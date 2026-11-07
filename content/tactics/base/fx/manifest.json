@@ -11061,6 +11061,36 @@
         "root": "ranger_spike_growth_step_root.png"
       },
       "default": "root"
+    },
+    "ranger_ensnared_thorns": {
+      "name": "Ensnared Thorns",
+      "group": "Ranger",
+      "frame": [
+        51,
+        38
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        42
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        15,
+        16
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_ensnared_thorns_root.png"
+      },
+      "default": "root"
     }
   },
   "passives": {
@@ -11097,6 +11127,7 @@
     "sharpshooter.high_ground_mastery": "fx.ranger_high_ground_mastery.steel",
     "beastmaster.companion": "fx.ranger_companion.gold",
     "beastmaster.ferocious_bond": "fx.ranger_ferocious_bond.steel",
-    "spike_growth.thorns": "fx.ranger_spike_growth_step.root"
+    "spike_growth.thorns": "fx.ranger_spike_growth_step.root",
+    "ensnared.thorns": "fx.ranger_ensnared_thorns.root"
   }
 }

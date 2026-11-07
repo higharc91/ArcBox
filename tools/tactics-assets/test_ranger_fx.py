@@ -18,8 +18,8 @@ class RangerFxTests(unittest.TestCase):
     def test_all_sheets_are_byte_identical_to_their_native_generator(self):
         manifest=json.loads((PACK/'fx/manifest.json').read_text())
         entries=[e for e in fx.CATALOGUE if e.id.startswith('ranger_')]
-        self.assertEqual(30,len(entries))
-        self.assertEqual(25,len(DESIGNS))
+        self.assertEqual(31,len(entries))
+        self.assertEqual(26,len(DESIGNS))
         for effect in entries:
             frames=effect.make();w,h=frames[0].w,frames[0].h
             entry=manifest['effects'][effect.id]

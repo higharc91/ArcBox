@@ -7,7 +7,7 @@ public sealed class RangerVfxTests
  [Fact]
  public void Every_ranger_feature_and_the_real_hound_have_complete_engine_fixtures()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var samples=FxShowcase.ForClass("ranger",rules);Assert.Equal(28,samples.Length);
+  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var samples=FxShowcase.ForClass("ranger",rules);Assert.Equal(29,samples.Length);
   foreach(var f in FxShowcase.Inventory("ranger",rules).Where(f=>f.Kind!="static"))
   {
    var s=Assert.Single(samples,x=>x.Id==f.Id);var events=s.After.Beats.Single().Events;
@@ -21,6 +21,7 @@ public sealed class RangerVfxTests
   Assert.Contains(samples.Single(s=>s.Id=="beastmaster.companion").After.Beats.Single().Events,e=>e is Spawned);
   Assert.Contains(samples.Single(s=>s.Id=="ranger.companion.move").After.Beats.Single().Events,e=>e is Moved);
   Assert.Contains(samples.Single(s=>s.Id=="ranger.companion.attack").After.Beats.Single().Events,e=>e is Damaged);
+  Assert.Contains(samples.Single(s=>s.Id=="ensnared.thorns").After.Beats.Single().Events,e=>e is Damaged);
   Assert.Contains(samples.Single(s=>s.Id=="spike_growth.thorns").After.Beats.Single().Events,e=>e is Damaged);
  }
 
@@ -31,7 +32,7 @@ public sealed class RangerVfxTests
   foreach(var s in FxShowcase.ForClass("ranger",rules))
   {
    var a=rules.Abilities.GetValueOrDefault(new(s.Id));var ordinary=s.Id=="common.attack"||s.Id.StartsWith("ranger.companion.",StringComparison.Ordinal);
-   var cap=ordinary||s.Id is "ranger.hunters_mark_bonus" or "sharpshooter.high_ground_mastery" or "beastmaster.ferocious_bond" or "spike_growth.thorns"?.8:a is null?1.5:BattleCutIn.Tier(a)==CutInTier.Full?2.5:1.5;
+   var cap=ordinary||s.Id is "ranger.hunters_mark_bonus" or "sharpshooter.high_ground_mastery" or "beastmaster.ferocious_bond" or "spike_growth.thorns" or "ensnared.thorns"?.8:a is null?1.5:BattleCutIn.Tier(a)==CutInTier.Full?2.5:1.5;
    var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);if(script.Length>cap+1e-6)failures.Add($"{s.Id}: {script.Length:F3}s > {cap:F1}s");
    if(ordinary)continue;var key=a?.Presentation?.Fx??fx.Passive(s.Id);Assert.NotNull(key);Assert.True(keys.Add(key!),s.Id);var clip=fx.Clip(key!)!;Assert.NotNull(clip);Assert.InRange(clip.Seconds,0,cap);
    if(key!.EndsWith(".root",StringComparison.Ordinal)||key.EndsWith(".wood",StringComparison.Ordinal)||key.EndsWith(".steel",StringComparison.Ordinal)||key.EndsWith(".mist",StringComparison.Ordinal))Assert.Null(clip.Emission);else Assert.NotNull(clip.Emission);
@@ -41,7 +42,7 @@ public sealed class RangerVfxTests
     if(a.Presentation.Projectile is {} shot){Assert.NotNull(fx.Shot(shot));Assert.True(Tactics.Presentation.Audio.SoundChoice.IsArrow(shot));Assert.Equal("bow_release",Tactics.Presentation.Audio.SoundChoice.Launch(shot,"longbow"));}
    }
   }
-  Assert.Equal(25,keys.Count);Assert.True(failures.Count==0,string.Join("\n",failures));
+  Assert.Equal(26,keys.Count);Assert.True(failures.Count==0,string.Join("\n",failures));
  }
  [Fact]
  public void On_hit_riders_land_on_the_real_victim_and_keep_the_damage_numbers_separate()

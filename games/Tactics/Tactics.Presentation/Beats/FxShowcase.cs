@@ -52,6 +52,12 @@ public static class FxShowcase
                 rows.TryAdd(parent.Subclass + ":" + proc.Id,
                     new(proc.Id, "Death Ward Rescue", parent.Level, parent.Subclass, "proc", "none", null));
         }
+        if(cls=="ranger")
+        {
+            var parent=rows.Values.Single(r=>r.Id=="ranger.ensnaring_strike");
+            foreach(var proc in rules.Conditions[new("ensnared")].Passives)
+                rows.TryAdd(parent.Subclass+":"+proc.Id,new(proc.Id,"Ensnaring Thorns · turn-start",parent.Level,parent.Subclass,"proc","none",null));
+        }
         if (cls is "druid" or "paladin" or "bard" or "ranger")
             foreach (var parent in rows.Values.Where(r => r.Kind == "ability").ToArray())
                 foreach (var proc in rules.Abilities[new(parent.Id)].Effects.OfType<ZoneEffect>().SelectMany(z => z.Passives))
@@ -207,6 +213,17 @@ public static class FxShowcase
                     return sample with { Id = feature.Id, Name = feature.Name, Description = "Real Death Ward rescue; fixture seed " + seed + "." };
             }
             throw new InvalidOperationException("The real lethal hit did not trigger Death Ward.");
+        }
+        if(feature.Id=="ensnared.thorns")
+        {
+            for(ulong seed=7;seed<40;seed++)
+                try
+                {
+                    return Sample(cls,new("ranger.ensnaring_strike"),feature.Level,rules,sequence,realistic:true,seed:seed,zoneProc:feature.Id)
+                        with { Id=feature.Id,Name=feature.Name,Description="Actual Ensnaring Strike, failed save and thorn damage on the victim's real turn. Fixture seed "+seed+"." };
+                }
+                catch(InvalidOperationException) { }
+            throw new InvalidOperationException("The real Ensnaring Strike condition hook did not fire.");
         }
         if (cls is "druid" or "paladin" or "bard" or "ranger" && !rules.Passives.ContainsKey(feature.Id))
             return Sample(cls, rules.Abilities.Single(pair=>pair.Value.Effects.OfType<ZoneEffect>().Any(z=>z.Passives.Any(p=>p.Id==feature.Id))).Key, feature.Level, rules, sequence,

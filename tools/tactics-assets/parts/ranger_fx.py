@@ -11,12 +11,12 @@ DESIGNS={
  'sic':('hunt_fangs','gold'),'pack_bond':('pack_link','gold'),'alpha_howl':('pack_howl','gold'),
  'vine_snare':('vine_hook','root'),'natures_veil':('leaf_mantle','root'),'guardian_tree':('hollow_canopy','root'),
  'hunters_mark_bonus':('force_puncture','force'),'high_ground_mastery':('falling_quill','steel'),
- 'companion':('paw_wake','gold'),'ferocious_bond':('pack_claws','steel'),'spike_growth_step':('thorn_step','root')}
+ 'companion':('paw_wake','gold'),'ferocious_bond':('pack_claws','steel'),'spike_growth_step':('thorn_step','root'),'ensnared_thorns':('thorn_clasp','root')}
 PASSIVES={'ranger.hunters_mark_bonus':'fx.ranger_hunters_mark_bonus.force',
  'sharpshooter.high_ground_mastery':'fx.ranger_high_ground_mastery.steel','beastmaster.companion':'fx.ranger_companion.gold',
- 'beastmaster.ferocious_bond':'fx.ranger_ferocious_bond.steel','spike_growth.thorns':'fx.ranger_spike_growth_step.root'}
+ 'beastmaster.ferocious_bond':'fx.ranger_ferocious_bond.steel','spike_growth.thorns':'fx.ranger_spike_growth_step.root','ensnared.thorns':'fx.ranger_ensnared_thorns.root'}
 SHOTS={'ensnaring_strike','hail_of_thorns','lightning_arrow','deadeye','volley'}
-SMALL={'hunters_mark_bonus','high_ground_mastery','ferocious_bond','spike_growth_step'}
+SMALL={'hunters_mark_bonus','high_ground_mastery','ferocious_bond','spike_growth_step','ensnared_thorns'}
 LARGE={'root_lattice','spike_bed','arrow_rain','pack_howl','hollow_canopy'}
 AIMED={'force_fan','piercing_lane','vine_hook'}
 DARK={'root','wood','steel','mist'}
@@ -136,6 +136,10 @@ def frames(name,shot=False):
    if shape=='hollow_canopy':
     for side in (-1,1):path([(cx+side*52,cy),(cx+side*65,cy-34),(cx+side*48,cy-70),(cx+side*15,cy-87)],'accent',min(shade,4))
     ring(cx,cy,r,r*.32,24,slot='main',s=2)
+  elif shape=='thorn_clasp':
+   for side in (-1,1):
+    x=cx+side*(23-11*t);path([(x,cy-40),(x-side*5,cy-24),(x,cy-7)],'main',shade)
+    for j in range(3):path([(x,cy-33+j*9),(x-side*8,cy-29+j*9),(x,cy-26+j*9)],'accent',min(4,shade))
   elif shape=='force_puncture':
    for side in (-1,1):path([(cx+side*22*g,cy-31),(cx+side*7,cy-20),(cx+side*22*g,cy-9)],'core',min(4,shade))
    _twinkle(c,cx,cy-20,core,4,min(5,shade))
