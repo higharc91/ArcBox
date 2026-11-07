@@ -11,6 +11,8 @@ public sealed class MobRefreshTests
     [InlineData("characters.goblin_archer", "goblin_archer")]
     [InlineData("characters.goblin_shaman", "goblin_shaman")]
     [InlineData("characters.goblin_spear", "goblin_boss")]
+    [InlineData("characters.hobgoblin", "hobgoblin")]
+    [InlineData("characters.bandit", "bandit")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -112,6 +114,8 @@ public sealed class MobRefreshTests
         var person = art.Sprite("characters.class_fighter")!.HeadLift;
         Assert.InRange(art.Sprite("characters.goblin_cutthroat")!.HeadLift / person, .5f, .9f);
         Assert.InRange(art.Sprite("characters.orc_brute")!.HeadLift / person, 1f, 1.5f);
+        Assert.InRange(art.Sprite("characters.bandit")!.HeadLift / person, .9f, 1.2f);
+        Assert.InRange(art.Sprite("characters.hobgoblin")!.HeadLift / person, 1f, 1.35f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }
 }

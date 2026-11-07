@@ -1,0 +1,15 @@
+{
+  "priorCommit": "ad09efab13ee02c0e5146a338b0325b37110d4db",
+  "addedCreatureEntries": [
+    "mob_refresh_bandit",
+    "mob_refresh_hobgoblin"
+  ],
+  "changedPortraitPresets": [
+    "bandit",
+    "hobgoblin"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "unrelatedPortraitsUnchanged": true,
+  "namedCaptainAndRookUnchanged": true,
+  "runtimeAssetCount": 14
+}

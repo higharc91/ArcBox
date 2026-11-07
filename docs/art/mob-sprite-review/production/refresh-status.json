@@ -1,14 +1,16 @@
 {
-  "scope": "Combat roster first; six refreshed designs integrated across two batches. Baseline numbers remain stable.",
+  "scope": "Combat roster first; eight refreshed designs integrated across three batches. Baseline numbers remain stable.",
   "integratedKeys": [
     "beasts.drake.red",
     "characters.goblin_cutthroat",
     "characters.orc_brute",
     "characters.goblin_archer",
     "characters.goblin_shaman",
-    "characters.goblin_spear"
+    "characters.goblin_spear",
+    "characters.hobgoblin",
+    "characters.bandit"
   ],
-  "remainingOlderCombatLooks": 23,
+  "remainingOlderCombatLooks": 21,
   "looks": [
     {
       "baselineNumber": 1,
@@ -86,7 +88,7 @@
       "baselineNumber": 13,
       "name": "Bandit / Roadside Tough",
       "key": "characters.bandit",
-      "status": "awaiting refresh"
+      "status": "integrated third batch"
     },
     {
       "baselineNumber": 14,
@@ -140,7 +142,7 @@
       "baselineNumber": 22,
       "name": "Hobgoblin",
       "key": "characters.hobgoblin",
-      "status": "awaiting refresh"
+      "status": "integrated third batch"
     },
     {
       "baselineNumber": 23,

@@ -86,14 +86,14 @@ public sealed class UnitArtTests
     [Fact]
     public void A_character_key_is_a_preset_with_the_character_frames_and_its_builds_head()
     {
-        var goblin = Art.Value.Sprite("characters.bandit")!; // retained legacy preset, rather than a refreshed compass atlas
+        var legacy = Art.Value.Sprite("characters.farmer")!; // retained legacy preset, rather than a refreshed compass atlas
         var fighter = Art.Value.Sprite("characters.class_fighter")!;   // a "large" build
 
-        Assert.Equal("characters/presets/bandit.png", goblin.Path);
-        Assert.Equal((32, 40, 16, 37), (goblin.Width, goblin.Height, goblin.AnchorX, goblin.AnchorY));
-        Assert.Equal(Pack.Frames("characters", "idle"), goblin.Idle.Frames);
-        Assert.Equal(Pack.Frames("characters", "down"), goblin.Down.Frames);
-        Assert.Equal(8, Art.Value.Sprite("characters.bandit")!.HeadTop);
+        Assert.Equal("characters/presets/farmer.png", legacy.Path);
+        Assert.Equal((32, 40, 16, 37), (legacy.Width, legacy.Height, legacy.AnchorX, legacy.AnchorY));
+        Assert.Equal(Pack.Frames("characters", "idle"), legacy.Idle.Frames);
+        Assert.Equal(Pack.Frames("characters", "down"), legacy.Down.Frames);
+        Assert.Equal(8, legacy.HeadTop);
         Assert.Equal(.5f, fighter.PixelScale);
         Assert.Equal(32, fighter.FootprintWidth);
     }
@@ -213,10 +213,10 @@ public sealed class UnitArtTests
     [Fact]
     public void A_frames_place_in_the_sheet_is_its_column_and_row()
     {
-        var goblin = Art.Value.Sprite("characters.bandit")!; // legacy two-row addressing remains supported
+        var legacy = Art.Value.Sprite("characters.farmer")!; // legacy two-row addressing remains supported
 
-        Assert.Equal(new ArtRect(62 * 32, 40, 32, 40), goblin.Source(62, 1));
-        Assert.Equal(new ArtRect(0, 0, 32, 40), goblin.Source(0, 0));
+        Assert.Equal(new ArtRect(62 * 32, 40, 32, 40), legacy.Source(62, 1));
+        Assert.Equal(new ArtRect(0, 0, 32, 40), legacy.Source(0, 0));
     }
 
     [Theory]
@@ -286,7 +286,7 @@ public sealed class UnitArtTests
     [Fact]
     public void Overhead_effects_follow_the_head_a_tall_sprite_lifts_them_a_small_one_lowers_them()
     {
-        Assert.Equal(0, Art.Value.Sprite("characters.bandit")!.EffectShift);                // standard build
+        Assert.Equal(0, Art.Value.Sprite("characters.farmer")!.EffectShift);                // standard build
         var fighter = Art.Value.Sprite("characters.class_fighter")!;
         var dwarf = Art.Value.Sprite("characters.dwarf_fighter")!;
         Assert.Equal((int)MathF.Round(29 - fighter.HeadLift), fighter.EffectShift);

@@ -264,12 +264,12 @@
       "surprised": "skeleton_surprised.png"
     },
     "bandit": {
-      "idle": "bandit_idle.png",
-      "hurt": "bandit_hurt.png",
-      "happy": "bandit_happy.png",
-      "angry": "bandit_angry.png",
-      "sad": "bandit_sad.png",
-      "surprised": "bandit_surprised.png"
+      "idle": "bandit_refresh_idle.png",
+      "hurt": "bandit_refresh_hurt.png",
+      "happy": "bandit_refresh_happy.png",
+      "angry": "bandit_refresh_angry.png",
+      "sad": "bandit_refresh_sad.png",
+      "surprised": "bandit_refresh_surprised.png"
     },
     "black_knight": {
       "idle": "black_knight_idle.png",
@@ -304,12 +304,12 @@
       "surprised": "kobold_slinger_refresh.png"
     },
     "hobgoblin": {
-      "idle": "hobgoblin_idle.png",
-      "hurt": "hobgoblin_hurt.png",
-      "happy": "hobgoblin_happy.png",
-      "angry": "hobgoblin_angry.png",
-      "sad": "hobgoblin_sad.png",
-      "surprised": "hobgoblin_surprised.png"
+      "idle": "hobgoblin_refresh_idle.png",
+      "hurt": "hobgoblin_refresh_hurt.png",
+      "happy": "hobgoblin_refresh_happy.png",
+      "angry": "hobgoblin_refresh_angry.png",
+      "sad": "hobgoblin_refresh_sad.png",
+      "surprised": "hobgoblin_refresh_surprised.png"
     },
     "goblin_archer": {
       "idle": "goblin_archer_refresh_idle.png",

@@ -1,0 +1,24 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "reference": "asset_X2MW7PYSkHsSRtnoYTefi3TJ",
+  "briefs": {
+    "hobgoblin": "Wardenflame: Embers of the Vale production concept sheet. Same grounded late-1990s tactical fantasy material language as supplied goblin reference, but NEW specified species/role. Painterly concept for pixel translation, worn leather/cloth/iron, warm upper-left light cool shadows, restrained earthy palette. Parchment background, no lettering/scenery. One identical adult shown FRONT3/4, REAR3/4, LEFTPROFILE full bodies plus head/equipment closeup and 1.75m human scale inset. Complete feet/hands/weapons contained with generous margins. Identical clothes/weapons/anatomical handedness in all views, no front buckle showing on rear. HOBGOBLIN soldier of Vorga's Host, adult 1.85m upright disciplined martial goblinoid, NOT a small goblin or orc. Burnt red-brown skin, broad pointed ears, dark amber eyes, broad flat nose, short black hair without flowing ponytail, subtle lower tusks, serious measured expression. Sturdy humanlike proportions, head slightly larger for tactical sprite readability. HEAVY ARMOR: battered grey iron segmented lamellar cuirass, symmetric small iron shoulder caps, brown leather underlayer, dark blue-grey trousers, reinforced dark brown boots and bracers. Faded ochre sash wraps waist, small handpainted sun mark on FRONT sash flap matching ch3 lore, plain sash knot/back with no duplicate sun emblem. No spikes/skulls/trophies. ONE straight LONGSWORD with simple crossguard and dark brown leather grip, gripped anatomicalRIGHT at rest (imageLEFT in front/imageRIGHT rear), LEFT hand free at rest and joins lower pommel for twohand overhead strikes. No shield/spear/axe. Weapon held close so handguard is connected to fist. His disciplined silhouette contrasts with improvised goblin brigandine; he can be negotiated with, not demonic monster.",
+    "bandit": "Wardenflame: Embers of the Vale production concept sheet. Same grounded late-1990s tactical fantasy material language as supplied goblin reference, but NEW specified species/role. Painterly concept for pixel translation, worn leather/cloth/iron, warm upper-left light cool shadows, restrained earthy palette. Parchment background, no lettering/scenery. One identical adult shown FRONT3/4, REAR3/4, LEFTPROFILE full bodies plus head/equipment closeup and 1.75m human scale inset. Complete feet/hands/weapons contained with generous margins. Identical clothes/weapons/anatomical handedness in all views, no front buckle showing on rear. ROADSIDE BANDIT, ordinary human Vale adult 1.75m, lean stocky practical traveller, not Rook/bandit captain/named boss. Weathered medium tan face, short dark stubble, dark brows, small watchful hazel eyes with pupils. Slate charcoal fitted CLOTH HOOD and short shoulder cowl, warm brown worn leather sleeveless jerkin over faded muted grey-green long-sleeve shirt, simple diagonal front fastening but NO longcloak, patched charcoal trousers, darkbrown calf boots, small tan pouch anatomicalLEFT hip and plain belt with front dull brass buckle hidden at back. Empty visible left hand, ONE single-bit worn iron HANDAXE on short darkwood haft held anatomicalRIGHT (imageLEFT front/imageRIGHT back). Handaxe is compact utilitarian broad curved choppingbit, not longsword/spear/pickaxe/double-headed battleaxe; integral grip in right fist. No second weapon/shield/mask/eye bandage. Front shows face and chest, rear shows hood back and jerkin seams. Crouched alert stance and believable desperatehumanity rather than evilcaricature; clear hood/leather silhouette matching NPC and party scale."
+  },
+  "jobs": {
+    "hobgoblin": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_AabWwxCoviZvviQz4crEtWmb",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_AabWwxCoviZvviQz4crEtWmb' (one call waits on up to 32 jobs)."
+    },
+    "bandit": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_VzQLLrKVb4JZgumTZFgwtqtX",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_VzQLLrKVb4JZgumTZFgwtqtX' (one call waits on up to 32 jobs)."
+    }
+  }
+}

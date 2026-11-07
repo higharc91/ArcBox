@@ -1,6 +1,6 @@
 # Approved first batch: integrated
 
-Goblin cutthroat, orc brute and red drake are registered in the game on `mob-sprite-refresh`. Existing combat keys are retained. The red drake keeps its original `beasts.drake` alias and remains grounded by the rules. Other mob roles, named designs and drake color variants retain their own art; [refresh-status.json](refresh-status.json) tracks the remaining 23 older combat looks after the second batch.
+Goblin cutthroat, orc brute and red drake are registered in the game on `mob-sprite-refresh`. Existing combat keys are retained. The red drake keeps its original `beasts.drake` alias and remains grounded by the rules. Other mob roles, named designs and drake color variants retain their own art; [refresh-status.json](refresh-status.json) tracks the remaining 21 older combat looks after the third batch.
 
 - [Standalone review](index.html): all eight directions and all five actions, with embedded battle/overworld evidence. Animation playback uses the shipped manifest's frame sequence and cadence.
 - [Combined animation GIF](first-batch-motion.gif) / [MP4](first-batch-motion.mp4): walking and attacks in four representative directions, at the shipped action cadence with brief pauses between attacks.
@@ -30,3 +30,5 @@ Reproduce the scene checks with the host:
 No PR has been opened for this batch.
 
 Latest: [goblin archer, shaman and Vorga refresh](../goblin-roles/README.md), including separate cast/rally animations.
+
+Latest third batch: [hobgoblin and roadside bandit](../road-and-host/README.md).

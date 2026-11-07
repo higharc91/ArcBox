@@ -18,6 +18,7 @@ public static class DemoBattle
     private const string Creatures = ":creatures";
     private const string MobRefresh = ":mob-refresh";
     private const string GoblinRoles = ":goblin-roles";
+    private const string RoadAndHost = ":road-and-host";
 
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
@@ -76,6 +77,15 @@ public static class DemoBattle
         Unit("Cutthroat reference", "Enemy", "characters.goblin_cutthroat", 13, 10, 16, 16),
     ];
 
+    private static ImmutableArray<UnitView> RefreshedRoadAndHost() =>
+    [
+        Unit("Bandit", "Enemy", "characters.bandit", 11, 6, 26, 26),
+        Unit("Hobgoblin", "Enemy", "characters.hobgoblin", 12, 9, 11, 11),
+        Unit("Vorga reference", "Enemy", "characters.goblin_spear", 9, 10, 21, 21),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Cutthroat reference", "Enemy", "characters.goblin_cutthroat", 13, 10, 16, 16),
+    ];
+
     private static BoardChanges Changes()
     {
         ImmutableArray<Tile> bridge = [.. Enumerable.Range(5, 2).SelectMany(y => Enumerable.Range(5, 4).Select(x => new Tile(x, y)))];
@@ -117,8 +127,9 @@ public static class DemoBattle
         var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);
         var mobRefresh = spec.EndsWith(MobRefresh, StringComparison.Ordinal);
         var goblinRoles = spec.EndsWith(GoblinRoles, StringComparison.Ordinal);
-        var map = goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
+        var roadAndHost = spec.EndsWith(RoadAndHost, StringComparison.Ordinal);
+        var map = roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

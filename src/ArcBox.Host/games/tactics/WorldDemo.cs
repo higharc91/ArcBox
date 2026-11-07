@@ -95,9 +95,12 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (goblinRoles)
+        _mobReview = roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (roadAndHost)
+            _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.bandit", "characters.hobgoblin", "characters.goblin_spear"];
+        else if (goblinRoles)
             _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.goblin_archer", "characters.goblin_shaman", "characters.goblin_spear"];
         else if (_mobReview)
             _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.orc_brute", "beasts.drake.red", "characters.kobold"];

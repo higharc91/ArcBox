@@ -26,8 +26,10 @@ Host review arguments after `--`:
 
 ```sh
 --tactics-demo=river_crossing:goblin-roles --shots=/absolute/battle-shots --quit-after=12
---tactics-demo=warlord_bridge --shots=/absolute/vorga-shots --quit-after=12
+--tactics-demo=encounter:warlord_bridge --shots=/absolute/vorga-shots --quit-after=12
 --world-demo=ashen_ford:goblin-roles '--world-looks=road@37,61@37,61;lineup@52,60@52,60' '--world-route=37,61;39,61' --shots=/absolute/world-shots --quit-after=30
 ```
 
 Six refreshed looks are integrated across both batches; [the tracker](../production/refresh-status.json) retains 23 older combat looks for later work. No PR has been opened.
+
+Subsequent batch: [hobgoblin and roadside bandit](../road-and-host/README.md) brings current progress to eight refreshed looks and 21 older combat looks remaining.
