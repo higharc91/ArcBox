@@ -1,0 +1,15 @@
+{
+  "baseline": "e89d584caa84918e2de93684d298cc4a072da04a",
+  "abilityGameplayDefinitionsUnchanged": 20,
+  "allPassiveDataUnchanged": true,
+  "originalCreatureArtAndMetadataUnchanged": true,
+  "otherClassAtlasesUnchanged": true,
+  "phoneFilesAndFixturesUnchanged": true,
+  "audioClipsUnchanged": true,
+  "replaysAndNonPresentationGoldenEventsUnchanged": true,
+  "goldenPresentationEventsChanged": 4,
+  "rulesAiImplementationUnchanged": true,
+  "workflowFilesUnchanged": true,
+  "allExistingEffectEntriesUnchanged": true,
+  "originalRangerFramesPixelIdentical": 4158
+}

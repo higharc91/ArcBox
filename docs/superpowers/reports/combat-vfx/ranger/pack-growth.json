@@ -1,0 +1,290 @@
+{
+  "baseline": "e89d584caa84918e2de93684d298cc4a072da04a",
+  "beforeBytes": 219859460,
+  "afterBytes": 220470473,
+  "deltaBytes": 611013,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 16807,
+      "after": 17756,
+      "delta": 949
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 184917,
+      "after": 201667,
+      "delta": 16750
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_alpha_howl_gold.png",
+      "before": 0,
+      "after": 8206,
+      "delta": 8206
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_barkskin_wood.png",
+      "before": 0,
+      "after": 3891,
+      "delta": 3891
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_companion_gold.png",
+      "before": 0,
+      "after": 2123,
+      "delta": 2123
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_conjure_barrage_force.png",
+      "before": 0,
+      "after": 15494,
+      "delta": 15494
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_cure_wounds_healing.png",
+      "before": 0,
+      "after": 2778,
+      "delta": 2778
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_deadeye_shot_steel.png",
+      "before": 0,
+      "after": 369,
+      "delta": 369
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_deadeye_steel.png",
+      "before": 0,
+      "after": 2837,
+      "delta": 2837
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_ensnared_thorns_root.png",
+      "before": 0,
+      "after": 1591,
+      "delta": 1591
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_ensnaring_strike_root.png",
+      "before": 0,
+      "after": 3612,
+      "delta": 3612
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_ensnaring_strike_shot_root.png",
+      "before": 0,
+      "after": 632,
+      "delta": 632
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_entangle_root.png",
+      "before": 0,
+      "after": 9732,
+      "delta": 9732
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_ferocious_bond_steel.png",
+      "before": 0,
+      "after": 619,
+      "delta": 619
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_guardian_tree_root.png",
+      "before": 0,
+      "after": 14459,
+      "delta": 14459
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_hail_of_thorns_shot_wood.png",
+      "before": 0,
+      "after": 642,
+      "delta": 642
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_hail_of_thorns_wood.png",
+      "before": 0,
+      "after": 2385,
+      "delta": 2385
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_high_ground_mastery_steel.png",
+      "before": 0,
+      "after": 1693,
+      "delta": 1693
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_hunters_mark_bonus_force.png",
+      "before": 0,
+      "after": 956,
+      "delta": 956
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_hunters_mark_force.png",
+      "before": 0,
+      "after": 2206,
+      "delta": 2206
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_lesser_restoration_healing.png",
+      "before": 0,
+      "after": 3024,
+      "delta": 3024
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_lightning_arrow_shot_storm.png",
+      "before": 0,
+      "after": 815,
+      "delta": 815
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_lightning_arrow_storm.png",
+      "before": 0,
+      "after": 1829,
+      "delta": 1829
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_natures_veil_root.png",
+      "before": 0,
+      "after": 4735,
+      "delta": 4735
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_pack_bond_gold.png",
+      "before": 0,
+      "after": 2315,
+      "delta": 2315
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_piercing_shot_steel.png",
+      "before": 0,
+      "after": 2426,
+      "delta": 2426
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_sic_gold.png",
+      "before": 0,
+      "after": 1403,
+      "delta": 1403
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_spike_growth_root.png",
+      "before": 0,
+      "after": 6859,
+      "delta": 6859
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_spike_growth_step_root.png",
+      "before": 0,
+      "after": 1574,
+      "delta": 1574
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_vanish_mist.png",
+      "before": 0,
+      "after": 4862,
+      "delta": 4862
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_vine_snare_root.png",
+      "before": 0,
+      "after": 5729,
+      "delta": 5729
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_volley_shot_steel.png",
+      "before": 0,
+      "after": 946,
+      "delta": 946
+    },
+    {
+      "path": "content/tactics/base/fx/ranger_volley_steel.png",
+      "before": 0,
+      "after": 8933,
+      "delta": 8933
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/ranger.json",
+      "before": 13192,
+      "after": 13581,
+      "delta": 389
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 43430,
+      "after": 43670,
+      "delta": 240
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_ranger.png",
+      "before": 424017,
+      "after": 467709,
+      "delta": 43692
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_ranger.png",
+      "before": 415871,
+      "after": 460182,
+      "delta": 44311
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_ranger.png",
+      "before": 372616,
+      "after": 413198,
+      "delta": 40582
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_ranger.png",
+      "before": 432987,
+      "after": 476741,
+      "delta": 43754
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_ranger.png",
+      "before": 376058,
+      "after": 415176,
+      "delta": 39118
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_ranger.png",
+      "before": 417925,
+      "after": 462129,
+      "delta": 44204
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_ranger.png",
+      "before": 421965,
+      "after": 464964,
+      "delta": 42999
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_ranger.png",
+      "before": 428480,
+      "after": 473413,
+      "delta": 44933
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_ranger.png",
+      "before": 378290,
+      "after": 417207,
+      "delta": 38917
+    },
+    {
+      "path": "content/tactics/base/tactical/human_ranger.png",
+      "before": 407677,
+      "after": 450393,
+      "delta": 42716
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 19472,
+      "after": 20694,
+      "delta": 1222
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_ranger.png",
+      "before": 458100,
+      "after": 504662,
+      "delta": 46562
+    }
+  ]
+}
