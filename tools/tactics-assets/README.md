@@ -704,3 +704,11 @@ The manifest pairs each biome with a sky.
 
 See `STYLE.md` for the art rules. A set is `parts/<name>.py` with a `build()` function. `build.py` finds it, and
 it writes under `content/tactics/base/<name>/` plus `previews/NN-<name>*.png`.
+
+### Cleric (#247)
+
+`parts/cleric_fx.py` adds 42 separate ability/proc identities and a Guiding Bolt flight sheet. Restoration uses the shared nature-green ramp with a holy core and gold accents; radiant judgement keeps the holy/gold language. Life uses rising crosses and chalices, War uses consecrated weapon and armour shapes, and Light uses dawn rays and coronas. Flame Strike combines fire tongues with radiant streaks. Each luminous material emits matching local light while its effect is present.
+
+`parts/cleric_casts.py` appends four five-frame gestures (209 frames per facing, nine rows): prayer, restoration, judgement and a weapon strike. `dev/build_cleric_vfx.py` exports only Cleric effects, presentation fields, existing sound associations and manifests. Bake the eleven Cleric race sheets through the tactical builder. Existing frame indices and other classes' art remain stable. Word of Radiance uses a brief 0.24 s prayer so its real multi-target saves fit the cantrip budget.
+
+The neutral showcase establishes wounded/downed allies, actual undead, restoration conditions, a concentrating ally for Dispel Magic, and a real lethal attack against Death Ward. Spiritual Weapon is one spectral weapon attack and Spirit Guardians is the rules' immediate burst; their art does not invent persistent summons or zones.

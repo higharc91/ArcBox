@@ -1,4 +1,4 @@
-> Status: Warlock preview complete and full local checks pass; awaiting owner approval before its PR or Cleric.
+> Status: Approved by the owner. [PR #254](https://github.com/higharc91/ArcBox/pull/254) is open; the Cleric pass follows.
 
 # Warlock — #247
 
@@ -38,4 +38,4 @@ Container medians are relative software-render measurements. Real-hardware 16 ms
 
 ## Approval boundary
 
-Per [#247](https://github.com/higharc91/ArcBox/issues/247), the Warlock PR and Cleric wait for explicit Warlock approval. No later class has started. The owner merges the PRs.
+The owner approved the Warlock preview. [PR #254](https://github.com/higharc91/ArcBox/pull/254) is open against `combat-vfx-sorcerer`, and the Cleric pass follows. The owner merges the approved PRs.

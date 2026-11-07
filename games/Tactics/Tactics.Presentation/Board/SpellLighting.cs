@@ -31,7 +31,7 @@ public sealed record SpellEmission(Rgb Colour, float Radius, float Power)
             "moon" => "#c3d9ff",
             "arcane" or "force" or "magic" => "#7aa8ff",
             "eldritch" or "shadow" or "violet" or "void" => "#b86ef2",
-            "nature" or "fey" => "#85d878",
+            "nature" or "fey" or "healing" => "#85d878",
             "grave" or "necro" or "necrotic" => "#9cf06a",
             "psychic" or "hex" or "mind" or "charm" => "#e070e8",
             _ => null,

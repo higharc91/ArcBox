@@ -216,7 +216,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private static readonly ImmutableHashSet<string> Physical = ["slashing", "piercing", "bludgeoning"];
 
     /// <summary>The animations that are a blow, which lunge at arm's length. The rest (a spell's poses, a block) stay where they are.</summary>
-    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", "warlock_blade", Special];
+    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", "warlock_blade", "cleric_strike", Special];
 
     /// <summary>The script for <paramref name="beat"/>. <paramref name="shown"/> is the battle as the player last saw it; <paramref name="live"/> is the newest view.</summary>
     public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds = null) => new Builder(beat, shown, live, fx, sounds).Build();
@@ -235,6 +235,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private AbilityUsed? _ability;
         private int _swings;
         private int _hits;
+        private readonly Dictionary<UnitId, int> _clericDamageRows = [];
+        private readonly bool _clericNumbers = beat.Events.Any(e => e switch
+        {
+            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true,
+            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true,
+            _ => false,
+        });
         private int _rolls;
         private bool _rolled;          // the last thing to advance the clock was a roll, which already spaced this target from the last
         private int _areaEnd = -1;     // the last event of the area effect being played: before it, its targets resolve together
@@ -407,6 +414,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AbilityUsed used:
+                    _clericDamageRows.Clear();
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
                     break;
@@ -698,6 +706,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     "ashmaw.cinder_roar" => 1.2, // six frames at five fps
                     "ashmaw.ash_shake" => 1.0,
                     "grisk.dig_faster" => 0.7,
+                    "cleric.word_of_radiance" => .24, // brief prayer; the real area saves share the release
                     _ => BeatTiming.Cast,
                 };
                 _cues.Add(new PoseCue(_t, length, used.Source, anim));
@@ -797,7 +806,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             else
                 Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
             if (hit.Amount > 0)
-                Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage, EldritchVolley ? Math.Max(0, _swings - 1) * 2 + _hits : 0);
+            {
+                // Split fire/radiant damage and domain procs must not overwrite one another's numbers.
+                // Reserve row 1 for the critical label, as in the Eldritch volley.
+                var row = _clericNumbers ? _clericDamageRows.GetValueOrDefault(hit.Unit) * 2
+                    : EldritchVolley ? Math.Max(0, _swings - 1) * 2 + _hits : 0;
+                Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage, row);
+                if (_clericNumbers) _clericDamageRows[hit.Unit] = row / 2 + 1;
+            }
             var length = _view.Units.FirstOrDefault(u => u.Id == hit.Unit)?.Sprite switch
             {
                 "monsters.ashmaw" => 0.5,

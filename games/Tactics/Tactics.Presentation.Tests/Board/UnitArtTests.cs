@@ -125,11 +125,12 @@ public sealed class UnitArtTests
             var wizard = preset.GetString()!.EndsWith("_wizard", StringComparison.Ordinal);
             var sorcerer = preset.GetString()!.EndsWith("_sorcerer", StringComparison.Ordinal);
             var warlock = preset.GetString()!.EndsWith("_warlock", StringComparison.Ordinal);
-            var count = wizard ? 223 : sorcerer ? 209 : warlock ? 210 : 189;
+            var cleric = preset.GetString()!.EndsWith("_cleric", StringComparison.Ordinal);
+            var count = wizard ? 223 : sorcerer || cleric ? 209 : warlock ? 210 : 189;
             var last = sprite.Source(count - 1, 1);
             Assert.InRange(last.X + last.Width, 1, 3840);
-            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock ? 2880 : 2560);
-            Assert.Equal(wizard ? 10 : sorcerer || warlock ? 9 : 8, sprite.RowsPerDirection);
+            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock || cleric ? 2880 : 2560);
+            Assert.Equal(wizard ? 10 : sorcerer || warlock || cleric ? 9 : 8, sprite.RowsPerDirection);
             if (wizard)
                 foreach (var name in new[] { "wizard_bolt", "wizard_weave", "wizard_ward", "wizard_nova", "wizard_stomp" })
                     Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 222));
@@ -145,6 +146,11 @@ public sealed class UnitArtTests
                     Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 209));
             else
                 Assert.Same(sprite.Anim("point"), sprite.Anim("warlock_lash"));
+            if (cleric)
+                foreach (var name in new[] { "cleric_prayer", "cleric_restore", "cleric_judgement", "cleric_strike" })
+                    Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 208));
+            else
+                Assert.Same(sprite.Anim("pray"), sprite.Anim("cleric_prayer"));
             Assert.Equal(32, sprite.FootprintWidth);
         }
     }

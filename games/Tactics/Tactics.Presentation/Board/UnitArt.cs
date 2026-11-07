@@ -86,7 +86,9 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
             "sorcerer_fling" => "point", "sorcerer_surge" => "summon",
             "sorcerer_focus" => "channel", "sorcerer_breath" => "cast",
             "warlock_pact" => "channel", "warlock_lash" or "warlock_release" => "point",
-            "warlock_rift" => "summon", "warlock_blade" => "attack", _ => name,
+            "warlock_rift" => "summon", "warlock_blade" => "attack",
+            "cleric_prayer" => "pray", "cleric_restore" => "buff",
+            "cleric_judgement" => "summon", "cleric_strike" => "attack", _ => name,
         };
         return Anims.GetValueOrDefault(name)
             ?? (SpellPoses.Contains(name) ? Anims.GetValueOrDefault(Special) : name == Special ? Anims.GetValueOrDefault(Cast) : null)

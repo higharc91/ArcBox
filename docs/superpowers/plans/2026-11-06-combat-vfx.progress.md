@@ -1,4 +1,4 @@
-> Status: Warlock preview complete, awaiting owner OK before its PR or Cleric. Approved shared/Wizard/Sorcerer PRs #251/#252/#253 await owner merges. CI remains manually disabled.
+> Status: Cleric preview complete; awaiting owner OK before its PR or Druid. Approved dependency PRs #251–#254 await owner merges. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -113,3 +113,23 @@ The 44-sample native gallery is `../reports/combat-vfx/warlock/index.html`: 33 a
 Three-run class median 19.7884 → 20.1112 ms (+1.63%, within 10%). Largest individual increase warlock.eldritch_blast.level7 (+8.96%), reported transparently. Peak texture growth +20.00 MiB; shipped-pack growth 0.56 MiB. Thirty six-player Warlock Chapter I rounds add at most 3.317 s Full / 3.017 s Auto Short / 0 Off, within the approved cap without loosening existing limits. Real-hardware 16 ms and physical TV readability remain hardware checks.
 
 All 33 gameplay definitions and passive definitions are unchanged. Existing Vampiric Touch/Cursed Slash enemy-targeted healing remains visible exactly as emitted by the engine; rules follow-up is separate. Phone, audio clips, other class atlases and workflow files are untouched. Warlock remains unchecked until explicit owner approval; its PR and Cleric wait for that OK. Owner merges the approved dependency PRs. CI remains disabled.
+
+
+## Warlock approval and Cleric
+
+The owner replied “ok, that looks good. Proceed.” Warlock is approved, its #247 checkbox is ticked, and PR #254 is open against `combat-vfx-sorcerer`. The owner merges the approved dependency PRs #251–#254. Cleric starts from latest main `c4e121eb` with approved Warlock dependency `0e96d343`; that dependency is the frozen Cleric before baseline.
+
+Cleric covers all 39 abilities, Divine Strike, Burning Luminescence, the embedded Death Ward rescue, ordinary Attack and wounded-target Toll the Dead: 44 real-engine samples. Fixtures use wounded/downed allies for healing and revival, skeletons for turning/searing, real conditions for restoration, an ally's actual Bless concentration for Dispel Magic, and an actual lethal attack for Death Ward. No rules or events are invented.
+
+Native art adds 42 identities plus Guiding Bolt flight and four five-frame casting gestures on all eleven Cleric race atlases. Green/gold healing, radiant judgement, necrotic wounds, spectral guardians and the three domain motifs retain shared palettes and matching light. Existing sounds and cinematic tiers are preserved. The 76-test focused presentation/atlas/round suite passes. The existing three six-hero Chapter I fixture parties all include Cleric, retain their original formation and strict timing assertions, and supply the round measurements. Full local checks and native review follow. Cleric's PR and Druid wait for Cleric approval; CI remains disabled.
+
+Native Flame Strike review exposed overlapping split-damage numbers. A regression reproduces the collision; Cleric effects/procs now stack each victim’s damage numbers independently and reserve the critical label row. Flame Strike, War Priest, Divine Strike and Burning Luminescence are recaptured after the fix. Only 16 presentation objects changed across the two golden event files; replay commands and every gameplay event value are unchanged.
+
+
+## Cleric review handoff
+
+The 44-sample native gallery is `../reports/combat-vfx/cleric/index.html`: 39 abilities, three visible procs including Death Ward rescue, an ordinary attack and wounded-target Toll the Dead. Green/gold restoration, radiant judgement and distinct domain shapes use matching light. Four casting gestures append 20 frames on each of eleven Cleric race atlases. Split damage and domain proc numbers remain separate; all four affected native scenes were recaptured. Source/art commit `2927f1257f251291bb8885d2131dc0076ad7fde9`.
+
+Full local gate passes: 7,259 .NET tests (zero skipped), 549 phone tests/build, 24 Node, 40 asset, 9 audio, 23 lore tests and lore/docs checks. Release and native Debug builds have zero warnings/errors. Three-run class median 20.5354 → 20.4545 ms (-0.39%, within 10%). Largest individual increase cleric.flame_strike (+9.75%), reported transparently. Peak texture growth +20.71 MiB; shipped-pack growth 0.58 MiB. All 90 six-hero Chapter I rounds containing Cleric remain within the approved cap: max 3.317 s Full / 3.017 s Auto Short / 0 Off. Real-hardware 16 ms and physical TV checks remain hardware validation.
+
+All 39 gameplay definitions and passive data remain unchanged. Only 16 presentation objects changed in two golden event files; event order/counts, gameplay values, replay commands and phone fixtures are unchanged. Existing sounds are reused; other class atlases and workflow files are untouched. Cleric remains unchecked until explicit owner approval. Its PR and Druid wait for that OK; the owner merges the approved dependencies. CI remains disabled.
