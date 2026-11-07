@@ -17,7 +17,9 @@ from parts.tactical_art.races import fit_point
 from arcpix.canvas import Canvas
 from parts.characters import SLOTS
 from parts.tactical_art.build import bake
-from parts.wizard_casts import poses_for,CASTS
+from parts.wizard_casts import CASTS
+from parts.class_casts import poses_for
+from parts.sorcerer_casts import CASTS as SORCERER_CASTS
 
 
 class TacticalTests(unittest.TestCase):
@@ -33,22 +35,26 @@ class TacticalTests(unittest.TestCase):
         self.assertEqual(set(ANIMS),set(self.manifest['anims']))
         for key in expected:
             with Image.open(self.root/f'{key}.png') as im:
-                self.assertEqual((3840,3200 if key.endswith('_wizard') else 2560),im.size,key)
+                self.assertEqual((3840,3200 if key.endswith('_wizard') else 2880 if key.endswith('_sorcerer') else 2560),im.size,key)
         custom=self.manifest['classes']['wizard']
         self.assertEqual(223,custom['framesPerDirection'])
         self.assertEqual(set(CASTS),set(custom['anims']))
         for anim in custom['anims'].values():
             self.assertTrue(all(189<=i<223 for i in anim['frames']))
+        custom=self.manifest['classes']['sorcerer']
+        self.assertEqual(209,custom['framesPerDirection'])
+        self.assertEqual(set(SORCERER_CASTS),set(custom['anims']))
+        for anim in custom['anims'].values():self.assertTrue(all(189<=i<209 for i in anim['frames']))
         for anim in self.manifest['anims'].values():
             self.assertTrue(anim['frames'])
             self.assertTrue(all(0<=i<len(frame_list()) for i in anim['frames']))
 
     def test_baked_front_and_back_frames_match_current_renderer(self):
-        for role,race in [('fighter','human'),('wizard','dragonborn'),('cleric','dwarf'),('warlock','tiefling')]:
+        for role,race in [('fighter','human'),('wizard','dragonborn'),('sorcerer','human'),('cleric','dwarf'),('warlock','tiefling')]:
             poses=poses_for(role);rows=(len(poses)+COLUMNS-1)//COLUMNS
             with Image.open(self.root/f'{race}_{role}.png') as sheet:
                 for back in (False,True):
-                    for index in (0,12,22,39,97,137)+(tuple(range(189,223)) if role=='wizard' else ()):
+                    for index in (0,12,22,39,97,137)+(tuple(range(189,223 if role=='wizard' else 209)) if role in ('wizard','sorcerer') else ()):
                         x=index%COLUMNS*FRAME[0];y=(int(back)*rows+index//COLUMNS)*FRAME[1]
                         actual=np.array(sheet.crop((x,y,x+FRAME[0],y+FRAME[1])))
                         expected=np.array(frame(role,race,back,poses[index][2]))
@@ -68,7 +74,7 @@ class TacticalTests(unittest.TestCase):
 
     def test_bake_is_deterministic(self):
         with tempfile.TemporaryDirectory() as root:
-            for role in ('fighter','wizard'):
+            for role in ('fighter','wizard','sorcerer'):
                 key=bake((role,'human',root))
                 expected=hashlib.sha256((self.root/f'{key}.png').read_bytes()).digest()
                 self.assertEqual(expected,hashlib.sha256((Path(root)/f'{key}.png').read_bytes()).digest())

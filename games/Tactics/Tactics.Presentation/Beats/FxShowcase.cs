@@ -90,11 +90,36 @@ public static class FxShowcase
             }
             catch (InvalidOperationException error) { gaps.Add($"{feature.Id}: {error.Message}"); }
         if (gaps.Count != 0) throw new InvalidOperationException($"Incomplete {cls} showcase; add real trigger fixtures before capturing this class:\n{string.Join('\n', gaps)}");
+        if (cls == "sorcerer")
+            foreach (var id in new[] { "chaos.wild_surge", "chaos.controlled_surge" })
+            {
+                var feature = Inventory(cls, rules).Single(f => f.Id == id);
+                var shown = samples.Single(s => s.Id == id).After.Beats.Single().Events.OfType<Damaged>().First().Type;
+                foreach (var type in (id == "chaos.wild_surge" ? new[] { "force", "lightning", "psychic" } : new[] { "force", "fire" }).Where(t => t != shown))
+                    samples.Add(SurgeSample(feature, type, rules, samples.Count + 1));
+            }
         return samples.ToImmutable();
+    }
+
+    private static FxShowcaseSample SurgeSample(FxShowcaseFeature feature, string type, RulesPack rules, int sequence)
+    {
+        for (ulong seed = 7; seed < 128; seed++)
+        {
+            var sample = Sample("sorcerer", new(feature.Id), feature.Level, rules, sequence, feature.Subclass, realistic: true, seed: seed);
+            if (sample.After.Beats.Single().Events.OfType<Damaged>().FirstOrDefault()?.Type == type)
+                return sample with { Id = feature.Id + "." + type, Name = feature.Name + " (" + type + ")",
+                    Description = sample.Description + $" Random outcome fixture seed {seed}." };
+        }
+        throw new InvalidOperationException($"No real {type} outcome found for {feature.Id}.");
     }
 
     public static FxShowcaseSample Specific(string cls, string id, RulesPack rules)
     {
+        if (cls == "sorcerer" && id.Count(c => c == '.') == 2)
+        {
+            var split = id.LastIndexOf('.');
+            return SurgeSample(Inventory(cls, rules).Single(f => f.Id == id[..split]), id[(split + 1)..], rules, 1);
+        }
         var feature = Inventory(cls, rules).FirstOrDefault(r => r.Id == id);
         if (feature?.Kind == "static") throw new InvalidOperationException($"{id} is a static modifier, not a standalone visible proc.");
         return feature?.Kind == "proc" ? ProcSample(cls, feature, rules, 1)
@@ -106,7 +131,7 @@ public static class FxShowcase
         var passive = rules.Passives[feature.Id];
         if (passive.Hook is not (HookKind.OnAttackHit or HookKind.BeforeAttackRoll))
             throw new InvalidOperationException($"No trigger fixture yet for {passive.Hook}. It must not be skipped.");
-        var trigger = passive.When?.IsSpell == true ? new AbilityId("wizard.fire_bolt") : RulesPack.CommonAttack.Id;
+        var trigger = passive.When?.IsSpell == true ? new AbilityId(rules.Abilities.ContainsKey(new(cls + ".fire_bolt")) ? cls + ".fire_bolt" : "wizard.fire_bolt") : RulesPack.CommonAttack.Id;
         var sample = Sample(cls, trigger, feature.Level, rules, sequence, feature.Subclass, feature.Id, realistic: true);
         if (!sample.After.Beats.SelectMany(b => b.Events).OfType<PassiveTriggered>().Any(e => e.Passive == feature.Id))
             throw new InvalidOperationException("The real engine did not trigger this passive; supply its required conditions.");
@@ -114,7 +139,7 @@ public static class FxShowcase
     }
 
     public static FxShowcaseSample Sample(string cls, AbilityId abilityId, int level, RulesPack rules, int sequence,
-        string? subclass = null, string? passive = null, bool realistic = false)
+        string? subclass = null, string? passive = null, bool realistic = false, ulong seed = 7)
     {
         var ability = rules.Abilities[abilityId];
         if (ability.Cost.Reaction > 0) return ReactionSample(cls, ability, level, rules, sequence, subclass);
@@ -145,7 +170,7 @@ public static class FxShowcase
         }
         var setup = new BattleSetup(map, placements.ToImmutable(),
             ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
-        var state = Battle.Start(setup, rules, 7).State;
+        var state = Battle.Start(setup, rules, seed).State;
         if (realistic)
         {
             var revive = ability.Effects.Any(e => e is ReviveEffect);
@@ -156,7 +181,8 @@ public static class FxShowcase
                     Countdown = revive && kv.Key != caster ? 2 : 0 }) };
             if (ability.Effects.Any(e => e is GrantResourceEffect))
                 state = state with { Units = state.Units.SetItem(caster, state.Units[caster] with
-                { Resources = state.Units[caster].Resources.ToImmutableSortedDictionary(p => p.Key, p => p.Value / 2, StringComparer.Ordinal) }) };
+                { Resources = state.Units[caster].Resources.ToImmutableSortedDictionary(p => p.Key,
+                    p => ability.Effects.OfType<GrantResourceEffect>().Any(g => g.Resource == p.Key) ? p.Value / 2 : p.Value, StringComparer.Ordinal) }) };
         }
         var choice = Choices.For(state, caster, rules).Abilities.FirstOrDefault(a => a.Ability == abilityId);
         var aim = choice?.Targets.OrderByDescending(t => t.Affected.Count(u => state.Units[u.Unit].Sheet.Side == Side.Enemy))

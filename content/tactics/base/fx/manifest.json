@@ -2648,9 +2648,1583 @@
         "fire": "wizard_fireball_shot_fire.png"
       },
       "default": "fire"
+    },
+    "sorcerer_innate_sorcery": {
+      "name": "Innate Sorcery",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        37
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        18
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        43
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_innate_sorcery_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_font_of_magic_mana": {
+      "name": "Font Of Magic Mana",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        38
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        20
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        41
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_font_of_magic_mana_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_font_of_magic_sorcery": {
+      "name": "Font Of Magic Sorcery",
+      "group": "Sorcerer",
+      "frame": [
+        60,
+        37
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        28,
+        18
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        20,
+        43
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "sorcerer_font_of_magic_sorcery_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "sorcerer_metamagic_twinned": {
+      "name": "Metamagic Twinned",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        30
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        15
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        46
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "sorcerer_metamagic_twinned_force.png"
+      },
+      "default": "force"
+    },
+    "sorcerer_metamagic_extended": {
+      "name": "Metamagic Extended",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        31
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_metamagic_extended_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_metamagic_careful": {
+      "name": "Metamagic Careful",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        22
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "sorcerer_metamagic_careful_gold.png"
+      },
+      "default": "gold"
+    },
+    "sorcerer_metamagic_quickened": {
+      "name": "Metamagic Quickened",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        31
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "sorcerer_metamagic_quickened_storm.png"
+      },
+      "default": "storm"
+    },
+    "sorcerer_metamagic_distant": {
+      "name": "Metamagic Distant",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        31
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "sorcerer_metamagic_distant_force.png"
+      },
+      "default": "force"
+    },
+    "sorcerer_fire_bolt": {
+      "name": "Fire Bolt",
+      "group": "Sorcerer",
+      "frame": [
+        28,
+        20
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        13,
+        14
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        23,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_fire_bolt_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_ray_of_frost": {
+      "name": "Ray Of Frost",
+      "group": "Sorcerer",
+      "frame": [
+        40,
+        31
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        19,
+        22
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        17,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "sorcerer_ray_of_frost_frost.png"
+      },
+      "default": "frost"
+    },
+    "sorcerer_shocking_grasp": {
+      "name": "Shocking Grasp",
+      "group": "Sorcerer",
+      "frame": [
+        29,
+        29
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        15,
+        22
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        21,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "sorcerer_shocking_grasp_storm.png"
+      },
+      "default": "storm"
+    },
+    "sorcerer_acid_splash": {
+      "name": "Acid Splash",
+      "group": "Sorcerer",
+      "frame": [
+        32,
+        26
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        16,
+        18
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        20,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "acid": "sorcerer_acid_splash_acid.png"
+      },
+      "default": "acid"
+    },
+    "sorcerer_chill_touch": {
+      "name": "Chill Touch",
+      "group": "Sorcerer",
+      "frame": [
+        31,
+        26
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        15,
+        19
+      ],
+      "sourceFrame": [
+        72,
+        72
+      ],
+      "trim": [
+        21,
+        27
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "grave": "sorcerer_chill_touch_grave.png"
+      },
+      "default": "grave"
+    },
+    "sorcerer_poison_spray": {
+      "name": "Poison Spray",
+      "group": "Sorcerer",
+      "frame": [
+        192,
+        71
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        36
+      ],
+      "sourceFrame": [
+        192,
+        112
+      ],
+      "trim": [
+        0,
+        20
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "venom": "sorcerer_poison_spray_venom.png"
+      },
+      "default": "venom"
+    },
+    "sorcerer_chromatic_orb": {
+      "name": "Chromatic Orb",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        34
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        16
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        45
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "sorcerer_chromatic_orb_storm.png"
+      },
+      "default": "storm"
+    },
+    "sorcerer_burning_hands": {
+      "name": "Burning Hands",
+      "group": "Sorcerer",
+      "frame": [
+        192,
+        75
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        37
+      ],
+      "sourceFrame": [
+        192,
+        112
+      ],
+      "trim": [
+        0,
+        19
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_burning_hands_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_magic_missile": {
+      "name": "Magic Missile",
+      "group": "Sorcerer",
+      "frame": [
+        60,
+        31
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        28,
+        16
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        20,
+        45
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "sorcerer_magic_missile_force.png"
+      },
+      "default": "force"
+    },
+    "sorcerer_shield": {
+      "name": "Shield",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_shield_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_thunderwave": {
+      "name": "Thunderwave",
+      "group": "Sorcerer",
+      "frame": [
+        161,
+        83
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        80,
+        41
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        32,
+        51
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "sorcerer_thunderwave_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "sorcerer_sleep": {
+      "name": "Sleep",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        38
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        23
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fey": "sorcerer_sleep_fey.png"
+      },
+      "default": "fey"
+    },
+    "sorcerer_scorching_ray": {
+      "name": "Scorching Ray",
+      "group": "Sorcerer",
+      "frame": [
+        54,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        37
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_scorching_ray_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_shatter": {
+      "name": "Shatter",
+      "group": "Sorcerer",
+      "frame": [
+        171,
+        92
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        84,
+        48
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        28,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "sorcerer_shatter_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "sorcerer_hold_person": {
+      "name": "Hold Person",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        22
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_hold_person_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_misty_step": {
+      "name": "Misty Step",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "sorcerer_misty_step_mist.png"
+      },
+      "default": "mist"
+    },
+    "sorcerer_web": {
+      "name": "Web",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        22
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "silk": "sorcerer_web_silk.png"
+      },
+      "default": "silk"
+    },
+    "sorcerer_fireball": {
+      "name": "Fireball",
+      "group": "Sorcerer",
+      "frame": [
+        175,
+        91
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        87,
+        45
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        25,
+        47
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_fireball_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_lightning_bolt": {
+      "name": "Lightning Bolt",
+      "group": "Sorcerer",
+      "frame": [
+        192,
+        38
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        25
+      ],
+      "sourceFrame": [
+        192,
+        112
+      ],
+      "trim": [
+        0,
+        31
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "sorcerer_lightning_bolt_storm.png"
+      },
+      "default": "storm"
+    },
+    "sorcerer_haste": {
+      "name": "Haste",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        31
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "sorcerer_haste_gold.png"
+      },
+      "default": "gold"
+    },
+    "sorcerer_slow": {
+      "name": "Slow",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        23
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "sorcerer_slow_frost.png"
+      },
+      "default": "frost"
+    },
+    "sorcerer_counterspell": {
+      "name": "Counterspell",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        22
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_counterspell_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_ice_storm": {
+      "name": "Ice Storm",
+      "group": "Sorcerer",
+      "frame": [
+        171,
+        118
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        84,
+        84
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        28,
+        8
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "sorcerer_ice_storm_frost.png"
+      },
+      "default": "frost"
+    },
+    "sorcerer_wall_of_fire": {
+      "name": "Wall Of Fire",
+      "group": "Sorcerer",
+      "frame": [
+        161,
+        69
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        80,
+        41
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        32,
+        51
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_wall_of_fire_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_banishment": {
+      "name": "Banishment",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        26
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        35
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_banishment_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_greater_invisibility": {
+      "name": "Greater Invisibility",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        28
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "mist": "sorcerer_greater_invisibility_mist.png"
+      },
+      "default": "mist"
+    },
+    "sorcerer_cone_of_cold": {
+      "name": "Cone Of Cold",
+      "group": "Sorcerer",
+      "frame": [
+        192,
+        74
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        39
+      ],
+      "sourceFrame": [
+        192,
+        112
+      ],
+      "trim": [
+        0,
+        17
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "sorcerer_cone_of_cold_frost.png"
+      },
+      "default": "frost"
+    },
+    "sorcerer_hold_monster": {
+      "name": "Hold Monster",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        22
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_hold_monster_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_dragon_breath": {
+      "name": "Dragon Breath",
+      "group": "Sorcerer",
+      "frame": [
+        192,
+        93
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        46
+      ],
+      "sourceFrame": [
+        192,
+        112
+      ],
+      "trim": [
+        0,
+        10
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_dragon_breath_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_dragon_wings": {
+      "name": "Dragon Wings",
+      "group": "Sorcerer",
+      "frame": [
+        62,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        33
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_dragon_wings_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_tides_of_chaos": {
+      "name": "Tides Of Chaos",
+      "group": "Sorcerer",
+      "frame": [
+        51,
+        48
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        23
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        23,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "sorcerer_tides_of_chaos_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "sorcerer_wild_surge": {
+      "name": "Wild Surge",
+      "group": "Sorcerer",
+      "frame": [
+        53,
+        48
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        27,
+        23
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        21,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "sorcerer_wild_surge_force.png",
+        "storm": "sorcerer_wild_surge_storm.png",
+        "psychic": "sorcerer_wild_surge_psychic.png"
+      },
+      "default": "force",
+      "variantsByDamage": {
+        "force": "force",
+        "lightning": "storm",
+        "psychic": "psychic"
+      }
+    },
+    "sorcerer_bend_luck": {
+      "name": "Bend Luck",
+      "group": "Sorcerer",
+      "frame": [
+        57,
+        48
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        28,
+        23
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        20,
+        38
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "sorcerer_bend_luck_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "sorcerer_controlled_surge": {
+      "name": "Controlled Surge",
+      "group": "Sorcerer",
+      "frame": [
+        149,
+        105
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        74,
+        53
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        38,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_controlled_surge_arcane.png",
+        "force": "sorcerer_controlled_surge_force.png",
+        "fire": "sorcerer_controlled_surge_fire.png"
+      },
+      "default": "arcane",
+      "variantsByDamage": {
+        "force": "force",
+        "fire": "fire"
+      }
+    },
+    "sorcerer_ember_rune": {
+      "name": "Ember Rune",
+      "group": "Sorcerer",
+      "frame": [
+        63,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        27,
+        19
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        21,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_ember_rune_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_frost_rune": {
+      "name": "Frost Rune",
+      "group": "Sorcerer",
+      "frame": [
+        71,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        19
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        13,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "sorcerer_frost_rune_frost.png"
+      },
+      "default": "frost"
+    },
+    "sorcerer_grand_sigil": {
+      "name": "Grand Sigil",
+      "group": "Sorcerer",
+      "frame": [
+        164,
+        97
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        79,
+        48
+      ],
+      "sourceFrame": [
+        224,
+        144
+      ],
+      "trim": [
+        33,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "sorcerer_grand_sigil_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "sorcerer_elemental_affinity": {
+      "name": "Elemental Affinity",
+      "group": "Sorcerer",
+      "frame": [
+        62,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        33
+      ],
+      "sourceFrame": [
+        96,
+        96
+      ],
+      "trim": [
+        17,
+        28
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_elemental_affinity_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_chromatic_orb_shot": {
+      "name": "Chromatic Orb flight",
+      "group": "Sorcerer",
+      "frame": [
+        46,
+        24
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        23,
+        12
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        1,
+        4
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "sorcerer_chromatic_orb_shot_storm.png"
+      },
+      "default": "storm"
+    },
+    "sorcerer_fire_bolt_shot": {
+      "name": "Fire Bolt flight",
+      "group": "Sorcerer",
+      "frame": [
+        48,
+        18
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        9
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        7
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_fire_bolt_shot_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_fireball_shot": {
+      "name": "Fireball flight",
+      "group": "Sorcerer",
+      "frame": [
+        44,
+        10
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        22,
+        5
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        2,
+        11
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_fireball_shot_fire.png"
+      },
+      "default": "fire"
+    },
+    "sorcerer_magic_missile_shot": {
+      "name": "Magic Missile flight",
+      "group": "Sorcerer",
+      "frame": [
+        46,
+        24
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        23,
+        12
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        1,
+        4
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "sorcerer_magic_missile_shot_force.png"
+      },
+      "default": "force"
+    },
+    "sorcerer_ray_of_frost_shot": {
+      "name": "Ray Of Frost flight",
+      "group": "Sorcerer",
+      "frame": [
+        48,
+        18
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        24,
+        9
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        0,
+        7
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "frost": "sorcerer_ray_of_frost_shot_frost.png"
+      },
+      "default": "frost"
+    },
+    "sorcerer_scorching_ray_shot": {
+      "name": "Scorching Ray flight",
+      "group": "Sorcerer",
+      "frame": [
+        46,
+        24
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        23,
+        12
+      ],
+      "sourceFrame": [
+        48,
+        32
+      ],
+      "trim": [
+        1,
+        4
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fire": "sorcerer_scorching_ray_shot_fire.png"
+      },
+      "default": "fire"
     }
   },
   "passives": {
-    "evoker.empowered_evocation": "fx.wizard_empowered_evocation.force"
+    "evoker.empowered_evocation": "fx.wizard_empowered_evocation.force",
+    "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire"
   }
 }

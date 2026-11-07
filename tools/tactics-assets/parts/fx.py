@@ -2464,6 +2464,8 @@ CATALOGUE: list[Fx] = [
 
 from .wizard_fx import catalogue as _wizard_catalogue
 CATALOGUE += _wizard_catalogue()
+from .sorcerer_fx import catalogue as _sorcerer_catalogue, DAMAGE_VARIANTS as _sorcerer_damage_variants
+CATALOGUE += _sorcerer_catalogue()
 
 ATTACH = {
     "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
@@ -2488,7 +2490,7 @@ def build() -> None:
         for vname, v in e.variants.items():
             imgs = [fr.render(ramps(v)) for fr in frames]
             packed, anchor, trim = imgs, e.anchor, (0, 0)
-            if e.id.startswith('wizard_'):
+            if e.id.startswith(('wizard_', 'sorcerer_')):
                 from .fx_packing import pack
                 packed, anchor, trim = pack(imgs, e.anchor, e.attach)
             w, h = packed[0].size
@@ -2502,12 +2504,13 @@ def build() -> None:
         entry = {"name": e.name, "group": e.group, "frame": [w, h], "frames": len(frames), "fps": e.fps,
                  "loop": e.loop, "anchor": list(anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
                  "variants": files, "default": next(iter(files))}
-        if e.id.startswith('wizard_'):
+        if e.id.startswith(('wizard_', 'sorcerer_')):
             entry.update(sourceFrame=[frames[0].w, frames[0].h], trim=list(trim))
         if e.loop and e.loop_start:
             entry["loopStart"] = e.loop_start
         if e.note:
             entry["note"] = e.note
+        if e.id in _sorcerer_damage_variants: entry["variantsByDamage"] = _sorcerer_damage_variants[e.id]
         effects[e.id] = entry
     write_json({
         "layout": "each file is one horizontal strip of frames, left to right, all the same size",
@@ -2519,7 +2522,8 @@ def build() -> None:
         "attach": ATTACH,
         "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
         "effects": effects,
-        "passives": {"evoker.empowered_evocation": "fx.wizard_empowered_evocation.force"},
+        "passives": {"evoker.empowered_evocation": "fx.wizard_empowered_evocation.force",
+                     "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire"},
     }, out / "manifest.json")
     _preview_sheet(rendered)
     _preview_gif(rendered)

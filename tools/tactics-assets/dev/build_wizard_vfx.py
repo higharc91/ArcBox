@@ -31,7 +31,7 @@ def build():
             'frames':len(frames),'fps':effect.fps,'loop':effect.loop,'anchor':list(anchor),
             'sourceFrame':[frames[0].w,frames[0].h],'trim':list(trim),
             'attach':effect.attach,'blend':effect.blend,'layer':effect.layer,'variants':variants,'default':next(iter(variants))}
-    meta['passives']={'evoker.empowered_evocation':'fx.wizard_empowered_evocation.force'}
+    meta.setdefault('passives',{})['evoker.empowered_evocation']='fx.wizard_empowered_evocation.force'
     write_json(meta,meta_path)
     # Only replace each presentation object, preserving the authored compact rules and all gameplay bytes.
     source=rules_path.read_text(); remap=json.loads((Path(__file__).resolve().parents[1]/'baseline/anim-remap.json').read_text())

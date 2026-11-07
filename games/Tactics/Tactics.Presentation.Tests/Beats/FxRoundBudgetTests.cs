@@ -10,13 +10,15 @@ namespace Tactics.Presentation.Tests.Beats;
 
 public sealed class FxRoundBudgetTests
 {
-    [Fact]
-    public void Six_hero_chapter_one_rounds_preserve_rules_and_stay_within_the_proposed_cinematic_budget()
+    [Theory]
+    [InlineData("wizard")]
+    [InlineData("sorcerer")]
+    public void Six_hero_chapter_one_rounds_preserve_rules_and_stay_within_the_proposed_cinematic_budget(string caster)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
         var art = FxArt.Load(Pack.Root);
         var unitArt = UnitArt.Load(Pack.Root);
-        string[] classes = ["fighter", "cleric", "rogue", "wizard", "barbarian", "bard"];
+        string[] classes = ["fighter", "cleric", "rogue", caster, "barbarian", "bard"];
         ImmutableArray<PartyMember> party = [.. classes.Select((cls, i) => new PartyMember(new($"hero{i + 1}"),
             SheetBuilder.DefaultCharacter(cls, "human", cls, null, 1, rules), new AiControlled("companion")))];
         var setup = Encounters.Setup("river_crossing", party, Difficulty.Normal, rules);
@@ -105,7 +107,7 @@ public sealed class FxRoundBudgetTests
         }
         Assert.True(complete >= 20);
         if (Environment.GetEnvironmentVariable("ARCBOX_FX_BUDGET_REPORT") is { Length: > 0 } path)
-            File.WriteAllText(path, JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(caster == "wizard" ? path : Path.Combine(Path.GetDirectoryName(path)!, Path.GetFileNameWithoutExtension(path) + "-sorcerer.json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
 
         BattleView View(BattleState s, ImmutableArray<Beat> beats) => new("budget", setup.Map.Id, s.Round, s.Order, s.Active,
             [.. s.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(), u.Sheet.Sprite, u.Pos,
