@@ -1,0 +1,42 @@
+{
+  "sourceCommit": "a11e227daeed40394b1f4d6f74db64eec3d8f852",
+  "beforeCommit": "4eb38ab6a3d287849553c8c0012cb5e39483d76e",
+  "fullCommand": "bash tools/check-all.sh --full",
+  "dotnetTestsPassed": 7255,
+  "dotnetTestsSkipped": 0,
+  "phoneTestsPassed": 549,
+  "nodeTestsPassed": 24,
+  "assetTestsPassed": 37,
+  "audioTestsPassed": 9,
+  "loreTestsPassed": 23,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "nativeBuildWarnings": 0,
+  "nativeBuildErrors": 0,
+  "nativeSamplesPerVersion": 44,
+  "nativeRenderingErrors": 0,
+  "neutralHarnessFilesIdentical": true,
+  "beforeContainsOnlyNeutralHarnessEdits": true,
+  "ciEnabledOrDispatched": false,
+  "ownerApprovalPending": true,
+  "realHardware16msValidated": false,
+  "physical3mReadabilityValidated": false,
+  "nativeAssemblySha256": {
+    "ArcBox.Host.dll": "ddb50309d861af06b236116ff144899c7d627a4ff7a6e185cf962fb889be04cb",
+    "Tactics.Presentation.dll": "bb4f0ae1dafa3c3a464f7973f5149bb5f8b159f966a49dd247ba01e237959a31"
+  },
+  "performanceClassMedianBudgetPassed": true,
+  "performanceRunsPerVersion": 3,
+  "webmComparisons": 44,
+  "fullResolutionPosters": 44,
+  "losslessGalleryThumbnails": 44,
+  "ciWorkflowState": "disabled_manually",
+  "ciWorkflowId": 408797508,
+  "galleryLinksAndAllMediaValidated": true,
+  "videoCodec": "vp9",
+  "videoResolution": [
+    1920,
+    540
+  ],
+  "videoFps": 30
+}
