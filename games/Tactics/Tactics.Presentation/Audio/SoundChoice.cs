@@ -43,7 +43,7 @@ public static class SoundChoice
         ("cobble", "step_stone"), ("flagstone", "step_stone"), ("rock_ford", "step_stone"), ("rock", "step_stone"), ("ash_ford", "step_dirt"), ("dungeon", "step_stone"), ("crypt", "step_stone"), ("wet_stone", "step_stone"), ("basalt", "step_stone"),
     ];
 
-    private static readonly string[] Mundane = ["fx.dust", "fx.smoke", "fx.poof"];
+    private static readonly string[] Mundane = ["fx.dust", "fx.smoke", "fx.poof", "fx.fighter_"];
 
     private static readonly ImmutableHashSet<string> Boons = ["hasted", "inspired", "raging", "barkskin", "mage_armor", "death_ward", "elemental_weapon", "aura_of_protection", "divine_smite", "invisible"];
 

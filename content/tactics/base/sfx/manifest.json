@@ -331,7 +331,7 @@
       ],
       "loop": false,
       "group": "battle",
-      "use": "Attack against a shield bearer that misses by armour"
+      "use": "Attack against a shield bearer that misses by armour; fx.fighter_feinting_attack.steel; fx.fighter_shield_wall.steel"
     },
     "blunt_armor": {
       "files": [
@@ -377,7 +377,7 @@
       ],
       "loop": false,
       "group": "battle",
-      "use": "ConditionApplied for a beneficial condition (blessed, hasted, raging)"
+      "use": "ConditionApplied for a beneficial condition (blessed, hasted, raging); fx.fighter_action_surge.gold; fx.fighter_challenge.gold; fx.fighter_mass_challenge.gold; fx.fighter_commanders_strike.royal; fx.fighter_maneuvering_order.royal; fx.fighter_rallying_cry.royal; fx.fighter_to_arms.royal"
     },
     "cache_open": {
       "files": [
@@ -1074,7 +1074,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.bless.*, fx.inspire.*; fx.cleric_bless.holy; fx.cleric_aid.healing; fx.paladin_bless.gold; fx.paladin_aid.gold; fx.bard_bardic_inspiration.music; fx.bard_countercharm.arcane; fx.bard_heroism.music; fx.bard_bardic_inspiration.gold; fx.bard_heroism.gold"
+      "use": "fx.bless.*, fx.inspire.*; fx.cleric_bless.holy; fx.cleric_aid.healing; fx.paladin_bless.gold; fx.paladin_aid.gold; fx.bard_bardic_inspiration.music; fx.bard_countercharm.arcane; fx.bard_heroism.music; fx.bard_bardic_inspiration.gold; fx.bard_heroism.gold; fx.fighter_rally.gold"
     },
     "spell_cast": {
       "files": [
@@ -1099,7 +1099,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire; fx.paladin_elemental_weapon.fire"
+      "use": "fx.aura.fire, fx.slash.fire, fx.thrust.fire; fx.paladin_elemental_weapon.fire; fx.fighter_goading_attack.gold"
     },
     "spell_fire_explosion": {
       "files": [
@@ -1176,7 +1176,7 @@
       ],
       "loop": false,
       "group": "spell",
-      "use": "fx.heal.nature, fx.restore.nature; fx.druid_cure_wounds.healing; fx.druid_healing_word.healing; fx.druid_lesser_restoration.healing; fx.druid_mass_cure_wounds.healing; fx.druid_greater_restoration.healing; fx.ranger_cure_wounds.healing; fx.ranger_lesser_restoration.healing"
+      "use": "fx.heal.nature, fx.restore.nature; fx.druid_cure_wounds.healing; fx.druid_healing_word.healing; fx.druid_lesser_restoration.healing; fx.druid_mass_cure_wounds.healing; fx.druid_greater_restoration.healing; fx.ranger_cure_wounds.healing; fx.ranger_lesser_restoration.healing; fx.fighter_second_wind.warm"
     },
     "spell_poison_cloud": {
       "files": [
@@ -1412,7 +1412,7 @@
       ],
       "loop": false,
       "group": "weapon",
-      "use": "Swing for longsword, shortsword, scimitar, rapier, greatsword, glaive, sickle"
+      "use": "Swing for longsword, shortsword, scimitar, rapier, greatsword, glaive, sickle; fx.fighter_trip_attack.steel; fx.fighter_pushing_attack.steel; fx.fighter_menacing_attack.steel; fx.fighter_precision_attack.steel; fx.fighter_charge.steel; fx.fighter_cleave.steel; fx.fighter_blade_dance.steel; fx.fighter_execution_strike.steel"
     },
     "terrain_shift": {
       "files": [

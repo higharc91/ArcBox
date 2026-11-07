@@ -152,6 +152,9 @@ public static class FxShowcase
         }
         if(cls=="ranger")
             foreach(var action in new[]{"move","attack"})samples.Add(RangerCompanionSample(action,rules,samples.Count+1));
+        if(cls=="fighter")
+            foreach(var id in new[]{"common.attack.level10","fighter.trip_attack.level10","fighter.pushing_attack.level10","fighter.menacing_attack.level10","fighter.goading_attack.level10","weaponmaster.blade_dance.level10","weaponmaster.execution_strike.wounded"})
+                samples.Add(FighterVariantSample(id,rules,samples.Count+1));
         return samples.ToImmutable();
     }
 
@@ -194,6 +197,7 @@ public static class FxShowcase
         if(cls=="paladin" && id=="paladin.elemental_weapon.strike")
             return Sample(cls,new("paladin.elemental_weapon"),9,rules,1,realistic:true,weaponFollowThrough:true) with { Id=id };
         if(cls=="ranger" && id.StartsWith("ranger.companion.",StringComparison.Ordinal))return RangerCompanionSample(id.Split('.')[2],rules,1);
+        if(cls=="fighter" && (id.EndsWith(".level10",StringComparison.Ordinal)||id.EndsWith(".wounded",StringComparison.Ordinal)))return FighterVariantSample(id,rules,1);
         var feature = Inventory(cls, rules).FirstOrDefault(r => r.Id == id);
         if (feature?.Kind == "static") throw new InvalidOperationException($"{id} is a static modifier, not a standalone visible proc.");
         return feature?.Kind == "proc" ? ProcSample(cls, feature, rules, 1)
@@ -202,6 +206,7 @@ public static class FxShowcase
 
     private static FxShowcaseSample ProcSample(string cls, FxShowcaseFeature feature, RulesPack rules, int sequence, bool undeadTarget=false)
     {
+        if(cls=="fighter" && feature.Id is "fighter.indomitable" or "vanguard.unbreakable")return FighterDefenceSample(feature,rules,sequence);
         if (feature.Id == "warlock.hunger_of_hadar.turn")
             return Sample(cls, new("warlock.hunger_of_hadar"), feature.Level, rules, sequence, realistic: true, zonePulse: true);
         if (feature.Id == "death_ward.save")
@@ -234,7 +239,7 @@ public static class FxShowcase
         if (cls=="paladin" && passive.Hook==HookKind.OnTurnEnd)
             return Sample(cls,RulesPack.CommonAttack.Id,feature.Level,rules,sequence,feature.Subclass,feature.Id,realistic:true,endTurnProc:true)
                 with { Id=feature.Id,Name=feature.Name };
-        if (passive.Hook is not (HookKind.OnAttackHit or HookKind.BeforeAttackRoll or HookKind.OnKill))
+        if (passive.Hook is not (HookKind.OnAttackHit or HookKind.OnAttackMiss or HookKind.BeforeAttackRoll or HookKind.OnKill))
             throw new InvalidOperationException($"No trigger fixture yet for {passive.Hook}. It must not be skipped.");
         var trigger = cls == "warlock" && (passive.When?.IsSpell == true || passive.Hook == HookKind.OnKill)
             ? new AbilityId("warlock.eldritch_blast")
@@ -268,6 +273,7 @@ public static class FxShowcase
         if (rules.Passives[feature.Id].Hook == HookKind.OnBattleStart)
         {
             before = ShowcaseView(state, map, [], hideSummons: true);
+            if(cls=="fighter")before=before with { Units=[..before.Units.Select(u=>u with { TempHp=0 })] };
             if(cls=="paladin")before=before with { Units=[.. before.Units.Select(u=>u with { Conditions=[] })] };
         }
         else
@@ -323,7 +329,7 @@ public static class FxShowcase
         var rangerPreparation=passive switch { "ranger.hunters_mark_bonus"=>"ranger.hunters_mark", "beastmaster.ferocious_bond"=>"beastmaster.sic",_=>null };
         if(rangerPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(rangerPreparation)] };
         if(paladinPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(paladinPreparation)] };
-        var friendly = (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
+        var friendly = (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger" or "fighter") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
             || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" or "bard" or "ranger" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
         var from = Place(new(3, 5));
         var selfArea = ability.Target.Kind == TargetKind.Self && ability.Target.Area.Shape == AreaShape.Burst;
@@ -339,7 +345,7 @@ public static class FxShowcase
         if (friendly && ability.Target.Area.Shape != AreaShape.Single)
             placements.Add(new(new("hero3"), ally with { Name = "Second Ally" }, new AiControlled("companion"), Place(new(from.X, from.Y - 1)), []));
         placements.Add(new(new("target1"), goblin, new AiControlled("brute"), target, []));
-        if (!realistic || ability.Target.Area.Shape != AreaShape.Single || abilityId.Value == "stormcaller.chain_tempest" || passive is not null && rules.Passives[passive].Hook == HookKind.OnKill)
+        if (!realistic || ability.Target.Area.Shape != AreaShape.Single || abilityId.Value == "stormcaller.chain_tempest" || passive is not null && rules.Passives[passive].Hook == HookKind.OnKill || cls=="fighter" && level>=5 && ability.IsWeaponAttack)
         {
             placements.Add(new(new("target2"), goblin, new AiControlled("brute"), Place(selfArea ? new(from.X, from.Y + 1) : new(target.X + 1, target.Y)), []));
             placements.Add(new(new("target3"), goblin, new AiControlled("brute"), Place(selfArea ? new(from.X - 1, from.Y) : new(target.X, target.Y + 1)), []));
@@ -352,7 +358,8 @@ public static class FxShowcase
             var revive = ability.Effects.Any(e => e is ReviveEffect) || ability.Target.Kind == TargetKind.DownedAlly;
             state = state with { Units = state.Units.ToImmutableSortedDictionary(kv => kv.Key, kv =>
                 kv.Value.Sheet.Side != Side.Party ? kv.Value : kv.Value with
-                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger" ? 3 : 2)),
+                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger" or "fighter" ? 3 : 2)),
+                    TempHp = cls=="fighter"?0:kv.Value.TempHp,
                     Life = revive && kv.Key != caster ? LifeState.Downed : LifeState.Up,
                     Countdown = revive && kv.Key != caster ? 2 : 0 }) };
             if (ability.Effects.Any(e => e is GrantResourceEffect))
@@ -385,7 +392,9 @@ public static class FxShowcase
             state=prepared.State;
         }
         if (woundedTarget)
-            state = state with { Units = state.Units.SetItem(new("target1"), state.Units[new("target1")] with { Hp = 100 }) };
+            state = state with { Units = state.Units.SetItem(new("target1"), state.Units[new("target1")] with { Hp = cls=="fighter"?80:100 }) };
+        if(passive=="weaponmaster.relentless")
+            state=state with { Units=state.Units.SetItem(caster,state.Units[caster] with { Resources=state.Units[caster].Resources.SetItem("superiority",Math.Max(0,state.Units[caster].Resources["superiority"]-1)) }) };
         if (wardProc)
             state = state with { Units = state.Units.SetItem(new("hero2"), state.Units[new("hero2")] with { Hp = 1 }) };
         var conditions = abilityId.Value switch
@@ -435,6 +444,9 @@ public static class FxShowcase
         var result = Battle.Apply(state, endTurnProc ? new EndTurn(caster) : new Use(caster, abilityId, aim.Target), rules);
         if (result.Rejected is { } rejected) throw new InvalidOperationException($"Demo {abilityId.Value}: {rejected.Code}");
         if (result.State.Pending is not null) throw new InvalidOperationException($"Demo {abilityId.Value} needs a reaction fixture.");
+        if(passive=="weaponmaster.relentless" && result.Events.OfType<PassiveTriggered>().Any(p=>p.Passive==passive)
+            && result.State.Units[caster].Resources["superiority"]!=state.Units[caster].Resources["superiority"]+1)
+            throw new InvalidOperationException("The real Relentless hook did not restore its expended superiority die.");
         BattleView View(BattleState s, ImmutableArray<Beat> beats) => new("fx-showcase", map.Id, s.Round, s.Order, s.Active,
             [.. s.Units.Values.Select(u => new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(), u.Sheet.Sprite, u.Pos,
                 u.Hp, u.Sheet.MaxHp, u.TempHp, u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], null))],
@@ -514,6 +526,44 @@ public static class FxShowcase
         }
         return new(abilityId.Value, ability.Name, choice!.Tooltip, level, View(state, []),
             View(result.State, [new Beat(sequence, caster, result.Events)]));
+    }
+
+    private static FxShowcaseSample FighterVariantSample(string id,RulesPack rules,int sequence)
+    {
+        var wounded=id.EndsWith(".wounded",StringComparison.Ordinal);var aid=id[..id.LastIndexOf('.')];
+        var subclass=aid.StartsWith("weaponmaster.",StringComparison.Ordinal)?"fighter.weaponmaster":null;
+        return Sample("fighter",new(aid),10,rules,sequence,subclass,realistic:true,woundedTarget:wounded)
+            with { Id=id,Name=rules.Abilities[new(aid)].Name+(wounded?" · wounded foe":" · level 10"),
+                Description=wounded?"Real Execution Strike against a foe below half HP; includes the authored additional slashing damage.":"Actual level-10 attacks and superiority progression." };
+    }
+
+    private static FxShowcaseSample FighterDefenceSample(FxShowcaseFeature feature,RulesPack rules,int sequence)
+    {
+        var map=rules.Maps["crypt_hall"];var hero=new UnitId("hero1");var threat=new UnitId("threat");var saving=feature.Id=="fighter.indomitable";
+        var defender=SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Ember","human","fighter",feature.Subclass,feature.Level,rules),rules)
+            with { InitiativeBonus=0,Sprite="characters.class_fighter",Passives=[feature.Id],Abilities=[] };
+        var aid=saving?new AbilityId("wizard.fireball"):RulesPack.CommonAttack.Id;
+        var attacker=SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Threat","human",saving?"wizard":"fighter",null,saving?5:3,rules),rules)
+            with { Side=Side.Enemy,InitiativeBonus=100,Sprite="characters.class_"+(saving?"wizard":"fighter"),Passives=[],Abilities=[aid] };
+        var placements=ImmutableArray.CreateBuilder<UnitPlacement>();
+        placements.Add(new(hero,defender,new PlayerControlled(new("preview")),new(3,5),[]));
+        placements.Add(new(threat,attacker,new AiControlled("brute"),saving?new(7,5):new(4,5),[]));
+        if(!saving)placements.Add(new(new("hero2"),defender with { Name="Ally",Passives=[] },new AiControlled("companion"),new(3,7),[]));
+        var setup=new BattleSetup(map,placements.ToImmutable(),ObjectivesDef.Default,[],Difficulty.Normal,0,[]);
+        for(ulong seed=7;seed<100;seed++)
+        {
+            var state=Battle.Start(setup,rules,seed).State;
+            state=state with { Units=state.Units.SetItem(hero,state.Units[hero] with { Hp=saving?defender.MaxHp:1,
+                Conditions=saving?[new ActiveCondition(new("poisoned"),threat,null,false,12,Stat.Con,false),new ActiveCondition(new("frightened"),threat,null,false,12,Stat.Wis,false)]:[] }) };
+            var result=Battle.Apply(state,new Use(threat,aid,saving?new Target(Tile:new(3,5)):new Target(Unit:hero)),rules);
+            if(result.Rejected is not null || result.State.Pending is not null)throw new InvalidOperationException("Fighter defence fixture was not a legal real attack.");
+            if(!result.Events.OfType<PassiveTriggered>().Any(p=>p.Passive==feature.Id))continue;
+            if(saving && !result.Events.OfType<ConditionRemoved>().Any())continue;
+            if(!saving && !result.Events.OfType<Revived>().Any())continue;
+            return new(feature.Id,feature.Name,saving?"Real failed Fireball save triggers Indomitable and clears existing poison/fear; seed "+seed+".":"Actual lethal weapon hit triggers Unbreakable's revive and temporary HP; seed "+seed+".",feature.Level,
+                ShowcaseView(state,map,[]),ShowcaseView(result.State,map,[new(sequence,threat,result.Events)]));
+        }
+        throw new InvalidOperationException("No actual Fighter defence trigger found: "+feature.Id);
     }
 
     private static FxShowcaseSample RangerCompanionSample(string action,RulesPack rules,int sequence)

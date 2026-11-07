@@ -1168,6 +1168,78 @@
           "loop": false
         }
       }
+    },
+    "fighter": {
+      "framesPerDirection": 214,
+      "anims": {
+        "fighter_cut": {
+          "frames": [
+            189,
+            190,
+            191,
+            192
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "fighter_thrust": {
+          "frames": [
+            193,
+            194,
+            195,
+            196
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "fighter_sweep": {
+          "frames": [
+            197,
+            198,
+            199,
+            200
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "fighter_guard": {
+          "frames": [
+            201,
+            202,
+            203,
+            204
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "fighter_command": {
+          "frames": [
+            205,
+            206,
+            207,
+            208
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "fighter_breath": {
+          "frames": [
+            209,
+            210,
+            211,
+            212
+          ],
+          "fps": 20,
+          "loop": false
+        },
+        "fighter_release": {
+          "frames": [
+            213
+          ],
+          "fps": 20,
+          "loop": false
+        }
+      }
     }
   }
 }

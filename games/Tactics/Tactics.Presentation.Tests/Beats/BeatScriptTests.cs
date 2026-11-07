@@ -16,8 +16,9 @@ public sealed class BeatScriptTests
     private static readonly UnitId Foe = new("goblin.1");
     private static readonly AbilityId Attack = new("common.attack");
 
+    // Generic cadence contracts use an unchanged class; real Fighter timing has dedicated coverage.
     private static UnitView Unit(UnitId id, string side, int x, int y, int hp = 10)
-        => new(id, id.Value, side, "characters.class_fighter", new Tile(x, y), hp, 10, 0, "Up", 0, [], null);
+        => new(id, id.Value, side, "characters.class_rogue", new Tile(x, y), hp, 10, 0, "Up", 0, [], null);
 
     private static BattleView View(params UnitView[] units) => new("e", "m", 1, [], null, [.. units], [], null, BoardChanges.None);
 

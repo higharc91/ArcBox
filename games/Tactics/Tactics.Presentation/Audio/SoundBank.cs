@@ -147,9 +147,9 @@ public sealed partial class SoundBank
             var entry = new SoundEntry(sound.Name, [.. v.GetProperty("files").EnumerateArray().Select(f => $"sfx/{f.GetString()}")],
                 v.TryGetProperty("loop", out var loop) && loop.GetBoolean(), v.GetProperty("group").GetString() ?? "", v.GetProperty("use").GetString() ?? "");
             _sounds[entry.Id] = entry;
-            if (entry.Group == "spell")
-                ReadEffects(entry);
-            else if (entry.Group == "creature" && entry.Id.EndsWith("_attack", StringComparison.Ordinal))
+            // Explicit art bindings may reuse existing weapon and battle clips.
+            ReadEffects(entry);
+            if (entry.Group == "creature" && entry.Id.EndsWith("_attack", StringComparison.Ordinal))
                 foreach (var name in v.GetProperty("families").EnumerateArray())
                     _families.TryAdd(name.GetString()!, entry.Id[..^"_attack".Length]);
         }

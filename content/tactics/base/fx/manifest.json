@@ -11091,6 +11091,846 @@
         "root": "ranger_ensnared_thorns_root.png"
       },
       "default": "root"
+    },
+    "fighter_second_wind": {
+      "name": "Second Wind",
+      "group": "Fighter",
+      "frame": [
+        59,
+        59
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        29,
+        49
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        27,
+        32
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "warm": "fighter_second_wind_warm.png"
+      },
+      "default": "warm"
+    },
+    "fighter_action_surge": {
+      "name": "Action Surge",
+      "group": "Fighter",
+      "frame": [
+        72,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        42,
+        39
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        14,
+        42
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_action_surge_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_trip_attack": {
+      "name": "Trip Attack",
+      "group": "Fighter",
+      "frame": [
+        72,
+        24
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        18
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        63
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_trip_attack_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_pushing_attack": {
+      "name": "Pushing Attack",
+      "group": "Fighter",
+      "frame": [
+        71,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        47
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        34
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_pushing_attack_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_menacing_attack": {
+      "name": "Menacing Attack",
+      "group": "Fighter",
+      "frame": [
+        63,
+        54
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        49
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        25,
+        32
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_menacing_attack_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_precision_attack": {
+      "name": "Precision Attack",
+      "group": "Fighter",
+      "frame": [
+        63,
+        35
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        37
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        44
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_precision_attack_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_goading_attack": {
+      "name": "Goading Attack",
+      "group": "Fighter",
+      "frame": [
+        58,
+        56
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        22,
+        58
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        34,
+        23
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_goading_attack_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_rally": {
+      "name": "Rally",
+      "group": "Fighter",
+      "frame": [
+        37,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        11,
+        53
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        45,
+        28
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_rally_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_feinting_attack": {
+      "name": "Feinting Attack",
+      "group": "Fighter",
+      "frame": [
+        72,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        43
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        38
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_feinting_attack_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_charge": {
+      "name": "Charge",
+      "group": "Fighter",
+      "frame": [
+        71,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        55
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        26
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_charge_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_challenge": {
+      "name": "Challenge",
+      "group": "Fighter",
+      "frame": [
+        38,
+        47
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        49
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        35,
+        32
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_challenge_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_shield_wall": {
+      "name": "Shield Wall",
+      "group": "Fighter",
+      "frame": [
+        161,
+        70
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        80,
+        55
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        24,
+        49
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_shield_wall_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_mass_challenge": {
+      "name": "Mass Challenge",
+      "group": "Fighter",
+      "frame": [
+        87,
+        76
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        33,
+        66
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        71,
+        38
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_mass_challenge_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_cleave": {
+      "name": "Cleave",
+      "group": "Fighter",
+      "frame": [
+        146,
+        84
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        70,
+        65
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        34,
+        39
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_cleave_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_blade_dance": {
+      "name": "Blade Dance",
+      "group": "Fighter",
+      "frame": [
+        143,
+        71
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        71,
+        68
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        33,
+        36
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_blade_dance_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_execution_strike": {
+      "name": "Execution Strike",
+      "group": "Fighter",
+      "frame": [
+        61,
+        59
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        51
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        26,
+        30
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_execution_strike_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_commanders_strike": {
+      "name": "Commanders Strike",
+      "group": "Fighter",
+      "frame": [
+        32,
+        50
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        11,
+        44
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        45,
+        37
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "royal": "fighter_commanders_strike_royal.png"
+      },
+      "default": "royal"
+    },
+    "fighter_maneuvering_order": {
+      "name": "Maneuvering Order",
+      "group": "Fighter",
+      "frame": [
+        59,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        52
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        25,
+        29
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "royal": "fighter_maneuvering_order_royal.png"
+      },
+      "default": "royal"
+    },
+    "fighter_rallying_cry": {
+      "name": "Rallying Cry",
+      "group": "Fighter",
+      "frame": [
+        79,
+        52
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        40,
+        45
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        64,
+        59
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "royal": "fighter_rallying_cry_royal.png"
+      },
+      "default": "royal"
+    },
+    "fighter_to_arms": {
+      "name": "To Arms",
+      "group": "Fighter",
+      "frame": [
+        149,
+        68
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        64,
+        66
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        40,
+        38
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "royal": "fighter_to_arms_royal.png"
+      },
+      "default": "royal"
+    },
+    "fighter_studied_attacks": {
+      "name": "Studied Attacks",
+      "group": "Fighter",
+      "frame": [
+        49,
+        27
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        37
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        16,
+        21
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_studied_attacks_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_indomitable": {
+      "name": "Indomitable",
+      "group": "Fighter",
+      "frame": [
+        99,
+        38
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        49,
+        45
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        7,
+        36
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_indomitable_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_hold_the_line": {
+      "name": "Hold The Line",
+      "group": "Fighter",
+      "frame": [
+        61,
+        20
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        15
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        10,
+        43
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_hold_the_line_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_unbreakable": {
+      "name": "Unbreakable",
+      "group": "Fighter",
+      "frame": [
+        65,
+        71
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        32,
+        68
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        24,
+        13
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_unbreakable_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_keen_edge": {
+      "name": "Keen Edge",
+      "group": "Fighter",
+      "frame": [
+        41,
+        48
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        21,
+        42
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        19,
+        16
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_keen_edge_steel.png"
+      },
+      "default": "steel"
+    },
+    "fighter_relentless": {
+      "name": "Relentless",
+      "group": "Fighter",
+      "frame": [
+        57,
+        41
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        28,
+        31
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        12,
+        27
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "gold": "fighter_relentless_gold.png"
+      },
+      "default": "gold"
+    },
+    "fighter_inspiring_presence": {
+      "name": "Inspiring Presence",
+      "group": "Fighter",
+      "frame": [
+        25,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        11,
+        44
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        45,
+        37
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "royal": "fighter_inspiring_presence_royal.png"
+      },
+      "default": "royal"
+    },
+    "fighter_weapon_hit": {
+      "name": "Weapon Hit",
+      "group": "Fighter",
+      "frame": [
+        51,
+        31
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        37
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        16,
+        21
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "fighter_weapon_hit_steel.png"
+      },
+      "default": "steel"
     }
   },
   "passives": {
@@ -11128,6 +11968,13 @@
     "beastmaster.companion": "fx.ranger_companion.gold",
     "beastmaster.ferocious_bond": "fx.ranger_ferocious_bond.steel",
     "spike_growth.thorns": "fx.ranger_spike_growth_step.root",
-    "ensnared.thorns": "fx.ranger_ensnared_thorns.root"
+    "ensnared.thorns": "fx.ranger_ensnared_thorns.root",
+    "fighter.studied_attacks": "fx.fighter_studied_attacks.steel",
+    "fighter.indomitable": "fx.fighter_indomitable.steel",
+    "vanguard.hold_the_line": "fx.fighter_hold_the_line.steel",
+    "vanguard.unbreakable": "fx.fighter_unbreakable.gold",
+    "weaponmaster.keen_edge": "fx.fighter_keen_edge.steel",
+    "weaponmaster.relentless": "fx.fighter_relentless.gold",
+    "warlord.inspiring_presence": "fx.fighter_inspiring_presence.royal"
   }
 }

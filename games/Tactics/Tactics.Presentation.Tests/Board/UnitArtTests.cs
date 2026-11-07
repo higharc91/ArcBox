@@ -130,11 +130,12 @@ public sealed class UnitArtTests
             var paladin=preset.GetString()!.EndsWith("_paladin",StringComparison.Ordinal);
             var bard=preset.GetString()!.EndsWith("_bard",StringComparison.Ordinal);
             var ranger=preset.GetString()!.EndsWith("_ranger",StringComparison.Ordinal);
-            var count = ranger ? 215 : wizard ? 223 : sorcerer || cleric ? 209 : warlock ? 210 : druid || paladin || bard || ranger ? 214 : 189;
+            var fighter=preset.GetString()!.EndsWith("_fighter",StringComparison.Ordinal);
+            var count = fighter ? 214 : ranger ? 215 : wizard ? 223 : sorcerer || cleric ? 209 : warlock ? 210 : druid || paladin || bard || ranger || fighter ? 214 : 189;
             var last = sprite.Source(count - 1, 1);
             Assert.InRange(last.X + last.Width, 1, 3840);
-            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock || cleric || druid || paladin || bard || ranger ? 2880 : 2560);
-            Assert.Equal(wizard ? 10 : sorcerer || warlock || cleric || druid || paladin || bard || ranger ? 9 : 8, sprite.RowsPerDirection);
+            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer || warlock || cleric || druid || paladin || bard || ranger || fighter ? 2880 : 2560);
+            Assert.Equal(wizard ? 10 : sorcerer || warlock || cleric || druid || paladin || bard || ranger || fighter ? 9 : 8, sprite.RowsPerDirection);
             if (wizard)
                 foreach (var name in new[] { "wizard_bolt", "wizard_weave", "wizard_ward", "wizard_nova", "wizard_stomp" })
                     Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 222));
@@ -167,6 +168,10 @@ public sealed class UnitArtTests
                 foreach(var name in new[]{"bard_play","bard_verse","bard_crescendo","bard_lore","bard_valor"})
                     Assert.All(sprite.Anim(name).Frames,frame=>Assert.InRange(frame,189,213));
             else Assert.Same(sprite.Anim("talk"),sprite.Anim("bard_verse"));
+            if(fighter)
+                foreach(var name in new[]{"fighter_cut","fighter_thrust","fighter_sweep","fighter_guard","fighter_command","fighter_breath","fighter_release"})
+                    Assert.All(sprite.Anim(name).Frames,f=>Assert.InRange(f,189,213));
+            else Assert.Same(sprite.Anim("attack"),sprite.Anim("fighter_cut"));
             if(ranger)
                 foreach(var name in new[]{"ranger_draw","ranger_volley","ranger_command","ranger_ward","ranger_vanish","ranger_release"})
                     Assert.All(sprite.Anim(name).Frames,f=>Assert.InRange(f,189,214));

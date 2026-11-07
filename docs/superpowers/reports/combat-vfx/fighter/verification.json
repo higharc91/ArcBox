@@ -1,0 +1,15 @@
+{
+  "baseline": "4d37f2eab86b19a638c57349745678255325dfe7",
+  "abilityGameplayDefinitionsUnchanged": 20,
+  "allPassiveDataUnchanged": true,
+  "originalCreatureArtAndMetadataUnchanged": true,
+  "otherClassAtlasesUnchanged": true,
+  "phoneFilesAndFixturesUnchanged": true,
+  "audioClipsUnchanged": true,
+  "replaysAndNonPresentationGoldenEventsUnchanged": true,
+  "goldenPresentationEventsChanged": 5,
+  "rulesAiImplementationUnchanged": true,
+  "workflowFilesUnchanged": true,
+  "allExistingEffectEntriesUnchanged": true,
+  "originalFighterFramesPixelIdentical": 4158
+}

@@ -363,7 +363,9 @@ public sealed class BeatSoundsTests
     public void A_sound_comes_out_of_the_tick_that_reaches_it_and_not_before()
     {
         var player = Player();
-        player.Receive(View() with { Beats = [new Beat(1, Hero, [.. Blow(Hero, Foe)])] });
+        // Exercise the unchanged generic cadence independently of Fighter cuts.
+        var generic=View();generic=generic with { Units=[..generic.Units.Select(u=>u.Id==Hero?u with { Sprite="characters.class_rogue" }:u)] };
+        player.Receive(generic with { Beats = [new Beat(1, Hero, [.. Blow(Hero, Foe)])] });
 
         var heard = Heard(player, 1.5);
         var land = Assert.Single(heard, h => h.Id == "blade_flesh");

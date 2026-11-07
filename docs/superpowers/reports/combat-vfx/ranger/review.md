@@ -1,4 +1,4 @@
-> Status: Ranger native review and full local verification complete; awaiting owner approval before its PR or Fighter.
+> Status: Approved by the owner (“Hunter looks good, next class”). PR #268 is open; owner merge pending.
 
 # Ranger — #247
 

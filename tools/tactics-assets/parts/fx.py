@@ -2478,6 +2478,8 @@ from .bard_fx import catalogue as _bard_catalogue, PASSIVES as _bard_passives
 CATALOGUE += _bard_catalogue()
 from .ranger_fx import catalogue as _ranger_catalogue, PASSIVES as _ranger_passives
 CATALOGUE += _ranger_catalogue()
+from .fighter_fx import catalogue as _fighter_catalogue, PASSIVES as _fighter_passives
+CATALOGUE += _fighter_catalogue()
 
 ATTACH = {
     "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
@@ -2502,7 +2504,7 @@ def build() -> None:
         for vname, v in e.variants.items():
             imgs = [fr.render(ramps(v)) for fr in frames]
             packed, anchor, trim = imgs, e.anchor, (0, 0)
-            if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_', 'bard_', 'ranger_')):
+            if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_', 'bard_', 'ranger_', 'fighter_')):
                 from .fx_packing import pack
                 packed, anchor, trim = pack(imgs, e.anchor, e.attach)
             w, h = packed[0].size
@@ -2516,7 +2518,7 @@ def build() -> None:
         entry = {"name": e.name, "group": e.group, "frame": [w, h], "frames": len(frames), "fps": e.fps,
                  "loop": e.loop, "anchor": list(anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
                  "variants": files, "default": next(iter(files))}
-        if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_', 'bard_', 'ranger_')):
+        if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_', 'bard_', 'ranger_', 'fighter_')):
             entry.update(sourceFrame=[frames[0].w, frames[0].h], trim=list(trim))
         if e.loop and e.loop_start:
             entry["loopStart"] = e.loop_start
@@ -2535,7 +2537,7 @@ def build() -> None:
         "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
         "effects": effects,
         "passives": {"evoker.empowered_evocation": "fx.wizard_empowered_evocation.force",
-                     "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire", **_warlock_passives, **_cleric_passives, **_druid_passives, **_paladin_passives, **_bard_passives, **_ranger_passives},
+                     "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire", **_warlock_passives, **_cleric_passives, **_druid_passives, **_paladin_passives, **_bard_passives, **_ranger_passives, **_fighter_passives},
     }, out / "manifest.json")
     _preview_sheet(rendered)
     _preview_gif(rendered)

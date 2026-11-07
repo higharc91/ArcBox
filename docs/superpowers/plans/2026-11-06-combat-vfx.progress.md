@@ -1,4 +1,4 @@
-> Status: Ranger native review complete; awaiting owner OK before its PR or Fighter. Approved dependency PRs await owner merges. CI remains manually disabled.
+> Status: Ranger approved, PR #268 open. Fighter recovered after workspace loss; final native review in progress. CI remains disabled.
 
 # Combat VFX #247 progress
 
@@ -206,3 +206,10 @@ Ranger covers 20 abilities, four class hooks, Spike Growth's entry hook, Ensnare
 The 29-sample native gallery is `../reports/combat-vfx/ranger/index.html`: 20 abilities, six hooks, ordinary Attack and two actual hound turns. Thirty-one sheets include five arrow strips. Five cast gestures and a held release append 26 frames across eleven races, preserving all 4,158 original frames. Source/art/runtime `8d193e1ed381618e28d811271ab12aea9d05f8b5`.
 
 The full gate passes: 7,317 .NET (zero skipped), 565 phone/build, 24 Node, 56 asset, 9 audio and 23 lore; zero build warnings. Three-run class median 20.7833 → 21.9784 ms (+5.75%, within 10%); largest individual ranger.companion.move (+12.30%). Texture peak +22.13 MiB; pack 0.58 MiB. All 180 rounds across six parties add at most 3.317/3.017/0 s Full/Auto/Off under unchanged strict assertions. Only four Hunter's Mark presentation events change in the Warlord Bridge golden; commands and non-presentation events are identical. Hardware 16 ms and physical TV checks remain hardware validation. Ranger stays unchecked; its PR and Fighter wait for explicit approval. CI remains disabled.
+
+
+## Ranger approval and recovered Fighter
+
+The owner approved Ranger with “Hunter looks good, next class”. Its #247 checkbox is ticked and PR #268 is open against `combat-vfx-bard`. The subsequent environment outage lost the unpushed Fighter checkout and captures. Fighter has been restored from the recorded changes on latest main `b0cc434e` plus approved Ranger dependency `733e36d343735a959a466c0754369e04fc3729ab`; frozen baseline `4d37f2eab86b19a638c57349745678255325dfe7`. Earlier successful counts are historical; verification is rerun on the restored source. Main includes #270's squirrel art-audit fix.
+
+Fighter covers 20 abilities, seven actual hooks, ordinary Attack and seven level-10/wounded variants: 35 native scenes, with five static features in the 32-row inventory. Twenty-eight deterministic sheets and six four-frame gestures plus a held release append 25 frames on eleven race atlases. Actual misses, failed saves, lethal hits, resource restoration, multiattacks and conditional damage drive the fixtures. Charge strikes after its real rush; Cleave's Keen Edge marks its actual victim. Physical effects remain unlit; incoming Fireball retains fire light. All gameplay fields and 4,158 original frames are preserved. Five Warlord Bridge events change presentation only. Fighter's PR and Barbarian wait for explicit Fighter approval. CI stays off.

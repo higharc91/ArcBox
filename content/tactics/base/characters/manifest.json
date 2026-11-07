@@ -886,6 +886,86 @@
       ],
       "fps": 10,
       "loop": false
+    },
+    "fighter_cut": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "fighter_thrust": {
+      "frames": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "fighter_sweep": {
+      "frames": [
+        53,
+        54,
+        55,
+        56,
+        57
+      ],
+      "fps": 14,
+      "loop": false
+    },
+    "fighter_guard": {
+      "frames": [
+        70,
+        71,
+        72
+      ],
+      "fps": 8,
+      "loop": false
+    },
+    "fighter_command": {
+      "frames": [
+        112,
+        113,
+        114,
+        115
+      ],
+      "fps": 6,
+      "loop": true
+    },
+    "fighter_breath": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "fighter_release": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
     }
   },
   "builds": {
