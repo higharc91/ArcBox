@@ -1,0 +1,876 @@
+{
+  "before": [
+    {
+      "id": "bard.bardic_inspiration",
+      "name": "Bardic Inspiration",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.inspire.gold"
+      }
+    },
+    {
+      "id": "bard.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "bard.dissonant_whispers",
+      "name": "Dissonant Whispers",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.psychic.dread"
+      }
+    },
+    {
+      "id": "bard.faerie_fire",
+      "name": "Faerie Fire",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "bard.healing_word",
+      "name": "Healing Word",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "bard.heroism",
+      "name": "Heroism",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.inspire.gold"
+      }
+    },
+    {
+      "id": "bard.minor_illusion",
+      "name": "Minor Illusion",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.smoke.grey"
+      }
+    },
+    {
+      "id": "bard.thunderclap",
+      "name": "Thunderclap",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "fx.thunder.thunder"
+      }
+    },
+    {
+      "id": "bard.thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "fx.thunder.thunder"
+      }
+    },
+    {
+      "id": "bard.vicious_mockery",
+      "name": "Vicious Mockery",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.talk",
+        "fx": "fx.psychic.mind"
+      }
+    },
+    {
+      "id": "bard.jack_of_all_trades",
+      "name": "Jack Of All Trades",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "bard.song_of_rest",
+      "name": "Song of Rest",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "bard.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.arcane"
+      }
+    },
+    {
+      "id": "bard.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.holy"
+      }
+    },
+    {
+      "id": "bard.shatter",
+      "name": "Shatter",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_shatter.thunder"
+      }
+    },
+    {
+      "id": "bard.silence",
+      "name": "Silence",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.shadow"
+      }
+    },
+    {
+      "id": "bard.silence.turn",
+      "name": "Silence \u00b7 OnTurnStart",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "bard.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "fx.dispel.arcane"
+      }
+    },
+    {
+      "id": "bard.font_of_inspiration",
+      "name": "Font Of Inspiration",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "bard.hypnotic_pattern",
+      "name": "Hypnotic Pattern",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "bard.mass_healing_word",
+      "name": "Mass Healing Word",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "bard.countercharm",
+      "name": "Countercharm",
+      "level": 6,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.inspire.charm"
+      }
+    },
+    {
+      "id": "bard.dimension_door",
+      "name": "Dimension Door",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.misty.fey"
+      }
+    },
+    {
+      "id": "bard.greater_invisibility",
+      "name": "Greater Invisibility",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.misty.fey"
+      }
+    },
+    {
+      "id": "bard.greater_restoration",
+      "name": "Greater Restoration",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.holy"
+      }
+    },
+    {
+      "id": "bard.hold_monster",
+      "name": "Hold Monster",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.arcane"
+      }
+    },
+    {
+      "id": "lore.arcane_scholar",
+      "name": "Arcane Scholar",
+      "level": 3,
+      "subclass": "bard.lore",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "lore.cutting_words",
+      "name": "Cutting Words",
+      "level": 3,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.talk",
+        "fx": "signature.lore_glyph_echo.arcane"
+      }
+    },
+    {
+      "id": "lore.counterspell",
+      "name": "Counterspell",
+      "level": 6,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.lore_glyph_echo.arcane"
+      }
+    },
+    {
+      "id": "lore.magical_secrets",
+      "name": "Magical Secrets: Glyph Blast",
+      "level": 6,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.lore_glyph_echo.arcane"
+      }
+    },
+    {
+      "id": "lore.peerless_skill",
+      "name": "Peerless Skill",
+      "level": 10,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.lore_glyph_echo.arcane"
+      }
+    },
+    {
+      "id": "siren.alluring_verse",
+      "name": "Alluring Verse",
+      "level": 3,
+      "subclass": "bard.siren",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.siren_charm_song.charm"
+      }
+    },
+    {
+      "id": "siren.enthralling_aria",
+      "name": "Enthralling Aria",
+      "level": 6,
+      "subclass": "bard.siren",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.siren_charm_song.charm"
+      }
+    },
+    {
+      "id": "siren.sirens_call",
+      "name": "Siren's Call",
+      "level": 10,
+      "subclass": "bard.siren",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.siren_charm_song.charm"
+      }
+    },
+    {
+      "id": "valor.battle_readiness",
+      "name": "Battle Readiness",
+      "level": 3,
+      "subclass": "bard.valor",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "valor.combat_inspiration",
+      "name": "Combat Inspiration",
+      "level": 3,
+      "subclass": "bard.valor",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.wave",
+        "fx": "signature.valor_war_horn.brass"
+      }
+    },
+    {
+      "id": "valor.battle_magic",
+      "name": "Battle Magic",
+      "level": 10,
+      "subclass": "bard.valor",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.attack",
+        "fx": "signature.valor_war_horn.brass"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "bard.bardic_inspiration",
+      "name": "Bardic Inspiration",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_bardic_inspiration.gold"
+      }
+    },
+    {
+      "id": "bard.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_cure_wounds.healing"
+      }
+    },
+    {
+      "id": "bard.dissonant_whispers",
+      "name": "Dissonant Whispers",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_verse",
+        "fx": "fx.bard_dissonant_whispers.psychic"
+      }
+    },
+    {
+      "id": "bard.faerie_fire",
+      "name": "Faerie Fire",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_faerie_fire.fey"
+      }
+    },
+    {
+      "id": "bard.healing_word",
+      "name": "Healing Word",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_healing_word.healing"
+      }
+    },
+    {
+      "id": "bard.heroism",
+      "name": "Heroism",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_heroism.gold"
+      }
+    },
+    {
+      "id": "bard.minor_illusion",
+      "name": "Minor Illusion",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.bard_verse",
+        "fx": "fx.bard_minor_illusion.illusion"
+      }
+    },
+    {
+      "id": "bard.thunderclap",
+      "name": "Thunderclap",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_thunderclap.thunder"
+      }
+    },
+    {
+      "id": "bard.thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_thunderwave.thunder"
+      }
+    },
+    {
+      "id": "bard.vicious_mockery",
+      "name": "Vicious Mockery",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.bard_verse",
+        "fx": "fx.bard_vicious_mockery.psychic"
+      }
+    },
+    {
+      "id": "bard.jack_of_all_trades",
+      "name": "Jack Of All Trades",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "bard.song_of_rest",
+      "name": "Song of Rest",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_song_of_rest.healing"
+      }
+    },
+    {
+      "id": "bard.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_hold_person.arcane"
+      }
+    },
+    {
+      "id": "bard.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_lesser_restoration.healing"
+      }
+    },
+    {
+      "id": "bard.shatter",
+      "name": "Shatter",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_shatter.thunder",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "bard.silence",
+      "name": "Silence",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_silence.illusion"
+      }
+    },
+    {
+      "id": "bard.silence.turn",
+      "name": "Silence \u00b7 OnTurnStart",
+      "level": 3,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.bard_silence_turn.thunder"
+      }
+    },
+    {
+      "id": "bard.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_dispel_magic.arcane"
+      }
+    },
+    {
+      "id": "bard.font_of_inspiration",
+      "name": "Font Of Inspiration",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.bard_font_of_inspiration.gold"
+      }
+    },
+    {
+      "id": "bard.hypnotic_pattern",
+      "name": "Hypnotic Pattern",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_hypnotic_pattern.psychic"
+      }
+    },
+    {
+      "id": "bard.mass_healing_word",
+      "name": "Mass Healing Word",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_mass_healing_word.healing"
+      }
+    },
+    {
+      "id": "bard.countercharm",
+      "name": "Countercharm",
+      "level": 6,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_verse",
+        "fx": "fx.bard_countercharm.arcane"
+      }
+    },
+    {
+      "id": "bard.dimension_door",
+      "name": "Dimension Door",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_dimension_door.arcane"
+      }
+    },
+    {
+      "id": "bard.greater_invisibility",
+      "name": "Greater Invisibility",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_greater_invisibility.illusion"
+      }
+    },
+    {
+      "id": "bard.greater_restoration",
+      "name": "Greater Restoration",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_greater_restoration.healing"
+      }
+    },
+    {
+      "id": "bard.hold_monster",
+      "name": "Hold Monster",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_hold_monster.arcane"
+      }
+    },
+    {
+      "id": "lore.arcane_scholar",
+      "name": "Arcane Scholar",
+      "level": 3,
+      "subclass": "bard.lore",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "lore.cutting_words",
+      "name": "Cutting Words",
+      "level": 3,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_cutting_words.psychic"
+      }
+    },
+    {
+      "id": "lore.counterspell",
+      "name": "Counterspell",
+      "level": 6,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_counterspell.arcane"
+      }
+    },
+    {
+      "id": "lore.magical_secrets",
+      "name": "Magical Secrets: Glyph Blast",
+      "level": 6,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_magical_secrets.force",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "lore.peerless_skill",
+      "name": "Peerless Skill",
+      "level": 10,
+      "subclass": "bard.lore",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_peerless_skill.arcane",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "siren.alluring_verse",
+      "name": "Alluring Verse",
+      "level": 3,
+      "subclass": "bard.siren",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_verse",
+        "fx": "fx.bard_alluring_verse.charm",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "siren.enthralling_aria",
+      "name": "Enthralling Aria",
+      "level": 6,
+      "subclass": "bard.siren",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_enthralling_aria.charm",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "siren.sirens_call",
+      "name": "Siren's Call",
+      "level": 10,
+      "subclass": "bard.siren",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_sirens_call.charm",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "valor.battle_readiness",
+      "name": "Battle Readiness",
+      "level": 3,
+      "subclass": "bard.valor",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "valor.combat_inspiration",
+      "name": "Combat Inspiration",
+      "level": 3,
+      "subclass": "bard.valor",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_valor",
+        "fx": "fx.bard_combat_inspiration.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "valor.battle_magic",
+      "name": "Battle Magic",
+      "level": 10,
+      "subclass": "bard.valor",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.bard_valor",
+        "fx": "fx.bard_battle_magic.thunder",
+        "cutIn": "full"
+      }
+    }
+  ]
+}
