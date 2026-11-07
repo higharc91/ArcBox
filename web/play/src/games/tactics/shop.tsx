@@ -25,11 +25,13 @@ interface ShopData extends ServiceData {
 function Haggle({ haggle, send, shop, pending }: { haggle: HaggleData; send: CustomScreenProps["send"]; shop: string; pending: boolean }) {
   const r = haggle.result;
   return <div class="tx-shop-haggle" role="status">
-    {r ? <p><b>{r.passed ? "Haggled" : "No deal"}</b>{` · ${r.name} rolled ${r.die} + ${r.bonus} = ${r.total} vs DC ${r.dc ?? haggle.dc}. `}
-      {r.passed ? "A tenth off what you buy, a tenth more for what you sell, this visit." : "Prices stand. No harm done."}</p>
-      : haggle.can ? <button type="button" class="tx-btn gold" disabled={pending} onClick={() => send("shopHaggle", { shop })}>
-        {`Haggle · Persuasion DC ${haggle.dc}`}</button>
-      : <p class="tx-note">{haggle.spent ? "Haggle spent. Try again after a long rest." : `The leader can haggle once this visit (Persuasion DC ${haggle.dc}).`}</p>}
+    {r ? <p><b>{r.passed ? "Haggled" : "No deal"}</b>{" · "}
+      {r.passed ? "10% off purchases and 10% more when selling, this visit." : "Prices stand. No harm done."}
+      {` ${r.name} rolled ${r.die} + ${r.bonus} = ${r.total}; needed ${r.dc ?? haggle.dc}.`}</p>
+      : <><p class="tx-note">Try for 10% off purchases and 10% more when selling this visit.</p>
+      {haggle.can ? <button type="button" class="tx-btn gold" disabled={pending} onClick={() => send("shopHaggle", { shop })}>
+        {`Haggle · Persuasion ${haggle.dc}+`}</button>
+      : <p class="tx-note">{haggle.spent ? "Already tried. Try again after a long rest." : `The leader can haggle once this visit (Persuasion ${haggle.dc}+).`}</p>}</>}
   </div>;
 }
 

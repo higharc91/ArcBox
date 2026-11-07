@@ -34,13 +34,14 @@ export function RecoveryParty({ members, you, status, action, injuryAction }: {
     <Portrait unit={{ name: m.name, hp: m.hp, maxHp: m.maxHp, side: "Party", sprite: null }} cls={m.class} size={40} tone={m.member === you ? "you" : "ally"} />
     <div class="tx-recovery-card-main">
       <div class="tx-recovery-name"><div class="tx-recovery-identity"><strong>{m.name}</strong><small>{status?.(m) ?? (!m.here ? "Away" : resourceName(m.class))}</small></div>
-      {(m.injuries.length > 0 || m.wellFed) && <div class="tx-recovery-effects">
-        {m.injuries.map(i => <button type="button" class={`tx-injury-button ${i.kind}`} aria-label={`${m.name}: ${i.name}`} title={i.name}
-          onClick={() => setOpened({ member: m, injury: i })} key={i.id}><InjuryIcon id={i.id} /></button>)}
-        {m.wellFed && <span class="tx-recovery-fed" title="Well fed: 3 temporary HP next battle">♨<span class="sr-only">Well fed</span></span>}
-      </div>}{action?.(m)}</div>
+      {action?.(m)}</div>
       {m.maxHp > 0 && <Meter name={`${m.name} HP`} label="HP" current={m.hp} max={m.maxHp} />}
       <div class="tx-recovery-resources">{m.resources.map(r => <Meter key={r.name} name={`${m.name} ${resourceName(r.name)}`} label={resourceName(r.name)} current={r.current} max={r.max} resource />)}</div>
+      {(m.injuries.length > 0 || m.wellFed) && <div class="tx-recovery-effects">
+        {m.injuries.map(i => <button type="button" class={`tx-injury-button ${i.kind}`} aria-label={`${m.name}: ${i.name}`}
+          onClick={() => setOpened({ member: m, injury: i })} key={i.id}><InjuryIcon id={i.id} /><span>{i.name}</span></button>)}
+        {m.wellFed && <span class="tx-recovery-fed"><span aria-hidden="true">♨</span><span><b>Well fed</b><small>3 temporary HP next battle</small></span></span>}
+      </div>}
 
     </div>
   </article>)}</div>
