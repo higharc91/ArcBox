@@ -31,6 +31,18 @@ public sealed class DemoBattleTests
     }
 
     [Fact]
+    public void Stone_sentinels_review_places_all_three_library_variants_with_human_scale_references()
+    {
+        var battle = DemoBattle.View("river_crossing:stone-sentinels").Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        foreach (var key in new[] { "bosses.golem.basalt", "bosses.golem.crystal", "bosses.golem.temple", "characters.class_fighter", "characters.bandit" })
+            Assert.Contains(battle.Units, u => u.Sprite == key);
+        Assert.Empty(battle.Units.Where(u => terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.Equal(5, UnitPlan.Build(battle, terrain, UnitArt.Load(Pack.Root), BoardFit.For(terrain, Pack.Art)).Length);
+    }
+
+    [Fact]
     public void Elemental_triad_review_places_all_three_bosses_with_human_scale_references()
     {
         var battle = DemoBattle.View("river_crossing:elemental-triad").Battle!;

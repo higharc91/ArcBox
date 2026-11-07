@@ -656,7 +656,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 && used.Presentation?.Anim is null or "attack" or "characters.attack" or "bosses.attack";
             if (impBolt) used = used with { Presentation = new("bosses.attack", "fx.flames.hellfire", "projectiles.fireball") };
             var anim = used.Presentation?.Anim ?? Attack;
-            // Only the refreshed elemental variants select these dedicated gestures.
+            // Refreshed creatures select dedicated visual gestures without changing their rules.
             // The shared rules, effects and legacy variant presentations stay intact.
             var sourceUnit = _view.Units.FirstOrDefault(u => u.Id == used.Source);
             var elementalKey = sourceUnit?.Sprite switch
@@ -668,6 +668,12 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             };
             (string? Pose, double Length, double Impact) elemental = (elementalKey, used.Ability.Value, anim) switch
             {
+                ("bosses.golem.basalt", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
+                ("bosses.golem.basalt", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
+                ("bosses.golem.crystal", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
+                ("bosses.golem.crystal", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
+                ("bosses.golem.temple", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
+                ("bosses.golem.temple", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
                 ("bosses.water_elemental.sea", "water_elemental.tidal_crush", "bosses.special") => ("bosses.special", .8, .4),
                 ("bosses.water_elemental.sea", "water_elemental.undertow", "bosses.special") => ("bosses.cast", .8, .4),
                 ("bosses.dragon.red", "dragon.fire_breath", "bosses.special") => ("bosses.special", 1.2, .5),
@@ -732,7 +738,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var impact = elemental.Pose is not null ? elemental.Impact : seismic ? 0.5 : 0;
                 EffectSound(effect, _t + impact);
                 if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red"
-                    or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp")
+                    or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
+                    or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple")
                     Moment("special-contact", impact);
                 // The taller flame body exhales from its mouth, above the shared humanoid body anchor.
                 Burst(effect, source, at: _t + impact, toward: clip is { Aimed: true } ? facing : null,
@@ -780,7 +787,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     {
                         "monsters.kobold_foreman" => 0.75,
                         "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.sapling.spring"
-                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp" => 0.8,
+                            or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
+                            or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple" => 0.8,
                         "bosses.dragon.red" => 1.0,
                         _ => BeatTiming.Lunge,
                     };

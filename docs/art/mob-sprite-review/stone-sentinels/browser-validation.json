@@ -1,0 +1,74 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1120
+    },
+    {
+      "title": "Development battle · golems beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Six specials through the normal Godot beat and effect path",
+      "width": 1920,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · golem scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "82860dd7",
+    "walk": "c92fc799",
+    "attack": "642920c2",
+    "special": "373aa89d",
+    "cast": "ea5ff1ec",
+    "hurt": "fb63622e",
+    "down": "b454aebd"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "golem_basalt",
+      "hashes": [
+        "bf567312",
+        "62e645c5",
+        "5208d6f8",
+        "25e241e"
+      ]
+    },
+    {
+      "id": "golem_crystal",
+      "hashes": [
+        "22fb4754",
+        "a7dae465",
+        "bfc9fa56",
+        "46bed70b"
+      ]
+    },
+    {
+      "id": "golem_temple",
+      "hashes": [
+        "37b91b7b",
+        "42bae195",
+        "fc1a27d3",
+        "1ce09e43"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

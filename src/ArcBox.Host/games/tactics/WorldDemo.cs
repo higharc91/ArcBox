@@ -95,6 +95,7 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var stoneSentinels = parts.Contains("stone-sentinels", StringComparer.Ordinal);
         var wildElements = parts.Contains("wild-elements", StringComparer.Ordinal);
         var tideAndWyrm = parts.Contains("tide-and-wyrm", StringComparer.Ordinal);
         var elementalTriad = parts.Contains("elemental-triad", StringComparer.Ordinal);
@@ -110,8 +111,10 @@ internal sealed partial class WorldDemo : Node
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = wildElements || tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (wildElements)
+        _mobReview = stoneSentinels || wildElements || tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (stoneSentinels)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.golem.basalt", "bosses.golem.crystal", "bosses.golem.temple"];
+        else if (wildElements)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.air_elemental.storm", "bosses.earth_elemental.magma", "bosses.water_elemental.swamp"];
         else if (tideAndWyrm)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.water_elemental.sea", "bosses.dragon.red"];

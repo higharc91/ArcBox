@@ -25,6 +25,7 @@ public static class DemoBattle
     private const string RimeKeepers = ":rime-keepers";
     private const string OathAndShadow = ":oath-and-shadow";
     private const string StoneAndMire = ":stone-and-mire";
+    private const string StoneSentinels = ":stone-sentinels";
     private const string WildElements = ":wild-elements";
     private const string TideAndWyrm = ":tide-and-wyrm";
     private const string ElementalTriad = ":elemental-triad";
@@ -153,6 +154,15 @@ public static class DemoBattle
         Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
     ];
 
+    private static ImmutableArray<UnitView> RefreshedStoneSentinels() =>
+    [
+        Unit("Basalt", "Enemy", "bosses.golem.basalt", 9, 10, 64, 64),
+        Unit("Crystal", "Enemy", "bosses.golem.crystal", 12, 9, 84, 84),
+        Unit("Temple", "Enemy", "bosses.golem.temple", 13, 6, 74, 74),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
     private static ImmutableArray<UnitView> RefreshedWildElements() =>
     [
         Unit("Storm", "Enemy", "bosses.air_elemental.storm", 9, 10, 64, 64),
@@ -261,6 +271,7 @@ public static class DemoBattle
         var boneWardens = spec.EndsWith(BoneWardens, StringComparison.Ordinal);
         var hollowDead = spec.EndsWith(HollowDead, StringComparison.Ordinal);
         var rimeKeepers = spec.EndsWith(RimeKeepers, StringComparison.Ordinal);
+        var stoneSentinels = spec.EndsWith(StoneSentinels, StringComparison.Ordinal);
         var wildElements = spec.EndsWith(WildElements, StringComparison.Ordinal);
         var tideAndWyrm = spec.EndsWith(TideAndWyrm, StringComparison.Ordinal);
         var elementalTriad = spec.EndsWith(ElementalTriad, StringComparison.Ordinal);
@@ -270,8 +281,8 @@ public static class DemoBattle
         var oakAmbush = spec.EndsWith(OakAmbush, StringComparison.Ordinal);
         var stoneAndMire = spec.EndsWith(StoneAndMire, StringComparison.Ordinal);
         var oathAndShadow = spec.EndsWith(OathAndShadow, StringComparison.Ordinal);
-        var map = wildElements ? spec[..^WildElements.Length] : tideAndWyrm ? spec[..^TideAndWyrm.Length] : elementalTriad ? spec[..^ElementalTriad.Length] : groveWard ? spec[..^GroveWard.Length] : emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = wildElements ? RefreshedWildElements() : tideAndWyrm ? RefreshedTideAndWyrm() : elementalTriad ? RefreshedElementalTriad() : groveWard ? RefreshedGroveWard() : emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
+        var map = stoneSentinels ? spec[..^StoneSentinels.Length] : wildElements ? spec[..^WildElements.Length] : tideAndWyrm ? spec[..^TideAndWyrm.Length] : elementalTriad ? spec[..^ElementalTriad.Length] : groveWard ? spec[..^GroveWard.Length] : emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = stoneSentinels ? RefreshedStoneSentinels() : wildElements ? RefreshedWildElements() : tideAndWyrm ? RefreshedTideAndWyrm() : elementalTriad ? RefreshedElementalTriad() : groveWard ? RefreshedGroveWard() : emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

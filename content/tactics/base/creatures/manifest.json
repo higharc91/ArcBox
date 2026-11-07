@@ -12799,6 +12799,525 @@
         }
       },
       "provenance": "Scenario/OpenAI variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/wild-elements-2026-11-07/."
+    },
+    "mob_refresh_golem_basalt": {
+      "file": "mob_refresh_golem_basalt.png",
+      "family": "golem_basalt",
+      "variant": "stone-sentinels",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        130,
+        81,
+        64,
+        64
+      ],
+      "headTop": 78,
+      "overheadClearance": {
+        "attack": 5.84,
+        "special": 11.6,
+        "cast": 3.28,
+        "buff": 3.28
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 47.68,
+      "footprintHeight": 56.96,
+      "keys": [
+        "bosses.golem.basalt"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario/OpenAI variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/stone-sentinels-2026-11-07/."
+    },
+    "mob_refresh_golem_crystal": {
+      "file": "mob_refresh_golem_crystal.png",
+      "family": "golem_crystal",
+      "variant": "stone-sentinels",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        128,
+        81,
+        64,
+        64
+      ],
+      "headTop": 64,
+      "overheadClearance": {
+        "walk": 2.32,
+        "special": 4.88,
+        "buff": 0
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 54.72,
+      "footprintHeight": 61.44,
+      "keys": [
+        "bosses.golem.crystal"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario/OpenAI variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/stone-sentinels-2026-11-07/."
+    },
+    "mob_refresh_golem_temple": {
+      "file": "mob_refresh_golem_temple.png",
+      "family": "golem_temple",
+      "variant": "stone-sentinels",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          256
+        ]
+      },
+      "portrait": [
+        129,
+        81,
+        64,
+        64
+      ],
+      "headTop": 77,
+      "overheadClearance": {
+        "walk": 2.32,
+        "attack": 2.96,
+        "special": 10.64,
+        "cast": 2.96,
+        "buff": 2.96
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 53.44,
+      "footprintHeight": 57.6,
+      "keys": [
+        "bosses.golem.temple"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario/OpenAI variant concepts; OpenAI complete pixel poses. Source/packing receipts: tools/tactics-assets/imagegen/stone-sentinels-2026-11-07/."
     }
   },
   "legacyDistinctForms": [

@@ -37,3 +37,5 @@ Godot before `--`: `--audio-driver Dummy --path src/ArcBox.Host --resolution 192
 ```
 
 Collect with `python tools/tactics-assets/imagegen/wild-elements-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`. Then run special-scenes.cjs, review.cjs and verify-review.cjs. Natural hit and six special-contact screenshots follow beat-clock moments; manual anticipation shots remain separate. Video shows three walks, three natural strikes, six specials and return to ready.
+
+Next: [Basalt, Crystal and Temple Golems](../stone-sentinels/README.md), library batch 2.

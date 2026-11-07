@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 0,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      82,
+      241,
+      253
+    ],
+    "count": 19263
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 1,
+    "scale": 1.162162162162162,
+    "bounds": [
+      79,
+      82,
+      241,
+      253
+    ],
+    "count": 19284
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 2,
+    "scale": 1.162162162162162,
+    "bounds": [
+      79,
+      82,
+      241,
+      253
+    ],
+    "count": 19212
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 3,
+    "scale": 1.162162162162162,
+    "bounds": [
+      79,
+      82,
+      241,
+      253
+    ],
+    "count": 19141
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 0,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      79,
+      85,
+      241,
+      256
+    ],
+    "count": 19147
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 1,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      79,
+      86,
+      239,
+      256
+    ],
+    "count": 19484
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 2,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      80,
+      85,
+      240,
+      256
+    ],
+    "count": 18997
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 3,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      79,
+      84,
+      240,
+      255
+    ],
+    "count": 19345
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 0,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      85,
+      241,
+      256
+    ],
+    "count": 19263
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 0,
+    "scale": 0.945054945054945,
+    "bounds": [
+      77,
+      85,
+      254,
+      256
+    ],
+    "count": 20270
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 1,
+    "scale": 0.945054945054945,
+    "bounds": [
+      66,
+      84,
+      251,
+      256
+    ],
+    "count": 20871
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 3,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      85,
+      240,
+      256
+    ],
+    "count": 19141
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      94,
+      93,
+      237,
+      256
+    ],
+    "count": 16667
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      85,
+      120,
+      234,
+      256
+    ],
+    "count": 15797
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 0,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      85,
+      241,
+      256
+    ],
+    "count": 19263
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 0,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      63,
+      242,
+      256
+    ],
+    "count": 21625
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 1,
+    "scale": 1.162162162162162,
+    "bounds": [
+      77,
+      110,
+      244,
+      256
+    ],
+    "count": 19413
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 3,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      85,
+      240,
+      256
+    ],
+    "count": 19141
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 0,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      85,
+      241,
+      256
+    ],
+    "count": 19263
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 2,
+    "scale": 1.162162162162162,
+    "bounds": [
+      88,
+      84,
+      231,
+      256
+    ],
+    "count": 18067
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 3,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      84,
+      222,
+      256
+    ],
+    "count": 16547
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 3,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      85,
+      240,
+      256
+    ],
+    "count": 19141
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 4,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      75,
+      232,
+      253
+    ],
+    "count": 18715
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 5,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      75,
+      232,
+      253
+    ],
+    "count": 18796
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 6,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      75,
+      230,
+      253
+    ],
+    "count": 18581
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 7,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      75,
+      230,
+      253
+    ],
+    "count": 18464
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 4,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      77,
+      233,
+      253
+    ],
+    "count": 17362
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 5,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      90,
+      79,
+      231,
+      255
+    ],
+    "count": 17797
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 6,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      77,
+      229,
+      254
+    ],
+    "count": 17767
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 7,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      77,
+      229,
+      254
+    ],
+    "count": 17506
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 4,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      78,
+      232,
+      256
+    ],
+    "count": 18715
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 2,
+    "scale": 0.945054945054945,
+    "bounds": [
+      65,
+      80,
+      244,
+      256
+    ],
+    "count": 20903
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 3,
+    "scale": 0.945054945054945,
+    "bounds": [
+      53,
+      80,
+      247,
+      256
+    ],
+    "count": 21028
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 7,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      78,
+      231,
+      256
+    ],
+    "count": 18464
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      87,
+      95,
+      219,
+      256
+    ],
+    "count": 15477
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      85,
+      118,
+      234,
+      256
+    ],
+    "count": 15430
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 4,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      78,
+      232,
+      256
+    ],
+    "count": 18715
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 4,
+    "scale": 1.162162162162162,
+    "bounds": [
+      75,
+      53,
+      234,
+      256
+    ],
+    "count": 22890
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 5,
+    "scale": 1.162162162162162,
+    "bounds": [
+      71,
+      115,
+      246,
+      256
+    ],
+    "count": 19139
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 7,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      78,
+      231,
+      256
+    ],
+    "count": 18464
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 4,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      78,
+      232,
+      256
+    ],
+    "count": 18715
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 6,
+    "scale": 1.162162162162162,
+    "bounds": [
+      89,
+      77,
+      223,
+      256
+    ],
+    "count": 17377
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 7,
+    "scale": 1.162162162162162,
+    "bounds": [
+      89,
+      77,
+      217,
+      256
+    ],
+    "count": 16651
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 7,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      78,
+      231,
+      256
+    ],
+    "count": 18464
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 8,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      77,
+      203,
+      254
+    ],
+    "count": 11323
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 9,
+    "scale": 1.162162162162162,
+    "bounds": [
+      124,
+      75,
+      205,
+      253
+    ],
+    "count": 11312
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 10,
+    "scale": 1.162162162162162,
+    "bounds": [
+      124,
+      75,
+      204,
+      253
+    ],
+    "count": 11151
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 11,
+    "scale": 1.162162162162162,
+    "bounds": [
+      122,
+      75,
+      203,
+      253
+    ],
+    "count": 11288
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 8,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      116,
+      79,
+      203,
+      259
+    ],
+    "count": 12077
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 9,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      119,
+      80,
+      204,
+      260
+    ],
+    "count": 12100
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 10,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      114,
+      79,
+      206,
+      261
+    ],
+    "count": 12555
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 11,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      122,
+      78,
+      206,
+      258
+    ],
+    "count": 11723
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 8,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      79,
+      203,
+      256
+    ],
+    "count": 11323
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 4,
+    "scale": 0.945054945054945,
+    "bounds": [
+      79,
+      74,
+      218,
+      256
+    ],
+    "count": 15884
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 5,
+    "scale": 0.945054945054945,
+    "bounds": [
+      33,
+      74,
+      221,
+      256
+    ],
+    "count": 18630
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 11,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      78,
+      202,
+      256
+    ],
+    "count": 11288
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      114,
+      85,
+      222,
+      256
+    ],
+    "count": 12488
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      91,
+      117,
+      228,
+      256
+    ],
+    "count": 13859
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 8,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      79,
+      203,
+      256
+    ],
+    "count": 11323
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 8,
+    "scale": 1.162162162162162,
+    "bounds": [
+      82,
+      50,
+      205,
+      256
+    ],
+    "count": 16501
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 9,
+    "scale": 1.162162162162162,
+    "bounds": [
+      71,
+      121,
+      245,
+      256
+    ],
+    "count": 16283
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 11,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      78,
+      202,
+      256
+    ],
+    "count": 11288
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 8,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      79,
+      203,
+      256
+    ],
+    "count": 11323
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 10,
+    "scale": 1.162162162162162,
+    "bounds": [
+      98,
+      75,
+      203,
+      256
+    ],
+    "count": 13223
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 11,
+    "scale": 1.162162162162162,
+    "bounds": [
+      99,
+      77,
+      202,
+      256
+    ],
+    "count": 13208
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 11,
+    "scale": 1.162162162162162,
+    "bounds": [
+      121,
+      78,
+      202,
+      256
+    ],
+    "count": 11288
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 12,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      77,
+      226,
+      254
+    ],
+    "count": 17804
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 13,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      77,
+      223,
+      254
+    ],
+    "count": 17461
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 14,
+    "scale": 1.162162162162162,
+    "bounds": [
+      96,
+      77,
+      224,
+      254
+    ],
+    "count": 17459
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 15,
+    "scale": 1.162162162162162,
+    "bounds": [
+      95,
+      77,
+      223,
+      254
+    ],
+    "count": 17355
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 12,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      79,
+      221,
+      256
+    ],
+    "count": 16156
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 13,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      95,
+      79,
+      223,
+      256
+    ],
+    "count": 16068
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 14,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      78,
+      225,
+      255
+    ],
+    "count": 16535
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 15,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      77,
+      225,
+      254
+    ],
+    "count": 16959
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 12,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      79,
+      226,
+      256
+    ],
+    "count": 17804
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 6,
+    "scale": 0.945054945054945,
+    "bounds": [
+      64,
+      80,
+      229,
+      256
+    ],
+    "count": 20588
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 7,
+    "scale": 0.945054945054945,
+    "bounds": [
+      43,
+      81,
+      237,
+      256
+    ],
+    "count": 20961
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 15,
+    "scale": 1.162162162162162,
+    "bounds": [
+      96,
+      79,
+      224,
+      256
+    ],
+    "count": 17355
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      110,
+      83,
+      232,
+      256
+    ],
+    "count": 14477
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      88,
+      118,
+      232,
+      256
+    ],
+    "count": 14259
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 12,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      79,
+      226,
+      256
+    ],
+    "count": 17804
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 12,
+    "scale": 1.162162162162162,
+    "bounds": [
+      73,
+      53,
+      222,
+      256
+    ],
+    "count": 21828
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 13,
+    "scale": 1.162162162162162,
+    "bounds": [
+      73,
+      127,
+      247,
+      256
+    ],
+    "count": 16604
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 15,
+    "scale": 1.162162162162162,
+    "bounds": [
+      96,
+      79,
+      224,
+      256
+    ],
+    "count": 17355
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 12,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      79,
+      226,
+      256
+    ],
+    "count": 17804
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 14,
+    "scale": 1.162162162162162,
+    "bounds": [
+      85,
+      79,
+      218,
+      256
+    ],
+    "count": 16815
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 15,
+    "scale": 1.162162162162162,
+    "bounds": [
+      81,
+      79,
+      217,
+      256
+    ],
+    "count": 17143
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 15,
+    "scale": 1.162162162162162,
+    "bounds": [
+      96,
+      79,
+      224,
+      256
+    ],
+    "count": 17355
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 16,
+    "scale": 1.162162162162162,
+    "bounds": [
+      77,
+      79,
+      243,
+      254
+    ],
+    "count": 20095
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 17,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      79,
+      241,
+      254
+    ],
+    "count": 19947
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 18,
+    "scale": 1.162162162162162,
+    "bounds": [
+      75,
+      80,
+      241,
+      254
+    ],
+    "count": 20023
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 19,
+    "scale": 1.162162162162162,
+    "bounds": [
+      76,
+      79,
+      240,
+      254
+    ],
+    "count": 19943
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 16,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      77,
+      81,
+      237,
+      258
+    ],
+    "count": 19814
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 17,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      78,
+      82,
+      238,
+      259
+    ],
+    "count": 20083
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 18,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      77,
+      81,
+      237,
+      256
+    ],
+    "count": 20054
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 19,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      76,
+      80,
+      238,
+      257
+    ],
+    "count": 20323
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 16,
+    "scale": 1.162162162162162,
+    "bounds": [
+      77,
+      81,
+      243,
+      256
+    ],
+    "count": 20095
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 8,
+    "scale": 0.945054945054945,
+    "bounds": [
+      70,
+      81,
+      248,
+      256
+    ],
+    "count": 21665
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 9,
+    "scale": 0.945054945054945,
+    "bounds": [
+      55,
+      80,
+      250,
+      256
+    ],
+    "count": 21532
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 19,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      81,
+      242,
+      256
+    ],
+    "count": 19943
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 8,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      81,
+      83,
+      240,
+      256
+    ],
+    "count": 19077
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      84,
+      115,
+      236,
+      256
+    ],
+    "count": 17303
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 16,
+    "scale": 1.162162162162162,
+    "bounds": [
+      77,
+      81,
+      243,
+      256
+    ],
+    "count": 20095
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 16,
+    "scale": 1.162162162162162,
+    "bounds": [
+      75,
+      54,
+      242,
+      256
+    ],
+    "count": 22837
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 17,
+    "scale": 1.162162162162162,
+    "bounds": [
+      76,
+      115,
+      244,
+      256
+    ],
+    "count": 18848
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 19,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      81,
+      242,
+      256
+    ],
+    "count": 19943
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 16,
+    "scale": 1.162162162162162,
+    "bounds": [
+      77,
+      81,
+      243,
+      256
+    ],
+    "count": 20095
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 18,
+    "scale": 1.162162162162162,
+    "bounds": [
+      91,
+      80,
+      227,
+      256
+    ],
+    "count": 17494
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 19,
+    "scale": 1.162162162162162,
+    "bounds": [
+      93,
+      80,
+      222,
+      256
+    ],
+    "count": 16669
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 19,
+    "scale": 1.162162162162162,
+    "bounds": [
+      78,
+      81,
+      242,
+      256
+    ],
+    "count": 19943
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 20,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      78,
+      219,
+      254
+    ],
+    "count": 16981
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 21,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      78,
+      218,
+      254
+    ],
+    "count": 16772
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 22,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      78,
+      218,
+      254
+    ],
+    "count": 16420
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 23,
+    "scale": 1.162162162162162,
+    "bounds": [
+      93,
+      78,
+      219,
+      254
+    ],
+    "count": 16579
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 20,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      89,
+      80,
+      223,
+      258
+    ],
+    "count": 17353
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 21,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      88,
+      81,
+      225,
+      258
+    ],
+    "count": 17645
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 22,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      92,
+      80,
+      226,
+      259
+    ],
+    "count": 17296
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 23,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      91,
+      78,
+      227,
+      256
+    ],
+    "count": 17328
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 20,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      80,
+      219,
+      256
+    ],
+    "count": 16981
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 10,
+    "scale": 0.945054945054945,
+    "bounds": [
+      81,
+      76,
+      238,
+      256
+    ],
+    "count": 20236
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 11,
+    "scale": 0.945054945054945,
+    "bounds": [
+      75,
+      78,
+      263,
+      256
+    ],
+    "count": 20361
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 23,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      80,
+      220,
+      256
+    ],
+    "count": 16579
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      80,
+      80,
+      212,
+      256
+    ],
+    "count": 15995
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      84,
+      117,
+      235,
+      256
+    ],
+    "count": 15525
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 20,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      80,
+      219,
+      256
+    ],
+    "count": 16981
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 20,
+    "scale": 1.162162162162162,
+    "bounds": [
+      84,
+      53,
+      237,
+      256
+    ],
+    "count": 22290
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 21,
+    "scale": 1.162162162162162,
+    "bounds": [
+      73,
+      120,
+      247,
+      256
+    ],
+    "count": 17692
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 23,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      80,
+      220,
+      256
+    ],
+    "count": 16579
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 20,
+    "scale": 1.162162162162162,
+    "bounds": [
+      92,
+      80,
+      219,
+      256
+    ],
+    "count": 16981
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 22,
+    "scale": 1.162162162162162,
+    "bounds": [
+      101,
+      78,
+      233,
+      256
+    ],
+    "count": 16672
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 23,
+    "scale": 1.162162162162162,
+    "bounds": [
+      102,
+      78,
+      230,
+      256
+    ],
+    "count": 16341
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 23,
+    "scale": 1.162162162162162,
+    "bounds": [
+      94,
+      80,
+      220,
+      256
+    ],
+    "count": 16579
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 24,
+    "scale": 1.162162162162162,
+    "bounds": [
+      111,
+      74,
+      194,
+      253
+    ],
+    "count": 11555
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 25,
+    "scale": 1.162162162162162,
+    "bounds": [
+      111,
+      74,
+      194,
+      253
+    ],
+    "count": 11633
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 26,
+    "scale": 1.162162162162162,
+    "bounds": [
+      112,
+      75,
+      194,
+      253
+    ],
+    "count": 11544
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 27,
+    "scale": 1.162162162162162,
+    "bounds": [
+      113,
+      74,
+      193,
+      253
+    ],
+    "count": 11480
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 24,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      112,
+      77,
+      194,
+      253
+    ],
+    "count": 11510
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 25,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      109,
+      78,
+      197,
+      255
+    ],
+    "count": 11849
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 26,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      110,
+      77,
+      197,
+      253
+    ],
+    "count": 11737
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 27,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      110,
+      76,
+      196,
+      253
+    ],
+    "count": 11682
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 24,
+    "scale": 1.162162162162162,
+    "bounds": [
+      111,
+      77,
+      194,
+      256
+    ],
+    "count": 11555
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 12,
+    "scale": 0.945054945054945,
+    "bounds": [
+      103,
+      75,
+      227,
+      256
+    ],
+    "count": 15190
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 13,
+    "scale": 0.945054945054945,
+    "bounds": [
+      110,
+      75,
+      275,
+      256
+    ],
+    "count": 17944
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 27,
+    "scale": 1.162162162162162,
+    "bounds": [
+      114,
+      77,
+      194,
+      256
+    ],
+    "count": 11480
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      118,
+      83,
+      213,
+      256
+    ],
+    "count": 11402
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      100,
+      120,
+      220,
+      256
+    ],
+    "count": 12676
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 24,
+    "scale": 1.162162162162162,
+    "bounds": [
+      111,
+      77,
+      194,
+      256
+    ],
+    "count": 11555
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 24,
+    "scale": 1.162162162162162,
+    "bounds": [
+      100,
+      50,
+      228,
+      256
+    ],
+    "count": 18928
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 25,
+    "scale": 1.162162162162162,
+    "bounds": [
+      73,
+      122,
+      248,
+      256
+    ],
+    "count": 16604
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 27,
+    "scale": 1.162162162162162,
+    "bounds": [
+      114,
+      77,
+      194,
+      256
+    ],
+    "count": 11480
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 24,
+    "scale": 1.162162162162162,
+    "bounds": [
+      111,
+      77,
+      194,
+      256
+    ],
+    "count": 11555
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 26,
+    "scale": 1.162162162162162,
+    "bounds": [
+      111,
+      74,
+      224,
+      256
+    ],
+    "count": 13413
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 27,
+    "scale": 1.162162162162162,
+    "bounds": [
+      107,
+      74,
+      217,
+      256
+    ],
+    "count": 13629
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 27,
+    "scale": 1.162162162162162,
+    "bounds": [
+      114,
+      77,
+      194,
+      256
+    ],
+    "count": 11480
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 28,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      81,
+      228,
+      253
+    ],
+    "count": 17899
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 29,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      81,
+      228,
+      253
+    ],
+    "count": 17959
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 30,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      81,
+      228,
+      253
+    ],
+    "count": 17923
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 31,
+    "scale": 1.162162162162162,
+    "bounds": [
+      87,
+      81,
+      228,
+      253
+    ],
+    "count": 17882
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 28,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      83,
+      84,
+      229,
+      256
+    ],
+    "count": 18157
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 29,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      86,
+      85,
+      231,
+      257
+    ],
+    "count": 18061
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 30,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      82,
+      84,
+      229,
+      259
+    ],
+    "count": 18416
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_temple-walk.png",
+    "sourcePose": 31,
+    "scale": 1.1390728476821192,
+    "bounds": [
+      82,
+      83,
+      232,
+      258
+    ],
+    "count": 18537
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 28,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      84,
+      228,
+      256
+    ],
+    "count": 17899
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 14,
+    "scale": 0.945054945054945,
+    "bounds": [
+      76,
+      79,
+      245,
+      256
+    ],
+    "count": 20537
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_temple-attack.png",
+    "sourcePose": 15,
+    "scale": 0.945054945054945,
+    "bounds": [
+      89,
+      79,
+      252,
+      256
+    ],
+    "count": 19917
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 31,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      84,
+      227,
+      256
+    ],
+    "count": 17882
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      97,
+      83,
+      231,
+      256
+    ],
+    "count": 16081
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7735849056603774,
+    "bounds": [
+      87,
+      124,
+      233,
+      256
+    ],
+    "count": 14662
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 28,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      84,
+      228,
+      256
+    ],
+    "count": 17899
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 28,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      54,
+      241,
+      256
+    ],
+    "count": 22664
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 29,
+    "scale": 1.162162162162162,
+    "bounds": [
+      72,
+      120,
+      247,
+      256
+    ],
+    "count": 18067
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 31,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      84,
+      227,
+      256
+    ],
+    "count": 17882
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 28,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      84,
+      228,
+      256
+    ],
+    "count": 17899
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 30,
+    "scale": 1.162162162162162,
+    "bounds": [
+      93,
+      80,
+      227,
+      256
+    ],
+    "count": 17497
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_temple-moves.png",
+    "sourcePose": 31,
+    "scale": 1.162162162162162,
+    "bounds": [
+      97,
+      80,
+      222,
+      256
+    ],
+    "count": 16608
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_temple-idle.png",
+    "sourcePose": 31,
+    "scale": 1.162162162162162,
+    "bounds": [
+      86,
+      84,
+      227,
+      256
+    ],
+    "count": 17882
+  }
+]

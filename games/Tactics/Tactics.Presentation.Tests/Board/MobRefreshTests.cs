@@ -38,6 +38,9 @@ public sealed class MobRefreshTests
     [InlineData("bosses.air_elemental.storm", "air_storm")]
     [InlineData("bosses.earth_elemental.magma", "earth_magma")]
     [InlineData("bosses.water_elemental.swamp", "water_swamp")]
+    [InlineData("bosses.golem.basalt", "golem_basalt")]
+    [InlineData("bosses.golem.crystal", "golem_crystal")]
+    [InlineData("bosses.golem.temple", "golem_temple")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -94,6 +97,9 @@ public sealed class MobRefreshTests
     [Theory]
     [InlineData("bosses.troll.troll", "troll.boulder_toss", "troll.frenzy_roar")]
     [InlineData("bosses.golem.granite", "golem.seismic_slam", "golem.stone_aegis")]
+    [InlineData("bosses.golem.basalt", "golem.seismic_slam", "golem.stone_aegis")]
+    [InlineData("bosses.golem.crystal", "golem.seismic_slam", "golem.stone_aegis")]
+    [InlineData("bosses.golem.temple", "golem.seismic_slam", "golem.stone_aegis")]
     public void Giants_bind_their_two_special_moves_to_distinct_complete_clips(string key, string primary, string buff)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -112,7 +118,6 @@ public sealed class MobRefreshTests
 
     [Theory]
     [InlineData("bosses.troll.frost")]
-    [InlineData("bosses.golem.basalt")]
     public void Legacy_boss_variants_keep_their_existing_special_clip_for_the_buff_binding(string key)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -313,6 +318,10 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("characters.dark_elf")!.HeadLift / person, .9f, 1.2f);
         Assert.InRange(art.Sprite("bosses.troll.troll")!.HeadLift / person, 1.35f, 1.95f);
         Assert.InRange(art.Sprite("bosses.golem.granite")!.HeadLift / person, 1.35f, 1.85f);
+        Assert.InRange(art.Sprite("bosses.golem.basalt")!.HeadLift / person, 1.35f, 1.85f);
+        Assert.InRange(art.Sprite("bosses.golem.crystal")!.HeadLift / person, 1.35f, 1.85f);
+        Assert.InRange(art.Sprite("bosses.golem.temple")!.HeadLift / person, 1.35f, 1.85f);
+
         Assert.InRange(art.Sprite("bosses.air_elemental.gale")!.HeadLift / person, 1.1f, 1.6f);
         Assert.InRange(art.Sprite("bosses.earth_elemental.stone")!.HeadLift / person, 1.35f, 1.9f);
         Assert.InRange(art.Sprite("bosses.fire_elemental.ember")!.HeadLift / person, 1.2f, 1.7f);

@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      83,
+      238,
+      254
+    ],
+    "count": 20458
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 1,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      83,
+      237,
+      254
+    ],
+    "count": 20285
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 2,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      84,
+      238,
+      254
+    ],
+    "count": 20256
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      83,
+      239,
+      254
+    ],
+    "count": 20334
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 0,
+    "scale": 1.048780487804878,
+    "bounds": [
+      82,
+      85,
+      234,
+      256
+    ],
+    "count": 19834
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 1,
+    "scale": 1.048780487804878,
+    "bounds": [
+      81,
+      85,
+      233,
+      255
+    ],
+    "count": 19292
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 2,
+    "scale": 1.048780487804878,
+    "bounds": [
+      79,
+      85,
+      233,
+      254
+    ],
+    "count": 19168
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 3,
+    "scale": 1.048780487804878,
+    "bounds": [
+      82,
+      83,
+      235,
+      254
+    ],
+    "count": 19820
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      85,
+      238,
+      256
+    ],
+    "count": 20458
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 0,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      78,
+      84,
+      244,
+      256
+    ],
+    "count": 20051
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 1,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      80,
+      85,
+      244,
+      256
+    ],
+    "count": 19649
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      85,
+      239,
+      256
+    ],
+    "count": 20334
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      77,
+      92,
+      238,
+      256
+    ],
+    "count": 19679
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      80,
+      140,
+      238,
+      256
+    ],
+    "count": 14654
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      85,
+      238,
+      256
+    ],
+    "count": 20458
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 0,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      78,
+      64,
+      244,
+      256
+    ],
+    "count": 21237
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 1,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      81,
+      112,
+      236,
+      256
+    ],
+    "count": 18021
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      85,
+      239,
+      256
+    ],
+    "count": 20334
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      85,
+      238,
+      256
+    ],
+    "count": 20458
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 2,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      92,
+      85,
+      229,
+      256
+    ],
+    "count": 16573
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 3,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      94,
+      84,
+      224,
+      256
+    ],
+    "count": 15549
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      80,
+      85,
+      239,
+      256
+    ],
+    "count": 20334
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      66,
+      235,
+      254
+    ],
+    "count": 21333
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 5,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      66,
+      234,
+      254
+    ],
+    "count": 21124
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 6,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      65,
+      235,
+      254
+    ],
+    "count": 21083
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      89,
+      65,
+      236,
+      254
+    ],
+    "count": 21207
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 4,
+    "scale": 1.048780487804878,
+    "bounds": [
+      89,
+      67,
+      231,
+      248
+    ],
+    "count": 19572
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 5,
+    "scale": 1.048780487804878,
+    "bounds": [
+      87,
+      68,
+      230,
+      247
+    ],
+    "count": 18731
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 6,
+    "scale": 1.048780487804878,
+    "bounds": [
+      89,
+      67,
+      231,
+      246
+    ],
+    "count": 18902
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 7,
+    "scale": 1.048780487804878,
+    "bounds": [
+      87,
+      66,
+      231,
+      245
+    ],
+    "count": 19027
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      68,
+      235,
+      256
+    ],
+    "count": 21333
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 2,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      81,
+      83,
+      240,
+      256
+    ],
+    "count": 19380
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 3,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      62,
+      83,
+      241,
+      256
+    ],
+    "count": 20048
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      86,
+      67,
+      233,
+      256
+    ],
+    "count": 21207
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      80,
+      92,
+      237,
+      256
+    ],
+    "count": 19060
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      73,
+      141,
+      246,
+      256
+    ],
+    "count": 14647
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      68,
+      235,
+      256
+    ],
+    "count": 21333
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 4,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      79,
+      56,
+      238,
+      256
+    ],
+    "count": 21786
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 5,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      73,
+      114,
+      244,
+      256
+    ],
+    "count": 19152
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      86,
+      67,
+      233,
+      256
+    ],
+    "count": 21207
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      68,
+      235,
+      256
+    ],
+    "count": 21333
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 6,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      90,
+      75,
+      222,
+      256
+    ],
+    "count": 16992
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 7,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      97,
+      76,
+      221,
+      256
+    ],
+    "count": 16200
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      86,
+      67,
+      233,
+      256
+    ],
+    "count": 21207
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      63,
+      205,
+      254
+    ],
+    "count": 13695
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 9,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      113,
+      63,
+      205,
+      254
+    ],
+    "count": 13620
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 10,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      63,
+      206,
+      254
+    ],
+    "count": 13759
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      113,
+      63,
+      209,
+      254
+    ],
+    "count": 13788
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 8,
+    "scale": 1.048780487804878,
+    "bounds": [
+      114,
+      64,
+      206,
+      253
+    ],
+    "count": 13423
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 9,
+    "scale": 1.048780487804878,
+    "bounds": [
+      114,
+      66,
+      206,
+      254
+    ],
+    "count": 13299
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 10,
+    "scale": 1.048780487804878,
+    "bounds": [
+      114,
+      64,
+      206,
+      253
+    ],
+    "count": 13394
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 11,
+    "scale": 1.048780487804878,
+    "bounds": [
+      114,
+      63,
+      206,
+      252
+    ],
+    "count": 13207
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      65,
+      205,
+      256
+    ],
+    "count": 13695
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 4,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      83,
+      83,
+      209,
+      256
+    ],
+    "count": 14834
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 5,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      44,
+      83,
+      210,
+      256
+    ],
+    "count": 16387
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      65,
+      208,
+      256
+    ],
+    "count": 13788
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      121,
+      82,
+      233,
+      256
+    ],
+    "count": 14695
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      84,
+      131,
+      234,
+      256
+    ],
+    "count": 13627
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      65,
+      205,
+      256
+    ],
+    "count": 13695
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 8,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      82,
+      57,
+      208,
+      256
+    ],
+    "count": 16225
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 9,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      73,
+      119,
+      246,
+      256
+    ],
+    "count": 16513
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      65,
+      208,
+      256
+    ],
+    "count": 13788
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      65,
+      205,
+      256
+    ],
+    "count": 13695
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 10,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      93,
+      81,
+      205,
+      256
+    ],
+    "count": 13111
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 11,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      101,
+      82,
+      205,
+      256
+    ],
+    "count": 12683
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      112,
+      65,
+      208,
+      256
+    ],
+    "count": 13788
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      68,
+      227,
+      254
+    ],
+    "count": 19808
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 13,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      89,
+      67,
+      228,
+      254
+    ],
+    "count": 19875
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 14,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      67,
+      227,
+      254
+    ],
+    "count": 19888
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      67,
+      227,
+      254
+    ],
+    "count": 19937
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 12,
+    "scale": 1.048780487804878,
+    "bounds": [
+      89,
+      70,
+      229,
+      253
+    ],
+    "count": 19222
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 13,
+    "scale": 1.048780487804878,
+    "bounds": [
+      86,
+      72,
+      229,
+      255
+    ],
+    "count": 18826
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 14,
+    "scale": 1.048780487804878,
+    "bounds": [
+      90,
+      71,
+      229,
+      254
+    ],
+    "count": 19052
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 15,
+    "scale": 1.048780487804878,
+    "bounds": [
+      83,
+      69,
+      228,
+      252
+    ],
+    "count": 19048
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      70,
+      227,
+      256
+    ],
+    "count": 19808
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_crystal-attack-rear.png",
+    "sourcePose": 0,
+    "scale": 0.2925170068027211,
+    "bounds": [
+      81,
+      85,
+      218,
+      256
+    ],
+    "count": 15454
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_crystal-attack-rear.png",
+    "sourcePose": 1,
+    "scale": 0.2925170068027211,
+    "bounds": [
+      53,
+      85,
+      220,
+      256
+    ],
+    "count": 15635
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      89,
+      69,
+      228,
+      256
+    ],
+    "count": 19937
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      112,
+      82,
+      241,
+      256
+    ],
+    "count": 16595
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      72,
+      144,
+      246,
+      256
+    ],
+    "count": 13308
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      70,
+      227,
+      256
+    ],
+    "count": 19808
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 12,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      84,
+      57,
+      224,
+      256
+    ],
+    "count": 19764
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 13,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      71,
+      121,
+      246,
+      256
+    ],
+    "count": 17164
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      89,
+      69,
+      228,
+      256
+    ],
+    "count": 19937
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      70,
+      227,
+      256
+    ],
+    "count": 19808
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 14,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      87,
+      81,
+      217,
+      256
+    ],
+    "count": 15669
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 15,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      87,
+      81,
+      213,
+      256
+    ],
+    "count": 15407
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      89,
+      69,
+      228,
+      256
+    ],
+    "count": 19937
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      75,
+      72,
+      244,
+      254
+    ],
+    "count": 22926
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 17,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      75,
+      70,
+      244,
+      253
+    ],
+    "count": 23089
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 18,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      76,
+      72,
+      244,
+      254
+    ],
+    "count": 23008
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      75,
+      70,
+      245,
+      253
+    ],
+    "count": 23015
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 16,
+    "scale": 1.048780487804878,
+    "bounds": [
+      79,
+      74,
+      242,
+      252
+    ],
+    "count": 22058
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 17,
+    "scale": 1.048780487804878,
+    "bounds": [
+      78,
+      74,
+      241,
+      252
+    ],
+    "count": 22043
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 18,
+    "scale": 1.048780487804878,
+    "bounds": [
+      77,
+      74,
+      241,
+      252
+    ],
+    "count": 21987
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 19,
+    "scale": 1.048780487804878,
+    "bounds": [
+      76,
+      73,
+      242,
+      251
+    ],
+    "count": 22014
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      75,
+      74,
+      244,
+      256
+    ],
+    "count": 22926
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 8,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      76,
+      83,
+      239,
+      256
+    ],
+    "count": 19856
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 9,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      66,
+      83,
+      242,
+      256
+    ],
+    "count": 20073
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      74,
+      73,
+      244,
+      256
+    ],
+    "count": 23015
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 8,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      78,
+      87,
+      239,
+      256
+    ],
+    "count": 19792
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      76,
+      138,
+      242,
+      256
+    ],
+    "count": 15494
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      75,
+      74,
+      244,
+      256
+    ],
+    "count": 22926
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 16,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      75,
+      61,
+      243,
+      256
+    ],
+    "count": 22448
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 17,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      78,
+      119,
+      242,
+      256
+    ],
+    "count": 17642
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      74,
+      73,
+      244,
+      256
+    ],
+    "count": 23015
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      75,
+      74,
+      244,
+      256
+    ],
+    "count": 22926
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 18,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      92,
+      83,
+      227,
+      256
+    ],
+    "count": 16451
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 19,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      92,
+      83,
+      224,
+      256
+    ],
+    "count": 15960
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      74,
+      73,
+      244,
+      256
+    ],
+    "count": 23015
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      65,
+      226,
+      254
+    ],
+    "count": 19652
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 21,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      66,
+      226,
+      254
+    ],
+    "count": 19464
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 22,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      65,
+      226,
+      254
+    ],
+    "count": 19633
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      87,
+      65,
+      227,
+      254
+    ],
+    "count": 19721
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 20,
+    "scale": 1.048780487804878,
+    "bounds": [
+      91,
+      66,
+      232,
+      250
+    ],
+    "count": 19060
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 21,
+    "scale": 1.048780487804878,
+    "bounds": [
+      92,
+      67,
+      234,
+      251
+    ],
+    "count": 18608
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 22,
+    "scale": 1.048780487804878,
+    "bounds": [
+      86,
+      66,
+      234,
+      250
+    ],
+    "count": 19063
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 23,
+    "scale": 1.048780487804878,
+    "bounds": [
+      88,
+      65,
+      232,
+      249
+    ],
+    "count": 18889
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      67,
+      226,
+      256
+    ],
+    "count": 19652
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 10,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      89,
+      84,
+      242,
+      256
+    ],
+    "count": 19096
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 11,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      88,
+      84,
+      246,
+      256
+    ],
+    "count": 17277
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      87,
+      67,
+      227,
+      256
+    ],
+    "count": 19721
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      69,
+      86,
+      217,
+      256
+    ],
+    "count": 18539
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      76,
+      140,
+      243,
+      256
+    ],
+    "count": 13659
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      67,
+      226,
+      256
+    ],
+    "count": 19652
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 20,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      84,
+      60,
+      241,
+      256
+    ],
+    "count": 21475
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 21,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      73,
+      125,
+      247,
+      256
+    ],
+    "count": 17068
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      87,
+      67,
+      227,
+      256
+    ],
+    "count": 19721
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      88,
+      67,
+      226,
+      256
+    ],
+    "count": 19652
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 22,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      100,
+      81,
+      230,
+      256
+    ],
+    "count": 16089
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 23,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      100,
+      79,
+      228,
+      256
+    ],
+    "count": 16006
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      87,
+      67,
+      227,
+      256
+    ],
+    "count": 19721
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      109,
+      65,
+      202,
+      254
+    ],
+    "count": 13519
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 25,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      111,
+      64,
+      202,
+      254
+    ],
+    "count": 13381
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 26,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      110,
+      65,
+      203,
+      254
+    ],
+    "count": 13353
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      111,
+      65,
+      204,
+      254
+    ],
+    "count": 13280
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 24,
+    "scale": 1.048780487804878,
+    "bounds": [
+      108,
+      67,
+      201,
+      251
+    ],
+    "count": 13294
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 25,
+    "scale": 1.048780487804878,
+    "bounds": [
+      108,
+      68,
+      203,
+      251
+    ],
+    "count": 13221
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 26,
+    "scale": 1.048780487804878,
+    "bounds": [
+      107,
+      67,
+      208,
+      251
+    ],
+    "count": 13606
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 27,
+    "scale": 1.048780487804878,
+    "bounds": [
+      104,
+      66,
+      208,
+      250
+    ],
+    "count": 13864
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      109,
+      67,
+      202,
+      256
+    ],
+    "count": 13519
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 12,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      100,
+      79,
+      210,
+      256
+    ],
+    "count": 13824
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 13,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      124,
+      79,
+      263,
+      256
+    ],
+    "count": 15906
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      111,
+      67,
+      204,
+      256
+    ],
+    "count": 13280
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      110,
+      85,
+      209,
+      256
+    ],
+    "count": 12216
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      81,
+      138,
+      238,
+      256
+    ],
+    "count": 12324
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      109,
+      67,
+      202,
+      256
+    ],
+    "count": 13519
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 24,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      104,
+      55,
+      222,
+      256
+    ],
+    "count": 17298
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 25,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      78,
+      125,
+      242,
+      256
+    ],
+    "count": 15543
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      111,
+      67,
+      204,
+      256
+    ],
+    "count": 13280
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      109,
+      67,
+      202,
+      256
+    ],
+    "count": 13519
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 26,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      118,
+      82,
+      225,
+      256
+    ],
+    "count": 12657
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 27,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      116,
+      82,
+      218,
+      256
+    ],
+    "count": 12701
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      111,
+      67,
+      204,
+      256
+    ],
+    "count": 13280
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      84,
+      68,
+      234,
+      254
+    ],
+    "count": 21613
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 29,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      83,
+      69,
+      234,
+      253
+    ],
+    "count": 21504
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 30,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      82,
+      68,
+      234,
+      254
+    ],
+    "count": 21554
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      82,
+      68,
+      234,
+      254
+    ],
+    "count": 21542
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 28,
+    "scale": 1.048780487804878,
+    "bounds": [
+      89,
+      71,
+      231,
+      249
+    ],
+    "count": 20054
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 29,
+    "scale": 1.048780487804878,
+    "bounds": [
+      85,
+      72,
+      231,
+      251
+    ],
+    "count": 19720
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 30,
+    "scale": 1.048780487804878,
+    "bounds": [
+      88,
+      71,
+      232,
+      250
+    ],
+    "count": 20067
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_crystal-walk.png",
+    "sourcePose": 31,
+    "scale": 1.048780487804878,
+    "bounds": [
+      84,
+      70,
+      234,
+      249
+    ],
+    "count": 20012
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      84,
+      70,
+      234,
+      256
+    ],
+    "count": 21613
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 14,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      79,
+      86,
+      237,
+      256
+    ],
+    "count": 19195
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_crystal-attack.png",
+    "sourcePose": 15,
+    "scale": 0.8730964467005076,
+    "bounds": [
+      88,
+      86,
+      247,
+      256
+    ],
+    "count": 19248
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      82,
+      70,
+      234,
+      256
+    ],
+    "count": 21542
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      95,
+      84,
+      237,
+      256
+    ],
+    "count": 18374
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      72,
+      142,
+      246,
+      256
+    ],
+    "count": 14055
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      84,
+      70,
+      234,
+      256
+    ],
+    "count": 21613
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 28,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      89,
+      60,
+      240,
+      256
+    ],
+    "count": 21189
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 29,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      75,
+      123,
+      245,
+      256
+    ],
+    "count": 17445
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      82,
+      70,
+      234,
+      256
+    ],
+    "count": 21542
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      84,
+      70,
+      234,
+      256
+    ],
+    "count": 21613
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 30,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      95,
+      81,
+      225,
+      256
+    ],
+    "count": 16318
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_crystal-moves.png",
+    "sourcePose": 31,
+    "scale": 1.0817610062893082,
+    "bounds": [
+      97,
+      81,
+      222,
+      256
+    ],
+    "count": 16117
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_crystal-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1025641025641026,
+    "bounds": [
+      82,
+      70,
+      234,
+      256
+    ],
+    "count": 21542
+  }
+]

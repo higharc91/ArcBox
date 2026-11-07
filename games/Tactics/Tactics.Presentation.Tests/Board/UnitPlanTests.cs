@@ -50,6 +50,12 @@ public sealed class UnitPlanTests
     [InlineData("bosses.earth_elemental.magma", "bosses.buff", .4)]
     [InlineData("bosses.water_elemental.swamp", "bosses.special", .4)]
     [InlineData("bosses.water_elemental.swamp", "bosses.cast", .4)]
+    [InlineData("bosses.golem.basalt", "bosses.special", .5)]
+    [InlineData("bosses.golem.basalt", "bosses.buff", .4)]
+    [InlineData("bosses.golem.crystal", "bosses.special", .5)]
+    [InlineData("bosses.golem.crystal", "bosses.buff", .4)]
+    [InlineData("bosses.golem.temple", "bosses.special", .5)]
+    [InlineData("bosses.golem.temple", "bosses.buff", .4)]
     public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
     {
         var view = Unit("a", "Enemy", 11, 10, key);

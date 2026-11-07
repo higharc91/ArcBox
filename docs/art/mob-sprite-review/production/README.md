@@ -58,3 +58,5 @@ Latest fourteenth batch: [Air, Earth and Fire Elementals](../elemental-triad/REA
 Latest fifteenth batch: [Water Elemental and Red Dragon](../tide-and-wyrm/README.md). Combat-roster pass complete: twenty-nine refreshed looks, no older combat looks remaining. Additional library colour variants remain separate.
 
 Sixteenth overall / first library batch: [Storm, Magma and Swamp Elementals](../wild-elements/README.md). Combat tracker stays complete at29; library tracker records three refreshed appearances,28 older two-direction appearances remaining,26 existing eight-direction appearances preserved.
+
+Seventeenth overall / second library batch: [Basalt, Crystal and Temple Golems](../stone-sentinels/README.md). Combat tracker stays complete at 29; six additional library appearances refreshed, 25 older two-direction looks remaining, 26 existing eight-direction looks preserved.

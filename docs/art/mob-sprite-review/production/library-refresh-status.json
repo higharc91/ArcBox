@@ -3,14 +3,17 @@
   "integratedKeys": [
     "bosses.air_elemental.storm",
     "bosses.earth_elemental.magma",
-    "bosses.water_elemental.swamp"
+    "bosses.water_elemental.swamp",
+    "bosses.golem.basalt",
+    "bosses.golem.crystal",
+    "bosses.golem.temple"
   ],
-  "libraryBatchCount": 1,
-  "overallBatchCount": 16,
+  "libraryBatchCount": 2,
+  "overallBatchCount": 17,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 28,
+  "remainingTwoDirectionLooks": 25,
   "looks": [
     {
       "baselineNumber": 42,
@@ -318,21 +321,21 @@
       "key": "bosses.golem.basalt",
       "name": "Golem Basalt",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch2"
     },
     {
       "baselineNumber": 86,
       "key": "bosses.golem.crystal",
       "name": "Golem Crystal",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch2"
     },
     {
       "baselineNumber": 87,
       "key": "bosses.golem.temple",
       "name": "Golem Temple",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch2"
     },
     {
       "baselineNumber": 88,
