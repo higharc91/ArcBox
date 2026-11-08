@@ -52,7 +52,7 @@ public static class FxShowcase
                 rows.TryAdd(parent.Subclass + ":" + proc.Id,
                     new(proc.Id, "Death Ward Rescue", parent.Level, parent.Subclass, "proc", "none", null));
         }
-        if (cls == "druid")
+        if (cls is "druid" or "paladin")
             foreach (var parent in rows.Values.Where(r => r.Kind == "ability").ToArray())
                 foreach (var proc in rules.Abilities[new(parent.Id)].Effects.OfType<ZoneEffect>().SelectMany(z => z.Passives))
                     rows.TryAdd(parent.Subclass + ":" + proc.Id,
@@ -134,6 +134,16 @@ public static class FxShowcase
             foreach (var form in new[] {"wolf", "bear", "dire_wolf", "elder_bear"})
                 foreach (var action in new[] {"move", "attack", "revert"})
                     samples.Add(DruidFormSample(form, action, rules, samples.Count + 1));
+        if (cls == "paladin")
+        {
+            foreach (var id in new[]{"paladin.smite_damage","paladin.smite_damage_2","paladin.smite_damage_3"})
+            {
+                var feature=Inventory(cls,rules).Single(f=>f.Id==id);
+                samples.Add(ProcSample(cls,feature,rules,samples.Count+1,undeadTarget:true) with { Id=id+".undead",Name=feature.Name+" · undead" });
+            }
+            samples.Add(Sample(cls,new("paladin.elemental_weapon"),9,rules,samples.Count+1,realistic:true,weaponFollowThrough:true)
+                with { Id="paladin.elemental_weapon.strike",Name="Elemental Weapon · actual attack" });
+        }
         return samples.ToImmutable();
     }
 
@@ -171,13 +181,17 @@ public static class FxShowcase
             var parts = id.Split('.');
             return DruidFormSample(parts[2],parts[3],rules,1);
         }
+        if(cls=="paladin" && id.EndsWith(".undead",StringComparison.Ordinal))
+            return ProcSample(cls,Inventory(cls,rules).Single(f=>f.Id==id[..^7]),rules,1,undeadTarget:true) with { Id=id };
+        if(cls=="paladin" && id=="paladin.elemental_weapon.strike")
+            return Sample(cls,new("paladin.elemental_weapon"),9,rules,1,realistic:true,weaponFollowThrough:true) with { Id=id };
         var feature = Inventory(cls, rules).FirstOrDefault(r => r.Id == id);
         if (feature?.Kind == "static") throw new InvalidOperationException($"{id} is a static modifier, not a standalone visible proc.");
         return feature?.Kind == "proc" ? ProcSample(cls, feature, rules, 1)
             : Sample(cls, new(id), feature?.Level ?? 1, rules, 1, feature?.Subclass, realistic: true);
     }
 
-    private static FxShowcaseSample ProcSample(string cls, FxShowcaseFeature feature, RulesPack rules, int sequence)
+    private static FxShowcaseSample ProcSample(string cls, FxShowcaseFeature feature, RulesPack rules, int sequence, bool undeadTarget=false)
     {
         if (feature.Id == "warlock.hunger_of_hadar.turn")
             return Sample(cls, new("warlock.hunger_of_hadar"), feature.Level, rules, sequence, realistic: true, zonePulse: true);
@@ -191,12 +205,15 @@ public static class FxShowcase
             }
             throw new InvalidOperationException("The real lethal hit did not trigger Death Ward.");
         }
-        if (cls == "druid" && !rules.Passives.ContainsKey(feature.Id))
-            return Sample(cls, new(feature.Id[..feature.Id.LastIndexOf('.')]), feature.Level, rules, sequence,
+        if (cls is "druid" or "paladin" && !rules.Passives.ContainsKey(feature.Id))
+            return Sample(cls, rules.Abilities.Single(pair=>pair.Value.Effects.OfType<ZoneEffect>().Any(z=>z.Passives.Any(p=>p.Id==feature.Id))).Key, feature.Level, rules, sequence,
                 feature.Subclass, realistic: true, zoneProc: feature.Id) with { Id = feature.Id, Name = feature.Name };
         var passive = rules.Passives[feature.Id];
         if (passive.Hook is HookKind.OnBattleStart or HookKind.OnRoundStart)
             return OpeningProcSample(cls, feature, rules, sequence);
+        if (cls=="paladin" && passive.Hook==HookKind.OnTurnEnd)
+            return Sample(cls,RulesPack.CommonAttack.Id,feature.Level,rules,sequence,feature.Subclass,feature.Id,realistic:true,endTurnProc:true)
+                with { Id=feature.Id,Name=feature.Name };
         if (passive.Hook is not (HookKind.OnAttackHit or HookKind.BeforeAttackRoll or HookKind.OnKill))
             throw new InvalidOperationException($"No trigger fixture yet for {passive.Hook}. It must not be skipped.");
         var trigger = cls == "warlock" && (passive.When?.IsSpell == true || passive.Hook == HookKind.OnKill)
@@ -206,7 +223,7 @@ public static class FxShowcase
         var subclass = cls == "warlock" ? feature.Subclass ?? "warlock.void" : feature.Subclass;
         for (ulong seed = 7; seed < 39; seed++)
         {
-            var sample = Sample(cls, trigger, feature.Level, rules, sequence, subclass, feature.Id, realistic: true, seed: seed);
+            var sample = Sample(cls, trigger, feature.Level, rules, sequence, subclass, feature.Id, realistic: true, seed: seed,undeadTarget:undeadTarget);
             if (sample.After.Beats.SelectMany(b => b.Events).OfType<PassiveTriggered>().Any(e => e.Passive == feature.Id))
                 return sample with { Id = feature.Id, Name = feature.Name,
                     Description = $"Visible passive triggered during {sample.Name}; fixture seed {seed}. {sample.Description}" };
@@ -220,13 +237,19 @@ public static class FxShowcase
         var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Ember", "human", cls, feature.Subclass, feature.Level, rules), rules)
             with { InitiativeBonus = 100, Sprite = "characters.class_" + cls, Passives = [feature.Id], Abilities = [] };
         var goblin = SheetBuilder.ForMonster("goblin", rules) with { InitiativeBonus = 0 };
-        var setup = new BattleSetup(map, [new(hero, sheet, new PlayerControlled(new("preview")), new(3,5), []),
-            new(new("target1"), goblin, new AiControlled("brute"), new(7,5), [])], ObjectivesDef.Default, [], Difficulty.Normal, 0, []);
+        var placements=ImmutableArray.CreateBuilder<UnitPlacement>();
+        placements.Add(new(hero,sheet,new PlayerControlled(new("preview")),new(3,5),[]));
+        if(cls=="paladin")placements.Add(new(new("hero2"),sheet with { Name="Ally",InitiativeBonus=0,Passives=[] },new AiControlled("companion"),new(3,6),[]));
+        placements.Add(new(new("target1"),goblin,new AiControlled("brute"),new(7,5),[]));
+        var setup=new BattleSetup(map,placements.ToImmutable(),ObjectivesDef.Default,[],Difficulty.Normal,0,[]);
         var result = Battle.Start(setup, rules, 7);
         var state = result.State;
         BattleView before;
         if (rules.Passives[feature.Id].Hook == HookKind.OnBattleStart)
+        {
             before = ShowcaseView(state, map, [], hideSummons: true);
+            if(cls=="paladin")before=before with { Units=[.. before.Units.Select(u=>u with { Conditions=[] })] };
+        }
         else
         {
             state = state with { Units = state.Units.SetItem(hero, state.Units[hero] with
@@ -257,7 +280,7 @@ public static class FxShowcase
     }
 
     public static FxShowcaseSample Sample(string cls, AbilityId abilityId, int level, RulesPack rules, int sequence,
-        string? subclass = null, string? passive = null, bool realistic = false, ulong seed = 7, bool zonePulse = false, bool woundedTarget = false, bool wardProc = false, string? zoneProc = null, string? formAction = null)
+        string? subclass = null, string? passive = null, bool realistic = false, ulong seed = 7, bool zonePulse = false, bool woundedTarget = false, bool wardProc = false, string? zoneProc = null, string? formAction = null, bool undeadTarget=false, bool endTurnProc=false, bool weaponFollowThrough=false)
     {
         var ability = rules.Abilities[abilityId];
         if (ability.Cost.Reaction > 0) return ReactionSample(cls, ability, level, rules, sequence, subclass);
@@ -269,19 +292,22 @@ public static class FxShowcase
             .OrderBy(t => Reach.Distance(t, preferred)).ThenBy(t => t).First();
         Tile Place(Tile preferred) { var tile = Free(preferred); occupied.Add(tile); return tile; }
         var caster = new UnitId("hero1");
+        var paladinPreparation=passive switch { "paladin.smite_damage"=>"paladin.divine_smite","paladin.smite_damage_2"=>"paladin.divine_smite_2",
+            "paladin.smite_damage_3"=>"paladin.divine_smite_3","avenger.vengeful_strikes"=>"avenger.vow_of_enmity",_=>null };
         var needsHex = abilityId.Value == "warlock.maddening_hex" || passive is not null && rules.Passives[passive].When?.TargetHasCondition?.Value == "hex";
         var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Ember", "human", cls, subclass, level, rules), rules)
             with { InitiativeBonus = 100, Sprite = "characters.class_" + cls, Abilities = [abilityId] };
         if (passive is not null) sheet = sheet with { Passives = [passive] };
         if (needsHex) sheet = sheet with { Abilities = [abilityId, new("warlock.hex")] };
-        var friendly = (cls is "cleric" or "druid") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
-            || abilityId.Value == "cleric.dispel_magic" || cls == "druid" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true);
+        if(paladinPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(paladinPreparation)] };
+        var friendly = (cls is "cleric" or "druid" or "paladin") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
+            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
         var from = Place(new(3, 5));
         var selfArea = ability.Target.Kind == TargetKind.Self && ability.Target.Area.Shape == AreaShape.Burst;
-        var melee = formAction is "attack" or "revert" || !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
+        var melee = weaponFollowThrough || formAction is "attack" or "revert" || !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
         var distance = ability.IsWeaponAttack || ability.Target.Range == 0 ? 4 : Math.Min(4, ability.Target.Range);
         var target = Place(wardProc ? new(from.X + 2, from.Y) : friendly ? new(from.X + 4, from.Y) : melee ? new(from.X + 1, from.Y) : new(from.X + distance, from.Y));
-        var enemyKind = abilityId.Value is "cleric.turn_undead" or "cleric.sear_undead" ? "skeleton" : "goblin";
+        var enemyKind = undeadTarget || abilityId.Value is "cleric.turn_undead" or "cleric.sear_undead" ? "skeleton" : "goblin";
         var goblin = SheetBuilder.ForMonster(enemyKind, rules) with { MaxHp = realistic && abilityId.Value.EndsWith(".sleep", StringComparison.Ordinal) ? 5 : 200, InitiativeBonus = 0 };
         var ally = sheet with { Name = "Ally", InitiativeBonus = 0, Abilities = [] };
         var placements = ImmutableArray.CreateBuilder<UnitPlacement>();
@@ -303,7 +329,7 @@ public static class FxShowcase
             var revive = ability.Effects.Any(e => e is ReviveEffect) || ability.Target.Kind == TargetKind.DownedAlly;
             state = state with { Units = state.Units.ToImmutableSortedDictionary(kv => kv.Key, kv =>
                 kv.Value.Sheet.Side != Side.Party ? kv.Value : kv.Value with
-                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" ? 3 : 2)),
+                { Hp = revive && kv.Key != caster ? 0 : Math.Max(1, kv.Value.Sheet.MaxHp / (cls is "cleric" or "druid" or "paladin" ? 3 : 2)),
                     Life = revive && kv.Key != caster ? LifeState.Downed : LifeState.Up,
                     Countdown = revive && kv.Key != caster ? 2 : 0 }) };
             if (ability.Effects.Any(e => e is GrantResourceEffect))
@@ -321,13 +347,19 @@ public static class FxShowcase
             if (ability.Cost.Bonus > 0)
                 do { state = Battle.Apply(state, new EndTurn(state.Active!.Value), rules).State; } while (state.Active != caster);
         }
+        if(paladinPreparation is not null)
+        {
+            var prepared=Battle.Apply(state,new Use(caster,new(paladinPreparation),new Target(Unit:new("target1"))),rules);
+            if(prepared.Rejected is not null || prepared.State.Pending is not null)throw new InvalidOperationException("Paladin rider preparation failed.");
+            state=prepared.State;
+        }
         if (woundedTarget)
             state = state with { Units = state.Units.SetItem(new("target1"), state.Units[new("target1")] with { Hp = 100 }) };
         if (wardProc)
             state = state with { Units = state.Units.SetItem(new("hero2"), state.Units[new("hero2")] with { Hp = 1 }) };
         var conditions = abilityId.Value switch
         {
-            "cleric.lesser_restoration" or "druid.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
+            "cleric.lesser_restoration" or "druid.lesser_restoration" or "paladin.lesser_restoration" => new[] {"poisoned", "blinded", "paralysed"},
             "cleric.greater_restoration" or "druid.greater_restoration" or "cleric.divine_intervention" => new[] {"poisoned", "charmed", "frightened"},
             _ => Array.Empty<string>()
         };
@@ -335,15 +367,15 @@ public static class FxShowcase
             state = state with { Units = state.Units.ToImmutableSortedDictionary(kv => kv.Key, kv =>
                 kv.Key.Value.StartsWith("hero", StringComparison.Ordinal) && kv.Key != caster ? kv.Value with
                 { Conditions = [.. conditions.Select(c => new ActiveCondition(new(c), new("target1"), null, false, 12, Stat.Wis, false))] } : kv.Value) };
-        if (abilityId.Value == "cleric.dispel_magic")
+        if (abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic")
         {
             var helper = new UnitId("hero2");
             state = state with { Units = state.Units.SetItem(helper, state.Units[helper] with
-                { Sheet = state.Units[helper].Sheet with { Abilities = [new("cleric.bless")] },
+                { Sheet = state.Units[helper].Sheet with { Abilities = [new(cls+".bless")] },
                     Conditions = [new ActiveCondition(new("charmed"), new("target1"), null, false, 12, Stat.Wis, false)] }) };
             for (var step = 0; step < 12 && state.Active != helper; step++)
                 state = Battle.Apply(state, new EndTurn(state.Active!.Value), rules).State;
-            var preparation = Battle.Apply(state, new Use(helper, new("cleric.bless"), new Target(Unit: helper)), rules);
+            var preparation = Battle.Apply(state, new Use(helper, new(cls+".bless"), new Target(Unit: helper)), rules);
             if (preparation.Rejected is not null) throw new InvalidOperationException("Dispel fixture could not cast its real Bless.");
             state = preparation.State;
             for (var step = 0; step < 12; step++)
@@ -366,7 +398,7 @@ public static class FxShowcase
             .ThenByDescending(t => friendly && t.Affected.Any(u => u.Unit.Value == "hero2"))
             .ThenBy(t => Reach.Distance(t.Aim, target)).FirstOrDefault();
         if (aim is null) throw new InvalidOperationException($"No legal demo target for {abilityId.Value}; add a scenario fixture.");
-        var result = Battle.Apply(state, new Use(caster, abilityId, aim.Target), rules);
+        var result = Battle.Apply(state, endTurnProc ? new EndTurn(caster) : new Use(caster, abilityId, aim.Target), rules);
         if (result.Rejected is { } rejected) throw new InvalidOperationException($"Demo {abilityId.Value}: {rejected.Code}");
         if (result.State.Pending is not null) throw new InvalidOperationException($"Demo {abilityId.Value} needs a reaction fixture.");
         BattleView View(BattleState s, ImmutableArray<Beat> beats) => new("fx-showcase", map.Id, s.Round, s.Order, s.Active,
@@ -391,11 +423,19 @@ public static class FxShowcase
                 else result = Battle.Apply(state,new EndTurn(state.Active!.Value),rules);
                 if (result.Rejected is not null || result.State.Pending is not null) throw new InvalidOperationException("Real zone trigger command failed.");
                 state = result.State;
-                if (result.Events.OfType<PassiveTriggered>().Any(p=>p.Passive==zoneProc))
+                if (result.Events.OfType<PassiveTriggered>().Any(p=>p.Passive==zoneProc) && (zoneProc!="crusader.consecrated.tick" || result.Events.OfType<Healed>().Any(h=>h.Amount>0)))
                     return new(zoneProc,zoneProc,"Real engine zone " + (enter ? "entry" : "turn-start") + " hook.",level,
                         View(old,[]),View(state,[new(sequence,old.Active,result.Events)]));
             }
             throw new InvalidOperationException("The real zone hook did not fire: " + zoneProc);
+        }
+        if(weaponFollowThrough)
+        {
+            state=result.State;
+            do { state=Battle.Apply(state,new EndTurn(state.Active!.Value),rules).State; } while(state.Active!=caster);
+            var old=state;result=Battle.Apply(state,new Use(caster,RulesPack.CommonAttack.Id,new Target(Unit:new("target1"))),rules);
+            if(result.Rejected is not null || result.State.Pending is not null)throw new InvalidOperationException("Enchanted weapon follow-through failed.");
+            return new("paladin.elemental_weapon.strike","Elemental Weapon · actual attack","Real attack while the actual weapon enchantment remains active.",level,View(old,[]),View(result.State,[new(sequence,caster,result.Events)]));
         }
         if (formAction is not null)
         {
@@ -470,7 +510,7 @@ public static class FxShowcase
         var defender = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Ember", "human", cls, subclass, level, rules), rules)
             with { InitiativeBonus = 0, Sprite = "characters.class_" + cls, Abilities = [ability.Id] };
         var trigger = spell ? new AbilityId("wizard.fireball") : RulesPack.CommonAttack.Id;
-        var attacker = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Threat", "human", spell ? "wizard" : "fighter", null, spell ? 5 : cls is "warlock" or "cleric" ? 3 : 10, rules), rules)
+        var attacker = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Threat", "human", spell ? "wizard" : "fighter", null, spell ? 5 : cls is "warlock" or "cleric" or "paladin" ? 3 : 10, rules), rules)
             with { Side = Side.Enemy, InitiativeBonus = 100, Abilities = [trigger], Sprite = "characters.class_" + (spell ? "wizard" : "fighter") };
         var setup = new BattleSetup(map,
             [new(hero, defender, new PlayerControlled(new("preview")), new(3, 5), []),

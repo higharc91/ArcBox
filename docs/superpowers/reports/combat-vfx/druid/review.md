@@ -1,4 +1,4 @@
-> Status: Druid native review and full local checks complete; awaiting owner approval before its PR or Paladin.
+> Status: Approved by the owner after the corrected animal-motion review. [PR #256](https://github.com/higharc91/ArcBox/pull/256) is open; Paladin follows.
 
 # Druid — #247
 
@@ -52,4 +52,4 @@ Container medians are relative software-render measurements. Real-hardware 16 ms
 
 ## Approval boundary
 
-Per [#247](https://github.com/higharc91/ArcBox/issues/247), the Druid PR and Paladin wait for explicit Druid approval. No later class has started. The owner merges approved PRs.
+The owner approved the corrected Druid preview. [PR #256](https://github.com/higharc91/ArcBox/pull/256) is open against `combat-vfx-cleric`. Paladin follows; the owner merges the approved dependencies.
