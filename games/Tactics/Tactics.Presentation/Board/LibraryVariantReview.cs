@@ -15,6 +15,8 @@ public static class LibraryVariantReview
             new("Bear", "Undead Bear", "beasts.bear.undead"), new("Slime", "Crystal Slime", "beasts.slime.crystal")],
         "web-and-hunt" => [new("Spider", "Phase Spider", "beasts.spider.phase"),
             new("Wolf", "Alpha Wolf", "beasts.wolf.alpha"), new("Crab", "Deep Crab", "bestiary.crab.deep")],
+        "iron-and-fangs" => [new("Scorpion", "Black Scorpion", "bestiary.scorpion.black"),
+            new("Rider", "Warg Rider", "bestiary.warg.rider"), new("Mimic", "Ironbound Mimic", "bosses.mimic.ironbound")],
         _ => throw new ArgumentException($"Unknown library art batch: {batch}", nameof(batch)),
     };
 

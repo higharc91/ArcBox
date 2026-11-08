@@ -18,14 +18,17 @@
     "beasts.slime.crystal",
     "beasts.spider.phase",
     "beasts.wolf.alpha",
-    "bestiary.crab.deep"
+    "bestiary.crab.deep",
+    "bestiary.scorpion.black",
+    "bestiary.warg.rider",
+    "bosses.mimic.ironbound"
   ],
-  "libraryBatchCount": 6,
-  "overallBatchCount": 21,
+  "libraryBatchCount": 7,
+  "overallBatchCount": 22,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 13,
+  "remainingTwoDirectionLooks": 10,
   "looks": [
     {
       "baselineNumber": 42,
@@ -214,7 +217,7 @@
       "key": "bestiary.scorpion.black",
       "name": "Scorpion Black",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch7"
     },
     {
       "baselineNumber": 69,
@@ -249,7 +252,7 @@
       "key": "bestiary.warg.rider",
       "name": "Warg Rider",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch7"
     },
     {
       "baselineNumber": 74,
@@ -375,7 +378,7 @@
       "key": "bosses.mimic.ironbound",
       "name": "Mimic Ironbound",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch7"
     },
     {
       "baselineNumber": 92,

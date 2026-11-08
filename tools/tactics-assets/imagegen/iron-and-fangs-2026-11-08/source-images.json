@@ -1,0 +1,18 @@
+{
+  "scorpion_black-idle": "6eed137c-d610-48a2-a58a-afb3ce29551e",
+  "warg_rider-idle": "442bc1d4-72c6-4200-8b4d-ab1fa460ceb4",
+  "mimic_ironbound-idle": "2be2618c-617e-48c5-9e98-0490a24c6c05",
+  "scorpion_black-idle-draft": "648bb678-d230-43e8-b0fd-8ec5247deb08",
+  "mimic_ironbound-idle-draft": "4b06ff2c-f8d0-4f73-ab17-ad81ca111075",
+  "scorpion_black-walk": "20f5863a-8e0a-4f44-8122-2e5901cc3d7d",
+  "warg_rider-walk": "8175aa1a-7610-42f9-90da-d112451eed57",
+  "mimic_ironbound-walk": "99900ea3-1972-44d8-a056-2d75d4ead930",
+  "scorpion_black-attack": "09712950-18ef-4bb4-8edf-0b54e22f4bfe",
+  "warg_rider-attack": "c952ae2d-f49d-4f22-8d1d-af272299dfd8",
+  "mimic_ironbound-attack": "21457f85-86d2-47c5-9645-fec42916f296",
+  "scorpion_black-damage": "39ec8ca6-60eb-43f0-81c3-7144da152730",
+  "warg_rider-damage": "ab36bf55-93aa-46df-a4b7-9eaf65d1fcbe",
+  "mimic_ironbound-damage": "38043a7a-9ff6-4603-b4ff-ebda82a4a725",
+  "scorpion_black-rear-damage": "13565f74-7da2-442e-b480-192dd85061c5",
+  "mimic_ironbound-rear-hurt": "9eb7bac8-c981-4e03-a089-311e0598c760"
+}

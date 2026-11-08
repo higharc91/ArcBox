@@ -53,6 +53,9 @@ public sealed class MobRefreshTests
     [InlineData("beasts.spider.phase", "spider_phase")]
     [InlineData("beasts.wolf.alpha", "wolf_alpha")]
     [InlineData("bestiary.crab.deep", "crab_deep")]
+    [InlineData("bestiary.scorpion.black", "scorpion_black")]
+    [InlineData("bestiary.warg.rider", "warg_rider")]
+    [InlineData("bosses.mimic.ironbound", "mimic_ironbound")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -360,6 +363,9 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("beasts.wolf.alpha")!.HeadLift / person, .75f, 1.15f);
         // Rear carapace depth contributes to the clearance envelope above this low animal.
         Assert.InRange(art.Sprite("bestiary.crab.deep")!.HeadLift / person, .6f, 1.25f);
+        Assert.InRange(art.Sprite("bestiary.scorpion.black")!.HeadLift / person, .8f, 1.5f);
+        Assert.InRange(art.Sprite("bestiary.warg.rider")!.HeadLift / person, 1.0f, 1.9f);
+        Assert.InRange(art.Sprite("bosses.mimic.ironbound")!.HeadLift / person, .4f, .9f);
         Assert.InRange(art.Sprite("bosses.mimic.oak")!.HeadLift / person, .4f, .8f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }

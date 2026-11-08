@@ -76,7 +76,7 @@ public sealed class CreatureAtlasTests
     public void Distinct_structural_forms_keep_their_identity_and_their_original_art()
     {
         var art = UnitArt.Load(Pack.Root);
-        Assert.Equal("bestiary/warg_rider.png", art.Sprite("bestiary.warg.rider")!.Path);
+        Assert.Equal("creatures/mob_refresh_warg_rider.png", art.Sprite("bestiary.warg.rider")!.Path);
         Assert.Equal("creatures/mob_refresh_bear_undead.png", art.Sprite("beasts.bear.undead")!.Path);
         Assert.Equal("creatures/mob_refresh_slime_crystal.png", art.Sprite("beasts.slime.crystal")!.Path);
     }

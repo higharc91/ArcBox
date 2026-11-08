@@ -1,0 +1,14 @@
+{
+  "mimic_ironbound-attack.png": "3b9e6f7ffee41303e36200e8613873f2171199e0a634fc066ecee1a93b9d4a29",
+  "mimic_ironbound-damage.png": "105b7ae21d1170a141b38cb96d65ac93cec7c293daff5b872aebe0892da5f4c0",
+  "mimic_ironbound-idle.png": "34cf35aa53e801d31c70d3fb208001bc40e64835afa9637fcd9ccbba145cebff",
+  "mimic_ironbound-walk.png": "12d845c57fd8fd1230786b2d3655b47a5dcddf0d5907cc1e03a736e9d3c6170e",
+  "scorpion_black-attack.png": "9a2955bd9e639fde9181d90530d7b24346904874ebd5dead1b0a4df2f1b217a0",
+  "scorpion_black-damage.png": "146450ccf5deb65501169f59cee7ebd771b4f1def12a1a1f782fc4ab8d34a0bb",
+  "scorpion_black-idle.png": "cee8bbda1a762c8340a6d52d37c4d8629f75cc4440489395a466ae400ed1adca",
+  "scorpion_black-walk.png": "7b59703b0e25f45c557784609ab9241d77b3e5dad0dbc22bd83746ebe46230dd",
+  "warg_rider-attack.png": "204c923adb0359cd42b2d056da7a29b77b3e9b8eea81b9747d8f89d94a9e330a",
+  "warg_rider-damage.png": "f151de7abceafd60afba54e6d24e5d6d4c85090c36c22f75438fa08d0f551f43",
+  "warg_rider-idle.png": "32ecbe8316d80a8d58caf8e842965a7a6d99f1c6c248838c2b5a90c736dfb69c",
+  "warg_rider-walk.png": "c2962bd3723d9284784620b3bec4f92fe53c8cc6609f9091d891ba468f250a00"
+}

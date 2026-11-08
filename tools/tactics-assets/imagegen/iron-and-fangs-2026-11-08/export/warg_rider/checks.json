@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 0,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      114,
+      189,
+      270
+    ],
+    "count": 5319
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 1,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      115,
+      190,
+      270
+    ],
+    "count": 5296
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 2,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      114,
+      190,
+      270
+    ],
+    "count": 5323
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 3,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      114,
+      190,
+      270
+    ],
+    "count": 5309
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 0,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      127,
+      117,
+      190,
+      272
+    ],
+    "count": 5647
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 1,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      125,
+      116,
+      189,
+      272
+    ],
+    "count": 5710
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 2,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      137,
+      114,
+      198,
+      272
+    ],
+    "count": 5560
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 3,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      126,
+      113,
+      190,
+      272
+    ],
+    "count": 5802
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 0,
+    "scale": 0.78,
+    "bounds": [
+      125,
+      117,
+      195,
+      272
+    ],
+    "count": 7161
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 1,
+    "scale": 0.78,
+    "bounds": [
+      116,
+      114,
+      200,
+      272
+    ],
+    "count": 7213
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 2,
+    "scale": 0.78,
+    "bounds": [
+      125,
+      140,
+      198,
+      272
+    ],
+    "count": 7126
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 3,
+    "scale": 0.78,
+    "bounds": [
+      124,
+      115,
+      196,
+      272
+    ],
+    "count": 7405
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      131,
+      121,
+      195,
+      272
+    ],
+    "count": 5841
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      116,
+      145,
+      203,
+      272
+    ],
+    "count": 6038
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 4,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      109,
+      129,
+      222,
+      270
+    ],
+    "count": 7197
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 5,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      111,
+      129,
+      224,
+      270
+    ],
+    "count": 7228
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 6,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      110,
+      129,
+      226,
+      270
+    ],
+    "count": 7242
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 7,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      110,
+      129,
+      230,
+      270
+    ],
+    "count": 7214
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 4,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      114,
+      127,
+      226,
+      272
+    ],
+    "count": 7383
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 5,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      118,
+      131,
+      236,
+      272
+    ],
+    "count": 7624
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 6,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      108,
+      128,
+      226,
+      272
+    ],
+    "count": 7451
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 7,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      112,
+      128,
+      231,
+      272
+    ],
+    "count": 7750
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 4,
+    "scale": 0.78,
+    "bounds": [
+      106,
+      128,
+      225,
+      272
+    ],
+    "count": 8776
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 5,
+    "scale": 0.78,
+    "bounds": [
+      107,
+      133,
+      229,
+      272
+    ],
+    "count": 8811
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 6,
+    "scale": 0.78,
+    "bounds": [
+      101,
+      131,
+      230,
+      272
+    ],
+    "count": 9416
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 7,
+    "scale": 0.78,
+    "bounds": [
+      101,
+      128,
+      229,
+      272
+    ],
+    "count": 9300
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      113,
+      125,
+      218,
+      272
+    ],
+    "count": 7905
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      99,
+      157,
+      219,
+      272
+    ],
+    "count": 7020
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 8,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      86,
+      143,
+      223,
+      270
+    ],
+    "count": 7691
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 9,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      86,
+      145,
+      224,
+      270
+    ],
+    "count": 7664
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 10,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      84,
+      145,
+      224,
+      270
+    ],
+    "count": 7664
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 11,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      86,
+      145,
+      225,
+      271
+    ],
+    "count": 7535
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 8,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      84,
+      146,
+      222,
+      272
+    ],
+    "count": 8111
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 9,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      82,
+      147,
+      225,
+      272
+    ],
+    "count": 8066
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 10,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      80,
+      149,
+      223,
+      272
+    ],
+    "count": 8164
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 11,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      84,
+      146,
+      228,
+      272
+    ],
+    "count": 8190
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 8,
+    "scale": 0.78,
+    "bounds": [
+      80,
+      142,
+      231,
+      272
+    ],
+    "count": 9703
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 9,
+    "scale": 0.78,
+    "bounds": [
+      82,
+      146,
+      230,
+      272
+    ],
+    "count": 9607
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 10,
+    "scale": 0.78,
+    "bounds": [
+      77,
+      154,
+      229,
+      272
+    ],
+    "count": 9619
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 11,
+    "scale": 0.78,
+    "bounds": [
+      80,
+      142,
+      230,
+      272
+    ],
+    "count": 9539
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      81,
+      144,
+      222,
+      272
+    ],
+    "count": 8715
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      88,
+      180,
+      232,
+      272
+    ],
+    "count": 6940
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 12,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      77,
+      126,
+      193,
+      270
+    ],
+    "count": 7672
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 13,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      76,
+      125,
+      194,
+      271
+    ],
+    "count": 7553
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 14,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      80,
+      125,
+      192,
+      269
+    ],
+    "count": 7400
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 15,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      81,
+      125,
+      193,
+      270
+    ],
+    "count": 7457
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 12,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      86,
+      126,
+      203,
+      272
+    ],
+    "count": 8053
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 13,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      84,
+      126,
+      204,
+      272
+    ],
+    "count": 8025
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 14,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      65,
+      128,
+      179,
+      272
+    ],
+    "count": 8015
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 15,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      76,
+      128,
+      192,
+      272
+    ],
+    "count": 8081
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 12,
+    "scale": 0.78,
+    "bounds": [
+      69,
+      127,
+      192,
+      272
+    ],
+    "count": 9080
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 13,
+    "scale": 0.78,
+    "bounds": [
+      71,
+      129,
+      197,
+      272
+    ],
+    "count": 9159
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 14,
+    "scale": 0.78,
+    "bounds": [
+      79,
+      131,
+      205,
+      272
+    ],
+    "count": 8949
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 15,
+    "scale": 0.78,
+    "bounds": [
+      75,
+      126,
+      201,
+      272
+    ],
+    "count": 9327
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      89,
+      131,
+      193,
+      272
+    ],
+    "count": 7688
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      101,
+      166,
+      219,
+      272
+    ],
+    "count": 6279
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 16,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      118,
+      188,
+      271
+    ],
+    "count": 5171
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 17,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      117,
+      187,
+      270
+    ],
+    "count": 5262
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 18,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      118,
+      188,
+      271
+    ],
+    "count": 5210
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 19,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      129,
+      118,
+      187,
+      271
+    ],
+    "count": 5105
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 16,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      127,
+      120,
+      190,
+      272
+    ],
+    "count": 5709
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 17,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      126,
+      119,
+      187,
+      272
+    ],
+    "count": 5675
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 18,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      129,
+      120,
+      190,
+      272
+    ],
+    "count": 5765
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 19,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      129,
+      120,
+      190,
+      272
+    ],
+    "count": 5611
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 16,
+    "scale": 0.78,
+    "bounds": [
+      125,
+      112,
+      195,
+      272
+    ],
+    "count": 7126
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 17,
+    "scale": 0.78,
+    "bounds": [
+      124,
+      114,
+      193,
+      272
+    ],
+    "count": 7014
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 18,
+    "scale": 0.78,
+    "bounds": [
+      125,
+      117,
+      195,
+      272
+    ],
+    "count": 7091
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 19,
+    "scale": 0.78,
+    "bounds": [
+      125,
+      114,
+      195,
+      272
+    ],
+    "count": 7028
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      131,
+      122,
+      189,
+      272
+    ],
+    "count": 5596
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      119,
+      148,
+      201,
+      272
+    ],
+    "count": 5609
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 20,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      126,
+      128,
+      226,
+      271
+    ],
+    "count": 6782
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 21,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      123,
+      128,
+      229,
+      271
+    ],
+    "count": 6894
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 22,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      125,
+      128,
+      228,
+      271
+    ],
+    "count": 6919
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 23,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      122,
+      128,
+      230,
+      271
+    ],
+    "count": 6904
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 20,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      128,
+      128,
+      233,
+      272
+    ],
+    "count": 7629
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 21,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      118,
+      128,
+      228,
+      272
+    ],
+    "count": 7664
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 22,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      123,
+      127,
+      229,
+      272
+    ],
+    "count": 7445
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 23,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      112,
+      128,
+      231,
+      272
+    ],
+    "count": 7885
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 20,
+    "scale": 0.78,
+    "bounds": [
+      124,
+      126,
+      243,
+      272
+    ],
+    "count": 8898
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 21,
+    "scale": 0.78,
+    "bounds": [
+      117,
+      126,
+      243,
+      272
+    ],
+    "count": 9238
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 22,
+    "scale": 0.78,
+    "bounds": [
+      119,
+      128,
+      242,
+      272
+    ],
+    "count": 9294
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 23,
+    "scale": 0.78,
+    "bounds": [
+      117,
+      124,
+      244,
+      272
+    ],
+    "count": 9284
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      119,
+      121,
+      227,
+      272
+    ],
+    "count": 7890
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      98,
+      163,
+      222,
+      272
+    ],
+    "count": 7152
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 24,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      98,
+      149,
+      239,
+      271
+    ],
+    "count": 7771
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 25,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      101,
+      147,
+      242,
+      271
+    ],
+    "count": 7677
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 26,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      93,
+      148,
+      239,
+      271
+    ],
+    "count": 7574
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 27,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      96,
+      147,
+      240,
+      271
+    ],
+    "count": 7439
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 24,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      97,
+      150,
+      242,
+      272
+    ],
+    "count": 8502
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 25,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      103,
+      149,
+      247,
+      272
+    ],
+    "count": 8454
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 26,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      100,
+      151,
+      245,
+      272
+    ],
+    "count": 8156
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 27,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      98,
+      148,
+      244,
+      272
+    ],
+    "count": 8319
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 24,
+    "scale": 0.78,
+    "bounds": [
+      94,
+      145,
+      247,
+      272
+    ],
+    "count": 9756
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 25,
+    "scale": 0.78,
+    "bounds": [
+      95,
+      149,
+      244,
+      272
+    ],
+    "count": 9568
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 26,
+    "scale": 0.78,
+    "bounds": [
+      95,
+      150,
+      246,
+      272
+    ],
+    "count": 9371
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 27,
+    "scale": 0.78,
+    "bounds": [
+      94,
+      144,
+      245,
+      272
+    ],
+    "count": 9545
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      105,
+      139,
+      248,
+      272
+    ],
+    "count": 8850
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      88,
+      178,
+      230,
+      272
+    ],
+    "count": 6919
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 28,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      84,
+      137,
+      204,
+      271
+    ],
+    "count": 7404
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 29,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      88,
+      137,
+      207,
+      270
+    ],
+    "count": 7322
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 30,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      86,
+      137,
+      210,
+      270
+    ],
+    "count": 7436
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/warg_rider-idle.png",
+    "sourcePose": 31,
+    "scale": 0.7428571428571429,
+    "bounds": [
+      87,
+      138,
+      208,
+      270
+    ],
+    "count": 7303
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 28,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      87,
+      138,
+      208,
+      272
+    ],
+    "count": 7920
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 29,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      107,
+      138,
+      228,
+      272
+    ],
+    "count": 7920
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 30,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      102,
+      140,
+      228,
+      272
+    ],
+    "count": 7856
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/warg_rider-walk.png",
+    "sourcePose": 31,
+    "scale": 0.7464114832535885,
+    "bounds": [
+      88,
+      136,
+      210,
+      272
+    ],
+    "count": 8048
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 28,
+    "scale": 0.78,
+    "bounds": [
+      88,
+      129,
+      215,
+      272
+    ],
+    "count": 9310
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 29,
+    "scale": 0.78,
+    "bounds": [
+      84,
+      131,
+      214,
+      272
+    ],
+    "count": 9730
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 30,
+    "scale": 0.78,
+    "bounds": [
+      84,
+      133,
+      219,
+      272
+    ],
+    "count": 9788
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/warg_rider-attack.png",
+    "sourcePose": 31,
+    "scale": 0.78,
+    "bounds": [
+      83,
+      132,
+      214,
+      272
+    ],
+    "count": 9561
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      100,
+      134,
+      208,
+      272
+    ],
+    "count": 7902
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/warg_rider-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5692883895131086,
+    "bounds": [
+      94,
+      177,
+      225,
+      272
+    ],
+    "count": 6589
+  }
+]

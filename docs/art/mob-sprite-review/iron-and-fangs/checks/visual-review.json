@@ -1,0 +1,15 @@
+{
+  "observations": [
+    "Slate-edged black scorpion with eight walking legs, two joined pincers and one rooted segmented stinger.",
+    "A goblin spearman seated on a grey warg; spear grip, reins, knees and saddle remain connected through movement and damage.",
+    "Dark oak and heavy iron chest mimic with front-only latch and rear-only hinges; closed idle/walk and an existing Adhesive Bite attack.",
+    "An OpenAI background edit removed the opaque scorpion idle background without repainting anatomy. A fresh fully closed mimic idle sheet replaced an overactive first draft.",
+    "Complete authored rear damage corrections preserve the creatures\u2019 rear orientation.",
+    "Runtime review uses real Adhesive Bite binding for Ironbound Mimic and joined rider/mount movement."
+  ],
+  "nativeBattleWorldReplayReviewed": true,
+  "allFacingsInGalleryReviewed": true,
+  "frontPortraitsAndBarClearanceReviewed": true,
+  "commonScaleAndCompleteInspectionBounds": true,
+  "mainUntouchedForPlaytest": true
+}

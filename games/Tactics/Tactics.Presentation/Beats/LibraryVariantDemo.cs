@@ -35,13 +35,15 @@ public static class LibraryVariantDemo
         for (var i = 0; i < creatures.Count; i++)
         {
             var c = creatures[i];
+            var ability = new AbilityId(c.Sprite == "bosses.mimic.ironbound" ? "mimic.adhesive_bite" : "common.attack");
             Add(7.2 + i * 3, "Target ready", null, [], targets[i]);
             Add(8 + i * 3, c.Name + " natural attack", new(c.Id),
-                [new AbilityUsed(new(c.Id), new("common.attack"), new Target(Unit: new("Fighter")), rules.Abilities[new("common.attack")].Presentation),
+                [new AbilityUsed(new(c.Id), ability, new Target(Unit: new("Fighter")), rules.Abilities[ability].Presentation),
                     new AttackResolved(new(c.Id), new("Fighter"), true, false),
                     new Damaged(new("Fighter"), 4, c.Sprite switch
                     {
-                        "beasts.bat.vampire" or "beasts.spider.phase" or "beasts.wolf.alpha" => "piercing",
+                        "beasts.bat.vampire" or "beasts.spider.phase" or "beasts.wolf.alpha"
+                            or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound" => "piercing",
                         "beasts.bear.undead" => "slashing",
                         _ => "bludgeoning",
                     }, 24)],

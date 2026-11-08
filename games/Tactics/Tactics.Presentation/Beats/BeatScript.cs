@@ -795,7 +795,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                             or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
                             or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow"
                             or "beasts.bat.vampire" or "beasts.bear.undead" or "beasts.slime.crystal"
-                            or "beasts.spider.phase" or "beasts.wolf.alpha" or "bestiary.crab.deep" => 0.8,
+                            or "beasts.spider.phase" or "beasts.wolf.alpha" or "bestiary.crab.deep"
+                            or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound" => 0.8,
                         "bosses.dragon.red" => 1.0,
                         _ => BeatTiming.Lunge,
                     };

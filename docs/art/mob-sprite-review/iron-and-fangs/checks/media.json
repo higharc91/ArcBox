@@ -1,0 +1,22 @@
+{
+  "iron-and-fangs-motion.mp4": {
+    "duration": 24.0,
+    "video": [
+      {
+        "width": 1440,
+        "height": 540,
+        "r_frame_rate": "16/1"
+      }
+    ]
+  },
+  "godot-specials.mp4": {
+    "duration": 20.0,
+    "video": [
+      {
+        "width": 960,
+        "height": 540,
+        "r_frame_rate": "20/1"
+      }
+    ]
+  }
+}

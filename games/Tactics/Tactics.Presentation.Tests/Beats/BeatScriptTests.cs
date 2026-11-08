@@ -133,6 +133,7 @@ public sealed class BeatScriptTests
     [Theory]
     [InlineData("crypt-kin")]
     [InlineData("web-and-hunt")]
+    [InlineData("iron-and-fangs")]
     public void Library_variant_replay_keeps_targets_stable_and_all_natural_attacks_adjacent(string batch)
     {
         var steps = LibraryVariantDemo.Steps(Pack.Root, batch);
@@ -158,7 +159,8 @@ public sealed class BeatScriptTests
                 attacks++;
                 Assert.NotNull(previous);
                 Assert.Equal(previous.Units.Select(u => u.At), current.Units.Select(u => u.At));
-                Assert.Equal("common.attack", used.Ability.Value);
+                var sprite = Assert.Single(current.Units, u => u.Id == used.Source).Sprite;
+                Assert.Equal(sprite == "bosses.mimic.ironbound" ? "mimic.adhesive_bite" : "common.attack", used.Ability.Value);
                 Assert.Equal(rules.Abilities[used.Ability].Presentation, used.Presentation);
                 var from = Assert.Single(current.Units, u => u.Id == used.Source).At;
                 var to = Assert.Single(current.Units, u => u.Id == used.Target.Unit).At;
@@ -539,6 +541,9 @@ public sealed class BeatScriptTests
     [InlineData("beasts.spider.phase")]
     [InlineData("beasts.wolf.alpha")]
     [InlineData("bestiary.crab.deep")]
+    [InlineData("bestiary.scorpion.black")]
+    [InlineData("bestiary.warg.rider")]
+    [InlineData("bosses.mimic.ironbound")]
     public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };

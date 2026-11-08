@@ -1,0 +1,120 @@
+{
+  "scorpion_black_idle": {
+    "promptKey": "scorpion_black_idle",
+    "references": [
+      "source/scorpion_black-idle-draft.png"
+    ]
+  },
+  "scorpion_black_walk": {
+    "promptKey": "scorpion_black_walk",
+    "references": [
+      "references/scorpion_black-walk.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/scorpion_black-idle.png"
+    ]
+  },
+  "scorpion_black_attack": {
+    "promptKey": "scorpion_black_attack",
+    "references": [
+      "references/scorpion_black-attack.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/scorpion_black-idle.png"
+    ]
+  },
+  "scorpion_black_damage": {
+    "promptKey": "scorpion_black_damage",
+    "references": [
+      "references/scorpion_black-damage.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/scorpion_black-idle.png"
+    ]
+  },
+  "warg_rider_idle": {
+    "promptKey": "warg_rider_idle",
+    "references": [
+      "references/warg_rider-idle.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png"
+    ]
+  },
+  "warg_rider_walk": {
+    "promptKey": "warg_rider_walk",
+    "references": [
+      "references/warg_rider-walk.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/warg_rider-idle.png"
+    ]
+  },
+  "warg_rider_attack": {
+    "promptKey": "warg_rider_attack",
+    "references": [
+      "references/warg_rider-attack.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/warg_rider-idle.png"
+    ]
+  },
+  "warg_rider_damage": {
+    "promptKey": "warg_rider_damage",
+    "references": [
+      "references/warg_rider-damage.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/warg_rider-idle.png"
+    ]
+  },
+  "mimic_ironbound_idle": {
+    "promptKey": "mimic_ironbound_idle",
+    "references": [
+      "references/mimic_ironbound-idle.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png"
+    ]
+  },
+  "mimic_ironbound_walk": {
+    "promptKey": "mimic_ironbound_walk",
+    "references": [
+      "references/mimic_ironbound-walk.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/mimic_ironbound-idle.png"
+    ]
+  },
+  "mimic_ironbound_attack": {
+    "promptKey": "mimic_ironbound_attack",
+    "references": [
+      "references/mimic_ironbound-attack.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/mimic_ironbound-idle.png"
+    ]
+  },
+  "mimic_ironbound_damage": {
+    "promptKey": "mimic_ironbound_damage",
+    "references": [
+      "references/mimic_ironbound-damage.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png",
+      "source/mimic_ironbound-idle.png"
+    ]
+  },
+  "scorpion_black_idle_original": {
+    "promptKey": "scorpion_black_idle_original",
+    "references": [
+      "references/scorpion_black-idle.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png"
+    ]
+  },
+  "mimic_ironbound_idle_original": {
+    "promptKey": "mimic_ironbound_idle_original",
+    "references": [
+      "references/mimic_ironbound-idle.png",
+      "../../concepts/iron-and-fangs-2026-11-08/three-variants.png"
+    ]
+  },
+  "scorpion_black_rear_damage": {
+    "references": [
+      "source/scorpion_black-idle.png",
+      "source/scorpion_black-damage.png"
+    ]
+  },
+  "mimic_ironbound_rear_hurt": {
+    "references": [
+      "source/mimic_ironbound-idle.png",
+      "source/mimic_ironbound-damage.png"
+    ]
+  }
+}

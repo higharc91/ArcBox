@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      101,
+      135,
+      219,
+      258
+    ],
+    "count": 6189
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      100,
+      136,
+      218,
+      259
+    ],
+    "count": 6114
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      100,
+      139,
+      218,
+      259
+    ],
+    "count": 6117
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      100,
+      139,
+      218,
+      258
+    ],
+    "count": 6089
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 0,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      100,
+      136,
+      219,
+      260
+    ],
+    "count": 6342
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 1,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      109,
+      140,
+      226,
+      260
+    ],
+    "count": 6166
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 2,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      102,
+      139,
+      220,
+      260
+    ],
+    "count": 6220
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 3,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      102,
+      141,
+      219,
+      260
+    ],
+    "count": 6179
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      104,
+      137,
+      214,
+      260
+    ],
+    "count": 6230
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      104,
+      154,
+      214,
+      260
+    ],
+    "count": 6028
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      105,
+      173,
+      217,
+      260
+    ],
+    "count": 5577
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      105,
+      144,
+      213,
+      260
+    ],
+    "count": 6116
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      100,
+      141,
+      219,
+      260
+    ],
+    "count": 6317
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      113,
+      176,
+      206,
+      260
+    ],
+    "count": 4871
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      116,
+      142,
+      241,
+      258
+    ],
+    "count": 6038
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      115,
+      144,
+      240,
+      259
+    ],
+    "count": 6083
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      116,
+      143,
+      241,
+      259
+    ],
+    "count": 5928
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      115,
+      143,
+      242,
+      259
+    ],
+    "count": 6059
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 4,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      115,
+      147,
+      239,
+      260
+    ],
+    "count": 6281
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 5,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      116,
+      147,
+      239,
+      260
+    ],
+    "count": 6416
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 6,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      113,
+      147,
+      237,
+      260
+    ],
+    "count": 6207
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 7,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      113,
+      146,
+      239,
+      260
+    ],
+    "count": 6356
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      118,
+      146,
+      234,
+      260
+    ],
+    "count": 5854
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      118,
+      156,
+      234,
+      260
+    ],
+    "count": 5878
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      116,
+      171,
+      235,
+      260
+    ],
+    "count": 5580
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      117,
+      146,
+      234,
+      260
+    ],
+    "count": 5882
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      104,
+      147,
+      231,
+      260
+    ],
+    "count": 6454
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      103,
+      177,
+      217,
+      260
+    ],
+    "count": 5282
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      99,
+      161,
+      230,
+      259
+    ],
+    "count": 5665
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      99,
+      161,
+      229,
+      259
+    ],
+    "count": 5644
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      99,
+      162,
+      229,
+      259
+    ],
+    "count": 5568
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      99,
+      161,
+      229,
+      259
+    ],
+    "count": 5632
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 8,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      108,
+      165,
+      236,
+      260
+    ],
+    "count": 5725
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 9,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      97,
+      165,
+      221,
+      260
+    ],
+    "count": 5768
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 10,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      108,
+      165,
+      232,
+      260
+    ],
+    "count": 5557
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 11,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      93,
+      165,
+      218,
+      260
+    ],
+    "count": 5698
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      102,
+      161,
+      220,
+      260
+    ],
+    "count": 5506
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      100,
+      171,
+      219,
+      260
+    ],
+    "count": 5617
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      99,
+      182,
+      222,
+      260
+    ],
+    "count": 5520
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      101,
+      164,
+      219,
+      260
+    ],
+    "count": 5494
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      78,
+      150,
+      219,
+      260
+    ],
+    "count": 6736
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      105,
+      181,
+      214,
+      260
+    ],
+    "count": 5147
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      79,
+      153,
+      210,
+      259
+    ],
+    "count": 5789
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      92,
+      150,
+      222,
+      258
+    ],
+    "count": 5931
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      92,
+      153,
+      222,
+      258
+    ],
+    "count": 5763
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      94,
+      152,
+      224,
+      259
+    ],
+    "count": 5742
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 12,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      91,
+      158,
+      223,
+      260
+    ],
+    "count": 6174
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 13,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      94,
+      157,
+      223,
+      260
+    ],
+    "count": 5910
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 14,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      94,
+      157,
+      226,
+      260
+    ],
+    "count": 5959
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 15,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      94,
+      159,
+      224,
+      260
+    ],
+    "count": 5894
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      107,
+      159,
+      226,
+      260
+    ],
+    "count": 5645
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      106,
+      164,
+      227,
+      260
+    ],
+    "count": 5620
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      106,
+      174,
+      227,
+      260
+    ],
+    "count": 5617
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      107,
+      160,
+      226,
+      260
+    ],
+    "count": 5573
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/scorpion_black-rear-damage.png",
+    "sourcePose": 0,
+    "scale": 0.32,
+    "bounds": [
+      114,
+      141,
+      230,
+      260
+    ],
+    "count": 6447
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/scorpion_black-rear-damage.png",
+    "sourcePose": 3,
+    "scale": 0.32,
+    "bounds": [
+      97,
+      180,
+      222,
+      260
+    ],
+    "count": 5924
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      101,
+      139,
+      218,
+      259
+    ],
+    "count": 6325
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      100,
+      137,
+      217,
+      258
+    ],
+    "count": 6290
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      99,
+      132,
+      217,
+      259
+    ],
+    "count": 6440
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      98,
+      141,
+      217,
+      258
+    ],
+    "count": 6253
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 16,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      102,
+      144,
+      217,
+      260
+    ],
+    "count": 6430
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 17,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      100,
+      143,
+      213,
+      260
+    ],
+    "count": 6347
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 18,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      104,
+      143,
+      217,
+      260
+    ],
+    "count": 6358
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 19,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      109,
+      149,
+      222,
+      260
+    ],
+    "count": 6227
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 16,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      104,
+      148,
+      212,
+      260
+    ],
+    "count": 5937
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 17,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      104,
+      152,
+      210,
+      260
+    ],
+    "count": 5883
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 18,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      106,
+      160,
+      212,
+      260
+    ],
+    "count": 5758
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 19,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      105,
+      152,
+      211,
+      260
+    ],
+    "count": 5756
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/scorpion_black-rear-damage.png",
+    "sourcePose": 1,
+    "scale": 0.32,
+    "bounds": [
+      106,
+      142,
+      213,
+      260
+    ],
+    "count": 6366
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/scorpion_black-rear-damage.png",
+    "sourcePose": 4,
+    "scale": 0.32,
+    "bounds": [
+      105,
+      182,
+      215,
+      260
+    ],
+    "count": 5409
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      92,
+      159,
+      220,
+      259
+    ],
+    "count": 5799
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      91,
+      157,
+      218,
+      258
+    ],
+    "count": 5795
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      93,
+      159,
+      220,
+      258
+    ],
+    "count": 5770
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      105,
+      159,
+      233,
+      259
+    ],
+    "count": 5731
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 20,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      91,
+      158,
+      218,
+      260
+    ],
+    "count": 6097
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 21,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      93,
+      158,
+      221,
+      260
+    ],
+    "count": 6132
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 22,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      101,
+      160,
+      227,
+      260
+    ],
+    "count": 6046
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 23,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      98,
+      160,
+      224,
+      260
+    ],
+    "count": 6058
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 20,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      97,
+      166,
+      216,
+      260
+    ],
+    "count": 5675
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 21,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      98,
+      167,
+      214,
+      260
+    ],
+    "count": 5651
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 22,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      97,
+      178,
+      214,
+      260
+    ],
+    "count": 5385
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 23,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      97,
+      168,
+      213,
+      260
+    ],
+    "count": 5437
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/scorpion_black-rear-damage.png",
+    "sourcePose": 2,
+    "scale": 0.32,
+    "bounds": [
+      89,
+      141,
+      207,
+      260
+    ],
+    "count": 6554
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/scorpion_black-rear-damage.png",
+    "sourcePose": 5,
+    "scale": 0.32,
+    "bounds": [
+      96,
+      187,
+      223,
+      260
+    ],
+    "count": 5420
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      103,
+      161,
+      233,
+      259
+    ],
+    "count": 5810
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      104,
+      161,
+      233,
+      259
+    ],
+    "count": 5810
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      101,
+      161,
+      229,
+      259
+    ],
+    "count": 5721
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      104,
+      162,
+      232,
+      259
+    ],
+    "count": 5722
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 24,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      107,
+      165,
+      235,
+      260
+    ],
+    "count": 6097
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 25,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      108,
+      165,
+      236,
+      260
+    ],
+    "count": 5969
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 26,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      106,
+      165,
+      233,
+      260
+    ],
+    "count": 6010
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 27,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      97,
+      163,
+      225,
+      260
+    ],
+    "count": 6032
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 24,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      102,
+      164,
+      225,
+      260
+    ],
+    "count": 5822
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 25,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      115,
+      170,
+      236,
+      260
+    ],
+    "count": 5673
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 26,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      102,
+      175,
+      225,
+      260
+    ],
+    "count": 5707
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 27,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      116,
+      170,
+      237,
+      260
+    ],
+    "count": 5586
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      109,
+      151,
+      246,
+      260
+    ],
+    "count": 6460
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      106,
+      181,
+      212,
+      260
+    ],
+    "count": 5022
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      81,
+      146,
+      208,
+      258
+    ],
+    "count": 5792
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      84,
+      150,
+      209,
+      259
+    ],
+    "count": 5687
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      83,
+      146,
+      208,
+      259
+    ],
+    "count": 5699
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/scorpion_black-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6927374301675978,
+    "bounds": [
+      84,
+      148,
+      210,
+      258
+    ],
+    "count": 5624
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 28,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      87,
+      152,
+      213,
+      260
+    ],
+    "count": 6034
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 29,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      86,
+      152,
+      208,
+      260
+    ],
+    "count": 5910
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 30,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      86,
+      154,
+      210,
+      260
+    ],
+    "count": 5813
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/scorpion_black-walk.png",
+    "sourcePose": 31,
+    "scale": 0.6850828729281768,
+    "bounds": [
+      84,
+      152,
+      209,
+      260
+    ],
+    "count": 5900
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 28,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      89,
+      152,
+      210,
+      260
+    ],
+    "count": 5853
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 29,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      89,
+      155,
+      210,
+      260
+    ],
+    "count": 5790
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 30,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      89,
+      161,
+      210,
+      260
+    ],
+    "count": 5640
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/scorpion_black-attack.png",
+    "sourcePose": 31,
+    "scale": 0.6458333333333334,
+    "bounds": [
+      89,
+      152,
+      210,
+      260
+    ],
+    "count": 5743
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      81,
+      147,
+      212,
+      260
+    ],
+    "count": 6669
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/scorpion_black-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5042016806722689,
+    "bounds": [
+      105,
+      182,
+      213,
+      260
+    ],
+    "count": 5412
+  }
+]

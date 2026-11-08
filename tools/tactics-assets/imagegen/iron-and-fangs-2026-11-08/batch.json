@@ -1,0 +1,22 @@
+{
+  "slug": "iron-and-fangs",
+  "date": "2026-11-08",
+  "title": "Black Scorpion, Warg Rider and Ironbound Mimic",
+  "priorCommit": "6b767166",
+  "libraryBatch": 7,
+  "overallBatch": 22,
+  "features": [
+    "Slate-edged black scorpion with eight walking legs, two joined pincers and one rooted segmented stinger.",
+    "A goblin spearman seated on a grey warg; spear grip, reins, knees and saddle remain connected through movement and damage.",
+    "Dark oak and heavy iron chest mimic with front-only latch and rear-only hinges; closed idle/walk and an existing Adhesive Bite attack."
+  ],
+  "conceptJob": "job_kPrLcs3CJf574cNtA26VZV7b",
+  "conceptAsset": "asset_MM3MsjnB71QSDFMNRGAiN8cG",
+  "creativeUnits": 12,
+  "conceptNote": "Scenario authored the three-creature concept. An OpenAI whole-sheet revision restored the missing goblin on one walking study; both original and selected concept are retained.",
+  "reviewNotes": [
+    "An OpenAI background edit removed the opaque scorpion idle background without repainting anatomy. A fresh fully closed mimic idle sheet replaced an overactive first draft.",
+    "Complete authored rear damage corrections preserve the creatures\u2019 rear orientation.",
+    "Runtime review uses real Adhesive Bite binding for Ironbound Mimic and joined rider/mount movement."
+  ]
+}

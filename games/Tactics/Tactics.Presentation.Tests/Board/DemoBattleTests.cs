@@ -57,6 +57,7 @@ public sealed class DemoBattleTests
     [Theory]
     [InlineData("crypt-kin")]
     [InlineData("web-and-hunt")]
+    [InlineData("iron-and-fangs")]
     public void Library_variant_reviews_use_walkable_positions_and_the_registered_runtime_keys(string batch)
     {
         var creatures = LibraryVariantReview.Creatures(batch);
