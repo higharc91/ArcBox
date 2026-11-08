@@ -1,4 +1,4 @@
-> Status: Wizard approved and PR #252 open; Sorcerer preview complete, awaiting owner OK before its PR or Warlock. Shared PR #251 awaits the owner merge. CI remains manually disabled.
+> Status: Warlock preview complete, awaiting owner OK before its PR or Cleric. Approved shared/Wizard/Sorcerer PRs #251/#252/#253 await owner merges. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -95,3 +95,21 @@ The final full gate passes: 7,251 .NET tests (zero skipped), zero build warnings
 Class median is 20.3094 → 20.9010 ms (+2.91%, within 10%). Largest individual increase: sorcerer.lightning_bolt (+10.16%), published transparently. Whole-reel texture growth is 22.13 MiB; shipped-pack growth 0.62 MiB. Thirty six-hero Sorcerer Chapter I rounds add at most 3.300 s Full / 3.000 s Auto Short / 0 s Off, below the approved 3.6 s cap without loosening assertions. Real-hardware 16 ms and physical 3 m TV validation remain hardware checks.
 
 Sorcerer remains unchecked on #247 until explicit owner approval. Do not open its PR or start Warlock before that approval. The owner merges #251, #252 and the later class PRs. CI remains manually disabled.
+
+
+## Sorcerer approval and Warlock
+
+The owner replied “those look good, continue.” Sorcerer is approved, its #247 checkbox is ticked, and PR #253 is open against `combat-vfx-wizard`. Shared PR #251 and Wizard PR #252 remain open for the owner merge. Warlock starts from latest main `c4e121eb` with approved Sorcerer dependency `4eb38ab6`; that dependency is the frozen Warlock before baseline.
+
+Warlock has 33 abilities, seven class/subclass visible procs, and Hunger of Hadar's embedded turn-start proc. Its 44 real samples also include ordinary Attack and the level-5/two-beam and level-7/three-beam Eldritch Blast variants. Real fixtures apply Hex before Hex effects, advance the actual pact-recovery round, summon the imp through battle-start hooks, and trigger the kill blessing on a wounded enemy with another enemy still alive. Self-centred and short-range spells receive legal nearby targets. No rules are changed.
+
+The art adds 41 distinct effect identities and one flight sheet, four five-frame gestures and one held release pose. Original frame indices remain stable; Warlock race atlases use nine rows per facing. Eldritch Blast charges once and releases its real subsequent beams rapidly, with separate damage-number rows and actual repelling motion inside the cantrip budget. Darkness, Hunger, shadow veils and Moil remain unlit; infernal fire, force, cold, curses and lightning use appropriate shared light. The focused 99-test presentation/content/round suite passes; the full gate and native review are next. No later class has started.
+
+
+## Warlock review handoff
+
+The 44-sample native gallery is `../reports/combat-vfx/warlock/index.html`: 33 abilities, seven visible class procs, Hunger's embedded turn proc, an ordinary attack and two higher-level Eldritch Blast variants. All real trigger fixtures, every animation/effect/sound key, all script/effect budgets, and new atlas bounds/attachments pass. The full local gate passes with zero build warnings/errors: 7,255 .NET (zero skipped), 549 phone tests/build, 24 Node, 37 asset, 9 audio and 23 lore tests plus lore/docs checks. Native captures and benchmarks finish without rendering errors. Source/art commit `a11e227daeed40394b1f4d6f74db64eec3d8f852`.
+
+Three-run class median 19.7884 → 20.1112 ms (+1.63%, within 10%). Largest individual increase warlock.eldritch_blast.level7 (+8.96%), reported transparently. Peak texture growth +20.00 MiB; shipped-pack growth 0.56 MiB. Thirty six-player Warlock Chapter I rounds add at most 3.317 s Full / 3.017 s Auto Short / 0 Off, within the approved cap without loosening existing limits. Real-hardware 16 ms and physical TV readability remain hardware checks.
+
+All 33 gameplay definitions and passive definitions are unchanged. Existing Vampiric Touch/Cursed Slash enemy-targeted healing remains visible exactly as emitted by the engine; rules follow-up is separate. Phone, audio clips, other class atlases and workflow files are untouched. Warlock remains unchecked until explicit owner approval; its PR and Cleric wait for that OK. Owner merges the approved dependency PRs. CI remains disabled.

@@ -216,7 +216,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
     private static readonly ImmutableHashSet<string> Physical = ["slashing", "piercing", "bludgeoning"];
 
     /// <summary>The animations that are a blow, which lunge at arm's length. The rest (a spell's poses, a block) stay where they are.</summary>
-    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", Special];
+    private static readonly ImmutableHashSet<string> Blows = [Attack, "thrust", "slam", "spin", "flurry", "bash", "warlock_blade", Special];
 
     /// <summary>The script for <paramref name="beat"/>. <paramref name="shown"/> is the battle as the player last saw it; <paramref name="live"/> is the newest view.</summary>
     public static BeatScript Of(Beat beat, BattleView shown, BattleView live, FxArt fx, SoundBank? sounds = null) => new Builder(beat, shown, live, fx, sounds).Build();
@@ -378,9 +378,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     PlayWalk(moved);
                     break;
                 case Pushed pushed:
-                    _cues.Add(new SlideCue(_t, BeatTiming.Slide, pushed.Unit, pushed.From, pushed.To));
+                    var slide = EldritchVolley ? .05 : BeatTiming.Slide;
+                    _cues.Add(new SlideCue(_t, slide, pushed.Unit, pushed.From, pushed.To));
                     Sound("pushed");
-                    _t += BeatTiming.Slide;
+                    _t += slide;
                     Apply(e);
                     break;
                 case Fell fell:
@@ -719,6 +720,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var ray = (key is "fx.wizard_scorching_ray_shot.fire" or "fx.sorcerer_scorching_ray_shot.fire") && _swings > 0;
                 var windup = ray ? .04 : BeatTiming.Windup;
                 if (ray) flight = .12;
+                if (key == "fx.warlock_eldritch_blast_shot.force")
+                {
+                    // One charged release, then held-palm follow-up bolts for the engine's real beam rolls.
+                    windup = _swings == 0 ? .10 : .02;
+                    flight = _swings == 0 ? .12 : .04;
+                    if (_swings > 0) anim = "characters.warlock_release";
+                }
                 _cues.Add(new PoseCue(_t, windup + flight, used.Source, anim, source, target));
                 _cues.Add(new FlightCue(_t + windup, flight, shot, source, target));
                 Cry(used.Source, "attack");
@@ -775,9 +783,11 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Pop(resolved.Target, Miss, PopStyle.Damage);
                 Sound("attack_miss");
                 _cues.Add(new PoseCue(_t, BeatTiming.Impact, resolved.Target, Dodge));
-                _t += InArea ? BeatTiming.Stagger : BeatTiming.Impact;
+                _t += EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
             }
         }
+
+        private bool EldritchVolley => _ability?.Ability.Value == "warlock.eldritch_blast";
 
         private void PlayDamage(Damaged hit)
         {
@@ -787,7 +797,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             else
                 Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
             if (hit.Amount > 0)
-                Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage);
+                Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage, EldritchVolley ? Math.Max(0, _swings - 1) * 2 + _hits : 0);
             var length = _view.Units.FirstOrDefault(u => u.Id == hit.Unit)?.Sprite switch
             {
                 "monsters.ashmaw" => 0.5,
@@ -809,7 +819,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             if (_reaction is not null)
                 return;
             if (!InArea)
-                _t += _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
+                _t += EldritchVolley ? (_hits++ == 0 ? .08 : .02) : _hits++ == 0 ? BeatTiming.Impact : BeatTiming.Stagger;
             else if (!_rolled)
                 _t += BeatTiming.Stagger;
             _rolled = false;
