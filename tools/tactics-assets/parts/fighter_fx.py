@@ -34,7 +34,9 @@ def frames(name):
   def arc(x,y,rx,ry,start,end,slot='main',s=None):path([(x+math.cos(a)*rx,y+math.sin(a)*ry) for a in [start+(end-start)*j/18 for j in range(19)]],slot,s)
   def shield(x,y,size=17):
    p=[(x-size,y-size),(x,y-size*1.3),(x+size,y-size),(x+size*.8,y+size*.3),(x,y+size),(x-size*.8,y+size*.3)]
-   c.polygon(p,'main',max(1,shade-1));path(p,'core',min(4,shade),True);line((x,y-size),(x,y+size*.6),'accent',min(4,shade))
+   # Solid impact lasts only two frames; the lingering outline leaves the unit readable.
+   if i in (2,3):c.polygon(p,'main',max(1,shade-1))
+   path(p,'core',min(4,shade),True);line((x,y-size),(x,y+size*.6),'accent',min(4,shade))
   def blade(x,y,length=38,angle=-1.1):
    dx=math.cos(angle);dy=math.sin(angle);nx=-dy;ny=dx
    p=[(x-nx*3,y-ny*3),(x+dx*length,y+dy*length),(x+nx*3,y+ny*3)]

@@ -63,3 +63,10 @@ class FighterFxTests(unittest.TestCase):
             self.assertIn(p['anim'].split('.')[-1],CASTS)
             self.assertNotIn(p['fx'],effects);effects.add(p['fx'])
         self.assertEqual(20,len(effects))
+
+    def test_shield_linger_keeps_the_victims_body_readable(self):
+        # After its brief impact, the central body rectangle must remain mostly open.
+        for frame in frames('goading_attack')[4:]:
+            cx=frame.w//2;cy=round(frame.h*.72)
+            body=frame.slot[cy-36:cy-10,cx-10:cx+10]
+            self.assertLess(np.count_nonzero(body)/body.size,.2)

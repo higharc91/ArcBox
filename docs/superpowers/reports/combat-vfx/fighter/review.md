@@ -6,7 +6,7 @@ The 35 real-engine comparisons cover all 20 abilities, seven visible hooks, ordi
 
 Indomitable follows a real failed Fireball save and removes existing poison/fear. Unbreakable follows an actual lethal hit while an ally keeps the party in battle. Studied Attacks follows a miss, Relentless restores an expended superiority die, and Inspiring Presence grants real temporary HP. Wounded Execution Strike exercises its conditional extra damage. Multiattacks keep every real attack and separate miss/damage rows. Vanguard Charge braces, follows its actual dash, then strikes on arrival. Keen Edge lands on the struck enemy, including self-centered Cleave.
 
-Physical Fighter effects emit no magical light. The incoming Wizard Fireball retains its fire light. Existing sound mappings remain; previously unmapped physical art reuses existing sword, shield and battle clips. No paid generation or new audio is used.
+Shield effects use a two-frame solid impact (0.1 s), followed by an open outline so the victim and health bar stay readable during the linger. Physical Fighter effects emit no magical light. The incoming Wizard Fireball retains its fire light. Existing sound mappings remain; previously unmapped physical art reuses existing sword, shield and battle clips. No paid generation or new audio is used.
 
 ## Recovery and baseline
 
