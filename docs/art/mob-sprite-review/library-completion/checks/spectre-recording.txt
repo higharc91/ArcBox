@@ -1,0 +1,1 @@
+[x11grab @ 0x55b28f755300] Stream #0: not enough frames to estimate rate; consider increasing probesize

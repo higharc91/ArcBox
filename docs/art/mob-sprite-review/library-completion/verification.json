@@ -1,0 +1,51 @@
+{
+  "testedIntegrationCommit": "fd5bf0c8",
+  "mainBase": "0d808be20ccb00e3fe3891983c40c60470e29cbc",
+  "presentationTests": {
+    "total": 3335,
+    "failed": 0,
+    "succeeded": 3335,
+    "skipped": 0
+  },
+  "assetManifestChecks": 8,
+  "hostAndTestBuildWarnings": 0,
+  "hostAndTestBuildErrors": 0,
+  "nativeContactsAfterIntegration": 12,
+  "desktopAnd390PixelPhoneGalleryPassed": true,
+  "manualTvPhonePlaytestFeedback": "Open on issue #272; feature branch remains unmerged",
+  "media": {
+    "all-19-walking.mp4": {
+      "seconds": 24.0,
+      "bytes": 8291589,
+      "streams": [
+        {
+          "width": 1920,
+          "height": 1700,
+          "r_frame_rate": "20/1"
+        }
+      ]
+    },
+    "native-gilded-and-rime.mp4": {
+      "seconds": 42.0,
+      "bytes": 4537485,
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "r_frame_rate": "20/1"
+        }
+      ]
+    },
+    "native-spectre.mp4": {
+      "seconds": 24.0,
+      "bytes": 1121877,
+      "streams": [
+        {
+          "width": 960,
+          "height": 540,
+          "r_frame_rate": "20/1"
+        }
+      ]
+    }
+  }
+}

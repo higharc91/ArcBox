@@ -1,0 +1,55 @@
+{
+  "integrationCommit": "fd5bf0c8",
+  "contacts": 12,
+  "allFromEngineMomentMarkers": true,
+  "scenes": [
+    {
+      "action": "Gold Jaws",
+      "sourceCapture": "010-tactics-beat-hit-4.png"
+    },
+    {
+      "action": "Frost Troll strike",
+      "sourceCapture": "015-tactics-beat-hit-5.png"
+    },
+    {
+      "action": "Ogre strike",
+      "sourceCapture": "020-tactics-beat-hit-6.png"
+    },
+    {
+      "action": "Gold Breath",
+      "sourceCapture": "024-tactics-beat-special-contact-7.png"
+    },
+    {
+      "action": "Frost boulder release",
+      "sourceCapture": "033-tactics-beat-boulder-release-10.png"
+    },
+    {
+      "action": "Ogre boulder release",
+      "sourceCapture": "040-tactics-beat-boulder-release-12.png"
+    },
+    {
+      "action": "Gold Presence",
+      "sourceCapture": "027-tactics-beat-special-contact-8.png"
+    },
+    {
+      "action": "Frost Frenzy Roar",
+      "sourceCapture": "037-tactics-beat-special-contact-11.png"
+    },
+    {
+      "action": "Ogre Frenzy Roar",
+      "sourceCapture": "044-tactics-beat-special-contact-13.png"
+    },
+    {
+      "action": "Gold Wingbeat",
+      "sourceCapture": "030-tactics-beat-special-contact-9.png"
+    },
+    {
+      "action": "Spectral touch",
+      "sourceCapture": "008-tactics-beat-hit-2.png"
+    },
+    {
+      "action": "Life Drain",
+      "sourceCapture": "012-tactics-beat-special-contact-3.png"
+    }
+  ]
+}

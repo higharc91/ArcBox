@@ -1,0 +1,15 @@
+  ArcBox.Sdk -> /workspace/arcbox-secrets/src/ArcBox.Sdk/bin/Debug/net10.0/ArcBox.Sdk.dll
+  ArcBox.Host.Core -> /workspace/arcbox-secrets/src/ArcBox.Host.Core/bin/Debug/net10.0/ArcBox.Host.Core.dll
+  Tactics.Logic -> /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/bin/Debug/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/arcbox-secrets/games/Tactics/Tactics.Game/bin/Debug/net10.0/Tactics.Game.dll
+  Counter.Logic -> /workspace/arcbox-secrets/games/Counter/Counter.Logic/bin/Debug/net10.0/Counter.Logic.dll
+  Redline.Logic -> /workspace/arcbox-secrets/games/Redline/Redline.Logic/bin/Debug/net10.0/Redline.Logic.dll
+  Redline.Presentation -> /workspace/arcbox-secrets/games/Redline/Redline.Presentation/bin/Debug/net10.0/Redline.Presentation.dll
+  Tactics.Presentation -> /workspace/arcbox-secrets/games/Tactics/Tactics.Presentation/bin/Debug/net10.0/Tactics.Presentation.dll
+  ArcBox.Host -> /workspace/arcbox-secrets/src/ArcBox.Host/.godot/mono/temp/bin/Debug/ArcBox.Host.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:14.85

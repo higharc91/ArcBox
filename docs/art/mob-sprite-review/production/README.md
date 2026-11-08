@@ -75,6 +75,8 @@ Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet I
 
 [Batch 24: Gold Dragon, Frost Troll and Ogre](../gilded-and-rime/index.html) adds library batch 9; 4 older appearances remain.
 
-[Batch 25: Autumn Sapling, Blossom Sapling and Shade](../autumn-and-veil/index.html) adds library batch 10; 1 older appearances remain.
+[Batch 25: Autumn Sapling, Blossom Sapling and Shade](../autumn-and-veil/index.html) adds library batch 10; 1 older appearance remains.
 
 [Batch 26: Spectre](../spectral-remnant/index.html) adds library batch 11; 0 older appearances remain.
+
+[Complete issue #272 follow-up review](../library-completion/README.md): all nineteen additions together, shared party scale, eight-direction walking, and final verification against main `0d808be2`. The 31 older library appearances are complete; TV/phone playtest feedback remains on the issue.
