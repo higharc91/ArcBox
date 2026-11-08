@@ -106,18 +106,6 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
-    [InlineData("bosses.wraith.spectre", "wraith.life_drain")]
-    public void Legacy_elemental_variants_keep_their_existing_visual_bindings_and_effect_timing(string key, string ability)
-    {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
-        var def = rules.Abilities[new(ability)];
-        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
-        var script = Script(view, new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), def.Presentation));
-        Assert.Equal(def.Presentation!.Anim, Assert.Single(script.Cues.OfType<PoseCue>()).Anim);
-        Assert.Equal(0, Assert.Single(script.Cues.OfType<BurstCue>()).At);
-    }
-
-    [Theory]
     [InlineData("bosses.air_elemental.gale")]
     [InlineData("bosses.earth_elemental.stone")]
     [InlineData("bosses.fire_elemental.ember")]
@@ -363,6 +351,7 @@ public sealed class BeatScriptTests
     [Theory]
     [InlineData("bosses.wraith.wraith", .375, .625, 16)]
     [InlineData("bosses.wraith.shade", .4, .8, 16)]
+    [InlineData("bosses.wraith.spectre", .4, .8, 16)]
     public void Life_drain_finishes_the_gathering_gesture_and_hits_its_target_at_hand_contact(
         string key, double impact, double length, int contactFrame)
     {
@@ -382,6 +371,26 @@ public sealed class BeatScriptTests
         Assert.True(script.Length >= anim.Frames.Length / anim.Fps);
         Assert.Empty(script.Cues.OfType<LungeCue>());
         Assert.Empty(script.Cues.OfType<FlightCue>());
+    }
+
+    [Fact]
+    public void Spectre_singleton_replay_walks_returns_and_uses_the_real_targeted_drain()
+    {
+        var steps = LibraryVariantDemo.Steps(Pack.Root, "spectral-remnant");
+        Assert.Equal(7, steps.Count);
+        Assert.All(steps, step => Assert.Equal(3, step.View.Battle!.Units.Length));
+        var walk = Assert.Single(steps.SelectMany(s => s.View.Battle!.Beats).SelectMany(b => b.Events).OfType<Moved>());
+        Assert.Equal(walk.Path[0], walk.Path[^1]);
+        var board = steps[0].View.Battle!; var terrain = new BoardTerrain(Pack.Map(board.Map), board.Board);
+        Assert.All(walk.Path, at => Assert.False(terrain.Map[at].Flags.HasFlag(TileFlags.Impassable)));
+        var events = steps.SelectMany(s => s.View.Battle!.Beats).SelectMany(b => b.Events).OfType<AbilityUsed>().ToArray();
+        Assert.Equal(new[] { "common.attack", "wraith.life_drain" }, events.Select(e => e.Ability.Value));
+        Assert.All(events, used => Assert.Equal("Fighter", used.Target.Unit!.Value.Value));
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        Assert.All(events, used => Assert.Equal(rules.Abilities[used.Ability].Presentation, used.Presentation));
+        for (var i = 1; i < steps.Count; i++)
+            if (steps[i].View.Battle!.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>().Any())
+                Assert.Equal(steps[i - 1].View.Battle!.Units.Select(u => u.At), steps[i].View.Battle!.Units.Select(u => u.At));
     }
 
     [Fact]
@@ -696,6 +705,7 @@ public sealed class BeatScriptTests
     [InlineData("bosses.troll.ogre")]
     [InlineData("bosses.wraith.wraith")]
     [InlineData("bosses.wraith.shade")]
+    [InlineData("bosses.wraith.spectre")]
     public void Natural_creature_strikes_finish_their_complete_clip_and_contact_on_the_forward_pose(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };

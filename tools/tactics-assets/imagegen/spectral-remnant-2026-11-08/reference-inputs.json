@@ -1,0 +1,44 @@
+{
+  "idle": {
+    "promptKey": "idle",
+    "references": [
+      "references/wraith_spectre-idle.png",
+      "../../concepts/spectral-remnant-2026-11-08/spectre.png"
+    ]
+  },
+  "walk": {
+    "promptKey": "walk",
+    "references": [
+      "references/wraith_spectre-idle.png",
+      "source/wraith_spectre-idle.png"
+    ]
+  },
+  "attack": {
+    "promptKey": "attack",
+    "references": [
+      "references/wraith_spectre-idle.png",
+      "source/wraith_spectre-idle.png"
+    ]
+  },
+  "cast": {
+    "promptKey": "cast",
+    "references": [
+      "references/wraith_spectre-idle.png",
+      "source/wraith_spectre-idle.png"
+    ]
+  },
+  "damage_original": {
+    "promptKey": "damage_original",
+    "references": [
+      "references/wraith_spectre-idle.png",
+      "source/wraith_spectre-idle.png"
+    ]
+  },
+  "damage": {
+    "promptKey": "damage",
+    "references": [
+      "references/wraith_spectre-damage.png",
+      "source/wraith_spectre-idle.png"
+    ]
+  }
+}

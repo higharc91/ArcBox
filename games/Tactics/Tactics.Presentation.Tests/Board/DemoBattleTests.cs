@@ -61,13 +61,14 @@ public sealed class DemoBattleTests
     [InlineData("wyrm-triad")]
     [InlineData("gilded-and-rime")]
     [InlineData("autumn-and-veil")]
+    [InlineData("spectral-remnant")]
     public void Library_variant_reviews_use_walkable_positions_and_the_registered_runtime_keys(string batch)
     {
         var creatures = LibraryVariantReview.Creatures(batch);
         var view = DemoBattle.View("river_crossing:library-" + batch);
         var battle = view.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
-        Assert.Equal(5, battle.Units.Length);
+        Assert.Equal(creatures.Count + 2, battle.Units.Length);
         Assert.Equal(LibraryVariantReview.WorldRoster(batch).Order(), battle.Units.Select(u => u.Sprite).Order());
         Assert.All(battle.Units, u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
         Assert.All(creatures, c => Assert.Contains(battle.Units, u => u.Id.Value == c.Id && u.Sprite == c.Sprite));

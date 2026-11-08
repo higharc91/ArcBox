@@ -1,0 +1,18 @@
+{
+  "focused": {
+    "total": 723,
+    "failed": 0,
+    "succeeded": 723,
+    "skipped": 0
+  },
+  "hostBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "testBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "browserValidationPassed": true,
+  "fullPresentation": "Deferred until issue #272 art batches are complete; starting main checkpoint passed 3128/3128."
+}

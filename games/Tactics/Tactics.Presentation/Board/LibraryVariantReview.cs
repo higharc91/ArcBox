@@ -30,6 +30,7 @@ public static class LibraryVariantReview
         "autumn-and-veil" => [new("Autumn", "Autumn Sapling", "bosses.sapling.autumn"),
             new("Blossom", "Blossom Sapling", "bosses.sapling.blossom"),
             new("Shade", "Shade", "bosses.wraith.shade", [new("wraith.life_drain", "drain", .4, true)])],
+        "spectral-remnant" => [new("Spectre", "Spectre", "bosses.wraith.spectre", [new("wraith.life_drain", "drain", .4, true)])],
         _ => throw new ArgumentException($"Unknown library art batch: {batch}", nameof(batch)),
     };
 

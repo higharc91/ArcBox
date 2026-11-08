@@ -65,6 +65,7 @@ public sealed class MobRefreshTests
     [InlineData("bosses.sapling.autumn", "sapling_autumn")]
     [InlineData("bosses.sapling.blossom", "sapling_blossom")]
     [InlineData("bosses.wraith.shade", "wraith_shade")]
+    [InlineData("bosses.wraith.spectre", "wraith_spectre")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -124,6 +125,7 @@ public sealed class MobRefreshTests
     [InlineData("bosses.sapling.autumn", true)]
     [InlineData("bosses.sapling.blossom", true)]
     [InlineData("bosses.wraith.shade", false)]
+    [InlineData("bosses.wraith.spectre", false)]
     public void Seasonal_plants_keep_root_wood_and_shades_never_turn_into_orange_foliage(string key, bool plant)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -147,6 +149,27 @@ public sealed class MobRefreshTests
                     Assert.True(plant ? wood > 30 : orange < visible * .02,
                         $"Mixed creature material in {key}/{row}/{frame}: wood={wood}, orange={orange}, visible={visible}");
                 }
+    }
+
+    [Theory]
+    [InlineData("bosses.wraith.spectre")]
+    public void Spectres_have_a_low_complete_collapsed_robe_silhouette_in_every_facing(string key)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        int Height(int frame, int row)
+        {
+            var rect = sprite.Source(frame, row); var top = rect.Height; var bottom = -1;
+            for (var y = 0; y < rect.Height; y++)
+                for (var x = 0; x < rect.Width; x++)
+                    if (pixels[((rect.Y + y) * width + rect.X + x) * 4 + 3] >= 128)
+                    { top = Math.Min(top, y); bottom = Math.Max(bottom, y); }
+            Assert.True(bottom >= top);
+            return bottom - top + 1;
+        }
+        for (var row = 0; row < 8; row++)
+            Assert.True(Height(sprite.Anim("down").Frames[0], row) < Height(sprite.Idle.Frames[0], row) * .65,
+                $"Upright down pose: {key}/{row}");
     }
 
     [Theory]
@@ -394,6 +417,7 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.troll.ogre")!.HeadLift / person, 1.35f, 1.95f);
         Assert.InRange(art.Sprite("bosses.sapling.autumn")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.sapling.blossom")!.HeadLift / person, .45f, .8f);
+        Assert.InRange(art.Sprite("bosses.wraith.spectre")!.HeadLift / person, .95f, 1.3f);
         Assert.InRange(art.Sprite("bosses.wraith.shade")!.HeadLift / person, .95f, 1.3f);
         Assert.InRange(art.Sprite("bosses.sapling.spring")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.imp.crimson")!.HeadLift / person, .4f, .75f);

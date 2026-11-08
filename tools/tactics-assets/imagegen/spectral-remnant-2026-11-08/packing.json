@@ -1,0 +1,4487 @@
+[
+  {
+    "id": "wraith_spectre",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          111.5,
+          30
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          62,
+          28,
+          98,
+          171
+        ],
+        "bounds": [
+          64,
+          30,
+          158,
+          197
+        ],
+        "foot": [
+          113.5,
+          197
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          30
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          284,
+          28,
+          99,
+          171
+        ],
+        "bounds": [
+          286,
+          30,
+          381,
+          197
+        ],
+        "foot": [
+          336.0,
+          197
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          30
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          505,
+          28,
+          99,
+          172
+        ],
+        "bounds": [
+          507,
+          30,
+          602,
+          198
+        ],
+        "foot": [
+          557.5,
+          198
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          30
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          727,
+          28,
+          100,
+          169
+        ],
+        "bounds": [
+          729,
+          30,
+          825,
+          195
+        ],
+        "foot": [
+          779.0,
+          195
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          31
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          58,
+          29,
+          106,
+          173
+        ],
+        "bounds": [
+          60,
+          31,
+          162,
+          200
+        ],
+        "foot": [
+          110.5,
+          200
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          31
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          280,
+          28,
+          108,
+          175
+        ],
+        "bounds": [
+          282,
+          30,
+          386,
+          201
+        ],
+        "foot": [
+          337.0,
+          201
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          31
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          501,
+          28,
+          108,
+          173
+        ],
+        "bounds": [
+          503,
+          30,
+          607,
+          199
+        ],
+        "foot": [
+          555.5,
+          199
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          31
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          724,
+          29,
+          105,
+          173
+        ],
+        "bounds": [
+          726,
+          31,
+          827,
+          200
+        ],
+        "foot": [
+          778.5,
+          200
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          29
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          27,
+          101,
+          174
+        ],
+        "bounds": [
+          63,
+          29,
+          160,
+          199
+        ],
+        "foot": [
+          111.5,
+          199
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          29
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          278,
+          27,
+          107,
+          174
+        ],
+        "bounds": [
+          280,
+          29,
+          383,
+          199
+        ],
+        "foot": [
+          334.5,
+          199
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          29
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          503,
+          27,
+          104,
+          174
+        ],
+        "bounds": [
+          505,
+          29,
+          605,
+          199
+        ],
+        "foot": [
+          557.0,
+          199
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          29
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          725,
+          27,
+          103,
+          174
+        ],
+        "bounds": [
+          727,
+          29,
+          826,
+          199
+        ],
+        "foot": [
+          777.5,
+          199
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          158.0,
+          41
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          98,
+          39,
+          117,
+          239
+        ],
+        "bounds": [
+          100,
+          41,
+          213,
+          276
+        ],
+        "foot": [
+          146.5,
+          276
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          465.5,
+          129
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          353,
+          126,
+          234,
+          141
+        ],
+        "bounds": [
+          355,
+          128,
+          585,
+          265
+        ],
+        "foot": [
+          470.0,
+          265
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.0,
+          27
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          56,
+          25,
+          109,
+          182
+        ],
+        "bounds": [
+          58,
+          27,
+          163,
+          205
+        ],
+        "foot": [
+          114.0,
+          205
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          27
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 1,
+        "cell": [
+          271,
+          25,
+          120,
+          182
+        ],
+        "bounds": [
+          273,
+          27,
+          389,
+          205
+        ],
+        "foot": [
+          337.5,
+          205
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          29
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          501,
+          27,
+          109,
+          181
+        ],
+        "bounds": [
+          503,
+          29,
+          608,
+          206
+        ],
+        "foot": [
+          559.0,
+          206
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          27
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          722,
+          25,
+          109,
+          182
+        ],
+        "bounds": [
+          724,
+          27,
+          829,
+          205
+        ],
+        "foot": [
+          780.5,
+          205
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          252
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          64,
+          250,
+          91,
+          169
+        ],
+        "bounds": [
+          66,
+          252,
+          153,
+          417
+        ],
+        "foot": [
+          115.5,
+          417
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          253
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          287,
+          251,
+          92,
+          168
+        ],
+        "bounds": [
+          289,
+          253,
+          377,
+          417
+        ],
+        "foot": [
+          337.0,
+          417
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          252
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          508,
+          250,
+          94,
+          170
+        ],
+        "bounds": [
+          510,
+          252,
+          600,
+          418
+        ],
+        "foot": [
+          560.0,
+          418
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          252
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          731,
+          250,
+          92,
+          169
+        ],
+        "bounds": [
+          733,
+          252,
+          821,
+          417
+        ],
+        "foot": [
+          783.0,
+          417
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          253
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          61,
+          251,
+          100,
+          170
+        ],
+        "bounds": [
+          63,
+          253,
+          159,
+          419
+        ],
+        "foot": [
+          114.0,
+          419
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          253
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          283,
+          251,
+          105,
+          170
+        ],
+        "bounds": [
+          285,
+          253,
+          386,
+          419
+        ],
+        "foot": [
+          337.5,
+          419
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          253
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          503,
+          251,
+          104,
+          171
+        ],
+        "bounds": [
+          505,
+          253,
+          605,
+          420
+        ],
+        "foot": [
+          556.0,
+          420
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          253
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          726,
+          251,
+          101,
+          169
+        ],
+        "bounds": [
+          728,
+          253,
+          825,
+          418
+        ],
+        "foot": [
+          780.5,
+          418
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          252
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          59,
+          250,
+          100,
+          171
+        ],
+        "bounds": [
+          61,
+          252,
+          157,
+          419
+        ],
+        "foot": [
+          116.0,
+          419
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          252
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          272,
+          250,
+          110,
+          171
+        ],
+        "bounds": [
+          274,
+          252,
+          380,
+          419
+        ],
+        "foot": [
+          338.0,
+          419
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          252
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          484,
+          250,
+          123,
+          171
+        ],
+        "bounds": [
+          486,
+          252,
+          605,
+          419
+        ],
+        "foot": [
+          560.5,
+          419
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          252
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          723,
+          250,
+          105,
+          171
+        ],
+        "bounds": [
+          725,
+          252,
+          826,
+          419
+        ],
+        "foot": [
+          782.0,
+          419
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          774.5,
+          41
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          722,
+          39,
+          120,
+          239
+        ],
+        "bounds": [
+          724,
+          41,
+          840,
+          276
+        ],
+        "foot": [
+          768.0,
+          276
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1076.0,
+          137
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          980,
+          134,
+          235,
+          141
+        ],
+        "bounds": [
+          982,
+          136,
+          1213,
+          273
+        ],
+        "foot": [
+          1097.5,
+          273
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.5,
+          248
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 4,
+        "cell": [
+          55,
+          245,
+          106,
+          181
+        ],
+        "bounds": [
+          57,
+          247,
+          159,
+          424
+        ],
+        "foot": [
+          115.0,
+          424
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          248
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 5,
+        "cell": [
+          257,
+          246,
+          128,
+          180
+        ],
+        "bounds": [
+          259,
+          248,
+          383,
+          424
+        ],
+        "foot": [
+          339.0,
+          424
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          248
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 6,
+        "cell": [
+          503,
+          246,
+          104,
+          180
+        ],
+        "bounds": [
+          505,
+          248,
+          605,
+          424
+        ],
+        "foot": [
+          561.0,
+          424
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          248
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 7,
+        "cell": [
+          722,
+          246,
+          105,
+          180
+        ],
+        "bounds": [
+          724,
+          248,
+          825,
+          424
+        ],
+        "foot": [
+          781.5,
+          424
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.0,
+          473
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          74,
+          470,
+          74,
+          170
+        ],
+        "bounds": [
+          76,
+          472,
+          146,
+          638
+        ],
+        "foot": [
+          117.5,
+          638
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          472
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          297,
+          470,
+          74,
+          169
+        ],
+        "bounds": [
+          299,
+          472,
+          369,
+          637
+        ],
+        "foot": [
+          340.0,
+          637
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.0,
+          473
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          517,
+          470,
+          75,
+          170
+        ],
+        "bounds": [
+          519,
+          472,
+          590,
+          638
+        ],
+        "foot": [
+          561.0,
+          638
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          473
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          740,
+          470,
+          74,
+          170
+        ],
+        "bounds": [
+          742,
+          472,
+          812,
+          638
+        ],
+        "foot": [
+          783.0,
+          638
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          103.5,
+          473
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          69,
+          470,
+          83,
+          173
+        ],
+        "bounds": [
+          71,
+          472,
+          150,
+          641
+        ],
+        "foot": [
+          118.0,
+          641
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.0,
+          473
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          291,
+          470,
+          85,
+          174
+        ],
+        "bounds": [
+          293,
+          472,
+          374,
+          642
+        ],
+        "foot": [
+          340.5,
+          642
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.5,
+          473
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          513,
+          470,
+          88,
+          172
+        ],
+        "bounds": [
+          515,
+          472,
+          599,
+          640
+        ],
+        "foot": [
+          560.0,
+          640
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          474
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          734,
+          471,
+          89,
+          172
+        ],
+        "bounds": [
+          736,
+          473,
+          821,
+          641
+        ],
+        "foot": [
+          784.0,
+          641
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.0,
+          473
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          60,
+          470,
+          93,
+          172
+        ],
+        "bounds": [
+          62,
+          472,
+          151,
+          640
+        ],
+        "foot": [
+          116.0,
+          640
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.0,
+          473
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          273,
+          470,
+          104,
+          172
+        ],
+        "bounds": [
+          275,
+          472,
+          375,
+          640
+        ],
+        "foot": [
+          338.5,
+          640
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.5,
+          473
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          472,
+          470,
+          128,
+          172
+        ],
+        "bounds": [
+          474,
+          472,
+          598,
+          640
+        ],
+        "foot": [
+          561.0,
+          640
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          473
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          720,
+          470,
+          102,
+          172
+        ],
+        "bounds": [
+          722,
+          472,
+          820,
+          640
+        ],
+        "foot": [
+          782.5,
+          640
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          149.5,
+          357
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          99,
+          354,
+          116,
+          235
+        ],
+        "bounds": [
+          101,
+          356,
+          213,
+          587
+        ],
+        "foot": [
+          147.5,
+          587
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          442.0,
+          456
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          348,
+          454,
+          238,
+          132
+        ],
+        "bounds": [
+          350,
+          456,
+          584,
+          584
+        ],
+        "foot": [
+          467.0,
+          584
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          105.5,
+          470
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          63,
+          468,
+          94,
+          181
+        ],
+        "bounds": [
+          65,
+          470,
+          155,
+          647
+        ],
+        "foot": [
+          116.5,
+          647
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          470
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 9,
+        "cell": [
+          258,
+          468,
+          123,
+          181
+        ],
+        "bounds": [
+          260,
+          470,
+          379,
+          647
+        ],
+        "foot": [
+          339.5,
+          647
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          472
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          508,
+          469,
+          92,
+          180
+        ],
+        "bounds": [
+          510,
+          471,
+          598,
+          647
+        ],
+        "foot": [
+          559.5,
+          647
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.0,
+          470
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          729,
+          467,
+          92,
+          182
+        ],
+        "bounds": [
+          731,
+          469,
+          819,
+          647
+        ],
+        "foot": [
+          782.0,
+          647
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          693
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          65,
+          691,
+          94,
+          170
+        ],
+        "bounds": [
+          67,
+          693,
+          157,
+          859
+        ],
+        "foot": [
+          117.0,
+          859
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          695
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          287,
+          692,
+          94,
+          168
+        ],
+        "bounds": [
+          289,
+          694,
+          379,
+          858
+        ],
+        "foot": [
+          339.0,
+          858
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.0,
+          695
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          508,
+          693,
+          93,
+          168
+        ],
+        "bounds": [
+          510,
+          695,
+          599,
+          859
+        ],
+        "foot": [
+          558.5,
+          859
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          694
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          731,
+          691,
+          92,
+          171
+        ],
+        "bounds": [
+          733,
+          693,
+          821,
+          860
+        ],
+        "foot": [
+          783.5,
+          860
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          107.5,
+          695
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          61,
+          693,
+          103,
+          168
+        ],
+        "bounds": [
+          63,
+          695,
+          162,
+          859
+        ],
+        "foot": [
+          112.5,
+          859
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          696
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          284,
+          693,
+          103,
+          170
+        ],
+        "bounds": [
+          286,
+          695,
+          385,
+          861
+        ],
+        "foot": [
+          338.0,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.5,
+          694
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          504,
+          692,
+          103,
+          171
+        ],
+        "bounds": [
+          506,
+          694,
+          605,
+          861
+        ],
+        "foot": [
+          558.0,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          694
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          727,
+          692,
+          101,
+          171
+        ],
+        "bounds": [
+          729,
+          694,
+          826,
+          861
+        ],
+        "foot": [
+          782.0,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.0,
+          694
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          61,
+          691,
+          101,
+          172
+        ],
+        "bounds": [
+          63,
+          693,
+          160,
+          861
+        ],
+        "foot": [
+          118.0,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          694
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          284,
+          691,
+          100,
+          172
+        ],
+        "bounds": [
+          286,
+          693,
+          382,
+          861
+        ],
+        "foot": [
+          338.5,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.0,
+          694
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          488,
+          691,
+          118,
+          172
+        ],
+        "bounds": [
+          490,
+          693,
+          604,
+          861
+        ],
+        "foot": [
+          561.0,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          694
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          724,
+          691,
+          105,
+          172
+        ],
+        "bounds": [
+          726,
+          693,
+          827,
+          861
+        ],
+        "foot": [
+          783.0,
+          861
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          779.5,
+          357
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          717,
+          355,
+          128,
+          234
+        ],
+        "bounds": [
+          719,
+          357,
+          843,
+          587
+        ],
+        "foot": [
+          775.5,
+          587
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1064.0,
+          459
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          975,
+          457,
+          240,
+          129
+        ],
+        "bounds": [
+          977,
+          459,
+          1213,
+          584
+        ],
+        "foot": [
+          1095.0,
+          584
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          108.5,
+          691
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          56,
+          688,
+          107,
+          181
+        ],
+        "bounds": [
+          58,
+          690,
+          161,
+          867
+        ],
+        "foot": [
+          116.0,
+          867
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.5,
+          692
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 13,
+        "cell": [
+          257,
+          690,
+          130,
+          179
+        ],
+        "bounds": [
+          259,
+          692,
+          385,
+          867
+        ],
+        "foot": [
+          338.5,
+          867
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.0,
+          692
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          509,
+          689,
+          98,
+          180
+        ],
+        "bounds": [
+          511,
+          691,
+          605,
+          867
+        ],
+        "foot": [
+          560.5,
+          867
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          691
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          723,
+          688,
+          106,
+          181
+        ],
+        "bounds": [
+          725,
+          690,
+          827,
+          867
+        ],
+        "foot": [
+          782.5,
+          867
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          915
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          60,
+          913,
+          101,
+          170
+        ],
+        "bounds": [
+          62,
+          915,
+          159,
+          1081
+        ],
+        "foot": [
+          112.5,
+          1081
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          915
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          283,
+          913,
+          101,
+          170
+        ],
+        "bounds": [
+          285,
+          915,
+          382,
+          1081
+        ],
+        "foot": [
+          336.5,
+          1081
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          915
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          504,
+          913,
+          102,
+          170
+        ],
+        "bounds": [
+          506,
+          915,
+          604,
+          1081
+        ],
+        "foot": [
+          556.0,
+          1081
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          915
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          727,
+          913,
+          101,
+          170
+        ],
+        "bounds": [
+          729,
+          915,
+          826,
+          1081
+        ],
+        "foot": [
+          779.0,
+          1081
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          914
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          57,
+          912,
+          109,
+          172
+        ],
+        "bounds": [
+          59,
+          914,
+          164,
+          1082
+        ],
+        "foot": [
+          111.5,
+          1082
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          914
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          279,
+          912,
+          109,
+          176
+        ],
+        "bounds": [
+          281,
+          914,
+          386,
+          1086
+        ],
+        "foot": [
+          337.5,
+          1086
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          914
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          500,
+          912,
+          109,
+          175
+        ],
+        "bounds": [
+          502,
+          914,
+          607,
+          1085
+        ],
+        "foot": [
+          556.0,
+          1085
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          914
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          722,
+          912,
+          109,
+          174
+        ],
+        "bounds": [
+          724,
+          914,
+          829,
+          1084
+        ],
+        "foot": [
+          779.0,
+          1084
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.0,
+          913
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          59,
+          911,
+          105,
+          174
+        ],
+        "bounds": [
+          61,
+          913,
+          162,
+          1083
+        ],
+        "foot": [
+          112.0,
+          1083
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          913
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          277,
+          911,
+          109,
+          174
+        ],
+        "bounds": [
+          279,
+          913,
+          384,
+          1083
+        ],
+        "foot": [
+          335.0,
+          1083
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          913
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          497,
+          911,
+          112,
+          173
+        ],
+        "bounds": [
+          499,
+          913,
+          607,
+          1082
+        ],
+        "foot": [
+          557.0,
+          1082
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          913
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          722,
+          911,
+          108,
+          173
+        ],
+        "bounds": [
+          724,
+          913,
+          828,
+          1082
+        ],
+        "foot": [
+          779.0,
+          1082
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.5,
+          668
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          86,
+          666,
+          140,
+          237
+        ],
+        "bounds": [
+          88,
+          668,
+          224,
+          901
+        ],
+        "foot": [
+          168.0,
+          901
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.0,
+          766
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          351,
+          764,
+          238,
+          138
+        ],
+        "bounds": [
+          353,
+          766,
+          587,
+          900
+        ],
+        "foot": [
+          470.0,
+          900
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          911
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          54,
+          908,
+          112,
+          182
+        ],
+        "bounds": [
+          56,
+          910,
+          164,
+          1088
+        ],
+        "foot": [
+          113.5,
+          1088
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          911
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 17,
+        "cell": [
+          268,
+          908,
+          124,
+          182
+        ],
+        "bounds": [
+          270,
+          910,
+          390,
+          1088
+        ],
+        "foot": [
+          337.5,
+          1088
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          911
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          501,
+          908,
+          107,
+          182
+        ],
+        "bounds": [
+          503,
+          910,
+          606,
+          1088
+        ],
+        "foot": [
+          559.5,
+          1088
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          911
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          721,
+          908,
+          112,
+          182
+        ],
+        "bounds": [
+          723,
+          910,
+          831,
+          1088
+        ],
+        "foot": [
+          779.0,
+          1088
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          1138
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          64,
+          1135,
+          91,
+          171
+        ],
+        "bounds": [
+          66,
+          1137,
+          153,
+          1304
+        ],
+        "foot": [
+          103.5,
+          1304
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          1138
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          287,
+          1135,
+          88,
+          170
+        ],
+        "bounds": [
+          289,
+          1137,
+          373,
+          1303
+        ],
+        "foot": [
+          328.0,
+          1303
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          1138
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          509,
+          1135,
+          90,
+          170
+        ],
+        "bounds": [
+          511,
+          1137,
+          597,
+          1303
+        ],
+        "foot": [
+          552.5,
+          1303
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          1137
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          731,
+          1135,
+          89,
+          170
+        ],
+        "bounds": [
+          733,
+          1137,
+          818,
+          1303
+        ],
+        "foot": [
+          772.0,
+          1303
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.0,
+          1139
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          58,
+          1136,
+          102,
+          173
+        ],
+        "bounds": [
+          60,
+          1138,
+          158,
+          1307
+        ],
+        "foot": [
+          108.5,
+          1307
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          1140
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          280,
+          1137,
+          99,
+          172
+        ],
+        "bounds": [
+          282,
+          1139,
+          377,
+          1307
+        ],
+        "foot": [
+          329.5,
+          1307
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          1140
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          501,
+          1137,
+          101,
+          170
+        ],
+        "bounds": [
+          503,
+          1139,
+          600,
+          1305
+        ],
+        "foot": [
+          552.0,
+          1305
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          1140
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          723,
+          1137,
+          101,
+          172
+        ],
+        "bounds": [
+          725,
+          1139,
+          822,
+          1307
+        ],
+        "foot": [
+          774.5,
+          1307
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.0,
+          1137
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          59,
+          1134,
+          94,
+          172
+        ],
+        "bounds": [
+          61,
+          1136,
+          151,
+          1304
+        ],
+        "foot": [
+          106.0,
+          1304
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1137
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          284,
+          1135,
+          99,
+          171
+        ],
+        "bounds": [
+          286,
+          1137,
+          381,
+          1304
+        ],
+        "foot": [
+          328.0,
+          1304
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          1137
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          504,
+          1134,
+          110,
+          172
+        ],
+        "bounds": [
+          506,
+          1136,
+          612,
+          1304
+        ],
+        "foot": [
+          550.0,
+          1304
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          1137
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          725,
+          1134,
+          105,
+          172
+        ],
+        "bounds": [
+          727,
+          1136,
+          828,
+          1304
+        ],
+        "foot": [
+          773.0,
+          1304
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          791.0,
+          671
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          719,
+          669,
+          126,
+          233
+        ],
+        "bounds": [
+          721,
+          671,
+          843,
+          900
+        ],
+        "foot": [
+          789.5,
+          900
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1122.5,
+          771
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          980,
+          769,
+          236,
+          132
+        ],
+        "bounds": [
+          982,
+          771,
+          1214,
+          899
+        ],
+        "foot": [
+          1098.0,
+          899
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.5,
+          1134
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 20,
+        "cell": [
+          55,
+          1132,
+          107,
+          177
+        ],
+        "bounds": [
+          57,
+          1134,
+          160,
+          1307
+        ],
+        "foot": [
+          105.0,
+          1307
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          1135
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 21,
+        "cell": [
+          280,
+          1133,
+          122,
+          177
+        ],
+        "bounds": [
+          282,
+          1135,
+          400,
+          1308
+        ],
+        "foot": [
+          328.0,
+          1308
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          1135
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 22,
+        "cell": [
+          504,
+          1133,
+          93,
+          177
+        ],
+        "bounds": [
+          506,
+          1135,
+          595,
+          1308
+        ],
+        "foot": [
+          549.5,
+          1308
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          1134
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 23,
+        "cell": [
+          725,
+          1132,
+          102,
+          177
+        ],
+        "bounds": [
+          727,
+          1134,
+          825,
+          1307
+        ],
+        "foot": [
+          772.0,
+          1307
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          1359
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          73,
+          1357,
+          74,
+          170
+        ],
+        "bounds": [
+          75,
+          1359,
+          145,
+          1525
+        ],
+        "foot": [
+          106.5,
+          1525
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          1360
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          296,
+          1357,
+          74,
+          170
+        ],
+        "bounds": [
+          298,
+          1359,
+          368,
+          1525
+        ],
+        "foot": [
+          329.0,
+          1525
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1360
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          514,
+          1358,
+          78,
+          171
+        ],
+        "bounds": [
+          516,
+          1360,
+          590,
+          1527
+        ],
+        "foot": [
+          551.0,
+          1527
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          1360
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          738,
+          1358,
+          75,
+          169
+        ],
+        "bounds": [
+          740,
+          1360,
+          811,
+          1525
+        ],
+        "foot": [
+          771.5,
+          1525
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          1359
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          69,
+          1357,
+          84,
+          172
+        ],
+        "bounds": [
+          71,
+          1359,
+          151,
+          1527
+        ],
+        "foot": [
+          107.0,
+          1527
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          1360
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          289,
+          1357,
+          85,
+          174
+        ],
+        "bounds": [
+          291,
+          1359,
+          372,
+          1529
+        ],
+        "foot": [
+          329.0,
+          1529
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1360
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          509,
+          1357,
+          89,
+          174
+        ],
+        "bounds": [
+          511,
+          1359,
+          596,
+          1529
+        ],
+        "foot": [
+          550.0,
+          1529
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          1360
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          734,
+          1357,
+          84,
+          173
+        ],
+        "bounds": [
+          736,
+          1359,
+          816,
+          1528
+        ],
+        "foot": [
+          772.0,
+          1528
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          1358
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          66,
+          1356,
+          81,
+          173
+        ],
+        "bounds": [
+          68,
+          1358,
+          145,
+          1527
+        ],
+        "foot": [
+          106.0,
+          1527
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          1359
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          286,
+          1356,
+          81,
+          173
+        ],
+        "bounds": [
+          288,
+          1358,
+          365,
+          1527
+        ],
+        "foot": [
+          327.5,
+          1527
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          1359
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          508,
+          1356,
+          96,
+          173
+        ],
+        "bounds": [
+          510,
+          1358,
+          602,
+          1527
+        ],
+        "foot": [
+          550.0,
+          1527
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          1358
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          731,
+          1356,
+          80,
+          173
+        ],
+        "bounds": [
+          733,
+          1358,
+          809,
+          1527
+        ],
+        "foot": [
+          773.5,
+          1527
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          165.5,
+          984
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          98,
+          982,
+          117,
+          232
+        ],
+        "bounds": [
+          100,
+          984,
+          213,
+          1212
+        ],
+        "foot": [
+          168.0,
+          1212
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          492.5,
+          1081
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          353,
+          1079,
+          236,
+          136
+        ],
+        "bounds": [
+          355,
+          1081,
+          587,
+          1213
+        ],
+        "foot": [
+          471.0,
+          1213
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.0,
+          1355
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          63,
+          1353,
+          86,
+          179
+        ],
+        "bounds": [
+          65,
+          1355,
+          147,
+          1530
+        ],
+        "foot": [
+          110.0,
+          1530
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          1355
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 25,
+        "cell": [
+          283,
+          1353,
+          115,
+          179
+        ],
+        "bounds": [
+          285,
+          1355,
+          396,
+          1530
+        ],
+        "foot": [
+          328.0,
+          1530
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          1355
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          508,
+          1353,
+          86,
+          179
+        ],
+        "bounds": [
+          510,
+          1355,
+          592,
+          1530
+        ],
+        "foot": [
+          549.5,
+          1530
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          1355
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          730,
+          1353,
+          87,
+          179
+        ],
+        "bounds": [
+          732,
+          1355,
+          815,
+          1530
+        ],
+        "foot": [
+          772.0,
+          1530
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          1582
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          65,
+          1580,
+          89,
+          167
+        ],
+        "bounds": [
+          67,
+          1582,
+          152,
+          1745
+        ],
+        "foot": [
+          103.0,
+          1745
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1582
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          286,
+          1579,
+          91,
+          170
+        ],
+        "bounds": [
+          288,
+          1581,
+          375,
+          1747
+        ],
+        "foot": [
+          329.5,
+          1747
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          1582
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          506,
+          1580,
+          93,
+          169
+        ],
+        "bounds": [
+          508,
+          1582,
+          597,
+          1747
+        ],
+        "foot": [
+          551.5,
+          1747
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.5,
+          1582
+        ],
+        "source": "source/wraith_spectre-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          731,
+          1580,
+          90,
+          167
+        ],
+        "bounds": [
+          733,
+          1582,
+          819,
+          1745
+        ],
+        "foot": [
+          769.5,
+          1745
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7664670658682635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1583
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          58,
+          1580,
+          100,
+          170
+        ],
+        "bounds": [
+          60,
+          1582,
+          156,
+          1748
+        ],
+        "foot": [
+          103.0,
+          1748
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          1582
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          282,
+          1580,
+          102,
+          172
+        ],
+        "bounds": [
+          284,
+          1582,
+          382,
+          1750
+        ],
+        "foot": [
+          332.0,
+          1750
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1582
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          502,
+          1580,
+          103,
+          172
+        ],
+        "bounds": [
+          504,
+          1582,
+          603,
+          1750
+        ],
+        "foot": [
+          555.5,
+          1750
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          1582
+        ],
+        "source": "source/wraith_spectre-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          725,
+          1579,
+          102,
+          172
+        ],
+        "bounds": [
+          727,
+          1581,
+          825,
+          1749
+        ],
+        "foot": [
+          772.0,
+          1749
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.757396449704142,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          107.5,
+          1581
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          62,
+          1579,
+          100,
+          171
+        ],
+        "bounds": [
+          64,
+          1581,
+          160,
+          1748
+        ],
+        "foot": [
+          104.5,
+          1748
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          1581
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          283,
+          1579,
+          99,
+          171
+        ],
+        "bounds": [
+          285,
+          1581,
+          380,
+          1748
+        ],
+        "foot": [
+          328.0,
+          1748
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.0,
+          1581
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          508,
+          1579,
+          95,
+          171
+        ],
+        "bounds": [
+          510,
+          1581,
+          601,
+          1748
+        ],
+        "foot": [
+          550.5,
+          1748
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          1581
+        ],
+        "source": "source/wraith_spectre-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          727,
+          1579,
+          98,
+          171
+        ],
+        "bounds": [
+          729,
+          1581,
+          823,
+          1748
+        ],
+        "foot": [
+          771.5,
+          1748
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7529411764705882,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          785.0,
+          981
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          724,
+          979,
+          118,
+          236
+        ],
+        "bounds": [
+          726,
+          981,
+          840,
+          1213
+        ],
+        "foot": [
+          795.0,
+          1213
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1128.5,
+          1083
+        ],
+        "source": "source/wraith_spectre-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          981,
+          1081,
+          239,
+          134
+        ],
+        "bounds": [
+          983,
+          1083,
+          1218,
+          1213
+        ],
+        "foot": [
+          1100.5,
+          1213
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.5106382978723404,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          106.5,
+          1579
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          61,
+          1577,
+          101,
+          176
+        ],
+        "bounds": [
+          63,
+          1579,
+          160,
+          1751
+        ],
+        "foot": [
+          109.0,
+          1751
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          1579
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 29,
+        "cell": [
+          280,
+          1577,
+          116,
+          176
+        ],
+        "bounds": [
+          282,
+          1579,
+          394,
+          1751
+        ],
+        "foot": [
+          330.5,
+          1751
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.0,
+          1579
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          501,
+          1577,
+          98,
+          176
+        ],
+        "bounds": [
+          503,
+          1579,
+          597,
+          1751
+        ],
+        "foot": [
+          552.0,
+          1751
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          1579
+        ],
+        "source": "source/wraith_spectre-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          725,
+          1577,
+          103,
+          176
+        ],
+        "bounds": [
+          727,
+          1579,
+          826,
+          1751
+        ],
+        "foot": [
+          775.0,
+          1751
+        ],
+        "sourceNeighbor": false,
+        "sourceEdge": false,
+        "scale": 0.7191011235955056,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 3
+      }
+    ]
+  }
+]

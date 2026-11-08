@@ -30,14 +30,15 @@
     "bosses.troll.ogre",
     "bosses.sapling.autumn",
     "bosses.sapling.blossom",
-    "bosses.wraith.shade"
+    "bosses.wraith.shade",
+    "bosses.wraith.spectre"
   ],
-  "libraryBatchCount": 10,
-  "overallBatchCount": 25,
+  "libraryBatchCount": 11,
+  "overallBatchCount": 26,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 1,
+  "remainingTwoDirectionLooks": 0,
   "looks": [
     {
       "baselineNumber": 42,
@@ -436,7 +437,7 @@
       "key": "bosses.wraith.spectre",
       "name": "Wraith Spectre",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch11"
     }
   ]
 }

@@ -675,6 +675,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 ("bosses.wraith.wraith", "wraith.life_drain", "bosses.special") => ("bosses.cast", .625, .375),
                 ("bosses.wraith.shade", "wraith.life_drain", "bosses.special") => ("bosses.cast", .8, .4),
+                ("bosses.wraith.spectre", "wraith.life_drain", "bosses.special") => ("bosses.cast", .8, .4),
                 ("bosses.troll.troll", "troll.frenzy_roar", "bosses.buff") => ("bosses.buff", .8, .4),
                 ("bosses.golem.basalt", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
                 ("bosses.golem.basalt", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
@@ -807,7 +808,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                             or "beasts.spider.phase" or "beasts.wolf.alpha" or "bestiary.crab.deep"
                             or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
                             or "bosses.troll.frost" or "bosses.troll.ogre"
-                            or "bosses.sapling.autumn" or "bosses.sapling.blossom" or "bosses.wraith.shade" => 0.8,
+                            or "bosses.sapling.autumn" or "bosses.sapling.blossom" or "bosses.wraith.shade" or "bosses.wraith.spectre" => 0.8,
                         "bosses.wraith.wraith" => .6,
                         "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => 1.0,
                         _ => BeatTiming.Lunge,

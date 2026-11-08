@@ -28,9 +28,9 @@ public static class LibraryVariantDemo
         void Move(double at, string who, Tile[] path)
             => Add(at, who + " moving", new(who), [new Moved(new(who), [.. path])], new(12, 10), (.3, who.ToLowerInvariant() + "-walk"));
         Add(0, "Library creatures ready", null, [], new(12, 10), (.5, "library-ready"));
-        Move(2, creatures[0].Id, [new(9, 10), new(10, 10), new(9, 10)]);
-        Move(4, creatures[1].Id, [new(12, 9), new(11, 9), new(12, 9)]);
-        Move(6, creatures[2].Id, [new(13, 6), new(13, 7), new(13, 6)]);
+        Tile[][] paths = [[new(9, 10), new(10, 10), new(9, 10)],
+            [new(12, 9), new(11, 9), new(12, 9)], [new(13, 6), new(13, 7), new(13, 6)]];
+        for (var i = 0; i < creatures.Count; i++) Move(2 + i * 2, creatures[i].Id, paths[i]);
         Tile[] targets = [new(10, 10), new(12, 10), new(13, 7)];
         for (var i = 0; i < creatures.Count; i++)
         {
@@ -46,7 +46,7 @@ public static class LibraryVariantDemo
                             or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
                             or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => "piercing",
                         "beasts.bear.undead" or "bosses.troll.frost" or "bosses.troll.ogre" => "slashing",
-                        "bosses.wraith.shade" => "necrotic",
+                        "bosses.wraith.shade" or "bosses.wraith.spectre" => "necrotic",
                         _ => "bludgeoning",
                     }, 24)],
                 targets[i], (.22, c.Id.ToLowerInvariant() + "-attack-windup"),

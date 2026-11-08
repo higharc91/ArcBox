@@ -100,6 +100,8 @@ public sealed class UnitPlanTests
     [InlineData("bosses.sapling.blossom", "bosses.attack", .4)]
     [InlineData("bosses.wraith.shade", "bosses.attack", .4)]
     [InlineData("bosses.wraith.shade", "bosses.cast", .4)]
+    [InlineData("bosses.wraith.spectre", "bosses.attack", .4)]
+    [InlineData("bosses.wraith.spectre", "bosses.cast", .4)]
     public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
     {
         var view = Unit("a", "Enemy", 11, 10, key);
