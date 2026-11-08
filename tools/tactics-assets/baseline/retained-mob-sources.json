@@ -1,0 +1,394 @@
+{
+  "version": 1,
+  "purpose": "Preserve pre-refresh runtime art and dialogue portraits as historical source references; active manifests use each replacement. See issue #272.",
+  "assets": {
+    "creatures/drake_red.png": {
+      "sha256": "18fea903b7e0a526f313261534f3514f23ecaa87c6ec1ffefe2d46c6b57a779f",
+      "replacement": "creatures/mob_refresh_drake.png"
+    },
+    "portraits/bandit_angry.png": {
+      "sha256": "acb0b0721cba5130c221ccf8cb740486ea16ce00e3357686caf937bf589f9628",
+      "replacement": "portraits/bandit_refresh_angry.png"
+    },
+    "portraits/bandit_happy.png": {
+      "sha256": "f47c3d1e768a763e6ca75c97786244f2ccc81723afb0362b6af288cfdfd55892",
+      "replacement": "portraits/bandit_refresh_happy.png"
+    },
+    "portraits/bandit_hurt.png": {
+      "sha256": "b0ab6cbf0d39469896fa2f4c30b9a661773e7fc114af0b3df0d62ebb8805d4de",
+      "replacement": "portraits/bandit_refresh_hurt.png"
+    },
+    "portraits/bandit_idle.png": {
+      "sha256": "304bf69f921e0fdfccd0bce884141a72b005ca9e371deb31b2536b3b921a6574",
+      "replacement": "portraits/bandit_refresh_idle.png"
+    },
+    "portraits/bandit_sad.png": {
+      "sha256": "81758bd441d480bece33798e895a05e0d0f639ff40d4dad6a322a09f138b1eaa",
+      "replacement": "portraits/bandit_refresh_sad.png"
+    },
+    "portraits/bandit_surprised.png": {
+      "sha256": "8b257b18b0517889a91a5f136a2cae101a8e58c0811662ae6f08514713b2a447",
+      "replacement": "portraits/bandit_refresh_surprised.png"
+    },
+    "portraits/black_knight_angry.png": {
+      "sha256": "011c23f6543e5606d35d2e4bff331f3d1466cfed4620b53ec6b3d039944d7ab3",
+      "replacement": "portraits/black_knight_refresh_angry.png"
+    },
+    "portraits/black_knight_happy.png": {
+      "sha256": "011c23f6543e5606d35d2e4bff331f3d1466cfed4620b53ec6b3d039944d7ab3",
+      "replacement": "portraits/black_knight_refresh_happy.png"
+    },
+    "portraits/black_knight_hurt.png": {
+      "sha256": "5fea46553dc476d3647ae39cdd5e9622fc8db3b83e343b1245c52386d5789d65",
+      "replacement": "portraits/black_knight_refresh_hurt.png"
+    },
+    "portraits/black_knight_idle.png": {
+      "sha256": "011c23f6543e5606d35d2e4bff331f3d1466cfed4620b53ec6b3d039944d7ab3",
+      "replacement": "portraits/black_knight_refresh_idle.png"
+    },
+    "portraits/black_knight_sad.png": {
+      "sha256": "011c23f6543e5606d35d2e4bff331f3d1466cfed4620b53ec6b3d039944d7ab3",
+      "replacement": "portraits/black_knight_refresh_sad.png"
+    },
+    "portraits/black_knight_surprised.png": {
+      "sha256": "011c23f6543e5606d35d2e4bff331f3d1466cfed4620b53ec6b3d039944d7ab3",
+      "replacement": "portraits/black_knight_refresh_surprised.png"
+    },
+    "portraits/cult_leader_angry.png": {
+      "sha256": "ea3cc8427d2e423ded087fc605493f118e512374e284bedcb182a10c1859a3b2",
+      "replacement": "portraits/cult_leader_refresh_angry.png"
+    },
+    "portraits/cult_leader_happy.png": {
+      "sha256": "04213b74abd78c7b55ef04b12b6950436278e5f6912ecd83eeb7152d21678b12",
+      "replacement": "portraits/cult_leader_refresh_happy.png"
+    },
+    "portraits/cult_leader_hurt.png": {
+      "sha256": "8fa08cd27d71f274a1b2b715669caa736e59e93bdd50d5b598afff35a9d8deca",
+      "replacement": "portraits/cult_leader_refresh_hurt.png"
+    },
+    "portraits/cult_leader_idle.png": {
+      "sha256": "53f4838f73ecc05da9f787233ee8dd99357305cffbed0159c8a9af8c2fe625aa",
+      "replacement": "portraits/cult_leader_refresh_idle.png"
+    },
+    "portraits/cult_leader_sad.png": {
+      "sha256": "c515f2b86f797fcbefe168bd612e94bc146201be384a27be4e9c00c61ad47c6f",
+      "replacement": "portraits/cult_leader_refresh_sad.png"
+    },
+    "portraits/cult_leader_surprised.png": {
+      "sha256": "a2df8bb1118c6941bbbbfba7b838982478adc78ca9db1da6f5d47212edf3ef75",
+      "replacement": "portraits/cult_leader_refresh_surprised.png"
+    },
+    "portraits/cultist_angry.png": {
+      "sha256": "f679a0b3e9c636e6f40a0f8af052d103fd419c9d70d8b2b319e0b223a8c8749a",
+      "replacement": "portraits/cultist_refresh_angry.png"
+    },
+    "portraits/cultist_happy.png": {
+      "sha256": "ea45e976088cc82878d9e947ee12c1ec6f6e4d9929858f09d2563ca8dad46035",
+      "replacement": "portraits/cultist_refresh_happy.png"
+    },
+    "portraits/cultist_hurt.png": {
+      "sha256": "a4fc9f13318805db1dbb7081e0ca119693d782e81183549a013043f0ed695e36",
+      "replacement": "portraits/cultist_refresh_hurt.png"
+    },
+    "portraits/cultist_idle.png": {
+      "sha256": "9b640394994d1e8435b62c689dfdc32c166261a21156cb8043ab262f4a5b7deb",
+      "replacement": "portraits/cultist_refresh_idle.png"
+    },
+    "portraits/cultist_sad.png": {
+      "sha256": "86c30c818fd45857f4660f6116665379c3bde617223f0eec6690534549894c43",
+      "replacement": "portraits/cultist_refresh_sad.png"
+    },
+    "portraits/cultist_surprised.png": {
+      "sha256": "535d3c5ef21fd711f7dd3b6029de0e364ca57ab4fc68c98cb2b1c1a66f030f14",
+      "replacement": "portraits/cultist_refresh_surprised.png"
+    },
+    "portraits/dark_elf_angry.png": {
+      "sha256": "4a3759455f2d08b9d2e0e515b5ec32a2d47456d412cbbe17d7ee685f4d35f03f",
+      "replacement": "portraits/dark_elf_refresh_angry.png"
+    },
+    "portraits/dark_elf_happy.png": {
+      "sha256": "1e2c7d0473a64ed933266bdf0a3a97b0e0a048cc1aa635b24f08f62f8ad6d186",
+      "replacement": "portraits/dark_elf_refresh_happy.png"
+    },
+    "portraits/dark_elf_hurt.png": {
+      "sha256": "0f5c2b3c4a7c109658931f9582f2126b3fcdc853ed2ff572cd2af684d7b43ff6",
+      "replacement": "portraits/dark_elf_refresh_hurt.png"
+    },
+    "portraits/dark_elf_idle.png": {
+      "sha256": "c0d4d4c974556e7e0270051bfa2a0c04892925c363e12f509e6ffa41af7c5d9f",
+      "replacement": "portraits/dark_elf_refresh_idle.png"
+    },
+    "portraits/dark_elf_sad.png": {
+      "sha256": "fae70751302356f0b2f51d5be3cfd6f7f280b45d7454c59a05f3514b59374e68",
+      "replacement": "portraits/dark_elf_refresh_sad.png"
+    },
+    "portraits/dark_elf_surprised.png": {
+      "sha256": "9e788f14e5da369c4b47c50d50c4ff33da54204a2b4128fdddbed8ed672333ac",
+      "replacement": "portraits/dark_elf_refresh_surprised.png"
+    },
+    "portraits/goblin_archer_angry.png": {
+      "sha256": "5ea35e565cb5c74c073aa08075589021acdfee8e88879624ca7cdd6268fdd1c0",
+      "replacement": "portraits/goblin_archer_refresh_angry.png"
+    },
+    "portraits/goblin_archer_happy.png": {
+      "sha256": "85f803b2ea3fcfc65cb2e5183ac5543d9ba26af5e25e50ca555edaa4d9424e59",
+      "replacement": "portraits/goblin_archer_refresh_happy.png"
+    },
+    "portraits/goblin_archer_hurt.png": {
+      "sha256": "5db923724e7015c9bb2edf84a4b5b42c8add037f50a966a4f2ca27658fff68d9",
+      "replacement": "portraits/goblin_archer_refresh_hurt.png"
+    },
+    "portraits/goblin_archer_idle.png": {
+      "sha256": "60cf6fa5979b5f221c0fc39fac8745f6bf7d076e3b31621e44fcabfb7c8c5237",
+      "replacement": "portraits/goblin_archer_refresh_idle.png"
+    },
+    "portraits/goblin_archer_sad.png": {
+      "sha256": "b28fa2955caa0927a4f871eb880f2b4863ca349f154fba964bc49cbd1c34b66a",
+      "replacement": "portraits/goblin_archer_refresh_sad.png"
+    },
+    "portraits/goblin_archer_surprised.png": {
+      "sha256": "35f16b1066f3cac872f4d6c34d7ba004b7b47d4d6f07928f0d2dd25dc2f7caee",
+      "replacement": "portraits/goblin_archer_refresh_surprised.png"
+    },
+    "portraits/goblin_cutthroat_angry.png": {
+      "sha256": "3246a6ff926e878dda9833b8cb40b6af36d47996fb0eb3bab91cdf9948fb0ae9",
+      "replacement": "portraits/goblin_cutthroat_refresh_angry.png"
+    },
+    "portraits/goblin_cutthroat_happy.png": {
+      "sha256": "906f1c051b9b0d547c40f525fb48246bd8237c010cff6aa9436aadb9cd5648f6",
+      "replacement": "portraits/goblin_cutthroat_refresh_happy.png"
+    },
+    "portraits/goblin_cutthroat_hurt.png": {
+      "sha256": "28bac2dd184cde8f64e0b4aca776c7f31f17a6fe6104951a57d20dcc96142a24",
+      "replacement": "portraits/goblin_cutthroat_refresh_hurt.png"
+    },
+    "portraits/goblin_cutthroat_idle.png": {
+      "sha256": "441f4ea1e3b91f8fd0fe9d496ab0757770a719efc1a010ef654bc5f2a7845eff",
+      "replacement": "portraits/goblin_cutthroat_refresh_idle.png"
+    },
+    "portraits/goblin_cutthroat_sad.png": {
+      "sha256": "552acb371a30fa24b4cdc903839aeb37b135c970fa0e7690d0b17943cea35ceb",
+      "replacement": "portraits/goblin_cutthroat_refresh_sad.png"
+    },
+    "portraits/goblin_cutthroat_surprised.png": {
+      "sha256": "22a74529b20dd81428d2ab14799529a699ee7faaee4e026555b20102158769b1",
+      "replacement": "portraits/goblin_cutthroat_refresh_surprised.png"
+    },
+    "portraits/goblin_shaman_angry.png": {
+      "sha256": "490a2205ca13b75f36a6cc949dbe8910bd7ada5bef69b75109f001de2e3518f4",
+      "replacement": "portraits/goblin_shaman_refresh_angry.png"
+    },
+    "portraits/goblin_shaman_happy.png": {
+      "sha256": "5181c3a5089d696dac6be4d65255d15fd0cb938306e2151ae44c9b9010046d8a",
+      "replacement": "portraits/goblin_shaman_refresh_happy.png"
+    },
+    "portraits/goblin_shaman_hurt.png": {
+      "sha256": "7d29441d1c1a7b1184b35e92d9472c2bf024c1d5fa0d692deb204baed4a259d1",
+      "replacement": "portraits/goblin_shaman_refresh_hurt.png"
+    },
+    "portraits/goblin_shaman_idle.png": {
+      "sha256": "2dc1bd32c3bae9ec3c87f47d9bd20df0f933bf060a2e7e5959449bb77e16aa28",
+      "replacement": "portraits/goblin_shaman_refresh_idle.png"
+    },
+    "portraits/goblin_shaman_sad.png": {
+      "sha256": "780617c2eeb11f64e65d432192a10fe9e5f5f6c37b95bafd79adda243ffe8cc4",
+      "replacement": "portraits/goblin_shaman_refresh_sad.png"
+    },
+    "portraits/goblin_shaman_surprised.png": {
+      "sha256": "49ecb68c82c280b68bbb037af6d236986251d390f1b6f4708c82b9d46bef3863",
+      "replacement": "portraits/goblin_shaman_refresh_surprised.png"
+    },
+    "portraits/goblin_spear_angry.png": {
+      "sha256": "4928e89544b4c6237880f5fcdb86d7902e5d55c8cbc04f491b8797e1437dca9e",
+      "replacement": "portraits/goblin_spear_refresh_angry.png"
+    },
+    "portraits/goblin_spear_happy.png": {
+      "sha256": "f506e11e4626078e463f5adf0d8023efa3f278e2c1095f12475a4c16d78dc46e",
+      "replacement": "portraits/goblin_spear_refresh_happy.png"
+    },
+    "portraits/goblin_spear_hurt.png": {
+      "sha256": "4b787397b9a02b13116847eef5f59bfbbc253016a40884bd992fbb660d71cf05",
+      "replacement": "portraits/goblin_spear_refresh_hurt.png"
+    },
+    "portraits/goblin_spear_idle.png": {
+      "sha256": "4674d98d3a6751d9958ee1eef83bbb4d5faee1e15660310878a8ba97f198ce20",
+      "replacement": "portraits/goblin_spear_refresh_idle.png"
+    },
+    "portraits/goblin_spear_sad.png": {
+      "sha256": "837c0eb18ca42069e7fd165af243f678fb6f40468e71cd0023ab51d576c9b0e5",
+      "replacement": "portraits/goblin_spear_refresh_sad.png"
+    },
+    "portraits/goblin_spear_surprised.png": {
+      "sha256": "ad9202238b72099d655b4ef23e9f47f37a5b241676aec40a6a10d8534a3087fb",
+      "replacement": "portraits/goblin_spear_refresh_surprised.png"
+    },
+    "portraits/hobgoblin_angry.png": {
+      "sha256": "fec976b5aaa1185b063e1bcd556a2432cc81874e335cd804fe6cd9d5663b6565",
+      "replacement": "portraits/hobgoblin_refresh_angry.png"
+    },
+    "portraits/hobgoblin_happy.png": {
+      "sha256": "5dc958b156083268e35c0f6f4467e3711ee94767c876e2bba5105b013bab0b57",
+      "replacement": "portraits/hobgoblin_refresh_happy.png"
+    },
+    "portraits/hobgoblin_hurt.png": {
+      "sha256": "6fd7d649b5a620abc2bc647b441d0fbc886c586b6f4b69db9fc5fda3435b13b1",
+      "replacement": "portraits/hobgoblin_refresh_hurt.png"
+    },
+    "portraits/hobgoblin_idle.png": {
+      "sha256": "1debbf98eeed394fadd4c16539e66c455b704bf115bc904ee5276b72c7be4724",
+      "replacement": "portraits/hobgoblin_refresh_idle.png"
+    },
+    "portraits/hobgoblin_sad.png": {
+      "sha256": "9325536b733b403eb419ea8e7c8488f28299a9769279bda188acccdf29b0bc1f",
+      "replacement": "portraits/hobgoblin_refresh_sad.png"
+    },
+    "portraits/hobgoblin_surprised.png": {
+      "sha256": "bb3fa08617bb621cf76aabbdd56754662cd951441eb34c256c4b975391a1c0d6",
+      "replacement": "portraits/hobgoblin_refresh_surprised.png"
+    },
+    "portraits/lich_angry.png": {
+      "sha256": "b54948601a9a9e2e70bbd27e4341c03a070cfd2f2b64eb64e300d1ecc1ade826",
+      "replacement": "portraits/lich_refresh_angry.png"
+    },
+    "portraits/lich_happy.png": {
+      "sha256": "b54948601a9a9e2e70bbd27e4341c03a070cfd2f2b64eb64e300d1ecc1ade826",
+      "replacement": "portraits/lich_refresh_happy.png"
+    },
+    "portraits/lich_hurt.png": {
+      "sha256": "e16e120db02b8224d9542368e37e680434e2896cbd1ac6f72fff2d601a76f3e9",
+      "replacement": "portraits/lich_refresh_hurt.png"
+    },
+    "portraits/lich_idle.png": {
+      "sha256": "b54948601a9a9e2e70bbd27e4341c03a070cfd2f2b64eb64e300d1ecc1ade826",
+      "replacement": "portraits/lich_refresh_idle.png"
+    },
+    "portraits/lich_sad.png": {
+      "sha256": "b54948601a9a9e2e70bbd27e4341c03a070cfd2f2b64eb64e300d1ecc1ade826",
+      "replacement": "portraits/lich_refresh_sad.png"
+    },
+    "portraits/lich_surprised.png": {
+      "sha256": "b54948601a9a9e2e70bbd27e4341c03a070cfd2f2b64eb64e300d1ecc1ade826",
+      "replacement": "portraits/lich_refresh_surprised.png"
+    },
+    "portraits/necromancer_angry.png": {
+      "sha256": "fc825cb772a5ed70f0cceade3d2b2da00bd0b9ae51d19157bc10797f89416755",
+      "replacement": "portraits/necromancer_refresh_angry.png"
+    },
+    "portraits/necromancer_happy.png": {
+      "sha256": "4e3a3eb4f0968489e906a70014595c3b3eb95bd8150be15e589ded4e0dec1081",
+      "replacement": "portraits/necromancer_refresh_happy.png"
+    },
+    "portraits/necromancer_hurt.png": {
+      "sha256": "ac69b73ec3519d6e87bdf67adc6a4edc13c61dcf1f74e1a7f30d12dfccb3e4e7",
+      "replacement": "portraits/necromancer_refresh_hurt.png"
+    },
+    "portraits/necromancer_idle.png": {
+      "sha256": "b8d8bb78610781a96b47d3f7fe1bb777eaaf2f93f44238eadd1c93de28628cd8",
+      "replacement": "portraits/necromancer_refresh_idle.png"
+    },
+    "portraits/necromancer_sad.png": {
+      "sha256": "4954385358e42f20b6de4b475890015400d663410f5f4fdf8fd7232d396308d8",
+      "replacement": "portraits/necromancer_refresh_sad.png"
+    },
+    "portraits/necromancer_surprised.png": {
+      "sha256": "40115ac64cc42281cf0c6dbc26affb3ba94578b8d3c588906804bdf2a083a946",
+      "replacement": "portraits/necromancer_refresh_surprised.png"
+    },
+    "portraits/orc_brute_angry.png": {
+      "sha256": "f7a2f0abf916d02b3e1d37bf263531f551e6f16595e9903ab0c5f2131549dd14",
+      "replacement": "portraits/orc_brute_refresh_angry.png"
+    },
+    "portraits/orc_brute_happy.png": {
+      "sha256": "5dee08c3d309dd9a4fc24ca6ea9d2d9cf34539f63ed476344c182e85fa06c93c",
+      "replacement": "portraits/orc_brute_refresh_happy.png"
+    },
+    "portraits/orc_brute_hurt.png": {
+      "sha256": "ac45b5d988ac286324903da9add62c8c083e022b328b6bebe5992cdce1783623",
+      "replacement": "portraits/orc_brute_refresh_hurt.png"
+    },
+    "portraits/orc_brute_idle.png": {
+      "sha256": "37037bf9c13a210851d986bc24e9f89877c859821d98fee0232582d71d8ff29d",
+      "replacement": "portraits/orc_brute_refresh_idle.png"
+    },
+    "portraits/orc_brute_sad.png": {
+      "sha256": "25e44bda67d03dc3ac05e794735c27a280a79e1e4f7ed19c2ecb8adcb8e121ed",
+      "replacement": "portraits/orc_brute_refresh_sad.png"
+    },
+    "portraits/orc_brute_surprised.png": {
+      "sha256": "0f447c7152efe656f86fe09ff23e2bcad307679f557db3097a3e7dc3d0f3db96",
+      "replacement": "portraits/orc_brute_refresh_surprised.png"
+    },
+    "portraits/skeleton_angry.png": {
+      "sha256": "adb9630b936efbd88d24032c671cb8ff38d4e9c97126f29cda0f6c88dc92371b",
+      "replacement": "portraits/skeleton_refresh_angry.png"
+    },
+    "portraits/skeleton_archer_angry.png": {
+      "sha256": "84c782eea9fc37a586975ad0a3e128ba4d9bc54b9ff839917014aa0f6267dadb",
+      "replacement": "portraits/skeleton_archer_refresh_angry.png"
+    },
+    "portraits/skeleton_archer_happy.png": {
+      "sha256": "84c782eea9fc37a586975ad0a3e128ba4d9bc54b9ff839917014aa0f6267dadb",
+      "replacement": "portraits/skeleton_archer_refresh_happy.png"
+    },
+    "portraits/skeleton_archer_hurt.png": {
+      "sha256": "77b81bfb06adc0be19f30e48b37fe055144204055a77a047291c5cc56acd246a",
+      "replacement": "portraits/skeleton_archer_refresh_hurt.png"
+    },
+    "portraits/skeleton_archer_idle.png": {
+      "sha256": "84c782eea9fc37a586975ad0a3e128ba4d9bc54b9ff839917014aa0f6267dadb",
+      "replacement": "portraits/skeleton_archer_refresh_idle.png"
+    },
+    "portraits/skeleton_archer_sad.png": {
+      "sha256": "84c782eea9fc37a586975ad0a3e128ba4d9bc54b9ff839917014aa0f6267dadb",
+      "replacement": "portraits/skeleton_archer_refresh_sad.png"
+    },
+    "portraits/skeleton_archer_surprised.png": {
+      "sha256": "84c782eea9fc37a586975ad0a3e128ba4d9bc54b9ff839917014aa0f6267dadb",
+      "replacement": "portraits/skeleton_archer_refresh_surprised.png"
+    },
+    "portraits/skeleton_happy.png": {
+      "sha256": "adb9630b936efbd88d24032c671cb8ff38d4e9c97126f29cda0f6c88dc92371b",
+      "replacement": "portraits/skeleton_refresh_happy.png"
+    },
+    "portraits/skeleton_hurt.png": {
+      "sha256": "ca93560c9d3c3b2bb1a2b1c922d49fc160cb57cb074a07ff6dbfedfb6800abf6",
+      "replacement": "portraits/skeleton_refresh_hurt.png"
+    },
+    "portraits/skeleton_idle.png": {
+      "sha256": "adb9630b936efbd88d24032c671cb8ff38d4e9c97126f29cda0f6c88dc92371b",
+      "replacement": "portraits/skeleton_refresh_idle.png"
+    },
+    "portraits/skeleton_sad.png": {
+      "sha256": "adb9630b936efbd88d24032c671cb8ff38d4e9c97126f29cda0f6c88dc92371b",
+      "replacement": "portraits/skeleton_refresh_sad.png"
+    },
+    "portraits/skeleton_surprised.png": {
+      "sha256": "adb9630b936efbd88d24032c671cb8ff38d4e9c97126f29cda0f6c88dc92371b",
+      "replacement": "portraits/skeleton_refresh_surprised.png"
+    },
+    "portraits/zombie_angry.png": {
+      "sha256": "0513c53a970561f63a52be463be64a500dc83af644ee7f82249bc1e0c6de7c18",
+      "replacement": "portraits/zombie_refresh_angry.png"
+    },
+    "portraits/zombie_happy.png": {
+      "sha256": "e00f277219b343f5558b65bdc087615a46a2a0982979262fb1e8b57a193ac294",
+      "replacement": "portraits/zombie_refresh_happy.png"
+    },
+    "portraits/zombie_hurt.png": {
+      "sha256": "7c581528a55eb8580f2d9bb0ea590f50c0c4ecd8f55671343191e440db6b41ee",
+      "replacement": "portraits/zombie_refresh_hurt.png"
+    },
+    "portraits/zombie_idle.png": {
+      "sha256": "aa60c6bb1374eeca9c76615bed0669030fcd4bf8d293cf4a4dfa9bcc38ae15e5",
+      "replacement": "portraits/zombie_refresh_idle.png"
+    },
+    "portraits/zombie_sad.png": {
+      "sha256": "8cccb8645c2fadc6e6833338ee88e741adcb26c921accd45ae475c78939de06c",
+      "replacement": "portraits/zombie_refresh_sad.png"
+    },
+    "portraits/zombie_surprised.png": {
+      "sha256": "8bbb84711f5ad24b319fcaa88e6fb93c4197a8fb2608c941d295aed0be5b2b0d",
+      "replacement": "portraits/zombie_refresh_surprised.png"
+    }
+  }
+}
