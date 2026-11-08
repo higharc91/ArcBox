@@ -1010,3 +1010,34 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-react .tx-foot p { margin: 5px 0 0; font-size: 16px; }
 
 .tx-react .tx-foot { display: flex; flex-direction: column; align-items: stretch; }
+
+/* Live battle terrain and unit inspection. */
+.tx-battle-map { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.tx-map-tools { display: flex; gap: 6px; align-items: center; }
+.tx-map-tools b { margin-right: auto; font-size: 16px; }
+.tx-map-tools .tx-btn { min-height: 44px; font-size: 14px; padding: 6px 8px; }
+.tx-battle-map .tx-map { width: 100%; box-sizing: border-box; }
+.tx-battle-map .tx-maprow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+.tx-battle-map .tx-cell { width: 100%; height: auto; aspect-ratio: 1; min-width: 0; font-size: 13px; position: relative; }
+.tx-map-key { margin: 0; font-size: 14px; color: var(--wf-muted); line-height: 1.3; }
+.tx-map-controls { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 10px; align-items: start; }
+.tx-tile-details { display: flex; flex-direction: column; gap: 5px; font-size: 16px; line-height: 1.25; overflow-wrap: anywhere; }
+.tx-tile-details span, .tx-tile-unit span { display: block; }
+.tx-tile-warning { color: var(--wf-gold-hi); }
+.tx .tx-cell.hazard { border: 2px dashed var(--wf-gold-hi); }
+.tx .tx-cell.deep { background: #15172e !important; color: var(--wf-gold-hi); }
+.tx .tx-cell.cliff-top { border-top: 3px dashed #ffe7a8; }
+.tx .tx-cell.cliff-right { border-right: 3px dashed #ffe7a8; }
+.tx .tx-cell.cliff-bottom { border-bottom: 3px dashed #ffe7a8; }
+.tx .tx-cell.cliff-left { border-left: 3px dashed #ffe7a8; }
+.tx-map-units { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.tx-map-units .tx-btn { width: 100%; flex-direction: column; align-items: flex-start; min-height: 58px; text-align: left; }
+.tx-map-units span { font-size: 16px; color: var(--wf-muted); }
+.tx-map-pan { max-width: 100%; overflow: auto; flex: none; }
+.tx-map-pan .tx-map.enlarged { width: max-content; max-width: none; overflow: visible; }
+.tx-map-pan .tx-map.enlarged .tx-maprow { grid-auto-columns: 44px; }
+.tx-map-pan .tx-map.enlarged .tx-cell { width: 44px; height: 44px; font-size: 15px; }
+
+.tx .tx-cell.neutral { background: #606775; }
+
+.tx-tile-details .tx-hp-text { display: inline; }

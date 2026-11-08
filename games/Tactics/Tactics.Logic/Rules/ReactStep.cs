@@ -71,8 +71,8 @@ public sealed record ReactStep(UnitId Source, AbilityId Ability, Tile Aim, Immut
 /// <summary>The first direct target's resolved dice for a damage type, before saves, resistance and critical doubling.</summary>
 public sealed record ReactionDamage(UnitId Target, DamageEffect Effect);
 
-/// <summary>Shared effect-tree queries for rules, previews and content validation.</summary>
-internal static class EffectTree
+/// <summary>Shared read-only effect-tree queries for rules, previews and content validation.</summary>
+public static class EffectTree
 {
     public static IEnumerable<EffectDef> All(ImmutableArray<EffectDef> effects)
     {

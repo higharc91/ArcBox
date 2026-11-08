@@ -37,6 +37,7 @@ export function loadMap(id: string): Promise<MapData | null> {
 export function useMap(id: string | undefined | null): MapData | null {
   const [map, setMap] = useState<MapData | null>(null);
   useEffect(() => {
+    setMap(null);
     if (!id) return;
     let live = true;
     void loadMap(id).then((m) => { if (live) setMap(m); });
