@@ -1,0 +1,443 @@
+[
+  {
+    "id": "common.attack",
+    "name": "Attack",
+    "description": "Weapon attack, weapon range: weapon damage",
+    "level": 1,
+    "seconds": 0.4500000000000014,
+    "frames": 39,
+    "frameMedianMs": 26.8375
+  },
+  {
+    "id": "wizard.acid_splash",
+    "name": "Acid Splash",
+    "description": "Dex save, 6 tiles, burst 1: 1d6 acid",
+    "level": 1,
+    "seconds": 0.7666666666666639,
+    "frames": 49,
+    "frameMedianMs": 23.8898
+  },
+  {
+    "id": "wizard.arcane_recovery",
+    "name": "Arcane Recovery",
+    "description": "Self: you gain 1 mana",
+    "level": 1,
+    "seconds": 0.8833333333333302,
+    "frames": 53,
+    "frameMedianMs": 25.1396
+  },
+  {
+    "id": "wizard.burning_hands",
+    "name": "Burning Hands",
+    "description": "Dex save, self, cone 3: 3d6 fire; half damage on a save",
+    "level": 1,
+    "seconds": 1.1166666666666893,
+    "frames": 59,
+    "frameMedianMs": 21.59
+  },
+  {
+    "id": "wizard.chill_touch",
+    "name": "Chill Touch",
+    "description": "Spell attack, 1 tile: 1d10 necrotic",
+    "level": 1,
+    "seconds": 0.4500000000000224,
+    "frames": 39,
+    "frameMedianMs": 20.1513
+  },
+  {
+    "id": "wizard.chromatic_orb",
+    "name": "Chromatic Orb",
+    "description": "Spell attack, 6 tiles: 3d8 lightning",
+    "level": 1,
+    "seconds": 1.2666666666667297,
+    "frames": 64,
+    "frameMedianMs": 20.2108
+  },
+  {
+    "id": "wizard.fire_bolt",
+    "name": "Fire Bolt",
+    "description": "Spell attack, 6 tiles: 1d10 fire",
+    "level": 1,
+    "seconds": 0.6666666666666998,
+    "frames": 46,
+    "frameMedianMs": 20.1398
+  },
+  {
+    "id": "wizard.grease",
+    "name": "Grease",
+    "description": "6 tiles, burst 1: creates a grease zone (burst 1) for 10 rounds, difficult terrain; units inside: When you enter a tile, on yourself: Dex save (target is Prone); Dex save (target is Prone)",
+    "level": 1,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 21.9878
+  },
+  {
+    "id": "wizard.mage_armor",
+    "name": "Mage Armor",
+    "description": "1 tile: target is Mage Armor",
+    "level": 1,
+    "seconds": 1.0166666666666089,
+    "frames": 56,
+    "frameMedianMs": 20.3566
+  },
+  {
+    "id": "wizard.magic_missile",
+    "name": "Magic Missile",
+    "description": "6 tiles: 3 times: 1d4\u002B1 force",
+    "level": 1,
+    "seconds": 1.4166666666665861,
+    "frames": 68,
+    "frameMedianMs": 20.5966
+  },
+  {
+    "id": "wizard.poison_spray",
+    "name": "Poison Spray",
+    "description": "Spell attack, 4 tiles: 1d12 poison",
+    "level": 1,
+    "seconds": 0.4499999999999744,
+    "frames": 39,
+    "frameMedianMs": 20.0087
+  },
+  {
+    "id": "wizard.ray_of_frost",
+    "name": "Ray of Frost",
+    "description": "Spell attack, 6 tiles: 1d8 cold; target gets -1 Move for 1 round",
+    "level": 1,
+    "seconds": 0.7833333333332888,
+    "frames": 49,
+    "frameMedianMs": 21.3342
+  },
+  {
+    "id": "wizard.ray_of_sickness",
+    "name": "Ray of Sickness",
+    "description": "Spell attack, 6 tiles: 2d8 poison; Con save (target is Poisoned for 1 round)",
+    "level": 1,
+    "seconds": 1.4666666666665833,
+    "frames": 70,
+    "frameMedianMs": 20.7497
+  },
+  {
+    "id": "wizard.shield",
+    "name": "Shield",
+    "description": "Real reaction to Attack; fixture seed 7.",
+    "level": 1,
+    "seconds": 1.2333333333332632,
+    "frames": 63,
+    "frameMedianMs": 20.3668
+  },
+  {
+    "id": "wizard.shocking_grasp",
+    "name": "Shocking Grasp",
+    "description": "Spell attack, 1 tile: 1d8 lightning",
+    "level": 1,
+    "seconds": 0.4499999999999744,
+    "frames": 40,
+    "frameMedianMs": 20.8484
+  },
+  {
+    "id": "wizard.sleep",
+    "name": "Sleep",
+    "description": "Wis save, 6 tiles, burst 1: target is Unconscious until saved",
+    "level": 1,
+    "seconds": 1.366666666666589,
+    "frames": 67,
+    "frameMedianMs": 21.8254
+  },
+  {
+    "id": "wizard.thunderwave",
+    "name": "Thunderwave",
+    "description": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save",
+    "level": 1,
+    "seconds": 0.8833333333332831,
+    "frames": 53,
+    "frameMedianMs": 21.8958
+  },
+  {
+    "id": "wizard.blur",
+    "name": "Blur",
+    "description": "Self: you are attacked with disadvantage for 10 rounds",
+    "level": 3,
+    "seconds": 1.0166666666666089,
+    "frames": 57,
+    "frameMedianMs": 20.9487
+  },
+  {
+    "id": "wizard.hold_person",
+    "name": "Hold Person",
+    "description": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)",
+    "level": 3,
+    "seconds": 1.133333333333269,
+    "frames": 60,
+    "frameMedianMs": 21.2715
+  },
+  {
+    "id": "wizard.invisibility",
+    "name": "Invisibility",
+    "description": "1 tile: target is Hidden \u2014 The target can\u0027t be seen until it attacks.",
+    "level": 3,
+    "seconds": 1.0166666666666089,
+    "frames": 57,
+    "frameMedianMs": 21.0586
+  },
+  {
+    "id": "wizard.misty_step",
+    "name": "Misty Step",
+    "description": "4 tiles: teleports you to the aimed tile, up to 4 tiles away",
+    "level": 3,
+    "seconds": 1.066666666666606,
+    "frames": 58,
+    "frameMedianMs": 20.9847
+  },
+  {
+    "id": "wizard.scorching_ray",
+    "name": "Scorching Ray",
+    "description": "6 tiles: 3 times: spell attack (2d6 fire)",
+    "level": 3,
+    "seconds": 2.6333333333331836,
+    "frames": 105,
+    "frameMedianMs": 20.9588
+  },
+  {
+    "id": "wizard.shatter",
+    "name": "Shatter",
+    "description": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save",
+    "level": 3,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 21.7767
+  },
+  {
+    "id": "wizard.web",
+    "name": "Web",
+    "description": "6 tiles, burst 1: creates a web zone (burst 1) for the battle, difficult terrain, ends if you lose concentration; units inside: When you enter a tile, on yourself: Dex save (target is Restrained until saved); Dex save (target is Restrained until saved)",
+    "level": 3,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 21.1161
+  },
+  {
+    "id": "wizard.counterspell",
+    "name": "Counterspell",
+    "description": "Real reaction to Fireball; fixture seed 7.",
+    "level": 5,
+    "seconds": 1.7999999999998977,
+    "frames": 80,
+    "frameMedianMs": 21.0299
+  },
+  {
+    "id": "wizard.dispel_magic",
+    "name": "Dispel Magic",
+    "description": "6 tiles: ends concentration; ends magical conditions on target",
+    "level": 5,
+    "seconds": 0.8166666666666202,
+    "frames": 51,
+    "frameMedianMs": 20.2336
+  },
+  {
+    "id": "wizard.fireball",
+    "name": "Fireball",
+    "description": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6.",
+    "level": 5,
+    "seconds": 1.899999999999892,
+    "frames": 83,
+    "frameMedianMs": 21.686
+  },
+  {
+    "id": "wizard.haste",
+    "name": "Haste",
+    "description": "4 tiles: target is Hasted for 10 rounds",
+    "level": 5,
+    "seconds": 1.3166666666665918,
+    "frames": 66,
+    "frameMedianMs": 20.8255
+  },
+  {
+    "id": "wizard.hypnotic_pattern",
+    "name": "Hypnotic Pattern",
+    "description": "Wis save, 6 tiles, burst 2: target is Incapacitated until saved \u2014 A twisting pattern of colours leaves those who see it charmed and dazed.",
+    "level": 5,
+    "seconds": 1.366666666666589,
+    "frames": 67,
+    "frameMedianMs": 22.2929
+  },
+  {
+    "id": "wizard.lightning_bolt",
+    "name": "Lightning Bolt",
+    "description": "Dex save, self, line 10: 6d6 lightning; half damage on a save \u2014 Game balance: 6d6 per target, matching Fireball.",
+    "level": 5,
+    "seconds": 1.6166666666665748,
+    "frames": 75,
+    "frameMedianMs": 22.4572
+  },
+  {
+    "id": "wizard.slow",
+    "name": "Slow",
+    "description": "Wis save, 6 tiles, burst 2: target is Slowed until saved",
+    "level": 5,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 23.0649
+  },
+  {
+    "id": "wizard.banishment",
+    "name": "Banishment",
+    "description": "Cha save, 6 tiles: target is Incapacitated until saved \u2014 The target is cast into a harmless elsewhere, out of the fight until it fights its way back.",
+    "level": 7,
+    "seconds": 1.133333333333269,
+    "frames": 60,
+    "frameMedianMs": 22.1332
+  },
+  {
+    "id": "wizard.blight",
+    "name": "Blight",
+    "description": "Con save, 4 tiles: 8d8 necrotic; half damage on a save",
+    "level": 7,
+    "seconds": 1.549999999999912,
+    "frames": 73,
+    "frameMedianMs": 22.0341
+  },
+  {
+    "id": "wizard.greater_invisibility",
+    "name": "Greater Invisibility",
+    "description": "1 tile: target is Invisible for 10 rounds",
+    "level": 7,
+    "seconds": 1.0166666666666089,
+    "frames": 57,
+    "frameMedianMs": 22.1026
+  },
+  {
+    "id": "wizard.ice_storm",
+    "name": "Ice Storm",
+    "description": "6 tiles, burst 2: creates a ice zone (burst 2) for 1 round, difficult terrain; Dex save (2d8 bludgeoning; 4d6 cold; half damage on a save)",
+    "level": 7,
+    "seconds": 1.8499999999998948,
+    "frames": 82,
+    "frameMedianMs": 23.768
+  },
+  {
+    "id": "wizard.wall_of_fire",
+    "name": "Wall of Fire",
+    "description": "6 tiles, ring 2: creates a fire zone (ring 2) for 10 rounds, ends if you lose concentration; units inside: At the start of your turn, on yourself: Dex save (1d8 fire; half damage on a save); Dex save (5d8 fire; half damage on a save) \u2014 Game balance: the initial hit deals 5d8; ongoing damage is 1d8 per turn instead of SRD 5d8.",
+    "level": 7,
+    "seconds": 1.6166666666665748,
+    "frames": 75,
+    "frameMedianMs": 24.321
+  },
+  {
+    "id": "wizard.cloudkill",
+    "name": "Cloudkill",
+    "description": "6 tiles, burst 2: creates a poison zone (burst 2) for 10 rounds, ends if you lose concentration; units inside: At the start of your turn, on yourself: Con save (5d8 poison; half damage on a save); Con save (6d8 poison; half damage on a save) \u2014 Game balance: the initial hit deals 6d8 poison; ongoing damage is the SRD 5d8.",
+    "level": 9,
+    "seconds": 1.9666666666665549,
+    "frames": 85,
+    "frameMedianMs": 22.1145
+  },
+  {
+    "id": "wizard.cone_of_cold",
+    "name": "Cone of Cold",
+    "description": "Con save, self, cone 7: 8d8 cold; half damage on a save",
+    "level": 9,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 22.8554
+  },
+  {
+    "id": "wizard.hold_monster",
+    "name": "Hold Monster",
+    "description": "Wis save, 6 tiles: target is Paralysed until saved",
+    "level": 9,
+    "seconds": 1.133333333333269,
+    "frames": 60,
+    "frameMedianMs": 20.5711
+  },
+  {
+    "id": "chronomancer.time_shift",
+    "name": "Time Shift (chronomancer)",
+    "description": "6 tiles: swaps target\u0027s place with the unit 1 place after it in the turn order",
+    "level": 3,
+    "seconds": 1.1166666666666032,
+    "frames": 60,
+    "frameMedianMs": 20.2988
+  },
+  {
+    "id": "chronomancer.accelerate",
+    "name": "Accelerate (chronomancer)",
+    "description": "6 tiles: moves target 2 places earlier in the turn order; target gets \u002B1 AC and \u002B1 Move for 2 rounds",
+    "level": 6,
+    "seconds": 1.3166666666665918,
+    "frames": 66,
+    "frameMedianMs": 20.3215
+  },
+  {
+    "id": "chronomancer.temporal_stasis",
+    "name": "Temporal Stasis (chronomancer)",
+    "description": "Wis save, 6 tiles: 4d8 force; delays target by 3 places in the turn order; target is Slowed for 2 rounds; half damage on a save",
+    "level": 10,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 20.4852
+  },
+  {
+    "id": "evoker.sculpted_nova",
+    "name": "Sculpted Nova (evoker)",
+    "description": "Dex save, 6 tiles, burst 2: 2d6 fire; half damage on a save \u2014 You shape the blast around your allies: it strikes only foes.",
+    "level": 3,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 21.372
+  },
+  {
+    "id": "evoker.empowered_evocation",
+    "name": "Empowered Evocation (evoker)",
+    "description": "Visible passive triggered during Fire Bolt. Spell attack, 6 tiles: 2d10 fire",
+    "level": 6,
+    "seconds": 0.7499999999999574,
+    "frames": 49,
+    "frameMedianMs": 20.1249
+  },
+  {
+    "id": "evoker.sculpted_inferno",
+    "name": "Sculpted Inferno (evoker)",
+    "description": "Dex save, 6 tiles, burst 3: 8d6 fire; half damage on a save \u2014 Once per battle you pour everything into one sculpted storm of fire that spares your allies.",
+    "level": 10,
+    "seconds": 1.666666666666572,
+    "frames": 76,
+    "frameMedianMs": 21.1984
+  },
+  {
+    "id": "geomancer.raise_earth",
+    "name": "Raise Earth (geomancer)",
+    "description": "6 tiles: raises the terrain (single tile) by 2",
+    "level": 3,
+    "seconds": 1.4666666666678339,
+    "frames": 70,
+    "frameMedianMs": 20.2366
+  },
+  {
+    "id": "geomancer.sink_earth",
+    "name": "Sink Earth (geomancer)",
+    "description": "6 tiles: sinks the terrain (single tile) by 2",
+    "level": 3,
+    "seconds": 1.1166666666675553,
+    "frames": 59,
+    "frameMedianMs": 20.2296
+  },
+  {
+    "id": "geomancer.tremor",
+    "name": "Tremor (geomancer)",
+    "description": "Dex save, 6 tiles, burst 1: 3d8 bludgeoning; target is Prone; half damage on a save",
+    "level": 6,
+    "seconds": 1.666666666667993,
+    "frames": 76,
+    "frameMedianMs": 21.1692
+  },
+  {
+    "id": "geomancer.stone_spire",
+    "name": "Stone Spire (geomancer)",
+    "description": "6 tiles, burst 1: raises the terrain (burst 1) by 2; Dex save (6d8 bludgeoning; target is Prone; half damage on a save)",
+    "level": 10,
+    "seconds": 2.7666666666688684,
+    "frames": 109,
+    "frameMedianMs": 21.2779
+  }
+]

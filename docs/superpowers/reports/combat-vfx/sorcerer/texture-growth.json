@@ -1,0 +1,11 @@
+{
+  "before": {
+    "peakBytes": 374741777
+  },
+  "full": {
+    "peakBytes": 397943213
+  },
+  "addedPeakBytes": 23201436,
+  "casterAtlasAddedPerRaceBytes": 4915200,
+  "note": "The whole reel retains all loaded spell sheets; normal encounters load only effects they use."
+}

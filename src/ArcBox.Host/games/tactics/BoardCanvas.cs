@@ -42,12 +42,27 @@ public partial class BoardCanvas : Node2D
     private ImmutableArray<BoardUnit> _units = [];
     private int[] _sequence = [];
     private ImmutableArray<FxDraw> _surfaceDraws = [];
+    private (long Order, Vector2[] Points)[] _telegraph = [];
+    private ImmutableArray<SpellLight> _spellLights = [];
+    private CutInFrame? _cinematic;
+    private float _cinematicScale = 1;
+
+    /// <summary>Dim the board in its existing draw pass; focused figures and their marks remain readable.</summary>
+    public void SetCinematic(CutInFrame? frame, float screenScale, bool parentDims = false)
+    {
+        (_cinematic, _cinematicScale) = (frame, screenScale);
+        var light = 1 - (frame?.Dim ?? 0);
+        SelfModulate = parentDims ? Colors.White : new Color(light, light, light);
+        var restore = parentDims ? new Color(1 / light, 1 / light, 1 / light) : Colors.White;
+        foreach (var layer in new CanvasItem[] { _marks, _light, _over, _flash, _halos }) layer.SelfModulate = restore;
+    }
     private bool _animated;
     private double _clock;
     private long _tick;
     private readonly FxLayer _halos;
     private readonly UnitMarks _marks;
     private readonly FxLayer _light;
+    private readonly FxLayer _flash;
     private readonly FxLayer _over;
     private BoardLighting? _lighting;
     private Vector2 _origin;
@@ -73,10 +88,12 @@ public partial class BoardCanvas : Node2D
         _marks = new UnitMarks(Load);
         _light = new FxLayer(Load, additive: true);
         _over = new FxLayer(Load, additive: false);
+        _flash = new FxLayer(path => path is null ? null : _painter.UnitTexture(path), additive: false, white: true);
         AddChild(_halos);
         AddChild(_marks);
         AddChild(_light);
         AddChild(_over);
+        AddChild(_flash);
     }
 
     /// <summary>Shows <paramref name="plan"/> in its light <paramref name="lit"/>, loading its art from <paramref name="packRoot"/>, placed by <paramref name="fit"/>.</summary>
@@ -123,13 +140,14 @@ public partial class BoardCanvas : Node2D
         _items.Clear();
         _orders.Clear();
         _alphas.Clear();
-        (_units, _sequence, _lighting) = ([], [], null);
+        (_units, _sequence, _lighting, _spellLights) = ([], [], null, []);
         _marks.Clear();
         _halos.Show([]);
         _light.Show([]);
         _over.Show([]);
+        _flash.Show([]);
         // What was drawn last is still recorded, textures and all, and a hidden node isn't drawn again to replace it: clear it now.
-        foreach (var item in new CanvasItem[] { this, _halos, _marks, _light, _over })
+        foreach (var item in new CanvasItem[] { this, _halos, _marks, _light, _over, _flash })
         {
             RenderingServer.CanvasItemClear(item.GetCanvasItem());
         }
@@ -221,6 +239,44 @@ public partial class BoardCanvas : Node2D
         Position = _origin + new Vector2(shake.X, shake.Y) * Scale;
     }
 
+    public void SetSpellLights(ImmutableArray<SpellLight> lights)
+    {
+        if (_spellLights.IsEmpty && lights.IsEmpty) return;
+        _spellLights = lights;
+        QueueRedraw();
+    }
+
+    public void SetTelegraph(ImmutableArray<global::Tactics.Logic.Tile> tiles, BoardTerrain terrain, global::Tactics.Logic.Tile origin = default)
+    {
+        if (tiles.IsEmpty && _telegraph.Length == 0) return;
+        _telegraph = tiles.Select(tile =>
+        {
+            var points = new[] { new System.Numerics.Vector2(tile.X, tile.Y), new(tile.X + 1, tile.Y), new(tile.X + 1, tile.Y + 1), new(tile.X, tile.Y + 1) }
+                .Select(p => BoardProjection.Corner(p.X, p.Y, RoadSurface.TryHeight(terrain, p, out var h) ? h : terrain.Top(tile)))
+                .Select(p => new Vector2(p.X, p.Y)).ToArray();
+            return (Order: BoardOrder.Key(new(tile.X + origin.X, tile.Y + origin.Y), BoardLayer.Ground) + 1, Points: points);
+        }).OrderBy(t => t.Order).ToArray();
+        QueueRedraw();
+    }
+
+    private void DrawTelegraph(Vector2[] points)
+    {
+        DrawColoredPolygon(points, new Color(1, .7f, .2f, .22f));
+        DrawPolyline([.. points, points[0]], new Color(1, .8f, .35f, .85f), 1);
+    }
+
+    public void SetFlashes(ImmutableHashSet<global::Tactics.Logic.UnitId> ids)
+    {
+        _flash.Show([.. _units.Where(u => ids.Contains(u.Id)).Select(unit =>
+        {
+            var sprite = unit.Sprite;
+            var source = sprite.Source(unit.Anim.FrameAt(_clock + unit.Phase), unit.Row);
+            var corner = unit.Feet - new System.Numerics.Vector2(unit.Mirror ? sprite.Width - sprite.AnchorX : sprite.AnchorX, sprite.AnchorY) * sprite.PixelScale;
+            return new FxDraw(sprite.Path, source, corner,
+                new System.Numerics.Vector2(unit.Mirror ? -sprite.WorldWidth : sprite.WorldWidth, sprite.WorldHeight), 0, false, 0.75f) { White = true };
+        })]);
+    }
+
     private void Merge()
     {
         _sequence = BoardOrder.Merge(_orders, [.. _units.Select(u => u.Order)]);
@@ -263,24 +319,35 @@ public partial class BoardCanvas : Node2D
         var light = _baked ? null : _lighting;
         BoardPainter.GridAlpha = _gridAlpha;
         var surface = 0;
+        var telegraph = 0;
         foreach (var step in _sequence)
         {
             var order = step < 0 ? _units[~step].Order : _orders[step];
-            while (surface < _surfaceDraws.Length && _surfaceDraws[surface].Order <= order)
-                DrawSurface(_surfaceDraws[surface++]);
+            DrawGroundThrough(order);
             if (step < 0)
             {
                 DrawUnit(_units[~step]);
             }
             else
             {
-                _painter.Paint(this, _items[step], light, _clock, _alphas[step]);
+                _painter.Paint(this, _items[step], light, _clock, _alphas[step], _spellLights);
             }
         }
-        while (surface < _surfaceDraws.Length)
-            DrawSurface(_surfaceDraws[surface++]);
+        DrawGroundThrough(long.MaxValue);
         BoardPainter.GridAlpha = 1;
         LastDrawMs = System.Diagnostics.Stopwatch.GetElapsedTime(clock).TotalMilliseconds;
+
+        void DrawGroundThrough(long order)
+        {
+            while ((telegraph < _telegraph.Length && _telegraph[telegraph].Order <= order)
+                || (surface < _surfaceDraws.Length && _surfaceDraws[surface].Order <= order))
+            {
+                if (surface < _surfaceDraws.Length && (telegraph == _telegraph.Length
+                    || _surfaceDraws[surface].Order <= _telegraph[telegraph].Order))
+                    DrawSurface(_surfaceDraws[surface++]);
+                else DrawTelegraph(_telegraph[telegraph++].Points);
+            }
+        }
     }
 
     private void DrawSurface(FxDraw draw)
@@ -325,6 +392,17 @@ public partial class BoardCanvas : Node2D
             var target = new Rect2(corner, unit.Mirror ? new Vector2(-size.X, size.Y) : size);   // a negative width flips, in the same place
             var light = !sprite.Unlit && _lighting is { } lighting ? Colour(lighting.ForFigure(BoardLighting.BodyOf(unit.Feet,
                 sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight))) : Colors.White;
+            if (!_spellLights.IsEmpty && !sprite.Unlit)
+            {
+                var at = BoardLighting.BodyOf(unit.Feet, sprite.FootprintHeight > 0 ? sprite.FootprintHeight : sprite.WorldHeight);
+                var lit = SpellLighting.Apply(new Rgb(light.R, light.G, light.B), at, _spellLights);
+                light = new Color(lit.R, lit.G, lit.B, light.A);
+            }
+            if (_cinematic is { Dim: > 0 } camera && CinematicFit.Focuses(camera, unit.Feet, _cinematicScale))
+            {
+                var restore = 1 / (1 - camera.Dim);
+                light = new Color(light.R * restore, light.G * restore, light.B * restore, light.A);
+            }
             light = unit.Away ? light * AwayShade : light;
             light.A *= unit.Opacity;
             DrawTextureRectRegion(texture, target, new Rect2(source.X, source.Y, source.Width, source.Height), light);

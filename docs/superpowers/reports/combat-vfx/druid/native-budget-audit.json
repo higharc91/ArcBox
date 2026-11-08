@@ -1,0 +1,323 @@
+{
+  "method": "Measured real-engine base script time; excludes cinematic lead/settle. Same caps as DruidVfxTests.",
+  "samples": [
+    {
+      "id": "common.attack",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.cure_wounds",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.entangle",
+      "baseSeconds": 1.08,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "druid.faerie_fire",
+      "baseSeconds": 0.78,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.fog_cloud",
+      "baseSeconds": 0.52,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.healing_word",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.produce_flame",
+      "baseSeconds": 0.6799999999999999,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.shillelagh",
+      "baseSeconds": 0.42,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.thorn_whip",
+      "baseSeconds": 0.5800000000000001,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.thunderwave",
+      "baseSeconds": 0.8600000000000001,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.wild_shape_wolf",
+      "baseSeconds": 0.55,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.barkskin",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.hold_person",
+      "baseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.lesser_restoration",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.moonbeam",
+      "baseSeconds": 0.52,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "druid.moonbeam.enter",
+      "baseSeconds": 0.64,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.moonbeam.turn",
+      "baseSeconds": 0.64,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.spike_growth",
+      "baseSeconds": 0.52,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.spike_growth.step",
+      "baseSeconds": 0.44,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.wild_shape_bear",
+      "baseSeconds": 0.55,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.call_lightning",
+      "baseSeconds": 0.78,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "druid.conjure_animals",
+      "baseSeconds": 0.72,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.dispel_magic",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.sleet_storm",
+      "baseSeconds": 1.08,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.sleet_storm.turn",
+      "baseSeconds": 0.4,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.wild_shape_dire_wolf",
+      "baseSeconds": 0.55,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.blight",
+      "baseSeconds": 0.66,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "druid.ice_storm",
+      "baseSeconds": 1.2600000000000002,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.greater_restoration",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.mass_cure_wounds",
+      "baseSeconds": 0.52,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "grovekeeper.bloom",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "grovekeeper.companion",
+      "baseSeconds": 0.45,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "grovekeeper.sanctuary_grove",
+      "baseSeconds": 0.8200000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "grovekeeper.sanctuary_grove.mend",
+      "baseSeconds": 0.44,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "grovekeeper.ancient_canopy",
+      "baseSeconds": 0.9000000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "shapeshifter.dire_form",
+      "baseSeconds": 0.55,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "shapeshifter.elder_bear_form",
+      "baseSeconds": 0.55,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "shapeshifter.primal_mend",
+      "baseSeconds": 0.54,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "stormcaller.gale_burst",
+      "baseSeconds": 0.9800000000000002,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "stormcaller.chain_tempest",
+      "baseSeconds": 0.42000000000000004,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "stormcaller.wrath_of_the_tempest",
+      "baseSeconds": 0.9000000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "druid.form.wolf.move",
+      "baseSeconds": 0.8,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.wolf.attack",
+      "baseSeconds": 0.43600000000000005,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.wolf.revert",
+      "baseSeconds": 0.71,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.form.bear.move",
+      "baseSeconds": 0.8,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.bear.attack",
+      "baseSeconds": 0.61,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.bear.revert",
+      "baseSeconds": 0.71,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.form.dire_wolf.move",
+      "baseSeconds": 0.8,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.dire_wolf.attack",
+      "baseSeconds": 0.75,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.dire_wolf.revert",
+      "baseSeconds": 0.71,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "druid.form.elder_bear.move",
+      "baseSeconds": 0.8,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.elder_bear.attack",
+      "baseSeconds": 0.61,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "druid.form.elder_bear.revert",
+      "baseSeconds": 0.71,
+      "capSeconds": 1.5,
+      "passed": true
+    }
+  ]
+}

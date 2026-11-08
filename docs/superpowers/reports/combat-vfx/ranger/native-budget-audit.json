@@ -1,0 +1,179 @@
+{
+  "method": "Measured real-engine base script times, excluding cinematic lead/settle. Same strict caps as RangerVfxTests.",
+  "samples": [
+    {
+      "id": "common.attack",
+      "baseSeconds": 0.38000000000000006,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "ensnared.thorns",
+      "baseSeconds": 0.44,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "ranger.cure_wounds",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.ensnaring_strike",
+      "baseSeconds": 0.9999999999999999,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.entangle",
+      "baseSeconds": 1.08,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.hail_of_thorns",
+      "baseSeconds": 0.9599999999999999,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.hunters_mark",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.hunters_mark_bonus",
+      "baseSeconds": 0.4600000000000001,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "ranger.barkskin",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.lesser_restoration",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.spike_growth",
+      "baseSeconds": 0.52,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "spike_growth.thorns",
+      "baseSeconds": 0.44,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "ranger.conjure_barrage",
+      "baseSeconds": 0.78,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.lightning_arrow",
+      "baseSeconds": 0.6799999999999999,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.vanish",
+      "baseSeconds": 0.42,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "beastmaster.companion",
+      "baseSeconds": 0.45,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "beastmaster.sic",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "beastmaster.pack_bond",
+      "baseSeconds": 0.58,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "beastmaster.alpha_howl",
+      "baseSeconds": 0.54,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "beastmaster.ferocious_bond",
+      "baseSeconds": 0.63,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "sharpshooter.deadeye",
+      "baseSeconds": 0.6799999999999999,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "sharpshooter.high_ground_mastery",
+      "baseSeconds": 0.4600000000000001,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "sharpshooter.piercing_shot",
+      "baseSeconds": 0.8500000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "sharpshooter.volley",
+      "baseSeconds": 0.8600000000000001,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "warden.vine_snare",
+      "baseSeconds": 0.42000000000000004,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "warden.natures_veil",
+      "baseSeconds": 0.42,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "warden.guardian_tree",
+      "baseSeconds": 0.84,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "ranger.companion.move",
+      "baseSeconds": 0.6000000000000001,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "ranger.companion.attack",
+      "baseSeconds": 0.7799999999999999,
+      "capSeconds": 0.8,
+      "passed": true
+    }
+  ]
+}

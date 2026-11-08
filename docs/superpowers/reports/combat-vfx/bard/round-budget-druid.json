@@ -1,0 +1,302 @@
+[
+  {
+    "Seed": 1,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 1,
+    "Round": 2,
+    "Full": 2.3999999999999986,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.4,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 1,
+    "Round": 3,
+    "Full": 1.5,
+    "AutoSixPlayers": 1.1999999999999993,
+    "Off": 0,
+    "IdealFull": 1.5,
+    "IdealAutoSixPlayers": 1.2,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 2,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 2,
+    "Round": 2,
+    "Full": 2.399999999999995,
+    "AutoSixPlayers": 2.399999999999995,
+    "Off": 0,
+    "IdealFull": 2.4,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 2,
+    "Round": 3,
+    "Full": 2.1000000000000014,
+    "AutoSixPlayers": 1.8000000000000007,
+    "Off": 0,
+    "IdealFull": 2.1,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 3,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 3,
+    "Round": 2,
+    "Full": 2.6999999999999957,
+    "AutoSixPlayers": 2.399999999999995,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 3,
+    "Round": 3,
+    "Full": 3.3000000000000007,
+    "AutoSixPlayers": 3,
+    "Off": 0,
+    "IdealFull": 3.3000000000000003,
+    "IdealAutoSixPlayers": 3,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 4,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 4,
+    "Round": 2,
+    "Full": 1.7999999999999936,
+    "AutoSixPlayers": 1.7999999999999936,
+    "Off": 0,
+    "IdealFull": 1.7999999999999998,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 4,
+    "Round": 3,
+    "Full": 2.099999999999998,
+    "AutoSixPlayers": 1.8000000000000007,
+    "Off": 0,
+    "IdealFull": 2.1,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 5,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 5,
+    "Round": 2,
+    "Full": 1.8000000000000007,
+    "AutoSixPlayers": 1.8000000000000007,
+    "Off": 0,
+    "IdealFull": 1.7999999999999998,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 5,
+    "Round": 3,
+    "Full": 1.5166666666666693,
+    "AutoSixPlayers": 1.2166666666666686,
+    "Off": 0,
+    "IdealFull": 1.5,
+    "IdealAutoSixPlayers": 1.2,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 6,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 6,
+    "Round": 2,
+    "Full": 2.700000000000003,
+    "AutoSixPlayers": 2.400000000000002,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 6,
+    "Round": 3,
+    "Full": 2.3999999999999986,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.4,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 7,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 7,
+    "Round": 2,
+    "Full": 2.3999999999999986,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.4,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 7,
+    "Round": 3,
+    "Full": 2.1000000000000014,
+    "AutoSixPlayers": 1.8000000000000007,
+    "Off": 0,
+    "IdealFull": 2.1,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 8,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 8,
+    "Round": 2,
+    "Full": 2.399999999999995,
+    "AutoSixPlayers": 2.399999999999995,
+    "Off": 0,
+    "IdealFull": 2.4,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 8,
+    "Round": 3,
+    "Full": 1.5166666666666657,
+    "AutoSixPlayers": 1.216666666666665,
+    "Off": 0,
+    "IdealFull": 1.5,
+    "IdealAutoSixPlayers": 1.2,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 9,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 9,
+    "Round": 2,
+    "Full": 2.399999999999995,
+    "AutoSixPlayers": 2.399999999999995,
+    "Off": 0,
+    "IdealFull": 2.4,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 9,
+    "Round": 3,
+    "Full": 2.100000000000005,
+    "AutoSixPlayers": 1.8000000000000043,
+    "Off": 0,
+    "IdealFull": 2.1,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 10,
+    "Round": 1,
+    "Full": 2.6999999999999993,
+    "AutoSixPlayers": 2.3999999999999986,
+    "Off": 0,
+    "IdealFull": 2.7,
+    "IdealAutoSixPlayers": 2.4,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 10,
+    "Round": 2,
+    "Full": 1.8000000000000007,
+    "AutoSixPlayers": 1.8000000000000007,
+    "Off": 0,
+    "IdealFull": 1.7999999999999998,
+    "IdealAutoSixPlayers": 1.7999999999999998,
+    "PlaybackFps": 60
+  },
+  {
+    "Seed": 10,
+    "Round": 3,
+    "Full": 1.5000000000000036,
+    "AutoSixPlayers": 1.1999999999999993,
+    "Off": 0,
+    "IdealFull": 1.5,
+    "IdealAutoSixPlayers": 1.2,
+    "PlaybackFps": 60
+  }
+]

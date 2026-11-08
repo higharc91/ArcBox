@@ -1,0 +1,32 @@
+{
+  "before": {
+    "common.attack": 20.651,
+    "wizard.fire_bolt": 20.6521,
+    "wizard.magic_missile": 20.5855,
+    "wizard.fireball": 20.2942
+  },
+  "full": {
+    "common.attack": 22.1186,
+    "wizard.fire_bolt": 20.2955,
+    "wizard.magic_missile": 20.7883,
+    "wizard.fireball": 21.0889
+  },
+  "short": {
+    "common.attack": 22.211,
+    "wizard.fire_bolt": 20.3269,
+    "wizard.magic_missile": 20.5992,
+    "wizard.fireball": 20.4802
+  },
+  "off": {
+    "common.attack": 21.1399,
+    "wizard.fire_bolt": 21.086,
+    "wizard.magic_missile": 20.8374,
+    "wizard.fireball": 20.952
+  },
+  "reduced": {
+    "common.attack": 22.402,
+    "wizard.fire_bolt": 20.3202,
+    "wizard.magic_missile": 20.3668,
+    "wizard.fireball": 20.6268
+  }
+}

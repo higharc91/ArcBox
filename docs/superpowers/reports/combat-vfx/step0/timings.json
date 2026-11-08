@@ -1,0 +1,204 @@
+{
+  "before": [
+    {
+      "id": "common.attack",
+      "name": "Attack",
+      "description": "Weapon attack, weapon range: weapon damage",
+      "level": 1,
+      "seconds": 0.4500000000000014,
+      "frames": 39,
+      "frameMedianMs": 32.6925
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "name": "Fire Bolt",
+      "description": "Spell attack, 6 tiles: 1d10 fire",
+      "level": 1,
+      "seconds": 0.6666666666666643,
+      "frames": 46,
+      "frameMedianMs": 26.9815
+    },
+    {
+      "id": "wizard.magic_missile",
+      "name": "Magic Missile",
+      "description": "6 tiles: 3 times: 1d4+1 force",
+      "level": 1,
+      "seconds": 0.8166666666666638,
+      "frames": 51,
+      "frameMedianMs": 23.1421
+    },
+    {
+      "id": "wizard.fireball",
+      "name": "Fireball",
+      "description": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6.",
+      "level": 5,
+      "seconds": 0.9833333333333405,
+      "frames": 55,
+      "frameMedianMs": 24.9337
+    }
+  ],
+  "full": [
+    {
+      "id": "common.attack",
+      "name": "Attack",
+      "description": "Weapon attack, weapon range: weapon damage",
+      "level": 1,
+      "seconds": 0.4500000000000014,
+      "frames": 39,
+      "frameMedianMs": 55.1922,
+      "textureBytes": 128958381
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "name": "Fire Bolt",
+      "description": "Spell attack, 6 tiles: 1d10 fire",
+      "level": 1,
+      "seconds": 0.6666666666666643,
+      "frames": 46,
+      "frameMedianMs": 36.1684,
+      "textureBytes": 129615103
+    },
+    {
+      "id": "wizard.magic_missile",
+      "name": "Magic Missile",
+      "description": "6 tiles: 3 times: 1d4+1 force",
+      "level": 1,
+      "seconds": 1.4166666666666616,
+      "frames": 69,
+      "frameMedianMs": 28.5006,
+      "textureBytes": 130437013
+    },
+    {
+      "id": "wizard.fireball",
+      "name": "Fireball",
+      "description": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6.",
+      "level": 5,
+      "seconds": 1.9000000000000847,
+      "frames": 83,
+      "frameMedianMs": 30.3887,
+      "textureBytes": 131555359
+    }
+  ],
+  "short": [
+    {
+      "id": "common.attack",
+      "name": "Attack",
+      "description": "Weapon attack, weapon range: weapon damage",
+      "level": 1,
+      "seconds": 0.4500000000000014,
+      "frames": 39,
+      "frameMedianMs": 24.14,
+      "textureBytes": 128958381
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "name": "Fire Bolt",
+      "description": "Spell attack, 6 tiles: 1d10 fire",
+      "level": 1,
+      "seconds": 0.6666666666666643,
+      "frames": 46,
+      "frameMedianMs": 23.5079,
+      "textureBytes": 129615103
+    },
+    {
+      "id": "wizard.magic_missile",
+      "name": "Magic Missile",
+      "description": "6 tiles: 3 times: 1d4+1 force",
+      "level": 1,
+      "seconds": 1.4166666666666616,
+      "frames": 69,
+      "frameMedianMs": 26.0731,
+      "textureBytes": 130437013
+    },
+    {
+      "id": "wizard.fireball",
+      "name": "Fireball",
+      "description": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6.",
+      "level": 5,
+      "seconds": 1.6000000000000698,
+      "frames": 74,
+      "frameMedianMs": 26.0728,
+      "textureBytes": 131555359
+    }
+  ],
+  "off": [
+    {
+      "id": "common.attack",
+      "name": "Attack",
+      "description": "Weapon attack, weapon range: weapon damage",
+      "level": 1,
+      "seconds": 0.4500000000000014,
+      "frames": 39,
+      "frameMedianMs": 41.5292
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "name": "Fire Bolt",
+      "description": "Spell attack, 6 tiles: 1d10 fire",
+      "level": 1,
+      "seconds": 0.6666666666666643,
+      "frames": 46,
+      "frameMedianMs": 65.8827
+    },
+    {
+      "id": "wizard.magic_missile",
+      "name": "Magic Missile",
+      "description": "6 tiles: 3 times: 1d4+1 force",
+      "level": 1,
+      "seconds": 0.8166666666666638,
+      "frames": 51,
+      "frameMedianMs": 61.6717
+    },
+    {
+      "id": "wizard.fireball",
+      "name": "Fireball",
+      "description": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6.",
+      "level": 5,
+      "seconds": 0.9833333333333405,
+      "frames": 55,
+      "frameMedianMs": 26.9617
+    }
+  ],
+  "reduced": [
+    {
+      "id": "common.attack",
+      "name": "Attack",
+      "description": "Weapon attack, weapon range: weapon damage",
+      "level": 1,
+      "seconds": 0.4500000000000014,
+      "frames": 39,
+      "frameMedianMs": 24.047,
+      "textureBytes": 128958381
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "name": "Fire Bolt",
+      "description": "Spell attack, 6 tiles: 1d10 fire",
+      "level": 1,
+      "seconds": 0.6666666666666643,
+      "frames": 46,
+      "frameMedianMs": 25.0809,
+      "textureBytes": 129615103
+    },
+    {
+      "id": "wizard.magic_missile",
+      "name": "Magic Missile",
+      "description": "6 tiles: 3 times: 1d4+1 force",
+      "level": 1,
+      "seconds": 1.4166666666666616,
+      "frames": 69,
+      "frameMedianMs": 67.9844,
+      "textureBytes": 130437013
+    },
+    {
+      "id": "wizard.fireball",
+      "name": "Fireball",
+      "description": "Dex save, 6 tiles, burst 2: 6d6 fire; half damage on a save \u2014 Game balance: 6d6 per target instead of SRD 8d6.",
+      "level": 5,
+      "seconds": 1.9000000000000847,
+      "frames": 83,
+      "frameMedianMs": 175.1226,
+      "textureBytes": 131555359
+    }
+  ]
+}
