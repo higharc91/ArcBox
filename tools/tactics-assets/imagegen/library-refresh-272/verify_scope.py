@@ -71,7 +71,7 @@ def run(root):
     motion = {}
     for role in roles:
         motion[role['id']] = {}
-        for action in ['idle', 'walk', 'attack']:
+        for action in role.get('motionActions', batch.get('motionActions', ['idle', 'walk', 'attack'])):
             motion[role['id']][action] = {}
             for direction in sorted((root / 'export' / role['id'] / action).iterdir()):
                 signatures = {hashlib.sha256(Image.open(p).tobytes()).hexdigest() for p in direction.glob('*.png')}
@@ -79,6 +79,20 @@ def run(root):
                 motion[role['id']][action][direction.name] = len(signatures)
     save(out / 'directional-motion.json', motion)
     receipt(out, 'runtime-assets.json', [repo / 'content/tactics/base/creatures' / (n + '.png') for n in names])
+
+    inspection = root / 'inspection-strips.json'
+    if inspection.exists():
+        encoded = json.loads(inspection.read_text())
+        assert set(encoded) == {r['id'] for r in roles}
+        for name, item in encoded.items():
+            assert hashlib.sha256((root / 'export' / name / 'atlas.png').read_bytes()).hexdigest() == item['sourceAtlasSha256']
+            assert len(item['facings']) == 8
+            for facing in item['facings']:
+                assert facing['pixelsMatchSourceAtlas']
+                assert hashlib.sha256((root / facing['file']).read_bytes()).hexdigest() == facing['webpSha256']
+        save(out / 'inspection-encoding.json', {name: {'sourceBytes': item['sourceBytes'],
+             'reviewBytes': sum(f['bytes'] for f in item['facings']), 'facings': 8, 'rgbaPixelsPreserved': True}
+             for name, item in encoded.items()})
 
     layout = json.loads((root / 'inspection-layout.json').read_text())
     checked = []

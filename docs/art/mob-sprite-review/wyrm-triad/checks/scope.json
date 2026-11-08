@@ -1,0 +1,20 @@
+{
+  "priorCommit": "82f13e16",
+  "addedCreatureEntries": [
+    "mob_refresh_dragon_black",
+    "mob_refresh_dragon_blue",
+    "mob_refresh_dragon_green"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "rulesAndAbilitiesUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "sourceImages": 23,
+  "sourceOriginalsAvailableAndChecked": true,
+  "packedFrameKeys": 624,
+  "distinctSelectedWholeFigures": 624,
+  "runtimeAssets": 3,
+  "mainUntouchedForPlaytest": true
+}

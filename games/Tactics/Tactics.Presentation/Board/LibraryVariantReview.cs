@@ -7,7 +7,12 @@ namespace Tactics.Presentation.Board;
 /// <summary>Development-only art lineups. These do not register encounters or change creature sheets.</summary>
 public static class LibraryVariantReview
 {
-    public sealed record Creature(string Id, string Name, string Sprite);
+    public sealed record Special(string Ability, string Label, double Impact, bool Targeted = false);
+    public sealed record Creature(string Id, string Name, string Sprite, IReadOnlyList<Special>? Specials = null);
+
+    private static Creature Dragon(string color) => new(color, color + " Dragon", "bosses.dragon." + color.ToLowerInvariant(),
+        [new("dragon.fire_breath", "breath", .5), new("dragon.frightful_roar", "roar", .5),
+            new("dragon.cataclysm", "wingbeat", .7)]);
 
     public static IReadOnlyList<Creature> Creatures(string batch) => batch switch
     {
@@ -17,6 +22,7 @@ public static class LibraryVariantReview
             new("Wolf", "Alpha Wolf", "beasts.wolf.alpha"), new("Crab", "Deep Crab", "bestiary.crab.deep")],
         "iron-and-fangs" => [new("Scorpion", "Black Scorpion", "bestiary.scorpion.black"),
             new("Rider", "Warg Rider", "bestiary.warg.rider"), new("Mimic", "Ironbound Mimic", "bosses.mimic.ironbound")],
+        "wyrm-triad" => [Dragon("Black"), Dragon("Blue"), Dragon("Green")],
         _ => throw new ArgumentException($"Unknown library art batch: {batch}", nameof(batch)),
     };
 

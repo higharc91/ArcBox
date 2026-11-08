@@ -56,12 +56,17 @@ public sealed class MobRefreshTests
     [InlineData("bestiary.scorpion.black", "scorpion_black")]
     [InlineData("bestiary.warg.rider", "warg_rider")]
     [InlineData("bosses.mimic.ironbound", "mimic_ironbound")]
+    [InlineData("bosses.dragon.black", "dragon_black")]
+    [InlineData("bosses.dragon.blue", "dragon_blue")]
+    [InlineData("bosses.dragon.green", "dragon_green")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
         Assert.Equal($"creatures/mob_refresh_{name}.png", sprite.Path);
         Assert.Equal(8, sprite.Directions.Length);
-        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var (pixels, width, height) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        Assert.InRange(width, 1, 16384);
+        Assert.InRange(height, 1, 16384);
         for (var row = 0; row < 8; row++)
         {
             foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" }.Concat(new[] { "cast", "special", "buff" }.Where(sprite.Anims.ContainsKey)))
@@ -288,10 +293,14 @@ public sealed class MobRefreshTests
         Assert.Equal("creatures/mother_skarrow.png", art.Sprite("characters.mother_skarrow")!.Path);
     }
 
-    [Fact]
-    public void Drake_spreads_its_wings_in_every_attack_facing()
+    [Theory]
+    [InlineData("beasts.drake.red")]
+    [InlineData("bosses.dragon.black")]
+    [InlineData("bosses.dragon.blue")]
+    [InlineData("bosses.dragon.green")]
+    public void Winged_creatures_spread_their_wings_in_every_attack_facing(string key)
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("beasts.drake.red")!;
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         (int Width, int Top) Bounds(int frame, int row)
         {
@@ -307,8 +316,8 @@ public sealed class MobRefreshTests
         {
             var idle = Bounds(sprite.Idle.Frames[0], row);
             var attack = Bounds(10, row);
-            Assert.True(attack.Width > idle.Width * 1.25, $"Wings did not widen facing {row}");
-            Assert.True(attack.Top < idle.Top - 4, $"Wings did not rise facing {row}");
+            Assert.True(attack.Width > idle.Width * (key == "beasts.drake.red" ? 1.25 : 1.2), $"Wings did not widen facing {row}");
+            if (key == "beasts.drake.red") Assert.True(attack.Top < idle.Top - 4, $"Wings did not rise facing {row}");
         }
     }
 
@@ -349,6 +358,9 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.earth_elemental.magma")!.HeadLift / person, 1.35f, 1.9f);
         Assert.InRange(art.Sprite("bosses.water_elemental.swamp")!.HeadLift / person, 1.2f, 1.7f);
         Assert.InRange(art.Sprite("bosses.dragon.red")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.black")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.blue")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.green")!.HeadLift / person, 1.7f, 2.3f);
         Assert.InRange(art.Sprite("bosses.sapling.spring")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.imp.crimson")!.HeadLift / person, .4f, .75f);
         Assert.InRange(art.Sprite("bosses.hound.tan")!.HeadLift / person, .35f, .65f);

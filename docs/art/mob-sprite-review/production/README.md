@@ -70,3 +70,5 @@ Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet I
 [Batch 21: Phase Spider, Alpha Wolf and Deep Crab](../web-and-hunt/index.html) adds library batch 6; 13 older appearances remain.
 
 [Batch 22: Black Scorpion, Warg Rider and Ironbound Mimic](../iron-and-fangs/index.html) adds library batch 7; 10 older appearances remain.
+
+[Batch 23: Black, Blue and Green Dragon](../wyrm-triad/index.html) adds library batch 8; 7 older appearances remain.

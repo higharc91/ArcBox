@@ -667,6 +667,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 "bosses.air_elemental.storm" => "bosses.air_elemental.gale",
                 "bosses.earth_elemental.magma" => "bosses.earth_elemental.stone",
                 "bosses.water_elemental.swamp" => "bosses.water_elemental.sea",
+                "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" => "bosses.dragon.red",
                 _ => sourceUnit?.Sprite,
             };
             (string? Pose, double Length, double Impact) elemental = (elementalKey, used.Ability.Value, anim) switch
@@ -741,6 +742,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var impact = elemental.Pose is not null ? elemental.Impact : seismic ? 0.5 : 0;
                 EffectSound(effect, _t + impact);
                 if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red"
+                    or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green"
                     or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
                     or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
                     or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow")
@@ -761,7 +763,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var reach = Math.Max(Math.Abs(target.X - source.X), Math.Abs(target.Y - source.Y));
             // The sapling's attached vine and the red dragon's jaws are physical reach weapons.
             var naturalReach = used.Ability.Value == "common.attack" && reach <= 2
-                && _view.Units.Any(u => u.Id == used.Source && u.Sprite is "bosses.sapling.spring" or "bosses.dragon.red")
+                && _view.Units.Any(u => u.Id == used.Source && u.Sprite is "bosses.sapling.spring" or "bosses.dragon.red"
+                    or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green")
                 && used.Presentation?.Projectile is null && used.Presentation?.Fx is null
                 && anim is "attack" or "characters.attack" or "bosses.attack";
             // Basic ranged attacks infer their projectile from the equipped weapon.
@@ -797,13 +800,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                             or "beasts.bat.vampire" or "beasts.bear.undead" or "beasts.slime.crystal"
                             or "beasts.spider.phase" or "beasts.wolf.alpha" or "bestiary.crab.deep"
                             or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound" => 0.8,
-                        "bosses.dragon.red" => 1.0,
+                        "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" => 1.0,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);
-                _t += length != BeatTiming.Lunge ? sourceUnit?.Sprite == "bosses.dragon.red" ? .5 : .4 : BeatTiming.Windup;
+                _t += length != BeatTiming.Lunge ? sourceUnit?.Sprite is "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" ? .5 : .4 : BeatTiming.Windup;
             }
             else
             {

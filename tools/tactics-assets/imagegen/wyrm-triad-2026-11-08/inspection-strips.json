@@ -1,0 +1,260 @@
+{
+  "dragon_black": {
+    "sourceAtlasSha256": "e2737fcbddc762cbaa6ec11f38481aac02d44f196ac91551324606f9630d9708",
+    "sourceBytes": 15233722,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/dragon_black-0.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "9ac0a2258677b228510b5ae8fcbe2155818b34861245de769e8adb788f23f56f",
+        "webpSha256": "d5a71de73208455ac7bc0e8ed9689ebe59a556a73a41af190bc75cf9e9e59614",
+        "bytes": 1250638,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/dragon_black-1.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "a2cbdc146cc8c01f3c6f0124729f2a7cf714b85e50de3880019551ba6e6a84e4",
+        "webpSha256": "b296123da200a253657e5be1837fc3ba4fd4ece13cff69b25e859379f390fdbb",
+        "bytes": 1128108,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/dragon_black-2.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "aed1a930b18aab6ffb10c5bfee844495f299e7cb00a38fc39f39b39081ba79f5",
+        "webpSha256": "a34d7d4bdcf887f4ec23f4f5f74669c175fe31fce19f55a803fc84c49a7af946",
+        "bytes": 935178,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/dragon_black-3.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "6719ed581e869e6cfbd897ee5f2539f92987ac258d1cce164b2b4b801baa73bb",
+        "webpSha256": "2e61b7b328d0d2487e117655e0f17c7872e43c4c3c03cd73103d391997451cc6",
+        "bytes": 1057718,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/dragon_black-4.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "b4bdb99c5a482560ff429eb3abce6a5148a87ef0660c5c7c5914044c343ddc6c",
+        "webpSha256": "eb864e467511e16c39892ea1ab30816bbc7c9f97edf1bd4ba14344755427935c",
+        "bytes": 1194876,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/dragon_black-5.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "863d9e0f2e559534e535f4fb40bbbbc2ba839d21759ee5f253c31b51fa4d3bf7",
+        "webpSha256": "78e67d9e2b8f903ca96657fd9cb60e939c803e217583d61072fad1db6c217e03",
+        "bytes": 1063966,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/dragon_black-6.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "607a5a43d966951332784aef4593016d83951d108c623dc43b9185bdd08742c9",
+        "webpSha256": "0a5a32e07c351118fafe45006bf8ba514f9a20c3ce941b01375a56b37a5ce0b5",
+        "bytes": 1097168,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/dragon_black-7.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "840c5763954aa44757117f8f182cc49ffc056b4cb5fe75e4f4becb930f949061",
+        "webpSha256": "9de72340b7e1cbe090d9fa028b779dd407b7cbda1001da026983aae2ba84ca2f",
+        "bytes": 1128674,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  },
+  "dragon_blue": {
+    "sourceAtlasSha256": "524618f823b230d533de8ec1d2436fb2b00bfcce28ff80ad720ac6c4996e50b5",
+    "sourceBytes": 15948676,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/dragon_blue-0.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "e2822d06d0c92b5d86b941db9799b43fbce3a05397a05c8a6d1f84b6d7ce380e",
+        "webpSha256": "4fc4f56ec90e6ef5830eb4968222ebefd360116723ca3dfe4658a4ad7e1360e3",
+        "bytes": 1327250,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/dragon_blue-1.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "90c40572b06440df0756c9f92d2bc47ac5c28cf90ab8f1893b279b2dffb59f61",
+        "webpSha256": "977bbebebbf4e5bc163132951318e2ed2aecabb6240e292c648e8232423b1ad9",
+        "bytes": 1245166,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/dragon_blue-2.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "8d4477b4435198528eb972c993b0a54dd4326dc05bcd4e9feb2c239702126ac0",
+        "webpSha256": "aaa19a2a15d233d503ca17aa26a75ef468752c89b1342f284b99bfa9dd49b702",
+        "bytes": 973936,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/dragon_blue-3.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "c0b0db736621fb773f98123ae6e59c1611bd3a74e2e29fd5951b7437966e845b",
+        "webpSha256": "d7e590449f274ecdab377df9c087d39620f3126b6c071fcebba8ca46f945668d",
+        "bytes": 1122118,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/dragon_blue-4.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "0d2584a90d28d1319465e7772c41b928a0f6226398441a1c47397edd865ec796",
+        "webpSha256": "99b85c26d883f8a2f9f5ae1d89ae17dcd65f6d740783cabbc7fe2efaa3e63ebf",
+        "bytes": 1266634,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/dragon_blue-5.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "aa23bc80c80b236d12aa0ff44179e50a51db28f978434ffbca68e167eb802dfe",
+        "webpSha256": "691ca34727cad943527be9b832316a9d25e5d2f2b12df11b475828187971c8b2",
+        "bytes": 1174358,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/dragon_blue-6.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "5d22bc0ff4ed25a21cee5efd94b58bae108344975894a6597d5bfde07d577b99",
+        "webpSha256": "9cdc0b844eda2b7814e7f02615451da98a45aa2bb2b7a0827394c4225cc195b6",
+        "bytes": 1197886,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/dragon_blue-7.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "2d1ce837eead99ad503421db06415ee43ae199bd5f8144d0e285c34a748a59ef",
+        "webpSha256": "4210ce98ddb705933dc72e802daa910572bc98a22a066296967681620d614146",
+        "bytes": 1225114,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  },
+  "dragon_green": {
+    "sourceAtlasSha256": "416fb6f91436b670355001198f89bc34278f4a4eaa1b9f5c7534edaa195ed235",
+    "sourceBytes": 14956327,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/dragon_green-0.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "f33dc81d85651b52437b4695aff68015fd70bab7fab92f0081c235d2d1c038cc",
+        "webpSha256": "129979322e55d5193dc66182669fff9ea2227be1695d2adfc66766a1003de4fa",
+        "bytes": 1291664,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/dragon_green-1.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "9ef0382c7f0a5c7f3db94999cf0629f08144a0ffe0f0e75c9b2beff625fa2603",
+        "webpSha256": "d636af256f8008026a0356fd761d67f14402218610cece3d13db5d3628c96e11",
+        "bytes": 1181690,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/dragon_green-2.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "cc8ad270890c7928b99c0fb98f8b821c4afe4f277116c95741d26758bb60a40b",
+        "webpSha256": "6c4799454e8bd9de3c84b2c3737cf52721157cfdd971337f73d57e0f73f3f87a",
+        "bytes": 931560,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/dragon_green-3.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "3fe539d3fdeae638f76e151554651cbb6fba73846a2b1c5ce05126c4df62d531",
+        "webpSha256": "51515b229129d0f0973cc9270199b2c043e827726dbc6efec27120f60c6ca702",
+        "bytes": 1077730,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/dragon_green-4.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "f7e97d809f6ccf3e05f4ad09879474c9424ac026236b9895b713dd5db4d6d548",
+        "webpSha256": "02d344a40e1124187ee00a6432e8e0bb32adb7a3f29c443e04b14334d78f88c9",
+        "bytes": 1171272,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/dragon_green-5.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "943fab8cc0f8fad5c49f2028667fbba4d80370f18a1eba998226a2ce38f7bd34",
+        "webpSha256": "782e8c2f5fa27d301d15373a530b90bcf0b1249d730fcbdccdb46ed1b90353fe",
+        "bytes": 1108684,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/dragon_green-6.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "c2fa065d2d2e6eadf54dc66947223d2ce452d58d6014fabb08c61e8ad51d3f3e",
+        "webpSha256": "59eb1d3487dac0587acc2d0a1e2a5cfe9ee383094dbd59b1f7031c71f283feac",
+        "bytes": 945036,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/dragon_green-7.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "ee3747f132ffa61d5af902a7d51b4f2b0d55f7169c09d61fdce986aaa855de41",
+        "webpSha256": "90e7f0c888e7f9db5a4c2cefa90fc794ed8bb1ed276e74e46333cf690c627860",
+        "bytes": 1152434,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  }
+}

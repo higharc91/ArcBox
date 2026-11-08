@@ -1,0 +1,142 @@
+[
+  {
+    "mob": "dragon_black",
+    "source": "dragons-rear-left-damage",
+    "count": 6,
+    "columns": 3,
+    "referencePose": 0,
+    "heightFactor": 0.96,
+    "action": "hurt",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_black",
+    "source": "dragons-rear-left-damage",
+    "count": 6,
+    "columns": 3,
+    "referencePose": 0,
+    "heightFactor": 0.96,
+    "action": "down",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_blue",
+    "source": "dragons-rear-left-damage",
+    "count": 6,
+    "columns": 3,
+    "referencePose": 1,
+    "heightFactor": 0.96,
+    "action": "hurt",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_blue",
+    "source": "dragons-rear-left-damage",
+    "count": 6,
+    "columns": 3,
+    "referencePose": 1,
+    "heightFactor": 0.96,
+    "action": "down",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_green",
+    "source": "dragons-rear-left-damage",
+    "count": 6,
+    "columns": 3,
+    "referencePose": 2,
+    "heightFactor": 0.96,
+    "action": "hurt",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_green",
+    "source": "dragons-rear-left-damage",
+    "count": 6,
+    "columns": 3,
+    "referencePose": 2,
+    "heightFactor": 0.96,
+    "action": "down",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_black",
+    "source": "dragons-east-wingbeat",
+    "count": 8,
+    "columns": 4,
+    "referencePose": 0,
+    "action": "buff",
+    "targets": [
+      {
+        "row": 6,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_blue",
+    "source": "dragons-east-wingbeat",
+    "count": 8,
+    "columns": 4,
+    "referencePose": 4,
+    "action": "buff",
+    "targets": [
+      {
+        "row": 6,
+        "poses": [
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ]
+  }
+]

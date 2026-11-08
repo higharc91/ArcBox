@@ -43,13 +43,33 @@ public static class LibraryVariantDemo
                     new Damaged(new("Fighter"), 4, c.Sprite switch
                     {
                         "beasts.bat.vampire" or "beasts.spider.phase" or "beasts.wolf.alpha"
-                            or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound" => "piercing",
+                            or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
+                            or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" => "piercing",
                         "beasts.bear.undead" => "slashing",
                         _ => "bludgeoning",
                     }, 24)],
-                targets[i], (.22, c.Id.ToLowerInvariant() + "-attack-windup"), (.46, c.Id.ToLowerInvariant() + "-attack-contact"), (1.2, c.Id.ToLowerInvariant() + "-recovery"));
+                targets[i], (.22, c.Id.ToLowerInvariant() + "-attack-windup"),
+                (c.Sprite.StartsWith("bosses.dragon.", StringComparison.Ordinal) ? .56 : .46, c.Id.ToLowerInvariant() + "-attack-contact"),
+                (1.2, c.Id.ToLowerInvariant() + "-recovery"));
         }
-        Add(18, "Library creatures ready again", null, [], new(12, 10), (.5, "library-restored"));
+        var next = 18d;
+        for (var i = 0; i < creatures.Count; i++)
+        {
+            var c = creatures[i];
+            if (c.Specials is not { Count: > 0 } specials) continue;
+            Add(next - .8, c.Name + " special target ready", null, [], targets[i]);
+            foreach (var special in specials)
+            {
+                var ability = new AbilityId(special.Ability);
+                var name = c.Id.ToLowerInvariant() + "-" + special.Label;
+                Add(next, name, new(c.Id),
+                    [new AbilityUsed(new(c.Id), ability, new Target(Unit: new(special.Targeted ? "Fighter" : c.Id)),
+                        rules.Abilities[ability].Presentation)], targets[i],
+                    (.2, name + "-windup"), (special.Impact + .05, name + "-impact"));
+                next += 3;
+            }
+        }
+        Add(next, "Library creatures ready again", null, [], new(12, 10), (.5, "library-restored"));
         return steps;
     }
 }

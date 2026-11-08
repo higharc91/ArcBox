@@ -21,14 +21,17 @@
     "bestiary.crab.deep",
     "bestiary.scorpion.black",
     "bestiary.warg.rider",
-    "bosses.mimic.ironbound"
+    "bosses.mimic.ironbound",
+    "bosses.dragon.black",
+    "bosses.dragon.blue",
+    "bosses.dragon.green"
   ],
-  "libraryBatchCount": 7,
-  "overallBatchCount": 22,
+  "libraryBatchCount": 8,
+  "overallBatchCount": 23,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 10,
+  "remainingTwoDirectionLooks": 7,
   "looks": [
     {
       "baselineNumber": 42,
@@ -280,14 +283,14 @@
       "key": "bosses.dragon.black",
       "name": "Dragon Black",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch8"
     },
     {
       "baselineNumber": 78,
       "key": "bosses.dragon.blue",
       "name": "Dragon Blue",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch8"
     },
     {
       "baselineNumber": 79,
@@ -301,7 +304,7 @@
       "key": "bosses.dragon.green",
       "name": "Dragon Green",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch8"
     },
     {
       "baselineNumber": 81,

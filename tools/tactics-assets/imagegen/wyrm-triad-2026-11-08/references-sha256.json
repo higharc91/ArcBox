@@ -1,0 +1,14 @@
+{
+  "dragon_black-attack.png": "76f7af893843eb190917cb71152c8e668112e217e3094859cd040e9c323c3c34",
+  "dragon_black-damage.png": "3ff0aa382277e5af11729c91a4234d0f3c644f30ac6de937ad07135ae4ab2c52",
+  "dragon_black-idle.png": "94f5d542e2fb4673be473dba8a529fc8e9598dc2fe731eb850fbc5c465da30a8",
+  "dragon_black-walk.png": "a3ca0f817c5836118651bc372169e791ba478776b8f162faffaba5abb07c0fb4",
+  "dragon_blue-attack.png": "76f7af893843eb190917cb71152c8e668112e217e3094859cd040e9c323c3c34",
+  "dragon_blue-damage.png": "3ff0aa382277e5af11729c91a4234d0f3c644f30ac6de937ad07135ae4ab2c52",
+  "dragon_blue-idle.png": "94f5d542e2fb4673be473dba8a529fc8e9598dc2fe731eb850fbc5c465da30a8",
+  "dragon_blue-walk.png": "a3ca0f817c5836118651bc372169e791ba478776b8f162faffaba5abb07c0fb4",
+  "dragon_green-attack.png": "76f7af893843eb190917cb71152c8e668112e217e3094859cd040e9c323c3c34",
+  "dragon_green-damage.png": "3ff0aa382277e5af11729c91a4234d0f3c644f30ac6de937ad07135ae4ab2c52",
+  "dragon_green-idle.png": "94f5d542e2fb4673be473dba8a529fc8e9598dc2fe731eb850fbc5c465da30a8",
+  "dragon_green-walk.png": "a3ca0f817c5836118651bc372169e791ba478776b8f162faffaba5abb07c0fb4"
+}

@@ -1,0 +1,3122 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 0,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      160,
+      198,
+      358,
+      397
+    ],
+    "count": 29558
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 1,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      163,
+      196,
+      359,
+      398
+    ],
+    "count": 29752
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 2,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      162,
+      198,
+      359,
+      397
+    ],
+    "count": 29471
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 3,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      160,
+      203,
+      358,
+      398
+    ],
+    "count": 28876
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 0,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      162,
+      201,
+      360,
+      400
+    ],
+    "count": 29017
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 1,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      196,
+      355,
+      400
+    ],
+    "count": 29053
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 2,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      164,
+      201,
+      361,
+      400
+    ],
+    "count": 28812
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 3,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      156,
+      202,
+      351,
+      400
+    ],
+    "count": 28299
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 0,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      162,
+      199,
+      358,
+      400
+    ],
+    "count": 29019
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 1,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      162,
+      199,
+      355,
+      400
+    ],
+    "count": 28772
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 2,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      116,
+      204,
+      394,
+      400
+    ],
+    "count": 35533
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 3,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      163,
+      203,
+      354,
+      400
+    ],
+    "count": 28445
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 0,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      160,
+      209,
+      383,
+      400
+    ],
+    "count": 28466
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 1,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      150,
+      270,
+      361,
+      400
+    ],
+    "count": 21028
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 0,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      153,
+      201,
+      355,
+      400
+    ],
+    "count": 29542
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 1,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      159,
+      207,
+      364,
+      400
+    ],
+    "count": 29753
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 2,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      136,
+      201,
+      373,
+      400
+    ],
+    "count": 32949
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 3,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      153,
+      201,
+      355,
+      400
+    ],
+    "count": 29610
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 0,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      159,
+      201,
+      361,
+      400
+    ],
+    "count": 29455
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 1,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      158,
+      188,
+      357,
+      400
+    ],
+    "count": 30672
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 2,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      128,
+      201,
+      384,
+      400
+    ],
+    "count": 34544
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 3,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      159,
+      201,
+      361,
+      400
+    ],
+    "count": 29432
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 0,
+    "scale": 1.25,
+    "bounds": [
+      160,
+      200,
+      360,
+      400
+    ],
+    "count": 29886
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 1,
+    "scale": 1.25,
+    "bounds": [
+      130,
+      184,
+      395,
+      400
+    ],
+    "count": 38912
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 2,
+    "scale": 1.25,
+    "bounds": [
+      123,
+      213,
+      400,
+      400
+    ],
+    "count": 32958
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 3,
+    "scale": 1.25,
+    "bounds": [
+      154,
+      204,
+      365,
+      400
+    ],
+    "count": 30126
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 4,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      168,
+      220,
+      371,
+      398
+    ],
+    "count": 25432
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 5,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      169,
+      213,
+      371,
+      398
+    ],
+    "count": 26147
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 6,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      170,
+      216,
+      372,
+      397
+    ],
+    "count": 25611
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 7,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      168,
+      222,
+      371,
+      397
+    ],
+    "count": 25148
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 4,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      180,
+      217,
+      384,
+      400
+    ],
+    "count": 25203
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 5,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      162,
+      211,
+      367,
+      400
+    ],
+    "count": 26031
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 6,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      167,
+      213,
+      374,
+      400
+    ],
+    "count": 25989
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 7,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      162,
+      222,
+      366,
+      400
+    ],
+    "count": 25152
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 4,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      169,
+      223,
+      371,
+      400
+    ],
+    "count": 25172
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 5,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      163,
+      211,
+      372,
+      400
+    ],
+    "count": 26461
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 6,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      120,
+      211,
+      397,
+      400
+    ],
+    "count": 31990
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 7,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      169,
+      223,
+      370,
+      400
+    ],
+    "count": 24895
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 2,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      174,
+      212,
+      378,
+      400
+    ],
+    "count": 25812
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 3,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      144,
+      274,
+      367,
+      400
+    ],
+    "count": 20208
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 4,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      166,
+      217,
+      369,
+      400
+    ],
+    "count": 25711
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 5,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      162,
+      217,
+      371,
+      400
+    ],
+    "count": 26537
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 6,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      145,
+      227,
+      389,
+      400
+    ],
+    "count": 28279
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 7,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      163,
+      222,
+      370,
+      400
+    ],
+    "count": 25669
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 4,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      170,
+      220,
+      374,
+      400
+    ],
+    "count": 25759
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 5,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      174,
+      205,
+      377,
+      400
+    ],
+    "count": 27075
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 6,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      162,
+      214,
+      395,
+      400
+    ],
+    "count": 30905
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 7,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      173,
+      220,
+      377,
+      400
+    ],
+    "count": 25785
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 4,
+    "scale": 1.25,
+    "bounds": [
+      155,
+      220,
+      360,
+      400
+    ],
+    "count": 26142
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 5,
+    "scale": 1.25,
+    "bounds": [
+      140,
+      194,
+      395,
+      400
+    ],
+    "count": 36381
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 6,
+    "scale": 1.25,
+    "bounds": [
+      119,
+      229,
+      396,
+      400
+    ],
+    "count": 30698
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 7,
+    "scale": 1.25,
+    "bounds": [
+      150,
+      224,
+      360,
+      400
+    ],
+    "count": 26269
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 8,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      136,
+      260,
+      346,
+      398
+    ],
+    "count": 18496
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 9,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      137,
+      256,
+      347,
+      397
+    ],
+    "count": 18743
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 10,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      136,
+      261,
+      348,
+      397
+    ],
+    "count": 18604
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 11,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      134,
+      262,
+      346,
+      397
+    ],
+    "count": 18426
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 8,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      135,
+      258,
+      350,
+      400
+    ],
+    "count": 19972
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 9,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      135,
+      257,
+      350,
+      400
+    ],
+    "count": 19910
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 10,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      132,
+      260,
+      347,
+      400
+    ],
+    "count": 19375
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 11,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      131,
+      258,
+      345,
+      400
+    ],
+    "count": 19565
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 8,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      130,
+      259,
+      352,
+      400
+    ],
+    "count": 19649
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 9,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      132,
+      259,
+      349,
+      400
+    ],
+    "count": 19884
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 10,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      87,
+      232,
+      370,
+      400
+    ],
+    "count": 28593
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 11,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      131,
+      259,
+      353,
+      400
+    ],
+    "count": 19678
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 4,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      137,
+      228,
+      379,
+      400
+    ],
+    "count": 25713
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 5,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      138,
+      299,
+      373,
+      400
+    ],
+    "count": 17686
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 8,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      130,
+      258,
+      354,
+      400
+    ],
+    "count": 20182
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 9,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      128,
+      257,
+      352,
+      400
+    ],
+    "count": 20540
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 10,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      104,
+      252,
+      366,
+      400
+    ],
+    "count": 24684
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 11,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      130,
+      258,
+      352,
+      400
+    ],
+    "count": 19987
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 8,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      129,
+      262,
+      354,
+      400
+    ],
+    "count": 20868
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 9,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      130,
+      254,
+      354,
+      400
+    ],
+    "count": 21011
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 10,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      114,
+      255,
+      365,
+      400
+    ],
+    "count": 24100
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 11,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      128,
+      261,
+      355,
+      400
+    ],
+    "count": 20614
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 8,
+    "scale": 1.25,
+    "bounds": [
+      125,
+      254,
+      361,
+      400
+    ],
+    "count": 21984
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 9,
+    "scale": 1.25,
+    "bounds": [
+      113,
+      205,
+      377,
+      400
+    ],
+    "count": 31638
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 10,
+    "scale": 1.25,
+    "bounds": [
+      90,
+      253,
+      367,
+      400
+    ],
+    "count": 25370
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 11,
+    "scale": 1.25,
+    "bounds": [
+      123,
+      254,
+      363,
+      400
+    ],
+    "count": 22250
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 12,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      131,
+      230,
+      333,
+      398
+    ],
+    "count": 21962
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 13,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      130,
+      219,
+      334,
+      398
+    ],
+    "count": 23275
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 14,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      128,
+      221,
+      332,
+      397
+    ],
+    "count": 23003
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 15,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      128,
+      226,
+      333,
+      398
+    ],
+    "count": 22514
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 12,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      131,
+      228,
+      332,
+      400
+    ],
+    "count": 22354
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 13,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      129,
+      220,
+      332,
+      400
+    ],
+    "count": 23403
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 14,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      129,
+      221,
+      333,
+      400
+    ],
+    "count": 23168
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 15,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      132,
+      222,
+      331,
+      400
+    ],
+    "count": 22737
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 12,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      152,
+      228,
+      354,
+      400
+    ],
+    "count": 23005
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 13,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      125,
+      221,
+      330,
+      400
+    ],
+    "count": 22961
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 14,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      102,
+      214,
+      357,
+      400
+    ],
+    "count": 30518
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 15,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      129,
+      227,
+      332,
+      400
+    ],
+    "count": 22885
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragons-rear-left-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5026178010471204,
+    "bounds": [
+      139,
+      209,
+      333,
+      400
+    ],
+    "count": 24506
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragons-rear-left-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5026178010471204,
+    "bounds": [
+      151,
+      247,
+      359,
+      400
+    ],
+    "count": 21205
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 12,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      124,
+      225,
+      335,
+      400
+    ],
+    "count": 23513
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 13,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      124,
+      221,
+      335,
+      400
+    ],
+    "count": 24070
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 14,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      125,
+      227,
+      358,
+      400
+    ],
+    "count": 25840
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 15,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      120,
+      225,
+      334,
+      400
+    ],
+    "count": 23862
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 12,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      130,
+      225,
+      333,
+      400
+    ],
+    "count": 23351
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 13,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      131,
+      220,
+      333,
+      400
+    ],
+    "count": 23560
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 14,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      123,
+      220,
+      340,
+      400
+    ],
+    "count": 26036
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 15,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      128,
+      225,
+      334,
+      400
+    ],
+    "count": 23070
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 12,
+    "scale": 1.25,
+    "bounds": [
+      145,
+      215,
+      354,
+      400
+    ],
+    "count": 26029
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 13,
+    "scale": 1.25,
+    "bounds": [
+      134,
+      195,
+      379,
+      400
+    ],
+    "count": 34913
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 14,
+    "scale": 1.25,
+    "bounds": [
+      131,
+      217,
+      380,
+      400
+    ],
+    "count": 30547
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 15,
+    "scale": 1.25,
+    "bounds": [
+      143,
+      217,
+      357,
+      400
+    ],
+    "count": 26554
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 16,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      155,
+      185,
+      336,
+      398
+    ],
+    "count": 27773
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 17,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      156,
+      180,
+      337,
+      398
+    ],
+    "count": 28717
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 18,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      156,
+      186,
+      337,
+      398
+    ],
+    "count": 28059
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 19,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      156,
+      186,
+      338,
+      398
+    ],
+    "count": 27892
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 16,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      187,
+      345,
+      400
+    ],
+    "count": 28086
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 17,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      184,
+      343,
+      400
+    ],
+    "count": 28534
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 18,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      144,
+      187,
+      328,
+      400
+    ],
+    "count": 27993
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 19,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      144,
+      187,
+      327,
+      400
+    ],
+    "count": 27839
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 16,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      157,
+      195,
+      339,
+      400
+    ],
+    "count": 26948
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 17,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      159,
+      184,
+      337,
+      400
+    ],
+    "count": 27433
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 18,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      109,
+      186,
+      392,
+      400
+    ],
+    "count": 35218
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 19,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      157,
+      195,
+      339,
+      400
+    ],
+    "count": 27041
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 8,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      104,
+      171,
+      319,
+      400
+    ],
+    "count": 29485
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 9,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      150,
+      250,
+      361,
+      400
+    ],
+    "count": 23131
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 16,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      157,
+      186,
+      340,
+      400
+    ],
+    "count": 29008
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 17,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      158,
+      183,
+      342,
+      400
+    ],
+    "count": 29529
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 18,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      138,
+      185,
+      363,
+      400
+    ],
+    "count": 32999
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 19,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      157,
+      186,
+      340,
+      400
+    ],
+    "count": 29130
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 16,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      156,
+      186,
+      342,
+      400
+    ],
+    "count": 28822
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 17,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      159,
+      175,
+      340,
+      400
+    ],
+    "count": 29513
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 18,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      122,
+      181,
+      375,
+      400
+    ],
+    "count": 35612
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 19,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      157,
+      183,
+      343,
+      400
+    ],
+    "count": 29303
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 16,
+    "scale": 1.25,
+    "bounds": [
+      162,
+      184,
+      343,
+      400
+    ],
+    "count": 28183
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 17,
+    "scale": 1.25,
+    "bounds": [
+      130,
+      178,
+      377,
+      400
+    ],
+    "count": 37190
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 18,
+    "scale": 1.25,
+    "bounds": [
+      108,
+      190,
+      393,
+      400
+    ],
+    "count": 33752
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 19,
+    "scale": 1.25,
+    "bounds": [
+      162,
+      184,
+      341,
+      400
+    ],
+    "count": 27582
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 20,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      154,
+      226,
+      353,
+      398
+    ],
+    "count": 22633
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 21,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      154,
+      215,
+      357,
+      397
+    ],
+    "count": 24403
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 22,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      154,
+      226,
+      355,
+      398
+    ],
+    "count": 23109
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 23,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      155,
+      227,
+      356,
+      397
+    ],
+    "count": 22749
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 20,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      153,
+      221,
+      354,
+      400
+    ],
+    "count": 23665
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 21,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      175,
+      216,
+      378,
+      400
+    ],
+    "count": 24454
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 22,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      177,
+      221,
+      380,
+      400
+    ],
+    "count": 23715
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 23,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      177,
+      222,
+      378,
+      400
+    ],
+    "count": 23260
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 20,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      158,
+      224,
+      353,
+      400
+    ],
+    "count": 23451
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 21,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      156,
+      216,
+      352,
+      400
+    ],
+    "count": 24719
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 22,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      115,
+      214,
+      374,
+      400
+    ],
+    "count": 30433
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 23,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      158,
+      224,
+      351,
+      400
+    ],
+    "count": 23406
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 10,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      152,
+      182,
+      345,
+      400
+    ],
+    "count": 27161
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 11,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      150,
+      257,
+      361,
+      400
+    ],
+    "count": 18987
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 20,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      151,
+      223,
+      356,
+      400
+    ],
+    "count": 23749
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 21,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      151,
+      222,
+      353,
+      400
+    ],
+    "count": 23827
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 22,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      157,
+      222,
+      377,
+      400
+    ],
+    "count": 25909
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 23,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      150,
+      226,
+      353,
+      400
+    ],
+    "count": 23591
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 20,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      152,
+      225,
+      359,
+      400
+    ],
+    "count": 24266
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 21,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      152,
+      215,
+      358,
+      400
+    ],
+    "count": 24920
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 22,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      143,
+      215,
+      361,
+      400
+    ],
+    "count": 27963
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 23,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      152,
+      225,
+      358,
+      400
+    ],
+    "count": 24137
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 20,
+    "scale": 1.25,
+    "bounds": [
+      157,
+      219,
+      363,
+      400
+    ],
+    "count": 25049
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 21,
+    "scale": 1.25,
+    "bounds": [
+      133,
+      198,
+      363,
+      400
+    ],
+    "count": 33355
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 22,
+    "scale": 1.25,
+    "bounds": [
+      111,
+      227,
+      397,
+      400
+    ],
+    "count": 30338
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 23,
+    "scale": 1.25,
+    "bounds": [
+      157,
+      224,
+      363,
+      400
+    ],
+    "count": 24914
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 24,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      165,
+      261,
+      374,
+      397
+    ],
+    "count": 18737
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 25,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      165,
+      255,
+      372,
+      397
+    ],
+    "count": 19145
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 26,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      163,
+      260,
+      373,
+      398
+    ],
+    "count": 18620
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 27,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      163,
+      265,
+      372,
+      398
+    ],
+    "count": 18454
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 24,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      166,
+      258,
+      376,
+      400
+    ],
+    "count": 19457
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 25,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      154,
+      256,
+      369,
+      400
+    ],
+    "count": 20138
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 26,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      258,
+      372,
+      400
+    ],
+    "count": 19455
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 27,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      157,
+      260,
+      370,
+      400
+    ],
+    "count": 19245
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 24,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      163,
+      260,
+      386,
+      400
+    ],
+    "count": 19824
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 25,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      166,
+      253,
+      378,
+      400
+    ],
+    "count": 19829
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 26,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      135,
+      240,
+      411,
+      400
+    ],
+    "count": 26503
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 27,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      162,
+      260,
+      386,
+      400
+    ],
+    "count": 20048
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 12,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      144,
+      233,
+      383,
+      400
+    ],
+    "count": 25550
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 13,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      139,
+      301,
+      372,
+      400
+    ],
+    "count": 16412
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 24,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      160,
+      262,
+      384,
+      400
+    ],
+    "count": 20413
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 25,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      161,
+      260,
+      382,
+      400
+    ],
+    "count": 20368
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 26,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      145,
+      260,
+      393,
+      400
+    ],
+    "count": 22321
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 27,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      161,
+      260,
+      383,
+      400
+    ],
+    "count": 20556
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 24,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      152,
+      262,
+      375,
+      400
+    ],
+    "count": 20423
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 25,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      154,
+      247,
+      363,
+      400
+    ],
+    "count": 20766
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 26,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      130,
+      247,
+      386,
+      400
+    ],
+    "count": 24995
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 27,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      155,
+      263,
+      377,
+      400
+    ],
+    "count": 20312
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragons-east-wingbeat.png",
+    "sourcePose": 0,
+    "scale": 1,
+    "bounds": [
+      140,
+      201,
+      391,
+      400
+    ],
+    "count": 31468
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragons-east-wingbeat.png",
+    "sourcePose": 1,
+    "scale": 1,
+    "bounds": [
+      112,
+      152,
+      438,
+      400
+    ],
+    "count": 50352
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragons-east-wingbeat.png",
+    "sourcePose": 2,
+    "scale": 1,
+    "bounds": [
+      70,
+      202,
+      447,
+      400
+    ],
+    "count": 42886
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragons-east-wingbeat.png",
+    "sourcePose": 3,
+    "scale": 1,
+    "bounds": [
+      140,
+      201,
+      390,
+      400
+    ],
+    "count": 33099
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 28,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      143,
+      219,
+      341,
+      398
+    ],
+    "count": 25127
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 29,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      145,
+      205,
+      344,
+      397
+    ],
+    "count": 26203
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 30,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      145,
+      213,
+      347,
+      398
+    ],
+    "count": 26009
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_black-idle.png",
+    "sourcePose": 31,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      145,
+      219,
+      346,
+      398
+    ],
+    "count": 25216
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 28,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      170,
+      220,
+      377,
+      400
+    ],
+    "count": 25064
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 29,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      143,
+      215,
+      347,
+      400
+    ],
+    "count": 25440
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 30,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      172,
+      214,
+      379,
+      400
+    ],
+    "count": 25896
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_black-walk.png",
+    "sourcePose": 31,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      171,
+      223,
+      375,
+      400
+    ],
+    "count": 25003
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 28,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      144,
+      221,
+      342,
+      400
+    ],
+    "count": 25174
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 29,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      144,
+      215,
+      343,
+      400
+    ],
+    "count": 25777
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 30,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      97,
+      210,
+      362,
+      400
+    ],
+    "count": 31957
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_black-attack.png",
+    "sourcePose": 31,
+    "scale": 1.1904761904761905,
+    "bounds": [
+      146,
+      221,
+      343,
+      400
+    ],
+    "count": 24902
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 14,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      144,
+      221,
+      355,
+      400
+    ],
+    "count": 25252
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-damage.png",
+    "sourcePose": 15,
+    "scale": 0.8609865470852018,
+    "bounds": [
+      140,
+      297,
+      370,
+      400
+    ],
+    "count": 16403
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 28,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      142,
+      221,
+      344,
+      400
+    ],
+    "count": 25323
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 29,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      140,
+      214,
+      347,
+      400
+    ],
+    "count": 26308
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 30,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      125,
+      223,
+      353,
+      400
+    ],
+    "count": 27394
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_black-breath.png",
+    "sourcePose": 31,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      141,
+      219,
+      350,
+      400
+    ],
+    "count": 26097
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 28,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      137,
+      218,
+      344,
+      400
+    ],
+    "count": 26604
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 29,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      136,
+      204,
+      345,
+      400
+    ],
+    "count": 27396
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 30,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      118,
+      213,
+      350,
+      400
+    ],
+    "count": 28988
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_black-roar.png",
+    "sourcePose": 31,
+    "scale": 1.2345679012345678,
+    "bounds": [
+      139,
+      219,
+      346,
+      400
+    ],
+    "count": 26358
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 28,
+    "scale": 1.25,
+    "bounds": [
+      146,
+      215,
+      345,
+      400
+    ],
+    "count": 26605
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 29,
+    "scale": 1.25,
+    "bounds": [
+      115,
+      190,
+      354,
+      400
+    ],
+    "count": 34285
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 30,
+    "scale": 1.25,
+    "bounds": [
+      114,
+      225,
+      379,
+      400
+    ],
+    "count": 29843
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_black-wingbeat.png",
+    "sourcePose": 31,
+    "scale": 1.25,
+    "bounds": [
+      140,
+      222,
+      346,
+      400
+    ],
+    "count": 26997
+  }
+]

@@ -60,7 +60,7 @@ public sealed class CreatureAtlasTests
                 // Authored walk cycles use four, six or eight keys; padding them with duplicates adds no motion.
                 Assert.Contains(sprite.Anim("walk").Frames.Length, new[] { 4, 6, 8 });
                 var attack = sprite.Anim("attack");
-                if (item.Name == "mob_refresh_dragon")
+                if (entry.GetProperty("family").GetString() == "dragon")
                 {
                     // The dragon deliberately holds its wind-up before the jaw/wing contact.
                     Assert.Equal(1, attack.Frames.Length / attack.Fps, 3);

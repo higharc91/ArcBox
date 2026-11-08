@@ -46,6 +46,8 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
     /// <summary>How many screenshots <c>--shots</c> takes of each kind of moment.</summary>
     private const int ShotsPerMoment = 6;
+    // Three-creature art reviews can exercise nine special contacts in one replay.
+    private const int BeatShotsPerMoment = 12;
 
     /// <summary>With <c>--shots</c>, how many shots a walk leaves of the party on the move and at a stop, and how far apart and how long after stopping.</summary>
     private const int WalkShots = 24;
@@ -752,7 +754,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     private void Shoot(string moment)
     {
         var taken = _moments.GetValueOrDefault(moment);
-        if (_shots is not null && taken < ShotsPerMoment)
+        if (_shots is not null && taken < BeatShotsPerMoment)
         {
             _moments[moment] = taken + 1;
             _shots.Capture($"tactics-beat-{moment}-{_playing?.Seq}");

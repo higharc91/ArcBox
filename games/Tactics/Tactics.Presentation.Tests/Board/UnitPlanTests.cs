@@ -74,6 +74,18 @@ public sealed class UnitPlanTests
     [InlineData("bestiary.scorpion.black", "bestiary.attack", .4)]
     [InlineData("bestiary.warg.rider", "bestiary.attack", .4)]
     [InlineData("bosses.mimic.ironbound", "bosses.attack", .4)]
+    [InlineData("bosses.dragon.black", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.black", "bosses.special", .5)]
+    [InlineData("bosses.dragon.black", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.black", "bosses.buff", .7)]
+    [InlineData("bosses.dragon.blue", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.blue", "bosses.special", .5)]
+    [InlineData("bosses.dragon.blue", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.blue", "bosses.buff", .7)]
+    [InlineData("bosses.dragon.green", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.green", "bosses.special", .5)]
+    [InlineData("bosses.dragon.green", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.green", "bosses.buff", .7)]
     public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
     {
         var view = Unit("a", "Enemy", 11, 10, key);

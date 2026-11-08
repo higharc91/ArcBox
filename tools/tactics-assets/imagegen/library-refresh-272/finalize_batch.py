@@ -17,6 +17,12 @@ def main(root, log_prefix):
     batch = json.loads((root / 'batch.json').read_text())
     roles = json.loads((root / 'roles.json').read_text())
     slug, title, date = batch['slug'], batch['title'], batch['date']
+    action_count = len(batch.get('actions', ['idle', 'walk', 'attack', 'hurt', 'down']))
+    native_seconds, reel_seconds = batch.get('nativeSeconds', 20), batch.get('reelSeconds', 24)
+    cadence = batch.get('cadenceNote', 'Natural strikes contact at .4 s and recover through .8 s, without changing rules, stats, effects or placements.')
+    replay_note = batch.get('replayNote', 'The replay contains three movement round trips, three natural attacks and return to ready.')
+    contact_label = batch.get('contactLabel', 'three engine-timed contacts')
+    actions_note = batch.get('actionsNote', f'Each creature has eight facings and {action_count} actions.')
     out = repo / 'docs/art/mob-sprite-review' / slug
     checks = out / 'checks'
     checks.mkdir(parents=True, exist_ok=True)
@@ -37,7 +43,7 @@ def main(root, log_prefix):
         text = (logs / (log_prefix + '-' + stem + '.log')).read_text()
         (checks / (stem + '.txt')).write_text('\n'.join(line.rstrip() for line in text.splitlines()) + '\n')
     media = {}
-    for name, duration in [(slug + '-motion.mp4', 24), ('godot-specials.mp4', 20)]:
+    for name, duration in [(slug + '-motion.mp4', reel_seconds), ('godot-specials.mp4', native_seconds)]:
         data = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-show_format', '-show_streams', '-of', 'json', str(out / name)]))
         assert abs(float(data['format']['duration']) - duration) < .1
         assert not any(stream['codec_type'] == 'audio' for stream in data['streams'])
@@ -94,7 +100,7 @@ def main(root, log_prefix):
 
 {source_count} source PNGs are preserved with exact prompts, generation IDs, references and whole-pose corrections. {keys} packed keys select {scope['distinctSelectedWholeFigures']} distinct complete authored figures. Hurt/down hold single poses. All creative pixels come from image generation; technical tools only copy, crop, uniformly scale and register whole figures. No procedural recolouring, mirrored parts or anatomy patches.
 
-Each creature has eight facings and five actions. Grounded poses register to their contact base; no synthetic head pinning or whole-body walk bob is added. Runtime size follows visible bodies rather than cell padding. Portraits frame front faces; neutral and active silhouette bounds determine bar clearance. Natural strikes contact at .4 s and recover through .8 s, without changing rules, stats, effects or placements.
+{actions_note} Grounded poses register to their contact base; no synthetic head pinning or whole-body walk bob is added. Runtime size follows visible bodies rather than cell padding. Portraits frame front faces; neutral and active silhouette bounds determine bar clearance. {cadence}
 
 {features}
 
@@ -116,14 +122,14 @@ Continues [issue #272](https://github.com/higharc91/ArcBox/issues/272) on `mob-l
 
 {features}
 
-{keys} packed keys select {scope['distinctSelectedWholeFigures']} complete figures from {source_count} preserved source sheets. Five actions and eight facings per creature; hurt/down hold single poses. Before/after and inspection animations retain a common scale for all creatures. [Battle](battle.png), [world lineup](overworld-lineup.png), [lighting/occlusion](overworld-lighting-occlusion.png), [three engine-timed contacts](actions-in-game.png).
+{keys} packed keys select {scope['distinctSelectedWholeFigures']} complete figures from {source_count} preserved source sheets. {actions_note} Hurt/down hold single poses. Before/after and inspection animations retain a common scale for all creatures. [Battle](battle.png), [world lineup](overworld-lineup.png), [lighting/occlusion](overworld-lighting-occlusion.png), [{contact_label}](actions-in-game.png).
 
 ## Verification
 
 - Host/test builds: zero warnings/errors. [All {counts['succeeded']} focused checks passed](checks/focused.txt), with none skipped. These cover silhouette connectivity, attachment, scale, HUD, atlas bounds, walkable review fixtures and natural contact/recovery.
-- [Scope/source receipts](checks/scope.json) preserve prior creature entries/images, rules/abilities, portraits, completed combat tracker and historical baseline. No new stats or encounters. Exact refreshed keys use the authored .4 s contact and .8 s recovery.
-- [Browser review](browser-validation.json) decodes all five embedded scenes and five actions, checks four distinct walk keys, and fits a 390 px phone viewport. [Complete silhouettes fit their gallery/reel panels](checks/artifact-bounds.json).
-- Native Godot battle, world and replay reviewed beside the party for scale, lighting, rear views, front portraits, contact and bar clearance. The silent native video lasts 20 seconds; the combined inspection reel lasts 24 seconds with four representative facings. The gallery selects any of eight facings. Software rendering checks appearance, not target-device performance. [Media metadata](checks/media.json).
+- [Scope/source receipts](checks/scope.json) preserve prior creature entries/images, rules/abilities, portraits, completed combat tracker and historical baseline. No new stats or encounters. {cadence}
+- [Browser review](browser-validation.json) decodes all five embedded scenes and {action_count} actions, checks four distinct walk keys, and fits a 390 px phone viewport. [Complete silhouettes fit their gallery/reel panels](checks/artifact-bounds.json).
+- Native Godot battle, world and replay reviewed beside the party for scale, lighting, rear views, front portraits, contact and bar clearance. The silent native video lasts {native_seconds} seconds; the combined inspection reel lasts {reel_seconds} seconds with four representative facings. The gallery selects any of eight facings. Software rendering checks appearance, not target-device performance. [Media metadata](checks/media.json).
 - Full presentation suite will run after the remaining issue #272 batches. Starting main checkpoint passed all 3,128 presentation tests.
 
 ## Reproduce captures
@@ -132,11 +138,11 @@ Use Godot Mono 4.7.2 and the .NET 10 host build. Before `--`: `--audio-driver Du
 
 ```sh
 --preset=low --tactics-demo=river_crossing:library-{slug} --shots=/absolute/battle-shots --quit-after=12
---preset=low --tactics-demo=library-{slug}-moves --shots=/absolute/move-shots --quit-after=22
+--preset=low --tactics-demo=library-{slug}-moves --shots=/absolute/move-shots --quit-after={native_seconds + 2}
 --preset=low --world-demo=ashen_ford:library-{slug} '--world-looks=road@37,61@37,61;lineup@52,60@52,60' '--world-route=37,61;39,61' --shots=/absolute/world-shots --quit-after=90
 ```
 
-Collect with `python tools/tactics-assets/imagegen/{root.name}/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`, then action-scenes.cjs, review.cjs and verify-review.cjs. The replay contains three movement round trips, three natural attacks and return to ready.
+Collect with `python tools/tactics-assets/imagegen/{root.name}/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`, then action-scenes.cjs, review.cjs and verify-review.cjs. {replay_note}
 ''')
     save(checks / 'test-summary.json', {'focused': counts, 'hostBuild': {'warnings': 0, 'errors': 0}, 'testBuild': {'warnings': 0, 'errors': 0},
          'browserValidationPassed': True, 'fullPresentation': 'Deferred until issue #272 art batches are complete; starting main checkpoint passed 3128/3128.'})

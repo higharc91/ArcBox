@@ -39,3 +39,5 @@ Use Godot Mono 4.7.2 and the .NET 10 host build. Before `--`: `--audio-driver Du
 ```
 
 Collect with `python tools/tactics-assets/imagegen/iron-and-fangs-2026-11-08/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`, then action-scenes.cjs, review.cjs and verify-review.cjs. The replay contains three movement round trips, three natural attacks and return to ready.
+
+[Next: Black, Blue and Green Dragon](../wyrm-triad/index.html), continuing issue #272 on the separate follow-up branch.
