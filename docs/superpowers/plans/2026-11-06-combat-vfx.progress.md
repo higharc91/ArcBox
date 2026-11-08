@@ -232,3 +232,6 @@ The merged asset guard identified 97 retained originals from the separate mob re
 
 
 The full gate passed on 967e9e8c. Concurrent main changes #275 (phone battle map) and #276 (hash-checked legacy source inventory) were then integrated without dropping either. Current main’s stronger source catalog is canonical. The post-update Release build, entire affected game-test project, phone tests/build, complete asset suite and Node checks validate the changed paths; full-gate and post-update evidence are recorded separately.
+
+
+The final playtest integration gate passes on `967e9e8cfdeee0a118e7c853626d5fc6a8020adc`: 7,579 .NET tests (zero skipped), 574 phone/build, 24 Node, 60 asset, 9 audio and 23 lore; zero build warnings. All nine approved PR heads are included, all current-main mob records remain exact and four Druid forms are retained. Full/Auto round overhead is 3.317/3.017 s across 180 completed rounds. The owner-authorized merge checkpoint is ready; remaining review/measurement and later classes stay open in #274. CI stays disabled.
