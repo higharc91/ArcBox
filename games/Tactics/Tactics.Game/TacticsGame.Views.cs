@@ -673,6 +673,7 @@ public sealed partial class TacticsGame
                 me = UnitViewOf(actor),
                 summoned = actor.SummonedBy is not null,
                 map = state.MapId,
+                terrain = PhoneTerrain.Of(state, Rules),
                 units = state.Units.Values.Where(DownedRules.InBattle).Select(UnitViewOf),
                 choices = PhoneChoices.Of(Choices.For(state, turn, Rules), Rules),
             }), state, actor, Rules), profile, hero)
