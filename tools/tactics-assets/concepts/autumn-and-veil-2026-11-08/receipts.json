@@ -1,0 +1,14 @@
+{
+  "model": "model_google-gemini-nano-banana-2-1",
+  "job": "job_m2QnKYGAhK6H15jUSTkUpoba",
+  "asset": "asset_cVoM4Xqc5C4xmfMeUHGBa3eP",
+  "creativeUnits": 12,
+  "team": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "revision": {
+    "provider": "OpenAI image generation",
+    "generationId": "a231c5e3-e8f7-4b5b-9628-5aff7290a329",
+    "prompt": "revision.txt",
+    "reason": "Restore the approved anatomical left-arm vine and restrained bark face; retain seasonal materials and Shade anatomy."
+  }
+}

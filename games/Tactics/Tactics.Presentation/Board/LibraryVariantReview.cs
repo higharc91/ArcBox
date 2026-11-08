@@ -27,6 +27,9 @@ public static class LibraryVariantReview
             new("Rider", "Warg Rider", "bestiary.warg.rider"), new("Mimic", "Ironbound Mimic", "bosses.mimic.ironbound")],
         "wyrm-triad" => [Dragon("Black"), Dragon("Blue"), Dragon("Green")],
         "gilded-and-rime" => [Dragon("Gold"), Giant("Frost", "Frost Troll", "frost"), Giant("Ogre", "Ogre", "ogre")],
+        "autumn-and-veil" => [new("Autumn", "Autumn Sapling", "bosses.sapling.autumn"),
+            new("Blossom", "Blossom Sapling", "bosses.sapling.blossom"),
+            new("Shade", "Shade", "bosses.wraith.shade", [new("wraith.life_drain", "drain", .4, true)])],
         _ => throw new ArgumentException($"Unknown library art batch: {batch}", nameof(batch)),
     };
 

@@ -1,0 +1,22 @@
+{
+  "sapling_autumn-attack-draft.png": "b4fc31aea394e54329a7f051f81d14813bd58a0e1c0c14eaea3c220f9c2c3506",
+  "sapling_autumn-attack.png": "c5893f0a138fa59a80208f2a3ae939f74dd4ade81c29b0ead1d125bb576d07e1",
+  "sapling_autumn-damage.png": "67cfec0fa6ae4e52d829310484fbf9da06288df4522ce8f5a75f9cd8245bebb9",
+  "sapling_autumn-idle.png": "199f66be7abe27945cd7fea8534d8fee2bb5a814e6810857950c780ad2ba4b49",
+  "sapling_autumn-walk.png": "c5ee0296e5438859dd983582d60772f2c98a048600ffa4c063e26cfce708f846",
+  "sapling_blossom-attack-draft.png": "573ecfc3a48cf5ed4304a96c4de07662dfb89ee6b8b93a43b922eb720561bdc0",
+  "sapling_blossom-attack.png": "ed4be158b176c9f87cd0e45b0e5facdaf2da459fedddc6d44fd9ed974660003a",
+  "sapling_blossom-damage.png": "13ea436973c095bde721cb1d6689e20563395ee98169cf32cec1ed9f53e1e6c9",
+  "sapling_blossom-idle.png": "4a262fd3059592e37536d9be9b860a9094662f233bedadfad73c491202314d42",
+  "sapling_blossom-walk-draft.png": "448d055359ea5621f40683ea471fb8f335d845cdb96f33e6e728d01cef00efd5",
+  "sapling_blossom-walk.png": "642f33ded19d68d79e4a3d4fad4d49abb8cdeed0283c12b712a0a630737a07a3",
+  "wraith_shade-attack-draft.png": "41a2d68394d88181e514343a8534c64a63b33d2c7e95d5eb10ef6e7f741bd978",
+  "wraith_shade-attack.png": "01c8803b0932f961d5968929419112d84e89c419b4b5297704014d31302fb97e",
+  "wraith_shade-cast.png": "f5ceca672c2a736db5a96ca843e14904c61b1e83d22108e213e7363dbba51d15",
+  "wraith_shade-damage-draft.png": "758ec7056ff55266f78f6b9ffea4a4ab18385d2872f9a4708f0a24994f107a00",
+  "wraith_shade-damage.png": "c23cc77d5b985c43e9e449ba4b6b61f1dc2042c8f49a3f88e124970cd6eb8350",
+  "wraith_shade-idle-draft.png": "837db711e9d23ab0fc0087fe82b1e20a532825b0fdb1eb1753ea2ddbdb64f2d7",
+  "wraith_shade-idle.png": "0583a7ecd64907415aba10c835bfc91cbaac402969a179f8ad03b10c85a71769",
+  "wraith_shade-walk-draft.png": "782d81585815d329876dec152979f51c247c35a2190bee29e3369c95b9b19360",
+  "wraith_shade-walk.png": "46f7ad84f2fde1b4f61a020d895e18a980bbac649b521287ba8406f3b1e9b7eb"
+}

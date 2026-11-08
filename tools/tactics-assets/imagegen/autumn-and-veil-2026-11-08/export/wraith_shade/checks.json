@@ -1,0 +1,2162 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      89,
+      95,
+      160,
+      222
+    ],
+    "count": 5903
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      88,
+      95,
+      161,
+      223
+    ],
+    "count": 5938
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      88,
+      95,
+      161,
+      222
+    ],
+    "count": 5963
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      89,
+      95,
+      159,
+      222
+    ],
+    "count": 5786
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 0,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      97,
+      166,
+      224
+    ],
+    "count": 6381
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 1,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      95,
+      165,
+      224
+    ],
+    "count": 6458
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 2,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      94,
+      166,
+      224
+    ],
+    "count": 6506
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 3,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      87,
+      96,
+      164,
+      224
+    ],
+    "count": 6356
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      84,
+      97,
+      164,
+      224
+    ],
+    "count": 6351
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      85,
+      97,
+      165,
+      224
+    ],
+    "count": 6408
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      84,
+      97,
+      165,
+      224
+    ],
+    "count": 6258
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      87,
+      97,
+      165,
+      224
+    ],
+    "count": 6313
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 0,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      91,
+      105,
+      170,
+      224
+    ],
+    "count": 5836
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 1,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      83,
+      147,
+      172,
+      224
+    ],
+    "count": 4829
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 0,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      93,
+      97,
+      157,
+      224
+    ],
+    "count": 5119
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 1,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      97,
+      158,
+      224
+    ],
+    "count": 5315
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 2,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      91,
+      95,
+      155,
+      224
+    ],
+    "count": 5258
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 3,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      93,
+      97,
+      158,
+      224
+    ],
+    "count": 5208
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      88,
+      100,
+      156,
+      223
+    ],
+    "count": 5437
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      85,
+      100,
+      157,
+      223
+    ],
+    "count": 5522
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      88,
+      99,
+      156,
+      223
+    ],
+    "count": 5678
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      90,
+      99,
+      157,
+      222
+    ],
+    "count": 5433
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 4,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      85,
+      101,
+      160,
+      224
+    ],
+    "count": 5984
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 5,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      82,
+      99,
+      159,
+      224
+    ],
+    "count": 6169
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 6,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      84,
+      98,
+      160,
+      224
+    ],
+    "count": 6270
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 7,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      99,
+      159,
+      224
+    ],
+    "count": 6031
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      87,
+      98,
+      161,
+      224
+    ],
+    "count": 6146
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      82,
+      99,
+      163,
+      224
+    ],
+    "count": 6266
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      78,
+      99,
+      163,
+      224
+    ],
+    "count": 6386
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      87,
+      98,
+      163,
+      224
+    ],
+    "count": 6269
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 2,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      88,
+      107,
+      164,
+      224
+    ],
+    "count": 5780
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 3,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      83,
+      144,
+      171,
+      224
+    ],
+    "count": 5097
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 4,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      92,
+      102,
+      155,
+      224
+    ],
+    "count": 4789
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 5,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      79,
+      102,
+      155,
+      224
+    ],
+    "count": 5038
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 6,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      94,
+      102,
+      154,
+      224
+    ],
+    "count": 4954
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 7,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      94,
+      102,
+      155,
+      224
+    ],
+    "count": 4763
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      91,
+      97,
+      156,
+      222
+    ],
+    "count": 5529
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      88,
+      97,
+      156,
+      222
+    ],
+    "count": 5580
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      91,
+      98,
+      157,
+      223
+    ],
+    "count": 5464
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      90,
+      99,
+      156,
+      223
+    ],
+    "count": 5433
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 8,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      90,
+      97,
+      159,
+      224
+    ],
+    "count": 5899
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 9,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      85,
+      99,
+      158,
+      224
+    ],
+    "count": 6017
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 10,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      89,
+      97,
+      159,
+      224
+    ],
+    "count": 5996
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 11,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      97,
+      160,
+      224
+    ],
+    "count": 6030
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      93,
+      97,
+      161,
+      224
+    ],
+    "count": 5929
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      75,
+      97,
+      160,
+      224
+    ],
+    "count": 6438
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      65,
+      98,
+      159,
+      224
+    ],
+    "count": 6616
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      90,
+      97,
+      161,
+      224
+    ],
+    "count": 6072
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 4,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      86,
+      104,
+      160,
+      224
+    ],
+    "count": 5729
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 5,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      83,
+      146,
+      173,
+      224
+    ],
+    "count": 5098
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 8,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      96,
+      102,
+      151,
+      224
+    ],
+    "count": 4425
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 9,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      76,
+      103,
+      152,
+      224
+    ],
+    "count": 4836
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 10,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      91,
+      101,
+      154,
+      224
+    ],
+    "count": 4858
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 11,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      92,
+      101,
+      152,
+      224
+    ],
+    "count": 4635
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      89,
+      100,
+      161,
+      223
+    ],
+    "count": 5786
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      87,
+      101,
+      159,
+      222
+    ],
+    "count": 5744
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      91,
+      101,
+      163,
+      222
+    ],
+    "count": 5793
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      91,
+      101,
+      161,
+      222
+    ],
+    "count": 5702
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 12,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      97,
+      164,
+      224
+    ],
+    "count": 6365
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 13,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      85,
+      98,
+      161,
+      224
+    ],
+    "count": 6362
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 14,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      99,
+      165,
+      224
+    ],
+    "count": 6356
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 15,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      97,
+      163,
+      224
+    ],
+    "count": 6427
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      86,
+      97,
+      165,
+      224
+    ],
+    "count": 6434
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      67,
+      97,
+      165,
+      224
+    ],
+    "count": 7064
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      63,
+      97,
+      164,
+      224
+    ],
+    "count": 7024
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      84,
+      97,
+      164,
+      224
+    ],
+    "count": 6527
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 6,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      91,
+      105,
+      163,
+      224
+    ],
+    "count": 5689
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 7,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      83,
+      146,
+      172,
+      224
+    ],
+    "count": 5314
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 12,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      92,
+      105,
+      157,
+      224
+    ],
+    "count": 4851
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 13,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      79,
+      106,
+      157,
+      224
+    ],
+    "count": 5147
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 14,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      92,
+      106,
+      157,
+      224
+    ],
+    "count": 4941
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 15,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      92,
+      105,
+      159,
+      224
+    ],
+    "count": 4957
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      84,
+      98,
+      163,
+      223
+    ],
+    "count": 6138
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      85,
+      98,
+      160,
+      223
+    ],
+    "count": 5928
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      90,
+      98,
+      165,
+      223
+    ],
+    "count": 6015
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      87,
+      99,
+      163,
+      223
+    ],
+    "count": 5936
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 16,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      83,
+      99,
+      165,
+      224
+    ],
+    "count": 6403
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 17,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      83,
+      99,
+      164,
+      224
+    ],
+    "count": 6396
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 18,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      99,
+      166,
+      224
+    ],
+    "count": 6366
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 19,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      84,
+      99,
+      165,
+      224
+    ],
+    "count": 6429
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 16,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      82,
+      102,
+      162,
+      224
+    ],
+    "count": 5976
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 17,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      80,
+      102,
+      161,
+      224
+    ],
+    "count": 6094
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 18,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      83,
+      102,
+      164,
+      224
+    ],
+    "count": 6035
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 19,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      82,
+      101,
+      161,
+      224
+    ],
+    "count": 5973
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 8,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      82,
+      104,
+      162,
+      224
+    ],
+    "count": 5963
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 9,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      82,
+      146,
+      172,
+      224
+    ],
+    "count": 4905
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 16,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      103,
+      160,
+      224
+    ],
+    "count": 5149
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 17,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      83,
+      104,
+      160,
+      224
+    ],
+    "count": 5108
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 18,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      94,
+      102,
+      165,
+      224
+    ],
+    "count": 5074
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 19,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      103,
+      160,
+      224
+    ],
+    "count": 5135
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      94,
+      100,
+      164,
+      223
+    ],
+    "count": 5637
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      93,
+      99,
+      165,
+      223
+    ],
+    "count": 5699
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      93,
+      99,
+      163,
+      223
+    ],
+    "count": 5803
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      92,
+      99,
+      163,
+      223
+    ],
+    "count": 5742
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 20,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      90,
+      98,
+      166,
+      224
+    ],
+    "count": 6229
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 21,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      91,
+      99,
+      170,
+      224
+    ],
+    "count": 6305
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 22,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      91,
+      97,
+      167,
+      224
+    ],
+    "count": 6366
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 23,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      87,
+      97,
+      166,
+      224
+    ],
+    "count": 6337
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 20,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      92,
+      101,
+      164,
+      224
+    ],
+    "count": 5900
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 21,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      93,
+      102,
+      174,
+      224
+    ],
+    "count": 6014
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 22,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      91,
+      103,
+      172,
+      224
+    ],
+    "count": 5940
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 23,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      92,
+      101,
+      162,
+      224
+    ],
+    "count": 5813
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 10,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      93,
+      107,
+      168,
+      224
+    ],
+    "count": 5456
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 11,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      83,
+      149,
+      172,
+      224
+    ],
+    "count": 4704
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 20,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      95,
+      105,
+      160,
+      224
+    ],
+    "count": 4753
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 21,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      96,
+      105,
+      170,
+      224
+    ],
+    "count": 4904
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 22,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      96,
+      104,
+      161,
+      224
+    ],
+    "count": 4886
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 23,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      95,
+      105,
+      162,
+      224
+    ],
+    "count": 4862
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      100,
+      98,
+      162,
+      223
+    ],
+    "count": 5292
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      95,
+      97,
+      162,
+      222
+    ],
+    "count": 5518
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      96,
+      97,
+      161,
+      222
+    ],
+    "count": 5630
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      98,
+      97,
+      161,
+      222
+    ],
+    "count": 5497
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 24,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      96,
+      99,
+      161,
+      224
+    ],
+    "count": 5667
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 25,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      92,
+      99,
+      162,
+      224
+    ],
+    "count": 5843
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 26,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      91,
+      99,
+      162,
+      224
+    ],
+    "count": 5942
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 27,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      95,
+      98,
+      167,
+      224
+    ],
+    "count": 5976
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 24,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      100,
+      95,
+      166,
+      224
+    ],
+    "count": 5704
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 25,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      96,
+      97,
+      171,
+      224
+    ],
+    "count": 5965
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 26,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      94,
+      97,
+      174,
+      224
+    ],
+    "count": 6103
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 27,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      97,
+      97,
+      162,
+      224
+    ],
+    "count": 5609
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 12,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      96,
+      103,
+      166,
+      224
+    ],
+    "count": 5480
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 13,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      86,
+      147,
+      169,
+      224
+    ],
+    "count": 4611
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 24,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      102,
+      101,
+      159,
+      224
+    ],
+    "count": 4649
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 25,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      96,
+      101,
+      173,
+      224
+    ],
+    "count": 5103
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 26,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      100,
+      99,
+      159,
+      224
+    ],
+    "count": 4926
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 27,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      102,
+      103,
+      161,
+      224
+    ],
+    "count": 4685
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      90,
+      97,
+      162,
+      222
+    ],
+    "count": 5794
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      91,
+      99,
+      167,
+      223
+    ],
+    "count": 5926
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      93,
+      99,
+      165,
+      223
+    ],
+    "count": 5906
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/wraith_shade-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6772486772486772,
+    "bounds": [
+      91,
+      97,
+      165,
+      222
+    ],
+    "count": 5965
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 28,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      97,
+      163,
+      224
+    ],
+    "count": 6382
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 29,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      86,
+      99,
+      168,
+      224
+    ],
+    "count": 6498
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 30,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      88,
+      98,
+      167,
+      224
+    ],
+    "count": 6545
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/wraith_shade-walk.png",
+    "sourcePose": 31,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      87,
+      98,
+      166,
+      224
+    ],
+    "count": 6469
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 28,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      90,
+      97,
+      164,
+      224
+    ],
+    "count": 6226
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 29,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      88,
+      97,
+      168,
+      224
+    ],
+    "count": 6416
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 30,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      85,
+      97,
+      167,
+      224
+    ],
+    "count": 6443
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/wraith_shade-attack.png",
+    "sourcePose": 31,
+    "scale": 0.6881720430107527,
+    "bounds": [
+      90,
+      97,
+      165,
+      224
+    ],
+    "count": 6354
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 14,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      92,
+      105,
+      168,
+      224
+    ],
+    "count": 5749
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/wraith_shade-damage.png",
+    "sourcePose": 15,
+    "scale": 0.4743083003952569,
+    "bounds": [
+      83,
+      149,
+      173,
+      224
+    ],
+    "count": 4768
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 28,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      94,
+      102,
+      157,
+      224
+    ],
+    "count": 4926
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 29,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      93,
+      105,
+      168,
+      224
+    ],
+    "count": 4996
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 30,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      94,
+      105,
+      156,
+      224
+    ],
+    "count": 4973
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/wraith_shade-cast.png",
+    "sourcePose": 31,
+    "scale": 0.6808510638297872,
+    "bounds": [
+      94,
+      102,
+      159,
+      224
+    ],
+    "count": 5035
+  }
+]

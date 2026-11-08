@@ -27,14 +27,17 @@
     "bosses.dragon.green",
     "bosses.dragon.gold",
     "bosses.troll.frost",
-    "bosses.troll.ogre"
+    "bosses.troll.ogre",
+    "bosses.sapling.autumn",
+    "bosses.sapling.blossom",
+    "bosses.wraith.shade"
   ],
-  "libraryBatchCount": 9,
-  "overallBatchCount": 24,
+  "libraryBatchCount": 10,
+  "overallBatchCount": 25,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 4,
+  "remainingTwoDirectionLooks": 1,
   "looks": [
     {
       "baselineNumber": 42,
@@ -391,14 +394,14 @@
       "key": "bosses.sapling.autumn",
       "name": "Sapling Autumn",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch10"
     },
     {
       "baselineNumber": 93,
       "key": "bosses.sapling.blossom",
       "name": "Sapling Blossom",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch10"
     },
     {
       "baselineNumber": 94,
@@ -426,7 +429,7 @@
       "key": "bosses.wraith.shade",
       "name": "Wraith Shade",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch10"
     },
     {
       "baselineNumber": 98,

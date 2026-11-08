@@ -60,6 +60,7 @@ public sealed class DemoBattleTests
     [InlineData("iron-and-fangs")]
     [InlineData("wyrm-triad")]
     [InlineData("gilded-and-rime")]
+    [InlineData("autumn-and-veil")]
     public void Library_variant_reviews_use_walkable_positions_and_the_registered_runtime_keys(string batch)
     {
         var creatures = LibraryVariantReview.Creatures(batch);

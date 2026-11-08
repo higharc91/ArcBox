@@ -1,0 +1,36 @@
+{
+  "slug": "autumn-and-veil",
+  "date": "2026-11-08",
+  "title": "Autumn Sapling, Blossom Sapling and Shade",
+  "priorCommit": "f01f6875",
+  "libraryBatch": 10,
+  "overallBatch": 25,
+  "features": [
+    "Small seasonal saplings preserve rooted twin crowns, warm bark, root-foot walking and their attached anatomical left vine.",
+    "Charcoal-violet Shade drifts with a continuous robe tail and joined grey hands; no legs, weapons or detached wisps.",
+    "Directional physical vine lashes and spectral touches use full contact/recovery; Shade retains its existing targeted Life Drain with a distinct gathering gesture."
+  ],
+  "conceptJob": "job_m2QnKYGAhK6H15jUSTkUpoba",
+  "conceptAsset": "asset_cVoM4Xqc5C4xmfMeUHGBa3eP",
+  "creativeUnits": 12,
+  "conceptNote": "Scenario supplied the initial concept; an OpenAI whole-concept revision corrected sapling vine handedness and removed human beard anatomy. OpenAI authored all complete pixel figures.",
+  "actions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "down",
+    "cast"
+  ],
+  "actionsNote": "Eight facings each. Five unique actions per sapling and six for Shade; the existing special alias selects its Life Drain gathering clip.",
+  "nativeSeconds": 24,
+  "reelSeconds": 40,
+  "cadenceNote": "Sapling lashes and Shade touch/drain contact at .4 s and recover through .8 s. Primary Wraith touch/drain now complete their existing .6/.625 s clips at .3/.375 s contact; its art is unchanged. Rules, stats, ranges and FX remain unchanged.",
+  "replayNote": "Three movement round trips, three natural strikes, one real targeted Life Drain and return to ready.",
+  "contactLabel": "four engine-timed lash, touch and Life Drain contacts",
+  "reviewNotes": [
+    "Seven mixed-species drafts are preserved but excluded. Fresh single-creature sheets replace them; material identity is checked across every selected facing/action.",
+    "Vine attack registration follows brown root feet, never the low lash tip; the full authored figures are copied without deformation.",
+    "Plain rear crowns and hoods face away; attached arms, vine and continuous robe remain intact."
+  ]
+}

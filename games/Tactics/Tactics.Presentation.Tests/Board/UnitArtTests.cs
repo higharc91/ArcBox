@@ -165,7 +165,7 @@ public sealed class UnitArtTests
     [Theory]
     [InlineData("bosses.troll.ogre", "creatures/mob_refresh_troll_ogre.png", 384, 384, 192, 320, true)]
     [InlineData("bosses.dragon.blue", "creatures/mob_refresh_dragon_blue.png", 512, 512, 256, 400, true)]
-    [InlineData("bosses.sapling.autumn", "bosses/sapling_autumn.png", 40, 40, 20, 37, false)]
+    [InlineData("bosses.sapling.autumn", "creatures/mob_refresh_sapling_autumn.png", 320, 320, 160, 192, true)]
     public void A_monster_key_names_its_set_and_variant_with_that_sets_frames(string key, string path, int w, int h, int ax, int ay, bool refreshed)
     {
         var sprite = Art.Value.Sprite(key)!;

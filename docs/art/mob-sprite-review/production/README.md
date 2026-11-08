@@ -74,3 +74,5 @@ Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet I
 [Batch 23: Black, Blue and Green Dragon](../wyrm-triad/index.html) adds library batch 8; 7 older appearances remain.
 
 [Batch 24: Gold Dragon, Frost Troll and Ogre](../gilded-and-rime/index.html) adds library batch 9; 4 older appearances remain.
+
+[Batch 25: Autumn Sapling, Blossom Sapling and Shade](../autumn-and-veil/index.html) adds library batch 10; 1 older appearances remain.

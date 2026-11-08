@@ -1,0 +1,20 @@
+{
+  "priorCommit": "f01f6875",
+  "addedCreatureEntries": [
+    "mob_refresh_sapling_autumn",
+    "mob_refresh_sapling_blossom",
+    "mob_refresh_wraith_shade"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "rulesAndAbilitiesUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "sourceImages": 20,
+  "sourceOriginalsAvailableAndChecked": true,
+  "packedFrameKeys": 368,
+  "distinctSelectedWholeFigures": 368,
+  "runtimeAssets": 3,
+  "mainUntouchedForPlaytest": true
+}

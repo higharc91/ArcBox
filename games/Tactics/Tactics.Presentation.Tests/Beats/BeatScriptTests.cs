@@ -106,7 +106,7 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
-    [InlineData("bosses.wraith.shade", "wraith.life_drain")]
+    [InlineData("bosses.wraith.spectre", "wraith.life_drain")]
     public void Legacy_elemental_variants_keep_their_existing_visual_bindings_and_effect_timing(string key, string ability)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
@@ -361,6 +361,47 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
+    [InlineData("bosses.wraith.wraith", .375, .625, 16)]
+    [InlineData("bosses.wraith.shade", .4, .8, 16)]
+    public void Life_drain_finishes_the_gathering_gesture_and_hits_its_target_at_hand_contact(
+        string key, double impact, double length, int contactFrame)
+    {
+        var def = RulesPack.Load([Path.Combine(Pack.Root, "rules")]).Abilities[new("wraith.life_drain")];
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
+        var script = Script(view, new AbilityUsed(Hero, new("wraith.life_drain"), new Target(Unit: Foe), def.Presentation));
+        var pose = Assert.Single(script.Cues.OfType<PoseCue>());
+        var burst = Assert.Single(script.Cues.OfType<BurstCue>());
+        Assert.Equal("bosses.cast", pose.Anim);
+        Assert.Equal(view.Units[1].At, pose.Toward);
+        Assert.Equal(view.Units[1].At, burst.Tile);
+        Assert.Equal(impact, burst.At, 3);
+        Assert.Equal(impact, Assert.Single(script.Cues.OfType<MomentCue>(), c => c.Label == "special-contact").At, 3);
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(pose.Anim);
+        Assert.Equal(contactFrame, anim.FrameAt(impact));
+        Assert.Equal(length, pose.Length, 3);
+        Assert.True(script.Length >= anim.Frames.Length / anim.Fps);
+        Assert.Empty(script.Cues.OfType<LungeCue>());
+        Assert.Empty(script.Cues.OfType<FlightCue>());
+    }
+
+    [Fact]
+    public void Autumn_and_veil_replay_uses_the_real_targeted_life_drain_without_teleporting_its_target()
+    {
+        var steps = LibraryVariantDemo.Steps(Pack.Root, "autumn-and-veil");
+        Assert.Equal(13, steps.Count);
+        var index = Enumerable.Range(0, steps.Count).Single(i => steps[i].View.Battle!.Beats
+            .SelectMany(b => b.Events).OfType<AbilityUsed>().Any(a => a.Ability.Value == "wraith.life_drain"));
+        var previous = steps[index - 1].View.Battle!;
+        var current = steps[index].View.Battle!;
+        Assert.Equal(previous.Units.Select(u => u.At), current.Units.Select(u => u.At));
+        var used = Assert.Single(current.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>());
+        Assert.Equal("Fighter", used.Target.Unit!.Value.Value);
+        Assert.Equal(RulesPack.Load([Path.Combine(Pack.Root, "rules")]).Abilities[used.Ability].Presentation, used.Presentation);
+        var terrain = new BoardTerrain(Pack.Map(current.Map), current.Board);
+        Assert.All(steps.SelectMany(s => s.View.Battle!.Units), u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+    }
+
+    [Theory]
     [InlineData("bosses.dragon.red", false)]
     [InlineData("bosses.dragon.red", true)]
     [InlineData("bosses.dragon.black", false)]
@@ -546,15 +587,19 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    public void Sapling_lashes_are_complete_physical_strikes_at_close_and_reach_distance(int range)
+    [InlineData("bosses.sapling.spring", 1)]
+    [InlineData("bosses.sapling.spring", 2)]
+    [InlineData("bosses.sapling.autumn", 1)]
+    [InlineData("bosses.sapling.autumn", 2)]
+    [InlineData("bosses.sapling.blossom", 1)]
+    [InlineData("bosses.sapling.blossom", 2)]
+    public void Sapling_lashes_are_complete_physical_strikes_at_close_and_reach_distance(string key, int range)
     {
-        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.sapling.spring", At = new Tile(3, 3) } : u with { At = new Tile(3 + range, 3) })] };
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key, At = new Tile(3, 3) } : u with { At = new Tile(3 + range, 3) })] };
         var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), new("characters.attack", null, null));
         var script = Script(view, used, new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 4, "bludgeoning", 6));
         var lunge = Assert.Single(script.Cues.OfType<LungeCue>());
-        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.sapling.spring")!.Anim(lunge.Anim);
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(lunge.Anim);
         Assert.Equal(10, anim.FrameAt(LastHit(script) - lunge.At));
         Assert.True(lunge.Length >= anim.Frames.Length / anim.Fps);
         Assert.True(script.Length >= lunge.At + lunge.Length);
@@ -649,6 +694,8 @@ public sealed class BeatScriptTests
     [InlineData("bosses.mimic.ironbound")]
     [InlineData("bosses.troll.frost")]
     [InlineData("bosses.troll.ogre")]
+    [InlineData("bosses.wraith.wraith")]
+    [InlineData("bosses.wraith.shade")]
     public void Natural_creature_strikes_finish_their_complete_clip_and_contact_on_the_forward_pose(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };

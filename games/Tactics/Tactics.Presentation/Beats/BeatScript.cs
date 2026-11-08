@@ -673,6 +673,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             };
             (string? Pose, double Length, double Impact) elemental = (elementalKey, used.Ability.Value, anim) switch
             {
+                ("bosses.wraith.wraith", "wraith.life_drain", "bosses.special") => ("bosses.cast", .625, .375),
+                ("bosses.wraith.shade", "wraith.life_drain", "bosses.special") => ("bosses.cast", .8, .4),
                 ("bosses.troll.troll", "troll.frenzy_roar", "bosses.buff") => ("bosses.buff", .8, .4),
                 ("bosses.golem.basalt", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
                 ("bosses.golem.basalt", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
@@ -702,8 +704,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Burst(effect, aim);
                 return;
             }
-            // Undertow is a directed pull gesture, not a natural swing or inferred bow shot.
-            if (elemental.Pose is not null && used.Ability.Value == "water_elemental.undertow" && aim is { } pulled && pulled != source)
+            // Directed pulls keep their hand gesture facing the target and apply its FX on contact.
+            if (elemental.Pose is not null && used.Ability.Value is "water_elemental.undertow" or "wraith.life_drain" && aim is { } pulled && pulled != source)
             {
                 _cues.Add(new PoseCue(_t, elemental.Length, used.Source, anim, source, pulled));
                 SwingSound(used, anim);
@@ -766,7 +768,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             var reach = Math.Max(Math.Abs(target.X - source.X), Math.Abs(target.Y - source.Y));
             // The sapling's attached vine and the red dragon's jaws are physical reach weapons.
             var naturalReach = used.Ability.Value == "common.attack" && reach <= 2
-                && _view.Units.Any(u => u.Id == used.Source && u.Sprite is "bosses.sapling.spring" or "bosses.dragon.red"
+                && _view.Units.Any(u => u.Id == used.Source && u.Sprite is "bosses.sapling.spring" or "bosses.sapling.autumn" or "bosses.sapling.blossom" or "bosses.dragon.red"
                     or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold")
                 && used.Presentation?.Projectile is null && used.Presentation?.Fx is null
                 && anim is "attack" or "characters.attack" or "bosses.attack";
@@ -804,14 +806,21 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                             or "beasts.bat.vampire" or "beasts.bear.undead" or "beasts.slime.crystal"
                             or "beasts.spider.phase" or "beasts.wolf.alpha" or "bestiary.crab.deep"
                             or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
-                            or "bosses.troll.frost" or "bosses.troll.ogre" => 0.8,
+                            or "bosses.troll.frost" or "bosses.troll.ogre"
+                            or "bosses.sapling.autumn" or "bosses.sapling.blossom" or "bosses.wraith.shade" => 0.8,
+                        "bosses.wraith.wraith" => .6,
                         "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => 1.0,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);
-                _t += length != BeatTiming.Lunge ? sourceUnit?.Sprite is "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" ? .5 : .4 : BeatTiming.Windup;
+                _t += length == BeatTiming.Lunge ? BeatTiming.Windup : sourceUnit?.Sprite switch
+                {
+                    "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => .5,
+                    "bosses.wraith.wraith" => .3,
+                    _ => .4,
+                };
             }
             else
             {

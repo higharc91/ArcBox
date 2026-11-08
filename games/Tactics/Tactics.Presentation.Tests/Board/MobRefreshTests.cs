@@ -62,6 +62,9 @@ public sealed class MobRefreshTests
     [InlineData("bosses.dragon.gold", "dragon_gold")]
     [InlineData("bosses.troll.frost", "troll_frost")]
     [InlineData("bosses.troll.ogre", "troll_ogre")]
+    [InlineData("bosses.sapling.autumn", "sapling_autumn")]
+    [InlineData("bosses.sapling.blossom", "sapling_blossom")]
+    [InlineData("bosses.wraith.shade", "wraith_shade")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -115,6 +118,35 @@ public sealed class MobRefreshTests
                 if (action is "idle" or "walk") Assert.True(shapes.Count > 1, $"Static {key}/{row}/{action}");
             }
         }
+    }
+
+    [Theory]
+    [InlineData("bosses.sapling.autumn", true)]
+    [InlineData("bosses.sapling.blossom", true)]
+    [InlineData("bosses.wraith.shade", false)]
+    public void Seasonal_plants_keep_root_wood_and_shades_never_turn_into_orange_foliage(string key, bool plant)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        for (var row = 0; row < 8; row++)
+            foreach (var action in sprite.Anims.Values)
+                foreach (var frame in action.Frames.Distinct())
+                {
+                    var box = sprite.Source(frame, row);
+                    var visible = 0; var wood = 0; var orange = 0;
+                    for (var y = box.Y; y < box.Y + box.Height; y++)
+                        for (var x = box.X; x < box.X + box.Width; x++)
+                        {
+                            var at = (y * width + x) * 4;
+                            if (pixels[at + 3] < 128) continue;
+                            visible++;
+                            var r = (int)pixels[at]; var g = (int)pixels[at + 1]; var b = (int)pixels[at + 2];
+                            if (r > g + 12 && g > b + 8) wood++;
+                            if (r > g + 35 && g > b + 20) orange++;
+                        }
+                    Assert.True(plant ? wood > 30 : orange < visible * .02,
+                        $"Mixed creature material in {key}/{row}/{frame}: wood={wood}, orange={orange}, visible={visible}");
+                }
     }
 
     [Theory]
@@ -360,6 +392,9 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.dragon.gold")!.HeadLift / person, 1.7f, 2.3f);
         Assert.InRange(art.Sprite("bosses.troll.frost")!.HeadLift / person, 1.35f, 1.95f);
         Assert.InRange(art.Sprite("bosses.troll.ogre")!.HeadLift / person, 1.35f, 1.95f);
+        Assert.InRange(art.Sprite("bosses.sapling.autumn")!.HeadLift / person, .45f, .8f);
+        Assert.InRange(art.Sprite("bosses.sapling.blossom")!.HeadLift / person, .45f, .8f);
+        Assert.InRange(art.Sprite("bosses.wraith.shade")!.HeadLift / person, .95f, 1.3f);
         Assert.InRange(art.Sprite("bosses.sapling.spring")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.imp.crimson")!.HeadLift / person, .4f, .75f);
         Assert.InRange(art.Sprite("bosses.hound.tan")!.HeadLift / person, .35f, .65f);

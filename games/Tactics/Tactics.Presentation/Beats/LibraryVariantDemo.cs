@@ -46,6 +46,7 @@ public static class LibraryVariantDemo
                             or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
                             or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => "piercing",
                         "beasts.bear.undead" or "bosses.troll.frost" or "bosses.troll.ogre" => "slashing",
+                        "bosses.wraith.shade" => "necrotic",
                         _ => "bludgeoning",
                     }, 24)],
                 targets[i], (.22, c.Id.ToLowerInvariant() + "-attack-windup"),

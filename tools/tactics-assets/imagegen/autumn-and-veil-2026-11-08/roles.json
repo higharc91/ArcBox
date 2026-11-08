@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sapling_autumn",
+    "label": "Autumn Sapling",
+    "key": "bosses.sapling.autumn",
+    "primaryId": "mob_refresh_sapling",
+    "height": 64,
+    "size": 320,
+    "anchor": [
+      160,
+      192
+    ],
+    "portraitSize": 54,
+    "idleFps": 3,
+    "walkFps": 4,
+    "identity": "Short knotted oak/umber SAPLING about0.95m, two root FEET, two joined branch ARMS, twin forked crown twigs and compact rooted foliage. Restrained recessed amber FRONT eyes in bark, no human face/beard/eyebrows; back plain bark/moss NO face. ONE coiled VINE grows from anatomical LEFT branch arm: front viewerRIGHT, back viewerLEFT; continues through that branch wrist into physical lash, never a detached/carried weapon. Same anatomy/physical scale as approved Spring Sapling. Rust/copper/burnished-gold compact leaf clusters with muted olive moss on umber bark; no fruit/hats/clothes."
+  },
+  {
+    "id": "sapling_blossom",
+    "label": "Blossom Sapling",
+    "key": "bosses.sapling.blossom",
+    "primaryId": "mob_refresh_sapling",
+    "height": 64,
+    "size": 320,
+    "anchor": [
+      160,
+      192
+    ],
+    "portraitSize": 54,
+    "idleFps": 3,
+    "walkFps": 4,
+    "identity": "Short knotted oak/umber SAPLING about0.95m, two root FEET, two joined branch ARMS, twin forked crown twigs and compact rooted foliage. Restrained recessed amber FRONT eyes in bark, no human face/beard/eyebrows; back plain bark/moss NO face. ONE coiled VINE grows from anatomical LEFT branch arm: front viewerRIGHT, back viewerLEFT; continues through that branch wrist into physical lash, never a detached/carried weapon. Same anatomy/physical scale as approved Spring Sapling. Compact dusty-pink/cream blossom clusters and small muted-green leaves firmly joined to crown twigs; not one giant flower face or mushroom."
+  },
+  {
+    "id": "wraith_shade",
+    "label": "Shade",
+    "key": "bosses.wraith.shade",
+    "primaryId": "mob_refresh_wraith",
+    "height": 128,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "portraitSize": 64,
+    "idleFps": 3,
+    "walkFps": 5,
+    "identity": "Human-size floating SHADE, charcoal/near-black violet hooded robe spirit with restrained slate-purple planes, empty dark FRONT hood with two tiny muted-grey eye slits. Cold-grey hands continuously joined to sleeves, ONE continuous ragged floating lower tail/base; NO legs/boots/weapons/crown/separate wisps. Plain rear hood seam, NO front eyes/face copied on back. All cloth/arms/tail one connected spectral creature, dense readable pixel masses, not oversized magic FX."
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "sapling_autumn": {
+    "sourceBytes": 1314900,
+    "reviewBytes": 781800,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  },
+  "sapling_blossom": {
+    "sourceBytes": 1333551,
+    "reviewBytes": 782868,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  },
+  "wraith_shade": {
+    "sourceBytes": 3296075,
+    "reviewBytes": 1952756,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  }
+}

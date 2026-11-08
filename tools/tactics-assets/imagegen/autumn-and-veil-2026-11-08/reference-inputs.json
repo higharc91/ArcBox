@@ -1,0 +1,152 @@
+{
+  "sapling_autumn_idle": {
+    "promptKey": "sapling_autumn_idle",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png"
+    ]
+  },
+  "sapling_blossom_idle": {
+    "promptKey": "sapling_blossom_idle",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png"
+    ]
+  },
+  "wraith_shade_idle_original": {
+    "promptKey": "wraith_shade_idle_original",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png"
+    ]
+  },
+  "sapling_autumn_walk": {
+    "promptKey": "sapling_autumn_walk",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/sapling_autumn-idle.png"
+    ]
+  },
+  "sapling_blossom_walk": {
+    "promptKey": "sapling_blossom_walk",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "source/sapling_blossom-idle.png"
+    ]
+  },
+  "wraith_shade_walk_original": {
+    "promptKey": "wraith_shade_walk_original",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/wraith_shade-idle-draft.png"
+    ]
+  },
+  "sapling_autumn_attack_original": {
+    "promptKey": "sapling_autumn_attack_original",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/sapling_autumn-idle.png"
+    ]
+  },
+  "sapling_blossom_attack_original": {
+    "promptKey": "sapling_blossom_attack_original",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/sapling_blossom-idle.png"
+    ]
+  },
+  "wraith_shade_attack_original": {
+    "promptKey": "wraith_shade_attack_original",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/wraith_shade-idle-draft.png"
+    ]
+  },
+  "sapling_autumn_damage": {
+    "promptKey": "sapling_autumn_damage",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/sapling_autumn-idle.png"
+    ]
+  },
+  "sapling_blossom_damage": {
+    "promptKey": "sapling_blossom_damage",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/sapling_blossom-idle.png"
+    ]
+  },
+  "wraith_shade_damage_original": {
+    "promptKey": "wraith_shade_damage_original",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/wraith_shade-idle-draft.png"
+    ]
+  },
+  "wraith_shade_cast": {
+    "promptKey": "wraith_shade_cast",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/wraith_shade-idle-draft.png"
+    ]
+  },
+  "wraith_shade_idle": {
+    "promptKey": "wraith_shade_idle",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "source/wraith_shade-cast.png"
+    ]
+  },
+  "wraith_shade_walk": {
+    "promptKey": "wraith_shade_walk",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "source/wraith_shade-idle.png"
+    ]
+  },
+  "wraith_shade_attack": {
+    "promptKey": "wraith_shade_attack",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "source/wraith_shade-idle.png"
+    ]
+  },
+  "wraith_shade_damage": {
+    "promptKey": "wraith_shade_damage",
+    "references": [
+      "references/wraith_shade-idle.png",
+      "source/wraith_shade-idle.png"
+    ]
+  },
+  "sapling_autumn_attack": {
+    "promptKey": "sapling_autumn_attack",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "source/sapling_autumn-idle.png"
+    ]
+  },
+  "sapling_blossom_attack": {
+    "promptKey": "sapling_blossom_attack",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "source/sapling_blossom-idle.png"
+    ]
+  },
+  "sapling_blossom_walk_original": {
+    "promptKey": "sapling_blossom_walk_original",
+    "references": [
+      "references/sapling_autumn-idle.png",
+      "../../concepts/autumn-and-veil-2026-11-08/three-variants.png",
+      "source/sapling_blossom-idle.png"
+    ]
+  }
+}

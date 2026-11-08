@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 0,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      131,
+      128,
+      183,
+      191
+    ],
+    "count": 2161
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 1,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      131,
+      128,
+      183,
+      191
+    ],
+    "count": 2147
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 2,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      131,
+      128,
+      183,
+      191
+    ],
+    "count": 2142
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 3,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      131,
+      128,
+      183,
+      191
+    ],
+    "count": 2136
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 0,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      131,
+      129,
+      183,
+      192
+    ],
+    "count": 2348
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 1,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      131,
+      128,
+      183,
+      192
+    ],
+    "count": 2318
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 2,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      131,
+      128,
+      184,
+      192
+    ],
+    "count": 2334
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 3,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      130,
+      128,
+      182,
+      192
+    ],
+    "count": 2318
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 0,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      131,
+      129,
+      183,
+      192
+    ],
+    "count": 2360
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 1,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      133,
+      129,
+      186,
+      192
+    ],
+    "count": 2298
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 2,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      133,
+      130,
+      197,
+      193
+    ],
+    "count": 2278
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 3,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      131,
+      129,
+      183,
+      192
+    ],
+    "count": 2333
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 0,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      132,
+      137,
+      182,
+      192
+    ],
+    "count": 1706
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 1,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      134,
+      154,
+      185,
+      192
+    ],
+    "count": 1320
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 4,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      128,
+      180,
+      192
+    ],
+    "count": 2023
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 5,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      128,
+      180,
+      192
+    ],
+    "count": 1952
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 6,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      128,
+      179,
+      191
+    ],
+    "count": 1898
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 7,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      134,
+      129,
+      179,
+      191
+    ],
+    "count": 1834
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 4,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      128,
+      127,
+      177,
+      192
+    ],
+    "count": 2114
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 5,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      130,
+      127,
+      179,
+      192
+    ],
+    "count": 2132
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 6,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      131,
+      129,
+      178,
+      192
+    ],
+    "count": 2088
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 7,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      132,
+      128,
+      179,
+      192
+    ],
+    "count": 2017
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 4,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      132,
+      129,
+      180,
+      193
+    ],
+    "count": 2113
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 5,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      132,
+      129,
+      184,
+      192
+    ],
+    "count": 2137
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 6,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      132,
+      130,
+      196,
+      193
+    ],
+    "count": 2038
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 7,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      131,
+      130,
+      179,
+      192
+    ],
+    "count": 2004
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 2,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      132,
+      137,
+      180,
+      192
+    ],
+    "count": 1603
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 3,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      135,
+      154,
+      185,
+      192
+    ],
+    "count": 1301
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 8,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      125,
+      175,
+      191
+    ],
+    "count": 1693
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 9,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      125,
+      174,
+      191
+    ],
+    "count": 1636
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 10,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      125,
+      174,
+      191
+    ],
+    "count": 1642
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 11,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      136,
+      125,
+      174,
+      191
+    ],
+    "count": 1609
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 8,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      134,
+      127,
+      174,
+      192
+    ],
+    "count": 1766
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 9,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      134,
+      126,
+      174,
+      192
+    ],
+    "count": 1732
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 10,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      126,
+      173,
+      192
+    ],
+    "count": 1727
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 11,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      127,
+      173,
+      192
+    ],
+    "count": 1675
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 8,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      127,
+      176,
+      192
+    ],
+    "count": 1804
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 9,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      135,
+      127,
+      178,
+      192
+    ],
+    "count": 1767
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 10,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      127,
+      194,
+      192
+    ],
+    "count": 1800
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 11,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      133,
+      127,
+      174,
+      192
+    ],
+    "count": 1751
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 4,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      134,
+      136,
+      174,
+      192
+    ],
+    "count": 1267
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 5,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      134,
+      152,
+      186,
+      192
+    ],
+    "count": 1231
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 12,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      136,
+      126,
+      180,
+      191
+    ],
+    "count": 1996
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 13,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      126,
+      179,
+      191
+    ],
+    "count": 1959
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 14,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      126,
+      179,
+      191
+    ],
+    "count": 1937
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 15,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      126,
+      179,
+      191
+    ],
+    "count": 1932
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 12,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      128,
+      181,
+      192
+    ],
+    "count": 2082
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 13,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      134,
+      128,
+      180,
+      192
+    ],
+    "count": 2059
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 14,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      127,
+      180,
+      192
+    ],
+    "count": 2100
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 15,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      128,
+      181,
+      192
+    ],
+    "count": 2021
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 12,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      127,
+      181,
+      192
+    ],
+    "count": 2148
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 13,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      133,
+      128,
+      181,
+      192
+    ],
+    "count": 2113
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 14,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      133,
+      128,
+      195,
+      192
+    ],
+    "count": 2092
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 15,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      129,
+      179,
+      192
+    ],
+    "count": 2042
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 6,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      138,
+      137,
+      180,
+      192
+    ],
+    "count": 1393
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 7,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      135,
+      152,
+      184,
+      192
+    ],
+    "count": 1236
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 16,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      128,
+      188,
+      192
+    ],
+    "count": 2239
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 17,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      127,
+      188,
+      191
+    ],
+    "count": 2222
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 18,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      128,
+      188,
+      192
+    ],
+    "count": 2198
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 19,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      135,
+      128,
+      188,
+      192
+    ],
+    "count": 2213
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 16,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      128,
+      189,
+      192
+    ],
+    "count": 2410
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 17,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      134,
+      127,
+      189,
+      192
+    ],
+    "count": 2416
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 18,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      134,
+      128,
+      188,
+      192
+    ],
+    "count": 2366
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 19,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      134,
+      128,
+      189,
+      192
+    ],
+    "count": 2364
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 16,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      129,
+      189,
+      192
+    ],
+    "count": 2463
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 17,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      133,
+      128,
+      187,
+      192
+    ],
+    "count": 2384
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 18,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      121,
+      128,
+      186,
+      192
+    ],
+    "count": 2348
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 19,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      132,
+      129,
+      187,
+      192
+    ],
+    "count": 2390
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 8,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      138,
+      138,
+      181,
+      192
+    ],
+    "count": 1619
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 9,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      136,
+      158,
+      184,
+      192
+    ],
+    "count": 1169
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 20,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      139,
+      126,
+      185,
+      192
+    ],
+    "count": 2073
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 21,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      140,
+      126,
+      184,
+      191
+    ],
+    "count": 2031
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 22,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      141,
+      126,
+      183,
+      191
+    ],
+    "count": 1976
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 23,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      140,
+      126,
+      183,
+      191
+    ],
+    "count": 2006
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 20,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      139,
+      127,
+      186,
+      192
+    ],
+    "count": 2180
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 21,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      140,
+      127,
+      185,
+      192
+    ],
+    "count": 2104
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 22,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      141,
+      127,
+      184,
+      192
+    ],
+    "count": 2067
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 23,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      140,
+      127,
+      184,
+      192
+    ],
+    "count": 2096
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 20,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      138,
+      127,
+      185,
+      192
+    ],
+    "count": 2166
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 21,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      140,
+      127,
+      185,
+      192
+    ],
+    "count": 2081
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 22,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      137,
+      126,
+      196,
+      192
+    ],
+    "count": 2231
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 23,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      139,
+      127,
+      185,
+      192
+    ],
+    "count": 2148
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 10,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      137,
+      137,
+      175,
+      192
+    ],
+    "count": 1423
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 11,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      137,
+      158,
+      182,
+      192
+    ],
+    "count": 1104
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 24,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      145,
+      127,
+      184,
+      191
+    ],
+    "count": 1715
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 25,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      145,
+      127,
+      183,
+      191
+    ],
+    "count": 1679
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 26,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      144,
+      126,
+      183,
+      191
+    ],
+    "count": 1678
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 27,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      143,
+      126,
+      182,
+      191
+    ],
+    "count": 1667
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 24,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      144,
+      127,
+      185,
+      192
+    ],
+    "count": 1796
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 25,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      144,
+      127,
+      185,
+      192
+    ],
+    "count": 1785
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 26,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      143,
+      127,
+      183,
+      192
+    ],
+    "count": 1767
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 27,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      143,
+      127,
+      184,
+      192
+    ],
+    "count": 1772
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 24,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      142,
+      128,
+      184,
+      192
+    ],
+    "count": 1827
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 25,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      143,
+      128,
+      184,
+      192
+    ],
+    "count": 1809
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 26,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      142,
+      128,
+      202,
+      192
+    ],
+    "count": 1913
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 27,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      140,
+      127,
+      181,
+      192
+    ],
+    "count": 1805
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 12,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      145,
+      136,
+      182,
+      192
+    ],
+    "count": 1243
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 13,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      136,
+      154,
+      183,
+      192
+    ],
+    "count": 1165
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 28,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      132,
+      127,
+      181,
+      191
+    ],
+    "count": 2072
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 29,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      127,
+      182,
+      191
+    ],
+    "count": 2062
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 30,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      127,
+      181,
+      191
+    ],
+    "count": 2039
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/sapling_blossom-idle.png",
+    "sourcePose": 31,
+    "scale": 0.39263803680981596,
+    "bounds": [
+      133,
+      127,
+      181,
+      191
+    ],
+    "count": 2037
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 28,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      132,
+      127,
+      181,
+      192
+    ],
+    "count": 2257
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 29,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      132,
+      128,
+      181,
+      192
+    ],
+    "count": 2203
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 30,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      131,
+      128,
+      180,
+      192
+    ],
+    "count": 2192
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/sapling_blossom-walk.png",
+    "sourcePose": 31,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      132,
+      128,
+      181,
+      192
+    ],
+    "count": 2248
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 28,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      135,
+      128,
+      184,
+      192
+    ],
+    "count": 2297
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 29,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      128,
+      184,
+      192
+    ],
+    "count": 2209
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 30,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      134,
+      129,
+      200,
+      193
+    ],
+    "count": 2248
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/sapling_blossom-attack.png",
+    "sourcePose": 31,
+    "scale": 0.38095238095238093,
+    "bounds": [
+      135,
+      128,
+      184,
+      192
+    ],
+    "count": 2302
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 14,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      153,
+      135,
+      194,
+      192
+    ],
+    "count": 1569
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_blossom-damage.png",
+    "sourcePose": 15,
+    "scale": 0.25339366515837103,
+    "bounds": [
+      136,
+      157,
+      183,
+      192
+    ],
+    "count": 1137
+  }
+]

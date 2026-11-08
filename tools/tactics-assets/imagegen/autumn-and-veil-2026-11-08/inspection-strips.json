@@ -1,0 +1,260 @@
+{
+  "sapling_autumn": {
+    "sourceAtlasSha256": "b545b1a2596a0a354a5a75e613dff82d1f04f8b642c240114334186b01d6e088",
+    "sourceBytes": 1314900,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/sapling_autumn-0.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "585cc62d758905864669d3f4f7482bd2efb4bdf1a45e0373991b3b8f5ac05fdd",
+        "webpSha256": "25c1ce7b4daca084dcb02a80121c1bdb3cead948a6f27d64c4cdd42ac559ea3e",
+        "bytes": 108280,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/sapling_autumn-1.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "2c382bc7336eb3305640ee56c9cf7932853ca68577a3c209aa16ce96f1acbbe4",
+        "webpSha256": "ba5064e1fe00fb4b6c87e80175e5490bfd91df018b7da371aaecd8af2190b0da",
+        "bytes": 97974,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/sapling_autumn-2.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "bf6b297c37f9d4f0d24d379aaf23db8306f908857af0963da2cafded73d98837",
+        "webpSha256": "783fcc7af9c7b00625e229860ee4aee3dc6d99ec35f8510c639b0bbf756ea0b7",
+        "bytes": 85574,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/sapling_autumn-3.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "3267f66fc4cae2ea314deaa84a66bbfcf4d886df437de86bfb2ac57e16e63890",
+        "webpSha256": "93275d6e77145bc0e75eefc0d92de48015897d8f3d3647b63287e4f090adfd24",
+        "bytes": 98156,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/sapling_autumn-4.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "8830249b8092e3e6aab3f464d17d155d7e47f478c0edb6c031d4d20d5549c034",
+        "webpSha256": "d7742f0bb3a6881a1d640065ed7708a97560cad69f4816d46749bb3955e01598",
+        "bytes": 105696,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/sapling_autumn-5.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "63f80e3d53fbbaa2a2ea497d022f2458ca9bf565d388d27f22b731e35477f781",
+        "webpSha256": "cc9036442c8af5748797779c54d78927684f744b0c32d63577c3bfbff976af17",
+        "bytes": 96244,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/sapling_autumn-6.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "b878a2f2fea8126891ec2c499466b8f8f7569381611152044e9757bce28f8753",
+        "webpSha256": "3c035ce02eecced29221c85c9f8082404ef5d42810a6cafb05e272f8981cb1df",
+        "bytes": 88024,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/sapling_autumn-7.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "8484503ed84a94eef0879df675134e8d1c6558975c8f49cf2db8f864b34783c2",
+        "webpSha256": "554f72e1b26f63a107433b1115cf2fa5e501d10a8191211ad72e4d8777ede39e",
+        "bytes": 101852,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  },
+  "sapling_blossom": {
+    "sourceAtlasSha256": "8a457a10e9d1c644d08b007506e116e670b1e96493c8f0d7aad0f27b59e2ba58",
+    "sourceBytes": 1333551,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/sapling_blossom-0.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "b07dadd211bd7fae72b4dbc2d17f593d1e549b8e85248cf01eaa107597a14338",
+        "webpSha256": "0e68cd66d0f7577f0ba1ef3b6dc5acacae03770390ed3813ebcd3b5397e1c39d",
+        "bytes": 111000,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/sapling_blossom-1.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "89c000ba6cf3c1b7b89a11eb13d4720d5449d35709ad470df1c88cb662d1112b",
+        "webpSha256": "8ae8d4e440caf6a1866defb34db4a83aced8e510b1e2c1732c5dbf8a07969f3f",
+        "bytes": 97606,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/sapling_blossom-2.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "424da638ba63ff1708c5b0306de4ba1d650841bfe9163d7c057f77466392b9a2",
+        "webpSha256": "bbe3e4cb28ba36c630d23a38133df15ff34c132f79ad7990e6c6406817024d9a",
+        "bytes": 82612,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/sapling_blossom-3.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "364ca1f78bc5c965532abc7c78cf7f4419148f40d1a7193df8fab25e2d135361",
+        "webpSha256": "dc162cb436d138011b5ccb184e62765abec023d01b8a44148716c8f961dfa784",
+        "bytes": 95056,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/sapling_blossom-4.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "82c24d1fd67f7e012631c3d9554ffb73a01ee8b6c5b197b6f8c161ffd1dcc376",
+        "webpSha256": "1047601c18d195bf35677b184c7cdc1fe9e19274fb6d36c910e8ecbd707a6d84",
+        "bytes": 111310,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/sapling_blossom-5.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "0fb47316a6425cff9ccc61fd02aa65f25b51fbc13e4474baa723760ec27cb912",
+        "webpSha256": "05874bcb440dc5063c4a59356191e43629beab367354464a9325e32e5de569d9",
+        "bytes": 96412,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/sapling_blossom-6.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "7b2953216c27cc9fc8e2d7cd50657a9803b9a3a0077c0a3a2a8d2d6a645d5f51",
+        "webpSha256": "f1055462e5b5605692059f64b59265c659f27c0a97d072ea508b779bc21a4615",
+        "bytes": 84092,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/sapling_blossom-7.webp",
+        "width": 2560,
+        "height": 640,
+        "rgbaSha256": "57187e07b5b6f3b88c90b6d757b6dcbde9401d4a373c3a96a72a6902ad30f720",
+        "webpSha256": "8f595a378d67c58fb721928c31a2d43fbcf774b731c9ec0381bc1904e10ab6d1",
+        "bytes": 104780,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  },
+  "wraith_shade": {
+    "sourceAtlasSha256": "cd42eb672341c64d56581db9e243ec47223d14e815e346974bbd46a70781060c",
+    "sourceBytes": 3296075,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/wraith_shade-0.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "f88b6979247435000300b63661d8571a3b76143ffa29b611e5194834b800178b",
+        "webpSha256": "21c11df9cb8ac39aad09eb101d386aec7e493d5ef2bfcf3dcb885bebcd072556",
+        "bytes": 249388,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/wraith_shade-1.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "337d2afc1bd8404ea750874a03baa513cc2c06a0a5c2e44fe88733a7d9c4a8c4",
+        "webpSha256": "1d8af914db071d08d6ca783ae5764132215cdc8053377db82f0c8b9f7f76b4c1",
+        "bytes": 243206,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/wraith_shade-2.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "efd73d3923190e4f8ef13039e520c56b358045ca08c7968a09e547e9431a6729",
+        "webpSha256": "616ca71293bd5c0a46b723b157cb8c28b5c93ca909c978cd43d5f7163f267aa1",
+        "bytes": 240576,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/wraith_shade-3.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "c6f324627c0212990047ea2c6a24b5002f5f1d33ed7e2e8911adf7d20cf4f952",
+        "webpSha256": "852f6ccdee5ac4f6e16762b9eb9d2b00f72b4043e00eef86ebe316e6f1f7cab5",
+        "bytes": 248230,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/wraith_shade-4.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "e63380d8dba678a3f322dde5403a6f05233baa8ba85be2b5a69f53f317993c57",
+        "webpSha256": "ff1e550ba21cadc979782b3b7abf7ec65c057a7f8e8011ab396c923baacdc50e",
+        "bytes": 240910,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/wraith_shade-5.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "1889a9266ba371f20d5aa289542f8efae85c828552a7770f525abc37a739ec7b",
+        "webpSha256": "137669f5541855bfc08cba29b3b366c459401b0439c4a3b669afea02fa9726f3",
+        "bytes": 242068,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/wraith_shade-6.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "b0b4d18ca815aa6e617b29cf42681b84458487bb6c5f0cd3010b895f5345d29d",
+        "webpSha256": "ba7ca1e2c3cbd2126f967ffc7a9ef72504766ea76ba79cae4f13ec4b84990aad",
+        "bytes": 238234,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/wraith_shade-7.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "f2db1905f682b5b4b09eb9e3577e36e6520f4f2263d05533cf667ddeec8d0008",
+        "webpSha256": "c2bfe7b29a2541ca1840a914ebe9b1cd2fa08fe75af0e6764eab5deb3d16deb2",
+        "bytes": 250144,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  }
+}
