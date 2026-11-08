@@ -586,7 +586,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.lightning.storm, fx.shock.storm"
+  "use": "fx.lightning.storm, fx.shock.storm; fx.wizard_shocking_grasp.storm; fx.wizard_chromatic_orb.storm"
  },
  "spell_thunderwave": {
   "prompt": "Booming thunderwave shockwave blast, deep rolling concussive boom",
@@ -595,7 +595,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.thunder.thunder"
+  "use": "fx.thunder.thunder; fx.wizard_thunderwave.thunder"
  },
  "spell_ice": {
   "prompt": "Ice spell forming, crystalline freezing crackle and shards of ice snapping",
@@ -604,7 +604,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.ice.frost, fx.frost.frost"
+  "use": "fx.ice.frost, fx.frost.frost; fx.wizard_ray_of_frost.frost; fx.wizard_ice_storm.frost"
  },
  "spell_holy_heal": {
   "prompt": "Holy healing spell, warm shimmering angelic choir swell with soft bells",
@@ -631,7 +631,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.shield.*, fx.ward.*"
+  "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane"
  },
  "spell_bless": {
   "prompt": "Blessing spell, gentle golden sparkling chimes rising",
@@ -649,7 +649,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane"
+  "use": "fx.circle.arcane, fx.aura.arcane, fx.pillar.arcane; fx.wizard_grease.arcane; fx.wizard_banishment.arcane; fx.wizard_arcane_recovery.arcane"
  },
  "spell_eldritch": {
   "prompt": "Eldritch energy blast, otherworldly crackling violet beam with a warping whoosh",
@@ -658,7 +658,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.eldritch, fx.force.*"
+  "use": "fx.eldritch, fx.force.*; fx.wizard_magic_missile.force"
  },
  "spell_nature_heal": {
   "prompt": "Nature healing magic, soft rustling leaves with gentle woody chimes and birdlike sparkle",
@@ -676,7 +676,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk"
+  "use": "fx.circle.nature, fx.hold.nature, fx.web.silk; fx.wizard_web.silk"
  },
  "spell_shadow": {
   "prompt": "Shadow curse spell, dark ominous whisper-like whoosh with a low droning pulse",
@@ -685,7 +685,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*"
+  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave"
  },
  "spell_poison_cloud": {
   "prompt": "Poison gas cloud spreading, hissing bubbling toxic vapour",
@@ -694,7 +694,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*"
+  "use": "fx.poison.poison, fx.poison.miasma, fx.toxin.*; fx.wizard_poison_spray.venom; fx.wizard_ray_of_sickness.sickness"
  },
  "spell_misty_step": {
   "prompt": "Teleport blink, quick magical swoosh with an airy shimmer as someone vanishes and reappears",
@@ -703,7 +703,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported"
+  "use": "fx.misty.mist, fx.misty.shadow, fx.misty.fey; Teleported; fx.wizard_sleep.fey; fx.wizard_misty_step.mist; fx.wizard_blur.mist; fx.wizard_invisibility.mist; fx.wizard_hypnotic_pattern.fey; fx.wizard_greater_invisibility.mist; fx.wizard_hypnotic_pattern.psychic"
  },
  "spell_psychic": {
   "prompt": "Psychic spell, eerie warbling mind-bending tone sweeping upward",

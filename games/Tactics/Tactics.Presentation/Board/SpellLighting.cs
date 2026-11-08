@@ -25,9 +25,9 @@ public sealed record SpellEmission(Rgb Colour, float Radius, float Power)
         {
             "fire" or "ember" => "#ff8a32",
             "hellfire" or "fel" => "#8fe05a",
-            "ice" or "frost" or "storm" or "thunder" or "lightning" or "azure" => "#8fcfff",
+            "ice" or "frost" or "storm" or "thunder" or "lightning" or "azure" or "slow" => "#8fcfff",
             "spark" => "#ffd080",
-            "holy" or "radiant" or "gold" or "dawn" or "spirit" or "ki" => "#ffe3a0",
+            "holy" or "radiant" or "gold" or "dawn" or "spirit" or "ki" or "haste" => "#ffe3a0",
             "moon" => "#c3d9ff",
             "arcane" or "force" or "magic" => "#7aa8ff",
             "eldritch" or "shadow" or "violet" or "void" => "#b86ef2",

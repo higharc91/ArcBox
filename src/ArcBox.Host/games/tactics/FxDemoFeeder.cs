@@ -4,6 +4,7 @@ using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using Godot;
 using Tactics.Game;
+using Tactics.Logic;
 using Tactics.Presentation.Beats;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -15,6 +16,8 @@ public partial class FxDemoFeeder : Node
     private readonly Screenshotter? _shots;
     private readonly IReadOnlyList<FxShowcaseSample> _samples = [];
     private readonly double[] _tails = [];
+    private readonly double[] _baseSeconds = [];
+    private readonly double[] _posterAt = [];
     private readonly List<object> _measurements = [];
     private readonly List<double> _frameMs = [];
     private int _sample = -1;
@@ -35,6 +38,23 @@ public partial class FxDemoFeeder : Node
         (_send, _shots, _samples) = (send, shots, samples);
         if (samples.Count == 0) throw new ArgumentException("The showcase needs samples.", nameof(samples));
         _tails = [.. samples.Select(s => art is null ? .85 : FxShowcase.TailFor(s, art))];
+        var scripts = samples.Select(s => art is null ? null : BeatScript.Of(s.After.Beats.Single(), s.Before, s.After, art)).ToArray();
+        _baseSeconds = [.. scripts.Select(s => s?.Length ?? 0)];
+        _posterAt = [.. samples.Select((sample, i) =>
+        {
+            var events = sample.After.Beats.Single().Events;
+            var used = events.OfType<AbilityUsed>().FirstOrDefault(a => a.Ability.Value == sample.Id)
+                ?? events.OfType<AbilityUsed>().FirstOrDefault();
+            var key = used?.Presentation?.Fx;
+            var path = key is null ? null : art?.Clip(key)?.Path;
+            var bursts = scripts[i]?.Cues.OfType<BurstCue>().ToArray() ?? [];
+            var proc = events.OfType<PassiveTriggered>().FirstOrDefault(p => p.Passive == sample.Id);
+            var procAt = scripts[i]?.Cues.OfType<ApplyCue>().FirstOrDefault(c => c.Event == proc)?.At;
+            var owner = proc is null ? null : sample.Before.Units.FirstOrDefault(u => u.Id == proc.Owner);
+            var burst = procAt is { } at && owner is not null ? bursts.FirstOrDefault(b => b.At >= at && b.Tile == owner.At) : null;
+            burst ??= bursts.FirstOrDefault(b => b.Clip.Path == path) ?? bursts.FirstOrDefault();
+            return burst is null ? _baseSeconds[i] * .55 : burst.At + Math.Min(.1, burst.Length * .25);
+        })];
     }
     public void Signal(string kind, object payload)
     {
@@ -45,7 +65,8 @@ public partial class FxDemoFeeder : Node
         _endAt = _clock + _tails[_sample];
     }
     private void Send(BattleView battle, FxShowcaseSample sample)
-        => _send(JsonSerializer.SerializeToElement(new TacticsHostView("Battle", sample.Name, null, sample.Level, [], null, battle, null, null), ArcJson.Options));
+        => _send(JsonSerializer.SerializeToElement(new TacticsHostView("Battle", sample.Name, null, sample.Level, [], null,
+            battle with { Name = $"{sample.Name} · Level {sample.Level}" }, null, null), ArcJson.Options));
 
     public override void _Process(double delta)
     {
@@ -61,6 +82,7 @@ public partial class FxDemoFeeder : Node
                 var ordered = _frameMs.Order().ToArray();
                 var sample = _samples[_sample];
                 _measurements.Add(new { sample.Id, sample.Name, sample.Description, sample.Level, Seconds = _shownAt - _began,
+                    BaseSeconds = _baseSeconds[_sample], PosterAt = _posterAt[_sample],
                     Frames = _frame, FrameMedianMs = ordered.Length == 0 ? 0 : ordered[ordered.Length / 2],
                     TextureBytes = (long)Performance.GetMonitor(Performance.Monitor.RenderTextureMemUsed) });
             }

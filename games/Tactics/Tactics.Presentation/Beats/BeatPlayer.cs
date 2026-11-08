@@ -115,6 +115,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private readonly Queue<SpokenLine> _unread = [];     // lines waiting their turn, as the voice speaks one at a time
     private BattleView? _live;
     private BeatScript? _script;
+    private readonly List<AbilityUsed> _waitingSpells = [];
     private BeatCatchUp? _caughtUp;
     private int _next;
     private int _played;        // the last beat begun
@@ -169,7 +170,10 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     public void Receive(BattleView live)
     {
         if (_queue.Offer(live.Beats, _real))
+        {
             (_script, Shown, _cutIn, _carriedCamera) = (null, null, null, null);
+            _waitingSpells.Clear();
+        }
         _live = live;
         if (_script is null && _queue.Late(_real))
             CatchUp(live);
@@ -180,6 +184,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
 
     private void CatchUp(BattleView live)
     {
+        _waitingSpells.Clear();
         _queue.KeepNewest();
         ClearCinematics();
         _fading.Clear();
@@ -196,6 +201,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     /// </summary>
     public void Reset()
     {
+        _waitingSpells.Clear();
         _queue.Clear();
         _fading.Clear();
         (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp, _cutIn) = (null, null, null, null, 0, null, null, null);
@@ -272,6 +278,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             CatchUp(_live);
         if (_queue.Next() is not { } beat)
             return null;
+        beat = ResumeSpell(beat);
         (_opening, _played) = (beat.Seq, beat.Seq);     // if working out its script throws, it's already off the queue
         (_script, _next, _clock, _cinematicClock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0, 0);
         _cutIn = CutIn?.Invoke(beat, Shown, _script);
@@ -279,6 +286,59 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))
             (AiFinished, _aiFinishedUntil, _aiBegan) = (actor, _now + Math.Max(_script.Length, BeatTiming.AiFinished), true);
         return _script;
+    }
+
+    // The engine already paid for and announced this spell in the parent batch. Only its presentation resumes here.
+    private Beat ResumeSpell(Beat beat)
+    {
+        var open = BeatScript.OpenSpellOffer(beat);
+        if (_waitingSpells.Count == 0 && open is null) return beat;
+        var events = beat.Events;
+        _waitingSpells.RemoveAll(a => events.OfType<Countered>().Any(c => c.Caster == a.Source && c.Ability == a.Ability));
+        var additions = new Dictionary<int, List<AbilityUsed>>();
+        foreach (var held in _waitingSpells.AsEnumerable().Reverse().ToArray())
+        {
+            if (events.OfType<AbilityUsed>().Any(a => a.Source == held.Source && a.Ability == held.Ability))
+            {
+                _waitingSpells.Remove(held);
+                continue;
+            }
+            // One wizard can counter a counter to their own spell: source alone cannot identify that spell's result.
+            var anotherCast = events.OfType<AbilityUsed>().Any(a => a.Source == held.Source && a.Ability != held.Ability);
+            var index = -1;
+            if (!anotherCast)
+                for (var i = 0; i < events.Length && index < 0; i++)
+                    if (events[i] is Countered c && c.By == held.Source
+                        || events[i] is Rolled { Kind: RollKind.Check } r && r.Roller == held.Source) index = i;
+            if (index < 0)
+            {
+                // A new nested window keeps earlier incantations suspended, rather than replacing them.
+                if (open is not null || !events.OfType<Reacted>().Any()) continue;
+                index = 0;
+                for (var i = 0; i < events.Length; i++)
+                    if (events[i] is Reacted or Countered or Rolled { Kind: RollKind.Check }) index = i + 1;
+            }
+            if (!additions.TryGetValue(index, out var here)) additions[index] = here = [];
+            here.Add(held);
+            _waitingSpells.Remove(held);
+        }
+        if (additions.Count > 0)
+        {
+            var resumed = ImmutableArray.CreateBuilder<BattleEvent>();
+            for (var i = 0; i <= events.Length; i++)
+            {
+                if (additions.TryGetValue(i, out var here)) resumed.AddRange(here);
+                if (i < events.Length) resumed.Add(events[i]);
+            }
+            beat = beat with { Events = resumed.ToImmutable() };
+        }
+        if (open is not null)
+        {
+            var announced = events.OfType<AbilityUsed>().LastOrDefault(a => a.Source == open.Actor && a.Ability == open.Ability);
+            if (announced is not null && !_waitingSpells.Any(a => a.Source == announced.Source && a.Ability == announced.Ability))
+                _waitingSpells.Add(announced);
+        }
+        return beat;
     }
 
     private void Reach(Cue cue, ImmutableArray<SpokenLine>.Builder lines, ImmutableArray<string>.Builder moments, ImmutableArray<string>.Builder heard)
