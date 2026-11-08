@@ -1,6 +1,6 @@
 """Class pose registry; base production frame indices stay stable."""
-from . import wizard_casts,sorcerer_casts,warlock_casts,cleric_casts
-MODULES={'wizard':wizard_casts,'sorcerer':sorcerer_casts,'warlock':warlock_casts,'cleric':cleric_casts}
+from . import wizard_casts,sorcerer_casts,warlock_casts,cleric_casts,druid_casts
+MODULES={'wizard':wizard_casts,'sorcerer':sorcerer_casts,'warlock':warlock_casts,'cleric':cleric_casts,'druid':druid_casts}
 def poses_for(role):
     from .rig import frame_list
     return MODULES[role].poses_for(role) if role in MODULES else frame_list()

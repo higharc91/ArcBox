@@ -40,6 +40,9 @@ public sealed class FxShowcaseTests
                     .SelectMany(z => z.Passives).Select(p => p.Id)).Distinct().Order();
             if (cls.Id == "cleric")
                 expected = expected.Concat(rules.Conditions[new("death_ward")].Passives.Select(p => p.Id)).Distinct().Order();
+            if (cls.Id == "druid")
+                expected = expected.Concat(rows.Where(r=>r.Kind=="ability").SelectMany(r=>rules.Abilities[new(r.Id)].Effects.OfType<ZoneEffect>())
+                    .SelectMany(z=>z.Passives).Select(p=>p.Id)).Distinct().Order();
             Assert.Equal(expected, rows.Select(r => r.Id).Distinct().Order());
             foreach (var row in rows.Where(r => r.Kind == "ability"))
             {
