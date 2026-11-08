@@ -128,4 +128,10 @@ it("the d-pad stays within the live map bounds", () => {
   fireEvent.click(screen.getByRole("button", { name: "Left", exact: true }));
   fireEvent.click(screen.getByRole("button", { name: "Up", exact: true }));
   expect(selected().textContent).toContain("Tile 0, 0");
+  units();
+  fireEvent.click(within(screen.getByRole("dialog")).getByRole("button", { name: /^#2 Goblin/ }));
+  fireEvent.click(screen.getByRole("button", { name: "Right", exact: true }));
+  fireEvent.click(screen.getByRole("button", { name: "Down", exact: true }));
+  fireEvent.click(screen.getByRole("button", { name: "Down", exact: true }));
+  expect(selected().textContent).toContain("Tile 9, 2");
 });

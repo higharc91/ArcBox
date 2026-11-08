@@ -16,7 +16,7 @@ Validation:
 - Five real server fixtures refresh only the added terrain snapshot.
 - Chromium at 320×844 and 390×844 checks unclipped unit labels, no page-level horizontal overflow, roster selection without commands, 44 px enlarged cells, cliff/deep/hazard inspection and sheet closure. The cliff and hazard captures use controlled changes to the real fixture's terrain; server tests independently cover matching live changes.
 
-Full repository validation is recorded in the PR after completion.
+The full repository gate passed all groups: Release build with zero warnings, 7,500 .NET tests, 582 phone tests and production build, 24 Node tests, 29 asset tests, 9 audio tests, 23 lore tests and lore/documentation validators. No tests were skipped. The final focused map suite also passes after strengthening the d-pad test to cover both minimum and maximum bounds. The existing retained-source asset inventory gap was repaired separately in PR #276 before the final full run.
 
 ![Full-width map at 320 px](map-320.png)
 ![Numbered roster at 390 px](units-390.png)
