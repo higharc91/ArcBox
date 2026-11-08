@@ -1,0 +1,682 @@
+{
+  "before": [
+    {
+      "id": "ensnared.thorns",
+      "name": "Ensnaring Thorns \u00b7 turn-start",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.nature"
+      }
+    },
+    {
+      "id": "ranger.ensnaring_strike",
+      "name": "Ensnaring Strike",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "signature.warden_vine_snare.root",
+        "projectile": "projectiles.arrow"
+      }
+    },
+    {
+      "id": "ranger.entangle",
+      "name": "Entangle",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "signature.warden_vine_snare.root"
+      }
+    },
+    {
+      "id": "ranger.hail_of_thorns",
+      "name": "Hail of Thorns",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "fx.circle.nature",
+        "projectile": "projectiles.arrow"
+      }
+    },
+    {
+      "id": "ranger.hunters_mark",
+      "name": "Hunter's Mark",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.circle.nature"
+      }
+    },
+    {
+      "id": "ranger.hunters_mark_bonus",
+      "name": "Hunters Mark Bonus",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.archery",
+      "name": "Archery",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.barkskin",
+      "name": "Barkskin",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.ward.nature"
+      }
+    },
+    {
+      "id": "ranger.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.nature"
+      }
+    },
+    {
+      "id": "ranger.spike_growth",
+      "name": "Spike Growth",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.nature"
+      }
+    },
+    {
+      "id": "spike_growth.thorns",
+      "name": "Spike Growth \u00b7 OnEnterTile",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.roving",
+      "name": "Roving",
+      "level": 6,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.conjure_barrage",
+      "name": "Conjure Barrage",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "fx.arrow.oak"
+      }
+    },
+    {
+      "id": "ranger.lightning_arrow",
+      "name": "Lightning Arrow",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "fx.shock.storm",
+        "projectile": "projectiles.arrow"
+      }
+    },
+    {
+      "id": "ranger.vanish",
+      "name": "Vanish",
+      "level": 10,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.dodge",
+        "fx": "fx.misty.shadow"
+      }
+    },
+    {
+      "id": "beastmaster.companion",
+      "name": "Companion",
+      "level": 3,
+      "subclass": "ranger.beastmaster",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "beastmaster.sic",
+      "name": "Sic 'Em",
+      "level": 3,
+      "subclass": "ranger.beastmaster",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.beastmaster_hunt_mark.amber"
+      }
+    },
+    {
+      "id": "beastmaster.pack_bond",
+      "name": "Pack Bond",
+      "level": 6,
+      "subclass": "ranger.beastmaster",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.beastmaster_hunt_mark.amber"
+      }
+    },
+    {
+      "id": "beastmaster.alpha_howl",
+      "name": "Alpha Howl",
+      "level": 10,
+      "subclass": "ranger.beastmaster",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.beastmaster_hunt_mark.amber"
+      }
+    },
+    {
+      "id": "beastmaster.ferocious_bond",
+      "name": "Ferocious Bond",
+      "level": 10,
+      "subclass": "ranger.beastmaster",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "sharpshooter.deadeye",
+      "name": "Deadeye Shot",
+      "level": 3,
+      "subclass": "ranger.sharpshooter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "signature.sharpshooter_deadeye.scope",
+        "projectile": "projectiles.arrow"
+      }
+    },
+    {
+      "id": "sharpshooter.high_ground_mastery",
+      "name": "High Ground Mastery",
+      "level": 3,
+      "subclass": "ranger.sharpshooter",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "sharpshooter.piercing_shot",
+      "name": "Piercing Shot",
+      "level": 6,
+      "subclass": "ranger.sharpshooter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "signature.sharpshooter_deadeye.scope",
+        "projectile": "projectiles.arrow"
+      }
+    },
+    {
+      "id": "sharpshooter.volley",
+      "name": "Volley",
+      "level": 10,
+      "subclass": "ranger.sharpshooter",
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.shoot",
+        "fx": "fx.arrow.oak",
+        "projectile": "projectiles.arrow"
+      }
+    },
+    {
+      "id": "warden.tough_bark",
+      "name": "Tough Bark",
+      "level": 3,
+      "subclass": "ranger.warden",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warden.vine_snare",
+      "name": "Vine Snare",
+      "level": 3,
+      "subclass": "ranger.warden",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.warden_vine_snare.root"
+      }
+    },
+    {
+      "id": "warden.natures_veil",
+      "name": "Nature's Veil",
+      "level": 6,
+      "subclass": "ranger.warden",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "signature.warden_vine_snare.root"
+      }
+    },
+    {
+      "id": "warden.guardian_tree",
+      "name": "Guardian of the Grove",
+      "level": 10,
+      "subclass": "ranger.warden",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.warden_vine_snare.root"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "ensnared.thorns",
+      "name": "Ensnaring Thorns \u00b7 turn-start",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.ranger_ensnared_thorns.root"
+      }
+    },
+    {
+      "id": "ranger.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_cure_wounds.healing"
+      }
+    },
+    {
+      "id": "ranger.ensnaring_strike",
+      "name": "Ensnaring Strike",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_draw",
+        "fx": "fx.ranger_ensnaring_strike.root",
+        "projectile": "fx.ranger_ensnaring_strike_shot.root",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "ranger.entangle",
+      "name": "Entangle",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_entangle.root",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "ranger.hail_of_thorns",
+      "name": "Hail of Thorns",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_draw",
+        "fx": "fx.ranger_hail_of_thorns.wood",
+        "projectile": "fx.ranger_hail_of_thorns_shot.wood"
+      }
+    },
+    {
+      "id": "ranger.hunters_mark",
+      "name": "Hunter's Mark",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_command",
+        "fx": "fx.ranger_hunters_mark.force"
+      }
+    },
+    {
+      "id": "ranger.hunters_mark_bonus",
+      "name": "Hunters Mark Bonus",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.ranger_hunters_mark_bonus.force"
+      }
+    },
+    {
+      "id": "ranger.archery",
+      "name": "Archery",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.barkskin",
+      "name": "Barkskin",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_barkskin.wood"
+      }
+    },
+    {
+      "id": "ranger.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_lesser_restoration.healing"
+      }
+    },
+    {
+      "id": "ranger.spike_growth",
+      "name": "Spike Growth",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_spike_growth.root"
+      }
+    },
+    {
+      "id": "spike_growth.thorns",
+      "name": "Spike Growth \u00b7 OnEnterTile",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.ranger_spike_growth_step.root"
+      }
+    },
+    {
+      "id": "ranger.roving",
+      "name": "Roving",
+      "level": 6,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "ranger.conjure_barrage",
+      "name": "Conjure Barrage",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_volley",
+        "fx": "fx.ranger_conjure_barrage.force"
+      }
+    },
+    {
+      "id": "ranger.lightning_arrow",
+      "name": "Lightning Arrow",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_draw",
+        "fx": "fx.ranger_lightning_arrow.storm",
+        "projectile": "fx.ranger_lightning_arrow_shot.storm"
+      }
+    },
+    {
+      "id": "ranger.vanish",
+      "name": "Vanish",
+      "level": 10,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_vanish",
+        "fx": "fx.ranger_vanish.mist"
+      }
+    },
+    {
+      "id": "beastmaster.companion",
+      "name": "Companion",
+      "level": 3,
+      "subclass": "ranger.beastmaster",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.ranger_companion.gold"
+      }
+    },
+    {
+      "id": "beastmaster.sic",
+      "name": "Sic 'Em",
+      "level": 3,
+      "subclass": "ranger.beastmaster",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_command",
+        "fx": "fx.ranger_sic.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "beastmaster.pack_bond",
+      "name": "Pack Bond",
+      "level": 6,
+      "subclass": "ranger.beastmaster",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_command",
+        "fx": "fx.ranger_pack_bond.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "beastmaster.alpha_howl",
+      "name": "Alpha Howl",
+      "level": 10,
+      "subclass": "ranger.beastmaster",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_command",
+        "fx": "fx.ranger_alpha_howl.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "beastmaster.ferocious_bond",
+      "name": "Ferocious Bond",
+      "level": 10,
+      "subclass": "ranger.beastmaster",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.ranger_ferocious_bond.steel"
+      }
+    },
+    {
+      "id": "sharpshooter.deadeye",
+      "name": "Deadeye Shot",
+      "level": 3,
+      "subclass": "ranger.sharpshooter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_draw",
+        "fx": "fx.ranger_deadeye.steel",
+        "projectile": "fx.ranger_deadeye_shot.steel",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sharpshooter.high_ground_mastery",
+      "name": "High Ground Mastery",
+      "level": 3,
+      "subclass": "ranger.sharpshooter",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.ranger_high_ground_mastery.steel"
+      }
+    },
+    {
+      "id": "sharpshooter.piercing_shot",
+      "name": "Piercing Shot",
+      "level": 6,
+      "subclass": "ranger.sharpshooter",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_volley",
+        "fx": "fx.ranger_piercing_shot.steel",
+        "projectile": "projectiles.arrow",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sharpshooter.volley",
+      "name": "Volley",
+      "level": 10,
+      "subclass": "ranger.sharpshooter",
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.ranger_volley",
+        "fx": "fx.ranger_volley.steel",
+        "projectile": "fx.ranger_volley_shot.steel"
+      }
+    },
+    {
+      "id": "warden.tough_bark",
+      "name": "Tough Bark",
+      "level": 3,
+      "subclass": "ranger.warden",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warden.vine_snare",
+      "name": "Vine Snare",
+      "level": 3,
+      "subclass": "ranger.warden",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_vine_snare.root",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "warden.natures_veil",
+      "name": "Nature's Veil",
+      "level": 6,
+      "subclass": "ranger.warden",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_natures_veil.root",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "warden.guardian_tree",
+      "name": "Guardian of the Grove",
+      "level": 10,
+      "subclass": "ranger.warden",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.ranger_ward",
+        "fx": "fx.ranger_guardian_tree.root",
+        "cutIn": "full"
+      }
+    }
+  ]
+}

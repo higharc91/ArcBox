@@ -20,6 +20,10 @@ internal sealed partial class Scorer
     /// </list>
     /// </summary>
     public double Worth(UnitState user, UnitState target, Outcome outcome, AiProfile p)
+        => TargetWorth(user, target, outcome, p) + (outcome.SelfHeal > 0 || outcome.SelfTempHp > 0
+            ? TargetWorth(user, user, new Outcome(DamageDist.Zero, Heal: outcome.SelfHeal, TempHp: outcome.SelfTempHp), p) : 0);
+
+    private double TargetWorth(UnitState user, UnitState target, Outcome outcome, AiProfile p)
     {
         var hp = target.Hp + target.TempHp;
         var maxHp = Math.Max(1, target.Sheet.MaxHp);
@@ -101,6 +105,8 @@ internal sealed partial class Scorer
                     {
                         foreach (var passive in zone.Passives.IsDefault ? [] : zone.Passives)
                         {
+                            if (!ZoneRules.Affects(zone.Affects, st.User.Sheet.Side, unit.Sheet.Side))
+                                continue;
                             var weight = passive.Hook switch
                             {
                                 HookKind.OnTurnStart => rounds,

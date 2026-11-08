@@ -818,6 +818,74 @@
       ],
       "fps": 14,
       "loop": false
+    },
+    "ranger_draw": {
+      "frames": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "ranger_volley": {
+      "frames": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "ranger_command": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "ranger_ward": {
+      "frames": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "ranger_vanish": {
+      "frames": [
+        73,
+        74,
+        75,
+        76
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "ranger_release": {
+      "frames": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "fps": 10,
+      "loop": false
     }
   },
   "builds": {

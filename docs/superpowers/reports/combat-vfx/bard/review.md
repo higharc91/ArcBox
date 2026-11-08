@@ -1,4 +1,4 @@
-> Status: Bard native review and full local verification complete; awaiting owner approval before its PR or Ranger.
+> Status: Owner-approved; PR #264 is open against combat-vfx-paladin for the owner merge.
 
 # Bard — #247
 
@@ -28,4 +28,4 @@ Container performance is a relative proxy; hardware 16 ms frames and physical TV
 
 ## Approval boundary
 
-Bard stays unchecked pending owner approval under [#247](https://github.com/higharc91/ArcBox/issues/247). Its PR and Ranger wait for explicit approval. The owner merges approved PRs #251–#256 and #259.
+The owner approved Bard with “looks great, on to the next class”. Its checkbox is ticked and PR #264 is open against combat-vfx-paladin. Ranger is next. The owner merges approved PRs #251–#256, #259 and #264.

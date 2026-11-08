@@ -26,11 +26,23 @@ public enum AreaShape
     [JsonStringEnumMemberName("all_enemies")] AllEnemies,
 }
 
-/// <summary>An area: its shape, size (radius, length or step count) and who it affects.</summary>
+/// <summary>An explicit side filter, relative to the source of an area or zone.</summary>
+public enum AffectedSide
+{
+    /// <summary>Both sides.</summary>
+    [JsonStringEnumMemberName("all")] All,
+    /// <summary>Only the source's side.</summary>
+    [JsonStringEnumMemberName("allies")] Allies,
+    /// <summary>Only other sides.</summary>
+    [JsonStringEnumMemberName("enemies")] Enemies,
+}
+
+/// <summary>An area: its shape, size (radius, length or step count) and who it affects. Affects overrides the target kind's side filter; IncludeSelf still governs the source.</summary>
 public sealed record AreaDef(AreaShape Shape,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Size = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool IncludeSelf = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool FriendlyFire = false);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool FriendlyFire = false,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] AffectedSide? Affects = null);
 
 /// <summary>Computes which tiles an area covers.</summary>
 public static class Areas

@@ -22,6 +22,8 @@ internal sealed partial class Validation
             var def = Deserialize<AbilityDef>(e, file, ptr);
             if (def is null)
                 return null;
+            if (e.TryGetProperty("effects", out var effects))
+                SupportTargets(effects, file, Pointer.Append(ptr, "effects"), CanAffectHostiles(def.Target));
             var target = Pointer.Append(ptr, "target");
             if (def.Target.Range > MaxRange)
                 Error(file, Pointer.Append(target, "range"), $"Range {def.Target.Range} is over the limit of {MaxRange}.");

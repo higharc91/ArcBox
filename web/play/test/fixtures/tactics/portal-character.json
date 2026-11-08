@@ -5052,7 +5052,7 @@
           "Action",
           "1 pact"
         ],
-        "text": "Spell attack, 1 tile: 3d6 necrotic; heals 1d6 \u002B casting modifier"
+        "text": "Spell attack, 1 tile: heals you for 1d6 \u002B casting modifier; 3d6 necrotic"
       },
       "warlock.witch_bolt": {
         "name": "Witch Bolt",

@@ -17,6 +17,15 @@ interface CampData {
 }
 const jobArt: Record<string, string> = { tend: "heal", rally: "inspire", cook: "food", watch: "torch", rest: "second_wind" };
 const shortJob: Record<string, string> = { tend: "Tend", rally: "Rally", cook: "Cook", watch: "Watch", rest: "Rest" };
+const jobEffect: Record<string, string> = {
+  tend: "Mend one body injury on a successful roll.",
+  rally: "Mend one spirit injury on a successful roll.",
+  cook: "Give everyone 3 temporary HP next battle on a successful roll.",
+  watch: "Look for nearby secrets.",
+  rest: "Rest with the party; no extra job.",
+};
+const jobCheck = (j: CampData["jobs"][number]) => j.id === "rest" ? "No roll"
+  : `${j.skill.replaceAll("_", " ").replace(/^./, c => c.toUpperCase())} · ${j.dc > 0 ? `roll ${j.dc}+` : "varies by secret"}`;
 
 /** A short job row above the shared party cards; injury details and treatment open on tap. */
 export function Camp(props: CustomScreenProps) {
@@ -41,9 +50,10 @@ export function Camp(props: CustomScreenProps) {
     <header><span class="tx-eyebrow">{d.mode === "inn" ? "At the inn" : "By the fire"}</span><h1>{d.stage === "dawn" ? "A new dawn" : rolled ? "A moment by the fire" : d.stage === "sleep" ? "A quiet night" : d.stage === "results" ? "A quiet moment" : "Make yourself useful"}</h1></header>
     <CampScene stage={d.stage} mode={d.mode} members={members} party={d.party} you={d.you} />
     {d.stage === "jobs" ? <>
-      <div class="tx-camp-jobs" aria-label="Camp jobs">{d.jobs.map(j => <button class="tx-btn" aria-label={j.name} aria-pressed={d.job === j.id} disabled={!d.canPick || j.can === false}
+      <div class="tx-camp-jobs" aria-label="Camp jobs">{d.jobs.map(j => <button class="tx-btn" aria-label={j.name} aria-describedby={`camp-job-${j.id}`} aria-pressed={d.job === j.id} disabled={!d.canPick || j.can === false}
         onClick={() => send("campJob", { job: j.id })} key={j.id}><span class="tx-job-disc" aria-hidden="true">{base && icons?.icons[jobArt[j.id] ?? ""]
-          ? <Sprite src={`${base}icons/${icons.icons[jobArt[j.id]!]!.atlas}`} rect={icons.icons[jobArt[j.id]!]!.rect} /> : shortJob[j.id]?.[0]}</span>{shortJob[j.id] ?? j.name}</button>)}</div>
+          ? <Sprite src={`${base}icons/${icons.icons[jobArt[j.id]!]!.atlas}`} rect={icons.icons[jobArt[j.id]!]!.rect} /> : shortJob[j.id]?.[0]}</span>
+          <span class="tx-job-text"><b>{j.name}</b><span id={`camp-job-${j.id}`}><span>{jobEffect[j.id] ?? j.name}</span><small>{jobCheck(j)}</small></span></span></button>)}</div>
       <div class="tx-recovery-section"><span>{d.job === "tend" || d.job === "rally" ? "Tap an injury to help" : "Party · battle ready"}</span><button class="tx-link" onClick={() => setHelp(true)}>About jobs</button></div>
     </> : rolled ? <Check {...props} data={{ skill: result.skill, dc: result.job === "watch" ? null : result.dc, title: result.text,
       cards: [{ id: result.member, name: d.party.find(p => p.member === result.member)?.name ?? result.member, player: "", cls: "", bonus: result.bonus,
@@ -53,8 +63,11 @@ export function Camp(props: CustomScreenProps) {
       : <p class="tx-recovery-result" role="status">{d.stage === "dawn" ? "Rest injuries mended. Ready for the road." : d.stage === "sleep" ? "The party settles down to sleep." : result?.text ?? "A quiet night."}</p>}
     {rolled ? <details class="tx-recovery-roll-party"><summary>Party status · {members.length} members</summary>{partyCards}</details> : partyCards}
     {d.stage !== "jobs" && d.leader && <button class="tx-btn ghost tx-recovery-continue" onClick={() => send("campNext")}>Continue</button>}
-    {help && <Sheet title="Camp jobs" eyebrow="Your own character rolls" onClose={() => setHelp(false)}><p>Tend: Medicine DC 12, mend a body injury. Healing spells grant advantage.</p>
-      <p>Rally: your better social skill, DC 12, mend a spirit injury. Cook: Survival DC 10, give everyone 3 temporary HP next battle.</p>
-      <p>Watch: Perception, find nearby secrets. Rest easy: no check. Leave a job unchosen to rest easy.</p></Sheet>}
+    {help && <Sheet title="Camp jobs" eyebrow="Your own character rolls" onClose={() => setHelp(false)}>
+      <p>Add your skill bonus to the roll. Reach the number shown on the job to succeed.</p>
+      <p>Tend mends a body injury. If you know a healing spell, roll twice and keep the higher result.</p>
+      <p>Rally mends a spirit injury using your better social skill. Cook gives everyone 3 temporary HP for the next battle on a successful roll. Temporary HP absorb damage before your normal HP.</p>
+      <p>Watch uses Perception to look for nearby secrets; each secret has its own target number.</p>
+      <p>Rest needs no roll. Choose Rest, or leave your job unchosen, to skip an extra job and recover with the party at dawn.</p></Sheet>}
   </section>;
 }

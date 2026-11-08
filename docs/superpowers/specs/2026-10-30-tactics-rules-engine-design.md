@@ -289,7 +289,7 @@ public sealed record BattleResult(
 - `cost` can use any of `action`, `bonus`, `reaction`, `move` (tiles), `resource{}`, `uses` (per battle) and `concentration: true`.
 - **Target kinds:** `self`, `ally`, `enemy`, `any_unit`, `downed_ally`, `tile`, `empty_tile`.
 - **Target options:** `range`, `minRange`, `los`, and `heightTolerance` for melee.
-- **Area shapes:** `single`, `burst{radius}` (4-way steps), `line{length}`, `cone{length}`, `cross{arm}`, `ring{radius}`, `all_allies`, `all_enemies`. Areas can also set `includeSelf` and `friendlyFire`.
+- **Area shapes:** `single`, `burst{radius}` (4-way steps), `line{length}`, `cone{length}`, `cross{arm}`, `ring{radius}`, `all_allies`, `all_enemies`. Areas can also set `includeSelf` and `friendlyFire`. Optional `affects: "allies" | "enemies" | "all"` overrides the target kind's side filter while `includeSelf` still controls the caster. A tile-aimed heal uses `affects: "allies"`; a rally centred on the caster uses `kind: "ally"`, range 0 and `includeSelf: true`.
 - `presentation` holds keys into the asset manifests: rig animation, `signature` / `fx` effect ids, and `projectiles` ids. The loader checks that they exist in the art pack.
 
 ### 4.3 Building blocks
@@ -307,6 +307,8 @@ There are about 35 blocks, each a C# class implementing `IEffectBlock` and regis
 | Combat | `grantResource`, `extraAction`, `refreshReaction`, `statMod` (timed bonus to AC, attack, saves, Move, Initiative, damage), `mark`, `taunt`, `reveal` |
 | Turn order | `turnOrder` (`delay`, `hasten`, `swap` two units: Chronomancer) |
 | Flow | `chain` (bounce to the nearest new target, n times), `repeat`, `if` (on outcome, target tags, conditions, HP%, height difference), `random` (weighted table) |
+
+`heal` and `tempHp` accept `self: true` to benefit the source instead of the affected unit. A drain puts its caster heal inside `onHit`, before damage, so misses never heal and killing the final enemy cannot cancel the heal. A zone can set `affects: "allies" | "enemies" | "all"` independently of its casting area's targets; it filters passive recipients relative to the zone owner. Omitted zone filters preserve the existing effect on everyone inside, including for old saved battles. The loader rejects healing, temporary HP, revives, Help and wholly beneficial stat modifiers that can reach a hostile side, including inside branches and healing zones.
 
 **Named C# hooks** cover the few features that don't fit the blocks. Each is a class registered by name, called from data (`{"hook": "wild_shape", "args": {...}}`), and validated like a block. The proposed list is `wild_shape`, `counterspell`, `polymorph` and `animate_dead`. Adding one requires a deploy; content can't add hooks.
 

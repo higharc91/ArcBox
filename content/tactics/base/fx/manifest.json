@@ -10161,6 +10161,936 @@
         "thunder": "bard_silence_turn_thunder.png"
       },
       "default": "thunder"
+    },
+    "ranger_hunters_mark": {
+      "name": "Hunters Mark",
+      "group": "Ranger",
+      "frame": [
+        70,
+        47
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        45
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "ranger_hunters_mark_force.png"
+      },
+      "default": "force"
+    },
+    "ranger_vanish": {
+      "name": "Vanish",
+      "group": "Ranger",
+      "frame": [
+        111,
+        65
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        55,
+        62
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        1,
+        19
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "mist": "ranger_vanish_mist.png"
+      },
+      "default": "mist"
+    },
+    "ranger_cure_wounds": {
+      "name": "Cure Wounds",
+      "group": "Ranger",
+      "frame": [
+        70,
+        48
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        39
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        42
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "ranger_cure_wounds_healing.png"
+      },
+      "default": "healing"
+    },
+    "ranger_ensnaring_strike": {
+      "name": "Ensnaring Strike",
+      "group": "Ranger",
+      "frame": [
+        73,
+        59
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        36,
+        45
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        20,
+        36
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_ensnaring_strike_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_ensnaring_strike_shot": {
+      "name": "Ensnaring Strike flight",
+      "group": "Ranger",
+      "frame": [
+        40,
+        14
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        20,
+        7
+      ],
+      "sourceFrame": [
+        64,
+        32
+      ],
+      "trim": [
+        12,
+        9
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_ensnaring_strike_shot_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_entangle": {
+      "name": "Entangle",
+      "group": "Ranger",
+      "frame": [
+        157,
+        74
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        78,
+        46
+      ],
+      "sourceFrame": [
+        208,
+        160
+      ],
+      "trim": [
+        26,
+        69
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_entangle_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_hail_of_thorns": {
+      "name": "Hail Of Thorns",
+      "group": "Ranger",
+      "frame": [
+        76,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        41,
+        49
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        15,
+        32
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "wood": "ranger_hail_of_thorns_wood.png"
+      },
+      "default": "wood"
+    },
+    "ranger_hail_of_thorns_shot": {
+      "name": "Hail Of Thorns flight",
+      "group": "Ranger",
+      "frame": [
+        40,
+        14
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        20,
+        7
+      ],
+      "sourceFrame": [
+        64,
+        32
+      ],
+      "trim": [
+        12,
+        9
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "wood": "ranger_hail_of_thorns_shot_wood.png"
+      },
+      "default": "wood"
+    },
+    "ranger_spike_growth": {
+      "name": "Spike Growth",
+      "group": "Ranger",
+      "frame": [
+        157,
+        80
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        78,
+        52
+      ],
+      "sourceFrame": [
+        208,
+        160
+      ],
+      "trim": [
+        26,
+        63
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_spike_growth_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_barkskin": {
+      "name": "Barkskin",
+      "group": "Ranger",
+      "frame": [
+        70,
+        70
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        60
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        21
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "wood": "ranger_barkskin_wood.png"
+      },
+      "default": "wood"
+    },
+    "ranger_lesser_restoration": {
+      "name": "Lesser Restoration",
+      "group": "Ranger",
+      "frame": [
+        70,
+        66
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        63
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        18
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "ranger_lesser_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "ranger_lightning_arrow": {
+      "name": "Lightning Arrow",
+      "group": "Ranger",
+      "frame": [
+        76,
+        58
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        52
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        29
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "ranger_lightning_arrow_storm.png"
+      },
+      "default": "storm"
+    },
+    "ranger_lightning_arrow_shot": {
+      "name": "Lightning Arrow flight",
+      "group": "Ranger",
+      "frame": [
+        54,
+        22
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        27,
+        11
+      ],
+      "sourceFrame": [
+        64,
+        32
+      ],
+      "trim": [
+        5,
+        5
+      ],
+      "attach": "projectile",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "storm": "ranger_lightning_arrow_shot_storm.png"
+      },
+      "default": "storm"
+    },
+    "ranger_conjure_barrage": {
+      "name": "Conjure Barrage",
+      "group": "Ranger",
+      "frame": [
+        240,
+        112
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        56
+      ],
+      "sourceFrame": [
+        240,
+        112
+      ],
+      "trim": [
+        0,
+        0
+      ],
+      "attach": "body",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "ranger_conjure_barrage_force.png"
+      },
+      "default": "force"
+    },
+    "ranger_deadeye": {
+      "name": "Deadeye",
+      "group": "Ranger",
+      "frame": [
+        75,
+        75
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        37,
+        60
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        19,
+        21
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_deadeye_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_deadeye_shot": {
+      "name": "Deadeye flight",
+      "group": "Ranger",
+      "frame": [
+        58,
+        14
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        29,
+        7
+      ],
+      "sourceFrame": [
+        64,
+        32
+      ],
+      "trim": [
+        3,
+        9
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_deadeye_shot_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_piercing_shot": {
+      "name": "Piercing Shot",
+      "group": "Ranger",
+      "frame": [
+        240,
+        36
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        16
+      ],
+      "sourceFrame": [
+        240,
+        112
+      ],
+      "trim": [
+        0,
+        40
+      ],
+      "attach": "body",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_piercing_shot_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_volley": {
+      "name": "Volley",
+      "group": "Ranger",
+      "frame": [
+        162,
+        85
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        83,
+        46
+      ],
+      "sourceFrame": [
+        208,
+        160
+      ],
+      "trim": [
+        21,
+        69
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_volley_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_volley_shot": {
+      "name": "Volley flight",
+      "group": "Ranger",
+      "frame": [
+        40,
+        30
+      ],
+      "frames": 8,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        20,
+        15
+      ],
+      "sourceFrame": [
+        64,
+        32
+      ],
+      "trim": [
+        12,
+        1
+      ],
+      "attach": "projectile",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_volley_shot_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_sic": {
+      "name": "Sic",
+      "group": "Ranger",
+      "frame": [
+        70,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        45
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "ranger_sic_gold.png"
+      },
+      "default": "gold"
+    },
+    "ranger_pack_bond": {
+      "name": "Pack Bond",
+      "group": "Ranger",
+      "frame": [
+        70,
+        45
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        35,
+        42
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        21,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "ranger_pack_bond_gold.png"
+      },
+      "default": "gold"
+    },
+    "ranger_alpha_howl": {
+      "name": "Alpha Howl",
+      "group": "Ranger",
+      "frame": [
+        152,
+        84
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        76,
+        60
+      ],
+      "sourceFrame": [
+        208,
+        160
+      ],
+      "trim": [
+        28,
+        55
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "ranger_alpha_howl_gold.png"
+      },
+      "default": "gold"
+    },
+    "ranger_vine_snare": {
+      "name": "Vine Snare",
+      "group": "Ranger",
+      "frame": [
+        240,
+        40
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        8,
+        20
+      ],
+      "sourceFrame": [
+        240,
+        112
+      ],
+      "trim": [
+        0,
+        36
+      ],
+      "attach": "body",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_vine_snare_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_natures_veil": {
+      "name": "Natures Veil",
+      "group": "Ranger",
+      "frame": [
+        96,
+        71
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        48,
+        68
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        8,
+        13
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_natures_veil_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_guardian_tree": {
+      "name": "Guardian Tree",
+      "group": "Ranger",
+      "frame": [
+        170,
+        117
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        80,
+        89
+      ],
+      "sourceFrame": [
+        208,
+        160
+      ],
+      "trim": [
+        24,
+        26
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_guardian_tree_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_hunters_mark_bonus": {
+      "name": "Hunters Mark Bonus",
+      "group": "Ranger",
+      "frame": [
+        50,
+        27
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        33
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        15,
+        25
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "ranger_hunters_mark_bonus_force.png"
+      },
+      "default": "force"
+    },
+    "ranger_high_ground_mastery": {
+      "name": "High Ground Mastery",
+      "group": "Ranger",
+      "frame": [
+        56,
+        43
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        31,
+        48
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        9,
+        10
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_high_ground_mastery_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_companion": {
+      "name": "Companion",
+      "group": "Ranger",
+      "frame": [
+        75,
+        50
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        37,
+        40
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        19,
+        41
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "ranger_companion_gold.png"
+      },
+      "default": "gold"
+    },
+    "ranger_ferocious_bond": {
+      "name": "Ferocious Bond",
+      "group": "Ranger",
+      "frame": [
+        50,
+        39
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        40
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        15,
+        18
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "steel": "ranger_ferocious_bond_steel.png"
+      },
+      "default": "steel"
+    },
+    "ranger_spike_growth_step": {
+      "name": "Spike Growth Step",
+      "group": "Ranger",
+      "frame": [
+        56,
+        43
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        28,
+        33
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        12,
+        25
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_spike_growth_step_root.png"
+      },
+      "default": "root"
+    },
+    "ranger_ensnared_thorns": {
+      "name": "Ensnared Thorns",
+      "group": "Ranger",
+      "frame": [
+        51,
+        38
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        42
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        15,
+        16
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "root": "ranger_ensnared_thorns_root.png"
+      },
+      "default": "root"
     }
   },
   "passives": {
@@ -10192,6 +11122,12 @@
     "avenger.vengeful_strikes": "fx.paladin_vengeful_strikes.ember",
     "crusader.consecrated.tick": "fx.paladin_consecrated_tick.holy",
     "bard.font_of_inspiration": "fx.bard_font_of_inspiration.gold",
-    "bard.silence.turn": "fx.bard_silence_turn.thunder"
+    "bard.silence.turn": "fx.bard_silence_turn.thunder",
+    "ranger.hunters_mark_bonus": "fx.ranger_hunters_mark_bonus.force",
+    "sharpshooter.high_ground_mastery": "fx.ranger_high_ground_mastery.steel",
+    "beastmaster.companion": "fx.ranger_companion.gold",
+    "beastmaster.ferocious_bond": "fx.ranger_ferocious_bond.steel",
+    "spike_growth.thorns": "fx.ranger_spike_growth_step.root",
+    "ensnared.thorns": "fx.ranger_ensnared_thorns.root"
   }
 }

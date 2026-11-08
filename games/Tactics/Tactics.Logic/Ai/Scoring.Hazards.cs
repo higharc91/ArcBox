@@ -45,6 +45,9 @@ internal sealed partial class Scorer
             var damage = 0.0;
             foreach (var (zone, passive) in entries)
             {
+                if (!ZoneRules.Affects(zone.Affects,
+                        zone.Owner is { } owner && State.Units.TryGetValue(owner, out var source) ? source.Sheet.Side : null, unit.Sheet.Side))
+                    continue;
                 if (passive.Hook != hook || passive.OncePerTurn && turn.Contains(passive.Id)
                     || passive.OncePerRound && round.Contains(passive.Id))
                     continue;

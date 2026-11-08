@@ -1,4 +1,4 @@
-> Status: Bard native review complete; awaiting owner OK before its PR or Ranger. Approved PRs #251–#256 and #259 await owner merges. CI remains manually disabled.
+> Status: Ranger native review complete; awaiting owner OK before its PR or Fighter. Approved dependency PRs await owner merges. CI remains manually disabled.
 
 # Combat VFX #247 progress
 
@@ -192,3 +192,17 @@ Bard covers 32 abilities, Font of Inspiration, Silence's embedded turn hook, ord
 The 35-sample gallery is `../reports/combat-vfx/bard/index.html`: 32 abilities, two actual hooks and ordinary Attack, with 37 inventory rows including three static features. Thirty-four native effect sheets and five five-frame cast gestures preserve the original 4,158 frames, all gameplay fields and sounds. Source/art/runtime `9b1e30d680dd1ead9615851089258300496c2264`.
 
 The full gate passes: 7,279 .NET (zero skipped), 562 phone/build, 24 Node, 53 asset, 9 audio and 23 lore tests; zero build warnings. Three-run class median 21.1478 → 21.4184 ms (+1.28%, within 10%); largest individual valor.combat_inspiration (+8.78%). Texture peak +20.15 MiB; pack growth 0.48 MiB. All 150 completed rounds across five Bard-containing parties add at most 3.317/3.017/0 s Full/Auto/Off under unchanged strict assertions. Hardware 16 ms and physical TV checks remain pending. Bard stays unchecked; its PR and Ranger wait for explicit approval. CI remains disabled.
+
+
+## Bard approval and Ranger
+
+The owner replied “looks great, on to the next class”. Bard is approved, its #247 checkbox is ticked, and PR #264 is open against `combat-vfx-paladin`. Ranger starts from latest main `44d6f111` with approved Bard dependency `6020d9100959a22df5db2161762e48b056c8b7f4`. Frozen before is `e89d584caa84918e2de93684d298cc4a072da04a`. Integration preserves latest-main support targeting, caster-only drains and every replay outcome; the conflict resolution updates only thirty existing AbilityUsed presentation objects in main's current Warlord Bridge replay. No new Ranger gameplay change is made.
+
+Ranger covers 20 abilities, four class hooks, Spike Growth's entry hook, Ensnared's turn-start damage, ordinary Attack and the real summoned hound's movement/attack. Three static features remain in the inventory. Thirty-one native sheets include five distinct flight strips. Five gestures and a held rapid-release pose append 26 frames per race. Real marks, actual high ground and zone entry trigger the fixtures. New bow playback keeps both level-10 attacks under the unchanged weapon budget, with rider effects and separate numbers on the victim. Full verification and native review are in progress. Ranger's PR and Fighter wait for explicit Ranger approval.
+
+
+## Ranger review handoff
+
+The 29-sample native gallery is `../reports/combat-vfx/ranger/index.html`: 20 abilities, six hooks, ordinary Attack and two actual hound turns. Thirty-one sheets include five arrow strips. Five cast gestures and a held release append 26 frames across eleven races, preserving all 4,158 original frames. Source/art/runtime `8d193e1ed381618e28d811271ab12aea9d05f8b5`.
+
+The full gate passes: 7,317 .NET (zero skipped), 565 phone/build, 24 Node, 56 asset, 9 audio and 23 lore; zero build warnings. Three-run class median 20.7833 → 21.9784 ms (+5.75%, within 10%); largest individual ranger.companion.move (+12.30%). Texture peak +22.13 MiB; pack 0.58 MiB. All 180 rounds across six parties add at most 3.317/3.017/0 s Full/Auto/Off under unchanged strict assertions. Only four Hunter's Mark presentation events change in the Warlord Bridge golden; commands and non-presentation events are identical. Hardware 16 ms and physical TV checks remain hardware validation. Ranger stays unchecked; its PR and Fighter wait for explicit approval. CI remains disabled.
