@@ -1,0 +1,6746 @@
+[
+  {
+    "id": "hobgoblin",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "frames": [
+      {
+        "head": [
+          124.5,
+          26
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          24,
+          24,
+          166,
+          195
+        ],
+        "bounds": [
+          26,
+          26,
+          188,
+          217
+        ],
+        "foot": [
+          98.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          25
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          247,
+          23,
+          164,
+          196
+        ],
+        "bounds": [
+          249,
+          25,
+          409,
+          217
+        ],
+        "foot": [
+          320.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.0,
+          24
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          469,
+          22,
+          165,
+          197
+        ],
+        "bounds": [
+          471,
+          24,
+          632,
+          217
+        ],
+        "foot": [
+          542.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          26
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          691,
+          24,
+          165,
+          195
+        ],
+        "bounds": [
+          693,
+          26,
+          854,
+          217
+        ],
+        "foot": [
+          765.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          124.5,
+          24
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          23,
+          22,
+          171,
+          196
+        ],
+        "bounds": [
+          25,
+          24,
+          192,
+          216
+        ],
+        "foot": [
+          95.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.5,
+          24
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          246,
+          22,
+          163,
+          196
+        ],
+        "bounds": [
+          248,
+          24,
+          407,
+          216
+        ],
+        "foot": [
+          312.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          24
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          468,
+          22,
+          168,
+          193
+        ],
+        "bounds": [
+          470,
+          24,
+          634,
+          213
+        ],
+        "foot": [
+          516.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          24
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          691,
+          22,
+          162,
+          196
+        ],
+        "bounds": [
+          693,
+          24,
+          851,
+          216
+        ],
+        "foot": [
+          757.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          218.5,
+          129
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 0,
+        "cell": [
+          113,
+          127,
+          241,
+          303
+        ],
+        "bounds": [
+          115,
+          129,
+          352,
+          428
+        ],
+        "foot": [
+          252.0,
+          428
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          624.5,
+          29
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 1,
+        "cell": [
+          532,
+          27,
+          262,
+          403
+        ],
+        "bounds": [
+          534,
+          29,
+          792,
+          428
+        ],
+        "foot": [
+          689.0,
+          428
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1110.0,
+          141
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 2,
+        "cell": [
+          957,
+          139,
+          261,
+          291
+        ],
+        "bounds": [
+          959,
+          141,
+          1216,
+          428
+        ],
+        "foot": [
+          1088.0,
+          428
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1554.5,
+          147
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 3,
+        "cell": [
+          1357,
+          145,
+          304,
+          285
+        ],
+        "bounds": [
+          1359,
+          147,
+          1659,
+          428
+        ],
+        "foot": [
+          1557.5,
+          428
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          173.0,
+          46
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          44,
+          44,
+          233,
+          241
+        ],
+        "bounds": [
+          46,
+          46,
+          275,
+          283
+        ],
+        "foot": [
+          148.5,
+          283
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          479.0,
+          171
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          322,
+          169,
+          270,
+          118
+        ],
+        "bounds": [
+          324,
+          171,
+          590,
+          285
+        ],
+        "foot": [
+          428.5,
+          285
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          124.5,
+          248
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          24,
+          246,
+          158,
+          195
+        ],
+        "bounds": [
+          26,
+          248,
+          180,
+          439
+        ],
+        "foot": [
+          125.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          245
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          246,
+          243,
+          159,
+          198
+        ],
+        "bounds": [
+          248,
+          245,
+          403,
+          439
+        ],
+        "foot": [
+          348.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.0,
+          244
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          468,
+          242,
+          159,
+          199
+        ],
+        "bounds": [
+          470,
+          244,
+          625,
+          439
+        ],
+        "foot": [
+          570.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.0,
+          248
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          690,
+          246,
+          158,
+          195
+        ],
+        "bounds": [
+          692,
+          248,
+          846,
+          439
+        ],
+        "foot": [
+          793.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.0,
+          244
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          24,
+          242,
+          159,
+          195
+        ],
+        "bounds": [
+          26,
+          244,
+          181,
+          435
+        ],
+        "foot": [
+          73.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.5,
+          244
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          246,
+          242,
+          160,
+          198
+        ],
+        "bounds": [
+          248,
+          244,
+          404,
+          438
+        ],
+        "foot": [
+          310.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          243
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          468,
+          241,
+          162,
+          196
+        ],
+        "bounds": [
+          470,
+          243,
+          628,
+          435
+        ],
+        "foot": [
+          544.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.5,
+          245
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          689,
+          243,
+          156,
+          197
+        ],
+        "bounds": [
+          691,
+          245,
+          843,
+          438
+        ],
+        "foot": [
+          797.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          203.0,
+          553
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 4,
+        "cell": [
+          89,
+          551,
+          268,
+          303
+        ],
+        "bounds": [
+          91,
+          553,
+          355,
+          852
+        ],
+        "foot": [
+          251.5,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          639.0,
+          466
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 5,
+        "cell": [
+          546,
+          464,
+          245,
+          390
+        ],
+        "bounds": [
+          548,
+          466,
+          789,
+          852
+        ],
+        "foot": [
+          683.5,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1102.5,
+          570
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 6,
+        "cell": [
+          921,
+          568,
+          315,
+          285
+        ],
+        "bounds": [
+          923,
+          570,
+          1234,
+          851
+        ],
+        "foot": [
+          1079.0,
+          851
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1544.0,
+          573
+        ],
+        "source": "source/hobgoblin-attack-front.png",
+        "sourcePose": 7,
+        "cell": [
+          1353,
+          571,
+          327,
+          282
+        ],
+        "bounds": [
+          1355,
+          573,
+          1678,
+          851
+        ],
+        "foot": [
+          1517.0,
+          851
+        ],
+        "sourceEdge": false,
+        "scale": 0.39732441471571905,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          808.5,
+          42
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          651,
+          40,
+          223,
+          245
+        ],
+        "bounds": [
+          653,
+          42,
+          872,
+          283
+        ],
+        "foot": [
+          779.0,
+          283
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1086.0,
+          172
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          929,
+          170,
+          287,
+          117
+        ],
+        "bounds": [
+          931,
+          172,
+          1214,
+          285
+        ],
+        "foot": [
+          1027.0,
+          285
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.5,
+          468
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          40,
+          466,
+          123,
+          197
+        ],
+        "bounds": [
+          42,
+          468,
+          161,
+          661
+        ],
+        "foot": [
+          128.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.5,
+          467
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          263,
+          465,
+          120,
+          198
+        ],
+        "bounds": [
+          265,
+          467,
+          381,
+          661
+        ],
+        "foot": [
+          349.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          465
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          485,
+          463,
+          120,
+          200
+        ],
+        "bounds": [
+          487,
+          465,
+          603,
+          661
+        ],
+        "foot": [
+          571.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          468
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          707,
+          466,
+          121,
+          197
+        ],
+        "bounds": [
+          709,
+          468,
+          826,
+          661
+        ],
+        "foot": [
+          794.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.5,
+          465
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          38,
+          463,
+          135,
+          197
+        ],
+        "bounds": [
+          40,
+          465,
+          171,
+          658
+        ],
+        "foot": [
+          102.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.0,
+          464
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          261,
+          462,
+          124,
+          198
+        ],
+        "bounds": [
+          263,
+          464,
+          383,
+          658
+        ],
+        "foot": [
+          347.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          463
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          485,
+          461,
+          124,
+          198
+        ],
+        "bounds": [
+          487,
+          463,
+          607,
+          657
+        ],
+        "foot": [
+          558.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          465
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          707,
+          463,
+          127,
+          198
+        ],
+        "bounds": [
+          709,
+          465,
+          832,
+          659
+        ],
+        "foot": [
+          757.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          90.0,
+          488
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          18,
+          486,
+          164,
+          175
+        ],
+        "bounds": [
+          20,
+          488,
+          180,
+          659
+        ],
+        "foot": [
+          127.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          446
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          274,
+          444,
+          126,
+          217
+        ],
+        "bounds": [
+          276,
+          446,
+          398,
+          659
+        ],
+        "foot": [
+          334.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.0,
+          499
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          436,
+          497,
+          203,
+          164
+        ],
+        "bounds": [
+          438,
+          499,
+          637,
+          659
+        ],
+        "foot": [
+          537.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          501
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          672,
+          499,
+          191,
+          162
+        ],
+        "bounds": [
+          674,
+          501,
+          861,
+          659
+        ],
+        "foot": [
+          767.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          187.0,
+          352
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          59,
+          350,
+          179,
+          249
+        ],
+        "bounds": [
+          61,
+          352,
+          236,
+          597
+        ],
+        "foot": [
+          166.5,
+          597
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          452.0,
+          485
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          281,
+          483,
+          310,
+          112
+        ],
+        "bounds": [
+          283,
+          485,
+          589,
+          593
+        ],
+        "foot": [
+          434.0,
+          593
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.0,
+          689
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          69,
+          687,
+          142,
+          197
+        ],
+        "bounds": [
+          71,
+          689,
+          209,
+          882
+        ],
+        "foot": [
+          121.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.0,
+          687
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          291,
+          685,
+          141,
+          199
+        ],
+        "bounds": [
+          293,
+          687,
+          430,
+          882
+        ],
+        "foot": [
+          343.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          685
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          514,
+          683,
+          139,
+          201
+        ],
+        "bounds": [
+          516,
+          685,
+          651,
+          882
+        ],
+        "foot": [
+          565.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.0,
+          689
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          736,
+          687,
+          141,
+          197
+        ],
+        "bounds": [
+          738,
+          689,
+          875,
+          882
+        ],
+        "foot": [
+          787.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.0,
+          685
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          64,
+          683,
+          148,
+          193
+        ],
+        "bounds": [
+          66,
+          685,
+          210,
+          874
+        ],
+        "foot": [
+          148.5,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          685
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          287,
+          683,
+          148,
+          199
+        ],
+        "bounds": [
+          289,
+          685,
+          433,
+          880
+        ],
+        "foot": [
+          358.0,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.5,
+          682
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          510,
+          680,
+          145,
+          200
+        ],
+        "bounds": [
+          512,
+          682,
+          653,
+          878
+        ],
+        "foot": [
+          553.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.5,
+          687
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          731,
+          685,
+          149,
+          197
+        ],
+        "bounds": [
+          733,
+          687,
+          878,
+          880
+        ],
+        "foot": [
+          803.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          87.5,
+          710
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          16,
+          708,
+          168,
+          175
+        ],
+        "bounds": [
+          18,
+          710,
+          182,
+          881
+        ],
+        "foot": [
+          133.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          350.5,
+          664
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          273,
+          662,
+          139,
+          220
+        ],
+        "bounds": [
+          275,
+          664,
+          410,
+          880
+        ],
+        "foot": [
+          330.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          534.0,
+          718
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          452,
+          716,
+          177,
+          167
+        ],
+        "bounds": [
+          454,
+          718,
+          627,
+          881
+        ],
+        "foot": [
+          571.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.0,
+          722
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          671,
+          720,
+          189,
+          163
+        ],
+        "bounds": [
+          673,
+          722,
+          858,
+          881
+        ],
+        "foot": [
+          802.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          782.5,
+          354
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          688,
+          352,
+          190,
+          247
+        ],
+        "bounds": [
+          690,
+          354,
+          876,
+          597
+        ],
+        "foot": [
+          763.5,
+          597
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1075.0,
+          492
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          908,
+          490,
+          310,
+          105
+        ],
+        "bounds": [
+          910,
+          492,
+          1216,
+          593
+        ],
+        "foot": [
+          1060.5,
+          593
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          115.0,
+          910
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          52,
+          908,
+          161,
+          197
+        ],
+        "bounds": [
+          54,
+          910,
+          211,
+          1103
+        ],
+        "foot": [
+          118.0,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          907
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          275,
+          905,
+          160,
+          200
+        ],
+        "bounds": [
+          277,
+          907,
+          433,
+          1103
+        ],
+        "foot": [
+          340.0,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          907
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          497,
+          905,
+          160,
+          200
+        ],
+        "bounds": [
+          499,
+          907,
+          655,
+          1103
+        ],
+        "foot": [
+          562.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.5,
+          910
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          718,
+          908,
+          161,
+          197
+        ],
+        "bounds": [
+          720,
+          910,
+          877,
+          1103
+        ],
+        "foot": [
+          784.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.0,
+          907
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          47,
+          905,
+          165,
+          196
+        ],
+        "bounds": [
+          49,
+          907,
+          210,
+          1099
+        ],
+        "foot": [
+          110.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          907
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          272,
+          905,
+          163,
+          199
+        ],
+        "bounds": [
+          274,
+          907,
+          433,
+          1102
+        ],
+        "foot": [
+          337.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.0,
+          907
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          496,
+          905,
+          161,
+          199
+        ],
+        "bounds": [
+          498,
+          907,
+          655,
+          1102
+        ],
+        "foot": [
+          579.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          908
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          717,
+          906,
+          162,
+          198
+        ],
+        "bounds": [
+          719,
+          908,
+          877,
+          1102
+        ],
+        "foot": [
+          804.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          83.0,
+          931
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          17,
+          929,
+          161,
+          172
+        ],
+        "bounds": [
+          19,
+          931,
+          176,
+          1099
+        ],
+        "foot": [
+          119.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          612.0,
+          233
+        ],
+        "source": "source/hobgoblin-overhead-clean.png",
+        "sourcePose": 0,
+        "cell": [
+          229,
+          231,
+          631,
+          972
+        ],
+        "bounds": [
+          231,
+          233,
+          858,
+          1201
+        ],
+        "foot": [
+          505.0,
+          1201
+        ],
+        "sourceEdge": false,
+        "scale": 0.15925324675324673,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          535.0,
+          941
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          468,
+          939,
+          169,
+          164
+        ],
+        "bounds": [
+          470,
+          941,
+          635,
+          1101
+        ],
+        "foot": [
+          574.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.0,
+          944
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          671,
+          942,
+          187,
+          161
+        ],
+        "bounds": [
+          673,
+          944,
+          856,
+          1101
+        ],
+        "foot": [
+          798.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          148.5,
+          649
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          63,
+          647,
+          220,
+          246
+        ],
+        "bounds": [
+          65,
+          649,
+          281,
+          891
+        ],
+        "foot": [
+          158.0,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          455.5,
+          762
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          345,
+          760,
+          258,
+          133
+        ],
+        "bounds": [
+          347,
+          762,
+          601,
+          891
+        ],
+        "foot": [
+          439.5,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          115.0,
+          1132
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          62,
+          1130,
+          150,
+          197
+        ],
+        "bounds": [
+          64,
+          1132,
+          210,
+          1325
+        ],
+        "foot": [
+          114.0,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.0,
+          1129
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          285,
+          1127,
+          149,
+          200
+        ],
+        "bounds": [
+          287,
+          1129,
+          432,
+          1325
+        ],
+        "foot": [
+          336.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          1128
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          509,
+          1126,
+          147,
+          201
+        ],
+        "bounds": [
+          511,
+          1128,
+          654,
+          1325
+        ],
+        "foot": [
+          558.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          1132
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          730,
+          1130,
+          149,
+          197
+        ],
+        "bounds": [
+          732,
+          1132,
+          877,
+          1325
+        ],
+        "foot": [
+          780.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.0,
+          1126
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          59,
+          1124,
+          153,
+          201
+        ],
+        "bounds": [
+          61,
+          1126,
+          210,
+          1323
+        ],
+        "foot": [
+          145.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          1126
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          280,
+          1124,
+          155,
+          200
+        ],
+        "bounds": [
+          282,
+          1126,
+          433,
+          1322
+        ],
+        "foot": [
+          372.5,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1126
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          508,
+          1124,
+          149,
+          201
+        ],
+        "bounds": [
+          510,
+          1126,
+          655,
+          1323
+        ],
+        "foot": [
+          573.0,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          1126
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          726,
+          1124,
+          154,
+          201
+        ],
+        "bounds": [
+          728,
+          1126,
+          878,
+          1323
+        ],
+        "foot": [
+          790.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          137.0,
+          1155
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          47,
+          1153,
+          150,
+          169
+        ],
+        "bounds": [
+          49,
+          1155,
+          195,
+          1320
+        ],
+        "foot": [
+          108.0,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          1109
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          265,
+          1107,
+          128,
+          215
+        ],
+        "bounds": [
+          267,
+          1109,
+          391,
+          1320
+        ],
+        "foot": [
+          327.0,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          1169
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          470,
+          1167,
+          169,
+          156
+        ],
+        "bounds": [
+          472,
+          1169,
+          637,
+          1321
+        ],
+        "foot": [
+          533.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          1171
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          702,
+          1169,
+          180,
+          154
+        ],
+        "bounds": [
+          704,
+          1171,
+          880,
+          1321
+        ],
+        "foot": [
+          762.0,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          755.0,
+          648
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          694,
+          646,
+          200,
+          247
+        ],
+        "bounds": [
+          696,
+          648,
+          892,
+          891
+        ],
+        "foot": [
+          779.5,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1075.5,
+          765
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          958,
+          763,
+          266,
+          130
+        ],
+        "bounds": [
+          960,
+          765,
+          1222,
+          891
+        ],
+        "foot": [
+          1025.0,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          118.5,
+          1354
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          78,
+          1352,
+          113,
+          198
+        ],
+        "bounds": [
+          80,
+          1354,
+          189,
+          1548
+        ],
+        "foot": [
+          138.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          1351
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          301,
+          1349,
+          112,
+          201
+        ],
+        "bounds": [
+          303,
+          1351,
+          411,
+          1548
+        ],
+        "foot": [
+          336.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.0,
+          1351
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          523,
+          1349,
+          113,
+          201
+        ],
+        "bounds": [
+          525,
+          1351,
+          634,
+          1548
+        ],
+        "foot": [
+          559.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.0,
+          1353
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          744,
+          1351,
+          113,
+          199
+        ],
+        "bounds": [
+          746,
+          1353,
+          855,
+          1548
+        ],
+        "foot": [
+          804.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          1349
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          70,
+          1347,
+          120,
+          199
+        ],
+        "bounds": [
+          72,
+          1349,
+          188,
+          1544
+        ],
+        "foot": [
+          130.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          1348
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          297,
+          1346,
+          117,
+          197
+        ],
+        "bounds": [
+          299,
+          1348,
+          412,
+          1541
+        ],
+        "foot": [
+          363.0,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1349
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          520,
+          1347,
+          117,
+          193
+        ],
+        "bounds": [
+          522,
+          1349,
+          635,
+          1538
+        ],
+        "foot": [
+          583.0,
+          1538
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.5,
+          1349
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          743,
+          1347,
+          115,
+          199
+        ],
+        "bounds": [
+          745,
+          1349,
+          856,
+          1544
+        ],
+        "foot": [
+          809.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          101.0,
+          1374
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          39,
+          1372,
+          137,
+          176
+        ],
+        "bounds": [
+          41,
+          1374,
+          174,
+          1546
+        ],
+        "foot": [
+          116.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.5,
+          1335
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          260,
+          1333,
+          130,
+          215
+        ],
+        "bounds": [
+          262,
+          1335,
+          388,
+          1546
+        ],
+        "foot": [
+          335.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.5,
+          1385
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          481,
+          1383,
+          159,
+          166
+        ],
+        "bounds": [
+          483,
+          1385,
+          638,
+          1547
+        ],
+        "foot": [
+          560.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          795.0,
+          1391
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          705,
+          1389,
+          173,
+          159
+        ],
+        "bounds": [
+          707,
+          1391,
+          876,
+          1546
+        ],
+        "foot": [
+          792.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          143.0,
+          948
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          94,
+          946,
+          142,
+          251
+        ],
+        "bounds": [
+          96,
+          948,
+          234,
+          1195
+        ],
+        "foot": [
+          148.0,
+          1195
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          479.5,
+          1078
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          345,
+          1076,
+          258,
+          116
+        ],
+        "bounds": [
+          347,
+          1078,
+          601,
+          1190
+        ],
+        "foot": [
+          508.5,
+          1190
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.5,
+          1576
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          34,
+          1574,
+          145,
+          195
+        ],
+        "bounds": [
+          36,
+          1576,
+          177,
+          1767
+        ],
+        "foot": [
+          102.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          1575
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          256,
+          1573,
+          147,
+          196
+        ],
+        "bounds": [
+          258,
+          1575,
+          401,
+          1767
+        ],
+        "foot": [
+          324.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1573
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          480,
+          1571,
+          145,
+          198
+        ],
+        "bounds": [
+          482,
+          1573,
+          623,
+          1767
+        ],
+        "foot": [
+          570.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          1576
+        ],
+        "source": "source/hobgoblin-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          701,
+          1574,
+          146,
+          195
+        ],
+        "bounds": [
+          703,
+          1576,
+          845,
+          1767
+        ],
+        "foot": [
+          769.0,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6910994764397905,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          1573
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          32,
+          1571,
+          149,
+          193
+        ],
+        "bounds": [
+          34,
+          1573,
+          179,
+          1762
+        ],
+        "foot": [
+          97.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          1572
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          256,
+          1570,
+          144,
+          194
+        ],
+        "bounds": [
+          258,
+          1572,
+          398,
+          1762
+        ],
+        "foot": [
+          350.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1572
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          478,
+          1570,
+          147,
+          191
+        ],
+        "bounds": [
+          480,
+          1572,
+          623,
+          1759
+        ],
+        "foot": [
+          528.0,
+          1759
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.0,
+          1573
+        ],
+        "source": "source/hobgoblin-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          702,
+          1571,
+          145,
+          193
+        ],
+        "bounds": [
+          704,
+          1573,
+          845,
+          1762
+        ],
+        "foot": [
+          764.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.6875,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          93.0,
+          1596
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          27,
+          1594,
+          159,
+          174
+        ],
+        "bounds": [
+          29,
+          1596,
+          184,
+          1766
+        ],
+        "foot": [
+          124.5,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.5,
+          1560
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          250,
+          1558,
+          151,
+          210
+        ],
+        "bounds": [
+          252,
+          1560,
+          399,
+          1766
+        ],
+        "foot": [
+          342.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          1606
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          479,
+          1604,
+          156,
+          164
+        ],
+        "bounds": [
+          481,
+          1606,
+          633,
+          1766
+        ],
+        "foot": [
+          556.5,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.5,
+          1611
+        ],
+        "source": "source/hobgoblin-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          707,
+          1609,
+          157,
+          160
+        ],
+        "bounds": [
+          709,
+          1611,
+          862,
+          1767
+        ],
+        "foot": [
+          785.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.7071428571428571,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          755.0,
+          947
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          665,
+          945,
+          196,
+          252
+        ],
+        "bounds": [
+          667,
+          947,
+          859,
+          1195
+        ],
+        "foot": [
+          756.0,
+          1195
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1087.5,
+          1075
+        ],
+        "source": "source/hobgoblin-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          959,
+          1073,
+          250,
+          118
+        ],
+        "bounds": [
+          961,
+          1075,
+          1207,
+          1189
+        ],
+        "foot": [
+          1116.5,
+          1189
+        ],
+        "sourceEdge": false,
+        "scale": 0.5569620253164557,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "bandit",
+    "size": 208,
+    "anchor": [
+      104,
+      184
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "frames": [
+      {
+        "head": [
+          125.0,
+          16
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          22,
+          14,
+          169,
+          204
+        ],
+        "bounds": [
+          24,
+          16,
+          189,
+          216
+        ],
+        "foot": [
+          123.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          15
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          245,
+          13,
+          167,
+          205
+        ],
+        "bounds": [
+          247,
+          15,
+          410,
+          216
+        ],
+        "foot": [
+          345.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          15
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          467,
+          13,
+          167,
+          205
+        ],
+        "bounds": [
+          469,
+          15,
+          632,
+          216
+        ],
+        "foot": [
+          567.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          16
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          689,
+          14,
+          167,
+          204
+        ],
+        "bounds": [
+          691,
+          16,
+          854,
+          216
+        ],
+        "foot": [
+          789.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          124.0,
+          15
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          24,
+          13,
+          166,
+          206
+        ],
+        "bounds": [
+          26,
+          15,
+          188,
+          217
+        ],
+        "foot": [
+          107.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.0,
+          15
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          252,
+          13,
+          158,
+          206
+        ],
+        "bounds": [
+          254,
+          15,
+          408,
+          217
+        ],
+        "foot": [
+          350.0,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          15
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          473,
+          13,
+          160,
+          206
+        ],
+        "bounds": [
+          475,
+          15,
+          631,
+          217
+        ],
+        "foot": [
+          586.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          15
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          700,
+          13,
+          152,
+          206
+        ],
+        "bounds": [
+          702,
+          15,
+          850,
+          217
+        ],
+        "foot": [
+          792.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.0,
+          25
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          18,
+          23,
+          184,
+          190
+        ],
+        "bounds": [
+          20,
+          25,
+          200,
+          211
+        ],
+        "foot": [
+          120.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.0,
+          12
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          252,
+          10,
+          171,
+          203
+        ],
+        "bounds": [
+          254,
+          12,
+          421,
+          211
+        ],
+        "foot": [
+          342.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.0,
+          28
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          500,
+          26,
+          129,
+          187
+        ],
+        "bounds": [
+          502,
+          28,
+          627,
+          211
+        ],
+        "foot": [
+          559.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.0,
+          28
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          722,
+          26,
+          132,
+          187
+        ],
+        "bounds": [
+          724,
+          28,
+          852,
+          211
+        ],
+        "foot": [
+          783.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          180.5,
+          46
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          40,
+          44,
+          223,
+          267
+        ],
+        "bounds": [
+          42,
+          46,
+          261,
+          309
+        ],
+        "foot": [
+          163.5,
+          309
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          467.5,
+          187
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          312,
+          185,
+          282,
+          127
+        ],
+        "bounds": [
+          314,
+          187,
+          592,
+          310
+        ],
+        "foot": [
+          430.0,
+          310
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.5,
+          234
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          24,
+          232,
+          160,
+          209
+        ],
+        "bounds": [
+          26,
+          234,
+          182,
+          439
+        ],
+        "foot": [
+          120.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          232
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          247,
+          230,
+          158,
+          211
+        ],
+        "bounds": [
+          249,
+          232,
+          403,
+          439
+        ],
+        "foot": [
+          342.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          233
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          469,
+          231,
+          159,
+          210
+        ],
+        "bounds": [
+          471,
+          233,
+          626,
+          439
+        ],
+        "foot": [
+          564.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          234
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          691,
+          232,
+          158,
+          209
+        ],
+        "bounds": [
+          693,
+          234,
+          847,
+          439
+        ],
+        "foot": [
+          786.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          232
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          24,
+          230,
+          160,
+          210
+        ],
+        "bounds": [
+          26,
+          232,
+          182,
+          438
+        ],
+        "foot": [
+          106.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          232
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          252,
+          230,
+          154,
+          210
+        ],
+        "bounds": [
+          254,
+          232,
+          404,
+          438
+        ],
+        "foot": [
+          344.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          232
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          476,
+          230,
+          152,
+          209
+        ],
+        "bounds": [
+          478,
+          232,
+          626,
+          437
+        ],
+        "foot": [
+          559.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          232
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          699,
+          230,
+          153,
+          209
+        ],
+        "bounds": [
+          701,
+          232,
+          850,
+          437
+        ],
+        "foot": [
+          783.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.5,
+          247
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          19,
+          245,
+          178,
+          194
+        ],
+        "bounds": [
+          21,
+          247,
+          195,
+          437
+        ],
+        "foot": [
+          124.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.5,
+          228
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          250,
+          226,
+          168,
+          211
+        ],
+        "bounds": [
+          252,
+          228,
+          416,
+          435
+        ],
+        "foot": [
+          346.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          254
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          474,
+          252,
+          156,
+          185
+        ],
+        "bounds": [
+          476,
+          254,
+          628,
+          435
+        ],
+        "foot": [
+          554.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          252
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          712,
+          250,
+          140,
+          187
+        ],
+        "bounds": [
+          714,
+          252,
+          850,
+          435
+        ],
+        "foot": [
+          796.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          799.0,
+          45
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          653,
+          43,
+          224,
+          268
+        ],
+        "bounds": [
+          655,
+          45,
+          875,
+          309
+        ],
+        "foot": [
+          777.5,
+          309
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1072.0,
+          190
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          931,
+          188,
+          288,
+          125
+        ],
+        "bounds": [
+          933,
+          190,
+          1217,
+          311
+        ],
+        "foot": [
+          1034.5,
+          311
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.5,
+          455
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          41,
+          453,
+          123,
+          210
+        ],
+        "bounds": [
+          43,
+          455,
+          162,
+          661
+        ],
+        "foot": [
+          118.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          454
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          263,
+          452,
+          123,
+          211
+        ],
+        "bounds": [
+          265,
+          454,
+          384,
+          661
+        ],
+        "foot": [
+          340.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          454
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          486,
+          452,
+          122,
+          211
+        ],
+        "bounds": [
+          488,
+          454,
+          606,
+          661
+        ],
+        "foot": [
+          562.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          455
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          707,
+          453,
+          123,
+          210
+        ],
+        "bounds": [
+          709,
+          455,
+          828,
+          661
+        ],
+        "foot": [
+          784.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          453
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          45,
+          451,
+          123,
+          208
+        ],
+        "bounds": [
+          47,
+          453,
+          166,
+          657
+        ],
+        "foot": [
+          108.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          452
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          268,
+          450,
+          120,
+          212
+        ],
+        "bounds": [
+          270,
+          452,
+          386,
+          660
+        ],
+        "foot": [
+          341.5,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          452
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          489,
+          450,
+          124,
+          212
+        ],
+        "bounds": [
+          491,
+          452,
+          611,
+          660
+        ],
+        "foot": [
+          562.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          452
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          450,
+          125,
+          212
+        ],
+        "bounds": [
+          713,
+          452,
+          834,
+          660
+        ],
+        "foot": [
+          788.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          469
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          24,
+          467,
+          149,
+          194
+        ],
+        "bounds": [
+          26,
+          469,
+          171,
+          659
+        ],
+        "foot": [
+          122.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.5,
+          450
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          250,
+          448,
+          141,
+          213
+        ],
+        "bounds": [
+          252,
+          450,
+          389,
+          659
+        ],
+        "foot": [
+          357.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          476
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          466,
+          474,
+          157,
+          187
+        ],
+        "bounds": [
+          468,
+          476,
+          621,
+          659
+        ],
+        "foot": [
+          549.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          476
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          707,
+          474,
+          137,
+          187
+        ],
+        "bounds": [
+          709,
+          476,
+          842,
+          659
+        ],
+        "foot": [
+          801.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          181.0,
+          355
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          54,
+          353,
+          181,
+          260
+        ],
+        "bounds": [
+          56,
+          355,
+          233,
+          611
+        ],
+        "foot": [
+          157.5,
+          611
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          429.5,
+          497
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          283,
+          495,
+          310,
+          122
+        ],
+        "bounds": [
+          285,
+          497,
+          591,
+          615
+        ],
+        "foot": [
+          437.0,
+          615
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          679
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          62,
+          677,
+          151,
+          205
+        ],
+        "bounds": [
+          64,
+          679,
+          211,
+          880
+        ],
+        "foot": [
+          117.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          677
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          286,
+          675,
+          147,
+          207
+        ],
+        "bounds": [
+          288,
+          677,
+          431,
+          880
+        ],
+        "foot": [
+          339.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          677
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          508,
+          675,
+          148,
+          207
+        ],
+        "bounds": [
+          510,
+          677,
+          654,
+          880
+        ],
+        "foot": [
+          562.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          679
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          729,
+          677,
+          148,
+          205
+        ],
+        "bounds": [
+          731,
+          679,
+          875,
+          880
+        ],
+        "foot": [
+          783.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          676
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          57,
+          674,
+          153,
+          210
+        ],
+        "bounds": [
+          59,
+          676,
+          208,
+          882
+        ],
+        "foot": [
+          136.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          676
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          282,
+          674,
+          151,
+          210
+        ],
+        "bounds": [
+          284,
+          676,
+          431,
+          882
+        ],
+        "foot": [
+          346.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          676
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          503,
+          674,
+          153,
+          210
+        ],
+        "bounds": [
+          505,
+          676,
+          654,
+          882
+        ],
+        "foot": [
+          589.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          676
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          725,
+          674,
+          151,
+          210
+        ],
+        "bounds": [
+          727,
+          676,
+          874,
+          882
+        ],
+        "foot": [
+          792.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          679
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          62,
+          677,
+          151,
+          205
+        ],
+        "bounds": [
+          64,
+          679,
+          211,
+          880
+        ],
+        "foot": [
+          117.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          367.0,
+          105
+        ],
+        "source": "source/bandit-rear-keys.png",
+        "sourcePose": 0,
+        "cell": [
+          212,
+          103,
+          276,
+          423
+        ],
+        "bounds": [
+          214,
+          105,
+          486,
+          524
+        ],
+        "foot": [
+          325.5,
+          524
+        ],
+        "sourceEdge": false,
+        "scale": 0.32935560859188545,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          887.5,
+          182
+        ],
+        "source": "source/bandit-rear-keys.png",
+        "sourcePose": 1,
+        "cell": [
+          773,
+          180,
+          387,
+          346
+        ],
+        "bounds": [
+          775,
+          182,
+          1158,
+          524
+        ],
+        "foot": [
+          891.5,
+          524
+        ],
+        "sourceEdge": false,
+        "scale": 0.32935560859188545,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          333.0,
+          677
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          286,
+          675,
+          147,
+          207
+        ],
+        "bounds": [
+          288,
+          677,
+          431,
+          880
+        ],
+        "foot": [
+          339.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          779.5,
+          352
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          674,
+          350,
+          209,
+          263
+        ],
+        "bounds": [
+          676,
+          352,
+          881,
+          611
+        ],
+        "foot": [
+          771.0,
+          611
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1071.0,
+          503
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          925,
+          501,
+          305,
+          116
+        ],
+        "bounds": [
+          927,
+          503,
+          1228,
+          615
+        ],
+        "foot": [
+          1076.0,
+          615
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.5,
+          901
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          50,
+          899,
+          157,
+          204
+        ],
+        "bounds": [
+          52,
+          901,
+          205,
+          1101
+        ],
+        "foot": [
+          116.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          900
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          272,
+          898,
+          157,
+          205
+        ],
+        "bounds": [
+          274,
+          900,
+          427,
+          1101
+        ],
+        "foot": [
+          338.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          900
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          494,
+          898,
+          157,
+          205
+        ],
+        "bounds": [
+          496,
+          900,
+          649,
+          1101
+        ],
+        "foot": [
+          560.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          901
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          716,
+          899,
+          157,
+          204
+        ],
+        "bounds": [
+          718,
+          901,
+          871,
+          1101
+        ],
+        "foot": [
+          782.0,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          897
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          47,
+          895,
+          162,
+          210
+        ],
+        "bounds": [
+          49,
+          897,
+          207,
+          1103
+        ],
+        "foot": [
+          130.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          898
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          269,
+          896,
+          162,
+          210
+        ],
+        "bounds": [
+          271,
+          898,
+          429,
+          1104
+        ],
+        "foot": [
+          352.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          897
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          492,
+          895,
+          161,
+          211
+        ],
+        "bounds": [
+          494,
+          897,
+          651,
+          1104
+        ],
+        "foot": [
+          576.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          898
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          711,
+          896,
+          165,
+          209
+        ],
+        "bounds": [
+          713,
+          898,
+          874,
+          1103
+        ],
+        "foot": [
+          787.0,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          180.0,
+          385
+        ],
+        "source": "source/bandit-attack-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          72,
+          383,
+          265,
+          314
+        ],
+        "bounds": [
+          74,
+          385,
+          335,
+          695
+        ],
+        "foot": [
+          180.0,
+          695
+        ],
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          561.5,
+          354
+        ],
+        "source": "source/bandit-attack-rear.png",
+        "sourcePose": 5,
+        "cell": [
+          423,
+          352,
+          236,
+          345
+        ],
+        "bounds": [
+          425,
+          354,
+          657,
+          695
+        ],
+        "foot": [
+          535.0,
+          695
+        ],
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          886.0,
+          404
+        ],
+        "source": "source/bandit-attack-rear.png",
+        "sourcePose": 6,
+        "cell": [
+          771,
+          402,
+          272,
+          295
+        ],
+        "bounds": [
+          773,
+          404,
+          1041,
+          695
+        ],
+        "foot": [
+          880.5,
+          695
+        ],
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1254.5,
+          404
+        ],
+        "source": "source/bandit-attack-rear.png",
+        "sourcePose": 7,
+        "cell": [
+          1139,
+          402,
+          262,
+          295
+        ],
+        "bounds": [
+          1141,
+          404,
+          1399,
+          695
+        ],
+        "foot": [
+          1245.0,
+          695
+        ],
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          148.5,
+          648
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          57,
+          646,
+          222,
+          249
+        ],
+        "bounds": [
+          59,
+          648,
+          277,
+          893
+        ],
+        "foot": [
+          154.0,
+          893
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          475.0,
+          774
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          347,
+          772,
+          255,
+          128
+        ],
+        "bounds": [
+          349,
+          774,
+          600,
+          898
+        ],
+        "foot": [
+          470.5,
+          898
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          119.5,
+          1121
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          52,
+          1119,
+          156,
+          206
+        ],
+        "bounds": [
+          54,
+          1121,
+          206,
+          1323
+        ],
+        "foot": [
+          110.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.0,
+          1120
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          274,
+          1118,
+          154,
+          207
+        ],
+        "bounds": [
+          276,
+          1120,
+          426,
+          1323
+        ],
+        "foot": [
+          333.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          1120
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          497,
+          1118,
+          151,
+          207
+        ],
+        "bounds": [
+          499,
+          1120,
+          646,
+          1323
+        ],
+        "foot": [
+          555.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.5,
+          1121
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          718,
+          1119,
+          155,
+          206
+        ],
+        "bounds": [
+          720,
+          1121,
+          871,
+          1323
+        ],
+        "foot": [
+          777.0,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.5,
+          1119
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          47,
+          1117,
+          158,
+          209
+        ],
+        "bounds": [
+          49,
+          1119,
+          203,
+          1324
+        ],
+        "foot": [
+          93.5,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          1119
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          272,
+          1117,
+          154,
+          209
+        ],
+        "bounds": [
+          274,
+          1119,
+          424,
+          1324
+        ],
+        "foot": [
+          334.5,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.0,
+          1119
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          494,
+          1117,
+          154,
+          203
+        ],
+        "bounds": [
+          496,
+          1119,
+          646,
+          1318
+        ],
+        "foot": [
+          550.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.0,
+          1119
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          712,
+          1117,
+          163,
+          209
+        ],
+        "bounds": [
+          714,
+          1119,
+          873,
+          1324
+        ],
+        "foot": [
+          779.5,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.5,
+          1121
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          52,
+          1119,
+          156,
+          206
+        ],
+        "bounds": [
+          54,
+          1121,
+          206,
+          1323
+        ],
+        "foot": [
+          110.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          377.0,
+          657
+        ],
+        "source": "source/bandit-rear-keys.png",
+        "sourcePose": 2,
+        "cell": [
+          188,
+          655,
+          300,
+          423
+        ],
+        "bounds": [
+          190,
+          657,
+          486,
+          1076
+        ],
+        "foot": [
+          314.0,
+          1076
+        ],
+        "sourceEdge": false,
+        "scale": 0.32935560859188545,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          930.0,
+          734
+        ],
+        "source": "source/bandit-rear-keys.png",
+        "sourcePose": 3,
+        "cell": [
+          750,
+          732,
+          401,
+          346
+        ],
+        "bounds": [
+          752,
+          734,
+          1149,
+          1076
+        ],
+        "foot": [
+          867.0,
+          1076
+        ],
+        "sourceEdge": false,
+        "scale": 0.32935560859188545,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          342.0,
+          1120
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          274,
+          1118,
+          154,
+          207
+        ],
+        "bounds": [
+          276,
+          1120,
+          426,
+          1323
+        ],
+        "foot": [
+          333.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          766.5,
+          648
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          687,
+          646,
+          205,
+          250
+        ],
+        "bounds": [
+          689,
+          648,
+          890,
+          894
+        ],
+        "foot": [
+          766.0,
+          894
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1136.0,
+          774
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          950,
+          772,
+          285,
+          128
+        ],
+        "bounds": [
+          952,
+          774,
+          1233,
+          898
+        ],
+        "foot": [
+          1089.0,
+          898
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          119.5,
+          1341
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          63,
+          1339,
+          125,
+          210
+        ],
+        "bounds": [
+          65,
+          1341,
+          186,
+          1547
+        ],
+        "foot": [
+          111.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          1341
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          286,
+          1339,
+          124,
+          209
+        ],
+        "bounds": [
+          288,
+          1341,
+          408,
+          1546
+        ],
+        "foot": [
+          334.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          1341
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          509,
+          1339,
+          123,
+          209
+        ],
+        "bounds": [
+          511,
+          1341,
+          630,
+          1546
+        ],
+        "foot": [
+          556.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.5,
+          1341
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          730,
+          1339,
+          125,
+          210
+        ],
+        "bounds": [
+          732,
+          1341,
+          853,
+          1547
+        ],
+        "foot": [
+          777.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.0,
+          1339
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          58,
+          1337,
+          132,
+          210
+        ],
+        "bounds": [
+          60,
+          1339,
+          188,
+          1545
+        ],
+        "foot": [
+          82.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.5,
+          1339
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          284,
+          1337,
+          126,
+          210
+        ],
+        "bounds": [
+          286,
+          1339,
+          408,
+          1545
+        ],
+        "foot": [
+          316.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.5,
+          1339
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          502,
+          1337,
+          130,
+          210
+        ],
+        "bounds": [
+          504,
+          1339,
+          630,
+          1545
+        ],
+        "foot": [
+          544.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          1339
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          730,
+          1337,
+          126,
+          210
+        ],
+        "bounds": [
+          732,
+          1339,
+          854,
+          1545
+        ],
+        "foot": [
+          765.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          122.5,
+          1357
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          46,
+          1355,
+          144,
+          190
+        ],
+        "bounds": [
+          48,
+          1357,
+          188,
+          1543
+        ],
+        "foot": [
+          102.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1340
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1338,
+          123,
+          207
+        ],
+        "bounds": [
+          273,
+          1340,
+          392,
+          1543
+        ],
+        "foot": [
+          333.0,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.0,
+          1363
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          490,
+          1361,
+          150,
+          184
+        ],
+        "bounds": [
+          492,
+          1363,
+          638,
+          1543
+        ],
+        "foot": [
+          527.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.0,
+          1363
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          711,
+          1361,
+          140,
+          184
+        ],
+        "bounds": [
+          713,
+          1363,
+          849,
+          1543
+        ],
+        "foot": [
+          764.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.5,
+          934
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          102,
+          932,
+          149,
+          269
+        ],
+        "bounds": [
+          104,
+          934,
+          249,
+          1199
+        ],
+        "foot": [
+          151.0,
+          1199
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          470.5,
+          1079
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          309,
+          1077,
+          268,
+          130
+        ],
+        "bounds": [
+          311,
+          1079,
+          575,
+          1205
+        ],
+        "foot": [
+          519.0,
+          1205
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          121.0,
+          1563
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          22,
+          1561,
+          160,
+          207
+        ],
+        "bounds": [
+          24,
+          1563,
+          180,
+          1766
+        ],
+        "foot": [
+          124.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.0,
+          1561
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          245,
+          1559,
+          159,
+          210
+        ],
+        "bounds": [
+          247,
+          1561,
+          402,
+          1767
+        ],
+        "foot": [
+          346.0,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.5,
+          1561
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          467,
+          1559,
+          159,
+          209
+        ],
+        "bounds": [
+          469,
+          1561,
+          624,
+          1766
+        ],
+        "foot": [
+          568.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          1564
+        ],
+        "source": "source/bandit-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          688,
+          1562,
+          161,
+          206
+        ],
+        "bounds": [
+          690,
+          1564,
+          847,
+          1766
+        ],
+        "foot": [
+          790.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.6,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.5,
+          1562
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          24,
+          1560,
+          160,
+          208
+        ],
+        "bounds": [
+          26,
+          1562,
+          182,
+          1766
+        ],
+        "foot": [
+          117.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          1559
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          248,
+          1557,
+          156,
+          211
+        ],
+        "bounds": [
+          250,
+          1559,
+          402,
+          1766
+        ],
+        "foot": [
+          340.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          1559
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          470,
+          1557,
+          160,
+          211
+        ],
+        "bounds": [
+          472,
+          1559,
+          628,
+          1766
+        ],
+        "foot": [
+          582.5,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.5,
+          1560
+        ],
+        "source": "source/bandit-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          693,
+          1558,
+          160,
+          210
+        ],
+        "bounds": [
+          695,
+          1560,
+          851,
+          1766
+        ],
+        "foot": [
+          793.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.594059405940594,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.5,
+          1576
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          16,
+          1574,
+          170,
+          188
+        ],
+        "bounds": [
+          18,
+          1576,
+          184,
+          1760
+        ],
+        "foot": [
+          112.0,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          1555
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          255,
+          1553,
+          156,
+          209
+        ],
+        "bounds": [
+          257,
+          1555,
+          409,
+          1760
+        ],
+        "foot": [
+          299.0,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.5,
+          1584
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          490,
+          1582,
+          125,
+          180
+        ],
+        "bounds": [
+          492,
+          1584,
+          613,
+          1760
+        ],
+        "foot": [
+          547.5,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          1584
+        ],
+        "source": "source/bandit-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          715,
+          1582,
+          138,
+          180
+        ],
+        "bounds": [
+          717,
+          1584,
+          851,
+          1760
+        ],
+        "foot": [
+          769.0,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.5806451612903226,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          761.5,
+          934
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          673,
+          932,
+          206,
+          268
+        ],
+        "bounds": [
+          675,
+          934,
+          877,
+          1198
+        ],
+        "foot": [
+          779.5,
+          1198
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1093.0,
+          1081
+        ],
+        "source": "source/bandit-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          945,
+          1079,
+          258,
+          138
+        ],
+        "bounds": [
+          947,
+          1081,
+          1201,
+          1215
+        ],
+        "foot": [
+          1133.5,
+          1215
+        ],
+        "sourceEdge": false,
+        "scale": 0.45627376425855515,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "allScenesLoaded": true,
+  "sceneCount": 3,
+  "phoneOverflow": false,
+  "actions": {
+    "idle": 1034648934,
+    "walk": 101882518,
+    "attack": 3577358117,
+    "hurt": 3412898639,
+    "down": 2380133791
+  },
+  "uniqueActionImages": 5,
+  "errors": []
+}

@@ -36,6 +36,8 @@ public sealed record UnitSprite(string Path, int Width, int Height, int AnchorX,
     /// <summary>Self-lit material such as a will-o'-wisp; scene lighting does not dim its core.</summary>
     public bool Unlit { get; init; }
     public ArtRect? PortraitSource { get; init; }
+    /// <summary>Extra world-pixel space for overhead marks during poses that raise hands or equipment above the head.</summary>
+    public ImmutableDictionary<string, float> OverheadClearance { get; init; } = ImmutableDictionary<string, float>.Empty;
     private static readonly string[] Compass = ["south", "south-west", "west", "north-west", "north", "north-east", "east", "south-east"];
     /// <summary>Authored compass rows. Empty keeps the original two-row mirrored sheets.</summary>
     public ImmutableArray<string> Directions { get; init; } = [];
@@ -446,6 +448,9 @@ public sealed class UnitArt
                 PixelScale = scale,
                 Unlit = e.TryGetProperty("unlit", out var unlit) && unlit.GetBoolean(),
                 PortraitSource = e.TryGetProperty("portrait", out var portrait) ? Rect(portrait) : null,
+                OverheadClearance = e.TryGetProperty("overheadClearance", out var clearance)
+                    ? clearance.EnumerateObject().ToImmutableDictionary(p => p.Name, p => p.Value.GetSingle(), StringComparer.Ordinal)
+                    : ImmutableDictionary<string, float>.Empty,
                 Columns = e.GetProperty("columns").GetInt32(),
                 RowsPerDirection = e.GetProperty("rowsPerDirection").GetInt32(),
                 Directions = [.. e.GetProperty("directions").EnumerateArray().Select(d => d.GetString()!)],

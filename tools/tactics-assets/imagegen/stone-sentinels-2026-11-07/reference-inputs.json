@@ -1,0 +1,126 @@
+{
+  "golem_basalt_idle": {
+    "promptKey": "golem_basalt_idle",
+    "references": [
+      "references/golem_basalt-idle.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_basalt.png"
+    ]
+  },
+  "golem_basalt_walk": {
+    "promptKey": "golem_basalt_walk",
+    "references": [
+      "references/golem_basalt-walk.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_basalt.png",
+      "source/golem_basalt-idle.png"
+    ]
+  },
+  "golem_basalt_attack": {
+    "promptKey": "golem_basalt_attack",
+    "references": [
+      "references/golem_basalt-attack.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_basalt.png",
+      "source/golem_basalt-idle.png"
+    ]
+  },
+  "golem_basalt_moves": {
+    "promptKey": "golem_basalt_moves",
+    "references": [
+      "references/golem_basalt-moves.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_basalt.png",
+      "source/golem_basalt-idle.png"
+    ]
+  },
+  "golem_basalt_damage": {
+    "promptKey": "golem_basalt_damage",
+    "references": [
+      "references/golem_basalt-damage.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_basalt.png",
+      "source/golem_basalt-idle.png"
+    ]
+  },
+  "golem_crystal_idle": {
+    "promptKey": "golem_crystal_idle",
+    "references": [
+      "references/golem_crystal-idle.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_crystal.png"
+    ]
+  },
+  "golem_crystal_walk": {
+    "promptKey": "golem_crystal_walk",
+    "references": [
+      "references/golem_crystal-walk.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_crystal.png",
+      "source/golem_crystal-idle.png"
+    ]
+  },
+  "golem_crystal_attack": {
+    "promptKey": "golem_crystal_attack",
+    "references": [
+      "references/golem_crystal-attack.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_crystal.png",
+      "source/golem_crystal-idle.png"
+    ]
+  },
+  "golem_crystal_moves": {
+    "promptKey": "golem_crystal_moves",
+    "references": [
+      "references/golem_crystal-moves.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_crystal.png",
+      "source/golem_crystal-idle.png"
+    ]
+  },
+  "golem_crystal_damage": {
+    "promptKey": "golem_crystal_damage",
+    "references": [
+      "references/golem_crystal-damage.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_crystal.png",
+      "source/golem_crystal-idle.png"
+    ]
+  },
+  "golem_temple_idle": {
+    "promptKey": "golem_temple_idle",
+    "references": [
+      "references/golem_temple-idle.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_temple.png"
+    ]
+  },
+  "golem_temple_walk": {
+    "promptKey": "golem_temple_walk",
+    "references": [
+      "references/golem_temple-walk.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_temple.png",
+      "source/golem_temple-idle.png"
+    ]
+  },
+  "golem_temple_attack": {
+    "promptKey": "golem_temple_attack",
+    "references": [
+      "references/golem_temple-attack.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_temple.png",
+      "source/golem_temple-idle.png"
+    ]
+  },
+  "golem_temple_moves": {
+    "promptKey": "golem_temple_moves",
+    "references": [
+      "references/golem_temple-moves.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_temple.png",
+      "source/golem_temple-idle.png"
+    ]
+  },
+  "golem_temple_damage": {
+    "promptKey": "golem_temple_damage",
+    "references": [
+      "references/golem_temple-damage.png",
+      "../../concepts/stone-sentinels-2026-11-07/golem_temple.png",
+      "source/golem_temple-idle.png"
+    ]
+  },
+  "golem_crystal_attack_rear": {
+    "promptKey": "golem_crystal_attack_rear",
+    "references": [
+      "references/golem_crystal-attack-rear.png",
+      "source/golem_crystal-idle.png"
+    ]
+  }
+}

@@ -1,0 +1,7482 @@
+[
+  {
+    "id": "zombie",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          117.0,
+          16
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          52,
+          14,
+          126,
+          200
+        ],
+        "bounds": [
+          54,
+          16,
+          176,
+          212
+        ],
+        "foot": [
+          117.5,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          20
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          274,
+          17,
+          126,
+          197
+        ],
+        "bounds": [
+          276,
+          19,
+          398,
+          212
+        ],
+        "foot": [
+          339.5,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          21
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          498,
+          18,
+          124,
+          196
+        ],
+        "bounds": [
+          500,
+          20,
+          620,
+          212
+        ],
+        "foot": [
+          561.5,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          16
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          719,
+          14,
+          125,
+          200
+        ],
+        "bounds": [
+          721,
+          16,
+          842,
+          212
+        ],
+        "foot": [
+          783.5,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          24
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          48,
+          22,
+          127,
+          198
+        ],
+        "bounds": [
+          50,
+          24,
+          173,
+          218
+        ],
+        "foot": [
+          113.0,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          25
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          276,
+          22,
+          119,
+          200
+        ],
+        "bounds": [
+          278,
+          24,
+          393,
+          220
+        ],
+        "foot": [
+          341.5,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          24
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          498,
+          22,
+          117,
+          200
+        ],
+        "bounds": [
+          500,
+          24,
+          613,
+          220
+        ],
+        "foot": [
+          574.5,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          24
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          720,
+          22,
+          119,
+          196
+        ],
+        "bounds": [
+          722,
+          24,
+          837,
+          216
+        ],
+        "foot": [
+          779.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          22
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          47,
+          19,
+          133,
+          197
+        ],
+        "bounds": [
+          49,
+          21,
+          178,
+          214
+        ],
+        "foot": [
+          115.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.0,
+          24
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          271,
+          22,
+          129,
+          194
+        ],
+        "bounds": [
+          273,
+          24,
+          398,
+          214
+        ],
+        "foot": [
+          335.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          32
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          492,
+          30,
+          130,
+          186
+        ],
+        "bounds": [
+          494,
+          32,
+          620,
+          214
+        ],
+        "foot": [
+          558.0,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          29
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          712,
+          27,
+          137,
+          189
+        ],
+        "bounds": [
+          714,
+          29,
+          847,
+          214
+        ],
+        "foot": [
+          780.0,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          170.5,
+          42
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          72,
+          40,
+          161,
+          251
+        ],
+        "bounds": [
+          74,
+          42,
+          231,
+          289
+        ],
+        "foot": [
+          147.5,
+          289
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          419.5,
+          171
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          323,
+          169,
+          249,
+          112
+        ],
+        "bounds": [
+          325,
+          171,
+          570,
+          279
+        ],
+        "foot": [
+          407.0,
+          279
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          101.0,
+          235
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          50,
+          233,
+          122,
+          203
+        ],
+        "bounds": [
+          52,
+          235,
+          170,
+          434
+        ],
+        "foot": [
+          115.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.0,
+          236
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          273,
+          234,
+          120,
+          202
+        ],
+        "bounds": [
+          275,
+          236,
+          391,
+          434
+        ],
+        "foot": [
+          337.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.5,
+          239
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          497,
+          236,
+          118,
+          200
+        ],
+        "bounds": [
+          499,
+          238,
+          613,
+          434
+        ],
+        "foot": [
+          560.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.5,
+          235
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          717,
+          233,
+          120,
+          203
+        ],
+        "bounds": [
+          719,
+          235,
+          835,
+          434
+        ],
+        "foot": [
+          781.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          90.0,
+          241
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          45,
+          239,
+          121,
+          202
+        ],
+        "bounds": [
+          47,
+          241,
+          164,
+          439
+        ],
+        "foot": [
+          113.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          313.0,
+          241
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          272,
+          239,
+          116,
+          204
+        ],
+        "bounds": [
+          274,
+          241,
+          386,
+          441
+        ],
+        "foot": [
+          340.5,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          535.0,
+          242
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          494,
+          240,
+          118,
+          203
+        ],
+        "bounds": [
+          496,
+          242,
+          610,
+          441
+        ],
+        "foot": [
+          565.0,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.0,
+          241
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          712,
+          239,
+          120,
+          203
+        ],
+        "bounds": [
+          714,
+          241,
+          830,
+          440
+        ],
+        "foot": [
+          781.0,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          98.5,
+          242
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          46,
+          239,
+          131,
+          200
+        ],
+        "bounds": [
+          48,
+          241,
+          175,
+          437
+        ],
+        "foot": [
+          114.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.0,
+          241
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          261,
+          238,
+          131,
+          201
+        ],
+        "bounds": [
+          263,
+          240,
+          390,
+          437
+        ],
+        "foot": [
+          334.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.0,
+          253
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          449,
+          251,
+          169,
+          188
+        ],
+        "bounds": [
+          451,
+          253,
+          616,
+          437
+        ],
+        "foot": [
+          556.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          756.5,
+          248
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          698,
+          246,
+          141,
+          193
+        ],
+        "bounds": [
+          700,
+          248,
+          837,
+          437
+        ],
+        "foot": [
+          777.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          772.0,
+          44
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          687,
+          41,
+          150,
+          253
+        ],
+        "bounds": [
+          689,
+          43,
+          835,
+          292
+        ],
+        "foot": [
+          760.5,
+          292
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1000.5,
+          163
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          942,
+          161,
+          266,
+          125
+        ],
+        "bounds": [
+          944,
+          163,
+          1206,
+          284
+        ],
+        "foot": [
+          1009.5,
+          284
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          95.5,
+          456
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          58,
+          454,
+          102,
+          205
+        ],
+        "bounds": [
+          60,
+          456,
+          158,
+          657
+        ],
+        "foot": [
+          115.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          317.0,
+          461
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          280,
+          458,
+          102,
+          201
+        ],
+        "bounds": [
+          282,
+          460,
+          380,
+          657
+        ],
+        "foot": [
+          338.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.5,
+          461
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          502,
+          459,
+          103,
+          200
+        ],
+        "bounds": [
+          504,
+          461,
+          603,
+          657
+        ],
+        "foot": [
+          560.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          761.5,
+          456
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          725,
+          454,
+          101,
+          205
+        ],
+        "bounds": [
+          727,
+          456,
+          824,
+          657
+        ],
+        "foot": [
+          781.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          89.0,
+          461
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          48,
+          459,
+          115,
+          207
+        ],
+        "bounds": [
+          50,
+          461,
+          161,
+          664
+        ],
+        "foot": [
+          104.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          312.0,
+          464
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          272,
+          461,
+          113,
+          205
+        ],
+        "bounds": [
+          274,
+          463,
+          383,
+          664
+        ],
+        "foot": [
+          341.5,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          534.0,
+          464
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          494,
+          462,
+          112,
+          204
+        ],
+        "bounds": [
+          496,
+          464,
+          604,
+          664
+        ],
+        "foot": [
+          559.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          754.5,
+          461
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          716,
+          459,
+          112,
+          205
+        ],
+        "bounds": [
+          718,
+          461,
+          826,
+          662
+        ],
+        "foot": [
+          784.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          92.0,
+          465
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          51,
+          462,
+          117,
+          201
+        ],
+        "bounds": [
+          53,
+          464,
+          166,
+          661
+        ],
+        "foot": [
+          116.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.5,
+          465
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          260,
+          462,
+          129,
+          201
+        ],
+        "bounds": [
+          262,
+          464,
+          387,
+          661
+        ],
+        "foot": [
+          334.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          530.5,
+          470
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          433,
+          468,
+          184,
+          195
+        ],
+        "bounds": [
+          435,
+          470,
+          615,
+          661
+        ],
+        "foot": [
+          564.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          749.0,
+          470
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          702,
+          467,
+          135,
+          196
+        ],
+        "bounds": [
+          704,
+          469,
+          835,
+          661
+        ],
+        "foot": [
+          783.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          139.5,
+          348
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          92,
+          346,
+          119,
+          258
+        ],
+        "bounds": [
+          94,
+          348,
+          209,
+          602
+        ],
+        "foot": [
+          146.5,
+          602
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          361.0,
+          480
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          305,
+          478,
+          273,
+          120
+        ],
+        "bounds": [
+          307,
+          480,
+          576,
+          596
+        ],
+        "foot": [
+          381.5,
+          596
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          94.5,
+          678
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          53,
+          676,
+          121,
+          202
+        ],
+        "bounds": [
+          55,
+          678,
+          172,
+          876
+        ],
+        "foot": [
+          112.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          315.0,
+          681
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          275,
+          679,
+          121,
+          199
+        ],
+        "bounds": [
+          277,
+          681,
+          394,
+          876
+        ],
+        "foot": [
+          334.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.0,
+          682
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          499,
+          680,
+          120,
+          198
+        ],
+        "bounds": [
+          501,
+          682,
+          617,
+          876
+        ],
+        "foot": [
+          558.0,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          761.0,
+          679
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          719,
+          677,
+          120,
+          201
+        ],
+        "bounds": [
+          721,
+          679,
+          837,
+          876
+        ],
+        "foot": [
+          779.0,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          89.5,
+          683
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          49,
+          681,
+          123,
+          200
+        ],
+        "bounds": [
+          51,
+          683,
+          170,
+          879
+        ],
+        "foot": [
+          93.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          316.0,
+          686
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          272,
+          684,
+          123,
+          200
+        ],
+        "bounds": [
+          274,
+          686,
+          393,
+          882
+        ],
+        "foot": [
+          328.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.0,
+          686
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          496,
+          684,
+          118,
+          199
+        ],
+        "bounds": [
+          498,
+          686,
+          612,
+          881
+        ],
+        "foot": [
+          549.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          756.5,
+          683
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          718,
+          681,
+          123,
+          202
+        ],
+        "bounds": [
+          720,
+          683,
+          839,
+          881
+        ],
+        "foot": [
+          776.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          91.0,
+          683
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          50,
+          681,
+          126,
+          201
+        ],
+        "bounds": [
+          52,
+          683,
+          174,
+          880
+        ],
+        "foot": [
+          113.0,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          312.5,
+          685
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          250,
+          683,
+          135,
+          199
+        ],
+        "bounds": [
+          252,
+          685,
+          383,
+          880
+        ],
+        "foot": [
+          331.0,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          529.5,
+          687
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          429,
+          685,
+          186,
+          197
+        ],
+        "bounds": [
+          431,
+          687,
+          613,
+          880
+        ],
+        "foot": [
+          559.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          754.5,
+          687
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          694,
+          684,
+          143,
+          198
+        ],
+        "bounds": [
+          696,
+          686,
+          835,
+          880
+        ],
+        "foot": [
+          781.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          758.0,
+          356
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          692,
+          353,
+          135,
+          249
+        ],
+        "bounds": [
+          694,
+          355,
+          825,
+          600
+        ],
+        "foot": [
+          760.5,
+          600
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          978.0,
+          482
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          931,
+          479,
+          280,
+          119
+        ],
+        "bounds": [
+          933,
+          481,
+          1209,
+          596
+        ],
+        "foot": [
+          1070.0,
+          596
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.0,
+          900
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          49,
+          898,
+          124,
+          203
+        ],
+        "bounds": [
+          51,
+          900,
+          171,
+          1099
+        ],
+        "foot": [
+          111.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          902
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          272,
+          900,
+          123,
+          201
+        ],
+        "bounds": [
+          274,
+          902,
+          393,
+          1099
+        ],
+        "foot": [
+          334.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          903
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          494,
+          901,
+          123,
+          200
+        ],
+        "bounds": [
+          496,
+          903,
+          615,
+          1099
+        ],
+        "foot": [
+          557.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          900
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          716,
+          898,
+          123,
+          203
+        ],
+        "bounds": [
+          718,
+          900,
+          837,
+          1099
+        ],
+        "foot": [
+          778.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          903
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          48,
+          901,
+          122,
+          201
+        ],
+        "bounds": [
+          50,
+          903,
+          168,
+          1100
+        ],
+        "foot": [
+          92.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          904
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          275,
+          901,
+          117,
+          201
+        ],
+        "bounds": [
+          277,
+          903,
+          390,
+          1100
+        ],
+        "foot": [
+          349.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          903
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          495,
+          901,
+          119,
+          201
+        ],
+        "bounds": [
+          497,
+          903,
+          612,
+          1100
+        ],
+        "foot": [
+          570.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          903
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          717,
+          901,
+          122,
+          199
+        ],
+        "bounds": [
+          719,
+          903,
+          837,
+          1098
+        ],
+        "foot": [
+          775.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          901
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          45,
+          899,
+          134,
+          202
+        ],
+        "bounds": [
+          47,
+          901,
+          177,
+          1099
+        ],
+        "foot": [
+          113.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          901
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          265,
+          899,
+          136,
+          202
+        ],
+        "bounds": [
+          267,
+          901,
+          399,
+          1099
+        ],
+        "foot": [
+          335.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          913
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          476,
+          910,
+          149,
+          191
+        ],
+        "bounds": [
+          478,
+          912,
+          623,
+          1099
+        ],
+        "foot": [
+          557.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          905
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          706,
+          903,
+          138,
+          197
+        ],
+        "bounds": [
+          708,
+          905,
+          842,
+          1098
+        ],
+        "foot": [
+          777.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          147.0,
+          663
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          70,
+          661,
+          159,
+          256
+        ],
+        "bounds": [
+          72,
+          663,
+          227,
+          915
+        ],
+        "foot": [
+          152.0,
+          915
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          415.5,
+          778
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          332,
+          775,
+          233,
+          150
+        ],
+        "bounds": [
+          334,
+          777,
+          563,
+          923
+        ],
+        "foot": [
+          503.5,
+          923
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          124.0,
+          1121
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          53,
+          1118,
+          110,
+          206
+        ],
+        "bounds": [
+          55,
+          1120,
+          161,
+          1322
+        ],
+        "foot": [
+          110.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.0,
+          1124
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          275,
+          1122,
+          111,
+          202
+        ],
+        "bounds": [
+          277,
+          1124,
+          384,
+          1322
+        ],
+        "foot": [
+          332.5,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          570.5,
+          1124
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          498,
+          1121,
+          111,
+          203
+        ],
+        "bounds": [
+          500,
+          1123,
+          607,
+          1322
+        ],
+        "foot": [
+          556.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.0,
+          1121
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          718,
+          1118,
+          112,
+          206
+        ],
+        "bounds": [
+          720,
+          1120,
+          828,
+          1322
+        ],
+        "foot": [
+          777.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.5,
+          1124
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          50,
+          1122,
+          106,
+          201
+        ],
+        "bounds": [
+          52,
+          1124,
+          154,
+          1321
+        ],
+        "foot": [
+          116.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          1124
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          271,
+          1122,
+          119,
+          204
+        ],
+        "bounds": [
+          273,
+          1124,
+          388,
+          1324
+        ],
+        "foot": [
+          318.5,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          1124
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          500,
+          1122,
+          110,
+          204
+        ],
+        "bounds": [
+          502,
+          1124,
+          608,
+          1324
+        ],
+        "foot": [
+          535.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.5,
+          1124
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          718,
+          1121,
+          115,
+          203
+        ],
+        "bounds": [
+          720,
+          1123,
+          831,
+          1322
+        ],
+        "foot": [
+          776.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          128.5,
+          1128
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          54,
+          1126,
+          112,
+          200
+        ],
+        "bounds": [
+          56,
+          1128,
+          164,
+          1324
+        ],
+        "foot": [
+          106.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          1123
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          270,
+          1120,
+          127,
+          204
+        ],
+        "bounds": [
+          272,
+          1122,
+          395,
+          1322
+        ],
+        "foot": [
+          327.5,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          1127
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          481,
+          1125,
+          164,
+          200
+        ],
+        "bounds": [
+          483,
+          1127,
+          643,
+          1323
+        ],
+        "foot": [
+          534.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          1127
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          708,
+          1125,
+          138,
+          200
+        ],
+        "bounds": [
+          710,
+          1127,
+          844,
+          1323
+        ],
+        "foot": [
+          765.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          765.0,
+          664
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          685,
+          662,
+          142,
+          256
+        ],
+        "bounds": [
+          687,
+          664,
+          825,
+          916
+        ],
+        "foot": [
+          745.5,
+          916
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1013.5,
+          779
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          940,
+          776,
+          263,
+          147
+        ],
+        "bounds": [
+          942,
+          778,
+          1201,
+          921
+        ],
+        "foot": [
+          1147.5,
+          921
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          126.0,
+          1344
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          62,
+          1341,
+          99,
+          203
+        ],
+        "bounds": [
+          64,
+          1343,
+          159,
+          1542
+        ],
+        "foot": [
+          108.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.0,
+          1347
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          283,
+          1344,
+          100,
+          200
+        ],
+        "bounds": [
+          285,
+          1346,
+          381,
+          1542
+        ],
+        "foot": [
+          330.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          570.5,
+          1347
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          506,
+          1344,
+          99,
+          200
+        ],
+        "bounds": [
+          508,
+          1346,
+          603,
+          1542
+        ],
+        "foot": [
+          552.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.0,
+          1344
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          730,
+          1342,
+          97,
+          202
+        ],
+        "bounds": [
+          732,
+          1344,
+          825,
+          1542
+        ],
+        "foot": [
+          774.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          122.5,
+          1346
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          53,
+          1344,
+          107,
+          203
+        ],
+        "bounds": [
+          55,
+          1346,
+          158,
+          1545
+        ],
+        "foot": [
+          87.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.0,
+          1347
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          275,
+          1345,
+          106,
+          200
+        ],
+        "bounds": [
+          277,
+          1347,
+          379,
+          1543
+        ],
+        "foot": [
+          305.0,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          570.0,
+          1349
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          497,
+          1346,
+          108,
+          199
+        ],
+        "bounds": [
+          499,
+          1348,
+          603,
+          1543
+        ],
+        "foot": [
+          542.0,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          792.0,
+          1346
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          719,
+          1344,
+          110,
+          199
+        ],
+        "bounds": [
+          721,
+          1346,
+          827,
+          1541
+        ],
+        "foot": [
+          763.5,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.5,
+          1347
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          56,
+          1345,
+          108,
+          202
+        ],
+        "bounds": [
+          58,
+          1347,
+          162,
+          1545
+        ],
+        "foot": [
+          109.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          1348
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          275,
+          1346,
+          125,
+          201
+        ],
+        "bounds": [
+          277,
+          1348,
+          398,
+          1545
+        ],
+        "foot": [
+          329.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          569.0,
+          1350
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          484,
+          1347,
+          164,
+          200
+        ],
+        "bounds": [
+          486,
+          1349,
+          646,
+          1545
+        ],
+        "foot": [
+          540.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.5,
+          1349
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          718,
+          1347,
+          116,
+          200
+        ],
+        "bounds": [
+          720,
+          1349,
+          832,
+          1545
+        ],
+        "foot": [
+          772.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.0,
+          972
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          76,
+          969,
+          124,
+          259
+        ],
+        "bounds": [
+          78,
+          971,
+          198,
+          1226
+        ],
+        "foot": [
+          123.0,
+          1226
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          513.5,
+          1110
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          301,
+          1108,
+          277,
+          115
+        ],
+        "bounds": [
+          303,
+          1110,
+          576,
+          1221
+        ],
+        "foot": [
+          504.5,
+          1221
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          124.0,
+          1565
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          52,
+          1563,
+          122,
+          201
+        ],
+        "bounds": [
+          54,
+          1565,
+          172,
+          1762
+        ],
+        "foot": [
+          110.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          1568
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          274,
+          1565,
+          123,
+          199
+        ],
+        "bounds": [
+          276,
+          1567,
+          395,
+          1762
+        ],
+        "foot": [
+          333.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          569.0,
+          1570
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          498,
+          1567,
+          122,
+          197
+        ],
+        "bounds": [
+          500,
+          1569,
+          618,
+          1762
+        ],
+        "foot": [
+          556.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          1566
+        ],
+        "source": "source/zombie-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          719,
+          1563,
+          123,
+          201
+        ],
+        "bounds": [
+          721,
+          1565,
+          840,
+          1762
+        ],
+        "foot": [
+          777.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5714285714285714,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          122.5,
+          1568
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          46,
+          1565,
+          119,
+          199
+        ],
+        "bounds": [
+          48,
+          1567,
+          163,
+          1762
+        ],
+        "foot": [
+          103.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.5,
+          1569
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          271,
+          1567,
+          118,
+          196
+        ],
+        "bounds": [
+          273,
+          1569,
+          387,
+          1761
+        ],
+        "foot": [
+          328.0,
+          1761
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          1568
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          495,
+          1565,
+          119,
+          199
+        ],
+        "bounds": [
+          497,
+          1567,
+          612,
+          1762
+        ],
+        "foot": [
+          553.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.5,
+          1568
+        ],
+        "source": "source/zombie-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          715,
+          1565,
+          121,
+          199
+        ],
+        "bounds": [
+          717,
+          1567,
+          834,
+          1762
+        ],
+        "foot": [
+          776.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5773195876288659,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.5,
+          1567
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          47,
+          1565,
+          128,
+          201
+        ],
+        "bounds": [
+          49,
+          1567,
+          173,
+          1764
+        ],
+        "foot": [
+          110.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.0,
+          1567
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          272,
+          1564,
+          131,
+          202
+        ],
+        "bounds": [
+          274,
+          1566,
+          401,
+          1764
+        ],
+        "foot": [
+          331.5,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.0,
+          1573
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          484,
+          1570,
+          174,
+          195
+        ],
+        "bounds": [
+          486,
+          1572,
+          656,
+          1763
+        ],
+        "foot": [
+          540.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.5,
+          1571
+        ],
+        "source": "source/zombie-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          711,
+          1568,
+          134,
+          197
+        ],
+        "bounds": [
+          713,
+          1570,
+          843,
+          1763
+        ],
+        "foot": [
+          775.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.5833333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          753.0,
+          976
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          681,
+          973,
+          138,
+          255
+        ],
+        "bounds": [
+          683,
+          975,
+          817,
+          1226
+        ],
+        "foot": [
+          748.5,
+          1226
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1132.0,
+          1104
+        ],
+        "source": "source/zombie-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          923,
+          1102,
+          275,
+          123
+        ],
+        "bounds": [
+          925,
+          1104,
+          1196,
+          1223
+        ],
+        "foot": [
+          1125.5,
+          1223
+        ],
+        "sourceEdge": false,
+        "scale": 0.4534412955465587,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "wraith",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          117.5,
+          13
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          57,
+          10,
+          117,
+          211
+        ],
+        "bounds": [
+          59,
+          12,
+          172,
+          219
+        ],
+        "foot": [
+          120.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          23
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          279,
+          20,
+          116,
+          199
+        ],
+        "bounds": [
+          281,
+          22,
+          393,
+          217
+        ],
+        "foot": [
+          342.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          24
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          502,
+          22,
+          116,
+          197
+        ],
+        "bounds": [
+          504,
+          24,
+          616,
+          217
+        ],
+        "foot": [
+          564.0,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          13
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          723,
+          10,
+          116,
+          211
+        ],
+        "bounds": [
+          725,
+          12,
+          837,
+          219
+        ],
+        "foot": [
+          785.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.0,
+          19
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          63,
+          17,
+          122,
+          204
+        ],
+        "bounds": [
+          65,
+          19,
+          183,
+          219
+        ],
+        "foot": [
+          128.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.0,
+          19
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          275,
+          17,
+          123,
+          205
+        ],
+        "bounds": [
+          277,
+          19,
+          396,
+          220
+        ],
+        "foot": [
+          343.5,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          23
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          493,
+          20,
+          122,
+          199
+        ],
+        "bounds": [
+          495,
+          22,
+          613,
+          217
+        ],
+        "foot": [
+          560.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.0,
+          20
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          707,
+          17,
+          122,
+          204
+        ],
+        "bounds": [
+          709,
+          19,
+          827,
+          219
+        ],
+        "foot": [
+          771.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.5,
+          33
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          30,
+          126,
+          194
+        ],
+        "bounds": [
+          63,
+          32,
+          185,
+          222
+        ],
+        "foot": [
+          126.0,
+          222
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.5,
+          32
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          271,
+          30,
+          131,
+          194
+        ],
+        "bounds": [
+          273,
+          32,
+          400,
+          222
+        ],
+        "foot": [
+          344.5,
+          222
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.5,
+          32
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          475,
+          30,
+          154,
+          194
+        ],
+        "bounds": [
+          477,
+          32,
+          627,
+          222
+        ],
+        "foot": [
+          564.5,
+          222
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          32
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          713,
+          30,
+          121,
+          194
+        ],
+        "bounds": [
+          715,
+          32,
+          832,
+          222
+        ],
+        "foot": [
+          776.0,
+          222
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          166.5,
+          24
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          99,
+          21,
+          131,
+          278
+        ],
+        "bounds": [
+          101,
+          23,
+          228,
+          297
+        ],
+        "foot": [
+          151.5,
+          297
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          471.5,
+          144
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          357,
+          142,
+          240,
+          157
+        ],
+        "bounds": [
+          359,
+          144,
+          595,
+          297
+        ],
+        "foot": [
+          486.5,
+          297
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.0,
+          28
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          62,
+          26,
+          112,
+          197
+        ],
+        "bounds": [
+          64,
+          28,
+          172,
+          221
+        ],
+        "foot": [
+          117.0,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          561.5,
+          30
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          493,
+          28,
+          123,
+          195
+        ],
+        "bounds": [
+          495,
+          30,
+          614,
+          221
+        ],
+        "foot": [
+          561.0,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          780.0,
+          30
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          721,
+          28,
+          114,
+          195
+        ],
+        "bounds": [
+          723,
+          30,
+          833,
+          221
+        ],
+        "foot": [
+          781.5,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          117.5,
+          236
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          56,
+          234,
+          110,
+          206
+        ],
+        "bounds": [
+          58,
+          236,
+          164,
+          438
+        ],
+        "foot": [
+          119.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          240
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          279,
+          238,
+          110,
+          202
+        ],
+        "bounds": [
+          281,
+          240,
+          387,
+          438
+        ],
+        "foot": [
+          342.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          241
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          501,
+          239,
+          110,
+          201
+        ],
+        "bounds": [
+          503,
+          241,
+          609,
+          438
+        ],
+        "foot": [
+          563.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          236
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          722,
+          234,
+          110,
+          206
+        ],
+        "bounds": [
+          724,
+          236,
+          830,
+          438
+        ],
+        "foot": [
+          785.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.5,
+          235
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          58,
+          233,
+          113,
+          205
+        ],
+        "bounds": [
+          60,
+          235,
+          169,
+          436
+        ],
+        "foot": [
+          121.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          235
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          275,
+          233,
+          117,
+          208
+        ],
+        "bounds": [
+          277,
+          235,
+          390,
+          439
+        ],
+        "foot": [
+          338.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.0,
+          237
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          491,
+          235,
+          118,
+          206
+        ],
+        "bounds": [
+          493,
+          237,
+          607,
+          439
+        ],
+        "foot": [
+          559.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          236
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          707,
+          233,
+          117,
+          206
+        ],
+        "bounds": [
+          709,
+          235,
+          822,
+          437
+        ],
+        "foot": [
+          771.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.0,
+          242
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          62,
+          239,
+          115,
+          200
+        ],
+        "bounds": [
+          64,
+          241,
+          175,
+          437
+        ],
+        "foot": [
+          124.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          242
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          263,
+          239,
+          132,
+          200
+        ],
+        "bounds": [
+          265,
+          241,
+          393,
+          437
+        ],
+        "foot": [
+          343.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          242
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          456,
+          239,
+          167,
+          200
+        ],
+        "bounds": [
+          458,
+          241,
+          621,
+          437
+        ],
+        "foot": [
+          565.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          242
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          715,
+          239,
+          116,
+          200
+        ],
+        "bounds": [
+          717,
+          241,
+          829,
+          437
+        ],
+        "foot": [
+          779.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          772.0,
+          28
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          717,
+          26,
+          138,
+          273
+        ],
+        "bounds": [
+          719,
+          28,
+          853,
+          297
+        ],
+        "foot": [
+          769.5,
+          297
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1063.5,
+          158
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          966,
+          156,
+          232,
+          141
+        ],
+        "bounds": [
+          968,
+          158,
+          1196,
+          295
+        ],
+        "foot": [
+          1095.5,
+          295
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.5,
+          242
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 4,
+        "cell": [
+          61,
+          240,
+          108,
+          205
+        ],
+        "bounds": [
+          63,
+          242,
+          167,
+          443
+        ],
+        "foot": [
+          118.0,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          557.0,
+          242
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 6,
+        "cell": [
+          470,
+          240,
+          141,
+          206
+        ],
+        "bounds": [
+          472,
+          242,
+          609,
+          444
+        ],
+        "foot": [
+          560.5,
+          444
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          778.0,
+          242
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 7,
+        "cell": [
+          725,
+          240,
+          108,
+          205
+        ],
+        "bounds": [
+          727,
+          242,
+          831,
+          443
+        ],
+        "foot": [
+          780.5,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          104.5,
+          456
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          69,
+          454,
+          85,
+          207
+        ],
+        "bounds": [
+          71,
+          456,
+          152,
+          659
+        ],
+        "foot": [
+          120.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          459
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          290,
+          457,
+          87,
+          204
+        ],
+        "bounds": [
+          292,
+          459,
+          375,
+          659
+        ],
+        "foot": [
+          342.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.0,
+          461
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          511,
+          459,
+          88,
+          201
+        ],
+        "bounds": [
+          513,
+          461,
+          597,
+          658
+        ],
+        "foot": [
+          563.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.0,
+          456
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          734,
+          453,
+          86,
+          208
+        ],
+        "bounds": [
+          736,
+          455,
+          818,
+          659
+        ],
+        "foot": [
+          785.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.5,
+          455
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          65,
+          452,
+          96,
+          206
+        ],
+        "bounds": [
+          67,
+          454,
+          159,
+          656
+        ],
+        "foot": [
+          121.0,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.5,
+          455
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          286,
+          452,
+          95,
+          208
+        ],
+        "bounds": [
+          288,
+          454,
+          379,
+          658
+        ],
+        "foot": [
+          340.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.0,
+          457
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          500,
+          455,
+          99,
+          205
+        ],
+        "bounds": [
+          502,
+          457,
+          597,
+          658
+        ],
+        "foot": [
+          557.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.5,
+          454
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          720,
+          452,
+          95,
+          206
+        ],
+        "bounds": [
+          722,
+          454,
+          813,
+          656
+        ],
+        "foot": [
+          774.0,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          456
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          69,
+          453,
+          95,
+          206
+        ],
+        "bounds": [
+          71,
+          455,
+          162,
+          657
+        ],
+        "foot": [
+          121.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.5,
+          456
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          268,
+          453,
+          120,
+          206
+        ],
+        "bounds": [
+          270,
+          455,
+          386,
+          657
+        ],
+        "foot": [
+          341.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          456
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          446,
+          453,
+          169,
+          206
+        ],
+        "bounds": [
+          448,
+          455,
+          613,
+          657
+        ],
+        "foot": [
+          565.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.0,
+          456
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          727,
+          454,
+          95,
+          205
+        ],
+        "bounds": [
+          729,
+          456,
+          820,
+          657
+        ],
+        "foot": [
+          777.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          164.5,
+          338
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          110,
+          336,
+          126,
+          267
+        ],
+        "bounds": [
+          112,
+          338,
+          234,
+          601
+        ],
+        "foot": [
+          165.0,
+          601
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          444.5,
+          472
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          359,
+          469,
+          229,
+          134
+        ],
+        "bounds": [
+          361,
+          471,
+          586,
+          601
+        ],
+        "foot": [
+          475.5,
+          601
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          461
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          58,
+          458,
+          103,
+          203
+        ],
+        "bounds": [
+          60,
+          460,
+          159,
+          659
+        ],
+        "foot": [
+          120.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          552.0,
+          461
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          462,
+          458,
+          143,
+          203
+        ],
+        "bounds": [
+          464,
+          460,
+          603,
+          659
+        ],
+        "foot": [
+          563.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          774.0,
+          461
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          727,
+          458,
+          98,
+          204
+        ],
+        "bounds": [
+          729,
+          460,
+          823,
+          660
+        ],
+        "foot": [
+          785.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          110.0,
+          676
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          58,
+          673,
+          109,
+          207
+        ],
+        "bounds": [
+          60,
+          675,
+          165,
+          878
+        ],
+        "foot": [
+          122.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          679
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          281,
+          677,
+          109,
+          204
+        ],
+        "bounds": [
+          283,
+          679,
+          388,
+          879
+        ],
+        "foot": [
+          343.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          680
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          506,
+          678,
+          107,
+          202
+        ],
+        "bounds": [
+          508,
+          680,
+          611,
+          878
+        ],
+        "foot": [
+          564.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          676
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          724,
+          673,
+          109,
+          208
+        ],
+        "bounds": [
+          726,
+          675,
+          831,
+          879
+        ],
+        "foot": [
+          787.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          675
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          55,
+          673,
+          119,
+          206
+        ],
+        "bounds": [
+          57,
+          675,
+          172,
+          877
+        ],
+        "foot": [
+          121.5,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          676
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          275,
+          673,
+          122,
+          209
+        ],
+        "bounds": [
+          277,
+          675,
+          395,
+          880
+        ],
+        "foot": [
+          340.0,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.0,
+          678
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          493,
+          675,
+          121,
+          205
+        ],
+        "bounds": [
+          495,
+          677,
+          612,
+          878
+        ],
+        "foot": [
+          559.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.0,
+          675
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          710,
+          672,
+          122,
+          208
+        ],
+        "bounds": [
+          712,
+          674,
+          830,
+          878
+        ],
+        "foot": [
+          774.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          676
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          50,
+          674,
+          125,
+          206
+        ],
+        "bounds": [
+          52,
+          676,
+          173,
+          878
+        ],
+        "foot": [
+          120.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          676
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          270,
+          674,
+          131,
+          206
+        ],
+        "bounds": [
+          272,
+          676,
+          399,
+          878
+        ],
+        "foot": [
+          343.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          676
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          449,
+          674,
+          166,
+          206
+        ],
+        "bounds": [
+          451,
+          676,
+          613,
+          878
+        ],
+        "foot": [
+          563.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          676
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          716,
+          674,
+          122,
+          207
+        ],
+        "bounds": [
+          718,
+          676,
+          836,
+          879
+        ],
+        "foot": [
+          778.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          788.5,
+          338
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          719,
+          336,
+          140,
+          267
+        ],
+        "bounds": [
+          721,
+          338,
+          857,
+          601
+        ],
+        "foot": [
+          778.0,
+          601
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1066.5,
+          478
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          981,
+          475,
+          240,
+          135
+        ],
+        "bounds": [
+          983,
+          477,
+          1219,
+          608
+        ],
+        "foot": [
+          1115.5,
+          608
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.5,
+          679
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          56,
+          677,
+          109,
+          205
+        ],
+        "bounds": [
+          58,
+          679,
+          163,
+          880
+        ],
+        "foot": [
+          119.0,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          554.5,
+          680
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          460,
+          678,
+          152,
+          204
+        ],
+        "bounds": [
+          462,
+          680,
+          610,
+          880
+        ],
+        "foot": [
+          563.0,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          775.5,
+          681
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          721,
+          679,
+          108,
+          203
+        ],
+        "bounds": [
+          723,
+          681,
+          827,
+          880
+        ],
+        "foot": [
+          783.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          113.5,
+          899
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          55,
+          897,
+          117,
+          204
+        ],
+        "bounds": [
+          57,
+          899,
+          170,
+          1099
+        ],
+        "foot": [
+          121.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          905
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          278,
+          903,
+          116,
+          197
+        ],
+        "bounds": [
+          280,
+          905,
+          392,
+          1098
+        ],
+        "foot": [
+          342.5,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          905
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          501,
+          902,
+          115,
+          199
+        ],
+        "bounds": [
+          503,
+          904,
+          614,
+          1099
+        ],
+        "foot": [
+          563.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          899
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          722,
+          897,
+          115,
+          204
+        ],
+        "bounds": [
+          724,
+          899,
+          835,
+          1099
+        ],
+        "foot": [
+          787.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          898
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          54,
+          896,
+          127,
+          203
+        ],
+        "bounds": [
+          56,
+          898,
+          179,
+          1097
+        ],
+        "foot": [
+          124.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          899
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          270,
+          896,
+          126,
+          201
+        ],
+        "bounds": [
+          272,
+          898,
+          394,
+          1095
+        ],
+        "foot": [
+          343.5,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          899
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          493,
+          896,
+          122,
+          203
+        ],
+        "bounds": [
+          495,
+          898,
+          613,
+          1097
+        ],
+        "foot": [
+          558.5,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.0,
+          897
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          707,
+          895,
+          124,
+          205
+        ],
+        "bounds": [
+          709,
+          897,
+          829,
+          1098
+        ],
+        "foot": [
+          775.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          897
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          50,
+          895,
+          134,
+          208
+        ],
+        "bounds": [
+          52,
+          897,
+          182,
+          1101
+        ],
+        "foot": [
+          124.0,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          897
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          271,
+          895,
+          133,
+          205
+        ],
+        "bounds": [
+          273,
+          897,
+          402,
+          1098
+        ],
+        "foot": [
+          344.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          897
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          474,
+          895,
+          151,
+          205
+        ],
+        "bounds": [
+          476,
+          897,
+          623,
+          1098
+        ],
+        "foot": [
+          565.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          897
+        ],
+        "source": "source/wraith-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          707,
+          895,
+          133,
+          210
+        ],
+        "bounds": [
+          709,
+          897,
+          838,
+          1103
+        ],
+        "foot": [
+          783.0,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          169.0,
+          642
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          91,
+          640,
+          157,
+          264
+        ],
+        "bounds": [
+          93,
+          642,
+          246,
+          902
+        ],
+        "foot": [
+          185.0,
+          902
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          477.0,
+          766
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          357,
+          764,
+          235,
+          141
+        ],
+        "bounds": [
+          359,
+          766,
+          590,
+          903
+        ],
+        "foot": [
+          474.0,
+          903
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          901
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          55,
+          899,
+          113,
+          202
+        ],
+        "bounds": [
+          57,
+          901,
+          166,
+          1099
+        ],
+        "foot": [
+          118.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          556.0,
+          904
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          479,
+          902,
+          146,
+          200
+        ],
+        "bounds": [
+          481,
+          904,
+          623,
+          1100
+        ],
+        "foot": [
+          560.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          775.5,
+          902
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          716,
+          899,
+          117,
+          203
+        ],
+        "bounds": [
+          718,
+          901,
+          831,
+          1100
+        ],
+        "foot": [
+          781.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          117.0,
+          1118
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          62,
+          1116,
+          102,
+          206
+        ],
+        "bounds": [
+          64,
+          1118,
+          162,
+          1320
+        ],
+        "foot": [
+          109.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          1122
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          285,
+          1120,
+          102,
+          202
+        ],
+        "bounds": [
+          287,
+          1122,
+          385,
+          1320
+        ],
+        "foot": [
+          335.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          1125
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          508,
+          1123,
+          102,
+          199
+        ],
+        "bounds": [
+          510,
+          1125,
+          608,
+          1320
+        ],
+        "foot": [
+          558.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.5,
+          1118
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          727,
+          1116,
+          102,
+          206
+        ],
+        "bounds": [
+          729,
+          1118,
+          827,
+          1320
+        ],
+        "foot": [
+          775.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          122.0,
+          1116
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          55,
+          1113,
+          117,
+          207
+        ],
+        "bounds": [
+          57,
+          1115,
+          170,
+          1318
+        ],
+        "foot": [
+          115.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          1117
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          280,
+          1114,
+          112,
+          208
+        ],
+        "bounds": [
+          282,
+          1116,
+          390,
+          1320
+        ],
+        "foot": [
+          335.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          1118
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          497,
+          1116,
+          113,
+          208
+        ],
+        "bounds": [
+          499,
+          1118,
+          608,
+          1322
+        ],
+        "foot": [
+          553.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          1116
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          713,
+          1113,
+          117,
+          209
+        ],
+        "bounds": [
+          715,
+          1115,
+          828,
+          1320
+        ],
+        "foot": [
+          769.0,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          207.5,
+          27
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 0,
+        "cell": [
+          114,
+          25,
+          168,
+          305
+        ],
+        "bounds": [
+          116,
+          27,
+          280,
+          328
+        ],
+        "foot": [
+          191.5,
+          328
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          569.0,
+          27
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 1,
+        "cell": [
+          476,
+          25,
+          153,
+          305
+        ],
+        "bounds": [
+          478,
+          27,
+          627,
+          328
+        ],
+        "foot": [
+          553.0,
+          328
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          931.5,
+          27
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 2,
+        "cell": [
+          838,
+          25,
+          208,
+          305
+        ],
+        "bounds": [
+          840,
+          27,
+          1044,
+          328
+        ],
+        "foot": [
+          915.0,
+          328
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1294.0,
+          27
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 3,
+        "cell": [
+          1200,
+          25,
+          168,
+          305
+        ],
+        "bounds": [
+          1202,
+          27,
+          1366,
+          328
+        ],
+        "foot": [
+          1277.5,
+          328
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          792.5,
+          646
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          716,
+          643,
+          133,
+          261
+        ],
+        "bounds": [
+          718,
+          645,
+          847,
+          902
+        ],
+        "foot": [
+          792.0,
+          902
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1116.0,
+          778
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          976,
+          775,
+          228,
+          127
+        ],
+        "bounds": [
+          978,
+          777,
+          1202,
+          900
+        ],
+        "foot": [
+          1082.0,
+          900
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          119.5,
+          1120
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 20,
+        "cell": [
+          65,
+          1118,
+          102,
+          203
+        ],
+        "bounds": [
+          67,
+          1120,
+          165,
+          1319
+        ],
+        "foot": [
+          115.0,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          560.5,
+          1122
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 22,
+        "cell": [
+          508,
+          1120,
+          119,
+          201
+        ],
+        "bounds": [
+          510,
+          1122,
+          625,
+          1319
+        ],
+        "foot": [
+          558.0,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          781.0,
+          1120
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 23,
+        "cell": [
+          722,
+          1118,
+          107,
+          204
+        ],
+        "bounds": [
+          724,
+          1120,
+          827,
+          1320
+        ],
+        "foot": [
+          781.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          121.5,
+          1342
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          71,
+          1339,
+          84,
+          207
+        ],
+        "bounds": [
+          73,
+          1341,
+          153,
+          1544
+        ],
+        "foot": [
+          106.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.5,
+          1348
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          291,
+          1346,
+          87,
+          200
+        ],
+        "bounds": [
+          293,
+          1348,
+          376,
+          1544
+        ],
+        "foot": [
+          331.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.5,
+          1351
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          512,
+          1349,
+          89,
+          197
+        ],
+        "bounds": [
+          514,
+          1351,
+          599,
+          1544
+        ],
+        "foot": [
+          553.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          1342
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          737,
+          1339,
+          84,
+          207
+        ],
+        "bounds": [
+          739,
+          1341,
+          819,
+          1544
+        ],
+        "foot": [
+          773.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.0,
+          1336
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          67,
+          1334,
+          93,
+          212
+        ],
+        "bounds": [
+          69,
+          1336,
+          158,
+          1544
+        ],
+        "foot": [
+          112.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.0,
+          1339
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          288,
+          1336,
+          94,
+          212
+        ],
+        "bounds": [
+          290,
+          1338,
+          380,
+          1546
+        ],
+        "foot": [
+          332.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          1341
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          504,
+          1338,
+          97,
+          210
+        ],
+        "bounds": [
+          506,
+          1340,
+          599,
+          1546
+        ],
+        "foot": [
+          549.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          1338
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          724,
+          1336,
+          92,
+          212
+        ],
+        "bounds": [
+          726,
+          1338,
+          814,
+          1546
+        ],
+        "foot": [
+          768.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          197.0,
+          383
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 4,
+        "cell": [
+          121,
+          381,
+          143,
+          313
+        ],
+        "bounds": [
+          123,
+          383,
+          262,
+          692
+        ],
+        "foot": [
+          183.0,
+          692
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          559.5,
+          383
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 5,
+        "cell": [
+          483,
+          381,
+          143,
+          313
+        ],
+        "bounds": [
+          485,
+          383,
+          624,
+          692
+        ],
+        "foot": [
+          545.0,
+          692
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          922.0,
+          384
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 6,
+        "cell": [
+          847,
+          381,
+          199,
+          313
+        ],
+        "bounds": [
+          849,
+          383,
+          1044,
+          692
+        ],
+        "foot": [
+          907.0,
+          692
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1283.5,
+          383
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 7,
+        "cell": [
+          1208,
+          381,
+          142,
+          314
+        ],
+        "bounds": [
+          1210,
+          383,
+          1348,
+          693
+        ],
+        "foot": [
+          1270.0,
+          693
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          172.5,
+          946
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          94,
+          943,
+          133,
+          270
+        ],
+        "bounds": [
+          96,
+          945,
+          225,
+          1211
+        ],
+        "foot": [
+          172.5,
+          1211
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          506.0,
+          1076
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          357,
+          1074,
+          235,
+          138
+        ],
+        "bounds": [
+          359,
+          1076,
+          590,
+          1210
+        ],
+        "foot": [
+          467.5,
+          1210
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.5,
+          1341
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          69,
+          1339,
+          91,
+          205
+        ],
+        "bounds": [
+          71,
+          1341,
+          158,
+          1542
+        ],
+        "foot": [
+          111.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          558.0,
+          1341
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          502,
+          1339,
+          127,
+          204
+        ],
+        "bounds": [
+          504,
+          1341,
+          627,
+          1541
+        ],
+        "foot": [
+          552.5,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          781.0,
+          1341
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          729,
+          1339,
+          90,
+          205
+        ],
+        "bounds": [
+          731,
+          1341,
+          817,
+          1542
+        ],
+        "foot": [
+          777.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          115.0,
+          1564
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          66,
+          1561,
+          106,
+          204
+        ],
+        "bounds": [
+          68,
+          1563,
+          170,
+          1763
+        ],
+        "foot": [
+          109.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          1568
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          284,
+          1566,
+          109,
+          199
+        ],
+        "bounds": [
+          286,
+          1568,
+          391,
+          1763
+        ],
+        "foot": [
+          333.5,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          1570
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          506,
+          1568,
+          109,
+          198
+        ],
+        "bounds": [
+          508,
+          1570,
+          613,
+          1764
+        ],
+        "foot": [
+          558.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          1563
+        ],
+        "source": "source/wraith-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          731,
+          1561,
+          106,
+          204
+        ],
+        "bounds": [
+          733,
+          1563,
+          835,
+          1763
+        ],
+        "foot": [
+          775.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6116504854368932,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.5,
+          1561
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          62,
+          1559,
+          117,
+          201
+        ],
+        "bounds": [
+          64,
+          1561,
+          177,
+          1758
+        ],
+        "foot": [
+          114.5,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          1561
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          280,
+          1559,
+          118,
+          201
+        ],
+        "bounds": [
+          282,
+          1561,
+          396,
+          1758
+        ],
+        "foot": [
+          339.0,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1563
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          496,
+          1560,
+          121,
+          200
+        ],
+        "bounds": [
+          498,
+          1562,
+          615,
+          1758
+        ],
+        "foot": [
+          554.5,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.5,
+          1561
+        ],
+        "source": "source/wraith-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          715,
+          1559,
+          118,
+          201
+        ],
+        "bounds": [
+          717,
+          1561,
+          831,
+          1758
+        ],
+        "foot": [
+          771.0,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.63,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          195.5,
+          748
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 8,
+        "cell": [
+          117,
+          745,
+          161,
+          311
+        ],
+        "bounds": [
+          119,
+          747,
+          276,
+          1054
+        ],
+        "foot": [
+          190.0,
+          1054
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          555.5,
+          748
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 9,
+        "cell": [
+          479,
+          745,
+          160,
+          311
+        ],
+        "bounds": [
+          481,
+          747,
+          637,
+          1054
+        ],
+        "foot": [
+          552.0,
+          1054
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          920.0,
+          748
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 10,
+        "cell": [
+          841,
+          745,
+          198,
+          311
+        ],
+        "bounds": [
+          843,
+          747,
+          1037,
+          1054
+        ],
+        "foot": [
+          914.5,
+          1054
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1281.5,
+          748
+        ],
+        "source": "source/wraith-attack-right.png",
+        "sourcePose": 11,
+        "cell": [
+          1204,
+          745,
+          160,
+          311
+        ],
+        "bounds": [
+          1206,
+          747,
+          1362,
+          1054
+        ],
+        "foot": [
+          1276.5,
+          1054
+        ],
+        "sourceEdge": false,
+        "scale": 0.4186046511627907,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          773.5,
+          946
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          707,
+          944,
+          127,
+          269
+        ],
+        "bounds": [
+          709,
+          946,
+          832,
+          1211
+        ],
+        "foot": [
+          785.5,
+          1211
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1115.5,
+          1078
+        ],
+        "source": "source/wraith-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          961,
+          1075,
+          241,
+          138
+        ],
+        "bounds": [
+          963,
+          1077,
+          1200,
+          1211
+        ],
+        "foot": [
+          1097.5,
+          1211
+        ],
+        "sourceEdge": false,
+        "scale": 0.46153846153846156,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.0,
+          1564
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          57,
+          1562,
+          106,
+          200
+        ],
+        "bounds": [
+          59,
+          1564,
+          161,
+          1760
+        ],
+        "foot": [
+          113.0,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          560.0,
+          1565
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          504,
+          1562,
+          133,
+          199
+        ],
+        "bounds": [
+          506,
+          1564,
+          635,
+          1759
+        ],
+        "foot": [
+          554.5,
+          1759
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          778.0,
+          1562
+        ],
+        "source": "source/wraith-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          717,
+          1560,
+          109,
+          200
+        ],
+        "bounds": [
+          719,
+          1562,
+          824,
+          1758
+        ],
+        "foot": [
+          775.5,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.6528497409326425,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  }
+]

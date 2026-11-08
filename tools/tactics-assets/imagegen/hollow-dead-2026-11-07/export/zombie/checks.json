@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 0,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      76,
+      86,
+      145,
+      197
+    ],
+    "count": 5059
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 1,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      76,
+      87,
+      145,
+      196
+    ],
+    "count": 5038
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 2,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      77,
+      88,
+      145,
+      197
+    ],
+    "count": 5037
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 3,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      76,
+      86,
+      144,
+      197
+    ],
+    "count": 5047
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 0,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      75,
+      87,
+      145,
+      198
+    ],
+    "count": 5165
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 1,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      87,
+      145,
+      199
+    ],
+    "count": 5034
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 2,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      87,
+      143,
+      199
+    ],
+    "count": 5040
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 3,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      86,
+      144,
+      196
+    ],
+    "count": 5083
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 0,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      73,
+      86,
+      147,
+      198
+    ],
+    "count": 5777
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 1,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      75,
+      88,
+      147,
+      198
+    ],
+    "count": 5267
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 2,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      75,
+      93,
+      148,
+      198
+    ],
+    "count": 4953
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 3,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      73,
+      91,
+      150,
+      198
+    ],
+    "count": 5430
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 0,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      79,
+      87,
+      149,
+      198
+    ],
+    "count": 5217
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 1,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      75,
+      150,
+      185,
+      198
+    ],
+    "count": 3455
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 4,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      76,
+      84,
+      143,
+      197
+    ],
+    "count": 5021
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 5,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      76,
+      85,
+      141,
+      197
+    ],
+    "count": 5004
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 6,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      78,
+      86,
+      142,
+      197
+    ],
+    "count": 4953
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 7,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      77,
+      84,
+      142,
+      197
+    ],
+    "count": 4976
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 4,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      85,
+      146,
+      198
+    ],
+    "count": 5069
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 5,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      81,
+      86,
+      145,
+      201
+    ],
+    "count": 4941
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 6,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      81,
+      85,
+      146,
+      199
+    ],
+    "count": 4811
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 7,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      84,
+      144,
+      198
+    ],
+    "count": 4952
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 4,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      73,
+      85,
+      146,
+      198
+    ],
+    "count": 5545
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 5,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      70,
+      84,
+      143,
+      198
+    ],
+    "count": 5255
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 6,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      51,
+      92,
+      146,
+      198
+    ],
+    "count": 5419
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 7,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      67,
+      89,
+      146,
+      198
+    ],
+    "count": 5286
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 2,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      80,
+      86,
+      145,
+      198
+    ],
+    "count": 4819
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 3,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      82,
+      144,
+      200,
+      198
+    ],
+    "count": 3752
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 8,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      83,
+      135,
+      197
+    ],
+    "count": 4190
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 9,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      85,
+      135,
+      197
+    ],
+    "count": 4148
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 10,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      86,
+      136,
+      197
+    ],
+    "count": 4149
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 11,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      81,
+      83,
+      136,
+      197
+    ],
+    "count": 4186
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 8,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      84,
+      141,
+      200
+    ],
+    "count": 4349
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 9,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      84,
+      140,
+      199
+    ],
+    "count": 4242
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 10,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      84,
+      140,
+      199
+    ],
+    "count": 4233
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 11,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      83,
+      141,
+      198
+    ],
+    "count": 4259
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 8,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      75,
+      84,
+      140,
+      198
+    ],
+    "count": 4623
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 9,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      70,
+      84,
+      142,
+      198
+    ],
+    "count": 4952
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 10,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      37,
+      87,
+      141,
+      198
+    ],
+    "count": 5192
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 11,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      65,
+      87,
+      141,
+      198
+    ],
+    "count": 4906
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 4,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      88,
+      84,
+      139,
+      198
+    ],
+    "count": 4123
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 5,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      78,
+      146,
+      199,
+      198
+    ],
+    "count": 3824
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 12,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      79,
+      85,
+      145,
+      197
+    ],
+    "count": 5013
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 13,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      86,
+      146,
+      197
+    ],
+    "count": 5030
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 14,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      87,
+      145,
+      197
+    ],
+    "count": 4985
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 15,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      79,
+      85,
+      144,
+      197
+    ],
+    "count": 5006
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 12,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      86,
+      147,
+      198
+    ],
+    "count": 4965
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 13,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      77,
+      87,
+      145,
+      199
+    ],
+    "count": 4819
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 14,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      80,
+      86,
+      145,
+      198
+    ],
+    "count": 4848
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 15,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      80,
+      85,
+      148,
+      198
+    ],
+    "count": 5116
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 12,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      76,
+      84,
+      146,
+      198
+    ],
+    "count": 5540
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 13,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      66,
+      85,
+      142,
+      198
+    ],
+    "count": 5282
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 14,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      37,
+      86,
+      142,
+      198
+    ],
+    "count": 5724
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 15,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      62,
+      86,
+      142,
+      198
+    ],
+    "count": 5397
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 6,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      82,
+      88,
+      140,
+      198
+    ],
+    "count": 4418
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 7,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      50,
+      147,
+      174,
+      198
+    ],
+    "count": 3772
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 16,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      77,
+      84,
+      145,
+      197
+    ],
+    "count": 5171
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 17,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      78,
+      85,
+      145,
+      197
+    ],
+    "count": 5150
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 18,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      78,
+      86,
+      145,
+      197
+    ],
+    "count": 5115
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 19,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      78,
+      84,
+      145,
+      197
+    ],
+    "count": 5124
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 16,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      76,
+      85,
+      143,
+      198
+    ],
+    "count": 5075
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 17,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      86,
+      143,
+      199
+    ],
+    "count": 4940
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 18,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      85,
+      144,
+      198
+    ],
+    "count": 5026
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 19,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      84,
+      145,
+      196
+    ],
+    "count": 5092
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 16,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      73,
+      83,
+      148,
+      198
+    ],
+    "count": 5884
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 17,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      72,
+      83,
+      148,
+      198
+    ],
+    "count": 5458
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 18,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      66,
+      90,
+      150,
+      198
+    ],
+    "count": 5316
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 19,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      72,
+      86,
+      149,
+      198
+    ],
+    "count": 5397
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 8,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      76,
+      85,
+      145,
+      198
+    ],
+    "count": 5183
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 9,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      35,
+      133,
+      138,
+      198
+    ],
+    "count": 3690
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 20,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      82,
+      140,
+      197
+    ],
+    "count": 4792
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 21,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      79,
+      85,
+      139,
+      197
+    ],
+    "count": 4770
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 22,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      84,
+      140,
+      197
+    ],
+    "count": 4777
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 23,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      79,
+      82,
+      140,
+      197
+    ],
+    "count": 4822
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 20,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      80,
+      84,
+      138,
+      197
+    ],
+    "count": 4489
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 21,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      85,
+      144,
+      200
+    ],
+    "count": 4589
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 22,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      81,
+      84,
+      141,
+      199
+    ],
+    "count": 4671
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 23,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      79,
+      82,
+      142,
+      196
+    ],
+    "count": 4713
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 20,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      83,
+      85,
+      145,
+      198
+    ],
+    "count": 5138
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 21,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      79,
+      82,
+      150,
+      198
+    ],
+    "count": 5229
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 22,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      82,
+      85,
+      174,
+      198
+    ],
+    "count": 5378
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 23,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      79,
+      85,
+      156,
+      198
+    ],
+    "count": 5288
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 10,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      86,
+      85,
+      147,
+      198
+    ],
+    "count": 4563
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 11,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      19,
+      134,
+      135,
+      198
+    ],
+    "count": 3766
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 24,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      87,
+      84,
+      140,
+      197
+    ],
+    "count": 4027
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 25,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      86,
+      86,
+      140,
+      197
+    ],
+    "count": 4021
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 26,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      86,
+      86,
+      139,
+      197
+    ],
+    "count": 4006
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 27,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      87,
+      85,
+      139,
+      197
+    ],
+    "count": 4007
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 24,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      83,
+      86,
+      142,
+      200
+    ],
+    "count": 4233
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 25,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      84,
+      87,
+      141,
+      199
+    ],
+    "count": 4165
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 26,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      81,
+      85,
+      140,
+      197
+    ],
+    "count": 4249
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 27,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      81,
+      85,
+      141,
+      197
+    ],
+    "count": 4266
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 24,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      82,
+      83,
+      142,
+      198
+    ],
+    "count": 4639
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 25,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      82,
+      84,
+      152,
+      198
+    ],
+    "count": 4887
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 26,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      80,
+      84,
+      172,
+      197
+    ],
+    "count": 5058
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 27,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      82,
+      84,
+      146,
+      197
+    ],
+    "count": 4836
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 12,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      92,
+      83,
+      145,
+      198
+    ],
+    "count": 4138
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 13,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      21,
+      149,
+      144,
+      198
+    ],
+    "count": 3742
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 28,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      85,
+      147,
+      197
+    ],
+    "count": 5059
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 29,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      86,
+      147,
+      197
+    ],
+    "count": 5095
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 30,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      87,
+      147,
+      196
+    ],
+    "count": 5030
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/zombie-idle.png",
+    "sourcePose": 31,
+    "scale": 0.5714285714285714,
+    "bounds": [
+      80,
+      85,
+      147,
+      197
+    ],
+    "count": 5061
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 28,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      77,
+      86,
+      143,
+      198
+    ],
+    "count": 5039
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 29,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      77,
+      87,
+      142,
+      197
+    ],
+    "count": 4837
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 30,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      78,
+      86,
+      144,
+      198
+    ],
+    "count": 4976
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/zombie-walk.png",
+    "sourcePose": 31,
+    "scale": 0.5773195876288659,
+    "bounds": [
+      77,
+      85,
+      144,
+      197
+    ],
+    "count": 5108
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 28,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      76,
+      84,
+      147,
+      198
+    ],
+    "count": 5416
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 29,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      78,
+      83,
+      151,
+      198
+    ],
+    "count": 5246
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 30,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      80,
+      87,
+      178,
+      198
+    ],
+    "count": 5402
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/zombie-attack.png",
+    "sourcePose": 31,
+    "scale": 0.5833333333333334,
+    "bounds": [
+      76,
+      86,
+      151,
+      198
+    ],
+    "count": 5436
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 14,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      82,
+      85,
+      142,
+      198
+    ],
+    "count": 4831
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/zombie-damage.png",
+    "sourcePose": 15,
+    "scale": 0.4534412955465587,
+    "bounds": [
+      21,
+      145,
+      143,
+      198
+    ],
+    "count": 3778
+  }
+]

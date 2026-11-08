@@ -1,0 +1,25 @@
+{
+  "focused": {
+    "total": 520,
+    "passed": 520,
+    "failed": 0
+  },
+  "completeAtlas": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "fullPresentation": {
+    "total": 3057,
+    "passed": 3054,
+    "failed": 3,
+    "preExistingFailures": [
+      "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_speaker_in_the_lore_has_a_face_in_every_mood_they_speak_in",
+      "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption",
+      "Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch"
+    ]
+  },
+  "fullSolutionRun": false,
+  "hostBuildWarnings": 0,
+  "hostBuildErrors": 0
+}

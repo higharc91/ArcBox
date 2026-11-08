@@ -1,0 +1,28 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "generationParameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  },
+  "briefs": {
+    "troll": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for pixel translation. ONE SAME creature in front threequarter, rear threequarter and leftprofile fullbodies, head/hand/material study, small neutral 1.75m human scale inset. Clean parchment background, all head/feet/fingers contained wide padding. Slightly enlarged tactical head, strong silhouette, natural worn materials and clear two/three-shade material ramps, warm upperleft key/cool shadows. No text/scenery/labels, no anime/glossy3D or huge magical FX. TROLL, existing large GIANT with natural CLAWS, boulder toss and frenzy roar; NOT an orc/ogre and NO CLUB/AXE/SHIELD/ARMOR. About3m tall if fully upright, hunches to2.6m; lean sinewy rangy power with veryLONG FOREARMS, broad stooped shoulders, tucked narrow pelvis and powerful bent digitigrade-like but human-heel bare feet. Moss/olive GREYGREEN thick leathery skin, clear desaturated purple-grey shadows, knobbly elbows/knees, old pale scars. Recognizable long crooked hookNOSE, deep-set small NATURAL muted amber eyes with dark pupils (NO GLOW), heavy brow, pointed swept ears, broad mouth with TWO short unequal lower tusks and small dullteeth, NO giant apefangs or exposedskull. Coarse short DARK moss-brown scruffy scalp crest fixed tohead (not a loose wig), sparse chin stubble, no flowingbraids. FIVE thick fingers per hand, bone-colored SHORT clawtips joined fingers, long low forearms never detached, feet broad with three visibly grouped SHORT toenail clusters. Ragged darkUMBER practical hipwrap/loincloth with dull rope belt and simple BACK knot (no frontbuckle onback), skin otherwise bare; NO dangling trophies/loose props. Asymmetric small old notch in RIGHT ear helps anatomy/front-back. Neutral lowguard BOTH hands open with curved naturalclaws, arms longbutnotgorilla-knucklewalk. Show claw grip and a grounded boulder-heave gesture without loose flying debris. Grounded giant with regenerative toughness, not elemental fire/poison or comicalgreenorc.",
+    "golem": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for pixel translation. ONE SAME creature in front threequarter, rear threequarter and leftprofile fullbodies, head/hand/material study, small neutral 1.75m human scale inset. Clean parchment background, all head/feet/fingers contained wide padding. Slightly enlarged tactical head, strong silhouette, natural worn materials and clear two/three-shade material ramps, warm upperleft key/cool shadows. No text/scenery/labels, no anime/glossy3D or huge magical FX. STONE GOLEM, existing GRANITE variant of an animated constructed guardian, natural blunt SLAM fists, seismic slam and stone aegis. About2.7m tall and visibly broader/heavier than human. Carved WEATHERED coolGREY GRANITE with readable fine darkmineral flecks, blunt bevelled planeedges and restrained warmgrey wear, darkbluegrey jointrecesses. Clearly BUILT and articulated HUMANOID masonry construct, not a jagged pile-of-rocks earth elemental: rectangular squared close-set blockHEAD with modest carved brow/simple blunt wedgeNOSE/darkhorizontaleye recesses (NO GLOW)/short flatmouthincision, trapezoidblock CHEST with old faint UNREADABLE geometric tool grooves (not factionlogo), broad squared but modestSHOULDER blocks, segmented connected stone upperarms/forearms, LARGE flatknuckle FIVE-finger masonryFISTS, visible bendable elbow/knee joints with centralstonehinges; no floating disconnected limbs. Short thick thighs/low squat blockfeet, body staysupright. Small mutedmoss justinoldshoulder/anklerecesses, NOT flowing vines/leaves/rootlegs. No clothing, belt, weapon, shields, redrubycore, crystals, lava, horns, crown, glowingrunes or wizardfacemask. Both openorclosed stonehands continuous wrists/forearms/shoulders, allsegments joined around darkjointcores. Front has subtlecarvedsternum, rearplainbackblocks notfrontface/chestengravings. Heavy measured posture, no biologicalbreath. Show large stonefists and twohand overhead hammergesture plus defensive crossedforearms. No giantflash/shockwave, gameownsFX."
+  },
+  "jobs": {
+    "troll": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_gy9ncdEBiEgEkiycrcS1sCRn",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_gy9ncdEBiEgEkiycrcS1sCRn' (one call waits on up to 32 jobs)."
+    },
+    "golem": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_38M8yMNJ51Nc1ViYffWM7xxw",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_38M8yMNJ51Nc1ViYffWM7xxw' (one call waits on up to 32 jobs)."
+    }
+  }
+}

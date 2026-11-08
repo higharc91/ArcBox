@@ -1,0 +1,83 @@
+[
+  {
+    "mob": "skeleton_archer",
+    "action": "attack",
+    "source": "archer-attack-left",
+    "count": 12,
+    "targets": [
+      {
+        "row": 1,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "row": 2,
+        "poses": [
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "row": 3,
+        "poses": [
+          8,
+          9,
+          10,
+          11
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "skeleton_archer",
+    "action": "attack",
+    "source": "archer-attack-rear",
+    "count": 8,
+    "targets": [
+      {
+        "row": 4,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "row": 5,
+        "poses": [
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "skeleton",
+    "action": "attack",
+    "source": "warrior-attack-backleft",
+    "count": 8,
+    "heightFactor": 0.9,
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          1,
+          2
+        ],
+        "frames": [
+          1,
+          2
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "dragon-attack.png": "3224df766df3cdd17c0b5492e012e543154506dfd571bb3cc3e8f8274f15dbfb",
+  "dragon-breath.png": "0b660e0b91788f5d08565a03c77a281b84e2e6c7367251b75b435580b7c0ff21",
+  "dragon-damage.png": "5897d4861d498fff48824d369bdeb8e8126947dbb6e1c4c8b62054e5dcc88d3e",
+  "dragon-idle.png": "0d40b426e0ab411c0a764f52e081fdcc661d33bca1686cd733259fefb757c43c",
+  "dragon-roar.png": "35401301478efbb80ff5f39f8b70b87e926bf5e6f3a3b7eccf454ffe4d0e1139",
+  "dragon-walk.png": "50b5c811432e3db9fa1d86eddc4319da95aa73e88cbbf8521118faed89160f4f",
+  "dragon-wingbeat.png": "5675b5b3256b1b823a16dfb8a24ee148922a467c1470858e72ad8c5021816cba",
+  "water_elemental-attack.png": "bd7835c4b05cb087a3873f4d2ea27f16874fbd0dbad62d721e33f3ed1801e469",
+  "water_elemental-damage.png": "ef34d7c919a32453cafd8639c52da23ef9a65362deb7911a3081155866213151",
+  "water_elemental-idle.png": "9193fcca2554da8baf892024a8aed094e13233012f31751275a62f245a5a988e",
+  "water_elemental-moves-backleft.png": "3bd1d90921f2635150947477f138410b66bf8bd9e3b6b248daf8730bb2917dec",
+  "water_elemental-moves.png": "ccf8d8c1c7bd3082b9dd4707ce92f3438a6c1eb7ef0f4aa627439e8263684ba2",
+  "water_elemental-walk.png": "a5fd024929e1c7d78914b8eca8cb8814c64d064740610581494bfa2cf9cae540"
+}

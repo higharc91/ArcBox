@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 0,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      88,
+      160,
+      168,
+      223
+    ],
+    "count": 4895
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 1,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      157,
+      168,
+      223
+    ],
+    "count": 5095
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 2,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      160,
+      167,
+      223
+    ],
+    "count": 4891
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 3,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      160,
+      167,
+      223
+    ],
+    "count": 4882
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 0,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      160,
+      168,
+      230
+    ],
+    "count": 5122
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 1,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      162,
+      168,
+      231
+    ],
+    "count": 5059
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 2,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      160,
+      167,
+      230
+    ],
+    "count": 5030
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 3,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      159,
+      168,
+      228
+    ],
+    "count": 5057
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 0,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      88,
+      161,
+      168,
+      224
+    ],
+    "count": 4895
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 1,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      85,
+      145,
+      169,
+      224
+    ],
+    "count": 5608
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 2,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      86,
+      156,
+      169,
+      224
+    ],
+    "count": 4796
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 3,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      161,
+      167,
+      224
+    ],
+    "count": 4882
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 0,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      95,
+      161,
+      165,
+      224
+    ],
+    "count": 3735
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 1,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      90,
+      171,
+      166,
+      224
+    ],
+    "count": 3538
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 28,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      152,
+      180,
+      223
+    ],
+    "count": 5262
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 29,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      152,
+      180,
+      223
+    ],
+    "count": 5253
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 30,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      153,
+      179,
+      223
+    ],
+    "count": 5172
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 31,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      152,
+      179,
+      223
+    ],
+    "count": 5243
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 28,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      154,
+      180,
+      226
+    ],
+    "count": 5193
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 29,
+    "scale": 0.546875,
+    "bounds": [
+      91,
+      155,
+      180,
+      225
+    ],
+    "count": 5158
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 30,
+    "scale": 0.546875,
+    "bounds": [
+      93,
+      154,
+      180,
+      226
+    ],
+    "count": 5104
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 31,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      153,
+      180,
+      223
+    ],
+    "count": 5215
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 28,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      153,
+      180,
+      224
+    ],
+    "count": 5262
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 5,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      92,
+      143,
+      179,
+      224
+    ],
+    "count": 5676
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 6,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      92,
+      155,
+      179,
+      224
+    ],
+    "count": 4907
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 31,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      153,
+      180,
+      224
+    ],
+    "count": 5243
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 2,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      81,
+      160,
+      151,
+      224
+    ],
+    "count": 3663
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 3,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      89,
+      171,
+      167,
+      224
+    ],
+    "count": 3349
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 24,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      91,
+      149,
+      161,
+      223
+    ],
+    "count": 4506
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 25,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      91,
+      149,
+      161,
+      223
+    ],
+    "count": 4510
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 26,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      91,
+      150,
+      161,
+      223
+    ],
+    "count": 4496
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 27,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      90,
+      150,
+      161,
+      223
+    ],
+    "count": 4521
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 24,
+    "scale": 0.546875,
+    "bounds": [
+      88,
+      150,
+      163,
+      226
+    ],
+    "count": 4703
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 25,
+    "scale": 0.546875,
+    "bounds": [
+      88,
+      151,
+      164,
+      227
+    ],
+    "count": 4679
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 26,
+    "scale": 0.546875,
+    "bounds": [
+      88,
+      150,
+      162,
+      226
+    ],
+    "count": 4603
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 27,
+    "scale": 0.546875,
+    "bounds": [
+      87,
+      149,
+      162,
+      225
+    ],
+    "count": 4634
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 24,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      91,
+      150,
+      161,
+      224
+    ],
+    "count": 4506
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 9,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      93,
+      136,
+      167,
+      224
+    ],
+    "count": 5020
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 10,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      78,
+      150,
+      163,
+      224
+    ],
+    "count": 4648
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 27,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      90,
+      151,
+      161,
+      224
+    ],
+    "count": 4521
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 4,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      103,
+      162,
+      155,
+      224
+    ],
+    "count": 2685
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 5,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      94,
+      174,
+      162,
+      224
+    ],
+    "count": 2975
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 12,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      149,
+      181,
+      223
+    ],
+    "count": 5518
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 13,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      149,
+      181,
+      223
+    ],
+    "count": 5521
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 14,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      149,
+      181,
+      223
+    ],
+    "count": 5494
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 15,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      150,
+      181,
+      223
+    ],
+    "count": 5504
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 12,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      151,
+      181,
+      227
+    ],
+    "count": 5554
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 13,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      151,
+      180,
+      226
+    ],
+    "count": 5326
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 14,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      151,
+      181,
+      226
+    ],
+    "count": 5367
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 15,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      150,
+      181,
+      224
+    ],
+    "count": 5480
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 12,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      150,
+      181,
+      224
+    ],
+    "count": 5518
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 13,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      95,
+      134,
+      183,
+      224
+    ],
+    "count": 6320
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 14,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      87,
+      148,
+      182,
+      224
+    ],
+    "count": 5582
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 15,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      151,
+      181,
+      224
+    ],
+    "count": 5504
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 6,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      107,
+      161,
+      176,
+      224
+    ],
+    "count": 3543
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 7,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      91,
+      173,
+      164,
+      224
+    ],
+    "count": 3060
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 16,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      157,
+      169,
+      223
+    ],
+    "count": 5115
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 17,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      88,
+      158,
+      169,
+      223
+    ],
+    "count": 5111
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 18,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      157,
+      168,
+      223
+    ],
+    "count": 5098
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 19,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      158,
+      168,
+      223
+    ],
+    "count": 5093
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 16,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      158,
+      170,
+      229
+    ],
+    "count": 5376
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 17,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      159,
+      170,
+      229
+    ],
+    "count": 5282
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 18,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      158,
+      170,
+      229
+    ],
+    "count": 5315
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 19,
+    "scale": 0.546875,
+    "bounds": [
+      86,
+      157,
+      170,
+      229
+    ],
+    "count": 5381
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 16,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      158,
+      169,
+      224
+    ],
+    "count": 5115
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 17,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      85,
+      141,
+      169,
+      224
+    ],
+    "count": 5948
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 18,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      87,
+      150,
+      169,
+      224
+    ],
+    "count": 5292
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 19,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      87,
+      159,
+      168,
+      224
+    ],
+    "count": 5093
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 8,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      93,
+      161,
+      161,
+      224
+    ],
+    "count": 3648
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 9,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      89,
+      174,
+      167,
+      224
+    ],
+    "count": 3441
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 20,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      76,
+      149,
+      163,
+      223
+    ],
+    "count": 5565
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 21,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      76,
+      149,
+      163,
+      223
+    ],
+    "count": 5551
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 22,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      76,
+      149,
+      163,
+      223
+    ],
+    "count": 5530
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 23,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      76,
+      149,
+      163,
+      223
+    ],
+    "count": 5529
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 20,
+    "scale": 0.546875,
+    "bounds": [
+      75,
+      150,
+      164,
+      230
+    ],
+    "count": 5725
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 21,
+    "scale": 0.546875,
+    "bounds": [
+      75,
+      151,
+      164,
+      228
+    ],
+    "count": 5610
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 22,
+    "scale": 0.546875,
+    "bounds": [
+      74,
+      150,
+      164,
+      227
+    ],
+    "count": 5618
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 23,
+    "scale": 0.546875,
+    "bounds": [
+      74,
+      149,
+      163,
+      226
+    ],
+    "count": 5600
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 20,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      76,
+      150,
+      163,
+      224
+    ],
+    "count": 5565
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 21,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      72,
+      135,
+      160,
+      224
+    ],
+    "count": 6445
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 22,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      74,
+      148,
+      170,
+      224
+    ],
+    "count": 5558
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 23,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      77,
+      150,
+      164,
+      224
+    ],
+    "count": 5529
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 10,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      80,
+      161,
+      151,
+      224
+    ],
+    "count": 3667
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 11,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      89,
+      175,
+      167,
+      224
+    ],
+    "count": 3243
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 8,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      150,
+      164,
+      223
+    ],
+    "count": 4434
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 9,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      150,
+      163,
+      223
+    ],
+    "count": 4417
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 10,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      150,
+      163,
+      223
+    ],
+    "count": 4440
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 11,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      150,
+      163,
+      223
+    ],
+    "count": 4431
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 8,
+    "scale": 0.546875,
+    "bounds": [
+      91,
+      151,
+      167,
+      228
+    ],
+    "count": 4717
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 9,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      152,
+      167,
+      227
+    ],
+    "count": 4585
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 10,
+    "scale": 0.546875,
+    "bounds": [
+      91,
+      151,
+      166,
+      228
+    ],
+    "count": 4642
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 11,
+    "scale": 0.546875,
+    "bounds": [
+      91,
+      150,
+      166,
+      226
+    ],
+    "count": 4596
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 8,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      151,
+      164,
+      224
+    ],
+    "count": 4434
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 25,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      88,
+      135,
+      161,
+      224
+    ],
+    "count": 5089
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 26,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      91,
+      150,
+      173,
+      224
+    ],
+    "count": 4480
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 11,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      151,
+      163,
+      224
+    ],
+    "count": 4431
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 12,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      100,
+      162,
+      152,
+      224
+    ],
+    "count": 2674
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 13,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      93,
+      173,
+      163,
+      224
+    ],
+    "count": 3034
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 4,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      153,
+      180,
+      223
+    ],
+    "count": 5229
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 5,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      153,
+      179,
+      223
+    ],
+    "count": 5216
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 6,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      153,
+      179,
+      223
+    ],
+    "count": 5234
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 7,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      94,
+      153,
+      180,
+      223
+    ],
+    "count": 5242
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 4,
+    "scale": 0.546875,
+    "bounds": [
+      93,
+      154,
+      181,
+      227
+    ],
+    "count": 5253
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 5,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      155,
+      180,
+      226
+    ],
+    "count": 5213
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 6,
+    "scale": 0.546875,
+    "bounds": [
+      93,
+      154,
+      180,
+      226
+    ],
+    "count": 5114
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/mimic-walk.png",
+    "sourcePose": 7,
+    "scale": 0.546875,
+    "bounds": [
+      92,
+      153,
+      180,
+      223
+    ],
+    "count": 5176
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 4,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      154,
+      180,
+      224
+    ],
+    "count": 5229
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 29,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      95,
+      140,
+      179,
+      224
+    ],
+    "count": 5732
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/mimic-attack.png",
+    "sourcePose": 30,
+    "scale": 0.5112781954887218,
+    "bounds": [
+      96,
+      152,
+      182,
+      224
+    ],
+    "count": 5002
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/mimic-idle.png",
+    "sourcePose": 7,
+    "scale": 0.5378151260504201,
+    "bounds": [
+      93,
+      154,
+      179,
+      224
+    ],
+    "count": 5242
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 14,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      102,
+      162,
+      173,
+      224
+    ],
+    "count": 3557
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/mimic-damage.png",
+    "sourcePose": 15,
+    "scale": 0.34972677595628415,
+    "bounds": [
+      89,
+      171,
+      166,
+      224
+    ],
+    "count": 3399
+  }
+]

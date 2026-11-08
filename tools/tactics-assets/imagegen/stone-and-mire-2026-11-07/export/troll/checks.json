@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      72,
+      99,
+      247,
+      286
+    ],
+    "count": 19566
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 1,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      74,
+      95,
+      247,
+      286
+    ],
+    "count": 19766
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 2,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      72,
+      99,
+      246,
+      286
+    ],
+    "count": 19565
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      73,
+      99,
+      246,
+      286
+    ],
+    "count": 19549
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 0,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      75,
+      100,
+      242,
+      288
+    ],
+    "count": 19672
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 1,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      71,
+      101,
+      246,
+      293
+    ],
+    "count": 19892
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 2,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      78,
+      100,
+      248,
+      285
+    ],
+    "count": 19481
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 3,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      79,
+      99,
+      243,
+      287
+    ],
+    "count": 19547
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 0,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      67,
+      101,
+      252,
+      288
+    ],
+    "count": 21358
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 1,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      65,
+      99,
+      255,
+      288
+    ],
+    "count": 20771
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 2,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      63,
+      107,
+      250,
+      288
+    ],
+    "count": 19613
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 3,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      77,
+      100,
+      261,
+      288
+    ],
+    "count": 21505
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 0,
+    "scale": 0.749003984063745,
+    "bounds": [
+      69,
+      101,
+      245,
+      288
+    ],
+    "count": 19405
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 1,
+    "scale": 0.749003984063745,
+    "bounds": [
+      41,
+      215,
+      278,
+      288
+    ],
+    "count": 11348
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 0,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      96,
+      101,
+      226,
+      288
+    ],
+    "count": 16825
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 1,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      86,
+      50,
+      230,
+      288
+    ],
+    "count": 20302
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 2,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      78,
+      100,
+      243,
+      288
+    ],
+    "count": 16236
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 3,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      78,
+      100,
+      240,
+      288
+    ],
+    "count": 18260
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 0,
+    "scale": 1.010752688172043,
+    "bounds": [
+      74,
+      101,
+      245,
+      288
+    ],
+    "count": 20792
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 1,
+    "scale": 1.010752688172043,
+    "bounds": [
+      68,
+      101,
+      253,
+      288
+    ],
+    "count": 19915
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 2,
+    "scale": 1.010752688172043,
+    "bounds": [
+      53,
+      100,
+      271,
+      288
+    ],
+    "count": 19867
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 3,
+    "scale": 1.010752688172043,
+    "bounds": [
+      74,
+      100,
+      244,
+      288
+    ],
+    "count": 20796
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      76,
+      86,
+      244,
+      286
+    ],
+    "count": 20206
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 5,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      74,
+      84,
+      242,
+      286
+    ],
+    "count": 20259
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 6,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      77,
+      86,
+      243,
+      286
+    ],
+    "count": 20096
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      77,
+      86,
+      244,
+      286
+    ],
+    "count": 20036
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 4,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      78,
+      90,
+      240,
+      291
+    ],
+    "count": 19483
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 5,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      73,
+      91,
+      237,
+      289
+    ],
+    "count": 19279
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 6,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      68,
+      89,
+      248,
+      286
+    ],
+    "count": 19579
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 7,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      84,
+      89,
+      236,
+      287
+    ],
+    "count": 19752
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 4,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      65,
+      94,
+      240,
+      288
+    ],
+    "count": 21463
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 5,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      64,
+      93,
+      246,
+      288
+    ],
+    "count": 20181
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 6,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      55,
+      101,
+      255,
+      288
+    ],
+    "count": 19252
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 7,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      64,
+      94,
+      248,
+      288
+    ],
+    "count": 21549
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 2,
+    "scale": 0.749003984063745,
+    "bounds": [
+      82,
+      104,
+      235,
+      288
+    ],
+    "count": 18014
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 3,
+    "scale": 0.749003984063745,
+    "bounds": [
+      40,
+      215,
+      278,
+      288
+    ],
+    "count": 10757
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 4,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      90,
+      98,
+      223,
+      288
+    ],
+    "count": 17338
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 5,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      72,
+      48,
+      216,
+      288
+    ],
+    "count": 20234
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 6,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      35,
+      98,
+      216,
+      288
+    ],
+    "count": 16446
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 7,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      74,
+      98,
+      239,
+      288
+    ],
+    "count": 18822
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 4,
+    "scale": 1.010752688172043,
+    "bounds": [
+      75,
+      94,
+      243,
+      288
+    ],
+    "count": 20782
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 5,
+    "scale": 1.010752688172043,
+    "bounds": [
+      62,
+      92,
+      244,
+      288
+    ],
+    "count": 19762
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 6,
+    "scale": 1.010752688172043,
+    "bounds": [
+      46,
+      91,
+      264,
+      288
+    ],
+    "count": 19922
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 7,
+    "scale": 1.010752688172043,
+    "bounds": [
+      72,
+      95,
+      242,
+      288
+    ],
+    "count": 20683
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      62,
+      89,
+      193,
+      285
+    ],
+    "count": 14707
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 9,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      63,
+      85,
+      189,
+      286
+    ],
+    "count": 14979
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 10,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      63,
+      88,
+      192,
+      285
+    ],
+    "count": 14709
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      63,
+      88,
+      191,
+      285
+    ],
+    "count": 14508
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 8,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      60,
+      91,
+      203,
+      287
+    ],
+    "count": 16433
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 9,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      61,
+      92,
+      200,
+      285
+    ],
+    "count": 15692
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 10,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      58,
+      92,
+      201,
+      288
+    ],
+    "count": 16039
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 11,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      60,
+      91,
+      207,
+      286
+    ],
+    "count": 16130
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 8,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      79,
+      93,
+      208,
+      288
+    ],
+    "count": 15437
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 9,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      41,
+      91,
+      188,
+      288
+    ],
+    "count": 17378
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 10,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      12,
+      97,
+      203,
+      288
+    ],
+    "count": 17044
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 11,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      76,
+      91,
+      210,
+      288
+    ],
+    "count": 15604
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 4,
+    "scale": 0.749003984063745,
+    "bounds": [
+      73,
+      97,
+      198,
+      288
+    ],
+    "count": 14467
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 5,
+    "scale": 0.749003984063745,
+    "bounds": [
+      42,
+      218,
+      276,
+      288
+    ],
+    "count": 10844
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 8,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      78,
+      98,
+      209,
+      288
+    ],
+    "count": 17037
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 9,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      73,
+      42,
+      207,
+      288
+    ],
+    "count": 18427
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 10,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      25,
+      97,
+      207,
+      288
+    ],
+    "count": 16953
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 11,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      73,
+      97,
+      207,
+      288
+    ],
+    "count": 15989
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 8,
+    "scale": 1.010752688172043,
+    "bounds": [
+      58,
+      95,
+      194,
+      288
+    ],
+    "count": 15291
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 9,
+    "scale": 1.010752688172043,
+    "bounds": [
+      59,
+      90,
+      195,
+      288
+    ],
+    "count": 15679
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 10,
+    "scale": 1.010752688172043,
+    "bounds": [
+      65,
+      93,
+      201,
+      288
+    ],
+    "count": 15470
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 11,
+    "scale": 1.010752688172043,
+    "bounds": [
+      58,
+      95,
+      194,
+      288
+    ],
+    "count": 15362
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      100,
+      87,
+      233,
+      286
+    ],
+    "count": 16809
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 13,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      101,
+      82,
+      231,
+      286
+    ],
+    "count": 16753
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 14,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      102,
+      87,
+      232,
+      286
+    ],
+    "count": 16605
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      102,
+      87,
+      232,
+      286
+    ],
+    "count": 16603
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 12,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      98,
+      91,
+      240,
+      288
+    ],
+    "count": 17646
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 13,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      100,
+      91,
+      237,
+      290
+    ],
+    "count": 17439
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 14,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      102,
+      90,
+      242,
+      284
+    ],
+    "count": 16733
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 15,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      104,
+      89,
+      234,
+      286
+    ],
+    "count": 17101
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 12,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      74,
+      93,
+      219,
+      288
+    ],
+    "count": 18000
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 13,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      74,
+      90,
+      239,
+      288
+    ],
+    "count": 18370
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 14,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      54,
+      97,
+      241,
+      288
+    ],
+    "count": 17431
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 15,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      75,
+      95,
+      222,
+      288
+    ],
+    "count": 17980
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 6,
+    "scale": 0.749003984063745,
+    "bounds": [
+      104,
+      101,
+      233,
+      288
+    ],
+    "count": 16061
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 7,
+    "scale": 0.749003984063745,
+    "bounds": [
+      37,
+      225,
+      281,
+      288
+    ],
+    "count": 10588
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 12,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      80,
+      92,
+      217,
+      288
+    ],
+    "count": 17986
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 13,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      77,
+      36,
+      210,
+      288
+    ],
+    "count": 21001
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 14,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      31,
+      91,
+      211,
+      288
+    ],
+    "count": 17036
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll-special-front.png",
+    "sourcePose": 15,
+    "scale": 1.0217391304347827,
+    "bounds": [
+      77,
+      90,
+      228,
+      288
+    ],
+    "count": 18564
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 12,
+    "scale": 1.010752688172043,
+    "bounds": [
+      83,
+      95,
+      217,
+      288
+    ],
+    "count": 17226
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 13,
+    "scale": 1.010752688172043,
+    "bounds": [
+      78,
+      88,
+      248,
+      288
+    ],
+    "count": 18655
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 14,
+    "scale": 1.010752688172043,
+    "bounds": [
+      55,
+      89,
+      272,
+      288
+    ],
+    "count": 18953
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 15,
+    "scale": 1.010752688172043,
+    "bounds": [
+      100,
+      94,
+      230,
+      288
+    ],
+    "count": 17213
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      73,
+      99,
+      247,
+      286
+    ],
+    "count": 19747
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 17,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      73,
+      96,
+      247,
+      286
+    ],
+    "count": 19603
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 18,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      74,
+      99,
+      247,
+      286
+    ],
+    "count": 19571
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      74,
+      99,
+      248,
+      286
+    ],
+    "count": 19659
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 16,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      76,
+      100,
+      244,
+      291
+    ],
+    "count": 20556
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 17,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      71,
+      101,
+      245,
+      290
+    ],
+    "count": 19911
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 18,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      77,
+      100,
+      249,
+      293
+    ],
+    "count": 20655
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 19,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      70,
+      100,
+      248,
+      289
+    ],
+    "count": 20365
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 16,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      69,
+      99,
+      252,
+      288
+    ],
+    "count": 21578
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 17,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      65,
+      98,
+      244,
+      288
+    ],
+    "count": 20096
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 18,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      61,
+      103,
+      253,
+      288
+    ],
+    "count": 18880
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 19,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      67,
+      98,
+      252,
+      288
+    ],
+    "count": 21672
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 8,
+    "scale": 0.749003984063745,
+    "bounds": [
+      74,
+      96,
+      242,
+      288
+    ],
+    "count": 19354
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 9,
+    "scale": 0.749003984063745,
+    "bounds": [
+      46,
+      214,
+      272,
+      288
+    ],
+    "count": 9717
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-special-fullback.png",
+    "sourcePose": 0,
+    "scale": 0.41685144124168516,
+    "bounds": [
+      94,
+      101,
+      227,
+      288
+    ],
+    "count": 16563
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll-special-fullback.png",
+    "sourcePose": 1,
+    "scale": 0.41685144124168516,
+    "bounds": [
+      93,
+      44,
+      227,
+      288
+    ],
+    "count": 20736
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll-special-fullback.png",
+    "sourcePose": 2,
+    "scale": 0.41685144124168516,
+    "bounds": [
+      89,
+      71,
+      230,
+      288
+    ],
+    "count": 17625
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll-special-fullback.png",
+    "sourcePose": 3,
+    "scale": 0.41685144124168516,
+    "bounds": [
+      83,
+      101,
+      234,
+      288
+    ],
+    "count": 17425
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 16,
+    "scale": 1.010752688172043,
+    "bounds": [
+      73,
+      95,
+      243,
+      288
+    ],
+    "count": 21342
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 17,
+    "scale": 1.010752688172043,
+    "bounds": [
+      62,
+      94,
+      257,
+      288
+    ],
+    "count": 20305
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 18,
+    "scale": 1.010752688172043,
+    "bounds": [
+      45,
+      96,
+      275,
+      288
+    ],
+    "count": 19753
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 19,
+    "scale": 1.010752688172043,
+    "bounds": [
+      73,
+      96,
+      243,
+      288
+    ],
+    "count": 21339
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      98,
+      88,
+      230,
+      285
+    ],
+    "count": 17750
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 21,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      97,
+      87,
+      229,
+      286
+    ],
+    "count": 17750
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 22,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      98,
+      88,
+      230,
+      285
+    ],
+    "count": 17837
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      98,
+      86,
+      230,
+      286
+    ],
+    "count": 17874
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 20,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      85,
+      92,
+      226,
+      288
+    ],
+    "count": 18907
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 21,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      93,
+      93,
+      231,
+      291
+    ],
+    "count": 17903
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 22,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      89,
+      92,
+      226,
+      289
+    ],
+    "count": 17820
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 23,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      81,
+      91,
+      225,
+      290
+    ],
+    "count": 18582
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 20,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      92,
+      90,
+      239,
+      288
+    ],
+    "count": 19366
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 21,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      83,
+      89,
+      240,
+      288
+    ],
+    "count": 18788
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 22,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      71,
+      93,
+      273,
+      288
+    ],
+    "count": 19401
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 23,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      92,
+      90,
+      239,
+      288
+    ],
+    "count": 19332
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 10,
+    "scale": 0.749003984063745,
+    "bounds": [
+      100,
+      96,
+      233,
+      288
+    ],
+    "count": 16676
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 11,
+    "scale": 0.749003984063745,
+    "bounds": [
+      36,
+      222,
+      282,
+      288
+    ],
+    "count": 10235
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 4,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      100,
+      99,
+      241,
+      288
+    ],
+    "count": 17236
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 5,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      103,
+      39,
+      228,
+      288
+    ],
+    "count": 20591
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 6,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      105,
+      101,
+      300,
+      288
+    ],
+    "count": 16365
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 7,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      84,
+      100,
+      233,
+      288
+    ],
+    "count": 17548
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 20,
+    "scale": 1.010752688172043,
+    "bounds": [
+      96,
+      91,
+      232,
+      288
+    ],
+    "count": 18571
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 21,
+    "scale": 1.010752688172043,
+    "bounds": [
+      84,
+      90,
+      244,
+      288
+    ],
+    "count": 19175
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 22,
+    "scale": 1.010752688172043,
+    "bounds": [
+      65,
+      88,
+      268,
+      288
+    ],
+    "count": 19382
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 23,
+    "scale": 1.010752688172043,
+    "bounds": [
+      96,
+      91,
+      232,
+      288
+    ],
+    "count": 18534
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      125,
+      89,
+      252,
+      285
+    ],
+    "count": 14490
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 25,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      126,
+      89,
+      252,
+      285
+    ],
+    "count": 14278
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 26,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      125,
+      89,
+      252,
+      285
+    ],
+    "count": 14420
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      125,
+      89,
+      252,
+      285
+    ],
+    "count": 14460
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 24,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      115,
+      92,
+      252,
+      285
+    ],
+    "count": 14901
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 25,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      124,
+      93,
+      253,
+      289
+    ],
+    "count": 15248
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 26,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      117,
+      92,
+      253,
+      284
+    ],
+    "count": 14887
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 27,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      122,
+      92,
+      253,
+      284
+    ],
+    "count": 14828
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 24,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      119,
+      92,
+      249,
+      288
+    ],
+    "count": 15591
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 25,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      107,
+      88,
+      256,
+      288
+    ],
+    "count": 17852
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 26,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      115,
+      92,
+      261,
+      288
+    ],
+    "count": 16960
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 27,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      118,
+      91,
+      247,
+      288
+    ],
+    "count": 15682
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 12,
+    "scale": 0.749003984063745,
+    "bounds": [
+      121,
+      102,
+      242,
+      288
+    ],
+    "count": 13428
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 13,
+    "scale": 0.749003984063745,
+    "bounds": [
+      44,
+      218,
+      274,
+      288
+    ],
+    "count": 10111
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 8,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      112,
+      98,
+      246,
+      288
+    ],
+    "count": 16455
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 9,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      112,
+      33,
+      225,
+      288
+    ],
+    "count": 18274
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 10,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      113,
+      98,
+      306,
+      288
+    ],
+    "count": 16018
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 11,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      111,
+      99,
+      232,
+      288
+    ],
+    "count": 14813
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 24,
+    "scale": 1.010752688172043,
+    "bounds": [
+      117,
+      94,
+      249,
+      288
+    ],
+    "count": 15049
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 25,
+    "scale": 1.010752688172043,
+    "bounds": [
+      120,
+      92,
+      247,
+      288
+    ],
+    "count": 15248
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 26,
+    "scale": 1.010752688172043,
+    "bounds": [
+      112,
+      92,
+      243,
+      288
+    ],
+    "count": 15007
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 27,
+    "scale": 1.010752688172043,
+    "bounds": [
+      119,
+      94,
+      250,
+      288
+    ],
+    "count": 15032
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      75,
+      93,
+      237,
+      286
+    ],
+    "count": 19054
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll-idle.png",
+    "sourcePose": 29,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      76,
+      91,
+      240,
+      286
+    ],
+    "count": 19225
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll-idle.png",
+    "sourcePose": 30,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      76,
+      93,
+      237,
+      286
+    ],
+    "count": 18987
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0386740331491713,
+    "bounds": [
+      76,
+      93,
+      238,
+      286
+    ],
+    "count": 19036
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-walk.png",
+    "sourcePose": 28,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      73,
+      95,
+      229,
+      287
+    ],
+    "count": 18567
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll-walk.png",
+    "sourcePose": 29,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      72,
+      96,
+      238,
+      289
+    ],
+    "count": 18255
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll-walk.png",
+    "sourcePose": 30,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      70,
+      96,
+      238,
+      281
+    ],
+    "count": 18470
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll-walk.png",
+    "sourcePose": 31,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      73,
+      95,
+      235,
+      287
+    ],
+    "count": 19640
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-attack.png",
+    "sourcePose": 28,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      74,
+      98,
+      244,
+      288
+    ],
+    "count": 20625
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll-attack.png",
+    "sourcePose": 29,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      76,
+      97,
+      249,
+      288
+    ],
+    "count": 19058
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll-attack.png",
+    "sourcePose": 30,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      98,
+      99,
+      257,
+      288
+    ],
+    "count": 18725
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll-attack.png",
+    "sourcePose": 31,
+    "scale": 1.0053475935828877,
+    "bounds": [
+      74,
+      98,
+      247,
+      288
+    ],
+    "count": 20732
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 14,
+    "scale": 0.749003984063745,
+    "bounds": [
+      88,
+      103,
+      240,
+      288
+    ],
+    "count": 18055
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-damage.png",
+    "sourcePose": 15,
+    "scale": 0.749003984063745,
+    "bounds": [
+      39,
+      217,
+      279,
+      288
+    ],
+    "count": 10470
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 12,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      110,
+      98,
+      239,
+      288
+    ],
+    "count": 16451
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 13,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      105,
+      30,
+      229,
+      288
+    ],
+    "count": 20411
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 14,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      108,
+      98,
+      301,
+      288
+    ],
+    "count": 16228
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll-special-back.png",
+    "sourcePose": 15,
+    "scale": 0.9740932642487047,
+    "bounds": [
+      88,
+      99,
+      236,
+      288
+    ],
+    "count": 17941
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll-buff.png",
+    "sourcePose": 28,
+    "scale": 1.010752688172043,
+    "bounds": [
+      78,
+      101,
+      243,
+      288
+    ],
+    "count": 19551
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll-buff.png",
+    "sourcePose": 29,
+    "scale": 1.010752688172043,
+    "bounds": [
+      70,
+      98,
+      256,
+      288
+    ],
+    "count": 19370
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll-buff.png",
+    "sourcePose": 30,
+    "scale": 1.010752688172043,
+    "bounds": [
+      60,
+      93,
+      269,
+      288
+    ],
+    "count": 19161
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll-buff.png",
+    "sourcePose": 31,
+    "scale": 1.010752688172043,
+    "bounds": [
+      75,
+      100,
+      243,
+      288
+    ],
+    "count": 19769
+  }
+]

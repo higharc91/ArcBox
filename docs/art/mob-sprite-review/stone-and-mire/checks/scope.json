@@ -1,0 +1,24 @@
+{
+  "priorCommit": "3d826133ce6ea91535b7eb1ac84151a6619825b2",
+  "addedCreatureEntries": [
+    "mob_refresh_golem",
+    "mob_refresh_troll"
+  ],
+  "changedVisualBindings": [
+    "troll.frenzy_roar",
+    "golem.stone_aegis"
+  ],
+  "combatMechanicsUnchanged": true,
+  "existingFxAndProjectilesUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "legacyBossAnimsUnchanged": true,
+  "newBuffAliasMatchesLegacySpecial": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 15,
+  "runtimeAssets": 2,
+  "selectedDistinctPoses": 352,
+  "rejectedSourcesExcluded": true,
+  "fullBackReleaseCorrectionSelected": true
+}

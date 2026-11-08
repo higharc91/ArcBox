@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "jobs": [
+    {
+      "jobId": "job_gy9ncdEBiEgEkiycrcS1sCRn",
+      "jobType": "custom",
+      "status": "success",
+      "progress": 1,
+      "createdAt": "2026-11-07T05:20:33.037Z",
+      "updatedAt": "2026-11-07T05:21:16.420Z",
+      "modelId": "model_google-gemini-nano-banana-2-1",
+      "assetIds": [
+        "asset_mrMHPSBApjusSo9UXwKpe1ar"
+      ],
+      "cuCost": 12
+    },
+    {
+      "jobId": "job_38M8yMNJ51Nc1ViYffWM7xxw",
+      "jobType": "custom",
+      "status": "success",
+      "progress": 1,
+      "createdAt": "2026-11-07T05:20:34.568Z",
+      "updatedAt": "2026-11-07T05:21:13.493Z",
+      "modelId": "model_google-gemini-nano-banana-2-1",
+      "assetIds": [
+        "asset_ARpMhtToYCsAKpVvruxU8L1F"
+      ],
+      "cuCost": 12
+    }
+  ]
+}

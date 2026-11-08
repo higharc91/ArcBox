@@ -1,0 +1,134 @@
+{
+  "approval": "Owner approved goblin and orc style, then winged drake attack, and instructed Proceed.",
+  "concepts": "../../../concepts/mob-refresh-2026-11-06/",
+  "pixelLabUsed": false,
+  "briefSummary": "Approved lore designs, fixed eight compass views, right-hand scimitar goblin, two-hand greataxe orc with one left shoulder plate, four-legged two-winged grounded red drake. Quiet idle, walk, attack, hurt/down; consistent pixel clusters, material palette and scale.",
+  "sources": [
+    {
+      "file": "source/drake-attack-rear.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-e6f2a2fd-5219-4c1f-9d64-16cdcd80c263.png",
+      "sha256": "f416a1f679221c5635c70b3f4b7215f8caf6c1f8cc60ed9f364f7e78d85e52d6"
+    },
+    {
+      "file": "source/drake-attack.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-a0076427-c214-4187-9291-ec01ace6ffe8.png",
+      "sha256": "1c94d1593dce5a6a525551166eb31f00abc88f50159ad90e25107dc84beb9cde"
+    },
+    {
+      "file": "source/drake-damage.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-dbb8273e-8fff-40ac-856e-d1f4bd99f779.png",
+      "sha256": "9cb09f9e6d85bf11cbd232bea57d5cf8cf74def998decbb338488dc9511f7566"
+    },
+    {
+      "file": "source/drake-idle-breath.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-9b2553b2-ec76-47db-97df-5fb26b2a6d85.png",
+      "sha256": "0d841bcbcb8d6aabe0e359d87155f7e5c70ddbe034d9188f4cef45addc4117e6"
+    },
+    {
+      "file": "source/drake-idle.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-e0bc7592-225d-4064-b32f-09d789a93f4b.png",
+      "sha256": "bb94b6b3ffb8c1338f8d0f84d2d1399e55c2592301b21de267d3e16829b231b7"
+    },
+    {
+      "file": "source/drake-walk.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-6ec8ed36-0d40-4c58-86a3-e36f2f0222f7.png",
+      "sha256": "63aa688a10f442daef726fc7a7f7def468c3f3c294036b47d987ca216e30e97f"
+    },
+    {
+      "file": "source/goblin-attack-corrected.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-2652fa3d-fc53-47a0-8653-b4c2f9bd1c46.png",
+      "sha256": "bd01af410b576f491968f3eccbc603e0682307c944d1965a97756c54d11f0e8f"
+    },
+    {
+      "file": "source/goblin-attack.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-9e57636a-8cc7-4128-bac4-b057f2c198bb.png",
+      "sha256": "6282c995495b79b51eb99fa37b077231d18113a709d2fcdb20933625b933cec1"
+    },
+    {
+      "file": "source/goblin-damage.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-d297de80-252c-4041-bdd6-9a8fc4e89f4f.png",
+      "sha256": "5ef46b71b136af2a8869f8ca1b966e75d7f91617f3aff7286f7265b88f0eff61"
+    },
+    {
+      "file": "source/goblin-idle.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-70e0b92c-808c-4db9-9b90-c0796ff5e624.png",
+      "sha256": "ac4e2aad267c9c195d08b2b08926932ff55e1675c3ecec4a281cf52070086123"
+    },
+    {
+      "file": "source/goblin-portraits.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-d173c677-2aa5-45a4-8d9f-2670bcef3770.png",
+      "sha256": "80e3d2d085f9140b5a82e87e74740c71fa187fc13bef1cf1e315d0df14f98948"
+    },
+    {
+      "file": "source/goblin-walk-corrected.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-036da36f-678e-4908-929b-1c735f293d38.png",
+      "sha256": "b8d81dd0efe6b12ea1c2614f75f998235570bd5648668d9c1e0986c01a24b333"
+    },
+    {
+      "file": "source/goblin-walk.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-466aeef4-0c71-43d9-aaf0-568a8bab71df.png",
+      "sha256": "d1effd2b9871815f8c2365f7bcb8a227c252424b5a1dfdad282a43784595b6f2"
+    },
+    {
+      "file": "source/orc-attack-corrected.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-039dd518-dc1e-4ebe-a674-7de4c82ba0cd.png",
+      "sha256": "dcf45a94342fca85ee50298cc22c704f5a649c6a4158056e5507626800123c7a"
+    },
+    {
+      "file": "source/orc-attack.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-e763456d-61e3-4a87-9354-d6aad85dfe93.png",
+      "sha256": "027428349e2814c33491b8d0cef716a5f86426abd1f5cdfadc319baa4477d80a"
+    },
+    {
+      "file": "source/orc-damage.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-2c43e37e-248a-4f5b-8ebe-88f5ca5415b5.png",
+      "sha256": "61466187aa80f92470c3d9601ec0a10421fa58e3e8de3f7e3c8be22a5be438c7"
+    },
+    {
+      "file": "source/orc-idle.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-cb48ddfe-971d-4cbe-a60d-d8ce578592ad.png",
+      "sha256": "875c6df3d0b36a02a83bc555d50197c20668a680d2678c7a9491525540954bbb"
+    },
+    {
+      "file": "source/orc-portraits.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-c64a887e-22ca-4889-96cb-7bcd85f78ed1.png",
+      "sha256": "195de0f554a35d5a77d4e7ec6f0ea7a3cbca58ffb289b710c53101416df1d810"
+    },
+    {
+      "file": "source/orc-walk-corrected.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-1fe3a115-73ee-4bdc-b83b-69529756a68a.png",
+      "sha256": "c8448df5b81d3f5312f64677e75e6495fb265b618ac31921c11b142ddd0a9c1c"
+    },
+    {
+      "file": "source/orc-walk.png",
+      "generator": "OpenAI image_gen",
+      "generationImage": "exec-c4c25e64-0ac9-4b9b-95e9-a569e2e17214.png",
+      "sha256": "c4fc89faaddad5a71adb3bfa9b5e36fabc0656326cfd75775dd6633851f645a3"
+    }
+  ],
+  "corrections": {
+    "goblin": "Walk back-left/front-right corrected for direction and right-hand sword; front/front-right attacks replaced to preserve weapon margins.",
+    "orc": "Left/right walk profiles corrected for the single left shoulder plate; front-right attack replaced for armor continuity. Corrected attack top row is not selected.",
+    "drake": "Rear diagonal attack views replaced to preserve back-facing anatomy. Attack timeline omits the last rear pose that turns its head towards the camera; peak/wind-up poses provide recovery.",
+    "portraits": "Goblin background-removal revision retained; portraits use an intentional brown portrait backdrop/glow, not a transparent combat sprite."
+  }
+}

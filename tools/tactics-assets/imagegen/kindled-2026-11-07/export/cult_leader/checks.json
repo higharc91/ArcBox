@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 0,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      74,
+      81,
+      143,
+      197
+    ],
+    "count": 5778
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 1,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      75,
+      81,
+      142,
+      197
+    ],
+    "count": 5739
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 2,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      76,
+      81,
+      143,
+      197
+    ],
+    "count": 5760
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 3,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      76,
+      81,
+      143,
+      197
+    ],
+    "count": 5700
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 0,
+    "scale": 0.58,
+    "bounds": [
+      73,
+      83,
+      144,
+      198
+    ],
+    "count": 5767
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 1,
+    "scale": 0.58,
+    "bounds": [
+      75,
+      83,
+      143,
+      199
+    ],
+    "count": 5648
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 2,
+    "scale": 0.58,
+    "bounds": [
+      77,
+      82,
+      143,
+      198
+    ],
+    "count": 5646
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 3,
+    "scale": 0.58,
+    "bounds": [
+      77,
+      82,
+      143,
+      198
+    ],
+    "count": 5572
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 0,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      76,
+      95,
+      147,
+      198
+    ],
+    "count": 4666
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 1,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      82,
+      95,
+      147,
+      198
+    ],
+    "count": 4438
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 2,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      79,
+      96,
+      156,
+      198
+    ],
+    "count": 4415
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 3,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      72,
+      97,
+      151,
+      198
+    ],
+    "count": 4658
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 0,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      66,
+      83,
+      151,
+      198
+    ],
+    "count": 6664
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 1,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      46,
+      147,
+      174,
+      198
+    ],
+    "count": 4139
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 0,
+    "scale": 0.58,
+    "bounds": [
+      77,
+      83,
+      144,
+      198
+    ],
+    "count": 5829
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 2,
+    "scale": 0.58,
+    "bounds": [
+      62,
+      83,
+      144,
+      198
+    ],
+    "count": 5906
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 3,
+    "scale": 0.58,
+    "bounds": [
+      75,
+      83,
+      144,
+      198
+    ],
+    "count": 5870
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 4,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      77,
+      82,
+      142,
+      197
+    ],
+    "count": 5555
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 5,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      77,
+      80,
+      142,
+      196
+    ],
+    "count": 5596
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 6,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      76,
+      81,
+      141,
+      197
+    ],
+    "count": 5551
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 7,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      77,
+      82,
+      142,
+      197
+    ],
+    "count": 5531
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 4,
+    "scale": 0.58,
+    "bounds": [
+      65,
+      83,
+      134,
+      198
+    ],
+    "count": 5694
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 5,
+    "scale": 0.58,
+    "bounds": [
+      69,
+      84,
+      134,
+      200
+    ],
+    "count": 5583
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 6,
+    "scale": 0.58,
+    "bounds": [
+      69,
+      83,
+      133,
+      199
+    ],
+    "count": 5614
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 7,
+    "scale": 0.58,
+    "bounds": [
+      70,
+      82,
+      134,
+      198
+    ],
+    "count": 5530
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 4,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      75,
+      93,
+      143,
+      198
+    ],
+    "count": 4931
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 5,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      81,
+      93,
+      142,
+      198
+    ],
+    "count": 4690
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 6,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      51,
+      95,
+      145,
+      198
+    ],
+    "count": 4715
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 7,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      65,
+      96,
+      147,
+      198
+    ],
+    "count": 4888
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 2,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      62,
+      83,
+      151,
+      198
+    ],
+    "count": 6549
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 3,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      46,
+      148,
+      176,
+      198
+    ],
+    "count": 4277
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 4,
+    "scale": 0.58,
+    "bounds": [
+      78,
+      84,
+      144,
+      198
+    ],
+    "count": 5712
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 6,
+    "scale": 0.58,
+    "bounds": [
+      50,
+      84,
+      143,
+      198
+    ],
+    "count": 5986
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 7,
+    "scale": 0.58,
+    "bounds": [
+      74,
+      84,
+      144,
+      198
+    ],
+    "count": 5886
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 8,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      82,
+      80,
+      137,
+      197
+    ],
+    "count": 4782
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 9,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      82,
+      80,
+      137,
+      196
+    ],
+    "count": 4766
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 10,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      82,
+      80,
+      137,
+      197
+    ],
+    "count": 4770
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 11,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      82,
+      80,
+      136,
+      197
+    ],
+    "count": 4777
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 8,
+    "scale": 0.58,
+    "bounds": [
+      78,
+      82,
+      137,
+      197
+    ],
+    "count": 5067
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 9,
+    "scale": 0.58,
+    "bounds": [
+      83,
+      83,
+      137,
+      199
+    ],
+    "count": 4956
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 10,
+    "scale": 0.58,
+    "bounds": [
+      78,
+      82,
+      137,
+      196
+    ],
+    "count": 5039
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 11,
+    "scale": 0.58,
+    "bounds": [
+      82,
+      80,
+      137,
+      196
+    ],
+    "count": 4956
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 8,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      67,
+      92,
+      144,
+      198
+    ],
+    "count": 4647
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 9,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      78,
+      93,
+      143,
+      198
+    ],
+    "count": 4415
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 10,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      38,
+      95,
+      143,
+      198
+    ],
+    "count": 4536
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 11,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      59,
+      96,
+      142,
+      198
+    ],
+    "count": 4527
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 4,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      72,
+      84,
+      143,
+      198
+    ],
+    "count": 5647
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 5,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      39,
+      147,
+      176,
+      198
+    ],
+    "count": 4656
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 8,
+    "scale": 0.58,
+    "bounds": [
+      81,
+      83,
+      137,
+      198
+    ],
+    "count": 5011
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 10,
+    "scale": 0.58,
+    "bounds": [
+      47,
+      83,
+      137,
+      198
+    ],
+    "count": 5409
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 11,
+    "scale": 0.58,
+    "bounds": [
+      79,
+      83,
+      137,
+      198
+    ],
+    "count": 5070
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 0,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      82,
+      82,
+      143,
+      197
+    ],
+    "count": 5008
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 1,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      81,
+      82,
+      143,
+      197
+    ],
+    "count": 5025
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 2,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      82,
+      82,
+      144,
+      197
+    ],
+    "count": 4996
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 3,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      81,
+      83,
+      143,
+      198
+    ],
+    "count": 5029
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 0,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      80,
+      83,
+      145,
+      198
+    ],
+    "count": 4988
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 1,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      79,
+      84,
+      146,
+      199
+    ],
+    "count": 5028
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 2,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      80,
+      83,
+      145,
+      198
+    ],
+    "count": 4906
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 3,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      79,
+      82,
+      145,
+      196
+    ],
+    "count": 5010
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 12,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      62,
+      93,
+      141,
+      198
+    ],
+    "count": 4597
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 13,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      74,
+      92,
+      142,
+      198
+    ],
+    "count": 4623
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 14,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      39,
+      95,
+      141,
+      198
+    ],
+    "count": 4535
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 15,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      58,
+      95,
+      141,
+      198
+    ],
+    "count": 4611
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cult_leader-hurt-rear.png",
+    "sourcePose": 0,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      80,
+      83,
+      153,
+      198
+    ],
+    "count": 5122
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 7,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      39,
+      147,
+      181,
+      198
+    ],
+    "count": 5039
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 0,
+    "scale": 0.3625,
+    "bounds": [
+      81,
+      83,
+      140,
+      198
+    ],
+    "count": 4811
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 2,
+    "scale": 0.3625,
+    "bounds": [
+      80,
+      83,
+      147,
+      198
+    ],
+    "count": 4889
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 3,
+    "scale": 0.3625,
+    "bounds": [
+      81,
+      83,
+      148,
+      198
+    ],
+    "count": 5057
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 4,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      82,
+      83,
+      143,
+      197
+    ],
+    "count": 4852
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 5,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      82,
+      82,
+      143,
+      197
+    ],
+    "count": 4924
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 6,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      82,
+      81,
+      143,
+      197
+    ],
+    "count": 4912
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 7,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      82,
+      83,
+      143,
+      197
+    ],
+    "count": 4929
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 4,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      81,
+      84,
+      145,
+      199
+    ],
+    "count": 4863
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 5,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      80,
+      85,
+      145,
+      200
+    ],
+    "count": 4816
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 6,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      80,
+      84,
+      144,
+      201
+    ],
+    "count": 4859
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 7,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      80,
+      83,
+      145,
+      197
+    ],
+    "count": 4899
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 16,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      73,
+      93,
+      151,
+      198
+    ],
+    "count": 4696
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 17,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      82,
+      94,
+      152,
+      198
+    ],
+    "count": 4492
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 18,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      82,
+      96,
+      166,
+      198
+    ],
+    "count": 4439
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 19,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      82,
+      96,
+      166,
+      198
+    ],
+    "count": 4563
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cult_leader-hurt-rear.png",
+    "sourcePose": 4,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      78,
+      84,
+      155,
+      198
+    ],
+    "count": 5328
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 9,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      41,
+      144,
+      179,
+      198
+    ],
+    "count": 4657
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 4,
+    "scale": 0.3625,
+    "bounds": [
+      81,
+      84,
+      139,
+      198
+    ],
+    "count": 4671
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 6,
+    "scale": 0.3625,
+    "bounds": [
+      81,
+      83,
+      147,
+      198
+    ],
+    "count": 4887
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 7,
+    "scale": 0.3625,
+    "bounds": [
+      81,
+      84,
+      146,
+      198
+    ],
+    "count": 4901
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 8,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      81,
+      83,
+      142,
+      197
+    ],
+    "count": 4948
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 9,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      80,
+      83,
+      142,
+      198
+    ],
+    "count": 4982
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 10,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      80,
+      82,
+      142,
+      197
+    ],
+    "count": 4987
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/cult_leader-idle-rear.png",
+    "sourcePose": 11,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      80,
+      83,
+      142,
+      197
+    ],
+    "count": 4973
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 8,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      79,
+      84,
+      144,
+      199
+    ],
+    "count": 4933
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 9,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      79,
+      85,
+      145,
+      199
+    ],
+    "count": 4908
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 10,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      78,
+      84,
+      146,
+      199
+    ],
+    "count": 4948
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/cult_leader-walk-rear.png",
+    "sourcePose": 11,
+    "scale": 0.3569230769230769,
+    "bounds": [
+      78,
+      83,
+      145,
+      197
+    ],
+    "count": 4962
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 20,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      83,
+      94,
+      156,
+      198
+    ],
+    "count": 4710
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 21,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      82,
+      93,
+      155,
+      198
+    ],
+    "count": 4559
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 22,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      82,
+      95,
+      177,
+      198
+    ],
+    "count": 4511
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 23,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      83,
+      95,
+      166,
+      198
+    ],
+    "count": 4714
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cult_leader-hurt-rear.png",
+    "sourcePose": 8,
+    "scale": 0.3613707165109034,
+    "bounds": [
+      78,
+      84,
+      154,
+      198
+    ],
+    "count": 5430
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 11,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      40,
+      147,
+      179,
+      198
+    ],
+    "count": 4550
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 8,
+    "scale": 0.3625,
+    "bounds": [
+      80,
+      83,
+      139,
+      198
+    ],
+    "count": 4858
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 10,
+    "scale": 0.3625,
+    "bounds": [
+      79,
+      83,
+      149,
+      198
+    ],
+    "count": 5075
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cult_leader-cast-rear.png",
+    "sourcePose": 11,
+    "scale": 0.3625,
+    "bounds": [
+      80,
+      83,
+      149,
+      198
+    ],
+    "count": 5116
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 24,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      78,
+      81,
+      137,
+      197
+    ],
+    "count": 4575
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 25,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      78,
+      82,
+      136,
+      197
+    ],
+    "count": 4583
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 26,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      78,
+      82,
+      136,
+      197
+    ],
+    "count": 4597
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 27,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      79,
+      82,
+      138,
+      197
+    ],
+    "count": 4572
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 24,
+    "scale": 0.58,
+    "bounds": [
+      70,
+      83,
+      128,
+      198
+    ],
+    "count": 4913
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 25,
+    "scale": 0.58,
+    "bounds": [
+      70,
+      84,
+      128,
+      199
+    ],
+    "count": 4774
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 26,
+    "scale": 0.58,
+    "bounds": [
+      71,
+      83,
+      129,
+      196
+    ],
+    "count": 4811
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 27,
+    "scale": 0.58,
+    "bounds": [
+      70,
+      82,
+      128,
+      197
+    ],
+    "count": 4928
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 24,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      85,
+      92,
+      157,
+      198
+    ],
+    "count": 4313
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 25,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      83,
+      92,
+      151,
+      198
+    ],
+    "count": 4314
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 26,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      83,
+      95,
+      186,
+      198
+    ],
+    "count": 4375
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 27,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      84,
+      96,
+      162,
+      198
+    ],
+    "count": 4212
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 12,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      81,
+      82,
+      146,
+      198
+    ],
+    "count": 5681
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 13,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      34,
+      149,
+      174,
+      198
+    ],
+    "count": 4600
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cult_leader-cast-profile.png",
+    "sourcePose": 0,
+    "scale": 0.31607629427792916,
+    "bounds": [
+      82,
+      83,
+      140,
+      198
+    ],
+    "count": 4854
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cult_leader-cast-profile.png",
+    "sourcePose": 2,
+    "scale": 0.31607629427792916,
+    "bounds": [
+      70,
+      75,
+      140,
+      198
+    ],
+    "count": 5167
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cult_leader-cast-profile.png",
+    "sourcePose": 3,
+    "scale": 0.31607629427792916,
+    "bounds": [
+      82,
+      83,
+      140,
+      198
+    ],
+    "count": 4926
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 28,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      75,
+      82,
+      140,
+      197
+    ],
+    "count": 5609
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 29,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      75,
+      82,
+      140,
+      197
+    ],
+    "count": 5505
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 30,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      75,
+      81,
+      140,
+      197
+    ],
+    "count": 5521
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/cult_leader-idle.png",
+    "sourcePose": 31,
+    "scale": 0.5918367346938775,
+    "bounds": [
+      75,
+      82,
+      141,
+      197
+    ],
+    "count": 5519
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 28,
+    "scale": 0.58,
+    "bounds": [
+      74,
+      83,
+      142,
+      198
+    ],
+    "count": 5841
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 29,
+    "scale": 0.58,
+    "bounds": [
+      75,
+      84,
+      140,
+      201
+    ],
+    "count": 5720
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 30,
+    "scale": 0.58,
+    "bounds": [
+      74,
+      83,
+      140,
+      197
+    ],
+    "count": 5647
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/cult_leader-walk.png",
+    "sourcePose": 31,
+    "scale": 0.58,
+    "bounds": [
+      75,
+      82,
+      141,
+      198
+    ],
+    "count": 5621
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 28,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      80,
+      93,
+      153,
+      198
+    ],
+    "count": 4764
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 29,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      79,
+      93,
+      148,
+      198
+    ],
+    "count": 4652
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 30,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      80,
+      95,
+      170,
+      198
+    ],
+    "count": 4623
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/cult_leader-attack.png",
+    "sourcePose": 31,
+    "scale": 0.5465968586387435,
+    "bounds": [
+      77,
+      97,
+      158,
+      198
+    ],
+    "count": 4625
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 14,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      73,
+      83,
+      148,
+      198
+    ],
+    "count": 6362
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cult_leader-damage.png",
+    "sourcePose": 15,
+    "scale": 0.4773662551440329,
+    "bounds": [
+      35,
+      148,
+      177,
+      198
+    ],
+    "count": 4440
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 28,
+    "scale": 0.58,
+    "bounds": [
+      76,
+      85,
+      141,
+      198
+    ],
+    "count": 5676
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 30,
+    "scale": 0.58,
+    "bounds": [
+      48,
+      85,
+      141,
+      198
+    ],
+    "count": 5965
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cult_leader-cast.png",
+    "sourcePose": 31,
+    "scale": 0.58,
+    "bounds": [
+      70,
+      85,
+      141,
+      198
+    ],
+    "count": 5995
+  }
+]

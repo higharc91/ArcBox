@@ -1,0 +1,22 @@
+{
+  "priorCommit": "d4fbd7e5",
+  "addedCreatureEntries": [
+    "mob_refresh_air_storm",
+    "mob_refresh_earth_magma",
+    "mob_refresh_water_swamp"
+  ],
+  "combatMechanicsUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 16,
+  "packedFrameKeys": 528,
+  "distinctAuthoredPoseSelections": 384,
+  "runtimeAssets": 3,
+  "specialsPerCreature": 2,
+  "wholePoseFacingSelection": true,
+  "visualContactTimingRefined": true
+}

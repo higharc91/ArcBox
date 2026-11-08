@@ -1,0 +1,19 @@
+{
+  "priorCommit": "6b3794ef",
+  "addedCreatureEntries": [
+    "mob_refresh_imp"
+  ],
+  "combatMechanicsUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 5,
+  "packedFrameKeys": 112,
+  "distinctAuthoredPoseSelections": 112,
+  "runtimeAssets": 1,
+  "wholePoseFacingSelection": true,
+  "rearCastCorrectionSelected": true,
+  "naturalHellfirePresentationInferredInRenderer": true
+}

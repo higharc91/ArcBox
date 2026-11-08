@@ -1,0 +1,83 @@
+[
+  {
+    "mob": "sapling",
+    "action": "attack",
+    "source": "sapling-contact",
+    "count": 8,
+    "columns": 2,
+    "targets": [
+      {
+        "row": 0,
+        "frames": [
+          2
+        ],
+        "poses": [
+          0
+        ]
+      },
+      {
+        "row": 1,
+        "frames": [
+          2
+        ],
+        "poses": [
+          1
+        ]
+      },
+      {
+        "row": 2,
+        "frames": [
+          2
+        ],
+        "poses": [
+          2
+        ]
+      },
+      {
+        "row": 3,
+        "frames": [
+          2
+        ],
+        "poses": [
+          3
+        ]
+      },
+      {
+        "row": 4,
+        "frames": [
+          2
+        ],
+        "poses": [
+          4
+        ]
+      },
+      {
+        "row": 5,
+        "frames": [
+          2
+        ],
+        "poses": [
+          5
+        ]
+      },
+      {
+        "row": 6,
+        "frames": [
+          2
+        ],
+        "poses": [
+          6
+        ]
+      },
+      {
+        "row": 7,
+        "frames": [
+          2
+        ],
+        "poses": [
+          7
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,6970 @@
+[
+  {
+    "id": "skeleton",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "frames": [
+      {
+        "head": [
+          118.0,
+          16
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          43,
+          13,
+          133,
+          202
+        ],
+        "bounds": [
+          45,
+          15,
+          174,
+          213
+        ],
+        "foot": [
+          118.0,
+          213
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          17
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          265,
+          15,
+          133,
+          200
+        ],
+        "bounds": [
+          267,
+          17,
+          396,
+          213
+        ],
+        "foot": [
+          340.0,
+          213
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          16
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          486,
+          13,
+          133,
+          202
+        ],
+        "bounds": [
+          488,
+          15,
+          617,
+          213
+        ],
+        "foot": [
+          562.0,
+          213
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          16
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          708,
+          13,
+          133,
+          202
+        ],
+        "bounds": [
+          710,
+          15,
+          839,
+          213
+        ],
+        "foot": [
+          783.5,
+          213
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.5,
+          15
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          41,
+          13,
+          136,
+          208
+        ],
+        "bounds": [
+          43,
+          15,
+          175,
+          219
+        ],
+        "foot": [
+          112.0,
+          219
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          15
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          263,
+          13,
+          134,
+          208
+        ],
+        "bounds": [
+          265,
+          15,
+          395,
+          219
+        ],
+        "foot": [
+          341.5,
+          219
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          15
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          485,
+          13,
+          134,
+          208
+        ],
+        "bounds": [
+          487,
+          15,
+          617,
+          219
+        ],
+        "foot": [
+          565.5,
+          219
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          15
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          708,
+          13,
+          133,
+          208
+        ],
+        "bounds": [
+          710,
+          15,
+          839,
+          219
+        ],
+        "foot": [
+          785.0,
+          219
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.5,
+          16
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          38,
+          13,
+          152,
+          204
+        ],
+        "bounds": [
+          40,
+          15,
+          188,
+          215
+        ],
+        "foot": [
+          117.0,
+          215
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          16
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          245,
+          14,
+          176,
+          202
+        ],
+        "bounds": [
+          247,
+          16,
+          419,
+          214
+        ],
+        "foot": [
+          335.5,
+          214
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          16
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          444,
+          13,
+          200,
+          203
+        ],
+        "bounds": [
+          446,
+          15,
+          642,
+          214
+        ],
+        "foot": [
+          560.5,
+          214
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          16
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          703,
+          13,
+          152,
+          204
+        ],
+        "bounds": [
+          705,
+          15,
+          853,
+          215
+        ],
+        "foot": [
+          782.5,
+          215
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          166.5,
+          48
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          32,
+          45,
+          222,
+          243
+        ],
+        "bounds": [
+          34,
+          47,
+          252,
+          286
+        ],
+        "foot": [
+          148.5,
+          286
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          439.5,
+          195
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          322,
+          193,
+          251,
+          99
+        ],
+        "bounds": [
+          324,
+          195,
+          571,
+          290
+        ],
+        "foot": [
+          424.5,
+          290
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          237
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          45,
+          235,
+          124,
+          202
+        ],
+        "bounds": [
+          47,
+          237,
+          167,
+          435
+        ],
+        "foot": [
+          115.0,
+          435
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          237
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          266,
+          235,
+          126,
+          202
+        ],
+        "bounds": [
+          268,
+          237,
+          390,
+          435
+        ],
+        "foot": [
+          337.5,
+          435
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          237
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          487,
+          234,
+          127,
+          203
+        ],
+        "bounds": [
+          489,
+          236,
+          612,
+          435
+        ],
+        "foot": [
+          558.5,
+          435
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          237
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          709,
+          234,
+          127,
+          203
+        ],
+        "bounds": [
+          711,
+          236,
+          834,
+          435
+        ],
+        "foot": [
+          781.5,
+          435
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          236
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          42,
+          233,
+          129,
+          208
+        ],
+        "bounds": [
+          44,
+          235,
+          169,
+          439
+        ],
+        "foot": [
+          110.5,
+          439
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          235
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          265,
+          233,
+          128,
+          208
+        ],
+        "bounds": [
+          267,
+          235,
+          391,
+          439
+        ],
+        "foot": [
+          345.5,
+          439
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          235
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          485,
+          233,
+          130,
+          208
+        ],
+        "bounds": [
+          487,
+          235,
+          613,
+          439
+        ],
+        "foot": [
+          555.0,
+          439
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          235
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          708,
+          233,
+          130,
+          208
+        ],
+        "bounds": [
+          710,
+          235,
+          836,
+          439
+        ],
+        "foot": [
+          783.5,
+          439
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          236
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          38,
+          234,
+          143,
+          205
+        ],
+        "bounds": [
+          40,
+          236,
+          179,
+          437
+        ],
+        "foot": [
+          119.5,
+          437
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          236
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          239,
+          229,
+          174,
+          210
+        ],
+        "bounds": [
+          241,
+          231,
+          411,
+          437
+        ],
+        "foot": [
+          336.5,
+          437
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          236
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          423,
+          233,
+          223,
+          205
+        ],
+        "bounds": [
+          425,
+          235,
+          644,
+          436
+        ],
+        "foot": [
+          562.5,
+          436
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.5,
+          236
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          704,
+          234,
+          143,
+          205
+        ],
+        "bounds": [
+          706,
+          236,
+          845,
+          437
+        ],
+        "foot": [
+          785.5,
+          437
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          790.0,
+          48
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          664,
+          46,
+          201,
+          248
+        ],
+        "bounds": [
+          666,
+          48,
+          863,
+          292
+        ],
+        "foot": [
+          771.5,
+          292
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1054.5,
+          197
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          933,
+          195,
+          291,
+          99
+        ],
+        "bounds": [
+          935,
+          197,
+          1222,
+          292
+        ],
+        "foot": [
+          1078.0,
+          292
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          107.5,
+          456
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          56,
+          454,
+          92,
+          205
+        ],
+        "bounds": [
+          58,
+          456,
+          146,
+          657
+        ],
+        "foot": [
+          114.5,
+          657
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.5,
+          459
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          278,
+          456,
+          94,
+          203
+        ],
+        "bounds": [
+          280,
+          458,
+          370,
+          657
+        ],
+        "foot": [
+          337.0,
+          657
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.0,
+          457
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          500,
+          454,
+          94,
+          205
+        ],
+        "bounds": [
+          502,
+          456,
+          592,
+          657
+        ],
+        "foot": [
+          559.0,
+          657
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.0,
+          456
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          722,
+          454,
+          93,
+          205
+        ],
+        "bounds": [
+          724,
+          456,
+          813,
+          657
+        ],
+        "foot": [
+          780.5,
+          657
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.5,
+          455
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          55,
+          453,
+          97,
+          209
+        ],
+        "bounds": [
+          57,
+          455,
+          150,
+          660
+        ],
+        "foot": [
+          106.0,
+          660
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          456
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          279,
+          453,
+          96,
+          209
+        ],
+        "bounds": [
+          281,
+          455,
+          373,
+          660
+        ],
+        "foot": [
+          332.5,
+          660
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.0,
+          455
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          501,
+          453,
+          97,
+          208
+        ],
+        "bounds": [
+          503,
+          455,
+          596,
+          659
+        ],
+        "foot": [
+          556.0,
+          659
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.0,
+          455
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          724,
+          452,
+          92,
+          211
+        ],
+        "bounds": [
+          726,
+          454,
+          814,
+          661
+        ],
+        "foot": [
+          772.0,
+          661
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.0,
+          457
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          30,
+          454,
+          128,
+          206
+        ],
+        "bounds": [
+          32,
+          456,
+          156,
+          658
+        ],
+        "foot": [
+          114.0,
+          658
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          458
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          246,
+          445,
+          151,
+          215
+        ],
+        "bounds": [
+          248,
+          447,
+          395,
+          658
+        ],
+        "foot": [
+          333.5,
+          658
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          457
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          410,
+          454,
+          223,
+          206
+        ],
+        "bounds": [
+          412,
+          456,
+          631,
+          658
+        ],
+        "foot": [
+          562.0,
+          658
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.5,
+          457
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          697,
+          455,
+          126,
+          205
+        ],
+        "bounds": [
+          699,
+          457,
+          821,
+          658
+        ],
+        "foot": [
+          780.0,
+          658
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          166.5,
+          337
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          48,
+          335,
+          159,
+          252
+        ],
+        "bounds": [
+          50,
+          337,
+          205,
+          585
+        ],
+        "foot": [
+          143.0,
+          585
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          420.0,
+          495
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          277,
+          492,
+          313,
+          95
+        ],
+        "bounds": [
+          279,
+          494,
+          588,
+          585
+        ],
+        "foot": [
+          433.5,
+          585
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          101.0,
+          678
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          58,
+          675,
+          125,
+          205
+        ],
+        "bounds": [
+          60,
+          677,
+          181,
+          878
+        ],
+        "foot": [
+          108.5,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.0,
+          678
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          280,
+          676,
+          126,
+          204
+        ],
+        "bounds": [
+          282,
+          678,
+          404,
+          878
+        ],
+        "foot": [
+          330.5,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.0,
+          678
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          501,
+          676,
+          127,
+          204
+        ],
+        "bounds": [
+          503,
+          678,
+          626,
+          878
+        ],
+        "foot": [
+          552.5,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.5,
+          678
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          724,
+          675,
+          126,
+          205
+        ],
+        "bounds": [
+          726,
+          677,
+          848,
+          878
+        ],
+        "foot": [
+          774.5,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.0,
+          676
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          54,
+          674,
+          130,
+          208
+        ],
+        "bounds": [
+          56,
+          676,
+          182,
+          880
+        ],
+        "foot": [
+          101.0,
+          880
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.0,
+          676
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          277,
+          674,
+          131,
+          210
+        ],
+        "bounds": [
+          279,
+          676,
+          406,
+          882
+        ],
+        "foot": [
+          354.5,
+          882
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.0,
+          676
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          499,
+          674,
+          130,
+          209
+        ],
+        "bounds": [
+          501,
+          676,
+          627,
+          881
+        ],
+        "foot": [
+          526.5,
+          881
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          767.0,
+          676
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          723,
+          674,
+          129,
+          210
+        ],
+        "bounds": [
+          725,
+          676,
+          850,
+          882
+        ],
+        "foot": [
+          783.5,
+          882
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          98.5,
+          680
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          39,
+          678,
+          151,
+          202
+        ],
+        "bounds": [
+          41,
+          680,
+          188,
+          878
+        ],
+        "foot": [
+          112.0,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          651.5,
+          36
+        ],
+        "source": "source/warrior-attack-backleft.png",
+        "sourcePose": 1,
+        "cell": [
+          519,
+          33,
+          234,
+          383
+        ],
+        "bounds": [
+          521,
+          35,
+          751,
+          414
+        ],
+        "foot": [
+          665.5,
+          414
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.2864721485411141,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1095.5,
+          36
+        ],
+        "source": "source/warrior-attack-backleft.png",
+        "sourcePose": 2,
+        "cell": [
+          880,
+          33,
+          317,
+          382
+        ],
+        "bounds": [
+          882,
+          35,
+          1195,
+          413
+        ],
+        "foot": [
+          1110.0,
+          413
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.2864721485411141,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.0,
+          680
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          704,
+          678,
+          151,
+          202
+        ],
+        "bounds": [
+          706,
+          680,
+          853,
+          878
+        ],
+        "foot": [
+          777.5,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          775.0,
+          338
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          676,
+          336,
+          179,
+          250
+        ],
+        "bounds": [
+          678,
+          338,
+          853,
+          584
+        ],
+        "foot": [
+          754.0,
+          584
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1048.5,
+          503
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          907,
+          501,
+          324,
+          87
+        ],
+        "bounds": [
+          909,
+          503,
+          1229,
+          586
+        ],
+        "foot": [
+          1069.0,
+          586
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          898
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          57,
+          896,
+          133,
+          206
+        ],
+        "bounds": [
+          59,
+          898,
+          188,
+          1100
+        ],
+        "foot": [
+          114.0,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          901
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          279,
+          899,
+          133,
+          203
+        ],
+        "bounds": [
+          281,
+          901,
+          410,
+          1100
+        ],
+        "foot": [
+          335.5,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          901
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          500,
+          899,
+          133,
+          203
+        ],
+        "bounds": [
+          502,
+          901,
+          631,
+          1100
+        ],
+        "foot": [
+          557.5,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          898
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          723,
+          896,
+          132,
+          206
+        ],
+        "bounds": [
+          725,
+          898,
+          853,
+          1100
+        ],
+        "foot": [
+          779.5,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          897
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          53,
+          895,
+          138,
+          212
+        ],
+        "bounds": [
+          55,
+          897,
+          189,
+          1105
+        ],
+        "foot": [
+          117.5,
+          1105
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          898
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          276,
+          895,
+          136,
+          208
+        ],
+        "bounds": [
+          278,
+          897,
+          410,
+          1101
+        ],
+        "foot": [
+          335.5,
+          1101
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          898
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          499,
+          895,
+          135,
+          212
+        ],
+        "bounds": [
+          501,
+          897,
+          632,
+          1105
+        ],
+        "foot": [
+          566.0,
+          1105
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          897
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          721,
+          895,
+          135,
+          208
+        ],
+        "bounds": [
+          723,
+          897,
+          854,
+          1101
+        ],
+        "foot": [
+          781.0,
+          1101
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.0,
+          900
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          36,
+          897,
+          153,
+          205
+        ],
+        "bounds": [
+          38,
+          899,
+          187,
+          1100
+        ],
+        "foot": [
+          111.0,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          900
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          239,
+          897,
+          174,
+          205
+        ],
+        "bounds": [
+          241,
+          899,
+          411,
+          1100
+        ],
+        "foot": [
+          333.5,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.0,
+          900
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          460,
+          897,
+          208,
+          204
+        ],
+        "bounds": [
+          462,
+          899,
+          666,
+          1099
+        ],
+        "foot": [
+          554.5,
+          1099
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          900
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          703,
+          897,
+          155,
+          205
+        ],
+        "bounds": [
+          705,
+          899,
+          856,
+          1100
+        ],
+        "foot": [
+          778.0,
+          1100
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.5,
+          636
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          48,
+          633,
+          202,
+          251
+        ],
+        "bounds": [
+          50,
+          635,
+          248,
+          882
+        ],
+        "foot": [
+          142.0,
+          882
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          452.5,
+          782
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          313,
+          779,
+          287,
+          101
+        ],
+        "bounds": [
+          315,
+          781,
+          598,
+          878
+        ],
+        "foot": [
+          431.5,
+          878
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          118.0,
+          1121
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          57,
+          1119,
+          121,
+          205
+        ],
+        "bounds": [
+          59,
+          1121,
+          176,
+          1322
+        ],
+        "foot": [
+          114.0,
+          1322
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          1122
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          280,
+          1120,
+          120,
+          204
+        ],
+        "bounds": [
+          282,
+          1122,
+          398,
+          1322
+        ],
+        "foot": [
+          336.0,
+          1322
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.5,
+          1122
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          500,
+          1120,
+          121,
+          204
+        ],
+        "bounds": [
+          502,
+          1122,
+          619,
+          1322
+        ],
+        "foot": [
+          557.5,
+          1322
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          1121
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          723,
+          1119,
+          121,
+          205
+        ],
+        "bounds": [
+          725,
+          1121,
+          842,
+          1322
+        ],
+        "foot": [
+          780.0,
+          1322
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.5,
+          1121
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          54,
+          1118,
+          127,
+          209
+        ],
+        "bounds": [
+          56,
+          1120,
+          179,
+          1325
+        ],
+        "foot": [
+          114.0,
+          1325
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          1121
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          276,
+          1118,
+          127,
+          208
+        ],
+        "bounds": [
+          278,
+          1120,
+          401,
+          1324
+        ],
+        "foot": [
+          330.5,
+          1324
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.5,
+          1121
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          498,
+          1118,
+          127,
+          208
+        ],
+        "bounds": [
+          500,
+          1120,
+          623,
+          1324
+        ],
+        "foot": [
+          555.5,
+          1324
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          1121
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          721,
+          1118,
+          127,
+          208
+        ],
+        "bounds": [
+          723,
+          1120,
+          846,
+          1324
+        ],
+        "foot": [
+          773.5,
+          1324
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.0,
+          1122
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          33,
+          1120,
+          161,
+          204
+        ],
+        "bounds": [
+          35,
+          1122,
+          192,
+          1322
+        ],
+        "foot": [
+          107.5,
+          1322
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          358.0,
+          1122
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          243,
+          1120,
+          170,
+          203
+        ],
+        "bounds": [
+          245,
+          1122,
+          411,
+          1321
+        ],
+        "foot": [
+          325.5,
+          1321
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          1122
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          461,
+          1120,
+          212,
+          203
+        ],
+        "bounds": [
+          463,
+          1122,
+          671,
+          1321
+        ],
+        "foot": [
+          551.0,
+          1321
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          1122
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          699,
+          1120,
+          159,
+          204
+        ],
+        "bounds": [
+          701,
+          1122,
+          856,
+          1322
+        ],
+        "foot": [
+          773.5,
+          1322
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          758.5,
+          639
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          682,
+          637,
+          195,
+          247
+        ],
+        "bounds": [
+          684,
+          639,
+          875,
+          882
+        ],
+        "foot": [
+          769.5,
+          882
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1089.5,
+          780
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          939,
+          778,
+          304,
+          103
+        ],
+        "bounds": [
+          941,
+          780,
+          1241,
+          879
+        ],
+        "foot": [
+          1048.5,
+          879
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          118.5,
+          1343
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          78,
+          1340,
+          83,
+          205
+        ],
+        "bounds": [
+          80,
+          1342,
+          159,
+          1543
+        ],
+        "foot": [
+          113.5,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.0,
+          1343
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          300,
+          1340,
+          84,
+          205
+        ],
+        "bounds": [
+          302,
+          1342,
+          382,
+          1543
+        ],
+        "foot": [
+          335.5,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.0,
+          1343
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          522,
+          1340,
+          83,
+          205
+        ],
+        "bounds": [
+          524,
+          1342,
+          603,
+          1543
+        ],
+        "foot": [
+          557.5,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          1342
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          743,
+          1340,
+          84,
+          205
+        ],
+        "bounds": [
+          745,
+          1342,
+          825,
+          1543
+        ],
+        "foot": [
+          779.0,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.0,
+          1342
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          75,
+          1339,
+          87,
+          211
+        ],
+        "bounds": [
+          77,
+          1341,
+          160,
+          1548
+        ],
+        "foot": [
+          102.5,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          1341
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          298,
+          1339,
+          86,
+          211
+        ],
+        "bounds": [
+          300,
+          1341,
+          382,
+          1548
+        ],
+        "foot": [
+          330.5,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1341
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          515,
+          1339,
+          91,
+          211
+        ],
+        "bounds": [
+          517,
+          1341,
+          604,
+          1548
+        ],
+        "foot": [
+          547.5,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          1341
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          741,
+          1339,
+          88,
+          209
+        ],
+        "bounds": [
+          743,
+          1341,
+          827,
+          1546
+        ],
+        "foot": [
+          779.5,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.5,
+          1343
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          64,
+          1340,
+          93,
+          208
+        ],
+        "bounds": [
+          66,
+          1342,
+          155,
+          1546
+        ],
+        "foot": [
+          105.0,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          1342
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          250,
+          1336,
+          132,
+          211
+        ],
+        "bounds": [
+          252,
+          1338,
+          380,
+          1545
+        ],
+        "foot": [
+          330.5,
+          1545
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1341
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          504,
+          1339,
+          174,
+          207
+        ],
+        "bounds": [
+          506,
+          1341,
+          676,
+          1544
+        ],
+        "foot": [
+          547.5,
+          1544
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          1342
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          730,
+          1340,
+          94,
+          208
+        ],
+        "bounds": [
+          732,
+          1342,
+          822,
+          1546
+        ],
+        "foot": [
+          771.0,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.0,
+          937
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          75,
+          935,
+          140,
+          253
+        ],
+        "bounds": [
+          77,
+          937,
+          213,
+          1186
+        ],
+        "foot": [
+          156.5,
+          1186
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          453.5,
+          1091
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          304,
+          1088,
+          288,
+          93
+        ],
+        "bounds": [
+          306,
+          1090,
+          590,
+          1179
+        ],
+        "foot": [
+          445.5,
+          1179
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          118.0,
+          1564
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          45,
+          1561,
+          116,
+          203
+        ],
+        "bounds": [
+          47,
+          1563,
+          159,
+          1762
+        ],
+        "foot": [
+          114.0,
+          1762
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          1564
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          266,
+          1562,
+          117,
+          202
+        ],
+        "bounds": [
+          268,
+          1564,
+          381,
+          1762
+        ],
+        "foot": [
+          335.5,
+          1762
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1564
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          488,
+          1562,
+          117,
+          202
+        ],
+        "bounds": [
+          490,
+          1564,
+          603,
+          1762
+        ],
+        "foot": [
+          558.0,
+          1762
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          1564
+        ],
+        "source": "source/skeleton-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          709,
+          1561,
+          118,
+          204
+        ],
+        "bounds": [
+          711,
+          1563,
+          825,
+          1763
+        ],
+        "foot": [
+          779.5,
+          1763
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6091370558375635,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.5,
+          1564
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          42,
+          1561,
+          120,
+          207
+        ],
+        "bounds": [
+          44,
+          1563,
+          160,
+          1766
+        ],
+        "foot": [
+          118.5,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          1564
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          263,
+          1561,
+          123,
+          207
+        ],
+        "bounds": [
+          265,
+          1563,
+          384,
+          1766
+        ],
+        "foot": [
+          335.5,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          1564
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          485,
+          1561,
+          126,
+          207
+        ],
+        "bounds": [
+          487,
+          1563,
+          609,
+          1766
+        ],
+        "foot": [
+          560.0,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          1564
+        ],
+        "source": "source/skeleton-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          708,
+          1561,
+          121,
+          207
+        ],
+        "bounds": [
+          710,
+          1563,
+          827,
+          1766
+        ],
+        "foot": [
+          783.0,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.5,
+          1565
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          36,
+          1563,
+          136,
+          200
+        ],
+        "bounds": [
+          38,
+          1565,
+          170,
+          1761
+        ],
+        "foot": [
+          109.0,
+          1761
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.0,
+          1565
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          247,
+          1559,
+          167,
+          204
+        ],
+        "bounds": [
+          249,
+          1561,
+          412,
+          1761
+        ],
+        "foot": [
+          330.5,
+          1761
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1565
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          489,
+          1563,
+          186,
+          200
+        ],
+        "bounds": [
+          491,
+          1565,
+          673,
+          1761
+        ],
+        "foot": [
+          546.5,
+          1761
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          1565
+        ],
+        "source": "source/skeleton-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          703,
+          1563,
+          139,
+          200
+        ],
+        "bounds": [
+          705,
+          1565,
+          840,
+          1761
+        ],
+        "foot": [
+          776.5,
+          1761
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.542713567839196,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          750.0,
+          937
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          679,
+          935,
+          188,
+          253
+        ],
+        "bounds": [
+          681,
+          937,
+          865,
+          1186
+        ],
+        "foot": [
+          773.5,
+          1186
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1085.5,
+          1091
+        ],
+        "source": "source/skeleton-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          943,
+          1088,
+          266,
+          98
+        ],
+        "bounds": [
+          945,
+          1090,
+          1207,
+          1184
+        ],
+        "foot": [
+          1094.5,
+          1184
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "skeleton_archer",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "frames": [
+      {
+        "head": [
+          116.5,
+          21
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          58,
+          18,
+          135,
+          198
+        ],
+        "bounds": [
+          60,
+          20,
+          191,
+          214
+        ],
+        "foot": [
+          116.5,
+          214
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          21
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          280,
+          18,
+          134,
+          198
+        ],
+        "bounds": [
+          282,
+          20,
+          412,
+          214
+        ],
+        "foot": [
+          338.5,
+          214
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          21
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          502,
+          19,
+          134,
+          197
+        ],
+        "bounds": [
+          504,
+          21,
+          634,
+          214
+        ],
+        "foot": [
+          560.5,
+          214
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          21
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          724,
+          18,
+          134,
+          198
+        ],
+        "bounds": [
+          726,
+          20,
+          856,
+          214
+        ],
+        "foot": [
+          782.0,
+          214
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          101.5,
+          20
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          55,
+          18,
+          136,
+          202
+        ],
+        "bounds": [
+          57,
+          20,
+          189,
+          218
+        ],
+        "foot": [
+          112.0,
+          218
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.5,
+          20
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          277,
+          18,
+          135,
+          202
+        ],
+        "bounds": [
+          279,
+          20,
+          410,
+          218
+        ],
+        "foot": [
+          326.0,
+          218
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          21
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          500,
+          18,
+          134,
+          202
+        ],
+        "bounds": [
+          502,
+          20,
+          632,
+          218
+        ],
+        "foot": [
+          552.0,
+          218
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.0,
+          20
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          722,
+          18,
+          134,
+          202
+        ],
+        "bounds": [
+          724,
+          20,
+          854,
+          218
+        ],
+        "foot": [
+          787.0,
+          218
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          99.0,
+          20
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          57,
+          18,
+          141,
+          200
+        ],
+        "bounds": [
+          59,
+          20,
+          196,
+          216
+        ],
+        "foot": [
+          116.0,
+          216
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.0,
+          20
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          279,
+          18,
+          146,
+          200
+        ],
+        "bounds": [
+          281,
+          20,
+          423,
+          216
+        ],
+        "foot": [
+          339.0,
+          216
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.5,
+          20
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          491,
+          17,
+          151,
+          201
+        ],
+        "bounds": [
+          493,
+          19,
+          640,
+          216
+        ],
+        "foot": [
+          561.0,
+          216
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.0,
+          20
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          718,
+          17,
+          136,
+          201
+        ],
+        "bounds": [
+          720,
+          19,
+          852,
+          216
+        ],
+        "foot": [
+          782.0,
+          216
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          46
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          62,
+          44,
+          180,
+          262
+        ],
+        "bounds": [
+          64,
+          46,
+          240,
+          304
+        ],
+        "foot": [
+          151.5,
+          304
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          416.0,
+          178
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          304,
+          175,
+          264,
+          134
+        ],
+        "bounds": [
+          306,
+          177,
+          566,
+          307
+        ],
+        "foot": [
+          419.5,
+          307
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          99.0,
+          241
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          58,
+          239,
+          129,
+          199
+        ],
+        "bounds": [
+          60,
+          241,
+          185,
+          436
+        ],
+        "foot": [
+          113.5,
+          436
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          321.5,
+          241
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          281,
+          239,
+          129,
+          199
+        ],
+        "bounds": [
+          283,
+          241,
+          408,
+          436
+        ],
+        "foot": [
+          336.0,
+          436
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.0,
+          241
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          503,
+          239,
+          128,
+          199
+        ],
+        "bounds": [
+          505,
+          241,
+          629,
+          436
+        ],
+        "foot": [
+          558.0,
+          436
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.0,
+          241
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          724,
+          239,
+          130,
+          199
+        ],
+        "bounds": [
+          726,
+          241,
+          852,
+          436
+        ],
+        "foot": [
+          780.0,
+          436
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          95.0,
+          240
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          52,
+          237,
+          131,
+          207
+        ],
+        "bounds": [
+          54,
+          239,
+          181,
+          442
+        ],
+        "foot": [
+          95.5,
+          442
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.5,
+          242
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          275,
+          239,
+          132,
+          205
+        ],
+        "bounds": [
+          277,
+          241,
+          405,
+          442
+        ],
+        "foot": [
+          341.5,
+          442
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.0,
+          241
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          498,
+          239,
+          132,
+          205
+        ],
+        "bounds": [
+          500,
+          241,
+          628,
+          442
+        ],
+        "foot": [
+          542.5,
+          442
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.0,
+          241
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          721,
+          239,
+          132,
+          205
+        ],
+        "bounds": [
+          723,
+          241,
+          851,
+          442
+        ],
+        "foot": [
+          779.0,
+          442
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          233.5,
+          34
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 0,
+        "cell": [
+          57,
+          32,
+          257,
+          316
+        ],
+        "bounds": [
+          59,
+          34,
+          312,
+          346
+        ],
+        "foot": [
+          235.5,
+          346
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          541.0,
+          34
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 1,
+        "cell": [
+          411,
+          32,
+          259,
+          316
+        ],
+        "bounds": [
+          413,
+          34,
+          668,
+          346
+        ],
+        "foot": [
+          580.5,
+          346
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          916.0,
+          34
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 2,
+        "cell": [
+          755,
+          32,
+          270,
+          316
+        ],
+        "bounds": [
+          757,
+          34,
+          1023,
+          346
+        ],
+        "foot": [
+          923.5,
+          346
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1250.0,
+          34
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 3,
+        "cell": [
+          1127,
+          32,
+          223,
+          316
+        ],
+        "bounds": [
+          1129,
+          34,
+          1348,
+          346
+        ],
+        "foot": [
+          1259.0,
+          346
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          680.5,
+          46
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          628,
+          44,
+          184,
+          262
+        ],
+        "bounds": [
+          630,
+          46,
+          810,
+          304
+        ],
+        "foot": [
+          705.0,
+          304
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          991.0,
+          181
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          871,
+          179,
+          265,
+          133
+        ],
+        "bounds": [
+          873,
+          181,
+          1134,
+          310
+        ],
+        "foot": [
+          991.5,
+          310
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          103.5,
+          464
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          52,
+          462,
+          107,
+          197
+        ],
+        "bounds": [
+          54,
+          464,
+          157,
+          657
+        ],
+        "foot": [
+          112.0,
+          657
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          464
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          274,
+          462,
+          108,
+          197
+        ],
+        "bounds": [
+          276,
+          464,
+          380,
+          657
+        ],
+        "foot": [
+          334.5,
+          657
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.5,
+          464
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          496,
+          461,
+          108,
+          199
+        ],
+        "bounds": [
+          498,
+          463,
+          602,
+          658
+        ],
+        "foot": [
+          556.0,
+          658
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.0,
+          464
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          718,
+          462,
+          108,
+          198
+        ],
+        "bounds": [
+          720,
+          464,
+          824,
+          658
+        ],
+        "foot": [
+          777.5,
+          658
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          102.5,
+          463
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          49,
+          460,
+          108,
+          201
+        ],
+        "bounds": [
+          51,
+          462,
+          155,
+          659
+        ],
+        "foot": [
+          110.5,
+          659
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          461
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          272,
+          459,
+          105,
+          202
+        ],
+        "bounds": [
+          274,
+          461,
+          375,
+          659
+        ],
+        "foot": [
+          328.0,
+          659
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          545.0,
+          461
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          494,
+          459,
+          107,
+          202
+        ],
+        "bounds": [
+          496,
+          461,
+          599,
+          659
+        ],
+        "foot": [
+          554.5,
+          659
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          461
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          717,
+          459,
+          106,
+          202
+        ],
+        "bounds": [
+          719,
+          461,
+          821,
+          659
+        ],
+        "foot": [
+          780.5,
+          659
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          235.5,
+          384
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 4,
+        "cell": [
+          48,
+          382,
+          270,
+          322
+        ],
+        "bounds": [
+          50,
+          384,
+          316,
+          702
+        ],
+        "foot": [
+          235.0,
+          702
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          543.0,
+          384
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 5,
+        "cell": [
+          408,
+          382,
+          251,
+          322
+        ],
+        "bounds": [
+          410,
+          384,
+          657,
+          702
+        ],
+        "foot": [
+          577.0,
+          702
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          920.0,
+          384
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 6,
+        "cell": [
+          749,
+          382,
+          256,
+          322
+        ],
+        "bounds": [
+          751,
+          384,
+          1003,
+          702
+        ],
+        "foot": [
+          920.5,
+          702
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1252.0,
+          384
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 7,
+        "cell": [
+          1148,
+          382,
+          192,
+          322
+        ],
+        "bounds": [
+          1150,
+          384,
+          1338,
+          702
+        ],
+        "foot": [
+          1252.5,
+          702
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          174.0,
+          353
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          56,
+          351,
+          166,
+          266
+        ],
+        "bounds": [
+          58,
+          353,
+          220,
+          615
+        ],
+        "foot": [
+          144.5,
+          615
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          433.0,
+          486
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          292,
+          483,
+          275,
+          134
+        ],
+        "bounds": [
+          294,
+          485,
+          565,
+          615
+        ],
+        "foot": [
+          438.0,
+          615
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.0,
+          684
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          30,
+          682,
+          141,
+          196
+        ],
+        "bounds": [
+          32,
+          684,
+          169,
+          876
+        ],
+        "foot": [
+          117.5,
+          876
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          684
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          252,
+          682,
+          140,
+          196
+        ],
+        "bounds": [
+          254,
+          684,
+          390,
+          876
+        ],
+        "foot": [
+          339.0,
+          876
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          684
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          474,
+          682,
+          140,
+          196
+        ],
+        "bounds": [
+          476,
+          684,
+          612,
+          876
+        ],
+        "foot": [
+          560.5,
+          876
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          684
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          696,
+          682,
+          140,
+          196
+        ],
+        "bounds": [
+          698,
+          684,
+          834,
+          876
+        ],
+        "foot": [
+          783.0,
+          876
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.0,
+          682
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          35,
+          679,
+          135,
+          203
+        ],
+        "bounds": [
+          37,
+          681,
+          168,
+          880
+        ],
+        "foot": [
+          120.0,
+          880
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.0,
+          682
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          256,
+          679,
+          132,
+          207
+        ],
+        "bounds": [
+          258,
+          681,
+          386,
+          884
+        ],
+        "foot": [
+          339.0,
+          884
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          682
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          479,
+          680,
+          133,
+          206
+        ],
+        "bounds": [
+          481,
+          682,
+          610,
+          884
+        ],
+        "foot": [
+          565.5,
+          884
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.0,
+          682
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          696,
+          680,
+          137,
+          206
+        ],
+        "bounds": [
+          698,
+          682,
+          831,
+          884
+        ],
+        "foot": [
+          779.5,
+          884
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          234.5,
+          738
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 8,
+        "cell": [
+          46,
+          736,
+          273,
+          335
+        ],
+        "bounds": [
+          48,
+          738,
+          317,
+          1069
+        ],
+        "foot": [
+          233.0,
+          1069
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          599.0,
+          738
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 9,
+        "cell": [
+          405,
+          736,
+          273,
+          335
+        ],
+        "bounds": [
+          407,
+          738,
+          676,
+          1069
+        ],
+        "foot": [
+          576.5,
+          1069
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          918.5,
+          739
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 10,
+        "cell": [
+          745,
+          736,
+          278,
+          335
+        ],
+        "bounds": [
+          747,
+          738,
+          1021,
+          1069
+        ],
+        "foot": [
+          919.5,
+          1069
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1257.0,
+          739
+        ],
+        "source": "source/archer-attack-left.png",
+        "sourcePose": 11,
+        "cell": [
+          1138,
+          736,
+          212,
+          335
+        ],
+        "bounds": [
+          1140,
+          738,
+          1348,
+          1069
+        ],
+        "foot": [
+          1261.5,
+          1069
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.38461538461538464,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          746.5,
+          354
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          623,
+          351,
+          187,
+          265
+        ],
+        "bounds": [
+          625,
+          353,
+          808,
+          614
+        ],
+        "foot": [
+          728.5,
+          614
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          999.0,
+          488
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          858,
+          485,
+          286,
+          135
+        ],
+        "bounds": [
+          860,
+          487,
+          1142,
+          618
+        ],
+        "foot": [
+          1001.5,
+          618
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          901
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          30,
+          899,
+          141,
+          201
+        ],
+        "bounds": [
+          32,
+          901,
+          169,
+          1098
+        ],
+        "foot": [
+          114.5,
+          1098
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          901
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          253,
+          899,
+          139,
+          202
+        ],
+        "bounds": [
+          255,
+          901,
+          390,
+          1099
+        ],
+        "foot": [
+          336.5,
+          1099
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          901
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          474,
+          899,
+          140,
+          202
+        ],
+        "bounds": [
+          476,
+          901,
+          612,
+          1099
+        ],
+        "foot": [
+          558.5,
+          1099
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          901
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          695,
+          899,
+          142,
+          202
+        ],
+        "bounds": [
+          697,
+          901,
+          835,
+          1099
+        ],
+        "foot": [
+          780.5,
+          1099
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.0,
+          902
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          30,
+          899,
+          140,
+          208
+        ],
+        "bounds": [
+          32,
+          901,
+          168,
+          1105
+        ],
+        "foot": [
+          113.5,
+          1105
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.5,
+          902
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          254,
+          900,
+          137,
+          204
+        ],
+        "bounds": [
+          256,
+          902,
+          389,
+          1102
+        ],
+        "foot": [
+          336.0,
+          1102
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.0,
+          902
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          476,
+          900,
+          137,
+          207
+        ],
+        "bounds": [
+          478,
+          902,
+          611,
+          1105
+        ],
+        "foot": [
+          554.0,
+          1105
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.5,
+          902
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          697,
+          900,
+          142,
+          207
+        ],
+        "bounds": [
+          699,
+          902,
+          837,
+          1105
+        ],
+        "foot": [
+          786.0,
+          1105
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          252.5,
+          30
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 0,
+        "cell": [
+          47,
+          27,
+          309,
+          402
+        ],
+        "bounds": [
+          49,
+          29,
+          354,
+          427
+        ],
+        "foot": [
+          234.0,
+          427
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          645.0,
+          30
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 1,
+        "cell": [
+          491,
+          27,
+          309,
+          402
+        ],
+        "bounds": [
+          493,
+          29,
+          798,
+          427
+        ],
+        "foot": [
+          677.5,
+          427
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1156.0,
+          30
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 2,
+        "cell": [
+          935,
+          27,
+          325,
+          402
+        ],
+        "bounds": [
+          937,
+          29,
+          1258,
+          427
+        ],
+        "foot": [
+          1121.0,
+          427
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1583.5,
+          30
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 3,
+        "cell": [
+          1378,
+          27,
+          307,
+          402
+        ],
+        "bounds": [
+          1380,
+          29,
+          1683,
+          427
+        ],
+        "foot": [
+          1565.0,
+          427
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          161.0,
+          676
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          48,
+          674,
+          197,
+          277
+        ],
+        "bounds": [
+          50,
+          676,
+          243,
+          949
+        ],
+        "foot": [
+          155.5,
+          949
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          439.5,
+          811
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          290,
+          808,
+          264,
+          138
+        ],
+        "bounds": [
+          292,
+          810,
+          552,
+          944
+        ],
+        "foot": [
+          436.5,
+          944
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          126.5,
+          1123
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          35,
+          1121,
+          141,
+          202
+        ],
+        "bounds": [
+          37,
+          1123,
+          174,
+          1321
+        ],
+        "foot": [
+          119.5,
+          1321
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          349.0,
+          1124
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          257,
+          1121,
+          141,
+          202
+        ],
+        "bounds": [
+          259,
+          1123,
+          396,
+          1321
+        ],
+        "foot": [
+          341.0,
+          1321
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.0,
+          1123
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          478,
+          1121,
+          141,
+          202
+        ],
+        "bounds": [
+          480,
+          1123,
+          617,
+          1321
+        ],
+        "foot": [
+          563.5,
+          1321
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.5,
+          1123
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          700,
+          1121,
+          141,
+          202
+        ],
+        "bounds": [
+          702,
+          1123,
+          839,
+          1321
+        ],
+        "foot": [
+          785.0,
+          1321
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.5,
+          1122
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          33,
+          1119,
+          143,
+          208
+        ],
+        "bounds": [
+          35,
+          1121,
+          174,
+          1325
+        ],
+        "foot": [
+          94.5,
+          1325
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          347.5,
+          1122
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          254,
+          1119,
+          142,
+          208
+        ],
+        "bounds": [
+          256,
+          1121,
+          394,
+          1325
+        ],
+        "foot": [
+          319.0,
+          1325
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          1122
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          476,
+          1119,
+          144,
+          208
+        ],
+        "bounds": [
+          478,
+          1121,
+          618,
+          1325
+        ],
+        "foot": [
+          538.5,
+          1325
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          792.0,
+          1122
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          697,
+          1119,
+          146,
+          208
+        ],
+        "bounds": [
+          699,
+          1121,
+          841,
+          1325
+        ],
+        "foot": [
+          789.5,
+          1325
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          161.5,
+          474
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          98,
+          467,
+          272,
+          406
+        ],
+        "bounds": [
+          100,
+          469,
+          368,
+          871
+        ],
+        "foot": [
+          192.5,
+          871
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          676.0,
+          470
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 5,
+        "cell": [
+          521,
+          468,
+          293,
+          405
+        ],
+        "bounds": [
+          523,
+          470,
+          812,
+          871
+        ],
+        "foot": [
+          636.0,
+          871
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1068.5,
+          474
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 6,
+        "cell": [
+          943,
+          467,
+          315,
+          406
+        ],
+        "bounds": [
+          945,
+          469,
+          1256,
+          871
+        ],
+        "foot": [
+          1079.0,
+          871
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1493.5,
+          475
+        ],
+        "source": "source/archer-attack-rear.png",
+        "sourcePose": 7,
+        "cell": [
+          1403,
+          467,
+          298,
+          406
+        ],
+        "bounds": [
+          1405,
+          469,
+          1699,
+          871
+        ],
+        "foot": [
+          1523.0,
+          871
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.3022670025188917,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          744.0,
+          676
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          626,
+          673,
+          189,
+          278
+        ],
+        "bounds": [
+          628,
+          675,
+          813,
+          949
+        ],
+        "foot": [
+          736.0,
+          949
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1016.5,
+          810
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          855,
+          807,
+          279,
+          143
+        ],
+        "bounds": [
+          857,
+          809,
+          1132,
+          948
+        ],
+        "foot": [
+          998.0,
+          948
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.5,
+          1347
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          64,
+          1344,
+          108,
+          201
+        ],
+        "bounds": [
+          66,
+          1346,
+          170,
+          1543
+        ],
+        "foot": [
+          113.0,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.0,
+          1347
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          287,
+          1344,
+          108,
+          201
+        ],
+        "bounds": [
+          289,
+          1346,
+          393,
+          1543
+        ],
+        "foot": [
+          335.5,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          1347
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          508,
+          1344,
+          109,
+          201
+        ],
+        "bounds": [
+          510,
+          1346,
+          615,
+          1543
+        ],
+        "foot": [
+          556.5,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.5,
+          1347
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          730,
+          1344,
+          109,
+          201
+        ],
+        "bounds": [
+          732,
+          1346,
+          837,
+          1543
+        ],
+        "foot": [
+          779.5,
+          1543
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          102.0,
+          1347
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          59,
+          1344,
+          109,
+          204
+        ],
+        "bounds": [
+          61,
+          1346,
+          166,
+          1546
+        ],
+        "foot": [
+          111.0,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.0,
+          1347
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          283,
+          1345,
+          107,
+          203
+        ],
+        "bounds": [
+          285,
+          1347,
+          388,
+          1546
+        ],
+        "foot": [
+          322.5,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          1347
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          503,
+          1344,
+          107,
+          204
+        ],
+        "bounds": [
+          505,
+          1346,
+          608,
+          1546
+        ],
+        "foot": [
+          568.5,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          1347
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          726,
+          1344,
+          110,
+          204
+        ],
+        "bounds": [
+          728,
+          1346,
+          834,
+          1546
+        ],
+        "foot": [
+          773.0,
+          1546
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          1348
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          57,
+          1345,
+          143,
+          205
+        ],
+        "bounds": [
+          59,
+          1347,
+          198,
+          1548
+        ],
+        "foot": [
+          115.0,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          1346
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1343,
+          154,
+          207
+        ],
+        "bounds": [
+          273,
+          1345,
+          423,
+          1548
+        ],
+        "foot": [
+          337.0,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          1345
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          494,
+          1343,
+          136,
+          207
+        ],
+        "bounds": [
+          496,
+          1345,
+          628,
+          1548
+        ],
+        "foot": [
+          558.5,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          1348
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          717,
+          1345,
+          130,
+          205
+        ],
+        "bounds": [
+          719,
+          1347,
+          845,
+          1548
+        ],
+        "foot": [
+          780.5,
+          1548
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1001
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          65,
+          998,
+          158,
+          274
+        ],
+        "bounds": [
+          67,
+          1000,
+          221,
+          1270
+        ],
+        "foot": [
+          137.5,
+          1270
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          404.0,
+          1141
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          277,
+          1139,
+          283,
+          127
+        ],
+        "bounds": [
+          279,
+          1141,
+          558,
+          1264
+        ],
+        "foot": [
+          402.5,
+          1264
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          1571
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          58,
+          1568,
+          131,
+          197
+        ],
+        "bounds": [
+          60,
+          1570,
+          187,
+          1763
+        ],
+        "foot": [
+          114.0,
+          1763
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          1571
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          280,
+          1569,
+          131,
+          196
+        ],
+        "bounds": [
+          282,
+          1571,
+          409,
+          1763
+        ],
+        "foot": [
+          336.5,
+          1763
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          1571
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          501,
+          1568,
+          132,
+          197
+        ],
+        "bounds": [
+          503,
+          1570,
+          631,
+          1763
+        ],
+        "foot": [
+          558.0,
+          1763
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          1571
+        ],
+        "source": "source/skeleton_archer-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          724,
+          1568,
+          130,
+          197
+        ],
+        "bounds": [
+          726,
+          1570,
+          852,
+          1763
+        ],
+        "foot": [
+          780.0,
+          1763
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6217616580310881,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          97.0,
+          1571
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          51,
+          1569,
+          135,
+          199
+        ],
+        "bounds": [
+          53,
+          1571,
+          184,
+          1766
+        ],
+        "foot": [
+          114.0,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          319.5,
+          1571
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          279,
+          1569,
+          129,
+          199
+        ],
+        "bounds": [
+          281,
+          1571,
+          406,
+          1766
+        ],
+        "foot": [
+          320.5,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.0,
+          1571
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          499,
+          1569,
+          131,
+          199
+        ],
+        "bounds": [
+          501,
+          1571,
+          628,
+          1766
+        ],
+        "foot": [
+          577.0,
+          1766
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          1571
+        ],
+        "source": "source/skeleton_archer-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          720,
+          1568,
+          134,
+          199
+        ],
+        "bounds": [
+          722,
+          1570,
+          852,
+          1765
+        ],
+        "foot": [
+          786.0,
+          1765
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6060606060606061,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          1570
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          50,
+          1568,
+          147,
+          199
+        ],
+        "bounds": [
+          52,
+          1570,
+          195,
+          1765
+        ],
+        "foot": [
+          113.5,
+          1765
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          1570
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          270,
+          1568,
+          159,
+          199
+        ],
+        "bounds": [
+          272,
+          1570,
+          427,
+          1765
+        ],
+        "foot": [
+          336.5,
+          1765
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.5,
+          1570
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          495,
+          1568,
+          146,
+          199
+        ],
+        "bounds": [
+          497,
+          1570,
+          639,
+          1765
+        ],
+        "foot": [
+          558.0,
+          1765
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          1570
+        ],
+        "source": "source/skeleton_archer-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          716,
+          1568,
+          137,
+          199
+        ],
+        "bounds": [
+          718,
+          1570,
+          851,
+          1765
+        ],
+        "foot": [
+          779.5,
+          1765
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.6122448979591837,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          670.0,
+          999
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          614,
+          996,
+          192,
+          276
+        ],
+        "bounds": [
+          616,
+          998,
+          804,
+          1270
+        ],
+        "foot": [
+          701.0,
+          1270
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          994.0,
+          1145
+        ],
+        "source": "source/skeleton_archer-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          851,
+          1143,
+          297,
+          132
+        ],
+        "bounds": [
+          853,
+          1145,
+          1146,
+          1273
+        ],
+        "foot": [
+          1029.5,
+          1273
+        ],
+        "rejectedDetachedSource": false,
+        "sourceEdge": false,
+        "scale": 0.46511627906976744,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

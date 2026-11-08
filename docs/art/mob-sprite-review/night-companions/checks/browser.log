@@ -1,0 +1,72 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1120
+    },
+    {
+      "title": "Development battle · companions beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Two natural bites and a hand-cast bolt through the Godot beat path",
+      "width": 960,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · companion scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "d389147",
+    "walk": "35e4460f",
+    "attack": "e28ecdb7",
+    "hurt": "ad8e2da3",
+    "down": "697a6c5b"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "hound_black",
+      "hashes": [
+        "f62a1bf",
+        "2e930f13",
+        "dcc76c07",
+        "f8de7a0b"
+      ]
+    },
+    {
+      "id": "hound_grey",
+      "hashes": [
+        "aef0d1b",
+        "ceb37123",
+        "e4ad4307",
+        "40e892bf"
+      ]
+    },
+    {
+      "id": "imp_violet",
+      "hashes": [
+        "d68101a3",
+        "5560166b",
+        "f09b7ed3",
+        "cbcdd74f"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

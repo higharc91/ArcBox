@@ -1,0 +1,38 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "aspectRatio": "3:2",
+    "resolution": "1K",
+    "numOutputs": 1
+  },
+  "records": [
+    {
+      "id": "water_elemental",
+      "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET, one consistent creature with front three-quarter, left profile, full back, movement, natural attack, special gestures and down pose. Neutral parchment, no text/grid/scenery. Strong pixel-friendly silhouette, crisp material clusters, two-three shade ramps, warm upper-left key and cool shadows. No glossy 3D/anime/chibi, no clothes/belts/carried weapons. Every anatomical part connected. Rear views have no face on back. Small neutral 1.75m fighter for scale. Do not invent new powers or named lore. SEA WATER ELEMENTAL: roughly2.4m crest-to-base. Dense translucent-looking but pixel-readable deep TEAL/NAVY water core, TURQUOISE curled wave planes, sparse pale AQUA foam ridges. Compact swept-back wave crest, narrow pale seafoam eyes on FRONT only, no giant eyes or mouth smile. Two heavy water arms joined through continuous shoulders; broad palms with curled wave fingers. ONE continuous tapering water-column base with low joined curling pool ridge, NO human legs/feet or flowing cloth. Different from pale ribbon Air Elemental: heavy rounded wave volumes with foamy curled edges, deep blue translucent facets and liquid elbows. Glides with forward weight and flowing base. Natural WAVE SLAM: one connected palm/forearm surges forward. TIDAL CRUSH: arms gather a joined chest wave, then both arms heave a broad connected wavefront FORWARD, no separate water projectile or giant FX. UNDERTOW: reach both hands forward then pull both elbows/hands back into chest, drawing a connected inward spiral. Down: low connected collapsed water mound with crest/arms folded into base, no separate droplets.",
+      "job": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_yXdKHPMo8iwCxgNkGdz4Ds4Y",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_yXdKHPMo8iwCxgNkGdz4Ds4Y' (one call waits on up to 32 jobs)."
+      },
+      "assetId": "asset_tnzw7mbeZgNpzy1SMxFnxrY5",
+      "status": "success",
+      "creativeUnitsCost": 8
+    },
+    {
+      "id": "dragon",
+      "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET, one consistent creature with front three-quarter, left profile, full back, movement, natural attack, special gestures and down pose. Neutral parchment, no text/grid/scenery. Strong pixel-friendly silhouette, crisp material clusters, two-three shade ramps, warm upper-left key and cool shadows. No glossy 3D/anime/chibi, no clothes/belts/carried weapons. Every anatomical part connected. Rear views have no face on back. Small neutral 1.75m fighter for scale. Do not invent new powers or named lore. ADULT RED DRAGON / CR10 huge boss: approx3.3m horn-top in grounded neutral posture, approx6–7m nose-to-tail length beside1.75m fighter. FOUR strong clawed LEGS on ground plus TWO separate dorsal bat WINGS attached to shoulder blades: SIX limbs total, NOT two-legged wyvern/drake. Broad stern crocodilian dragon skull on strong curved neck, swept-back ivory horns, small AMBER front/side eyes, heavy dark brow, long muzzle and bone jaw spines; no human face. BRICK RED/scarlet scales, dark burgundy shadow planes, muted warm ivory belly scutes from jaw to belly and underside of long tapered tail, leathery dark CRIMSON wing membranes with red bone struts. Two wings folded along back during grounded idle/walk, tips below or at horn height so face stays readable. Strong connected shoulders/hips/ankles; no floating claws, horns, wing membranes or severed tail. Distinct mature heavy six-limbed silhouette from smaller two-leg drake. Tail curves compactly behind body, remains attached to pelvis. Grounded deliberate four-foot walk, folded wings settle with back rather than flap as legs step. Natural DRAGON JAWS: neck retracts then lunges muzzle FORWARD, jaw opens toward foe, WINGS visibly UNFURL/brace at contact, four legs planted. FIRE BREATH: neck curls in then head leans forward/mouth opens, wings half-unfurl for brace; short white-hot lip at mouth only, existing game supplies cone. FRIGHTFUL PRESENCE: chest rises, head lifts/open roaring jaws and both wings HALF OPEN in menacing mantle. CATACLYSMIC WINGBEAT: two connected wings spread high wide then sweep down/out strongly while four feet brace; grounded wingbeat, not whole dragon flying or giant explosion art. Down: whole dragon slumped low on side, neck/head/wings/tail remain joined; no dismemberment. Show all wing membranes in full and generous gaps between poses.",
+      "job": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_6gfGVaZ8vULnu64q89QjNfdL",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_6gfGVaZ8vULnu64q89QjNfdL' (one call waits on up to 32 jobs)."
+      },
+      "assetId": "asset_mPUtMRSY517vihExZsHyBhVP",
+      "status": "success",
+      "creativeUnitsCost": 8
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "content/tactics/base/creatures/mob_refresh_necromancer.png": "8d126851776959024362735ab704f3a471991e35ab51f8905cf03c391bcd9afa",
+  "content/tactics/base/creatures/mob_refresh_lich.png": "a91876a4fe97ba02eed138ffa6323b2c3bb5c7afc8bbbb3958d31b332d49d71a",
+  "content/tactics/base/portraits/necromancer_refresh_angry.png": "8363906c45e616af540855897a60718fedb52f84f88917643574475221802142",
+  "content/tactics/base/portraits/necromancer_refresh_happy.png": "9d6ff77613961da83228b6bebeef1abe6ba19f386b2651c5e1aeb9880e69ed52",
+  "content/tactics/base/portraits/necromancer_refresh_hurt.png": "b47dc43d77178f1d670dad0219ab390c7ee60f20c05a3f7935738c4ebc061a84",
+  "content/tactics/base/portraits/necromancer_refresh_idle.png": "a41db3f135a7ff66f9fa06768f8301e5cbda1b3d1ceac762a85654fb2f4bd321",
+  "content/tactics/base/portraits/necromancer_refresh_sad.png": "caec16f297e03815335aeef8e76d9a1f81f2ddf4220ac01c9f1f9983d2272d35",
+  "content/tactics/base/portraits/necromancer_refresh_surprised.png": "5abac93ec059aec9e047faff7458da23608dda3d47789758c534e55f347d75f2",
+  "content/tactics/base/portraits/lich_refresh_angry.png": "1e97bb50c34943da3116924855c5ab5bc8341bb0f5f377d3dac1fa7f69c67f15",
+  "content/tactics/base/portraits/lich_refresh_happy.png": "f371e543ca81a04e1d536c4dcdb8a4b564dece4ac234e641c1d83da961668820",
+  "content/tactics/base/portraits/lich_refresh_hurt.png": "54d91b66e6fa1176961205eb0e6c37b3424036dd701962168b8d339d4b1c27f4",
+  "content/tactics/base/portraits/lich_refresh_idle.png": "8a37789b1e090a0dbdfa498d93240aec403975c8ae6828d08cda3c7b21f7aacc",
+  "content/tactics/base/portraits/lich_refresh_sad.png": "08df64059a8b7e8abf2906b300891371c3cdf3ddee996c6633ac5aab7c493a82",
+  "content/tactics/base/portraits/lich_refresh_surprised.png": "44ac1e5e7d5c71f2e03221191bd9f9a53b40b60061c00b891e12846b9d1679ed"
+}

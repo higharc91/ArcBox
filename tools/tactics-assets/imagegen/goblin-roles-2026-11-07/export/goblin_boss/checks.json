@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 0,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      54,
+      108,
+      141
+    ],
+    "count": 3717
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 1,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      54,
+      108,
+      141
+    ],
+    "count": 3730
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 2,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      53,
+      109,
+      141
+    ],
+    "count": 3744
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 3,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      54,
+      109,
+      141
+    ],
+    "count": 3728
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 0,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      38,
+      55,
+      106,
+      142
+    ],
+    "count": 3653
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 1,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      41,
+      56,
+      108,
+      142
+    ],
+    "count": 3624
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 2,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      39,
+      55,
+      107,
+      141
+    ],
+    "count": 3624
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 3,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      38,
+      54,
+      105,
+      139
+    ],
+    "count": 3601
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 0,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      29,
+      64,
+      118,
+      142
+    ],
+    "count": 3944
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 1,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      37,
+      51,
+      117,
+      143
+    ],
+    "count": 4266
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 2,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      46,
+      68,
+      120,
+      143
+    ],
+    "count": 3382
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 3,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      39,
+      69,
+      122,
+      143
+    ],
+    "count": 3307
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 0,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      37,
+      56,
+      118,
+      143
+    ],
+    "count": 4338
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 1,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      35,
+      92,
+      122,
+      143
+    ],
+    "count": 3029
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 0,
+    "scale": 0.44,
+    "bounds": [
+      41,
+      55,
+      107,
+      142
+    ],
+    "count": 3734
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 2,
+    "scale": 0.44,
+    "bounds": [
+      40,
+      55,
+      112,
+      142
+    ],
+    "count": 3810
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 3,
+    "scale": 0.44,
+    "bounds": [
+      41,
+      56,
+      108,
+      143
+    ],
+    "count": 3733
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 4,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      43,
+      53,
+      112,
+      141
+    ],
+    "count": 3689
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 5,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      48,
+      52,
+      116,
+      142
+    ],
+    "count": 3728
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 6,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      43,
+      52,
+      111,
+      142
+    ],
+    "count": 3771
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 7,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      42,
+      53,
+      112,
+      141
+    ],
+    "count": 3705
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 4,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      45,
+      55,
+      115,
+      142
+    ],
+    "count": 3731
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 5,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      47,
+      56,
+      117,
+      143
+    ],
+    "count": 3639
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 6,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      44,
+      56,
+      113,
+      142
+    ],
+    "count": 3743
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 7,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      48,
+      54,
+      117,
+      140
+    ],
+    "count": 3572
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 4,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      34,
+      65,
+      114,
+      142
+    ],
+    "count": 3714
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 5,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      39,
+      49,
+      115,
+      142
+    ],
+    "count": 4087
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 6,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      43,
+      67,
+      120,
+      142
+    ],
+    "count": 3401
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 7,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      41,
+      71,
+      130,
+      143
+    ],
+    "count": 3353
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 2,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      38,
+      55,
+      116,
+      143
+    ],
+    "count": 4248
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 3,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      46,
+      89,
+      137,
+      142
+    ],
+    "count": 3360
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 4,
+    "scale": 0.44,
+    "bounds": [
+      44,
+      55,
+      108,
+      142
+    ],
+    "count": 3598
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 6,
+    "scale": 0.44,
+    "bounds": [
+      44,
+      55,
+      115,
+      142
+    ],
+    "count": 3753
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 7,
+    "scale": 0.44,
+    "bounds": [
+      44,
+      55,
+      109,
+      142
+    ],
+    "count": 3627
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 8,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      50,
+      52,
+      108,
+      142
+    ],
+    "count": 3066
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 9,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      50,
+      51,
+      107,
+      141
+    ],
+    "count": 3057
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 10,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      49,
+      50,
+      106,
+      141
+    ],
+    "count": 3054
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 11,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      49,
+      52,
+      106,
+      142
+    ],
+    "count": 3014
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 8,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      48,
+      53,
+      107,
+      139
+    ],
+    "count": 3074
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 9,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      48,
+      54,
+      106,
+      141
+    ],
+    "count": 3107
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 10,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      48,
+      52,
+      105,
+      139
+    ],
+    "count": 3035
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 11,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      50,
+      52,
+      107,
+      138
+    ],
+    "count": 2970
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 8,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      37,
+      65,
+      114,
+      143
+    ],
+    "count": 3423
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 9,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      42,
+      48,
+      108,
+      142
+    ],
+    "count": 3472
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 10,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      18,
+      66,
+      101,
+      143
+    ],
+    "count": 3336
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 11,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      29,
+      69,
+      113,
+      142
+    ],
+    "count": 3379
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 4,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      39,
+      53,
+      111,
+      142
+    ],
+    "count": 3700
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 5,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      34,
+      89,
+      124,
+      143
+    ],
+    "count": 3186
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 8,
+    "scale": 0.44,
+    "bounds": [
+      51,
+      53,
+      110,
+      142
+    ],
+    "count": 3132
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 10,
+    "scale": 0.44,
+    "bounds": [
+      51,
+      53,
+      110,
+      142
+    ],
+    "count": 3221
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 11,
+    "scale": 0.44,
+    "bounds": [
+      51,
+      53,
+      110,
+      142
+    ],
+    "count": 3071
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 12,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      56,
+      53,
+      120,
+      141
+    ],
+    "count": 3506
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 13,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      55,
+      52,
+      120,
+      141
+    ],
+    "count": 3583
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 14,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      56,
+      51,
+      120,
+      141
+    ],
+    "count": 3579
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 15,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      56,
+      53,
+      121,
+      141
+    ],
+    "count": 3509
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 12,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      56,
+      54,
+      119,
+      141
+    ],
+    "count": 3456
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 13,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      52,
+      55,
+      115,
+      142
+    ],
+    "count": 3412
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 14,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      52,
+      54,
+      114,
+      142
+    ],
+    "count": 3414
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 15,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      57,
+      53,
+      121,
+      140
+    ],
+    "count": 3360
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 12,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      36,
+      64,
+      114,
+      142
+    ],
+    "count": 3628
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 13,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      41,
+      46,
+      109,
+      142
+    ],
+    "count": 3960
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 14,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      15,
+      66,
+      106,
+      142
+    ],
+    "count": 3577
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 15,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      18,
+      70,
+      110,
+      143
+    ],
+    "count": 3464
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 6,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      37,
+      53,
+      112,
+      142
+    ],
+    "count": 4120
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 7,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      33,
+      91,
+      125,
+      142
+    ],
+    "count": 3159
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 12,
+    "scale": 0.44,
+    "bounds": [
+      56,
+      54,
+      120,
+      142
+    ],
+    "count": 3552
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 14,
+    "scale": 0.44,
+    "bounds": [
+      42,
+      54,
+      120,
+      142
+    ],
+    "count": 3683
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 15,
+    "scale": 0.44,
+    "bounds": [
+      54,
+      54,
+      119,
+      143
+    ],
+    "count": 3562
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 16,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      50,
+      51,
+      118,
+      141
+    ],
+    "count": 3766
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 17,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      50,
+      51,
+      118,
+      141
+    ],
+    "count": 3806
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 18,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      51,
+      50,
+      119,
+      141
+    ],
+    "count": 3811
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 19,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      51,
+      51,
+      118,
+      141
+    ],
+    "count": 3757
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 16,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      42,
+      52,
+      107,
+      140
+    ],
+    "count": 3578
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 17,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      53,
+      54,
+      118,
+      142
+    ],
+    "count": 3605
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 18,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      44,
+      52,
+      109,
+      140
+    ],
+    "count": 3537
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 19,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      52,
+      51,
+      117,
+      138
+    ],
+    "count": 3551
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 16,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      35,
+      63,
+      112,
+      142
+    ],
+    "count": 3917
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 17,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      44,
+      47,
+      111,
+      142
+    ],
+    "count": 4236
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 18,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      18,
+      65,
+      113,
+      142
+    ],
+    "count": 3782
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 19,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      24,
+      68,
+      112,
+      142
+    ],
+    "count": 3658
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 8,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      39,
+      56,
+      125,
+      142
+    ],
+    "count": 4157
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 9,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      38,
+      94,
+      125,
+      142
+    ],
+    "count": 2725
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 16,
+    "scale": 0.44,
+    "bounds": [
+      53,
+      53,
+      117,
+      142
+    ],
+    "count": 3614
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 18,
+    "scale": 0.44,
+    "bounds": [
+      37,
+      53,
+      116,
+      142
+    ],
+    "count": 3755
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 19,
+    "scale": 0.44,
+    "bounds": [
+      49,
+      53,
+      116,
+      142
+    ],
+    "count": 3673
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 20,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      50,
+      52,
+      114,
+      142
+    ],
+    "count": 3497
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 21,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      48,
+      52,
+      113,
+      142
+    ],
+    "count": 3506
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 22,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      48,
+      50,
+      113,
+      141
+    ],
+    "count": 3515
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 23,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      49,
+      52,
+      114,
+      142
+    ],
+    "count": 3488
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 20,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      56,
+      53,
+      119,
+      140
+    ],
+    "count": 3324
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 21,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      49,
+      54,
+      113,
+      141
+    ],
+    "count": 3361
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 22,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      50,
+      53,
+      113,
+      141
+    ],
+    "count": 3308
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 23,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      51,
+      52,
+      114,
+      139
+    ],
+    "count": 3341
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 20,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      44,
+      63,
+      119,
+      143
+    ],
+    "count": 3903
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 21,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      49,
+      48,
+      109,
+      143
+    ],
+    "count": 4013
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 22,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      31,
+      65,
+      111,
+      142
+    ],
+    "count": 3510
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 23,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      31,
+      69,
+      113,
+      142
+    ],
+    "count": 3410
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 10,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      44,
+      57,
+      124,
+      142
+    ],
+    "count": 4131
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 11,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      35,
+      92,
+      127,
+      142
+    ],
+    "count": 2918
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 20,
+    "scale": 0.44,
+    "bounds": [
+      52,
+      53,
+      116,
+      142
+    ],
+    "count": 3436
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 22,
+    "scale": 0.44,
+    "bounds": [
+      53,
+      53,
+      120,
+      142
+    ],
+    "count": 3619
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 23,
+    "scale": 0.44,
+    "bounds": [
+      53,
+      53,
+      116,
+      142
+    ],
+    "count": 3402
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 24,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      52,
+      50,
+      108,
+      141
+    ],
+    "count": 2989
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 25,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      52,
+      50,
+      108,
+      141
+    ],
+    "count": 3017
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 26,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      51,
+      49,
+      107,
+      141
+    ],
+    "count": 3015
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 27,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      53,
+      50,
+      108,
+      141
+    ],
+    "count": 2957
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 24,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      50,
+      52,
+      107,
+      140
+    ],
+    "count": 2936
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 25,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      50,
+      53,
+      106,
+      142
+    ],
+    "count": 2972
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 26,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      52,
+      52,
+      108,
+      141
+    ],
+    "count": 2868
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 27,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      52,
+      51,
+      108,
+      139
+    ],
+    "count": 2885
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 24,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      42,
+      63,
+      107,
+      142
+    ],
+    "count": 3213
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 25,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      45,
+      47,
+      105,
+      143
+    ],
+    "count": 3502
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 26,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      37,
+      67,
+      124,
+      142
+    ],
+    "count": 3516
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 27,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      47,
+      70,
+      130,
+      142
+    ],
+    "count": 3320
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 12,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      46,
+      53,
+      116,
+      143
+    ],
+    "count": 3814
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 13,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      38,
+      86,
+      122,
+      144
+    ],
+    "count": 3306
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 24,
+    "scale": 0.44,
+    "bounds": [
+      49,
+      52,
+      106,
+      143
+    ],
+    "count": 3193
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 26,
+    "scale": 0.44,
+    "bounds": [
+      49,
+      52,
+      113,
+      143
+    ],
+    "count": 3386
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 27,
+    "scale": 0.44,
+    "bounds": [
+      49,
+      52,
+      106,
+      142
+    ],
+    "count": 3080
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/boss-idle.png",
+    "sourcePose": 28,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      54,
+      107,
+      141
+    ],
+    "count": 3709
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/boss-idle.png",
+    "sourcePose": 29,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      53,
+      106,
+      141
+    ],
+    "count": 3748
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/boss-idle.png",
+    "sourcePose": 30,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      52,
+      106,
+      142
+    ],
+    "count": 3753
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/boss-idle.png",
+    "sourcePose": 31,
+    "scale": 0.4489795918367347,
+    "bounds": [
+      39,
+      54,
+      107,
+      141
+    ],
+    "count": 3703
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/boss-walk.png",
+    "sourcePose": 28,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      41,
+      58,
+      107,
+      142
+    ],
+    "count": 3596
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/boss-walk.png",
+    "sourcePose": 29,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      41,
+      59,
+      106,
+      144
+    ],
+    "count": 3548
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/boss-walk.png",
+    "sourcePose": 30,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      41,
+      58,
+      106,
+      144
+    ],
+    "count": 3532
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/boss-walk.png",
+    "sourcePose": 31,
+    "scale": 0.4292682926829268,
+    "bounds": [
+      43,
+      56,
+      109,
+      140
+    ],
+    "count": 3550
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/boss-attack.png",
+    "sourcePose": 28,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      37,
+      68,
+      117,
+      143
+    ],
+    "count": 3596
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/boss-attack.png",
+    "sourcePose": 29,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      41,
+      49,
+      118,
+      143
+    ],
+    "count": 4342
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/boss-attack.png",
+    "sourcePose": 30,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      50,
+      68,
+      129,
+      142
+    ],
+    "count": 3559
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/boss-attack.png",
+    "sourcePose": 31,
+    "scale": 0.4604651162790698,
+    "bounds": [
+      43,
+      71,
+      126,
+      142
+    ],
+    "count": 3320
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 14,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      39,
+      52,
+      120,
+      142
+    ],
+    "count": 4316
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/boss-damage.png",
+    "sourcePose": 15,
+    "scale": 0.3333333333333333,
+    "bounds": [
+      38,
+      86,
+      121,
+      143
+    ],
+    "count": 3244
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/boss-cast.png",
+    "sourcePose": 28,
+    "scale": 0.44,
+    "bounds": [
+      41,
+      56,
+      105,
+      142
+    ],
+    "count": 3655
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/boss-cast.png",
+    "sourcePose": 30,
+    "scale": 0.44,
+    "bounds": [
+      40,
+      57,
+      119,
+      143
+    ],
+    "count": 3850
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/boss-cast.png",
+    "sourcePose": 31,
+    "scale": 0.44,
+    "bounds": [
+      41,
+      56,
+      108,
+      142
+    ],
+    "count": 3724
+  }
+]

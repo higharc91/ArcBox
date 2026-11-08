@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      62,
+      65,
+      173,
+      196
+    ],
+    "count": 7795
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      63,
+      65,
+      173,
+      197
+    ],
+    "count": 7760
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      63,
+      64,
+      174,
+      197
+    ],
+    "count": 7721
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      63,
+      65,
+      174,
+      196
+    ],
+    "count": 7735
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 0,
+    "scale": 0.6875,
+    "bounds": [
+      61,
+      67,
+      175,
+      198
+    ],
+    "count": 7882
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 1,
+    "scale": 0.6875,
+    "bounds": [
+      63,
+      68,
+      172,
+      199
+    ],
+    "count": 7751
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 2,
+    "scale": 0.6875,
+    "bounds": [
+      63,
+      67,
+      175,
+      196
+    ],
+    "count": 7726
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 3,
+    "scale": 0.6875,
+    "bounds": [
+      63,
+      66,
+      171,
+      197
+    ],
+    "count": 7624
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 0,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      58,
+      80,
+      151,
+      198
+    ],
+    "count": 6451
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 1,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      51,
+      41,
+      152,
+      198
+    ],
+    "count": 7398
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 2,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      61,
+      85,
+      162,
+      198
+    ],
+    "count": 6181
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 3,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      33,
+      88,
+      151,
+      198
+    ],
+    "count": 6193
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      55,
+      67,
+      182,
+      198
+    ],
+    "count": 9014
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      54,
+      135,
+      201,
+      198
+    ],
+    "count": 5400
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      43,
+      65,
+      149,
+      196
+    ],
+    "count": 7449
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      43,
+      63,
+      150,
+      196
+    ],
+    "count": 7450
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      43,
+      62,
+      150,
+      196
+    ],
+    "count": 7535
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      43,
+      65,
+      149,
+      196
+    ],
+    "count": 7413
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 4,
+    "scale": 0.6875,
+    "bounds": [
+      44,
+      67,
+      150,
+      198
+    ],
+    "count": 7544
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 5,
+    "scale": 0.6875,
+    "bounds": [
+      44,
+      68,
+      151,
+      201
+    ],
+    "count": 7440
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 6,
+    "scale": 0.6875,
+    "bounds": [
+      43,
+      67,
+      151,
+      198
+    ],
+    "count": 7489
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 7,
+    "scale": 0.6875,
+    "bounds": [
+      42,
+      66,
+      146,
+      198
+    ],
+    "count": 7070
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 4,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      48,
+      80,
+      152,
+      198
+    ],
+    "count": 6569
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 5,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      58,
+      46,
+      153,
+      198
+    ],
+    "count": 7264
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 6,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      50,
+      88,
+      172,
+      198
+    ],
+    "count": 6538
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/hobgoblin-attack-front.png",
+    "sourcePose": 7,
+    "scale": 0.39732441471571905,
+    "bounds": [
+      48,
+      89,
+      175,
+      198
+    ],
+    "count": 6547
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      42,
+      65,
+      163,
+      198
+    ],
+    "count": 8623
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      58,
+      136,
+      215,
+      198
+    ],
+    "count": 5834
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      52,
+      64,
+      134,
+      197
+    ],
+    "count": 5899
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      53,
+      63,
+      133,
+      196
+    ],
+    "count": 5787
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      53,
+      62,
+      133,
+      197
+    ],
+    "count": 5744
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      53,
+      64,
+      133,
+      197
+    ],
+    "count": 5811
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 8,
+    "scale": 0.6875,
+    "bounds": [
+      52,
+      65,
+      141,
+      197
+    ],
+    "count": 6104
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 9,
+    "scale": 0.6875,
+    "bounds": [
+      52,
+      66,
+      134,
+      199
+    ],
+    "count": 5788
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 10,
+    "scale": 0.6875,
+    "bounds": [
+      54,
+      65,
+      136,
+      198
+    ],
+    "count": 5935
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 11,
+    "scale": 0.6875,
+    "bounds": [
+      53,
+      64,
+      137,
+      197
+    ],
+    "count": 5872
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      36,
+      78,
+      149,
+      198
+    ],
+    "count": 6674
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      70,
+      48,
+      156,
+      198
+    ],
+    "count": 6725
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      41,
+      85,
+      181,
+      198
+    ],
+    "count": 7594
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      46,
+      87,
+      178,
+      198
+    ],
+    "count": 6925
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      53,
+      62,
+      150,
+      198
+    ],
+    "count": 6220
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      28,
+      139,
+      198,
+      198
+    ],
+    "count": 6135
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      77,
+      64,
+      172,
+      197
+    ],
+    "count": 7199
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      77,
+      62,
+      171,
+      196
+    ],
+    "count": 7120
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      78,
+      61,
+      171,
+      197
+    ],
+    "count": 7101
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      78,
+      64,
+      172,
+      197
+    ],
+    "count": 7148
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 12,
+    "scale": 0.6875,
+    "bounds": [
+      74,
+      65,
+      172,
+      194
+    ],
+    "count": 7287
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 13,
+    "scale": 0.6875,
+    "bounds": [
+      75,
+      66,
+      173,
+      199
+    ],
+    "count": 7259
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 14,
+    "scale": 0.6875,
+    "bounds": [
+      75,
+      65,
+      171,
+      199
+    ],
+    "count": 6948
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 15,
+    "scale": 0.6875,
+    "bounds": [
+      74,
+      64,
+      173,
+      196
+    ],
+    "count": 7226
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 12,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      30,
+      78,
+      145,
+      198
+    ],
+    "count": 6659
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 13,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      72,
+      46,
+      167,
+      200
+    ],
+    "count": 7217
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 14,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      29,
+      83,
+      151,
+      198
+    ],
+    "count": 6937
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 15,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      20,
+      86,
+      150,
+      198
+    ],
+    "count": 6802
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      71,
+      64,
+      174,
+      198
+    ],
+    "count": 8035
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      28,
+      143,
+      198,
+      198
+    ],
+    "count": 5905
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      67,
+      64,
+      175,
+      197
+    ],
+    "count": 7910
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      68,
+      62,
+      175,
+      197
+    ],
+    "count": 7868
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      68,
+      62,
+      175,
+      197
+    ],
+    "count": 7875
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      67,
+      64,
+      175,
+      197
+    ],
+    "count": 7877
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 16,
+    "scale": 0.6875,
+    "bounds": [
+      64,
+      65,
+      174,
+      196
+    ],
+    "count": 7986
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 17,
+    "scale": 0.6875,
+    "bounds": [
+      66,
+      66,
+      175,
+      199
+    ],
+    "count": 8055
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 18,
+    "scale": 0.6875,
+    "bounds": [
+      67,
+      65,
+      174,
+      198
+    ],
+    "count": 7820
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 19,
+    "scale": 0.6875,
+    "bounds": [
+      66,
+      64,
+      174,
+      197
+    ],
+    "count": 7881
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 16,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      41,
+      80,
+      151,
+      198
+    ],
+    "count": 6836
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/hobgoblin-overhead-clean.png",
+    "sourcePose": 0,
+    "scale": 0.15925324675324673,
+    "bounds": [
+      68,
+      45,
+      167,
+      198
+    ],
+    "count": 7365
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 18,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      38,
+      85,
+      154,
+      198
+    ],
+    "count": 6594
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 19,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      23,
+      88,
+      152,
+      198
+    ],
+    "count": 6514
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      60,
+      64,
+      179,
+      198
+    ],
+    "count": 8803
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      60,
+      127,
+      201,
+      198
+    ],
+    "count": 5703
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      77,
+      64,
+      177,
+      197
+    ],
+    "count": 7343
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      77,
+      62,
+      177,
+      197
+    ],
+    "count": 7259
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      77,
+      61,
+      175,
+      197
+    ],
+    "count": 7217
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      78,
+      64,
+      178,
+      197
+    ],
+    "count": 7276
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 20,
+    "scale": 0.6875,
+    "bounds": [
+      75,
+      65,
+      177,
+      200
+    ],
+    "count": 7151
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 21,
+    "scale": 0.6875,
+    "bounds": [
+      74,
+      66,
+      177,
+      200
+    ],
+    "count": 7255
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 22,
+    "scale": 0.6875,
+    "bounds": [
+      78,
+      65,
+      177,
+      200
+    ],
+    "count": 7282
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 23,
+    "scale": 0.6875,
+    "bounds": [
+      74,
+      64,
+      177,
+      199
+    ],
+    "count": 7348
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 20,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      70,
+      82,
+      173,
+      198
+    ],
+    "count": 6493
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 21,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      69,
+      49,
+      156,
+      198
+    ],
+    "count": 7301
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 22,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      68,
+      91,
+      184,
+      198
+    ],
+    "count": 6174
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 23,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      71,
+      93,
+      195,
+      198
+    ],
+    "count": 6114
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      65,
+      64,
+      173,
+      198
+    ],
+    "count": 8383
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      76,
+      129,
+      221,
+      198
+    ],
+    "count": 5295
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      71,
+      63,
+      146,
+      196
+    ],
+    "count": 5118
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      72,
+      61,
+      146,
+      197
+    ],
+    "count": 5069
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      72,
+      61,
+      147,
+      197
+    ],
+    "count": 5119
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      71,
+      62,
+      146,
+      196
+    ],
+    "count": 5077
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 24,
+    "scale": 0.6875,
+    "bounds": [
+      67,
+      65,
+      146,
+      198
+    ],
+    "count": 5370
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 25,
+    "scale": 0.6875,
+    "bounds": [
+      70,
+      66,
+      147,
+      198
+    ],
+    "count": 5281
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 26,
+    "scale": 0.6875,
+    "bounds": [
+      70,
+      65,
+      147,
+      194
+    ],
+    "count": 5273
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 27,
+    "scale": 0.6875,
+    "bounds": [
+      69,
+      64,
+      145,
+      197
+    ],
+    "count": 5374
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 24,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      59,
+      77,
+      152,
+      198
+    ],
+    "count": 6218
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 25,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      61,
+      49,
+      149,
+      198
+    ],
+    "count": 7157
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 26,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      57,
+      84,
+      166,
+      198
+    ],
+    "count": 6737
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 27,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      51,
+      89,
+      170,
+      198
+    ],
+    "count": 6462
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      83,
+      61,
+      159,
+      198
+    ],
+    "count": 5814
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      22,
+      137,
+      163,
+      198
+    ],
+    "count": 6060
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      66,
+      65,
+      163,
+      196
+    ],
+    "count": 7325
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      65,
+      65,
+      163,
+      197
+    ],
+    "count": 7337
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      67,
+      63,
+      164,
+      196
+    ],
+    "count": 7353
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/hobgoblin-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6910994764397905,
+    "bounds": [
+      66,
+      65,
+      164,
+      196
+    ],
+    "count": 7254
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 28,
+    "scale": 0.6875,
+    "bounds": [
+      66,
+      67,
+      165,
+      196
+    ],
+    "count": 7172
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 29,
+    "scale": 0.6875,
+    "bounds": [
+      66,
+      68,
+      162,
+      198
+    ],
+    "count": 7125
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 30,
+    "scale": 0.6875,
+    "bounds": [
+      66,
+      67,
+      164,
+      195
+    ],
+    "count": 6968
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/hobgoblin-walk.png",
+    "sourcePose": 31,
+    "scale": 0.6875,
+    "bounds": [
+      66,
+      66,
+      162,
+      195
+    ],
+    "count": 7220
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 28,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      44,
+      78,
+      153,
+      198
+    ],
+    "count": 6959
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 29,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      48,
+      53,
+      151,
+      198
+    ],
+    "count": 7716
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 30,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      58,
+      85,
+      165,
+      198
+    ],
+    "count": 6527
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/hobgoblin-attack.png",
+    "sourcePose": 31,
+    "scale": 0.7071428571428571,
+    "bounds": [
+      57,
+      88,
+      165,
+      198
+    ],
+    "count": 6353
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      62,
+      61,
+      168,
+      198
+    ],
+    "count": 8778
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hobgoblin-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5569620253164557,
+    "bounds": [
+      25,
+      135,
+      161,
+      198
+    ],
+    "count": 5809
+  }
+]

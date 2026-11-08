@@ -1,0 +1,66 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1160
+    },
+    {
+      "title": "Development battle · creatures beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Five specials and the physical bite through the normal Godot beat and effect path",
+      "width": 1920,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · creature scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "93c6dc3a",
+    "walk": "ceac6d30",
+    "attack": "a9ca0217",
+    "special": "735ac9ad",
+    "cast": "d042f42b",
+    "buff": "d2fcf39d",
+    "hurt": "9ba5657c",
+    "down": "41004e69"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "water_elemental",
+      "hashes": [
+        "cf3336be",
+        "6f664dd4",
+        "c5046180",
+        "9257192d"
+      ]
+    },
+    {
+      "id": "dragon",
+      "hashes": [
+        "d2a0354f",
+        "56cb1e65",
+        "5bacc07d",
+        "f4c5cf1b"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 640,
+  "passed": true
+}

@@ -1,0 +1,14 @@
+{
+  "priorCommit": "136fb3502224af4c9b36b6dc7b38a2fd328fa2be",
+  "addedCreatureEntries": [
+    "mob_refresh_skeleton",
+    "mob_refresh_skeleton_archer"
+  ],
+  "changedPortraitPresets": [
+    "skeleton",
+    "skeleton_archer"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "unrelatedPortraitsUnchanged": true,
+  "runtimeAssets": 14
+}

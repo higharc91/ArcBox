@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.72,
+    "bounds": [
+      74,
+      79,
+      171,
+      222
+    ],
+    "count": 7723
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 1,
+    "scale": 0.72,
+    "bounds": [
+      73,
+      78,
+      171,
+      223
+    ],
+    "count": 8086
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 2,
+    "scale": 0.72,
+    "bounds": [
+      71,
+      78,
+      171,
+      223
+    ],
+    "count": 8281
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.72,
+    "bounds": [
+      73,
+      79,
+      171,
+      222
+    ],
+    "count": 7883
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 0,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      70,
+      81,
+      172,
+      224
+    ],
+    "count": 8031
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 1,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      69,
+      81,
+      171,
+      226
+    ],
+    "count": 8255
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 2,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      68,
+      81,
+      171,
+      227
+    ],
+    "count": 8465
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 3,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      70,
+      80,
+      172,
+      223
+    ],
+    "count": 8098
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.72,
+    "bounds": [
+      74,
+      81,
+      171,
+      224
+    ],
+    "count": 7723
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      73,
+      80,
+      178,
+      224
+    ],
+    "count": 8487
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      78,
+      80,
+      178,
+      224
+    ],
+    "count": 8224
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.72,
+    "bounds": [
+      73,
+      81,
+      171,
+      224
+    ],
+    "count": 7883
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 0,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      82,
+      89,
+      175,
+      224
+    ],
+    "count": 6984
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 1,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      87,
+      142,
+      168,
+      224
+    ],
+    "count": 4502
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.72,
+    "bounds": [
+      74,
+      81,
+      171,
+      224
+    ],
+    "count": 7723
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 0,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      82,
+      80,
+      167,
+      224
+    ],
+    "count": 7380
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 1,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      57,
+      79,
+      196,
+      224
+    ],
+    "count": 9348
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.72,
+    "bounds": [
+      73,
+      81,
+      171,
+      224
+    ],
+    "count": 7883
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.72,
+    "bounds": [
+      74,
+      81,
+      171,
+      224
+    ],
+    "count": 7723
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 2,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      83,
+      78,
+      170,
+      224
+    ],
+    "count": 7623
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 3,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      79,
+      78,
+      166,
+      224
+    ],
+    "count": 7372
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.72,
+    "bounds": [
+      73,
+      81,
+      171,
+      224
+    ],
+    "count": 7883
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      80,
+      170,
+      223
+    ],
+    "count": 7755
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 5,
+    "scale": 0.72,
+    "bounds": [
+      80,
+      76,
+      170,
+      222
+    ],
+    "count": 8131
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 6,
+    "scale": 0.72,
+    "bounds": [
+      80,
+      74,
+      170,
+      222
+    ],
+    "count": 8334
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.72,
+    "bounds": [
+      80,
+      79,
+      170,
+      222
+    ],
+    "count": 7857
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 4,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      83,
+      175,
+      225
+    ],
+    "count": 8084
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 5,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      76,
+      83,
+      173,
+      228
+    ],
+    "count": 8280
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 6,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      74,
+      83,
+      172,
+      229
+    ],
+    "count": 8497
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 7,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      81,
+      175,
+      224
+    ],
+    "count": 8125
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      170,
+      224
+    ],
+    "count": 7755
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      69,
+      80,
+      174,
+      224
+    ],
+    "count": 8609
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      49,
+      80,
+      176,
+      224
+    ],
+    "count": 8825
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      169,
+      224
+    ],
+    "count": 7857
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 2,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      86,
+      87,
+      172,
+      224
+    ],
+    "count": 7019
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 3,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      89,
+      147,
+      166,
+      224
+    ],
+    "count": 4174
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      170,
+      224
+    ],
+    "count": 7755
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 4,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      86,
+      83,
+      162,
+      224
+    ],
+    "count": 6998
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 5,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      57,
+      81,
+      194,
+      224
+    ],
+    "count": 9620
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      169,
+      224
+    ],
+    "count": 7857
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      170,
+      224
+    ],
+    "count": 7755
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 6,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      80,
+      78,
+      155,
+      224
+    ],
+    "count": 7404
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 7,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      58,
+      81,
+      157,
+      224
+    ],
+    "count": 7727
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      169,
+      224
+    ],
+    "count": 7857
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.72,
+    "bounds": [
+      89,
+      82,
+      158,
+      223
+    ],
+    "count": 6336
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 9,
+    "scale": 0.72,
+    "bounds": [
+      90,
+      79,
+      158,
+      222
+    ],
+    "count": 6438
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 10,
+    "scale": 0.72,
+    "bounds": [
+      88,
+      76,
+      159,
+      223
+    ],
+    "count": 6710
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.72,
+    "bounds": [
+      91,
+      82,
+      157,
+      223
+    ],
+    "count": 6285
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 8,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      89,
+      83,
+      158,
+      224
+    ],
+    "count": 6764
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 9,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      90,
+      84,
+      158,
+      226
+    ],
+    "count": 6765
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 10,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      87,
+      83,
+      159,
+      229
+    ],
+    "count": 7062
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 11,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      90,
+      82,
+      158,
+      223
+    ],
+    "count": 6725
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.72,
+    "bounds": [
+      89,
+      83,
+      158,
+      224
+    ],
+    "count": 6336
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      71,
+      83,
+      164,
+      224
+    ],
+    "count": 8085
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      45,
+      83,
+      166,
+      224
+    ],
+    "count": 8653
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.72,
+    "bounds": [
+      90,
+      83,
+      156,
+      224
+    ],
+    "count": 6285
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 4,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      98,
+      88,
+      153,
+      224
+    ],
+    "count": 5280
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 5,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      93,
+      153,
+      162,
+      224
+    ],
+    "count": 3767
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.72,
+    "bounds": [
+      89,
+      83,
+      158,
+      224
+    ],
+    "count": 6336
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 8,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      87,
+      86,
+      157,
+      224
+    ],
+    "count": 6655
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 9,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      63,
+      84,
+      181,
+      224
+    ],
+    "count": 8974
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.72,
+    "bounds": [
+      90,
+      83,
+      156,
+      224
+    ],
+    "count": 6285
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.72,
+    "bounds": [
+      89,
+      83,
+      158,
+      224
+    ],
+    "count": 6336
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 10,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      70,
+      84,
+      155,
+      224
+    ],
+    "count": 7306
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 11,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      50,
+      84,
+      155,
+      224
+    ],
+    "count": 7894
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.72,
+    "bounds": [
+      90,
+      83,
+      156,
+      224
+    ],
+    "count": 6285
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      80,
+      167,
+      223
+    ],
+    "count": 7644
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 13,
+    "scale": 0.72,
+    "bounds": [
+      80,
+      78,
+      168,
+      222
+    ],
+    "count": 7863
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 14,
+    "scale": 0.72,
+    "bounds": [
+      77,
+      77,
+      165,
+      223
+    ],
+    "count": 8037
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      82,
+      168,
+      223
+    ],
+    "count": 7668
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 12,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      82,
+      169,
+      222
+    ],
+    "count": 8031
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 13,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      83,
+      170,
+      226
+    ],
+    "count": 8170
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 14,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      82,
+      168,
+      225
+    ],
+    "count": 8183
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 15,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      81,
+      170,
+      222
+    ],
+    "count": 8077
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      167,
+      224
+    ],
+    "count": 7644
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      82,
+      83,
+      170,
+      224
+    ],
+    "count": 8194
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      55,
+      83,
+      176,
+      224
+    ],
+    "count": 8543
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      83,
+      170,
+      224
+    ],
+    "count": 7668
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 6,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      89,
+      93,
+      168,
+      224
+    ],
+    "count": 6631
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 7,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      89,
+      156,
+      166,
+      224
+    ],
+    "count": 3891
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      167,
+      224
+    ],
+    "count": 7644
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 12,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      82,
+      83,
+      163,
+      224
+    ],
+    "count": 7457
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 13,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      55,
+      83,
+      186,
+      224
+    ],
+    "count": 9063
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      83,
+      170,
+      224
+    ],
+    "count": 7668
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      167,
+      224
+    ],
+    "count": 7644
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 14,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      75,
+      81,
+      157,
+      224
+    ],
+    "count": 7697
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 15,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      56,
+      84,
+      158,
+      224
+    ],
+    "count": 8102
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      83,
+      170,
+      224
+    ],
+    "count": 7668
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      80,
+      178,
+      223
+    ],
+    "count": 7864
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 17,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      78,
+      177,
+      222
+    ],
+    "count": 8030
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 18,
+    "scale": 0.72,
+    "bounds": [
+      80,
+      78,
+      179,
+      223
+    ],
+    "count": 8281
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      80,
+      178,
+      223
+    ],
+    "count": 7909
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 16,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      81,
+      181,
+      224
+    ],
+    "count": 8342
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 17,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      78,
+      82,
+      181,
+      225
+    ],
+    "count": 8304
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 18,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      81,
+      181,
+      225
+    ],
+    "count": 8636
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 19,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      76,
+      80,
+      180,
+      223
+    ],
+    "count": 8398
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      178,
+      224
+    ],
+    "count": 7864
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      77,
+      83,
+      184,
+      224
+    ],
+    "count": 8219
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      82,
+      83,
+      193,
+      224
+    ],
+    "count": 8221
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      178,
+      224
+    ],
+    "count": 7909
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 8,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      84,
+      91,
+      177,
+      224
+    ],
+    "count": 6953
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 9,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      85,
+      147,
+      169,
+      224
+    ],
+    "count": 4483
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      178,
+      224
+    ],
+    "count": 7864
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 16,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      84,
+      81,
+      171,
+      224
+    ],
+    "count": 7688
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 17,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      53,
+      81,
+      202,
+      224
+    ],
+    "count": 9502
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      178,
+      224
+    ],
+    "count": 7909
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      178,
+      224
+    ],
+    "count": 7864
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 18,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      87,
+      81,
+      169,
+      224
+    ],
+    "count": 7528
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 19,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      81,
+      81,
+      177,
+      224
+    ],
+    "count": 8452
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.72,
+    "bounds": [
+      79,
+      81,
+      178,
+      224
+    ],
+    "count": 7909
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.72,
+    "bounds": [
+      83,
+      81,
+      175,
+      223
+    ],
+    "count": 7647
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 21,
+    "scale": 0.72,
+    "bounds": [
+      86,
+      78,
+      175,
+      222
+    ],
+    "count": 7782
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 22,
+    "scale": 0.72,
+    "bounds": [
+      84,
+      73,
+      175,
+      222
+    ],
+    "count": 8187
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.72,
+    "bounds": [
+      83,
+      81,
+      174,
+      222
+    ],
+    "count": 7647
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 20,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      81,
+      81,
+      176,
+      222
+    ],
+    "count": 8046
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 21,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      83,
+      82,
+      177,
+      224
+    ],
+    "count": 8286
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 22,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      80,
+      82,
+      177,
+      229
+    ],
+    "count": 8496
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 23,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      80,
+      81,
+      177,
+      221
+    ],
+    "count": 8146
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.72,
+    "bounds": [
+      83,
+      82,
+      175,
+      224
+    ],
+    "count": 7647
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      80,
+      81,
+      180,
+      224
+    ],
+    "count": 8578
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      76,
+      82,
+      199,
+      224
+    ],
+    "count": 8755
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.72,
+    "bounds": [
+      84,
+      83,
+      175,
+      224
+    ],
+    "count": 7647
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 10,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      86,
+      91,
+      171,
+      224
+    ],
+    "count": 6758
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 11,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      87,
+      154,
+      167,
+      224
+    ],
+    "count": 4151
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.72,
+    "bounds": [
+      83,
+      82,
+      175,
+      224
+    ],
+    "count": 7647
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 20,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      89,
+      83,
+      167,
+      224
+    ],
+    "count": 7298
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 21,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      54,
+      83,
+      195,
+      224
+    ],
+    "count": 9070
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.72,
+    "bounds": [
+      84,
+      83,
+      175,
+      224
+    ],
+    "count": 7647
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.72,
+    "bounds": [
+      83,
+      82,
+      175,
+      224
+    ],
+    "count": 7647
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 22,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      93,
+      82,
+      170,
+      224
+    ],
+    "count": 7408
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 23,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      91,
+      84,
+      187,
+      224
+    ],
+    "count": 7825
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.72,
+    "bounds": [
+      84,
+      83,
+      175,
+      224
+    ],
+    "count": 7647
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      83,
+      162,
+      222
+    ],
+    "count": 6006
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 25,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      78,
+      160,
+      223
+    ],
+    "count": 6218
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 26,
+    "scale": 0.72,
+    "bounds": [
+      97,
+      75,
+      162,
+      223
+    ],
+    "count": 6342
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      83,
+      161,
+      222
+    ],
+    "count": 5989
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 24,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      96,
+      85,
+      163,
+      224
+    ],
+    "count": 6442
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 25,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      97,
+      86,
+      162,
+      227
+    ],
+    "count": 6445
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 26,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      95,
+      86,
+      164,
+      231
+    ],
+    "count": 6746
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 27,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      96,
+      85,
+      164,
+      224
+    ],
+    "count": 6434
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      85,
+      162,
+      224
+    ],
+    "count": 6006
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      89,
+      83,
+      164,
+      224
+    ],
+    "count": 7459
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      88,
+      84,
+      198,
+      224
+    ],
+    "count": 8206
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      85,
+      161,
+      224
+    ],
+    "count": 5989
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 12,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      99,
+      89,
+      154,
+      224
+    ],
+    "count": 5240
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 13,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      95,
+      155,
+      161,
+      224
+    ],
+    "count": 3607
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      85,
+      162,
+      224
+    ],
+    "count": 6006
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 24,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      89,
+      83,
+      159,
+      224
+    ],
+    "count": 6985
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 25,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      69,
+      83,
+      179,
+      224
+    ],
+    "count": 8071
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      85,
+      161,
+      224
+    ],
+    "count": 5989
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      85,
+      162,
+      224
+    ],
+    "count": 6006
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 26,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      90,
+      79,
+      167,
+      224
+    ],
+    "count": 7396
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 27,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      93,
+      81,
+      187,
+      224
+    ],
+    "count": 7631
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.72,
+    "bounds": [
+      98,
+      85,
+      161,
+      224
+    ],
+    "count": 5989
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      85,
+      170,
+      222
+    ],
+    "count": 7391
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 29,
+    "scale": 0.72,
+    "bounds": [
+      80,
+      78,
+      171,
+      223
+    ],
+    "count": 7932
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 30,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      76,
+      172,
+      223
+    ],
+    "count": 7844
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      84,
+      170,
+      222
+    ],
+    "count": 7433
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 28,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      76,
+      86,
+      174,
+      222
+    ],
+    "count": 7865
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 29,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      77,
+      87,
+      174,
+      228
+    ],
+    "count": 8145
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 30,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      78,
+      86,
+      177,
+      229
+    ],
+    "count": 8173
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_elemental-walk.png",
+    "sourcePose": 31,
+    "scale": 0.7093596059113301,
+    "bounds": [
+      78,
+      85,
+      175,
+      221
+    ],
+    "count": 8015
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      87,
+      170,
+      224
+    ],
+    "count": 7391
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      80,
+      82,
+      173,
+      224
+    ],
+    "count": 8161
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_elemental-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6923076923076923,
+    "bounds": [
+      91,
+      83,
+      183,
+      224
+    ],
+    "count": 7752
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      86,
+      170,
+      224
+    ],
+    "count": 7433
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 14,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      90,
+      92,
+      169,
+      224
+    ],
+    "count": 6456
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-damage.png",
+    "sourcePose": 15,
+    "scale": 0.6098654708520179,
+    "bounds": [
+      91,
+      157,
+      163,
+      224
+    ],
+    "count": 3676
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      87,
+      170,
+      224
+    ],
+    "count": 7391
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 28,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      83,
+      86,
+      163,
+      224
+    ],
+    "count": 7321
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 29,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      61,
+      82,
+      190,
+      224
+    ],
+    "count": 9115
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      86,
+      170,
+      224
+    ],
+    "count": 7433
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      87,
+      170,
+      224
+    ],
+    "count": 7391
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 30,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      87,
+      81,
+      165,
+      224
+    ],
+    "count": 7494
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/air_elemental-moves.png",
+    "sourcePose": 31,
+    "scale": 0.7346938775510204,
+    "bounds": [
+      87,
+      84,
+      188,
+      224
+    ],
+    "count": 7700
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/air_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.72,
+    "bounds": [
+      81,
+      86,
+      170,
+      224
+    ],
+    "count": 7433
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "briefs": {
+    "skeleton": "Wardenflame: Embers of the Vale production concept sheet for pixel translation. Grounded tactical fantasy matching the refreshed human/goblin roster: warm upperleftkey coolshadows, crispreadable silhouette, worncloth/leather/iron, restrainedearthpalette. Parchmentbackground,noscenery/lettering. OneSAMEcharacter front3/4,rear3/4,leftprofile fullbodies plus skull/equipmentstudy andneutral1.75m human scaleinset. Allhead/feet/weaponscontainedwithlargemargins. BONE WARDEN, adultHUMANskeleton about1.75m. Canon: oldestdead ofWardens'crypts stillinremnantsofuniforms, keptatpostbycryptwards, emptyratherthancruel. WeatheredIVORYskull, DARKEMPTYeyesockets/nasalhole, visibleattachedjawandneckspine, no glowingred/coloredpupil/horns/fangs. Headslightlyenlargedfortacticalreadability. Lightarmor: tatteredSLATEBLUEknee-lengthSPLITWardentabard underpatchedcharcoalleatherjerkin, dullbrassclaspplainfadedbadgeunreadable, brownleatherbeltfrontbuckleONLYfront, simplebracers/cuffwraps, exposedivoryforearmbonesjoinedwristsandshoulders, leatherwrappedshinsanddarkbrownboots. Ribsshowthroughafewclothingtears buttorso/neck/spineconnected; don'tmakefloatingbonepieces. ClothingBACKseamsnotfrontbuckles, no cape/helmet/crown/spikes/gore. Samebonesuniformpaletteforallviews; no inventedrecognizablesigil. MELEE BoneWarden sentinel. ONEstraight wornIRONSHORTSWORD anatomicalRIGHT hand (viewerLEFTfront/viewerRIGHTback), plaincrossguarddarkwoodgrip, bonefingerssecurelywrappedhiltandwristconnectedforearm. AnatomicalLEFT handempty. No shield/axe/spear/bow/quiver/extraweapons. Swordheldlowatrest. Adultuniformproportions slimandbony notoversizedarmoredknight; stancepatientstubbornemptyguard.",
+    "skeleton_archer": "Wardenflame: Embers of the Vale production concept sheet for pixel translation. Grounded tactical fantasy matching the refreshed human/goblin roster: warm upperleftkey coolshadows, crispreadable silhouette, worncloth/leather/iron, restrainedearthpalette. Parchmentbackground,noscenery/lettering. OneSAMEcharacter front3/4,rear3/4,leftprofile fullbodies plus skull/equipmentstudy andneutral1.75m human scaleinset. Allhead/feet/weaponscontainedwithlargemargins. BONE WARDEN, adultHUMANskeleton about1.75m. Canon: oldestdead ofWardens'crypts stillinremnantsofuniforms, keptatpostbycryptwards, emptyratherthancruel. WeatheredIVORYskull, DARKEMPTYeyesockets/nasalhole, visibleattachedjawandneckspine, no glowingred/coloredpupil/horns/fangs. Headslightlyenlargedfortacticalreadability. Lightarmor: tatteredSLATEBLUEknee-lengthSPLITWardentabard underpatchedcharcoalleatherjerkin, dullbrassclaspplainfadedbadgeunreadable, brownleatherbeltfrontbuckleONLYfront, simplebracers/cuffwraps, exposedivoryforearmbonesjoinedwristsandshoulders, leatherwrappedshinsanddarkbrownboots. Ribsshowthroughafewclothingtears buttorso/neck/spineconnected; don'tmakefloatingbonepieces. ClothingBACKseamsnotfrontbuckles, no cape/helmet/crown/spikes/gore. Samebonesuniformpaletteforallviews; no inventedrecognizablesigil. ARCHER BoneWarden. ONE smallASHWOODSHORTBOW anatomicalLEFT (viewerRIGHTfront/viewerLEFTback), leatherbackquiverwith6plainarrows strappedBACK, RIGHT handemptyatrest anddrawsstring/nocksarrowwhenattacking. BowgripinsideLEFTbonefistcontinuoustowristforearm, tautstringconnectedbothbowtips. ArrowsstowedonBACKneverfrontbelt orfloating. Forearmwrapsdullleatherarcherbrace. No sword/knife/shield/helmet. Slightwatchfulhunchedposturebutsamehumanheight/anatomyanduniformasmeleesentinel. StudyshowsLEFTbowgrip/RIGHTnockhandconnected natural, entirebow/arrowscontained."
+  },
+  "jobs": {
+    "skeleton": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_pBr4Y6ZDxEdVcx95kcCZj21y",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_pBr4Y6ZDxEdVcx95kcCZj21y' (one call waits on up to 32 jobs)."
+    },
+    "skeleton_archer": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_mJkwe9V9Ki7Y2QoCpzADmAYh",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_mJkwe9V9Ki7Y2QoCpzADmAYh' (one call waits on up to 32 jobs)."
+    }
+  }
+}

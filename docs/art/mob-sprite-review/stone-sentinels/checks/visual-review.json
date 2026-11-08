@@ -1,0 +1,43 @@
+{
+  "reviewed": [
+    "before-after.png",
+    "attack-impact-all-facings.png",
+    "special-windup-all-facings.png",
+    "battle.png",
+    "overworld-lineup.png",
+    "overworld-lighting-occlusion.png",
+    "specials-in-game.png",
+    "crystal-slam-windup.png"
+  ],
+  "observations": {
+    "materials": "Dark Basalt, lavender/blue Crystal and mossy sandstone Temple retain distinct identities at party scale.",
+    "rearViews": "Chest cores remain on front. Crystal rear-left attack uses corrected whole figures.",
+    "anatomy": "Connected fists and stone joints; no floating equipment or detached crystal shards.",
+    "hud": "Front head portraits remain visible; bars clear raised-fist windups.",
+    "specials": "All three slam at0.5s; crossed-arm guard contacts at0.4s. Existing ground/ward FX release at the authored contact.",
+    "world": "Checked under town lamplight, in shadow and behind transparent foreground occluders."
+  },
+  "combinedReel": {
+    "seconds": 24,
+    "frames": 384,
+    "width": 1440,
+    "height": 540,
+    "facings": [
+      "south-west",
+      "west",
+      "north",
+      "south-east"
+    ],
+    "allEightFacingsInGallery": true
+  },
+  "godotReplay": {
+    "seconds": 32,
+    "width": 960,
+    "height": 540,
+    "walks": 3,
+    "naturalStrikes": 3,
+    "specials": 6,
+    "silent": true
+  },
+  "softwareRendering": "Visual review, not a performance benchmark."
+}

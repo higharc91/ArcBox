@@ -1,0 +1,35 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  },
+  "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for ONE consistent HUNTING HOUND, ranger's loyal beast companion. Show front threequarter, left profile, rear threequarter, rear view, four-phase walking study and natural forward bite study, plus a small neutral adult ranger for scale. Neutral parchment, clean readable shapes, no text or labels, no scene, no weapons. A medium lean athletic scent-hound, about0.65m at shoulder and1.05m nose-to-rump beside1.75m human. Warm tawny/tan short coarse fur, darker umber saddle along back and top of neck, cream lower muzzle, throat, chest and toes. Long dog muzzle, black moist nose, small dark-brown intelligent eyes, TWO long floppy dark-brown ears physically attached high on sides of head; no upright wolf ears. FOUR anatomically connected slim canine legs with correct shoulder/elbow/carpal and hip/hock joints, four padded paws; sturdy narrow ribcage, tucked waist, long low curved tail continuously joined to rump. Friendly vigilant tracker at rest, determined bite while attacking. Simple weathered dark chestnut leather COLLAR around neck with small dull brass buckle on FRONT/SIDE only, plain leather on rear; no harness, clothes, bag, studs, hanging tags/metal trinkets, ribbons or armor. No glowing magic, flames, spectral parts, saddle equipment or monstrous horns. Consistent two ears/four legs/one tail, no detached paws/tail or floating teeth. Bite lowers forequarters slightly and extends neck horizontally toward target; upper and lower jaw open from same attached head, teeth contained inside muzzle, NOT a howl or hind-leg standing pose. Footfall study uses opposing diagonal pairs and a stable spine; ears follow head with restrained motion, collar fixed on neck, tail follows rump. Fine pixel-friendly fur groups, dark outline hierarchy, two-three material shades, warm upper-left lighting/cool shade, clear silhouette suited to FFT-inspired recent refreshed mobs. No oversized pet or giant wolf. Down form resting/slumped on side with joined legs, ears and tail, no dismemberment. This is existing generic ranger companion, do not invent named character/lore.",
+  "job": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_6oxT8aQDBKpTDjsGbbu7vd9i",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_6oxT8aQDBKpTDjsGbbu7vd9i' (one call waits on up to 32 jobs)."
+  },
+  "results": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_6oxT8aQDBKpTDjsGbbu7vd9i",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T10:48:50.685Z",
+        "updatedAt": "2026-11-07T10:49:19.320Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_pCPSeMPXYrigw9sgZvQog3tu"
+        ],
+        "cuCost": 12
+      }
+    ]
+  }
+}

@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6,
+    "bounds": [
+      44,
+      64,
+      142,
+      183
+    ],
+    "count": 6500
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6,
+    "bounds": [
+      45,
+      63,
+      142,
+      183
+    ],
+    "count": 6469
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6,
+    "bounds": [
+      45,
+      63,
+      142,
+      183
+    ],
+    "count": 6445
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6,
+    "bounds": [
+      45,
+      64,
+      142,
+      183
+    ],
+    "count": 6444
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 0,
+    "scale": 0.594059405940594,
+    "bounds": [
+      46,
+      65,
+      141,
+      184
+    ],
+    "count": 6371
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 1,
+    "scale": 0.594059405940594,
+    "bounds": [
+      51,
+      66,
+      142,
+      185
+    ],
+    "count": 6315
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 2,
+    "scale": 0.594059405940594,
+    "bounds": [
+      50,
+      65,
+      142,
+      184
+    ],
+    "count": 6233
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 3,
+    "scale": 0.594059405940594,
+    "bounds": [
+      52,
+      64,
+      139,
+      183
+    ],
+    "count": 5982
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 0,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      46,
+      77,
+      150,
+      184
+    ],
+    "count": 6227
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 1,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      53,
+      69,
+      149,
+      184
+    ],
+    "count": 6326
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 2,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      71,
+      79,
+      143,
+      184
+    ],
+    "count": 5496
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 3,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      70,
+      79,
+      143,
+      184
+    ],
+    "count": 5503
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 0,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      49,
+      65,
+      148,
+      184
+    ],
+    "count": 6784
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 1,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      51,
+      129,
+      177,
+      184
+    ],
+    "count": 4217
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6,
+    "bounds": [
+      47,
+      61,
+      140,
+      183
+    ],
+    "count": 6287
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6,
+    "bounds": [
+      49,
+      59,
+      141,
+      182
+    ],
+    "count": 6259
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6,
+    "bounds": [
+      48,
+      60,
+      140,
+      183
+    ],
+    "count": 6285
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6,
+    "bounds": [
+      48,
+      61,
+      140,
+      183
+    ],
+    "count": 6229
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 4,
+    "scale": 0.594059405940594,
+    "bounds": [
+      48,
+      62,
+      140,
+      184
+    ],
+    "count": 6122
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 5,
+    "scale": 0.594059405940594,
+    "bounds": [
+      53,
+      63,
+      141,
+      185
+    ],
+    "count": 6046
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 6,
+    "scale": 0.594059405940594,
+    "bounds": [
+      55,
+      62,
+      142,
+      183
+    ],
+    "count": 5876
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 7,
+    "scale": 0.594059405940594,
+    "bounds": [
+      54,
+      61,
+      142,
+      182
+    ],
+    "count": 5896
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 4,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      44,
+      75,
+      144,
+      184
+    ],
+    "count": 6100
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 5,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      49,
+      65,
+      143,
+      184
+    ],
+    "count": 6328
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 6,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      58,
+      80,
+      145,
+      184
+    ],
+    "count": 5788
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 7,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      56,
+      79,
+      134,
+      184
+    ],
+    "count": 5461
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 2,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      48,
+      65,
+      147,
+      184
+    ],
+    "count": 6507
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 3,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      58,
+      130,
+      186,
+      184
+    ],
+    "count": 4339
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6,
+    "bounds": [
+      58,
+      60,
+      129,
+      183
+    ],
+    "count": 5213
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6,
+    "bounds": [
+      58,
+      59,
+      129,
+      182
+    ],
+    "count": 5214
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6,
+    "bounds": [
+      59,
+      59,
+      129,
+      182
+    ],
+    "count": 5219
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6,
+    "bounds": [
+      59,
+      60,
+      130,
+      183
+    ],
+    "count": 5230
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 8,
+    "scale": 0.594059405940594,
+    "bounds": [
+      62,
+      61,
+      132,
+      181
+    ],
+    "count": 5153
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 9,
+    "scale": 0.594059405940594,
+    "bounds": [
+      63,
+      62,
+      131,
+      185
+    ],
+    "count": 5225
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 10,
+    "scale": 0.594059405940594,
+    "bounds": [
+      62,
+      61,
+      132,
+      184
+    ],
+    "count": 5263
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 11,
+    "scale": 0.594059405940594,
+    "bounds": [
+      62,
+      60,
+      133,
+      183
+    ],
+    "count": 5187
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 8,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      48,
+      75,
+      131,
+      184
+    ],
+    "count": 5380
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 9,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      43,
+      63,
+      122,
+      184
+    ],
+    "count": 5254
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 10,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      57,
+      79,
+      145,
+      184
+    ],
+    "count": 5478
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 11,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      50,
+      79,
+      126,
+      184
+    ],
+    "count": 5087
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 4,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      58,
+      68,
+      138,
+      184
+    ],
+    "count": 5111
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 5,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      35,
+      131,
+      174,
+      184
+    ],
+    "count": 4855
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6,
+    "bounds": [
+      72,
+      63,
+      159,
+      183
+    ],
+    "count": 5910
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6,
+    "bounds": [
+      72,
+      62,
+      157,
+      183
+    ],
+    "count": 5864
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6,
+    "bounds": [
+      72,
+      62,
+      158,
+      183
+    ],
+    "count": 5907
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6,
+    "bounds": [
+      72,
+      63,
+      158,
+      183
+    ],
+    "count": 5857
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 12,
+    "scale": 0.594059405940594,
+    "bounds": [
+      70,
+      64,
+      158,
+      186
+    ],
+    "count": 6029
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 13,
+    "scale": 0.594059405940594,
+    "bounds": [
+      71,
+      65,
+      158,
+      187
+    ],
+    "count": 6100
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 14,
+    "scale": 0.594059405940594,
+    "bounds": [
+      70,
+      64,
+      158,
+      186
+    ],
+    "count": 6056
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 15,
+    "scale": 0.594059405940594,
+    "bounds": [
+      70,
+      63,
+      157,
+      185
+    ],
+    "count": 6082
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6,
+    "bounds": [
+      72,
+      64,
+      159,
+      184
+    ],
+    "count": 5910
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bandit-rear-keys.png",
+    "sourcePose": 0,
+    "scale": 0.32935560859188545,
+    "bounds": [
+      68,
+      47,
+      156,
+      184
+    ],
+    "count": 6529
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bandit-rear-keys.png",
+    "sourcePose": 1,
+    "scale": 0.32935560859188545,
+    "bounds": [
+      66,
+      73,
+      191,
+      184
+    ],
+    "count": 6603
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6,
+    "bounds": [
+      73,
+      63,
+      158,
+      184
+    ],
+    "count": 5864
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 6,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      61,
+      67,
+      153,
+      184
+    ],
+    "count": 6036
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 7,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      36,
+      134,
+      172,
+      184
+    ],
+    "count": 4492
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6,
+    "bounds": [
+      65,
+      64,
+      156,
+      183
+    ],
+    "count": 6206
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6,
+    "bounds": [
+      65,
+      63,
+      156,
+      183
+    ],
+    "count": 6282
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6,
+    "bounds": [
+      65,
+      63,
+      156,
+      183
+    ],
+    "count": 6238
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6,
+    "bounds": [
+      65,
+      64,
+      156,
+      183
+    ],
+    "count": 6154
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 16,
+    "scale": 0.594059405940594,
+    "bounds": [
+      64,
+      65,
+      157,
+      187
+    ],
+    "count": 6344
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 17,
+    "scale": 0.594059405940594,
+    "bounds": [
+      64,
+      66,
+      157,
+      188
+    ],
+    "count": 6294
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 18,
+    "scale": 0.594059405940594,
+    "bounds": [
+      65,
+      65,
+      157,
+      187
+    ],
+    "count": 6338
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 19,
+    "scale": 0.594059405940594,
+    "bounds": [
+      63,
+      64,
+      158,
+      185
+    ],
+    "count": 6406
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bandit-attack-rear.png",
+    "sourcePose": 4,
+    "scale": 0.38461538461538464,
+    "bounds": [
+      63,
+      66,
+      162,
+      184
+    ],
+    "count": 6659
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bandit-attack-rear.png",
+    "sourcePose": 5,
+    "scale": 0.38461538461538464,
+    "bounds": [
+      62,
+      54,
+      150,
+      184
+    ],
+    "count": 6766
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bandit-attack-rear.png",
+    "sourcePose": 6,
+    "scale": 0.38461538461538464,
+    "bounds": [
+      63,
+      73,
+      165,
+      184
+    ],
+    "count": 6290
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bandit-attack-rear.png",
+    "sourcePose": 7,
+    "scale": 0.38461538461538464,
+    "bounds": [
+      64,
+      73,
+      162,
+      184
+    ],
+    "count": 6393
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 8,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      61,
+      73,
+      159,
+      184
+    ],
+    "count": 6059
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 9,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      49,
+      129,
+      162,
+      184
+    ],
+    "count": 3811
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6,
+    "bounds": [
+      70,
+      62,
+      160,
+      182
+    ],
+    "count": 6061
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6,
+    "bounds": [
+      70,
+      62,
+      159,
+      183
+    ],
+    "count": 6017
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6,
+    "bounds": [
+      70,
+      62,
+      157,
+      183
+    ],
+    "count": 5986
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6,
+    "bounds": [
+      70,
+      62,
+      160,
+      182
+    ],
+    "count": 6027
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 20,
+    "scale": 0.594059405940594,
+    "bounds": [
+      66,
+      64,
+      157,
+      185
+    ],
+    "count": 6135
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 21,
+    "scale": 0.594059405940594,
+    "bounds": [
+      66,
+      65,
+      154,
+      186
+    ],
+    "count": 5940
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 22,
+    "scale": 0.594059405940594,
+    "bounds": [
+      68,
+      64,
+      156,
+      181
+    ],
+    "count": 5993
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 23,
+    "scale": 0.594059405940594,
+    "bounds": [
+      65,
+      63,
+      159,
+      184
+    ],
+    "count": 6156
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6,
+    "bounds": [
+      70,
+      64,
+      160,
+      184
+    ],
+    "count": 6061
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bandit-rear-keys.png",
+    "sourcePose": 2,
+    "scale": 0.32935560859188545,
+    "bounds": [
+      64,
+      47,
+      160,
+      184
+    ],
+    "count": 6499
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bandit-rear-keys.png",
+    "sourcePose": 3,
+    "scale": 0.32935560859188545,
+    "bounds": [
+      66,
+      73,
+      195,
+      184
+    ],
+    "count": 6499
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6,
+    "bounds": [
+      69,
+      63,
+      158,
+      184
+    ],
+    "count": 6017
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 10,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      69,
+      73,
+      160,
+      184
+    ],
+    "count": 5723
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 11,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      42,
+      129,
+      169,
+      184
+    ],
+    "count": 4468
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6,
+    "bounds": [
+      76,
+      60,
+      148,
+      183
+    ],
+    "count": 5069
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6,
+    "bounds": [
+      77,
+      61,
+      148,
+      183
+    ],
+    "count": 5025
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6,
+    "bounds": [
+      77,
+      61,
+      148,
+      183
+    ],
+    "count": 5021
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6,
+    "bounds": [
+      77,
+      60,
+      149,
+      183
+    ],
+    "count": 5070
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 24,
+    "scale": 0.594059405940594,
+    "bounds": [
+      73,
+      61,
+      148,
+      183
+    ],
+    "count": 5540
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 25,
+    "scale": 0.594059405940594,
+    "bounds": [
+      75,
+      62,
+      147,
+      184
+    ],
+    "count": 5252
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 26,
+    "scale": 0.594059405940594,
+    "bounds": [
+      73,
+      61,
+      147,
+      183
+    ],
+    "count": 5368
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 27,
+    "scale": 0.594059405940594,
+    "bounds": [
+      76,
+      60,
+      148,
+      182
+    ],
+    "count": 5286
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 24,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      72,
+      77,
+      152,
+      184
+    ],
+    "count": 5273
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 25,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      69,
+      67,
+      137,
+      184
+    ],
+    "count": 4992
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 26,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      83,
+      80,
+      167,
+      184
+    ],
+    "count": 5094
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 27,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      74,
+      80,
+      152,
+      184
+    ],
+    "count": 5089
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 12,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      83,
+      64,
+      148,
+      184
+    ],
+    "count": 4887
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 13,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      9,
+      128,
+      128,
+      184
+    ],
+    "count": 4221
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6,
+    "bounds": [
+      44,
+      62,
+      137,
+      183
+    ],
+    "count": 6568
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6,
+    "bounds": [
+      44,
+      60,
+      136,
+      183
+    ],
+    "count": 6568
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6,
+    "bounds": [
+      44,
+      61,
+      136,
+      183
+    ],
+    "count": 6550
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bandit-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6,
+    "bounds": [
+      44,
+      62,
+      137,
+      182
+    ],
+    "count": 6567
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 28,
+    "scale": 0.594059405940594,
+    "bounds": [
+      45,
+      63,
+      137,
+      183
+    ],
+    "count": 6308
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 29,
+    "scale": 0.594059405940594,
+    "bounds": [
+      46,
+      64,
+      135,
+      186
+    ],
+    "count": 6277
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 30,
+    "scale": 0.594059405940594,
+    "bounds": [
+      45,
+      63,
+      137,
+      185
+    ],
+    "count": 6479
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bandit-walk.png",
+    "sourcePose": 31,
+    "scale": 0.594059405940594,
+    "bounds": [
+      46,
+      62,
+      138,
+      184
+    ],
+    "count": 6391
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 28,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      49,
+      78,
+      145,
+      184
+    ],
+    "count": 5870
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 29,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      79,
+      66,
+      166,
+      184
+    ],
+    "count": 6086
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 30,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      72,
+      83,
+      141,
+      184
+    ],
+    "count": 5111
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bandit-attack.png",
+    "sourcePose": 31,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      74,
+      83,
+      151,
+      184
+    ],
+    "count": 5143
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 14,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      56,
+      65,
+      147,
+      184
+    ],
+    "count": 6414
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bandit-damage.png",
+    "sourcePose": 15,
+    "scale": 0.45627376425855515,
+    "bounds": [
+      19,
+      124,
+      134,
+      184
+    ],
+    "count": 4334
+  }
+]

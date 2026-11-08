@@ -1,0 +1,9779 @@
+[
+  {
+    "id": "goblin",
+    "size": 128,
+    "anchor": [
+      64,
+      111
+    ],
+    "pixelScale": 0.32,
+    "frames": [
+      {
+        "head": [
+          118.5,
+          16
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          38,
+          14,
+          142,
+          198
+        ],
+        "bounds": [
+          40,
+          16,
+          178,
+          210
+        ],
+        "foot": [
+          117.0,
+          205
+        ],
+        "scale": 0.408,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          16
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          259,
+          14,
+          143,
+          198
+        ],
+        "bounds": [
+          261,
+          16,
+          400,
+          210
+        ],
+        "foot": [
+          338.0,
+          205
+        ],
+        "scale": 0.408,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          16
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          482,
+          14,
+          142,
+          198
+        ],
+        "bounds": [
+          484,
+          16,
+          622,
+          210
+        ],
+        "foot": [
+          562.5,
+          205
+        ],
+        "scale": 0.408,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          16
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          704,
+          14,
+          142,
+          198
+        ],
+        "bounds": [
+          706,
+          16,
+          844,
+          210
+        ],
+        "foot": [
+          783.0,
+          205
+        ],
+        "scale": 0.408,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.0,
+          23
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          38,
+          21,
+          135,
+          189
+        ],
+        "bounds": [
+          40,
+          23,
+          171,
+          208
+        ],
+        "foot": [
+          114.5,
+          191
+        ],
+        "scale": 0.432,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          23
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          260,
+          21,
+          135,
+          189
+        ],
+        "bounds": [
+          262,
+          23,
+          393,
+          208
+        ],
+        "foot": [
+          339.0,
+          202
+        ],
+        "scale": 0.432,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          23
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          484,
+          21,
+          132,
+          189
+        ],
+        "bounds": [
+          486,
+          23,
+          614,
+          208
+        ],
+        "foot": [
+          545.5,
+          202
+        ],
+        "scale": 0.432,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          23
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          706,
+          21,
+          132,
+          182
+        ],
+        "bounds": [
+          708,
+          23,
+          836,
+          201
+        ],
+        "foot": [
+          786.0,
+          195
+        ],
+        "scale": 0.432,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          232.5,
+          131
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 0,
+        "cell": [
+          151,
+          129,
+          163,
+          229
+        ],
+        "bounds": [
+          153,
+          131,
+          312,
+          356
+        ],
+        "foot": [
+          226.0,
+          350
+        ],
+        "scale": 0.35,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          635.5,
+          73
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 1,
+        "cell": [
+          578,
+          71,
+          187,
+          287
+        ],
+        "bounds": [
+          580,
+          73,
+          763,
+          356
+        ],
+        "foot": [
+          664.0,
+          350
+        ],
+        "scale": 0.35,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1094.5,
+          135
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 2,
+        "cell": [
+          1026,
+          133,
+          175,
+          225
+        ],
+        "bounds": [
+          1028,
+          135,
+          1199,
+          356
+        ],
+        "foot": [
+          1101.0,
+          350
+        ],
+        "scale": 0.35,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1541.5,
+          144
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 3,
+        "cell": [
+          1466,
+          142,
+          170,
+          216
+        ],
+        "bounds": [
+          1468,
+          144,
+          1634,
+          356
+        ],
+        "foot": [
+          1544.5,
+          350
+        ],
+        "scale": 0.35,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.0,
+          54
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          53,
+          52,
+          218,
+          241
+        ],
+        "bounds": [
+          55,
+          54,
+          269,
+          291
+        ],
+        "foot": [
+          164.5,
+          283
+        ],
+        "scale": 0.332,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.0,
+          184
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          335,
+          182,
+          248,
+          112
+        ],
+        "bounds": [
+          337,
+          184,
+          581,
+          292
+        ],
+        "foot": [
+          463.5,
+          287
+        ],
+        "scale": 0.332,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          108.5,
+          237
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          33,
+          235,
+          139,
+          200
+        ],
+        "bounds": [
+          35,
+          237,
+          170,
+          433
+        ],
+        "foot": [
+          112.5,
+          427
+        ],
+        "scale": 0.408,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          237
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          256,
+          235,
+          137,
+          200
+        ],
+        "bounds": [
+          258,
+          237,
+          391,
+          433
+        ],
+        "foot": [
+          333.5,
+          427
+        ],
+        "scale": 0.408,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          237
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          478,
+          235,
+          137,
+          200
+        ],
+        "bounds": [
+          480,
+          237,
+          613,
+          433
+        ],
+        "foot": [
+          555.0,
+          427
+        ],
+        "scale": 0.408,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.5,
+          237
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          700,
+          235,
+          137,
+          200
+        ],
+        "bounds": [
+          702,
+          237,
+          835,
+          433
+        ],
+        "foot": [
+          778.5,
+          427
+        ],
+        "scale": 0.408,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.0,
+          243
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          36,
+          241,
+          137,
+          191
+        ],
+        "bounds": [
+          38,
+          243,
+          171,
+          430
+        ],
+        "foot": [
+          94.0,
+          421
+        ],
+        "scale": 0.432,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          242
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          257,
+          240,
+          138,
+          191
+        ],
+        "bounds": [
+          259,
+          242,
+          393,
+          429
+        ],
+        "foot": [
+          333.5,
+          423
+        ],
+        "scale": 0.432,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          243
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          480,
+          241,
+          137,
+          190
+        ],
+        "bounds": [
+          482,
+          243,
+          615,
+          429
+        ],
+        "foot": [
+          546.0,
+          423
+        ],
+        "scale": 0.432,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          242
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          707,
+          240,
+          127,
+          188
+        ],
+        "bounds": [
+          709,
+          242,
+          832,
+          426
+        ],
+        "foot": [
+          782.0,
+          420
+        ],
+        "scale": 0.432,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          266
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          16,
+          264,
+          189,
+          174
+        ],
+        "bounds": [
+          18,
+          266,
+          203,
+          436
+        ],
+        "foot": [
+          116.0,
+          434
+        ],
+        "scale": 0.44,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          299.0,
+          224
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          247,
+          222,
+          166,
+          216
+        ],
+        "bounds": [
+          249,
+          224,
+          411,
+          436
+        ],
+        "foot": [
+          334.5,
+          434
+        ],
+        "scale": 0.44,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.0,
+          279
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          473,
+          277,
+          171,
+          169
+        ],
+        "bounds": [
+          475,
+          279,
+          642,
+          444
+        ],
+        "foot": [
+          547.5,
+          431
+        ],
+        "scale": 0.44,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          266
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          687,
+          264,
+          182,
+          177
+        ],
+        "bounds": [
+          689,
+          266,
+          867,
+          439
+        ],
+        "foot": [
+          765.5,
+          434
+        ],
+        "scale": 0.44,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          776.5,
+          54
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          671,
+          52,
+          225,
+          243
+        ],
+        "bounds": [
+          673,
+          54,
+          894,
+          293
+        ],
+        "foot": [
+          784.0,
+          284
+        ],
+        "scale": 0.332,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1075.0,
+          180
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          951,
+          178,
+          263,
+          114
+        ],
+        "bounds": [
+          953,
+          180,
+          1212,
+          290
+        ],
+        "foot": [
+          1068.5,
+          287
+        ],
+        "scale": 0.332,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          104.5,
+          457
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          44,
+          455,
+          106,
+          203
+        ],
+        "bounds": [
+          46,
+          457,
+          148,
+          656
+        ],
+        "foot": [
+          102.5,
+          651
+        ],
+        "scale": 0.408,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          458
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          266,
+          456,
+          106,
+          202
+        ],
+        "bounds": [
+          268,
+          458,
+          370,
+          656
+        ],
+        "foot": [
+          326.0,
+          650
+        ],
+        "scale": 0.408,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.5,
+          457
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          487,
+          455,
+          107,
+          203
+        ],
+        "bounds": [
+          489,
+          457,
+          592,
+          656
+        ],
+        "foot": [
+          547.5,
+          650
+        ],
+        "scale": 0.408,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.0,
+          458
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          709,
+          456,
+          106,
+          202
+        ],
+        "bounds": [
+          711,
+          458,
+          813,
+          656
+        ],
+        "foot": [
+          769.0,
+          650
+        ],
+        "scale": 0.408,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.0,
+          466
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          33,
+          464,
+          133,
+          190
+        ],
+        "bounds": [
+          35,
+          466,
+          164,
+          652
+        ],
+        "foot": [
+          109.0,
+          644
+        ],
+        "scale": 0.432,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          465
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          263,
+          463,
+          117,
+          189
+        ],
+        "bounds": [
+          265,
+          465,
+          378,
+          650
+        ],
+        "foot": [
+          331.0,
+          644
+        ],
+        "scale": 0.432,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.5,
+          465
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          488,
+          463,
+          122,
+          189
+        ],
+        "bounds": [
+          490,
+          465,
+          608,
+          650
+        ],
+        "foot": [
+          555.5,
+          642
+        ],
+        "scale": 0.432,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          466
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          715,
+          464,
+          106,
+          188
+        ],
+        "bounds": [
+          717,
+          466,
+          819,
+          650
+        ],
+        "foot": [
+          768.0,
+          645
+        ],
+        "scale": 0.432,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.5,
+          486
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          15,
+          484,
+          176,
+          177
+        ],
+        "bounds": [
+          17,
+          486,
+          189,
+          659
+        ],
+        "foot": [
+          117.5,
+          655
+        ],
+        "scale": 0.44,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          302.0,
+          445
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          250,
+          443,
+          144,
+          218
+        ],
+        "bounds": [
+          252,
+          445,
+          392,
+          659
+        ],
+        "foot": [
+          330.5,
+          656
+        ],
+        "scale": 0.44,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          528.5,
+          498
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          447,
+          496,
+          193,
+          165
+        ],
+        "bounds": [
+          449,
+          498,
+          638,
+          659
+        ],
+        "foot": [
+          535.0,
+          655
+        ],
+        "scale": 0.44,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          762.0,
+          490
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          687,
+          488,
+          165,
+          173
+        ],
+        "bounds": [
+          689,
+          490,
+          850,
+          659
+        ],
+        "foot": [
+          766.5,
+          658
+        ],
+        "scale": 0.44,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          169.0,
+          364
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          69,
+          362,
+          176,
+          249
+        ],
+        "bounds": [
+          71,
+          364,
+          243,
+          609
+        ],
+        "foot": [
+          149.0,
+          602
+        ],
+        "scale": 0.332,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          443.0,
+          495
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          324,
+          493,
+          276,
+          111
+        ],
+        "bounds": [
+          326,
+          495,
+          598,
+          602
+        ],
+        "foot": [
+          464.5,
+          597
+        ],
+        "scale": 0.332,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          95.0,
+          678
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          48,
+          676,
+          134,
+          201
+        ],
+        "bounds": [
+          50,
+          678,
+          180,
+          875
+        ],
+        "foot": [
+          107.0,
+          871
+        ],
+        "scale": 0.408,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          317.0,
+          678
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          271,
+          676,
+          132,
+          201
+        ],
+        "bounds": [
+          273,
+          678,
+          401,
+          875
+        ],
+        "foot": [
+          329.0,
+          871
+        ],
+        "scale": 0.408,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.0,
+          677
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          493,
+          675,
+          132,
+          202
+        ],
+        "bounds": [
+          495,
+          677,
+          623,
+          875
+        ],
+        "foot": [
+          552.0,
+          872
+        ],
+        "scale": 0.408,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          761.0,
+          678
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          714,
+          676,
+          134,
+          201
+        ],
+        "bounds": [
+          716,
+          678,
+          846,
+          875
+        ],
+        "foot": [
+          773.5,
+          871
+        ],
+        "scale": 0.408,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          223.5,
+          29
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 0,
+        "cell": [
+          91,
+          27,
+          263,
+          380
+        ],
+        "bounds": [
+          93,
+          29,
+          352,
+          405
+        ],
+        "foot": [
+          278.0,
+          394
+        ],
+        "scale": 0.213,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          667.0,
+          29
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 1,
+        "cell": [
+          565,
+          27,
+          233,
+          383
+        ],
+        "bounds": [
+          567,
+          29,
+          796,
+          408
+        ],
+        "foot": [
+          689.0,
+          396
+        ],
+        "scale": 0.213,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          1110.0,
+          29
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 2,
+        "cell": [
+          997,
+          27,
+          244,
+          382
+        ],
+        "bounds": [
+          999,
+          29,
+          1239,
+          407
+        ],
+        "foot": [
+          1105.5,
+          378
+        ],
+        "scale": 0.213,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1554.0,
+          29
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 3,
+        "cell": [
+          1453,
+          27,
+          232,
+          381
+        ],
+        "bounds": [
+          1455,
+          29,
+          1683,
+          406
+        ],
+        "foot": [
+          1587.0,
+          395
+        ],
+        "scale": 0.213,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          86.0,
+          712
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          17,
+          710,
+          159,
+          172
+        ],
+        "bounds": [
+          19,
+          712,
+          174,
+          880
+        ],
+        "foot": [
+          111.5,
+          880
+        ],
+        "scale": 0.44,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.5,
+          669
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          250,
+          667,
+          138,
+          216
+        ],
+        "bounds": [
+          252,
+          669,
+          386,
+          881
+        ],
+        "foot": [
+          329.5,
+          878
+        ],
+        "scale": 0.44,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          505.0,
+          716
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          425,
+          714,
+          194,
+          169
+        ],
+        "bounds": [
+          427,
+          716,
+          617,
+          881
+        ],
+        "foot": [
+          551.0,
+          880
+        ],
+        "scale": 0.44,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          755.0,
+          709
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          700,
+          707,
+          145,
+          175
+        ],
+        "bounds": [
+          702,
+          709,
+          843,
+          880
+        ],
+        "foot": [
+          771.0,
+          878
+        ],
+        "scale": 0.44,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          778.5,
+          364
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          680,
+          362,
+          220,
+          249
+        ],
+        "bounds": [
+          682,
+          364,
+          898,
+          609
+        ],
+        "foot": [
+          796.5,
+          602
+        ],
+        "scale": 0.332,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1060.0,
+          494
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          951,
+          492,
+          269,
+          113
+        ],
+        "bounds": [
+          953,
+          494,
+          1218,
+          603
+        ],
+        "foot": [
+          1102.0,
+          598
+        ],
+        "scale": 0.332,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.5,
+          902
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          46,
+          900,
+          145,
+          200
+        ],
+        "bounds": [
+          48,
+          902,
+          189,
+          1098
+        ],
+        "foot": [
+          109.0,
+          1093
+        ],
+        "scale": 0.408,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          902
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          268,
+          900,
+          145,
+          200
+        ],
+        "bounds": [
+          270,
+          902,
+          411,
+          1098
+        ],
+        "foot": [
+          327.5,
+          1093
+        ],
+        "scale": 0.408,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          902
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          491,
+          900,
+          144,
+          199
+        ],
+        "bounds": [
+          493,
+          902,
+          633,
+          1097
+        ],
+        "foot": [
+          553.0,
+          1092
+        ],
+        "scale": 0.408,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          902
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          712,
+          900,
+          144,
+          200
+        ],
+        "bounds": [
+          714,
+          902,
+          854,
+          1098
+        ],
+        "foot": [
+          774.5,
+          1092
+        ],
+        "scale": 0.408,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          912
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          51,
+          910,
+          131,
+          187
+        ],
+        "bounds": [
+          53,
+          912,
+          180,
+          1095
+        ],
+        "foot": [
+          107.0,
+          1075
+        ],
+        "scale": 0.432,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          912
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          273,
+          910,
+          129,
+          186
+        ],
+        "bounds": [
+          275,
+          912,
+          400,
+          1094
+        ],
+        "foot": [
+          330.5,
+          1085
+        ],
+        "scale": 0.432,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          912
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          495,
+          910,
+          128,
+          186
+        ],
+        "bounds": [
+          497,
+          912,
+          621,
+          1094
+        ],
+        "foot": [
+          568.0,
+          1089
+        ],
+        "scale": 0.432,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          912
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          717,
+          910,
+          130,
+          186
+        ],
+        "bounds": [
+          719,
+          912,
+          845,
+          1094
+        ],
+        "foot": [
+          775.0,
+          1088
+        ],
+        "scale": 0.432,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          102.5,
+          927
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          24,
+          925,
+          177,
+          178
+        ],
+        "bounds": [
+          26,
+          927,
+          199,
+          1101
+        ],
+        "foot": [
+          105.0,
+          1098
+        ],
+        "scale": 0.44,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          885
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          240,
+          883,
+          157,
+          220
+        ],
+        "bounds": [
+          242,
+          885,
+          395,
+          1101
+        ],
+        "foot": [
+          329.0,
+          1098
+        ],
+        "scale": 0.44,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.5,
+          936
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          462,
+          934,
+          193,
+          169
+        ],
+        "bounds": [
+          464,
+          936,
+          653,
+          1101
+        ],
+        "foot": [
+          551.5,
+          1099
+        ],
+        "scale": 0.44,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.0,
+          927
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          701,
+          925,
+          152,
+          178
+        ],
+        "bounds": [
+          703,
+          927,
+          851,
+          1101
+        ],
+        "foot": [
+          777.5,
+          1098
+        ],
+        "scale": 0.44,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          159.5,
+          675
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          48,
+          673,
+          225,
+          245
+        ],
+        "bounds": [
+          50,
+          675,
+          271,
+          916
+        ],
+        "foot": [
+          151.0,
+          906
+        ],
+        "scale": 0.332,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          466.0,
+          800
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          338,
+          798,
+          251,
+          122
+        ],
+        "bounds": [
+          340,
+          800,
+          587,
+          918
+        ],
+        "foot": [
+          443.5,
+          903
+        ],
+        "scale": 0.332,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          1124
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          47,
+          1122,
+          137,
+          198
+        ],
+        "bounds": [
+          49,
+          1124,
+          182,
+          1318
+        ],
+        "foot": [
+          109.0,
+          1312
+        ],
+        "scale": 0.408,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          1124
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          269,
+          1122,
+          136,
+          198
+        ],
+        "bounds": [
+          271,
+          1124,
+          403,
+          1318
+        ],
+        "foot": [
+          330.5,
+          1312
+        ],
+        "scale": 0.408,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1121
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          492,
+          1119,
+          135,
+          201
+        ],
+        "bounds": [
+          494,
+          1121,
+          625,
+          1318
+        ],
+        "foot": [
+          552.0,
+          1312
+        ],
+        "scale": 0.408,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1124
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          713,
+          1122,
+          137,
+          198
+        ],
+        "bounds": [
+          715,
+          1124,
+          848,
+          1318
+        ],
+        "foot": [
+          774.0,
+          1312
+        ],
+        "scale": 0.408,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          1132
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          43,
+          1130,
+          138,
+          189
+        ],
+        "bounds": [
+          45,
+          1132,
+          179,
+          1317
+        ],
+        "foot": [
+          120.5,
+          1310
+        ],
+        "scale": 0.432,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          1132
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          272,
+          1130,
+          130,
+          188
+        ],
+        "bounds": [
+          274,
+          1132,
+          400,
+          1316
+        ],
+        "foot": [
+          327.0,
+          1310
+        ],
+        "scale": 0.432,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1132
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          493,
+          1130,
+          132,
+          188
+        ],
+        "bounds": [
+          495,
+          1132,
+          623,
+          1316
+        ],
+        "foot": [
+          540.0,
+          1310
+        ],
+        "scale": 0.432,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1132
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          717,
+          1130,
+          130,
+          181
+        ],
+        "bounds": [
+          719,
+          1132,
+          845,
+          1309
+        ],
+        "foot": [
+          773.0,
+          1302
+        ],
+        "scale": 0.432,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.0,
+          1149
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          23,
+          1147,
+          182,
+          178
+        ],
+        "bounds": [
+          25,
+          1149,
+          203,
+          1323
+        ],
+        "foot": [
+          104.5,
+          1318
+        ],
+        "scale": 0.44,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.5,
+          1109
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          242,
+          1107,
+          166,
+          216
+        ],
+        "bounds": [
+          244,
+          1109,
+          406,
+          1321
+        ],
+        "foot": [
+          325.5,
+          1321
+        ],
+        "scale": 0.44,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1160
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          455,
+          1158,
+          194,
+          167
+        ],
+        "bounds": [
+          457,
+          1160,
+          647,
+          1323
+        ],
+        "foot": [
+          537.0,
+          1318
+        ],
+        "scale": 0.44,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          1149
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          689,
+          1147,
+          176,
+          178
+        ],
+        "bounds": [
+          691,
+          1149,
+          863,
+          1323
+        ],
+        "foot": [
+          769.5,
+          1322
+        ],
+        "scale": 0.44,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          794.5,
+          678
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          666,
+          676,
+          218,
+          246
+        ],
+        "bounds": [
+          668,
+          678,
+          882,
+          920
+        ],
+        "foot": [
+          759.0,
+          911
+        ],
+        "scale": 0.332,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1115.0,
+          804
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          964,
+          802,
+          259,
+          117
+        ],
+        "bounds": [
+          966,
+          804,
+          1221,
+          917
+        ],
+        "foot": [
+          1069.5,
+          908
+        ],
+        "scale": 0.332,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          108.0,
+          1344
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          61,
+          1342,
+          108,
+          204
+        ],
+        "bounds": [
+          63,
+          1344,
+          167,
+          1544
+        ],
+        "foot": [
+          107.0,
+          1539
+        ],
+        "scale": 0.408,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.0,
+          1344
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          284,
+          1342,
+          107,
+          204
+        ],
+        "bounds": [
+          286,
+          1344,
+          389,
+          1544
+        ],
+        "foot": [
+          329.5,
+          1539
+        ],
+        "scale": 0.408,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.0,
+          1341
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          506,
+          1339,
+          108,
+          207
+        ],
+        "bounds": [
+          508,
+          1341,
+          612,
+          1544
+        ],
+        "foot": [
+          551.5,
+          1539
+        ],
+        "scale": 0.408,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          1344
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          727,
+          1342,
+          109,
+          204
+        ],
+        "bounds": [
+          729,
+          1344,
+          834,
+          1544
+        ],
+        "foot": [
+          774.0,
+          1539
+        ],
+        "scale": 0.408,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          1354
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          42,
+          1352,
+          132,
+          187
+        ],
+        "bounds": [
+          44,
+          1354,
+          172,
+          1537
+        ],
+        "foot": [
+          97.5,
+          1532
+        ],
+        "scale": 0.432,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1354
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          286,
+          1352,
+          106,
+          187
+        ],
+        "bounds": [
+          288,
+          1354,
+          390,
+          1537
+        ],
+        "foot": [
+          329.0,
+          1532
+        ],
+        "scale": 0.432,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          1354
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          494,
+          1352,
+          126,
+          187
+        ],
+        "bounds": [
+          496,
+          1354,
+          618,
+          1537
+        ],
+        "foot": [
+          536.0,
+          1532
+        ],
+        "scale": 0.432,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          1355
+        ],
+        "source": "source/goblin-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          726,
+          1353,
+          111,
+          186
+        ],
+        "bounds": [
+          728,
+          1355,
+          835,
+          1537
+        ],
+        "foot": [
+          778.0,
+          1531
+        ],
+        "scale": 0.432,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.5,
+          1374
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          35,
+          1372,
+          134,
+          176
+        ],
+        "bounds": [
+          37,
+          1374,
+          167,
+          1546
+        ],
+        "foot": [
+          102.5,
+          1543
+        ],
+        "scale": 0.44,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.5,
+          1331
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          256,
+          1329,
+          130,
+          219
+        ],
+        "bounds": [
+          258,
+          1331,
+          384,
+          1546
+        ],
+        "foot": [
+          319.5,
+          1543
+        ],
+        "scale": 0.44,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          1385
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          470,
+          1383,
+          183,
+          165
+        ],
+        "bounds": [
+          472,
+          1385,
+          651,
+          1546
+        ],
+        "foot": [
+          527.5,
+          1543
+        ],
+        "scale": 0.44,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.5,
+          1375
+        ],
+        "source": "source/goblin-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          704,
+          1373,
+          146,
+          175
+        ],
+        "bounds": [
+          706,
+          1375,
+          848,
+          1546
+        ],
+        "foot": [
+          759.0,
+          1546
+        ],
+        "scale": 0.44,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          145.0,
+          988
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          71,
+          986,
+          168,
+          245
+        ],
+        "bounds": [
+          73,
+          988,
+          237,
+          1229
+        ],
+        "foot": [
+          172.0,
+          1222
+        ],
+        "scale": 0.332,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          485.5,
+          1119
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          327,
+          1117,
+          268,
+          109
+        ],
+        "bounds": [
+          329,
+          1119,
+          593,
+          1224
+        ],
+        "foot": [
+          444.0,
+          1221
+        ],
+        "scale": 0.332,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          1568
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          39,
+          1566,
+          139,
+          195
+        ],
+        "bounds": [
+          41,
+          1568,
+          176,
+          1759
+        ],
+        "foot": [
+          117.0,
+          1754
+        ],
+        "scale": 0.408,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          1568
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          260,
+          1566,
+          140,
+          196
+        ],
+        "bounds": [
+          262,
+          1568,
+          398,
+          1760
+        ],
+        "foot": [
+          339.0,
+          1754
+        ],
+        "scale": 0.408,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          1566
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          482,
+          1564,
+          141,
+          197
+        ],
+        "bounds": [
+          484,
+          1566,
+          621,
+          1759
+        ],
+        "foot": [
+          560.5,
+          1754
+        ],
+        "scale": 0.408,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          1568
+        ],
+        "source": "source/goblin-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          704,
+          1566,
+          141,
+          195
+        ],
+        "bounds": [
+          706,
+          1568,
+          843,
+          1759
+        ],
+        "foot": [
+          782.5,
+          1754
+        ],
+        "scale": 0.408,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          222.0,
+          476
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 4,
+        "cell": [
+          94,
+          474,
+          254,
+          374
+        ],
+        "bounds": [
+          96,
+          476,
+          346,
+          846
+        ],
+        "foot": [
+          175.0,
+          835
+        ],
+        "scale": 0.213,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          666.0,
+          476
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 5,
+        "cell": [
+          540,
+          474,
+          242,
+          381
+        ],
+        "bounds": [
+          542,
+          476,
+          780,
+          853
+        ],
+        "foot": [
+          667.5,
+          833
+        ],
+        "scale": 0.213,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          1109.0,
+          476
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 6,
+        "cell": [
+          983,
+          474,
+          247,
+          378
+        ],
+        "bounds": [
+          985,
+          476,
+          1228,
+          850
+        ],
+        "foot": [
+          1111.0,
+          828
+        ],
+        "scale": 0.213,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1553.0,
+          476
+        ],
+        "source": "source/goblin-walk-corrected.png",
+        "sourcePose": 7,
+        "cell": [
+          1427,
+          474,
+          236,
+          381
+        ],
+        "bounds": [
+          1429,
+          476,
+          1661,
+          853
+        ],
+        "foot": [
+          1552.0,
+          807
+        ],
+        "scale": 0.213,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          225.0,
+          576
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 4,
+        "cell": [
+          146,
+          574,
+          159,
+          227
+        ],
+        "bounds": [
+          148,
+          576,
+          303,
+          799
+        ],
+        "foot": [
+          218.5,
+          793
+        ],
+        "scale": 0.35,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          635.0,
+          513
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 5,
+        "cell": [
+          578,
+          511,
+          174,
+          291
+        ],
+        "bounds": [
+          580,
+          513,
+          750,
+          800
+        ],
+        "foot": [
+          659.0,
+          794
+        ],
+        "scale": 0.35,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1089.5,
+          578
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 6,
+        "cell": [
+          1017,
+          576,
+          195,
+          225
+        ],
+        "bounds": [
+          1019,
+          578,
+          1210,
+          799
+        ],
+        "foot": [
+          1092.5,
+          793
+        ],
+        "scale": 0.35,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1538.5,
+          588
+        ],
+        "source": "source/goblin-attack-corrected.png",
+        "sourcePose": 7,
+        "cell": [
+          1458,
+          586,
+          160,
+          216
+        ],
+        "bounds": [
+          1460,
+          588,
+          1616,
+          800
+        ],
+        "foot": [
+          1529.5,
+          794
+        ],
+        "scale": 0.35,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          747.5,
+          989
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          692,
+          987,
+          188,
+          244
+        ],
+        "bounds": [
+          694,
+          989,
+          878,
+          1229
+        ],
+        "foot": [
+          778.5,
+          1221
+        ],
+        "scale": 0.332,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1109.5,
+          1114
+        ],
+        "source": "source/goblin-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          968,
+          1112,
+          231,
+          117
+        ],
+        "bounds": [
+          970,
+          1114,
+          1197,
+          1227
+        ],
+        "foot": [
+          1101.5,
+          1220
+        ],
+        "scale": 0.332,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "orc",
+    "size": 192,
+    "anchor": [
+      96,
+      171
+    ],
+    "pixelScale": 0.32,
+    "frames": [
+      {
+        "head": [
+          115.0,
+          13
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          46,
+          11,
+          157,
+          204
+        ],
+        "bounds": [
+          48,
+          13,
+          201,
+          213
+        ],
+        "foot": [
+          110.5,
+          213
+        ],
+        "scale": 0.65,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          13
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          268,
+          11,
+          157,
+          204
+        ],
+        "bounds": [
+          270,
+          13,
+          423,
+          213
+        ],
+        "foot": [
+          332.5,
+          213
+        ],
+        "scale": 0.65,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          13
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          490,
+          11,
+          156,
+          204
+        ],
+        "bounds": [
+          492,
+          13,
+          644,
+          213
+        ],
+        "foot": [
+          554.5,
+          213
+        ],
+        "scale": 0.65,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          13
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          713,
+          11,
+          156,
+          204
+        ],
+        "bounds": [
+          715,
+          13,
+          867,
+          213
+        ],
+        "foot": [
+          776.5,
+          213
+        ],
+        "scale": 0.65,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          19
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          47,
+          17,
+          156,
+          197
+        ],
+        "bounds": [
+          49,
+          19,
+          201,
+          212
+        ],
+        "foot": [
+          127.0,
+          209
+        ],
+        "scale": 0.677,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          19
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          273,
+          17,
+          149,
+          194
+        ],
+        "bounds": [
+          275,
+          19,
+          420,
+          209
+        ],
+        "foot": [
+          335.5,
+          206
+        ],
+        "scale": 0.677,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          19
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          495,
+          17,
+          150,
+          194
+        ],
+        "bounds": [
+          497,
+          19,
+          643,
+          209
+        ],
+        "foot": [
+          556.0,
+          206
+        ],
+        "scale": 0.677,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          19
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          718,
+          17,
+          148,
+          194
+        ],
+        "bounds": [
+          720,
+          19,
+          864,
+          209
+        ],
+        "foot": [
+          779.0,
+          207
+        ],
+        "scale": 0.677,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          53
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          53,
+          51,
+          138,
+          171
+        ],
+        "bounds": [
+          55,
+          53,
+          189,
+          220
+        ],
+        "foot": [
+          123.5,
+          219
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.5,
+          20
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          260,
+          18,
+          145,
+          205
+        ],
+        "bounds": [
+          262,
+          20,
+          403,
+          221
+        ],
+        "foot": [
+          333.5,
+          220
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          77
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          482,
+          75,
+          136,
+          164
+        ],
+        "bounds": [
+          484,
+          77,
+          616,
+          237
+        ],
+        "foot": [
+          550.0,
+          220
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.0,
+          79
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          692,
+          77,
+          167,
+          160
+        ],
+        "bounds": [
+          694,
+          79,
+          857,
+          235
+        ],
+        "foot": [
+          774.0,
+          220
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.0,
+          50
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          79,
+          48,
+          217,
+          269
+        ],
+        "bounds": [
+          81,
+          50,
+          294,
+          315
+        ],
+        "foot": [
+          163.5,
+          312
+        ],
+        "scale": 0.5,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          476.5,
+          175
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          336,
+          173,
+          277,
+          135
+        ],
+        "bounds": [
+          338,
+          175,
+          611,
+          306
+        ],
+        "foot": [
+          476.0,
+          299
+        ],
+        "scale": 0.5,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.0,
+          231
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          47,
+          229,
+          143,
+          210
+        ],
+        "bounds": [
+          49,
+          231,
+          188,
+          437
+        ],
+        "foot": [
+          110.0,
+          436
+        ],
+        "scale": 0.65,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          231
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          269,
+          229,
+          143,
+          210
+        ],
+        "bounds": [
+          271,
+          231,
+          410,
+          437
+        ],
+        "foot": [
+          332.5,
+          437
+        ],
+        "scale": 0.65,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          231
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          491,
+          229,
+          143,
+          210
+        ],
+        "bounds": [
+          493,
+          231,
+          632,
+          437
+        ],
+        "foot": [
+          554.0,
+          436
+        ],
+        "scale": 0.65,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.5,
+          231
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          713,
+          229,
+          143,
+          210
+        ],
+        "bounds": [
+          715,
+          231,
+          854,
+          437
+        ],
+        "foot": [
+          775.5,
+          436
+        ],
+        "scale": 0.65,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          237
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          48,
+          235,
+          143,
+          200
+        ],
+        "bounds": [
+          50,
+          237,
+          189,
+          433
+        ],
+        "foot": [
+          92.5,
+          423
+        ],
+        "scale": 0.677,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          237
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          270,
+          235,
+          137,
+          200
+        ],
+        "bounds": [
+          272,
+          237,
+          405,
+          433
+        ],
+        "foot": [
+          340.0,
+          430
+        ],
+        "scale": 0.677,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          237
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          490,
+          235,
+          135,
+          199
+        ],
+        "bounds": [
+          492,
+          237,
+          623,
+          432
+        ],
+        "foot": [
+          533.0,
+          427
+        ],
+        "scale": 0.677,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          237
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          713,
+          235,
+          131,
+          197
+        ],
+        "bounds": [
+          715,
+          237,
+          842,
+          430
+        ],
+        "foot": [
+          773.0,
+          426
+        ],
+        "scale": 0.677,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          278
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          52,
+          276,
+          123,
+          171
+        ],
+        "bounds": [
+          54,
+          278,
+          173,
+          445
+        ],
+        "foot": [
+          111.0,
+          438
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.0,
+          240
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          253,
+          238,
+          145,
+          205
+        ],
+        "bounds": [
+          255,
+          240,
+          396,
+          441
+        ],
+        "foot": [
+          332.0,
+          439
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          534.0,
+          299
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          482,
+          297,
+          138,
+          164
+        ],
+        "bounds": [
+          484,
+          299,
+          618,
+          459
+        ],
+        "foot": [
+          551.5,
+          439
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          762.5,
+          302
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          689,
+          300,
+          155,
+          162
+        ],
+        "bounds": [
+          691,
+          302,
+          842,
+          460
+        ],
+        "foot": [
+          767.0,
+          439
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          803.5,
+          50
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          660,
+          48,
+          199,
+          269
+        ],
+        "bounds": [
+          662,
+          50,
+          857,
+          315
+        ],
+        "foot": [
+          759.0,
+          314
+        ],
+        "scale": 0.5,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1059.0,
+          190
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          938,
+          188,
+          270,
+          125
+        ],
+        "bounds": [
+          940,
+          190,
+          1206,
+          311
+        ],
+        "foot": [
+          1084.0,
+          306
+        ],
+        "scale": 0.5,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          121.0,
+          455
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          58,
+          453,
+          105,
+          206
+        ],
+        "bounds": [
+          60,
+          455,
+          161,
+          657
+        ],
+        "foot": [
+          115.0,
+          656
+        ],
+        "scale": 0.65,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.0,
+          455
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          280,
+          453,
+          104,
+          206
+        ],
+        "bounds": [
+          282,
+          455,
+          382,
+          657
+        ],
+        "foot": [
+          337.5,
+          655
+        ],
+        "scale": 0.65,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.0,
+          455
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          503,
+          453,
+          103,
+          206
+        ],
+        "bounds": [
+          505,
+          455,
+          604,
+          657
+        ],
+        "foot": [
+          558.0,
+          656
+        ],
+        "scale": 0.65,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          454
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          724,
+          452,
+          104,
+          207
+        ],
+        "bounds": [
+          726,
+          454,
+          826,
+          657
+        ],
+        "foot": [
+          780.0,
+          656
+        ],
+        "scale": 0.65,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          234.0,
+          45
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 0,
+        "cell": [
+          127,
+          43,
+          231,
+          360
+        ],
+        "bounds": [
+          129,
+          45,
+          356,
+          401
+        ],
+        "foot": [
+          249.0,
+          400
+        ],
+        "scale": 0.37,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          674.5,
+          45
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 1,
+        "cell": [
+          571,
+          43,
+          175,
+          363
+        ],
+        "bounds": [
+          573,
+          45,
+          744,
+          404
+        ],
+        "foot": [
+          659.5,
+          403
+        ],
+        "scale": 0.37,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          1111.0,
+          46
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 2,
+        "cell": [
+          1004,
+          44,
+          230,
+          361
+        ],
+        "bounds": [
+          1006,
+          46,
+          1232,
+          403
+        ],
+        "foot": [
+          1119.0,
+          397
+        ],
+        "scale": 0.37,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1551.0,
+          43
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 3,
+        "cell": [
+          1450,
+          41,
+          172,
+          367
+        ],
+        "bounds": [
+          1452,
+          43,
+          1620,
+          406
+        ],
+        "foot": [
+          1550.0,
+          406
+        ],
+        "scale": 0.37,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          103.0,
+          498
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          37,
+          496,
+          132,
+          169
+        ],
+        "bounds": [
+          39,
+          498,
+          167,
+          663
+        ],
+        "foot": [
+          104.0,
+          662
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          458
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          248,
+          456,
+          138,
+          210
+        ],
+        "bounds": [
+          250,
+          458,
+          384,
+          664
+        ],
+        "foot": [
+          329.5,
+          663
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          514.0,
+          525
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          443,
+          523,
+          177,
+          153
+        ],
+        "bounds": [
+          445,
+          525,
+          618,
+          674
+        ],
+        "foot": [
+          534.5,
+          661
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          746.5,
+          526
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          671,
+          524,
+          173,
+          149
+        ],
+        "bounds": [
+          673,
+          526,
+          842,
+          671
+        ],
+        "foot": [
+          761.5,
+          663
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          182.5,
+          352
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          51,
+          350,
+          185,
+          271
+        ],
+        "bounds": [
+          53,
+          352,
+          234,
+          619
+        ],
+        "foot": [
+          172.0,
+          619
+        ],
+        "scale": 0.5,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          454.5,
+          492
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          313,
+          490,
+          289,
+          126
+        ],
+        "bounds": [
+          315,
+          492,
+          600,
+          614
+        ],
+        "foot": [
+          455.0,
+          606
+        ],
+        "scale": 0.5,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          123.5,
+          673
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          41,
+          671,
+          121,
+          211
+        ],
+        "bounds": [
+          43,
+          673,
+          160,
+          880
+        ],
+        "foot": [
+          110.5,
+          880
+        ],
+        "scale": 0.65,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          673
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          263,
+          671,
+          121,
+          211
+        ],
+        "bounds": [
+          265,
+          673,
+          382,
+          880
+        ],
+        "foot": [
+          333.0,
+          880
+        ],
+        "scale": 0.65,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.0,
+          672
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          485,
+          670,
+          120,
+          212
+        ],
+        "bounds": [
+          487,
+          672,
+          603,
+          880
+        ],
+        "foot": [
+          555.0,
+          880
+        ],
+        "scale": 0.65,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.0,
+          673
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          707,
+          671,
+          120,
+          211
+        ],
+        "bounds": [
+          709,
+          673,
+          825,
+          880
+        ],
+        "foot": [
+          776.5,
+          880
+        ],
+        "scale": 0.65,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          678
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          26,
+          676,
+          155,
+          201
+        ],
+        "bounds": [
+          28,
+          678,
+          179,
+          875
+        ],
+        "foot": [
+          112.0,
+          872
+        ],
+        "scale": 0.677,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          678
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          256,
+          676,
+          140,
+          201
+        ],
+        "bounds": [
+          258,
+          678,
+          394,
+          875
+        ],
+        "foot": [
+          340.0,
+          875
+        ],
+        "scale": 0.677,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          679
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          476,
+          677,
+          141,
+          198
+        ],
+        "bounds": [
+          478,
+          679,
+          615,
+          873
+        ],
+        "foot": [
+          543.5,
+          871
+        ],
+        "scale": 0.677,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          679
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          699,
+          677,
+          133,
+          201
+        ],
+        "bounds": [
+          701,
+          679,
+          830,
+          876
+        ],
+        "foot": [
+          775.5,
+          867
+        ],
+        "scale": 0.677,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          94.0,
+          721
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          20,
+          719,
+          149,
+          167
+        ],
+        "bounds": [
+          22,
+          721,
+          167,
+          884
+        ],
+        "foot": [
+          100.0,
+          882
+        ],
+        "scale": 0.7,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          682
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          258,
+          680,
+          144,
+          209
+        ],
+        "bounds": [
+          260,
+          682,
+          400,
+          887
+        ],
+        "foot": [
+          323.5,
+          886
+        ],
+        "scale": 0.7,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          507.5,
+          750
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          433,
+          748,
+          178,
+          139
+        ],
+        "bounds": [
+          435,
+          750,
+          609,
+          885
+        ],
+        "foot": [
+          523.0,
+          882
+        ],
+        "scale": 0.7,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          742.0,
+          753
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          669,
+          751,
+          167,
+          138
+        ],
+        "bounds": [
+          671,
+          753,
+          834,
+          887
+        ],
+        "foot": [
+          754.5,
+          884
+        ],
+        "scale": 0.7,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          811.5,
+          352
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          662,
+          350,
+          199,
+          270
+        ],
+        "bounds": [
+          664,
+          352,
+          859,
+          618
+        ],
+        "foot": [
+          742.0,
+          618
+        ],
+        "scale": 0.5,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1065.0,
+          499
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          936,
+          497,
+          276,
+          119
+        ],
+        "bounds": [
+          938,
+          499,
+          1210,
+          614
+        ],
+        "foot": [
+          1069.0,
+          608
+        ],
+        "scale": 0.5,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          897
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          32,
+          895,
+          155,
+          207
+        ],
+        "bounds": [
+          34,
+          897,
+          185,
+          1100
+        ],
+        "foot": [
+          116.0,
+          1099
+        ],
+        "scale": 0.65,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          897
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          254,
+          895,
+          155,
+          208
+        ],
+        "bounds": [
+          256,
+          897,
+          407,
+          1101
+        ],
+        "foot": [
+          337.0,
+          1100
+        ],
+        "scale": 0.65,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          897
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          476,
+          895,
+          155,
+          207
+        ],
+        "bounds": [
+          478,
+          897,
+          629,
+          1100
+        ],
+        "foot": [
+          559.5,
+          1099
+        ],
+        "scale": 0.65,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          897
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          698,
+          895,
+          156,
+          207
+        ],
+        "bounds": [
+          700,
+          897,
+          852,
+          1100
+        ],
+        "foot": [
+          781.0,
+          1100
+        ],
+        "scale": 0.65,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          900
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          26,
+          898,
+          162,
+          202
+        ],
+        "bounds": [
+          28,
+          900,
+          186,
+          1098
+        ],
+        "foot": [
+          116.0,
+          1091
+        ],
+        "scale": 0.677,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          900
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          248,
+          898,
+          156,
+          199
+        ],
+        "bounds": [
+          250,
+          900,
+          402,
+          1095
+        ],
+        "foot": [
+          338.5,
+          1095
+        ],
+        "scale": 0.677,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          901
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          469,
+          899,
+          157,
+          197
+        ],
+        "bounds": [
+          471,
+          901,
+          624,
+          1094
+        ],
+        "foot": [
+          544.5,
+          1093
+        ],
+        "scale": 0.677,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          901
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          692,
+          899,
+          157,
+          198
+        ],
+        "bounds": [
+          694,
+          901,
+          847,
+          1095
+        ],
+        "foot": [
+          777.5,
+          1087
+        ],
+        "scale": 0.677,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          939
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          53,
+          937,
+          151,
+          171
+        ],
+        "bounds": [
+          55,
+          939,
+          202,
+          1106
+        ],
+        "foot": [
+          126.5,
+          1105
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          905
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          265,
+          903,
+          136,
+          208
+        ],
+        "bounds": [
+          267,
+          905,
+          399,
+          1109
+        ],
+        "foot": [
+          326.5,
+          1107
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.0,
+          971
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          474,
+          969,
+          147,
+          140
+        ],
+        "bounds": [
+          476,
+          971,
+          619,
+          1107
+        ],
+        "foot": [
+          547.5,
+          1106
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.0,
+          972
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          700,
+          970,
+          161,
+          141
+        ],
+        "bounds": [
+          702,
+          972,
+          859,
+          1109
+        ],
+        "foot": [
+          778.5,
+          1108
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          167.5,
+          653
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          56,
+          651,
+          226,
+          270
+        ],
+        "bounds": [
+          58,
+          653,
+          280,
+          919
+        ],
+        "foot": [
+          156.0,
+          918
+        ],
+        "scale": 0.5,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.0,
+          782
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          330,
+          780,
+          270,
+          131
+        ],
+        "bounds": [
+          332,
+          782,
+          598,
+          909
+        ],
+        "foot": [
+          458.0,
+          907
+        ],
+        "scale": 0.5,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          101.5,
+          1117
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          45,
+          1115,
+          142,
+          210
+        ],
+        "bounds": [
+          47,
+          1117,
+          185,
+          1323
+        ],
+        "foot": [
+          114.0,
+          1322
+        ],
+        "scale": 0.65,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.5,
+          1117
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          266,
+          1115,
+          142,
+          210
+        ],
+        "bounds": [
+          268,
+          1117,
+          406,
+          1323
+        ],
+        "foot": [
+          335.0,
+          1322
+        ],
+        "scale": 0.65,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          1117
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          489,
+          1115,
+          142,
+          210
+        ],
+        "bounds": [
+          491,
+          1117,
+          629,
+          1323
+        ],
+        "foot": [
+          557.5,
+          1321
+        ],
+        "scale": 0.65,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.0,
+          1117
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          710,
+          1115,
+          143,
+          210
+        ],
+        "bounds": [
+          712,
+          1117,
+          851,
+          1323
+        ],
+        "foot": [
+          780.5,
+          1322
+        ],
+        "scale": 0.65,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          1122
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          34,
+          1120,
+          156,
+          200
+        ],
+        "bounds": [
+          36,
+          1122,
+          188,
+          1318
+        ],
+        "foot": [
+          111.0,
+          1307
+        ],
+        "scale": 0.677,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          1122
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          260,
+          1120,
+          146,
+          196
+        ],
+        "bounds": [
+          262,
+          1122,
+          404,
+          1314
+        ],
+        "foot": [
+          335.5,
+          1312
+        ],
+        "scale": 0.677,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          1122
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          481,
+          1120,
+          146,
+          200
+        ],
+        "bounds": [
+          483,
+          1122,
+          625,
+          1318
+        ],
+        "foot": [
+          544.0,
+          1316
+        ],
+        "scale": 0.677,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          1122
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          707,
+          1120,
+          143,
+          196
+        ],
+        "bounds": [
+          709,
+          1122,
+          848,
+          1314
+        ],
+        "foot": [
+          775.5,
+          1312
+        ],
+        "scale": 0.677,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.0,
+          1163
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          46,
+          1161,
+          154,
+          167
+        ],
+        "bounds": [
+          48,
+          1163,
+          198,
+          1326
+        ],
+        "foot": [
+          121.5,
+          1324
+        ],
+        "scale": 0.7,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          351.0,
+          1123
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          272,
+          1121,
+          130,
+          207
+        ],
+        "bounds": [
+          274,
+          1123,
+          400,
+          1326
+        ],
+        "foot": [
+          319.0,
+          1325
+        ],
+        "scale": 0.7,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.5,
+          1190
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          458,
+          1188,
+          167,
+          140
+        ],
+        "bounds": [
+          460,
+          1190,
+          623,
+          1326
+        ],
+        "foot": [
+          540.0,
+          1323
+        ],
+        "scale": 0.7,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.0,
+          1193
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          691,
+          1191,
+          174,
+          136
+        ],
+        "bounds": [
+          693,
+          1193,
+          863,
+          1325
+        ],
+        "foot": [
+          775.0,
+          1324
+        ],
+        "scale": 0.7,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          738.0,
+          655
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          685,
+          653,
+          206,
+          268
+        ],
+        "bounds": [
+          687,
+          655,
+          889,
+          919
+        ],
+        "foot": [
+          767.5,
+          918
+        ],
+        "scale": 0.5,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1090.5,
+          788
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          947,
+          786,
+          278,
+          126
+        ],
+        "bounds": [
+          949,
+          788,
+          1223,
+          910
+        ],
+        "foot": [
+          1085.5,
+          908
+        ],
+        "scale": 0.5,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          105.5,
+          1342
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          65,
+          1340,
+          104,
+          206
+        ],
+        "bounds": [
+          67,
+          1342,
+          167,
+          1544
+        ],
+        "foot": [
+          112.0,
+          1543
+        ],
+        "scale": 0.65,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          1342
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          287,
+          1340,
+          104,
+          206
+        ],
+        "bounds": [
+          289,
+          1342,
+          389,
+          1544
+        ],
+        "foot": [
+          332.5,
+          1543
+        ],
+        "scale": 0.65,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.0,
+          1342
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          509,
+          1340,
+          104,
+          206
+        ],
+        "bounds": [
+          511,
+          1342,
+          611,
+          1544
+        ],
+        "foot": [
+          556.5,
+          1543
+        ],
+        "scale": 0.65,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.5,
+          1342
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          731,
+          1340,
+          104,
+          206
+        ],
+        "bounds": [
+          733,
+          1342,
+          833,
+          1544
+        ],
+        "foot": [
+          777.5,
+          1543
+        ],
+        "scale": 0.65,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          229.5,
+          490
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 4,
+        "cell": [
+          98,
+          488,
+          248,
+          358
+        ],
+        "bounds": [
+          100,
+          490,
+          344,
+          844
+        ],
+        "foot": [
+          213.5,
+          842
+        ],
+        "scale": 0.37,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          666.5,
+          485
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 5,
+        "cell": [
+          596,
+          483,
+          175,
+          364
+        ],
+        "bounds": [
+          598,
+          485,
+          769,
+          845
+        ],
+        "foot": [
+          670.0,
+          844
+        ],
+        "scale": 0.37,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          1109.5,
+          487
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 6,
+        "cell": [
+          986,
+          485,
+          243,
+          362
+        ],
+        "bounds": [
+          988,
+          487,
+          1227,
+          845
+        ],
+        "foot": [
+          1102.5,
+          839
+        ],
+        "scale": 0.37,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1552.0,
+          485
+        ],
+        "source": "source/orc-walk-corrected.png",
+        "sourcePose": 7,
+        "cell": [
+          1483,
+          483,
+          174,
+          365
+        ],
+        "bounds": [
+          1485,
+          485,
+          1655,
+          846
+        ],
+        "foot": [
+          1538.0,
+          844
+        ],
+        "scale": 0.37,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          101.0,
+          1378
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          53,
+          1376,
+          131,
+          169
+        ],
+        "bounds": [
+          55,
+          1378,
+          182,
+          1543
+        ],
+        "foot": [
+          115.0,
+          1543
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          1345
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          272,
+          1343,
+          116,
+          203
+        ],
+        "bounds": [
+          274,
+          1345,
+          386,
+          1544
+        ],
+        "foot": [
+          314.5,
+          1543
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          537.0,
+          1409
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          453,
+          1407,
+          164,
+          144
+        ],
+        "bounds": [
+          455,
+          1409,
+          615,
+          1549
+        ],
+        "foot": [
+          535.0,
+          1545
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          764.5,
+          1415
+        ],
+        "source": "source/orc-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          683,
+          1413,
+          181,
+          137
+        ],
+        "bounds": [
+          685,
+          1415,
+          862,
+          1548
+        ],
+        "foot": [
+          772.5,
+          1544
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.0,
+          956
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          74,
+          954,
+          192,
+          276
+        ],
+        "bounds": [
+          76,
+          956,
+          264,
+          1228
+        ],
+        "foot": [
+          177.0,
+          1228
+        ],
+        "scale": 0.5,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          464.0,
+          1092
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          325,
+          1090,
+          289,
+          133
+        ],
+        "bounds": [
+          327,
+          1092,
+          612,
+          1221
+        ],
+        "foot": [
+          471.0,
+          1213
+        ],
+        "scale": 0.5,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          104.0,
+          1560
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          51,
+          1558,
+          143,
+          209
+        ],
+        "bounds": [
+          53,
+          1560,
+          192,
+          1765
+        ],
+        "foot": [
+          111.0,
+          1765
+        ],
+        "scale": 0.65,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.5,
+          1560
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          273,
+          1558,
+          143,
+          210
+        ],
+        "bounds": [
+          275,
+          1560,
+          414,
+          1766
+        ],
+        "foot": [
+          333.0,
+          1764
+        ],
+        "scale": 0.65,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.5,
+          1560
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          496,
+          1558,
+          142,
+          210
+        ],
+        "bounds": [
+          498,
+          1560,
+          636,
+          1766
+        ],
+        "foot": [
+          554.5,
+          1765
+        ],
+        "scale": 0.65,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          1560
+        ],
+        "source": "source/orc-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          718,
+          1558,
+          142,
+          209
+        ],
+        "bounds": [
+          720,
+          1560,
+          858,
+          1765
+        ],
+        "foot": [
+          777.5,
+          1764
+        ],
+        "scale": 0.65,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          1566
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          50,
+          1564,
+          153,
+          199
+        ],
+        "bounds": [
+          52,
+          1566,
+          201,
+          1761
+        ],
+        "foot": [
+          130.0,
+          1755
+        ],
+        "scale": 0.677,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1566
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          277,
+          1564,
+          143,
+          192
+        ],
+        "bounds": [
+          279,
+          1566,
+          418,
+          1754
+        ],
+        "foot": [
+          331.0,
+          1752
+        ],
+        "scale": 0.677,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          1567
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          501,
+          1565,
+          144,
+          198
+        ],
+        "bounds": [
+          503,
+          1567,
+          643,
+          1761
+        ],
+        "foot": [
+          574.0,
+          1757
+        ],
+        "scale": 0.677,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          1567
+        ],
+        "source": "source/orc-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          723,
+          1565,
+          139,
+          191
+        ],
+        "bounds": [
+          725,
+          1567,
+          860,
+          1754
+        ],
+        "foot": [
+          767.0,
+          1753
+        ],
+        "scale": 0.677,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          214.0,
+          549
+        ],
+        "source": "source/orc-attack-corrected.png",
+        "sourcePose": 4,
+        "cell": [
+          96,
+          547,
+          286,
+          326
+        ],
+        "bounds": [
+          98,
+          549,
+          380,
+          871
+        ],
+        "foot": [
+          209.0,
+          871
+        ],
+        "scale": 0.37,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          671.5,
+          451
+        ],
+        "source": "source/orc-attack-corrected.png",
+        "sourcePose": 5,
+        "cell": [
+          542,
+          449,
+          255,
+          424
+        ],
+        "bounds": [
+          544,
+          451,
+          795,
+          871
+        ],
+        "foot": [
+          654.5,
+          871
+        ],
+        "scale": 0.37,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1103.0,
+          551
+        ],
+        "source": "source/orc-attack-corrected.png",
+        "sourcePose": 6,
+        "cell": [
+          984,
+          549,
+          242,
+          329
+        ],
+        "bounds": [
+          986,
+          551,
+          1224,
+          876
+        ],
+        "foot": [
+          1104.0,
+          871
+        ],
+        "scale": 0.37,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1541.5,
+          564
+        ],
+        "source": "source/orc-attack-corrected.png",
+        "sourcePose": 7,
+        "cell": [
+          1426,
+          562,
+          291,
+          315
+        ],
+        "bounds": [
+          1428,
+          564,
+          1715,
+          875
+        ],
+        "foot": [
+          1569.5,
+          871
+        ],
+        "scale": 0.37,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          730.0,
+          956
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          670,
+          954,
+          220,
+          276
+        ],
+        "bounds": [
+          672,
+          956,
+          888,
+          1228
+        ],
+        "foot": [
+          713.0,
+          1226
+        ],
+        "scale": 0.5,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1064.0,
+          1099
+        ],
+        "source": "source/orc-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          933,
+          1097,
+          279,
+          127
+        ],
+        "bounds": [
+          935,
+          1099,
+          1210,
+          1222
+        ],
+        "foot": [
+          1085.0,
+          1217
+        ],
+        "scale": 0.5,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "drake",
+    "size": 192,
+    "anchor": [
+      96,
+      171
+    ],
+    "pixelScale": 0.32,
+    "frames": [
+      {
+        "head": [
+          111.5,
+          42
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 0,
+        "cell": [
+          41,
+          40,
+          141,
+          180
+        ],
+        "bounds": [
+          43,
+          42,
+          180,
+          218
+        ],
+        "foot": [
+          111.0,
+          218
+        ],
+        "scale": 0.521,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          42
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 1,
+        "cell": [
+          263,
+          40,
+          141,
+          180
+        ],
+        "bounds": [
+          265,
+          42,
+          402,
+          218
+        ],
+        "foot": [
+          333.0,
+          218
+        ],
+        "scale": 0.521,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          43
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 2,
+        "cell": [
+          484,
+          41,
+          142,
+          179
+        ],
+        "bounds": [
+          486,
+          43,
+          624,
+          218
+        ],
+        "foot": [
+          554.5,
+          218
+        ],
+        "scale": 0.521,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          43
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 3,
+        "cell": [
+          706,
+          41,
+          141,
+          179
+        ],
+        "bounds": [
+          708,
+          43,
+          845,
+          218
+        ],
+        "foot": [
+          776.5,
+          218
+        ],
+        "scale": 0.521,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          40
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          46,
+          38,
+          133,
+          178
+        ],
+        "bounds": [
+          48,
+          40,
+          177,
+          214
+        ],
+        "foot": [
+          111.5,
+          214
+        ],
+        "scale": 0.536,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          40
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          269,
+          38,
+          131,
+          179
+        ],
+        "bounds": [
+          271,
+          40,
+          398,
+          215
+        ],
+        "foot": [
+          335.5,
+          215
+        ],
+        "scale": 0.536,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          40
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          489,
+          38,
+          133,
+          178
+        ],
+        "bounds": [
+          491,
+          40,
+          620,
+          214
+        ],
+        "foot": [
+          554.0,
+          214
+        ],
+        "scale": 0.536,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          40
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          712,
+          38,
+          130,
+          179
+        ],
+        "bounds": [
+          714,
+          40,
+          840,
+          215
+        ],
+        "foot": [
+          778.5,
+          215
+        ],
+        "scale": 0.536,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          79
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          53,
+          77,
+          112,
+          121
+        ],
+        "bounds": [
+          55,
+          79,
+          163,
+          196
+        ],
+        "foot": [
+          108.5,
+          196
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          72
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          240,
+          70,
+          176,
+          127
+        ],
+        "bounds": [
+          242,
+          72,
+          414,
+          195
+        ],
+        "foot": [
+          328.0,
+          195
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          55
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          449,
+          53,
+          208,
+          144
+        ],
+        "bounds": [
+          451,
+          55,
+          655,
+          195
+        ],
+        "foot": [
+          551.0,
+          195
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          65
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          675,
+          63,
+          202,
+          134
+        ],
+        "bounds": [
+          677,
+          65,
+          875,
+          195
+        ],
+        "foot": [
+          773.0,
+          195
+        ],
+        "scale": 0.7,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          161.0,
+          67
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          77,
+          65,
+          166,
+          207
+        ],
+        "bounds": [
+          79,
+          67,
+          241,
+          270
+        ],
+        "foot": [
+          161.5,
+          270
+        ],
+        "scale": 0.449,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          462.5,
+          159
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          365,
+          157,
+          227,
+          116
+        ],
+        "bounds": [
+          367,
+          159,
+          590,
+          271
+        ],
+        "foot": [
+          470.0,
+          271
+        ],
+        "scale": 0.449,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          73.0,
+          259
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 4,
+        "cell": [
+          26,
+          257,
+          180,
+          170
+        ],
+        "bounds": [
+          28,
+          259,
+          204,
+          425
+        ],
+        "foot": [
+          102.0,
+          425
+        ],
+        "scale": 0.521,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          295.0,
+          259
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 5,
+        "cell": [
+          249,
+          257,
+          179,
+          170
+        ],
+        "bounds": [
+          251,
+          259,
+          426,
+          425
+        ],
+        "foot": [
+          325.0,
+          425
+        ],
+        "scale": 0.521,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          516.5,
+          259
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 6,
+        "cell": [
+          470,
+          257,
+          179,
+          170
+        ],
+        "bounds": [
+          472,
+          259,
+          647,
+          425
+        ],
+        "foot": [
+          546.5,
+          425
+        ],
+        "scale": 0.521,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          738.0,
+          259
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 7,
+        "cell": [
+          692,
+          257,
+          179,
+          170
+        ],
+        "bounds": [
+          694,
+          259,
+          869,
+          425
+        ],
+        "foot": [
+          767.5,
+          425
+        ],
+        "scale": 0.521,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          82.5,
+          257
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          38,
+          255,
+          163,
+          170
+        ],
+        "bounds": [
+          40,
+          257,
+          199,
+          423
+        ],
+        "foot": [
+          125.0,
+          423
+        ],
+        "scale": 0.536,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          302.0,
+          257
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          258,
+          255,
+          164,
+          168
+        ],
+        "bounds": [
+          260,
+          257,
+          420,
+          421
+        ],
+        "foot": [
+          345.0,
+          421
+        ],
+        "scale": 0.536,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          524.0,
+          257
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          479,
+          255,
+          166,
+          170
+        ],
+        "bounds": [
+          481,
+          257,
+          643,
+          423
+        ],
+        "foot": [
+          558.5,
+          423
+        ],
+        "scale": 0.536,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          745.0,
+          257
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          700,
+          255,
+          164,
+          170
+        ],
+        "bounds": [
+          702,
+          257,
+          862,
+          423
+        ],
+        "foot": [
+          789.5,
+          423
+        ],
+        "scale": 0.536,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          84.5,
+          292
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          50,
+          290,
+          129,
+          126
+        ],
+        "bounds": [
+          52,
+          292,
+          177,
+          414
+        ],
+        "foot": [
+          109.5,
+          414
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          284
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          243,
+          282,
+          171,
+          133
+        ],
+        "bounds": [
+          245,
+          284,
+          412,
+          413
+        ],
+        "foot": [
+          330.5,
+          413
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          260
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          447,
+          258,
+          201,
+          157
+        ],
+        "bounds": [
+          449,
+          260,
+          646,
+          413
+        ],
+        "foot": [
+          551.5,
+          413
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.0,
+          274
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          675,
+          272,
+          192,
+          143
+        ],
+        "bounds": [
+          677,
+          274,
+          865,
+          413
+        ],
+        "foot": [
+          775.5,
+          413
+        ],
+        "scale": 0.7,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          741.5,
+          75
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          683,
+          73,
+          212,
+          199
+        ],
+        "bounds": [
+          685,
+          75,
+          893,
+          270
+        ],
+        "foot": [
+          779.0,
+          270
+        ],
+        "scale": 0.449,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1096.5,
+          160
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          975,
+          158,
+          248,
+          114
+        ],
+        "bounds": [
+          977,
+          160,
+          1221,
+          270
+        ],
+        "foot": [
+          1091.5,
+          270
+        ],
+        "scale": 0.449,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          64.5,
+          478
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 8,
+        "cell": [
+          15,
+          476,
+          199,
+          160
+        ],
+        "bounds": [
+          17,
+          478,
+          212,
+          634
+        ],
+        "foot": [
+          102.0,
+          634
+        ],
+        "scale": 0.521,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          286.0,
+          478
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 9,
+        "cell": [
+          239,
+          476,
+          197,
+          160
+        ],
+        "bounds": [
+          241,
+          478,
+          434,
+          634
+        ],
+        "foot": [
+          324.5,
+          634
+        ],
+        "scale": 0.521,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          507.0,
+          478
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 10,
+        "cell": [
+          459,
+          476,
+          199,
+          160
+        ],
+        "bounds": [
+          461,
+          478,
+          656,
+          634
+        ],
+        "foot": [
+          546.0,
+          634
+        ],
+        "scale": 0.521,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          730.5,
+          478
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 11,
+        "cell": [
+          681,
+          476,
+          197,
+          160
+        ],
+        "bounds": [
+          683,
+          478,
+          876,
+          634
+        ],
+        "foot": [
+          766.5,
+          634
+        ],
+        "scale": 0.521,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          62.0,
+          480
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          14,
+          478,
+          200,
+          161
+        ],
+        "bounds": [
+          16,
+          480,
+          212,
+          637
+        ],
+        "foot": [
+          97.0,
+          637
+        ],
+        "scale": 0.536,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          283.5,
+          482
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          236,
+          480,
+          203,
+          159
+        ],
+        "bounds": [
+          238,
+          482,
+          437,
+          637
+        ],
+        "foot": [
+          332.0,
+          637
+        ],
+        "scale": 0.536,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          504.0,
+          484
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          457,
+          482,
+          203,
+          157
+        ],
+        "bounds": [
+          459,
+          484,
+          658,
+          637
+        ],
+        "foot": [
+          537.0,
+          637
+        ],
+        "scale": 0.536,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          723.5,
+          484
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          676,
+          482,
+          202,
+          155
+        ],
+        "bounds": [
+          678,
+          484,
+          876,
+          635
+        ],
+        "foot": [
+          773.5,
+          635
+        ],
+        "scale": 0.536,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          68.5,
+          518
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          22,
+          516,
+          181,
+          122
+        ],
+        "bounds": [
+          24,
+          518,
+          201,
+          636
+        ],
+        "foot": [
+          119.0,
+          636
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          305.5,
+          508
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          230,
+          506,
+          191,
+          131
+        ],
+        "bounds": [
+          232,
+          508,
+          419,
+          635
+        ],
+        "foot": [
+          337.0,
+          635
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.0,
+          478
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          436,
+          476,
+          210,
+          161
+        ],
+        "bounds": [
+          438,
+          478,
+          644,
+          635
+        ],
+        "foot": [
+          558.0,
+          635
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          489
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          669,
+          487,
+          198,
+          151
+        ],
+        "bounds": [
+          671,
+          489,
+          865,
+          636
+        ],
+        "foot": [
+          781.5,
+          636
+        ],
+        "scale": 0.7,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.5,
+          372
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          65,
+          370,
+          221,
+          192
+        ],
+        "bounds": [
+          67,
+          372,
+          284,
+          560
+        ],
+        "foot": [
+          151.0,
+          560
+        ],
+        "scale": 0.449,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.5,
+          456
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          348,
+          454,
+          246,
+          107
+        ],
+        "bounds": [
+          350,
+          456,
+          592,
+          559
+        ],
+        "foot": [
+          467.5,
+          559
+        ],
+        "scale": 0.449,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          76.5,
+          686
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 12,
+        "cell": [
+          32,
+          684,
+          172,
+          173
+        ],
+        "bounds": [
+          34,
+          686,
+          202,
+          855
+        ],
+        "foot": [
+          104.0,
+          855
+        ],
+        "scale": 0.521,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          298.5,
+          686
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 13,
+        "cell": [
+          255,
+          684,
+          170,
+          173
+        ],
+        "bounds": [
+          257,
+          686,
+          423,
+          855
+        ],
+        "foot": [
+          327.0,
+          855
+        ],
+        "scale": 0.521,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          520.0,
+          686
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 14,
+        "cell": [
+          476,
+          684,
+          171,
+          173
+        ],
+        "bounds": [
+          478,
+          686,
+          645,
+          855
+        ],
+        "foot": [
+          548.5,
+          855
+        ],
+        "scale": 0.521,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          742.0,
+          686
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 15,
+        "cell": [
+          698,
+          684,
+          171,
+          173
+        ],
+        "bounds": [
+          700,
+          686,
+          867,
+          855
+        ],
+        "foot": [
+          769.5,
+          855
+        ],
+        "scale": 0.521,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          75.0,
+          696
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          36,
+          694,
+          164,
+          167
+        ],
+        "bounds": [
+          38,
+          696,
+          198,
+          859
+        ],
+        "foot": [
+          125.5,
+          859
+        ],
+        "scale": 0.536,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          294.5,
+          696
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          255,
+          694,
+          159,
+          164
+        ],
+        "bounds": [
+          257,
+          696,
+          412,
+          856
+        ],
+        "foot": [
+          327.5,
+          856
+        ],
+        "scale": 0.536,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          516.5,
+          696
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          477,
+          694,
+          167,
+          165
+        ],
+        "bounds": [
+          479,
+          696,
+          642,
+          857
+        ],
+        "foot": [
+          549.0,
+          857
+        ],
+        "scale": 0.536,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          737.5,
+          696
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          698,
+          694,
+          158,
+          166
+        ],
+        "bounds": [
+          700,
+          696,
+          854,
+          858
+        ],
+        "foot": [
+          779.5,
+          858
+        ],
+        "scale": 0.536,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          147.0,
+          134
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 0,
+        "cell": [
+          94,
+          132,
+          225,
+          263
+        ],
+        "bounds": [
+          96,
+          134,
+          317,
+          393
+        ],
+        "foot": [
+          228.0,
+          393
+        ],
+        "scale": 0.34,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          609.5,
+          136
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 1,
+        "cell": [
+          504,
+          134,
+          248,
+          260
+        ],
+        "bounds": [
+          506,
+          136,
+          750,
+          392
+        ],
+        "foot": [
+          645.5,
+          392
+        ],
+        "scale": 0.34,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1038.0,
+          89
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 2,
+        "cell": [
+          847,
+          87,
+          381,
+          307
+        ],
+        "bounds": [
+          849,
+          89,
+          1226,
+          392
+        ],
+        "foot": [
+          1081.5,
+          392
+        ],
+        "scale": 0.34,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1510.5,
+          117
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 3,
+        "cell": [
+          1297,
+          115,
+          405,
+          279
+        ],
+        "bounds": [
+          1299,
+          117,
+          1700,
+          392
+        ],
+        "foot": [
+          1556.0,
+          392
+        ],
+        "scale": 0.34,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          749.5,
+          368
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          701,
+          366,
+          189,
+          193
+        ],
+        "bounds": [
+          703,
+          368,
+          888,
+          557
+        ],
+        "foot": [
+          788.0,
+          557
+        ],
+        "scale": 0.449,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1109.5,
+          458
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          975,
+          456,
+          252,
+          105
+        ],
+        "bounds": [
+          977,
+          458,
+          1225,
+          559
+        ],
+        "foot": [
+          1099.0,
+          559
+        ],
+        "scale": 0.449,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.0,
+          913
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 16,
+        "cell": [
+          39,
+          911,
+          144,
+          186
+        ],
+        "bounds": [
+          41,
+          913,
+          181,
+          1095
+        ],
+        "foot": [
+          111.5,
+          1095
+        ],
+        "scale": 0.521,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          913
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 17,
+        "cell": [
+          262,
+          911,
+          143,
+          186
+        ],
+        "bounds": [
+          264,
+          913,
+          403,
+          1095
+        ],
+        "foot": [
+          333.0,
+          1095
+        ],
+        "scale": 0.521,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          913
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 18,
+        "cell": [
+          483,
+          911,
+          144,
+          186
+        ],
+        "bounds": [
+          485,
+          913,
+          625,
+          1095
+        ],
+        "foot": [
+          555.0,
+          1095
+        ],
+        "scale": 0.521,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          913
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 19,
+        "cell": [
+          705,
+          911,
+          144,
+          186
+        ],
+        "bounds": [
+          707,
+          913,
+          847,
+          1095
+        ],
+        "foot": [
+          776.5,
+          1095
+        ],
+        "scale": 0.521,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          919
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          47,
+          917,
+          131,
+          178
+        ],
+        "bounds": [
+          49,
+          919,
+          176,
+          1093
+        ],
+        "foot": [
+          110.5,
+          1093
+        ],
+        "scale": 0.536,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          918
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          268,
+          916,
+          132,
+          180
+        ],
+        "bounds": [
+          270,
+          918,
+          398,
+          1094
+        ],
+        "foot": [
+          334.5,
+          1094
+        ],
+        "scale": 0.536,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          919
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          489,
+          917,
+          132,
+          180
+        ],
+        "bounds": [
+          491,
+          919,
+          619,
+          1095
+        ],
+        "foot": [
+          573.5,
+          1095
+        ],
+        "scale": 0.536,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          919
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          712,
+          917,
+          129,
+          178
+        ],
+        "bounds": [
+          714,
+          919,
+          839,
+          1093
+        ],
+        "foot": [
+          776.5,
+          1093
+        ],
+        "scale": 0.536,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.0,
+          950
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          52,
+          948,
+          113,
+          133
+        ],
+        "bounds": [
+          54,
+          950,
+          163,
+          1079
+        ],
+        "foot": [
+          109.0,
+          1079
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          315.0,
+          943
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          238,
+          941,
+          172,
+          140
+        ],
+        "bounds": [
+          240,
+          943,
+          408,
+          1079
+        ],
+        "foot": [
+          329.0,
+          1079
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          924
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          439,
+          922,
+          223,
+          159
+        ],
+        "bounds": [
+          441,
+          924,
+          660,
+          1079
+        ],
+        "foot": [
+          550.5,
+          1079
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          942
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          670,
+          940,
+          205,
+          141
+        ],
+        "bounds": [
+          672,
+          942,
+          873,
+          1079
+        ],
+        "foot": [
+          773.0,
+          1079
+        ],
+        "scale": 0.7,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.0,
+          655
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          73,
+          653,
+          167,
+          206
+        ],
+        "bounds": [
+          75,
+          655,
+          238,
+          857
+        ],
+        "foot": [
+          158.0,
+          857
+        ],
+        "scale": 0.449,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.0,
+          741
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          354,
+          739,
+          214,
+          120
+        ],
+        "bounds": [
+          356,
+          741,
+          566,
+          857
+        ],
+        "foot": [
+          461.5,
+          857
+        ],
+        "scale": 0.449,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          147.0,
+          1138
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 20,
+        "cell": [
+          23,
+          1136,
+          166,
+          172
+        ],
+        "bounds": [
+          25,
+          1138,
+          187,
+          1306
+        ],
+        "foot": [
+          119.5,
+          1306
+        ],
+        "scale": 0.521,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          369.5,
+          1138
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 21,
+        "cell": [
+          246,
+          1136,
+          165,
+          172
+        ],
+        "bounds": [
+          248,
+          1138,
+          409,
+          1306
+        ],
+        "foot": [
+          341.5,
+          1306
+        ],
+        "scale": 0.521,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          591.5,
+          1138
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 22,
+        "cell": [
+          467,
+          1136,
+          166,
+          172
+        ],
+        "bounds": [
+          469,
+          1138,
+          631,
+          1306
+        ],
+        "foot": [
+          564.0,
+          1306
+        ],
+        "scale": 0.521,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          812.5,
+          1138
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 23,
+        "cell": [
+          689,
+          1136,
+          166,
+          172
+        ],
+        "bounds": [
+          691,
+          1138,
+          853,
+          1306
+        ],
+        "foot": [
+          785.0,
+          1306
+        ],
+        "scale": 0.521,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          148.0,
+          1142
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          20,
+          1140,
+          170,
+          165
+        ],
+        "bounds": [
+          22,
+          1142,
+          188,
+          1303
+        ],
+        "foot": [
+          89.0,
+          1303
+        ],
+        "scale": 0.536,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          371.0,
+          1142
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          242,
+          1140,
+          170,
+          165
+        ],
+        "bounds": [
+          244,
+          1142,
+          410,
+          1303
+        ],
+        "foot": [
+          333.0,
+          1303
+        ],
+        "scale": 0.536,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          592.5,
+          1143
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          463,
+          1141,
+          171,
+          163
+        ],
+        "bounds": [
+          465,
+          1143,
+          632,
+          1302
+        ],
+        "foot": [
+          561.0,
+          1302
+        ],
+        "scale": 0.536,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          813.0,
+          1142
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          686,
+          1140,
+          169,
+          166
+        ],
+        "bounds": [
+          688,
+          1142,
+          853,
+          1304
+        ],
+        "foot": [
+          775.0,
+          1304
+        ],
+        "scale": 0.536,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          287.0,
+          546
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          104,
+          544,
+          232,
+          266
+        ],
+        "bounds": [
+          106,
+          546,
+          334,
+          808
+        ],
+        "foot": [
+          200.5,
+          808
+        ],
+        "scale": 0.34,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          634.0,
+          548
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 5,
+        "cell": [
+          488,
+          546,
+          254,
+          264
+        ],
+        "bounds": [
+          490,
+          548,
+          740,
+          808
+        ],
+        "foot": [
+          591.0,
+          808
+        ],
+        "scale": 0.34,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          1051.5,
+          505
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 6,
+        "cell": [
+          863,
+          503,
+          378,
+          307
+        ],
+        "bounds": [
+          865,
+          505,
+          1239,
+          808
+        ],
+        "foot": [
+          1001.0,
+          808
+        ],
+        "scale": 0.34,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          1515.5,
+          537
+        ],
+        "source": "source/drake-attack-rear.png",
+        "sourcePose": 7,
+        "cell": [
+          1328,
+          535,
+          396,
+          274
+        ],
+        "bounds": [
+          1330,
+          537,
+          1722,
+          807
+        ],
+        "foot": [
+          1459.0,
+          807
+        ],
+        "scale": 0.34,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          813.5,
+          654
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          672,
+          652,
+          198,
+          206
+        ],
+        "bounds": [
+          674,
+          654,
+          868,
+          856
+        ],
+        "foot": [
+          781.5,
+          856
+        ],
+        "scale": 0.449,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1103.0,
+          752
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          971,
+          750,
+          245,
+          107
+        ],
+        "bounds": [
+          973,
+          752,
+          1214,
+          855
+        ],
+        "foot": [
+          1081.0,
+          855
+        ],
+        "scale": 0.449,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          157.5,
+          1362
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 24,
+        "cell": [
+          11,
+          1360,
+          197,
+          160
+        ],
+        "bounds": [
+          13,
+          1362,
+          206,
+          1518
+        ],
+        "foot": [
+          109.0,
+          1518
+        ],
+        "scale": 0.521,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          380.0,
+          1362
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 25,
+        "cell": [
+          232,
+          1360,
+          196,
+          160
+        ],
+        "bounds": [
+          234,
+          1362,
+          426,
+          1518
+        ],
+        "foot": [
+          329.5,
+          1518
+        ],
+        "scale": 0.521,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          601.0,
+          1361
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 26,
+        "cell": [
+          453,
+          1359,
+          196,
+          161
+        ],
+        "bounds": [
+          455,
+          1361,
+          647,
+          1518
+        ],
+        "foot": [
+          552.0,
+          1518
+        ],
+        "scale": 0.521,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          821.5,
+          1361
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 27,
+        "cell": [
+          675,
+          1359,
+          197,
+          161
+        ],
+        "bounds": [
+          677,
+          1361,
+          870,
+          1518
+        ],
+        "foot": [
+          774.0,
+          1518
+        ],
+        "scale": 0.521,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          164.0,
+          1363
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          11,
+          1361,
+          200,
+          160
+        ],
+        "bounds": [
+          13,
+          1363,
+          209,
+          1519
+        ],
+        "foot": [
+          126.5,
+          1519
+        ],
+        "scale": 0.536,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          383.0,
+          1364
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          231,
+          1362,
+          199,
+          158
+        ],
+        "bounds": [
+          233,
+          1364,
+          428,
+          1518
+        ],
+        "foot": [
+          333.0,
+          1518
+        ],
+        "scale": 0.536,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          607.0,
+          1365
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          450,
+          1363,
+          204,
+          158
+        ],
+        "bounds": [
+          452,
+          1365,
+          652,
+          1519
+        ],
+        "foot": [
+          572.0,
+          1519
+        ],
+        "scale": 0.536,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          825.5,
+          1362
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          674,
+          1360,
+          197,
+          159
+        ],
+        "bounds": [
+          676,
+          1362,
+          869,
+          1517
+        ],
+        "foot": [
+          777.5,
+          1517
+        ],
+        "scale": 0.536,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          148.0,
+          1405
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          16,
+          1403,
+          179,
+          119
+        ],
+        "bounds": [
+          18,
+          1405,
+          193,
+          1520
+        ],
+        "foot": [
+          98.0,
+          1520
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          1393
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          239,
+          1391,
+          179,
+          131
+        ],
+        "bounds": [
+          241,
+          1393,
+          416,
+          1520
+        ],
+        "foot": [
+          317.0,
+          1520
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.0,
+          1363
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          437,
+          1361,
+          208,
+          161
+        ],
+        "bounds": [
+          439,
+          1363,
+          643,
+          1520
+        ],
+        "foot": [
+          532.5,
+          1520
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          761.0,
+          1376
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          675,
+          1374,
+          197,
+          148
+        ],
+        "bounds": [
+          677,
+          1376,
+          870,
+          1520
+        ],
+        "foot": [
+          760.5,
+          1520
+        ],
+        "scale": 0.7,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          211.5,
+          960
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          46,
+          958,
+          216,
+          190
+        ],
+        "bounds": [
+          48,
+          960,
+          260,
+          1146
+        ],
+        "foot": [
+          170.0,
+          1146
+        ],
+        "scale": 0.449,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          465.0,
+          1044
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          350,
+          1042,
+          240,
+          107
+        ],
+        "bounds": [
+          352,
+          1044,
+          588,
+          1147
+        ],
+        "foot": [
+          472.5,
+          1147
+        ],
+        "scale": 0.449,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          145.0,
+          1574
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 28,
+        "cell": [
+          18,
+          1572,
+          176,
+          173
+        ],
+        "bounds": [
+          20,
+          1574,
+          192,
+          1743
+        ],
+        "foot": [
+          118.0,
+          1743
+        ],
+        "scale": 0.521,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          366.5,
+          1574
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 29,
+        "cell": [
+          240,
+          1572,
+          174,
+          173
+        ],
+        "bounds": [
+          242,
+          1574,
+          412,
+          1743
+        ],
+        "foot": [
+          339.5,
+          1743
+        ],
+        "scale": 0.521,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          588.5,
+          1574
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 30,
+        "cell": [
+          461,
+          1572,
+          176,
+          173
+        ],
+        "bounds": [
+          463,
+          1574,
+          635,
+          1743
+        ],
+        "foot": [
+          561.5,
+          1743
+        ],
+        "scale": 0.521,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          810.5,
+          1574
+        ],
+        "source": "source/drake-idle-breath.png",
+        "sourcePose": 31,
+        "cell": [
+          684,
+          1572,
+          174,
+          173
+        ],
+        "bounds": [
+          686,
+          1574,
+          856,
+          1743
+        ],
+        "foot": [
+          783.5,
+          1743
+        ],
+        "scale": 0.521,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          129.0,
+          1579
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          30,
+          1577,
+          145,
+          167
+        ],
+        "bounds": [
+          32,
+          1579,
+          173,
+          1742
+        ],
+        "foot": [
+          107.5,
+          1742
+        ],
+        "scale": 0.536,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          352.0,
+          1579
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          250,
+          1577,
+          147,
+          167
+        ],
+        "bounds": [
+          252,
+          1579,
+          395,
+          1742
+        ],
+        "foot": [
+          320.5,
+          1742
+        ],
+        "scale": 0.536,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          574.5,
+          1579
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          469,
+          1577,
+          150,
+          167
+        ],
+        "bounds": [
+          471,
+          1579,
+          617,
+          1742
+        ],
+        "foot": [
+          545.5,
+          1742
+        ],
+        "scale": 0.536,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          798.0,
+          1579
+        ],
+        "source": "source/drake-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          691,
+          1577,
+          151,
+          167
+        ],
+        "bounds": [
+          693,
+          1579,
+          840,
+          1742
+        ],
+        "foot": [
+          768.0,
+          1742
+        ],
+        "scale": 0.536,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          131.0,
+          1620
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          40,
+          1618,
+          125,
+          128
+        ],
+        "bounds": [
+          42,
+          1620,
+          163,
+          1744
+        ],
+        "foot": [
+          108.5,
+          1744
+        ],
+        "scale": 0.7,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          1610
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          237,
+          1608,
+          161,
+          139
+        ],
+        "bounds": [
+          239,
+          1610,
+          396,
+          1745
+        ],
+        "foot": [
+          322.5,
+          1745
+        ],
+        "scale": 0.7,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.5,
+          1587
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          438,
+          1585,
+          202,
+          162
+        ],
+        "bounds": [
+          440,
+          1587,
+          638,
+          1745
+        ],
+        "foot": [
+          544.5,
+          1745
+        ],
+        "scale": 0.7,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.0,
+          1604
+        ],
+        "source": "source/drake-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          672,
+          1602,
+          194,
+          145
+        ],
+        "bounds": [
+          674,
+          1604,
+          864,
+          1745
+        ],
+        "foot": [
+          766.5,
+          1745
+        ],
+        "scale": 0.7,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          805.5,
+          956
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          669,
+          954,
+          202,
+          197
+        ],
+        "bounds": [
+          671,
+          956,
+          869,
+          1149
+        ],
+        "foot": [
+          789.0,
+          1149
+        ],
+        "scale": 0.449,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1093.0,
+          1044
+        ],
+        "source": "source/drake-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          981,
+          1042,
+          234,
+          109
+        ],
+        "bounds": [
+          983,
+          1044,
+          1213,
+          1149
+        ],
+        "foot": [
+          1101.0,
+          1149
+        ],
+        "scale": 0.449,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

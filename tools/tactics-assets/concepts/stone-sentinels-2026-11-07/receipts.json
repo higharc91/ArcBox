@@ -1,0 +1,22 @@
+{
+  "model": "model_google-gemini-nano-banana-2-1",
+  "teamId": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "projectId": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "concepts": {
+    "golem_basalt": {
+      "provider": "Scenario",
+      "jobId": "job_6m6aL7LuindWWVT3MWHWMAgk",
+      "assetId": "asset_qymHTC7CMpK7KigKjjmMNR1V",
+      "cuCost": 8
+    },
+    "golem_crystal": {
+      "provider": "OpenAI imagegen",
+      "generationId": "56e4bdec-b501-4abd-bc49-1856ecfa2fcf"
+    },
+    "golem_temple": {
+      "provider": "OpenAI imagegen",
+      "generationId": "f62ef6d7-fb02-428d-88e7-e2ab15342ae9"
+    }
+  },
+  "fallbackReason": "Scenario rate limited after Basalt:429,906 seconds remaining. Crystal and Temple generated with OpenAI instead."
+}

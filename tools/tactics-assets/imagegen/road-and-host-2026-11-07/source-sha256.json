@@ -1,0 +1,20 @@
+{
+  "bandit-attack-backleft-final-rejected.png": "17ef62263fa632e55d343c477a3c60668709a492fd576582ee959a4416370119",
+  "bandit-attack-backleft-rejected.png": "0ce7bc7beba6be7427b5b42937b47c9479608495a8ff22c2af0cb1439fea493e",
+  "bandit-attack-rear-twohand-rejected.png": "1345cafd42a21ac29be957f61baa36461b37d4be8bb1988847dce946ea29030c",
+  "bandit-attack-rear.png": "84a7b6f8174ef1760e2d4d4a1c1908a572d69d98c95d41a22a6f02a1ae8da854",
+  "bandit-attack.png": "498ffca4d302962432f60fac95d4cd414b0343357287ac38ac7ffb4786e8caaf",
+  "bandit-damage.png": "bbef70e8edbd7044994bb0ac1c049cf4f5856005fb6817016176648c674ddda2",
+  "bandit-idle.png": "67f3e6169d3435b7e38bc08e8bbe9806a38ffe58a4d8972a96de5389d0a9d305",
+  "bandit-portraits.png": "4122ff7dad84fef91adbf640d0a1bfc7d106af09ed115d74ead926b24169e84d",
+  "bandit-rear-keys.png": "7958e9ab6b9c11e0e5b027563bff621d9dd277b7585df52864eedbb264e664f3",
+  "bandit-walk.png": "c876be929a2f1b881ea5a5ee9e783ef6e0364dc2e76f719137b512a3b6595f48",
+  "hobgoblin-attack-back-rejected.png": "f032464dde208aeefc5b4efc1c80fba431ed6f0e228ac2202e750c41323b345d",
+  "hobgoblin-attack-front.png": "79ee2af00be3a66178b7ffb0862e8ffa598c1329889a35862e24e3c2e7c1cdf7",
+  "hobgoblin-attack.png": "5deab5d66207bbc5ca642d702e30ee1b25dbe5e7914d017d8b7d3ec853fadd5d",
+  "hobgoblin-damage.png": "3ba48f9cf992b0bfb001fd99442ecd6730ec09203a32ba6eb9d810ceac7c3772",
+  "hobgoblin-idle.png": "bfd184ccc7cebb891247c3d1d28c1a65f05beeebd31c164589e6b9d009298ce4",
+  "hobgoblin-overhead-clean.png": "059f8883cdd10d127a8fad9ea4debc93080fd628af8e80a18259680813fc7dda",
+  "hobgoblin-portraits.png": "b876e6ed3e8f4073a4f1d437ac4bf67be86bdf801a7797fe24a7c7cf396e0c09",
+  "hobgoblin-walk.png": "b7f05614d07032c79f18ed546421fa476f628fba93c38fd70c13e37c0088bb0a"
+}

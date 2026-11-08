@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      114,
+      167,
+      139,
+      222
+    ],
+    "count": 1147
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      115,
+      167,
+      140,
+      222
+    ],
+    "count": 1144
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      114,
+      167,
+      140,
+      222
+    ],
+    "count": 1154
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      115,
+      167,
+      140,
+      222
+    ],
+    "count": 1145
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 0,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      114,
+      169,
+      140,
+      224
+    ],
+    "count": 1163
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 1,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      113,
+      170,
+      141,
+      225
+    ],
+    "count": 1262
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 2,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      114,
+      169,
+      140,
+      224
+    ],
+    "count": 1215
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 3,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      115,
+      168,
+      141,
+      223
+    ],
+    "count": 1155
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      115,
+      169,
+      140,
+      224
+    ],
+    "count": 1226
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      114,
+      171,
+      141,
+      224
+    ],
+    "count": 1209
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      114,
+      171,
+      142,
+      224
+    ],
+    "count": 1231
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      114,
+      169,
+      140,
+      224
+    ],
+    "count": 1206
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 0,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      115,
+      173,
+      140,
+      224
+    ],
+    "count": 1052
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 1,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      111,
+      191,
+      145,
+      224
+    ],
+    "count": 910
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      96,
+      169,
+      155,
+      223
+    ],
+    "count": 1602
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      96,
+      169,
+      155,
+      222
+    ],
+    "count": 1570
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      96,
+      171,
+      156,
+      223
+    ],
+    "count": 1599
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      96,
+      169,
+      155,
+      222
+    ],
+    "count": 1603
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 4,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      94,
+      170,
+      154,
+      223
+    ],
+    "count": 1639
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 5,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      94,
+      171,
+      154,
+      224
+    ],
+    "count": 1616
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 6,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      95,
+      170,
+      155,
+      221
+    ],
+    "count": 1618
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 7,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      95,
+      168,
+      155,
+      221
+    ],
+    "count": 1638
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      94,
+      169,
+      155,
+      224
+    ],
+    "count": 1694
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      93,
+      171,
+      154,
+      224
+    ],
+    "count": 1628
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      92,
+      173,
+      155,
+      224
+    ],
+    "count": 1673
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      95,
+      169,
+      155,
+      224
+    ],
+    "count": 1685
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 2,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      106,
+      174,
+      149,
+      224
+    ],
+    "count": 1291
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 3,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      104,
+      196,
+      152,
+      224
+    ],
+    "count": 1036
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      83,
+      172,
+      161,
+      223
+    ],
+    "count": 1723
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      84,
+      172,
+      161,
+      223
+    ],
+    "count": 1622
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      84,
+      173,
+      161,
+      223
+    ],
+    "count": 1651
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      84,
+      172,
+      162,
+      223
+    ],
+    "count": 1750
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 8,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      84,
+      173,
+      162,
+      222
+    ],
+    "count": 1763
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 9,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      84,
+      174,
+      159,
+      223
+    ],
+    "count": 1663
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 10,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      83,
+      173,
+      160,
+      222
+    ],
+    "count": 1653
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 11,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      84,
+      172,
+      162,
+      222
+    ],
+    "count": 1759
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      82,
+      172,
+      162,
+      224
+    ],
+    "count": 1832
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      84,
+      175,
+      163,
+      224
+    ],
+    "count": 1694
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      82,
+      174,
+      161,
+      224
+    ],
+    "count": 1737
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      82,
+      172,
+      162,
+      224
+    ],
+    "count": 1855
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 4,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      88,
+      175,
+      156,
+      224
+    ],
+    "count": 1611
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 5,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      94,
+      198,
+      162,
+      224
+    ],
+    "count": 1372
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      98,
+      166,
+      151,
+      223
+    ],
+    "count": 1516
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      98,
+      167,
+      151,
+      223
+    ],
+    "count": 1479
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      98,
+      166,
+      151,
+      223
+    ],
+    "count": 1475
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      99,
+      166,
+      152,
+      223
+    ],
+    "count": 1499
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 12,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      98,
+      168,
+      151,
+      224
+    ],
+    "count": 1544
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 13,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      98,
+      169,
+      152,
+      225
+    ],
+    "count": 1482
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 14,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      98,
+      168,
+      151,
+      224
+    ],
+    "count": 1525
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 15,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      98,
+      167,
+      151,
+      223
+    ],
+    "count": 1543
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      97,
+      167,
+      151,
+      224
+    ],
+    "count": 1541
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      97,
+      167,
+      153,
+      224
+    ],
+    "count": 1554
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      96,
+      167,
+      151,
+      224
+    ],
+    "count": 1547
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      98,
+      167,
+      153,
+      224
+    ],
+    "count": 1569
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 6,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      95,
+      173,
+      152,
+      224
+    ],
+    "count": 1461
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 7,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      98,
+      198,
+      157,
+      224
+    ],
+    "count": 1189
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      116,
+      167,
+      140,
+      223
+    ],
+    "count": 1094
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      116,
+      167,
+      139,
+      223
+    ],
+    "count": 1100
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      116,
+      167,
+      140,
+      222
+    ],
+    "count": 1099
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      116,
+      167,
+      140,
+      223
+    ],
+    "count": 1089
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 16,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      115,
+      168,
+      140,
+      223
+    ],
+    "count": 1141
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 17,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      115,
+      169,
+      140,
+      224
+    ],
+    "count": 1157
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 18,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      115,
+      167,
+      140,
+      222
+    ],
+    "count": 1148
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 19,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      115,
+      167,
+      139,
+      222
+    ],
+    "count": 1141
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 16,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      115,
+      169,
+      140,
+      224
+    ],
+    "count": 1155
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 17,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      114,
+      169,
+      139,
+      224
+    ],
+    "count": 1180
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 18,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      115,
+      170,
+      140,
+      224
+    ],
+    "count": 1156
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 19,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      115,
+      169,
+      139,
+      224
+    ],
+    "count": 1162
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 8,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      114,
+      165,
+      138,
+      224
+    ],
+    "count": 1128
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 9,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      111,
+      189,
+      144,
+      224
+    ],
+    "count": 902
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      103,
+      167,
+      156,
+      223
+    ],
+    "count": 1471
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      105,
+      167,
+      157,
+      223
+    ],
+    "count": 1404
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      104,
+      167,
+      157,
+      223
+    ],
+    "count": 1400
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      103,
+      167,
+      158,
+      223
+    ],
+    "count": 1472
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 20,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      103,
+      168,
+      156,
+      223
+    ],
+    "count": 1486
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 21,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      103,
+      169,
+      156,
+      223
+    ],
+    "count": 1434
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 22,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      103,
+      168,
+      157,
+      222
+    ],
+    "count": 1465
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 23,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      103,
+      167,
+      156,
+      222
+    ],
+    "count": 1468
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 20,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      101,
+      168,
+      157,
+      224
+    ],
+    "count": 1523
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 21,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      102,
+      169,
+      156,
+      224
+    ],
+    "count": 1452
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 22,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      101,
+      169,
+      158,
+      224
+    ],
+    "count": 1513
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 23,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      102,
+      167,
+      157,
+      224
+    ],
+    "count": 1480
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 10,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      111,
+      166,
+      154,
+      224
+    ],
+    "count": 1324
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 11,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      104,
+      196,
+      151,
+      224
+    ],
+    "count": 1016
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      93,
+      173,
+      171,
+      222
+    ],
+    "count": 1671
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      91,
+      173,
+      171,
+      223
+    ],
+    "count": 1655
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      92,
+      172,
+      170,
+      223
+    ],
+    "count": 1671
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      91,
+      173,
+      171,
+      223
+    ],
+    "count": 1698
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 24,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      92,
+      175,
+      170,
+      223
+    ],
+    "count": 1721
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 25,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      94,
+      175,
+      171,
+      223
+    ],
+    "count": 1651
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 26,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      93,
+      175,
+      170,
+      223
+    ],
+    "count": 1681
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 27,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      93,
+      174,
+      171,
+      222
+    ],
+    "count": 1717
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 24,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      93,
+      174,
+      172,
+      224
+    ],
+    "count": 1771
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 25,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      95,
+      175,
+      173,
+      224
+    ],
+    "count": 1779
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 26,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      95,
+      176,
+      174,
+      224
+    ],
+    "count": 1708
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 27,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      92,
+      174,
+      171,
+      224
+    ],
+    "count": 1775
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 12,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      101,
+      177,
+      168,
+      224
+    ],
+    "count": 1531
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 13,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      94,
+      199,
+      161,
+      224
+    ],
+    "count": 1262
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      104,
+      170,
+      157,
+      223
+    ],
+    "count": 1468
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      104,
+      170,
+      157,
+      223
+    ],
+    "count": 1426
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      104,
+      171,
+      157,
+      223
+    ],
+    "count": 1449
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/hound_grey-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6746987951807228,
+    "bounds": [
+      104,
+      170,
+      157,
+      223
+    ],
+    "count": 1440
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 28,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      104,
+      171,
+      158,
+      222
+    ],
+    "count": 1482
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 29,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      106,
+      172,
+      159,
+      223
+    ],
+    "count": 1453
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 30,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      106,
+      171,
+      159,
+      221
+    ],
+    "count": 1446
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/hound_grey-walk.png",
+    "sourcePose": 31,
+    "scale": 0.6436781609195402,
+    "bounds": [
+      105,
+      170,
+      158,
+      221
+    ],
+    "count": 1447
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 28,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      103,
+      171,
+      157,
+      224
+    ],
+    "count": 1496
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 29,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      103,
+      171,
+      157,
+      224
+    ],
+    "count": 1475
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 30,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      105,
+      172,
+      159,
+      224
+    ],
+    "count": 1462
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/hound_grey-attack.png",
+    "sourcePose": 31,
+    "scale": 0.6666666666666666,
+    "bounds": [
+      103,
+      172,
+      158,
+      224
+    ],
+    "count": 1484
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 14,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      106,
+      174,
+      152,
+      224
+    ],
+    "count": 1309
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/hound_grey-damage.png",
+    "sourcePose": 15,
+    "scale": 0.39097744360902253,
+    "bounds": [
+      101,
+      197,
+      155,
+      224
+    ],
+    "count": 1092
+  }
+]

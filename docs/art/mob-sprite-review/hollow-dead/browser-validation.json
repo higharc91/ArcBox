@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 540
+    },
+    {
+      "title": "Battle · River Crossing",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Risen and wraith · actual Crypt Hall encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Risen · actual Rime Tower encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · fighter, bandit, Risen and wraith lineup",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "9365fd2",
+    "walk": "a114521e",
+    "attack": "1b0dbb4",
+    "cast": "12a674c5",
+    "hurt": "c7002ca5",
+    "down": "1c7ca8d7"
+  },
+  "walkFrameHashes": [
+    "3db48825",
+    "a114521e",
+    "242aa830",
+    "158f5864"
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}

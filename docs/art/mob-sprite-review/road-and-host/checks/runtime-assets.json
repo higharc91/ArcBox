@@ -1,0 +1,16 @@
+{
+  "content/tactics/base/creatures/mob_refresh_bandit.png": "64e309b0e47ab4e0fc759d212aa8f0b8bc435402508881b166c4cfaa52e64f14",
+  "content/tactics/base/creatures/mob_refresh_hobgoblin.png": "2279fb3977cf4cbaca6dac93b9e04293a5e57522ad154cfcc3e0c4ed7c864ea7",
+  "content/tactics/base/portraits/bandit_refresh_angry.png": "f66176e99faf19ba4ebc80224f1fa4d37712c98384f0a241eb5bea7a0e1b7bad",
+  "content/tactics/base/portraits/bandit_refresh_happy.png": "6fb65645cbf89c3e9cc2da2ec4213bca4fce89109671960de50540a6db92ec9f",
+  "content/tactics/base/portraits/bandit_refresh_hurt.png": "6b400bb764adf92989813a2cf728227b647d994920f361632328550e98c6dcfb",
+  "content/tactics/base/portraits/bandit_refresh_idle.png": "06780a6fa1ec18fa4d2effe78c7c87ed861f860c8a547272a2b65c286cc736c1",
+  "content/tactics/base/portraits/bandit_refresh_sad.png": "b69c881ec2fbeb3a60885b6468b12ef07ecfdad9b33230b692a4b14628742802",
+  "content/tactics/base/portraits/bandit_refresh_surprised.png": "d7b46cdd4d2ac7bd771e38c459b0f8d964be88f1184ef22f75ef3fa45126658d",
+  "content/tactics/base/portraits/hobgoblin_refresh_angry.png": "58ae2ad628e715aa6712ed8fc1984a99130c23198d822eda1d4a077efbc652d2",
+  "content/tactics/base/portraits/hobgoblin_refresh_happy.png": "23cca6a66d4289d1232d336069cbd420ead7a0c827967f3ad95cf0424328cc27",
+  "content/tactics/base/portraits/hobgoblin_refresh_hurt.png": "5b9c8590fa2f0e4f9dbfc8c50d3948103650fc32261ded3ba9fbec229afd661b",
+  "content/tactics/base/portraits/hobgoblin_refresh_idle.png": "683606ebe1423a98347908186e88db10f550c5910df9d291a6e410ea7fbe0191",
+  "content/tactics/base/portraits/hobgoblin_refresh_sad.png": "623e9d95171d691fecde70a8845bd16c304c39030753ee8be35b421efe7e2537",
+  "content/tactics/base/portraits/hobgoblin_refresh_surprised.png": "555e4ef7af4cbc3fb8e5344888ab516a5555704cc8a0bc1083a5059a1dcdf6d4"
+}

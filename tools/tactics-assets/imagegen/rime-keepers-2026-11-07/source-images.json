@@ -1,0 +1,19 @@
+{
+  "necromancer-idle": "e56f0e52-011e-49dc-80ed-e080ef563b7f",
+  "lich-idle": "319962ee-33eb-4e0b-b318-3d63296c8d60",
+  "lich-idle-opaque-rejected": "c33c692c-bcb5-43eb-be1f-abe775561fdd",
+  "necromancer-walk": "00026e37-d2b0-4ccf-9867-caa5d919058a",
+  "lich-walk": "bc17b8f4-d4c0-480f-a6fa-79cf7f74cca1",
+  "necromancer-attack": "0b0c1cd5-c660-4025-be93-0eafb5f9aba4",
+  "lich-attack": "f396c6e5-2ddf-4d05-b056-ac5e255d10be",
+  "necromancer-cast": "70658184-86cf-4ea7-9c35-730094f32c39",
+  "lich-cast": "d0aa23c7-8b7c-4beb-9fe9-ee542ae02e2b",
+  "lich-cast-frontleft": "9112d61e-572e-4cb9-8433-42c4b4d0f937",
+  "necromancer-damage": "018bd405-355b-4315-beba-c7d46653eda8",
+  "lich-damage": "9e971d00-bde8-401f-a474-a8e867827788",
+  "necromancer-portraits": "f0330941-94b0-4175-a30e-19ef16c1f40e",
+  "lich-portraits": "8abcc005-8986-4399-994b-2c3b7497472c",
+  "necromancer-cast-oblique-rejected": "5c5507d3-d6e9-4726-94b3-2405f391a4c8",
+  "necromancer-cast-raised": "160f2368-abf9-4285-a6aa-4b226b1e7f95",
+  "hurt-backleft": "c787d976-0145-40be-a325-f99fb53a15c0"
+}

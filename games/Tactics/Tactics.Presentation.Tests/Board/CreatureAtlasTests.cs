@@ -57,9 +57,17 @@ public sealed class CreatureAtlasTests
             else
             {
                 Assert.Equal(4, sprite.Idle.Frames.Length);
-                Assert.Equal(entry.GetProperty("family").GetString() is "ashmaw" or "kobold_foreman" or "kobold" ? 6 : 8,
-                    sprite.Anim("walk").Frames.Length);
-                Assert.InRange(sprite.Anim("attack").Frames.Length, 4, 8);
+                // Authored walk cycles use four, six or eight keys; padding them with duplicates adds no motion.
+                Assert.Contains(sprite.Anim("walk").Frames.Length, new[] { 4, 6, 8 });
+                var attack = sprite.Anim("attack");
+                if (item.Name == "mob_refresh_dragon")
+                {
+                    // The dragon deliberately holds its wind-up before the jaw/wing contact.
+                    Assert.Equal(1, attack.Frames.Length / attack.Fps, 3);
+                    Assert.Equal(10, attack.FrameAt(.5));
+                    Assert.Equal(sprite.Idle.Frames[0], attack.Frames[^1]);
+                }
+                else Assert.InRange(attack.Frames.Length, 4, 8);
             }
         }
     }

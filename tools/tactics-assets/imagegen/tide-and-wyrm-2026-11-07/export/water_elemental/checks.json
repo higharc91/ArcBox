@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      104,
+      226,
+      255
+    ],
+    "count": 13104
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 1,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      92,
+      107,
+      223,
+      254
+    ],
+    "count": 12717
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 2,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      97,
+      102,
+      227,
+      254
+    ],
+    "count": 13178
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      104,
+      227,
+      255
+    ],
+    "count": 13144
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 0,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      91,
+      105,
+      227,
+      256
+    ],
+    "count": 13462
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 1,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      91,
+      106,
+      225,
+      253
+    ],
+    "count": 13245
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 2,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      95,
+      105,
+      228,
+      258
+    ],
+    "count": 13533
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 3,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      96,
+      104,
+      229,
+      254
+    ],
+    "count": 13479
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      105,
+      226,
+      256
+    ],
+    "count": 13104
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 0,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      78,
+      105,
+      232,
+      256
+    ],
+    "count": 15415
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 1,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      73,
+      104,
+      236,
+      256
+    ],
+    "count": 16248
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      105,
+      225,
+      256
+    ],
+    "count": 13144
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      92,
+      112,
+      228,
+      256
+    ],
+    "count": 13471
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      91,
+      156,
+      228,
+      256
+    ],
+    "count": 9201
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      105,
+      226,
+      256
+    ],
+    "count": 13104
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 0,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      102,
+      105,
+      221,
+      256
+    ],
+    "count": 12431
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 1,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      86,
+      107,
+      231,
+      256
+    ],
+    "count": 13923
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      105,
+      225,
+      256
+    ],
+    "count": 13144
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      105,
+      226,
+      256
+    ],
+    "count": 13104
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 2,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      88,
+      105,
+      225,
+      256
+    ],
+    "count": 13280
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 3,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      101,
+      105,
+      221,
+      256
+    ],
+    "count": 12599
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      105,
+      225,
+      256
+    ],
+    "count": 13144
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      108,
+      228,
+      255
+    ],
+    "count": 12454
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 5,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      103,
+      109,
+      226,
+      255
+    ],
+    "count": 12001
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 6,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      103,
+      223,
+      254
+    ],
+    "count": 12483
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      228,
+      255
+    ],
+    "count": 12271
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 4,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      98,
+      109,
+      229,
+      256
+    ],
+    "count": 12705
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 5,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      102,
+      110,
+      230,
+      256
+    ],
+    "count": 12568
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 6,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      99,
+      110,
+      228,
+      260
+    ],
+    "count": 13103
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 7,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      101,
+      109,
+      230,
+      255
+    ],
+    "count": 12634
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      109,
+      228,
+      256
+    ],
+    "count": 12454
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 2,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      78,
+      102,
+      225,
+      256
+    ],
+    "count": 15282
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 3,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      55,
+      105,
+      233,
+      256
+    ],
+    "count": 16559
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      110,
+      223,
+      256
+    ],
+    "count": 12271
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      89,
+      113,
+      215,
+      256
+    ],
+    "count": 12856
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      92,
+      155,
+      227,
+      256
+    ],
+    "count": 9465
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      109,
+      228,
+      256
+    ],
+    "count": 12454
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 4,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      104,
+      108,
+      211,
+      256
+    ],
+    "count": 11696
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 5,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      80,
+      109,
+      218,
+      256
+    ],
+    "count": 13193
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      110,
+      223,
+      256
+    ],
+    "count": 12271
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      109,
+      228,
+      256
+    ],
+    "count": 12454
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 6,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      80,
+      105,
+      212,
+      256
+    ],
+    "count": 12509
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 7,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      98,
+      109,
+      210,
+      256
+    ],
+    "count": 11776
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      110,
+      223,
+      256
+    ],
+    "count": 12271
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      107,
+      214,
+      254
+    ],
+    "count": 10841
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 9,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      104,
+      106,
+      217,
+      254
+    ],
+    "count": 10411
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 10,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      97,
+      101,
+      212,
+      254
+    ],
+    "count": 11732
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      100,
+      107,
+      211,
+      254
+    ],
+    "count": 11110
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 8,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      99,
+      109,
+      215,
+      256
+    ],
+    "count": 11259
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 9,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      102,
+      110,
+      216,
+      257
+    ],
+    "count": 11180
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 10,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      98,
+      108,
+      212,
+      260
+    ],
+    "count": 12081
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 11,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      99,
+      108,
+      211,
+      255
+    ],
+    "count": 11541
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      109,
+      214,
+      256
+    ],
+    "count": 10841
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 4,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      82,
+      101,
+      217,
+      256
+    ],
+    "count": 14260
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 5,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      36,
+      101,
+      218,
+      256
+    ],
+    "count": 16338
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      212,
+      256
+    ],
+    "count": 11110
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      98,
+      111,
+      212,
+      256
+    ],
+    "count": 11705
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      95,
+      153,
+      224,
+      256
+    ],
+    "count": 8965
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      109,
+      214,
+      256
+    ],
+    "count": 10841
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 8,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      95,
+      109,
+      212,
+      256
+    ],
+    "count": 11395
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 9,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      69,
+      109,
+      213,
+      256
+    ],
+    "count": 13306
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      212,
+      256
+    ],
+    "count": 11110
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      109,
+      214,
+      256
+    ],
+    "count": 10841
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 10,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      75,
+      107,
+      215,
+      256
+    ],
+    "count": 12480
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 11,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      96,
+      109,
+      212,
+      256
+    ],
+    "count": 11643
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      212,
+      256
+    ],
+    "count": 11110
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      95,
+      105,
+      214,
+      255
+    ],
+    "count": 11996
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 13,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      97,
+      105,
+      215,
+      255
+    ],
+    "count": 11453
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 14,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      95,
+      100,
+      213,
+      255
+    ],
+    "count": 12116
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      105,
+      214,
+      254
+    ],
+    "count": 11941
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 12,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      94,
+      106,
+      213,
+      256
+    ],
+    "count": 12548
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 13,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      94,
+      107,
+      215,
+      257
+    ],
+    "count": 12279
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 14,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      93,
+      106,
+      213,
+      260
+    ],
+    "count": 12612
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 15,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      93,
+      104,
+      214,
+      254
+    ],
+    "count": 12646
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      95,
+      106,
+      214,
+      256
+    ],
+    "count": 11996
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 6,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      86,
+      101,
+      225,
+      256
+    ],
+    "count": 15398
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 7,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      42,
+      101,
+      231,
+      256
+    ],
+    "count": 17319
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      107,
+      216,
+      256
+    ],
+    "count": 11941
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      93,
+      111,
+      220,
+      256
+    ],
+    "count": 12670
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      90,
+      155,
+      229,
+      256
+    ],
+    "count": 9301
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      95,
+      106,
+      214,
+      256
+    ],
+    "count": 11996
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_elemental-moves-backleft.png",
+    "sourcePose": 0,
+    "scale": 0.2992125984251969,
+    "bounds": [
+      87,
+      105,
+      214,
+      256
+    ],
+    "count": 12570
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_elemental-moves-backleft.png",
+    "sourcePose": 1,
+    "scale": 0.2992125984251969,
+    "bounds": [
+      82,
+      105,
+      215,
+      256
+    ],
+    "count": 12809
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      107,
+      216,
+      256
+    ],
+    "count": 11941
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      95,
+      106,
+      214,
+      256
+    ],
+    "count": 11996
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_elemental-moves-backleft.png",
+    "sourcePose": 2,
+    "scale": 0.2992125984251969,
+    "bounds": [
+      79,
+      105,
+      215,
+      256
+    ],
+    "count": 12466
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_elemental-moves-backleft.png",
+    "sourcePose": 3,
+    "scale": 0.2992125984251969,
+    "bounds": [
+      88,
+      105,
+      217,
+      256
+    ],
+    "count": 12852
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      96,
+      107,
+      216,
+      256
+    ],
+    "count": 11941
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      109,
+      224,
+      255
+    ],
+    "count": 12642
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 17,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      98,
+      110,
+      223,
+      254
+    ],
+    "count": 11947
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 18,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      98,
+      105,
+      225,
+      254
+    ],
+    "count": 12626
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      95,
+      109,
+      227,
+      254
+    ],
+    "count": 12638
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 16,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      95,
+      110,
+      225,
+      255
+    ],
+    "count": 12753
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 17,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      96,
+      111,
+      228,
+      253
+    ],
+    "count": 12546
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 18,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      97,
+      110,
+      225,
+      254
+    ],
+    "count": 12614
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 19,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      95,
+      109,
+      227,
+      252
+    ],
+    "count": 12805
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      110,
+      224,
+      256
+    ],
+    "count": 12642
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      73,
+      109,
+      231,
+      256
+    ],
+    "count": 15865
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      51,
+      108,
+      232,
+      256
+    ],
+    "count": 16626
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      111,
+      225,
+      256
+    ],
+    "count": 12638
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      90,
+      112,
+      227,
+      256
+    ],
+    "count": 13522
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      92,
+      156,
+      228,
+      256
+    ],
+    "count": 9195
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      110,
+      224,
+      256
+    ],
+    "count": 12642
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 16,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      100,
+      112,
+      223,
+      256
+    ],
+    "count": 12031
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 17,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      86,
+      112,
+      234,
+      256
+    ],
+    "count": 13680
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      111,
+      225,
+      256
+    ],
+    "count": 12638
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      94,
+      110,
+      224,
+      256
+    ],
+    "count": 12642
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 18,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      86,
+      109,
+      227,
+      256
+    ],
+    "count": 12913
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 19,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      95,
+      112,
+      220,
+      256
+    ],
+    "count": 12183
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      93,
+      111,
+      225,
+      256
+    ],
+    "count": 12638
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      106,
+      222,
+      254
+    ],
+    "count": 11849
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 21,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      104,
+      218,
+      255
+    ],
+    "count": 11873
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 22,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      98,
+      222,
+      254
+    ],
+    "count": 12617
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      106,
+      223,
+      254
+    ],
+    "count": 11901
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 20,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      102,
+      107,
+      224,
+      256
+    ],
+    "count": 12245
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 21,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      98,
+      108,
+      219,
+      258
+    ],
+    "count": 12330
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 22,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      98,
+      108,
+      222,
+      263
+    ],
+    "count": 13051
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 23,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      101,
+      106,
+      225,
+      255
+    ],
+    "count": 12285
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      108,
+      222,
+      256
+    ],
+    "count": 11849
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      89,
+      105,
+      228,
+      256
+    ],
+    "count": 14751
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      92,
+      105,
+      247,
+      256
+    ],
+    "count": 15046
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      108,
+      223,
+      256
+    ],
+    "count": 11901
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      100,
+      115,
+      222,
+      256
+    ],
+    "count": 12049
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      94,
+      156,
+      226,
+      256
+    ],
+    "count": 8653
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      108,
+      222,
+      256
+    ],
+    "count": 11849
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 20,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      105,
+      108,
+      218,
+      256
+    ],
+    "count": 11788
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 21,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      97,
+      109,
+      236,
+      256
+    ],
+    "count": 13289
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      108,
+      223,
+      256
+    ],
+    "count": 11901
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      108,
+      222,
+      256
+    ],
+    "count": 11849
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 22,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      94,
+      105,
+      231,
+      256
+    ],
+    "count": 12909
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 23,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      107,
+      108,
+      224,
+      256
+    ],
+    "count": 11819
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      108,
+      223,
+      256
+    ],
+    "count": 11901
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      105,
+      105,
+      215,
+      255
+    ],
+    "count": 11272
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 25,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      109,
+      105,
+      217,
+      254
+    ],
+    "count": 10655
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 26,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      102,
+      100,
+      213,
+      255
+    ],
+    "count": 11244
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      106,
+      107,
+      217,
+      254
+    ],
+    "count": 11108
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 24,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      102,
+      107,
+      214,
+      256
+    ],
+    "count": 11619
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 25,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      104,
+      107,
+      217,
+      254
+    ],
+    "count": 11344
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 26,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      103,
+      107,
+      212,
+      262
+    ],
+    "count": 11588
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 27,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      105,
+      106,
+      218,
+      253
+    ],
+    "count": 11449
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      105,
+      106,
+      215,
+      256
+    ],
+    "count": 11272
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 12,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      86,
+      101,
+      222,
+      256
+    ],
+    "count": 14753
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 13,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      93,
+      101,
+      249,
+      256
+    ],
+    "count": 14970
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      103,
+      109,
+      214,
+      256
+    ],
+    "count": 11108
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      105,
+      111,
+      212,
+      256
+    ],
+    "count": 11004
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      94,
+      156,
+      225,
+      256
+    ],
+    "count": 8945
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      105,
+      106,
+      215,
+      256
+    ],
+    "count": 11272
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 24,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      109,
+      107,
+      218,
+      256
+    ],
+    "count": 11234
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 25,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      100,
+      106,
+      235,
+      256
+    ],
+    "count": 12986
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      103,
+      109,
+      214,
+      256
+    ],
+    "count": 11108
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      105,
+      106,
+      215,
+      256
+    ],
+    "count": 11272
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 26,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      103,
+      104,
+      231,
+      256
+    ],
+    "count": 12279
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 27,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      108,
+      107,
+      215,
+      256
+    ],
+    "count": 11356
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      103,
+      109,
+      214,
+      256
+    ],
+    "count": 11108
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      100,
+      107,
+      224,
+      254
+    ],
+    "count": 12169
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 29,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      108,
+      220,
+      255
+    ],
+    "count": 11819
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 30,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      97,
+      103,
+      223,
+      254
+    ],
+    "count": 12440
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      99,
+      108,
+      224,
+      255
+    ],
+    "count": 12127
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 28,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      99,
+      108,
+      226,
+      253
+    ],
+    "count": 12405
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 29,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      97,
+      109,
+      222,
+      254
+    ],
+    "count": 12375
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 30,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      97,
+      109,
+      225,
+      258
+    ],
+    "count": 12920
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_elemental-walk.png",
+    "sourcePose": 31,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      99,
+      108,
+      229,
+      252
+    ],
+    "count": 12285
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      100,
+      109,
+      224,
+      256
+    ],
+    "count": 12169
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 14,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      87,
+      103,
+      234,
+      256
+    ],
+    "count": 15242
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_elemental-attack.png",
+    "sourcePose": 15,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      84,
+      104,
+      235,
+      256
+    ],
+    "count": 15474
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      226,
+      256
+    ],
+    "count": 12127
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      87,
+      112,
+      223,
+      256
+    ],
+    "count": 13061
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5806451612903226,
+    "bounds": [
+      91,
+      156,
+      228,
+      256
+    ],
+    "count": 9141
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      100,
+      109,
+      224,
+      256
+    ],
+    "count": 12169
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 28,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      107,
+      109,
+      214,
+      256
+    ],
+    "count": 11512
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 29,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      89,
+      108,
+      230,
+      256
+    ],
+    "count": 12975
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      226,
+      256
+    ],
+    "count": 12127
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      100,
+      109,
+      224,
+      256
+    ],
+    "count": 12169
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 30,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      106,
+      107,
+      236,
+      256
+    ],
+    "count": 12331
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_elemental-moves.png",
+    "sourcePose": 31,
+    "scale": 0.7916666666666666,
+    "bounds": [
+      108,
+      109,
+      217,
+      256
+    ],
+    "count": 11592
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.8172043010752689,
+    "bounds": [
+      101,
+      109,
+      226,
+      256
+    ],
+    "count": 12127
+  }
+]

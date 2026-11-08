@@ -1,0 +1,26 @@
+{
+  "priorCommit": "459b0fd5",
+  "addedCreatureEntries": [
+    "mob_refresh_golem_basalt",
+    "mob_refresh_golem_crystal",
+    "mob_refresh_golem_temple"
+  ],
+  "combatMechanicsUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 16,
+  "packedFrameKeys": 528,
+  "distinctAuthoredPoseSelections": 384,
+  "runtimeAssets": 3,
+  "specialsPerCreature": 2,
+  "wholePoseFacingSelection": true,
+  "rejectedCrystalRearPunchPoses": [
+    6,
+    7
+  ],
+  "visualContactTimingRefined": true
+}

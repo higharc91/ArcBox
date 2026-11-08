@@ -1,0 +1,28 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "generationParameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  },
+  "briefs": {
+    "necromancer": "Wardenflame: Embers of the Vale grounded tactical fantasy production concept sheet for pixel translation. One SAME character front three-quarter, rear three-quarter, left profile full bodies plus face and staff-grip detail, small neutral1.75m human scale inset. Parchment background, no scenery or text, full heads/feet/staves contained with generous margins. Readable slightly enlarged tactical head, crisp material separation, restrained earth palette, warm upper-left key and cool shadows. No modern clothes, anime, huge armor, magic circles or floating equipment. IVO RIME, the shared NECROMANCER appearance. Canon: a Warden-trained physician studying cold ember and the memoryless Risen of Frostpeak after his wife Nell died; funded by the Kindled, exhausted, precise, soft-spoken, not cruel. HUMAN male about50,1.75m tall slim/stooped, pale living skin not a corpse, tired hazel-brown eyes with dark circles, narrow clean-shaven face, short swept-back dark brown hair with grey temples. Practical charcoal-blue wool physician's long split coat over grey-green quilted LIGHT leather jerkin, faded cream scarf, muted brown satchel-flap pouch firmly on belt at anatomical RIGHT hip, small sealed medicine pouch (no jangling vials), dark trousers and weathered brown boots. Coat rear seams, plain rear belt no front buckle. No skull mask, horns, crown, spikes, skeletal hands or purple evilwizard robes. ONE simple straight ASHWOOD STAFF in anatomical LEFT hand (viewerRIGHTfront/viewerLEFTback), small capped pale BLUE-GREY glass focus held by dull brass collars near top, NONfiery unlitatrest, no giant orb or floating gem. Pale living LEFT fingers firmly wrap grip joined wrist/forearm; RIGHT hand empty to cast. Staff base rests beside left boot, same LEFT hand allviews. Read like an impoverished scholarly doctor in a cold mountain rather than a king or action necromancer. Detail the left-hand grip and back coat structure.",
+    "lich": "Wardenflame: Embers of the Vale grounded tactical fantasy production concept sheet for pixel translation. One SAME character front three-quarter, rear three-quarter, left profile full bodies plus face and staff-grip detail, small neutral1.75m human scale inset. Parchment background, no scenery or text, full heads/feet/staves contained with generous margins. Readable slightly enlarged tactical head, crisp material separation, restrained earth palette, warm upper-left key and cool shadows. No modern clothes, anime, huge armor, magic circles or floating equipment. OSWIN HALE, the shared LICH appearance, Last Warden-Keeper of the Last Watch. Canon: undead for100years, remembers everything, very tired, bound himself to finish extinguishing the stolen flame; refused ever to touch ember-fire. Former HUMAN adult1.8m skeletal frame, ivory weathered skull with intact jaw physically joined cervical spine, deeply DARK EMPTY eye sockets (no orange/red flames or neon pupils), patient weary head tilt not grinning cartoon. Dark SLATE-NAVY layered knee-length Warden ceremonial overrobe split for walking, worn ivory linen stole with subtle unreadable faded geometric stitching, restrained dull BRASS clasps, charcoal light underrobe, visible ivory fingers/wrists, dark leather boots. Narrow body, modest shoulders, NO crown/horns/helmet/spikes, no huge lich armor, no magical floating bones, no gore. Bare skull framed by low lowered cowl atneck, NOT hood hiding face. Back shows robe/stole seams and plain backwaist, no forwardbeltbuckle. ONE weathered darkwood WARDEN STAFF in anatomical LEFT hand (viewerRIGHTfront/viewerLEFTback), small CLOSED IVORY RING ferrule near top with dull brass collar, ring firmly joined pole, NO fire, ember, floating gemstone or glow. LEFT bone fingers wrap wooden grip, connected wrist/forearm; RIGHT hand empty to cast. Staffplant besideLEFTbootallviews. This unlit keeper's staff and plain robes distinguish him from demonic fantasy liches. Ivory ring focus clearly contained, reads atworldscale."
+  },
+  "jobs": {
+    "necromancer": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_zag3ytUGgYXhinbci57ZFX9j",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_zag3ytUGgYXhinbci57ZFX9j' (one call waits on up to 32 jobs)."
+    },
+    "lich": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_3g82TVGp1BCpppc2GAMSG6KA",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_3g82TVGp1BCpppc2GAMSG6KA' (one call waits on up to 32 jobs)."
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 540
+    },
+    {
+      "title": "Battle · River Crossing",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Bone Wardens · actual Crypt Hall encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Bone Wardens · actual Keep Gate encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · fighter, bandit and Bone Warden lineup",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "76239944",
+    "walk": "76827ba8",
+    "attack": "e230cf0",
+    "hurt": "657c9009",
+    "down": "8445aeca"
+  },
+  "walkFrameHashes": [
+    "c332d649",
+    "e822f9f3",
+    "76827ba8",
+    "fa878c53"
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}

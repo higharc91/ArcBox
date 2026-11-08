@@ -224,68 +224,68 @@
       "surprised": "class_sorcerer_surprised.png"
     },
     "goblin_cutthroat": {
-      "idle": "goblin_cutthroat_idle.png",
-      "hurt": "goblin_cutthroat_hurt.png",
-      "happy": "goblin_cutthroat_happy.png",
-      "angry": "goblin_cutthroat_angry.png",
-      "sad": "goblin_cutthroat_sad.png",
-      "surprised": "goblin_cutthroat_surprised.png"
+      "idle": "goblin_cutthroat_refresh_idle.png",
+      "hurt": "goblin_cutthroat_refresh_hurt.png",
+      "happy": "goblin_cutthroat_refresh_happy.png",
+      "angry": "goblin_cutthroat_refresh_angry.png",
+      "sad": "goblin_cutthroat_refresh_sad.png",
+      "surprised": "goblin_cutthroat_refresh_surprised.png"
     },
     "goblin_spear": {
-      "idle": "goblin_spear_idle.png",
-      "hurt": "goblin_spear_hurt.png",
-      "happy": "goblin_spear_happy.png",
-      "angry": "goblin_spear_angry.png",
-      "sad": "goblin_spear_sad.png",
-      "surprised": "goblin_spear_surprised.png"
+      "idle": "goblin_spear_refresh_idle.png",
+      "hurt": "goblin_spear_refresh_hurt.png",
+      "happy": "goblin_spear_refresh_happy.png",
+      "angry": "goblin_spear_refresh_angry.png",
+      "sad": "goblin_spear_refresh_sad.png",
+      "surprised": "goblin_spear_refresh_surprised.png"
     },
     "goblin_shaman": {
-      "idle": "goblin_shaman_idle.png",
-      "hurt": "goblin_shaman_hurt.png",
-      "happy": "goblin_shaman_happy.png",
-      "angry": "goblin_shaman_angry.png",
-      "sad": "goblin_shaman_sad.png",
-      "surprised": "goblin_shaman_surprised.png"
+      "idle": "goblin_shaman_refresh_idle.png",
+      "hurt": "goblin_shaman_refresh_hurt.png",
+      "happy": "goblin_shaman_refresh_happy.png",
+      "angry": "goblin_shaman_refresh_angry.png",
+      "sad": "goblin_shaman_refresh_sad.png",
+      "surprised": "goblin_shaman_refresh_surprised.png"
     },
     "orc_brute": {
-      "idle": "orc_brute_idle.png",
-      "hurt": "orc_brute_hurt.png",
-      "happy": "orc_brute_happy.png",
-      "angry": "orc_brute_angry.png",
-      "sad": "orc_brute_sad.png",
-      "surprised": "orc_brute_surprised.png"
+      "idle": "orc_brute_refresh_idle.png",
+      "hurt": "orc_brute_refresh_hurt.png",
+      "happy": "orc_brute_refresh_happy.png",
+      "angry": "orc_brute_refresh_angry.png",
+      "sad": "orc_brute_refresh_sad.png",
+      "surprised": "orc_brute_refresh_surprised.png"
     },
     "skeleton": {
-      "idle": "skeleton_idle.png",
-      "hurt": "skeleton_hurt.png",
-      "happy": "skeleton_happy.png",
-      "angry": "skeleton_angry.png",
-      "sad": "skeleton_sad.png",
-      "surprised": "skeleton_surprised.png"
+      "idle": "skeleton_refresh_idle.png",
+      "hurt": "skeleton_refresh_hurt.png",
+      "happy": "skeleton_refresh_happy.png",
+      "angry": "skeleton_refresh_angry.png",
+      "sad": "skeleton_refresh_sad.png",
+      "surprised": "skeleton_refresh_surprised.png"
     },
     "bandit": {
-      "idle": "bandit_idle.png",
-      "hurt": "bandit_hurt.png",
-      "happy": "bandit_happy.png",
-      "angry": "bandit_angry.png",
-      "sad": "bandit_sad.png",
-      "surprised": "bandit_surprised.png"
+      "idle": "bandit_refresh_idle.png",
+      "hurt": "bandit_refresh_hurt.png",
+      "happy": "bandit_refresh_happy.png",
+      "angry": "bandit_refresh_angry.png",
+      "sad": "bandit_refresh_sad.png",
+      "surprised": "bandit_refresh_surprised.png"
     },
     "black_knight": {
-      "idle": "black_knight_idle.png",
-      "hurt": "black_knight_hurt.png",
-      "happy": "black_knight_happy.png",
-      "angry": "black_knight_angry.png",
-      "sad": "black_knight_sad.png",
-      "surprised": "black_knight_surprised.png"
+      "idle": "black_knight_refresh_idle.png",
+      "hurt": "black_knight_refresh_hurt.png",
+      "happy": "black_knight_refresh_happy.png",
+      "angry": "black_knight_refresh_angry.png",
+      "sad": "black_knight_refresh_sad.png",
+      "surprised": "black_knight_refresh_surprised.png"
     },
     "cultist": {
-      "idle": "cultist_idle.png",
-      "hurt": "cultist_hurt.png",
-      "happy": "cultist_happy.png",
-      "angry": "cultist_angry.png",
-      "sad": "cultist_sad.png",
-      "surprised": "cultist_surprised.png"
+      "idle": "cultist_refresh_idle.png",
+      "hurt": "cultist_refresh_hurt.png",
+      "happy": "cultist_refresh_happy.png",
+      "angry": "cultist_refresh_angry.png",
+      "sad": "cultist_refresh_sad.png",
+      "surprised": "cultist_refresh_surprised.png"
     },
     "kobold": {
       "idle": "kobold_refresh.png",
@@ -304,60 +304,60 @@
       "surprised": "kobold_slinger_refresh.png"
     },
     "hobgoblin": {
-      "idle": "hobgoblin_idle.png",
-      "hurt": "hobgoblin_hurt.png",
-      "happy": "hobgoblin_happy.png",
-      "angry": "hobgoblin_angry.png",
-      "sad": "hobgoblin_sad.png",
-      "surprised": "hobgoblin_surprised.png"
+      "idle": "hobgoblin_refresh_idle.png",
+      "hurt": "hobgoblin_refresh_hurt.png",
+      "happy": "hobgoblin_refresh_happy.png",
+      "angry": "hobgoblin_refresh_angry.png",
+      "sad": "hobgoblin_refresh_sad.png",
+      "surprised": "hobgoblin_refresh_surprised.png"
     },
     "goblin_archer": {
-      "idle": "goblin_archer_idle.png",
-      "hurt": "goblin_archer_hurt.png",
-      "happy": "goblin_archer_happy.png",
-      "angry": "goblin_archer_angry.png",
-      "sad": "goblin_archer_sad.png",
-      "surprised": "goblin_archer_surprised.png"
+      "idle": "goblin_archer_refresh_idle.png",
+      "hurt": "goblin_archer_refresh_hurt.png",
+      "happy": "goblin_archer_refresh_happy.png",
+      "angry": "goblin_archer_refresh_angry.png",
+      "sad": "goblin_archer_refresh_sad.png",
+      "surprised": "goblin_archer_refresh_surprised.png"
     },
     "zombie": {
-      "idle": "zombie_idle.png",
-      "hurt": "zombie_hurt.png",
-      "happy": "zombie_happy.png",
-      "angry": "zombie_angry.png",
-      "sad": "zombie_sad.png",
-      "surprised": "zombie_surprised.png"
+      "idle": "zombie_refresh_idle.png",
+      "hurt": "zombie_refresh_hurt.png",
+      "happy": "zombie_refresh_happy.png",
+      "angry": "zombie_refresh_angry.png",
+      "sad": "zombie_refresh_sad.png",
+      "surprised": "zombie_refresh_surprised.png"
     },
     "skeleton_archer": {
-      "idle": "skeleton_archer_idle.png",
-      "hurt": "skeleton_archer_hurt.png",
-      "happy": "skeleton_archer_happy.png",
-      "angry": "skeleton_archer_angry.png",
-      "sad": "skeleton_archer_sad.png",
-      "surprised": "skeleton_archer_surprised.png"
+      "idle": "skeleton_archer_refresh_idle.png",
+      "hurt": "skeleton_archer_refresh_hurt.png",
+      "happy": "skeleton_archer_refresh_happy.png",
+      "angry": "skeleton_archer_refresh_angry.png",
+      "sad": "skeleton_archer_refresh_sad.png",
+      "surprised": "skeleton_archer_refresh_surprised.png"
     },
     "lich": {
-      "idle": "lich_idle.png",
-      "hurt": "lich_hurt.png",
-      "happy": "lich_happy.png",
-      "angry": "lich_angry.png",
-      "sad": "lich_sad.png",
-      "surprised": "lich_surprised.png"
+      "idle": "lich_refresh_idle.png",
+      "hurt": "lich_refresh_hurt.png",
+      "happy": "lich_refresh_happy.png",
+      "angry": "lich_refresh_angry.png",
+      "sad": "lich_refresh_sad.png",
+      "surprised": "lich_refresh_surprised.png"
     },
     "dark_elf": {
-      "idle": "dark_elf_idle.png",
-      "hurt": "dark_elf_hurt.png",
-      "happy": "dark_elf_happy.png",
-      "angry": "dark_elf_angry.png",
-      "sad": "dark_elf_sad.png",
-      "surprised": "dark_elf_surprised.png"
+      "idle": "dark_elf_refresh_idle.png",
+      "hurt": "dark_elf_refresh_hurt.png",
+      "happy": "dark_elf_refresh_happy.png",
+      "angry": "dark_elf_refresh_angry.png",
+      "sad": "dark_elf_refresh_sad.png",
+      "surprised": "dark_elf_refresh_surprised.png"
     },
     "necromancer": {
-      "idle": "necromancer_idle.png",
-      "hurt": "necromancer_hurt.png",
-      "happy": "necromancer_happy.png",
-      "angry": "necromancer_angry.png",
-      "sad": "necromancer_sad.png",
-      "surprised": "necromancer_surprised.png"
+      "idle": "necromancer_refresh_idle.png",
+      "hurt": "necromancer_refresh_hurt.png",
+      "happy": "necromancer_refresh_happy.png",
+      "angry": "necromancer_refresh_angry.png",
+      "sad": "necromancer_refresh_sad.png",
+      "surprised": "necromancer_refresh_surprised.png"
     },
     "bandit_captain": {
       "idle": "rook_idle.png",
@@ -368,12 +368,12 @@
       "surprised": "rook_surprised.png"
     },
     "cult_leader": {
-      "idle": "cult_leader_idle.png",
-      "hurt": "cult_leader_hurt.png",
-      "happy": "cult_leader_happy.png",
-      "angry": "cult_leader_angry.png",
-      "sad": "cult_leader_sad.png",
-      "surprised": "cult_leader_surprised.png"
+      "idle": "cult_leader_refresh_idle.png",
+      "hurt": "cult_leader_refresh_hurt.png",
+      "happy": "cult_leader_refresh_happy.png",
+      "angry": "cult_leader_refresh_angry.png",
+      "sad": "cult_leader_refresh_sad.png",
+      "surprised": "cult_leader_refresh_surprised.png"
     },
     "mayor": {
       "idle": "halden_varrow_idle.png",

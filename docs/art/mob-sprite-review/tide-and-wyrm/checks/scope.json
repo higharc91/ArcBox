@@ -1,0 +1,23 @@
+{
+  "priorCommit": "d07880ed",
+  "addedCreatureEntries": [
+    "mob_refresh_dragon",
+    "mob_refresh_water_elemental"
+  ],
+  "combatMechanicsUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 13,
+  "packedFrameKeys": 384,
+  "distinctAuthoredPoseSelections": 272,
+  "runtimeAssets": 2,
+  "specialsPerCreature": {
+    "water_elemental": 2,
+    "dragon": 3
+  },
+  "wholePoseFacingSelection": true,
+  "visualContactTimingRefined": true
+}

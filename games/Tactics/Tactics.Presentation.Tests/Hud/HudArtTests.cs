@@ -7,6 +7,28 @@ namespace Tactics.Presentation.Tests.Hud;
 /// <summary><see cref="HudArt"/> against the real pack: ui/manifest.json's rectangles and each unit's portrait.</summary>
 public sealed class HudArtTests
 {
+    [Fact]
+    public void Mimic_hud_shows_the_complete_disguised_chest_instead_of_an_invented_head()
+    {
+        var sprite = Units.Value.Sprite("bosses.mimic.oak")!;
+        var portrait = Art.Value.Portrait("bosses.mimic.oak", UnitTone.Enemy);
+        Assert.Equal("creatures/mob_refresh_mimic.png", portrait.Path);
+        Assert.Equal(sprite.PortraitSource, portrait.Source);
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var source = sprite.Source(0, 0);
+        var count = 0;
+        for (var y = 0; y < source.Height; y++)
+            for (var x = 0; x < source.Width; x++)
+                if (pixels[((source.Y + y) * width + source.X + x) * 4 + 3] >= 128)
+                {
+                    Assert.InRange(x, portrait.Source.X, portrait.Source.X + portrait.Source.Width - 1);
+                    Assert.InRange(y, portrait.Source.Y, portrait.Source.Y + portrait.Source.Height - 1);
+                    count++;
+                }
+        Assert.True(count > 100);
+        Assert.Equal("portraits/backdrops/enemy.png", portrait.Backdrop);
+    }
+
     [Theory]
     [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "idle")]
     [InlineData("mother_skarrow", "mother_skarrow", "mother_skarrow", "hurt")]
@@ -89,7 +111,6 @@ public sealed class HudArtTests
     }
 
     [Theory]
-    [InlineData("characters.goblin_cutthroat", UnitTone.Enemy, "portraits/goblin_cutthroat_idle.png", "portraits/backdrops/enemy.png")]
     [InlineData("characters.farmer", UnitTone.Neutral, "portraits/generic_farmer_a_idle.png", "portraits/backdrops/neutral.png")]
     public void A_character_has_its_portrait_on_its_sides_backdrop(string sprite, UnitTone tone, string path, string backdrop)
     {
@@ -98,6 +119,67 @@ public sealed class HudArtTests
         Assert.Equal(path, portrait.Path);
         Assert.Equal(backdrop, portrait.Backdrop);
         Assert.Equal(new ArtRect(0, 0, 40, 40), portrait.Source);
+    }
+
+    [Theory]
+    [InlineData("characters.goblin_cutthroat", "goblin", 48)]
+    [InlineData("characters.orc_brute", "orc", 48)]
+    [InlineData("beasts.drake.red", "drake", 64)]
+    [InlineData("characters.goblin_archer", "goblin_archer", 56)]
+    [InlineData("characters.goblin_shaman", "goblin_shaman", 56)]
+    [InlineData("characters.goblin_spear", "goblin_boss", 56)]
+    [InlineData("characters.hobgoblin", "hobgoblin", 64)]
+    [InlineData("characters.bandit", "bandit", 64)]
+    [InlineData("characters.cultist", "cultist", 64)]
+    [InlineData("characters.cult_leader", "cult_leader", 64)]
+    [InlineData("characters.skeleton", "skeleton", 64)]
+    [InlineData("characters.skeleton_archer", "skeleton_archer", 64)]
+    [InlineData("characters.zombie", "zombie", 64)]
+    [InlineData("bosses.wraith.wraith", "wraith", 64)]
+    [InlineData("characters.necromancer", "necromancer", 64)]
+    [InlineData("characters.lich", "lich", 64)]
+    [InlineData("characters.black_knight", "black_knight", 64)]
+    [InlineData("characters.dark_elf", "dark_elf", 64)]
+    [InlineData("bosses.troll.troll", "troll", 64)]
+    [InlineData("bosses.golem.granite", "golem", 64)]
+    public void Refreshed_mobs_show_their_current_atlas_head_in_the_battle_hud(string key, string file, int size)
+    {
+        var portrait = Art.Value.Portrait(key, UnitTone.Enemy);
+        Assert.Equal($"creatures/mob_refresh_{file}.png", portrait.Path);
+        Assert.Equal(Units.Value.Sprite(key)!.PortraitSource, portrait.Source);
+        Assert.Equal(size, portrait.Source.Width);
+        Assert.Equal(size, portrait.Source.Height);
+        Assert.Equal("portraits/backdrops/enemy.png", portrait.Backdrop);
+    }
+
+    [Theory]
+    [InlineData("goblin_cutthroat")]
+    [InlineData("orc_brute")]
+    [InlineData("goblin_archer")]
+    [InlineData("goblin_shaman")]
+    [InlineData("goblin_spear")]
+    [InlineData("hobgoblin")]
+    [InlineData("bandit")]
+    [InlineData("cultist")]
+    [InlineData("cult_leader")]
+    [InlineData("skeleton")]
+    [InlineData("skeleton_archer")]
+    [InlineData("zombie")]
+    [InlineData("necromancer")]
+    [InlineData("lich")]
+    [InlineData("black_knight")]
+    [InlineData("dark_elf")]
+    public void Refreshed_speakers_keep_all_six_expression_roles(string preset)
+    {
+        var files = new HashSet<string>();
+        foreach (var mood in new[] { "idle", "hurt", "happy", "angry", "sad", "surprised" })
+        {
+            var face = Art.Value.Speaker(preset, mood, "villain")!;
+            Assert.Equal($"portraits/{preset}_refresh_{mood}.png", face.Path);
+            Assert.Equal(new ArtRect(0, 0, 40, 40), face.Source);
+            files.Add(Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(Path.Combine(Pack.Root, face.Path)))));
+        }
+        Assert.Equal(6, files.Count);
     }
 
     [Theory]

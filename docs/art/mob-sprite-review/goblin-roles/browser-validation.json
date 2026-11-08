@@ -1,0 +1,17 @@
+{
+  "decodedEmbeddedScenes": 5,
+  "actionHashes": {
+    "idle": "4f63c3d0",
+    "walk": "aa5c2f15",
+    "attack": "a7ede4ac",
+    "hurt": "af96cb97",
+    "down": "94fc206a",
+    "cast": "43a1a912"
+  },
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}

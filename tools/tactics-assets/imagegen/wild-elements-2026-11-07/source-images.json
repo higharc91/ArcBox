@@ -1,0 +1,18 @@
+{
+  "air_storm-idle": "a2891665-a011-4448-a772-60df7a5da23b",
+  "earth_magma-idle": "33471a8a-60df-4696-b726-321481479eed",
+  "water_swamp-idle": "35c7d15b-cbde-4b95-a3a3-6b9316bfbe80",
+  "air_storm-walk": "2039d060-d8cf-49ff-a4ea-aa8e001ccb0b",
+  "earth_magma-walk": "6fefb683-b75b-42f2-8cf5-d1a0778c4930",
+  "water_swamp-walk": "966b4a68-2951-44f2-9939-9f030a0e3c28",
+  "air_storm-attack": "8150f2ca-467b-442b-9a21-8c32ad249c76",
+  "earth_magma-attack": "98cba47c-6c7c-40c0-9d0e-fdf325c87bdc",
+  "water_swamp-attack": "24bc9ae1-df40-42c5-bcdf-70e266262c78",
+  "air_storm-moves": "c249a2d5-55b5-4994-95d9-b42da5db04d6",
+  "earth_magma-moves": "ff3f6dfa-763e-43b3-8699-7e24fd29bc71",
+  "water_swamp-moves": "5b4186df-e508-47dc-a62f-bed3b62925b5",
+  "air_storm-damage": "29e72f1e-e4c2-418b-9350-adf810f9aa65",
+  "earth_magma-damage": "fc875a22-e1a4-4d0d-82b8-be1de2805bf4",
+  "water_swamp-damage": "92448816-b654-41b7-bdf1-293991a90ea3",
+  "air_storm-hurt-back": "3a5424b5-bb86-4783-8838-44961ac32802"
+}

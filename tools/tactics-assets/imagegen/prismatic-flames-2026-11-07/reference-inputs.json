@@ -1,0 +1,126 @@
+{
+  "fire_azure_idle": {
+    "promptKey": "fire_azure_idle",
+    "references": [
+      "references/fire_azure-idle.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png"
+    ]
+  },
+  "fire_azure_walk": {
+    "promptKey": "fire_azure_walk",
+    "references": [
+      "references/fire_azure-walk.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_azure-idle.png"
+    ]
+  },
+  "fire_azure_attack": {
+    "promptKey": "fire_azure_attack",
+    "references": [
+      "references/fire_azure-attack.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_azure-idle.png"
+    ]
+  },
+  "fire_azure_moves": {
+    "promptKey": "fire_azure_moves",
+    "references": [
+      "references/fire_azure-moves.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_azure-idle.png"
+    ]
+  },
+  "fire_azure_damage": {
+    "promptKey": "fire_azure_damage",
+    "references": [
+      "references/fire_azure-damage.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_azure-idle.png"
+    ]
+  },
+  "fire_radiant_idle": {
+    "promptKey": "fire_radiant_idle",
+    "references": [
+      "references/fire_radiant-idle.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png"
+    ]
+  },
+  "fire_radiant_walk": {
+    "promptKey": "fire_radiant_walk",
+    "references": [
+      "references/fire_radiant-walk.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_radiant-idle.png"
+    ]
+  },
+  "fire_radiant_attack": {
+    "promptKey": "fire_radiant_attack",
+    "references": [
+      "references/fire_radiant-attack.png",
+      "source/fire_radiant-idle.png"
+    ]
+  },
+  "fire_radiant_moves": {
+    "promptKey": "fire_radiant_moves",
+    "references": [
+      "references/fire_radiant-moves.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_radiant-idle.png"
+    ]
+  },
+  "fire_radiant_damage": {
+    "promptKey": "fire_radiant_damage",
+    "references": [
+      "references/fire_radiant-damage.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_radiant-idle.png"
+    ]
+  },
+  "fire_shadow_idle": {
+    "promptKey": "fire_shadow_idle",
+    "references": [
+      "references/fire_shadow-idle.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png"
+    ]
+  },
+  "fire_shadow_walk": {
+    "promptKey": "fire_shadow_walk",
+    "references": [
+      "references/fire_shadow-walk.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_shadow-idle.png"
+    ]
+  },
+  "fire_shadow_attack": {
+    "promptKey": "fire_shadow_attack",
+    "references": [
+      "references/fire_shadow-attack.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_shadow-idle.png"
+    ]
+  },
+  "fire_shadow_moves": {
+    "promptKey": "fire_shadow_moves",
+    "references": [
+      "references/fire_shadow-moves.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_shadow-idle.png"
+    ]
+  },
+  "fire_shadow_damage": {
+    "promptKey": "fire_shadow_damage",
+    "references": [
+      "references/fire_shadow-damage.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_shadow-idle.png"
+    ]
+  },
+  "fire_radiant_attack_original": {
+    "promptKey": "fire_radiant_attack_original",
+    "references": [
+      "references/fire_radiant-attack.png",
+      "../../concepts/prismatic-flames-2026-11-07/three-variants.png",
+      "source/fire_radiant-idle.png"
+    ]
+  }
+}

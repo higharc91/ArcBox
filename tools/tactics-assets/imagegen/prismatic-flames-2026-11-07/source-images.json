@@ -1,0 +1,18 @@
+{
+  "fire_azure-idle": "05db9fd2-ec1e-4e96-a83f-aa852190f816",
+  "fire_radiant-idle": "4f78e063-24b4-4c38-8bcf-774fc35e58f1",
+  "fire_shadow-idle": "c7d3a04d-5d7f-41e8-afa1-a7dd17f1cb3c",
+  "fire_azure-walk": "e1f2caed-d35b-4058-baf3-1346012c7d03",
+  "fire_radiant-walk": "e1c2cad5-0eaf-40e9-af42-10054be2d216",
+  "fire_shadow-walk": "135509ae-57da-453f-9744-b0c55896b5a8",
+  "fire_azure-attack": "50be4297-e548-4c56-aeca-232eb3ec948c",
+  "fire_radiant-attack": "90b1dcfa-20ba-499c-b911-98da1033e5ee",
+  "fire_shadow-attack": "a6b38bfb-771f-46ee-9103-9f5d90dd4d2e",
+  "fire_azure-moves": "24fc97a4-02dc-468d-a257-889eec24d7d5",
+  "fire_radiant-moves": "b88a32d7-c3c1-43ec-90b8-c8e4deececa8",
+  "fire_shadow-moves": "aef81613-8852-4d68-b3ff-4872dd9e6b30",
+  "fire_azure-damage": "e0a88a13-b2d4-4ebf-81b7-56874536f47f",
+  "fire_radiant-damage": "f245a4dc-b869-40e1-ab5d-d67fb9b03c0b",
+  "fire_shadow-damage": "30a462ca-3f25-4c6d-9917-d29dad043b0c",
+  "fire_radiant-attack-draft": "483d83c9-db99-4e38-88fd-60f4a7c328e4"
+}

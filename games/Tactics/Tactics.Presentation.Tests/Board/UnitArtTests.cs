@@ -86,14 +86,14 @@ public sealed class UnitArtTests
     [Fact]
     public void A_character_key_is_a_preset_with_the_character_frames_and_its_builds_head()
     {
-        var goblin = Art.Value.Sprite("characters.goblin_archer")!;
+        var legacy = Art.Value.Sprite("characters.farmer")!; // retained legacy preset, rather than a refreshed compass atlas
         var fighter = Art.Value.Sprite("characters.class_fighter")!;   // a "large" build
 
-        Assert.Equal("characters/presets/goblin_archer.png", goblin.Path);
-        Assert.Equal((32, 40, 16, 37), (goblin.Width, goblin.Height, goblin.AnchorX, goblin.AnchorY));
-        Assert.Equal(Pack.Frames("characters", "idle"), goblin.Idle.Frames);
-        Assert.Equal(Pack.Frames("characters", "down"), goblin.Down.Frames);
-        Assert.Equal(8, Art.Value.Sprite("characters.bandit")!.HeadTop);
+        Assert.Equal("characters/presets/farmer.png", legacy.Path);
+        Assert.Equal((32, 40, 16, 37), (legacy.Width, legacy.Height, legacy.AnchorX, legacy.AnchorY));
+        Assert.Equal(Pack.Frames("characters", "idle"), legacy.Idle.Frames);
+        Assert.Equal(Pack.Frames("characters", "down"), legacy.Down.Frames);
+        Assert.Equal(8, legacy.HeadTop);
         Assert.Equal(.5f, fighter.PixelScale);
         Assert.Equal(32, fighter.FootprintWidth);
     }
@@ -210,13 +210,13 @@ public sealed class UnitArtTests
     {
         Assert.Equal("tactical/human_fighter.png", Art.Value.Sprite("characters.kara")!.Path);
         Assert.Equal("tactical/elf_wizard.png", Art.Value.Sprite("characters.ilyra")!.Path);
-        Assert.Equal("characters/presets/goblin_archer.png", Art.Value.Sprite("characters.goblin_archer")!.Path);
+        Assert.Equal("creatures/mob_refresh_goblin_archer.png", Art.Value.Sprite("characters.goblin_archer")!.Path);
     }
 
     [Theory]
     [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60)]
-    [InlineData("bosses.dragon.red", "bosses/dragon_red.png", 96, 96, 48, 90)]
-    [InlineData("bosses.imp.violet", "bosses/imp_violet.png", 32, 32, 16, 30)]
+    [InlineData("bosses.dragon.blue", "bosses/dragon_blue.png", 96, 96, 48, 90)]
+    [InlineData("bosses.sapling.autumn", "bosses/sapling_autumn.png", 40, 40, 20, 37)]
     public void A_monster_key_names_its_set_and_variant_with_that_sets_frames(string key, string path, int w, int h, int ax, int ay)
     {
         var sprite = Art.Value.Sprite(key)!;
@@ -264,10 +264,10 @@ public sealed class UnitArtTests
     [Fact]
     public void A_frames_place_in_the_sheet_is_its_column_and_row()
     {
-        var goblin = Art.Value.Sprite("characters.goblin_archer")!;
+        var legacy = Art.Value.Sprite("characters.farmer")!; // legacy two-row addressing remains supported
 
-        Assert.Equal(new ArtRect(62 * 32, 40, 32, 40), goblin.Source(62, 1));
-        Assert.Equal(new ArtRect(0, 0, 32, 40), goblin.Source(0, 0));
+        Assert.Equal(new ArtRect(62 * 32, 40, 32, 40), legacy.Source(62, 1));
+        Assert.Equal(new ArtRect(0, 0, 32, 40), legacy.Source(0, 0));
     }
 
     [Theory]
@@ -337,13 +337,18 @@ public sealed class UnitArtTests
     [Fact]
     public void Overhead_effects_follow_the_head_a_tall_sprite_lifts_them_a_small_one_lowers_them()
     {
-        Assert.Equal(0, Art.Value.Sprite("characters.bandit")!.EffectShift);                // standard build
+        Assert.Equal(0, Art.Value.Sprite("characters.farmer")!.EffectShift);                // standard build
         var fighter = Art.Value.Sprite("characters.class_fighter")!;
         var dwarf = Art.Value.Sprite("characters.dwarf_fighter")!;
         Assert.Equal((int)MathF.Round(29 - fighter.HeadLift), fighter.EffectShift);
         Assert.True(dwarf.EffectShift > fighter.EffectShift);
-        Assert.Equal(-23, Art.Value.Sprite("bosses.troll.troll")!.EffectShift);
-        Assert.Equal(7, Art.Value.Sprite("bosses.imp.crimson")!.EffectShift);
+        Assert.Equal(-23, Art.Value.Sprite("bosses.troll.frost")!.EffectShift);
+        foreach (var key in new[] { "bosses.imp.crimson", "bosses.imp.violet" })
+        {
+            var imp = Art.Value.Sprite(key)!;
+            Assert.Equal((int)MathF.Round(29 - imp.HeadLift), imp.EffectShift);
+            Assert.True(imp.EffectShift > fighter.EffectShift);
+        }
     }
 
     [Fact]

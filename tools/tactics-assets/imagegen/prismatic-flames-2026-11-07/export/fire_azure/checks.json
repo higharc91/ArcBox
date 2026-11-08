@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      103,
+      205,
+      254
+    ],
+    "count": 7930
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 1,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      107,
+      204,
+      254
+    ],
+    "count": 7618
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 2,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      98,
+      205,
+      254
+    ],
+    "count": 8246
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      106,
+      205,
+      254
+    ],
+    "count": 7684
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 0,
+    "scale": 0.95,
+    "bounds": [
+      118,
+      105,
+      208,
+      256
+    ],
+    "count": 8661
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 1,
+    "scale": 0.95,
+    "bounds": [
+      120,
+      106,
+      209,
+      257
+    ],
+    "count": 8487
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 2,
+    "scale": 0.95,
+    "bounds": [
+      119,
+      105,
+      208,
+      256
+    ],
+    "count": 8534
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 3,
+    "scale": 0.95,
+    "bounds": [
+      118,
+      104,
+      208,
+      255
+    ],
+    "count": 8602
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      105,
+      205,
+      256
+    ],
+    "count": 7930
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 0,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      116,
+      105,
+      206,
+      256
+    ],
+    "count": 8704
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 1,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      113,
+      105,
+      205,
+      256
+    ],
+    "count": 8373
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      108,
+      203,
+      256
+    ],
+    "count": 7684
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 0,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      115,
+      112,
+      204,
+      256
+    ],
+    "count": 8005
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 1,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      118,
+      176,
+      201,
+      256
+    ],
+    "count": 4661
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      105,
+      205,
+      256
+    ],
+    "count": 7930
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 0,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      114,
+      107,
+      206,
+      256
+    ],
+    "count": 8446
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 1,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      93,
+      107,
+      225,
+      256
+    ],
+    "count": 9639
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      108,
+      203,
+      256
+    ],
+    "count": 7684
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      105,
+      205,
+      256
+    ],
+    "count": 7930
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 2,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      116,
+      104,
+      204,
+      256
+    ],
+    "count": 9200
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 3,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      110,
+      111,
+      210,
+      256
+    ],
+    "count": 9025
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      108,
+      203,
+      256
+    ],
+    "count": 7684
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      102,
+      200,
+      254
+    ],
+    "count": 7733
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 5,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      104,
+      196,
+      254
+    ],
+    "count": 7647
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 6,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      120,
+      98,
+      198,
+      254
+    ],
+    "count": 8117
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      101,
+      203,
+      254
+    ],
+    "count": 7818
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 4,
+    "scale": 0.95,
+    "bounds": [
+      116,
+      103,
+      202,
+      256
+    ],
+    "count": 8467
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 5,
+    "scale": 0.95,
+    "bounds": [
+      118,
+      105,
+      201,
+      258
+    ],
+    "count": 8497
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 6,
+    "scale": 0.95,
+    "bounds": [
+      119,
+      104,
+      200,
+      257
+    ],
+    "count": 8351
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 7,
+    "scale": 0.95,
+    "bounds": [
+      121,
+      102,
+      204,
+      255
+    ],
+    "count": 8493
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      104,
+      200,
+      256
+    ],
+    "count": 7733
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 2,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      118,
+      113,
+      198,
+      256
+    ],
+    "count": 7634
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 3,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      98,
+      112,
+      198,
+      256
+    ],
+    "count": 8078
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      123,
+      103,
+      202,
+      256
+    ],
+    "count": 7818
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 2,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      121,
+      117,
+      201,
+      256
+    ],
+    "count": 7388
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 3,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      118,
+      180,
+      201,
+      256
+    ],
+    "count": 4594
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      104,
+      200,
+      256
+    ],
+    "count": 7733
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 4,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      116,
+      108,
+      194,
+      256
+    ],
+    "count": 7845
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 5,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      92,
+      103,
+      228,
+      256
+    ],
+    "count": 9777
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      123,
+      103,
+      202,
+      256
+    ],
+    "count": 7818
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      104,
+      200,
+      256
+    ],
+    "count": 7733
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 6,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      116,
+      104,
+      198,
+      256
+    ],
+    "count": 8691
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 7,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      102,
+      108,
+      206,
+      256
+    ],
+    "count": 8637
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      123,
+      103,
+      202,
+      256
+    ],
+    "count": 7818
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      107,
+      193,
+      254
+    ],
+    "count": 5987
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 9,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      103,
+      189,
+      254
+    ],
+    "count": 6089
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 10,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      123,
+      101,
+      192,
+      254
+    ],
+    "count": 6487
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      125,
+      105,
+      190,
+      254
+    ],
+    "count": 6044
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 8,
+    "scale": 0.95,
+    "bounds": [
+      129,
+      109,
+      194,
+      258
+    ],
+    "count": 6643
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 9,
+    "scale": 0.95,
+    "bounds": [
+      127,
+      109,
+      194,
+      257
+    ],
+    "count": 6563
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 10,
+    "scale": 0.95,
+    "bounds": [
+      129,
+      109,
+      196,
+      258
+    ],
+    "count": 6769
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 11,
+    "scale": 0.95,
+    "bounds": [
+      129,
+      107,
+      193,
+      256
+    ],
+    "count": 6637
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      109,
+      193,
+      256
+    ],
+    "count": 5987
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 4,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      115,
+      115,
+      190,
+      256
+    ],
+    "count": 6618
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 5,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      90,
+      115,
+      192,
+      256
+    ],
+    "count": 7129
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      107,
+      193,
+      256
+    ],
+    "count": 6044
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 4,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      127,
+      116,
+      192,
+      256
+    ],
+    "count": 6079
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 5,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      119,
+      180,
+      199,
+      256
+    ],
+    "count": 4480
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      109,
+      193,
+      256
+    ],
+    "count": 5987
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 8,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      126,
+      108,
+      194,
+      256
+    ],
+    "count": 7118
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 9,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      95,
+      107,
+      212,
+      256
+    ],
+    "count": 9031
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      107,
+      193,
+      256
+    ],
+    "count": 6044
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      109,
+      193,
+      256
+    ],
+    "count": 5987
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 10,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      123,
+      105,
+      194,
+      256
+    ],
+    "count": 7410
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 11,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      93,
+      107,
+      199,
+      256
+    ],
+    "count": 8315
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      107,
+      193,
+      256
+    ],
+    "count": 6044
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      102,
+      198,
+      254
+    ],
+    "count": 7791
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 13,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      197,
+      254
+    ],
+    "count": 8099
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 14,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      195,
+      254
+    ],
+    "count": 8012
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      103,
+      196,
+      254
+    ],
+    "count": 7793
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 12,
+    "scale": 0.95,
+    "bounds": [
+      116,
+      104,
+      197,
+      255
+    ],
+    "count": 8298
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 13,
+    "scale": 0.95,
+    "bounds": [
+      116,
+      105,
+      199,
+      256
+    ],
+    "count": 8459
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 14,
+    "scale": 0.95,
+    "bounds": [
+      117,
+      104,
+      199,
+      255
+    ],
+    "count": 8434
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 15,
+    "scale": 0.95,
+    "bounds": [
+      114,
+      103,
+      199,
+      254
+    ],
+    "count": 8600
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      104,
+      198,
+      256
+    ],
+    "count": 7791
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 6,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      112,
+      115,
+      197,
+      256
+    ],
+    "count": 7807
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 7,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      93,
+      115,
+      201,
+      256
+    ],
+    "count": 8071
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      105,
+      197,
+      256
+    ],
+    "count": 7793
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 6,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      120,
+      115,
+      200,
+      256
+    ],
+    "count": 7351
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 7,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      117,
+      178,
+      202,
+      256
+    ],
+    "count": 4856
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      104,
+      198,
+      256
+    ],
+    "count": 7791
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 12,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      115,
+      106,
+      196,
+      256
+    ],
+    "count": 8459
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 13,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      90,
+      105,
+      220,
+      256
+    ],
+    "count": 10094
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      105,
+      197,
+      256
+    ],
+    "count": 7793
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      104,
+      198,
+      256
+    ],
+    "count": 7791
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 14,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      117,
+      106,
+      201,
+      256
+    ],
+    "count": 9076
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 15,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      113,
+      108,
+      203,
+      256
+    ],
+    "count": 9190
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      105,
+      197,
+      256
+    ],
+    "count": 7793
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      100,
+      204,
+      254
+    ],
+    "count": 8584
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 17,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      101,
+      203,
+      254
+    ],
+    "count": 8522
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 18,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      114,
+      96,
+      199,
+      254
+    ],
+    "count": 8632
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      117,
+      100,
+      202,
+      254
+    ],
+    "count": 8563
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 16,
+    "scale": 0.95,
+    "bounds": [
+      114,
+      102,
+      203,
+      254
+    ],
+    "count": 9077
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 17,
+    "scale": 0.95,
+    "bounds": [
+      114,
+      103,
+      204,
+      255
+    ],
+    "count": 8979
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 18,
+    "scale": 0.95,
+    "bounds": [
+      112,
+      102,
+      200,
+      256
+    ],
+    "count": 8973
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 19,
+    "scale": 0.95,
+    "bounds": [
+      112,
+      101,
+      201,
+      254
+    ],
+    "count": 9059
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      204,
+      256
+    ],
+    "count": 8584
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      117,
+      118,
+      204,
+      256
+    ],
+    "count": 8173
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      97,
+      118,
+      206,
+      256
+    ],
+    "count": 8574
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      102,
+      204,
+      256
+    ],
+    "count": 8563
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 8,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      115,
+      117,
+      202,
+      256
+    ],
+    "count": 7878
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 9,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      114,
+      177,
+      204,
+      256
+    ],
+    "count": 5147
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      204,
+      256
+    ],
+    "count": 8584
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 16,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      116,
+      107,
+      205,
+      256
+    ],
+    "count": 8990
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 17,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      89,
+      104,
+      227,
+      256
+    ],
+    "count": 10273
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      102,
+      204,
+      256
+    ],
+    "count": 8563
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      204,
+      256
+    ],
+    "count": 8584
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 18,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      115,
+      103,
+      207,
+      256
+    ],
+    "count": 9508
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 19,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      108,
+      107,
+      213,
+      256
+    ],
+    "count": 9882
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      102,
+      204,
+      256
+    ],
+    "count": 8563
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      104,
+      199,
+      254
+    ],
+    "count": 8022
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 21,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      120,
+      103,
+      198,
+      254
+    ],
+    "count": 8248
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 22,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      123,
+      98,
+      201,
+      254
+    ],
+    "count": 8301
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      102,
+      198,
+      254
+    ],
+    "count": 8192
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 20,
+    "scale": 0.95,
+    "bounds": [
+      123,
+      105,
+      197,
+      256
+    ],
+    "count": 8415
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 21,
+    "scale": 0.95,
+    "bounds": [
+      121,
+      106,
+      197,
+      258
+    ],
+    "count": 8558
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 22,
+    "scale": 0.95,
+    "bounds": [
+      121,
+      105,
+      198,
+      257
+    ],
+    "count": 8497
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 23,
+    "scale": 0.95,
+    "bounds": [
+      121,
+      104,
+      199,
+      256
+    ],
+    "count": 8414
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      106,
+      199,
+      256
+    ],
+    "count": 8022
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      117,
+      110,
+      200,
+      256
+    ],
+    "count": 8348
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      117,
+      110,
+      218,
+      256
+    ],
+    "count": 8422
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      104,
+      198,
+      256
+    ],
+    "count": 8192
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 10,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      117,
+      118,
+      200,
+      256
+    ],
+    "count": 7505
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 11,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      114,
+      185,
+      204,
+      256
+    ],
+    "count": 4714
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      106,
+      199,
+      256
+    ],
+    "count": 8022
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 20,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      119,
+      103,
+      199,
+      256
+    ],
+    "count": 8600
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 21,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      95,
+      103,
+      220,
+      256
+    ],
+    "count": 10382
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      104,
+      198,
+      256
+    ],
+    "count": 8192
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      124,
+      106,
+      199,
+      256
+    ],
+    "count": 8022
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 22,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      114,
+      103,
+      199,
+      256
+    ],
+    "count": 9113
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 23,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      112,
+      107,
+      201,
+      256
+    ],
+    "count": 9228
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      121,
+      104,
+      198,
+      256
+    ],
+    "count": 8192
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      126,
+      103,
+      192,
+      254
+    ],
+    "count": 6048
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 25,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      127,
+      101,
+      194,
+      254
+    ],
+    "count": 6265
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 26,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      127,
+      99,
+      193,
+      254
+    ],
+    "count": 6331
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      128,
+      103,
+      194,
+      254
+    ],
+    "count": 6034
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 24,
+    "scale": 0.95,
+    "bounds": [
+      127,
+      106,
+      191,
+      252
+    ],
+    "count": 6548
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 25,
+    "scale": 0.95,
+    "bounds": [
+      123,
+      107,
+      192,
+      253
+    ],
+    "count": 6602
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 26,
+    "scale": 0.95,
+    "bounds": [
+      124,
+      105,
+      193,
+      251
+    ],
+    "count": 6583
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 27,
+    "scale": 0.95,
+    "bounds": [
+      123,
+      104,
+      192,
+      250
+    ],
+    "count": 6509
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      126,
+      105,
+      192,
+      256
+    ],
+    "count": 6048
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 12,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      128,
+      109,
+      199,
+      256
+    ],
+    "count": 6927
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 13,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      127,
+      109,
+      228,
+      256
+    ],
+    "count": 7632
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      127,
+      105,
+      193,
+      256
+    ],
+    "count": 6034
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 12,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      126,
+      117,
+      191,
+      256
+    ],
+    "count": 5805
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 13,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      119,
+      186,
+      201,
+      256
+    ],
+    "count": 4172
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      126,
+      105,
+      192,
+      256
+    ],
+    "count": 6048
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 24,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      125,
+      100,
+      196,
+      256
+    ],
+    "count": 7511
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 25,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      100,
+      101,
+      209,
+      256
+    ],
+    "count": 9259
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      127,
+      105,
+      193,
+      256
+    ],
+    "count": 6034
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      126,
+      105,
+      192,
+      256
+    ],
+    "count": 6048
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 26,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      125,
+      103,
+      197,
+      256
+    ],
+    "count": 7530
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 27,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      114,
+      106,
+      211,
+      256
+    ],
+    "count": 8520
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      127,
+      105,
+      193,
+      256
+    ],
+    "count": 6034
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      104,
+      200,
+      254
+    ],
+    "count": 8097
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 29,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      100,
+      201,
+      254
+    ],
+    "count": 8109
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 30,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      122,
+      99,
+      201,
+      254
+    ],
+    "count": 8236
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      100,
+      201,
+      254
+    ],
+    "count": 8192
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 28,
+    "scale": 0.95,
+    "bounds": [
+      118,
+      106,
+      207,
+      257
+    ],
+    "count": 8838
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 29,
+    "scale": 0.95,
+    "bounds": [
+      119,
+      106,
+      204,
+      258
+    ],
+    "count": 8681
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 30,
+    "scale": 0.95,
+    "bounds": [
+      118,
+      106,
+      204,
+      257
+    ],
+    "count": 8711
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_azure-walk.png",
+    "sourcePose": 31,
+    "scale": 0.95,
+    "bounds": [
+      119,
+      104,
+      206,
+      256
+    ],
+    "count": 8706
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      106,
+      200,
+      256
+    ],
+    "count": 8097
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 14,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      118,
+      108,
+      203,
+      256
+    ],
+    "count": 8692
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_azure-attack.png",
+    "sourcePose": 15,
+    "scale": 0.7524752475247525,
+    "bounds": [
+      120,
+      108,
+      220,
+      256
+    ],
+    "count": 8441
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      200,
+      256
+    ],
+    "count": 8192
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 14,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      121,
+      120,
+      200,
+      256
+    ],
+    "count": 7060
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-damage.png",
+    "sourcePose": 15,
+    "scale": 0.6575342465753424,
+    "bounds": [
+      113,
+      186,
+      206,
+      256
+    ],
+    "count": 4340
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      106,
+      200,
+      256
+    ],
+    "count": 8097
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 28,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      112,
+      108,
+      198,
+      256
+    ],
+    "count": 8468
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 29,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      88,
+      107,
+      217,
+      256
+    ],
+    "count": 10113
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      200,
+      256
+    ],
+    "count": 8192
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      119,
+      106,
+      200,
+      256
+    ],
+    "count": 8097
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 30,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      114,
+      105,
+      194,
+      256
+    ],
+    "count": 8950
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/fire_azure-moves.png",
+    "sourcePose": 31,
+    "scale": 0.9934640522875817,
+    "bounds": [
+      108,
+      111,
+      207,
+      256
+    ],
+    "count": 8997
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/fire_azure-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0066225165562914,
+    "bounds": [
+      118,
+      102,
+      200,
+      256
+    ],
+    "count": 8192
+  }
+]

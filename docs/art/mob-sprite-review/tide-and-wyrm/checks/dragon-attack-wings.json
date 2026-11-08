@@ -1,0 +1,14 @@
+{
+  "minimumExpansion": 1.25,
+  "ratios": {
+    "east": 1.363,
+    "north": 1.837,
+    "north-east": 1.455,
+    "north-west": 1.465,
+    "south": 1.621,
+    "south-east": 1.375,
+    "south-west": 1.537,
+    "west": 1.468
+  },
+  "passed": true
+}

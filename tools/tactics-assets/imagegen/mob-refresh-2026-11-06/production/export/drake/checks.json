@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 0,
+    "scale": 0.521,
+    "bounds": [
+      61,
+      79,
+      131,
+      170
+    ],
+    "count": 4144
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 1,
+    "scale": 0.521,
+    "bounds": [
+      60,
+      79,
+      130,
+      170
+    ],
+    "count": 4144
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 2,
+    "scale": 0.521,
+    "bounds": [
+      60,
+      80,
+      131,
+      170
+    ],
+    "count": 4156
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 3,
+    "scale": 0.521,
+    "bounds": [
+      61,
+      80,
+      131,
+      170
+    ],
+    "count": 4143
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 0,
+    "scale": 0.536,
+    "bounds": [
+      61,
+      80,
+      129,
+      172
+    ],
+    "count": 4022
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 1,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      81,
+      129,
+      174
+    ],
+    "count": 4029
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 2,
+    "scale": 0.536,
+    "bounds": [
+      61,
+      80,
+      129,
+      172
+    ],
+    "count": 3996
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 3,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      79,
+      129,
+      172
+    ],
+    "count": 3925
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/drake-attack.png",
+    "sourcePose": 0,
+    "scale": 0.7,
+    "bounds": [
+      58,
+      90,
+      133,
+      171
+    ],
+    "count": 4114
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/drake-attack.png",
+    "sourcePose": 1,
+    "scale": 0.7,
+    "bounds": [
+      35,
+      86,
+      155,
+      172
+    ],
+    "count": 6187
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/drake-attack.png",
+    "sourcePose": 2,
+    "scale": 0.7,
+    "bounds": [
+      26,
+      74,
+      168,
+      171
+    ],
+    "count": 7873
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/drake-attack.png",
+    "sourcePose": 3,
+    "scale": 0.7,
+    "bounds": [
+      28,
+      81,
+      166,
+      171
+    ],
+    "count": 6963
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 0,
+    "scale": 0.449,
+    "bounds": [
+      59,
+      81,
+      131,
+      171
+    ],
+    "count": 4339
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 1,
+    "scale": 0.449,
+    "bounds": [
+      50,
+      122,
+      149,
+      171
+    ],
+    "count": 3745
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 4,
+    "scale": 0.521,
+    "bounds": [
+      57,
+      84,
+      148,
+      170
+    ],
+    "count": 4797
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 5,
+    "scale": 0.521,
+    "bounds": [
+      58,
+      84,
+      148,
+      170
+    ],
+    "count": 4752
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 6,
+    "scale": 0.521,
+    "bounds": [
+      58,
+      84,
+      148,
+      170
+    ],
+    "count": 4772
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 7,
+    "scale": 0.521,
+    "bounds": [
+      58,
+      84,
+      148,
+      170
+    ],
+    "count": 4751
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 4,
+    "scale": 0.536,
+    "bounds": [
+      58,
+      85,
+      142,
+      173
+    ],
+    "count": 4482
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 5,
+    "scale": 0.536,
+    "bounds": [
+      58,
+      86,
+      143,
+      173
+    ],
+    "count": 4467
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 6,
+    "scale": 0.536,
+    "bounds": [
+      58,
+      85,
+      144,
+      173
+    ],
+    "count": 4512
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 7,
+    "scale": 0.536,
+    "bounds": [
+      58,
+      84,
+      143,
+      172
+    ],
+    "count": 4408
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/drake-attack.png",
+    "sourcePose": 4,
+    "scale": 0.7,
+    "bounds": [
+      55,
+      86,
+      142,
+      171
+    ],
+    "count": 5152
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/drake-attack.png",
+    "sourcePose": 5,
+    "scale": 0.7,
+    "bounds": [
+      36,
+      81,
+      152,
+      171
+    ],
+    "count": 6791
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/drake-attack.png",
+    "sourcePose": 6,
+    "scale": 0.7,
+    "bounds": [
+      24,
+      65,
+      161,
+      172
+    ],
+    "count": 8541
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/drake-attack.png",
+    "sourcePose": 7,
+    "scale": 0.7,
+    "bounds": [
+      27,
+      74,
+      158,
+      171
+    ],
+    "count": 7769
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 2,
+    "scale": 0.449,
+    "bounds": [
+      54,
+      85,
+      146,
+      171
+    ],
+    "count": 5209
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 3,
+    "scale": 0.449,
+    "bounds": [
+      45,
+      123,
+      153,
+      171
+    ],
+    "count": 3744
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 8,
+    "scale": 0.521,
+    "bounds": [
+      52,
+      90,
+      153,
+      170
+    ],
+    "count": 4575
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 9,
+    "scale": 0.521,
+    "bounds": [
+      53,
+      90,
+      153,
+      170
+    ],
+    "count": 4511
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 10,
+    "scale": 0.521,
+    "bounds": [
+      52,
+      90,
+      153,
+      170
+    ],
+    "count": 4561
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 11,
+    "scale": 0.521,
+    "bounds": [
+      52,
+      90,
+      152,
+      170
+    ],
+    "count": 4490
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 8,
+    "scale": 0.536,
+    "bounds": [
+      52,
+      91,
+      156,
+      174
+    ],
+    "count": 4741
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 9,
+    "scale": 0.536,
+    "bounds": [
+      52,
+      92,
+      158,
+      174
+    ],
+    "count": 4662
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 10,
+    "scale": 0.536,
+    "bounds": [
+      52,
+      91,
+      158,
+      172
+    ],
+    "count": 4599
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 11,
+    "scale": 0.536,
+    "bounds": [
+      52,
+      90,
+      157,
+      170
+    ],
+    "count": 4597
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/drake-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7,
+    "bounds": [
+      29,
+      89,
+      152,
+      171
+    ],
+    "count": 5996
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/drake-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7,
+    "bounds": [
+      22,
+      83,
+      152,
+      171
+    ],
+    "count": 7051
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/drake-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7,
+    "bounds": [
+      12,
+      62,
+      156,
+      171
+    ],
+    "count": 10068
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/drake-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7,
+    "bounds": [
+      18,
+      69,
+      153,
+      171
+    ],
+    "count": 8949
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 4,
+    "scale": 0.449,
+    "bounds": [
+      58,
+      88,
+      154,
+      171
+    ],
+    "count": 4800
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 5,
+    "scale": 0.449,
+    "bounds": [
+      43,
+      126,
+      151,
+      171
+    ],
+    "count": 3548
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 12,
+    "scale": 0.521,
+    "bounds": [
+      59,
+      83,
+      146,
+      170
+    ],
+    "count": 4652
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 13,
+    "scale": 0.521,
+    "bounds": [
+      60,
+      83,
+      146,
+      170
+    ],
+    "count": 4574
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 14,
+    "scale": 0.521,
+    "bounds": [
+      60,
+      83,
+      146,
+      170
+    ],
+    "count": 4576
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 15,
+    "scale": 0.521,
+    "bounds": [
+      60,
+      83,
+      146,
+      170
+    ],
+    "count": 4601
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 12,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      84,
+      147,
+      170
+    ],
+    "count": 4291
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 13,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      85,
+      144,
+      170
+    ],
+    "count": 4338
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 14,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      84,
+      148,
+      169
+    ],
+    "count": 4396
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 15,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      83,
+      144,
+      169
+    ],
+    "count": 4306
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 0,
+    "scale": 0.34,
+    "bounds": [
+      51,
+      84,
+      125,
+      171
+    ],
+    "count": 4011
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 1,
+    "scale": 0.34,
+    "bounds": [
+      49,
+      85,
+      131,
+      171
+    ],
+    "count": 4778
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 2,
+    "scale": 0.34,
+    "bounds": [
+      17,
+      69,
+      144,
+      171
+    ],
+    "count": 6762
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 3,
+    "scale": 0.34,
+    "bounds": [
+      9,
+      79,
+      144,
+      171
+    ],
+    "count": 6531
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 6,
+    "scale": 0.449,
+    "bounds": [
+      58,
+      87,
+      140,
+      171
+    ],
+    "count": 4562
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 7,
+    "scale": 0.449,
+    "bounds": [
+      41,
+      127,
+      151,
+      171
+    ],
+    "count": 3718
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 16,
+    "scale": 0.521,
+    "bounds": [
+      59,
+      76,
+      131,
+      170
+    ],
+    "count": 4445
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 17,
+    "scale": 0.521,
+    "bounds": [
+      59,
+      76,
+      130,
+      170
+    ],
+    "count": 4402
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 18,
+    "scale": 0.521,
+    "bounds": [
+      59,
+      76,
+      131,
+      170
+    ],
+    "count": 4432
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 19,
+    "scale": 0.521,
+    "bounds": [
+      60,
+      76,
+      132,
+      170
+    ],
+    "count": 4427
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 16,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      77,
+      129,
+      169
+    ],
+    "count": 3944
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 17,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      78,
+      130,
+      171
+    ],
+    "count": 4046
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 18,
+    "scale": 0.536,
+    "bounds": [
+      62,
+      77,
+      130,
+      170
+    ],
+    "count": 3937
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 19,
+    "scale": 0.536,
+    "bounds": [
+      63,
+      76,
+      129,
+      168
+    ],
+    "count": 3895
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/drake-attack.png",
+    "sourcePose": 16,
+    "scale": 0.7,
+    "bounds": [
+      57,
+      81,
+      133,
+      171
+    ],
+    "count": 4598
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/drake-attack.png",
+    "sourcePose": 17,
+    "scale": 0.7,
+    "bounds": [
+      33,
+      76,
+      150,
+      171
+    ],
+    "count": 6511
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/drake-attack.png",
+    "sourcePose": 18,
+    "scale": 0.7,
+    "bounds": [
+      19,
+      63,
+      172,
+      171
+    ],
+    "count": 9046
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/drake-attack.png",
+    "sourcePose": 19,
+    "scale": 0.7,
+    "bounds": [
+      25,
+      76,
+      165,
+      171
+    ],
+    "count": 7600
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 8,
+    "scale": 0.449,
+    "bounds": [
+      59,
+      81,
+      131,
+      171
+    ],
+    "count": 4351
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 9,
+    "scale": 0.449,
+    "bounds": [
+      49,
+      120,
+      142,
+      171
+    ],
+    "count": 3197
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 20,
+    "scale": 0.521,
+    "bounds": [
+      47,
+      83,
+      130,
+      170
+    ],
+    "count": 4497
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 21,
+    "scale": 0.521,
+    "bounds": [
+      47,
+      83,
+      130,
+      170
+    ],
+    "count": 4453
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 22,
+    "scale": 0.521,
+    "bounds": [
+      46,
+      83,
+      129,
+      170
+    ],
+    "count": 4490
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 23,
+    "scale": 0.521,
+    "bounds": [
+      47,
+      83,
+      130,
+      170
+    ],
+    "count": 4494
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 20,
+    "scale": 0.536,
+    "bounds": [
+      43,
+      84,
+      131,
+      169
+    ],
+    "count": 4287
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 21,
+    "scale": 0.536,
+    "bounds": [
+      42,
+      85,
+      130,
+      170
+    ],
+    "count": 4445
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 22,
+    "scale": 0.536,
+    "bounds": [
+      42,
+      84,
+      131,
+      168
+    ],
+    "count": 4392
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 23,
+    "scale": 0.536,
+    "bounds": [
+      43,
+      83,
+      131,
+      169
+    ],
+    "count": 4387
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 4,
+    "scale": 0.34,
+    "bounds": [
+      64,
+      83,
+      140,
+      171
+    ],
+    "count": 4120
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 5,
+    "scale": 0.34,
+    "bounds": [
+      62,
+      84,
+      146,
+      171
+    ],
+    "count": 4935
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 6,
+    "scale": 0.34,
+    "bounds": [
+      50,
+      69,
+      176,
+      171
+    ],
+    "count": 6867
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/drake-attack-rear.png",
+    "sourcePose": 7,
+    "scale": 0.34,
+    "bounds": [
+      52,
+      81,
+      184,
+      171
+    ],
+    "count": 6569
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 10,
+    "scale": 0.449,
+    "bounds": [
+      48,
+      81,
+      134,
+      171
+    ],
+    "count": 4852
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 11,
+    "scale": 0.449,
+    "bounds": [
+      48,
+      126,
+      155,
+      171
+    ],
+    "count": 3655
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 24,
+    "scale": 0.521,
+    "bounds": [
+      46,
+      90,
+      146,
+      170
+    ],
+    "count": 4546
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 25,
+    "scale": 0.521,
+    "bounds": [
+      45,
+      90,
+      144,
+      170
+    ],
+    "count": 4596
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 26,
+    "scale": 0.521,
+    "bounds": [
+      45,
+      90,
+      144,
+      170
+    ],
+    "count": 4580
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 27,
+    "scale": 0.521,
+    "bounds": [
+      46,
+      89,
+      146,
+      170
+    ],
+    "count": 4621
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 24,
+    "scale": 0.536,
+    "bounds": [
+      40,
+      92,
+      144,
+      174
+    ],
+    "count": 4565
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 25,
+    "scale": 0.536,
+    "bounds": [
+      41,
+      92,
+      145,
+      174
+    ],
+    "count": 4565
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 26,
+    "scale": 0.536,
+    "bounds": [
+      38,
+      91,
+      144,
+      173
+    ],
+    "count": 4556
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 27,
+    "scale": 0.536,
+    "bounds": [
+      41,
+      91,
+      144,
+      172
+    ],
+    "count": 4573
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/drake-attack.png",
+    "sourcePose": 24,
+    "scale": 0.7,
+    "bounds": [
+      40,
+      91,
+      162,
+      171
+    ],
+    "count": 5823
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/drake-attack.png",
+    "sourcePose": 25,
+    "scale": 0.7,
+    "bounds": [
+      42,
+      83,
+      164,
+      171
+    ],
+    "count": 6949
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/drake-attack.png",
+    "sourcePose": 26,
+    "scale": 0.7,
+    "bounds": [
+      30,
+      62,
+      172,
+      171
+    ],
+    "count": 9792
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/drake-attack.png",
+    "sourcePose": 27,
+    "scale": 0.7,
+    "bounds": [
+      37,
+      71,
+      172,
+      171
+    ],
+    "count": 8585
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 12,
+    "scale": 0.449,
+    "bounds": [
+      41,
+      89,
+      135,
+      171
+    ],
+    "count": 4593
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 13,
+    "scale": 0.449,
+    "bounds": [
+      42,
+      126,
+      147,
+      171
+    ],
+    "count": 3509
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 28,
+    "scale": 0.521,
+    "bounds": [
+      45,
+      83,
+      134,
+      170
+    ],
+    "count": 4823
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 29,
+    "scale": 0.521,
+    "bounds": [
+      45,
+      83,
+      133,
+      170
+    ],
+    "count": 4783
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 30,
+    "scale": 0.521,
+    "bounds": [
+      45,
+      83,
+      134,
+      170
+    ],
+    "count": 4805
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/drake-idle-breath.png",
+    "sourcePose": 31,
+    "scale": 0.521,
+    "bounds": [
+      45,
+      83,
+      133,
+      170
+    ],
+    "count": 4812
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/drake-walk.png",
+    "sourcePose": 28,
+    "scale": 0.536,
+    "bounds": [
+      58,
+      84,
+      133,
+      170
+    ],
+    "count": 3935
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/drake-walk.png",
+    "sourcePose": 29,
+    "scale": 0.536,
+    "bounds": [
+      56,
+      85,
+      132,
+      171
+    ],
+    "count": 4086
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/drake-walk.png",
+    "sourcePose": 30,
+    "scale": 0.536,
+    "bounds": [
+      55,
+      84,
+      132,
+      170
+    ],
+    "count": 4072
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/drake-walk.png",
+    "sourcePose": 31,
+    "scale": 0.536,
+    "bounds": [
+      54,
+      83,
+      132,
+      169
+    ],
+    "count": 4070
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/drake-attack.png",
+    "sourcePose": 28,
+    "scale": 0.7,
+    "bounds": [
+      49,
+      85,
+      133,
+      171
+    ],
+    "count": 5028
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/drake-attack.png",
+    "sourcePose": 29,
+    "scale": 0.7,
+    "bounds": [
+      37,
+      77,
+      146,
+      171
+    ],
+    "count": 6844
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/drake-attack.png",
+    "sourcePose": 30,
+    "scale": 0.7,
+    "bounds": [
+      22,
+      61,
+      160,
+      171
+    ],
+    "count": 9053
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/drake-attack.png",
+    "sourcePose": 31,
+    "scale": 0.7,
+    "bounds": [
+      31,
+      73,
+      163,
+      171
+    ],
+    "count": 7647
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 14,
+    "scale": 0.449,
+    "bounds": [
+      43,
+      85,
+      131,
+      171
+    ],
+    "count": 4903
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/drake-damage.png",
+    "sourcePose": 15,
+    "scale": 0.449,
+    "bounds": [
+      43,
+      125,
+      145,
+      171
+    ],
+    "count": 3341
+  }
+]

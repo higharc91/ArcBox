@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      79,
+      253,
+      254
+    ],
+    "count": 23296
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 1,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      65,
+      84,
+      255,
+      254
+    ],
+    "count": 23074
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 2,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      77,
+      253,
+      254
+    ],
+    "count": 22944
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      64,
+      78,
+      255,
+      254
+    ],
+    "count": 23379
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 0,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      66,
+      81,
+      252,
+      256
+    ],
+    "count": 22403
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 1,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      69,
+      82,
+      249,
+      253
+    ],
+    "count": 21950
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 2,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      67,
+      81,
+      250,
+      257
+    ],
+    "count": 21934
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 3,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      67,
+      79,
+      244,
+      251
+    ],
+    "count": 21801
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      81,
+      253,
+      256
+    ],
+    "count": 23296
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 0,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      60,
+      81,
+      271,
+      256
+    ],
+    "count": 25891
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 1,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      67,
+      81,
+      270,
+      256
+    ],
+    "count": 25453
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      64,
+      80,
+      255,
+      256
+    ],
+    "count": 23379
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 0,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      69,
+      88,
+      256,
+      256
+    ],
+    "count": 23444
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 1,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      57,
+      130,
+      262,
+      256
+    ],
+    "count": 19625
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      81,
+      253,
+      256
+    ],
+    "count": 23296
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 0,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      62,
+      63,
+      261,
+      256
+    ],
+    "count": 23723
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 1,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      67,
+      113,
+      254,
+      256
+    ],
+    "count": 20114
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      64,
+      80,
+      255,
+      256
+    ],
+    "count": 23379
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 0,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      81,
+      253,
+      256
+    ],
+    "count": 23296
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 2,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      75,
+      81,
+      241,
+      256
+    ],
+    "count": 21744
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 3,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      78,
+      81,
+      235,
+      256
+    ],
+    "count": 19724
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 3,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      64,
+      80,
+      255,
+      256
+    ],
+    "count": 23379
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      68,
+      242,
+      254
+    ],
+    "count": 23704
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 5,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      74,
+      243,
+      254
+    ],
+    "count": 23434
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 6,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      68,
+      241,
+      254
+    ],
+    "count": 23477
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      68,
+      68,
+      242,
+      254
+    ],
+    "count": 23633
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 4,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      72,
+      70,
+      234,
+      249
+    ],
+    "count": 20650
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 5,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      71,
+      71,
+      237,
+      246
+    ],
+    "count": 21160
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 6,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      69,
+      71,
+      232,
+      248
+    ],
+    "count": 20708
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 7,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      71,
+      70,
+      236,
+      248
+    ],
+    "count": 20894
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      70,
+      242,
+      256
+    ],
+    "count": 23704
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 2,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      52,
+      82,
+      260,
+      256
+    ],
+    "count": 24853
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 3,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      21,
+      85,
+      260,
+      256
+    ],
+    "count": 25664
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      68,
+      70,
+      242,
+      256
+    ],
+    "count": 23633
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 2,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      64,
+      86,
+      244,
+      256
+    ],
+    "count": 22634
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 3,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      59,
+      131,
+      260,
+      256
+    ],
+    "count": 18779
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      70,
+      242,
+      256
+    ],
+    "count": 23704
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 4,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      60,
+      55,
+      238,
+      256
+    ],
+    "count": 23480
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 5,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      65,
+      111,
+      256,
+      256
+    ],
+    "count": 20389
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      68,
+      70,
+      242,
+      256
+    ],
+    "count": 23633
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 4,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      70,
+      242,
+      256
+    ],
+    "count": 23704
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 6,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      69,
+      83,
+      234,
+      256
+    ],
+    "count": 21189
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 7,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      79,
+      82,
+      230,
+      256
+    ],
+    "count": 19415
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 7,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      68,
+      70,
+      242,
+      256
+    ],
+    "count": 23633
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      68,
+      209,
+      254
+    ],
+    "count": 16311
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 9,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      82,
+      73,
+      210,
+      254
+    ],
+    "count": 16337
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 10,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      69,
+      208,
+      254
+    ],
+    "count": 16401
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      69,
+      209,
+      254
+    ],
+    "count": 16436
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 8,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      85,
+      71,
+      206,
+      250
+    ],
+    "count": 15521
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 9,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      84,
+      71,
+      208,
+      248
+    ],
+    "count": 14906
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 10,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      85,
+      71,
+      207,
+      251
+    ],
+    "count": 15477
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 11,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      85,
+      69,
+      207,
+      249
+    ],
+    "count": 15398
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      70,
+      209,
+      256
+    ],
+    "count": 16311
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 4,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      63,
+      85,
+      218,
+      256
+    ],
+    "count": 19890
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 5,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      6,
+      85,
+      218,
+      256
+    ],
+    "count": 21903
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      81,
+      71,
+      207,
+      256
+    ],
+    "count": 16436
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 4,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      99,
+      71,
+      225,
+      256
+    ],
+    "count": 16195
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 5,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      73,
+      140,
+      246,
+      256
+    ],
+    "count": 15859
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      70,
+      209,
+      256
+    ],
+    "count": 16311
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 8,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      16,
+      48,
+      190,
+      256
+    ],
+    "count": 21487
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 9,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      66,
+      119,
+      258,
+      256
+    ],
+    "count": 18120
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      81,
+      71,
+      207,
+      256
+    ],
+    "count": 16436
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 8,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      70,
+      209,
+      256
+    ],
+    "count": 16311
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 10,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      72,
+      80,
+      221,
+      256
+    ],
+    "count": 18574
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 11,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      70,
+      79,
+      222,
+      256
+    ],
+    "count": 18828
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 11,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      81,
+      71,
+      207,
+      256
+    ],
+    "count": 16436
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      85,
+      73,
+      232,
+      254
+    ],
+    "count": 20899
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 13,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      86,
+      77,
+      233,
+      254
+    ],
+    "count": 20446
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 14,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      78,
+      72,
+      232,
+      254
+    ],
+    "count": 21405
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      73,
+      233,
+      254
+    ],
+    "count": 21154
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 12,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      76,
+      75,
+      231,
+      251
+    ],
+    "count": 19992
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 13,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      88,
+      75,
+      235,
+      247
+    ],
+    "count": 18448
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 14,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      77,
+      75,
+      233,
+      250
+    ],
+    "count": 20267
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 15,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      88,
+      73,
+      231,
+      247
+    ],
+    "count": 19294
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      85,
+      75,
+      232,
+      256
+    ],
+    "count": 20899
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 6,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      65,
+      82,
+      255,
+      256
+    ],
+    "count": 23450
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 7,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      20,
+      84,
+      258,
+      256
+    ],
+    "count": 24270
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      75,
+      233,
+      256
+    ],
+    "count": 21154
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 6,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      100,
+      74,
+      264,
+      256
+    ],
+    "count": 21958
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 7,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      61,
+      144,
+      259,
+      256
+    ],
+    "count": 16423
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      85,
+      75,
+      232,
+      256
+    ],
+    "count": 20899
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 12,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      51,
+      52,
+      225,
+      256
+    ],
+    "count": 21065
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 13,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      70,
+      127,
+      271,
+      256
+    ],
+    "count": 17841
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      75,
+      233,
+      256
+    ],
+    "count": 21154
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 12,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      85,
+      75,
+      232,
+      256
+    ],
+    "count": 20899
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 14,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      75,
+      83,
+      228,
+      256
+    ],
+    "count": 17515
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 15,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      63,
+      84,
+      221,
+      256
+    ],
+    "count": 18135
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 15,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      83,
+      75,
+      233,
+      256
+    ],
+    "count": 21154
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      62,
+      76,
+      253,
+      254
+    ],
+    "count": 23358
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 17,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      62,
+      82,
+      254,
+      254
+    ],
+    "count": 23052
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 18,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      74,
+      252,
+      254
+    ],
+    "count": 23243
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      76,
+      253,
+      254
+    ],
+    "count": 23267
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 16,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      65,
+      78,
+      246,
+      254
+    ],
+    "count": 22013
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 17,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      64,
+      80,
+      249,
+      250
+    ],
+    "count": 21687
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 18,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      66,
+      78,
+      249,
+      255
+    ],
+    "count": 21853
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 19,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      67,
+      77,
+      248,
+      253
+    ],
+    "count": 22058
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      62,
+      78,
+      253,
+      256
+    ],
+    "count": 23358
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 8,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      53,
+      86,
+      262,
+      256
+    ],
+    "count": 23847
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 9,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      51,
+      86,
+      284,
+      256
+    ],
+    "count": 24497
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      78,
+      253,
+      256
+    ],
+    "count": 23267
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 8,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      58,
+      76,
+      261,
+      256
+    ],
+    "count": 26044
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 9,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      56,
+      126,
+      263,
+      256
+    ],
+    "count": 20375
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      62,
+      78,
+      253,
+      256
+    ],
+    "count": 23358
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 16,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      51,
+      56,
+      244,
+      256
+    ],
+    "count": 23802
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 17,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      61,
+      125,
+      256,
+      256
+    ],
+    "count": 19067
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      78,
+      253,
+      256
+    ],
+    "count": 23267
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 16,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      62,
+      78,
+      253,
+      256
+    ],
+    "count": 23358
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 18,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      65,
+      78,
+      234,
+      256
+    ],
+    "count": 21894
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 19,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      81,
+      79,
+      233,
+      256
+    ],
+    "count": 19578
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 19,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      63,
+      78,
+      253,
+      256
+    ],
+    "count": 23267
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      78,
+      70,
+      238,
+      254
+    ],
+    "count": 22672
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 21,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      76,
+      74,
+      235,
+      254
+    ],
+    "count": 22389
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 22,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      76,
+      69,
+      235,
+      254
+    ],
+    "count": 22633
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      77,
+      70,
+      237,
+      254
+    ],
+    "count": 22644
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 20,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      78,
+      71,
+      232,
+      248
+    ],
+    "count": 20492
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 21,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      79,
+      73,
+      232,
+      249
+    ],
+    "count": 20168
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 22,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      78,
+      72,
+      233,
+      246
+    ],
+    "count": 20014
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 23,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      77,
+      70,
+      235,
+      246
+    ],
+    "count": 20544
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      78,
+      72,
+      238,
+      256
+    ],
+    "count": 22672
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 10,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      73,
+      80,
+      256,
+      256
+    ],
+    "count": 22195
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 11,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      71,
+      80,
+      307,
+      256
+    ],
+    "count": 24272
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      77,
+      72,
+      237,
+      256
+    ],
+    "count": 22644
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 10,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      70,
+      71,
+      248,
+      256
+    ],
+    "count": 23797
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 11,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      58,
+      134,
+      262,
+      256
+    ],
+    "count": 18245
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      78,
+      72,
+      238,
+      256
+    ],
+    "count": 22672
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 20,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      71,
+      56,
+      255,
+      256
+    ],
+    "count": 22844
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 21,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      62,
+      122,
+      267,
+      256
+    ],
+    "count": 19242
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      77,
+      72,
+      237,
+      256
+    ],
+    "count": 22644
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 20,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      78,
+      72,
+      238,
+      256
+    ],
+    "count": 22672
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 22,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      83,
+      80,
+      234,
+      256
+    ],
+    "count": 19637
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 23,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      91,
+      81,
+      237,
+      256
+    ],
+    "count": 18373
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 23,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      77,
+      72,
+      237,
+      256
+    ],
+    "count": 22644
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      66,
+      237,
+      254
+    ],
+    "count": 15578
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 25,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      114,
+      73,
+      238,
+      254
+    ],
+    "count": 15556
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 26,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      112,
+      63,
+      237,
+      254
+    ],
+    "count": 15600
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      112,
+      64,
+      237,
+      254
+    ],
+    "count": 15677
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 24,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      112,
+      67,
+      234,
+      247
+    ],
+    "count": 14900
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 25,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      113,
+      68,
+      235,
+      246
+    ],
+    "count": 14657
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 26,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      114,
+      68,
+      235,
+      249
+    ],
+    "count": 14268
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 27,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      111,
+      66,
+      235,
+      246
+    ],
+    "count": 14772
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      68,
+      237,
+      256
+    ],
+    "count": 15578
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 12,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      98,
+      79,
+      228,
+      256
+    ],
+    "count": 18076
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 13,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      113,
+      75,
+      302,
+      256
+    ],
+    "count": 20976
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      66,
+      238,
+      256
+    ],
+    "count": 15677
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 12,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      103,
+      71,
+      229,
+      256
+    ],
+    "count": 15651
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 13,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      75,
+      142,
+      245,
+      256
+    ],
+    "count": 14954
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      68,
+      237,
+      256
+    ],
+    "count": 15578
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 24,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      103,
+      45,
+      255,
+      256
+    ],
+    "count": 20935
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 25,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      67,
+      120,
+      252,
+      256
+    ],
+    "count": 18472
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      66,
+      238,
+      256
+    ],
+    "count": 15677
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 24,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      68,
+      237,
+      256
+    ],
+    "count": 15578
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 26,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      97,
+      78,
+      236,
+      256
+    ],
+    "count": 18161
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 27,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      98,
+      82,
+      232,
+      256
+    ],
+    "count": 17276
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 27,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      113,
+      66,
+      238,
+      256
+    ],
+    "count": 15677
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      69,
+      73,
+      252,
+      254
+    ],
+    "count": 23905
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 29,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      68,
+      79,
+      252,
+      254
+    ],
+    "count": 23686
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 30,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      68,
+      69,
+      252,
+      254
+    ],
+    "count": 24199
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      73,
+      252,
+      254
+    ],
+    "count": 23990
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 28,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      68,
+      75,
+      247,
+      245
+    ],
+    "count": 21741
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 29,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      69,
+      76,
+      248,
+      242
+    ],
+    "count": 21703
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 30,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      67,
+      76,
+      247,
+      248
+    ],
+    "count": 21765
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/earth_elemental-walk.png",
+    "sourcePose": 31,
+    "scale": 0.9361702127659575,
+    "bounds": [
+      68,
+      74,
+      247,
+      244
+    ],
+    "count": 22171
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      69,
+      75,
+      252,
+      256
+    ],
+    "count": 23905
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 14,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      70,
+      88,
+      277,
+      256
+    ],
+    "count": 24400
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/earth_elemental-attack.png",
+    "sourcePose": 15,
+    "scale": 0.9166666666666666,
+    "bounds": [
+      91,
+      85,
+      280,
+      256
+    ],
+    "count": 23413
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      75,
+      252,
+      256
+    ],
+    "count": 23990
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 14,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      77,
+      73,
+      257,
+      256
+    ],
+    "count": 23929
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-damage.png",
+    "sourcePose": 15,
+    "scale": 0.8484848484848485,
+    "bounds": [
+      59,
+      142,
+      260,
+      256
+    ],
+    "count": 17429
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      69,
+      75,
+      252,
+      256
+    ],
+    "count": 23905
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 28,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      80,
+      60,
+      270,
+      256
+    ],
+    "count": 23423
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 29,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      66,
+      120,
+      254,
+      256
+    ],
+    "count": 18445
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      75,
+      252,
+      256
+    ],
+    "count": 23990
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 28,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      69,
+      75,
+      252,
+      256
+    ],
+    "count": 23905
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 30,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      89,
+      87,
+      247,
+      256
+    ],
+    "count": 19499
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/earth_elemental-moves.png",
+    "sourcePose": 31,
+    "scale": 0.9943502824858758,
+    "bounds": [
+      91,
+      87,
+      244,
+      256
+    ],
+    "count": 18463
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/earth_elemental-idle.png",
+    "sourcePose": 31,
+    "scale": 0.9887640449438202,
+    "bounds": [
+      67,
+      75,
+      252,
+      256
+    ],
+    "count": 23990
+  }
+]

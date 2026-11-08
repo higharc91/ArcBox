@@ -1,0 +1,61 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "aspectRatio": "3:2",
+    "resolution": "1K",
+    "numOutputs": 1
+  },
+  "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for ONE consistent GROVE SAPLING, existing generic summoned PLANT companion with natural reach VINE LASH (bludgeoning, range2), not a boss/gianttreant. Clean neutral parchment/no labels/text/scenery. Show only SIX clear whole figures: frontthreequarter, LEFTprofile, rear threequarter, FULLBACK, PHYSICAL VINE-LASH extended right arm, and slumped down pose. Small neutral1.75m human scale inset. Smallsturdy woody seedling approx0.95m fromrootfeet toleafcrown. Short knotted warmOAK/UMBERbarktorso continuousbodytrunk, readablelargeflatbarkplateplanes/finegrain darkoutline, coololive mossincreases. Small faceONLYFRONT uppertrunk: TWOsmall recessed paleAMBER/greenish eyeswithdarkupperlids, simpleknotholemouth, NO neonlargeglowingeyes/humanoidwhiteeyeballs/grin. Topheadhas TWOshortforkedwoodytwigbranches and a COMPACT springGREENleafcrown madeof5-7 solidconnectedleafCLUSTERS attachedtotwigs (notfloatingindividualleaves/particlecloud), no blossoms/fruit/antlers/horns. TWOgnarledROOTLEGS organicallyjoinedtrunk base, broad three-toed rootFEET; TWObranchARMS organicallyjoinedupperSIDESoftrunk with elbowknots and smallrootlikehands. ONEthickdarkolivegreenVINE spirals alongtheRIGHTbranchARM fromupperarmthroughwrist and CONTINUES into theWHIPtip, visually continuouswoodyvine/rootconnection, neverdetachedwhipheldaspole/weapon. IdlewhipcoiledagainstRIGHTforearm, noflailingappendages; leftbranchhandshorteropen. LashdrawsRIGHTarmback then swings/extendsitsCONTINUOUSvineFORWARD towardtarget, vineuncoilsuptoabout2-3bodylengths butSTILLFIRMLYROOTEDtorightwrist, smallconnectedtipwithNOprojectile/looseparticles. Physicalplantlash, notmagicalbeam/fire/sword/arrow. Backplainwoodgrain/knots/moss/twigroots, NOfrontface/eyes/mouthontheBACK; rightvinearmonIMAGELEFTwhenfrontfacecamera, IMAGERIGHTwhenbackfacecamera, samephysicalarmallviews. Smallslowponderouswalkingsteps atrootankles, stablecrown/twigroots/head, compactleafclustersrigidwithbranches restrainedsubtlesway. Friendlystalwartgrovecompanion, notcuteGrootclone/evilskull/humanoidwearingtreecostume. NOclothes/belt/armor/backpack/carryweapon/hangingornaments. Hurttrunkbendsandrootlegsbrace; downwholeplantrestsrolledsideways roots/arms/crown/vinejoined, nobrokenoffleaves/branches/gore. Finepixel-friendlymaterialramps 2-3shades, warmupperleftkey andcoolshadows, matchesrefreshedroster FFT-inspireddetail. No gloss3D/anime, no groundshadow inpixeltranslation. Artguidancenotnewnamedlore.",
+  "job": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_23Tdw7F7XW8eC8eV51FzFJaq",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_23Tdw7F7XW8eC8eV51FzFJaq' (one call waits on up to 32 jobs)."
+  },
+  "results": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_23Tdw7F7XW8eC8eV51FzFJaq",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T14:28:53.916Z",
+        "updatedAt": "2026-11-07T14:30:10.654Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_ULmzQNRNjHyraiRXRgcA4t7d"
+        ],
+        "cuCost": 8
+      }
+    ]
+  },
+  "failedInitialAttempt": {
+    "job": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_QoNwi7TC89bG31A23ctS53MS",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_QoNwi7TC89bG31A23ctS53MS' (one call waits on up to 32 jobs)."
+    },
+    "results": {
+      "status": "completed",
+      "jobs": [
+        {
+          "jobId": "job_QoNwi7TC89bG31A23ctS53MS",
+          "jobType": "custom",
+          "status": "failure",
+          "progress": 1,
+          "createdAt": "2026-11-07T14:26:31.076Z",
+          "updatedAt": "2026-11-07T14:28:06.936Z",
+          "modelId": "model_google-gemini-nano-banana-2-1",
+          "assetIds": [],
+          "cuCost": 12,
+          "error": "An internal error occurred. Please contact support and provide this id:  error_CGFwrz5MRFVgiLMJ1QJBPhrF",
+          "hint": "The generation stopped before completion because the output token limit was reached. Try again with a different aspect ratio or resolution, or retry the same request."
+        }
+      ]
+    }
+  }
+}

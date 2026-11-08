@@ -1,0 +1,18 @@
+{
+  "golem_basalt-idle": "a07c9e08-b4e0-4922-afb2-0f616438a680",
+  "golem_crystal-idle": "7653d3b2-a3fb-46f6-a0ee-c4b2ac8f5e07",
+  "golem_temple-idle": "0d489e5f-ee34-4895-a634-3611ed1acf99",
+  "golem_basalt-walk": "b6e1a45d-f943-4e4b-ad26-62fc26af3e12",
+  "golem_crystal-walk": "a86a8941-ea26-4218-829b-2f697dd59c81",
+  "golem_temple-walk": "4fddffef-5693-4fad-a183-a8cb0c878f1c",
+  "golem_basalt-attack": "c92eff17-1c02-4a5a-9f41-7b3268318b13",
+  "golem_crystal-attack": "15358809-954c-4ea6-8f82-7b15ed9a8c30",
+  "golem_temple-attack": "a3e0bd26-b8b2-4be8-b25f-e7e90cdb620c",
+  "golem_basalt-moves": "9455a061-e831-4caa-99e2-2a0249a19275",
+  "golem_crystal-moves": "9edf2a19-0b02-4a52-bc3f-c3b1d17f9b74",
+  "golem_temple-moves": "d9f7102f-f42c-46fe-b563-d9e90f01e915",
+  "golem_basalt-damage": "d8a2a72b-23bc-4fd9-a2e9-929bd1810d25",
+  "golem_crystal-damage": "68ae1d7b-93c6-4071-aba1-de49aa0ce765",
+  "golem_temple-damage": "df77490a-c2f7-4a1a-a456-efca472632bc",
+  "golem_crystal-attack-rear": "701dd990-4c18-42ea-a6ad-8cff83992c09"
+}

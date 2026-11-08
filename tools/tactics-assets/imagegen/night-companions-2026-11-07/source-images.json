@@ -1,0 +1,15 @@
+{
+  "hound_black-idle": "fbe6a488-e56d-4755-9c5f-9a538571b05d",
+  "hound_grey-idle": "76b8dfc4-dc9e-486e-b9a2-7a2d2c50a2a4",
+  "imp_violet-idle": "dfe9fdf9-8fc7-4f54-a8af-186773d58d75",
+  "imp_violet-idle-draft": "9f719aaf-153d-4d1a-ae5b-dabca88379c2",
+  "hound_black-walk": "79621bc9-5afb-4b42-8cd2-a44524b73f53",
+  "hound_grey-walk": "f8aedefa-6642-4d34-ade4-66a86daba1ad",
+  "imp_violet-walk": "d2efdfd2-975a-42e6-8062-f43f4ff8e674",
+  "hound_black-attack": "ff1adb41-0a8b-4528-8e46-2a714e030c1c",
+  "hound_grey-attack": "e49f1262-91b7-4240-bdc7-e69cf05f108e",
+  "imp_violet-attack": "57651734-ffc2-4a14-96f8-262e8c6566fa",
+  "hound_black-damage": "799f9d36-b0f6-437c-aaeb-b91e2caeb0be",
+  "hound_grey-damage": "2df838cf-fe0c-4644-8544-95fea1f00b83",
+  "imp_violet-damage": "27012eaf-7fd2-4c47-9075-c3ecb2e2c191"
+}

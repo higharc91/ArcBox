@@ -1,0 +1,65 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 660
+    },
+    {
+      "title": "Development battle · giants beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Four specials through the normal Godot beat and effect path",
+      "width": 1920,
+      "height": 1160
+    },
+    {
+      "title": "Overworld · giant scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "fe0936fd",
+    "walk": "70aea63f",
+    "attack": "e82eda59",
+    "special": "d86e97cd",
+    "buff": "36226fdd",
+    "hurt": "cbedac51",
+    "down": "bfdb2288"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "troll",
+      "hashes": [
+        "7894dd62",
+        "734fb64f",
+        "40abb44d",
+        "7dec264f"
+      ]
+    },
+    {
+      "id": "golem",
+      "hashes": [
+        "98a9fbc3",
+        "d4ef5a60",
+        "6cd20357",
+        "bee402b5"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

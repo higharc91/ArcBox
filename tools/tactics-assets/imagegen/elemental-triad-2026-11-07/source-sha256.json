@@ -1,0 +1,17 @@
+{
+  "air_elemental-attack.png": "9ffcf48fa322ff0fe0a0b3bd0d0bca71115452d8a73a40c5b926db7a8deff3ae",
+  "air_elemental-damage.png": "1d8c9abe0394730a21c6699a28789cd617509116d2b9bc73624b3278743bc06e",
+  "air_elemental-idle.png": "d32a93a30b85ee5b62f08180572ce8807d6d5da68febc0926a1590dc6e5b5f6b",
+  "air_elemental-moves.png": "55369033c54fd6169177dd5ea02b310a4b4825dac4dfd3031be406068dcaf8f8",
+  "air_elemental-walk.png": "b3ecabcdd379b809697c1dabe7eb85694c6edafd4853f92dfc641c9a67d02ad6",
+  "earth_elemental-attack.png": "b776995fe6a60a2047088d200db40f60cb626c9f8d0ac1370b16a296cc1547ec",
+  "earth_elemental-damage.png": "765dab11543dc828a063bd46bba7eac40d877581ee44bcbd414aa83cbd66db19",
+  "earth_elemental-idle.png": "e7df2ba8eca04603f477d7f72bf7daa8f2343415df91496220a641649edf15a3",
+  "earth_elemental-moves.png": "e4081329ae12508eb8d919760262d9a93d4fdba3ceda6d657623819068272fdb",
+  "earth_elemental-walk.png": "e14ca9a7ffbf06af0367ccc2a534f1765ba865d3ab6d3335da5092e66ac4e299",
+  "fire_elemental-attack.png": "dfc976334b3463b302c69ddc2b73ca484945074d03a63a6e9bb0bae8a5ad96e2",
+  "fire_elemental-damage.png": "1c2c429904f3661903567b999755a572e2d4dfae24ece9b4f9a4d6deb912adf4",
+  "fire_elemental-idle.png": "845a7646738f7addf1fb6f7c868b8409c76cce896baa48db1340d3148f6110d4",
+  "fire_elemental-moves.png": "c2fc9e9da9bcc1fd4d60a2bf302d94270baaa3b8fb077f7a172597b1ed07efe2",
+  "fire_elemental-walk.png": "567180468fa5edc7301ec593a0505be361f3645395370d72eb2603da8f2041b5"
+}

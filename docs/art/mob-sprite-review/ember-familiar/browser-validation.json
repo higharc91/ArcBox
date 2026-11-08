@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1080,
+      "height": 540
+    },
+    {
+      "title": "Development battle · imp beside the party and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Hellfire bolt through the normal Godot beat and effect path",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · imp scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "673a149e",
+    "walk": "f951474e",
+    "attack": "6077a53a",
+    "hurt": "8ebde6e6",
+    "down": "d9a403ca"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "imp",
+      "hashes": [
+        "ffeca36e",
+        "b61538f6",
+        "674726b6",
+        "f951474e"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

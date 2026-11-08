@@ -1,0 +1,81 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "aspectRatio": "3:2",
+    "resolution": "1K",
+    "numOutputs": 1
+  },
+  "records": [
+    {
+      "id": "air_elemental",
+      "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for ONE consistent elemental creature. Neutral parchment, no labels/text/scenery, no grid. Show frontthreequarter, LEFTprofile, FULLBACK, physicalstrike, primaryspecial, secondaryspecial and low collapseddown pose plus a small neutral1.75m adult fighter scale inset. Strong pixel-friendly silhouette, fine darkoutline hierarchy, flatmaterialgroups/two-three shade ramps, warmupperleftlight/coolshadows. No glossy3D/anime/chibi/hugewhiteeyes, no clothes/belt/armor/carriedweapons/extra jewelry. Allbodyparts physicallyconnected toone main figure, no looseparticles or detachedanatomy; runtime alreadyhasexistingFX so no independent magicexplosions/projectiles incharacter sheet. Rearviewsplainbackofhead/torso notfrontfacepaintedontheback. Do notinvent newnamedlore or powers. AIR ELEMENTAL / GALE: approx2.3m crest-to-vortexbase beside1.75mhuman, tallLEAN swirlingwindspirit formedofcontinuous PALEBLUEGREY/CYANWHITEwindribbons aroundadarkerSLATEBLUEcore. Compact sweptBACKwindCREST, two narrowcoolWHITEeyesembeddedFRONThead withdarkupperlids; facelessback. TWO condensedwindARMS withbroadtaperedwindhands continuouslyjoinedupperTORSO. LowerbodyONEtaperedSPIRALLINGvortexcolumn withconnectedellipticalbasecurl, NOhumanlegs/feet/ghostcloth/hood/armor/solidrockbody. Thickcontinuousribbons joinhead,shoulders,arms,core,base; keepdensepixel-readableedges nottranslucentfaintsmoke. Idlecoils flowupwardinrestrainedloop withoutwholebodypuffinflation. Movementleans/glidesoncoiledbase, no humanoidwalking. NaturalGALESTRIKE onecondensedforearmsweepFORWARDtowardfaceheading. WHIRLWIND primary: arms spread, connectedhelicalwindcoilsliftandspread aroundcorebutremainonefigure, no detachedcircle. GALEBLAST secondary: drawsTWOwindhands/chestcoilstogetherthenTHRUSTSbothpalmsFORWARDtowardfaceheading toreleaseexistinggustFX, distinctfromradialwhirlwind. Downlowcollapsedconnectedwindknot withcrestandarmsfoldedintocore, notemptysheet/disconnectedribbons. No boltartpaintedonbody, no lightninghorns/floatingrocks.",
+      "job": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_unWZqNcpuSSGA1jA3ZiSwzSU",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_unWZqNcpuSSGA1jA3ZiSwzSU' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_unWZqNcpuSSGA1jA3ZiSwzSU",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T15:13:38.138Z",
+        "updatedAt": "2026-11-07T15:14:11.933Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_GrhiHCKiJNWCKgNvzRqfCHT8"
+        ],
+        "cuCost": 8
+      }
+    },
+    {
+      "id": "earth_elemental",
+      "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for ONE consistent elemental creature. Neutral parchment, no labels/text/scenery, no grid. Show frontthreequarter, LEFTprofile, FULLBACK, physicalstrike, primaryspecial, secondaryspecial and low collapseddown pose plus a small neutral1.75m adult fighter scale inset. Strong pixel-friendly silhouette, fine darkoutline hierarchy, flatmaterialgroups/two-three shade ramps, warmupperleftlight/coolshadows. No glossy3D/anime/chibi/hugewhiteeyes, no clothes/belt/armor/carriedweapons/extra jewelry. Allbodyparts physicallyconnected toone main figure, no looseparticles or detachedanatomy; runtime alreadyhasexistingFX so no independent magicexplosions/projectiles incharacter sheet. Rearviewsplainbackofhead/torso notfrontfacepaintedontheback. Do notinvent newnamedlore or powers. EARTH ELEMENTAL / STONE: approx2.8mtoheadbeside1.75mhuman, broadHUNCHEDroughnaturalCLIFF/BOULDERcreature, visiblydifferentfromsmoothrigidgranitearmoredGolem. WarmOCHRE/BROWNweatheredSANDSTONE anddarkUMBERseams, coarsebarklikefractureplanes/strata, smallfixedOLIVEmosspatches. SquatangularrockHEADsetbetweentwoHUGEcragshoulders, narrowwarmPALEAMBEReyesinDARKrecesses FRONTonly, ridgejaw/smallsternrockmouth. TWOhugestoneARMS/fists connectedbycontinuousrockELBOW/wristbridges, TWOshortheavyROCKLEGS withbroadblockyfeetconnectedatankles/hips; no floatingbouldersororbitingdebris. No carriedweapon/gemcrystals/neonrunes/chiseledarmor/humanclothes. Idleweightsettlewithoutbreathingstoneswelling. Walkslowalternatingheavyfeet withconnectedshoulder/hipjointarticulation. NaturalSTONEFIST oneforearmPUNCHforwardtowardfaceheading. EARTH TREMOR primary:bothconnectedfistsrise then SLAMgroundatfrontofbody, narrowarms/fistsstillrootedtoshoulders andfeetremainfloor, visiblecontactthenrecovery, no detachedshockwaveart. STONE AEGIS secondary: forearmsCROSSprotectivelyoverchestwithfirmstance distinctfromslam andpunch, smallfixedmossonly. Downwholeheavybodyfalls/rests low sideways, fists/head/feetremainjoined, noexplodedrubble.",
+      "job": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_YF71bUx6F46snpYMbvFkARsw",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_YF71bUx6F46snpYMbvFkARsw' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_YF71bUx6F46snpYMbvFkARsw",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T15:13:36.385Z",
+        "updatedAt": "2026-11-07T15:14:13.666Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_M81knAFvR95Vfh8YJEsf6a9q"
+        ],
+        "cuCost": 8
+      }
+    },
+    {
+      "id": "fire_elemental",
+      "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for ONE consistent elemental creature. Neutral parchment, no labels/text/scenery, no grid. Show frontthreequarter, LEFTprofile, FULLBACK, physicalstrike, primaryspecial, secondaryspecial and low collapseddown pose plus a small neutral1.75m adult fighter scale inset. Strong pixel-friendly silhouette, fine darkoutline hierarchy, flatmaterialgroups/two-three shade ramps, warmupperleftlight/coolshadows. No glossy3D/anime/chibi/hugewhiteeyes, no clothes/belt/armor/carriedweapons/extra jewelry. Allbodyparts physicallyconnected toone main figure, no looseparticles or detachedanatomy; runtime alreadyhasexistingFX so no independent magicexplosions/projectiles incharacter sheet. Rearviewsplainbackofhead/torso notfrontfacepaintedontheback. Do notinvent newnamedlore or powers. FIRE ELEMENTAL / EMBER: approx2.5mflamecrest-to-basebeside1.75mhuman, leanuprightLIVINGFLAMEformedofcontinuousgoldenYELLOW/AMBERhotCORE withORANGEbodyplanesandDARKCRIMSONouterflameedge forcontrast. SweptBACKtaperedflameCREST and narrowWHITEHOTeyeswithdarkburntrecessFRONTonly; rearplainflowingflameback,noeyes. TWOFLAMEARMS/hands continuouslyrootedtoupperTORSO, lowerbodycontinuousTWISTEDFLAMECOLUMN/lowbraidedflarebase, NOhumanfeet/legs/robes/clothes/skeleton/moltenrockarmor/horns/trident. Densecrispflameclusters with2-3shades, notfaintsemitransparentnoise orgiantbloom. Idleflameedgesflowupward whilecore/headsizeholdsstable; movementglideswithleanandbaseflareflow notwalkinghuman. NaturalFLAMETOUCH oneconnectedflamehandTHRUSTtowardfaceheading. FLAMESURGE primary:drawsarminthenOPENSbotharms/radiatingconnectedflamefans atshoulders/torso; bodyflarewidensabout1.4x withoutinflatingheadorbodyheight. FLAMEBREATH secondary:bracebotharms/leanheadforward, mouthcoregatherswarmwhitehotglowthenOPENSMOUTHtowardfaceheading toreleaseexistingbreathFX, distinctfromradialsurge; onlyshortflamelipjoinedtomouth, no giantcone/projectilepaintedonsheet. Downlowconnectedfadingember/flameknot, headcrest/armsfoldedtogetherintobase, no floatingembers/smoke/debris.",
+      "job": {
+        "model_id": "model_google-gemini-nano-banana-2-1",
+        "job_id": "job_Jjq8D9PAQTyQEiPugevSD3Vs",
+        "status": "in-progress",
+        "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_Jjq8D9PAQTyQEiPugevSD3Vs' (one call waits on up to 32 jobs)."
+      },
+      "result": {
+        "jobId": "job_Jjq8D9PAQTyQEiPugevSD3Vs",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T15:13:34.942Z",
+        "updatedAt": "2026-11-07T15:14:13.004Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_gTzv1ixptk4MzveuDM1GVNVQ"
+        ],
+        "cuCost": 8
+      }
+    }
+  ]
+}

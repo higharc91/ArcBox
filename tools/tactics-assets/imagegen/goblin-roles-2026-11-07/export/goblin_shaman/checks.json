@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 0,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      47,
+      62,
+      107,
+      141
+    ],
+    "count": 2863
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 1,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      47,
+      62,
+      106,
+      141
+    ],
+    "count": 2871
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 2,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      47,
+      62,
+      106,
+      142
+    ],
+    "count": 2872
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 3,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      47,
+      62,
+      107,
+      141
+    ],
+    "count": 2841
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 0,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      45,
+      64,
+      106,
+      143
+    ],
+    "count": 2974
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 1,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      29,
+      64,
+      89,
+      143
+    ],
+    "count": 2985
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 2,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      45,
+      64,
+      104,
+      142
+    ],
+    "count": 2897
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 3,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      45,
+      62,
+      104,
+      140
+    ],
+    "count": 2950
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 0,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      42,
+      72,
+      107,
+      143
+    ],
+    "count": 2819
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 1,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      35,
+      71,
+      103,
+      142
+    ],
+    "count": 2678
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 2,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      33,
+      74,
+      103,
+      143
+    ],
+    "count": 2597
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 3,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      45,
+      76,
+      113,
+      143
+    ],
+    "count": 2475
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 0,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      49,
+      64,
+      113,
+      143
+    ],
+    "count": 3337
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 1,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      43,
+      77,
+      112,
+      142
+    ],
+    "count": 2028
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 0,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      47,
+      64,
+      106,
+      143
+    ],
+    "count": 3012
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 2,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      47,
+      64,
+      110,
+      143
+    ],
+    "count": 3090
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 3,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      47,
+      64,
+      106,
+      143
+    ],
+    "count": 3123
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 4,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      48,
+      64,
+      104,
+      141
+    ],
+    "count": 2704
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 5,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      58,
+      63,
+      114,
+      141
+    ],
+    "count": 2713
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 6,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      45,
+      62,
+      101,
+      141
+    ],
+    "count": 2696
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 7,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      48,
+      64,
+      104,
+      141
+    ],
+    "count": 2688
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 4,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      41,
+      63,
+      101,
+      142
+    ],
+    "count": 2790
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 5,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      43,
+      64,
+      99,
+      141
+    ],
+    "count": 2768
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 6,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      43,
+      63,
+      101,
+      143
+    ],
+    "count": 2680
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 7,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      43,
+      62,
+      100,
+      141
+    ],
+    "count": 2733
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 4,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      35,
+      71,
+      103,
+      143
+    ],
+    "count": 2760
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 5,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      39,
+      66,
+      101,
+      143
+    ],
+    "count": 2666
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 6,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      19,
+      75,
+      103,
+      143
+    ],
+    "count": 2693
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 7,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      43,
+      78,
+      117,
+      143
+    ],
+    "count": 2490
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 2,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      48,
+      64,
+      113,
+      143
+    ],
+    "count": 3287
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 3,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      46,
+      78,
+      114,
+      143
+    ],
+    "count": 2098
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 4,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      48,
+      64,
+      105,
+      142
+    ],
+    "count": 2948
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 6,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      47,
+      64,
+      111,
+      142
+    ],
+    "count": 3042
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 7,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      48,
+      64,
+      106,
+      142
+    ],
+    "count": 3065
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 8,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      64,
+      99,
+      141
+    ],
+    "count": 2281
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 9,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      55,
+      63,
+      100,
+      141
+    ],
+    "count": 2283
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 10,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      63,
+      99,
+      141
+    ],
+    "count": 2298
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 11,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      64,
+      99,
+      141
+    ],
+    "count": 2270
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 8,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      47,
+      66,
+      96,
+      143
+    ],
+    "count": 2492
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 9,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      55,
+      65,
+      104,
+      143
+    ],
+    "count": 2500
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 10,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      51,
+      65,
+      100,
+      142
+    ],
+    "count": 2451
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 11,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      51,
+      64,
+      100,
+      142
+    ],
+    "count": 2443
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 8,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      39,
+      68,
+      97,
+      142
+    ],
+    "count": 2457
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 9,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      41,
+      61,
+      97,
+      142
+    ],
+    "count": 2543
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 10,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      12,
+      73,
+      103,
+      142
+    ],
+    "count": 2593
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 11,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      38,
+      78,
+      114,
+      144
+    ],
+    "count": 2520
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 4,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      56,
+      66,
+      109,
+      143
+    ],
+    "count": 2397
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 5,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      42,
+      79,
+      112,
+      142
+    ],
+    "count": 2124
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 8,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      62,
+      102,
+      142
+    ],
+    "count": 2707
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 10,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      62,
+      112,
+      142
+    ],
+    "count": 2860
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 11,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      62,
+      103,
+      142
+    ],
+    "count": 2727
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 12,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      55,
+      64,
+      102,
+      141
+    ],
+    "count": 2429
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 13,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      44,
+      63,
+      91,
+      141
+    ],
+    "count": 2472
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 14,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      44,
+      63,
+      91,
+      141
+    ],
+    "count": 2486
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 15,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      44,
+      64,
+      91,
+      141
+    ],
+    "count": 2437
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 12,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      41,
+      63,
+      92,
+      140
+    ],
+    "count": 2649
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 13,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      42,
+      65,
+      91,
+      141
+    ],
+    "count": 2591
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 14,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      41,
+      64,
+      91,
+      141
+    ],
+    "count": 2531
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 15,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      41,
+      63,
+      92,
+      140
+    ],
+    "count": 2620
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 12,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      37,
+      70,
+      100,
+      142
+    ],
+    "count": 2655
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 13,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      35,
+      60,
+      101,
+      142
+    ],
+    "count": 2622
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 14,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      17,
+      73,
+      104,
+      142
+    ],
+    "count": 2556
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 15,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      32,
+      78,
+      101,
+      142
+    ],
+    "count": 2279
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 6,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      57,
+      67,
+      110,
+      143
+    ],
+    "count": 2593
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 7,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      45,
+      80,
+      115,
+      142
+    ],
+    "count": 2050
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/shaman-cast-clean.png",
+    "sourcePose": 0,
+    "scale": 0.20304568527918782,
+    "bounds": [
+      58,
+      63,
+      107,
+      142
+    ],
+    "count": 2538
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/shaman-cast-clean.png",
+    "sourcePose": 2,
+    "scale": 0.20304568527918782,
+    "bounds": [
+      50,
+      63,
+      106,
+      142
+    ],
+    "count": 2609
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/shaman-cast-clean.png",
+    "sourcePose": 3,
+    "scale": 0.20304568527918782,
+    "bounds": [
+      49,
+      63,
+      107,
+      142
+    ],
+    "count": 2582
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 16,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      64,
+      110,
+      142
+    ],
+    "count": 2652
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 17,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      53,
+      63,
+      108,
+      141
+    ],
+    "count": 2647
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 18,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      53,
+      64,
+      109,
+      142
+    ],
+    "count": 2632
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 19,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      53,
+      64,
+      109,
+      141
+    ],
+    "count": 2644
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 16,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      52,
+      64,
+      111,
+      142
+    ],
+    "count": 2789
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 17,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      54,
+      65,
+      109,
+      143
+    ],
+    "count": 2726
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 18,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      54,
+      64,
+      110,
+      142
+    ],
+    "count": 2739
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 19,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      53,
+      63,
+      109,
+      139
+    ],
+    "count": 2734
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 16,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      39,
+      68,
+      99,
+      142
+    ],
+    "count": 2610
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 17,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      41,
+      60,
+      101,
+      143
+    ],
+    "count": 2630
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 18,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      25,
+      73,
+      102,
+      143
+    ],
+    "count": 2512
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/shaman-attack.png",
+    "sourcePose": 19,
+    "scale": 0.4022346368715084,
+    "bounds": [
+      37,
+      75,
+      101,
+      142
+    ],
+    "count": 2373
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 8,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      45,
+      68,
+      110,
+      143
+    ],
+    "count": 3071
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 9,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      48,
+      80,
+      118,
+      143
+    ],
+    "count": 2040
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 16,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      63,
+      111,
+      142
+    ],
+    "count": 3022
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 18,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      40,
+      63,
+      111,
+      142
+    ],
+    "count": 3068
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 19,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      51,
+      63,
+      111,
+      142
+    ],
+    "count": 3068
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 20,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      55,
+      64,
+      110,
+      142
+    ],
+    "count": 2609
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 21,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      64,
+      109,
+      142
+    ],
+    "count": 2616
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 22,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      63,
+      109,
+      141
+    ],
+    "count": 2631
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 23,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      54,
+      64,
+      109,
+      142
+    ],
+    "count": 2615
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 20,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      54,
+      65,
+      111,
+      142
+    ],
+    "count": 2765
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 21,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      55,
+      65,
+      110,
+      143
+    ],
+    "count": 2719
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 22,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      54,
+      65,
+      111,
+      143
+    ],
+    "count": 2743
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 23,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      52,
+      63,
+      108,
+      141
+    ],
+    "count": 2720
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 0,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      45,
+      73,
+      114,
+      144
+    ],
+    "count": 2661
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 1,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      48,
+      59,
+      102,
+      142
+    ],
+    "count": 2615
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 2,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      56,
+      74,
+      147,
+      142
+    ],
+    "count": 2648
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 3,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      43,
+      75,
+      122,
+      144
+    ],
+    "count": 2655
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 10,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      46,
+      67,
+      112,
+      142
+    ],
+    "count": 3134
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 11,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      50,
+      82,
+      116,
+      144
+    ],
+    "count": 2017
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 20,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      56,
+      63,
+      111,
+      142
+    ],
+    "count": 2917
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 22,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      43,
+      63,
+      111,
+      142
+    ],
+    "count": 3058
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 23,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      54,
+      63,
+      111,
+      142
+    ],
+    "count": 2989
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 24,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      59,
+      64,
+      106,
+      141
+    ],
+    "count": 2209
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 25,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      59,
+      63,
+      106,
+      141
+    ],
+    "count": 2234
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 26,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      52,
+      63,
+      99,
+      141
+    ],
+    "count": 2234
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/shaman-idle.png",
+    "sourcePose": 27,
+    "scale": 0.39800995024875624,
+    "bounds": [
+      59,
+      64,
+      106,
+      141
+    ],
+    "count": 2213
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 24,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      58,
+      65,
+      107,
+      142
+    ],
+    "count": 2445
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 25,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      59,
+      66,
+      106,
+      144
+    ],
+    "count": 2398
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 26,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      59,
+      65,
+      107,
+      142
+    ],
+    "count": 2368
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/shaman-walk.png",
+    "sourcePose": 27,
+    "scale": 0.3864734299516908,
+    "bounds": [
+      59,
+      64,
+      107,
+      142
+    ],
+    "count": 2402
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 4,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      44,
+      71,
+      115,
+      144
+    ],
+    "count": 2760
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 5,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      48,
+      58,
+      103,
+      143
+    ],
+    "count": 2723
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 6,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      56,
+      73,
+      151,
+      142
+    ],
+    "count": 2709
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 7,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      44,
+      73,
+      125,
+      143
+    ],
+    "count": 2741
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 12,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      57,
+      65,
+      108,
+      143
+    ],
+    "count": 2528
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 13,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      45,
+      79,
+      114,
+      143
+    ],
+    "count": 2017
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 24,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      62,
+      109,
+      143
+    ],
+    "count": 2736
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 26,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      61,
+      115,
+      142
+    ],
+    "count": 2890
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/shaman-cast.png",
+    "sourcePose": 27,
+    "scale": 0.4020100502512563,
+    "bounds": [
+      52,
+      62,
+      109,
+      142
+    ],
+    "count": 2700
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 0,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      48,
+      62,
+      105,
+      141
+    ],
+    "count": 3032
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 1,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      43,
+      62,
+      100,
+      141
+    ],
+    "count": 3008
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 2,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      48,
+      62,
+      105,
+      141
+    ],
+    "count": 2994
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 3,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      43,
+      63,
+      101,
+      142
+    ],
+    "count": 3012
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 4,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      48,
+      63,
+      105,
+      143
+    ],
+    "count": 2948
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 5,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      43,
+      64,
+      100,
+      143
+    ],
+    "count": 2773
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 6,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      43,
+      63,
+      100,
+      143
+    ],
+    "count": 2873
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/shaman-continuity.png",
+    "sourcePose": 7,
+    "scale": 0.2185792349726776,
+    "bounds": [
+      48,
+      62,
+      105,
+      141
+    ],
+    "count": 2764
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 8,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      42,
+      68,
+      115,
+      144
+    ],
+    "count": 3008
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 9,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      46,
+      56,
+      103,
+      142
+    ],
+    "count": 2951
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 10,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      54,
+      69,
+      147,
+      142
+    ],
+    "count": 2952
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/shaman-aim.png",
+    "sourcePose": 11,
+    "scale": 0.2845849802371542,
+    "bounds": [
+      45,
+      69,
+      125,
+      142
+    ],
+    "count": 2960
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 14,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      52,
+      65,
+      116,
+      142
+    ],
+    "count": 3301
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/shaman-damage.png",
+    "sourcePose": 15,
+    "scale": 0.2962962962962963,
+    "bounds": [
+      44,
+      80,
+      116,
+      144
+    ],
+    "count": 2147
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/shaman-cast-clean.png",
+    "sourcePose": 4,
+    "scale": 0.20304568527918782,
+    "bounds": [
+      52,
+      64,
+      100,
+      142
+    ],
+    "count": 2578
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/shaman-cast-clean.png",
+    "sourcePose": 6,
+    "scale": 0.20304568527918782,
+    "bounds": [
+      52,
+      64,
+      109,
+      142
+    ],
+    "count": 2614
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/shaman-cast-clean.png",
+    "sourcePose": 7,
+    "scale": 0.20304568527918782,
+    "bounds": [
+      52,
+      64,
+      110,
+      142
+    ],
+    "count": 2655
+  }
+]

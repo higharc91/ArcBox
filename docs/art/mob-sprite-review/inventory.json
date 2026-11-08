@@ -1,0 +1,3970 @@
+{
+  "rules": [
+    {
+      "id": "giant_spider",
+      "name": "Giant Spider",
+      "key": "beasts.spider.black",
+      "group": "beasts-1"
+    },
+    {
+      "id": "kobold",
+      "name": "Kobold",
+      "key": "characters.kobold",
+      "group": "beasts-1"
+    },
+    {
+      "id": "kobold_slinger",
+      "name": "Kobold Slinger",
+      "key": "characters.kobold_slinger",
+      "group": "beasts-1"
+    },
+    {
+      "id": "boar",
+      "name": "Boar",
+      "key": "beasts.boar.brown",
+      "group": "beasts-1"
+    },
+    {
+      "id": "slime",
+      "name": "Slime",
+      "key": "beasts.slime.green",
+      "group": "beasts-1"
+    },
+    {
+      "id": "giant_bat",
+      "name": "Giant Bat",
+      "key": "beasts.bat.dusk",
+      "group": "beasts-1"
+    },
+    {
+      "id": "drake",
+      "name": "Drake",
+      "key": "beasts.drake.red",
+      "group": "beasts-1"
+    },
+    {
+      "id": "kobold_foreman",
+      "name": "Grisk",
+      "key": "monsters.kobold_foreman",
+      "group": "beasts-1"
+    },
+    {
+      "id": "mimic",
+      "name": "Mimic",
+      "key": "bosses.mimic.oak",
+      "group": "bosses"
+    },
+    {
+      "id": "troll",
+      "name": "Troll",
+      "key": "bosses.troll.troll",
+      "group": "bosses"
+    },
+    {
+      "id": "golem",
+      "name": "Stone Golem",
+      "key": "bosses.golem.granite",
+      "group": "bosses"
+    },
+    {
+      "id": "fire_elemental",
+      "name": "Fire Elemental",
+      "key": "bosses.fire_elemental.ember",
+      "group": "bosses"
+    },
+    {
+      "id": "water_elemental",
+      "name": "Water Elemental",
+      "key": "bosses.water_elemental.sea",
+      "group": "bosses"
+    },
+    {
+      "id": "earth_elemental",
+      "name": "Earth Elemental",
+      "key": "bosses.earth_elemental.stone",
+      "group": "bosses"
+    },
+    {
+      "id": "air_elemental",
+      "name": "Air Elemental",
+      "key": "bosses.air_elemental.gale",
+      "group": "bosses"
+    },
+    {
+      "id": "dragon",
+      "name": "Red Dragon",
+      "key": "bosses.dragon.red",
+      "group": "bosses"
+    },
+    {
+      "id": "ashmaw",
+      "name": "Ashmaw",
+      "key": "monsters.ashmaw",
+      "group": "bosses"
+    },
+    {
+      "id": "ashmaw_party",
+      "name": "Ashmaw",
+      "key": "monsters.ashmaw",
+      "group": "bosses"
+    },
+    {
+      "id": "hound",
+      "name": "Hunting Hound",
+      "key": "bosses.hound.tan",
+      "group": "companions"
+    },
+    {
+      "id": "sapling",
+      "name": "Grove Sapling",
+      "key": "bosses.sapling.spring",
+      "group": "companions"
+    },
+    {
+      "id": "imp",
+      "name": "Bound Imp",
+      "key": "bosses.imp.crimson",
+      "group": "companions"
+    },
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "key": "characters.goblin_cutthroat",
+      "group": "goblinoids"
+    },
+    {
+      "id": "goblin_archer",
+      "name": "Goblin Archer",
+      "key": "characters.goblin_archer",
+      "group": "goblinoids"
+    },
+    {
+      "id": "goblin_boss",
+      "name": "Goblin Boss",
+      "key": "characters.goblin_spear",
+      "group": "goblinoids"
+    },
+    {
+      "id": "goblin_shaman",
+      "name": "Goblin Shaman",
+      "key": "characters.goblin_shaman",
+      "group": "goblinoids"
+    },
+    {
+      "id": "goblin_ford_shaman",
+      "name": "Skarrow Stormcaller",
+      "key": "characters.goblin_shaman",
+      "group": "goblinoids"
+    },
+    {
+      "id": "hobgoblin",
+      "name": "Hobgoblin",
+      "key": "characters.hobgoblin",
+      "group": "goblinoids"
+    },
+    {
+      "id": "orc_brute",
+      "name": "Orc Brute",
+      "key": "characters.orc_brute",
+      "group": "goblinoids"
+    },
+    {
+      "id": "bandit",
+      "name": "Bandit",
+      "key": "characters.bandit",
+      "group": "humanoids"
+    },
+    {
+      "id": "bandit_captain",
+      "name": "Bandit Captain",
+      "key": "characters.bandit_captain",
+      "group": "humanoids"
+    },
+    {
+      "id": "cultist",
+      "name": "Cultist",
+      "key": "characters.cultist",
+      "group": "humanoids"
+    },
+    {
+      "id": "cult_leader",
+      "name": "Ember Hierophant",
+      "key": "characters.cult_leader",
+      "group": "humanoids"
+    },
+    {
+      "id": "dark_elf",
+      "name": "Drow Blade",
+      "key": "characters.dark_elf",
+      "group": "humanoids"
+    },
+    {
+      "id": "black_knight",
+      "name": "Black Knight",
+      "key": "characters.black_knight",
+      "group": "humanoids"
+    },
+    {
+      "id": "rime_spider",
+      "name": "Giant Spider",
+      "key": "beasts.spider.black",
+      "group": "rime-nest"
+    },
+    {
+      "id": "kobold_roamer",
+      "name": "Kobold Scout",
+      "key": "characters.kobold",
+      "group": "roamers"
+    },
+    {
+      "id": "kobold_roamer_slinger",
+      "name": "Kobold Scout Slinger",
+      "key": "characters.kobold_slinger",
+      "group": "roamers"
+    },
+    {
+      "id": "bandit_roamer",
+      "name": "Roadside Tough",
+      "key": "characters.bandit",
+      "group": "roamers"
+    },
+    {
+      "id": "river_slime",
+      "name": "River Slime",
+      "key": "beasts.slime.green",
+      "group": "roamers"
+    },
+    {
+      "id": "hollow_bat",
+      "name": "Hollow Bat",
+      "key": "beasts.bat.dusk",
+      "group": "roamers"
+    },
+    {
+      "id": "wolf_roamer",
+      "name": "Wolf",
+      "key": "beasts.wolf.wildshape",
+      "group": "roamers"
+    },
+    {
+      "id": "boar_roamer",
+      "name": "Boar",
+      "key": "beasts.boar.brown",
+      "group": "roamers"
+    },
+    {
+      "id": "kobold_roamer_lone",
+      "name": "Kobold Scout",
+      "key": "characters.kobold",
+      "group": "roamers"
+    },
+    {
+      "id": "wolf_roamer_lone",
+      "name": "Wolf",
+      "key": "beasts.wolf.wildshape",
+      "group": "roamers"
+    },
+    {
+      "id": "boar_roamer_lone",
+      "name": "Boar",
+      "key": "beasts.boar.brown",
+      "group": "roamers"
+    },
+    {
+      "id": "boar_roamer_pair",
+      "name": "Boar",
+      "key": "beasts.boar.brown",
+      "group": "roamers"
+    },
+    {
+      "id": "bandit_roamer_lone",
+      "name": "Roadside Tough",
+      "key": "characters.bandit",
+      "group": "roamers"
+    },
+    {
+      "id": "hollow_bat_lone",
+      "name": "Hollow Bat",
+      "key": "beasts.bat.dusk",
+      "group": "roamers"
+    },
+    {
+      "id": "river_slime_lone",
+      "name": "River Slime",
+      "key": "beasts.slime.green",
+      "group": "roamers"
+    },
+    {
+      "id": "river_slime_pair",
+      "name": "River Slime",
+      "key": "beasts.slime.green",
+      "group": "roamers"
+    },
+    {
+      "id": "kobold_roamer_slinger_lone",
+      "name": "Kobold Scout Slinger",
+      "key": "characters.kobold_slinger",
+      "group": "roamers"
+    },
+    {
+      "id": "hollow_bat_swarm",
+      "name": "Hollow Bat",
+      "key": "beasts.bat.dusk",
+      "group": "roamers"
+    },
+    {
+      "id": "boar_roamer_sounder",
+      "name": "Boar",
+      "key": "beasts.boar.brown",
+      "group": "roamers"
+    },
+    {
+      "id": "kobold_roamer_patrol",
+      "name": "Kobold Scout",
+      "key": "characters.kobold",
+      "group": "roamers"
+    },
+    {
+      "id": "kobold_roamer_slinger_patrol",
+      "name": "Kobold Scout Slinger",
+      "key": "characters.kobold_slinger",
+      "group": "roamers"
+    },
+    {
+      "id": "bandit_roamer_gang",
+      "name": "Roadside Tough",
+      "key": "characters.bandit",
+      "group": "roamers"
+    },
+    {
+      "id": "kobold_roamer_diggers",
+      "name": "Kobold Scout",
+      "key": "characters.kobold",
+      "group": "roamers"
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "key": "characters.skeleton",
+      "group": "undead"
+    },
+    {
+      "id": "skeleton_archer",
+      "name": "Skeleton Archer",
+      "key": "characters.skeleton_archer",
+      "group": "undead"
+    },
+    {
+      "id": "zombie",
+      "name": "Zombie",
+      "key": "characters.zombie",
+      "group": "undead"
+    },
+    {
+      "id": "necromancer",
+      "name": "Necromancer",
+      "key": "characters.necromancer",
+      "group": "undead"
+    },
+    {
+      "id": "wraith",
+      "name": "Wraith",
+      "key": "bosses.wraith.wraith",
+      "group": "undead"
+    },
+    {
+      "id": "lich",
+      "name": "Lich",
+      "key": "characters.lich",
+      "group": "undead"
+    },
+    {
+      "id": "mother_skarrow",
+      "name": "Mother Skarrow",
+      "key": "characters.mother_skarrow",
+      "group": "villains"
+    },
+    {
+      "id": "vorga",
+      "name": "Vorga",
+      "key": "characters.goblin_spear",
+      "group": "villains"
+    },
+    {
+      "id": "ivo_rime",
+      "name": "Ivo Rime",
+      "key": "characters.necromancer",
+      "group": "villains"
+    },
+    {
+      "id": "halvard",
+      "name": "Ser Halvard",
+      "key": "characters.black_knight",
+      "group": "villains"
+    },
+    {
+      "id": "maren_sorrel",
+      "name": "Maren Sorrel",
+      "key": "characters.cult_leader",
+      "group": "villains"
+    },
+    {
+      "id": "wolf",
+      "name": "Wolf",
+      "key": "beasts.wolf.wildshape",
+      "group": "wildshape"
+    },
+    {
+      "id": "bear",
+      "name": "Bear",
+      "key": "beasts.bear.wildshape",
+      "group": "wildshape"
+    },
+    {
+      "id": "dire_wolf",
+      "name": "Dire Wolf",
+      "key": "beasts.wolf.wildshape",
+      "group": "wildshape"
+    },
+    {
+      "id": "elder_bear",
+      "name": "Elder Bear",
+      "key": "beasts.bear.wildshape",
+      "group": "wildshape"
+    }
+  ],
+  "sprites": [
+    {
+      "key": "beasts.bat.dusk",
+      "path": "creatures/bat_dusk.png",
+      "width": 223,
+      "height": 186,
+      "anchorX": 111,
+      "anchorY": 180,
+      "pixelScale": 0.26,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 223,
+        "height": 186
+      },
+      "back": {
+        "x": 0,
+        "y": 2232,
+        "width": 223,
+        "height": 186
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.bat.vampire",
+      "path": "beasts/bat_vampire.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.60666686,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.bear.black",
+      "path": "creatures/bear_black.png",
+      "width": 152,
+      "height": 129,
+      "anchorX": 77,
+      "anchorY": 124,
+      "pixelScale": 0.34,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 152,
+        "height": 129
+      },
+      "back": {
+        "x": 0,
+        "y": 1548,
+        "width": 152,
+        "height": 129
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.bear.brown",
+      "path": "creatures/bear_brown.png",
+      "width": 152,
+      "height": 129,
+      "anchorX": 77,
+      "anchorY": 124,
+      "pixelScale": 0.4,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 152,
+        "height": 129
+      },
+      "back": {
+        "x": 0,
+        "y": 1548,
+        "width": 152,
+        "height": 129
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.bear.polar",
+      "path": "creatures/bear_polar.png",
+      "width": 152,
+      "height": 129,
+      "anchorX": 77,
+      "anchorY": 124,
+      "pixelScale": 0.472,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 152,
+        "height": 129
+      },
+      "back": {
+        "x": 0,
+        "y": 1548,
+        "width": 152,
+        "height": 129
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.bear.undead",
+      "path": "beasts/bear_undead.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.9375,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.bear.wildshape",
+      "path": "creatures/bear_wildshape.png",
+      "width": 152,
+      "height": 129,
+      "anchorX": 77,
+      "anchorY": 124,
+      "pixelScale": 0.4,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 152,
+        "height": 129
+      },
+      "back": {
+        "x": 0,
+        "y": 1548,
+        "width": 152,
+        "height": 129
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.boar.brown",
+      "path": "creatures/boar_brown.png",
+      "width": 141,
+      "height": 109,
+      "anchorX": 70,
+      "anchorY": 105,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 141,
+        "height": 109
+      },
+      "back": {
+        "x": 0,
+        "y": 1308,
+        "width": 141,
+        "height": 109
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.boar.dark",
+      "path": "creatures/boar_dark.png",
+      "width": 141,
+      "height": 109,
+      "anchorX": 70,
+      "anchorY": 105,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 141,
+        "height": 109
+      },
+      "back": {
+        "x": 0,
+        "y": 1308,
+        "width": 141,
+        "height": 109
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.drake.blue",
+      "path": "creatures/drake_blue.png",
+      "width": 246,
+      "height": 223,
+      "anchorX": 116,
+      "anchorY": 213,
+      "pixelScale": 0.36,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 246,
+        "height": 223
+      },
+      "back": {
+        "x": 0,
+        "y": 2676,
+        "width": 246,
+        "height": 223
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.drake.green",
+      "path": "creatures/drake_green.png",
+      "width": 246,
+      "height": 223,
+      "anchorX": 116,
+      "anchorY": 213,
+      "pixelScale": 0.36,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 246,
+        "height": 223
+      },
+      "back": {
+        "x": 0,
+        "y": 2676,
+        "width": 246,
+        "height": 223
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.drake.red",
+      "path": "creatures/drake_red.png",
+      "width": 246,
+      "height": 223,
+      "anchorX": 116,
+      "anchorY": 213,
+      "pixelScale": 0.36,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 246,
+        "height": 223
+      },
+      "back": {
+        "x": 0,
+        "y": 2676,
+        "width": 246,
+        "height": 223
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.slime.blue",
+      "path": "creatures/slime_blue.png",
+      "width": 125,
+      "height": 99,
+      "anchorX": 62,
+      "anchorY": 92,
+      "pixelScale": 0.34,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 99
+      },
+      "back": {
+        "x": 0,
+        "y": 1188,
+        "width": 125,
+        "height": 99
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.slime.crystal",
+      "path": "beasts/slime_crystal.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.81222194,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.slime.green",
+      "path": "creatures/slime_green.png",
+      "width": 125,
+      "height": 99,
+      "anchorX": 62,
+      "anchorY": 92,
+      "pixelScale": 0.34,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 99
+      },
+      "back": {
+        "x": 0,
+        "y": 1188,
+        "width": 125,
+        "height": 99
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.slime.magma",
+      "path": "creatures/slime_magma.png",
+      "width": 125,
+      "height": 99,
+      "anchorX": 62,
+      "anchorY": 92,
+      "pixelScale": 0.34,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 99
+      },
+      "back": {
+        "x": 0,
+        "y": 1188,
+        "width": 125,
+        "height": 99
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.spider.black",
+      "path": "creatures/spider_black.png",
+      "width": 177,
+      "height": 206,
+      "anchorX": 88,
+      "anchorY": 151,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 177,
+        "height": 206
+      },
+      "back": {
+        "x": 0,
+        "y": 2472,
+        "width": 177,
+        "height": 206
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.spider.phase",
+      "path": "beasts/spider_phase.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.9083872,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.spider.red",
+      "path": "creatures/spider_red.png",
+      "width": 177,
+      "height": 206,
+      "anchorX": 88,
+      "anchorY": 151,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 177,
+        "height": 206
+      },
+      "back": {
+        "x": 0,
+        "y": 2472,
+        "width": 177,
+        "height": 206
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.wolf.alpha",
+      "path": "beasts/wolf_alpha.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.6625,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.wolf.dire",
+      "path": "creatures/wolf_dire.png",
+      "width": 125,
+      "height": 101,
+      "anchorX": 59,
+      "anchorY": 96,
+      "pixelScale": 0.5,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 101
+      },
+      "back": {
+        "x": 0,
+        "y": 1212,
+        "width": 125,
+        "height": 101
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.wolf.frost",
+      "path": "creatures/wolf_frost.png",
+      "width": 125,
+      "height": 101,
+      "anchorX": 59,
+      "anchorY": 96,
+      "pixelScale": 0.4,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 101
+      },
+      "back": {
+        "x": 0,
+        "y": 1212,
+        "width": 125,
+        "height": 101
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.wolf.grey",
+      "path": "creatures/wolf_grey.png",
+      "width": 125,
+      "height": 101,
+      "anchorX": 59,
+      "anchorY": 96,
+      "pixelScale": 0.4,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 101
+      },
+      "back": {
+        "x": 0,
+        "y": 1212,
+        "width": 125,
+        "height": 101
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.wolf.timber",
+      "path": "creatures/wolf_timber.png",
+      "width": 125,
+      "height": 101,
+      "anchorX": 59,
+      "anchorY": 96,
+      "pixelScale": 0.4,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 101
+      },
+      "back": {
+        "x": 0,
+        "y": 1212,
+        "width": 125,
+        "height": 101
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "beasts.wolf.wildshape",
+      "path": "creatures/wolf_wildshape.png",
+      "width": 125,
+      "height": 101,
+      "anchorX": 59,
+      "anchorY": 96,
+      "pixelScale": 0.4,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 125,
+        "height": 101
+      },
+      "back": {
+        "x": 0,
+        "y": 1212,
+        "width": 125,
+        "height": 101
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.crab.deep",
+      "path": "bestiary/crab_deep.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.8863634,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.crab.shore",
+      "path": "creatures/crab_shore.png",
+      "width": 216,
+      "height": 208,
+      "anchorX": 108,
+      "anchorY": 199,
+      "pixelScale": 0.26,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 216,
+        "height": 208
+      },
+      "back": {
+        "x": 0,
+        "y": 2496,
+        "width": 216,
+        "height": 208
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.gargoyle.granite",
+      "path": "creatures/gargoyle_granite.png",
+      "width": 235,
+      "height": 210,
+      "anchorX": 118,
+      "anchorY": 201,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 235,
+        "height": 210
+      },
+      "back": {
+        "x": 0,
+        "y": 2520,
+        "width": 235,
+        "height": 210
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.gargoyle.obsidian",
+      "path": "creatures/gargoyle_obsidian.png",
+      "width": 235,
+      "height": 210,
+      "anchorX": 118,
+      "anchorY": 201,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 235,
+        "height": 210
+      },
+      "back": {
+        "x": 0,
+        "y": 2520,
+        "width": 235,
+        "height": 210
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.harpy.dusk",
+      "path": "creatures/harpy_dusk.png",
+      "width": 210,
+      "height": 186,
+      "anchorX": 106,
+      "anchorY": 183,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 210,
+        "height": 186
+      },
+      "back": {
+        "x": 0,
+        "y": 2232,
+        "width": 210,
+        "height": 186
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.harpy.storm",
+      "path": "creatures/harpy_storm.png",
+      "width": 210,
+      "height": 186,
+      "anchorX": 106,
+      "anchorY": 183,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 210,
+        "height": 186
+      },
+      "back": {
+        "x": 0,
+        "y": 2232,
+        "width": 210,
+        "height": 186
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.hookbeak.brown",
+      "path": "creatures/hookbeak_brown.png",
+      "width": 213,
+      "height": 202,
+      "anchorX": 106,
+      "anchorY": 188,
+      "pixelScale": 0.28,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 213,
+        "height": 202
+      },
+      "back": {
+        "x": 0,
+        "y": 2424,
+        "width": 213,
+        "height": 202
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.hookbeak.snow",
+      "path": "creatures/hookbeak_snow.png",
+      "width": 213,
+      "height": 202,
+      "anchorX": 106,
+      "anchorY": 188,
+      "pixelScale": 0.28,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 213,
+        "height": 202
+      },
+      "back": {
+        "x": 0,
+        "y": 2424,
+        "width": 213,
+        "height": 202
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.scorpion.black",
+      "path": "bestiary/scorpion_black.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 1.11,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.scorpion.ember",
+      "path": "creatures/scorpion_ember.png",
+      "width": 187,
+      "height": 168,
+      "anchorX": 85,
+      "anchorY": 164,
+      "pixelScale": 0.3,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 187,
+        "height": 168
+      },
+      "back": {
+        "x": 0,
+        "y": 2016,
+        "width": 187,
+        "height": 168
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.scorpion.sand",
+      "path": "creatures/scorpion_sand.png",
+      "width": 187,
+      "height": 168,
+      "anchorX": 85,
+      "anchorY": 164,
+      "pixelScale": 0.3,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 187,
+        "height": 168
+      },
+      "back": {
+        "x": 0,
+        "y": 2016,
+        "width": 187,
+        "height": 168
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.warg.ash",
+      "path": "creatures/warg_ash.png",
+      "width": 180,
+      "height": 152,
+      "anchorX": 89,
+      "anchorY": 146,
+      "pixelScale": 0.3,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 180,
+        "height": 152
+      },
+      "back": {
+        "x": 0,
+        "y": 1824,
+        "width": 180,
+        "height": 152
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.warg.black",
+      "path": "creatures/warg_black.png",
+      "width": 180,
+      "height": 152,
+      "anchorX": 89,
+      "anchorY": 146,
+      "pixelScale": 0.3,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 180,
+        "height": 152
+      },
+      "back": {
+        "x": 0,
+        "y": 1824,
+        "width": 180,
+        "height": 152
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.warg.rider",
+      "path": "bestiary/warg_rider.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 0.7628574,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.wisp.ember",
+      "path": "creatures/wisp_ember.png",
+      "width": 35,
+      "height": 70,
+      "anchorX": 12,
+      "anchorY": 67,
+      "pixelScale": 0.5,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 35,
+        "height": 70
+      },
+      "back": {
+        "x": 0,
+        "y": 840,
+        "width": 35,
+        "height": 70
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bestiary.wisp.marsh",
+      "path": "creatures/wisp_marsh.png",
+      "width": 35,
+      "height": 70,
+      "anchorX": 12,
+      "anchorY": 67,
+      "pixelScale": 0.5,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 35,
+        "height": 70
+      },
+      "back": {
+        "x": 0,
+        "y": 840,
+        "width": 35,
+        "height": 70
+      },
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5.555555555555555,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.air_elemental.gale",
+      "path": "bosses/air_elemental_gale.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.air_elemental.storm",
+      "path": "bosses/air_elemental_storm.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.dragon.black",
+      "path": "bosses/dragon_black.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 90,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.dragon.blue",
+      "path": "bosses/dragon_blue.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 90,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.dragon.gold",
+      "path": "bosses/dragon_gold.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 90,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.dragon.green",
+      "path": "bosses/dragon_green.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 90,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.dragon.red",
+      "path": "bosses/dragon_red.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 90,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.earth_elemental.magma",
+      "path": "bosses/earth_elemental_magma.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.earth_elemental.stone",
+      "path": "bosses/earth_elemental_stone.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.fire_elemental.azure",
+      "path": "bosses/fire_elemental_azure.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.fire_elemental.ember",
+      "path": "bosses/fire_elemental_ember.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.fire_elemental.radiant",
+      "path": "bosses/fire_elemental_radiant.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.fire_elemental.shadow",
+      "path": "bosses/fire_elemental_shadow.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.golem.basalt",
+      "path": "bosses/golem_basalt.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.golem.crystal",
+      "path": "bosses/golem_crystal.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.golem.granite",
+      "path": "bosses/golem_granite.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.golem.temple",
+      "path": "bosses/golem_temple.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.hound.black",
+      "path": "bosses/hound_black.png",
+      "width": 40,
+      "height": 40,
+      "anchorX": 20,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 40,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.hound.grey",
+      "path": "bosses/hound_grey.png",
+      "width": 40,
+      "height": 40,
+      "anchorX": 20,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 40,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.hound.tan",
+      "path": "bosses/hound_tan.png",
+      "width": 40,
+      "height": 40,
+      "anchorX": 20,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 40,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.imp.crimson",
+      "path": "bosses/imp_crimson.png",
+      "width": 32,
+      "height": 32,
+      "anchorX": 16,
+      "anchorY": 30,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 32
+      },
+      "back": {
+        "x": 0,
+        "y": 32,
+        "width": 32,
+        "height": 32
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.imp.violet",
+      "path": "bosses/imp_violet.png",
+      "width": 32,
+      "height": 32,
+      "anchorX": 16,
+      "anchorY": 30,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 32
+      },
+      "back": {
+        "x": 0,
+        "y": 32,
+        "width": 32,
+        "height": 32
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.mimic.ironbound",
+      "path": "bosses/mimic_ironbound.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.mimic.oak",
+      "path": "bosses/mimic_oak.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.sapling.autumn",
+      "path": "bosses/sapling_autumn.png",
+      "width": 40,
+      "height": 40,
+      "anchorX": 20,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 40,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.sapling.blossom",
+      "path": "bosses/sapling_blossom.png",
+      "width": 40,
+      "height": 40,
+      "anchorX": 20,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 40,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.sapling.spring",
+      "path": "bosses/sapling_spring.png",
+      "width": 40,
+      "height": 40,
+      "anchorX": 20,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 40,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.troll.frost",
+      "path": "bosses/troll_frost.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.troll.ogre",
+      "path": "bosses/troll_ogre.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.troll.troll",
+      "path": "bosses/troll_troll.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.water_elemental.sea",
+      "path": "bosses/water_elemental_sea.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.water_elemental.swamp",
+      "path": "bosses/water_elemental_swamp.png",
+      "width": 64,
+      "height": 64,
+      "anchorX": 32,
+      "anchorY": 60,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 64,
+        "height": 64
+      },
+      "back": {
+        "x": 0,
+        "y": 64,
+        "width": 64,
+        "height": 64
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.wraith.shade",
+      "path": "bosses/wraith_shade.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.wraith.spectre",
+      "path": "bosses/wraith_spectre.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "bosses.wraith.wraith",
+      "path": "bosses/wraith_wraith.png",
+      "width": 48,
+      "height": 48,
+      "anchorX": 24,
+      "anchorY": 44,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 48,
+        "height": 48
+      },
+      "back": {
+        "x": 0,
+        "y": 48,
+        "width": 48,
+        "height": 48
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.bandit",
+      "path": "characters/presets/bandit.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.bandit_captain",
+      "path": "creatures/rook.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 84,
+      "pixelScale": 0.5,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 18,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "fps": 6.666666666666667,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.black_knight",
+      "path": "characters/presets/black_knight.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.cult_leader",
+      "path": "characters/presets/cult_leader.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.cultist",
+      "path": "characters/presets/cultist.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.dark_elf",
+      "path": "characters/presets/dark_elf.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.goblin_archer",
+      "path": "characters/presets/goblin_archer.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.goblin_cutthroat",
+      "path": "characters/presets/goblin_cutthroat.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.goblin_shaman",
+      "path": "characters/presets/goblin_shaman.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.goblin_spear",
+      "path": "characters/presets/goblin_spear.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.hobgoblin",
+      "path": "characters/presets/hobgoblin.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.kobold",
+      "path": "creatures/kobold_refresh_worker.png",
+      "width": 128,
+      "height": 128,
+      "anchorX": 64,
+      "anchorY": 110,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "back": {
+        "x": 0,
+        "y": 2048,
+        "width": 128,
+        "height": 128
+      },
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.kobold_slinger",
+      "path": "creatures/kobold_refresh_slinger.png",
+      "width": 128,
+      "height": 128,
+      "anchorX": 64,
+      "anchorY": 110,
+      "pixelScale": 0.32,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "back": {
+        "x": 0,
+        "y": 2560,
+        "width": 128,
+        "height": 128
+      },
+      "columns": 8,
+      "rowsPerDirection": 5,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.lich",
+      "path": "characters/presets/lich.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.mother_skarrow",
+      "path": "creatures/mother_skarrow.png",
+      "width": 96,
+      "height": 96,
+      "anchorX": 48,
+      "anchorY": 84,
+      "pixelScale": 0.5,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "back": {
+        "x": 0,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "columns": 18,
+      "rowsPerDirection": 2,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "fps": 6.666666666666667,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.necromancer",
+      "path": "characters/presets/necromancer.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.orc_brute",
+      "path": "characters/presets/orc_brute.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.skeleton",
+      "path": "characters/presets/skeleton.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.skeleton_archer",
+      "path": "characters/presets/skeleton_archer.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "characters.zombie",
+      "path": "characters/presets/zombie.png",
+      "width": 32,
+      "height": 40,
+      "anchorX": 16,
+      "anchorY": 37,
+      "pixelScale": 1,
+      "directions": 2,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 40
+      },
+      "back": {
+        "x": 0,
+        "y": 40,
+        "width": 32,
+        "height": 40
+      },
+      "columns": 0,
+      "rowsPerDirection": 1,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fps": 5,
+        "loop": true
+      }
+    },
+    {
+      "key": "monsters.ashmaw",
+      "path": "creatures/ashmaw_bounty.png",
+      "width": 192,
+      "height": 192,
+      "anchorX": 96,
+      "anchorY": 171,
+      "pixelScale": 0.65,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 192,
+        "height": 192
+      },
+      "back": {
+        "x": 0,
+        "y": 4608,
+        "width": 192,
+        "height": 192
+      },
+      "columns": 8,
+      "rowsPerDirection": 6,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 1,
+        "loop": true
+      }
+    },
+    {
+      "key": "monsters.kobold_foreman",
+      "path": "creatures/grisk_bounty.png",
+      "width": 128,
+      "height": 128,
+      "anchorX": 64,
+      "anchorY": 110,
+      "pixelScale": 0.34,
+      "directions": 8,
+      "front": {
+        "x": 0,
+        "y": 0,
+        "width": 128,
+        "height": 128
+      },
+      "back": {
+        "x": 0,
+        "y": 2560,
+        "width": 128,
+        "height": 128
+      },
+      "columns": 8,
+      "rowsPerDirection": 5,
+      "idle": {
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true
+      }
+    }
+  ]
+}

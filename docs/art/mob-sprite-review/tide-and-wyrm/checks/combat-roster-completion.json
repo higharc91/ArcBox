@@ -1,0 +1,125 @@
+{
+  "integratedDesigns": 29,
+  "batches": 15,
+  "remainingOlderCombatLooks": 0,
+  "additionalLibraryVariantsSeparate": true,
+  "resolved": {
+    "beasts.drake.red": {
+      "file": "content/tactics/base/creatures/mob_refresh_drake.png",
+      "directions": 8
+    },
+    "characters.goblin_cutthroat": {
+      "file": "content/tactics/base/creatures/mob_refresh_goblin.png",
+      "directions": 8
+    },
+    "characters.orc_brute": {
+      "file": "content/tactics/base/creatures/mob_refresh_orc.png",
+      "directions": 8
+    },
+    "characters.goblin_archer": {
+      "file": "content/tactics/base/creatures/mob_refresh_goblin_archer.png",
+      "directions": 8
+    },
+    "characters.goblin_shaman": {
+      "file": "content/tactics/base/creatures/mob_refresh_goblin_shaman.png",
+      "directions": 8
+    },
+    "characters.goblin_spear": {
+      "file": "content/tactics/base/creatures/mob_refresh_goblin_boss.png",
+      "directions": 8
+    },
+    "characters.hobgoblin": {
+      "file": "content/tactics/base/creatures/mob_refresh_hobgoblin.png",
+      "directions": 8
+    },
+    "characters.bandit": {
+      "file": "content/tactics/base/creatures/mob_refresh_bandit.png",
+      "directions": 8
+    },
+    "characters.cultist": {
+      "file": "content/tactics/base/creatures/mob_refresh_cultist.png",
+      "directions": 8
+    },
+    "characters.cult_leader": {
+      "file": "content/tactics/base/creatures/mob_refresh_cult_leader.png",
+      "directions": 8
+    },
+    "characters.skeleton": {
+      "file": "content/tactics/base/creatures/mob_refresh_skeleton.png",
+      "directions": 8
+    },
+    "characters.skeleton_archer": {
+      "file": "content/tactics/base/creatures/mob_refresh_skeleton_archer.png",
+      "directions": 8
+    },
+    "characters.zombie": {
+      "file": "content/tactics/base/creatures/mob_refresh_zombie.png",
+      "directions": 8
+    },
+    "bosses.wraith.wraith": {
+      "file": "content/tactics/base/creatures/mob_refresh_wraith.png",
+      "directions": 8
+    },
+    "characters.necromancer": {
+      "file": "content/tactics/base/creatures/mob_refresh_necromancer.png",
+      "directions": 8
+    },
+    "characters.lich": {
+      "file": "content/tactics/base/creatures/mob_refresh_lich.png",
+      "directions": 8
+    },
+    "characters.black_knight": {
+      "file": "content/tactics/base/creatures/mob_refresh_black_knight.png",
+      "directions": 8
+    },
+    "characters.dark_elf": {
+      "file": "content/tactics/base/creatures/mob_refresh_dark_elf.png",
+      "directions": 8
+    },
+    "bosses.troll.troll": {
+      "file": "content/tactics/base/creatures/mob_refresh_troll.png",
+      "directions": 8
+    },
+    "bosses.golem.granite": {
+      "file": "content/tactics/base/creatures/mob_refresh_golem.png",
+      "directions": 8
+    },
+    "bosses.mimic.oak": {
+      "file": "content/tactics/base/creatures/mob_refresh_mimic.png",
+      "directions": 8
+    },
+    "bosses.hound.tan": {
+      "file": "content/tactics/base/creatures/mob_refresh_hound.png",
+      "directions": 8
+    },
+    "bosses.imp.crimson": {
+      "file": "content/tactics/base/creatures/mob_refresh_imp.png",
+      "directions": 8
+    },
+    "bosses.sapling.spring": {
+      "file": "content/tactics/base/creatures/mob_refresh_sapling.png",
+      "directions": 8
+    },
+    "bosses.air_elemental.gale": {
+      "file": "content/tactics/base/creatures/mob_refresh_air_elemental.png",
+      "directions": 8
+    },
+    "bosses.earth_elemental.stone": {
+      "file": "content/tactics/base/creatures/mob_refresh_earth_elemental.png",
+      "directions": 8
+    },
+    "bosses.fire_elemental.ember": {
+      "file": "content/tactics/base/creatures/mob_refresh_fire_elemental.png",
+      "directions": 8
+    },
+    "bosses.water_elemental.sea": {
+      "file": "content/tactics/base/creatures/mob_refresh_water_elemental.png",
+      "directions": 8
+    },
+    "bosses.dragon.red": {
+      "file": "content/tactics/base/creatures/mob_refresh_dragon.png",
+      "directions": 8
+    }
+  },
+  "passed": true
+}

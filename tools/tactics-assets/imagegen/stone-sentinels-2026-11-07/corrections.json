@@ -1,0 +1,22 @@
+[
+  {
+    "mob": "golem_crystal",
+    "action": "attack",
+    "source": "golem_crystal-attack-rear",
+    "count": 2,
+    "columns": 2,
+    "targets": [
+      {
+        "row": 3,
+        "frames": [
+          1,
+          2
+        ],
+        "poses": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+]

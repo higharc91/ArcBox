@@ -74,6 +74,7 @@ internal sealed partial class WorldDemo : Node
     private bool _gateFailed;
     private ImmutableArray<string> _roster = WorldTextureBudget.Party;
     private int _rosterFrames;
+    private bool _mobReview;
 
     public WorldDemo(string spec, string packRoot, string? shots, string? looks = null, string? walk = null, bool perfGate = false)
     {
@@ -94,6 +95,63 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var nightCompanions = parts.Contains("night-companions", StringComparer.Ordinal);
+        var prismaticFlames = parts.Contains("prismatic-flames", StringComparer.Ordinal);
+        var stoneSentinels = parts.Contains("stone-sentinels", StringComparer.Ordinal);
+        var wildElements = parts.Contains("wild-elements", StringComparer.Ordinal);
+        var tideAndWyrm = parts.Contains("tide-and-wyrm", StringComparer.Ordinal);
+        var elementalTriad = parts.Contains("elemental-triad", StringComparer.Ordinal);
+        var groveWard = parts.Contains("grove-ward", StringComparer.Ordinal);
+        var emberFamiliar = parts.Contains("ember-familiar", StringComparer.Ordinal);
+        var trailCompanion = parts.Contains("trail-companion", StringComparer.Ordinal);
+        var oakAmbush = parts.Contains("oak-ambush", StringComparer.Ordinal);
+        var stoneAndMire = parts.Contains("stone-and-mire", StringComparer.Ordinal);
+        var oathAndShadow = parts.Contains("oath-and-shadow", StringComparer.Ordinal);
+        var rimeKeepers = parts.Contains("rime-keepers", StringComparer.Ordinal);
+        var hollowDead = parts.Contains("hollow-dead", StringComparer.Ordinal);
+        var boneWardens = parts.Contains("bone-wardens", StringComparer.Ordinal);
+        var kindled = parts.Contains("kindled", StringComparer.Ordinal);
+        var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
+        var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
+        _mobReview = nightCompanions || prismaticFlames || stoneSentinels || wildElements || tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (nightCompanions)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.hound.black", "bosses.hound.grey", "bosses.imp.violet"];
+        else if (prismaticFlames)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.fire_elemental.azure", "bosses.fire_elemental.radiant", "bosses.fire_elemental.shadow"];
+        else if (stoneSentinels)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.golem.basalt", "bosses.golem.crystal", "bosses.golem.temple"];
+        else if (wildElements)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.air_elemental.storm", "bosses.earth_elemental.magma", "bosses.water_elemental.swamp"];
+        else if (tideAndWyrm)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.water_elemental.sea", "bosses.dragon.red"];
+        else if (elementalTriad)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.air_elemental.gale", "bosses.earth_elemental.stone", "bosses.fire_elemental.ember"];
+        else if (groveWard)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.sapling.spring", "bosses.imp.crimson", "bosses.hound.tan"];
+        else if (emberFamiliar)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.imp.crimson", "characters.skeleton", "bosses.hound.tan"];
+        else if (trailCompanion)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.hound.tan", "characters.skeleton", "bosses.mimic.oak"];
+        else if (oakAmbush)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.mimic.oak", "characters.skeleton", "bosses.golem.granite"];
+        else if (stoneAndMire)
+            _roster = ["characters.class_fighter", "characters.bandit", "bosses.troll.troll", "bosses.golem.granite", "characters.skeleton"];
+        else if (oathAndShadow)
+            _roster = ["characters.class_fighter", "characters.bandit", "characters.black_knight", "characters.dark_elf", "characters.skeleton"];
+        else if (rimeKeepers)
+            _roster = ["characters.class_fighter", "characters.bandit", "characters.necromancer", "characters.lich", "characters.skeleton"];
+        else if (hollowDead)
+            _roster = ["characters.class_fighter", "characters.bandit", "characters.zombie", "bosses.wraith.wraith", "characters.skeleton"];
+        else if (boneWardens)
+            _roster = ["characters.class_fighter", "characters.bandit", "characters.skeleton", "characters.skeleton_archer", "characters.hobgoblin"];
+        else if (kindled)
+            _roster = ["characters.class_fighter", "characters.bandit", "characters.cultist", "characters.cult_leader", "characters.hobgoblin"];
+        else if (roadAndHost)
+            _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.bandit", "characters.hobgoblin", "characters.goblin_spear"];
+        else if (goblinRoles)
+            _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.goblin_archer", "characters.goblin_shaman", "characters.goblin_spear"];
+        else if (_mobReview)
+            _roster = ["characters.class_fighter", "characters.goblin_cutthroat", "characters.orc_brute", "beasts.drake.red", "characters.kobold"];
         var blocks = parts.Length > 1 && int.TryParse(parts[1], CultureInfo.InvariantCulture, out var b) ? b : WorldTuning.BlockSize;
         _canvas = new WorldCanvas(_pack, () => Ground(parts[0]), blocks);
         AddChild(_canvas);
@@ -240,7 +298,9 @@ internal sealed partial class WorldDemo : Node
             _scenerySet = true;
         }
         _people ??= new WorldPeople(_canvas.Ground!.People, terrain, _art);
-        var walkers = _partyWalk ? ProofWalkers(terrain, place) : _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
+        var walkers = _mobReview ? _roster.SelectMany((sprite, i) => DemoRegion.StandIn(terrain, _art,
+                new UnitPlace(place.Map + new System.Numerics.Vector2(-i * 1.2f, i * 1.2f), place.Height), heading, _clock, sprite, $"mob-review-{i}")).ToImmutableArray()
+            : _partyWalk ? ProofWalkers(terrain, place) : _perfGate ? DemoRegion.PerfParty(terrain, _art, place, heading, _clock, _roster)
             : DemoRegion.StandIn(terrain, _art, place, heading, _clock);
         _canvas.PartySheets(walkers.Select(u => u.Sprite.Path));
         ImmutableArray<BoardUnit> units = [.. walkers.Concat(_people.Units(_clock, looking ?? place.Feet, [], flags: _storyFlags)).OrderBy(u => u.Order)];

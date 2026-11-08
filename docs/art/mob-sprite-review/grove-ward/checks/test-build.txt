@@ -1,0 +1,12 @@
+  ArcBox.Sdk -> /workspace/arcbox-secrets/src/ArcBox.Sdk/bin/Debug/net10.0/ArcBox.Sdk.dll
+  Tactics.Logic -> /workspace/arcbox-secrets/games/Tactics/Tactics.Logic/bin/Debug/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/arcbox-secrets/games/Tactics/Tactics.Game/bin/Debug/net10.0/Tactics.Game.dll
+  Tactics.Presentation -> /workspace/arcbox-secrets/games/Tactics/Tactics.Presentation/bin/Debug/net10.0/Tactics.Presentation.dll
+  ArcBox.Sdk.Testing -> /workspace/arcbox-secrets/src/ArcBox.Sdk.Testing/bin/Debug/net10.0/ArcBox.Sdk.Testing.dll
+  Tactics.Presentation.Tests -> /workspace/arcbox-secrets/games/Tactics/Tactics.Presentation.Tests/bin/Debug/net10.0/Tactics.Presentation.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:17.80

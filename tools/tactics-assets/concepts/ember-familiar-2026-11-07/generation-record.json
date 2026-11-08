@@ -1,0 +1,35 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  },
+  "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for ONE consistent BOUND IMP, existing generic summoned fiend companion with ranged HELLFIRE BOLT natural attack. Neutral parchment no scene no labels/text. Show front threequarter, left profile, rear threequarter, fullback, four-stage wing-assisted movement study and hand-cast bolt anticipation/release study plus small neutral1.75m human scale inset. Small lean crimson/devil-red imp about0.8m to horns when standing, NOT giant demon/dragon or human size. Angular mischievous clever face, narrow gold/amber eyes with DARK pupils and dark upper lids, short blunt muzzle/nose, small contained ivory teeth. TWO short swept-back warmIVORY horns rootedtemples and TWO long pointed crimson ears attachedsideshead. No extra horns/eyes. Slimlongarms endthreeclawedfingers+thumb, two shortstrongdigitigradelegs/cloven toes. ONE slim long crimson tail continuously attachedsacrum with small darkredSPADEtip, curledlowaroundside never disconnected/floatingtip. TWO medium BATLIKE wings organically attached to UPPERBACK via sturdyshoulderroots, darkWINE/BURGUNDY leathermembranes and crimson fingerstruts; membranesstretchcontinuouslybetweenstruts, no detachedpanels/humanarmsreplacedbywings. Wingroots alwaysonback, notbelt/hands; rearshowsbackanatomy/two roots andplainbackofhead, NEVER frontface/eyesontheback. Restwingshalf-folded behindtorso, movingwings smoothlyup/out/downatbothroots whilefeetmake smallgroundedsteps or lowhover, no highaerial/giantspan. Simple wornwarmOCHRE/charcoal waistwrap securedbydarkrope, NOdanglingbelttrinkets/backpack/armor/weapon/chains, plainrearknot notfrontbuckle. He castshellfirefromONEanatomicallyattachedhand/palm orientedtowardtarget; small warmamberpalmglint only, notfullbodyflameorhugefloatingfireball. Anticipationdrawshandtochest then palmextendsforwardatshoulderheight, visibleconnectedforearm wrist/fingers; handstaysattachedwhilewingsbrace. Bothfrontandrearcasthead/facing consistent; handextendsAWAYinfullback. Flameprojectileart willuseexistinggameFX, no freeprojectile incharactersprite. Hurtflinchfoldswings; downsmallfiendslumpedsidewayswithwings/tail/horns/headstillattached, neverexplodedpieces. Deliberate fine darkoutlines/pixel-friendly materialgroups/two-three shade ramps, warmupperleftlighting/coolwine shadows. No glossy3D/anime/chibieyes/oversizedhead/spectralglow. Preserve silhouette and exact horn/wing/tail countallposes. Do notinvent namedlore ornewpowers.",
+  "job": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_PRk69Jkpjf9EU3TNPbixs3BF",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_PRk69Jkpjf9EU3TNPbixs3BF' (one call waits on up to 32 jobs)."
+  },
+  "results": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_PRk69Jkpjf9EU3TNPbixs3BF",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T14:03:54.526Z",
+        "updatedAt": "2026-11-07T14:04:36.380Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_xmzjUn9p5zdECbRuYtdmVNGm"
+        ],
+        "cuCost": 12
+      }
+    ]
+  }
+}

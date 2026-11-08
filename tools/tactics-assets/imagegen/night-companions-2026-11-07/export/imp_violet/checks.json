@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 0,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      101,
+      168,
+      149,
+      223
+    ],
+    "count": 1692
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 1,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      102,
+      168,
+      150,
+      223
+    ],
+    "count": 1698
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 2,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      102,
+      168,
+      150,
+      223
+    ],
+    "count": 1692
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 3,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      102,
+      168,
+      150,
+      223
+    ],
+    "count": 1692
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 0,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      102,
+      169,
+      150,
+      224
+    ],
+    "count": 1693
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 1,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      99,
+      170,
+      146,
+      225
+    ],
+    "count": 1647
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 2,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      99,
+      169,
+      146,
+      224
+    ],
+    "count": 1621
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 3,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      102,
+      168,
+      149,
+      223
+    ],
+    "count": 1600
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 0,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      100,
+      169,
+      149,
+      224
+    ],
+    "count": 1807
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 1,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      100,
+      169,
+      149,
+      224
+    ],
+    "count": 1764
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 2,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      100,
+      169,
+      149,
+      224
+    ],
+    "count": 1754
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 3,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      100,
+      169,
+      149,
+      224
+    ],
+    "count": 1808
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 0,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      107,
+      173,
+      149,
+      224
+    ],
+    "count": 1577
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 1,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      104,
+      194,
+      151,
+      224
+    ],
+    "count": 1130
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 4,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      104,
+      170,
+      150,
+      224
+    ],
+    "count": 1558
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 5,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      104,
+      169,
+      150,
+      223
+    ],
+    "count": 1553
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 6,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      104,
+      170,
+      150,
+      224
+    ],
+    "count": 1552
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 7,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      104,
+      170,
+      150,
+      224
+    ],
+    "count": 1532
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 4,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      170,
+      150,
+      225
+    ],
+    "count": 1521
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 5,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      171,
+      150,
+      226
+    ],
+    "count": 1486
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 6,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      170,
+      149,
+      225
+    ],
+    "count": 1514
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 7,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      169,
+      150,
+      224
+    ],
+    "count": 1525
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 4,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      169,
+      150,
+      224
+    ],
+    "count": 1648
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 5,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      169,
+      149,
+      224
+    ],
+    "count": 1626
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 6,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      102,
+      169,
+      149,
+      224
+    ],
+    "count": 1634
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 7,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      169,
+      149,
+      224
+    ],
+    "count": 1621
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 2,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      110,
+      173,
+      148,
+      224
+    ],
+    "count": 1446
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 3,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      105,
+      192,
+      151,
+      224
+    ],
+    "count": 1211
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 8,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      169,
+      148,
+      223
+    ],
+    "count": 1208
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 9,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      169,
+      147,
+      223
+    ],
+    "count": 1187
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 10,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      107,
+      169,
+      147,
+      223
+    ],
+    "count": 1179
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 11,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      169,
+      147,
+      223
+    ],
+    "count": 1170
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 8,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      109,
+      170,
+      147,
+      224
+    ],
+    "count": 1223
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 9,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      108,
+      171,
+      146,
+      225
+    ],
+    "count": 1221
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 10,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      108,
+      170,
+      146,
+      224
+    ],
+    "count": 1248
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 11,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      108,
+      169,
+      147,
+      223
+    ],
+    "count": 1219
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 8,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      108,
+      170,
+      149,
+      224
+    ],
+    "count": 1377
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 9,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      108,
+      170,
+      149,
+      224
+    ],
+    "count": 1408
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 10,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      99,
+      170,
+      149,
+      224
+    ],
+    "count": 1472
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 11,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      108,
+      170,
+      149,
+      224
+    ],
+    "count": 1391
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 4,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      107,
+      171,
+      148,
+      224
+    ],
+    "count": 1438
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 5,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      103,
+      196,
+      152,
+      224
+    ],
+    "count": 1155
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 12,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      109,
+      169,
+      149,
+      223
+    ],
+    "count": 1348
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 13,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      170,
+      148,
+      224
+    ],
+    "count": 1338
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 14,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      170,
+      148,
+      224
+    ],
+    "count": 1331
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 15,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      170,
+      148,
+      224
+    ],
+    "count": 1328
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 12,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      109,
+      170,
+      149,
+      222
+    ],
+    "count": 1311
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 13,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      109,
+      171,
+      148,
+      223
+    ],
+    "count": 1291
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 14,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      109,
+      170,
+      148,
+      223
+    ],
+    "count": 1293
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 15,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      109,
+      169,
+      149,
+      223
+    ],
+    "count": 1330
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 12,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      108,
+      171,
+      150,
+      224
+    ],
+    "count": 1434
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 13,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      107,
+      171,
+      149,
+      224
+    ],
+    "count": 1445
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 14,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      96,
+      171,
+      149,
+      224
+    ],
+    "count": 1525
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 15,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      108,
+      171,
+      149,
+      224
+    ],
+    "count": 1433
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 6,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      107,
+      172,
+      144,
+      224
+    ],
+    "count": 1368
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 7,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      103,
+      191,
+      153,
+      224
+    ],
+    "count": 1267
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 16,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      168,
+      153,
+      223
+    ],
+    "count": 1626
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 17,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      106,
+      168,
+      154,
+      224
+    ],
+    "count": 1621
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 18,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      106,
+      168,
+      154,
+      223
+    ],
+    "count": 1616
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 19,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      168,
+      153,
+      223
+    ],
+    "count": 1616
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 16,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      169,
+      153,
+      224
+    ],
+    "count": 1575
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 17,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      170,
+      153,
+      225
+    ],
+    "count": 1566
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 18,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      169,
+      153,
+      224
+    ],
+    "count": 1563
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 19,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      106,
+      168,
+      153,
+      223
+    ],
+    "count": 1594
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 16,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      169,
+      154,
+      224
+    ],
+    "count": 1699
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 17,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      168,
+      154,
+      224
+    ],
+    "count": 1668
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 18,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      168,
+      154,
+      224
+    ],
+    "count": 1655
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 19,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      169,
+      154,
+      224
+    ],
+    "count": 1661
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 8,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      109,
+      171,
+      149,
+      224
+    ],
+    "count": 1469
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 9,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      104,
+      195,
+      152,
+      224
+    ],
+    "count": 1059
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 20,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      168,
+      142,
+      223
+    ],
+    "count": 1363
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 21,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      168,
+      142,
+      224
+    ],
+    "count": 1354
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 22,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      168,
+      142,
+      223
+    ],
+    "count": 1352
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 23,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      168,
+      142,
+      223
+    ],
+    "count": 1349
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 20,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      105,
+      169,
+      143,
+      224
+    ],
+    "count": 1318
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 21,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      105,
+      170,
+      143,
+      225
+    ],
+    "count": 1313
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 22,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      104,
+      169,
+      143,
+      225
+    ],
+    "count": 1319
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 23,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      104,
+      168,
+      143,
+      224
+    ],
+    "count": 1314
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 20,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      106,
+      171,
+      144,
+      224
+    ],
+    "count": 1340
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 21,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      106,
+      171,
+      144,
+      224
+    ],
+    "count": 1368
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 22,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      106,
+      171,
+      153,
+      224
+    ],
+    "count": 1398
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 23,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      171,
+      143,
+      224
+    ],
+    "count": 1378
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 10,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      109,
+      171,
+      144,
+      224
+    ],
+    "count": 1342
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 11,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      105,
+      190,
+      150,
+      224
+    ],
+    "count": 1209
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 24,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      107,
+      168,
+      147,
+      223
+    ],
+    "count": 1231
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 25,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      167,
+      147,
+      223
+    ],
+    "count": 1218
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 26,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      108,
+      167,
+      147,
+      223
+    ],
+    "count": 1216
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 27,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      107,
+      168,
+      147,
+      224
+    ],
+    "count": 1223
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 24,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      107,
+      169,
+      147,
+      224
+    ],
+    "count": 1269
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 25,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      108,
+      169,
+      147,
+      224
+    ],
+    "count": 1238
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 26,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      107,
+      169,
+      147,
+      224
+    ],
+    "count": 1285
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 27,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      107,
+      168,
+      147,
+      223
+    ],
+    "count": 1268
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 24,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      106,
+      171,
+      148,
+      224
+    ],
+    "count": 1360
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 25,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      106,
+      171,
+      147,
+      224
+    ],
+    "count": 1374
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 26,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      106,
+      171,
+      157,
+      224
+    ],
+    "count": 1442
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 27,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      171,
+      147,
+      224
+    ],
+    "count": 1377
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 12,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      111,
+      171,
+      153,
+      224
+    ],
+    "count": 1438
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 13,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      103,
+      195,
+      153,
+      224
+    ],
+    "count": 1193
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 28,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      170,
+      148,
+      224
+    ],
+    "count": 1485
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 29,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      169,
+      148,
+      223
+    ],
+    "count": 1483
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 30,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      169,
+      148,
+      223
+    ],
+    "count": 1465
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/imp_violet-idle.png",
+    "sourcePose": 31,
+    "scale": 0.4057971014492754,
+    "bounds": [
+      105,
+      170,
+      148,
+      224
+    ],
+    "count": 1466
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 28,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      105,
+      170,
+      149,
+      224
+    ],
+    "count": 1548
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 29,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      104,
+      171,
+      149,
+      225
+    ],
+    "count": 1523
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 30,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      105,
+      170,
+      150,
+      225
+    ],
+    "count": 1554
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/imp_violet-walk.png",
+    "sourcePose": 31,
+    "scale": 0.3888888888888889,
+    "bounds": [
+      105,
+      169,
+      149,
+      224
+    ],
+    "count": 1546
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 28,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      170,
+      148,
+      224
+    ],
+    "count": 1574
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 29,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      170,
+      149,
+      224
+    ],
+    "count": 1576
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 30,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      105,
+      170,
+      152,
+      224
+    ],
+    "count": 1579
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/imp_violet-attack.png",
+    "sourcePose": 31,
+    "scale": 0.3835616438356164,
+    "bounds": [
+      104,
+      170,
+      148,
+      224
+    ],
+    "count": 1579
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 14,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      105,
+      171,
+      145,
+      224
+    ],
+    "count": 1481
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/imp_violet-damage.png",
+    "sourcePose": 15,
+    "scale": 0.2736842105263158,
+    "bounds": [
+      102,
+      193,
+      153,
+      224
+    ],
+    "count": 1228
+  }
+]

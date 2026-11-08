@@ -1,0 +1,18 @@
+{
+  "golem_basalt-attack.png": "e2d7d6c2bfe6181695d79390b46c993a2bf7f0c634df397e8b358782d3a5ad53",
+  "golem_basalt-damage.png": "b6f3f872e9c93969ee40746f3c29a16bb833531ad7881688d34a4426a31da6a1",
+  "golem_basalt-idle.png": "c98325155a4b5912047017a429b0a15701f2608edd25b813bba5680145efb00c",
+  "golem_basalt-moves.png": "0796a5e683a26f321597df391930e13a5644d10558de98ebe4144374eebc0e2f",
+  "golem_basalt-walk.png": "42bb539b25417070efe20e84b5f7973ca1b8a37254dae7a82c3f010408df59fe",
+  "golem_crystal-attack-rear.png": "ce164e82e32c3122f337ce382a0b3bd8748f74df2faf531788c9505e759dc69c",
+  "golem_crystal-attack.png": "e2d7d6c2bfe6181695d79390b46c993a2bf7f0c634df397e8b358782d3a5ad53",
+  "golem_crystal-damage.png": "b6f3f872e9c93969ee40746f3c29a16bb833531ad7881688d34a4426a31da6a1",
+  "golem_crystal-idle.png": "c98325155a4b5912047017a429b0a15701f2608edd25b813bba5680145efb00c",
+  "golem_crystal-moves.png": "0796a5e683a26f321597df391930e13a5644d10558de98ebe4144374eebc0e2f",
+  "golem_crystal-walk.png": "42bb539b25417070efe20e84b5f7973ca1b8a37254dae7a82c3f010408df59fe",
+  "golem_temple-attack.png": "e2d7d6c2bfe6181695d79390b46c993a2bf7f0c634df397e8b358782d3a5ad53",
+  "golem_temple-damage.png": "b6f3f872e9c93969ee40746f3c29a16bb833531ad7881688d34a4426a31da6a1",
+  "golem_temple-idle.png": "c98325155a4b5912047017a429b0a15701f2608edd25b813bba5680145efb00c",
+  "golem_temple-moves.png": "0796a5e683a26f321597df391930e13a5644d10558de98ebe4144374eebc0e2f",
+  "golem_temple-walk.png": "42bb539b25417070efe20e84b5f7973ca1b8a37254dae7a82c3f010408df59fe"
+}
