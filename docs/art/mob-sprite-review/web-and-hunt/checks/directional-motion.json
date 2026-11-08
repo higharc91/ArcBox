@@ -1,0 +1,98 @@
+{
+  "spider_phase": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  },
+  "wolf_alpha": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  },
+  "crab_deep": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  }
+}

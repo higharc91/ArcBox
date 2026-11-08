@@ -1,0 +1,102 @@
+{
+  "spider_phase_idle": {
+    "promptKey": "spider_phase_idle",
+    "references": [
+      "references/spider_phase-idle.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png"
+    ]
+  },
+  "spider_phase_walk": {
+    "promptKey": "spider_phase_walk",
+    "references": [
+      "references/spider_phase-walk.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/spider_phase-idle.png"
+    ]
+  },
+  "spider_phase_attack": {
+    "promptKey": "spider_phase_attack",
+    "references": [
+      "references/spider_phase-attack.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/spider_phase-idle.png"
+    ]
+  },
+  "spider_phase_damage": {
+    "promptKey": "spider_phase_damage",
+    "references": [
+      "references/spider_phase-damage.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/spider_phase-idle.png"
+    ]
+  },
+  "wolf_alpha_idle": {
+    "promptKey": "wolf_alpha_idle",
+    "references": [
+      "references/wolf_alpha-idle.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png"
+    ]
+  },
+  "wolf_alpha_walk": {
+    "promptKey": "wolf_alpha_walk",
+    "references": [
+      "references/wolf_alpha-walk.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/wolf_alpha-idle.png"
+    ]
+  },
+  "wolf_alpha_attack": {
+    "promptKey": "wolf_alpha_attack",
+    "references": [
+      "references/wolf_alpha-attack.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/wolf_alpha-idle.png"
+    ]
+  },
+  "wolf_alpha_damage": {
+    "promptKey": "wolf_alpha_damage",
+    "references": [
+      "references/wolf_alpha-damage.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/wolf_alpha-idle.png"
+    ]
+  },
+  "crab_deep_idle": {
+    "promptKey": "crab_deep_idle",
+    "references": [
+      "references/crab_deep-idle.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png"
+    ]
+  },
+  "crab_deep_walk": {
+    "promptKey": "crab_deep_walk",
+    "references": [
+      "references/crab_deep-walk.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/crab_deep-idle.png"
+    ]
+  },
+  "crab_deep_attack": {
+    "promptKey": "crab_deep_attack",
+    "references": [
+      "references/crab_deep-attack.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/crab_deep-idle.png"
+    ]
+  },
+  "crab_deep_damage": {
+    "promptKey": "crab_deep_damage",
+    "references": [
+      "references/crab_deep-damage.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png",
+      "source/crab_deep-idle.png"
+    ]
+  },
+  "wolf_alpha_rear_down": {
+    "promptKey": "wolf_alpha_rear_down",
+    "references": [
+      "source/wolf_alpha-idle.png",
+      "../../concepts/web-and-hunt-2026-11-08/three-variants.png"
+    ]
+  }
+}

@@ -39,7 +39,12 @@ public static class LibraryVariantDemo
             Add(8 + i * 3, c.Name + " natural attack", new(c.Id),
                 [new AbilityUsed(new(c.Id), new("common.attack"), new Target(Unit: new("Fighter")), rules.Abilities[new("common.attack")].Presentation),
                     new AttackResolved(new(c.Id), new("Fighter"), true, false),
-                    new Damaged(new("Fighter"), 4, c.Sprite switch { "beasts.bat.vampire" => "piercing", "beasts.bear.undead" => "slashing", _ => "bludgeoning" }, 24)],
+                    new Damaged(new("Fighter"), 4, c.Sprite switch
+                    {
+                        "beasts.bat.vampire" or "beasts.spider.phase" or "beasts.wolf.alpha" => "piercing",
+                        "beasts.bear.undead" => "slashing",
+                        _ => "bludgeoning",
+                    }, 24)],
                 targets[i], (.22, c.Id.ToLowerInvariant() + "-attack-windup"), (.46, c.Id.ToLowerInvariant() + "-attack-contact"), (1.2, c.Id.ToLowerInvariant() + "-recovery"));
         }
         Add(18, "Library creatures ready again", null, [], new(12, 10), (.5, "library-restored"));

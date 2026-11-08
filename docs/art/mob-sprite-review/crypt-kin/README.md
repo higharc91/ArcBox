@@ -32,3 +32,5 @@ Use Godot Mono 4.7.2 with the .NET 10 host build. Before `--`: `--audio-driver D
 ```
 
 Collect with `python tools/tactics-assets/imagegen/crypt-kin-2026-11-08/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`, then action-scenes.cjs, review.cjs and verify-review.cjs. Native replay includes three movement round trips, three adjacent natural attacks and recovery. It is silent with Dummy audio. Software-rendered captures verify appearance, not hardware performance.
+
+[Next: Phase Spider, Alpha Wolf and Deep Crab](../web-and-hunt/index.html), continuing issue #272 on the separate follow-up branch.

@@ -1,0 +1,50 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-secrets/content/tactics/base
+THINGS demo: 11 views, 14 shots
+THINGS demo step Library creatures ready at 2.01 s
+TACTICS screen tactics-battle-river_crossing
+THINGS demo step Spider moving at 2.01 s
+THINGS demo step Wolf moving at 4.01 s
+SHOT /workspace/mob-review/web-hunt-moves/001-tactics.png
+SHOT /workspace/mob-review/web-hunt-moves/002-tactics-battle-river-crossing.png
+SHOT /workspace/mob-review/web-hunt-moves/003-spider-walk.png
+SHOT /workspace/mob-review/web-hunt-moves/004-library-ready.png
+SHOT /workspace/mob-review/web-hunt-moves/005-wolf-walk.png
+THINGS demo step Crab moving at 6.01 s
+SHOT /workspace/mob-review/web-hunt-moves/006-crab-walk.png
+THINGS demo step Target ready at 7.21 s
+THINGS demo step Phase Spider natural attack at 8.02 s
+SHOT /workspace/mob-review/web-hunt-moves/007-spider-attack-windup.png
+SHOT /workspace/mob-review/web-hunt-moves/008-tactics-beat-attack-4.png
+SHOT /workspace/mob-review/web-hunt-moves/009-spider-attack-contact.png
+SHOT /workspace/mob-review/web-hunt-moves/010-tactics-beat-hit-4.png
+SHOT /workspace/mob-review/web-hunt-moves/011-spider-recovery.png
+THINGS demo step Target ready at 10.20 s
+THINGS demo step Alpha Wolf natural attack at 11.05 s
+SHOT /workspace/mob-review/web-hunt-moves/012-wolf-attack-windup.png
+SHOT /workspace/mob-review/web-hunt-moves/013-tactics-beat-attack-5.png
+SHOT /workspace/mob-review/web-hunt-moves/014-wolf-attack-contact.png
+SHOT /workspace/mob-review/web-hunt-moves/015-tactics-beat-hit-5.png
+SHOT /workspace/mob-review/web-hunt-moves/016-wolf-recovery.png
+THINGS demo step Target ready at 13.22 s
+THINGS demo step Deep Crab natural attack at 14.01 s
+SHOT /workspace/mob-review/web-hunt-moves/017-crab-attack-windup.png
+SHOT /workspace/mob-review/web-hunt-moves/018-tactics-beat-attack-6.png
+SHOT /workspace/mob-review/web-hunt-moves/019-crab-attack-contact.png
+SHOT /workspace/mob-review/web-hunt-moves/020-tactics-beat-hit-6.png
+SHOT /workspace/mob-review/web-hunt-moves/021-crab-recovery.png
+THINGS demo step Library creatures ready again at 18.01 s
+SHOT /workspace/mob-review/web-hunt-moves/022-library-restored.png
+THINGS demo done
+TACTICS left: narrator cleared

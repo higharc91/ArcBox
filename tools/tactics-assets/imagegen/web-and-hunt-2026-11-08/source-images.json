@@ -1,0 +1,15 @@
+{
+  "spider_phase-idle": "0b2754e5-f82a-4abf-a47b-338e75f8de77",
+  "wolf_alpha-idle": "dd0987c2-9b48-4e17-b12a-d0b88f588c3f",
+  "crab_deep-idle": "ab4a983f-73a1-4588-a3bd-7b60a4252df4",
+  "spider_phase-walk": "bda1602a-b10b-4d81-a40f-b5f1b72bb196",
+  "wolf_alpha-walk": "4e6acffc-f779-4db2-93a4-499e2b398b29",
+  "crab_deep-walk": "c67d4036-87f8-4535-bfc0-b17d3ef2e2ad",
+  "spider_phase-attack": "da4ba377-5514-45a0-b73d-1be44e955000",
+  "wolf_alpha-attack": "60645428-dcfd-4f57-a407-0d3504cbb218",
+  "crab_deep-attack": "d3a281b0-118c-4579-8483-2cfb8e4bb76f",
+  "spider_phase-damage": "57d6ce5b-6781-4e03-b91e-df1dd637078f",
+  "wolf_alpha-damage": "87d7c128-13d9-4c9a-b2d8-74bcfba38641",
+  "crab_deep-damage": "110b91fe-8868-4724-9693-838bdb0f0747",
+  "wolf_alpha-rear-down": "6dbb48e8-5a5d-45dc-a13c-ca4ba7d00c30"
+}

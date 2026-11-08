@@ -1,0 +1,10142 @@
+[
+  {
+    "id": "spider_phase",
+    "size": 320,
+    "anchor": [
+      160,
+      260
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          110.5,
+          56
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          14,
+          54,
+          193,
+          144
+        ],
+        "bounds": [
+          16,
+          56,
+          205,
+          196
+        ],
+        "foot": [
+          111.0,
+          196
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          55
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          236,
+          53,
+          193,
+          145
+        ],
+        "bounds": [
+          238,
+          55,
+          427,
+          196
+        ],
+        "foot": [
+          333.5,
+          196
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          54
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          459,
+          52,
+          192,
+          146
+        ],
+        "bounds": [
+          461,
+          54,
+          649,
+          196
+        ],
+        "foot": [
+          555.5,
+          196
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          56
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          681,
+          54,
+          192,
+          144
+        ],
+        "bounds": [
+          683,
+          56,
+          871,
+          196
+        ],
+        "foot": [
+          778.0,
+          196
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          55
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          14,
+          52,
+          193,
+          144
+        ],
+        "bounds": [
+          16,
+          54,
+          205,
+          194
+        ],
+        "foot": [
+          111.0,
+          194
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          54
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          230,
+          52,
+          201,
+          145
+        ],
+        "bounds": [
+          232,
+          54,
+          429,
+          195
+        ],
+        "foot": [
+          329.5,
+          195
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          54
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          459,
+          52,
+          189,
+          141
+        ],
+        "bounds": [
+          461,
+          54,
+          646,
+          191
+        ],
+        "foot": [
+          552.5,
+          191
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          55
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          675,
+          52,
+          198,
+          144
+        ],
+        "bounds": [
+          677,
+          54,
+          871,
+          194
+        ],
+        "foot": [
+          776.5,
+          194
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          53
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          14,
+          50,
+          194,
+          151
+        ],
+        "bounds": [
+          16,
+          52,
+          206,
+          199
+        ],
+        "foot": [
+          111.0,
+          199
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          53
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          236,
+          50,
+          194,
+          152
+        ],
+        "bounds": [
+          238,
+          52,
+          428,
+          200
+        ],
+        "foot": [
+          332.5,
+          200
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          58
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          458,
+          55,
+          193,
+          147
+        ],
+        "bounds": [
+          460,
+          57,
+          649,
+          200
+        ],
+        "foot": [
+          555.5,
+          200
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          53
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          679,
+          50,
+          194,
+          151
+        ],
+        "bounds": [
+          681,
+          52,
+          871,
+          199
+        ],
+        "foot": [
+          777.5,
+          199
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          163.5,
+          73
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          19,
+          70,
+          281,
+          197
+        ],
+        "bounds": [
+          21,
+          72,
+          298,
+          265
+        ],
+        "foot": [
+          161.0,
+          265
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          470.5,
+          113
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          350,
+          111,
+          245,
+          147
+        ],
+        "bounds": [
+          352,
+          113,
+          593,
+          256
+        ],
+        "foot": [
+          472.5,
+          256
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.5,
+          266
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          24,
+          264,
+          178,
+          161
+        ],
+        "bounds": [
+          26,
+          266,
+          200,
+          423
+        ],
+        "foot": [
+          100.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          264
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          247,
+          262,
+          176,
+          163
+        ],
+        "bounds": [
+          249,
+          264,
+          421,
+          423
+        ],
+        "foot": [
+          324.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          264
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          470,
+          262,
+          176,
+          163
+        ],
+        "bounds": [
+          472,
+          264,
+          644,
+          423
+        ],
+        "foot": [
+          547.5,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          267
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          690,
+          264,
+          178,
+          161
+        ],
+        "bounds": [
+          692,
+          266,
+          866,
+          423
+        ],
+        "foot": [
+          770.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          266
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          20,
+          263,
+          183,
+          161
+        ],
+        "bounds": [
+          22,
+          265,
+          201,
+          422
+        ],
+        "foot": [
+          95.0,
+          422
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          265
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          246,
+          263,
+          180,
+          163
+        ],
+        "bounds": [
+          248,
+          265,
+          424,
+          424
+        ],
+        "foot": [
+          312.5,
+          424
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          265
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          463,
+          262,
+          182,
+          163
+        ],
+        "bounds": [
+          465,
+          264,
+          643,
+          423
+        ],
+        "foot": [
+          545.5,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          266
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          685,
+          263,
+          184,
+          162
+        ],
+        "bounds": [
+          687,
+          265,
+          867,
+          423
+        ],
+        "foot": [
+          772.5,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          266
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          18,
+          263,
+          185,
+          161
+        ],
+        "bounds": [
+          20,
+          265,
+          201,
+          422
+        ],
+        "foot": [
+          99.5,
+          422
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          266
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          240,
+          263,
+          186,
+          161
+        ],
+        "bounds": [
+          242,
+          265,
+          424,
+          422
+        ],
+        "foot": [
+          321.5,
+          422
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          268
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          462,
+          265,
+          186,
+          160
+        ],
+        "bounds": [
+          464,
+          267,
+          646,
+          423
+        ],
+        "foot": [
+          548.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          268
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          683,
+          265,
+          188,
+          159
+        ],
+        "bounds": [
+          685,
+          267,
+          869,
+          422
+        ],
+        "foot": [
+          767.5,
+          422
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          798.5,
+          73
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          647,
+          71,
+          267,
+          203
+        ],
+        "bounds": [
+          649,
+          73,
+          912,
+          272
+        ],
+        "foot": [
+          771.5,
+          272
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1121.0,
+          113
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          970,
+          111,
+          251,
+          154
+        ],
+        "bounds": [
+          972,
+          113,
+          1219,
+          263
+        ],
+        "foot": [
+          1095.5,
+          263
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          121.0,
+          507
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          20,
+          505,
+          182,
+          130
+        ],
+        "bounds": [
+          22,
+          507,
+          200,
+          633
+        ],
+        "foot": [
+          89.0,
+          633
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          504
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          242,
+          501,
+          181,
+          133
+        ],
+        "bounds": [
+          244,
+          503,
+          421,
+          632
+        ],
+        "foot": [
+          310.0,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.0,
+          506
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          464,
+          503,
+          182,
+          131
+        ],
+        "bounds": [
+          466,
+          505,
+          644,
+          632
+        ],
+        "foot": [
+          533.0,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          506
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          686,
+          504,
+          182,
+          131
+        ],
+        "bounds": [
+          688,
+          506,
+          866,
+          633
+        ],
+        "foot": [
+          755.0,
+          633
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.5,
+          505
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          17,
+          503,
+          186,
+          132
+        ],
+        "bounds": [
+          19,
+          505,
+          201,
+          633
+        ],
+        "foot": [
+          110.5,
+          633
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.0,
+          505
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          237,
+          502,
+          188,
+          128
+        ],
+        "bounds": [
+          239,
+          504,
+          423,
+          628
+        ],
+        "foot": [
+          325.0,
+          628
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.0,
+          505
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          459,
+          503,
+          188,
+          126
+        ],
+        "bounds": [
+          461,
+          505,
+          645,
+          627
+        ],
+        "foot": [
+          533.0,
+          627
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.0,
+          505
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          681,
+          503,
+          188,
+          129
+        ],
+        "bounds": [
+          683,
+          505,
+          867,
+          630
+        ],
+        "foot": [
+          754.5,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          122.5,
+          504
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          17,
+          502,
+          188,
+          128
+        ],
+        "bounds": [
+          19,
+          504,
+          203,
+          628
+        ],
+        "foot": [
+          87.5,
+          628
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.5,
+          503
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          238,
+          501,
+          188,
+          128
+        ],
+        "bounds": [
+          240,
+          503,
+          424,
+          627
+        ],
+        "foot": [
+          309.5,
+          627
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          505
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          458,
+          503,
+          190,
+          126
+        ],
+        "bounds": [
+          460,
+          505,
+          646,
+          627
+        ],
+        "foot": [
+          531.5,
+          627
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.0,
+          504
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          683,
+          501,
+          188,
+          129
+        ],
+        "bounds": [
+          685,
+          503,
+          869,
+          628
+        ],
+        "foot": [
+          754.0,
+          628
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          186.0,
+          383
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          40,
+          381,
+          248,
+          199
+        ],
+        "bounds": [
+          42,
+          383,
+          286,
+          578
+        ],
+        "foot": [
+          169.0,
+          578
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          483.5,
+          420
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          343,
+          418,
+          242,
+          142
+        ],
+        "bounds": [
+          345,
+          420,
+          583,
+          558
+        ],
+        "foot": [
+          464.0,
+          558
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          96.5,
+          709
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          22,
+          706,
+          173,
+          156
+        ],
+        "bounds": [
+          24,
+          708,
+          193,
+          860
+        ],
+        "foot": [
+          120.5,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.5,
+          708
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          246,
+          705,
+          173,
+          157
+        ],
+        "bounds": [
+          248,
+          707,
+          417,
+          860
+        ],
+        "foot": [
+          343.5,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.5,
+          708
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          470,
+          705,
+          172,
+          156
+        ],
+        "bounds": [
+          472,
+          707,
+          640,
+          859
+        ],
+        "foot": [
+          565.0,
+          859
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          709
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          690,
+          707,
+          172,
+          155
+        ],
+        "bounds": [
+          692,
+          709,
+          860,
+          860
+        ],
+        "foot": [
+          787.0,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          705
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          20,
+          703,
+          179,
+          154
+        ],
+        "bounds": [
+          22,
+          705,
+          197,
+          855
+        ],
+        "foot": [
+          102.5,
+          855
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          704
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          244,
+          702,
+          180,
+          156
+        ],
+        "bounds": [
+          246,
+          704,
+          422,
+          856
+        ],
+        "foot": [
+          346.0,
+          856
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          704
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          465,
+          702,
+          172,
+          157
+        ],
+        "bounds": [
+          467,
+          704,
+          635,
+          857
+        ],
+        "foot": [
+          568.0,
+          857
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          705
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          686,
+          702,
+          184,
+          161
+        ],
+        "bounds": [
+          688,
+          704,
+          868,
+          861
+        ],
+        "foot": [
+          787.5,
+          861
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          701
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          19,
+          698,
+          180,
+          163
+        ],
+        "bounds": [
+          21,
+          700,
+          197,
+          859
+        ],
+        "foot": [
+          122.0,
+          859
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          352.0,
+          701
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          241,
+          698,
+          183,
+          164
+        ],
+        "bounds": [
+          243,
+          700,
+          422,
+          860
+        ],
+        "foot": [
+          344.0,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          702
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          465,
+          699,
+          182,
+          163
+        ],
+        "bounds": [
+          467,
+          701,
+          645,
+          860
+        ],
+        "foot": [
+          568.0,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          702
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          685,
+          700,
+          181,
+          162
+        ],
+        "bounds": [
+          687,
+          702,
+          864,
+          860
+        ],
+        "foot": [
+          788.0,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          783.5,
+          386
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          649,
+          384,
+          260,
+          194
+        ],
+        "bounds": [
+          651,
+          386,
+          907,
+          576
+        ],
+        "foot": [
+          791.0,
+          576
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1104.5,
+          421
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          974,
+          418,
+          255,
+          146
+        ],
+        "bounds": [
+          976,
+          420,
+          1227,
+          562
+        ],
+        "foot": [
+          1101.5,
+          562
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          942
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          18,
+          940,
+          188,
+          140
+        ],
+        "bounds": [
+          20,
+          942,
+          204,
+          1078
+        ],
+        "foot": [
+          111.5,
+          1078
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          942
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          239,
+          939,
+          189,
+          141
+        ],
+        "bounds": [
+          241,
+          941,
+          426,
+          1078
+        ],
+        "foot": [
+          334.5,
+          1078
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          942
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          460,
+          939,
+          190,
+          141
+        ],
+        "bounds": [
+          462,
+          941,
+          648,
+          1078
+        ],
+        "foot": [
+          555.5,
+          1078
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          942
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          683,
+          940,
+          188,
+          140
+        ],
+        "bounds": [
+          685,
+          942,
+          869,
+          1078
+        ],
+        "foot": [
+          778.0,
+          1078
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          939
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          16,
+          937,
+          190,
+          147
+        ],
+        "bounds": [
+          18,
+          939,
+          204,
+          1082
+        ],
+        "foot": [
+          112.5,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          939
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          239,
+          937,
+          192,
+          147
+        ],
+        "bounds": [
+          241,
+          939,
+          429,
+          1082
+        ],
+        "foot": [
+          333.0,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          939
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          459,
+          936,
+          188,
+          147
+        ],
+        "bounds": [
+          461,
+          938,
+          645,
+          1081
+        ],
+        "foot": [
+          557.0,
+          1081
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          940
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          680,
+          938,
+          185,
+          146
+        ],
+        "bounds": [
+          682,
+          940,
+          863,
+          1082
+        ],
+        "foot": [
+          778.5,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          937
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          16,
+          934,
+          191,
+          150
+        ],
+        "bounds": [
+          18,
+          936,
+          205,
+          1082
+        ],
+        "foot": [
+          112.5,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          936
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          236,
+          934,
+          193,
+          147
+        ],
+        "bounds": [
+          238,
+          936,
+          427,
+          1079
+        ],
+        "foot": [
+          332.5,
+          1079
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          936
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          458,
+          934,
+          193,
+          142
+        ],
+        "bounds": [
+          460,
+          936,
+          649,
+          1074
+        ],
+        "foot": [
+          555.0,
+          1074
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          937
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          680,
+          934,
+          190,
+          149
+        ],
+        "bounds": [
+          682,
+          936,
+          868,
+          1081
+        ],
+        "foot": [
+          777.5,
+          1081
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          183.5,
+          687
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          24,
+          684,
+          271,
+          203
+        ],
+        "bounds": [
+          26,
+          686,
+          293,
+          885
+        ],
+        "foot": [
+          166.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.5,
+          741
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          350,
+          738,
+          239,
+          140
+        ],
+        "bounds": [
+          352,
+          740,
+          587,
+          876
+        ],
+        "foot": [
+          469.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.0,
+          1157
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          21,
+          1155,
+          179,
+          154
+        ],
+        "bounds": [
+          23,
+          1157,
+          198,
+          1307
+        ],
+        "foot": [
+          80.5,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1157
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          242,
+          1155,
+          181,
+          153
+        ],
+        "bounds": [
+          244,
+          1157,
+          421,
+          1306
+        ],
+        "foot": [
+          308.0,
+          1306
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          1157
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          464,
+          1155,
+          181,
+          153
+        ],
+        "bounds": [
+          466,
+          1157,
+          643,
+          1306
+        ],
+        "foot": [
+          534.0,
+          1306
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          1157
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          687,
+          1155,
+          181,
+          153
+        ],
+        "bounds": [
+          689,
+          1157,
+          866,
+          1306
+        ],
+        "foot": [
+          751.5,
+          1306
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          1155
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          15,
+          1152,
+          191,
+          153
+        ],
+        "bounds": [
+          17,
+          1154,
+          204,
+          1303
+        ],
+        "foot": [
+          86.5,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1153
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          240,
+          1151,
+          182,
+          157
+        ],
+        "bounds": [
+          242,
+          1153,
+          420,
+          1306
+        ],
+        "foot": [
+          302.0,
+          1306
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          1154
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          460,
+          1152,
+          188,
+          156
+        ],
+        "bounds": [
+          462,
+          1154,
+          646,
+          1306
+        ],
+        "foot": [
+          523.5,
+          1306
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          1154
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          684,
+          1151,
+          187,
+          160
+        ],
+        "bounds": [
+          686,
+          1153,
+          869,
+          1309
+        ],
+        "foot": [
+          749.0,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          1153
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          19,
+          1151,
+          186,
+          156
+        ],
+        "bounds": [
+          21,
+          1153,
+          203,
+          1305
+        ],
+        "foot": [
+          82.0,
+          1305
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          1153
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          239,
+          1150,
+          186,
+          156
+        ],
+        "bounds": [
+          241,
+          1152,
+          423,
+          1304
+        ],
+        "foot": [
+          309.0,
+          1304
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          1157
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          462,
+          1154,
+          190,
+          153
+        ],
+        "bounds": [
+          464,
+          1156,
+          650,
+          1305
+        ],
+        "foot": [
+          532.5,
+          1305
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          1152
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          685,
+          1150,
+          186,
+          157
+        ],
+        "bounds": [
+          687,
+          1152,
+          869,
+          1305
+        ],
+        "foot": [
+          753.5,
+          1305
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          787.0,
+          696
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          648,
+          693,
+          266,
+          200
+        ],
+        "bounds": [
+          650,
+          695,
+          912,
+          891
+        ],
+        "foot": [
+          773.5,
+          891
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1101.0,
+          735
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          975,
+          733,
+          248,
+          146
+        ],
+        "bounds": [
+          977,
+          735,
+          1221,
+          877
+        ],
+        "foot": [
+          1099.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          102.0,
+          1390
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          20,
+          1387,
+          185,
+          133
+        ],
+        "bounds": [
+          22,
+          1389,
+          203,
+          1518
+        ],
+        "foot": [
+          118.5,
+          1518
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.0,
+          1387
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          244,
+          1385,
+          184,
+          130
+        ],
+        "bounds": [
+          246,
+          1387,
+          426,
+          1513
+        ],
+        "foot": [
+          345.5,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          1387
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          467,
+          1385,
+          183,
+          130
+        ],
+        "bounds": [
+          469,
+          1387,
+          648,
+          1513
+        ],
+        "foot": [
+          566.0,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.0,
+          1390
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          687,
+          1388,
+          184,
+          132
+        ],
+        "bounds": [
+          689,
+          1390,
+          869,
+          1518
+        ],
+        "foot": [
+          786.5,
+          1518
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          101.5,
+          1390
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          20,
+          1388,
+          187,
+          129
+        ],
+        "bounds": [
+          22,
+          1390,
+          205,
+          1515
+        ],
+        "foot": [
+          113.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.0,
+          1390
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          243,
+          1388,
+          185,
+          120
+        ],
+        "bounds": [
+          245,
+          1390,
+          426,
+          1506
+        ],
+        "foot": [
+          350.0,
+          1506
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.5,
+          1390
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          466,
+          1388,
+          184,
+          130
+        ],
+        "bounds": [
+          468,
+          1390,
+          648,
+          1516
+        ],
+        "foot": [
+          563.0,
+          1516
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          1391
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          688,
+          1388,
+          184,
+          129
+        ],
+        "bounds": [
+          690,
+          1390,
+          870,
+          1515
+        ],
+        "foot": [
+          787.0,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          104.0,
+          1386
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          19,
+          1384,
+          187,
+          133
+        ],
+        "bounds": [
+          21,
+          1386,
+          204,
+          1515
+        ],
+        "foot": [
+          119.0,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.0,
+          1386
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          243,
+          1384,
+          186,
+          129
+        ],
+        "bounds": [
+          245,
+          1386,
+          427,
+          1511
+        ],
+        "foot": [
+          344.0,
+          1511
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.5,
+          1386
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          465,
+          1384,
+          184,
+          130
+        ],
+        "bounds": [
+          467,
+          1386,
+          647,
+          1512
+        ],
+        "foot": [
+          565.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          1386
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          685,
+          1383,
+          188,
+          134
+        ],
+        "bounds": [
+          687,
+          1385,
+          871,
+          1515
+        ],
+        "foot": [
+          787.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          138.5,
+          1004
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          30,
+          1002,
+          245,
+          201
+        ],
+        "bounds": [
+          32,
+          1004,
+          273,
+          1201
+        ],
+        "foot": [
+          147.0,
+          1201
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          449.0,
+          1045
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          347,
+          1043,
+          243,
+          136
+        ],
+        "bounds": [
+          349,
+          1045,
+          588,
+          1177
+        ],
+        "foot": [
+          468.5,
+          1177
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          100.0,
+          1598
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          21,
+          1596,
+          176,
+          152
+        ],
+        "bounds": [
+          23,
+          1598,
+          195,
+          1746
+        ],
+        "foot": [
+          110.0,
+          1746
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          321.5,
+          1598
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          243,
+          1596,
+          176,
+          148
+        ],
+        "bounds": [
+          245,
+          1598,
+          417,
+          1742
+        ],
+        "foot": [
+          336.5,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.5,
+          1598
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          465,
+          1595,
+          177,
+          150
+        ],
+        "bounds": [
+          467,
+          1597,
+          640,
+          1743
+        ],
+        "foot": [
+          558.5,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          1599
+        ],
+        "source": "source/spider_phase-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          688,
+          1596,
+          175,
+          152
+        ],
+        "bounds": [
+          690,
+          1598,
+          861,
+          1746
+        ],
+        "foot": [
+          779.5,
+          1746
+        ],
+        "sourceEdge": false,
+        "scale": 0.8,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.0,
+          1598
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          17,
+          1595,
+          177,
+          146
+        ],
+        "bounds": [
+          19,
+          1597,
+          192,
+          1739
+        ],
+        "foot": [
+          138.5,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.5,
+          1598
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          240,
+          1596,
+          177,
+          148
+        ],
+        "bounds": [
+          242,
+          1598,
+          415,
+          1742
+        ],
+        "foot": [
+          342.0,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          542.5,
+          1598
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          462,
+          1595,
+          182,
+          150
+        ],
+        "bounds": [
+          464,
+          1597,
+          642,
+          1743
+        ],
+        "foot": [
+          564.0,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          767.0,
+          1599
+        ],
+        "source": "source/spider_phase-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          689,
+          1596,
+          176,
+          144
+        ],
+        "bounds": [
+          691,
+          1598,
+          863,
+          1738
+        ],
+        "foot": [
+          807.0,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.8057553956834532,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.5,
+          1596
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          19,
+          1594,
+          182,
+          147
+        ],
+        "bounds": [
+          21,
+          1596,
+          199,
+          1739
+        ],
+        "foot": [
+          140.0,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.0,
+          1598
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          240,
+          1595,
+          183,
+          145
+        ],
+        "bounds": [
+          242,
+          1597,
+          421,
+          1738
+        ],
+        "foot": [
+          339.0,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          542.5,
+          1598
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          464,
+          1595,
+          183,
+          142
+        ],
+        "bounds": [
+          466,
+          1597,
+          645,
+          1735
+        ],
+        "foot": [
+          559.5,
+          1735
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          767.0,
+          1598
+        ],
+        "source": "source/spider_phase-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          685,
+          1595,
+          182,
+          144
+        ],
+        "bounds": [
+          687,
+          1597,
+          865,
+          1737
+        ],
+        "foot": [
+          809.0,
+          1737
+        ],
+        "sourceEdge": false,
+        "scale": 0.7671232876712328,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          757.5,
+          1005
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          646,
+          1003,
+          261,
+          202
+        ],
+        "bounds": [
+          648,
+          1005,
+          905,
+          1203
+        ],
+        "foot": [
+          778.0,
+          1203
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1059.0,
+          1045
+        ],
+        "source": "source/spider_phase-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          972,
+          1043,
+          242,
+          144
+        ],
+        "bounds": [
+          974,
+          1045,
+          1212,
+          1185
+        ],
+        "foot": [
+          1093.0,
+          1185
+        ],
+        "sourceEdge": false,
+        "scale": 0.5625,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "wolf_alpha",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          110.5,
+          43
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          64,
+          40,
+          94,
+          173
+        ],
+        "bounds": [
+          66,
+          42,
+          156,
+          211
+        ],
+        "foot": [
+          110.5,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          43
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          287,
+          40,
+          102,
+          173
+        ],
+        "bounds": [
+          289,
+          42,
+          387,
+          211
+        ],
+        "foot": [
+          332.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          43
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          509,
+          40,
+          102,
+          174
+        ],
+        "bounds": [
+          511,
+          42,
+          609,
+          212
+        ],
+        "foot": [
+          555.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          43
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          732,
+          40,
+          93,
+          174
+        ],
+        "bounds": [
+          734,
+          42,
+          823,
+          212
+        ],
+        "foot": [
+          777.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          41
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          39,
+          98,
+          175
+        ],
+        "bounds": [
+          63,
+          41,
+          157,
+          212
+        ],
+        "foot": [
+          110.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          42
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          284,
+          39,
+          103,
+          175
+        ],
+        "bounds": [
+          286,
+          41,
+          385,
+          212
+        ],
+        "foot": [
+          330.5,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          42
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          507,
+          39,
+          99,
+          176
+        ],
+        "bounds": [
+          509,
+          41,
+          604,
+          213
+        ],
+        "foot": [
+          566.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          43
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          729,
+          41,
+          97,
+          176
+        ],
+        "bounds": [
+          731,
+          43,
+          824,
+          215
+        ],
+        "foot": [
+          787.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.0,
+          41
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          66,
+          38,
+          103,
+          181
+        ],
+        "bounds": [
+          68,
+          40,
+          167,
+          217
+        ],
+        "foot": [
+          116.0,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          53
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          287,
+          50,
+          118,
+          168
+        ],
+        "bounds": [
+          289,
+          52,
+          403,
+          216
+        ],
+        "foot": [
+          333.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          54
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          496,
+          52,
+          128,
+          166
+        ],
+        "bounds": [
+          498,
+          54,
+          622,
+          216
+        ],
+        "foot": [
+          557.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          41
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          727,
+          38,
+          108,
+          180
+        ],
+        "bounds": [
+          729,
+          40,
+          833,
+          216
+        ],
+        "foot": [
+          776.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          158.5,
+          43
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          98,
+          40,
+          127,
+          251
+        ],
+        "bounds": [
+          100,
+          42,
+          223,
+          289
+        ],
+        "foot": [
+          160.0,
+          289
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          463.5,
+          164
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          361,
+          161,
+          224,
+          132
+        ],
+        "bounds": [
+          363,
+          163,
+          583,
+          291
+        ],
+        "foot": [
+          473.0,
+          291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          98.5,
+          275
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          27,
+          272,
+          170,
+          152
+        ],
+        "bounds": [
+          29,
+          274,
+          195,
+          422
+        ],
+        "foot": [
+          113.0,
+          422
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.5,
+          274
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          248,
+          272,
+          171,
+          152
+        ],
+        "bounds": [
+          250,
+          274,
+          417,
+          422
+        ],
+        "foot": [
+          303.5,
+          422
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.5,
+          277
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          468,
+          275,
+          174,
+          147
+        ],
+        "bounds": [
+          470,
+          277,
+          640,
+          420
+        ],
+        "foot": [
+          561.0,
+          420
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          762.0,
+          275
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          691,
+          273,
+          174,
+          149
+        ],
+        "bounds": [
+          693,
+          275,
+          863,
+          420
+        ],
+        "foot": [
+          784.0,
+          420
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          95.5,
+          275
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          28,
+          273,
+          173,
+          155
+        ],
+        "bounds": [
+          30,
+          275,
+          199,
+          426
+        ],
+        "foot": [
+          79.5,
+          426
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          315.0,
+          276
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          250,
+          274,
+          168,
+          154
+        ],
+        "bounds": [
+          252,
+          276,
+          416,
+          426
+        ],
+        "foot": [
+          294.5,
+          426
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.5,
+          276
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          470,
+          274,
+          173,
+          153
+        ],
+        "bounds": [
+          472,
+          276,
+          641,
+          425
+        ],
+        "foot": [
+          531.5,
+          425
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          756.0,
+          276
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          692,
+          274,
+          168,
+          156
+        ],
+        "bounds": [
+          694,
+          276,
+          858,
+          428
+        ],
+        "foot": [
+          745.0,
+          428
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          90.5,
+          274
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          29,
+          272,
+          165,
+          157
+        ],
+        "bounds": [
+          31,
+          274,
+          192,
+          427
+        ],
+        "foot": [
+          115.5,
+          427
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          314.5,
+          287
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          244,
+          284,
+          173,
+          143
+        ],
+        "bounds": [
+          246,
+          286,
+          415,
+          425
+        ],
+        "foot": [
+          294.5,
+          425
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.5,
+          287
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          461,
+          284,
+          177,
+          142
+        ],
+        "bounds": [
+          463,
+          286,
+          636,
+          424
+        ],
+        "foot": [
+          519.5,
+          424
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          755.0,
+          278
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          690,
+          275,
+          172,
+          152
+        ],
+        "bounds": [
+          692,
+          277,
+          860,
+          425
+        ],
+        "foot": [
+          781.0,
+          425
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          747.5,
+          49
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          657,
+          46,
+          241,
+          247
+        ],
+        "bounds": [
+          659,
+          48,
+          896,
+          291
+        ],
+        "foot": [
+          731.0,
+          291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1081.0,
+          168
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          952,
+          165,
+          267,
+          128
+        ],
+        "bounds": [
+          954,
+          167,
+          1217,
+          291
+        ],
+        "foot": [
+          1085.5,
+          291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          96.5,
+          493
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          17,
+          491,
+          190,
+          140
+        ],
+        "bounds": [
+          19,
+          493,
+          205,
+          629
+        ],
+        "foot": [
+          122.5,
+          629
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          315.0,
+          492
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          240,
+          489,
+          186,
+          142
+        ],
+        "bounds": [
+          242,
+          491,
+          424,
+          629
+        ],
+        "foot": [
+          345.0,
+          629
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.0,
+          497
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          461,
+          495,
+          188,
+          137
+        ],
+        "bounds": [
+          463,
+          497,
+          647,
+          630
+        ],
+        "foot": [
+          566.0,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          756.0,
+          494
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          683,
+          491,
+          189,
+          141
+        ],
+        "bounds": [
+          685,
+          493,
+          870,
+          630
+        ],
+        "foot": [
+          788.5,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          95.0,
+          494
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          14,
+          492,
+          198,
+          137
+        ],
+        "bounds": [
+          16,
+          494,
+          210,
+          627
+        ],
+        "foot": [
+          117.0,
+          627
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          317.0,
+          494
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          235,
+          491,
+          199,
+          139
+        ],
+        "bounds": [
+          237,
+          493,
+          432,
+          628
+        ],
+        "foot": [
+          337.5,
+          628
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.0,
+          495
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          455,
+          492,
+          200,
+          138
+        ],
+        "bounds": [
+          457,
+          494,
+          653,
+          628
+        ],
+        "foot": [
+          560.0,
+          628
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          749.0,
+          495
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          675,
+          493,
+          200,
+          133
+        ],
+        "bounds": [
+          677,
+          495,
+          873,
+          624
+        ],
+        "foot": [
+          788.5,
+          624
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          90.0,
+          498
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          11,
+          496,
+          199,
+          136
+        ],
+        "bounds": [
+          13,
+          498,
+          208,
+          630
+        ],
+        "foot": [
+          123.0,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.5,
+          505
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          230,
+          502,
+          201,
+          130
+        ],
+        "bounds": [
+          232,
+          504,
+          429,
+          630
+        ],
+        "foot": [
+          341.5,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          528.5,
+          513
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          441,
+          510,
+          215,
+          122
+        ],
+        "bounds": [
+          443,
+          512,
+          654,
+          630
+        ],
+        "foot": [
+          571.0,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          742.0,
+          499
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          672,
+          497,
+          205,
+          135
+        ],
+        "bounds": [
+          674,
+          499,
+          875,
+          630
+        ],
+        "foot": [
+          789.0,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          137.0,
+          358
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          22,
+          355,
+          280,
+          228
+        ],
+        "bounds": [
+          24,
+          357,
+          300,
+          581
+        ],
+        "foot": [
+          171.0,
+          581
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          459.0,
+          468
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          333,
+          465,
+          273,
+          119
+        ],
+        "bounds": [
+          335,
+          467,
+          604,
+          582
+        ],
+        "foot": [
+          469.5,
+          582
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          68.5,
+          683
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          20,
+          681,
+          168,
+          180
+        ],
+        "bounds": [
+          22,
+          683,
+          186,
+          859
+        ],
+        "foot": [
+          147.5,
+          859
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          292.0,
+          683
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          246,
+          681,
+          159,
+          180
+        ],
+        "bounds": [
+          248,
+          683,
+          403,
+          859
+        ],
+        "foot": [
+          367.0,
+          859
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          513.5,
+          683
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          469,
+          681,
+          159,
+          181
+        ],
+        "bounds": [
+          471,
+          683,
+          626,
+          860
+        ],
+        "foot": [
+          590.0,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          742.0,
+          682
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          700,
+          679,
+          149,
+          183
+        ],
+        "bounds": [
+          702,
+          681,
+          847,
+          860
+        ],
+        "foot": [
+          811.5,
+          860
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          69.5,
+          686
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          21,
+          684,
+          164,
+          180
+        ],
+        "bounds": [
+          23,
+          686,
+          183,
+          862
+        ],
+        "foot": [
+          148.0,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          291.0,
+          685
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          245,
+          682,
+          160,
+          181
+        ],
+        "bounds": [
+          247,
+          684,
+          403,
+          861
+        ],
+        "foot": [
+          367.0,
+          861
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          513.5,
+          685
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          466,
+          683,
+          161,
+          182
+        ],
+        "bounds": [
+          468,
+          685,
+          625,
+          863
+        ],
+        "foot": [
+          587.5,
+          863
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          737.5,
+          686
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          692,
+          683,
+          162,
+          180
+        ],
+        "bounds": [
+          694,
+          685,
+          852,
+          861
+        ],
+        "foot": [
+          809.5,
+          861
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          64.5,
+          686
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          16,
+          684,
+          173,
+          181
+        ],
+        "bounds": [
+          18,
+          686,
+          187,
+          863
+        ],
+        "foot": [
+          133.0,
+          863
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          285.0,
+          688
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          235,
+          686,
+          171,
+          178
+        ],
+        "bounds": [
+          237,
+          688,
+          404,
+          862
+        ],
+        "foot": [
+          364.0,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          510.5,
+          689
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          461,
+          686,
+          169,
+          179
+        ],
+        "bounds": [
+          463,
+          688,
+          628,
+          863
+        ],
+        "foot": [
+          586.5,
+          863
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          738.0,
+          687
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          693,
+          685,
+          163,
+          180
+        ],
+        "bounds": [
+          695,
+          687,
+          854,
+          863
+        ],
+        "foot": [
+          814.0,
+          863
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          737.5,
+          348
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          670,
+          345,
+          224,
+          241
+        ],
+        "bounds": [
+          672,
+          347,
+          892,
+          584
+        ],
+        "foot": [
+          837.5,
+          584
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          197.5,
+          215
+        ],
+        "source": "source/wolf_alpha-rear-down.png",
+        "sourcePose": 0,
+        "cell": [
+          32,
+          213,
+          537,
+          435
+        ],
+        "bounds": [
+          34,
+          215,
+          567,
+          646
+        ],
+        "foot": [
+          300.5,
+          646
+        ],
+        "sourceEdge": false,
+        "scale": 0.13271461716937355,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          909
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          71,
+          907,
+          82,
+          188
+        ],
+        "bounds": [
+          73,
+          909,
+          151,
+          1093
+        ],
+        "foot": [
+          111.5,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          906
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          294,
+          904,
+          82,
+          189
+        ],
+        "bounds": [
+          296,
+          906,
+          374,
+          1091
+        ],
+        "foot": [
+          333.0,
+          1091
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          907
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          515,
+          905,
+          82,
+          190
+        ],
+        "bounds": [
+          517,
+          907,
+          595,
+          1093
+        ],
+        "foot": [
+          555.0,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          906
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          736,
+          904,
+          83,
+          190
+        ],
+        "bounds": [
+          738,
+          906,
+          817,
+          1092
+        ],
+        "foot": [
+          777.0,
+          1092
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          906
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          66,
+          904,
+          91,
+          194
+        ],
+        "bounds": [
+          68,
+          906,
+          155,
+          1096
+        ],
+        "foot": [
+          111.5,
+          1096
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          908
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          287,
+          905,
+          90,
+          194
+        ],
+        "bounds": [
+          289,
+          907,
+          375,
+          1097
+        ],
+        "foot": [
+          335.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          910
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          510,
+          907,
+          91,
+          192
+        ],
+        "bounds": [
+          512,
+          909,
+          599,
+          1097
+        ],
+        "foot": [
+          568.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          908
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          732,
+          906,
+          91,
+          193
+        ],
+        "bounds": [
+          734,
+          908,
+          821,
+          1097
+        ],
+        "foot": [
+          779.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          902
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          65,
+          900,
+          93,
+          201
+        ],
+        "bounds": [
+          67,
+          902,
+          156,
+          1099
+        ],
+        "foot": [
+          111.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          908
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          285,
+          906,
+          97,
+          193
+        ],
+        "bounds": [
+          287,
+          908,
+          380,
+          1097
+        ],
+        "foot": [
+          330.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          912
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          504,
+          910,
+          103,
+          189
+        ],
+        "bounds": [
+          506,
+          912,
+          605,
+          1097
+        ],
+        "foot": [
+          555.5,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          903
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          734,
+          900,
+          90,
+          201
+        ],
+        "bounds": [
+          736,
+          902,
+          822,
+          1099
+        ],
+        "foot": [
+          777.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          158.0,
+          645
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          106,
+          643,
+          108,
+          253
+        ],
+        "bounds": [
+          108,
+          645,
+          212,
+          894
+        ],
+        "foot": [
+          161.0,
+          894
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          887.5,
+          195
+        ],
+        "source": "source/wolf_alpha-rear-down.png",
+        "sourcePose": 1,
+        "cell": [
+          728,
+          192,
+          319,
+          531
+        ],
+        "bounds": [
+          730,
+          194,
+          1045,
+          721
+        ],
+        "foot": [
+          887.5,
+          721
+        ],
+        "sourceEdge": false,
+        "scale": 0.13271461716937355,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          139.5,
+          1132
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          29,
+          1129,
+          153,
+          181
+        ],
+        "bounds": [
+          31,
+          1131,
+          180,
+          1308
+        ],
+        "foot": [
+          69.5,
+          1308
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          361.0,
+          1132
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          253,
+          1129,
+          148,
+          180
+        ],
+        "bounds": [
+          255,
+          1131,
+          399,
+          1307
+        ],
+        "foot": [
+          292.5,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          578.0,
+          1130
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          473,
+          1128,
+          144,
+          183
+        ],
+        "bounds": [
+          475,
+          1130,
+          615,
+          1309
+        ],
+        "foot": [
+          512.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          801.0,
+          1137
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          694,
+          1135,
+          147,
+          175
+        ],
+        "bounds": [
+          696,
+          1137,
+          839,
+          1308
+        ],
+        "foot": [
+          745.0,
+          1308
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          140.5,
+          1134
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          28,
+          1132,
+          159,
+          177
+        ],
+        "bounds": [
+          30,
+          1134,
+          185,
+          1307
+        ],
+        "foot": [
+          65.5,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          360.5,
+          1134
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          247,
+          1132,
+          160,
+          179
+        ],
+        "bounds": [
+          249,
+          1134,
+          405,
+          1309
+        ],
+        "foot": [
+          289.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          578.0,
+          1136
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          463,
+          1134,
+          161,
+          178
+        ],
+        "bounds": [
+          465,
+          1136,
+          622,
+          1310
+        ],
+        "foot": [
+          516.0,
+          1310
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          801.5,
+          1138
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          686,
+          1136,
+          161,
+          177
+        ],
+        "bounds": [
+          688,
+          1138,
+          845,
+          1311
+        ],
+        "foot": [
+          748.0,
+          1311
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          134.5,
+          1141
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          30,
+          1138,
+          151,
+          173
+        ],
+        "bounds": [
+          32,
+          1140,
+          179,
+          1309
+        ],
+        "foot": [
+          70.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          360.5,
+          1145
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          245,
+          1142,
+          167,
+          167
+        ],
+        "bounds": [
+          247,
+          1144,
+          410,
+          1307
+        ],
+        "foot": [
+          282.5,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          582.0,
+          1144
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          462,
+          1142,
+          172,
+          169
+        ],
+        "bounds": [
+          464,
+          1144,
+          632,
+          1309
+        ],
+        "foot": [
+          502.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          800.0,
+          1141
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          690,
+          1139,
+          158,
+          172
+        ],
+        "bounds": [
+          692,
+          1141,
+          846,
+          1309
+        ],
+        "foot": [
+          731.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          813.5,
+          642
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          673,
+          639,
+          200,
+          259
+        ],
+        "bounds": [
+          675,
+          641,
+          871,
+          896
+        ],
+        "foot": [
+          736.5,
+          896
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1578.5,
+          215
+        ],
+        "source": "source/wolf_alpha-rear-down.png",
+        "sourcePose": 2,
+        "cell": [
+          1205,
+          213,
+          537,
+          434
+        ],
+        "bounds": [
+          1207,
+          215,
+          1740,
+          645
+        ],
+        "foot": [
+          1473.5,
+          645
+        ],
+        "sourceEdge": false,
+        "scale": 0.13271461716937355,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          123.5,
+          1376
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          15,
+          1374,
+          191,
+          137
+        ],
+        "bounds": [
+          17,
+          1376,
+          204,
+          1509
+        ],
+        "foot": [
+          96.0,
+          1509
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          375.0,
+          1365
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          235,
+          1363,
+          194,
+          149
+        ],
+        "bounds": [
+          237,
+          1365,
+          427,
+          1510
+        ],
+        "foot": [
+          318.5,
+          1510
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          600.0,
+          1359
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          456,
+          1357,
+          194,
+          155
+        ],
+        "bounds": [
+          458,
+          1359,
+          648,
+          1510
+        ],
+        "foot": [
+          540.0,
+          1510
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.0,
+          1373
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          678,
+          1370,
+          194,
+          142
+        ],
+        "bounds": [
+          680,
+          1372,
+          870,
+          1510
+        ],
+        "foot": [
+          760.5,
+          1510
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          122.5,
+          1376
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          13,
+          1374,
+          199,
+          144
+        ],
+        "bounds": [
+          15,
+          1376,
+          210,
+          1516
+        ],
+        "foot": [
+          97.5,
+          1516
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          377.5,
+          1370
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          235,
+          1367,
+          198,
+          151
+        ],
+        "bounds": [
+          237,
+          1369,
+          431,
+          1516
+        ],
+        "foot": [
+          314.5,
+          1516
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          597.5,
+          1369
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          453,
+          1367,
+          201,
+          149
+        ],
+        "bounds": [
+          455,
+          1369,
+          652,
+          1514
+        ],
+        "foot": [
+          532.0,
+          1514
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          794.5,
+          1375
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          675,
+          1372,
+          201,
+          143
+        ],
+        "bounds": [
+          677,
+          1374,
+          874,
+          1513
+        ],
+        "foot": [
+          764.5,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.5,
+          1377
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          12,
+          1374,
+          201,
+          142
+        ],
+        "bounds": [
+          14,
+          1376,
+          211,
+          1514
+        ],
+        "foot": [
+          96.5,
+          1514
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          351.0,
+          1379
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          234,
+          1376,
+          200,
+          138
+        ],
+        "bounds": [
+          236,
+          1378,
+          432,
+          1512
+        ],
+        "foot": [
+          315.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          583.0,
+          1374
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          455,
+          1372,
+          200,
+          142
+        ],
+        "bounds": [
+          457,
+          1374,
+          653,
+          1512
+        ],
+        "foot": [
+          539.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          798.5,
+          1377
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          677,
+          1374,
+          201,
+          142
+        ],
+        "bounds": [
+          679,
+          1376,
+          876,
+          1514
+        ],
+        "foot": [
+          758.0,
+          1514
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          197.5,
+          971
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          27,
+          968,
+          274,
+          226
+        ],
+        "bounds": [
+          29,
+          970,
+          299,
+          1192
+        ],
+        "foot": [
+          146.0,
+          1192
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          475.0,
+          1085
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          322,
+          1082,
+          265,
+          107
+        ],
+        "bounds": [
+          324,
+          1084,
+          585,
+          1187
+        ],
+        "foot": [
+          454.5,
+          1187
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          124.0,
+          1592
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          19,
+          1589,
+          181,
+          150
+        ],
+        "bounds": [
+          21,
+          1591,
+          198,
+          1737
+        ],
+        "foot": [
+          137.0,
+          1737
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          350.5,
+          1586
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          242,
+          1584,
+          185,
+          156
+        ],
+        "bounds": [
+          244,
+          1586,
+          425,
+          1738
+        ],
+        "foot": [
+          356.5,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          572.5,
+          1583
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          464,
+          1580,
+          179,
+          160
+        ],
+        "bounds": [
+          466,
+          1582,
+          641,
+          1738
+        ],
+        "foot": [
+          577.5,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          792.5,
+          1587
+        ],
+        "source": "source/wolf_alpha-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          684,
+          1584,
+          183,
+          155
+        ],
+        "bounds": [
+          686,
+          1586,
+          865,
+          1737
+        ],
+        "foot": [
+          797.5,
+          1737
+        ],
+        "sourceEdge": false,
+        "scale": 0.6190476190476191,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          124.5,
+          1590
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          17,
+          1587,
+          181,
+          154
+        ],
+        "bounds": [
+          19,
+          1589,
+          196,
+          1739
+        ],
+        "foot": [
+          103.5,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          352.0,
+          1588
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          239,
+          1585,
+          184,
+          155
+        ],
+        "bounds": [
+          241,
+          1587,
+          421,
+          1738
+        ],
+        "foot": [
+          347.5,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.0,
+          1586
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          460,
+          1584,
+          181,
+          156
+        ],
+        "bounds": [
+          462,
+          1586,
+          639,
+          1738
+        ],
+        "foot": [
+          575.5,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          794.0,
+          1587
+        ],
+        "source": "source/wolf_alpha-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          682,
+          1584,
+          185,
+          157
+        ],
+        "bounds": [
+          684,
+          1586,
+          865,
+          1739
+        ],
+        "foot": [
+          797.0,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.6081871345029239,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.0,
+          1591
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          16,
+          1589,
+          183,
+          155
+        ],
+        "bounds": [
+          18,
+          1591,
+          197,
+          1742
+        ],
+        "foot": [
+          129.0,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          350.0,
+          1591
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          239,
+          1589,
+          188,
+          150
+        ],
+        "bounds": [
+          241,
+          1591,
+          425,
+          1737
+        ],
+        "foot": [
+          349.5,
+          1737
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          576.0,
+          1590
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          461,
+          1587,
+          188,
+          153
+        ],
+        "bounds": [
+          463,
+          1589,
+          647,
+          1738
+        ],
+        "foot": [
+          572.0,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.5,
+          1591
+        ],
+        "source": "source/wolf_alpha-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          682,
+          1588,
+          183,
+          152
+        ],
+        "bounds": [
+          684,
+          1590,
+          863,
+          1738
+        ],
+        "foot": [
+          799.0,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.5909090909090909,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          782.0,
+          977
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          637,
+          974,
+          243,
+          225
+        ],
+        "bounds": [
+          639,
+          976,
+          878,
+          1197
+        ],
+        "foot": [
+          791.5,
+          1197
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1095.0,
+          1081
+        ],
+        "source": "source/wolf_alpha-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          940,
+          1079,
+          267,
+          120
+        ],
+        "bounds": [
+          942,
+          1081,
+          1205,
+          1197
+        ],
+        "foot": [
+          1073.5,
+          1197
+        ],
+        "sourceEdge": false,
+        "scale": 0.4065040650406504,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "crab_deep",
+    "size": 320,
+    "anchor": [
+      160,
+      260
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          110.5,
+          110
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          13,
+          107,
+          196,
+          110
+        ],
+        "bounds": [
+          15,
+          109,
+          207,
+          215
+        ],
+        "foot": [
+          111.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          107
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          236,
+          105,
+          194,
+          110
+        ],
+        "bounds": [
+          238,
+          107,
+          428,
+          213
+        ],
+        "foot": [
+          333.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          107
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          457,
+          105,
+          195,
+          111
+        ],
+        "bounds": [
+          459,
+          107,
+          650,
+          214
+        ],
+        "foot": [
+          555.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          110
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          680,
+          107,
+          194,
+          109
+        ],
+        "bounds": [
+          682,
+          109,
+          872,
+          214
+        ],
+        "foot": [
+          777.0,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          107
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          14,
+          105,
+          192,
+          116
+        ],
+        "bounds": [
+          16,
+          107,
+          204,
+          219
+        ],
+        "foot": [
+          111.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          108
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          237,
+          106,
+          192,
+          115
+        ],
+        "bounds": [
+          239,
+          108,
+          427,
+          219
+        ],
+        "foot": [
+          332.5,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          107
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          459,
+          105,
+          190,
+          116
+        ],
+        "bounds": [
+          461,
+          107,
+          647,
+          219
+        ],
+        "foot": [
+          548.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          108
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          678,
+          106,
+          194,
+          116
+        ],
+        "bounds": [
+          680,
+          108,
+          870,
+          220
+        ],
+        "foot": [
+          779.0,
+          220
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.0,
+          105
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          13,
+          103,
+          197,
+          114
+        ],
+        "bounds": [
+          15,
+          105,
+          208,
+          215
+        ],
+        "foot": [
+          110.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          105
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          234,
+          102,
+          199,
+          119
+        ],
+        "bounds": [
+          236,
+          104,
+          431,
+          219
+        ],
+        "foot": [
+          334.0,
+          219
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.5,
+          105
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          457,
+          102,
+          196,
+          114
+        ],
+        "bounds": [
+          459,
+          104,
+          651,
+          214
+        ],
+        "foot": [
+          554.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          105
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          679,
+          102,
+          197,
+          115
+        ],
+        "bounds": [
+          681,
+          104,
+          874,
+          215
+        ],
+        "foot": [
+          777.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          162.0,
+          90
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          19,
+          88,
+          284,
+          169
+        ],
+        "bounds": [
+          21,
+          90,
+          301,
+          255
+        ],
+        "foot": [
+          164.0,
+          255
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          473.0,
+          119
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          344,
+          116,
+          254,
+          142
+        ],
+        "bounds": [
+          346,
+          118,
+          596,
+          256
+        ],
+        "foot": [
+          471.0,
+          256
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          101.5,
+          307
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          14,
+          304,
+          195,
+          130
+        ],
+        "bounds": [
+          16,
+          306,
+          207,
+          432
+        ],
+        "foot": [
+          137.0,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.5,
+          306
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          237,
+          304,
+          194,
+          131
+        ],
+        "bounds": [
+          239,
+          306,
+          429,
+          433
+        ],
+        "foot": [
+          333.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          305
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          459,
+          303,
+          193,
+          131
+        ],
+        "bounds": [
+          461,
+          305,
+          650,
+          432
+        ],
+        "foot": [
+          553.0,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.0,
+          307
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          681,
+          305,
+          194,
+          128
+        ],
+        "bounds": [
+          683,
+          307,
+          873,
+          431
+        ],
+        "foot": [
+          803.0,
+          431
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          103.5,
+          307
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          15,
+          305,
+          192,
+          129
+        ],
+        "bounds": [
+          17,
+          307,
+          205,
+          432
+        ],
+        "foot": [
+          123.5,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.0,
+          307
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          237,
+          305,
+          193,
+          129
+        ],
+        "bounds": [
+          239,
+          307,
+          428,
+          432
+        ],
+        "foot": [
+          334.0,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          308
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          459,
+          305,
+          192,
+          129
+        ],
+        "bounds": [
+          461,
+          307,
+          649,
+          432
+        ],
+        "foot": [
+          594.0,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.5,
+          308
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          682,
+          306,
+          193,
+          129
+        ],
+        "bounds": [
+          684,
+          308,
+          873,
+          433
+        ],
+        "foot": [
+          777.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          102.0,
+          306
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          15,
+          304,
+          193,
+          128
+        ],
+        "bounds": [
+          17,
+          306,
+          206,
+          430
+        ],
+        "foot": [
+          126.0,
+          430
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.0,
+          306
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          238,
+          304,
+          195,
+          130
+        ],
+        "bounds": [
+          240,
+          306,
+          431,
+          432
+        ],
+        "foot": [
+          356.5,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          306
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          461,
+          304,
+          189,
+          126
+        ],
+        "bounds": [
+          463,
+          306,
+          648,
+          428
+        ],
+        "foot": [
+          571.0,
+          428
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          306
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          681,
+          304,
+          192,
+          127
+        ],
+        "bounds": [
+          683,
+          306,
+          871,
+          429
+        ],
+        "foot": [
+          790.5,
+          429
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          769.0,
+          95
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          642,
+          92,
+          273,
+          182
+        ],
+        "bounds": [
+          644,
+          94,
+          913,
+          272
+        ],
+        "foot": [
+          837.0,
+          272
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1091.5,
+          122
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          969,
+          119,
+          256,
+          140
+        ],
+        "bounds": [
+          971,
+          121,
+          1223,
+          257
+        ],
+        "foot": [
+          1097.0,
+          257
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          115.5,
+          524
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          18,
+          522,
+          190,
+          112
+        ],
+        "bounds": [
+          20,
+          524,
+          206,
+          632
+        ],
+        "foot": [
+          134.0,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          522
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          239,
+          520,
+          191,
+          114
+        ],
+        "bounds": [
+          241,
+          522,
+          428,
+          632
+        ],
+        "foot": [
+          356.0,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          523
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          461,
+          521,
+          190,
+          113
+        ],
+        "bounds": [
+          463,
+          523,
+          649,
+          632
+        ],
+        "foot": [
+          578.0,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          525
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          683,
+          523,
+          190,
+          111
+        ],
+        "bounds": [
+          685,
+          525,
+          871,
+          632
+        ],
+        "foot": [
+          799.5,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          523
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          17,
+          521,
+          191,
+          111
+        ],
+        "bounds": [
+          19,
+          523,
+          206,
+          630
+        ],
+        "foot": [
+          132.0,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          523
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          241,
+          520,
+          187,
+          112
+        ],
+        "bounds": [
+          243,
+          522,
+          426,
+          630
+        ],
+        "foot": [
+          355.0,
+          630
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          523
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          462,
+          520,
+          189,
+          114
+        ],
+        "bounds": [
+          464,
+          522,
+          649,
+          632
+        ],
+        "foot": [
+          572.5,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          525
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          683,
+          522,
+          191,
+          115
+        ],
+        "bounds": [
+          685,
+          524,
+          872,
+          635
+        ],
+        "foot": [
+          797.5,
+          635
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          521
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          15,
+          519,
+          195,
+          118
+        ],
+        "bounds": [
+          17,
+          521,
+          208,
+          635
+        ],
+        "foot": [
+          130.0,
+          635
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.0,
+          521
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          236,
+          518,
+          196,
+          120
+        ],
+        "bounds": [
+          238,
+          520,
+          430,
+          636
+        ],
+        "foot": [
+          355.5,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          521
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          459,
+          518,
+          193,
+          120
+        ],
+        "bounds": [
+          461,
+          520,
+          650,
+          636
+        ],
+        "foot": [
+          575.0,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          521
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          681,
+          519,
+          194,
+          118
+        ],
+        "bounds": [
+          683,
+          521,
+          873,
+          635
+        ],
+        "foot": [
+          800.5,
+          635
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          173.0,
+          398
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          22,
+          396,
+          270,
+          170
+        ],
+        "bounds": [
+          24,
+          398,
+          290,
+          564
+        ],
+        "foot": [
+          186.0,
+          564
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          475.0,
+          420
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          347,
+          418,
+          250,
+          137
+        ],
+        "bounds": [
+          349,
+          420,
+          595,
+          553
+        ],
+        "foot": [
+          472.0,
+          553
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          101.0,
+          723
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          17,
+          721,
+          188,
+          133
+        ],
+        "bounds": [
+          19,
+          723,
+          203,
+          852
+        ],
+        "foot": [
+          127.0,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.0,
+          723
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          239,
+          721,
+          189,
+          133
+        ],
+        "bounds": [
+          241,
+          723,
+          426,
+          852
+        ],
+        "foot": [
+          350.0,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          545.5,
+          722
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          462,
+          720,
+          188,
+          134
+        ],
+        "bounds": [
+          464,
+          722,
+          648,
+          852
+        ],
+        "foot": [
+          572.0,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          767.5,
+          724
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          683,
+          722,
+          189,
+          132
+        ],
+        "bounds": [
+          685,
+          724,
+          870,
+          852
+        ],
+        "foot": [
+          793.5,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.0,
+          723
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          18,
+          720,
+          190,
+          134
+        ],
+        "bounds": [
+          20,
+          722,
+          206,
+          852
+        ],
+        "foot": [
+          126.0,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.5,
+          722
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          241,
+          719,
+          191,
+          133
+        ],
+        "bounds": [
+          243,
+          721,
+          430,
+          850
+        ],
+        "foot": [
+          350.0,
+          850
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.5,
+          721
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          463,
+          719,
+          189,
+          133
+        ],
+        "bounds": [
+          465,
+          721,
+          650,
+          850
+        ],
+        "foot": [
+          570.5,
+          850
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.0,
+          724
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          684,
+          722,
+          189,
+          132
+        ],
+        "bounds": [
+          686,
+          724,
+          871,
+          852
+        ],
+        "foot": [
+          796.0,
+          852
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          98.0,
+          718
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          17,
+          716,
+          189,
+          141
+        ],
+        "bounds": [
+          19,
+          718,
+          204,
+          855
+        ],
+        "foot": [
+          126.5,
+          855
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.0,
+          718
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          239,
+          715,
+          189,
+          142
+        ],
+        "bounds": [
+          241,
+          717,
+          426,
+          855
+        ],
+        "foot": [
+          352.0,
+          855
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          540.0,
+          718
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          461,
+          716,
+          189,
+          141
+        ],
+        "bounds": [
+          463,
+          718,
+          648,
+          855
+        ],
+        "foot": [
+          572.5,
+          855
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          762.5,
+          718
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          683,
+          716,
+          188,
+          140
+        ],
+        "bounds": [
+          685,
+          718,
+          869,
+          854
+        ],
+        "foot": [
+          794.0,
+          854
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          765.0,
+          385
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          650,
+          383,
+          255,
+          182
+        ],
+        "bounds": [
+          652,
+          385,
+          903,
+          563
+        ],
+        "foot": [
+          801.5,
+          563
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1110.0,
+          413
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          979,
+          410,
+          250,
+          139
+        ],
+        "bounds": [
+          981,
+          412,
+          1227,
+          547
+        ],
+        "foot": [
+          1104.0,
+          547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          942
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          15,
+          940,
+          193,
+          124
+        ],
+        "bounds": [
+          17,
+          942,
+          206,
+          1062
+        ],
+        "foot": [
+          108.5,
+          1062
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          940
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          237,
+          938,
+          193,
+          127
+        ],
+        "bounds": [
+          239,
+          940,
+          428,
+          1063
+        ],
+        "foot": [
+          331.0,
+          1063
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          942
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          459,
+          940,
+          193,
+          124
+        ],
+        "bounds": [
+          461,
+          942,
+          650,
+          1062
+        ],
+        "foot": [
+          553.0,
+          1062
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          943
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          681,
+          941,
+          193,
+          123
+        ],
+        "bounds": [
+          683,
+          943,
+          872,
+          1062
+        ],
+        "foot": [
+          774.0,
+          1062
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          936
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          14,
+          933,
+          195,
+          130
+        ],
+        "bounds": [
+          16,
+          935,
+          207,
+          1061
+        ],
+        "foot": [
+          116.5,
+          1061
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          936
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          236,
+          933,
+          195,
+          132
+        ],
+        "bounds": [
+          238,
+          935,
+          429,
+          1063
+        ],
+        "foot": [
+          337.0,
+          1063
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          937
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          456,
+          935,
+          196,
+          128
+        ],
+        "bounds": [
+          458,
+          937,
+          650,
+          1061
+        ],
+        "foot": [
+          561.0,
+          1061
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          937
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          679,
+          934,
+          196,
+          130
+        ],
+        "bounds": [
+          681,
+          936,
+          873,
+          1062
+        ],
+        "foot": [
+          787.0,
+          1062
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          942
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          15,
+          939,
+          192,
+          127
+        ],
+        "bounds": [
+          17,
+          941,
+          205,
+          1064
+        ],
+        "foot": [
+          99.0,
+          1064
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          941
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          236,
+          939,
+          194,
+          127
+        ],
+        "bounds": [
+          238,
+          941,
+          428,
+          1064
+        ],
+        "foot": [
+          332.0,
+          1064
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          941
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          459,
+          938,
+          192,
+          128
+        ],
+        "bounds": [
+          461,
+          940,
+          649,
+          1064
+        ],
+        "foot": [
+          544.0,
+          1064
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          942
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          681,
+          939,
+          192,
+          127
+        ],
+        "bounds": [
+          683,
+          941,
+          871,
+          1064
+        ],
+        "foot": [
+          777.0,
+          1064
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          155.5,
+          709
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          18,
+          706,
+          275,
+          178
+        ],
+        "bounds": [
+          20,
+          708,
+          291,
+          882
+        ],
+        "foot": [
+          152.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          464.5,
+          735
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          343,
+          732,
+          254,
+          138
+        ],
+        "bounds": [
+          345,
+          734,
+          595,
+          868
+        ],
+        "foot": [
+          470.0,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          100.0,
+          1145
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          13,
+          1143,
+          194,
+          141
+        ],
+        "bounds": [
+          15,
+          1145,
+          205,
+          1282
+        ],
+        "foot": [
+          123.5,
+          1282
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          323.0,
+          1142
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          236,
+          1140,
+          194,
+          142
+        ],
+        "bounds": [
+          238,
+          1142,
+          428,
+          1280
+        ],
+        "foot": [
+          347.0,
+          1280
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.5,
+          1144
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          458,
+          1141,
+          193,
+          143
+        ],
+        "bounds": [
+          460,
+          1143,
+          649,
+          1282
+        ],
+        "foot": [
+          567.5,
+          1282
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.0,
+          1149
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          680,
+          1146,
+          193,
+          140
+        ],
+        "bounds": [
+          682,
+          1148,
+          871,
+          1284
+        ],
+        "foot": [
+          788.5,
+          1284
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.0,
+          1145
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          14,
+          1143,
+          192,
+          136
+        ],
+        "bounds": [
+          16,
+          1145,
+          204,
+          1277
+        ],
+        "foot": [
+          120.0,
+          1277
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.5,
+          1143
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          237,
+          1141,
+          193,
+          137
+        ],
+        "bounds": [
+          239,
+          1143,
+          428,
+          1276
+        ],
+        "foot": [
+          345.0,
+          1276
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          1145
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          456,
+          1143,
+          195,
+          135
+        ],
+        "bounds": [
+          458,
+          1145,
+          649,
+          1276
+        ],
+        "foot": [
+          570.0,
+          1276
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.5,
+          1148
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          678,
+          1145,
+          198,
+          135
+        ],
+        "bounds": [
+          680,
+          1147,
+          874,
+          1278
+        ],
+        "foot": [
+          791.5,
+          1278
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.0,
+          1148
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          13,
+          1145,
+          197,
+          136
+        ],
+        "bounds": [
+          15,
+          1147,
+          208,
+          1279
+        ],
+        "foot": [
+          122.5,
+          1279
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.0,
+          1149
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          236,
+          1146,
+          193,
+          136
+        ],
+        "bounds": [
+          238,
+          1148,
+          427,
+          1280
+        ],
+        "foot": [
+          343.5,
+          1280
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.5,
+          1147
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          459,
+          1145,
+          193,
+          137
+        ],
+        "bounds": [
+          461,
+          1147,
+          650,
+          1280
+        ],
+        "foot": [
+          562.0,
+          1280
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.5,
+          1148
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          681,
+          1146,
+          194,
+          136
+        ],
+        "bounds": [
+          683,
+          1148,
+          873,
+          1280
+        ],
+        "foot": [
+          788.5,
+          1280
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          785.5,
+          711
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          648,
+          708,
+          267,
+          181
+        ],
+        "bounds": [
+          650,
+          710,
+          913,
+          887
+        ],
+        "foot": [
+          775.0,
+          887
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1099.5,
+          734
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          974,
+          732,
+          254,
+          135
+        ],
+        "bounds": [
+          976,
+          734,
+          1226,
+          865
+        ],
+        "foot": [
+          1101.0,
+          865
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.5,
+          1381
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          14,
+          1379,
+          192,
+          114
+        ],
+        "bounds": [
+          16,
+          1381,
+          204,
+          1491
+        ],
+        "foot": [
+          85.5,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          1378
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          236,
+          1375,
+          191,
+          117
+        ],
+        "bounds": [
+          238,
+          1377,
+          425,
+          1490
+        ],
+        "foot": [
+          307.5,
+          1490
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          1377
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          458,
+          1374,
+          191,
+          120
+        ],
+        "bounds": [
+          460,
+          1376,
+          647,
+          1492
+        ],
+        "foot": [
+          530.0,
+          1492
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          1382
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          680,
+          1380,
+          191,
+          113
+        ],
+        "bounds": [
+          682,
+          1382,
+          869,
+          1491
+        ],
+        "foot": [
+          750.5,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          1376
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          15,
+          1374,
+          195,
+          118
+        ],
+        "bounds": [
+          17,
+          1376,
+          208,
+          1490
+        ],
+        "foot": [
+          88.5,
+          1490
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          1376
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          239,
+          1373,
+          191,
+          119
+        ],
+        "bounds": [
+          241,
+          1375,
+          428,
+          1490
+        ],
+        "foot": [
+          309.0,
+          1490
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1376
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          453,
+          1374,
+          199,
+          120
+        ],
+        "bounds": [
+          455,
+          1376,
+          650,
+          1492
+        ],
+        "foot": [
+          527.0,
+          1492
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.5,
+          1381
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          677,
+          1379,
+          197,
+          115
+        ],
+        "bounds": [
+          679,
+          1381,
+          872,
+          1492
+        ],
+        "foot": [
+          751.0,
+          1492
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          1373
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          13,
+          1371,
+          197,
+          122
+        ],
+        "bounds": [
+          15,
+          1373,
+          208,
+          1491
+        ],
+        "foot": [
+          84.0,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          1371
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          235,
+          1368,
+          198,
+          125
+        ],
+        "bounds": [
+          237,
+          1370,
+          431,
+          1491
+        ],
+        "foot": [
+          307.5,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          1374
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          457,
+          1372,
+          195,
+          121
+        ],
+        "bounds": [
+          459,
+          1374,
+          650,
+          1491
+        ],
+        "foot": [
+          529.0,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          1374
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          680,
+          1372,
+          195,
+          121
+        ],
+        "bounds": [
+          682,
+          1374,
+          873,
+          1491
+        ],
+        "foot": [
+          749.0,
+          1491
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          161.0,
+          1015
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          26,
+          1013,
+          269,
+          169
+        ],
+        "bounds": [
+          28,
+          1015,
+          293,
+          1180
+        ],
+        "foot": [
+          126.5,
+          1180
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          467.5,
+          1035
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          349,
+          1033,
+          249,
+          141
+        ],
+        "bounds": [
+          351,
+          1035,
+          596,
+          1172
+        ],
+        "foot": [
+          473.5,
+          1172
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.0,
+          1596
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          15,
+          1593,
+          192,
+          124
+        ],
+        "bounds": [
+          17,
+          1595,
+          205,
+          1715
+        ],
+        "foot": [
+          62.0,
+          1715
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          1596
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          237,
+          1594,
+          191,
+          123
+        ],
+        "bounds": [
+          239,
+          1596,
+          426,
+          1715
+        ],
+        "foot": [
+          284.5,
+          1715
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          1598
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          459,
+          1596,
+          190,
+          121
+        ],
+        "bounds": [
+          461,
+          1598,
+          647,
+          1715
+        ],
+        "foot": [
+          506.5,
+          1715
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          1599
+        ],
+        "source": "source/crab_deep-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          682,
+          1597,
+          191,
+          120
+        ],
+        "bounds": [
+          684,
+          1599,
+          871,
+          1715
+        ],
+        "foot": [
+          728.5,
+          1715
+        ],
+        "sourceEdge": false,
+        "scale": 0.8952380952380953,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          1595
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          14,
+          1593,
+          191,
+          121
+        ],
+        "bounds": [
+          16,
+          1595,
+          203,
+          1712
+        ],
+        "foot": [
+          60.5,
+          1712
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          1596
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          237,
+          1594,
+          193,
+          120
+        ],
+        "bounds": [
+          239,
+          1596,
+          428,
+          1712
+        ],
+        "foot": [
+          286.0,
+          1712
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.0,
+          1597
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          457,
+          1594,
+          195,
+          121
+        ],
+        "bounds": [
+          459,
+          1596,
+          650,
+          1713
+        ],
+        "foot": [
+          509.0,
+          1713
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          1596
+        ],
+        "source": "source/crab_deep-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          680,
+          1594,
+          194,
+          121
+        ],
+        "bounds": [
+          682,
+          1596,
+          872,
+          1713
+        ],
+        "foot": [
+          728.0,
+          1713
+        ],
+        "sourceEdge": false,
+        "scale": 0.8392857142857143,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          1594
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          14,
+          1591,
+          196,
+          123
+        ],
+        "bounds": [
+          16,
+          1593,
+          208,
+          1712
+        ],
+        "foot": [
+          61.5,
+          1712
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          1594
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          236,
+          1592,
+          196,
+          124
+        ],
+        "bounds": [
+          238,
+          1594,
+          430,
+          1714
+        ],
+        "foot": [
+          311.5,
+          1714
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          1595
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          459,
+          1592,
+          194,
+          124
+        ],
+        "bounds": [
+          461,
+          1594,
+          651,
+          1714
+        ],
+        "foot": [
+          506.0,
+          1714
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.5,
+          1595
+        ],
+        "source": "source/crab_deep-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          680,
+          1593,
+          195,
+          121
+        ],
+        "bounds": [
+          682,
+          1595,
+          873,
+          1712
+        ],
+        "foot": [
+          728.5,
+          1712
+        ],
+        "sourceEdge": false,
+        "scale": 0.8545454545454545,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          781.5,
+          1010
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          646,
+          1008,
+          259,
+          174
+        ],
+        "bounds": [
+          648,
+          1010,
+          903,
+          1180
+        ],
+        "foot": [
+          740.5,
+          1180
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1096.5,
+          1033
+        ],
+        "source": "source/crab_deep-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          971,
+          1030,
+          260,
+          143
+        ],
+        "bounds": [
+          973,
+          1032,
+          1229,
+          1171
+        ],
+        "foot": [
+          1101.0,
+          1171
+        ],
+        "sourceEdge": false,
+        "scale": 0.5454545454545454,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

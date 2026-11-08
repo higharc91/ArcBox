@@ -66,3 +66,5 @@ Eighteenth overall / third library batch: [Azure, Radiant and Shadow Fire Elemen
 Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet Imp](../night-companions/README.md). Combat tracker stays complete at 29; 12 additional library appearances refreshed, 19 older two-direction looks remaining, 26 existing eight-direction looks preserved.
 
 [Batch 20: Vampire Bat, Undead Bear and Crystal Slime](../crypt-kin/index.html) adds library batch 5. 44 designs refreshed; 16 older library appearances remain. Main playtest checkpoint is PR #273; follow-up work stays on `mob-library-refresh-272` for issue #272.
+
+[Batch 21: Phase Spider, Alpha Wolf and Deep Crab](../web-and-hunt/index.html) adds library batch 6; 13 older appearances remain.

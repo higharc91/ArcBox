@@ -13,6 +13,8 @@ public static class LibraryVariantReview
     {
         "crypt-kin" => [new("Bat", "Vampire Bat", "beasts.bat.vampire"),
             new("Bear", "Undead Bear", "beasts.bear.undead"), new("Slime", "Crystal Slime", "beasts.slime.crystal")],
+        "web-and-hunt" => [new("Spider", "Phase Spider", "beasts.spider.phase"),
+            new("Wolf", "Alpha Wolf", "beasts.wolf.alpha"), new("Crab", "Deep Crab", "bestiary.crab.deep")],
         _ => throw new ArgumentException($"Unknown library art batch: {batch}", nameof(batch)),
     };
 

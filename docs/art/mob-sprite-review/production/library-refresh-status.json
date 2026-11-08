@@ -15,14 +15,17 @@
     "bosses.imp.violet",
     "beasts.bat.vampire",
     "beasts.bear.undead",
-    "beasts.slime.crystal"
+    "beasts.slime.crystal",
+    "beasts.spider.phase",
+    "beasts.wolf.alpha",
+    "bestiary.crab.deep"
   ],
-  "libraryBatchCount": 5,
-  "overallBatchCount": 20,
+  "libraryBatchCount": 6,
+  "overallBatchCount": 21,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 16,
+  "remainingTwoDirectionLooks": 13,
   "looks": [
     {
       "baselineNumber": 42,
@@ -106,7 +109,7 @@
       "key": "beasts.spider.phase",
       "name": "Spider Phase",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch6"
     },
     {
       "baselineNumber": 54,
@@ -120,7 +123,7 @@
       "key": "beasts.wolf.alpha",
       "name": "Wolf Alpha",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch6"
     },
     {
       "baselineNumber": 56,
@@ -155,7 +158,7 @@
       "key": "bestiary.crab.deep",
       "name": "Crab Deep",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch6"
     },
     {
       "baselineNumber": 61,

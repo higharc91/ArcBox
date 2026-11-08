@@ -130,10 +130,12 @@ public sealed class BeatScriptTests
         Assert.Empty(script.Cues.OfType<FlightCue>());
     }
 
-    [Fact]
-    public void Library_variant_replay_keeps_targets_stable_and_all_natural_attacks_adjacent()
+    [Theory]
+    [InlineData("crypt-kin")]
+    [InlineData("web-and-hunt")]
+    public void Library_variant_replay_keeps_targets_stable_and_all_natural_attacks_adjacent(string batch)
     {
-        var steps = LibraryVariantDemo.Steps(Pack.Root, "crypt-kin");
+        var steps = LibraryVariantDemo.Steps(Pack.Root, batch);
         Assert.Equal(11, steps.Count);
         var battle = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
@@ -534,6 +536,9 @@ public sealed class BeatScriptTests
     [InlineData("beasts.bat.vampire")]
     [InlineData("beasts.bear.undead")]
     [InlineData("beasts.slime.crystal")]
+    [InlineData("beasts.spider.phase")]
+    [InlineData("beasts.wolf.alpha")]
+    [InlineData("bestiary.crab.deep")]
     public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };

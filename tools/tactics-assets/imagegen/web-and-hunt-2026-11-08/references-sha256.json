@@ -1,0 +1,14 @@
+{
+  "crab_deep-attack.png": "e10942bc2bd85212f598f7ed42e04d38215fafa265120cf52e5bd833aa96861e",
+  "crab_deep-damage.png": "44768b7c212b8f64447204305da1f2978b3bca19aec8b38aa8face0b2f21855f",
+  "crab_deep-idle.png": "1426f3c1def8f957f9b46e2c57ea8f0aa11b5ce2574013b72e984da21515f018",
+  "crab_deep-walk.png": "923949cd2ef88f2a93c0463f935092a7fdb769c08bb3bfd375acbcd440bf833e",
+  "spider_phase-attack.png": "cf5dd57a9847daefa0405e02f539c5d5d910148c24bed8f8a1b5647fb4a7bbdf",
+  "spider_phase-damage.png": "12b2abdfcb01a30b3670a96ab4ad564b9ab6f11698dfdb7eca76b7e5defed4d3",
+  "spider_phase-idle.png": "ca4a1c46bd23e010318c388c2a0b247467302d01aebad1f1dada6882eeef4652",
+  "spider_phase-walk.png": "181da53b6d56796ab141defb3c92d26451fec9082deb0b8e9d62424634aa5490",
+  "wolf_alpha-attack.png": "35a9d3c6512fff60493eba2583f139220967dc0abb6ed6351ea539be51fd7c59",
+  "wolf_alpha-damage.png": "f47c00b9681fa80de9b40b79bdb8ead6a040e60e87b5ca1228e109d9d989b488",
+  "wolf_alpha-idle.png": "75fb6f9c2b410e94f90917f3fc23fb7e7896ef8e771335657c078b80e4f7d5eb",
+  "wolf_alpha-walk.png": "299a8fad0d80158bd36cd67599ce0f60bccb9acc86ccf7377748ce4991c2da85"
+}

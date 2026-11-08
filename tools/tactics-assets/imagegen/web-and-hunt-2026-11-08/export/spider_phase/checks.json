@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 0,
+    "scale": 0.8,
+    "bounds": [
+      84,
+      148,
+      234,
+      259
+    ],
+    "count": 8692
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 1,
+    "scale": 0.8,
+    "bounds": [
+      84,
+      147,
+      234,
+      258
+    ],
+    "count": 8518
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 2,
+    "scale": 0.8,
+    "bounds": [
+      85,
+      146,
+      234,
+      258
+    ],
+    "count": 8521
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 3,
+    "scale": 0.8,
+    "bounds": [
+      84,
+      148,
+      233,
+      259
+    ],
+    "count": 8699
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 0,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      84,
+      149,
+      235,
+      260
+    ],
+    "count": 9320
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 1,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      82,
+      148,
+      239,
+      260
+    ],
+    "count": 8942
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 2,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      87,
+      151,
+      235,
+      260
+    ],
+    "count": 9067
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 3,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      80,
+      149,
+      235,
+      260
+    ],
+    "count": 9289
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 0,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      88,
+      149,
+      232,
+      260
+    ],
+    "count": 9039
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 1,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      88,
+      148,
+      232,
+      260
+    ],
+    "count": 8900
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 2,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      87,
+      152,
+      231,
+      260
+    ],
+    "count": 9233
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 3,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      86,
+      149,
+      230,
+      260
+    ],
+    "count": 9150
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5625,
+    "bounds": [
+      81,
+      152,
+      236,
+      260
+    ],
+    "count": 8111
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5625,
+    "bounds": [
+      92,
+      180,
+      227,
+      260
+    ],
+    "count": 7958
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 4,
+    "scale": 0.8,
+    "bounds": [
+      101,
+      134,
+      239,
+      258
+    ],
+    "count": 8689
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 5,
+    "scale": 0.8,
+    "bounds": [
+      100,
+      133,
+      236,
+      259
+    ],
+    "count": 8768
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 6,
+    "scale": 0.8,
+    "bounds": [
+      100,
+      133,
+      236,
+      259
+    ],
+    "count": 8768
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 7,
+    "scale": 0.8,
+    "bounds": [
+      98,
+      134,
+      236,
+      258
+    ],
+    "count": 8699
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 4,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      102,
+      135,
+      245,
+      260
+    ],
+    "count": 9587
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 5,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      108,
+      133,
+      248,
+      260
+    ],
+    "count": 9468
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 6,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      96,
+      133,
+      238,
+      260
+    ],
+    "count": 9510
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 7,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      91,
+      134,
+      235,
+      260
+    ],
+    "count": 9618
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 4,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      99,
+      141,
+      236,
+      260
+    ],
+    "count": 8892
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 5,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      99,
+      141,
+      237,
+      260
+    ],
+    "count": 8983
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 6,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      96,
+      142,
+      234,
+      260
+    ],
+    "count": 9139
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 7,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      97,
+      143,
+      237,
+      260
+    ],
+    "count": 9053
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5625,
+    "bounds": [
+      91,
+      149,
+      238,
+      260
+    ],
+    "count": 8446
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5625,
+    "bounds": [
+      90,
+      177,
+      228,
+      261
+    ],
+    "count": 7904
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 8,
+    "scale": 0.8,
+    "bounds": [
+      107,
+      159,
+      248,
+      258
+    ],
+    "count": 7896
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 9,
+    "scale": 0.8,
+    "bounds": [
+      108,
+      157,
+      248,
+      259
+    ],
+    "count": 7859
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 10,
+    "scale": 0.8,
+    "bounds": [
+      107,
+      158,
+      248,
+      258
+    ],
+    "count": 7877
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 11,
+    "scale": 0.8,
+    "bounds": [
+      107,
+      158,
+      248,
+      258
+    ],
+    "count": 7856
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 8,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      87,
+      158,
+      232,
+      260
+    ],
+    "count": 8886
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 9,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      91,
+      161,
+      238,
+      260
+    ],
+    "count": 8556
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 10,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      102,
+      163,
+      249,
+      260
+    ],
+    "count": 8690
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 11,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      103,
+      161,
+      250,
+      260
+    ],
+    "count": 8666
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 8,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      108,
+      166,
+      248,
+      260
+    ],
+    "count": 8188
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 9,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      107,
+      166,
+      247,
+      260
+    ],
+    "count": 8110
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 10,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      106,
+      168,
+      247,
+      260
+    ],
+    "count": 7818
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 11,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      108,
+      166,
+      248,
+      260
+    ],
+    "count": 8072
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5625,
+    "bounds": [
+      88,
+      151,
+      224,
+      260
+    ],
+    "count": 8870
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5625,
+    "bounds": [
+      93,
+      183,
+      226,
+      260
+    ],
+    "count": 7399
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 12,
+    "scale": 0.8,
+    "bounds": [
+      83,
+      138,
+      217,
+      258
+    ],
+    "count": 8490
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 13,
+    "scale": 0.8,
+    "bounds": [
+      84,
+      137,
+      218,
+      258
+    ],
+    "count": 8409
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 14,
+    "scale": 0.8,
+    "bounds": [
+      86,
+      138,
+      219,
+      258
+    ],
+    "count": 8552
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 15,
+    "scale": 0.8,
+    "bounds": [
+      84,
+      139,
+      217,
+      258
+    ],
+    "count": 8455
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 12,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      96,
+      141,
+      236,
+      260
+    ],
+    "count": 9538
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 13,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      80,
+      139,
+      220,
+      260
+    ],
+    "count": 9415
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 14,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      79,
+      138,
+      213,
+      260
+    ],
+    "count": 9456
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 15,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      80,
+      135,
+      224,
+      260
+    ],
+    "count": 9640
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 12,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      83,
+      139,
+      217,
+      260
+    ],
+    "count": 9111
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 13,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      83,
+      139,
+      219,
+      260
+    ],
+    "count": 9062
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 14,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      83,
+      139,
+      218,
+      260
+    ],
+    "count": 8906
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 15,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      83,
+      140,
+      217,
+      260
+    ],
+    "count": 8925
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5625,
+    "bounds": [
+      81,
+      154,
+      224,
+      260
+    ],
+    "count": 8585
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5625,
+    "bounds": [
+      89,
+      181,
+      229,
+      260
+    ],
+    "count": 7861
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 16,
+    "scale": 0.8,
+    "bounds": [
+      87,
+      151,
+      233,
+      258
+    ],
+    "count": 8437
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 17,
+    "scale": 0.8,
+    "bounds": [
+      86,
+      150,
+      233,
+      258
+    ],
+    "count": 8344
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 18,
+    "scale": 0.8,
+    "bounds": [
+      86,
+      150,
+      233,
+      258
+    ],
+    "count": 8347
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 19,
+    "scale": 0.8,
+    "bounds": [
+      86,
+      151,
+      232,
+      258
+    ],
+    "count": 8379
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 16,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      84,
+      146,
+      232,
+      260
+    ],
+    "count": 9528
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 17,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      86,
+      146,
+      236,
+      260
+    ],
+    "count": 9319
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 18,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      83,
+      146,
+      230,
+      260
+    ],
+    "count": 9437
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 19,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      83,
+      147,
+      227,
+      260
+    ],
+    "count": 9362
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 16,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      88,
+      149,
+      230,
+      260
+    ],
+    "count": 9137
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 17,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      88,
+      152,
+      232,
+      260
+    ],
+    "count": 8910
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 18,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      88,
+      156,
+      232,
+      260
+    ],
+    "count": 8814
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 19,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      87,
+      150,
+      228,
+      260
+    ],
+    "count": 8927
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5625,
+    "bounds": [
+      81,
+      149,
+      230,
+      260
+    ],
+    "count": 8988
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5625,
+    "bounds": [
+      94,
+      184,
+      225,
+      260
+    ],
+    "count": 7808
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 20,
+    "scale": 0.8,
+    "bounds": [
+      114,
+      140,
+      253,
+      259
+    ],
+    "count": 8005
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 21,
+    "scale": 0.8,
+    "bounds": [
+      109,
+      141,
+      249,
+      259
+    ],
+    "count": 7984
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 22,
+    "scale": 0.8,
+    "bounds": [
+      106,
+      141,
+      246,
+      259
+    ],
+    "count": 7996
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 23,
+    "scale": 0.8,
+    "bounds": [
+      110,
+      141,
+      250,
+      259
+    ],
+    "count": 8034
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 20,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      104,
+      141,
+      253,
+      260
+    ],
+    "count": 9226
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 21,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      112,
+      138,
+      254,
+      260
+    ],
+    "count": 9250
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 22,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      111,
+      139,
+      258,
+      260
+    ],
+    "count": 9304
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 23,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      110,
+      136,
+      256,
+      260
+    ],
+    "count": 9464
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 20,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      114,
+      145,
+      252,
+      260
+    ],
+    "count": 8455
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 21,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      108,
+      145,
+      246,
+      260
+    ],
+    "count": 8560
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 22,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      108,
+      147,
+      249,
+      260
+    ],
+    "count": 8285
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 23,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      109,
+      144,
+      247,
+      260
+    ],
+    "count": 8421
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5625,
+    "bounds": [
+      91,
+      151,
+      237,
+      260
+    ],
+    "count": 8897
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5625,
+    "bounds": [
+      91,
+      181,
+      227,
+      260
+    ],
+    "count": 8068
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 24,
+    "scale": 0.8,
+    "bounds": [
+      83,
+      157,
+      226,
+      259
+    ],
+    "count": 8059
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 25,
+    "scale": 0.8,
+    "bounds": [
+      81,
+      159,
+      224,
+      258
+    ],
+    "count": 7914
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 26,
+    "scale": 0.8,
+    "bounds": [
+      83,
+      159,
+      225,
+      258
+    ],
+    "count": 7838
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 27,
+    "scale": 0.8,
+    "bounds": [
+      82,
+      157,
+      225,
+      258
+    ],
+    "count": 7928
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 24,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      87,
+      161,
+      233,
+      260
+    ],
+    "count": 8655
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 25,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      76,
+      168,
+      220,
+      260
+    ],
+    "count": 8133
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 26,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      84,
+      160,
+      228,
+      260
+    ],
+    "count": 8359
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 27,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      82,
+      161,
+      226,
+      260
+    ],
+    "count": 8345
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 24,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      85,
+      163,
+      224,
+      260
+    ],
+    "count": 8271
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 25,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      85,
+      166,
+      223,
+      260
+    ],
+    "count": 7994
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 26,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      85,
+      165,
+      221,
+      260
+    ],
+    "count": 7986
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 27,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      83,
+      162,
+      223,
+      260
+    ],
+    "count": 8218
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5625,
+    "bounds": [
+      95,
+      150,
+      230,
+      260
+    ],
+    "count": 9104
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5625,
+    "bounds": [
+      93,
+      187,
+      227,
+      260
+    ],
+    "count": 7620
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 28,
+    "scale": 0.8,
+    "bounds": [
+      91,
+      141,
+      227,
+      258
+    ],
+    "count": 8506
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 29,
+    "scale": 0.8,
+    "bounds": [
+      87,
+      145,
+      223,
+      259
+    ],
+    "count": 8338
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 30,
+    "scale": 0.8,
+    "bounds": [
+      87,
+      143,
+      224,
+      258
+    ],
+    "count": 8376
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/spider_phase-idle.png",
+    "sourcePose": 31,
+    "scale": 0.8,
+    "bounds": [
+      89,
+      141,
+      224,
+      258
+    ],
+    "count": 8420
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 28,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      64,
+      147,
+      202,
+      260
+    ],
+    "count": 9013
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 29,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      80,
+      145,
+      218,
+      260
+    ],
+    "count": 8982
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 30,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      80,
+      144,
+      222,
+      260
+    ],
+    "count": 9073
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/spider_phase-walk.png",
+    "sourcePose": 31,
+    "scale": 0.8057553956834532,
+    "bounds": [
+      67,
+      149,
+      204,
+      260
+    ],
+    "count": 8788
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 28,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      69,
+      152,
+      204,
+      260
+    ],
+    "count": 8570
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 29,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      86,
+      153,
+      222,
+      260
+    ],
+    "count": 8408
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 30,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      89,
+      156,
+      225,
+      260
+    ],
+    "count": 8610
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/spider_phase-attack.png",
+    "sourcePose": 31,
+    "scale": 0.7671232876712328,
+    "bounds": [
+      67,
+      154,
+      202,
+      260
+    ],
+    "count": 8320
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5625,
+    "bounds": [
+      87,
+      150,
+      231,
+      261
+    ],
+    "count": 8525
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/spider_phase-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5625,
+    "bounds": [
+      93,
+      182,
+      226,
+      260
+    ],
+    "count": 7895
+  }
+]

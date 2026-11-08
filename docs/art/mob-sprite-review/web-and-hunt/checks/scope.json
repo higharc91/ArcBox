@@ -1,0 +1,20 @@
+{
+  "priorCommit": "a4d9981e",
+  "addedCreatureEntries": [
+    "mob_refresh_crab_deep",
+    "mob_refresh_spider_phase",
+    "mob_refresh_wolf_alpha"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "rulesAndAbilitiesUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "sourceImages": 13,
+  "sourceOriginalsAvailableAndChecked": true,
+  "packedFrameKeys": 336,
+  "distinctSelectedWholeFigures": 336,
+  "runtimeAssets": 3,
+  "mainUntouchedForPlaytest": true
+}
