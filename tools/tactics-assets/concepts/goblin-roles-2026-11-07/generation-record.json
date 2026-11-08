@@ -1,0 +1,31 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "reference": "asset_X2MW7PYSkHsSRtnoYTefi3TJ",
+  "briefs": {
+    "archer": "Original Wardenflame: Embers of the Vale production concept sheet. Match supplied approved goblin's anatomy and painterly tactical-fantasy material language: moss-olive skin, bald broad pointed ears, amber eyes with dark pupils, blunt short nose, compact adult goblin proportions. No reptilian snout, horns or tail. Grounded late-1990s tactical RPG clarity, worn practical fabrics/leather/iron, warm top-left key, cool shadows, restrained earth colors, readable clusters for later pixel-art translation. Parchment background, no scenery/lettering. Show one SAME character as front3/4 fullbody, rear3/4 fullbody, side fullbody, head/equipment closeup, human1.75m scale inset. Consistent equipment and handedness, complete weapons/feet/ears contained with generous margins. Sk arrow-clan GOBLIN ARCHER, about1.05m adult. Wiry watchful person from a displaced hungry clan, not grotesqueevil caricature. Patchwork russet leather jerkin, brown shorttunic, fadedmaroon neckcloth, simple belt sidepouch, wrappedboots. ONE small ashwood SHORTBOW held anatomicalLEFT hand and a practical leather quiver onback with6-8 plain arrows. AnatomicalRIGHT hand empty atrest then draws arrow/string whenaiming; detail study one arrow nocked withleftbowgrip/rightdrawfingers connected naturally. Stowed arrows never atfrontbelt or floating besidehands. No sword, dagger,spear,shield,helmet. Body palette and facialdesign closeapprovedgoblin; distinguish bybow/quiver/lightarmbracer ratherthannewskintone. Rearview quiverstrapwraps torso andfrontbucklehidden.",
+    "shaman": "Original Wardenflame: Embers of the Vale production concept sheet. Match supplied approved goblin's anatomy and painterly tactical-fantasy material language: moss-olive skin, bald broad pointed ears, amber eyes with dark pupils, blunt short nose, compact adult goblin proportions. No reptilian snout, horns or tail. Grounded late-1990s tactical RPG clarity, worn practical fabrics/leather/iron, warm top-left key, cool shadows, restrained earth colors, readable clusters for later pixel-art translation. Parchment background, no scenery/lettering. Show one SAME character as front3/4 fullbody, rear3/4 fullbody, side fullbody, head/equipment closeup, human1.75m scale inset. Consistent equipment and handedness, complete weapons/feet/ears contained with generous margins. Sk arrow-clan GOBLIN SHAMAN / SKARROW STORMCALLER shared combatrole, about1.05m. An adult learned clan spellcaster, NOT Mother Skarrow and not hernamedportrait. Weatheredolive face, largeearsvisible fromslate-blue cloth hood pushedback, fadedmaroon shortshouldermantle over charcoal-brown knee-length robe, practicalboots/wrappedcalves, simplebone/claybeads andwovenwristbindings. ONE straightnaturalwood QUARTERSTAFF anatomicalRIGHT hand, smallcharredwood/riverstone charm lashedatstafftop; stafflowornament nonbranching enough toreadat80px. LEFT hand freeforcinderandstormgestures. A tinycontainedamberember in charm, not giant glowingorbs orobscuringeffect. Warmrust/maroon accentstieclan palette; slatemantledistinguishes caster. No skullhat,necromancercorpsefetish,horns,giant antlers orweaponfloating. Detailrightfistwrapsconnectedstaff.",
+    "boss": "Original Wardenflame: Embers of the Vale production concept sheet. Match supplied approved goblin's anatomy and painterly tactical-fantasy material language: moss-olive skin, bald broad pointed ears, amber eyes with dark pupils, blunt short nose, compact adult goblin proportions. No reptilian snout, horns or tail. Grounded late-1990s tactical RPG clarity, worn practical fabrics/leather/iron, warm top-left key, cool shadows, restrained earth colors, readable clusters for later pixel-art translation. Parchment background, no scenery/lettering. Show one SAME character as front3/4 fullbody, rear3/4 fullbody, side fullbody, head/equipment closeup, human1.75m scale inset. Consistent equipment and handedness, complete weapons/feet/ears contained with generous margins. VORGA THE BRIDGE-TAKER, goblinboss shared combatlook. Young adult grandson of Mother Skarrow; raised hiswarband afterthreewintersofchildrenstarving. Loud showmansswaggeroverrealanger, cruelpragmatist ratherthanjoyfulsadist. About1.15m, stockierthanarcher butsamegoblinanatomy andolivepalette. Mediumarmor: patched oxbloodleatherbrigandinewithfewflatironplates, onepractical ironleftshoulderplate, maroonshortsplitcape fastenedatneck thatleavesswordarmclear, beltwithsmallpouch, reinforcedboots. Headbare, no crown orgianthelmet. ONE worn SCIMITAR anatomicalRIGHT hand,LEFT empty forrallygesture. Notaspear despiteoldassetname. Functionalcurvedironblade/brownhiltconnectedrightfist. A small fadedclanknot charm onbelt recalls grandmother, no skulltrophies orspikes. Designandposemustreadwarlord at85-90nativepixels withoutturninghimintoanorc oroversizedhuman. Rearshowscape/armorbacknotfrontbuckle; collar/cape/shoulderplate remainfixed onbodywhenrotated."
+  },
+  "jobs": {
+    "archer": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_6LdB8gd1VNktLELurCBXMPuG",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_6LdB8gd1VNktLELurCBXMPuG' (one call waits on up to 32 jobs)."
+    },
+    "shaman": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_fpJxZTyTth3iEAfhEBfQUejw",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_fpJxZTyTth3iEAfhEBfQUejw' (one call waits on up to 32 jobs)."
+    },
+    "boss": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_6rWXo8FPtEGCPNARDAJEjsPP",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_6rWXo8FPtEGCPNARDAJEjsPP' (one call waits on up to 32 jobs)."
+    }
+  }
+}

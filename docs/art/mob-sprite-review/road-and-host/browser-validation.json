@@ -1,0 +1,53 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 540
+    },
+    {
+      "title": "Battle · River Crossing",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Hobgoblins · actual Warlord’s Bridge encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Bandits · actual Roadside Toughs encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · fighter, goblin and soldier lineup",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "97071bf0",
+    "walk": "23783aa5",
+    "attack": "40966343",
+    "hurt": "1275bd26",
+    "down": "9cd9b4a2"
+  },
+  "walkFrameHashes": [
+    "ccf61c92",
+    "a9180cb2",
+    "23783aa5",
+    "6d67d519"
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}

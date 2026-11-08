@@ -1,0 +1,17 @@
+{
+  "golem-attack.png": "4c87d53058ea94d5ffe61d709b3697e23129b49930490d0f0a1512506f216e02",
+  "golem-buff.png": "3a509724e4eda88fb78178813b27fa1f1bf14f3bdc87bf8947a8c195bfa17a8e",
+  "golem-damage.png": "0d190c7bd41c43e16b31d15019333016d9245110fac323abaf1200a46709642a",
+  "golem-idle.png": "66940d089631454f3d00631270f687cad32c1564087219599646d372d897a045",
+  "golem-special.png": "40b47420a1635d754e6f48c93a71c793eeb041645df400650a875de2acf25fb5",
+  "golem-walk.png": "446be45fa51b771b8a3ca2c9f00cf043dd5d0c84c1be0c2a88c59dcfc5c77fac",
+  "troll-attack.png": "9a343d4ce8b60e2a385c26a0bd2e1e2250c0035269bc6f07ef29decc9bd35cc0",
+  "troll-buff.png": "f31ea4e7c694cb45b90dea980362eef0460afee33df01cd8e4802d649662a9a6",
+  "troll-damage.png": "83bbdee8352252fa9496295f3eefb653ec9122cd81d0a78f71c9aefe313f08b2",
+  "troll-idle.png": "f15a3c9a6cbc4a0939eaceff709d60cbabbe5e2b9c9ffb8bcac2378a21c2f0e5",
+  "troll-special-back.png": "18f1968897770094fb0dbae47a18dcc6d73cd49123a6099d7d7559283799662b",
+  "troll-special-crowded-rejected.png": "e50271de73918af40ebb5f44cf2f9511686cf72618f081641a03ea41539f2750",
+  "troll-special-front.png": "623cd074b243479bddbfcd1c6cc95c248dbc887a0b7ac0a475149abe9bef7659",
+  "troll-special-fullback.png": "6e82bef07053bdeeb05bebb172cd9a6407d572f2ea31f2f760cd67fe3ef084d5",
+  "troll-walk.png": "91a329ee50fd04603f84e74ec8f94cbf729763c70e657d691b3d044cd4c9ce29"
+}

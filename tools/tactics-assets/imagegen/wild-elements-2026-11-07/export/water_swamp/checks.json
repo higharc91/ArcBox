@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 0,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      101,
+      230,
+      253
+    ],
+    "count": 15543
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 1,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      231,
+      253
+    ],
+    "count": 15341
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 2,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      100,
+      230,
+      254
+    ],
+    "count": 15660
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 3,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      101,
+      233,
+      253
+    ],
+    "count": 15680
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 0,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      86,
+      104,
+      227,
+      256
+    ],
+    "count": 15480
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 1,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      87,
+      106,
+      225,
+      255
+    ],
+    "count": 15025
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 2,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      88,
+      105,
+      226,
+      256
+    ],
+    "count": 15305
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 3,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      88,
+      104,
+      228,
+      255
+    ],
+    "count": 15306
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 0,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      230,
+      256
+    ],
+    "count": 15543
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 0,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      79,
+      105,
+      234,
+      256
+    ],
+    "count": 15749
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 1,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      76,
+      105,
+      234,
+      256
+    ],
+    "count": 15761
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 3,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      231,
+      256
+    ],
+    "count": 15680
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 0,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      92,
+      112,
+      226,
+      256
+    ],
+    "count": 13755
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 1,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      87,
+      157,
+      232,
+      256
+    ],
+    "count": 9543
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 0,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      230,
+      256
+    ],
+    "count": 15543
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 0,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      95,
+      104,
+      224,
+      256
+    ],
+    "count": 14250
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 1,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      88,
+      103,
+      235,
+      256
+    ],
+    "count": 15158
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 3,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      231,
+      256
+    ],
+    "count": 15680
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 0,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      230,
+      256
+    ],
+    "count": 15543
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 2,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      88,
+      104,
+      228,
+      256
+    ],
+    "count": 14701
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 3,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      96,
+      104,
+      225,
+      256
+    ],
+    "count": 14292
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 3,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      104,
+      231,
+      256
+    ],
+    "count": 15680
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 4,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      105,
+      232,
+      253
+    ],
+    "count": 15244
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 5,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      96,
+      107,
+      229,
+      254
+    ],
+    "count": 14383
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 6,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      102,
+      226,
+      253
+    ],
+    "count": 14647
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 7,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      95,
+      107,
+      232,
+      254
+    ],
+    "count": 14839
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 4,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      108,
+      230,
+      256
+    ],
+    "count": 14991
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 5,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      96,
+      109,
+      229,
+      257
+    ],
+    "count": 14230
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 6,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      108,
+      226,
+      259
+    ],
+    "count": 14310
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 7,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      108,
+      234,
+      256
+    ],
+    "count": 14739
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 4,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      108,
+      232,
+      256
+    ],
+    "count": 15244
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 2,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      83,
+      114,
+      226,
+      256
+    ],
+    "count": 13619
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 3,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      64,
+      114,
+      227,
+      256
+    ],
+    "count": 14185
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 7,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      91,
+      109,
+      228,
+      256
+    ],
+    "count": 14839
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 2,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      87,
+      108,
+      218,
+      256
+    ],
+    "count": 13749
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 3,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      90,
+      156,
+      230,
+      256
+    ],
+    "count": 9802
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 4,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      108,
+      232,
+      256
+    ],
+    "count": 15244
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 4,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      98,
+      108,
+      215,
+      256
+    ],
+    "count": 13403
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 5,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      81,
+      108,
+      222,
+      256
+    ],
+    "count": 14751
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 7,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      91,
+      109,
+      228,
+      256
+    ],
+    "count": 14839
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 4,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      108,
+      232,
+      256
+    ],
+    "count": 15244
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 6,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      81,
+      105,
+      214,
+      256
+    ],
+    "count": 14081
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 7,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      94,
+      107,
+      214,
+      256
+    ],
+    "count": 13597
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 7,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      91,
+      109,
+      228,
+      256
+    ],
+    "count": 14839
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 8,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      107,
+      216,
+      254
+    ],
+    "count": 13123
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 9,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      101,
+      107,
+      217,
+      254
+    ],
+    "count": 12852
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 10,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      95,
+      102,
+      214,
+      253
+    ],
+    "count": 13728
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 11,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      101,
+      107,
+      217,
+      254
+    ],
+    "count": 13181
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 8,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      101,
+      109,
+      217,
+      257
+    ],
+    "count": 12870
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 9,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      112,
+      218,
+      259
+    ],
+    "count": 12761
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 10,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      109,
+      216,
+      260
+    ],
+    "count": 13533
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 11,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      108,
+      218,
+      256
+    ],
+    "count": 12996
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 8,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      109,
+      216,
+      256
+    ],
+    "count": 13123
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 4,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      88,
+      117,
+      215,
+      256
+    ],
+    "count": 12173
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 5,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      52,
+      117,
+      215,
+      256
+    ],
+    "count": 13464
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 11,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      109,
+      218,
+      256
+    ],
+    "count": 13181
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 4,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      98,
+      105,
+      214,
+      256
+    ],
+    "count": 12608
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 5,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      87,
+      155,
+      232,
+      256
+    ],
+    "count": 9930
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 8,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      109,
+      216,
+      256
+    ],
+    "count": 13123
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 8,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      91,
+      105,
+      216,
+      256
+    ],
+    "count": 13701
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 9,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      72,
+      105,
+      219,
+      256
+    ],
+    "count": 15442
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 11,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      109,
+      218,
+      256
+    ],
+    "count": 13181
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 8,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      109,
+      216,
+      256
+    ],
+    "count": 13123
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 10,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      76,
+      104,
+      217,
+      256
+    ],
+    "count": 14335
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 11,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      95,
+      105,
+      216,
+      256
+    ],
+    "count": 13697
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 11,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      109,
+      218,
+      256
+    ],
+    "count": 13181
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 12,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      102,
+      216,
+      253
+    ],
+    "count": 14441
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 13,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      102,
+      219,
+      253
+    ],
+    "count": 13937
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 14,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      100,
+      216,
+      254
+    ],
+    "count": 14447
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 15,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      95,
+      102,
+      218,
+      253
+    ],
+    "count": 14312
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 12,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      91,
+      104,
+      217,
+      256
+    ],
+    "count": 14130
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 13,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      106,
+      216,
+      255
+    ],
+    "count": 13559
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 14,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      104,
+      218,
+      256
+    ],
+    "count": 13833
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 15,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      91,
+      103,
+      217,
+      255
+    ],
+    "count": 14117
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 12,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      105,
+      216,
+      256
+    ],
+    "count": 14441
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 6,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      91,
+      111,
+      225,
+      256
+    ],
+    "count": 14113
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 7,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      56,
+      112,
+      225,
+      256
+    ],
+    "count": 14870
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 15,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      105,
+      217,
+      256
+    ],
+    "count": 14312
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 6,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      92,
+      110,
+      225,
+      256
+    ],
+    "count": 13543
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 7,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      86,
+      155,
+      233,
+      256
+    ],
+    "count": 10134
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 12,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      105,
+      216,
+      256
+    ],
+    "count": 14441
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 12,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      86,
+      104,
+      215,
+      256
+    ],
+    "count": 13837
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 13,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      80,
+      104,
+      215,
+      256
+    ],
+    "count": 14343
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 15,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      105,
+      217,
+      256
+    ],
+    "count": 14312
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 12,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      105,
+      216,
+      256
+    ],
+    "count": 14441
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 14,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      79,
+      103,
+      223,
+      256
+    ],
+    "count": 13984
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 15,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      88,
+      104,
+      221,
+      256
+    ],
+    "count": 14150
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 15,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      94,
+      105,
+      217,
+      256
+    ],
+    "count": 14312
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 16,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      107,
+      227,
+      254
+    ],
+    "count": 15371
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 17,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      230,
+      253
+    ],
+    "count": 14868
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 18,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      104,
+      230,
+      253
+    ],
+    "count": 15551
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 19,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      90,
+      107,
+      231,
+      254
+    ],
+    "count": 15533
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 16,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      86,
+      108,
+      226,
+      259
+    ],
+    "count": 15202
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 17,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      87,
+      109,
+      224,
+      258
+    ],
+    "count": 14915
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 18,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      88,
+      109,
+      225,
+      260
+    ],
+    "count": 15117
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 19,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      88,
+      108,
+      226,
+      257
+    ],
+    "count": 15176
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 16,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      109,
+      227,
+      256
+    ],
+    "count": 15371
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 8,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      81,
+      118,
+      233,
+      256
+    ],
+    "count": 15115
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 9,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      66,
+      118,
+      236,
+      256
+    ],
+    "count": 15325
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 19,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      109,
+      230,
+      256
+    ],
+    "count": 15533
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 8,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      89,
+      102,
+      235,
+      256
+    ],
+    "count": 16041
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 9,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      85,
+      152,
+      234,
+      256
+    ],
+    "count": 10549
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 16,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      109,
+      227,
+      256
+    ],
+    "count": 15371
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 16,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      93,
+      105,
+      224,
+      256
+    ],
+    "count": 14507
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 17,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      90,
+      105,
+      237,
+      256
+    ],
+    "count": 15370
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 19,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      109,
+      230,
+      256
+    ],
+    "count": 15533
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 16,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      109,
+      227,
+      256
+    ],
+    "count": 15371
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 18,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      88,
+      105,
+      229,
+      256
+    ],
+    "count": 14890
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 19,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      94,
+      105,
+      227,
+      256
+    ],
+    "count": 14779
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 19,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      109,
+      230,
+      256
+    ],
+    "count": 15533
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 20,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      98,
+      102,
+      228,
+      253
+    ],
+    "count": 14733
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 21,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      98,
+      101,
+      224,
+      253
+    ],
+    "count": 14372
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 22,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      97,
+      229,
+      253
+    ],
+    "count": 14948
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 23,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      100,
+      104,
+      231,
+      253
+    ],
+    "count": 14679
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 20,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      95,
+      107,
+      229,
+      259
+    ],
+    "count": 14811
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 21,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      108,
+      226,
+      259
+    ],
+    "count": 14338
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 22,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      107,
+      230,
+      259
+    ],
+    "count": 14973
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 23,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      95,
+      106,
+      231,
+      258
+    ],
+    "count": 14868
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 20,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      98,
+      105,
+      228,
+      256
+    ],
+    "count": 14733
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 10,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      90,
+      113,
+      226,
+      256
+    ],
+    "count": 13660
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 11,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      93,
+      113,
+      239,
+      256
+    ],
+    "count": 13736
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 23,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      100,
+      107,
+      231,
+      256
+    ],
+    "count": 14679
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 10,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      91,
+      98,
+      226,
+      256
+    ],
+    "count": 14782
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 11,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      85,
+      147,
+      234,
+      256
+    ],
+    "count": 10873
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 20,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      98,
+      105,
+      228,
+      256
+    ],
+    "count": 14733
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 20,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      104,
+      105,
+      228,
+      256
+    ],
+    "count": 13992
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 21,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      98,
+      104,
+      243,
+      256
+    ],
+    "count": 15439
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 23,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      100,
+      107,
+      231,
+      256
+    ],
+    "count": 14679
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 20,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      98,
+      105,
+      228,
+      256
+    ],
+    "count": 14733
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 22,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      100,
+      104,
+      240,
+      256
+    ],
+    "count": 15014
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 23,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      103,
+      105,
+      228,
+      256
+    ],
+    "count": 14080
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 23,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      100,
+      107,
+      231,
+      256
+    ],
+    "count": 14679
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 24,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      107,
+      217,
+      254
+    ],
+    "count": 13564
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 25,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      102,
+      107,
+      218,
+      254
+    ],
+    "count": 13160
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 26,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      98,
+      101,
+      216,
+      253
+    ],
+    "count": 13537
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 27,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      100,
+      105,
+      215,
+      253
+    ],
+    "count": 13304
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 24,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      96,
+      109,
+      212,
+      258
+    ],
+    "count": 13239
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 25,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      110,
+      213,
+      259
+    ],
+    "count": 13104
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 26,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      97,
+      109,
+      210,
+      260
+    ],
+    "count": 12948
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 27,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      96,
+      108,
+      211,
+      257
+    ],
+    "count": 13025
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 24,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      109,
+      217,
+      256
+    ],
+    "count": 13564
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 12,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      92,
+      115,
+      218,
+      256
+    ],
+    "count": 12669
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 13,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      100,
+      115,
+      251,
+      256
+    ],
+    "count": 13286
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 27,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      108,
+      214,
+      256
+    ],
+    "count": 13304
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 12,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      101,
+      103,
+      217,
+      256
+    ],
+    "count": 13319
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 13,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      86,
+      155,
+      234,
+      256
+    ],
+    "count": 10237
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 24,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      109,
+      217,
+      256
+    ],
+    "count": 13564
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 24,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      104,
+      104,
+      223,
+      256
+    ],
+    "count": 13339
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 25,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      99,
+      103,
+      240,
+      256
+    ],
+    "count": 15538
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 27,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      108,
+      214,
+      256
+    ],
+    "count": 13304
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 24,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      109,
+      217,
+      256
+    ],
+    "count": 13564
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 26,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      104,
+      103,
+      239,
+      256
+    ],
+    "count": 14279
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 27,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      106,
+      105,
+      218,
+      256
+    ],
+    "count": 13221
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 27,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      99,
+      108,
+      214,
+      256
+    ],
+    "count": 13304
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 28,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      105,
+      229,
+      253
+    ],
+    "count": 15303
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 29,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      95,
+      107,
+      229,
+      254
+    ],
+    "count": 14560
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 30,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      102,
+      229,
+      253
+    ],
+    "count": 14851
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 31,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      105,
+      228,
+      253
+    ],
+    "count": 14918
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 28,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      87,
+      107,
+      228,
+      258
+    ],
+    "count": 15101
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 29,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      89,
+      108,
+      226,
+      259
+    ],
+    "count": 14641
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 30,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      93,
+      107,
+      230,
+      256
+    ],
+    "count": 14782
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_swamp-walk.png",
+    "sourcePose": 31,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      88,
+      107,
+      228,
+      255
+    ],
+    "count": 14869
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 28,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      229,
+      256
+    ],
+    "count": 15303
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 14,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      88,
+      113,
+      231,
+      256
+    ],
+    "count": 14177
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_swamp-attack.png",
+    "sourcePose": 15,
+    "scale": 0.8085106382978723,
+    "bounds": [
+      91,
+      113,
+      234,
+      256
+    ],
+    "count": 14023
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 31,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      228,
+      256
+    ],
+    "count": 14918
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 14,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      78,
+      100,
+      227,
+      256
+    ],
+    "count": 15737
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-damage.png",
+    "sourcePose": 15,
+    "scale": 0.8780487804878049,
+    "bounds": [
+      87,
+      155,
+      232,
+      256
+    ],
+    "count": 10150
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 28,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      229,
+      256
+    ],
+    "count": 15303
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 28,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      102,
+      107,
+      221,
+      256
+    ],
+    "count": 13582
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 29,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      90,
+      105,
+      234,
+      256
+    ],
+    "count": 14640
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 31,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      228,
+      256
+    ],
+    "count": 14918
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 28,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      229,
+      256
+    ],
+    "count": 15303
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 30,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      104,
+      105,
+      240,
+      256
+    ],
+    "count": 14050
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/water_swamp-moves.png",
+    "sourcePose": 31,
+    "scale": 1.3333333333333333,
+    "bounds": [
+      102,
+      107,
+      223,
+      256
+    ],
+    "count": 13711
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/water_swamp-idle.png",
+    "sourcePose": 31,
+    "scale": 1.3818181818181818,
+    "bounds": [
+      92,
+      108,
+      228,
+      256
+    ],
+    "count": 14918
+  }
+]

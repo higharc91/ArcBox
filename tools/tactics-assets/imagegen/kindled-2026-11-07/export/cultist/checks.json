@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 0,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      68,
+      78,
+      146,
+      197
+    ],
+    "count": 6079
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 1,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      68,
+      78,
+      146,
+      197
+    ],
+    "count": 6050
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 2,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      69,
+      78,
+      147,
+      197
+    ],
+    "count": 6066
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 3,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      68,
+      78,
+      146,
+      197
+    ],
+    "count": 6047
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 0,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      64,
+      78,
+      147,
+      198
+    ],
+    "count": 6046
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 1,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      68,
+      79,
+      145,
+      199
+    ],
+    "count": 5928
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 2,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      70,
+      78,
+      148,
+      198
+    ],
+    "count": 5995
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 3,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      69,
+      77,
+      147,
+      197
+    ],
+    "count": 5909
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 0,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      63,
+      91,
+      159,
+      198
+    ],
+    "count": 6512
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 1,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      68,
+      91,
+      162,
+      198
+    ],
+    "count": 6141
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 2,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      76,
+      90,
+      164,
+      198
+    ],
+    "count": 5835
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 3,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      72,
+      90,
+      157,
+      198
+    ],
+    "count": 6271
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      63,
+      79,
+      163,
+      198
+    ],
+    "count": 7149
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      61,
+      138,
+      186,
+      198
+    ],
+    "count": 5409
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 0,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      62,
+      78,
+      146,
+      198
+    ],
+    "count": 6338
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 2,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      61,
+      79,
+      153,
+      198
+    ],
+    "count": 6368
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 3,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      62,
+      79,
+      151,
+      198
+    ],
+    "count": 6479
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 4,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      66,
+      75,
+      147,
+      197
+    ],
+    "count": 6319
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 5,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      67,
+      75,
+      147,
+      197
+    ],
+    "count": 6299
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 6,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      67,
+      75,
+      147,
+      197
+    ],
+    "count": 6294
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 7,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      67,
+      75,
+      147,
+      197
+    ],
+    "count": 6266
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 4,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      66,
+      76,
+      151,
+      197
+    ],
+    "count": 6153
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 5,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      68,
+      77,
+      151,
+      198
+    ],
+    "count": 5990
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 6,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      68,
+      76,
+      150,
+      197
+    ],
+    "count": 5978
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 7,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      69,
+      75,
+      150,
+      196
+    ],
+    "count": 5940
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 4,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      64,
+      89,
+      155,
+      198
+    ],
+    "count": 6639
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 5,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      59,
+      89,
+      155,
+      198
+    ],
+    "count": 6429
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 6,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      40,
+      88,
+      160,
+      198
+    ],
+    "count": 6329
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 7,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      63,
+      89,
+      152,
+      198
+    ],
+    "count": 6420
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      63,
+      78,
+      163,
+      198
+    ],
+    "count": 6985
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      58,
+      137,
+      188,
+      198
+    ],
+    "count": 5976
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 4,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      63,
+      77,
+      144,
+      198
+    ],
+    "count": 6254
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 6,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      64,
+      78,
+      143,
+      198
+    ],
+    "count": 6135
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 7,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      64,
+      77,
+      146,
+      198
+    ],
+    "count": 6441
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 8,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      75,
+      75,
+      137,
+      197
+    ],
+    "count": 5143
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 9,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      75,
+      75,
+      135,
+      197
+    ],
+    "count": 5028
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 10,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      76,
+      75,
+      136,
+      197
+    ],
+    "count": 5084
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 11,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      76,
+      75,
+      136,
+      197
+    ],
+    "count": 5054
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 8,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      74,
+      75,
+      141,
+      196
+    ],
+    "count": 5189
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 9,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      79,
+      76,
+      139,
+      197
+    ],
+    "count": 4821
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 10,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      76,
+      75,
+      140,
+      196
+    ],
+    "count": 5110
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 11,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      79,
+      74,
+      137,
+      195
+    ],
+    "count": 4828
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 8,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      59,
+      88,
+      145,
+      198
+    ],
+    "count": 5784
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 9,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      51,
+      89,
+      143,
+      198
+    ],
+    "count": 5627
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 10,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      15,
+      88,
+      145,
+      198
+    ],
+    "count": 5948
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 11,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      66,
+      88,
+      144,
+      198
+    ],
+    "count": 5701
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      68,
+      74,
+      142,
+      198
+    ],
+    "count": 5915
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      56,
+      139,
+      194,
+      198
+    ],
+    "count": 6117
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 8,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      72,
+      78,
+      137,
+      198
+    ],
+    "count": 5357
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 10,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      58,
+      77,
+      137,
+      198
+    ],
+    "count": 5885
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 11,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      72,
+      78,
+      138,
+      198
+    ],
+    "count": 5265
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 12,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      160,
+      197
+    ],
+    "count": 6162
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 13,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      160,
+      197
+    ],
+    "count": 6225
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 14,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      159,
+      197
+    ],
+    "count": 6189
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 15,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      78,
+      76,
+      160,
+      197
+    ],
+    "count": 6190
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 12,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      73,
+      77,
+      159,
+      199
+    ],
+    "count": 6345
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 13,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      75,
+      78,
+      156,
+      200
+    ],
+    "count": 5902
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 14,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      75,
+      77,
+      156,
+      199
+    ],
+    "count": 6152
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 15,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      74,
+      75,
+      158,
+      198
+    ],
+    "count": 5897
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 12,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      61,
+      88,
+      159,
+      198
+    ],
+    "count": 6284
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 13,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      58,
+      88,
+      146,
+      198
+    ],
+    "count": 6136
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 14,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      26,
+      89,
+      149,
+      198
+    ],
+    "count": 6343
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 15,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      61,
+      88,
+      149,
+      198
+    ],
+    "count": 6152
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      65,
+      76,
+      164,
+      198
+    ],
+    "count": 6862
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      45,
+      141,
+      181,
+      198
+    ],
+    "count": 6044
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 12,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      75,
+      78,
+      160,
+      198
+    ],
+    "count": 6326
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 14,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      47,
+      78,
+      160,
+      198
+    ],
+    "count": 6634
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 15,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      72,
+      78,
+      160,
+      198
+    ],
+    "count": 6472
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 16,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      74,
+      77,
+      157,
+      197
+    ],
+    "count": 6292
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 17,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      74,
+      76,
+      157,
+      196
+    ],
+    "count": 6268
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 18,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      74,
+      77,
+      156,
+      197
+    ],
+    "count": 6230
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 19,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      74,
+      76,
+      157,
+      196
+    ],
+    "count": 6259
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 16,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      74,
+      78,
+      160,
+      197
+    ],
+    "count": 6293
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 17,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      76,
+      79,
+      157,
+      198
+    ],
+    "count": 6149
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 18,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      74,
+      78,
+      157,
+      197
+    ],
+    "count": 6158
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 19,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      75,
+      77,
+      156,
+      197
+    ],
+    "count": 6188
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 16,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      60,
+      88,
+      164,
+      198
+    ],
+    "count": 6397
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 17,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      58,
+      88,
+      156,
+      198
+    ],
+    "count": 6145
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 18,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      61,
+      88,
+      163,
+      198
+    ],
+    "count": 5952
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 19,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      66,
+      88,
+      159,
+      198
+    ],
+    "count": 6202
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      59,
+      71,
+      169,
+      198
+    ],
+    "count": 7645
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      55,
+      135,
+      188,
+      198
+    ],
+    "count": 5440
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 16,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      77,
+      79,
+      162,
+      198
+    ],
+    "count": 6199
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 18,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      49,
+      79,
+      162,
+      198
+    ],
+    "count": 6625
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 19,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      70,
+      79,
+      162,
+      198
+    ],
+    "count": 6609
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 20,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      80,
+      76,
+      159,
+      196
+    ],
+    "count": 5910
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 21,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      80,
+      77,
+      159,
+      197
+    ],
+    "count": 5882
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 22,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      80,
+      77,
+      158,
+      197
+    ],
+    "count": 5834
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 23,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      80,
+      76,
+      158,
+      196
+    ],
+    "count": 5817
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 20,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      80,
+      78,
+      159,
+      201
+    ],
+    "count": 6138
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 21,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      80,
+      79,
+      157,
+      201
+    ],
+    "count": 5865
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 22,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      78,
+      78,
+      157,
+      199
+    ],
+    "count": 5967
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 23,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      80,
+      76,
+      157,
+      199
+    ],
+    "count": 5877
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 20,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      74,
+      89,
+      171,
+      198
+    ],
+    "count": 6206
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 21,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      73,
+      90,
+      167,
+      198
+    ],
+    "count": 6016
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 22,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      71,
+      89,
+      182,
+      198
+    ],
+    "count": 6013
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 23,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      76,
+      89,
+      161,
+      198
+    ],
+    "count": 5902
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      61,
+      71,
+      163,
+      198
+    ],
+    "count": 7212
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      71,
+      131,
+      214,
+      198
+    ],
+    "count": 6265
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 20,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      73,
+      77,
+      147,
+      198
+    ],
+    "count": 6151
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 22,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      74,
+      78,
+      169,
+      198
+    ],
+    "count": 6342
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 23,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      73,
+      78,
+      149,
+      198
+    ],
+    "count": 5997
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 24,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      86,
+      75,
+      146,
+      197
+    ],
+    "count": 5168
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 25,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      86,
+      74,
+      146,
+      197
+    ],
+    "count": 5130
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 26,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      87,
+      74,
+      147,
+      197
+    ],
+    "count": 5126
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 27,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      87,
+      75,
+      146,
+      197
+    ],
+    "count": 5131
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 24,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      85,
+      76,
+      149,
+      197
+    ],
+    "count": 5262
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 25,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      87,
+      76,
+      146,
+      198
+    ],
+    "count": 4986
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 26,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      83,
+      75,
+      149,
+      196
+    ],
+    "count": 5268
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 27,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      87,
+      74,
+      145,
+      195
+    ],
+    "count": 4985
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 24,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      80,
+      90,
+      150,
+      198
+    ],
+    "count": 5484
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 25,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      80,
+      89,
+      158,
+      198
+    ],
+    "count": 5614
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 26,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      79,
+      89,
+      189,
+      198
+    ],
+    "count": 5626
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 27,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      82,
+      91,
+      148,
+      198
+    ],
+    "count": 5146
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      79,
+      70,
+      155,
+      198
+    ],
+    "count": 6315
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      43,
+      136,
+      180,
+      198
+    ],
+    "count": 6135
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 24,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      88,
+      77,
+      147,
+      198
+    ],
+    "count": 5622
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 26,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      87,
+      77,
+      172,
+      198
+    ],
+    "count": 5910
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 27,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      88,
+      77,
+      146,
+      198
+    ],
+    "count": 5472
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 28,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      67,
+      75,
+      145,
+      197
+    ],
+    "count": 6440
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 29,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      67,
+      76,
+      145,
+      197
+    ],
+    "count": 6428
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 30,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      68,
+      76,
+      146,
+      197
+    ],
+    "count": 6418
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/cultist-idle.png",
+    "sourcePose": 31,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      67,
+      76,
+      146,
+      197
+    ],
+    "count": 6415
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 28,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      65,
+      76,
+      146,
+      196
+    ],
+    "count": 6418
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 29,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      65,
+      77,
+      146,
+      197
+    ],
+    "count": 6307
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 30,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      66,
+      76,
+      148,
+      196
+    ],
+    "count": 6349
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/cultist-walk.png",
+    "sourcePose": 31,
+    "scale": 0.5797101449275363,
+    "bounds": [
+      66,
+      75,
+      147,
+      195
+    ],
+    "count": 6330
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 28,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      71,
+      90,
+      165,
+      198
+    ],
+    "count": 6255
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 29,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      74,
+      90,
+      162,
+      198
+    ],
+    "count": 5968
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 30,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      78,
+      90,
+      179,
+      198
+    ],
+    "count": 5809
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/cultist-attack.png",
+    "sourcePose": 31,
+    "scale": 0.5901639344262295,
+    "bounds": [
+      74,
+      90,
+      159,
+      198
+    ],
+    "count": 6238
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      63,
+      73,
+      162,
+      198
+    ],
+    "count": 7267
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cultist-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5194805194805194,
+    "bounds": [
+      43,
+      136,
+      181,
+      198
+    ],
+    "count": 6083
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 28,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      63,
+      78,
+      144,
+      198
+    ],
+    "count": 6341
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 30,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      63,
+      78,
+      161,
+      198
+    ],
+    "count": 6608
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/cultist-cast.png",
+    "sourcePose": 31,
+    "scale": 0.5853658536585366,
+    "bounds": [
+      64,
+      78,
+      149,
+      198
+    ],
+    "count": 6587
+  }
+]

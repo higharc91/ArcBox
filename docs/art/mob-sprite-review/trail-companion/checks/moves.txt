@@ -1,0 +1,42 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:97)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio/audio_server.cpp:258)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-secrets/content/tactics/base
+THINGS demo: 4 views, 6 shots
+THINGS demo step Watchful companion at 0.22 s
+TACTICS screen tactics-battle-river_crossing
+SHOT /workspace/mob-review/trail-companion-moves/001-tactics.png
+SHOT /workspace/mob-review/trail-companion-moves/002-tactics-battle-river-crossing.png
+SHOT /workspace/mob-review/trail-companion-moves/003-hound-idle.png
+THINGS demo step Four-legged gait at 2.10 s
+SHOT /workspace/mob-review/trail-companion-moves/004-hound-walk.png
+THINGS demo step Natural bite at 4.03 s
+SHOT /workspace/mob-review/trail-companion-moves/005-hound-bite-windup.png
+SHOT /workspace/mob-review/trail-companion-moves/006-tactics-beat-attack-2.png
+SHOT /workspace/mob-review/trail-companion-moves/007-hound-bite-contact.png
+SHOT /workspace/mob-review/trail-companion-moves/008-hound-recovery.png
+THINGS demo step Ready again at 7.01 s
+SHOT /workspace/mob-review/trail-companion-moves/009-hound-ready.png
+THINGS demo done
+TACTICS left: narrator cleared

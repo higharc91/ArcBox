@@ -1,0 +1,20 @@
+{
+  "hobgoblin-attack-back-rejected": "68f15005-ae75-40f8-ad27-9a815cbdae04",
+  "hobgoblin-overhead-clean": "e9f601f0-2284-40b2-a201-e643e78ba764",
+  "hobgoblin-idle": "ffc88966-ab31-4fc5-a628-8e6fcb0c43cb",
+  "bandit-idle": "f6ec11ff-3437-4f4f-a703-ebdf9bed9d5f",
+  "hobgoblin-walk": "d56f09cc-7811-44db-b4cf-d91a642124e2",
+  "bandit-walk": "bf2a0b72-509e-4976-9a63-03c1ee5b99bc",
+  "hobgoblin-attack": "cac9eed4-b88c-44e0-86cd-5fdc56a95381",
+  "bandit-attack": "533bff8c-8d33-4555-8653-f4d23d483056",
+  "hobgoblin-attack-front": "eb35fde7-2e22-4a31-8c20-eab7b832c46c",
+  "bandit-attack-rear": "bc89be95-37f7-4b4e-8a07-c31815141d24",
+  "hobgoblin-damage": "a148096e-94f7-428f-8f28-e31554b8ae6a",
+  "bandit-damage": "24834c4b-6f49-4b61-bbfe-339153337882",
+  "bandit-attack-backleft-rejected": "24dab31a-f0ed-41eb-8abe-f7fd3cdd1e8a",
+  "bandit-attack-backleft-final-rejected": "e7a5e5d8-a11e-4fc3-95f6-cb7fc1492812",
+  "bandit-attack-rear-twohand-rejected": "b87ea7cb-4bc6-4cb7-842f-4bbc74f7ee30",
+  "bandit-rear-keys": "7437d2ac-c5ab-4c7c-a77a-5e1cb506ac88",
+  "hobgoblin-portraits": "bafe6b5d-05be-475e-a213-f457f578ed0d",
+  "bandit-portraits": "dd70c1cd-bf04-484d-aeee-9bd2b5ac3981"
+}

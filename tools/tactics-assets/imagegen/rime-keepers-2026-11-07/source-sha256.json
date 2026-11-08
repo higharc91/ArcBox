@@ -1,0 +1,19 @@
+{
+  "hurt-backleft.png": "750275d52d11644e13c698a872bb4c95eefc1f83cc0eefb05cf2fcff4357505c",
+  "lich-attack.png": "5e0ffb0a93b51ec9eea23d2c6efc3f18201549f828b6df4fd1e65e95f8b5a475",
+  "lich-cast-frontleft.png": "d4812c183d0b06a0a1a644e6e2307ebbf2c5cf01881232c40ea09e760cd8d0e9",
+  "lich-cast.png": "04cac008e8e46e5d1ec93c472f96622f7fdc320504e758b00fb34d2d088c86da",
+  "lich-damage.png": "67d921ba850c5d16aff965b615f28f5eef81d714a2e1df63b292919acbd385d4",
+  "lich-idle-opaque-rejected.png": "c77fe4400f3e87efe02bcdd0a26c37552a426b0df295082d10e4700faa023815",
+  "lich-idle.png": "a1c5c22389be2b76c14536079f07016185d2b274d8592d2636e5af4d003270f7",
+  "lich-portraits.png": "fa9ca102dc120fd0c33a1472a951036607b619dbc1ae8b4b0e9c39ea537ea5e7",
+  "lich-walk.png": "458a2d6839a867622e4485b5e2e266dca91e02103246e8115ab9361df96b0bf4",
+  "necromancer-attack.png": "ece4a7bc393350268e27ca8cd9e80cf371e4f9c917fad0eb1fc2887eac7ea848",
+  "necromancer-cast-oblique-rejected.png": "8f727201fd4d5e9000fcd9af8a0b43001c87cbbe2c8ed53dacca32726f706548",
+  "necromancer-cast-raised.png": "b1d8b5aaa6130454bfafb515995d8a562add9f5a5b6d391bad40080abf885d84",
+  "necromancer-cast.png": "764c8b1e703b3fa69d64e3503f08bfb97fdb81a4a285f96a89dfba893e9ce341",
+  "necromancer-damage.png": "3fa90c065ef20b182a54b4d4df66b8ad23f1a46c41f3ddad8fdc9b0da9df9def",
+  "necromancer-idle.png": "b095568a07efc688900d67ea59c10a837b7010caa016df00e4e640aac2d0f4a0",
+  "necromancer-portraits.png": "e5201e87fe61a5300b37358df41ce2ad9513b6e6eaeed1f746c66e0638e54b49",
+  "necromancer-walk.png": "953969f66cded9fb24d98fe2626a74e1bcd4a0ec599c5bfb44eaf779a94281d7"
+}

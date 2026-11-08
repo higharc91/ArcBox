@@ -1,0 +1,84 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM default
+ERROR: Condition "status < 0" is true. Returning: ERR_CANT_OPEN
+   at: init_output_device (drivers/alsa/audio_driver_alsa.cpp:97)
+WARNING: All audio drivers failed, falling back to the dummy driver.
+     at: initialize (servers/audio/audio_server.cpp:258)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+World demo: no server connection
+WORLD window 1920x1080 at (0, 0), spec ashen_ford:trail-companion, optimised False, adapter llvmpipe (LLVM 19.1.7, 256 bits)
+WORLD open on the main thread 6.0 ms
+WORLD build ground 233 ms, plan+light 813 ms, bake 103 ms, herd 61 ms, nodes 13 ms, total 1224 ms, main thread 6.0 ms
+WORLD items 34,473 lit; 19,200 tiles, 80 blocks, block items median 378, most 1268; 82 lights, active True; 192 images; route 3 tiles; spots road@37,61 lineup@52,60
+WORLD memory after build: managed 42.3 MB (+41.7), engine 32.4 MB (+0.5), textures 15.8 MB, buffers 8.1 MB, process 381 MB
+WORLD unit-texture creatures/generic_farmer_a.png 576x768
+WORLD unit-texture creatures/mob_refresh_goblin.png 1024x2048
+WORLD unit-texture creatures/mother_skarrow.png 1728x1536
+WORLD unit-texture creatures/mob_refresh_goblin_boss.png 1280x3840
+WORLD unit-texture creatures/mob_refresh_goblin_archer.png 1024x2048
+WORLD unit-texture creatures/generic_merchant_a.png 576x768
+WORLD unit-texture creatures/generic_farmhand_a.png 576x768
+WORLD unit-texture creatures/generic_guard_a.png 576x768
+WORLD unit-texture creatures/bree_tallow.png 1536x768
+WORLD unit-texture creatures/mother_aubrine.png 1728x768
+WORLD unit-texture creatures/tobin_fell.png 1728x768
+WORLD unit-texture creatures/generic_child_a.png 576x768
+WORLD unit-texture creatures/lark.png 1728x768
+WORLD unit-texture creatures/corvin.png 1728x768
+WORLD unit-texture creatures/pip.png 1152x512
+WORLD unit-texture creatures/generic_child_b.png 576x768
+WORLD unit-texture creatures/generic_farmhand_b.png 576x768
+WORLD unit-texture creatures/generic_guard_b.png 576x768
+WORLD unit-texture creatures/generic_farmer_b.png 576x768
+WORLD unit-texture creatures/generic_barmaid_a.png 576x768
+WORLD unit-texture creatures/halden_varrow.png 1440x768
+WORLD unit-texture creatures/generic_merchant_b.png 576x768
+WORLD unit-texture creatures/dagna.png 1728x768
+WORLD unit-texture creatures/generic_barmaid_b.png 576x768
+WORLD unit-texture creatures/celandine.png 1728x768
+WORLD unit-texture creatures/old_maud.png 1728x768
+WORLD unit-texture creatures/generic_fisher_a.png 576x768
+WORLD unit-texture creatures/generic_fisher_b.png 576x768
+WORLD unit-texture creatures/rook.png 1728x768
+WORLD unit-texture creatures/fauna_crow.png 352x1248
+WORLD unit-texture creatures/fauna_dog.png 448x928
+WORLD unit-texture creatures/fauna_goat.png 400x768
+WORLD unit-texture creatures/fauna_sheep.png 448x832
+WORLD unit-texture creatures/fauna_mule.png 592x1312
+WORLD unit-texture creatures/fauna_fox.png 416x1088
+WORLD unit-texture creatures/fauna_duck.png 256x448
+WORLD unit-texture tactical/human_fighter.png 3840x2560
+WORLD unit-texture creatures/mob_refresh_bandit.png 1664x3328
+WORLD unit-texture creatures/mob_refresh_hound.png 2048x4096
+WORLD unit-texture creatures/mob_refresh_skeleton.png 1792x3584
+WORLD unit-texture creatures/mob_refresh_mimic.png 2048x4096
+WORLD textures 274 in 1090 ms, worst 109.6 ms; binding items (and baking glows) 11 ms; 66 blocks still to record at reveal
+WORLD crossing 3 tiles at 6.7 tiles/s, 0.4 s, 4 frames: frame ms median 101.68, p95 106.13, p99 106.13, worst 106.13
+WORLD crossing after the first 1 s: frame ms median 0.00, p95 0.00, p99 0.00, worst 0.00
+WORLD frames over 16 ms: 4 of 4, at 0.00s=94.3 0.09s=106.1 0.20s=95.9 0.30s=101.7, 4 while recording
+WORLD recording during the walk: 4 frames, ms a frame median 3.95, p95 3.98, p99 3.98, worst 3.98
+WORLD frames while recording: frame ms median 101.68, p95 106.13, p99 106.13, worst 106.13
+WORLD _Draw per block, first time: median 0.28, p95 0.82, p99 0.90, worst 0.90, sum 23.1 ms
+WORLD render CPU ms median 63.29, p95 65.16, p99 65.16, worst 65.16; GPU ms median 63.25, p95 65.05, p99 65.05, worst 65.05; at most 2,926 draw calls
+WORLD overlay query ms median 11.28, p95 27.42, p99 27.42, worst 27.42; draw ms median 0.60, p95 0.92, p99 0.92, worst 0.92; items median 495.00, p95 526.00, p99 526.00, worst 526.00
+WORLD blocks recorded once, whatever the walk did: True; recorded again for a fade: 4
+WORLD memory at end of crossing: managed 44.2 MB (+43.7), engine 49.2 MB (+17.3), textures 429.1 MB, buffers 8.2 MB, process 767 MB
+WORLD shot /workspace/mob-review/trail-companion-world/world-ashen_ford-trail-companion.png
+WORLD shot /workspace/mob-review/trail-companion-world/world-road.png
+WORLD shot /workspace/mob-review/trail-companion-world/world-lineup.png
+WORLD closed

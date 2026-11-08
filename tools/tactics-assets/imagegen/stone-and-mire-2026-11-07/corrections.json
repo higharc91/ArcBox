@@ -1,0 +1,20 @@
+[
+  {
+    "mob": "troll",
+    "action": "special",
+    "source": "troll-special-fullback",
+    "count": 4,
+    "columns": 4,
+    "targets": [
+      {
+        "row": 4,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  }
+]

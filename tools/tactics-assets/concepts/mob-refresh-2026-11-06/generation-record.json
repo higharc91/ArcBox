@@ -1,0 +1,149 @@
+{
+  "provider": "Scenario",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "reference_asset": "asset_TXx2ypS9LjXJ3uPfmPB353fr",
+  "briefs": {
+    "goblin": "Original production concept sheet for Wardenflame: Embers of the Vale. Use the supplied approved Grisk sheet ONLY as the painting/material/style reference, not as an anatomy or costume template. Grounded humane tactical fantasy, late-1990s tactical-RPG clarity, practical worn materials, strong distinct silhouettes, clean separated material planes suitable for later careful pixel-art translation. Warm top-left key light, cooler shadows, restrained earth colours, no photographic microtexture, blur, excessive bloom or modern gear. These are original designs. Warm parchment background, generous margins, no scenery, no labels, lettering, watermark or interface. Show one coherent design in a large front three-quarter full-body view, separate side and rear full-body views, one head/material study, and one small side-view scale comparison beside a neutral 1.75 m human. All feet, weapons, ears and tails inside the page. Preserve exact equipment, handedness and anatomy between views; belts, straps and gear wrap around correctly on the rear view. Design a Skarrow-clan GOBLIN skirmisher who carries a short worn SCIMITAR in the anatomical RIGHT hand. About 1.05 m tall, compact sinewy adult proportions, moss-olive green skin, long pointed lateral ears, short blunt nose, expressive amber-brown eyes with small dark pupils; no glowing eyeballs. A wary capable person from a hungry displaced clan, not an evil caricature or a cute toy. Patched russet leather vest over a muted brown short tunic, cloth leg wraps, simple boots, one practical belt with a small side pouch, a narrow faded-maroon clan cloth at the neck. Short curved iron blade with an unambiguous grip, fingers firmly wrapped and wrist connected; small empty left hand ready to balance. No bow, spear, shield, trophy skulls, ornate jewelry, large helmet or lantern. NO reptile snout, horns or tail: this is a goblin, not the reference kobold. Eye, ear, leather seam, blade and hand shapes must remain readable when translated into a roughly 50\u201360 native-pixel-tall sprite at the game's established density.",
+    "orc": "Original production concept sheet for Wardenflame: Embers of the Vale. Use the supplied approved Grisk sheet ONLY as the painting/material/style reference, not as an anatomy or costume template. Grounded humane tactical fantasy, late-1990s tactical-RPG clarity, practical worn materials, strong distinct silhouettes, clean separated material planes suitable for later careful pixel-art translation. Warm top-left key light, cooler shadows, restrained earth colours, no photographic microtexture, blur, excessive bloom or modern gear. These are original designs. Warm parchment background, generous margins, no scenery, no labels, lettering, watermark or interface. Show one coherent design in a large front three-quarter full-body view, separate side and rear full-body views, one head/material study, and one small side-view scale comparison beside a neutral 1.75 m human. All feet, weapons, ears and tails inside the page. Preserve exact equipment, handedness and anatomy between views; belts, straps and gear wrap around correctly on the rear view. Design the ORC BRUTE combat role: a 2.05 m adult hill-clan warrior, broad-shouldered and muscular with believable joints and a full-sized expressive head, sturdy grounded legs, grey-olive skin, strong brows, broad nose, modest lower tusks, pointed ears and short tied-back dark hair. Orcs in the Vale trade and fight alongside humans and goblins; this warrior is weary, disciplined and protective, not a mindless evil monster. Practical patched oxblood/brown leather armour, one iron shoulder plate, simple wrist guards, weathered wool/linen underlayers, belt with a side tool pouch, reinforced boots. A two-handed GREAtAXE with a wooden shaft and a single functional iron head; show BOTH hands gripping the same continuous shaft, believable leverage and clearance from the legs. No oversized toy axe, tusk mask, glowing eyes, huge trophy skulls, bodybuilder posing or extravagant spikes. Anatomy, axe head and all hand placements must agree in front/side/back views. Use a compact readable silhouette appropriate for roughly 85\u2013100 native pixels tall at the game's established density.",
+    "drake": "Original production concept sheet for Wardenflame: Embers of the Vale. Use the supplied approved Grisk sheet ONLY as the painting/material/style reference, not as an anatomy or costume template. Grounded humane tactical fantasy, late-1990s tactical-RPG clarity, practical worn materials, strong distinct silhouettes, clean separated material planes suitable for later careful pixel-art translation. Warm top-left key light, cooler shadows, restrained earth colours, no photographic microtexture, blur, excessive bloom or modern gear. These are original designs. Warm parchment background, generous margins, no scenery, no labels, lettering, watermark or interface. Show one coherent design in a large front three-quarter full-body view, separate side and rear full-body views, one head/material study, and one small side-view scale comparison beside a neutral 1.75 m human. All feet, weapons, ears and tails inside the page. Preserve exact equipment, handedness and anatomy between views; belts, straps and gear wrap around correctly on the rear view. Design a RED DRAKE, a natural low-slung wingless quadruped predator of the Vale rather than a human or a full-sized dragon. Around 2.3 m from nose to tail-tip, about 0.9 m at the shoulder, substantial but shorter than the human comparison; keep the animal compact enough to occupy a small tactical creature footprint. All FOUR legs are clear, jointed, load-bearing and plantigrade/digitigrade consistently; no human arms, detached feet, extra limbs, wings or hovering body. A broad wedge-shaped reptilian head, short swept-back horn ridges, small amber eyes with dark pupils, strong jaw, restrained overlapping burgundy and ember-red scale plates, muted warm ochre throat and belly, a flexible long balancing tail with a clear single root at the pelvis. Coarse readable armour-scale clusters and quiet highlight planes rather than thousands of tiny shiny scales. A faint contained warmth in the throat may suggest its flame-breath ability, but no permanent fire body, fiery aura or obscuring particles. Side and rear studies must show the same tail connection, scale pattern, four limb roots and shoulder/hip structure. Add a small purposeful walking weight-shift pose and a separate flame-breath preparation head study, preserving anatomy. Maintain detail compatible with the newly approved kobolds and party rather than a highly rendered creature at a different pixel density."
+  },
+  "jobs": {
+    "goblin": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_CBeKFRirDWYe2JNN6aWTyrz8",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_CBeKFRirDWYe2JNN6aWTyrz8' (one call waits on up to 32 jobs)."
+    },
+    "orc": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_EC9yEe8aJPYFN6EGkCiXPHX7",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_EC9yEe8aJPYFN6EGkCiXPHX7' (one call waits on up to 32 jobs)."
+    },
+    "drake": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_Ct9u3pAVETADNgwvoxWXhvRo",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_Ct9u3pAVETADNgwvoxWXhvRo' (one call waits on up to 32 jobs)."
+    }
+  },
+  "results": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_CBeKFRirDWYe2JNN6aWTyrz8",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-06T22:13:51.877Z",
+        "updatedAt": "2026-11-06T22:14:49.292Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_gdzunUB9msfVZRi6wXR17Vwm"
+        ],
+        "cuCost": 13
+      },
+      {
+        "jobId": "job_EC9yEe8aJPYFN6EGkCiXPHX7",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-06T22:13:53.484Z",
+        "updatedAt": "2026-11-06T22:14:55.230Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_borbR9ZuxN4QM5Y2poKGt4P9"
+        ],
+        "cuCost": 13
+      },
+      {
+        "jobId": "job_Ct9u3pAVETADNgwvoxWXhvRo",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-06T22:13:55.018Z",
+        "updatedAt": "2026-11-06T22:14:35.865Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_jyE7isx9fsLMN4iDRveGVZ6P"
+        ],
+        "cuCost": 13
+      }
+    ]
+  },
+  "goblin_revision": {
+    "prompt": "Correct this original Wardenflame goblin concept sheet while preserving its painting style, exact character design, anatomy, olive-green skin, russet vest, brown tunic, maroon neck cloth and all existing sheet elements. In EVERY full-body view the goblin has exactly ONE weapon: one short curved iron scimitar gripped firmly in the anatomical RIGHT hand. In the right-hand side/three-quarter full-body study, REMOVE the extra second curved blade. The LEFT hand is empty and relaxed. Show only one continuous blade, one hilt, one grip and one pommel in each full-body study; no detached weapon pieces, floating blades, second sword, sheath mistaken for a sword or empty-hand overlap. The front and back designs are otherwise correct and must stay consistent. Keep all views and the human scale inset, the plain parchment, clean readable material planes and restrained warm top-left light. This is a production correction, not a redesign.",
+    "job": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_RGcmVh32tNWusQR89ygGTauB",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_RGcmVh32tNWusQR89ygGTauB' (one call waits on up to 32 jobs)."
+    },
+    "result": {
+      "status": "completed",
+      "jobs": [
+        {
+          "jobId": "job_RGcmVh32tNWusQR89ygGTauB",
+          "jobType": "custom",
+          "status": "success",
+          "progress": 1,
+          "createdAt": "2026-11-06T22:16:36.754Z",
+          "updatedAt": "2026-11-06T22:17:36.736Z",
+          "modelId": "model_google-gemini-nano-banana-2-1",
+          "assetIds": [
+            "asset_X2MW7PYSkHsSRtnoYTefi3TJ"
+          ],
+          "cuCost": 13
+        }
+      ]
+    }
+  },
+  "pixel_stage": {
+    "provider": "OpenAI image generation; locally authored production export",
+    "orc_pilot": "/workspace/generated_images/exec-00978d8b-22c0-4254-a9b3-f9da972c2f62.png",
+    "status": "Three idle-turnaround candidates and one goblin front-walk pilot; not integrated. Owner style/scope feedback pending.",
+    "outputs": [
+      "orc-idle-turnaround-v2.png",
+      "goblin-idle-turnaround.png",
+      "drake-idle-turnaround.png",
+      "goblin-walk-front-clean.png"
+    ],
+    "revisions": [
+      "Orc initial sheet had duplicate directions; v2 corrects the direction set.",
+      "Goblin walk initial output had a dirty transparency matte; cleanup was generated before export.",
+      "Extraction uses eight whole-sheet connected components instead of a guessed fixed grid, preserving tails and removing adjacent-cell fragments."
+    ],
+    "native_frames": {
+      "goblin": [
+        128,
+        128
+      ],
+      "orc": [
+        192,
+        192
+      ],
+      "drake": [
+        192,
+        192
+      ]
+    },
+    "proposed_pixel_scale": 0.32,
+    "outstanding": [
+      "Full eight-direction walking",
+      "Animated breathing idle",
+      "Attack/special/hurt/down sets",
+      "Anatomical weapon-grip continuity across all directions",
+      "Palette and edge review",
+      "In-game world/battle visual review"
+    ]
+  },
+  "owner_scope": "Asked whether combat roster first or entire art library; answer pending.",
+  "owner_feedback": {
+    "goblin_style": "approved",
+    "orc_style": "approved",
+    "drake": "Revise: wings must be shown when attacking; folded wing idle and clearly spread attack proposed.",
+    "scope": "Combat roster first as previously recommended; further library variants not prioritized."
+  }
+}

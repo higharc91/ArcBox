@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      85,
+      81,
+      233,
+      253
+    ],
+    "count": 17273
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 1,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      83,
+      230,
+      254
+    ],
+    "count": 16977
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 2,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      90,
+      81,
+      231,
+      253
+    ],
+    "count": 16836
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      81,
+      232,
+      253
+    ],
+    "count": 16994
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 0,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      85,
+      234,
+      256
+    ],
+    "count": 17627
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 1,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      85,
+      232,
+      258
+    ],
+    "count": 17217
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 2,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      90,
+      85,
+      232,
+      256
+    ],
+    "count": 16939
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 3,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      84,
+      232,
+      255
+    ],
+    "count": 17342
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      85,
+      84,
+      233,
+      256
+    ],
+    "count": 17273
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 0,
+    "scale": 1.017751479289941,
+    "bounds": [
+      66,
+      84,
+      247,
+      256
+    ],
+    "count": 20830
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 1,
+    "scale": 1.017751479289941,
+    "bounds": [
+      61,
+      84,
+      247,
+      256
+    ],
+    "count": 20949
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      84,
+      231,
+      256
+    ],
+    "count": 16994
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      82,
+      92,
+      230,
+      256
+    ],
+    "count": 16747
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      82,
+      153,
+      237,
+      256
+    ],
+    "count": 12159
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      85,
+      84,
+      233,
+      256
+    ],
+    "count": 17273
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 0,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      77,
+      65,
+      239,
+      256
+    ],
+    "count": 20338
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 1,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      77,
+      112,
+      241,
+      256
+    ],
+    "count": 18774
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      84,
+      231,
+      256
+    ],
+    "count": 16994
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 0,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      85,
+      84,
+      233,
+      256
+    ],
+    "count": 17273
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 2,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      91,
+      85,
+      226,
+      256
+    ],
+    "count": 16293
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 3,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      95,
+      84,
+      223,
+      256
+    ],
+    "count": 15559
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 3,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      84,
+      231,
+      256
+    ],
+    "count": 16994
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      77,
+      229,
+      254
+    ],
+    "count": 16732
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 5,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      78,
+      230,
+      254
+    ],
+    "count": 16793
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 6,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      77,
+      229,
+      254
+    ],
+    "count": 16738
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      77,
+      229,
+      254
+    ],
+    "count": 16767
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 4,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      94,
+      80,
+      228,
+      256
+    ],
+    "count": 16184
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 5,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      95,
+      81,
+      230,
+      250
+    ],
+    "count": 16459
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 6,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      95,
+      79,
+      232,
+      255
+    ],
+    "count": 16715
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 7,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      95,
+      78,
+      233,
+      254
+    ],
+    "count": 16098
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      79,
+      229,
+      256
+    ],
+    "count": 16732
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 2,
+    "scale": 1.017751479289941,
+    "bounds": [
+      69,
+      72,
+      245,
+      256
+    ],
+    "count": 21652
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 3,
+    "scale": 1.017751479289941,
+    "bounds": [
+      48,
+      72,
+      244,
+      256
+    ],
+    "count": 21863
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      99,
+      79,
+      230,
+      256
+    ],
+    "count": 16767
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      85,
+      93,
+      222,
+      256
+    ],
+    "count": 15461
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      77,
+      150,
+      242,
+      256
+    ],
+    "count": 12973
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      79,
+      229,
+      256
+    ],
+    "count": 16732
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 4,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      78,
+      54,
+      234,
+      256
+    ],
+    "count": 21315
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 5,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      74,
+      117,
+      243,
+      256
+    ],
+    "count": 18309
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      99,
+      79,
+      230,
+      256
+    ],
+    "count": 16767
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 4,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      79,
+      229,
+      256
+    ],
+    "count": 16732
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 6,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      91,
+      74,
+      219,
+      256
+    ],
+    "count": 16727
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 7,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      97,
+      76,
+      216,
+      256
+    ],
+    "count": 15944
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 7,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      99,
+      79,
+      230,
+      256
+    ],
+    "count": 16767
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      79,
+      198,
+      254
+    ],
+    "count": 10113
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 9,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      128,
+      80,
+      199,
+      253
+    ],
+    "count": 9984
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 10,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      79,
+      198,
+      254
+    ],
+    "count": 10084
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      79,
+      198,
+      254
+    ],
+    "count": 10003
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 8,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      121,
+      80,
+      202,
+      258
+    ],
+    "count": 11053
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 9,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      121,
+      81,
+      202,
+      259
+    ],
+    "count": 11180
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 10,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      117,
+      80,
+      201,
+      258
+    ],
+    "count": 11097
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 11,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      121,
+      80,
+      203,
+      257
+    ],
+    "count": 11010
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      81,
+      198,
+      256
+    ],
+    "count": 10113
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 4,
+    "scale": 1.017751479289941,
+    "bounds": [
+      82,
+      70,
+      211,
+      256
+    ],
+    "count": 15901
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 5,
+    "scale": 1.017751479289941,
+    "bounds": [
+      29,
+      69,
+      217,
+      256
+    ],
+    "count": 19573
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      81,
+      198,
+      256
+    ],
+    "count": 10003
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      109,
+      89,
+      213,
+      256
+    ],
+    "count": 11261
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      79,
+      159,
+      240,
+      256
+    ],
+    "count": 11527
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      81,
+      198,
+      256
+    ],
+    "count": 10113
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 8,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      84,
+      48,
+      205,
+      256
+    ],
+    "count": 15585
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 9,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      78,
+      123,
+      240,
+      256
+    ],
+    "count": 15219
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      81,
+      198,
+      256
+    ],
+    "count": 10003
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 8,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      81,
+      198,
+      256
+    ],
+    "count": 10113
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 10,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      94,
+      77,
+      199,
+      256
+    ],
+    "count": 12544
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 11,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      101,
+      79,
+      199,
+      256
+    ],
+    "count": 12067
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 11,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      127,
+      81,
+      198,
+      256
+    ],
+    "count": 10003
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      79,
+      219,
+      254
+    ],
+    "count": 15227
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 13,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      103,
+      79,
+      217,
+      254
+    ],
+    "count": 15190
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 14,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      104,
+      79,
+      218,
+      254
+    ],
+    "count": 15160
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      104,
+      79,
+      218,
+      254
+    ],
+    "count": 14992
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 12,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      81,
+      216,
+      256
+    ],
+    "count": 14405
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 13,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      100,
+      82,
+      219,
+      257
+    ],
+    "count": 14691
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 14,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      94,
+      80,
+      222,
+      253
+    ],
+    "count": 15283
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 15,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      97,
+      80,
+      221,
+      255
+    ],
+    "count": 15312
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      81,
+      219,
+      256
+    ],
+    "count": 15227
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 6,
+    "scale": 1.017751479289941,
+    "bounds": [
+      78,
+      68,
+      237,
+      256
+    ],
+    "count": 21239
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 7,
+    "scale": 1.017751479289941,
+    "bounds": [
+      34,
+      68,
+      239,
+      256
+    ],
+    "count": 22875
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      81,
+      219,
+      256
+    ],
+    "count": 14992
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      89,
+      90,
+      215,
+      256
+    ],
+    "count": 14835
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      78,
+      159,
+      240,
+      256
+    ],
+    "count": 11371
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      81,
+      219,
+      256
+    ],
+    "count": 15227
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 12,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      82,
+      54,
+      223,
+      256
+    ],
+    "count": 19912
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 13,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      77,
+      121,
+      241,
+      256
+    ],
+    "count": 15894
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      81,
+      219,
+      256
+    ],
+    "count": 14992
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 12,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      81,
+      219,
+      256
+    ],
+    "count": 15227
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 14,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      89,
+      74,
+      218,
+      256
+    ],
+    "count": 16201
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 15,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      90,
+      74,
+      213,
+      256
+    ],
+    "count": 15841
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 15,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      105,
+      81,
+      219,
+      256
+    ],
+    "count": 14992
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      90,
+      81,
+      230,
+      253
+    ],
+    "count": 17231
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 17,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      84,
+      228,
+      254
+    ],
+    "count": 17039
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 18,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      83,
+      229,
+      254
+    ],
+    "count": 17089
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      81,
+      229,
+      253
+    ],
+    "count": 17331
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 16,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      86,
+      83,
+      233,
+      256
+    ],
+    "count": 17858
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 17,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      85,
+      232,
+      257
+    ],
+    "count": 17877
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 18,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      84,
+      232,
+      256
+    ],
+    "count": 17480
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 19,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      85,
+      82,
+      232,
+      255
+    ],
+    "count": 17971
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      90,
+      84,
+      230,
+      256
+    ],
+    "count": 17231
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 8,
+    "scale": 1.017751479289941,
+    "bounds": [
+      69,
+      77,
+      247,
+      256
+    ],
+    "count": 22431
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 9,
+    "scale": 1.017751479289941,
+    "bounds": [
+      55,
+      77,
+      246,
+      256
+    ],
+    "count": 22125
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      84,
+      229,
+      256
+    ],
+    "count": 17331
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 8,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      85,
+      90,
+      239,
+      256
+    ],
+    "count": 17830
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      76,
+      154,
+      242,
+      256
+    ],
+    "count": 12836
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      90,
+      84,
+      230,
+      256
+    ],
+    "count": 17231
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 16,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      71,
+      58,
+      241,
+      256
+    ],
+    "count": 22513
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 17,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      78,
+      118,
+      240,
+      256
+    ],
+    "count": 17693
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      84,
+      229,
+      256
+    ],
+    "count": 17331
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 16,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      90,
+      84,
+      230,
+      256
+    ],
+    "count": 17231
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 18,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      94,
+      82,
+      224,
+      256
+    ],
+    "count": 16666
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 19,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      97,
+      82,
+      222,
+      256
+    ],
+    "count": 16033
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 19,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      89,
+      84,
+      229,
+      256
+    ],
+    "count": 17331
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      93,
+      77,
+      213,
+      254
+    ],
+    "count": 15478
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 21,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      96,
+      80,
+      217,
+      253
+    ],
+    "count": 15198
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 22,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      95,
+      78,
+      214,
+      254
+    ],
+    "count": 15148
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      94,
+      77,
+      214,
+      254
+    ],
+    "count": 15367
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 20,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      92,
+      80,
+      217,
+      256
+    ],
+    "count": 15214
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 21,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      98,
+      81,
+      219,
+      257
+    ],
+    "count": 15070
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 22,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      91,
+      80,
+      221,
+      256
+    ],
+    "count": 15492
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 23,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      92,
+      79,
+      221,
+      255
+    ],
+    "count": 15412
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      93,
+      79,
+      213,
+      256
+    ],
+    "count": 15478
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 10,
+    "scale": 1.017751479289941,
+    "bounds": [
+      83,
+      67,
+      234,
+      256
+    ],
+    "count": 20291
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 11,
+    "scale": 1.017751479289941,
+    "bounds": [
+      83,
+      68,
+      259,
+      256
+    ],
+    "count": 20673
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      96,
+      79,
+      216,
+      256
+    ],
+    "count": 15367
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      100,
+      85,
+      228,
+      256
+    ],
+    "count": 15780
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      78,
+      148,
+      241,
+      256
+    ],
+    "count": 13256
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      93,
+      79,
+      213,
+      256
+    ],
+    "count": 15478
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 20,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      84,
+      59,
+      235,
+      256
+    ],
+    "count": 21132
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 21,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      77,
+      121,
+      243,
+      256
+    ],
+    "count": 16527
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      96,
+      79,
+      216,
+      256
+    ],
+    "count": 15367
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 20,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      93,
+      79,
+      213,
+      256
+    ],
+    "count": 15478
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 22,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      103,
+      81,
+      225,
+      256
+    ],
+    "count": 15465
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 23,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      104,
+      82,
+      220,
+      256
+    ],
+    "count": 14856
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 23,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      96,
+      79,
+      216,
+      256
+    ],
+    "count": 15367
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      120,
+      79,
+      194,
+      254
+    ],
+    "count": 10037
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 25,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      121,
+      81,
+      192,
+      253
+    ],
+    "count": 9958
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 26,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      118,
+      79,
+      192,
+      254
+    ],
+    "count": 10166
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      118,
+      79,
+      192,
+      254
+    ],
+    "count": 10089
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 24,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      115,
+      83,
+      199,
+      259
+    ],
+    "count": 11188
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 25,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      114,
+      84,
+      198,
+      260
+    ],
+    "count": 11003
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 26,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      112,
+      83,
+      199,
+      258
+    ],
+    "count": 11266
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 27,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      113,
+      82,
+      198,
+      257
+    ],
+    "count": 11146
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      120,
+      81,
+      194,
+      256
+    ],
+    "count": 10037
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 12,
+    "scale": 1.017751479289941,
+    "bounds": [
+      101,
+      66,
+      214,
+      256
+    ],
+    "count": 15625
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 13,
+    "scale": 1.017751479289941,
+    "bounds": [
+      116,
+      66,
+      275,
+      256
+    ],
+    "count": 18082
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      118,
+      81,
+      192,
+      256
+    ],
+    "count": 10089
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      117,
+      87,
+      209,
+      256
+    ],
+    "count": 11246
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      80,
+      151,
+      239,
+      256
+    ],
+    "count": 11965
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      120,
+      81,
+      194,
+      256
+    ],
+    "count": 10037
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 24,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      104,
+      49,
+      225,
+      256
+    ],
+    "count": 17268
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 25,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      79,
+      125,
+      241,
+      256
+    ],
+    "count": 15240
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      118,
+      81,
+      192,
+      256
+    ],
+    "count": 10089
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 24,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      120,
+      81,
+      194,
+      256
+    ],
+    "count": 10037
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 26,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      113,
+      80,
+      220,
+      256
+    ],
+    "count": 12345
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 27,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      108,
+      80,
+      210,
+      256
+    ],
+    "count": 12396
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 27,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      118,
+      81,
+      192,
+      256
+    ],
+    "count": 10089
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      79,
+      221,
+      254
+    ],
+    "count": 16462
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 29,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      81,
+      220,
+      253
+    ],
+    "count": 16270
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 30,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      81,
+      219,
+      253
+    ],
+    "count": 16237
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      85,
+      83,
+      218,
+      254
+    ],
+    "count": 16309
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 28,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      86,
+      83,
+      219,
+      253
+    ],
+    "count": 16484
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 29,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      82,
+      219,
+      252
+    ],
+    "count": 15326
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 30,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      83,
+      220,
+      253
+    ],
+    "count": 15630
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_basalt-walk.png",
+    "sourcePose": 31,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      86,
+      82,
+      219,
+      252
+    ],
+    "count": 15753
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      81,
+      221,
+      256
+    ],
+    "count": 16462
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 14,
+    "scale": 1.017751479289941,
+    "bounds": [
+      107,
+      71,
+      279,
+      256
+    ],
+    "count": 20790
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_basalt-attack.png",
+    "sourcePose": 15,
+    "scale": 1.017751479289941,
+    "bounds": [
+      126,
+      71,
+      294,
+      256
+    ],
+    "count": 20979
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      85,
+      220,
+      256
+    ],
+    "count": 16309
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      101,
+      87,
+      240,
+      256
+    ],
+    "count": 16421
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7256637168141593,
+    "bounds": [
+      75,
+      151,
+      244,
+      256
+    ],
+    "count": 12809
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      81,
+      221,
+      256
+    ],
+    "count": 16462
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 28,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      90,
+      54,
+      236,
+      256
+    ],
+    "count": 20528
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 29,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      80,
+      124,
+      240,
+      256
+    ],
+    "count": 16300
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      85,
+      220,
+      256
+    ],
+    "count": 16309
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 28,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      88,
+      81,
+      221,
+      256
+    ],
+    "count": 16462
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 30,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      98,
+      81,
+      220,
+      256
+    ],
+    "count": 15409
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem_basalt-moves.png",
+    "sourcePose": 31,
+    "scale": 1.1466666666666667,
+    "bounds": [
+      102,
+      82,
+      216,
+      256
+    ],
+    "count": 14965
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem_basalt-idle.png",
+    "sourcePose": 31,
+    "scale": 1.1168831168831168,
+    "bounds": [
+      87,
+      85,
+      220,
+      256
+    ],
+    "count": 16309
+  }
+]

@@ -1,0 +1,8202 @@
+[
+  {
+    "id": "necromancer",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          119.0,
+          29
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          65,
+          26,
+          100,
+          188
+        ],
+        "bounds": [
+          67,
+          28,
+          163,
+          212
+        ],
+        "foot": [
+          113.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          31
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          288,
+          29,
+          100,
+          184
+        ],
+        "bounds": [
+          290,
+          31,
+          386,
+          211
+        ],
+        "foot": [
+          336.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.0,
+          29
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          510,
+          27,
+          100,
+          186
+        ],
+        "bounds": [
+          512,
+          29,
+          608,
+          211
+        ],
+        "foot": [
+          557.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          29
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          732,
+          27,
+          100,
+          186
+        ],
+        "bounds": [
+          734,
+          29,
+          830,
+          211
+        ],
+        "foot": [
+          779.5,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.0,
+          27
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          59,
+          25,
+          109,
+          192
+        ],
+        "bounds": [
+          61,
+          27,
+          166,
+          215
+        ],
+        "foot": [
+          107.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          28
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          282,
+          26,
+          106,
+          188
+        ],
+        "bounds": [
+          284,
+          28,
+          386,
+          212
+        ],
+        "foot": [
+          329.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          28
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          504,
+          26,
+          109,
+          191
+        ],
+        "bounds": [
+          506,
+          28,
+          611,
+          215
+        ],
+        "foot": [
+          548.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          28
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          726,
+          25,
+          106,
+          190
+        ],
+        "bounds": [
+          728,
+          27,
+          830,
+          213
+        ],
+        "foot": [
+          772.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          26
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          24,
+          105,
+          193
+        ],
+        "bounds": [
+          63,
+          26,
+          164,
+          215
+        ],
+        "foot": [
+          110.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.5,
+          29
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          266,
+          27,
+          121,
+          190
+        ],
+        "bounds": [
+          268,
+          29,
+          385,
+          215
+        ],
+        "foot": [
+          338.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          30
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          501,
+          27,
+          110,
+          190
+        ],
+        "bounds": [
+          503,
+          29,
+          609,
+          215
+        ],
+        "foot": [
+          560.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          26
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          727,
+          24,
+          106,
+          193
+        ],
+        "bounds": [
+          729,
+          26,
+          831,
+          215
+        ],
+        "foot": [
+          777.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          140.0,
+          53
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          85,
+          51,
+          147,
+          243
+        ],
+        "bounds": [
+          87,
+          53,
+          230,
+          292
+        ],
+        "foot": [
+          154.5,
+          292
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          435.5,
+          194
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          291,
+          192,
+          303,
+          100
+        ],
+        "bounds": [
+          293,
+          194,
+          592,
+          290
+        ],
+        "foot": [
+          421.5,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.5,
+          28
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          25,
+          107,
+          193
+        ],
+        "bounds": [
+          63,
+          27,
+          166,
+          216
+        ],
+        "foot": [
+          112.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          561.5,
+          28
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          506,
+          25,
+          126,
+          193
+        ],
+        "bounds": [
+          508,
+          27,
+          630,
+          216
+        ],
+        "foot": [
+          556.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          784.0,
+          28
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          727,
+          25,
+          109,
+          193
+        ],
+        "bounds": [
+          729,
+          27,
+          834,
+          216
+        ],
+        "foot": [
+          778.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          113.0,
+          248
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          61,
+          246,
+          98,
+          191
+        ],
+        "bounds": [
+          63,
+          248,
+          157,
+          435
+        ],
+        "foot": [
+          107.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          251
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          283,
+          249,
+          100,
+          188
+        ],
+        "bounds": [
+          285,
+          251,
+          381,
+          435
+        ],
+        "foot": [
+          330.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          251
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          506,
+          249,
+          99,
+          188
+        ],
+        "bounds": [
+          508,
+          251,
+          603,
+          435
+        ],
+        "foot": [
+          552.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          249
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          727,
+          246,
+          97,
+          191
+        ],
+        "bounds": [
+          729,
+          248,
+          822,
+          435
+        ],
+        "foot": [
+          773.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          249
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          56,
+          247,
+          108,
+          191
+        ],
+        "bounds": [
+          58,
+          249,
+          162,
+          436
+        ],
+        "foot": [
+          105.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          251
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          281,
+          249,
+          102,
+          190
+        ],
+        "bounds": [
+          283,
+          251,
+          381,
+          437
+        ],
+        "foot": [
+          324.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          251
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          502,
+          249,
+          107,
+          190
+        ],
+        "bounds": [
+          504,
+          251,
+          607,
+          437
+        ],
+        "foot": [
+          548.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          250
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          724,
+          247,
+          103,
+          191
+        ],
+        "bounds": [
+          726,
+          249,
+          825,
+          436
+        ],
+        "foot": [
+          769.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          248
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          56,
+          246,
+          108,
+          193
+        ],
+        "bounds": [
+          58,
+          248,
+          162,
+          437
+        ],
+        "foot": [
+          105.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          249
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          262,
+          247,
+          123,
+          193
+        ],
+        "bounds": [
+          264,
+          249,
+          383,
+          438
+        ],
+        "foot": [
+          334.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          253
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          460,
+          251,
+          150,
+          188
+        ],
+        "bounds": [
+          462,
+          253,
+          608,
+          437
+        ],
+        "foot": [
+          558.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          249
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          723,
+          246,
+          108,
+          193
+        ],
+        "bounds": [
+          725,
+          248,
+          829,
+          437
+        ],
+        "foot": [
+          774.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          732.5,
+          52
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          677,
+          50,
+          156,
+          244
+        ],
+        "bounds": [
+          679,
+          52,
+          831,
+          292
+        ],
+        "foot": [
+          751.5,
+          292
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1031.0,
+          193
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          896,
+          191,
+          311,
+          103
+        ],
+        "bounds": [
+          898,
+          193,
+          1205,
+          292
+        ],
+        "foot": [
+          1028.5,
+          292
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          240.0,
+          56
+        ],
+        "source": "source/necromancer-cast-raised.png",
+        "sourcePose": 0,
+        "cell": [
+          140,
+          54,
+          178,
+          371
+        ],
+        "bounds": [
+          142,
+          56,
+          316,
+          423
+        ],
+        "foot": [
+          225.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.32697547683923706,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          1145.0,
+          16
+        ],
+        "source": "source/necromancer-cast-raised.png",
+        "sourcePose": 2,
+        "cell": [
+          1028,
+          14,
+          185,
+          411
+        ],
+        "bounds": [
+          1030,
+          16,
+          1211,
+          423
+        ],
+        "foot": [
+          1112.0,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.32697547683923706,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1570.5,
+          56
+        ],
+        "source": "source/necromancer-cast-raised.png",
+        "sourcePose": 3,
+        "cell": [
+          1470,
+          54,
+          178,
+          372
+        ],
+        "bounds": [
+          1472,
+          56,
+          1646,
+          424
+        ],
+        "foot": [
+          1555.5,
+          424
+        ],
+        "sourceEdge": false,
+        "scale": 0.32697547683923706,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          116.5,
+          471
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          67,
+          469,
+          82,
+          190
+        ],
+        "bounds": [
+          69,
+          471,
+          147,
+          657
+        ],
+        "foot": [
+          107.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          472
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          289,
+          469,
+          83,
+          190
+        ],
+        "bounds": [
+          291,
+          471,
+          370,
+          657
+        ],
+        "foot": [
+          329.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.0,
+          472
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          511,
+          469,
+          83,
+          190
+        ],
+        "bounds": [
+          513,
+          471,
+          592,
+          657
+        ],
+        "foot": [
+          551.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          471
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          733,
+          468,
+          82,
+          191
+        ],
+        "bounds": [
+          735,
+          470,
+          813,
+          657
+        ],
+        "foot": [
+          773.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          470
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          64,
+          467,
+          96,
+          197
+        ],
+        "bounds": [
+          66,
+          469,
+          158,
+          662
+        ],
+        "foot": [
+          110.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.0,
+          471
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          288,
+          469,
+          86,
+          194
+        ],
+        "bounds": [
+          290,
+          471,
+          372,
+          661
+        ],
+        "foot": [
+          329.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          473
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          509,
+          470,
+          94,
+          190
+        ],
+        "bounds": [
+          511,
+          472,
+          601,
+          658
+        ],
+        "foot": [
+          556.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          472
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          731,
+          470,
+          87,
+          194
+        ],
+        "bounds": [
+          733,
+          472,
+          816,
+          662
+        ],
+        "foot": [
+          771.5,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          470
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          61,
+          467,
+          93,
+          194
+        ],
+        "bounds": [
+          63,
+          469,
+          152,
+          659
+        ],
+        "foot": [
+          105.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          471
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          259,
+          468,
+          120,
+          193
+        ],
+        "bounds": [
+          261,
+          470,
+          377,
+          659
+        ],
+        "foot": [
+          334.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          474
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          436,
+          472,
+          172,
+          189
+        ],
+        "bounds": [
+          438,
+          474,
+          606,
+          659
+        ],
+        "foot": [
+          556.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          469
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          723,
+          467,
+          97,
+          194
+        ],
+        "bounds": [
+          725,
+          469,
+          818,
+          659
+        ],
+        "foot": [
+          771.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.0,
+          340
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          74,
+          337,
+          148,
+          250
+        ],
+        "bounds": [
+          76,
+          339,
+          220,
+          585
+        ],
+        "foot": [
+          146.0,
+          585
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          383.0,
+          485
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          264,
+          482,
+          348,
+          104
+        ],
+        "bounds": [
+          266,
+          484,
+          610,
+          584
+        ],
+        "foot": [
+          437.5,
+          584
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.0,
+          471
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          62,
+          468,
+          90,
+          192
+        ],
+        "bounds": [
+          64,
+          470,
+          150,
+          658
+        ],
+        "foot": [
+          106.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          560.0,
+          471
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          485,
+          469,
+          111,
+          192
+        ],
+        "bounds": [
+          487,
+          471,
+          594,
+          659
+        ],
+        "foot": [
+          550.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          782.0,
+          471
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          729,
+          468,
+          89,
+          193
+        ],
+        "bounds": [
+          731,
+          470,
+          816,
+          659
+        ],
+        "foot": [
+          772.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          112.0,
+          693
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          67,
+          690,
+          97,
+          188
+        ],
+        "bounds": [
+          69,
+          692,
+          162,
+          876
+        ],
+        "foot": [
+          116.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          693
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          289,
+          691,
+          98,
+          187
+        ],
+        "bounds": [
+          291,
+          693,
+          385,
+          876
+        ],
+        "foot": [
+          339.0,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          693
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          512,
+          691,
+          96,
+          187
+        ],
+        "bounds": [
+          514,
+          693,
+          606,
+          876
+        ],
+        "foot": [
+          561.0,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          693
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          734,
+          690,
+          97,
+          188
+        ],
+        "bounds": [
+          736,
+          692,
+          829,
+          876
+        ],
+        "foot": [
+          783.0,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          693
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          52,
+          690,
+          114,
+          191
+        ],
+        "bounds": [
+          54,
+          692,
+          164,
+          879
+        ],
+        "foot": [
+          116.0,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          694
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          283,
+          691,
+          104,
+          190
+        ],
+        "bounds": [
+          285,
+          693,
+          385,
+          879
+        ],
+        "foot": [
+          345.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          693
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          505,
+          691,
+          105,
+          190
+        ],
+        "bounds": [
+          507,
+          693,
+          608,
+          879
+        ],
+        "foot": [
+          561.0,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          693
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          727,
+          690,
+          105,
+          191
+        ],
+        "bounds": [
+          729,
+          692,
+          830,
+          879
+        ],
+        "foot": [
+          788.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.5,
+          693
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          59,
+          690,
+          107,
+          189
+        ],
+        "bounds": [
+          61,
+          692,
+          164,
+          877
+        ],
+        "foot": [
+          116.5,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          321.5,
+          693
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          282,
+          691,
+          108,
+          188
+        ],
+        "bounds": [
+          284,
+          693,
+          388,
+          877
+        ],
+        "foot": [
+          330.5,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.5,
+          697
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          442,
+          694,
+          169,
+          185
+        ],
+        "bounds": [
+          444,
+          696,
+          609,
+          877
+        ],
+        "foot": [
+          561.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.0,
+          693
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          727,
+          690,
+          109,
+          189
+        ],
+        "bounds": [
+          729,
+          692,
+          834,
+          877
+        ],
+        "foot": [
+          784.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          501.0,
+          146
+        ],
+        "source": "source/hurt-backleft.png",
+        "sourcePose": 0,
+        "cell": [
+          341,
+          144,
+          341,
+          638
+        ],
+        "bounds": [
+          343,
+          146,
+          680,
+          780
+        ],
+        "foot": [
+          518.5,
+          780
+        ],
+        "sourceEdge": false,
+        "scale": 0.1892744479495268,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          959.0,
+          473
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          894,
+          470,
+          331,
+          115
+        ],
+        "bounds": [
+          896,
+          472,
+          1223,
+          583
+        ],
+        "foot": [
+          1057.0,
+          583
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          693
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          53,
+          690,
+          113,
+          189
+        ],
+        "bounds": [
+          55,
+          692,
+          164,
+          877
+        ],
+        "foot": [
+          116.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          555.5,
+          692
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          465,
+          690,
+          146,
+          189
+        ],
+        "bounds": [
+          467,
+          692,
+          609,
+          877
+        ],
+        "foot": [
+          561.5,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          778.0,
+          692
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          729,
+          690,
+          104,
+          189
+        ],
+        "bounds": [
+          731,
+          692,
+          831,
+          877
+        ],
+        "foot": [
+          783.5,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          109.5,
+          914
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          64,
+          912,
+          100,
+          188
+        ],
+        "bounds": [
+          66,
+          914,
+          162,
+          1098
+        ],
+        "foot": [
+          117.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          915
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          288,
+          913,
+          99,
+          187
+        ],
+        "bounds": [
+          290,
+          915,
+          385,
+          1098
+        ],
+        "foot": [
+          339.5,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          914
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          510,
+          912,
+          99,
+          188
+        ],
+        "bounds": [
+          512,
+          914,
+          607,
+          1098
+        ],
+        "foot": [
+          561.5,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          914
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          732,
+          912,
+          99,
+          188
+        ],
+        "bounds": [
+          734,
+          914,
+          829,
+          1098
+        ],
+        "foot": [
+          783.5,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.5,
+          914
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          56,
+          912,
+          109,
+          194
+        ],
+        "bounds": [
+          58,
+          914,
+          163,
+          1104
+        ],
+        "foot": [
+          119.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          914
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          279,
+          912,
+          108,
+          190
+        ],
+        "bounds": [
+          281,
+          914,
+          385,
+          1100
+        ],
+        "foot": [
+          342.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          914
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          497,
+          912,
+          113,
+          193
+        ],
+        "bounds": [
+          499,
+          914,
+          608,
+          1103
+        ],
+        "foot": [
+          565.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          915
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          725,
+          912,
+          108,
+          193
+        ],
+        "bounds": [
+          727,
+          914,
+          831,
+          1103
+        ],
+        "foot": [
+          787.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.0,
+          911
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          61,
+          909,
+          106,
+          192
+        ],
+        "bounds": [
+          63,
+          911,
+          165,
+          1099
+        ],
+        "foot": [
+          118.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          911
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          285,
+          909,
+          123,
+          192
+        ],
+        "bounds": [
+          287,
+          911,
+          406,
+          1099
+        ],
+        "foot": [
+          330.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          912
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          506,
+          909,
+          117,
+          192
+        ],
+        "bounds": [
+          508,
+          911,
+          621,
+          1099
+        ],
+        "foot": [
+          551.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          911
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          726,
+          909,
+          109,
+          192
+        ],
+        "bounds": [
+          728,
+          911,
+          833,
+          1099
+        ],
+        "foot": [
+          784.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          145.0,
+          637
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          69,
+          634,
+          154,
+          239
+        ],
+        "bounds": [
+          71,
+          636,
+          221,
+          871
+        ],
+        "foot": [
+          148.5,
+          871
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          448.0,
+          765
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          286,
+          762,
+          303,
+          110
+        ],
+        "bounds": [
+          288,
+          764,
+          587,
+          870
+        ],
+        "foot": [
+          405.5,
+          870
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.5,
+          914
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          49,
+          911,
+          118,
+          190
+        ],
+        "bounds": [
+          51,
+          913,
+          165,
+          1099
+        ],
+        "foot": [
+          118.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          554.0,
+          913
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          463,
+          911,
+          149,
+          190
+        ],
+        "bounds": [
+          465,
+          913,
+          610,
+          1099
+        ],
+        "foot": [
+          562.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          776.0,
+          914
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          724,
+          912,
+          110,
+          189
+        ],
+        "bounds": [
+          726,
+          914,
+          832,
+          1099
+        ],
+        "foot": [
+          785.5,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          112.5,
+          1135
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          70,
+          1132,
+          97,
+          190
+        ],
+        "bounds": [
+          72,
+          1134,
+          165,
+          1320
+        ],
+        "foot": [
+          120.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          1136
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          292,
+          1133,
+          98,
+          189
+        ],
+        "bounds": [
+          294,
+          1135,
+          388,
+          1320
+        ],
+        "foot": [
+          343.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          1135
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          514,
+          1133,
+          98,
+          189
+        ],
+        "bounds": [
+          516,
+          1135,
+          610,
+          1320
+        ],
+        "foot": [
+          565.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          1135
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          736,
+          1133,
+          99,
+          189
+        ],
+        "bounds": [
+          738,
+          1135,
+          833,
+          1320
+        ],
+        "foot": [
+          787.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1137
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          62,
+          1135,
+          104,
+          192
+        ],
+        "bounds": [
+          64,
+          1137,
+          164,
+          1325
+        ],
+        "foot": [
+          122.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          1137
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          284,
+          1134,
+          104,
+          192
+        ],
+        "bounds": [
+          286,
+          1136,
+          386,
+          1324
+        ],
+        "foot": [
+          345.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          1137
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          506,
+          1135,
+          104,
+          194
+        ],
+        "bounds": [
+          508,
+          1137,
+          608,
+          1327
+        ],
+        "foot": [
+          570.5,
+          1327
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          1137
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          727,
+          1135,
+          108,
+          192
+        ],
+        "bounds": [
+          729,
+          1137,
+          833,
+          1325
+        ],
+        "foot": [
+          787.5,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.5,
+          1132
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          58,
+          1129,
+          110,
+          195
+        ],
+        "bounds": [
+          60,
+          1131,
+          166,
+          1322
+        ],
+        "foot": [
+          118.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          324.0,
+          1131
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          282,
+          1129,
+          116,
+          194
+        ],
+        "bounds": [
+          284,
+          1131,
+          396,
+          1321
+        ],
+        "foot": [
+          331.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.5,
+          1132
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          500,
+          1130,
+          132,
+          193
+        ],
+        "bounds": [
+          502,
+          1132,
+          630,
+          1321
+        ],
+        "foot": [
+          553.0,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          1132
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          725,
+          1129,
+          111,
+          194
+        ],
+        "bounds": [
+          727,
+          1131,
+          834,
+          1321
+        ],
+        "foot": [
+          785.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          765.5,
+          637
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          664,
+          634,
+          151,
+          241
+        ],
+        "bounds": [
+          666,
+          636,
+          813,
+          873
+        ],
+        "foot": [
+          741.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1105.0,
+          759
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          883,
+          757,
+          334,
+          120
+        ],
+        "bounds": [
+          885,
+          759,
+          1215,
+          875
+        ],
+        "foot": [
+          997.5,
+          875
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          208.0,
+          499
+        ],
+        "source": "source/necromancer-cast-raised.png",
+        "sourcePose": 4,
+        "cell": [
+          135,
+          497,
+          166,
+          371
+        ],
+        "bounds": [
+          137,
+          499,
+          299,
+          866
+        ],
+        "foot": [
+          221.0,
+          866
+        ],
+        "sourceEdge": false,
+        "scale": 0.32697547683923706,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          1078.5,
+          456
+        ],
+        "source": "source/necromancer-cast-raised.png",
+        "sourcePose": 6,
+        "cell": [
+          1014,
+          454,
+          175,
+          414
+        ],
+        "bounds": [
+          1016,
+          456,
+          1187,
+          866
+        ],
+        "foot": [
+          1108.0,
+          866
+        ],
+        "sourceEdge": false,
+        "scale": 0.32697547683923706,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1539.5,
+          499
+        ],
+        "source": "source/necromancer-cast-raised.png",
+        "sourcePose": 7,
+        "cell": [
+          1466,
+          497,
+          166,
+          371
+        ],
+        "bounds": [
+          1468,
+          499,
+          1630,
+          866
+        ],
+        "foot": [
+          1552.0,
+          866
+        ],
+        "sourceEdge": false,
+        "scale": 0.32697547683923706,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          110.5,
+          1360
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          82,
+          1357,
+          75,
+          187
+        ],
+        "bounds": [
+          84,
+          1359,
+          155,
+          1542
+        ],
+        "foot": [
+          119.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          1360
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          304,
+          1357,
+          76,
+          187
+        ],
+        "bounds": [
+          306,
+          1359,
+          378,
+          1542
+        ],
+        "foot": [
+          342.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1360
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          526,
+          1358,
+          76,
+          186
+        ],
+        "bounds": [
+          528,
+          1360,
+          600,
+          1542
+        ],
+        "foot": [
+          564.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1360
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          748,
+          1357,
+          76,
+          187
+        ],
+        "bounds": [
+          750,
+          1359,
+          822,
+          1542
+        ],
+        "foot": [
+          786.0,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.0,
+          1358
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          72,
+          1356,
+          88,
+          190
+        ],
+        "bounds": [
+          74,
+          1358,
+          158,
+          1544
+        ],
+        "foot": [
+          115.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          1357
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          296,
+          1355,
+          85,
+          194
+        ],
+        "bounds": [
+          298,
+          1357,
+          379,
+          1547
+        ],
+        "foot": [
+          345.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.5,
+          1358
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          522,
+          1356,
+          80,
+          191
+        ],
+        "bounds": [
+          524,
+          1358,
+          600,
+          1545
+        ],
+        "foot": [
+          565.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          1358
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          741,
+          1356,
+          84,
+          192
+        ],
+        "bounds": [
+          743,
+          1358,
+          823,
+          1546
+        ],
+        "foot": [
+          788.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          105.5,
+          1354
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          73,
+          1352,
+          85,
+          194
+        ],
+        "bounds": [
+          75,
+          1354,
+          156,
+          1544
+        ],
+        "foot": [
+          119.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.0,
+          1355
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          284,
+          1352,
+          103,
+          194
+        ],
+        "bounds": [
+          286,
+          1354,
+          385,
+          1544
+        ],
+        "foot": [
+          325.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          1355
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          492,
+          1352,
+          149,
+          194
+        ],
+        "bounds": [
+          494,
+          1354,
+          639,
+          1544
+        ],
+        "foot": [
+          547.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.0,
+          1354
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          740,
+          1352,
+          88,
+          194
+        ],
+        "bounds": [
+          742,
+          1354,
+          826,
+          1544
+        ],
+        "foot": [
+          786.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          150.5,
+          920
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          60,
+          918,
+          144,
+          259
+        ],
+        "bounds": [
+          62,
+          920,
+          202,
+          1175
+        ],
+        "foot": [
+          126.0,
+          1175
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          484.5,
+          1071
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          251,
+          1069,
+          340,
+          103
+        ],
+        "bounds": [
+          253,
+          1071,
+          589,
+          1170
+        ],
+        "foot": [
+          419.5,
+          1170
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.0,
+          1358
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          77,
+          1355,
+          82,
+          191
+        ],
+        "bounds": [
+          79,
+          1357,
+          157,
+          1544
+        ],
+        "foot": [
+          120.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          562.0,
+          1358
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          521,
+          1355,
+          115,
+          191
+        ],
+        "bounds": [
+          523,
+          1357,
+          634,
+          1544
+        ],
+        "foot": [
+          564.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          785.0,
+          1358
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          742,
+          1355,
+          83,
+          191
+        ],
+        "bounds": [
+          744,
+          1357,
+          823,
+          1544
+        ],
+        "foot": [
+          787.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          117.0,
+          1580
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          65,
+          1577,
+          98,
+          188
+        ],
+        "bounds": [
+          67,
+          1579,
+          161,
+          1763
+        ],
+        "foot": [
+          113.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          1581
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          287,
+          1578,
+          98,
+          187
+        ],
+        "bounds": [
+          289,
+          1580,
+          383,
+          1763
+        ],
+        "foot": [
+          335.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          1581
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          509,
+          1579,
+          98,
+          186
+        ],
+        "bounds": [
+          511,
+          1581,
+          605,
+          1763
+        ],
+        "foot": [
+          557.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          1580
+        ],
+        "source": "source/necromancer-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          731,
+          1578,
+          99,
+          187
+        ],
+        "bounds": [
+          733,
+          1580,
+          828,
+          1763
+        ],
+        "foot": [
+          779.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6557377049180327,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.0,
+          1580
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          57,
+          1578,
+          106,
+          191
+        ],
+        "bounds": [
+          59,
+          1580,
+          161,
+          1767
+        ],
+        "foot": [
+          98.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.5,
+          1581
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          282,
+          1578,
+          105,
+          188
+        ],
+        "bounds": [
+          284,
+          1580,
+          385,
+          1764
+        ],
+        "foot": [
+          323.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          1581
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          504,
+          1579,
+          106,
+          189
+        ],
+        "bounds": [
+          506,
+          1581,
+          608,
+          1766
+        ],
+        "foot": [
+          551.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          1580
+        ],
+        "source": "source/necromancer-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          726,
+          1578,
+          105,
+          191
+        ],
+        "bounds": [
+          728,
+          1580,
+          829,
+          1767
+        ],
+        "foot": [
+          770.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.5,
+          1577
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          57,
+          1575,
+          110,
+          191
+        ],
+        "bounds": [
+          59,
+          1577,
+          165,
+          1764
+        ],
+        "foot": [
+          110.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          1580
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          274,
+          1577,
+          106,
+          189
+        ],
+        "bounds": [
+          276,
+          1579,
+          378,
+          1764
+        ],
+        "foot": [
+          336.5,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          1582
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          492,
+          1579,
+          142,
+          187
+        ],
+        "bounds": [
+          494,
+          1581,
+          632,
+          1764
+        ],
+        "foot": [
+          553.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.0,
+          1579
+        ],
+        "source": "source/necromancer-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          722,
+          1577,
+          113,
+          189
+        ],
+        "bounds": [
+          724,
+          1579,
+          833,
+          1764
+        ],
+        "foot": [
+          777.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6349206349206349,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          755.5,
+          920
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          662,
+          918,
+          144,
+          259
+        ],
+        "bounds": [
+          664,
+          920,
+          804,
+          1175
+        ],
+        "foot": [
+          740.5,
+          1175
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1089.5,
+          1074
+        ],
+        "source": "source/necromancer-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          887,
+          1071,
+          314,
+          106
+        ],
+        "bounds": [
+          889,
+          1073,
+          1199,
+          1175
+        ],
+        "foot": [
+          1060.5,
+          1175
+        ],
+        "sourceEdge": false,
+        "scale": 0.502092050209205,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.0,
+          1579
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          61,
+          1576,
+          101,
+          189
+        ],
+        "bounds": [
+          63,
+          1578,
+          160,
+          1763
+        ],
+        "foot": [
+          112.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          560.0,
+          1580
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          506,
+          1577,
+          132,
+          188
+        ],
+        "bounds": [
+          508,
+          1579,
+          636,
+          1763
+        ],
+        "foot": [
+          557.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          783.5,
+          1579
+        ],
+        "source": "source/necromancer-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          727,
+          1577,
+          105,
+          188
+        ],
+        "bounds": [
+          729,
+          1579,
+          830,
+          1763
+        ],
+        "foot": [
+          779.5,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6382978723404256,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  },
+  {
+    "id": "lich",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          125.0,
+          29
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          65,
+          27,
+          107,
+          188
+        ],
+        "bounds": [
+          67,
+          29,
+          170,
+          213
+        ],
+        "foot": [
+          117.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.0,
+          29
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          287,
+          27,
+          107,
+          188
+        ],
+        "bounds": [
+          289,
+          29,
+          392,
+          213
+        ],
+        "foot": [
+          339.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          570.0,
+          29
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          509,
+          27,
+          107,
+          188
+        ],
+        "bounds": [
+          511,
+          29,
+          614,
+          213
+        ],
+        "foot": [
+          561.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.5,
+          29
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          731,
+          27,
+          107,
+          188
+        ],
+        "bounds": [
+          733,
+          29,
+          836,
+          213
+        ],
+        "foot": [
+          784.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          126.5,
+          26
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          63,
+          24,
+          110,
+          201
+        ],
+        "bounds": [
+          65,
+          26,
+          171,
+          223
+        ],
+        "foot": [
+          98.5,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          349.0,
+          26
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          287,
+          24,
+          110,
+          199
+        ],
+        "bounds": [
+          289,
+          26,
+          395,
+          221
+        ],
+        "foot": [
+          322.0,
+          221
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.5,
+          26
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          510,
+          24,
+          112,
+          201
+        ],
+        "bounds": [
+          512,
+          26,
+          620,
+          223
+        ],
+        "foot": [
+          547.0,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          794.0,
+          26
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          732,
+          24,
+          110,
+          196
+        ],
+        "bounds": [
+          734,
+          26,
+          840,
+          218
+        ],
+        "foot": [
+          767.0,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.0,
+          28
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          62,
+          26,
+          114,
+          193
+        ],
+        "bounds": [
+          64,
+          28,
+          174,
+          217
+        ],
+        "foot": [
+          117.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          32
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          270,
+          30,
+          121,
+          189
+        ],
+        "bounds": [
+          272,
+          32,
+          389,
+          217
+        ],
+        "foot": [
+          342.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.5,
+          35
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          507,
+          33,
+          128,
+          186
+        ],
+        "bounds": [
+          509,
+          35,
+          633,
+          217
+        ],
+        "foot": [
+          560.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          28
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          727,
+          26,
+          115,
+          193
+        ],
+        "bounds": [
+          729,
+          28,
+          840,
+          217
+        ],
+        "foot": [
+          783.5,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.5,
+          82
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          80,
+          75,
+          144,
+          214
+        ],
+        "bounds": [
+          82,
+          77,
+          222,
+          287
+        ],
+        "foot": [
+          154.0,
+          287
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          420.0,
+          199
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          306,
+          196,
+          276,
+          93
+        ],
+        "bounds": [
+          308,
+          198,
+          580,
+          287
+        ],
+        "foot": [
+          443.5,
+          287
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          125.0,
+          27
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          63,
+          25,
+          110,
+          191
+        ],
+        "bounds": [
+          65,
+          27,
+          171,
+          214
+        ],
+        "foot": [
+          116.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          568.5,
+          27
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          508,
+          25,
+          137,
+          191
+        ],
+        "bounds": [
+          510,
+          27,
+          643,
+          214
+        ],
+        "foot": [
+          560.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          791.0,
+          27
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          730,
+          25,
+          109,
+          191
+        ],
+        "bounds": [
+          732,
+          27,
+          837,
+          214
+        ],
+        "foot": [
+          782.5,
+          214
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          118.5,
+          249
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          55,
+          247,
+          112,
+          189
+        ],
+        "bounds": [
+          57,
+          249,
+          165,
+          434
+        ],
+        "foot": [
+          111.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          249
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          277,
+          247,
+          112,
+          189
+        ],
+        "bounds": [
+          279,
+          249,
+          387,
+          434
+        ],
+        "foot": [
+          333.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          249
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          499,
+          247,
+          113,
+          189
+        ],
+        "bounds": [
+          501,
+          249,
+          610,
+          434
+        ],
+        "foot": [
+          556.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.0,
+          249
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          721,
+          247,
+          113,
+          189
+        ],
+        "bounds": [
+          723,
+          249,
+          832,
+          434
+        ],
+        "foot": [
+          778.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          248
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          54,
+          246,
+          115,
+          196
+        ],
+        "bounds": [
+          56,
+          248,
+          167,
+          440
+        ],
+        "foot": [
+          99.5,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          248
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          276,
+          246,
+          116,
+          196
+        ],
+        "bounds": [
+          278,
+          248,
+          390,
+          440
+        ],
+        "foot": [
+          329.5,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          248
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          499,
+          246,
+          119,
+          196
+        ],
+        "bounds": [
+          501,
+          248,
+          616,
+          440
+        ],
+        "foot": [
+          539.0,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          248
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          721,
+          246,
+          119,
+          196
+        ],
+        "bounds": [
+          723,
+          248,
+          838,
+          440
+        ],
+        "foot": [
+          772.0,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.5,
+          252
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          53,
+          249,
+          117,
+          191
+        ],
+        "bounds": [
+          55,
+          251,
+          168,
+          438
+        ],
+        "foot": [
+          113.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          252
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          266,
+          249,
+          120,
+          191
+        ],
+        "bounds": [
+          268,
+          251,
+          384,
+          438
+        ],
+        "foot": [
+          340.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.0,
+          254
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          467,
+          252,
+          149,
+          188
+        ],
+        "bounds": [
+          469,
+          254,
+          614,
+          438
+        ],
+        "foot": [
+          570.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          252
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          718,
+          250,
+          121,
+          190
+        ],
+        "bounds": [
+          720,
+          252,
+          837,
+          438
+        ],
+        "foot": [
+          781.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          751.0,
+          76
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          673,
+          74,
+          144,
+          216
+        ],
+        "bounds": [
+          675,
+          76,
+          815,
+          288
+        ],
+        "foot": [
+          743.5,
+          288
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1008.5,
+          197
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          904,
+          195,
+          273,
+          94
+        ],
+        "bounds": [
+          906,
+          197,
+          1175,
+          287
+        ],
+        "foot": [
+          1040.5,
+          287
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          319.0,
+          42
+        ],
+        "source": "source/lich-cast-frontleft.png",
+        "sourcePose": 0,
+        "cell": [
+          141,
+          39,
+          318,
+          645
+        ],
+        "bounds": [
+          143,
+          41,
+          457,
+          682
+        ],
+        "foot": [
+          303.5,
+          682
+        ],
+        "sourceEdge": false,
+        "scale": 0.190625,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          1405.0,
+          42
+        ],
+        "source": "source/lich-cast-frontleft.png",
+        "sourcePose": 2,
+        "cell": [
+          1181,
+          39,
+          345,
+          645
+        ],
+        "bounds": [
+          1183,
+          41,
+          1524,
+          682
+        ],
+        "foot": [
+          1389.0,
+          682
+        ],
+        "sourceEdge": false,
+        "scale": 0.190625,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1948.0,
+          42
+        ],
+        "source": "source/lich-cast-frontleft.png",
+        "sourcePose": 3,
+        "cell": [
+          1769,
+          39,
+          319,
+          645
+        ],
+        "bounds": [
+          1771,
+          41,
+          2086,
+          682
+        ],
+        "foot": [
+          1932.0,
+          682
+        ],
+        "sourceEdge": false,
+        "scale": 0.190625,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          120.0,
+          470
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          66,
+          468,
+          87,
+          190
+        ],
+        "bounds": [
+          68,
+          470,
+          151,
+          656
+        ],
+        "foot": [
+          108.0,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          470
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          289,
+          468,
+          85,
+          190
+        ],
+        "bounds": [
+          291,
+          470,
+          372,
+          656
+        ],
+        "foot": [
+          329.5,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          470
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          512,
+          468,
+          84,
+          190
+        ],
+        "bounds": [
+          514,
+          470,
+          594,
+          656
+        ],
+        "foot": [
+          551.5,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.5,
+          470
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          734,
+          468,
+          85,
+          190
+        ],
+        "bounds": [
+          736,
+          470,
+          817,
+          656
+        ],
+        "foot": [
+          774.5,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          104.0,
+          468
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          64,
+          466,
+          91,
+          197
+        ],
+        "bounds": [
+          66,
+          468,
+          153,
+          661
+        ],
+        "foot": [
+          104.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.0,
+          468
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          287,
+          466,
+          90,
+          197
+        ],
+        "bounds": [
+          289,
+          468,
+          375,
+          661
+        ],
+        "foot": [
+          326.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.0,
+          468
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          510,
+          466,
+          91,
+          197
+        ],
+        "bounds": [
+          512,
+          468,
+          599,
+          661
+        ],
+        "foot": [
+          549.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.0,
+          468
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          732,
+          466,
+          96,
+          197
+        ],
+        "bounds": [
+          734,
+          468,
+          826,
+          661
+        ],
+        "foot": [
+          771.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.0,
+          471
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          62,
+          468,
+          94,
+          195
+        ],
+        "bounds": [
+          64,
+          470,
+          154,
+          661
+        ],
+        "foot": [
+          107.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.0,
+          471
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          272,
+          468,
+          106,
+          196
+        ],
+        "bounds": [
+          274,
+          470,
+          376,
+          662
+        ],
+        "foot": [
+          334.5,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          473
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          445,
+          471,
+          166,
+          192
+        ],
+        "bounds": [
+          447,
+          473,
+          609,
+          661
+        ],
+        "foot": [
+          561.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          771.0,
+          471
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          730,
+          468,
+          93,
+          196
+        ],
+        "bounds": [
+          732,
+          470,
+          821,
+          662
+        ],
+        "foot": [
+          774.5,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          140.0,
+          362
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          92,
+          360,
+          111,
+          223
+        ],
+        "bounds": [
+          94,
+          362,
+          201,
+          581
+        ],
+        "foot": [
+          150.0,
+          581
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          389.5,
+          496
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          279,
+          493,
+          322,
+          89
+        ],
+        "bounds": [
+          281,
+          495,
+          599,
+          580
+        ],
+        "foot": [
+          440.5,
+          580
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          119.5,
+          468
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          65,
+          466,
+          88,
+          195
+        ],
+        "bounds": [
+          67,
+          468,
+          151,
+          659
+        ],
+        "foot": [
+          107.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          563.5,
+          468
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          506,
+          466,
+          91,
+          195
+        ],
+        "bounds": [
+          508,
+          468,
+          595,
+          659
+        ],
+        "foot": [
+          551.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          785.5,
+          468
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          732,
+          466,
+          87,
+          195
+        ],
+        "bounds": [
+          734,
+          468,
+          817,
+          659
+        ],
+        "foot": [
+          773.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          108.0,
+          690
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          61,
+          687,
+          111,
+          191
+        ],
+        "bounds": [
+          63,
+          689,
+          170,
+          876
+        ],
+        "foot": [
+          118.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          690
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          284,
+          687,
+          111,
+          191
+        ],
+        "bounds": [
+          286,
+          689,
+          393,
+          876
+        ],
+        "foot": [
+          341.0,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          690
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          507,
+          687,
+          110,
+          191
+        ],
+        "bounds": [
+          509,
+          689,
+          615,
+          876
+        ],
+        "foot": [
+          563.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          690
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          729,
+          687,
+          110,
+          191
+        ],
+        "bounds": [
+          731,
+          689,
+          837,
+          876
+        ],
+        "foot": [
+          785.5,
+          876
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.0,
+          689
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          58,
+          687,
+          115,
+          196
+        ],
+        "bounds": [
+          60,
+          689,
+          171,
+          881
+        ],
+        "foot": [
+          123.0,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          689
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          280,
+          687,
+          115,
+          195
+        ],
+        "bounds": [
+          282,
+          689,
+          393,
+          880
+        ],
+        "foot": [
+          341.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.0,
+          690
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          502,
+          687,
+          115,
+          194
+        ],
+        "bounds": [
+          504,
+          689,
+          615,
+          879
+        ],
+        "foot": [
+          564.0,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          689
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          726,
+          687,
+          115,
+          196
+        ],
+        "bounds": [
+          728,
+          689,
+          839,
+          881
+        ],
+        "foot": [
+          795.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          107.5,
+          693
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          58,
+          691,
+          111,
+          190
+        ],
+        "bounds": [
+          60,
+          693,
+          167,
+          879
+        ],
+        "foot": [
+          116.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          317.0,
+          695
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          268,
+          692,
+          112,
+          189
+        ],
+        "bounds": [
+          270,
+          694,
+          378,
+          879
+        ],
+        "foot": [
+          315.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          694
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          449,
+          692,
+          168,
+          189
+        ],
+        "bounds": [
+          451,
+          694,
+          615,
+          879
+        ],
+        "foot": [
+          566.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          693
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          725,
+          691,
+          112,
+          190
+        ],
+        "bounds": [
+          727,
+          693,
+          835,
+          879
+        ],
+        "foot": [
+          785.0,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          1095.0,
+          166
+        ],
+        "source": "source/hurt-backleft.png",
+        "sourcePose": 1,
+        "cell": [
+          933,
+          164,
+          341,
+          618
+        ],
+        "bounds": [
+          935,
+          166,
+          1272,
+          780
+        ],
+        "foot": [
+          1107.0,
+          780
+        ],
+        "sourceEdge": false,
+        "scale": 0.1986970684039088,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          996.0,
+          492
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          886,
+          490,
+          316,
+          93
+        ],
+        "bounds": [
+          888,
+          492,
+          1200,
+          581
+        ],
+        "foot": [
+          1044.5,
+          581
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          109.0,
+          689
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          49,
+          687,
+          123,
+          193
+        ],
+        "bounds": [
+          51,
+          689,
+          170,
+          878
+        ],
+        "foot": [
+          119.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          553.0,
+          689
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          465,
+          687,
+          150,
+          193
+        ],
+        "bounds": [
+          467,
+          689,
+          613,
+          878
+        ],
+        "foot": [
+          563.0,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          775.0,
+          689
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          726,
+          687,
+          111,
+          193
+        ],
+        "bounds": [
+          728,
+          689,
+          835,
+          878
+        ],
+        "foot": [
+          785.5,
+          878
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          110.0,
+          911
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          61,
+          909,
+          112,
+          193
+        ],
+        "bounds": [
+          63,
+          911,
+          171,
+          1100
+        ],
+        "foot": [
+          122.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          911
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          284,
+          909,
+          110,
+          193
+        ],
+        "bounds": [
+          286,
+          911,
+          392,
+          1100
+        ],
+        "foot": [
+          344.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          911
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          507,
+          909,
+          110,
+          193
+        ],
+        "bounds": [
+          509,
+          911,
+          615,
+          1100
+        ],
+        "foot": [
+          566.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          911
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          729,
+          909,
+          110,
+          193
+        ],
+        "bounds": [
+          731,
+          911,
+          837,
+          1100
+        ],
+        "foot": [
+          789.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          910
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          59,
+          908,
+          114,
+          198
+        ],
+        "bounds": [
+          61,
+          910,
+          171,
+          1104
+        ],
+        "foot": [
+          125.5,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          910
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          280,
+          908,
+          115,
+          198
+        ],
+        "bounds": [
+          282,
+          910,
+          393,
+          1104
+        ],
+        "foot": [
+          345.5,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          910
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          504,
+          908,
+          113,
+          199
+        ],
+        "bounds": [
+          506,
+          910,
+          615,
+          1105
+        ],
+        "foot": [
+          566.5,
+          1105
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          910
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          726,
+          908,
+          114,
+          198
+        ],
+        "bounds": [
+          728,
+          910,
+          838,
+          1104
+        ],
+        "foot": [
+          793.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          911
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          58,
+          909,
+          115,
+          194
+        ],
+        "bounds": [
+          60,
+          911,
+          171,
+          1101
+        ],
+        "foot": [
+          121.0,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          913
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          278,
+          910,
+          125,
+          193
+        ],
+        "bounds": [
+          280,
+          912,
+          401,
+          1101
+        ],
+        "foot": [
+          331.0,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          913
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          507,
+          911,
+          139,
+          192
+        ],
+        "bounds": [
+          509,
+          913,
+          644,
+          1101
+        ],
+        "foot": [
+          554.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          911
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          726,
+          909,
+          114,
+          194
+        ],
+        "bounds": [
+          728,
+          911,
+          838,
+          1101
+        ],
+        "foot": [
+          788.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          147.0,
+          657
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          80,
+          654,
+          136,
+          213
+        ],
+        "bounds": [
+          82,
+          656,
+          214,
+          865
+        ],
+        "foot": [
+          152.0,
+          865
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          460.0,
+          778
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          312,
+          776,
+          266,
+          92
+        ],
+        "bounds": [
+          314,
+          778,
+          576,
+          866
+        ],
+        "foot": [
+          440.0,
+          866
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.5,
+          909
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          48,
+          907,
+          125,
+          195
+        ],
+        "bounds": [
+          50,
+          909,
+          171,
+          1100
+        ],
+        "foot": [
+          122.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          554.5,
+          909
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          465,
+          907,
+          152,
+          195
+        ],
+        "bounds": [
+          467,
+          909,
+          615,
+          1100
+        ],
+        "foot": [
+          566.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          776.0,
+          909
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          722,
+          907,
+          116,
+          195
+        ],
+        "bounds": [
+          724,
+          909,
+          836,
+          1100
+        ],
+        "foot": [
+          787.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          113.5,
+          1133
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          63,
+          1131,
+          112,
+          193
+        ],
+        "bounds": [
+          65,
+          1133,
+          173,
+          1322
+        ],
+        "foot": [
+          121.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          1133
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          286,
+          1131,
+          110,
+          193
+        ],
+        "bounds": [
+          288,
+          1133,
+          394,
+          1322
+        ],
+        "foot": [
+          343.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          1133
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          508,
+          1131,
+          110,
+          193
+        ],
+        "bounds": [
+          510,
+          1133,
+          616,
+          1322
+        ],
+        "foot": [
+          566.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          1134
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          731,
+          1131,
+          109,
+          193
+        ],
+        "bounds": [
+          733,
+          1133,
+          838,
+          1322
+        ],
+        "foot": [
+          788.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.0,
+          1132
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          57,
+          1130,
+          118,
+          197
+        ],
+        "bounds": [
+          59,
+          1132,
+          173,
+          1325
+        ],
+        "foot": [
+          123.0,
+          1325
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          1132
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          283,
+          1130,
+          113,
+          195
+        ],
+        "bounds": [
+          285,
+          1132,
+          394,
+          1323
+        ],
+        "foot": [
+          342.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.0,
+          1132
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          502,
+          1130,
+          117,
+          194
+        ],
+        "bounds": [
+          504,
+          1132,
+          617,
+          1322
+        ],
+        "foot": [
+          569.0,
+          1322
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.5,
+          1132
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          725,
+          1130,
+          116,
+          196
+        ],
+        "bounds": [
+          727,
+          1132,
+          839,
+          1324
+        ],
+        "foot": [
+          788.5,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          1130
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          57,
+          1128,
+          114,
+          194
+        ],
+        "bounds": [
+          59,
+          1130,
+          169,
+          1320
+        ],
+        "foot": [
+          119.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          1132
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          269,
+          1129,
+          141,
+          194
+        ],
+        "bounds": [
+          271,
+          1131,
+          408,
+          1321
+        ],
+        "foot": [
+          322.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.5,
+          1132
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          487,
+          1130,
+          166,
+          193
+        ],
+        "bounds": [
+          489,
+          1132,
+          651,
+          1321
+        ],
+        "foot": [
+          540.0,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          1130
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          723,
+          1128,
+          116,
+          195
+        ],
+        "bounds": [
+          725,
+          1130,
+          837,
+          1321
+        ],
+        "foot": [
+          786.0,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          762.0,
+          655
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          683,
+          652,
+          131,
+          216
+        ],
+        "bounds": [
+          685,
+          654,
+          812,
+          866
+        ],
+        "foot": [
+          750.5,
+          866
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1087.5,
+          775
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          904,
+          773,
+          292,
+          94
+        ],
+        "bounds": [
+          906,
+          775,
+          1194,
+          865
+        ],
+        "foot": [
+          1046.0,
+          865
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          1130
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 20,
+        "cell": [
+          66,
+          1128,
+          109,
+          197
+        ],
+        "bounds": [
+          68,
+          1130,
+          173,
+          1323
+        ],
+        "foot": [
+          121.0,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          557.0,
+          1130
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 22,
+        "cell": [
+          510,
+          1128,
+          137,
+          197
+        ],
+        "bounds": [
+          512,
+          1130,
+          645,
+          1323
+        ],
+        "foot": [
+          565.0,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          780.5,
+          1130
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 23,
+        "cell": [
+          732,
+          1128,
+          109,
+          197
+        ],
+        "bounds": [
+          734,
+          1130,
+          839,
+          1323
+        ],
+        "foot": [
+          787.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          109.5,
+          1358
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          78,
+          1355,
+          81,
+          190
+        ],
+        "bounds": [
+          80,
+          1357,
+          157,
+          1543
+        ],
+        "foot": [
+          122.0,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          1358
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          300,
+          1355,
+          81,
+          190
+        ],
+        "bounds": [
+          302,
+          1357,
+          379,
+          1543
+        ],
+        "foot": [
+          343.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          1358
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          523,
+          1355,
+          80,
+          190
+        ],
+        "bounds": [
+          525,
+          1357,
+          601,
+          1543
+        ],
+        "foot": [
+          566.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          1358
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          745,
+          1355,
+          80,
+          190
+        ],
+        "bounds": [
+          747,
+          1357,
+          823,
+          1543
+        ],
+        "foot": [
+          788.0,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.0,
+          1356
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          73,
+          1353,
+          88,
+          197
+        ],
+        "bounds": [
+          75,
+          1355,
+          159,
+          1548
+        ],
+        "foot": [
+          122.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.0,
+          1356
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          292,
+          1353,
+          90,
+          197
+        ],
+        "bounds": [
+          294,
+          1355,
+          380,
+          1548
+        ],
+        "foot": [
+          344.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          1356
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          518,
+          1353,
+          88,
+          197
+        ],
+        "bounds": [
+          520,
+          1355,
+          604,
+          1548
+        ],
+        "foot": [
+          567.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.0,
+          1356
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          738,
+          1353,
+          90,
+          197
+        ],
+        "bounds": [
+          740,
+          1355,
+          826,
+          1548
+        ],
+        "foot": [
+          790.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.5,
+          1360
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          74,
+          1357,
+          88,
+          192
+        ],
+        "bounds": [
+          76,
+          1359,
+          160,
+          1547
+        ],
+        "foot": [
+          122.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          1359
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          282,
+          1356,
+          107,
+          193
+        ],
+        "bounds": [
+          284,
+          1358,
+          387,
+          1547
+        ],
+        "foot": [
+          330.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          1361
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          503,
+          1358,
+          140,
+          191
+        ],
+        "bounds": [
+          505,
+          1360,
+          641,
+          1547
+        ],
+        "foot": [
+          549.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.5,
+          1357
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          739,
+          1355,
+          89,
+          194
+        ],
+        "bounds": [
+          741,
+          1357,
+          826,
+          1547
+        ],
+        "foot": [
+          787.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.0,
+          939
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          88,
+          937,
+          115,
+          231
+        ],
+        "bounds": [
+          90,
+          939,
+          201,
+          1166
+        ],
+        "foot": [
+          138.5,
+          1166
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          487.0,
+          1078
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          282,
+          1075,
+          315,
+          91
+        ],
+        "bounds": [
+          284,
+          1077,
+          595,
+          1164
+        ],
+        "foot": [
+          438.5,
+          1164
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          1355
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          77,
+          1353,
+          90,
+          195
+        ],
+        "bounds": [
+          79,
+          1355,
+          165,
+          1546
+        ],
+        "foot": [
+          123.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          553.0,
+          1356
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          521,
+          1353,
+          120,
+          194
+        ],
+        "bounds": [
+          523,
+          1355,
+          639,
+          1545
+        ],
+        "foot": [
+          566.5,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          775.0,
+          1356
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          743,
+          1353,
+          83,
+          195
+        ],
+        "bounds": [
+          745,
+          1355,
+          824,
+          1546
+        ],
+        "foot": [
+          789.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          118.0,
+          1578
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          54,
+          1576,
+          115,
+          189
+        ],
+        "bounds": [
+          56,
+          1578,
+          167,
+          1763
+        ],
+        "foot": [
+          114.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          1579
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          277,
+          1577,
+          113,
+          188
+        ],
+        "bounds": [
+          279,
+          1579,
+          388,
+          1763
+        ],
+        "foot": [
+          336.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.5,
+          1579
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          499,
+          1577,
+          113,
+          188
+        ],
+        "bounds": [
+          501,
+          1579,
+          610,
+          1763
+        ],
+        "foot": [
+          559.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          1578
+        ],
+        "source": "source/lich-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          721,
+          1576,
+          113,
+          189
+        ],
+        "bounds": [
+          723,
+          1578,
+          832,
+          1763
+        ],
+        "foot": [
+          781.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6630434782608695,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.0,
+          1577
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          54,
+          1574,
+          117,
+          194
+        ],
+        "bounds": [
+          56,
+          1576,
+          169,
+          1766
+        ],
+        "foot": [
+          97.5,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          1577
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          274,
+          1574,
+          115,
+          197
+        ],
+        "bounds": [
+          276,
+          1576,
+          387,
+          1769
+        ],
+        "foot": [
+          325.5,
+          1769
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1577
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          497,
+          1574,
+          121,
+          193
+        ],
+        "bounds": [
+          499,
+          1576,
+          616,
+          1765
+        ],
+        "foot": [
+          545.5,
+          1765
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.0,
+          1577
+        ],
+        "source": "source/lich-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          719,
+          1574,
+          119,
+          197
+        ],
+        "bounds": [
+          721,
+          1576,
+          836,
+          1769
+        ],
+        "foot": [
+          775.5,
+          1769
+        ],
+        "sourceEdge": false,
+        "scale": 0.6192893401015228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.0,
+          1579
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          54,
+          1577,
+          117,
+          190
+        ],
+        "bounds": [
+          56,
+          1579,
+          169,
+          1765
+        ],
+        "foot": [
+          115.5,
+          1765
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          1582
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          260,
+          1579,
+          126,
+          187
+        ],
+        "bounds": [
+          262,
+          1581,
+          384,
+          1764
+        ],
+        "foot": [
+          340.5,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.0,
+          1585
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          493,
+          1583,
+          160,
+          183
+        ],
+        "bounds": [
+          495,
+          1585,
+          651,
+          1764
+        ],
+        "foot": [
+          544.5,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.0,
+          1580
+        ],
+        "source": "source/lich-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          721,
+          1577,
+          116,
+          190
+        ],
+        "bounds": [
+          723,
+          1579,
+          835,
+          1765
+        ],
+        "foot": [
+          782.5,
+          1765
+        ],
+        "sourceEdge": false,
+        "scale": 0.6455026455026455,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          752.5,
+          944
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          685,
+          942,
+          141,
+          226
+        ],
+        "bounds": [
+          687,
+          944,
+          824,
+          1166
+        ],
+        "foot": [
+          758.0,
+          1166
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1109.5,
+          1078
+        ],
+        "source": "source/lich-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          897,
+          1075,
+          283,
+          91
+        ],
+        "bounds": [
+          899,
+          1077,
+          1178,
+          1164
+        ],
+        "foot": [
+          1039.0,
+          1164
+        ],
+        "sourceEdge": false,
+        "scale": 0.5951219512195122,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          116.5,
+          1576
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          53,
+          1574,
+          117,
+          191
+        ],
+        "bounds": [
+          55,
+          1576,
+          168,
+          1763
+        ],
+        "foot": [
+          113.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          562.5,
+          1576
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          498,
+          1574,
+          148,
+          191
+        ],
+        "bounds": [
+          500,
+          1576,
+          644,
+          1763
+        ],
+        "foot": [
+          558.5,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          784.5,
+          1576
+        ],
+        "source": "source/lich-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          719,
+          1574,
+          118,
+          191
+        ],
+        "bounds": [
+          721,
+          1576,
+          835,
+          1763
+        ],
+        "foot": [
+          780.5,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.6524064171122995,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  }
+]

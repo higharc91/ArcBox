@@ -30,6 +30,81 @@ public sealed class UnitPlanTests
     private static ImmutableArray<WalkerView> Walkers(params string[] ids)
         => [.. ids.Select((id, i) => new WalkerView(id, id, "characters.class_rogue", true, i == 0))];
 
+    [Theory]
+    [InlineData("bosses.air_elemental.gale", "bosses.special", .4)]
+    [InlineData("bosses.air_elemental.gale", "bosses.cast", .4)]
+    [InlineData("bosses.earth_elemental.stone", "bosses.special", .5)]
+    [InlineData("bosses.earth_elemental.stone", "bosses.buff", .4)]
+    [InlineData("bosses.fire_elemental.ember", "bosses.special", .4)]
+    [InlineData("bosses.fire_elemental.ember", "bosses.cast", .4)]
+    [InlineData("bosses.water_elemental.sea", "bosses.special", .4)]
+    [InlineData("bosses.water_elemental.sea", "bosses.cast", .4)]
+    [InlineData("bosses.dragon.red", "bosses.special", .5)]
+    [InlineData("bosses.dragon.red", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.red", "bosses.buff", .7)]
+    [InlineData("bosses.water_elemental.sea", "bosses.attack", .4)]
+    [InlineData("bosses.dragon.red", "bosses.attack", .5)]
+    [InlineData("bosses.air_elemental.storm", "bosses.special", .4)]
+    [InlineData("bosses.air_elemental.storm", "bosses.cast", .4)]
+    [InlineData("bosses.earth_elemental.magma", "bosses.special", .5)]
+    [InlineData("bosses.earth_elemental.magma", "bosses.buff", .4)]
+    [InlineData("bosses.water_elemental.swamp", "bosses.special", .4)]
+    [InlineData("bosses.water_elemental.swamp", "bosses.cast", .4)]
+    [InlineData("bosses.golem.basalt", "bosses.special", .5)]
+    [InlineData("bosses.golem.basalt", "bosses.buff", .4)]
+    [InlineData("bosses.golem.crystal", "bosses.special", .5)]
+    [InlineData("bosses.golem.crystal", "bosses.buff", .4)]
+    [InlineData("bosses.golem.temple", "bosses.special", .5)]
+    [InlineData("bosses.golem.temple", "bosses.buff", .4)]
+    [InlineData("bosses.fire_elemental.azure", "bosses.special", .4)]
+    [InlineData("bosses.fire_elemental.azure", "bosses.cast", .4)]
+    [InlineData("bosses.fire_elemental.radiant", "bosses.special", .4)]
+    [InlineData("bosses.fire_elemental.radiant", "bosses.cast", .4)]
+    [InlineData("bosses.fire_elemental.shadow", "bosses.special", .4)]
+    [InlineData("bosses.fire_elemental.shadow", "bosses.cast", .4)]
+    [InlineData("bosses.hound.black", "bosses.attack", .4)]
+    [InlineData("bosses.hound.grey", "bosses.attack", .4)]
+    [InlineData("bosses.imp.violet", "bosses.attack", .4)]
+    public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
+    {
+        var view = Unit("a", "Enemy", 11, 10, key);
+        var posed = Assert.Single(UnitPlan.Build(Battle(null, view), River, Art.Value, Fit, poses:
+            new Dictionary<UnitId, UnitPose> { [view.Id] = new(binding, time, new Vector2(0, 1)) }));
+        var sprite = posed.Sprite;
+        var source = sprite.Source(Assert.Single(posed.Anim.Frames), posed.Row);
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var first = source.Height;
+        for (var y = 0; y < source.Height; y++)
+            for (var x = 0; x < source.Width; x++)
+                if (pixels[((source.Y + y) * width + source.X + x) * 4 + 3] >= 128) first = Math.Min(first, y);
+        var highest = posed.Feet.Y + (first - sprite.AnchorY) * sprite.PixelScale;
+        Assert.True(posed.Bar!.TopLeft.Y + UnitPlan.BarHeight < highest);
+        Assert.Equal(One(null, view).Sprite.HeadLift, sprite.HeadLift);
+    }
+
+    [Theory]
+    [InlineData("bosses.troll.troll", "bosses.special")]
+    [InlineData("bosses.golem.granite", "bosses.special")]
+    [InlineData("bosses.mimic.oak", "bosses.attack")]
+    public void Raised_boulders_fists_and_jaws_stay_below_their_health_bar(string key, string binding)
+    {
+        var view = Unit("a", "Enemy", 11, 10, key);
+        var idle = One(null, view);
+        var posed = Assert.Single(UnitPlan.Build(Battle(null, view), River, Art.Value, Fit, poses:
+            new Dictionary<UnitId, UnitPose> { [view.Id] = new(binding, .3, new Vector2(0, 1)) }));
+        var sprite = posed.Sprite;
+        var source = sprite.Source(Assert.Single(posed.Anim.Frames), posed.Row);
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var first = source.Height;
+        for (var y = 0; y < source.Height; y++)
+            for (var x = 0; x < source.Width; x++)
+                if (pixels[((source.Y + y) * width + source.X + x) * 4 + 3] >= 128) first = Math.Min(first, y);
+        var highest = posed.Feet.Y + (first - sprite.AnchorY) * sprite.PixelScale;
+        Assert.True(posed.Bar!.TopLeft.Y + UnitPlan.BarHeight < highest);
+        Assert.True(posed.Bar.TopLeft.Y < idle.Bar!.TopLeft.Y);
+        Assert.Equal(idle.Sprite.HeadLift, posed.Sprite.HeadLift); // headroom does not change body size
+    }
+
     [Fact]
     public void Walkers_have_no_bars_and_only_the_leader_a_crown()
     {
@@ -303,10 +378,10 @@ public sealed class UnitPlanTests
     }
 
     [Theory]
-    [InlineData(5, 5, 5, 7, 0, true)]    // +V: lower left on the screen
-    [InlineData(5, 5, 7, 5, 0, false)]   // +U: lower right
-    [InlineData(5, 5, 3, 5, 1, false)]   // -U: upper left
-    [InlineData(5, 5, 5, 3, 1, true)]    // -V: upper right
+    [InlineData(5, 5, 5, 7, 1, false)]   // +V: south-west, authored view
+    [InlineData(5, 5, 7, 5, 7, false)]   // +U: south-east
+    [InlineData(5, 5, 3, 5, 3, false)]   // -U: north-west
+    [InlineData(5, 5, 5, 3, 5, false)]   // -V: north-east
     [InlineData(5, 5, 8, 8, 0, false)]   // straight down the screen: the art's own way
     public void A_unit_faces_its_foe_by_the_screen_direction(int x, int y, int foeX, int foeY, int row, bool mirror)
     {
@@ -320,7 +395,7 @@ public sealed class UnitPlanTests
     {
         var unit = One(null, Unit("a", "Party", 5, 5), Unit("far", "Enemy", 12, 5), Unit("near", "Enemy", 5, 3));
 
-        Assert.Equal((1, true), (unit.Row, unit.Mirror));
+        Assert.Equal((5, false), (unit.Row, unit.Mirror));
     }
 
     [Fact]
@@ -371,7 +446,7 @@ public sealed class UnitPlanTests
     public void The_bar_sits_over_the_head_centred_on_the_feet()
     {
         var unit = One(null, Unit("a", "Party", 5, 5));
-        var head = unit.Feet.Y - unit.Sprite.AnchorY + unit.Sprite.HeadTop;
+        var head = unit.Feet.Y - unit.Sprite.HeadLift;
 
         Assert.Equal(unit.Feet.X - UnitPlan.BarWidth / 2f, unit.Bar!.TopLeft.X);
         Assert.True(unit.Bar.TopLeft.Y + UnitPlan.BarHeight <= head);
@@ -397,7 +472,7 @@ public sealed class UnitPlanTests
     {
         var unit = One(null, Unit("a", "Party", 5, 5, hp: 0, life: "Downed", countdown: 2));
 
-        Assert.Equal(Pack.Frames("characters", "down")[^1], unit.Anim.Frames[0]);
+        Assert.Equal(13, unit.Anim.Frames[0]);
         Assert.Null(unit.Bar);
         Assert.Equal("2", unit.Countdown!.Text);
         Assert.Equal(unit.Feet.X, unit.Countdown.Centre.X);
@@ -414,7 +489,7 @@ public sealed class UnitPlanTests
 
     [Fact]
     public void A_downed_monster_holds_its_last_down_frame()
-        => Assert.Equal(Pack.Frames("bosses", "down")[^1], One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.troll", life: "Downed", countdown: 1)).Anim.FrameAt(0));
+        => Assert.Equal(Pack.Frames("bosses", "down")[^1], One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.frost", life: "Downed", countdown: 1)).Anim.FrameAt(0));
 
     [Fact]
     public void A_standing_unit_idles_and_units_do_not_bob_in_step()
@@ -480,15 +555,15 @@ public sealed class UnitPlanTests
             new Dictionary<UnitId, UnitPose> { [new UnitId("a")] = new UnitPose("walk", 0.3, new Vector2(1, 0)) })[0];
 
         Assert.Equal(sprite.Anim("walk").FrameAt(0.3), Assert.Single(walking.Anim.Frames));
-        Assert.Equal(0, walking.Row);       // +X: lower right
+        Assert.Equal(7, walking.Row);       // +X: authored south-east
         Assert.False(walking.Mirror);
     }
 
     [Theory]
-    [InlineData(1, 0, 0, false)]     // +X, lower right
-    [InlineData(0, 1, 0, true)]      // +Y, lower left
-    [InlineData(-1, 0, 1, false)]    // -X, upper left
-    [InlineData(0, -1, 1, true)]     // -Y, upper right
+    [InlineData(1, 0, 7, false)]     // +X, south-east
+    [InlineData(0, 1, 1, false)]     // +Y, south-west
+    [InlineData(-1, 0, 3, false)]    // -X, north-west
+    [InlineData(0, -1, 5, false)]    // -Y, north-east
     public void A_poses_direction_picks_the_sheets_row_and_mirror(float x, float y, int row, bool mirror)
     {
         var posed = UnitPlan.Build(Battle(null, Unit("a", "Party", 5, 5)), River, Art.Value, Fit, null,

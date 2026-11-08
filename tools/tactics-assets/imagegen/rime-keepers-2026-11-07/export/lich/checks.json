@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      94,
+      101,
+      162,
+      222
+    ],
+    "count": 5637
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      94,
+      101,
+      162,
+      222
+    ],
+    "count": 5608
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      94,
+      101,
+      162,
+      222
+    ],
+    "count": 5590
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      94,
+      101,
+      162,
+      222
+    ],
+    "count": 5589
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 0,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      95,
+      103,
+      160,
+      224
+    ],
+    "count": 5380
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 1,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      96,
+      104,
+      161,
+      224
+    ],
+    "count": 5316
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 2,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      96,
+      103,
+      162,
+      224
+    ],
+    "count": 5445
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 3,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      96,
+      102,
+      161,
+      220
+    ],
+    "count": 5253
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      93,
+      103,
+      163,
+      224
+    ],
+    "count": 5936
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      82,
+      105,
+      157,
+      224
+    ],
+    "count": 5642
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      94,
+      107,
+      173,
+      224
+    ],
+    "count": 5442
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      93,
+      103,
+      164,
+      224
+    ],
+    "count": 5903
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      85,
+      100,
+      168,
+      224
+    ],
+    "count": 7494
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      47,
+      172,
+      208,
+      224
+    ],
+    "count": 4901
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 0,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      94,
+      103,
+      162,
+      224
+    ],
+    "count": 5710
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 2,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      95,
+      103,
+      181,
+      224
+    ],
+    "count": 5908
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 3,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      95,
+      103,
+      163,
+      224
+    ],
+    "count": 5657
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      101,
+      163,
+      223
+    ],
+    "count": 5657
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      101,
+      163,
+      223
+    ],
+    "count": 5641
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      101,
+      164,
+      223
+    ],
+    "count": 5680
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      101,
+      164,
+      223
+    ],
+    "count": 5654
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 4,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      95,
+      102,
+      163,
+      220
+    ],
+    "count": 5295
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 5,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      95,
+      103,
+      164,
+      221
+    ],
+    "count": 5265
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 6,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      95,
+      102,
+      165,
+      220
+    ],
+    "count": 5326
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 7,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      96,
+      101,
+      166,
+      219
+    ],
+    "count": 5314
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      90,
+      104,
+      162,
+      224
+    ],
+    "count": 5822
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      81,
+      104,
+      155,
+      224
+    ],
+    "count": 5573
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      63,
+      106,
+      156,
+      224
+    ],
+    "count": 5318
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      88,
+      105,
+      163,
+      224
+    ],
+    "count": 5873
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      87,
+      99,
+      170,
+      224
+    ],
+    "count": 7659
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      48,
+      171,
+      207,
+      224
+    ],
+    "count": 5033
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/lich-cast-frontleft.png",
+    "sourcePose": 0,
+    "scale": 0.190625,
+    "bounds": [
+      97,
+      102,
+      156,
+      224
+    ],
+    "count": 5141
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/lich-cast-frontleft.png",
+    "sourcePose": 2,
+    "scale": 0.190625,
+    "bounds": [
+      88,
+      102,
+      152,
+      224
+    ],
+    "count": 5132
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/lich-cast-frontleft.png",
+    "sourcePose": 3,
+    "scale": 0.190625,
+    "bounds": [
+      97,
+      102,
+      156,
+      224
+    ],
+    "count": 5160
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      101,
+      100,
+      155,
+      223
+    ],
+    "count": 4460
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      102,
+      100,
+      155,
+      223
+    ],
+    "count": 4401
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      103,
+      100,
+      155,
+      223
+    ],
+    "count": 4374
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      103,
+      100,
+      156,
+      223
+    ],
+    "count": 4399
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 8,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      112,
+      101,
+      165,
+      220
+    ],
+    "count": 4305
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 9,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      113,
+      102,
+      165,
+      221
+    ],
+    "count": 4315
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 10,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      113,
+      101,
+      166,
+      220
+    ],
+    "count": 4290
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 11,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      113,
+      100,
+      169,
+      219
+    ],
+    "count": 4380
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      100,
+      101,
+      157,
+      224
+    ],
+    "count": 4902
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      89,
+      101,
+      154,
+      224
+    ],
+    "count": 4817
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      54,
+      103,
+      158,
+      224
+    ],
+    "count": 5268
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      100,
+      101,
+      157,
+      224
+    ],
+    "count": 4875
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      94,
+      94,
+      157,
+      224
+    ],
+    "count": 6276
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      33,
+      174,
+      221,
+      224
+    ],
+    "count": 5598
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 8,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      102,
+      100,
+      156,
+      224
+    ],
+    "count": 4770
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 10,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      100,
+      100,
+      156,
+      224
+    ],
+    "count": 4873
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 11,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      102,
+      100,
+      155,
+      224
+    ],
+    "count": 4818
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      91,
+      99,
+      161,
+      222
+    ],
+    "count": 5660
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      91,
+      99,
+      161,
+      222
+    ],
+    "count": 5684
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      99,
+      162,
+      222
+    ],
+    "count": 5691
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      91,
+      99,
+      161,
+      222
+    ],
+    "count": 5698
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 12,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      91,
+      101,
+      159,
+      219
+    ],
+    "count": 5339
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 13,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      91,
+      102,
+      159,
+      220
+    ],
+    "count": 5219
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 14,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      91,
+      101,
+      159,
+      218
+    ],
+    "count": 5321
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 15,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      92,
+      100,
+      160,
+      218
+    ],
+    "count": 5345
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      91,
+      105,
+      159,
+      224
+    ],
+    "count": 5731
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      98,
+      105,
+      167,
+      224
+    ],
+    "count": 4978
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      53,
+      105,
+      158,
+      224
+    ],
+    "count": 5451
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      90,
+      105,
+      159,
+      224
+    ],
+    "count": 5718
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/hurt-backleft.png",
+    "sourcePose": 1,
+    "scale": 0.1986970684039088,
+    "bounds": [
+      93,
+      103,
+      159,
+      224
+    ],
+    "count": 5386
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      35,
+      172,
+      220,
+      224
+    ],
+    "count": 5706
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 12,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      83,
+      101,
+      160,
+      224
+    ],
+    "count": 5883
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 14,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      65,
+      101,
+      160,
+      224
+    ],
+    "count": 6071
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 15,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      90,
+      101,
+      159,
+      224
+    ],
+    "count": 5720
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      89,
+      98,
+      160,
+      223
+    ],
+    "count": 5990
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      89,
+      98,
+      159,
+      223
+    ],
+    "count": 5894
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      90,
+      98,
+      160,
+      223
+    ],
+    "count": 5862
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      90,
+      98,
+      160,
+      223
+    ],
+    "count": 5915
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 16,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      90,
+      99,
+      157,
+      218
+    ],
+    "count": 5534
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 17,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      89,
+      100,
+      157,
+      219
+    ],
+    "count": 5624
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 18,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      90,
+      99,
+      157,
+      219
+    ],
+    "count": 5607
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 19,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      89,
+      98,
+      156,
+      217
+    ],
+    "count": 5601
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 16,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      88,
+      102,
+      159,
+      224
+    ],
+    "count": 6019
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 17,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      95,
+      103,
+      172,
+      224
+    ],
+    "count": 5459
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 18,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      98,
+      103,
+      184,
+      224
+    ],
+    "count": 5409
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 19,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      89,
+      102,
+      159,
+      224
+    ],
+    "count": 6071
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      86,
+      100,
+      164,
+      224
+    ],
+    "count": 7107
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      53,
+      172,
+      208,
+      224
+    ],
+    "count": 4587
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 16,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      80,
+      100,
+      158,
+      224
+    ],
+    "count": 6175
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 18,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      63,
+      100,
+      159,
+      224
+    ],
+    "count": 6330
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 19,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      86,
+      100,
+      158,
+      224
+    ],
+    "count": 6052
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      91,
+      98,
+      162,
+      223
+    ],
+    "count": 5722
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      98,
+      162,
+      223
+    ],
+    "count": 5678
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      98,
+      162,
+      223
+    ],
+    "count": 5680
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      92,
+      98,
+      161,
+      223
+    ],
+    "count": 5720
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 20,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      89,
+      99,
+      159,
+      218
+    ],
+    "count": 5474
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 21,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      92,
+      100,
+      159,
+      218
+    ],
+    "count": 5354
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 22,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      89,
+      99,
+      158,
+      216
+    ],
+    "count": 5440
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 23,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      90,
+      98,
+      159,
+      216
+    ],
+    "count": 5438
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 20,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      89,
+      102,
+      159,
+      224
+    ],
+    "count": 5891
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 21,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      94,
+      102,
+      182,
+      224
+    ],
+    "count": 5429
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 22,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      95,
+      103,
+      199,
+      224
+    ],
+    "count": 5666
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 23,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      88,
+      101,
+      160,
+      224
+    ],
+    "count": 6046
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      89,
+      99,
+      164,
+      224
+    ],
+    "count": 7109
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      44,
+      171,
+      215,
+      224
+    ],
+    "count": 5266
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 20,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      93,
+      99,
+      161,
+      224
+    ],
+    "count": 5878
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 22,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      93,
+      99,
+      179,
+      224
+    ],
+    "count": 6089
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 23,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      93,
+      99,
+      161,
+      224
+    ],
+    "count": 5871
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      100,
+      100,
+      150,
+      223
+    ],
+    "count": 4253
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      100,
+      100,
+      150,
+      223
+    ],
+    "count": 4230
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      100,
+      100,
+      150,
+      223
+    ],
+    "count": 4226
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      100,
+      100,
+      150,
+      223
+    ],
+    "count": 4229
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 24,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      90,
+      101,
+      141,
+      220
+    ],
+    "count": 4222
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 25,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      89,
+      102,
+      141,
+      221
+    ],
+    "count": 4236
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 26,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      90,
+      101,
+      141,
+      220
+    ],
+    "count": 4310
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 27,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      89,
+      100,
+      141,
+      219
+    ],
+    "count": 4228
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 24,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      98,
+      103,
+      152,
+      224
+    ],
+    "count": 4645
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 25,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      98,
+      103,
+      164,
+      224
+    ],
+    "count": 4612
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 26,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      99,
+      104,
+      186,
+      224
+    ],
+    "count": 4689
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 27,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      98,
+      102,
+      152,
+      224
+    ],
+    "count": 4656
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      99,
+      90,
+      164,
+      224
+    ],
+    "count": 5971
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      36,
+      173,
+      220,
+      224
+    ],
+    "count": 5605
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 24,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      99,
+      100,
+      154,
+      224
+    ],
+    "count": 4759
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 26,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      99,
+      101,
+      174,
+      224
+    ],
+    "count": 5051
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 27,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      99,
+      100,
+      150,
+      224
+    ],
+    "count": 4637
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/lich-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      89,
+      101,
+      162,
+      223
+    ],
+    "count": 5726
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/lich-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      90,
+      101,
+      162,
+      222
+    ],
+    "count": 5682
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/lich-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      90,
+      101,
+      162,
+      222
+    ],
+    "count": 5599
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/lich-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6630434782608695,
+    "bounds": [
+      90,
+      101,
+      162,
+      223
+    ],
+    "count": 5694
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/lich-walk.png",
+    "sourcePose": 28,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      92,
+      101,
+      161,
+      218
+    ],
+    "count": 5242
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/lich-walk.png",
+    "sourcePose": 29,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      91,
+      102,
+      159,
+      221
+    ],
+    "count": 5319
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/lich-walk.png",
+    "sourcePose": 30,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      91,
+      101,
+      163,
+      217
+    ],
+    "count": 5210
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/lich-walk.png",
+    "sourcePose": 31,
+    "scale": 0.6192893401015228,
+    "bounds": [
+      91,
+      100,
+      161,
+      219
+    ],
+    "count": 5374
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/lich-attack.png",
+    "sourcePose": 28,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      89,
+      105,
+      161,
+      224
+    ],
+    "count": 5836
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/lich-attack.png",
+    "sourcePose": 29,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      77,
+      107,
+      155,
+      224
+    ],
+    "count": 5498
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/lich-attack.png",
+    "sourcePose": 30,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      96,
+      109,
+      196,
+      224
+    ],
+    "count": 5326
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/lich-attack.png",
+    "sourcePose": 31,
+    "scale": 0.6455026455026455,
+    "bounds": [
+      89,
+      105,
+      161,
+      224
+    ],
+    "count": 5765
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      86,
+      93,
+      167,
+      224
+    ],
+    "count": 7401
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/lich-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5951219512195122,
+    "bounds": [
+      44,
+      173,
+      209,
+      224
+    ],
+    "count": 5446
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/lich-cast.png",
+    "sourcePose": 28,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      90,
+      103,
+      163,
+      224
+    ],
+    "count": 5808
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/lich-cast.png",
+    "sourcePose": 30,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      90,
+      103,
+      183,
+      224
+    ],
+    "count": 6083
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/lich-cast.png",
+    "sourcePose": 31,
+    "scale": 0.6524064171122995,
+    "bounds": [
+      89,
+      103,
+      163,
+      224
+    ],
+    "count": 5816
+  }
+]

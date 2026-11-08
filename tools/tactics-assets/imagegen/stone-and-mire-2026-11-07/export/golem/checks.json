@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 0,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      59,
+      51,
+      197,
+      222
+    ],
+    "count": 15690
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 1,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      58,
+      54,
+      196,
+      222
+    ],
+    "count": 15372
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 2,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      59,
+      50,
+      196,
+      222
+    ],
+    "count": 15669
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 3,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      59,
+      51,
+      197,
+      222
+    ],
+    "count": 15715
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 0,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      57,
+      52,
+      195,
+      224
+    ],
+    "count": 16178
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 1,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      57,
+      54,
+      199,
+      228
+    ],
+    "count": 16425
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 2,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      54,
+      52,
+      199,
+      227
+    ],
+    "count": 16357
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 3,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      60,
+      51,
+      200,
+      222
+    ],
+    "count": 16295
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 0,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      49,
+      53,
+      204,
+      224
+    ],
+    "count": 17648
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 1,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      51,
+      56,
+      206,
+      224
+    ],
+    "count": 15945
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 2,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      56,
+      57,
+      200,
+      224
+    ],
+    "count": 15070
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 3,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      53,
+      53,
+      204,
+      224
+    ],
+    "count": 16342
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      50,
+      53,
+      207,
+      224
+    ],
+    "count": 17820
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      36,
+      153,
+      219,
+      224
+    ],
+    "count": 10196
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 0,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      49,
+      53,
+      205,
+      224
+    ],
+    "count": 18617
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 1,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      48,
+      32,
+      203,
+      224
+    ],
+    "count": 19027
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 2,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      54,
+      84,
+      200,
+      224
+    ],
+    "count": 16276
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 3,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      49,
+      64,
+      203,
+      224
+    ],
+    "count": 17726
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 0,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      56,
+      53,
+      198,
+      224
+    ],
+    "count": 16662
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 1,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      64,
+      53,
+      192,
+      224
+    ],
+    "count": 13946
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 2,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      69,
+      53,
+      187,
+      224
+    ],
+    "count": 13320
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 3,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      56,
+      53,
+      198,
+      224
+    ],
+    "count": 16646
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 4,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      70,
+      43,
+      197,
+      222
+    ],
+    "count": 15810
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 5,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      66,
+      46,
+      197,
+      222
+    ],
+    "count": 15793
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 6,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      70,
+      43,
+      197,
+      222
+    ],
+    "count": 15752
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 7,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      70,
+      43,
+      198,
+      222
+    ],
+    "count": 15805
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 4,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      69,
+      45,
+      194,
+      223
+    ],
+    "count": 15096
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 5,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      69,
+      47,
+      196,
+      219
+    ],
+    "count": 15295
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 6,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      67,
+      46,
+      198,
+      224
+    ],
+    "count": 15856
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 7,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      67,
+      44,
+      196,
+      222
+    ],
+    "count": 15618
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 4,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      51,
+      47,
+      200,
+      224
+    ],
+    "count": 17666
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 5,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      45,
+      47,
+      203,
+      224
+    ],
+    "count": 17312
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 6,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      24,
+      51,
+      197,
+      224
+    ],
+    "count": 16716
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 7,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      48,
+      47,
+      197,
+      224
+    ],
+    "count": 16859
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      48,
+      53,
+      193,
+      224
+    ],
+    "count": 16632
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      32,
+      152,
+      223,
+      224
+    ],
+    "count": 10449
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 4,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      50,
+      56,
+      204,
+      224
+    ],
+    "count": 18197
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 5,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      48,
+      25,
+      196,
+      224
+    ],
+    "count": 19102
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 6,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      49,
+      89,
+      206,
+      224
+    ],
+    "count": 16360
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 7,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      41,
+      68,
+      191,
+      224
+    ],
+    "count": 16992
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 4,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      67,
+      46,
+      199,
+      224
+    ],
+    "count": 16625
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 5,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      64,
+      48,
+      185,
+      224
+    ],
+    "count": 14363
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 6,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      70,
+      46,
+      180,
+      224
+    ],
+    "count": 13706
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 7,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      63,
+      46,
+      200,
+      224
+    ],
+    "count": 16889
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 8,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      98,
+      46,
+      164,
+      222
+    ],
+    "count": 9049
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 9,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      97,
+      48,
+      165,
+      222
+    ],
+    "count": 9078
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 10,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      98,
+      46,
+      165,
+      222
+    ],
+    "count": 9133
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 11,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      98,
+      46,
+      165,
+      222
+    ],
+    "count": 9107
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 8,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      90,
+      49,
+      165,
+      228
+    ],
+    "count": 10010
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 9,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      95,
+      50,
+      166,
+      229
+    ],
+    "count": 9784
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 10,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      87,
+      48,
+      167,
+      226
+    ],
+    "count": 10265
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 11,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      93,
+      47,
+      166,
+      226
+    ],
+    "count": 9740
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 8,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      83,
+      47,
+      165,
+      224
+    ],
+    "count": 10573
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 9,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      60,
+      49,
+      170,
+      224
+    ],
+    "count": 11592
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 10,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      10,
+      50,
+      182,
+      224
+    ],
+    "count": 14537
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 11,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      58,
+      47,
+      177,
+      224
+    ],
+    "count": 11924
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      71,
+      42,
+      163,
+      224
+    ],
+    "count": 11275
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      26,
+      158,
+      229,
+      224
+    ],
+    "count": 10456
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 8,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      92,
+      55,
+      171,
+      224
+    ],
+    "count": 10455
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 9,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      58,
+      21,
+      170,
+      224
+    ],
+    "count": 14051
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 10,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      50,
+      93,
+      203,
+      224
+    ],
+    "count": 13949
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 11,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      31,
+      68,
+      169,
+      224
+    ],
+    "count": 13725
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 8,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      95,
+      48,
+      166,
+      224
+    ],
+    "count": 9739
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 9,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      68,
+      49,
+      166,
+      224
+    ],
+    "count": 10483
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 10,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      73,
+      48,
+      166,
+      224
+    ],
+    "count": 10596
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 11,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      92,
+      48,
+      166,
+      224
+    ],
+    "count": 9994
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 12,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      79,
+      44,
+      184,
+      222
+    ],
+    "count": 14120
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 13,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      78,
+      47,
+      184,
+      222
+    ],
+    "count": 14071
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 14,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      79,
+      44,
+      185,
+      222
+    ],
+    "count": 14274
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 15,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      80,
+      44,
+      186,
+      222
+    ],
+    "count": 14240
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 12,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      71,
+      47,
+      183,
+      225
+    ],
+    "count": 13530
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 13,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      72,
+      47,
+      188,
+      224
+    ],
+    "count": 14261
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 14,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      66,
+      46,
+      192,
+      224
+    ],
+    "count": 14834
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 15,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      69,
+      46,
+      189,
+      224
+    ],
+    "count": 14994
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 12,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      56,
+      45,
+      184,
+      224
+    ],
+    "count": 16366
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 13,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      44,
+      46,
+      185,
+      224
+    ],
+    "count": 16559
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 14,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      14,
+      48,
+      188,
+      224
+    ],
+    "count": 16838
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 15,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      48,
+      46,
+      189,
+      224
+    ],
+    "count": 16899
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      78,
+      42,
+      196,
+      224
+    ],
+    "count": 15115
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      23,
+      150,
+      232,
+      224
+    ],
+    "count": 11597
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 12,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      64,
+      51,
+      186,
+      224
+    ],
+    "count": 15570
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 13,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      52,
+      27,
+      184,
+      224
+    ],
+    "count": 17843
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 14,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      49,
+      100,
+      208,
+      224
+    ],
+    "count": 14063
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 15,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      32,
+      70,
+      178,
+      224
+    ],
+    "count": 15073
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 12,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      70,
+      49,
+      185,
+      224
+    ],
+    "count": 15193
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 13,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      62,
+      49,
+      180,
+      224
+    ],
+    "count": 13589
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 14,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      60,
+      48,
+      175,
+      224
+    ],
+    "count": 13575
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 15,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      68,
+      48,
+      184,
+      224
+    ],
+    "count": 15346
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 16,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      59,
+      49,
+      197,
+      222
+    ],
+    "count": 16271
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 17,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      58,
+      53,
+      196,
+      222
+    ],
+    "count": 15921
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 18,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      59,
+      49,
+      196,
+      222
+    ],
+    "count": 16137
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 19,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      58,
+      49,
+      196,
+      222
+    ],
+    "count": 16178
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 16,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      55,
+      50,
+      200,
+      227
+    ],
+    "count": 17161
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 17,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      55,
+      52,
+      200,
+      227
+    ],
+    "count": 16913
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 18,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      55,
+      51,
+      201,
+      226
+    ],
+    "count": 16973
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 19,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      54,
+      50,
+      200,
+      226
+    ],
+    "count": 17277
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 16,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      52,
+      47,
+      204,
+      224
+    ],
+    "count": 18485
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 17,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      44,
+      49,
+      201,
+      224
+    ],
+    "count": 17158
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 18,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      40,
+      49,
+      204,
+      224
+    ],
+    "count": 16907
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 19,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      47,
+      47,
+      199,
+      224
+    ],
+    "count": 18311
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 8,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      56,
+      50,
+      211,
+      224
+    ],
+    "count": 18633
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      32,
+      145,
+      223,
+      224
+    ],
+    "count": 11658
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 16,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      47,
+      55,
+      206,
+      224
+    ],
+    "count": 18775
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 17,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      45,
+      31,
+      207,
+      224
+    ],
+    "count": 19574
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 18,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      52,
+      97,
+      201,
+      224
+    ],
+    "count": 15042
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 19,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      45,
+      61,
+      207,
+      224
+    ],
+    "count": 18707
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 16,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      56,
+      53,
+      197,
+      224
+    ],
+    "count": 17186
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 17,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      65,
+      54,
+      189,
+      224
+    ],
+    "count": 13685
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 18,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      68,
+      53,
+      183,
+      224
+    ],
+    "count": 13124
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 19,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      57,
+      53,
+      198,
+      224
+    ],
+    "count": 17099
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 20,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      65,
+      45,
+      180,
+      222
+    ],
+    "count": 14760
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 21,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      65,
+      49,
+      182,
+      222
+    ],
+    "count": 14579
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 22,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      65,
+      45,
+      180,
+      222
+    ],
+    "count": 14718
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 23,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      65,
+      45,
+      180,
+      222
+    ],
+    "count": 14743
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 20,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      62,
+      48,
+      183,
+      228
+    ],
+    "count": 14556
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 21,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      65,
+      49,
+      186,
+      226
+    ],
+    "count": 14614
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 22,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      62,
+      48,
+      186,
+      228
+    ],
+    "count": 15239
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 23,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      63,
+      47,
+      186,
+      226
+    ],
+    "count": 15027
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 20,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      58,
+      45,
+      198,
+      224
+    ],
+    "count": 17306
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 21,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      57,
+      44,
+      193,
+      224
+    ],
+    "count": 16124
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 22,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      54,
+      45,
+      215,
+      224
+    ],
+    "count": 16338
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 23,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      58,
+      45,
+      202,
+      224
+    ],
+    "count": 17409
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      50,
+      44,
+      177,
+      224
+    ],
+    "count": 15893
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      23,
+      145,
+      232,
+      224
+    ],
+    "count": 12372
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 20,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      59,
+      50,
+      191,
+      224
+    ],
+    "count": 16904
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 21,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      53,
+      28,
+      200,
+      224
+    ],
+    "count": 19208
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 22,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      44,
+      95,
+      208,
+      224
+    ],
+    "count": 15350
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 23,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      63,
+      62,
+      211,
+      224
+    ],
+    "count": 16616
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 20,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      68,
+      48,
+      188,
+      224
+    ],
+    "count": 15478
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 21,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      73,
+      49,
+      191,
+      224
+    ],
+    "count": 13722
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 22,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      77,
+      47,
+      187,
+      224
+    ],
+    "count": 13385
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 23,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      68,
+      47,
+      186,
+      224
+    ],
+    "count": 15418
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 24,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      89,
+      44,
+      158,
+      222
+    ],
+    "count": 9428
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 25,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      89,
+      48,
+      157,
+      222
+    ],
+    "count": 9250
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 26,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      89,
+      45,
+      158,
+      222
+    ],
+    "count": 9364
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 27,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      89,
+      45,
+      158,
+      222
+    ],
+    "count": 9333
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 24,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      86,
+      47,
+      163,
+      227
+    ],
+    "count": 10550
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 25,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      87,
+      47,
+      160,
+      223
+    ],
+    "count": 10204
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 26,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      86,
+      46,
+      164,
+      224
+    ],
+    "count": 10149
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 27,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      87,
+      45,
+      164,
+      225
+    ],
+    "count": 10327
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 24,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      89,
+      45,
+      176,
+      224
+    ],
+    "count": 11038
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 25,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      77,
+      46,
+      180,
+      224
+    ],
+    "count": 11540
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 26,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      85,
+      46,
+      221,
+      224
+    ],
+    "count": 13917
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 27,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      82,
+      44,
+      188,
+      224
+    ],
+    "count": 12147
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      91,
+      39,
+      183,
+      224
+    ],
+    "count": 11629
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      24,
+      159,
+      231,
+      224
+    ],
+    "count": 10830
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 24,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      78,
+      49,
+      163,
+      224
+    ],
+    "count": 11577
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 25,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      76,
+      22,
+      192,
+      224
+    ],
+    "count": 15680
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 26,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      51,
+      98,
+      203,
+      224
+    ],
+    "count": 13792
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 27,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      81,
+      68,
+      206,
+      224
+    ],
+    "count": 13531
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 24,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      88,
+      46,
+      160,
+      224
+    ],
+    "count": 10333
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 25,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      86,
+      50,
+      185,
+      224
+    ],
+    "count": 10190
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 26,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      82,
+      46,
+      176,
+      224
+    ],
+    "count": 10915
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 27,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      89,
+      46,
+      162,
+      224
+    ],
+    "count": 10282
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-idle.png",
+    "sourcePose": 28,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      64,
+      47,
+      185,
+      222
+    ],
+    "count": 14696
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem-idle.png",
+    "sourcePose": 29,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      64,
+      51,
+      185,
+      222
+    ],
+    "count": 14511
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem-idle.png",
+    "sourcePose": 30,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      63,
+      47,
+      185,
+      222
+    ],
+    "count": 14914
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem-idle.png",
+    "sourcePose": 31,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      63,
+      48,
+      186,
+      222
+    ],
+    "count": 14896
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-walk.png",
+    "sourcePose": 28,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      58,
+      50,
+      187,
+      220
+    ],
+    "count": 15116
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem-walk.png",
+    "sourcePose": 29,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      59,
+      50,
+      183,
+      220
+    ],
+    "count": 14626
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem-walk.png",
+    "sourcePose": 30,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      58,
+      50,
+      186,
+      224
+    ],
+    "count": 15186
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem-walk.png",
+    "sourcePose": 31,
+    "scale": 0.9772727272727273,
+    "bounds": [
+      60,
+      48,
+      184,
+      219
+    ],
+    "count": 14774
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-attack.png",
+    "sourcePose": 28,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      55,
+      50,
+      194,
+      224
+    ],
+    "count": 16184
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem-attack.png",
+    "sourcePose": 29,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      50,
+      53,
+      199,
+      224
+    ],
+    "count": 15787
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem-attack.png",
+    "sourcePose": 30,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      71,
+      51,
+      215,
+      224
+    ],
+    "count": 15297
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem-attack.png",
+    "sourcePose": 31,
+    "scale": 0.9662921348314607,
+    "bounds": [
+      48,
+      50,
+      198,
+      224
+    ],
+    "count": 16728
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      90,
+      40,
+      236,
+      224
+    ],
+    "count": 18043
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7350427350427351,
+    "bounds": [
+      19,
+      155,
+      235,
+      224
+    ],
+    "count": 11786
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-special.png",
+    "sourcePose": 28,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      54,
+      51,
+      197,
+      224
+    ],
+    "count": 17230
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem-special.png",
+    "sourcePose": 29,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      64,
+      26,
+      203,
+      224
+    ],
+    "count": 18683
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem-special.png",
+    "sourcePose": 30,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      52,
+      98,
+      202,
+      224
+    ],
+    "count": 14705
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem-special.png",
+    "sourcePose": 31,
+    "scale": 0.9885057471264368,
+    "bounds": [
+      60,
+      65,
+      210,
+      224
+    ],
+    "count": 16646
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/golem-buff.png",
+    "sourcePose": 28,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      58,
+      52,
+      183,
+      224
+    ],
+    "count": 15227
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/golem-buff.png",
+    "sourcePose": 29,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      69,
+      53,
+      185,
+      224
+    ],
+    "count": 13389
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/golem-buff.png",
+    "sourcePose": 30,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      74,
+      52,
+      179,
+      224
+    ],
+    "count": 12907
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/golem-buff.png",
+    "sourcePose": 31,
+    "scale": 0.9555555555555556,
+    "bounds": [
+      56,
+      53,
+      187,
+      224
+    ],
+    "count": 15556
+  }
+]

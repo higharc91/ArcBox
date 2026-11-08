@@ -1,0 +1,16 @@
+{
+  "content/tactics/base/creatures/mob_refresh_skeleton.png": "81ba907251354b99e9e0869859097cc0dc64160b56f6d3f77e069db05a157ef6",
+  "content/tactics/base/creatures/mob_refresh_skeleton_archer.png": "b8506369e8880ad978efcdf038a4a52c6db6aa86adb28f784084cc06a793837c",
+  "content/tactics/base/portraits/skeleton_archer_refresh_angry.png": "30707c4b857e6a3e41d861c121aa5ff0a450c804dc6279f0636e080525ebba6e",
+  "content/tactics/base/portraits/skeleton_archer_refresh_happy.png": "0e3f7626a35b766d45d8ab10b7fdb34979fa35021f15226d66edd469da134513",
+  "content/tactics/base/portraits/skeleton_archer_refresh_hurt.png": "64ff6fc88cbb4ee3fc916652948e2cbffd003bf73649be8d2e07c37552bd22cc",
+  "content/tactics/base/portraits/skeleton_archer_refresh_idle.png": "f8ab1c22403b425add14ed3841afaac065059862ed91bb5ef788086f652dea02",
+  "content/tactics/base/portraits/skeleton_archer_refresh_sad.png": "5bd70a9839b29ab0865fc309c23d72f11ce2fe9037f4cad6db83ac1bcfee67c0",
+  "content/tactics/base/portraits/skeleton_archer_refresh_surprised.png": "639bfd797d6c45dcf2ad8c36569d59dd9387223494cf1a69ae2deef394a9d082",
+  "content/tactics/base/portraits/skeleton_refresh_angry.png": "f56c5e9424548c0bf3988e0d13223c50d5da798cad475a1d4d0e3fb4ed9692d2",
+  "content/tactics/base/portraits/skeleton_refresh_happy.png": "78af90f5fa4e4421b1de39baef232a25f9dc1b043db52b7a8c5df10bf7ca2da2",
+  "content/tactics/base/portraits/skeleton_refresh_hurt.png": "eec3ba326caf17ef0c8fec899be6e311f5c5d8d12ba699904f7bae46600a6b09",
+  "content/tactics/base/portraits/skeleton_refresh_idle.png": "a4200abd65603191cedf4ec0090ce71a63089131f930537fc22e88ba0166da2a",
+  "content/tactics/base/portraits/skeleton_refresh_sad.png": "4f4756fa0c6a23962a52c126c1976256fc12d8b2fbb510b5aa00d73770eb349f",
+  "content/tactics/base/portraits/skeleton_refresh_surprised.png": "13ea93fabbe3986d4123d3b709555101a17550f5c9462d6fc31552ae6c9df198"
+}

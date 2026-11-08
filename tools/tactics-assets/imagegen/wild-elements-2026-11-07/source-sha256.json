@@ -1,0 +1,18 @@
+{
+  "air_storm-attack.png": "40a8020dab328e47c275be6608b03fab514247b1c6a9e474fd723168f4ebde24",
+  "air_storm-damage.png": "d0f7269d7d76ee3c88b6851f0dee246c3db2cfdedfb7f4de88c3b61b638f6c45",
+  "air_storm-hurt-back.png": "2e62b6f33d4def5ab9dd2a61efa3f2526c36badb3807ee71dd311fa04ea24314",
+  "air_storm-idle.png": "9ff5ac77b0812d9a845f7bc1f865fc5a7682e2067f531a1ca88e73afa37f318d",
+  "air_storm-moves.png": "8831731b9304a3cd9172d969dc5df07fadec7d137957a2e64f62811e3eb9c03f",
+  "air_storm-walk.png": "0f5b1ed8d20ea469d7604f65186a6ef240467a1b2300b8c1369b8fcf6b536aaf",
+  "earth_magma-attack.png": "83f70354335e37217769ae824412d618c0acff4770ad81f603e8a7cb98cce735",
+  "earth_magma-damage.png": "fe1cba8301316a878ad4f6dfd10cf6bbeaca599d6c04d04567becdc66b84a319",
+  "earth_magma-idle.png": "5ce6c9585945b564cf5096fb80c6fa50f7e42465deb554a019f9d03fa7bf6e5a",
+  "earth_magma-moves.png": "844fdbd52387f002ff8dbfc20ec7d74d973cb4d5798be5a45005a200398aabdf",
+  "earth_magma-walk.png": "18dfe4537e331965d50b746262d0dc62a32d372702d4a705e9059cdf8cde124b",
+  "water_swamp-attack.png": "9f03b83879805e145876aac2cab61845d765817d82ecad37683830ead9b87061",
+  "water_swamp-damage.png": "10f600e24118d17be96a7801f7966aa198bf33d6f3181040c896049eb2f51f58",
+  "water_swamp-idle.png": "679349349284fb3a176ffc593e0f3f96c7b4176367c1095de12b0ff17d806ff9",
+  "water_swamp-moves.png": "f1a8a56c9697f5cb4c395a9695f66924cfded0b114a41c99572eea451491cd3d",
+  "water_swamp-walk.png": "a9b20b2860d6faa9af24afb9457f93a14e8297fa3880619f851beae2fb109c2d"
+}

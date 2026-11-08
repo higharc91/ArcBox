@@ -1,0 +1,28 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "generationParameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  },
+  "briefs": {
+    "black_knight": "Wardenflame: Embers of the Vale grounded tactical fantasy production concept sheet for pixel translation. ONE same character frontthreequarter, rearthreequarter, leftprofile fullbodies, head/grip materialstudy, small neutral1.75m human scale inset. Parchmentbackground, no text/scenery. Slightly enlarged tactical head, readable material/color separation, worn practical materials, warm upperleftkey/coolshadows. Allhead/feet/swordtips containedwidepadding. No giant glowingFX, anime, glossy3D or modern costume. SER HALVARD / BLACK KNIGHT. Canon: courteous, honourable lethal captain of Warden guard, oathbound to Oswin for100years atbroken gate; armour blackened by infernal fire. Adult formerHUMAN1.9m inHEAVY full plate. Closedmedieval GREAT HELM with narrow DARK horizontal eye/visor slit, no bareface/visibleeyes/glowingredpupils. SootBLACK iron plates with readable coldSTEELGREY edgewear/scratches andbluegreyshadows, restrained small dullbrass Warden clasps, no spikes/horns/skulltrophies/crown. Worn BURGUNDY knee-length split tabard with fadedIVORY piping, simplebrown rearbelt/no frontbuckleback, blacksteelgreaves/sabatons. Modest layeredshoulders/broadheavystature butnotmonster. NO SHIELD/cape/secondaryweapons. ONE straight SILVERGREY STEELGREATSWORD substantialnarrowblade/darklongleathergrip/plaincrossguard/smallroundpommel. ALWAYS BOTH platedGAUNTLETS ontheSAMElonghilt: RIGHThand nearestcrossguard, LEFT handnearestpommel. UprightguardbladeangledUPbesideanatomicalRIGHTshoulder(frontIMAGE LEFT/backIMAGE RIGHT), swordtipnomorethan15%abovehelmet, hiltinfrontwaist, allfingers/wrists/elbows connectedtoshoulders. DemonstrateRIGHTupper/LEFTlowergrip in swordUPorientation; neither releases orswaps. SwordUNLITnondemonic. Guardsteadyformalpatient, no maliciouspose. ArmorBACK has backplate/reartabardseams, never frontbreastplatebuckle.",
+    "dark_elf": "Wardenflame: Embers of the Vale grounded tactical fantasy production concept sheet for pixel translation. ONE same character frontthreequarter, rearthreequarter, leftprofile fullbodies, head/grip materialstudy, small neutral1.75m human scale inset. Parchmentbackground, no text/scenery. Slightly enlarged tactical head, readable material/color separation, worn practical materials, warm upperleftkey/coolshadows. Allhead/feet/swordtips containedwidepadding. No giant glowingFX, anime, glossy3D or modern costume. DROW BLADE, existing DARK ELF preset ALSO used for YSOLDE Voice of Glimmer Court. This sharedfemaleelvenidentity must fit courteous curious alien feyenvoy AND agile light-armored rapierduelist, no claim that enemyDrowstatblock belongs to Court. MatureadultFEMALEelf1.75m SLIM gracefulposture, cool GREY-LILAC fantasy skin nothumanpink, natural paleSILVER-GREY eyes withpupilsno glow, longpointedears. SILVERWHITE shortbob tuckedbehindears withsmallfixednapeclasp, hairendsabove collar no longloosebraid/ponytail. Calmcuriousknowingnarrowface, no snarlinggoblinface. Fitted SLATE-TEAL lightLEATHERjerkin over charcoal long-sleeve tunic, modestcoveredchestandthighs, small mutedPLUM shortsplit hipcloth lining, narrowbrownfront-buckledbelt/plainbackbelt, simplebrownbracers andknee-highdarkleatherboots. SmallfixedsealedpouchatLEFT hip. A restrained unreadable leaflike silverclasp recallsfeycourtcostume, no factionlogo invented. No hood/mask/tiara/crown/armoredpauldrons/flowingcape/spidermotifs/skullornaments/sexualizedarmor. ONE SLENDER STRAIGHT STEEL RAPIER in anatomicalRIGHT hand (viewerLEFTfront/viewerRIGHTback), small dullBRASS CUPGUARD anddark leathergrip, pommeljoinedhilt. RIGHTfingerswrapgripcontinuouswrist/forearm, LEFT hand EMPTY for balance/shadow-step spell. RapierheldLOW atrestonRIGHTside, nottwoswords/daggers/bow/shield. Backhair/clasp/seams/plainbeltnotfrontbuckles. Samefemaleelfallviews; no glowingpoison dripping, nofloatingaccessories. Detail a secureRIGHTgripandsharpcontainedrapiertip."
+  },
+  "jobs": {
+    "black_knight": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_zaVz5NsryYh88ifjZsLhHrJA",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_zaVz5NsryYh88ifjZsLhHrJA' (one call waits on up to 32 jobs)."
+    },
+    "dark_elf": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_NjNpN9UpehL9sMX2u1Cpvp9c",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_NjNpN9UpehL9sMX2u1Cpvp9c' (one call waits on up to 32 jobs)."
+    }
+  }
+}

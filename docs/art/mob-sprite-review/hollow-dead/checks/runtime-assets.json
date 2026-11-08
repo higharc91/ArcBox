@@ -1,0 +1,10 @@
+{
+  "content/tactics/base/creatures/mob_refresh_zombie.png": "fbbe7a16a89a24e6aaeb48929e44187fefec1b14a5b11ef284a61134810407b0",
+  "content/tactics/base/creatures/mob_refresh_wraith.png": "be5bbef25f15db5e6851c6c19f055f70c07f899ca8b92f429536b939125fc525",
+  "content/tactics/base/portraits/zombie_refresh_angry.png": "3da80ffdbf00391f6f1e52117e51d86aa6d37b30c64ca8124384a9bf7e17da0d",
+  "content/tactics/base/portraits/zombie_refresh_happy.png": "f37cd6658f1b2c3381d216fc3b220fa89aab3381877f6fa57006dd1a25b99b05",
+  "content/tactics/base/portraits/zombie_refresh_hurt.png": "bdd1ad949f90f24ea24748e74c5434317eed9e12304281c63aa10611d708f9af",
+  "content/tactics/base/portraits/zombie_refresh_idle.png": "c2e1d3b758488c0239aaf5d98fa2478f377ba3c1a05227bf9ba45b00e2d0eb83",
+  "content/tactics/base/portraits/zombie_refresh_sad.png": "73dabaef99486ac4a4d6cf0d2bbbfa7ccbcfc5c7dfaf9688c0657fcbdd8aceba",
+  "content/tactics/base/portraits/zombie_refresh_surprised.png": "5543403fd770ae371bac0d2a71ddb7c97ad6c57f8bd04becdb13515c00f977d9"
+}

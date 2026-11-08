@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      109,
+      114,
+      182,
+      254
+    ],
+    "count": 6082
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 1,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      110,
+      115,
+      182,
+      254
+    ],
+    "count": 6121
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 2,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      114,
+      183,
+      254
+    ],
+    "count": 6256
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      114,
+      183,
+      254
+    ],
+    "count": 6106
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 0,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      101,
+      125,
+      168,
+      256
+    ],
+    "count": 5487
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 1,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      101,
+      125,
+      169,
+      257
+    ],
+    "count": 5449
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 2,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      101,
+      124,
+      169,
+      255
+    ],
+    "count": 5584
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 3,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      102,
+      124,
+      169,
+      258
+    ],
+    "count": 5500
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 0,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      109,
+      112,
+      181,
+      256
+    ],
+    "count": 6185
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 1,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      95,
+      90,
+      173,
+      256
+    ],
+    "count": 6490
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 2,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      98,
+      138,
+      191,
+      256
+    ],
+    "count": 5833
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 3,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      109,
+      112,
+      178,
+      256
+    ],
+    "count": 6206
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 0,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      107,
+      108,
+      184,
+      256
+    ],
+    "count": 7129
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 1,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      47,
+      212,
+      242,
+      256
+    ],
+    "count": 5027
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 0,
+    "scale": 1,
+    "bounds": [
+      107,
+      125,
+      179,
+      256
+    ],
+    "count": 6449
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 2,
+    "scale": 1,
+    "bounds": [
+      108,
+      118,
+      176,
+      258
+    ],
+    "count": 6280
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 3,
+    "scale": 1,
+    "bounds": [
+      107,
+      124,
+      179,
+      256
+    ],
+    "count": 6468
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      123,
+      178,
+      254
+    ],
+    "count": 5504
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 5,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      122,
+      179,
+      254
+    ],
+    "count": 5525
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 6,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      122,
+      178,
+      254
+    ],
+    "count": 5561
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      112,
+      122,
+      178,
+      254
+    ],
+    "count": 5410
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 4,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      113,
+      125,
+      176,
+      254
+    ],
+    "count": 5049
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 5,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      126,
+      176,
+      255
+    ],
+    "count": 4892
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 6,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      125,
+      176,
+      254
+    ],
+    "count": 5107
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 7,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      124,
+      176,
+      253
+    ],
+    "count": 4903
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 4,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      110,
+      112,
+      178,
+      256
+    ],
+    "count": 6008
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 5,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      97,
+      104,
+      175,
+      256
+    ],
+    "count": 6139
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 6,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      82,
+      137,
+      208,
+      256
+    ],
+    "count": 6375
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 7,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      110,
+      112,
+      174,
+      256
+    ],
+    "count": 5933
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 2,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      107,
+      113,
+      186,
+      256
+    ],
+    "count": 6878
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 3,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      45,
+      207,
+      241,
+      256
+    ],
+    "count": 5199
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 4,
+    "scale": 1,
+    "bounds": [
+      107,
+      123,
+      173,
+      256
+    ],
+    "count": 6350
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 6,
+    "scale": 1,
+    "bounds": [
+      109,
+      115,
+      173,
+      256
+    ],
+    "count": 6080
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 7,
+    "scale": 1,
+    "bounds": [
+      108,
+      122,
+      173,
+      256
+    ],
+    "count": 6298
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      121,
+      121,
+      191,
+      254
+    ],
+    "count": 4408
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 9,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      120,
+      122,
+      189,
+      254
+    ],
+    "count": 4405
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 10,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      121,
+      121,
+      190,
+      254
+    ],
+    "count": 4303
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      121,
+      122,
+      190,
+      254
+    ],
+    "count": 4345
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 8,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      120,
+      122,
+      185,
+      251
+    ],
+    "count": 4246
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 9,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      121,
+      123,
+      185,
+      252
+    ],
+    "count": 4035
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 10,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      122,
+      122,
+      185,
+      253
+    ],
+    "count": 4086
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 11,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      121,
+      121,
+      186,
+      250
+    ],
+    "count": 4021
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 8,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      119,
+      110,
+      192,
+      256
+    ],
+    "count": 5069
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 9,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      107,
+      103,
+      180,
+      256
+    ],
+    "count": 5384
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 10,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      74,
+      140,
+      219,
+      256
+    ],
+    "count": 6286
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 11,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      118,
+      110,
+      192,
+      256
+    ],
+    "count": 5126
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 4,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      112,
+      111,
+      178,
+      256
+    ],
+    "count": 5889
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 5,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      42,
+      213,
+      245,
+      256
+    ],
+    "count": 4841
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 8,
+    "scale": 1,
+    "bounds": [
+      114,
+      130,
+      168,
+      256
+    ],
+    "count": 5350
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 10,
+    "scale": 1,
+    "bounds": [
+      116,
+      125,
+      171,
+      256
+    ],
+    "count": 5113
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 11,
+    "scale": 1,
+    "bounds": [
+      115,
+      131,
+      170,
+      256
+    ],
+    "count": 5311
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      119,
+      126,
+      188,
+      254
+    ],
+    "count": 5046
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 13,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      120,
+      125,
+      188,
+      254
+    ],
+    "count": 5012
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 14,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      119,
+      125,
+      187,
+      254
+    ],
+    "count": 5037
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      119,
+      125,
+      188,
+      254
+    ],
+    "count": 5037
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 12,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      116,
+      127,
+      187,
+      258
+    ],
+    "count": 5270
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 13,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      118,
+      128,
+      188,
+      261
+    ],
+    "count": 4921
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 14,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      115,
+      125,
+      187,
+      256
+    ],
+    "count": 5114
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 15,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      118,
+      126,
+      187,
+      256
+    ],
+    "count": 4934
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 12,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      112,
+      118,
+      181,
+      256
+    ],
+    "count": 5680
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 13,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      107,
+      105,
+      176,
+      256
+    ],
+    "count": 5707
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 14,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      61,
+      140,
+      179,
+      256
+    ],
+    "count": 6317
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 15,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      112,
+      118,
+      181,
+      256
+    ],
+    "count": 5699
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 6,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      103,
+      113,
+      173,
+      256
+    ],
+    "count": 6353
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 7,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      42,
+      212,
+      245,
+      256
+    ],
+    "count": 4950
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 12,
+    "scale": 1,
+    "bounds": [
+      118,
+      128,
+      173,
+      256
+    ],
+    "count": 5775
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 14,
+    "scale": 1,
+    "bounds": [
+      118,
+      125,
+      171,
+      256
+    ],
+    "count": 5473
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 15,
+    "scale": 1,
+    "bounds": [
+      117,
+      128,
+      173,
+      256
+    ],
+    "count": 5798
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      114,
+      125,
+      175,
+      254
+    ],
+    "count": 5417
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 17,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      114,
+      125,
+      175,
+      254
+    ],
+    "count": 5427
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 18,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      115,
+      125,
+      176,
+      254
+    ],
+    "count": 5517
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      114,
+      125,
+      175,
+      254
+    ],
+    "count": 5429
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 16,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      112,
+      125,
+      179,
+      256
+    ],
+    "count": 5634
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 17,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      112,
+      126,
+      178,
+      257
+    ],
+    "count": 5418
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 18,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      112,
+      125,
+      180,
+      256
+    ],
+    "count": 5597
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 19,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      112,
+      124,
+      180,
+      255
+    ],
+    "count": 5509
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 16,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      112,
+      107,
+      178,
+      256
+    ],
+    "count": 6207
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 17,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      112,
+      103,
+      176,
+      256
+    ],
+    "count": 6175
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 18,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      80,
+      140,
+      175,
+      256
+    ],
+    "count": 5613
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 19,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      111,
+      106,
+      182,
+      256
+    ],
+    "count": 6284
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 8,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      106,
+      103,
+      180,
+      256
+    ],
+    "count": 7343
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 9,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      43,
+      209,
+      246,
+      256
+    ],
+    "count": 5434
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 16,
+    "scale": 1,
+    "bounds": [
+      113,
+      127,
+      175,
+      256
+    ],
+    "count": 6363
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 18,
+    "scale": 1,
+    "bounds": [
+      112,
+      123,
+      175,
+      256
+    ],
+    "count": 6275
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 19,
+    "scale": 1,
+    "bounds": [
+      112,
+      127,
+      175,
+      256
+    ],
+    "count": 6314
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      116,
+      123,
+      184,
+      254
+    ],
+    "count": 5450
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 21,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      116,
+      123,
+      184,
+      254
+    ],
+    "count": 5449
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 22,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      116,
+      123,
+      183,
+      254
+    ],
+    "count": 5459
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      116,
+      123,
+      183,
+      254
+    ],
+    "count": 5466
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 20,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      122,
+      185,
+      252
+    ],
+    "count": 5261
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 21,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      124,
+      182,
+      255
+    ],
+    "count": 5100
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 22,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      123,
+      184,
+      254
+    ],
+    "count": 5232
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 23,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      114,
+      123,
+      184,
+      254
+    ],
+    "count": 5153
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 20,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      114,
+      108,
+      188,
+      256
+    ],
+    "count": 6270
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 21,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      117,
+      109,
+      195,
+      256
+    ],
+    "count": 6220
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 22,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      106,
+      138,
+      224,
+      256
+    ],
+    "count": 6147
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 23,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      114,
+      109,
+      185,
+      256
+    ],
+    "count": 6183
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 10,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      110,
+      109,
+      187,
+      256
+    ],
+    "count": 6790
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 11,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      43,
+      208,
+      247,
+      256
+    ],
+    "count": 5373
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 20,
+    "scale": 1,
+    "bounds": [
+      113,
+      126,
+      175,
+      256
+    ],
+    "count": 6292
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 22,
+    "scale": 1,
+    "bounds": [
+      111,
+      123,
+      174,
+      256
+    ],
+    "count": 6199
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 23,
+    "scale": 1,
+    "bounds": [
+      113,
+      127,
+      176,
+      256
+    ],
+    "count": 6375
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      122,
+      127,
+      178,
+      254
+    ],
+    "count": 4569
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 25,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      122,
+      127,
+      179,
+      254
+    ],
+    "count": 4614
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 26,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      122,
+      127,
+      178,
+      254
+    ],
+    "count": 4523
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      122,
+      127,
+      178,
+      254
+    ],
+    "count": 4536
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 24,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      120,
+      126,
+      177,
+      253
+    ],
+    "count": 4446
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 25,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      120,
+      127,
+      176,
+      254
+    ],
+    "count": 4230
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 26,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      120,
+      127,
+      178,
+      252
+    ],
+    "count": 4511
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 27,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      121,
+      125,
+      178,
+      251
+    ],
+    "count": 4267
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 24,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      119,
+      107,
+      185,
+      256
+    ],
+    "count": 5568
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 25,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      117,
+      104,
+      191,
+      256
+    ],
+    "count": 5516
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 26,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      109,
+      138,
+      235,
+      256
+    ],
+    "count": 5997
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 27,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      118,
+      109,
+      184,
+      256
+    ],
+    "count": 5630
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 12,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      118,
+      115,
+      188,
+      256
+    ],
+    "count": 5900
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 13,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      42,
+      212,
+      247,
+      256
+    ],
+    "count": 4987
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 24,
+    "scale": 1,
+    "bounds": [
+      119,
+      130,
+      174,
+      256
+    ],
+    "count": 5465
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 26,
+    "scale": 1,
+    "bounds": [
+      119,
+      126,
+      173,
+      256
+    ],
+    "count": 5054
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 27,
+    "scale": 1,
+    "bounds": [
+      118,
+      129,
+      173,
+      256
+    ],
+    "count": 5377
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      112,
+      126,
+      179,
+      254
+    ],
+    "count": 5464
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 29,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      125,
+      179,
+      254
+    ],
+    "count": 5437
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 30,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      111,
+      125,
+      179,
+      254
+    ],
+    "count": 5539
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/black_knight-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0076335877862594,
+    "bounds": [
+      112,
+      125,
+      179,
+      254
+    ],
+    "count": 5414
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 28,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      111,
+      126,
+      177,
+      255
+    ],
+    "count": 5354
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 29,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      111,
+      127,
+      180,
+      253
+    ],
+    "count": 5230
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 30,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      111,
+      126,
+      182,
+      254
+    ],
+    "count": 5513
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/black_knight-walk.png",
+    "sourcePose": 31,
+    "scale": 0.7333333333333333,
+    "bounds": [
+      111,
+      124,
+      176,
+      250
+    ],
+    "count": 5088
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 28,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      111,
+      116,
+      183,
+      256
+    ],
+    "count": 6285
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 29,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      102,
+      95,
+      174,
+      256
+    ],
+    "count": 6317
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 30,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      95,
+      137,
+      194,
+      256
+    ],
+    "count": 5939
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/black_knight-attack.png",
+    "sourcePose": 31,
+    "scale": 0.8571428571428571,
+    "bounds": [
+      110,
+      115,
+      183,
+      256
+    ],
+    "count": 6287
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 14,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      112,
+      116,
+      192,
+      256
+    ],
+    "count": 6820
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/black_knight-damage.png",
+    "sourcePose": 15,
+    "scale": 0.6111111111111112,
+    "bounds": [
+      43,
+      209,
+      246,
+      256
+    ],
+    "count": 4968
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 28,
+    "scale": 1,
+    "bounds": [
+      110,
+      130,
+      177,
+      256
+    ],
+    "count": 6290
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 30,
+    "scale": 1,
+    "bounds": [
+      110,
+      126,
+      175,
+      256
+    ],
+    "count": 5984
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/black_knight-cast.png",
+    "sourcePose": 31,
+    "scale": 1,
+    "bounds": [
+      110,
+      130,
+      177,
+      256
+    ],
+    "count": 6302
+  }
+]

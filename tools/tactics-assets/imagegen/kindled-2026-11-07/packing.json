@@ -1,0 +1,8202 @@
+[
+  {
+    "id": "cultist",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          124.0,
+          11
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          46,
+          9,
+          138,
+          208
+        ],
+        "bounds": [
+          48,
+          11,
+          182,
+          215
+        ],
+        "foot": [
+          123.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.5,
+          11
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          268,
+          9,
+          138,
+          208
+        ],
+        "bounds": [
+          270,
+          11,
+          404,
+          215
+        ],
+        "foot": [
+          345.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          11
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          491,
+          9,
+          138,
+          208
+        ],
+        "bounds": [
+          493,
+          11,
+          627,
+          215
+        ],
+        "foot": [
+          568.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.5,
+          12
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          712,
+          9,
+          138,
+          208
+        ],
+        "bounds": [
+          714,
+          11,
+          848,
+          215
+        ],
+        "foot": [
+          789.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.0,
+          11
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          38,
+          8,
+          149,
+          212
+        ],
+        "bounds": [
+          40,
+          10,
+          185,
+          218
+        ],
+        "foot": [
+          119.0,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.0,
+          11
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          266,
+          8,
+          138,
+          212
+        ],
+        "bounds": [
+          268,
+          10,
+          402,
+          218
+        ],
+        "foot": [
+          343.0,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.0,
+          11
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          491,
+          8,
+          140,
+          212
+        ],
+        "bounds": [
+          493,
+          10,
+          629,
+          218
+        ],
+        "foot": [
+          567.0,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.5,
+          11
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          712,
+          8,
+          140,
+          212
+        ],
+        "bounds": [
+          714,
+          10,
+          850,
+          218
+        ],
+        "foot": [
+          790.5,
+          218
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          121.5,
+          28
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          36,
+          26,
+          168,
+          187
+        ],
+        "bounds": [
+          38,
+          28,
+          202,
+          211
+        ],
+        "foot": [
+          120.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          28
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          267,
+          26,
+          165,
+          187
+        ],
+        "bounds": [
+          269,
+          28,
+          430,
+          211
+        ],
+        "foot": [
+          342.5,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.5,
+          28
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          502,
+          26,
+          154,
+          188
+        ],
+        "bounds": [
+          504,
+          28,
+          654,
+          212
+        ],
+        "foot": [
+          565.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.0,
+          28
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          717,
+          26,
+          150,
+          189
+        ],
+        "bounds": [
+          719,
+          28,
+          865,
+          213
+        ],
+        "foot": [
+          787.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          144.0,
+          66
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          60,
+          64,
+          199,
+          235
+        ],
+        "bounds": [
+          62,
+          66,
+          257,
+          297
+        ],
+        "foot": [
+          156.5,
+          297
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          441.0,
+          181
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          334,
+          178,
+          247,
+          121
+        ],
+        "bounds": [
+          336,
+          180,
+          579,
+          297
+        ],
+        "foot": [
+          434.5,
+          297
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          123.5,
+          10
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          37,
+          7,
+          149,
+          210
+        ],
+        "bounds": [
+          39,
+          9,
+          184,
+          215
+        ],
+        "foot": [
+          124.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          567.0,
+          10
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          481,
+          8,
+          163,
+          209
+        ],
+        "bounds": [
+          483,
+          10,
+          642,
+          215
+        ],
+        "foot": [
+          569.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          789.0,
+          10
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          704,
+          8,
+          158,
+          209
+        ],
+        "bounds": [
+          706,
+          10,
+          860,
+          215
+        ],
+        "foot": [
+          790.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          117.5,
+          231
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          42,
+          229,
+          143,
+          212
+        ],
+        "bounds": [
+          44,
+          231,
+          183,
+          439
+        ],
+        "foot": [
+          122.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          231
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          265,
+          229,
+          142,
+          212
+        ],
+        "bounds": [
+          267,
+          231,
+          405,
+          439
+        ],
+        "foot": [
+          343.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.5,
+          231
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          487,
+          229,
+          142,
+          212
+        ],
+        "bounds": [
+          489,
+          231,
+          627,
+          439
+        ],
+        "foot": [
+          566.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.5,
+          231
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          709,
+          229,
+          141,
+          212
+        ],
+        "bounds": [
+          711,
+          231,
+          848,
+          439
+        ],
+        "foot": [
+          788.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.0,
+          231
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          38,
+          228,
+          152,
+          215
+        ],
+        "bounds": [
+          40,
+          230,
+          188,
+          441
+        ],
+        "foot": [
+          105.0,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          230
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          262,
+          228,
+          148,
+          214
+        ],
+        "bounds": [
+          264,
+          230,
+          408,
+          440
+        ],
+        "foot": [
+          351.0,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          230
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          484,
+          228,
+          147,
+          214
+        ],
+        "bounds": [
+          486,
+          230,
+          629,
+          440
+        ],
+        "foot": [
+          553.5,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          230
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          709,
+          228,
+          145,
+          214
+        ],
+        "bounds": [
+          711,
+          230,
+          852,
+          440
+        ],
+        "foot": [
+          794.0,
+          440
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          250
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          39,
+          248,
+          160,
+          190
+        ],
+        "bounds": [
+          41,
+          250,
+          197,
+          436
+        ],
+        "foot": [
+          122.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          250
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          254,
+          248,
+          168,
+          190
+        ],
+        "bounds": [
+          256,
+          250,
+          420,
+          436
+        ],
+        "foot": [
+          345.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          250
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          446,
+          247,
+          209,
+          191
+        ],
+        "bounds": [
+          448,
+          249,
+          653,
+          436
+        ],
+        "foot": [
+          570.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          250
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          704,
+          248,
+          156,
+          190
+        ],
+        "bounds": [
+          706,
+          250,
+          858,
+          436
+        ],
+        "foot": [
+          788.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          755.5,
+          63
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          665,
+          61,
+          199,
+          237
+        ],
+        "bounds": [
+          667,
+          63,
+          862,
+          296
+        ],
+        "foot": [
+          762.0,
+          296
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1048.5,
+          180
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          937,
+          178,
+          257,
+          123
+        ],
+        "bounds": [
+          939,
+          180,
+          1192,
+          299
+        ],
+        "foot": [
+          1043.0,
+          299
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          115.0,
+          231
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 4,
+        "cell": [
+          37,
+          228,
+          144,
+          212
+        ],
+        "bounds": [
+          39,
+          230,
+          179,
+          438
+        ],
+        "foot": [
+          122.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          559.5,
+          231
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 6,
+        "cell": [
+          482,
+          229,
+          141,
+          211
+        ],
+        "bounds": [
+          484,
+          231,
+          621,
+          438
+        ],
+        "foot": [
+          566.5,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          782.5,
+          231
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 7,
+        "cell": [
+          705,
+          228,
+          145,
+          212
+        ],
+        "bounds": [
+          707,
+          230,
+          848,
+          438
+        ],
+        "foot": [
+          789.0,
+          438
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          113.0,
+          452
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          53,
+          450,
+          110,
+          213
+        ],
+        "bounds": [
+          55,
+          452,
+          161,
+          661
+        ],
+        "foot": [
+          118.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          452
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          276,
+          450,
+          108,
+          213
+        ],
+        "bounds": [
+          278,
+          452,
+          382,
+          661
+        ],
+        "foot": [
+          340.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          452
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          499,
+          450,
+          108,
+          213
+        ],
+        "bounds": [
+          501,
+          452,
+          605,
+          661
+        ],
+        "foot": [
+          562.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          452
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          721,
+          450,
+          108,
+          213
+        ],
+        "bounds": [
+          723,
+          452,
+          827,
+          661
+        ],
+        "foot": [
+          784.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          452
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          50,
+          449,
+          121,
+          214
+        ],
+        "bounds": [
+          52,
+          451,
+          169,
+          661
+        ],
+        "foot": [
+          121.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          452
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          281,
+          449,
+          109,
+          214
+        ],
+        "bounds": [
+          283,
+          451,
+          388,
+          661
+        ],
+        "foot": [
+          341.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          452
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          498,
+          449,
+          115,
+          214
+        ],
+        "bounds": [
+          500,
+          451,
+          611,
+          661
+        ],
+        "foot": [
+          565.5,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          452
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          725,
+          449,
+          106,
+          214
+        ],
+        "bounds": [
+          727,
+          451,
+          829,
+          661
+        ],
+        "foot": [
+          780.0,
+          661
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          107.0,
+          472
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          31,
+          470,
+          151,
+          191
+        ],
+        "bounds": [
+          33,
+          472,
+          180,
+          659
+        ],
+        "foot": [
+          122.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          472
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          246,
+          470,
+          161,
+          190
+        ],
+        "bounds": [
+          248,
+          472,
+          405,
+          658
+        ],
+        "foot": [
+          350.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          549.5,
+          472
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          420,
+          470,
+          226,
+          191
+        ],
+        "bounds": [
+          422,
+          472,
+          644,
+          659
+        ],
+        "foot": [
+          586.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.5,
+          472
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          716,
+          470,
+          137,
+          191
+        ],
+        "bounds": [
+          718,
+          472,
+          851,
+          659
+        ],
+        "foot": [
+          795.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          152.5,
+          360
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          63,
+          358,
+          149,
+          244
+        ],
+        "bounds": [
+          65,
+          360,
+          210,
+          600
+        ],
+        "foot": [
+          150.5,
+          600
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          411.0,
+          482
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          307,
+          480,
+          271,
+          120
+        ],
+        "bounds": [
+          309,
+          482,
+          576,
+          598
+        ],
+        "foot": [
+          417.5,
+          598
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          112.0,
+          453
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          46,
+          451,
+          117,
+          211
+        ],
+        "bounds": [
+          48,
+          453,
+          161,
+          660
+        ],
+        "foot": [
+          116.5,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          555.5,
+          453
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          467,
+          450,
+          141,
+          212
+        ],
+        "bounds": [
+          469,
+          452,
+          606,
+          660
+        ],
+        "foot": [
+          561.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          778.5,
+          453
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          713,
+          451,
+          118,
+          211
+        ],
+        "bounds": [
+          715,
+          453,
+          829,
+          660
+        ],
+        "foot": [
+          783.5,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          109.5,
+          675
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          58,
+          673,
+          145,
+          211
+        ],
+        "bounds": [
+          60,
+          675,
+          201,
+          882
+        ],
+        "foot": [
+          117.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          675
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          280,
+          673,
+          144,
+          211
+        ],
+        "bounds": [
+          282,
+          675,
+          422,
+          882
+        ],
+        "foot": [
+          340.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          675
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          503,
+          672,
+          143,
+          211
+        ],
+        "bounds": [
+          505,
+          674,
+          644,
+          881
+        ],
+        "foot": [
+          562.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          676
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          724,
+          673,
+          145,
+          211
+        ],
+        "bounds": [
+          726,
+          675,
+          867,
+          882
+        ],
+        "foot": [
+          783.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          673
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          49,
+          671,
+          153,
+          216
+        ],
+        "bounds": [
+          51,
+          673,
+          200,
+          885
+        ],
+        "foot": [
+          122.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          673
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          276,
+          671,
+          146,
+          216
+        ],
+        "bounds": [
+          278,
+          673,
+          420,
+          885
+        ],
+        "foot": [
+          335.5,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          673
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          498,
+          671,
+          146,
+          216
+        ],
+        "bounds": [
+          500,
+          673,
+          642,
+          885
+        ],
+        "foot": [
+          530.0,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          673
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          719,
+          670,
+          150,
+          217
+        ],
+        "bounds": [
+          721,
+          672,
+          867,
+          885
+        ],
+        "foot": [
+          779.0,
+          885
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          104.5,
+          693
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          35,
+          691,
+          171,
+          191
+        ],
+        "bounds": [
+          37,
+          693,
+          204,
+          880
+        ],
+        "foot": [
+          122.5,
+          880
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.0,
+          693
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          254,
+          690,
+          155,
+          191
+        ],
+        "bounds": [
+          256,
+          692,
+          407,
+          879
+        ],
+        "foot": [
+          347.0,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.5,
+          693
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          429,
+          691,
+          214,
+          190
+        ],
+        "bounds": [
+          431,
+          693,
+          641,
+          879
+        ],
+        "foot": [
+          576.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          693
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          705,
+          690,
+          155,
+          191
+        ],
+        "bounds": [
+          707,
+          692,
+          858,
+          879
+        ],
+        "foot": [
+          792.5,
+          879
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          750.0,
+          362
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          654,
+          360,
+          197,
+          241
+        ],
+        "bounds": [
+          656,
+          362,
+          849,
+          599
+        ],
+        "foot": [
+          747.0,
+          599
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1029.0,
+          482
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          924,
+          480,
+          267,
+          115
+        ],
+        "bounds": [
+          926,
+          482,
+          1189,
+          593
+        ],
+        "foot": [
+          1055.0,
+          593
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          108.5,
+          675
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 12,
+        "cell": [
+          52,
+          673,
+          150,
+          211
+        ],
+        "bounds": [
+          54,
+          675,
+          200,
+          882
+        ],
+        "foot": [
+          117.0,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          553.5,
+          675
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 14,
+        "cell": [
+          447,
+          673,
+          199,
+          210
+        ],
+        "bounds": [
+          449,
+          675,
+          644,
+          881
+        ],
+        "foot": [
+          560.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          776.0,
+          675
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 15,
+        "cell": [
+          713,
+          673,
+          156,
+          210
+        ],
+        "bounds": [
+          715,
+          675,
+          867,
+          881
+        ],
+        "foot": [
+          783.5,
+          881
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          113.5,
+          897
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          48,
+          895,
+          147,
+          209
+        ],
+        "bounds": [
+          50,
+          897,
+          193,
+          1102
+        ],
+        "foot": [
+          114.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.0,
+          897
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          271,
+          895,
+          146,
+          210
+        ],
+        "bounds": [
+          273,
+          897,
+          415,
+          1103
+        ],
+        "foot": [
+          336.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          897
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          494,
+          895,
+          145,
+          209
+        ],
+        "bounds": [
+          496,
+          897,
+          637,
+          1102
+        ],
+        "foot": [
+          558.5,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.5,
+          897
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          715,
+          895,
+          146,
+          210
+        ],
+        "bounds": [
+          717,
+          897,
+          859,
+          1103
+        ],
+        "foot": [
+          780.5,
+          1103
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          897
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          45,
+          895,
+          153,
+          211
+        ],
+        "bounds": [
+          47,
+          897,
+          196,
+          1104
+        ],
+        "foot": [
+          107.5,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          897
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          271,
+          895,
+          145,
+          211
+        ],
+        "bounds": [
+          273,
+          897,
+          414,
+          1104
+        ],
+        "foot": [
+          336.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          897
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          491,
+          895,
+          149,
+          211
+        ],
+        "bounds": [
+          493,
+          897,
+          638,
+          1104
+        ],
+        "foot": [
+          557.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          897
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          715,
+          894,
+          146,
+          212
+        ],
+        "bounds": [
+          717,
+          896,
+          859,
+          1104
+        ],
+        "foot": [
+          784.0,
+          1104
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          113.0,
+          913
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          27,
+          911,
+          182,
+          191
+        ],
+        "bounds": [
+          29,
+          913,
+          207,
+          1100
+        ],
+        "foot": [
+          117.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          913
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          243,
+          911,
+          171,
+          191
+        ],
+        "bounds": [
+          245,
+          913,
+          412,
+          1100
+        ],
+        "foot": [
+          335.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          913
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          467,
+          911,
+          179,
+          191
+        ],
+        "bounds": [
+          469,
+          913,
+          644,
+          1100
+        ],
+        "foot": [
+          555.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          913
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          700,
+          911,
+          163,
+          191
+        ],
+        "bounds": [
+          702,
+          913,
+          861,
+          1100
+        ],
+        "foot": [
+          780.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          158.0,
+          655
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          47,
+          652,
+          217,
+          250
+        ],
+        "bounds": [
+          49,
+          654,
+          262,
+          900
+        ],
+        "foot": [
+          151.5,
+          900
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          464.0,
+          773
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          321,
+          771,
+          262,
+          128
+        ],
+        "bounds": [
+          323,
+          773,
+          581,
+          897
+        ],
+        "foot": [
+          432.5,
+          897
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.0,
+          897
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 16,
+        "cell": [
+          52,
+          895,
+          151,
+          209
+        ],
+        "bounds": [
+          54,
+          897,
+          201,
+          1102
+        ],
+        "foot": [
+          113.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          558.0,
+          897
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 18,
+        "cell": [
+          448,
+          895,
+          198,
+          209
+        ],
+        "bounds": [
+          450,
+          897,
+          644,
+          1102
+        ],
+        "foot": [
+          558.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          781.0,
+          897
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 19,
+        "cell": [
+          706,
+          895,
+          163,
+          209
+        ],
+        "bounds": [
+          708,
+          897,
+          867,
+          1102
+        ],
+        "foot": [
+          780.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          121.5,
+          1118
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          58,
+          1116,
+          139,
+          210
+        ],
+        "bounds": [
+          60,
+          1118,
+          195,
+          1324
+        ],
+        "foot": [
+          114.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.0,
+          1118
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          281,
+          1116,
+          139,
+          209
+        ],
+        "bounds": [
+          283,
+          1118,
+          418,
+          1323
+        ],
+        "foot": [
+          336.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.0,
+          1118
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          504,
+          1116,
+          138,
+          209
+        ],
+        "bounds": [
+          506,
+          1118,
+          640,
+          1323
+        ],
+        "foot": [
+          558.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.0,
+          1118
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          725,
+          1116,
+          138,
+          210
+        ],
+        "bounds": [
+          727,
+          1118,
+          861,
+          1324
+        ],
+        "foot": [
+          780.5,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.5,
+          1116
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          56,
+          1114,
+          142,
+          218
+        ],
+        "bounds": [
+          58,
+          1116,
+          196,
+          1330
+        ],
+        "foot": [
+          112.5,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          345.0,
+          1116
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          280,
+          1114,
+          138,
+          216
+        ],
+        "bounds": [
+          282,
+          1116,
+          416,
+          1328
+        ],
+        "foot": [
+          336.5,
+          1328
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.5,
+          1116
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          498,
+          1114,
+          142,
+          215
+        ],
+        "bounds": [
+          500,
+          1116,
+          638,
+          1327
+        ],
+        "foot": [
+          560.0,
+          1327
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.5,
+          1116
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          724,
+          1113,
+          138,
+          217
+        ],
+        "bounds": [
+          726,
+          1115,
+          860,
+          1328
+        ],
+        "foot": [
+          785.0,
+          1328
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.0,
+          1135
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          36,
+          1133,
+          169,
+          190
+        ],
+        "bounds": [
+          38,
+          1135,
+          203,
+          1321
+        ],
+        "foot": [
+          101.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          346.5,
+          1135
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          256,
+          1133,
+          165,
+          189
+        ],
+        "bounds": [
+          258,
+          1135,
+          419,
+          1320
+        ],
+        "foot": [
+          324.5,
+          1320
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1136
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          474,
+          1133,
+          193,
+          190
+        ],
+        "bounds": [
+          476,
+          1135,
+          665,
+          1321
+        ],
+        "foot": [
+          546.0,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.0,
+          1136
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          708,
+          1133,
+          149,
+          190
+        ],
+        "bounds": [
+          710,
+          1135,
+          855,
+          1321
+        ],
+        "foot": [
+          771.5,
+          1321
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          770.5,
+          655
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          656,
+          652,
+          202,
+          250
+        ],
+        "bounds": [
+          658,
+          654,
+          856,
+          900
+        ],
+        "foot": [
+          756.5,
+          900
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1085.5,
+          771
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          927,
+          768,
+          282,
+          135
+        ],
+        "bounds": [
+          929,
+          770,
+          1207,
+          901
+        ],
+        "foot": [
+          1007.5,
+          901
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          122.0,
+          1117
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 20,
+        "cell": [
+          47,
+          1114,
+          132,
+          212
+        ],
+        "bounds": [
+          49,
+          1116,
+          177,
+          1324
+        ],
+        "foot": [
+          115.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          565.5,
+          1117
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 22,
+        "cell": [
+          492,
+          1115,
+          167,
+          211
+        ],
+        "bounds": [
+          494,
+          1117,
+          657,
+          1324
+        ],
+        "foot": [
+          559.0,
+          1324
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          788.0,
+          1117
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 23,
+        "cell": [
+          713,
+          1115,
+          136,
+          210
+        ],
+        "bounds": [
+          715,
+          1117,
+          847,
+          1323
+        ],
+        "foot": [
+          781.5,
+          1323
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          120.5,
+          1339
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          66,
+          1337,
+          108,
+          213
+        ],
+        "bounds": [
+          68,
+          1339,
+          172,
+          1548
+        ],
+        "foot": [
+          111.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.5,
+          1338
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          288,
+          1336,
+          107,
+          214
+        ],
+        "bounds": [
+          290,
+          1338,
+          393,
+          1548
+        ],
+        "foot": [
+          334.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.5,
+          1338
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          511,
+          1336,
+          107,
+          214
+        ],
+        "bounds": [
+          513,
+          1338,
+          616,
+          1548
+        ],
+        "foot": [
+          556.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.5,
+          1339
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          733,
+          1337,
+          106,
+          213
+        ],
+        "bounds": [
+          735,
+          1339,
+          837,
+          1548
+        ],
+        "foot": [
+          778.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.0,
+          1338
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          62,
+          1336,
+          115,
+          214
+        ],
+        "bounds": [
+          64,
+          1338,
+          175,
+          1548
+        ],
+        "foot": [
+          108.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          341.5,
+          1337
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          288,
+          1334,
+          107,
+          216
+        ],
+        "bounds": [
+          290,
+          1336,
+          393,
+          1548
+        ],
+        "foot": [
+          335.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          1338
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          503,
+          1335,
+          119,
+          215
+        ],
+        "bounds": [
+          505,
+          1337,
+          620,
+          1548
+        ],
+        "foot": [
+          545.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          787.5,
+          1338
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          733,
+          1335,
+          106,
+          215
+        ],
+        "bounds": [
+          735,
+          1337,
+          837,
+          1548
+        ],
+        "foot": [
+          778.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.5,
+          1358
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          47,
+          1356,
+          124,
+          189
+        ],
+        "bounds": [
+          49,
+          1358,
+          169,
+          1543
+        ],
+        "foot": [
+          103.5,
+          1543
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.5,
+          1358
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          266,
+          1356,
+          138,
+          190
+        ],
+        "bounds": [
+          268,
+          1358,
+          402,
+          1544
+        ],
+        "foot": [
+          322.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.5,
+          1359
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          485,
+          1356,
+          192,
+          190
+        ],
+        "bounds": [
+          487,
+          1358,
+          675,
+          1544
+        ],
+        "foot": [
+          543.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          789.0,
+          1358
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          718,
+          1356,
+          117,
+          187
+        ],
+        "bounds": [
+          720,
+          1358,
+          833,
+          1541
+        ],
+        "foot": [
+          770.0,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          143.5,
+          958
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          77,
+          956,
+          153,
+          253
+        ],
+        "bounds": [
+          79,
+          958,
+          228,
+          1207
+        ],
+        "foot": [
+          141.5,
+          1207
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          464.0,
+          1083
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          300,
+          1080,
+          270,
+          125
+        ],
+        "bounds": [
+          302,
+          1082,
+          568,
+          1203
+        ],
+        "foot": [
+          434.0,
+          1203
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.0,
+          1339
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 24,
+        "cell": [
+          66,
+          1337,
+          107,
+          212
+        ],
+        "bounds": [
+          68,
+          1339,
+          171,
+          1547
+        ],
+        "foot": [
+          109.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          563.0,
+          1339
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 26,
+        "cell": [
+          509,
+          1337,
+          150,
+          212
+        ],
+        "bounds": [
+          511,
+          1339,
+          657,
+          1547
+        ],
+        "foot": [
+          553.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          785.0,
+          1339
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 27,
+        "cell": [
+          733,
+          1337,
+          105,
+          212
+        ],
+        "bounds": [
+          735,
+          1339,
+          836,
+          1547
+        ],
+        "foot": [
+          776.0,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          118.0,
+          1561
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          43,
+          1559,
+          138,
+          212
+        ],
+        "bounds": [
+          45,
+          1561,
+          179,
+          1769
+        ],
+        "foot": [
+          120.5,
+          1769
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          340.0,
+          1561
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          265,
+          1559,
+          138,
+          211
+        ],
+        "bounds": [
+          267,
+          1561,
+          401,
+          1768
+        ],
+        "foot": [
+          343.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          1561
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          488,
+          1559,
+          138,
+          211
+        ],
+        "bounds": [
+          490,
+          1561,
+          624,
+          1768
+        ],
+        "foot": [
+          565.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          1561
+        ],
+        "source": "source/cultist-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          709,
+          1559,
+          139,
+          211
+        ],
+        "bounds": [
+          711,
+          1561,
+          846,
+          1768
+        ],
+        "foot": [
+          787.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5882352941176471,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.5,
+          1560
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          36,
+          1558,
+          146,
+          212
+        ],
+        "bounds": [
+          38,
+          1560,
+          180,
+          1768
+        ],
+        "foot": [
+          123.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          1560
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          258,
+          1558,
+          146,
+          212
+        ],
+        "bounds": [
+          260,
+          1560,
+          402,
+          1768
+        ],
+        "foot": [
+          344.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          561.0,
+          1560
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          482,
+          1558,
+          147,
+          212
+        ],
+        "bounds": [
+          484,
+          1560,
+          627,
+          1768
+        ],
+        "foot": [
+          572.0,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          783.0,
+          1560
+        ],
+        "source": "source/cultist-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          704,
+          1558,
+          146,
+          212
+        ],
+        "bounds": [
+          706,
+          1560,
+          848,
+          1768
+        ],
+        "foot": [
+          793.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5797101449275363,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          117.0,
+          1579
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          36,
+          1576,
+          164,
+          188
+        ],
+        "bounds": [
+          38,
+          1578,
+          198,
+          1762
+        ],
+        "foot": [
+          107.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.0,
+          1579
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          262,
+          1576,
+          154,
+          188
+        ],
+        "bounds": [
+          264,
+          1578,
+          414,
+          1762
+        ],
+        "foot": [
+          328.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          1579
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          476,
+          1576,
+          176,
+          188
+        ],
+        "bounds": [
+          478,
+          1578,
+          650,
+          1762
+        ],
+        "foot": [
+          535.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          1579
+        ],
+        "source": "source/cultist-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          705,
+          1576,
+          150,
+          188
+        ],
+        "bounds": [
+          707,
+          1578,
+          853,
+          1762
+        ],
+        "foot": [
+          771.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5901639344262295,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          745.0,
+          963
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          659,
+          961,
+          196,
+          246
+        ],
+        "bounds": [
+          661,
+          963,
+          853,
+          1205
+        ],
+        "foot": [
+          755.5,
+          1205
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1078.5,
+          1083
+        ],
+        "source": "source/cultist-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          918,
+          1081,
+          271,
+          125
+        ],
+        "bounds": [
+          920,
+          1083,
+          1187,
+          1204
+        ],
+        "foot": [
+          1053.0,
+          1204
+        ],
+        "sourceEdge": false,
+        "scale": 0.5194805194805194,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          118.0,
+          1562
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          37,
+          1560,
+          143,
+          210
+        ],
+        "bounds": [
+          39,
+          1562,
+          178,
+          1768
+        ],
+        "foot": [
+          122.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          563.0,
+          1562
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          481,
+          1560,
+          172,
+          210
+        ],
+        "bounds": [
+          483,
+          1562,
+          651,
+          1768
+        ],
+        "foot": [
+          566.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          786.0,
+          1562
+        ],
+        "source": "source/cultist-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          704,
+          1560,
+          150,
+          210
+        ],
+        "bounds": [
+          706,
+          1562,
+          852,
+          1768
+        ],
+        "foot": [
+          788.5,
+          1768
+        ],
+        "sourceEdge": false,
+        "scale": 0.5853658536585366,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  },
+  {
+    "id": "cult_leader",
+    "size": 224,
+    "anchor": [
+      112,
+      198
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 3,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13,
+      "cast": 14
+    },
+    "frames": [
+      {
+        "head": [
+          114.5,
+          17
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          59,
+          14,
+          122,
+          201
+        ],
+        "bounds": [
+          61,
+          16,
+          179,
+          213
+        ],
+        "foot": [
+          125.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          336.0,
+          16
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          283,
+          14,
+          119,
+          201
+        ],
+        "bounds": [
+          285,
+          16,
+          400,
+          213
+        ],
+        "foot": [
+          347.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          558.5,
+          16
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          506,
+          14,
+          118,
+          201
+        ],
+        "bounds": [
+          508,
+          16,
+          622,
+          213
+        ],
+        "foot": [
+          570.0,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.5,
+          17
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          727,
+          14,
+          119,
+          201
+        ],
+        "bounds": [
+          729,
+          16,
+          844,
+          213
+        ],
+        "foot": [
+          791.5,
+          213
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          16
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          55,
+          14,
+          127,
+          204
+        ],
+        "bounds": [
+          57,
+          16,
+          180,
+          216
+        ],
+        "foot": [
+          130.0,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          16
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          281,
+          13,
+          123,
+          206
+        ],
+        "bounds": [
+          283,
+          15,
+          402,
+          217
+        ],
+        "foot": [
+          354.0,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.0,
+          16
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          505,
+          13,
+          120,
+          205
+        ],
+        "bounds": [
+          507,
+          15,
+          623,
+          216
+        ],
+        "foot": [
+          577.5,
+          216
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.0,
+          16
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          728,
+          14,
+          120,
+          205
+        ],
+        "bounds": [
+          730,
+          16,
+          846,
+          217
+        ],
+        "foot": [
+          802.0,
+          217
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          20
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          47,
+          18,
+          136,
+          195
+        ],
+        "bounds": [
+          49,
+          20,
+          181,
+          211
+        ],
+        "foot": [
+          114.5,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          20
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          279,
+          18,
+          124,
+          195
+        ],
+        "bounds": [
+          281,
+          20,
+          401,
+          211
+        ],
+        "foot": [
+          335.0,
+          211
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          23
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          493,
+          21,
+          147,
+          193
+        ],
+        "bounds": [
+          495,
+          23,
+          638,
+          212
+        ],
+        "foot": [
+          556.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          26
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          703,
+          23,
+          151,
+          191
+        ],
+        "bounds": [
+          705,
+          25,
+          852,
+          212
+        ],
+        "foot": [
+          778.0,
+          212
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          167.0,
+          49
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          61,
+          46,
+          185,
+          248
+        ],
+        "bounds": [
+          63,
+          48,
+          244,
+          292
+        ],
+        "foot": [
+          160.5,
+          292
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          436.5,
+          193
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          316,
+          190,
+          275,
+          113
+        ],
+        "bounds": [
+          318,
+          192,
+          589,
+          301
+        ],
+        "foot": [
+          456.0,
+          301
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          15
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 0,
+        "cell": [
+          62,
+          13,
+          121,
+          204
+        ],
+        "bounds": [
+          64,
+          15,
+          181,
+          215
+        ],
+        "foot": [
+          124.5,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          558.5,
+          15
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 2,
+        "cell": [
+          480,
+          13,
+          146,
+          204
+        ],
+        "bounds": [
+          482,
+          15,
+          624,
+          215
+        ],
+        "foot": [
+          568.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          779.5,
+          15
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 3,
+        "cell": [
+          724,
+          13,
+          124,
+          204
+        ],
+        "bounds": [
+          726,
+          15,
+          846,
+          215
+        ],
+        "foot": [
+          790.0,
+          215
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south",
+        "row": 0,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          106.5,
+          240
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          55,
+          238,
+          116,
+          199
+        ],
+        "bounds": [
+          57,
+          240,
+          169,
+          435
+        ],
+        "foot": [
+          116.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          237
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          278,
+          235,
+          115,
+          202
+        ],
+        "bounds": [
+          280,
+          237,
+          391,
+          435
+        ],
+        "foot": [
+          339.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.0,
+          237
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          499,
+          235,
+          116,
+          201
+        ],
+        "bounds": [
+          501,
+          237,
+          613,
+          434
+        ],
+        "foot": [
+          562.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          772.5,
+          240
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          722,
+          238,
+          116,
+          199
+        ],
+        "bounds": [
+          724,
+          240,
+          836,
+          435
+        ],
+        "foot": [
+          783.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.0,
+          238
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          48,
+          236,
+          124,
+          203
+        ],
+        "bounds": [
+          50,
+          238,
+          170,
+          437
+        ],
+        "foot": [
+          116.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.0,
+          236
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          276,
+          234,
+          117,
+          205
+        ],
+        "bounds": [
+          278,
+          236,
+          391,
+          437
+        ],
+        "foot": [
+          345.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          564.0,
+          236
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          498,
+          234,
+          116,
+          205
+        ],
+        "bounds": [
+          500,
+          236,
+          612,
+          437
+        ],
+        "foot": [
+          570.5,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          786.0,
+          236
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          722,
+          234,
+          115,
+          205
+        ],
+        "bounds": [
+          724,
+          236,
+          835,
+          437
+        ],
+        "foot": [
+          791.0,
+          437
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          103.5,
+          241
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          42,
+          239,
+          130,
+          197
+        ],
+        "bounds": [
+          44,
+          241,
+          170,
+          434
+        ],
+        "foot": [
+          112.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          241
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          277,
+          239,
+          118,
+          197
+        ],
+        "bounds": [
+          279,
+          241,
+          393,
+          434
+        ],
+        "foot": [
+          336.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.0,
+          244
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          444,
+          242,
+          177,
+          194
+        ],
+        "bounds": [
+          446,
+          244,
+          619,
+          434
+        ],
+        "foot": [
+          557.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          245
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          691,
+          243,
+          155,
+          193
+        ],
+        "bounds": [
+          693,
+          245,
+          844,
+          434
+        ],
+        "foot": [
+          779.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          790.0,
+          50
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          656,
+          47,
+          193,
+          248
+        ],
+        "bounds": [
+          658,
+          49,
+          847,
+          293
+        ],
+        "foot": [
+          763.5,
+          293
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1068.0,
+          194
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          949,
+          192,
+          279,
+          111
+        ],
+        "bounds": [
+          951,
+          194,
+          1226,
+          301
+        ],
+        "foot": [
+          1089.5,
+          301
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          106.0,
+          238
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 4,
+        "cell": [
+          54,
+          236,
+          119,
+          202
+        ],
+        "bounds": [
+          56,
+          238,
+          171,
+          436
+        ],
+        "foot": [
+          114.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.5,
+          239
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 6,
+        "cell": [
+          452,
+          236,
+          165,
+          202
+        ],
+        "bounds": [
+          454,
+          238,
+          615,
+          436
+        ],
+        "foot": [
+          560.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          772.5,
+          238
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 7,
+        "cell": [
+          713,
+          236,
+          126,
+          202
+        ],
+        "bounds": [
+          715,
+          238,
+          837,
+          436
+        ],
+        "foot": [
+          781.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-west",
+        "row": 1,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          115.5,
+          460
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          65,
+          457,
+          98,
+          203
+        ],
+        "bounds": [
+          67,
+          459,
+          161,
+          658
+        ],
+        "foot": [
+          117.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          460
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          287,
+          457,
+          98,
+          202
+        ],
+        "bounds": [
+          289,
+          459,
+          383,
+          657
+        ],
+        "foot": [
+          339.0,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          459
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          509,
+          457,
+          98,
+          203
+        ],
+        "bounds": [
+          511,
+          459,
+          605,
+          658
+        ],
+        "foot": [
+          561.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          781.5,
+          460
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          731,
+          457,
+          97,
+          203
+        ],
+        "bounds": [
+          733,
+          459,
+          826,
+          658
+        ],
+        "foot": [
+          782.5,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.0,
+          459
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          57,
+          457,
+          108,
+          204
+        ],
+        "bounds": [
+          59,
+          459,
+          163,
+          659
+        ],
+        "foot": [
+          108.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          459
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          289,
+          457,
+          99,
+          205
+        ],
+        "bounds": [
+          291,
+          459,
+          386,
+          660
+        ],
+        "foot": [
+          342.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.5,
+          459
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          501,
+          457,
+          108,
+          202
+        ],
+        "bounds": [
+          503,
+          459,
+          607,
+          657
+        ],
+        "foot": [
+          558.5,
+          657
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.5,
+          460
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          731,
+          457,
+          100,
+          205
+        ],
+        "bounds": [
+          733,
+          459,
+          829,
+          660
+        ],
+        "foot": [
+          788.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          101.0,
+          462
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          34,
+          459,
+          146,
+          199
+        ],
+        "bounds": [
+          36,
+          461,
+          178,
+          656
+        ],
+        "foot": [
+          117.5,
+          656
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.5,
+          463
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          277,
+          460,
+          124,
+          197
+        ],
+        "bounds": [
+          279,
+          462,
+          399,
+          655
+        ],
+        "foot": [
+          341.0,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.0,
+          465
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          427,
+          463,
+          197,
+          194
+        ],
+        "bounds": [
+          429,
+          465,
+          622,
+          655
+        ],
+        "foot": [
+          564.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          467
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          689,
+          465,
+          158,
+          192
+        ],
+        "bounds": [
+          691,
+          467,
+          845,
+          655
+        ],
+        "foot": [
+          788.5,
+          655
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          170.5,
+          357
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          77,
+          355,
+          154,
+          246
+        ],
+        "bounds": [
+          79,
+          357,
+          229,
+          599
+        ],
+        "foot": [
+          163.0,
+          599
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          441.0,
+          493
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          306,
+          490,
+          294,
+          113
+        ],
+        "bounds": [
+          308,
+          492,
+          598,
+          601
+        ],
+        "foot": [
+          460.5,
+          601
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          115.5,
+          459
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 8,
+        "cell": [
+          62,
+          457,
+          102,
+          203
+        ],
+        "bounds": [
+          64,
+          459,
+          162,
+          658
+        ],
+        "foot": [
+          117.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          559.5,
+          459
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 10,
+        "cell": [
+          447,
+          457,
+          161,
+          203
+        ],
+        "bounds": [
+          449,
+          459,
+          606,
+          658
+        ],
+        "foot": [
+          560.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          781.0,
+          459
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 11,
+        "cell": [
+          724,
+          457,
+          106,
+          203
+        ],
+        "bounds": [
+          726,
+          459,
+          828,
+          658
+        ],
+        "foot": [
+          782.0,
+          658
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "west",
+        "row": 2,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          225.0,
+          22
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 0,
+        "cell": [
+          121,
+          19,
+          175,
+          326
+        ],
+        "bounds": [
+          123,
+          21,
+          294,
+          343
+        ],
+        "foot": [
+          208.0,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          571.0,
+          22
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 1,
+        "cell": [
+          466,
+          19,
+          178,
+          326
+        ],
+        "bounds": [
+          468,
+          21,
+          642,
+          343
+        ],
+        "foot": [
+          553.5,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          915.5,
+          22
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 2,
+        "cell": [
+          812,
+          19,
+          180,
+          326
+        ],
+        "bounds": [
+          814,
+          21,
+          990,
+          343
+        ],
+        "foot": [
+          898.0,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1260.0,
+          22
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 3,
+        "cell": [
+          1155,
+          20,
+          179,
+          325
+        ],
+        "bounds": [
+          1157,
+          22,
+          1332,
+          343
+        ],
+        "foot": [
+          1243.0,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          225.5,
+          19
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 0,
+        "cell": [
+          116,
+          17,
+          191,
+          329
+        ],
+        "bounds": [
+          118,
+          19,
+          305,
+          344
+        ],
+        "foot": [
+          199.5,
+          344
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          570.5,
+          20
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 1,
+        "cell": [
+          457,
+          17,
+          194,
+          329
+        ],
+        "bounds": [
+          459,
+          19,
+          649,
+          344
+        ],
+        "foot": [
+          534.5,
+          344
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          917.0,
+          20
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 2,
+        "cell": [
+          808,
+          17,
+          190,
+          331
+        ],
+        "bounds": [
+          810,
+          19,
+          996,
+          346
+        ],
+        "foot": [
+          884.0,
+          346
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1262.0,
+          22
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 3,
+        "cell": [
+          1150,
+          20,
+          193,
+          328
+        ],
+        "bounds": [
+          1152,
+          22,
+          1341,
+          346
+        ],
+        "foot": [
+          1231.5,
+          346
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          99.5,
+          683
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          23,
+          681,
+          151,
+          198
+        ],
+        "bounds": [
+          25,
+          683,
+          172,
+          877
+        ],
+        "foot": [
+          116.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.5,
+          683
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          267,
+          680,
+          130,
+          199
+        ],
+        "bounds": [
+          269,
+          682,
+          395,
+          877
+        ],
+        "foot": [
+          339.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.0,
+          686
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          430,
+          684,
+          192,
+          195
+        ],
+        "bounds": [
+          432,
+          686,
+          620,
+          877
+        ],
+        "foot": [
+          565.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          767.5,
+          687
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          688,
+          684,
+          158,
+          195
+        ],
+        "bounds": [
+          690,
+          686,
+          844,
+          877
+        ],
+        "foot": [
+          789.0,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          234.0,
+          22
+        ],
+        "source": "source/cult_leader-hurt-rear.png",
+        "sourcePose": 0,
+        "cell": [
+          115,
+          20,
+          210,
+          325
+        ],
+        "bounds": [
+          117,
+          22,
+          323,
+          343
+        ],
+        "foot": [
+          205.0,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1066.5,
+          494
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          918,
+          491,
+          304,
+          112
+        ],
+        "bounds": [
+          920,
+          493,
+          1220,
+          601
+        ],
+        "foot": [
+          1074.0,
+          601
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          224.0,
+          22
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 0,
+        "cell": [
+          118,
+          19,
+          171,
+          325
+        ],
+        "bounds": [
+          120,
+          21,
+          287,
+          342
+        ],
+        "foot": [
+          205.5,
+          342
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          905.0,
+          21
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 2,
+        "cell": [
+          798,
+          19,
+          191,
+          326
+        ],
+        "bounds": [
+          800,
+          21,
+          987,
+          343
+        ],
+        "foot": [
+          888.0,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1256.5,
+          22
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 3,
+        "cell": [
+          1148,
+          19,
+          191,
+          326
+        ],
+        "bounds": [
+          1150,
+          21,
+          1337,
+          343
+        ],
+        "foot": [
+          1236.5,
+          343
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north-west",
+        "row": 3,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          219.0,
+          384
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          122,
+          382,
+          175,
+          323
+        ],
+        "bounds": [
+          124,
+          384,
+          295,
+          703
+        ],
+        "foot": [
+          208.5,
+          703
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          564.0,
+          382
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 5,
+        "cell": [
+          467,
+          379,
+          175,
+          326
+        ],
+        "bounds": [
+          469,
+          381,
+          640,
+          703
+        ],
+        "foot": [
+          553.0,
+          703
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          909.5,
+          379
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 6,
+        "cell": [
+          812,
+          377,
+          175,
+          328
+        ],
+        "bounds": [
+          814,
+          379,
+          985,
+          703
+        ],
+        "foot": [
+          899.0,
+          703
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1253.5,
+          384
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 7,
+        "cell": [
+          1157,
+          382,
+          176,
+          323
+        ],
+        "bounds": [
+          1159,
+          384,
+          1331,
+          703
+        ],
+        "foot": [
+          1243.0,
+          703
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          218.5,
+          379
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          118,
+          377,
+          187,
+          329
+        ],
+        "bounds": [
+          120,
+          379,
+          303,
+          704
+        ],
+        "foot": [
+          173.0,
+          704
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          563.5,
+          379
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 5,
+        "cell": [
+          461,
+          377,
+          191,
+          330
+        ],
+        "bounds": [
+          463,
+          379,
+          650,
+          705
+        ],
+        "foot": [
+          532.5,
+          705
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          910.0,
+          378
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 6,
+        "cell": [
+          808,
+          375,
+          188,
+          336
+        ],
+        "bounds": [
+          810,
+          377,
+          994,
+          709
+        ],
+        "foot": [
+          869.5,
+          709
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1255.5,
+          382
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 7,
+        "cell": [
+          1153,
+          380,
+          189,
+          326
+        ],
+        "bounds": [
+          1155,
+          382,
+          1340,
+          704
+        ],
+        "foot": [
+          1231.0,
+          704
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.5,
+          906
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          30,
+          903,
+          149,
+          197
+        ],
+        "bounds": [
+          32,
+          905,
+          177,
+          1098
+        ],
+        "foot": [
+          102.5,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.0,
+          905
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          262,
+          903,
+          133,
+          196
+        ],
+        "bounds": [
+          264,
+          905,
+          393,
+          1097
+        ],
+        "foot": [
+          319.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          540.5,
+          908
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          477,
+          906,
+          160,
+          193
+        ],
+        "bounds": [
+          479,
+          908,
+          635,
+          1097
+        ],
+        "foot": [
+          534.5,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.0,
+          909
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          703,
+          907,
+          160,
+          192
+        ],
+        "bounds": [
+          705,
+          909,
+          861,
+          1097
+        ],
+        "foot": [
+          759.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          223.5,
+          382
+        ],
+        "source": "source/cult_leader-hurt-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          117,
+          380,
+          221,
+          324
+        ],
+        "bounds": [
+          119,
+          382,
+          336,
+          702
+        ],
+        "foot": [
+          214.5,
+          702
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          433.5,
+          787
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          301,
+          784,
+          296,
+          120
+        ],
+        "bounds": [
+          303,
+          786,
+          595,
+          902
+        ],
+        "foot": [
+          451.5,
+          902
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          216.0,
+          383
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 4,
+        "cell": [
+          118,
+          381,
+          168,
+          323
+        ],
+        "bounds": [
+          120,
+          383,
+          284,
+          702
+        ],
+        "foot": [
+          205.5,
+          702
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          898.0,
+          382
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 6,
+        "cell": [
+          798,
+          379,
+          190,
+          325
+        ],
+        "bounds": [
+          800,
+          381,
+          986,
+          702
+        ],
+        "foot": [
+          886.0,
+          702
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1247.5,
+          383
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 7,
+        "cell": [
+          1147,
+          381,
+          187,
+          323
+        ],
+        "bounds": [
+          1149,
+          383,
+          1332,
+          702
+        ],
+        "foot": [
+          1235.0,
+          702
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north",
+        "row": 4,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          219.5,
+          746
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 8,
+        "cell": [
+          121,
+          744,
+          177,
+          324
+        ],
+        "bounds": [
+          123,
+          746,
+          296,
+          1066
+        ],
+        "foot": [
+          209.0,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.5,
+          746
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 9,
+        "cell": [
+          466,
+          743,
+          179,
+          325
+        ],
+        "bounds": [
+          468,
+          745,
+          643,
+          1066
+        ],
+        "foot": [
+          554.0,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          912.5,
+          744
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 10,
+        "cell": [
+          811,
+          742,
+          180,
+          326
+        ],
+        "bounds": [
+          813,
+          744,
+          989,
+          1066
+        ],
+        "foot": [
+          899.0,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          1256.0,
+          747
+        ],
+        "source": "source/cult_leader-idle-rear.png",
+        "sourcePose": 11,
+        "cell": [
+          1155,
+          744,
+          179,
+          324
+        ],
+        "bounds": [
+          1157,
+          746,
+          1332,
+          1066
+        ],
+        "foot": [
+          1243.0,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          220.5,
+          742
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 8,
+        "cell": [
+          116,
+          740,
+          190,
+          330
+        ],
+        "bounds": [
+          118,
+          742,
+          304,
+          1068
+        ],
+        "foot": [
+          172.0,
+          1068
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          566.0,
+          744
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 9,
+        "cell": [
+          459,
+          742,
+          192,
+          328
+        ],
+        "bounds": [
+          461,
+          744,
+          649,
+          1068
+        ],
+        "foot": [
+          537.0,
+          1068
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          914.0,
+          742
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 10,
+        "cell": [
+          805,
+          740,
+          197,
+          330
+        ],
+        "bounds": [
+          807,
+          742,
+          1000,
+          1068
+        ],
+        "foot": [
+          882.5,
+          1068
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          1258.0,
+          745
+        ],
+        "source": "source/cult_leader-walk-rear.png",
+        "sourcePose": 11,
+        "cell": [
+          1150,
+          743,
+          194,
+          327
+        ],
+        "bounds": [
+          1152,
+          745,
+          1342,
+          1068
+        ],
+        "foot": [
+          1229.5,
+          1068
+        ],
+        "sourceEdge": false,
+        "scale": 0.3569230769230769,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          100.5,
+          1127
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          41,
+          1125,
+          139,
+          196
+        ],
+        "bounds": [
+          43,
+          1127,
+          178,
+          1319
+        ],
+        "foot": [
+          96.0,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.0,
+          1125
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          260,
+          1123,
+          139,
+          198
+        ],
+        "bounds": [
+          262,
+          1125,
+          397,
+          1319
+        ],
+        "foot": [
+          317.5,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.5,
+          1129
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          476,
+          1126,
+          180,
+          195
+        ],
+        "bounds": [
+          478,
+          1128,
+          654,
+          1319
+        ],
+        "foot": [
+          533.5,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          767.5,
+          1129
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          705,
+          1127,
+          157,
+          194
+        ],
+        "bounds": [
+          707,
+          1129,
+          860,
+          1319
+        ],
+        "foot": [
+          760.0,
+          1319
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          219.5,
+          746
+        ],
+        "source": "source/cult_leader-hurt-rear.png",
+        "sourcePose": 8,
+        "cell": [
+          116,
+          744,
+          219,
+          323
+        ],
+        "bounds": [
+          118,
+          746,
+          333,
+          1065
+        ],
+        "foot": [
+          212.5,
+          1065
+        ],
+        "sourceEdge": false,
+        "scale": 0.3613707165109034,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1058.0,
+          793
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          925,
+          791,
+          297,
+          113
+        ],
+        "bounds": [
+          927,
+          793,
+          1220,
+          902
+        ],
+        "foot": [
+          1077.0,
+          902
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          217.0,
+          745
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 8,
+        "cell": [
+          117,
+          743,
+          171,
+          325
+        ],
+        "bounds": [
+          119,
+          745,
+          286,
+          1066
+        ],
+        "foot": [
+          208.0,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          904.0,
+          745
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 10,
+        "cell": [
+          797,
+          742,
+          200,
+          326
+        ],
+        "bounds": [
+          799,
+          744,
+          995,
+          1066
+        ],
+        "foot": [
+          889.5,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1252.0,
+          745
+        ],
+        "source": "source/cult_leader-cast-rear.png",
+        "sourcePose": 11,
+        "cell": [
+          1146,
+          743,
+          197,
+          325
+        ],
+        "bounds": [
+          1148,
+          745,
+          1341,
+          1066
+        ],
+        "foot": [
+          1237.0,
+          1066
+        ],
+        "sourceEdge": false,
+        "scale": 0.3625,
+        "direction": "north-east",
+        "row": 5,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          102.5,
+          1349
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          64,
+          1346,
+          105,
+          201
+        ],
+        "bounds": [
+          66,
+          1348,
+          167,
+          1545
+        ],
+        "foot": [
+          123.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.0,
+          1349
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          287,
+          1346,
+          104,
+          200
+        ],
+        "bounds": [
+          289,
+          1348,
+          389,
+          1544
+        ],
+        "foot": [
+          345.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.0,
+          1349
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          509,
+          1346,
+          104,
+          200
+        ],
+        "bounds": [
+          511,
+          1348,
+          611,
+          1544
+        ],
+        "foot": [
+          567.5,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          1349
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          731,
+          1346,
+          105,
+          200
+        ],
+        "bounds": [
+          733,
+          1348,
+          834,
+          1544
+        ],
+        "foot": [
+          789.0,
+          1544
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.0,
+          1346
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          62,
+          1344,
+          106,
+          203
+        ],
+        "bounds": [
+          64,
+          1346,
+          166,
+          1545
+        ],
+        "foot": [
+          112.5,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          1346
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          285,
+          1344,
+          105,
+          203
+        ],
+        "bounds": [
+          287,
+          1346,
+          388,
+          1545
+        ],
+        "foot": [
+          340.0,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.0,
+          1346
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          508,
+          1344,
+          105,
+          200
+        ],
+        "bounds": [
+          510,
+          1346,
+          611,
+          1542
+        ],
+        "foot": [
+          559.5,
+          1542
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          782.0,
+          1346
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          729,
+          1344,
+          106,
+          203
+        ],
+        "bounds": [
+          731,
+          1346,
+          833,
+          1545
+        ],
+        "foot": [
+          783.5,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          91.0,
+          1346
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          39,
+          1344,
+          137,
+          199
+        ],
+        "bounds": [
+          41,
+          1346,
+          174,
+          1541
+        ],
+        "foot": [
+          91.0,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.5,
+          1346
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          259,
+          1344,
+          130,
+          199
+        ],
+        "bounds": [
+          261,
+          1346,
+          387,
+          1541
+        ],
+        "foot": [
+          313.0,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.0,
+          1352
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          474,
+          1349,
+          195,
+          194
+        ],
+        "bounds": [
+          476,
+          1351,
+          667,
+          1541
+        ],
+        "foot": [
+          528.0,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          760.0,
+          1352
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          704,
+          1350,
+          149,
+          193
+        ],
+        "bounds": [
+          706,
+          1352,
+          851,
+          1541
+        ],
+        "foot": [
+          757.5,
+          1541
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          144.5,
+          956
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          90,
+          953,
+          143,
+          249
+        ],
+        "bounds": [
+          92,
+          955,
+          231,
+          1200
+        ],
+        "foot": [
+          158.0,
+          1200
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          426.0,
+          1100
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          289,
+          1098,
+          300,
+          109
+        ],
+        "bounds": [
+          291,
+          1100,
+          587,
+          1205
+        ],
+        "foot": [
+          455.5,
+          1205
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          217.5,
+          51
+        ],
+        "source": "source/cult_leader-cast-profile.png",
+        "sourcePose": 0,
+        "cell": [
+          152,
+          48,
+          193,
+          372
+        ],
+        "bounds": [
+          154,
+          50,
+          343,
+          418
+        ],
+        "foot": [
+          250.0,
+          418
+        ],
+        "sourceEdge": false,
+        "scale": 0.31607629427792916,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          1085.5,
+          27
+        ],
+        "source": "source/cult_leader-cast-profile.png",
+        "sourcePose": 2,
+        "cell": [
+          1002,
+          24,
+          231,
+          396
+        ],
+        "bounds": [
+          1004,
+          26,
+          1231,
+          418
+        ],
+        "foot": [
+          1137.5,
+          418
+        ],
+        "sourceEdge": false,
+        "scale": 0.31607629427792916,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          1548.0,
+          51
+        ],
+        "source": "source/cult_leader-cast-profile.png",
+        "sourcePose": 3,
+        "cell": [
+          1483,
+          48,
+          193,
+          372
+        ],
+        "bounds": [
+          1485,
+          50,
+          1674,
+          418
+        ],
+        "foot": [
+          1581.5,
+          418
+        ],
+        "sourceEdge": false,
+        "scale": 0.31607629427792916,
+        "direction": "east",
+        "row": 6,
+        "action": "cast",
+        "frame": 2
+      },
+      {
+        "head": [
+          97.5,
+          1569
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          55,
+          1567,
+          116,
+          199
+        ],
+        "bounds": [
+          57,
+          1569,
+          169,
+          1764
+        ],
+        "foot": [
+          119.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.0,
+          1568
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          277,
+          1566,
+          116,
+          200
+        ],
+        "bounds": [
+          279,
+          1568,
+          391,
+          1764
+        ],
+        "foot": [
+          341.5,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          542.5,
+          1568
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          499,
+          1565,
+          116,
+          201
+        ],
+        "bounds": [
+          501,
+          1567,
+          613,
+          1764
+        ],
+        "foot": [
+          563.0,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.5,
+          1569
+        ],
+        "source": "source/cult_leader-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          721,
+          1567,
+          117,
+          199
+        ],
+        "bounds": [
+          723,
+          1569,
+          836,
+          1764
+        ],
+        "foot": [
+          785.5,
+          1764
+        ],
+        "sourceEdge": false,
+        "scale": 0.5918367346938775,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          93.0,
+          1565
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          47,
+          1562,
+          122,
+          203
+        ],
+        "bounds": [
+          49,
+          1564,
+          167,
+          1763
+        ],
+        "foot": [
+          114.0,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          316.0,
+          1565
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          273,
+          1562,
+          118,
+          207
+        ],
+        "bounds": [
+          275,
+          1564,
+          389,
+          1767
+        ],
+        "foot": [
+          339.0,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          540.5,
+          1565
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          496,
+          1563,
+          119,
+          202
+        ],
+        "bounds": [
+          498,
+          1565,
+          613,
+          1763
+        ],
+        "foot": [
+          579.5,
+          1763
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.0,
+          1566
+        ],
+        "source": "source/cult_leader-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          719,
+          1563,
+          120,
+          206
+        ],
+        "bounds": [
+          721,
+          1565,
+          837,
+          1767
+        ],
+        "foot": [
+          797.5,
+          1767
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          95.5,
+          1569
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          44,
+          1566,
+          140,
+          198
+        ],
+        "bounds": [
+          46,
+          1568,
+          182,
+          1762
+        ],
+        "foot": [
+          104.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          316.0,
+          1568
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          264,
+          1566,
+          131,
+          198
+        ],
+        "bounds": [
+          266,
+          1568,
+          393,
+          1762
+        ],
+        "foot": [
+          326.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          541.5,
+          1572
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          485,
+          1570,
+          171,
+          194
+        ],
+        "bounds": [
+          487,
+          1572,
+          654,
+          1762
+        ],
+        "foot": [
+          545.0,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.5,
+          1577
+        ],
+        "source": "source/cult_leader-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          706,
+          1574,
+          153,
+          190
+        ],
+        "bounds": [
+          708,
+          1576,
+          857,
+          1762
+        ],
+        "foot": [
+          772.5,
+          1762
+        ],
+        "sourceEdge": false,
+        "scale": 0.5465968586387435,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          735.5,
+          955
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          677,
+          953,
+          163,
+          248
+        ],
+        "bounds": [
+          679,
+          955,
+          838,
+          1199
+        ],
+        "foot": [
+          761.0,
+          1199
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1051.0,
+          1101
+        ],
+        "source": "source/cult_leader-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          921,
+          1098,
+          304,
+          110
+        ],
+        "bounds": [
+          923,
+          1100,
+          1223,
+          1206
+        ],
+        "foot": [
+          1084.5,
+          1206
+        ],
+        "sourceEdge": false,
+        "scale": 0.4773662551440329,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          97.0,
+          1570
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 28,
+        "cell": [
+          54,
+          1567,
+          118,
+          201
+        ],
+        "bounds": [
+          56,
+          1569,
+          170,
+          1766
+        ],
+        "foot": [
+          118.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 0
+      },
+      {
+        "head": [
+          542.5,
+          1570
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 30,
+        "cell": [
+          451,
+          1567,
+          166,
+          201
+        ],
+        "bounds": [
+          453,
+          1569,
+          615,
+          1766
+        ],
+        "foot": [
+          563.5,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 1
+      },
+      {
+        "head": [
+          764.0,
+          1570
+        ],
+        "source": "source/cult_leader-cast.png",
+        "sourcePose": 31,
+        "cell": [
+          711,
+          1567,
+          128,
+          201
+        ],
+        "bounds": [
+          713,
+          1569,
+          837,
+          1766
+        ],
+        "foot": [
+          785.0,
+          1766
+        ],
+        "sourceEdge": false,
+        "scale": 0.58,
+        "direction": "south-east",
+        "row": 7,
+        "action": "cast",
+        "frame": 2
+      }
+    ]
+  }
+]

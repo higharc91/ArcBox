@@ -265,7 +265,8 @@ public static class UnitPlan
 
         // The marks stack up from the head. If the stack would reach the top strip, all of it comes down onto the unit.
         var feet = place.Feet;
-        var head = downed ? feet.Y - LyingHeight : feet.Y - sprite.HeadLift;
+        var clearance = pose is null ? 0 : sprite.OverheadClearance.GetValueOrDefault(pose.Anim[(pose.Anim.LastIndexOf('.') + 1)..]);
+        var head = downed ? feet.Y - LyingHeight : feet.Y - sprite.HeadLift - clearance;
         var y = head - Gap;
         var mark = y;
         y -= downed ? DigitHeight * CountdownScale : BarHeight;

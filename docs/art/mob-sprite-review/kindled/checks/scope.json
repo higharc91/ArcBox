@@ -1,0 +1,15 @@
+{
+  "priorCommit": "3c9a0b22f6ce8ffa1ec36e10542524c88da1c45b",
+  "addedCreatureEntries": [
+    "mob_refresh_cultist",
+    "mob_refresh_cult_leader"
+  ],
+  "changedPortraitPresets": [
+    "cultist",
+    "cult_leader"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "unrelatedPortraitsUnchanged": true,
+  "runtimeAssets": 14,
+  "sceneIdleFramesUnchangedByFinalProfileCorrection": 64
+}

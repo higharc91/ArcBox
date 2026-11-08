@@ -1,0 +1,19 @@
+{
+  "priorCommit": "79d4317b",
+  "addedCreatureEntries": [
+    "mob_refresh_sapling"
+  ],
+  "combatMechanicsUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 5,
+  "packedFrameKeys": 112,
+  "distinctAuthoredPoseSelections": 96,
+  "runtimeAssets": 1,
+  "wholePoseFacingSelection": true,
+  "correctedContactPosesSelected": true,
+  "physicalReachInferredInRenderer": true
+}

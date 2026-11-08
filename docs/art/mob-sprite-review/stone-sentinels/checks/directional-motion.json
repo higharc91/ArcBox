@@ -1,0 +1,158 @@
+{
+  "golem_basalt": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "special": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "cast": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  },
+  "golem_crystal": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "special": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "cast": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  },
+  "golem_temple": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "special": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "cast": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  }
+}

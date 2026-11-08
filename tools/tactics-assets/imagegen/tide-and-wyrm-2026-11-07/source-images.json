@@ -1,0 +1,15 @@
+{
+  "water_elemental-idle": "871f9fe2-ee2c-4869-b2a0-ce037256a8b5",
+  "dragon-idle": "55451525-6d06-40c5-bc8b-bb781b3e7e25",
+  "water_elemental-walk": "452afd48-239f-4a10-9070-0e5d434bcf5c",
+  "dragon-walk": "865f1b26-7e75-437d-a318-043a3df741c7",
+  "water_elemental-attack": "77460497-e738-4425-8014-80b651481697",
+  "dragon-attack": "adade226-514e-485c-b44c-45a6bc754df6",
+  "water_elemental-moves": "677da54a-096a-48c1-bdc4-418378c1d8fa",
+  "dragon-breath": "873160fe-1dd9-4bf3-9843-962d8b5753ab",
+  "dragon-roar": "12445ced-481a-42df-aadd-47dafb920a85",
+  "dragon-wingbeat": "d4921f16-d7b8-44c7-965d-c349101656bd",
+  "water_elemental-damage": "16539603-1f04-4dbe-8850-aa6d45ce5838",
+  "dragon-damage": "b40a21ff-4b1e-4538-8855-2cccd6f50280",
+  "water_elemental-moves-backleft": "6979ad08-279e-4fc3-bc46-429ed0d145c7"
+}

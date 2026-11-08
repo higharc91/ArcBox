@@ -147,6 +147,39 @@ public partial class Main : Control
             if (board == "environment")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
+            else if (board == "stone-and-mire-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.StoneAndMireDemo.Steps(pack)));
+            else if (board == "night-companions-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.NightCompanionsDemo.Steps(pack)));
+            else if (board == "prismatic-flames-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.PrismaticFlamesDemo.Steps(pack)));
+            else if (board == "stone-sentinels-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.StoneSentinelsDemo.Steps(pack)));
+            else if (board == "wild-elements-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.WildElementsDemo.Steps(pack)));
+            else if (board == "tide-and-wyrm-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.TideAndWyrmDemo.Steps(pack)));
+            else if (board == "elemental-triad-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.ElementalTriadDemo.Steps(pack)));
+            else if (board == "grove-ward-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.GroveWardDemo.Steps(pack)));
+            else if (board == "ember-familiar-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.EmberFamiliarDemo.Steps(pack)));
+            else if (board == "trail-companion-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.TrailCompanionDemo.Steps()));
+            else if (board == "oak-ambush-moves")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.OakAmbushDemo.Steps(pack)));
             else if (board.StartsWith("encounter:", StringComparison.Ordinal))
                 OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(
                     global::Tactics.Presentation.Board.DemoBattle.Encounter(board["encounter:".Length..], pack), ArcJson.Options)));

@@ -1,0 +1,16 @@
+{
+  "black_knight-idle": "a4075309-478e-4b1a-9a29-111cce79d697",
+  "dark_elf-idle": "17d5d72e-b280-4f4e-8901-57e092e6e9d0",
+  "dark_elf-walk": "e9801f9b-b6dc-4c69-819c-d78f918d963f",
+  "dark_elf-attack": "0b0bf2e3-a7a1-45a2-a9e9-892702651d70",
+  "black_knight-cast": "bb8a8999-299d-4d7a-9fdd-4bdb79153f12",
+  "dark_elf-cast": "8125f436-30a5-4550-b9f2-102b1f59db60",
+  "black_knight-walk-crowded-rejected": "559a4d20-a339-486e-b49e-ba220d5f62e1",
+  "black_knight-attack-crowded-rejected": "b7c4e00c-d8ae-407d-9d8a-af0e96922b30",
+  "black_knight-walk": "9e501e78-de3c-442a-a8ad-fccb181cb449",
+  "black_knight-attack": "f24f4f7a-8304-4a0a-a0e9-eb2df34c0077",
+  "black_knight-damage": "1266c7ab-29f8-4014-8ef0-51fcf58b66dd",
+  "black_knight-portraits": "d148ca2e-5549-471f-b681-b33c69c7d30d",
+  "dark_elf-damage": "a0e65184-0a2b-419b-881c-35a2b3a5d341",
+  "dark_elf-portraits": "d2335f4c-318e-46d9-91b0-4569fc46111d"
+}

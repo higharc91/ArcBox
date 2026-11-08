@@ -1,0 +1,16 @@
+{
+  "content/tactics/base/creatures/mob_refresh_cult_leader.png": "df7b82163a9acbe025005b87a0b73b6312ad9785ad09722238bbd15c0cc6371c",
+  "content/tactics/base/creatures/mob_refresh_cultist.png": "17fa3cd3f874015c1c5d942dd21e031a6abd8b81565abf1fef4e7268f3285d06",
+  "content/tactics/base/portraits/cult_leader_refresh_angry.png": "86fc2908343ea316c2850926df46956d5f0d0640e45f1b62e7f2cf071b2dddae",
+  "content/tactics/base/portraits/cult_leader_refresh_happy.png": "ae0755b04d10566cd2e04c1db7626dae0d0d6c1de7a4c5569fce74d7f3334ecc",
+  "content/tactics/base/portraits/cult_leader_refresh_hurt.png": "78665882f00d7fa8af92feda261b0aca73b2de9a149d5938e0d0718c71751247",
+  "content/tactics/base/portraits/cult_leader_refresh_idle.png": "fdf588eab296fadf6c3837026e0b1041cd1ed10c39478667b2048c57b0a269a2",
+  "content/tactics/base/portraits/cult_leader_refresh_sad.png": "d9d2d11c459e47659a560145b6e906be5012d8a1b951457e5ae992f4c33f3d58",
+  "content/tactics/base/portraits/cult_leader_refresh_surprised.png": "0f4c8746f6711c5baf74c718964a1a2a692262409d462cd7a69fb983739e16eb",
+  "content/tactics/base/portraits/cultist_refresh_angry.png": "0e0f667cfbfdb216b6b4fa3a1b200fc84a03bdc075191d90e28bc6dafd25bf7d",
+  "content/tactics/base/portraits/cultist_refresh_happy.png": "4907b86e5894bf9025f3c82fe989d949c6837e416a69c1ed86a904f29627e82e",
+  "content/tactics/base/portraits/cultist_refresh_hurt.png": "55b027212a304860fb9a459694d55f90ef5c9cd5fd85c9eb937d11b680c3ca0e",
+  "content/tactics/base/portraits/cultist_refresh_idle.png": "328f73b9d2acafcb3b4dd04e346e568a0d91886e37ff300316d0e578c84a74dd",
+  "content/tactics/base/portraits/cultist_refresh_sad.png": "6904032ec17026415725600984327ec0524f1a3e0a2468a0e259108364c7fac2",
+  "content/tactics/base/portraits/cultist_refresh_surprised.png": "ed934b819bdffcab36cd6679d25246aba0edfa1aa3dad2935cf4b0478df38875"
+}

@@ -1,0 +1,23 @@
+{
+  "content/tactics/base/creatures/mob_refresh_goblin_archer.png": "dbb304c9cd958e91664440d5b1239aeb725f97434a352e6e473b4848cc6d2a38",
+  "content/tactics/base/creatures/mob_refresh_goblin_boss.png": "b1c41156042ab159f1fa3e4db069eeb9eab65965c01770176141b8d7a027fc88",
+  "content/tactics/base/creatures/mob_refresh_goblin_shaman.png": "f19b1b23952b17b89db14da5347b9adb9a2410290c8d67ad4f0add9a753a8905",
+  "content/tactics/base/portraits/goblin_archer_refresh_angry.png": "cad3bdb985b861d16734a33f19c745a0a94d00e5a0588ff06316aea2703cb105",
+  "content/tactics/base/portraits/goblin_archer_refresh_happy.png": "e555862a90a9401404fb222db06ac6f0b18e4f908cfa324dd4947f5c9ed80a7a",
+  "content/tactics/base/portraits/goblin_archer_refresh_hurt.png": "7e2c648fcbe50e74fd660e262c88126433f32102364ead6f05e23f53070b8c33",
+  "content/tactics/base/portraits/goblin_archer_refresh_idle.png": "160114e9c0e79b65e654e5827a6e40eb2894b826c0b2103efdb8d29836d1aecf",
+  "content/tactics/base/portraits/goblin_archer_refresh_sad.png": "da2ddabe7848bb9d64627b6f53608643d4d6d8bb26cb538637195a5b53706e12",
+  "content/tactics/base/portraits/goblin_archer_refresh_surprised.png": "c390c5d5f3afe321b94b15041b10e330cf0f7d1ecc1239c463a521cf58ca8f1d",
+  "content/tactics/base/portraits/goblin_shaman_refresh_angry.png": "fdffcd9cbff331fb8ebcef3e43d3006f8cdeaaf74ef7c114e67d77cebcd6a1cd",
+  "content/tactics/base/portraits/goblin_shaman_refresh_happy.png": "bed2e5caa8cb3ff92478831e80ff822b6982ef8ea91caf0c9a7e2660302e0f14",
+  "content/tactics/base/portraits/goblin_shaman_refresh_hurt.png": "7d08c433dfc28f6a1d9e2425511c473c3ff557e7133e55efef8b8a892da66661",
+  "content/tactics/base/portraits/goblin_shaman_refresh_idle.png": "773fb61707f13d1f7dc889b29be246eec5488182451f001581a1c6358a4d8acc",
+  "content/tactics/base/portraits/goblin_shaman_refresh_sad.png": "38ba47856c8247aa7076187fdd0c69c93a241c9640180bdac93340617845b476",
+  "content/tactics/base/portraits/goblin_shaman_refresh_surprised.png": "dc64530c226ec12b50e7235855bfc1eacaa0aedb4bc78e76181ed79ae8d31fa9",
+  "content/tactics/base/portraits/goblin_spear_refresh_angry.png": "37740e422f492b6d5d5ed35ba8d59fec0c08a9a5b7a02167fc801a17b8687851",
+  "content/tactics/base/portraits/goblin_spear_refresh_happy.png": "1850040098bf2cd7615cc873d44b07fa222356ecfd16cdcf2c9286e007ac6b54",
+  "content/tactics/base/portraits/goblin_spear_refresh_hurt.png": "22ed946903b59953edf04565c0862bd3ebfe5e1fef698e8c7c1e15944a4356f3",
+  "content/tactics/base/portraits/goblin_spear_refresh_idle.png": "2fb7e78167e4067bdd2c9a33806efd18eaf1d9163ed293d79f6d447cfa76244d",
+  "content/tactics/base/portraits/goblin_spear_refresh_sad.png": "989b1bd0efc148a1643fc23035fffc6b49f2365ce3aaeda7519d2e76f3ee78be",
+  "content/tactics/base/portraits/goblin_spear_refresh_surprised.png": "d9e5845204fe9627e8ba1424fa2bd367b9318d76b6f542d757aaa3a52eadeb1c"
+}

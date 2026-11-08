@@ -16,6 +16,25 @@ public static class DemoBattle
     private const string Changed = ":changed";
     private const string Fight = ":fight";
     private const string Creatures = ":creatures";
+    private const string MobRefresh = ":mob-refresh";
+    private const string GoblinRoles = ":goblin-roles";
+    private const string RoadAndHost = ":road-and-host";
+    private const string Kindled = ":kindled";
+    private const string BoneWardens = ":bone-wardens";
+    private const string HollowDead = ":hollow-dead";
+    private const string RimeKeepers = ":rime-keepers";
+    private const string OathAndShadow = ":oath-and-shadow";
+    private const string StoneAndMire = ":stone-and-mire";
+    private const string NightCompanions = ":night-companions";
+    private const string PrismaticFlames = ":prismatic-flames";
+    private const string StoneSentinels = ":stone-sentinels";
+    private const string WildElements = ":wild-elements";
+    private const string TideAndWyrm = ":tide-and-wyrm";
+    private const string ElementalTriad = ":elemental-triad";
+    private const string GroveWard = ":grove-ward";
+    private const string EmberFamiliar = ":ember-familiar";
+    private const string TrailCompanion = ":trail-companion";
+    private const string OakAmbush = ":oak-ambush";
 
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
@@ -56,6 +75,176 @@ public static class DemoBattle
             Unit("human reference", "Party", "characters.class_fighter", 6, 11, 30, 30)];
     }
 
+    private static ImmutableArray<UnitView> RefreshedMobs() =>
+    [
+        Unit("Goblin cutthroat", "Enemy", "characters.goblin_cutthroat", 11, 6, 7, 7),
+        Unit("Orc brute", "Enemy", "characters.orc_brute", 12, 9, 20, 20),
+        Unit("Red drake", "Enemy", "beasts.drake.red", 9, 10, 64, 64),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Kobold reference", "Enemy", "characters.kobold", 13, 10, 5, 5),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedGoblinRoles() =>
+    [
+        Unit("Goblin archer", "Enemy", "characters.goblin_archer", 11, 6, 14, 14),
+        Unit("Stormcaller", "Enemy", "characters.goblin_shaman", 12, 9, 18, 18),
+        Unit("Vorga", "Enemy", "characters.goblin_spear", 9, 10, 21, 21),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Cutthroat reference", "Enemy", "characters.goblin_cutthroat", 13, 10, 16, 16),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedRoadAndHost() =>
+    [
+        Unit("Bandit", "Enemy", "characters.bandit", 11, 6, 26, 26),
+        Unit("Hobgoblin", "Enemy", "characters.hobgoblin", 12, 9, 11, 11),
+        Unit("Vorga reference", "Enemy", "characters.goblin_spear", 9, 10, 21, 21),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Cutthroat reference", "Enemy", "characters.goblin_cutthroat", 13, 10, 16, 16),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedKindled() =>
+    [
+        Unit("Cultist", "Enemy", "characters.cultist", 11, 6, 16, 16),
+        Unit("Maren", "Enemy", "characters.cult_leader", 12, 9, 105, 105),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 9, 10, 26, 26),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Hobgoblin reference", "Enemy", "characters.hobgoblin", 13, 10, 11, 11),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedBoneWardens() =>
+    [
+        Unit("Bone warrior", "Enemy", "characters.skeleton", 11, 6, 13, 13),
+        Unit("Bone archer", "Enemy", "characters.skeleton_archer", 12, 9, 16, 16),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 9, 10, 26, 26),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Hobgoblin reference", "Enemy", "characters.hobgoblin", 13, 10, 11, 11),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedHollowDead() =>
+    [
+        Unit("Risen", "Enemy", "characters.zombie", 11, 6, 15, 15),
+        Unit("Wraith", "Enemy", "bosses.wraith.wraith", 13, 6, 40, 40),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 9, 10, 13, 13),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedRimeKeepers() =>
+    [
+        Unit("Ivo / necromancer", "Enemy", "characters.necromancer", 11, 6, 52, 52),
+        Unit("Oswin / lich", "Enemy", "characters.lich", 13, 6, 95, 95),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 9, 10, 13, 13),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedOathAndShadow() =>
+    [
+        Unit("Halvard", "Enemy", "characters.black_knight", 11, 6, 280, 280),
+        Unit("Drow", "Enemy", "characters.dark_elf", 13, 6, 34, 34),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 9, 10, 13, 13),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedStoneAndMire() =>
+    [
+        Unit("Troll", "Enemy", "bosses.troll.troll", 11, 6, 72, 72),
+        Unit("Golem", "Enemy", "bosses.golem.granite", 13, 6, 95, 95),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 9, 10, 13, 13),
+        Unit("Fighter reference", "Party", "characters.class_fighter", 11, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedNightCompanions() =>
+    [
+        Unit("Black", "Enemy", "bosses.hound.black", 9, 10, 64, 64),
+        Unit("Grey", "Enemy", "bosses.hound.grey", 12, 9, 84, 84),
+        Unit("Violet", "Enemy", "bosses.imp.violet", 13, 6, 74, 74),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 11, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedPrismaticFlames() =>
+    [
+        Unit("Azure", "Enemy", "bosses.fire_elemental.azure", 9, 10, 64, 64),
+        Unit("Radiant", "Enemy", "bosses.fire_elemental.radiant", 12, 9, 84, 84),
+        Unit("Shadow", "Enemy", "bosses.fire_elemental.shadow", 13, 6, 74, 74),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedStoneSentinels() =>
+    [
+        Unit("Basalt", "Enemy", "bosses.golem.basalt", 9, 10, 64, 64),
+        Unit("Crystal", "Enemy", "bosses.golem.crystal", 12, 9, 84, 84),
+        Unit("Temple", "Enemy", "bosses.golem.temple", 13, 6, 74, 74),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedWildElements() =>
+    [
+        Unit("Storm", "Enemy", "bosses.air_elemental.storm", 9, 10, 64, 64),
+        Unit("Magma", "Enemy", "bosses.earth_elemental.magma", 12, 9, 84, 84),
+        Unit("Swamp", "Enemy", "bosses.water_elemental.swamp", 13, 6, 74, 74),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedTideAndWyrm() =>
+    [
+        Unit("Water", "Enemy", "bosses.water_elemental.sea", 9, 10, 74, 74),
+        Unit("Dragon", "Enemy", "bosses.dragon.red", 13, 6, 160, 160),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedElementalTriad() =>
+    [
+        Unit("Air", "Enemy", "bosses.air_elemental.gale", 9, 10, 64, 64),
+        Unit("Earth", "Enemy", "bosses.earth_elemental.stone", 12, 9, 84, 84),
+        Unit("Fire", "Enemy", "bosses.fire_elemental.ember", 13, 6, 68, 68),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit reference", "Enemy", "characters.bandit", 13, 10, 26, 26),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedGroveWard() =>
+    [
+        Unit("Sapling", "Party", "bosses.sapling.spring", 11, 9, 18, 18),
+        Unit("Bandit", "Enemy", "characters.bandit", 13, 9, 26, 26),
+        Unit("Fighter", "Party", "characters.class_fighter", 11, 6, 28, 28),
+        Unit("Hound reference", "Party", "bosses.hound.tan", 9, 10, 16, 16),
+        Unit("Imp reference", "Party", "bosses.imp.crimson", 13, 6, 14, 14),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedEmberFamiliar() =>
+    [
+        Unit("Imp", "Party", "bosses.imp.crimson", 11, 9, 14, 14),
+        Unit("Bandit", "Enemy", "characters.bandit", 13, 10, 26, 26),
+        Unit("Fighter", "Party", "characters.class_fighter", 11, 6, 28, 28),
+        Unit("Hound reference", "Party", "bosses.hound.tan", 9, 10, 16, 16),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 13, 6, 13, 13),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedTrailCompanion() =>
+    [
+        Unit("Hound", "Party", "bosses.hound.tan", 12, 10, 16, 16),
+        Unit("Bandit", "Enemy", "characters.bandit", 13, 10, 26, 26),
+        Unit("Fighter", "Party", "characters.class_fighter", 11, 6, 28, 28),
+        Unit("Mimic reference", "Enemy", "bosses.mimic.oak", 9, 10, 40, 40),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 13, 6, 13, 13),
+    ];
+
+    private static ImmutableArray<UnitView> RefreshedOakAmbush() =>
+    [
+        Unit("Mimic", "Enemy", "bosses.mimic.oak", 12, 9, 40, 40),
+        Unit("Fighter", "Party", "characters.class_fighter", 12, 10, 28, 28),
+        Unit("Bandit", "Enemy", "characters.bandit", 13, 10, 26, 26),
+        Unit("Bone reference", "Enemy", "characters.skeleton", 9, 10, 13, 13),
+        Unit("Golem reference", "Enemy", "bosses.golem.granite", 13, 6, 95, 95),
+    ];
+
     private static BoardChanges Changes()
     {
         ImmutableArray<Tile> bridge = [.. Enumerable.Range(5, 2).SelectMany(y => Enumerable.Range(5, 4).Select(x => new Tile(x, y)))];
@@ -95,8 +284,27 @@ public static class DemoBattle
         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
         var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);
-        var map = creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = creatures ? CreatureUnits() : fight ? Units() : [];
+        var mobRefresh = spec.EndsWith(MobRefresh, StringComparison.Ordinal);
+        var goblinRoles = spec.EndsWith(GoblinRoles, StringComparison.Ordinal);
+        var roadAndHost = spec.EndsWith(RoadAndHost, StringComparison.Ordinal);
+        var kindled = spec.EndsWith(Kindled, StringComparison.Ordinal);
+        var boneWardens = spec.EndsWith(BoneWardens, StringComparison.Ordinal);
+        var hollowDead = spec.EndsWith(HollowDead, StringComparison.Ordinal);
+        var rimeKeepers = spec.EndsWith(RimeKeepers, StringComparison.Ordinal);
+        var nightCompanions = spec.EndsWith(NightCompanions, StringComparison.Ordinal);
+        var prismaticFlames = spec.EndsWith(PrismaticFlames, StringComparison.Ordinal);
+        var stoneSentinels = spec.EndsWith(StoneSentinels, StringComparison.Ordinal);
+        var wildElements = spec.EndsWith(WildElements, StringComparison.Ordinal);
+        var tideAndWyrm = spec.EndsWith(TideAndWyrm, StringComparison.Ordinal);
+        var elementalTriad = spec.EndsWith(ElementalTriad, StringComparison.Ordinal);
+        var groveWard = spec.EndsWith(GroveWard, StringComparison.Ordinal);
+        var emberFamiliar = spec.EndsWith(EmberFamiliar, StringComparison.Ordinal);
+        var trailCompanion = spec.EndsWith(TrailCompanion, StringComparison.Ordinal);
+        var oakAmbush = spec.EndsWith(OakAmbush, StringComparison.Ordinal);
+        var stoneAndMire = spec.EndsWith(StoneAndMire, StringComparison.Ordinal);
+        var oathAndShadow = spec.EndsWith(OathAndShadow, StringComparison.Ordinal);
+        var map = nightCompanions ? spec[..^NightCompanions.Length] : prismaticFlames ? spec[..^PrismaticFlames.Length] : stoneSentinels ? spec[..^StoneSentinels.Length] : wildElements ? spec[..^WildElements.Length] : tideAndWyrm ? spec[..^TideAndWyrm.Length] : elementalTriad ? spec[..^ElementalTriad.Length] : groveWard ? spec[..^GroveWard.Length] : emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = nightCompanions ? RefreshedNightCompanions() : prismaticFlames ? RefreshedPrismaticFlames() : stoneSentinels ? RefreshedStoneSentinels() : wildElements ? RefreshedWildElements() : tideAndWyrm ? RefreshedTideAndWyrm() : elementalTriad ? RefreshedElementalTriad() : groveWard ? RefreshedGroveWard() : emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

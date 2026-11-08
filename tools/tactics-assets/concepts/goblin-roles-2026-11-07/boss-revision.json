@@ -1,0 +1,27 @@
+{
+  "prompt": "Original Wardenflame: Embers of the Vale production concept sheet. Match supplied approved goblin's anatomy and painterly tactical-fantasy material language: moss-olive skin, bald broad pointed ears, amber eyes with dark pupils, blunt short nose, compact adult goblin proportions. No reptilian snout, horns or tail. Grounded late-1990s tactical RPG clarity, worn practical fabrics/leather/iron, warm top-left key, cool shadows, restrained earth colors, readable clusters for later pixel-art translation. Parchment background, no scenery/lettering. Show one SAME character as front3/4 fullbody, rear3/4 fullbody, side fullbody, head/equipment closeup, human1.75m scale inset. Consistent equipment and handedness, complete weapons/feet/ears contained with generous margins. VORGA THE BRIDGE-TAKER, goblinboss shared combatlook. Young adult grandson of Mother Skarrow; raised hiswarband afterthreewintersofchildrenstarving. Loud showmansswaggeroverrealanger, cruelpragmatist ratherthanjoyfulsadist. About1.15m, stockierthanarcher butsamegoblinanatomy andolivepalette. Mediumarmor: patched oxbloodleatherbrigandinewithfewflatironplates, onepractical ironleftshoulderplate, maroonshortsplitcape fastenedatneck thatleavesswordarmclear, beltwithsmallpouch, reinforcedboots. Headbare, no crown orgianthelmet. ONE worn SCIMITAR anatomicalRIGHT hand,LEFT empty forrallygesture. Notaspear despiteoldassetname. Functionalcurvedironblade/brownhiltconnectedrightfist. A small fadedclanknot charm onbelt recalls grandmother, no skulltrophies orspikes. Designandposemustreadwarlord at85-90nativepixels withoutturninghimintoanorc oroversizedhuman. Rearshowscape/armorbacknotfrontbuckle; collar/cape/shoulderplate remainfixed onbodywhenrotated. REVISION: remove the silver metal shoulderplate completely from ALLviews. Both shoulders have matching plain darkbrown leather caps, no metalpauldrons. Keep ironflatplatesandstuds on chestbrigandine ONLY. Preserve same young goblin warlord, maroonsplitcape, right-hand scimitar and empty left hand. Make thefaceyoungfirmratherthanelderlywrinkles. No other designchanges.",
+  "job": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_ZGhQbK2MjmzFcJxX8R7g5fET",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_ZGhQbK2MjmzFcJxX8R7g5fET' (one call waits on up to 32 jobs)."
+  },
+  "result": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_ZGhQbK2MjmzFcJxX8R7g5fET",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-07T00:18:14.688Z",
+        "updatedAt": "2026-11-07T00:18:50.522Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_HKNMm2sZ5vFVceXSEbR8eJ4z"
+        ],
+        "cuCost": 13
+      }
+    ]
+  }
+}

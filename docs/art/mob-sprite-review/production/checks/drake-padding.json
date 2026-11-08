@@ -1,0 +1,22 @@
+{
+  "authoringDrakeFrame": [
+    256,
+    256
+  ],
+  "packedDrakeFrame": [
+    192,
+    192
+  ],
+  "canonicalCrop": [
+    32,
+    53,
+    224,
+    245
+  ],
+  "comparedPoses": 112,
+  "allPixelIdentical": true,
+  "authoringTextureMiB": 32,
+  "packedTextureMiB": 18,
+  "savedTextureMiB": 14,
+  "method": "Compared every packed RGBA frame against the corresponding canonical 256px export cropped at the anchor offset. Exporter retains canonical sampling before cropping."
+}

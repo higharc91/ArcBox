@@ -1,0 +1,14 @@
+{
+  "hound_black-attack.png": "cc2bab3cb2efd4a7f804b774b9c709e37ace315847ae2d467ec37cc01a4bab42",
+  "hound_black-damage.png": "e7d5686cdc7eac7f36662310cdf5d37f68b5d013a2fab86951dda626692afc8c",
+  "hound_black-idle.png": "45849ff7dea0591d7138e786d0593cd65fb5882b9d244e716c2a7d1e2fa54ecc",
+  "hound_black-walk.png": "348631dfb5a1524fc9d3f8ee947fc03bb0085e06e69b143a639237fea3292f60",
+  "hound_grey-attack.png": "cc2bab3cb2efd4a7f804b774b9c709e37ace315847ae2d467ec37cc01a4bab42",
+  "hound_grey-damage.png": "e7d5686cdc7eac7f36662310cdf5d37f68b5d013a2fab86951dda626692afc8c",
+  "hound_grey-idle.png": "45849ff7dea0591d7138e786d0593cd65fb5882b9d244e716c2a7d1e2fa54ecc",
+  "hound_grey-walk.png": "348631dfb5a1524fc9d3f8ee947fc03bb0085e06e69b143a639237fea3292f60",
+  "imp_violet-attack.png": "7047cd22a9456d2814e486ba25b83de7eaa1e5ae15a028c9318f65a09b324419",
+  "imp_violet-damage.png": "489b863c55f104dd1a4dd6c15d0e72de3d1cc88151ecfd5b6c1069b5461b962a",
+  "imp_violet-idle.png": "4cbdf6e9415082c6b12ca5a6f25052aaf47ad070147b07d745c5c62dbecc8a4b",
+  "imp_violet-walk.png": "0c7ea49f6048e68e29eecc2d3a332b988f78ffee9348f9a7c48d1066fad5428a"
+}

@@ -1,0 +1,21 @@
+{
+  "cult_leader-attack.png": "8f919e577cb097a5633a293bebf8ce3ac28d2d453e6713873b342fb91c05c22d",
+  "cult_leader-cast-profile.png": "59d9f426c4c336ca032efdc4779cb2918e9f7863815e938832b13b21733da7d0",
+  "cult_leader-cast-rear.png": "dc274d3102877bd6195fad9f2c9621cb3cc58658b873c68593b8ea6dd75b35a3",
+  "cult_leader-cast.png": "047a0d957cb36af81c1cae4b546c4ce95ce9046a6e62b1c0c63f3bf511e8945e",
+  "cult_leader-damage-rejected.png": "6c2b78abd995bb7dd5ab30cb9e2f20536208e1ca8acc8965b9814672ade20de8",
+  "cult_leader-damage.png": "b1a397d4d256d099ec13b4c13de9d74afbea4a00ec9befbdf30f255b81745ff4",
+  "cult_leader-hurt-rear.png": "164f58cc619923bce7bb7f9350191c6a6a126c88723eb30c1411060a5945fe59",
+  "cult_leader-idle-rear.png": "5360eaa2984fff7bac63bf6264d37c67650f11812791469343a771a2d7ff677d",
+  "cult_leader-idle.png": "ac8cfbb6543154853498d940c4dceb537ac1ead2a245e807fa0fae92badddb09",
+  "cult_leader-portraits.png": "b0e22904eea08f43745072c8f4aa051dd0ab25bf5116cdfdf0e224cb266807ab",
+  "cult_leader-walk-rear.png": "be75e3c0c762343dfbf0d56b6fa94730e31b5fac500367a51d4fb39e45cb61f8",
+  "cult_leader-walk.png": "38e69deda10194c48be249968e9ef240b7e113967fb1013e0769ee7be0284b13",
+  "cultist-attack.png": "b8eed304e9938aac8109a40c71968a0c4d07979633152ff36787f008eef354a2",
+  "cultist-cast.png": "f32560ba9361fc7f71c3d56c96792938fc293930678af8d0dfae50930e17eea3",
+  "cultist-damage.png": "e4c8fe86c9ea38d215848515bdd0bcf9d785890ab19dc5e3124e19e6a3216795",
+  "cultist-idle.png": "7153d1a6ab256e97409eaa8f22ae29c49f03815c056bbe8941dd54fcf081c4d9",
+  "cultist-portraits-rejected.png": "4a50d373e38a2eee7394ec600a0525bc86a1f43cb8bb8ca8082bdc3bcd38b632",
+  "cultist-portraits.png": "581b4615e0568c333fe49935fd9eab777c187cee18ef230818eab29cd216a6b4",
+  "cultist-walk.png": "d321b168ec52cecaaf191e30001c4cda320f4ad457d6bc778301e09d52c01c16"
+}

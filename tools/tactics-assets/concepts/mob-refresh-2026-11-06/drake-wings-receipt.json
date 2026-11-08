@@ -1,0 +1,34 @@
+{
+  "provider": "Scenario",
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "prompt": "Revise this original Wardenflame RED DRAKE concept to restore its WINGS. This supersedes the earlier wingless direction: the owner explicitly wants its wings visible and clearly spreading during an attack. Preserve the creature's existing burgundy/ember-red scales, muted ochre throat/belly, wedge-shaped head, short swept horn ridges, amber eyes with small dark pupils, compact four-legged body, and single balancing tail. Match the same grounded tactical-fantasy painted concept craft, separated material planes and warm upper-left light. Not a giant flying dragon: body about 2.3 m nose-to-tail, about 0.9 m shoulder, and roughly 2.8–3.0 m full wingspan. It has exactly FOUR load-bearing legs PLUS ONE PAIR of batlike leathery wings. Each wing has a consistent visible root at the upper back behind the foreleg shoulder, a bent leading arm and three readable membrane-support fingers; front legs are separate and never become the wings. Russet wing membranes with subdued warm thinness at the lit edge, darker rib structure, no holes or random extra fingers. While idle the wings are folded along the back and flanks, visibly present as compact layered membranes rather than disappearing. During an aggressive bite/lunge the same wings unfold up and out in a clear readable threatening silhouette. Remain grounded, no flight scene, no huge flame effects obscuring the anatomy. Show THREE coherent full-body studies: (1) large front-three-quarter idle with both wings folded, (2) rear three-quarter idle clearly showing the two wing roots/folded membranes/tail connection, (3) equally large front-three-quarter attack preparation with BOTH wings fully spread, neck lowered and four claws braced on the same ground plane. Add one small wing-joint construction inset showing attachment behind the foreleg, and one neutral 1.75 m human side silhouette for scale. Keep the body exactly the same size across idle and attack; only wings and pose change. All wing tips, feet and tail fully inside the sheet with generous margins. Warm neutral parchment, no scene, no lettering, labels, watermark, UI, copied franchise designs, extra limbs, floating wing panels or wings replacing the forelegs.",
+  "reference_asset": "asset_jyE7isx9fsLMN4iDRveGVZ6P",
+  "job": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_HYDdsZDzYUS3rLE1TaMWdMdm",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_HYDdsZDzYUS3rLE1TaMWdMdm' (one call waits on up to 32 jobs)."
+  },
+  "result": {
+    "status": "completed",
+    "jobs": [
+      {
+        "jobId": "job_HYDdsZDzYUS3rLE1TaMWdMdm",
+        "jobType": "custom",
+        "status": "success",
+        "progress": 1,
+        "createdAt": "2026-11-06T22:42:22.611Z",
+        "updatedAt": "2026-11-06T22:43:14.923Z",
+        "modelId": "model_google-gemini-nano-banana-2-1",
+        "assetIds": [
+          "asset_4S89WuDz373cHtGWWg6NdzHp"
+        ],
+        "cuCost": 13
+      }
+    ]
+  },
+  "owner_request": "Yes those look good minus the drake, make sure it shows it's wings when it attacks",
+  "status": "Winged revision concept; pixel idle and attack work follows."
+}

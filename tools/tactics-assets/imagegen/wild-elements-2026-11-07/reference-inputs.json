@@ -1,0 +1,126 @@
+{
+  "air_storm-idle": {
+    "promptKey": "air_storm_idle",
+    "references": [
+      "references/air_storm-idle.png",
+      "../../concepts/wild-elements-2026-11-07/air_storm-concept.png"
+    ]
+  },
+  "air_storm-walk": {
+    "promptKey": "air_storm_walk",
+    "references": [
+      "references/air_storm-walk.png",
+      "source/air_storm-idle.png",
+      "../../concepts/wild-elements-2026-11-07/air_storm-concept.png"
+    ]
+  },
+  "air_storm-attack": {
+    "promptKey": "air_storm_attack",
+    "references": [
+      "references/air_storm-attack.png",
+      "source/air_storm-idle.png",
+      "../../concepts/wild-elements-2026-11-07/air_storm-concept.png"
+    ]
+  },
+  "air_storm-moves": {
+    "promptKey": "air_storm_moves",
+    "references": [
+      "references/air_storm-moves.png",
+      "source/air_storm-idle.png",
+      "../../concepts/wild-elements-2026-11-07/air_storm-concept.png"
+    ]
+  },
+  "air_storm-damage": {
+    "promptKey": "air_storm_damage",
+    "references": [
+      "references/air_storm-damage.png",
+      "source/air_storm-idle.png",
+      "../../concepts/wild-elements-2026-11-07/air_storm-concept.png"
+    ]
+  },
+  "earth_magma-idle": {
+    "promptKey": "earth_magma_idle",
+    "references": [
+      "references/earth_magma-idle.png",
+      "../../concepts/wild-elements-2026-11-07/earth_magma-concept.png"
+    ]
+  },
+  "earth_magma-walk": {
+    "promptKey": "earth_magma_walk",
+    "references": [
+      "references/earth_magma-walk.png",
+      "source/earth_magma-idle.png",
+      "../../concepts/wild-elements-2026-11-07/earth_magma-concept.png"
+    ]
+  },
+  "earth_magma-attack": {
+    "promptKey": "earth_magma_attack",
+    "references": [
+      "references/earth_magma-attack.png",
+      "source/earth_magma-idle.png",
+      "../../concepts/wild-elements-2026-11-07/earth_magma-concept.png"
+    ]
+  },
+  "earth_magma-moves": {
+    "promptKey": "earth_magma_moves",
+    "references": [
+      "references/earth_magma-moves.png",
+      "source/earth_magma-idle.png",
+      "../../concepts/wild-elements-2026-11-07/earth_magma-concept.png"
+    ]
+  },
+  "earth_magma-damage": {
+    "promptKey": "earth_magma_damage",
+    "references": [
+      "references/earth_magma-damage.png",
+      "source/earth_magma-idle.png",
+      "../../concepts/wild-elements-2026-11-07/earth_magma-concept.png"
+    ]
+  },
+  "water_swamp-idle": {
+    "promptKey": "water_swamp_idle",
+    "references": [
+      "references/water_swamp-idle.png",
+      "../../concepts/wild-elements-2026-11-07/water_swamp-concept.png"
+    ]
+  },
+  "water_swamp-walk": {
+    "promptKey": "water_swamp_walk",
+    "references": [
+      "references/water_swamp-walk.png",
+      "source/water_swamp-idle.png",
+      "../../concepts/wild-elements-2026-11-07/water_swamp-concept.png"
+    ]
+  },
+  "water_swamp-attack": {
+    "promptKey": "water_swamp_attack",
+    "references": [
+      "references/water_swamp-attack.png",
+      "source/water_swamp-idle.png",
+      "../../concepts/wild-elements-2026-11-07/water_swamp-concept.png"
+    ]
+  },
+  "water_swamp-moves": {
+    "promptKey": "water_swamp_moves",
+    "references": [
+      "references/water_swamp-moves.png",
+      "source/water_swamp-idle.png",
+      "../../concepts/wild-elements-2026-11-07/water_swamp-concept.png"
+    ]
+  },
+  "water_swamp-damage": {
+    "promptKey": "water_swamp_damage",
+    "references": [
+      "references/water_swamp-damage.png",
+      "source/water_swamp-idle.png",
+      "../../concepts/wild-elements-2026-11-07/water_swamp-concept.png"
+    ]
+  },
+  "air_storm-hurt-back": {
+    "promptKey": "air_storm_hurt_back",
+    "references": [
+      "../elemental-triad-2026-11-07/export/air_elemental/hurt/north/0.png",
+      "source/air_storm-idle.png"
+    ]
+  }
+}

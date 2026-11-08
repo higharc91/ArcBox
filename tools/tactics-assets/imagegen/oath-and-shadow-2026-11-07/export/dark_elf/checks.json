@@ -1,0 +1,2042 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 0,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      104,
+      158,
+      223
+    ],
+    "count": 3658
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 1,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      103,
+      158,
+      223
+    ],
+    "count": 3653
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 2,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      102,
+      158,
+      222
+    ],
+    "count": 3654
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 3,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      102,
+      158,
+      222
+    ],
+    "count": 3652
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 0,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      101,
+      105,
+      161,
+      224
+    ],
+    "count": 3702
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 1,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      102,
+      106,
+      161,
+      225
+    ],
+    "count": 3711
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 2,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      102,
+      105,
+      162,
+      224
+    ],
+    "count": 3694
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 3,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      101,
+      104,
+      157,
+      222
+    ],
+    "count": 3626
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 0,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      99,
+      105,
+      160,
+      224
+    ],
+    "count": 4004
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 1,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      97,
+      105,
+      163,
+      224
+    ],
+    "count": 3824
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 2,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      100,
+      105,
+      169,
+      224
+    ],
+    "count": 3663
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 3,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      95,
+      105,
+      155,
+      224
+    ],
+    "count": 3856
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      92,
+      105,
+      177,
+      224
+    ],
+    "count": 5007
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      41,
+      189,
+      181,
+      224
+    ],
+    "count": 3773
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 0,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      105,
+      157,
+      224
+    ],
+    "count": 3774
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 2,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      97,
+      159,
+      225
+    ],
+    "count": 3955
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 3,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      105,
+      157,
+      224
+    ],
+    "count": 3784
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 4,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      102,
+      157,
+      222
+    ],
+    "count": 3562
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 5,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      102,
+      156,
+      222
+    ],
+    "count": 3533
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 6,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      102,
+      156,
+      222
+    ],
+    "count": 3486
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 7,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      101,
+      102,
+      157,
+      222
+    ],
+    "count": 3507
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 4,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      101,
+      103,
+      162,
+      223
+    ],
+    "count": 3654
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 5,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      102,
+      104,
+      162,
+      224
+    ],
+    "count": 3398
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 6,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      102,
+      104,
+      162,
+      224
+    ],
+    "count": 3451
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 7,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      101,
+      102,
+      160,
+      222
+    ],
+    "count": 3476
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 4,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      97,
+      104,
+      164,
+      224
+    ],
+    "count": 3997
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 5,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      92,
+      105,
+      165,
+      224
+    ],
+    "count": 3978
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 6,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      62,
+      105,
+      167,
+      224
+    ],
+    "count": 4076
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 7,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      104,
+      158,
+      224
+    ],
+    "count": 3909
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      91,
+      103,
+      177,
+      224
+    ],
+    "count": 5006
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      47,
+      186,
+      187,
+      224
+    ],
+    "count": 3805
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 4,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      101,
+      104,
+      157,
+      224
+    ],
+    "count": 3706
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 6,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      95,
+      156,
+      224
+    ],
+    "count": 3797
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 7,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      101,
+      104,
+      155,
+      224
+    ],
+    "count": 3643
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 8,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      111,
+      101,
+      147,
+      223
+    ],
+    "count": 2433
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 9,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      112,
+      101,
+      148,
+      223
+    ],
+    "count": 2445
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 10,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      113,
+      101,
+      148,
+      223
+    ],
+    "count": 2415
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 11,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      112,
+      101,
+      147,
+      223
+    ],
+    "count": 2416
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 8,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      106,
+      102,
+      159,
+      222
+    ],
+    "count": 2983
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 9,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      108,
+      103,
+      151,
+      223
+    ],
+    "count": 2622
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 10,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      108,
+      103,
+      152,
+      222
+    ],
+    "count": 2690
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 11,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      113,
+      102,
+      151,
+      222
+    ],
+    "count": 2653
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 8,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      104,
+      103,
+      150,
+      224
+    ],
+    "count": 3187
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 9,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      95,
+      104,
+      163,
+      224
+    ],
+    "count": 3635
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 10,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      32,
+      107,
+      166,
+      224
+    ],
+    "count": 4395
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 11,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      98,
+      103,
+      157,
+      224
+    ],
+    "count": 3571
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      101,
+      100,
+      161,
+      224
+    ],
+    "count": 4163
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      51,
+      189,
+      197,
+      224
+    ],
+    "count": 3553
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 8,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      110,
+      104,
+      149,
+      224
+    ],
+    "count": 2688
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 10,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      109,
+      96,
+      151,
+      224
+    ],
+    "count": 2821
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 11,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      110,
+      104,
+      148,
+      224
+    ],
+    "count": 2641
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 12,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      98,
+      102,
+      152,
+      223
+    ],
+    "count": 3506
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 13,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      98,
+      102,
+      152,
+      223
+    ],
+    "count": 3493
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 14,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      99,
+      102,
+      153,
+      223
+    ],
+    "count": 3492
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 15,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      98,
+      102,
+      152,
+      223
+    ],
+    "count": 3478
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 12,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      95,
+      103,
+      155,
+      221
+    ],
+    "count": 3694
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 13,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      104,
+      155,
+      222
+    ],
+    "count": 3395
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 14,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      103,
+      154,
+      222
+    ],
+    "count": 3582
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 15,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      102,
+      154,
+      221
+    ],
+    "count": 3558
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 12,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      87,
+      104,
+      156,
+      224
+    ],
+    "count": 4030
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 13,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      102,
+      104,
+      151,
+      224
+    ],
+    "count": 3603
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 14,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      36,
+      105,
+      164,
+      224
+    ],
+    "count": 4367
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 15,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      99,
+      104,
+      151,
+      224
+    ],
+    "count": 3624
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      93,
+      100,
+      172,
+      224
+    ],
+    "count": 5218
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 7,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      50,
+      187,
+      193,
+      224
+    ],
+    "count": 3894
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 12,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      98,
+      105,
+      153,
+      224
+    ],
+    "count": 3625
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 14,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      101,
+      96,
+      153,
+      224
+    ],
+    "count": 3817
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 15,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      98,
+      105,
+      152,
+      224
+    ],
+    "count": 3622
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 16,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      96,
+      102,
+      155,
+      223
+    ],
+    "count": 3724
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 17,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      95,
+      102,
+      153,
+      223
+    ],
+    "count": 3744
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 18,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      95,
+      102,
+      153,
+      223
+    ],
+    "count": 3741
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 19,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      96,
+      102,
+      154,
+      223
+    ],
+    "count": 3738
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 16,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      103,
+      157,
+      223
+    ],
+    "count": 3722
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 17,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      104,
+      157,
+      223
+    ],
+    "count": 3734
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 18,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      96,
+      103,
+      157,
+      220
+    ],
+    "count": 3760
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 19,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      102,
+      157,
+      222
+    ],
+    "count": 3777
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 16,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      86,
+      103,
+      155,
+      224
+    ],
+    "count": 4181
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 17,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      85,
+      103,
+      167,
+      224
+    ],
+    "count": 3915
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 18,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      85,
+      103,
+      179,
+      224
+    ],
+    "count": 4065
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 19,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      90,
+      103,
+      158,
+      224
+    ],
+    "count": 3921
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      77,
+      102,
+      167,
+      224
+    ],
+    "count": 5236
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 9,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      50,
+      188,
+      197,
+      224
+    ],
+    "count": 4135
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 16,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      104,
+      153,
+      224
+    ],
+    "count": 3752
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 18,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      96,
+      153,
+      224
+    ],
+    "count": 3853
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 19,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      104,
+      153,
+      224
+    ],
+    "count": 3722
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 20,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      98,
+      102,
+      152,
+      223
+    ],
+    "count": 3484
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 21,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      98,
+      102,
+      151,
+      223
+    ],
+    "count": 3493
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 22,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      97,
+      102,
+      151,
+      223
+    ],
+    "count": 3487
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 23,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      98,
+      102,
+      151,
+      222
+    ],
+    "count": 3480
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 20,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      94,
+      103,
+      150,
+      221
+    ],
+    "count": 3348
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 21,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      96,
+      104,
+      153,
+      224
+    ],
+    "count": 3346
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 22,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      91,
+      103,
+      151,
+      223
+    ],
+    "count": 3592
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 23,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      91,
+      103,
+      151,
+      221
+    ],
+    "count": 3537
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 20,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      89,
+      104,
+      153,
+      224
+    ],
+    "count": 4025
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 21,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      82,
+      104,
+      169,
+      224
+    ],
+    "count": 4040
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 22,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      87,
+      104,
+      189,
+      224
+    ],
+    "count": 4096
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 23,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      90,
+      104,
+      157,
+      224
+    ],
+    "count": 3885
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      96,
+      100,
+      179,
+      224
+    ],
+    "count": 5293
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 11,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      46,
+      188,
+      195,
+      224
+    ],
+    "count": 4131
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 20,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      103,
+      150,
+      224
+    ],
+    "count": 3407
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 22,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      95,
+      150,
+      224
+    ],
+    "count": 3620
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 23,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      100,
+      103,
+      150,
+      224
+    ],
+    "count": 3348
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 24,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      110,
+      102,
+      140,
+      223
+    ],
+    "count": 2345
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 25,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      110,
+      102,
+      141,
+      223
+    ],
+    "count": 2371
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 26,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      110,
+      101,
+      140,
+      223
+    ],
+    "count": 2370
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 27,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      110,
+      101,
+      140,
+      223
+    ],
+    "count": 2351
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 24,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      106,
+      103,
+      144,
+      223
+    ],
+    "count": 2612
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 25,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      109,
+      104,
+      145,
+      224
+    ],
+    "count": 2511
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 26,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      106,
+      102,
+      144,
+      222
+    ],
+    "count": 2591
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 27,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      108,
+      102,
+      144,
+      222
+    ],
+    "count": 2485
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 24,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      110,
+      104,
+      139,
+      224
+    ],
+    "count": 2690
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 25,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      104,
+      104,
+      151,
+      224
+    ],
+    "count": 2991
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 26,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      92,
+      105,
+      203,
+      224
+    ],
+    "count": 3874
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 27,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      104,
+      104,
+      150,
+      224
+    ],
+    "count": 2864
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      102,
+      97,
+      168,
+      224
+    ],
+    "count": 4284
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      49,
+      187,
+      195,
+      224
+    ],
+    "count": 3904
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 24,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      107,
+      104,
+      143,
+      224
+    ],
+    "count": 2618
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 26,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      106,
+      95,
+      147,
+      224
+    ],
+    "count": 2986
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 27,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      107,
+      104,
+      143,
+      224
+    ],
+    "count": 2579
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 28,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      103,
+      102,
+      155,
+      223
+    ],
+    "count": 3457
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 29,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      103,
+      102,
+      155,
+      223
+    ],
+    "count": 3474
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 30,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      103,
+      102,
+      155,
+      223
+    ],
+    "count": 3473
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dark_elf-idle.png",
+    "sourcePose": 31,
+    "scale": 0.5970149253731343,
+    "bounds": [
+      102,
+      102,
+      154,
+      223
+    ],
+    "count": 3454
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 28,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      102,
+      103,
+      158,
+      221
+    ],
+    "count": 3422
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 29,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      99,
+      104,
+      158,
+      222
+    ],
+    "count": 3407
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 30,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      100,
+      103,
+      157,
+      220
+    ],
+    "count": 3415
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dark_elf-walk.png",
+    "sourcePose": 31,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      101,
+      102,
+      156,
+      220
+    ],
+    "count": 3461
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 28,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      99,
+      105,
+      162,
+      224
+    ],
+    "count": 3914
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 29,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      103,
+      105,
+      160,
+      224
+    ],
+    "count": 3535
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 30,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      92,
+      108,
+      201,
+      224
+    ],
+    "count": 3563
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dark_elf-attack.png",
+    "sourcePose": 31,
+    "scale": 0.5825242718446602,
+    "bounds": [
+      103,
+      106,
+      158,
+      224
+    ],
+    "count": 3629
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      106,
+      98,
+      188,
+      224
+    ],
+    "count": 5128
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dark_elf-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5405405405405406,
+    "bounds": [
+      38,
+      184,
+      182,
+      224
+    ],
+    "count": 3861
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 28,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      101,
+      105,
+      154,
+      224
+    ],
+    "count": 3536
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 30,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      101,
+      99,
+      158,
+      224
+    ],
+    "count": 3756
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dark_elf-cast.png",
+    "sourcePose": 31,
+    "scale": 0.5882352941176471,
+    "bounds": [
+      101,
+      105,
+      154,
+      224
+    ],
+    "count": 3550
+  }
+]

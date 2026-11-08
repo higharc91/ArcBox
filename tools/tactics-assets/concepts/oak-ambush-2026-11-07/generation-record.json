@@ -1,0 +1,17 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "parameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  },
+  "brief": "Wardenflame: Embers of the Vale grounded tactical fantasy PRODUCTION CONCEPT SHEET for pixel translation. ONE consistent OAK MIMIC creature in frontthreequarter CLOSED/dormant chest, rear CLOSED threequarter showing hinges, LEFT profile, OPEN BITE threequarter and open REAR view, detail of fixedhinges/tongue root, small neutral1.75m human SCALE inset. Clean parchmentbackground, no text/scenery/labels. Strong readable silhouette, fine darkoutlines, deliberate material/shade separation, warm upperleftkey/coolshadows, notglossy3D/anime or giantglowingFX. Existing lore/rules: SMALL aberration disguisedas oakchest, natural BITE and ADHESIVE BITE, NOT a humanoid/giant wardrobe and no carried weapons. Closedwaisthighdomed treasurechest approx1mWIDE,0.65mDEEP,0.75mHIGH (0.9m when shortfeetextended). Weathered warmHONEY/OAK brown planks, visiblecoarsewoodgrain/worncorners, TWO darkoxidizedIRONHOOPS wrapping curvedbarrelLID fronttoback, dullironcornerbrackets, one SMALL BRASSsquareLATCH at CENTERFRONT only. Backplainwood has TWO CONNECTEDfixedIRONHINGES byupperedge, NO frontlatch/face/lipsontheBACK. Lid is RIGID WOOD connectedatREARhingeaxis, opensUPandBACK likechest, neverfoldsfront or floatsfree. CloseddisguisehasNOEXTERNALEYES or facialfeatures, no horns/skulls/piratelogos/chains/treasureloot. Only averyfine darkseam hintsatcreature. WhenMOVING fourSHORT DARKINDIGOresinous MUSCULARPSEUDOPODFEET emergefromunderside andremain solidlyJOINEDtobodysill, no humanarms/doglegs/floatingtentacles. Openattackrevealsburgundy/maroon gumsLINING lidandbodyrims, 8-10 UNEVEN smallIVORYtoothshapes firmlySEATED IN GUMS (notfloatingrows), deepdarkmouthcavity, ONEbroad fleshyDUSTYROSEstickyTONGUE firmlyROOTEDinsidefloorofmouth; modestshortforwardtonguelashlessthanhalfchestwidth, tipnotsevered/scorpionstinger. ShellpanelsretainEXACTproportions, teethareorganicinteriornotironspikes. Fourshortfeetbrace duringbite. Nose/front-mouthdirection always LATCHSIDE. LEFTprofilefrontopeningLEFT/rearhingeRIGHT; RIGHTprofilefrontopeningRIGHT/hingeLEFT; FULLBACK seesoutsideofraisedwoodlid/twohinges andoccludedmouth/tongueprojectingAWAY, NEVER chestfrontmouthexposed onbackpanel. Inactivefigurelooksordinarychest; activeformreadsambushhorror without gore. No floatinggoldcoins/debris/slimeparticles/paintedgroundshadow. Downformslumpedchestsidewayswithalllid/body/feet/weakwithdrawntonguejoinedbyhinges/tissue, notexplodedpile. Fine tacticalpixelfriendlydetailsmatchrefreshedroster; closedformlowerthanpersonwaist, fullyopen lidstillbelowadulthead.",
+  "job": {
+    "model_id": "model_google-gemini-nano-banana-2-1",
+    "job_id": "job_EzJkAnaqbZJEYUmt4MbEVE5C",
+    "status": "in-progress",
+    "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_EzJkAnaqbZJEYUmt4MbEVE5C' (one call waits on up to 32 jobs)."
+  }
+}

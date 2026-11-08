@@ -1,0 +1,17 @@
+{
+  "priorCommit": "05c4fb65",
+  "addedCreatureEntries": [
+    "mob_refresh_hound"
+  ],
+  "combatMechanicsUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 4,
+  "packedFrameKeys": 112,
+  "distinctAuthoredPoseSelections": 112,
+  "runtimeAssets": 1,
+  "wholePoseFacingSelection": true
+}

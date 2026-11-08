@@ -1,0 +1,10139 @@
+[
+  {
+    "id": "hound_black",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          111.0,
+          121
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          82,
+          119,
+          57,
+          117
+        ],
+        "bounds": [
+          84,
+          121,
+          137,
+          234
+        ],
+        "foot": [
+          111.5,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          118
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          304,
+          116,
+          57,
+          120
+        ],
+        "bounds": [
+          306,
+          118,
+          359,
+          234
+        ],
+        "foot": [
+          333.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          123
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          526,
+          121,
+          57,
+          115
+        ],
+        "bounds": [
+          528,
+          123,
+          581,
+          234
+        ],
+        "foot": [
+          555.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          121
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          748,
+          119,
+          57,
+          117
+        ],
+        "bounds": [
+          750,
+          121,
+          803,
+          234
+        ],
+        "foot": [
+          776.5,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          120
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          82,
+          118,
+          58,
+          118
+        ],
+        "bounds": [
+          84,
+          120,
+          138,
+          234
+        ],
+        "foot": [
+          111.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          118
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          304,
+          115,
+          58,
+          121
+        ],
+        "bounds": [
+          306,
+          117,
+          360,
+          234
+        ],
+        "foot": [
+          333.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          122
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          526,
+          120,
+          59,
+          116
+        ],
+        "bounds": [
+          528,
+          122,
+          583,
+          234
+        ],
+        "foot": [
+          556.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          120
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          748,
+          118,
+          58,
+          118
+        ],
+        "bounds": [
+          750,
+          120,
+          804,
+          234
+        ],
+        "foot": [
+          777.5,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          122
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          80,
+          120,
+          62,
+          116
+        ],
+        "bounds": [
+          82,
+          122,
+          140,
+          234
+        ],
+        "foot": [
+          110.5,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          122
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          301,
+          120,
+          63,
+          116
+        ],
+        "bounds": [
+          303,
+          122,
+          362,
+          234
+        ],
+        "foot": [
+          332.5,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          128
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          524,
+          125,
+          62,
+          111
+        ],
+        "bounds": [
+          526,
+          127,
+          584,
+          234
+        ],
+        "foot": [
+          555.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          122
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          746,
+          120,
+          61,
+          116
+        ],
+        "bounds": [
+          748,
+          122,
+          805,
+          234
+        ],
+        "foot": [
+          777.0,
+          234
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.0,
+          134
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          118,
+          132,
+          79,
+          154
+        ],
+        "bounds": [
+          120,
+          134,
+          195,
+          284
+        ],
+        "foot": [
+          160.0,
+          284
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          468.0,
+          190
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          413,
+          188,
+          104,
+          99
+        ],
+        "bounds": [
+          415,
+          190,
+          515,
+          285
+        ],
+        "foot": [
+          465.0,
+          285
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          82.0,
+          346
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          54,
+          344,
+          106,
+          108
+        ],
+        "bounds": [
+          56,
+          346,
+          158,
+          450
+        ],
+        "foot": [
+          95.5,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          303.5,
+          343
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          277,
+          340,
+          105,
+          112
+        ],
+        "bounds": [
+          279,
+          342,
+          380,
+          450
+        ],
+        "foot": [
+          317.5,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          526.5,
+          347
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          499,
+          345,
+          105,
+          107
+        ],
+        "bounds": [
+          501,
+          347,
+          602,
+          450
+        ],
+        "foot": [
+          539.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          749.0,
+          347
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          721,
+          345,
+          106,
+          107
+        ],
+        "bounds": [
+          723,
+          347,
+          825,
+          450
+        ],
+        "foot": [
+          761.5,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          83.5,
+          345
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          52,
+          342,
+          110,
+          111
+        ],
+        "bounds": [
+          54,
+          344,
+          160,
+          451
+        ],
+        "foot": [
+          94.5,
+          451
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          303.0,
+          342
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          274,
+          340,
+          110,
+          112
+        ],
+        "bounds": [
+          276,
+          342,
+          382,
+          450
+        ],
+        "foot": [
+          318.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          527.0,
+          345
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          497,
+          342,
+          110,
+          110
+        ],
+        "bounds": [
+          499,
+          344,
+          605,
+          450
+        ],
+        "foot": [
+          540.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          749.5,
+          344
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          718,
+          342,
+          111,
+          110
+        ],
+        "bounds": [
+          720,
+          344,
+          827,
+          450
+        ],
+        "foot": [
+          763.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          84.0,
+          347
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          51,
+          344,
+          109,
+          109
+        ],
+        "bounds": [
+          53,
+          346,
+          158,
+          451
+        ],
+        "foot": [
+          94.5,
+          451
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          303.5,
+          347
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          273,
+          344,
+          109,
+          108
+        ],
+        "bounds": [
+          275,
+          346,
+          380,
+          450
+        ],
+        "foot": [
+          316.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          535.5,
+          352
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          493,
+          349,
+          112,
+          104
+        ],
+        "bounds": [
+          495,
+          351,
+          603,
+          451
+        ],
+        "foot": [
+          538.5,
+          451
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.0,
+          351
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          718,
+          348,
+          110,
+          104
+        ],
+        "bounds": [
+          720,
+          350,
+          826,
+          450
+        ],
+        "foot": [
+          761.0,
+          450
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          766.0,
+          141
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          703,
+          139,
+          144,
+          145
+        ],
+        "bounds": [
+          705,
+          141,
+          845,
+          282
+        ],
+        "foot": [
+          762.0,
+          282
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1091.0,
+          192
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          1012,
+          189,
+          161,
+          93
+        ],
+        "bounds": [
+          1014,
+          191,
+          1171,
+          280
+        ],
+        "foot": [
+          1092.5,
+          280
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          69.0,
+          564
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          35,
+          562,
+          147,
+          104
+        ],
+        "bounds": [
+          37,
+          564,
+          180,
+          664
+        ],
+        "foot": [
+          123.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          291.0,
+          563
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          258,
+          561,
+          146,
+          105
+        ],
+        "bounds": [
+          260,
+          563,
+          402,
+          664
+        ],
+        "foot": [
+          344.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          514.5,
+          566
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          480,
+          564,
+          146,
+          102
+        ],
+        "bounds": [
+          482,
+          566,
+          624,
+          664
+        ],
+        "foot": [
+          566.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          735.5,
+          565
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          701,
+          562,
+          147,
+          104
+        ],
+        "bounds": [
+          703,
+          564,
+          846,
+          664
+        ],
+        "foot": [
+          788.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          68.0,
+          564
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          32,
+          561,
+          152,
+          105
+        ],
+        "bounds": [
+          34,
+          563,
+          182,
+          664
+        ],
+        "foot": [
+          118.5,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          291.0,
+          563
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          254,
+          561,
+          152,
+          106
+        ],
+        "bounds": [
+          256,
+          563,
+          404,
+          665
+        ],
+        "foot": [
+          342.0,
+          665
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          513.5,
+          565
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          476,
+          562,
+          153,
+          104
+        ],
+        "bounds": [
+          478,
+          564,
+          627,
+          664
+        ],
+        "foot": [
+          561.5,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          734.5,
+          564
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          698,
+          561,
+          153,
+          106
+        ],
+        "bounds": [
+          700,
+          563,
+          849,
+          665
+        ],
+        "foot": [
+          790.0,
+          665
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          68.0,
+          565
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          32,
+          563,
+          150,
+          104
+        ],
+        "bounds": [
+          34,
+          565,
+          180,
+          665
+        ],
+        "foot": [
+          123.0,
+          665
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          289.0,
+          566
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          252,
+          564,
+          153,
+          103
+        ],
+        "bounds": [
+          254,
+          566,
+          403,
+          665
+        ],
+        "foot": [
+          344.5,
+          665
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          512.5,
+          568
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          474,
+          566,
+          153,
+          101
+        ],
+        "bounds": [
+          476,
+          568,
+          625,
+          665
+        ],
+        "foot": [
+          567.5,
+          665
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          735.0,
+          566
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          699,
+          563,
+          150,
+          104
+        ],
+        "bounds": [
+          701,
+          565,
+          847,
+          665
+        ],
+        "foot": [
+          789.5,
+          665
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          135.0,
+          447
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          45,
+          444,
+          217,
+          136
+        ],
+        "bounds": [
+          47,
+          446,
+          260,
+          578
+        ],
+        "foot": [
+          176.0,
+          578
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          473.0,
+          501
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          373,
+          499,
+          195,
+          77
+        ],
+        "bounds": [
+          375,
+          501,
+          566,
+          574
+        ],
+        "foot": [
+          470.5,
+          574
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          76.5,
+          776
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          48,
+          773,
+          111,
+          118
+        ],
+        "bounds": [
+          50,
+          775,
+          157,
+          889
+        ],
+        "foot": [
+          130.0,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          299.5,
+          775
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          272,
+          773,
+          109,
+          118
+        ],
+        "bounds": [
+          274,
+          775,
+          379,
+          889
+        ],
+        "foot": [
+          352.0,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          522.0,
+          779
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          494,
+          777,
+          109,
+          114
+        ],
+        "bounds": [
+          496,
+          779,
+          601,
+          889
+        ],
+        "foot": [
+          574.0,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          744.0,
+          779
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          716,
+          777,
+          109,
+          114
+        ],
+        "bounds": [
+          718,
+          779,
+          823,
+          889
+        ],
+        "foot": [
+          795.5,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          76.5,
+          773
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          47,
+          771,
+          115,
+          120
+        ],
+        "bounds": [
+          49,
+          773,
+          160,
+          889
+        ],
+        "foot": [
+          130.0,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          299.5,
+          773
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          271,
+          771,
+          113,
+          120
+        ],
+        "bounds": [
+          273,
+          773,
+          382,
+          889
+        ],
+        "foot": [
+          351.0,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          520.5,
+          775
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          491,
+          773,
+          116,
+          118
+        ],
+        "bounds": [
+          493,
+          775,
+          605,
+          889
+        ],
+        "foot": [
+          574.5,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          743.0,
+          775
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          713,
+          772,
+          116,
+          119
+        ],
+        "bounds": [
+          715,
+          774,
+          827,
+          889
+        ],
+        "foot": [
+          797.0,
+          889
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          78.0,
+          778
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          45,
+          776,
+          115,
+          116
+        ],
+        "bounds": [
+          47,
+          778,
+          158,
+          890
+        ],
+        "foot": [
+          128.0,
+          890
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          298.5,
+          778
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          267,
+          775,
+          120,
+          117
+        ],
+        "bounds": [
+          269,
+          777,
+          385,
+          890
+        ],
+        "foot": [
+          351.5,
+          890
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          519.5,
+          782
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          488,
+          780,
+          118,
+          112
+        ],
+        "bounds": [
+          490,
+          782,
+          604,
+          890
+        ],
+        "foot": [
+          573.5,
+          890
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          743.5,
+          782
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          712,
+          779,
+          118,
+          113
+        ],
+        "bounds": [
+          714,
+          781,
+          828,
+          890
+        ],
+        "foot": [
+          795.5,
+          890
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          748.5,
+          423
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          701,
+          421,
+          165,
+          161
+        ],
+        "bounds": [
+          703,
+          423,
+          864,
+          580
+        ],
+        "foot": [
+          824.0,
+          580
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1091.0,
+          500
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          1010,
+          498,
+          163,
+          86
+        ],
+        "bounds": [
+          1012,
+          500,
+          1171,
+          582
+        ],
+        "foot": [
+          1091.5,
+          582
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.5,
+          979
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          84,
+          976,
+          53,
+          126
+        ],
+        "bounds": [
+          86,
+          978,
+          135,
+          1100
+        ],
+        "foot": [
+          111.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          974
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          306,
+          972,
+          53,
+          130
+        ],
+        "bounds": [
+          308,
+          974,
+          357,
+          1100
+        ],
+        "foot": [
+          333.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          980
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          528,
+          978,
+          53,
+          124
+        ],
+        "bounds": [
+          530,
+          980,
+          579,
+          1100
+        ],
+        "foot": [
+          555.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          979
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          749,
+          976,
+          54,
+          126
+        ],
+        "bounds": [
+          751,
+          978,
+          801,
+          1100
+        ],
+        "foot": [
+          777.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          976
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          83,
+          974,
+          56,
+          129
+        ],
+        "bounds": [
+          85,
+          976,
+          137,
+          1101
+        ],
+        "foot": [
+          111.5,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          975
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          304,
+          972,
+          57,
+          131
+        ],
+        "bounds": [
+          306,
+          974,
+          359,
+          1101
+        ],
+        "foot": [
+          334.0,
+          1101
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          977
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          527,
+          975,
+          56,
+          127
+        ],
+        "bounds": [
+          529,
+          977,
+          581,
+          1100
+        ],
+        "foot": [
+          555.5,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          977
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          748,
+          974,
+          57,
+          128
+        ],
+        "bounds": [
+          750,
+          976,
+          803,
+          1100
+        ],
+        "foot": [
+          777.0,
+          1100
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          979
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          83,
+          977,
+          55,
+          127
+        ],
+        "bounds": [
+          85,
+          979,
+          136,
+          1102
+        ],
+        "foot": [
+          111.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          977
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          304,
+          974,
+          55,
+          130
+        ],
+        "bounds": [
+          306,
+          976,
+          357,
+          1102
+        ],
+        "foot": [
+          332.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          982
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          527,
+          980,
+          56,
+          124
+        ],
+        "bounds": [
+          529,
+          982,
+          581,
+          1102
+        ],
+        "foot": [
+          555.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          980
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          749,
+          977,
+          55,
+          127
+        ],
+        "bounds": [
+          751,
+          979,
+          802,
+          1102
+        ],
+        "foot": [
+          777.0,
+          1102
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.0,
+          737
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          118,
+          734,
+          79,
+          164
+        ],
+        "bounds": [
+          120,
+          736,
+          195,
+          896
+        ],
+        "foot": [
+          158.5,
+          896
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          468.5,
+          806
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          416,
+          804,
+          102,
+          92
+        ],
+        "bounds": [
+          418,
+          806,
+          516,
+          894
+        ],
+        "foot": [
+          467.0,
+          894
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          142.0,
+          1190
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          55,
+          1188,
+          114,
+          118
+        ],
+        "bounds": [
+          57,
+          1190,
+          167,
+          1304
+        ],
+        "foot": [
+          92.5,
+          1304
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          363.0,
+          1189
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          276,
+          1186,
+          114,
+          120
+        ],
+        "bounds": [
+          278,
+          1188,
+          388,
+          1304
+        ],
+        "foot": [
+          314.0,
+          1304
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          585.5,
+          1193
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          499,
+          1191,
+          114,
+          115
+        ],
+        "bounds": [
+          501,
+          1193,
+          611,
+          1304
+        ],
+        "foot": [
+          536.0,
+          1304
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          807.0,
+          1192
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          721,
+          1190,
+          113,
+          116
+        ],
+        "bounds": [
+          723,
+          1192,
+          832,
+          1304
+        ],
+        "foot": [
+          758.0,
+          1304
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          143.0,
+          1188
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          54,
+          1186,
+          117,
+          119
+        ],
+        "bounds": [
+          56,
+          1188,
+          169,
+          1303
+        ],
+        "foot": [
+          89.5,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          363.0,
+          1188
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          274,
+          1186,
+          118,
+          118
+        ],
+        "bounds": [
+          276,
+          1188,
+          390,
+          1302
+        ],
+        "foot": [
+          311.0,
+          1302
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          585.0,
+          1190
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          494,
+          1188,
+          119,
+          116
+        ],
+        "bounds": [
+          496,
+          1190,
+          611,
+          1302
+        ],
+        "foot": [
+          532.0,
+          1302
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          807.0,
+          1190
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          717,
+          1187,
+          120,
+          118
+        ],
+        "bounds": [
+          719,
+          1189,
+          835,
+          1303
+        ],
+        "foot": [
+          755.5,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          144.0,
+          1190
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          53,
+          1187,
+          122,
+          118
+        ],
+        "bounds": [
+          55,
+          1189,
+          173,
+          1303
+        ],
+        "foot": [
+          90.0,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          366.0,
+          1190
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          274,
+          1188,
+          123,
+          117
+        ],
+        "bounds": [
+          276,
+          1190,
+          395,
+          1303
+        ],
+        "foot": [
+          310.5,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          588.0,
+          1195
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          497,
+          1192,
+          122,
+          113
+        ],
+        "bounds": [
+          499,
+          1194,
+          617,
+          1303
+        ],
+        "foot": [
+          533.5,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          809.0,
+          1192
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          719,
+          1190,
+          122,
+          115
+        ],
+        "bounds": [
+          721,
+          1192,
+          839,
+          1303
+        ],
+        "foot": [
+          756.0,
+          1303
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          809.0,
+          737
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          703,
+          734,
+          153,
+          163
+        ],
+        "bounds": [
+          705,
+          736,
+          854,
+          895
+        ],
+        "foot": [
+          751.5,
+          895
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1099.0,
+          812
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          1026,
+          809,
+          136,
+          86
+        ],
+        "bounds": [
+          1028,
+          811,
+          1160,
+          893
+        ],
+        "foot": [
+          1094.0,
+          893
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          150.5,
+          1412
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          28,
+          1410,
+          162,
+          104
+        ],
+        "bounds": [
+          30,
+          1412,
+          188,
+          1512
+        ],
+        "foot": [
+          95.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          376.0,
+          1409
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          250,
+          1407,
+          162,
+          107
+        ],
+        "bounds": [
+          252,
+          1409,
+          410,
+          1512
+        ],
+        "foot": [
+          316.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          575.5,
+          1416
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          472,
+          1413,
+          161,
+          101
+        ],
+        "bounds": [
+          474,
+          1415,
+          631,
+          1512
+        ],
+        "foot": [
+          539.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          817.0,
+          1413
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          693,
+          1410,
+          164,
+          104
+        ],
+        "bounds": [
+          695,
+          1412,
+          855,
+          1512
+        ],
+        "foot": [
+          760.0,
+          1512
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          151.5,
+          1410
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          29,
+          1408,
+          163,
+          105
+        ],
+        "bounds": [
+          31,
+          1410,
+          190,
+          1511
+        ],
+        "foot": [
+          94.5,
+          1511
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          377.0,
+          1408
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          251,
+          1405,
+          163,
+          107
+        ],
+        "bounds": [
+          253,
+          1407,
+          412,
+          1510
+        ],
+        "foot": [
+          316.0,
+          1510
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          577.0,
+          1413
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          472,
+          1411,
+          162,
+          101
+        ],
+        "bounds": [
+          474,
+          1413,
+          632,
+          1510
+        ],
+        "foot": [
+          538.0,
+          1510
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          817.0,
+          1411
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          694,
+          1409,
+          164,
+          104
+        ],
+        "bounds": [
+          696,
+          1411,
+          856,
+          1511
+        ],
+        "foot": [
+          759.5,
+          1511
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          150.0,
+          1412
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          29,
+          1410,
+          161,
+          105
+        ],
+        "bounds": [
+          31,
+          1412,
+          188,
+          1513
+        ],
+        "foot": [
+          95.0,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          373.5,
+          1411
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          249,
+          1409,
+          163,
+          106
+        ],
+        "bounds": [
+          251,
+          1411,
+          410,
+          1513
+        ],
+        "foot": [
+          315.0,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          575.0,
+          1418
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          472,
+          1416,
+          163,
+          99
+        ],
+        "bounds": [
+          474,
+          1418,
+          633,
+          1513
+        ],
+        "foot": [
+          538.0,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          817.5,
+          1413
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          695,
+          1411,
+          162,
+          104
+        ],
+        "bounds": [
+          697,
+          1413,
+          855,
+          1513
+        ],
+        "foot": [
+          761.0,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          187.5,
+          1062
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          57,
+          1060,
+          221,
+          135
+        ],
+        "bounds": [
+          59,
+          1062,
+          276,
+          1193
+        ],
+        "foot": [
+          129.0,
+          1193
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          469.5,
+          1119
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          378,
+          1117,
+          183,
+          77
+        ],
+        "bounds": [
+          380,
+          1119,
+          559,
+          1192
+        ],
+        "foot": [
+          469.5,
+          1192
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          132.0,
+          1638
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          51,
+          1636,
+          112,
+          108
+        ],
+        "bounds": [
+          53,
+          1638,
+          161,
+          1742
+        ],
+        "foot": [
+          117.5,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          356.5,
+          1632
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          272,
+          1630,
+          114,
+          114
+        ],
+        "bounds": [
+          274,
+          1632,
+          384,
+          1742
+        ],
+        "foot": [
+          339.5,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          575.0,
+          1640
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          495,
+          1637,
+          112,
+          107
+        ],
+        "bounds": [
+          497,
+          1639,
+          605,
+          1742
+        ],
+        "foot": [
+          561.5,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          798.0,
+          1638
+        ],
+        "source": "source/hound_black-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          717,
+          1636,
+          112,
+          108
+        ],
+        "bounds": [
+          719,
+          1638,
+          827,
+          1742
+        ],
+        "foot": [
+          783.0,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.49557522123893805,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          132.0,
+          1634
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          47,
+          1631,
+          116,
+          111
+        ],
+        "bounds": [
+          49,
+          1633,
+          161,
+          1740
+        ],
+        "foot": [
+          117.5,
+          1740
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          355.5,
+          1629
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          270,
+          1627,
+          115,
+          115
+        ],
+        "bounds": [
+          272,
+          1629,
+          383,
+          1740
+        ],
+        "foot": [
+          338.0,
+          1740
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          575.0,
+          1635
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          492,
+          1632,
+          116,
+          110
+        ],
+        "bounds": [
+          494,
+          1634,
+          606,
+          1740
+        ],
+        "foot": [
+          557.5,
+          1740
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          798.5,
+          1633
+        ],
+        "source": "source/hound_black-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          712,
+          1631,
+          118,
+          111
+        ],
+        "bounds": [
+          714,
+          1633,
+          828,
+          1740
+        ],
+        "foot": [
+          765.5,
+          1740
+        ],
+        "sourceEdge": false,
+        "scale": 0.49122807017543857,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          126.0,
+          1640
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          47,
+          1638,
+          119,
+          107
+        ],
+        "bounds": [
+          49,
+          1640,
+          164,
+          1743
+        ],
+        "foot": [
+          116.5,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          354.5,
+          1638
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          269,
+          1636,
+          120,
+          109
+        ],
+        "bounds": [
+          271,
+          1638,
+          387,
+          1743
+        ],
+        "foot": [
+          338.5,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.5,
+          1643
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          491,
+          1640,
+          122,
+          105
+        ],
+        "bounds": [
+          493,
+          1642,
+          611,
+          1743
+        ],
+        "foot": [
+          560.0,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          796.5,
+          1640
+        ],
+        "source": "source/hound_black-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          713,
+          1638,
+          117,
+          107
+        ],
+        "bounds": [
+          715,
+          1640,
+          828,
+          1743
+        ],
+        "foot": [
+          783.0,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.5,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          785.5,
+          1065
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          702,
+          1063,
+          147,
+          134
+        ],
+        "bounds": [
+          704,
+          1065,
+          847,
+          1195
+        ],
+        "foot": [
+          790.0,
+          1195
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1092.0,
+          1116
+        ],
+        "source": "source/hound_black-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          1012,
+          1114,
+          164,
+          80
+        ],
+        "bounds": [
+          1014,
+          1116,
+          1174,
+          1192
+        ],
+        "foot": [
+          1094.0,
+          1192
+        ],
+        "sourceEdge": false,
+        "scale": 0.3466666666666667,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "hound_grey",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          111.5,
+          141
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          90,
+          139,
+          42,
+          87
+        ],
+        "bounds": [
+          92,
+          141,
+          130,
+          224
+        ],
+        "foot": [
+          111.5,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          141
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          312,
+          139,
+          42,
+          87
+        ],
+        "bounds": [
+          314,
+          141,
+          352,
+          224
+        ],
+        "foot": [
+          333.0,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          141
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          532,
+          139,
+          43,
+          87
+        ],
+        "bounds": [
+          534,
+          141,
+          573,
+          224
+        ],
+        "foot": [
+          554.5,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          141
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          756,
+          139,
+          42,
+          87
+        ],
+        "bounds": [
+          758,
+          141,
+          796,
+          224
+        ],
+        "foot": [
+          776.5,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          138
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          88,
+          136,
+          46,
+          91
+        ],
+        "bounds": [
+          90,
+          138,
+          132,
+          225
+        ],
+        "foot": [
+          111.0,
+          225
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          138
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          308,
+          136,
+          48,
+          91
+        ],
+        "bounds": [
+          310,
+          138,
+          354,
+          225
+        ],
+        "foot": [
+          334.0,
+          225
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          138
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          532,
+          136,
+          46,
+          91
+        ],
+        "bounds": [
+          534,
+          138,
+          576,
+          225
+        ],
+        "foot": [
+          554.5,
+          225
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          138
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          754,
+          136,
+          45,
+          91
+        ],
+        "bounds": [
+          756,
+          138,
+          797,
+          225
+        ],
+        "foot": [
+          776.5,
+          225
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          140
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          90,
+          138,
+          43,
+          88
+        ],
+        "bounds": [
+          92,
+          140,
+          131,
+          224
+        ],
+        "foot": [
+          111.0,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          144
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          310,
+          142,
+          45,
+          84
+        ],
+        "bounds": [
+          312,
+          144,
+          353,
+          224
+        ],
+        "foot": [
+          332.5,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          144
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          532,
+          142,
+          47,
+          84
+        ],
+        "bounds": [
+          534,
+          144,
+          577,
+          224
+        ],
+        "foot": [
+          554.5,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          140
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          755,
+          138,
+          44,
+          88
+        ],
+        "bounds": [
+          757,
+          140,
+          797,
+          224
+        ],
+        "foot": [
+          777.0,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.5,
+          127
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          122,
+          125,
+          71,
+          137
+        ],
+        "bounds": [
+          124,
+          127,
+          191,
+          260
+        ],
+        "foot": [
+          159.0,
+          260
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          468.0,
+          173
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          422,
+          171,
+          94,
+          91
+        ],
+        "bounds": [
+          424,
+          173,
+          514,
+          260
+        ],
+        "foot": [
+          469.0,
+          260
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          85.0,
+          363
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          62,
+          361,
+          92,
+          85
+        ],
+        "bounds": [
+          64,
+          363,
+          152,
+          444
+        ],
+        "foot": [
+          111.5,
+          444
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          308.0,
+          363
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          285,
+          361,
+          92,
+          84
+        ],
+        "bounds": [
+          287,
+          363,
+          375,
+          443
+        ],
+        "foot": [
+          335.0,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          530.0,
+          363
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          507,
+          361,
+          94,
+          82
+        ],
+        "bounds": [
+          509,
+          363,
+          599,
+          441
+        ],
+        "foot": [
+          557.5,
+          441
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          752.0,
+          363
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          729,
+          361,
+          92,
+          84
+        ],
+        "bounds": [
+          731,
+          363,
+          819,
+          443
+        ],
+        "foot": [
+          779.5,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          83.5,
+          359
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          57,
+          357,
+          99,
+          88
+        ],
+        "bounds": [
+          59,
+          359,
+          154,
+          443
+        ],
+        "foot": [
+          113.0,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          306.5,
+          360
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          280,
+          358,
+          99,
+          87
+        ],
+        "bounds": [
+          282,
+          360,
+          377,
+          443
+        ],
+        "foot": [
+          336.0,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          528.5,
+          361
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          503,
+          359,
+          98,
+          85
+        ],
+        "bounds": [
+          505,
+          361,
+          599,
+          442
+        ],
+        "foot": [
+          557.5,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          750.5,
+          360
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          725,
+          357,
+          98,
+          88
+        ],
+        "bounds": [
+          727,
+          359,
+          821,
+          443
+        ],
+        "foot": [
+          780.0,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          86.5,
+          361
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          60,
+          359,
+          96,
+          88
+        ],
+        "bounds": [
+          62,
+          361,
+          154,
+          445
+        ],
+        "foot": [
+          112.0,
+          445
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.5,
+          363
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          282,
+          361,
+          96,
+          84
+        ],
+        "bounds": [
+          284,
+          363,
+          376,
+          443
+        ],
+        "foot": [
+          335.5,
+          443
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          534.0,
+          365
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          503,
+          363,
+          100,
+          81
+        ],
+        "bounds": [
+          505,
+          365,
+          601,
+          442
+        ],
+        "foot": [
+          558.0,
+          442
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          754.5,
+          361
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          729,
+          359,
+          95,
+          87
+        ],
+        "bounds": [
+          731,
+          361,
+          822,
+          444
+        ],
+        "foot": [
+          780.0,
+          444
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          758.0,
+          130
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          723,
+          128,
+          118,
+          134
+        ],
+        "bounds": [
+          725,
+          130,
+          839,
+          260
+        ],
+        "foot": [
+          781.5,
+          260
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1097.5,
+          185
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          1028,
+          182,
+          129,
+          80
+        ],
+        "bounds": [
+          1030,
+          184,
+          1155,
+          260
+        ],
+        "foot": [
+          1092.5,
+          260
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          73.5,
+          587
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          47,
+          585,
+          121,
+          80
+        ],
+        "bounds": [
+          49,
+          587,
+          166,
+          663
+        ],
+        "foot": [
+          114.5,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          296.0,
+          587
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          270,
+          585,
+          119,
+          80
+        ],
+        "bounds": [
+          272,
+          587,
+          387,
+          663
+        ],
+        "foot": [
+          337.5,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          518.0,
+          587
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          491,
+          585,
+          120,
+          79
+        ],
+        "bounds": [
+          493,
+          587,
+          609,
+          662
+        ],
+        "foot": [
+          558.5,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          740.0,
+          587
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          713,
+          585,
+          122,
+          80
+        ],
+        "bounds": [
+          715,
+          587,
+          833,
+          663
+        ],
+        "foot": [
+          781.0,
+          663
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          71.5,
+          584
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          44,
+          582,
+          126,
+          82
+        ],
+        "bounds": [
+          46,
+          584,
+          168,
+          662
+        ],
+        "foot": [
+          115.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          294.0,
+          585
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          267,
+          583,
+          122,
+          81
+        ],
+        "bounds": [
+          269,
+          585,
+          387,
+          662
+        ],
+        "foot": [
+          335.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          516.5,
+          585
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          488,
+          582,
+          125,
+          82
+        ],
+        "bounds": [
+          490,
+          584,
+          611,
+          662
+        ],
+        "foot": [
+          557.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          738.5,
+          584
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          581,
+          127,
+          83
+        ],
+        "bounds": [
+          713,
+          583,
+          836,
+          662
+        ],
+        "foot": [
+          781.5,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          72.5,
+          586
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          44,
+          583,
+          125,
+          83
+        ],
+        "bounds": [
+          46,
+          585,
+          167,
+          664
+        ],
+        "foot": [
+          115.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          294.5,
+          587
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          266,
+          585,
+          123,
+          79
+        ],
+        "bounds": [
+          268,
+          587,
+          387,
+          662
+        ],
+        "foot": [
+          334.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          516.0,
+          586
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          487,
+          584,
+          124,
+          80
+        ],
+        "bounds": [
+          489,
+          586,
+          609,
+          662
+        ],
+        "foot": [
+          558.0,
+          662
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          739.5,
+          586
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          711,
+          583,
+          125,
+          83
+        ],
+        "bounds": [
+          713,
+          585,
+          834,
+          664
+        ],
+        "foot": [
+          782.0,
+          664
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          116.5,
+          442
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          69,
+          440,
+          180,
+          132
+        ],
+        "bounds": [
+          71,
+          442,
+          247,
+          570
+        ],
+        "foot": [
+          174.0,
+          570
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          461.0,
+          496
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          376,
+          494,
+          181,
+          74
+        ],
+        "bounds": [
+          378,
+          496,
+          555,
+          566
+        ],
+        "foot": [
+          466.5,
+          566
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          90.5,
+          808
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          69,
+          805,
+          84,
+          89
+        ],
+        "bounds": [
+          71,
+          807,
+          151,
+          892
+        ],
+        "foot": [
+          115.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          313.0,
+          808
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          292,
+          806,
+          84,
+          88
+        ],
+        "bounds": [
+          294,
+          808,
+          374,
+          892
+        ],
+        "foot": [
+          336.0,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          534.5,
+          808
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          514,
+          805,
+          84,
+          89
+        ],
+        "bounds": [
+          516,
+          807,
+          596,
+          892
+        ],
+        "foot": [
+          559.0,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          757.0,
+          808
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          737,
+          805,
+          83,
+          89
+        ],
+        "bounds": [
+          739,
+          807,
+          818,
+          892
+        ],
+        "foot": [
+          782.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          88.5,
+          804
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          67,
+          802,
+          87,
+          92
+        ],
+        "bounds": [
+          69,
+          804,
+          152,
+          892
+        ],
+        "foot": [
+          116.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.5,
+          804
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          289,
+          802,
+          89,
+          92
+        ],
+        "bounds": [
+          291,
+          804,
+          376,
+          892
+        ],
+        "foot": [
+          334.0,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          535.5,
+          804
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          513,
+          802,
+          87,
+          92
+        ],
+        "bounds": [
+          515,
+          804,
+          598,
+          892
+        ],
+        "foot": [
+          558.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          757.0,
+          804
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          735,
+          802,
+          87,
+          92
+        ],
+        "bounds": [
+          737,
+          804,
+          820,
+          892
+        ],
+        "foot": [
+          783.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          91.0,
+          806
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          69,
+          804,
+          86,
+          91
+        ],
+        "bounds": [
+          71,
+          806,
+          153,
+          893
+        ],
+        "foot": [
+          116.5,
+          893
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          312.5,
+          806
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          290,
+          804,
+          89,
+          90
+        ],
+        "bounds": [
+          292,
+          806,
+          377,
+          892
+        ],
+        "foot": [
+          338.5,
+          892
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.0,
+          807
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          512,
+          804,
+          88,
+          91
+        ],
+        "bounds": [
+          514,
+          806,
+          598,
+          893
+        ],
+        "foot": [
+          561.5,
+          893
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.0,
+          807
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          736,
+          804,
+          88,
+          91
+        ],
+        "bounds": [
+          738,
+          806,
+          822,
+          893
+        ],
+        "foot": [
+          782.5,
+          893
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          741.0,
+          437
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          700,
+          435,
+          153,
+          137
+        ],
+        "bounds": [
+          702,
+          437,
+          851,
+          570
+        ],
+        "foot": [
+          786.5,
+          570
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1091.0,
+          498
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          1014,
+          495,
+          159,
+          73
+        ],
+        "bounds": [
+          1016,
+          497,
+          1171,
+          566
+        ],
+        "foot": [
+          1093.5,
+          566
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          1028
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          91,
+          1026,
+          40,
+          88
+        ],
+        "bounds": [
+          93,
+          1028,
+          129,
+          1112
+        ],
+        "foot": [
+          111.0,
+          1112
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          1028
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          313,
+          1026,
+          39,
+          88
+        ],
+        "bounds": [
+          315,
+          1028,
+          350,
+          1112
+        ],
+        "foot": [
+          333.0,
+          1112
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          1028
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          534,
+          1026,
+          41,
+          87
+        ],
+        "bounds": [
+          536,
+          1028,
+          573,
+          1111
+        ],
+        "foot": [
+          554.0,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1028
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          757,
+          1026,
+          40,
+          88
+        ],
+        "bounds": [
+          759,
+          1028,
+          795,
+          1112
+        ],
+        "foot": [
+          776.0,
+          1112
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          1025
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          89,
+          1023,
+          44,
+          90
+        ],
+        "bounds": [
+          91,
+          1025,
+          131,
+          1111
+        ],
+        "foot": [
+          111.5,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          1025
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          311,
+          1023,
+          44,
+          90
+        ],
+        "bounds": [
+          313,
+          1025,
+          353,
+          1111
+        ],
+        "foot": [
+          333.0,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          1026
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          532,
+          1023,
+          44,
+          90
+        ],
+        "bounds": [
+          534,
+          1025,
+          574,
+          1111
+        ],
+        "foot": [
+          554.5,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1025
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          755,
+          1023,
+          43,
+          90
+        ],
+        "bounds": [
+          757,
+          1025,
+          796,
+          1111
+        ],
+        "foot": [
+          776.0,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1028
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          90,
+          1025,
+          42,
+          88
+        ],
+        "bounds": [
+          92,
+          1027,
+          130,
+          1111
+        ],
+        "foot": [
+          111.0,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1028
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          311,
+          1026,
+          43,
+          87
+        ],
+        "bounds": [
+          313,
+          1028,
+          352,
+          1111
+        ],
+        "foot": [
+          333.0,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1029
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          534,
+          1027,
+          42,
+          86
+        ],
+        "bounds": [
+          536,
+          1029,
+          574,
+          1111
+        ],
+        "foot": [
+          555.0,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1028
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          756,
+          1025,
+          41,
+          88
+        ],
+        "bounds": [
+          758,
+          1027,
+          795,
+          1111
+        ],
+        "foot": [
+          776.5,
+          1111
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.5,
+          728
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          124,
+          726,
+          69,
+          158
+        ],
+        "bounds": [
+          126,
+          728,
+          191,
+          882
+        ],
+        "foot": [
+          161.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          468.0,
+          792
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          423,
+          789,
+          91,
+          96
+        ],
+        "bounds": [
+          425,
+          791,
+          512,
+          883
+        ],
+        "foot": [
+          468.5,
+          883
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          129.0,
+          1246
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          65,
+          1244,
+          83,
+          88
+        ],
+        "bounds": [
+          67,
+          1246,
+          146,
+          1330
+        ],
+        "foot": [
+          103.0,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          350.0,
+          1246
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          288,
+          1244,
+          82,
+          88
+        ],
+        "bounds": [
+          290,
+          1246,
+          368,
+          1330
+        ],
+        "foot": [
+          316.0,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          573.5,
+          1246
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          510,
+          1244,
+          84,
+          88
+        ],
+        "bounds": [
+          512,
+          1246,
+          592,
+          1330
+        ],
+        "foot": [
+          549.5,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          796.0,
+          1246
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          731,
+          1244,
+          86,
+          88
+        ],
+        "bounds": [
+          733,
+          1246,
+          815,
+          1330
+        ],
+        "foot": [
+          769.5,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          129.5,
+          1244
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          62,
+          1242,
+          88,
+          90
+        ],
+        "bounds": [
+          64,
+          1244,
+          148,
+          1330
+        ],
+        "foot": [
+          103.0,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          353.0,
+          1244
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          286,
+          1242,
+          87,
+          89
+        ],
+        "bounds": [
+          288,
+          1244,
+          371,
+          1329
+        ],
+        "foot": [
+          327.5,
+          1329
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          574.0,
+          1244
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          506,
+          1242,
+          89,
+          89
+        ],
+        "bounds": [
+          508,
+          1244,
+          593,
+          1329
+        ],
+        "foot": [
+          549.5,
+          1329
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          796.5,
+          1244
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          729,
+          1242,
+          88,
+          90
+        ],
+        "bounds": [
+          731,
+          1244,
+          815,
+          1330
+        ],
+        "foot": [
+          769.5,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          130.0,
+          1246
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          62,
+          1243,
+          89,
+          89
+        ],
+        "bounds": [
+          64,
+          1245,
+          149,
+          1330
+        ],
+        "foot": [
+          103.5,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          351.0,
+          1245
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          285,
+          1243,
+          86,
+          88
+        ],
+        "bounds": [
+          287,
+          1245,
+          369,
+          1329
+        ],
+        "foot": [
+          326.0,
+          1329
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          573.0,
+          1246
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          505,
+          1244,
+          90,
+          88
+        ],
+        "bounds": [
+          507,
+          1246,
+          593,
+          1330
+        ],
+        "foot": [
+          547.0,
+          1330
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          796.0,
+          1246
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          729,
+          1243,
+          87,
+          90
+        ],
+        "bounds": [
+          731,
+          1245,
+          814,
+          1331
+        ],
+        "foot": [
+          769.5,
+          1331
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          799.5,
+          731
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          719,
+          728,
+          117,
+          156
+        ],
+        "bounds": [
+          721,
+          730,
+          834,
+          882
+        ],
+        "foot": [
+          765.5,
+          882
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1101.5,
+          808
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          1032,
+          805,
+          128,
+          80
+        ],
+        "bounds": [
+          1034,
+          807,
+          1158,
+          883
+        ],
+        "foot": [
+          1096.0,
+          883
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          145.0,
+          1472
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          50,
+          1470,
+          121,
+          78
+        ],
+        "bounds": [
+          52,
+          1472,
+          169,
+          1546
+        ],
+        "foot": [
+          104.0,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          368.0,
+          1472
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1469,
+          123,
+          79
+        ],
+        "bounds": [
+          273,
+          1471,
+          392,
+          1546
+        ],
+        "foot": [
+          324.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          590.0,
+          1472
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          494,
+          1469,
+          121,
+          80
+        ],
+        "bounds": [
+          496,
+          1471,
+          613,
+          1547
+        ],
+        "foot": [
+          545.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          812.0,
+          1472
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          715,
+          1470,
+          123,
+          79
+        ],
+        "bounds": [
+          717,
+          1472,
+          836,
+          1547
+        ],
+        "foot": [
+          770.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          147.0,
+          1470
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          47,
+          1468,
+          126,
+          80
+        ],
+        "bounds": [
+          49,
+          1470,
+          171,
+          1546
+        ],
+        "foot": [
+          103.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          368.0,
+          1471
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1468,
+          124,
+          80
+        ],
+        "bounds": [
+          273,
+          1470,
+          393,
+          1546
+        ],
+        "foot": [
+          324.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          589.5,
+          1470
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          491,
+          1468,
+          125,
+          79
+        ],
+        "bounds": [
+          493,
+          1470,
+          614,
+          1545
+        ],
+        "foot": [
+          546.5,
+          1545
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          812.5,
+          1470
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          713,
+          1468,
+          126,
+          80
+        ],
+        "bounds": [
+          715,
+          1470,
+          837,
+          1546
+        ],
+        "foot": [
+          769.5,
+          1546
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          144.5,
+          1473
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          49,
+          1470,
+          123,
+          80
+        ],
+        "bounds": [
+          51,
+          1472,
+          170,
+          1548
+        ],
+        "foot": [
+          103.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          363.0,
+          1474
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1472,
+          122,
+          78
+        ],
+        "bounds": [
+          273,
+          1474,
+          391,
+          1548
+        ],
+        "foot": [
+          322.5,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          589.0,
+          1475
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          493,
+          1472,
+          123,
+          77
+        ],
+        "bounds": [
+          495,
+          1474,
+          614,
+          1547
+        ],
+        "foot": [
+          544.5,
+          1547
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          809.5,
+          1473
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          713,
+          1470,
+          125,
+          80
+        ],
+        "bounds": [
+          715,
+          1472,
+          836,
+          1548
+        ],
+        "foot": [
+          768.0,
+          1548
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          206.0,
+          1069
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          74,
+          1066,
+          179,
+          128
+        ],
+        "bounds": [
+          76,
+          1068,
+          251,
+          1192
+        ],
+        "foot": [
+          146.5,
+          1192
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          478.0,
+          1122
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          379,
+          1120,
+          178,
+          70
+        ],
+        "bounds": [
+          381,
+          1122,
+          555,
+          1188
+        ],
+        "foot": [
+          468.0,
+          1188
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          127.0,
+          1670
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          65,
+          1668,
+          84,
+          83
+        ],
+        "bounds": [
+          67,
+          1670,
+          147,
+          1749
+        ],
+        "foot": [
+          102.5,
+          1749
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.5,
+          1670
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          287,
+          1668,
+          84,
+          83
+        ],
+        "bounds": [
+          289,
+          1670,
+          369,
+          1749
+        ],
+        "foot": [
+          324.5,
+          1749
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.0,
+          1670
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          509,
+          1668,
+          84,
+          82
+        ],
+        "bounds": [
+          511,
+          1670,
+          591,
+          1748
+        ],
+        "foot": [
+          543.5,
+          1748
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.0,
+          1670
+        ],
+        "source": "source/hound_grey-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          732,
+          1668,
+          84,
+          83
+        ],
+        "bounds": [
+          734,
+          1670,
+          814,
+          1749
+        ],
+        "foot": [
+          769.0,
+          1749
+        ],
+        "sourceEdge": false,
+        "scale": 0.6746987951807228,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          127.5,
+          1669
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          63,
+          1666,
+          89,
+          85
+        ],
+        "bounds": [
+          65,
+          1668,
+          150,
+          1749
+        ],
+        "foot": [
+          103.0,
+          1749
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.5,
+          1669
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          287,
+          1666,
+          87,
+          85
+        ],
+        "bounds": [
+          289,
+          1668,
+          372,
+          1749
+        ],
+        "foot": [
+          326.0,
+          1749
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          570.0,
+          1669
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          508,
+          1667,
+          87,
+          83
+        ],
+        "bounds": [
+          510,
+          1669,
+          593,
+          1748
+        ],
+        "foot": [
+          544.0,
+          1748
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          793.0,
+          1668
+        ],
+        "source": "source/hound_grey-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          730,
+          1666,
+          88,
+          84
+        ],
+        "bounds": [
+          732,
+          1668,
+          816,
+          1748
+        ],
+        "foot": [
+          769.0,
+          1748
+        ],
+        "sourceEdge": false,
+        "scale": 0.6436781609195402,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.5,
+          1672
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          63,
+          1669,
+          86,
+          84
+        ],
+        "bounds": [
+          65,
+          1671,
+          147,
+          1751
+        ],
+        "foot": [
+          102.0,
+          1751
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          347.0,
+          1672
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          285,
+          1669,
+          86,
+          85
+        ],
+        "bounds": [
+          287,
+          1671,
+          369,
+          1752
+        ],
+        "foot": [
+          324.0,
+          1752
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          1672
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          507,
+          1670,
+          86,
+          83
+        ],
+        "bounds": [
+          509,
+          1672,
+          591,
+          1751
+        ],
+        "foot": [
+          543.0,
+          1751
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          792.0,
+          1672
+        ],
+        "source": "source/hound_grey-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          730,
+          1670,
+          87,
+          83
+        ],
+        "bounds": [
+          732,
+          1672,
+          815,
+          1751
+        ],
+        "foot": [
+          769.0,
+          1751
+        ],
+        "sourceEdge": false,
+        "scale": 0.6666666666666666,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          803.5,
+          1065
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          717,
+          1062,
+          125,
+          134
+        ],
+        "bounds": [
+          719,
+          1064,
+          840,
+          1194
+        ],
+        "foot": [
+          776.0,
+          1194
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1098.0,
+          1123
+        ],
+        "source": "source/hound_grey-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          1024,
+          1120,
+          144,
+          75
+        ],
+        "bounds": [
+          1026,
+          1122,
+          1166,
+          1193
+        ],
+        "foot": [
+          1096.0,
+          1193
+        ],
+        "sourceEdge": false,
+        "scale": 0.39097744360902253,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "imp_violet",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          112.0,
+          86
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          49,
+          84,
+          125,
+          142
+        ],
+        "bounds": [
+          51,
+          86,
+          172,
+          224
+        ],
+        "foot": [
+          117.0,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          85
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          271,
+          83,
+          125,
+          142
+        ],
+        "bounds": [
+          273,
+          85,
+          394,
+          223
+        ],
+        "foot": [
+          339.5,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          86
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          493,
+          84,
+          124,
+          142
+        ],
+        "bounds": [
+          495,
+          86,
+          615,
+          224
+        ],
+        "foot": [
+          560.5,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          87
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          715,
+          84,
+          124,
+          142
+        ],
+        "bounds": [
+          717,
+          86,
+          837,
+          224
+        ],
+        "foot": [
+          783.0,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          86
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          47,
+          84,
+          130,
+          148
+        ],
+        "bounds": [
+          49,
+          86,
+          175,
+          230
+        ],
+        "foot": [
+          111.0,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.5,
+          86
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          270,
+          83,
+          127,
+          149
+        ],
+        "bounds": [
+          272,
+          85,
+          395,
+          230
+        ],
+        "foot": [
+          335.0,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          563.5,
+          86
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          492,
+          84,
+          127,
+          148
+        ],
+        "bounds": [
+          494,
+          86,
+          617,
+          230
+        ],
+        "foot": [
+          551.5,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          86
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          713,
+          84,
+          128,
+          148
+        ],
+        "bounds": [
+          715,
+          86,
+          839,
+          230
+        ],
+        "foot": [
+          781.0,
+          230
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          82
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          42,
+          79,
+          136,
+          151
+        ],
+        "bounds": [
+          44,
+          81,
+          176,
+          228
+        ],
+        "foot": [
+          116.5,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.0,
+          81
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          264,
+          79,
+          135,
+          151
+        ],
+        "bounds": [
+          266,
+          81,
+          397,
+          228
+        ],
+        "foot": [
+          339.0,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          565.5,
+          82
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          486,
+          79,
+          135,
+          151
+        ],
+        "bounds": [
+          488,
+          81,
+          619,
+          228
+        ],
+        "foot": [
+          561.0,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          82
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          708,
+          79,
+          135,
+          151
+        ],
+        "bounds": [
+          710,
+          81,
+          841,
+          228
+        ],
+        "foot": [
+          783.0,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          157.5,
+          100
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          76,
+          98,
+          162,
+          194
+        ],
+        "bounds": [
+          78,
+          100,
+          236,
+          290
+        ],
+        "foot": [
+          155.0,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          464.0,
+          175
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          376,
+          173,
+          182,
+          119
+        ],
+        "bounds": [
+          378,
+          175,
+          556,
+          290
+        ],
+        "foot": [
+          467.0,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          99.5,
+          304
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          53,
+          302,
+          121,
+          139
+        ],
+        "bounds": [
+          55,
+          304,
+          172,
+          439
+        ],
+        "foot": [
+          115.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          321.0,
+          303
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          275,
+          301,
+          120,
+          140
+        ],
+        "bounds": [
+          277,
+          303,
+          393,
+          439
+        ],
+        "foot": [
+          337.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          542.5,
+          305
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          497,
+          302,
+          120,
+          139
+        ],
+        "bounds": [
+          499,
+          304,
+          615,
+          439
+        ],
+        "foot": [
+          558.5,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.0,
+          304
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          719,
+          302,
+          120,
+          139
+        ],
+        "bounds": [
+          721,
+          304,
+          837,
+          439
+        ],
+        "foot": [
+          780.0,
+          439
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          96.5,
+          303
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          54,
+          301,
+          120,
+          148
+        ],
+        "bounds": [
+          56,
+          303,
+          172,
+          447
+        ],
+        "foot": [
+          102.0,
+          447
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          316.0,
+          303
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          274,
+          301,
+          120,
+          148
+        ],
+        "bounds": [
+          276,
+          303,
+          392,
+          447
+        ],
+        "foot": [
+          331.5,
+          447
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.0,
+          303
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          496,
+          301,
+          117,
+          148
+        ],
+        "bounds": [
+          498,
+          303,
+          611,
+          447
+        ],
+        "foot": [
+          551.5,
+          447
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          760.5,
+          303
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          717,
+          301,
+          121,
+          148
+        ],
+        "bounds": [
+          719,
+          303,
+          836,
+          447
+        ],
+        "foot": [
+          771.0,
+          447
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          99.0,
+          300
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          53,
+          298,
+          124,
+          150
+        ],
+        "bounds": [
+          55,
+          300,
+          175,
+          446
+        ],
+        "foot": [
+          116.0,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.0,
+          300
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          276,
+          298,
+          123,
+          150
+        ],
+        "bounds": [
+          278,
+          300,
+          397,
+          446
+        ],
+        "foot": [
+          338.0,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          542.5,
+          301
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          490,
+          298,
+          131,
+          150
+        ],
+        "bounds": [
+          492,
+          300,
+          619,
+          446
+        ],
+        "foot": [
+          561.0,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          764.5,
+          300
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          721,
+          298,
+          122,
+          150
+        ],
+        "bounds": [
+          723,
+          300,
+          841,
+          446
+        ],
+        "foot": [
+          782.5,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          775.0,
+          101
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          712,
+          98,
+          149,
+          194
+        ],
+        "bounds": [
+          714,
+          100,
+          859,
+          290
+        ],
+        "foot": [
+          780.5,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1087.5,
+          168
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          1010,
+          166,
+          178,
+          126
+        ],
+        "bounds": [
+          1012,
+          168,
+          1186,
+          290
+        ],
+        "foot": [
+          1099.0,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          88.0,
+          518
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          63,
+          516,
+          105,
+          140
+        ],
+        "bounds": [
+          65,
+          518,
+          166,
+          654
+        ],
+        "foot": [
+          114.5,
+          654
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.5,
+          518
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          285,
+          516,
+          104,
+          140
+        ],
+        "bounds": [
+          287,
+          518,
+          387,
+          654
+        ],
+        "foot": [
+          336.5,
+          654
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.5,
+          518
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          506,
+          515,
+          105,
+          141
+        ],
+        "bounds": [
+          508,
+          517,
+          609,
+          654
+        ],
+        "foot": [
+          558.5,
+          654
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          754.5,
+          518
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          729,
+          516,
+          104,
+          140
+        ],
+        "bounds": [
+          731,
+          518,
+          831,
+          654
+        ],
+        "foot": [
+          780.5,
+          654
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          86.0,
+          517
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          61,
+          515,
+          106,
+          146
+        ],
+        "bounds": [
+          63,
+          517,
+          165,
+          659
+        ],
+        "foot": [
+          110.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          308.5,
+          518
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          283,
+          516,
+          106,
+          146
+        ],
+        "bounds": [
+          285,
+          518,
+          387,
+          660
+        ],
+        "foot": [
+          325.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          530.5,
+          518
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          505,
+          515,
+          106,
+          147
+        ],
+        "bounds": [
+          507,
+          517,
+          609,
+          660
+        ],
+        "foot": [
+          555.5,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          753.0,
+          518
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          727,
+          515,
+          107,
+          146
+        ],
+        "bounds": [
+          729,
+          517,
+          832,
+          659
+        ],
+        "foot": [
+          780.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          89.5,
+          515
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          60,
+          512,
+          115,
+          149
+        ],
+        "bounds": [
+          62,
+          514,
+          173,
+          659
+        ],
+        "foot": [
+          114.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.0,
+          515
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          282,
+          513,
+          114,
+          148
+        ],
+        "bounds": [
+          284,
+          515,
+          394,
+          659
+        ],
+        "foot": [
+          337.0,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.5,
+          515
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          480,
+          513,
+          138,
+          149
+        ],
+        "bounds": [
+          482,
+          515,
+          616,
+          660
+        ],
+        "foot": [
+          559.0,
+          660
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          755.5,
+          515
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          726,
+          512,
+          114,
+          149
+        ],
+        "bounds": [
+          728,
+          514,
+          838,
+          659
+        ],
+        "foot": [
+          779.5,
+          659
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.0,
+          379
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          82,
+          377,
+          158,
+          202
+        ],
+        "bounds": [
+          84,
+          379,
+          238,
+          577
+        ],
+        "foot": [
+          163.0,
+          577
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          453.0,
+          471
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          374,
+          469,
+          189,
+          112
+        ],
+        "bounds": [
+          376,
+          471,
+          561,
+          579
+        ],
+        "foot": [
+          468.5,
+          579
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          88.5,
+          733
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          63,
+          730,
+          106,
+          140
+        ],
+        "bounds": [
+          65,
+          732,
+          167,
+          868
+        ],
+        "foot": [
+          113.0,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          312.0,
+          733
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          285,
+          730,
+          106,
+          139
+        ],
+        "bounds": [
+          287,
+          732,
+          389,
+          867
+        ],
+        "foot": [
+          336.0,
+          867
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.5,
+          733
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          507,
+          730,
+          106,
+          139
+        ],
+        "bounds": [
+          509,
+          732,
+          611,
+          867
+        ],
+        "foot": [
+          558.0,
+          867
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          755.5,
+          733
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          729,
+          731,
+          106,
+          139
+        ],
+        "bounds": [
+          731,
+          733,
+          833,
+          868
+        ],
+        "foot": [
+          778.5,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          88.5,
+          732
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          62,
+          730,
+          109,
+          142
+        ],
+        "bounds": [
+          64,
+          732,
+          169,
+          870
+        ],
+        "foot": [
+          111.5,
+          870
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.5,
+          733
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          284,
+          730,
+          108,
+          142
+        ],
+        "bounds": [
+          286,
+          732,
+          390,
+          870
+        ],
+        "foot": [
+          338.5,
+          870
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.5,
+          733
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          506,
+          731,
+          108,
+          144
+        ],
+        "bounds": [
+          508,
+          733,
+          612,
+          873
+        ],
+        "foot": [
+          557.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          753.5,
+          732
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          728,
+          730,
+          110,
+          145
+        ],
+        "bounds": [
+          730,
+          732,
+          836,
+          873
+        ],
+        "foot": [
+          780.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          89.0,
+          731
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          60,
+          728,
+          117,
+          146
+        ],
+        "bounds": [
+          62,
+          730,
+          175,
+          872
+        ],
+        "foot": [
+          116.0,
+          872
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          310.5,
+          731
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          281,
+          728,
+          118,
+          146
+        ],
+        "bounds": [
+          283,
+          730,
+          397,
+          872
+        ],
+        "foot": [
+          338.0,
+          872
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          533.0,
+          731
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          474,
+          728,
+          146,
+          146
+        ],
+        "bounds": [
+          476,
+          730,
+          618,
+          872
+        ],
+        "foot": [
+          560.0,
+          872
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          755.0,
+          731
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          726,
+          728,
+          115,
+          146
+        ],
+        "bounds": [
+          728,
+          730,
+          839,
+          872
+        ],
+        "foot": [
+          781.0,
+          872
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          770.5,
+          381
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          712,
+          379,
+          145,
+          200
+        ],
+        "bounds": [
+          714,
+          381,
+          855,
+          577
+        ],
+        "foot": [
+          793.5,
+          577
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1102.5,
+          455
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          999,
+          453,
+          192,
+          130
+        ],
+        "bounds": [
+          1001,
+          455,
+          1189,
+          581
+        ],
+        "foot": [
+          1095.0,
+          581
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          944
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          48,
+          941,
+          126,
+          143
+        ],
+        "bounds": [
+          50,
+          943,
+          172,
+          1082
+        ],
+        "foot": [
+          107.0,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          943
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          271,
+          940,
+          124,
+          144
+        ],
+        "bounds": [
+          273,
+          942,
+          393,
+          1082
+        ],
+        "foot": [
+          328.0,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          944
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          493,
+          942,
+          124,
+          142
+        ],
+        "bounds": [
+          495,
+          944,
+          615,
+          1082
+        ],
+        "foot": [
+          550.0,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          944
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          714,
+          942,
+          125,
+          142
+        ],
+        "bounds": [
+          716,
+          944,
+          837,
+          1082
+        ],
+        "foot": [
+          772.0,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          944
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          48,
+          941,
+          129,
+          149
+        ],
+        "bounds": [
+          50,
+          943,
+          175,
+          1088
+        ],
+        "foot": [
+          102.5,
+          1088
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          944
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          270,
+          941,
+          127,
+          149
+        ],
+        "bounds": [
+          272,
+          943,
+          395,
+          1088
+        ],
+        "foot": [
+          327.5,
+          1088
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          943
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          491,
+          941,
+          128,
+          148
+        ],
+        "bounds": [
+          493,
+          943,
+          617,
+          1087
+        ],
+        "foot": [
+          549.0,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          944
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          712,
+          942,
+          129,
+          148
+        ],
+        "bounds": [
+          714,
+          944,
+          839,
+          1088
+        ],
+        "foot": [
+          770.5,
+          1088
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          940
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          43,
+          938,
+          136,
+          151
+        ],
+        "bounds": [
+          45,
+          940,
+          177,
+          1087
+        ],
+        "foot": [
+          105.5,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          940
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          265,
+          937,
+          136,
+          152
+        ],
+        "bounds": [
+          267,
+          939,
+          399,
+          1087
+        ],
+        "foot": [
+          327.0,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          940
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          487,
+          937,
+          135,
+          152
+        ],
+        "bounds": [
+          489,
+          939,
+          620,
+          1087
+        ],
+        "foot": [
+          549.0,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          940
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          709,
+          938,
+          135,
+          151
+        ],
+        "bounds": [
+          711,
+          940,
+          842,
+          1087
+        ],
+        "foot": [
+          771.0,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          158.0,
+          674
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          79,
+          672,
+          156,
+          203
+        ],
+        "bounds": [
+          81,
+          674,
+          233,
+          873
+        ],
+        "foot": [
+          152.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          468.5,
+          758
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          374,
+          756,
+          186,
+          117
+        ],
+        "bounds": [
+          376,
+          758,
+          558,
+          871
+        ],
+        "foot": [
+          467.0,
+          871
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          122.0,
+          1152
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          49,
+          1150,
+          99,
+          143
+        ],
+        "bounds": [
+          51,
+          1152,
+          146,
+          1291
+        ],
+        "foot": [
+          107.0,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          344.5,
+          1152
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          271,
+          1149,
+          99,
+          144
+        ],
+        "bounds": [
+          273,
+          1151,
+          368,
+          1291
+        ],
+        "foot": [
+          328.5,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          566.5,
+          1152
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          493,
+          1150,
+          99,
+          143
+        ],
+        "bounds": [
+          495,
+          1152,
+          590,
+          1291
+        ],
+        "foot": [
+          549.5,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          788.0,
+          1152
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          715,
+          1150,
+          99,
+          143
+        ],
+        "bounds": [
+          717,
+          1152,
+          812,
+          1291
+        ],
+        "foot": [
+          772.0,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          123.5,
+          1151
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          45,
+          1149,
+          105,
+          149
+        ],
+        "bounds": [
+          47,
+          1151,
+          148,
+          1296
+        ],
+        "foot": [
+          104.5,
+          1296
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          347.0,
+          1151
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          269,
+          1149,
+          105,
+          149
+        ],
+        "bounds": [
+          271,
+          1151,
+          372,
+          1296
+        ],
+        "foot": [
+          346.0,
+          1296
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.0,
+          1151
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          487,
+          1149,
+          107,
+          150
+        ],
+        "bounds": [
+          489,
+          1151,
+          592,
+          1297
+        ],
+        "foot": [
+          559.0,
+          1297
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          1151
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          710,
+          1149,
+          107,
+          150
+        ],
+        "bounds": [
+          712,
+          1151,
+          815,
+          1297
+        ],
+        "foot": [
+          786.0,
+          1297
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          124.0,
+          1150
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          45,
+          1147,
+          105,
+          146
+        ],
+        "bounds": [
+          47,
+          1149,
+          148,
+          1291
+        ],
+        "foot": [
+          105.0,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          347.0,
+          1150
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          266,
+          1148,
+          107,
+          145
+        ],
+        "bounds": [
+          268,
+          1150,
+          371,
+          1291
+        ],
+        "foot": [
+          326.5,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          1150
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          487,
+          1148,
+          131,
+          145
+        ],
+        "bounds": [
+          489,
+          1150,
+          616,
+          1291
+        ],
+        "foot": [
+          548.0,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          1150
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          709,
+          1148,
+          107,
+          145
+        ],
+        "bounds": [
+          711,
+          1150,
+          814,
+          1291
+        ],
+        "foot": [
+          770.5,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          792.0,
+          673
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          709,
+          671,
+          138,
+          204
+        ],
+        "bounds": [
+          711,
+          673,
+          845,
+          873
+        ],
+        "foot": [
+          781.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1096.5,
+          746
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          1004,
+          744,
+          175,
+          135
+        ],
+        "bounds": [
+          1006,
+          746,
+          1177,
+          877
+        ],
+        "foot": [
+          1091.5,
+          877
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          129.5,
+          1369
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          49,
+          1367,
+          105,
+          143
+        ],
+        "bounds": [
+          51,
+          1369,
+          152,
+          1508
+        ],
+        "foot": [
+          102.5,
+          1508
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          350.5,
+          1369
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          271,
+          1366,
+          105,
+          145
+        ],
+        "bounds": [
+          273,
+          1368,
+          374,
+          1509
+        ],
+        "foot": [
+          324.0,
+          1509
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          572.5,
+          1369
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          493,
+          1366,
+          104,
+          145
+        ],
+        "bounds": [
+          495,
+          1368,
+          595,
+          1509
+        ],
+        "foot": [
+          545.5,
+          1509
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          795.5,
+          1369
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          715,
+          1367,
+          105,
+          144
+        ],
+        "bounds": [
+          717,
+          1369,
+          818,
+          1509
+        ],
+        "foot": [
+          767.5,
+          1509
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          129.5,
+          1369
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          46,
+          1367,
+          109,
+          149
+        ],
+        "bounds": [
+          48,
+          1369,
+          153,
+          1514
+        ],
+        "foot": [
+          116.5,
+          1514
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          350.5,
+          1370
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          269,
+          1367,
+          107,
+          148
+        ],
+        "bounds": [
+          271,
+          1369,
+          374,
+          1513
+        ],
+        "foot": [
+          339.5,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          572.0,
+          1369
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          488,
+          1367,
+          109,
+          148
+        ],
+        "bounds": [
+          490,
+          1369,
+          595,
+          1513
+        ],
+        "foot": [
+          545.5,
+          1513
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          794.0,
+          1369
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          710,
+          1367,
+          109,
+          149
+        ],
+        "bounds": [
+          712,
+          1369,
+          817,
+          1514
+        ],
+        "foot": [
+          767.0,
+          1514
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          126.5,
+          1365
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          38,
+          1363,
+          117,
+          146
+        ],
+        "bounds": [
+          40,
+          1365,
+          153,
+          1507
+        ],
+        "foot": [
+          97.5,
+          1507
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.0,
+          1365
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          261,
+          1363,
+          115,
+          146
+        ],
+        "bounds": [
+          263,
+          1365,
+          374,
+          1507
+        ],
+        "foot": [
+          320.5,
+          1507
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          569.5,
+          1365
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          482,
+          1363,
+          141,
+          146
+        ],
+        "bounds": [
+          484,
+          1365,
+          621,
+          1507
+        ],
+        "foot": [
+          542.0,
+          1507
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          792.5,
+          1365
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          703,
+          1363,
+          118,
+          146
+        ],
+        "bounds": [
+          705,
+          1365,
+          819,
+          1507
+        ],
+        "foot": [
+          764.5,
+          1507
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          201.5,
+          983
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          71,
+          981,
+          164,
+          202
+        ],
+        "bounds": [
+          73,
+          983,
+          233,
+          1181
+        ],
+        "foot": [
+          138.0,
+          1181
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          481.5,
+          1070
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          370,
+          1067,
+          192,
+          115
+        ],
+        "bounds": [
+          372,
+          1069,
+          560,
+          1180
+        ],
+        "foot": [
+          466.0,
+          1180
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          126.5,
+          1594
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          49,
+          1592,
+          114,
+          139
+        ],
+        "bounds": [
+          51,
+          1594,
+          161,
+          1729
+        ],
+        "foot": [
+          108.5,
+          1729
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          349.0,
+          1593
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          271,
+          1591,
+          114,
+          141
+        ],
+        "bounds": [
+          273,
+          1593,
+          383,
+          1730
+        ],
+        "foot": [
+          333.0,
+          1730
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          571.0,
+          1593
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          493,
+          1591,
+          114,
+          141
+        ],
+        "bounds": [
+          495,
+          1593,
+          605,
+          1730
+        ],
+        "foot": [
+          553.5,
+          1730
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          792.0,
+          1595
+        ],
+        "source": "source/imp_violet-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          715,
+          1592,
+          113,
+          139
+        ],
+        "bounds": [
+          717,
+          1594,
+          826,
+          1729
+        ],
+        "foot": [
+          773.5,
+          1729
+        ],
+        "sourceEdge": false,
+        "scale": 0.4057971014492754,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          126.5,
+          1592
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          46,
+          1590,
+          119,
+          147
+        ],
+        "bounds": [
+          48,
+          1592,
+          163,
+          1735
+        ],
+        "foot": [
+          116.5,
+          1735
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          348.0,
+          1592
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          266,
+          1590,
+          122,
+          147
+        ],
+        "bounds": [
+          268,
+          1592,
+          386,
+          1735
+        ],
+        "foot": [
+          326.5,
+          1735
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          569.0,
+          1592
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          488,
+          1590,
+          123,
+          148
+        ],
+        "bounds": [
+          490,
+          1592,
+          609,
+          1736
+        ],
+        "foot": [
+          561.5,
+          1736
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          791.0,
+          1593
+        ],
+        "source": "source/imp_violet-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          711,
+          1590,
+          121,
+          148
+        ],
+        "bounds": [
+          713,
+          1592,
+          830,
+          1736
+        ],
+        "foot": [
+          783.5,
+          1736
+        ],
+        "sourceEdge": false,
+        "scale": 0.3888888888888889,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          124.5,
+          1588
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          44,
+          1586,
+          120,
+          147
+        ],
+        "bounds": [
+          46,
+          1588,
+          162,
+          1731
+        ],
+        "foot": [
+          107.0,
+          1731
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          347.0,
+          1588
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          266,
+          1586,
+          121,
+          147
+        ],
+        "bounds": [
+          268,
+          1588,
+          385,
+          1731
+        ],
+        "foot": [
+          329.5,
+          1731
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          568.5,
+          1588
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          488,
+          1586,
+          129,
+          147
+        ],
+        "bounds": [
+          490,
+          1588,
+          615,
+          1731
+        ],
+        "foot": [
+          551.5,
+          1731
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          790.0,
+          1588
+        ],
+        "source": "source/imp_violet-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          709,
+          1586,
+          121,
+          147
+        ],
+        "bounds": [
+          711,
+          1588,
+          828,
+          1731
+        ],
+        "foot": [
+          773.0,
+          1731
+        ],
+        "sourceEdge": false,
+        "scale": 0.3835616438356164,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          785.0,
+          984
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          694,
+          982,
+          155,
+          203
+        ],
+        "bounds": [
+          696,
+          984,
+          847,
+          1183
+        ],
+        "foot": [
+          782.0,
+          1183
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1098.0,
+          1065
+        ],
+        "source": "source/imp_violet-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          996,
+          1063,
+          196,
+          124
+        ],
+        "bounds": [
+          998,
+          1065,
+          1190,
+          1185
+        ],
+        "foot": [
+          1094.0,
+          1185
+        ],
+        "sourceEdge": false,
+        "scale": 0.2736842105263158,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

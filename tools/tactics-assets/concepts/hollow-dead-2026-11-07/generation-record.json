@@ -1,0 +1,28 @@
+{
+  "team_id": "team_5nToMAwZ2bBo1gqSuy5933dS",
+  "project_id": "proj_DXXKthLZvfZMp4svC2fRJksp",
+  "model_id": "model_google-gemini-nano-banana-2-1",
+  "briefs": {
+    "zombie": "Wardenflame: Embers of the Vale production concept sheet for tactical pixel-art translation. Grounded fantasy, readable silhouette, slightly enlarged tactical head, weathered material details, restrained earth palette, warm upper-left key light and cool shadow. Parchment background, no scenery, no lettering. Same one character front three-quarter, rear three-quarter and left profile, small head/material study and a neutral 1.75m human scale silhouette. Fully contained heads, hands and feet/tails, wide margins. No extra character variants. THE RISEN OF FROSTPEAK. Canon: dead of the pass, Warden pilgrims, dwarven road-builders and goliaths, raised by the cold ember; walking roads they walked in life, empty rather than cruel. This shared zombie appearance represents ONE adult HUMAN former Warden pilgrim, about1.75m upright but stooped. Stocky ordinary traveller, intact weathered pale grey-olive face with sunk dull dark eyes, receding sparse ash-grey short hair, attached jaw, shut slack mouth. No exposed organs, blood, missing limbs or neon eyes. Practical torn moss-olive knee-length wool tunic, patched dark umber sleeveless travel jerkin, drab faded cream neck scarf, brown leather belt with a plain small front buckle, russet wrist wraps, muddy brown calf boots. Bare grey-olive HANDS, all wrists and elbows connected; each hand empty, no weapons, shield, backpack or staff. Old cold-weather pilgrimage clothes, no modern garments or armor spikes. A few understated frost-grey edges on shoulders/cloth, not glowing ice armor. Hunched slow asymmetric shuffle, heavy bent knees, numb outstretched arms below shoulders; no goofy cartoon grin or evil monster face. BACK has collar, seams and plain belt, never face or front buckle. Main design must read very clearly at 40px world height next to the refreshed Bone Wardens.",
+    "wraith": "Wardenflame: Embers of the Vale production concept sheet for tactical pixel-art translation. Grounded fantasy, readable silhouette, slightly enlarged tactical head, weathered material details, restrained earth palette, warm upper-left key light and cool shadow. Parchment background, no scenery, no lettering. Same one character front three-quarter, rear three-quarter and left profile, small head/material study and a neutral 1.75m human scale silhouette. Fully contained heads, hands and feet/tails, wide margins. No extra character variants. WRAITH. Canon: all that remains after ember-fire burns every memory from a person; cold, hungry, drawn to living memory. Human-sized formerly-human specter, height about1.85m including hover-tail, slim upper torso. Tattered desaturated charcoal-indigo burial hood and layered ragged robe, dusty slate-blue inner folds, small restrained cold-grey teal inner edges at hands. Hood contains DARK EMPTY FACE RECESS with two dim small pale-grey eye slits, no flesh or skull mask, no glowing neon angry eyes, no horns/crown/armor/weapon/staff/lantern. Two long thin ash-grey spectral hands fully JOINED to sleeves/wrists, five readable fingers, one reaches to touch while other hangs near torso. Robe tapers to ONE connected ragged floating hem/tail hovering over floor, NO legs or boots, NO disconnected wisps/cloud/glow particles. Opaque readable cloth core, subtly spectral cool hands; no black flat silhouette. Robe has hood back seam and layered back folds, rear face NEVER visible. Front robe overlap only front, no belt buckle. A cold hungry presence, poised forward lean and controlled float. Avoid generic Grim Reaper scythe, silly bedsheet ghost or ornamental magic rings."
+  },
+  "jobs": {
+    "zombie": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_7LfyvZseNNVDgZa4BGKT3my5",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_7LfyvZseNNVDgZa4BGKT3my5' (one call waits on up to 32 jobs)."
+    },
+    "wraith": {
+      "model_id": "model_google-gemini-nano-banana-2-1",
+      "job_id": "job_cJ3Nu6dCXzNiZBeHx2wQzQg2",
+      "status": "in-progress",
+      "message": "Job started (status 'in-progress'); no outputs yet. When you need them, call jobs_wait with job_ids including 'job_cJ3Nu6dCXzNiZBeHx2wQzQg2' (one call waits on up to 32 jobs)."
+    }
+  },
+  "generationParameters": {
+    "aspectRatio": "3:2",
+    "resolution": "2K",
+    "numOutputs": 1
+  }
+}

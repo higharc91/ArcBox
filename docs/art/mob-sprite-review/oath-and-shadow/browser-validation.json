@@ -1,0 +1,49 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1800,
+      "height": 540
+    },
+    {
+      "title": "Battle · River Crossing",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Ser Halvard · actual Broken Gate encounter",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Overworld · fighter, bandit, Halvard and Drow / Ysolde lineup",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "e7f07bac",
+    "walk": "2a18acf3",
+    "attack": "b660e4b0",
+    "cast": "27a253c1",
+    "hurt": "ae047473",
+    "down": "fa433b45"
+  },
+  "walkFrameHashes": [
+    "425ae25a",
+    "725c578e",
+    "8319a821",
+    "858ad009"
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "passed": true
+}
