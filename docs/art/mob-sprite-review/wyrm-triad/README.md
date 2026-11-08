@@ -43,3 +43,5 @@ Use Godot Mono 4.7.2 and the .NET 10 host build. Before `--`: `--audio-driver Du
 ```
 
 Collect with `python tools/tactics-assets/imagegen/wyrm-triad-2026-11-08/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`, then action-scenes.cjs, review.cjs and verify-review.cjs. The replay contains three movement round trips, three natural jaw attacks, all nine existing special gestures and return to ready.
+
+[Next: Gold Dragon, Frost Troll and Ogre](../gilded-and-rime/index.html), continuing issue #272 on the separate follow-up branch.

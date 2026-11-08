@@ -667,11 +667,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 "bosses.air_elemental.storm" => "bosses.air_elemental.gale",
                 "bosses.earth_elemental.magma" => "bosses.earth_elemental.stone",
                 "bosses.water_elemental.swamp" => "bosses.water_elemental.sea",
-                "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" => "bosses.dragon.red",
+                "bosses.troll.frost" or "bosses.troll.ogre" => "bosses.troll.troll",
+                "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => "bosses.dragon.red",
                 _ => sourceUnit?.Sprite,
             };
             (string? Pose, double Length, double Impact) elemental = (elementalKey, used.Ability.Value, anim) switch
             {
+                ("bosses.troll.troll", "troll.frenzy_roar", "bosses.buff") => ("bosses.buff", .8, .4),
                 ("bosses.golem.basalt", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
                 ("bosses.golem.basalt", "golem.stone_aegis", "bosses.buff") => ("bosses.buff", .8, .4),
                 ("bosses.golem.crystal", "golem.seismic_slam", "bosses.special") => ("bosses.special", 1, .5),
@@ -742,7 +744,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var impact = elemental.Pose is not null ? elemental.Impact : seismic ? 0.5 : 0;
                 EffectSound(effect, _t + impact);
                 if (elemental.Pose is not null && sourceUnit?.Sprite is "bosses.water_elemental.sea" or "bosses.dragon.red"
-                    or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green"
+                    or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold"
+                    or "bosses.troll.troll" or "bosses.troll.frost" or "bosses.troll.ogre"
                     or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
                     or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
                     or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow")
@@ -764,7 +767,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             // The sapling's attached vine and the red dragon's jaws are physical reach weapons.
             var naturalReach = used.Ability.Value == "common.attack" && reach <= 2
                 && _view.Units.Any(u => u.Id == used.Source && u.Sprite is "bosses.sapling.spring" or "bosses.dragon.red"
-                    or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green")
+                    or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold")
                 && used.Presentation?.Projectile is null && used.Presentation?.Fx is null
                 && anim is "attack" or "characters.attack" or "bosses.attack";
             // Basic ranged attacks infer their projectile from the equipped weapon.
@@ -780,6 +783,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 _cues.Add(new PoseCue(_t, length, used.Source, anim, source, target));
                 if (boulder || impBolt) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 _cues.Add(new FlightCue(_t + windup, flight, shot, source, target));
+                if (boulder) Moment("boulder-release", windup);
                 Cry(used.Source, "attack");
                 var leaving = SoundChoice.Launch(key, GearOf(used.Source).Weapon);
                 Sound(leaving, leaving == "spell_cast" ? _t : _t + windup);     // a spell gathers; a shot goes when it's loosed
@@ -799,14 +803,15 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                             or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow"
                             or "beasts.bat.vampire" or "beasts.bear.undead" or "beasts.slime.crystal"
                             or "beasts.spider.phase" or "beasts.wolf.alpha" or "bestiary.crab.deep"
-                            or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound" => 0.8,
-                        "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" => 1.0,
+                            or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
+                            or "bosses.troll.frost" or "bosses.troll.ogre" => 0.8,
+                        "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => 1.0,
                         _ => BeatTiming.Lunge,
                     };
                 _cues.Add(new LungeCue(_t, length, used.Source, source, target, anim));
                 if (length != BeatTiming.Lunge) _creaturePoseUntil = Math.Max(_creaturePoseUntil, _t + length);
                 SwingSound(used, anim);
-                _t += length != BeatTiming.Lunge ? sourceUnit?.Sprite is "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" ? .5 : .4 : BeatTiming.Windup;
+                _t += length != BeatTiming.Lunge ? sourceUnit?.Sprite is "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" ? .5 : .4 : BeatTiming.Windup;
             }
             else
             {

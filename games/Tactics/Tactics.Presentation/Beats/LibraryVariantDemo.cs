@@ -44,8 +44,8 @@ public static class LibraryVariantDemo
                     {
                         "beasts.bat.vampire" or "beasts.spider.phase" or "beasts.wolf.alpha"
                             or "bestiary.scorpion.black" or "bestiary.warg.rider" or "bosses.mimic.ironbound"
-                            or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" => "piercing",
-                        "beasts.bear.undead" => "slashing",
+                            or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" => "piercing",
+                        "beasts.bear.undead" or "bosses.troll.frost" or "bosses.troll.ogre" => "slashing",
                         _ => "bludgeoning",
                     }, 24)],
                 targets[i], (.22, c.Id.ToLowerInvariant() + "-attack-windup"),
@@ -57,14 +57,15 @@ public static class LibraryVariantDemo
         {
             var c = creatures[i];
             if (c.Specials is not { Count: > 0 } specials) continue;
-            Add(next - .8, c.Name + " special target ready", null, [], targets[i]);
+            var specialTarget = c.Sprite.StartsWith("bosses.troll.", StringComparison.Ordinal) ? new Tile(10, 10) : targets[i];
+            Add(next - .8, c.Name + " special target ready", null, [], specialTarget);
             foreach (var special in specials)
             {
                 var ability = new AbilityId(special.Ability);
                 var name = c.Id.ToLowerInvariant() + "-" + special.Label;
                 Add(next, name, new(c.Id),
                     [new AbilityUsed(new(c.Id), ability, new Target(Unit: new(special.Targeted ? "Fighter" : c.Id)),
-                        rules.Abilities[ability].Presentation)], targets[i],
+                        rules.Abilities[ability].Presentation)], specialTarget,
                     (.2, name + "-windup"), (special.Impact + .05, name + "-impact"));
                 next += 3;
             }

@@ -72,3 +72,5 @@ Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet I
 [Batch 22: Black Scorpion, Warg Rider and Ironbound Mimic](../iron-and-fangs/index.html) adds library batch 7; 10 older appearances remain.
 
 [Batch 23: Black, Blue and Green Dragon](../wyrm-triad/index.html) adds library batch 8; 7 older appearances remain.
+
+[Batch 24: Gold Dragon, Frost Troll and Ogre](../gilded-and-rime/index.html) adds library batch 9; 4 older appearances remain.

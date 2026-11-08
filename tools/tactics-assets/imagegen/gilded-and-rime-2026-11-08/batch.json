@@ -1,0 +1,40 @@
+{
+  "slug": "gilded-and-rime",
+  "date": "2026-11-08",
+  "title": "Gold Dragon, Frost Troll and Ogre",
+  "priorCommit": "aed32f95",
+  "libraryBatch": 9,
+  "overallBatch": 24,
+  "features": [
+    "Gold-scaled mature dragon retains four grounded legs, two dorsal wings and a rooted tail; wings fold for walking and unfold on jaw strikes.",
+    "Pale slate-blue Frost Troll and broad taupe Ogre share the approved giant scale, joined empty-hand strikes, fixed short hair and rope-bound hipwraps.",
+    "Boulder windups grip the stone; release hands are empty as the existing projectile leaves. Distinct chest/throat roar gestures remain grounded."
+  ],
+  "conceptJob": "job_Uk7jo4fDwbvzjRJLstAb1mjG",
+  "conceptAsset": "asset_emXd9dcMrBQeRg9S5ud8cc2Y",
+  "creativeUnits": 12,
+  "conceptNote": "Scenario supplied the three-creature concept sheet. Its raised Gold Dragon gesture is excluded: production retains four grounded legs from the approved Red Dragon anatomy. OpenAI authored all complete pixel figures.",
+  "actions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "down",
+    "special",
+    "cast",
+    "buff"
+  ],
+  "actionsNote": "Eight facings per creature. Gold Dragon has eight unique actions; each giant has seven, with existing generic casting aliases sharing its roar gesture.",
+  "nativeSeconds": 42,
+  "reelSeconds": 56,
+  "cadenceNote": "Dragon Jaws contacts at .5 s through 1 s; Breath and Presence at .5 s through 1.2 s, and Wingbeat at .7 s through 1.4 s. Giant strikes/roars contact at .4 s through .8 s; boulders release at .4 s and hit after their flight. Rules, effects, stats and placements remain unchanged.",
+  "replayNote": "The replay contains three movement round trips, three natural strikes, all seven existing specials and return to ready.",
+  "contactLabel": "ten natural strike, boulder release and special reviews",
+  "reviewNotes": [
+    "Fresh Gold rear-left damage, east walking and northwest Wingbeat figures correct orientation, unwanted walking attacks and overlapping source gutters.",
+    "The rejected Ogre throw sheet retained a carried stone at release; a fresh complete sheet shows empty release palms in every facing.",
+    "Frenzy Roar FX now waits for the authored .4 s chest gesture across the Troll family; its full .8 s recovery plays without changing gameplay.",
+    "The gallery uses lossless compass strips and one-facing phone decoding; original runtime/source pixels are preserved.",
+    "Fresh northeast and southeast jaw sequences visibly unfurl both wings; all eight contact silhouettes are checked against the folded idle."
+  ]
+}

@@ -59,6 +59,9 @@ public sealed class MobRefreshTests
     [InlineData("bosses.dragon.black", "dragon_black")]
     [InlineData("bosses.dragon.blue", "dragon_blue")]
     [InlineData("bosses.dragon.green", "dragon_green")]
+    [InlineData("bosses.dragon.gold", "dragon_gold")]
+    [InlineData("bosses.troll.frost", "troll_frost")]
+    [InlineData("bosses.troll.ogre", "troll_ogre")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -120,6 +123,8 @@ public sealed class MobRefreshTests
     [InlineData("bosses.golem.basalt", "golem.seismic_slam", "golem.stone_aegis")]
     [InlineData("bosses.golem.crystal", "golem.seismic_slam", "golem.stone_aegis")]
     [InlineData("bosses.golem.temple", "golem.seismic_slam", "golem.stone_aegis")]
+    [InlineData("bosses.troll.frost", "troll.boulder_toss", "troll.frenzy_roar")]
+    [InlineData("bosses.troll.ogre", "troll.boulder_toss", "troll.frenzy_roar")]
     public void Giants_bind_their_two_special_moves_to_distinct_complete_clips(string key, string primary, string buff)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -136,16 +141,6 @@ public sealed class MobRefreshTests
         Assert.False(sprite.Anim("attack").Frames.SequenceEqual(sprite.Anim(primaryBinding).Frames));
     }
 
-    [Theory]
-    [InlineData("bosses.troll.frost")]
-    public void Legacy_boss_variants_keep_their_existing_special_clip_for_the_buff_binding(string key)
-    {
-        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
-        Assert.Equal(sprite.Anim("special").Frames.ToArray(), sprite.Anim("bosses.buff").Frames.ToArray());
-        Assert.Equal(sprite.Anim("special").Fps, sprite.Anim("bosses.buff").Fps);
-        Assert.Equal(sprite.Anim("special").Loop, sprite.Anim("bosses.buff").Loop);
-        Assert.Equal(Pack.Frames("bosses", "special"), sprite.Anim("bosses.buff").Frames.ToArray());
-    }
 
     [Fact]
     public void Halvard_cleave_uses_the_greatsword_swing_and_ward_uses_a_separate_guard()
@@ -298,6 +293,7 @@ public sealed class MobRefreshTests
     [InlineData("bosses.dragon.black")]
     [InlineData("bosses.dragon.blue")]
     [InlineData("bosses.dragon.green")]
+    [InlineData("bosses.dragon.gold")]
     public void Winged_creatures_spread_their_wings_in_every_attack_facing(string key)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -361,6 +357,9 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.dragon.black")!.HeadLift / person, 1.7f, 2.3f);
         Assert.InRange(art.Sprite("bosses.dragon.blue")!.HeadLift / person, 1.7f, 2.3f);
         Assert.InRange(art.Sprite("bosses.dragon.green")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.gold")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.troll.frost")!.HeadLift / person, 1.35f, 1.95f);
+        Assert.InRange(art.Sprite("bosses.troll.ogre")!.HeadLift / person, 1.35f, 1.95f);
         Assert.InRange(art.Sprite("bosses.sapling.spring")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.imp.crimson")!.HeadLift / person, .4f, .75f);
         Assert.InRange(art.Sprite("bosses.hound.tan")!.HeadLift / person, .35f, .65f);

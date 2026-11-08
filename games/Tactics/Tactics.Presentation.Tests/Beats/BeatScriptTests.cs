@@ -72,6 +72,12 @@ public sealed class BeatScriptTests
     [InlineData("bosses.dragon.green", "dragon.fire_breath", "bosses.special", .5, 1.2, 16)]
     [InlineData("bosses.dragon.green", "dragon.frightful_roar", "bosses.cast", .5, 1.2, 20)]
     [InlineData("bosses.dragon.green", "dragon.cataclysm", "bosses.buff", .7, 1.4, 24)]
+    [InlineData("bosses.dragon.gold", "dragon.fire_breath", "bosses.special", .5, 1.2, 16)]
+    [InlineData("bosses.dragon.gold", "dragon.frightful_roar", "bosses.cast", .5, 1.2, 20)]
+    [InlineData("bosses.dragon.gold", "dragon.cataclysm", "bosses.buff", .7, 1.4, 24)]
+    [InlineData("bosses.troll.troll", "troll.frenzy_roar", "bosses.buff", .4, .8, 20)]
+    [InlineData("bosses.troll.frost", "troll.frenzy_roar", "bosses.buff", .4, .8, 20)]
+    [InlineData("bosses.troll.ogre", "troll.frenzy_roar", "bosses.buff", .4, .8, 20)]
     public void Elemental_effects_and_damage_wait_for_their_distinct_authored_contact_frame(string key, string ability, string binding, double impact, double duration, int contact)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
@@ -88,7 +94,7 @@ public sealed class BeatScriptTests
         Assert.Equal(impact, burst.At - pose.At, 3);
         Assert.Equal(impact, LastHit(script) - pose.At, 3);
         Assert.Equal(contact, anim.FrameAt(impact));
-        if (key is "bosses.water_elemental.sea" or "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp" or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple" or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow")
+        if (key is "bosses.water_elemental.sea" or "bosses.dragon.red" or "bosses.dragon.black" or "bosses.dragon.blue" or "bosses.dragon.green" or "bosses.dragon.gold" or "bosses.troll.troll" or "bosses.troll.frost" or "bosses.troll.ogre" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp" or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple" or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow")
             Assert.Equal(pose.At + impact, Assert.Single(script.Cues.OfType<MomentCue>(), c => c.Label == "special-contact").At, 3);
         Assert.Equal(Fx.Value.Clip(def.Presentation!.Fx!)!.Path, burst.Clip.Path);
         Assert.Equal(ability == "dragon.fire_breath" ? 42 : ability == "drake.flame_breath" ? 30 : Fx.Value.Clip(def.Presentation.Fx!)!.Lift, burst.Clip.Lift);
@@ -100,7 +106,7 @@ public sealed class BeatScriptTests
     }
 
     [Theory]
-    [InlineData("bosses.dragon.gold", "dragon.fire_breath")]
+    [InlineData("bosses.wraith.shade", "wraith.life_drain")]
     public void Legacy_elemental_variants_keep_their_existing_visual_bindings_and_effect_timing(string key, string ability)
     {
         var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
@@ -363,6 +369,8 @@ public sealed class BeatScriptTests
     [InlineData("bosses.dragon.blue", true)]
     [InlineData("bosses.dragon.green", false)]
     [InlineData("bosses.dragon.green", true)]
+    [InlineData("bosses.dragon.gold", false)]
+    [InlineData("bosses.dragon.gold", true)]
     public void Dragon_jaws_remain_a_two_tile_physical_attack_but_explicit_projectiles_win(string key, bool explicitProjectile)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u with { At = new Tile(5,3) })] };
@@ -496,6 +504,47 @@ public sealed class BeatScriptTests
             Assert.Equal(3, used.Count(a => a == ability));
     }
 
+    [Fact]
+    public void Gilded_and_rime_replay_uses_seven_real_specials_and_stable_walkable_targets()
+    {
+        var steps = LibraryVariantDemo.Steps(Pack.Root, "gilded-and-rime");
+        Assert.Equal(21, steps.Count);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+        var board = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(board.Map),board.Board);
+        BattleView? previous = null;
+        var used = new List<string>();
+        foreach (var step in steps)
+        {
+            var current = step.View.Battle!;
+            Assert.All(current.Units,u=>Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+            foreach(var moved in current.Beats.SelectMany(b=>b.Events).OfType<Moved>())
+            {
+                Assert.Equal(moved.Path[0],moved.Path[^1]);
+                Assert.All(moved.Path,t=>Assert.False(terrain.Map[t].Flags.HasFlag(TileFlags.Impassable)));
+            }
+            foreach(var move in current.Beats.SelectMany(b=>b.Events).OfType<AbilityUsed>())
+            {
+                Assert.NotNull(previous);
+                Assert.Equal(previous.Units.Select(u=>u.At),current.Units.Select(u=>u.At));
+                Assert.Equal(rules.Abilities[move.Ability].Presentation,move.Presentation);
+                if(move.Ability.Value=="common.attack")
+                {
+                    var from=Assert.Single(current.Units,u=>u.Id==move.Source).At;
+                    var to=Assert.Single(current.Units,u=>u.Id==move.Target.Unit).At;
+                    Assert.Equal(1,Math.Max(Math.Abs(from.X-to.X),Math.Abs(from.Y-to.Y)));
+                }
+                else used.Add(move.Ability.Value);
+            }
+            previous=current;
+        }
+        Assert.Equal(7, used.Count);
+        foreach (var ability in new[] { "dragon.fire_breath", "dragon.frightful_roar", "dragon.cataclysm" })
+            Assert.Equal(1, used.Count(a => a == ability));
+        Assert.Equal(2, used.Count(a => a == "troll.boulder_toss"));
+        Assert.Equal(2, used.Count(a => a == "troll.frenzy_roar"));
+    }
+
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
@@ -598,7 +647,9 @@ public sealed class BeatScriptTests
     [InlineData("bestiary.scorpion.black")]
     [InlineData("bestiary.warg.rider")]
     [InlineData("bosses.mimic.ironbound")]
-    public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose(string key)
+    [InlineData("bosses.troll.frost")]
+    [InlineData("bosses.troll.ogre")]
+    public void Natural_creature_strikes_finish_their_complete_clip_and_contact_on_the_forward_pose(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var used = new AbilityUsed(Hero, Attack, new Target(Unit: Foe), null);
@@ -686,15 +737,19 @@ public sealed class BeatScriptTests
         Assert.True(script.Length >= lunge.At + lunge.Length);
     }
 
-    [Fact]
-    public void Troll_releases_the_rendered_boulder_when_its_authored_hands_open()
+    [Theory]
+    [InlineData("bosses.troll.troll")]
+    [InlineData("bosses.troll.frost")]
+    [InlineData("bosses.troll.ogre")]
+    public void Troll_releases_the_rendered_boulder_when_its_authored_hands_open(string key)
     {
-        var view = Far with { Units = [.. Far.Units.Select(u => u.Id == Hero ? u with { Sprite = "bosses.troll.troll" } : u)] };
+        var view = Far with { Units = [.. Far.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var used = new AbilityUsed(Hero, new("troll.boulder_toss"), new Target(Unit: Foe), new("bosses.special", "fx.dust", "projectiles.rock"));
         var script = Script(view, used, new Damaged(Foe, 5, "bludgeoning", 5));
         var pose = Assert.Single(script.Cues.OfType<PoseCue>(), c => c.Unit == Hero);
         var flight = Assert.Single(script.Cues.OfType<FlightCue>());
-        var anim = UnitArt.Load(Pack.Root).Sprite("bosses.troll.troll")!.Anim(pose.Anim);
+        var anim = UnitArt.Load(Pack.Root).Sprite(key)!.Anim(pose.Anim);
+        Assert.Equal(flight.At, Assert.Single(script.Cues.OfType<MomentCue>(), c => c.Label == "boulder-release").At, 6);
         Assert.Equal(15, anim.FrameAt(flight.At - pose.At - .001)); // held overhead
         Assert.Equal(16, anim.FrameAt(flight.At - pose.At)); // empty release hands
         Assert.Equal(flight.At + flight.Length, LastHit(script), 6);
@@ -706,10 +761,13 @@ public sealed class BeatScriptTests
     [InlineData("troll.frenzy_roar", "bosses.troll.troll", "bosses.buff")]
     [InlineData("golem.seismic_slam", "bosses.golem.granite", "bosses.special")]
     [InlineData("golem.stone_aegis", "bosses.golem.granite", "bosses.buff")]
+    [InlineData("troll.frenzy_roar", "bosses.troll.frost", "bosses.buff")]
+    [InlineData("troll.frenzy_roar", "bosses.troll.ogre", "bosses.buff")]
     public void Giant_self_moves_keep_their_entire_authored_clip(string ability, string sprite, string binding)
     {
         var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), new(binding, null, null));
-        var script = Script(Near, used);
+        var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = sprite } : u)] };
+        var script = Script(view, used);
         var pose = Assert.Single(script.Cues.OfType<PoseCue>(), c => c.Unit == Hero);
         var anim = UnitArt.Load(Pack.Root).Sprite(sprite)!.Anim(binding);
         Assert.True(pose.Length >= anim.Frames.Length / anim.Fps);

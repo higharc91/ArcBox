@@ -15830,6 +15830,654 @@
         }
       },
       "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/wyrm-triad-2026-11-08/."
+    },
+    "mob_refresh_dragon_gold": {
+      "file": "mob_refresh_dragon_gold.png",
+      "family": "dragon",
+      "variant": "gilded-and-rime",
+      "frame": {
+        "width": 512,
+        "height": 512,
+        "anchor": [
+          256,
+          400
+        ]
+      },
+      "portrait": [
+        219,
+        208,
+        88,
+        88
+      ],
+      "headTop": 188,
+      "overheadClearance": {
+        "walk": 2.32,
+        "attack": 6.48,
+        "buff": 13.52
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 65.28,
+      "footprintHeight": 67.2,
+      "keys": [
+        "bosses.dragon.gold"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            17,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            25,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept sheet; OpenAI complete pixel figures. Sources/packing: tools/tactics-assets/imagegen/gilded-and-rime-2026-11-08/."
+    },
+    "mob_refresh_troll_frost": {
+      "file": "mob_refresh_troll_frost.png",
+      "family": "troll",
+      "variant": "gilded-and-rime",
+      "frame": {
+        "width": 384,
+        "height": 384,
+        "anchor": [
+          192,
+          320
+        ]
+      },
+      "portrait": [
+        151,
+        140,
+        80,
+        80
+      ],
+      "headTop": 126,
+      "overheadClearance": {
+        "walk": 4.24,
+        "special": 9.36,
+        "buff": 2.64,
+        "cast": 2.64,
+        "point": 2.64,
+        "pray": 2.64,
+        "channel": 2.64,
+        "summon": 2.64
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 56.64,
+      "footprintHeight": 61.76,
+      "keys": [
+        "bosses.troll.frost"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept sheet; OpenAI complete pixel figures. Sources/packing: tools/tactics-assets/imagegen/gilded-and-rime-2026-11-08/."
+    },
+    "mob_refresh_troll_ogre": {
+      "file": "mob_refresh_troll_ogre.png",
+      "family": "troll",
+      "variant": "gilded-and-rime",
+      "frame": {
+        "width": 384,
+        "height": 384,
+        "anchor": [
+          192,
+          320
+        ]
+      },
+      "portrait": [
+        152,
+        140,
+        80,
+        80
+      ],
+      "headTop": 123,
+      "overheadClearance": {
+        "walk": 2.64,
+        "special": 9.04,
+        "buff": 3.92,
+        "cast": 3.92,
+        "point": 3.92,
+        "pray": 3.92,
+        "channel": 3.92,
+        "summon": 3.92
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 57.92,
+      "footprintHeight": 62.72,
+      "keys": [
+        "bosses.troll.ogre"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept sheet; OpenAI complete pixel figures. Sources/packing: tools/tactics-assets/imagegen/gilded-and-rime-2026-11-08/."
     }
   },
   "legacyDistinctForms": [

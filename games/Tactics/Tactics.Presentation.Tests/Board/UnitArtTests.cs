@@ -163,7 +163,7 @@ public sealed class UnitArtTests
     }
 
     [Theory]
-    [InlineData("bosses.troll.ogre", "bosses/troll_ogre.png", 64, 64, 32, 60, false)]
+    [InlineData("bosses.troll.ogre", "creatures/mob_refresh_troll_ogre.png", 384, 384, 192, 320, true)]
     [InlineData("bosses.dragon.blue", "creatures/mob_refresh_dragon_blue.png", 512, 512, 256, 400, true)]
     [InlineData("bosses.sapling.autumn", "bosses/sapling_autumn.png", 40, 40, 20, 37, false)]
     public void A_monster_key_names_its_set_and_variant_with_that_sets_frames(string key, string path, int w, int h, int ax, int ay, bool refreshed)
@@ -292,7 +292,7 @@ public sealed class UnitArtTests
         var dwarf = Art.Value.Sprite("characters.dwarf_fighter")!;
         Assert.Equal((int)MathF.Round(29 - fighter.HeadLift), fighter.EffectShift);
         Assert.True(dwarf.EffectShift > fighter.EffectShift);
-        Assert.Equal(-23, Art.Value.Sprite("bosses.troll.frost")!.EffectShift);
+        Assert.Equal(-33, Art.Value.Sprite("bosses.troll.frost")!.EffectShift); // approved giant head clearance
         foreach (var key in new[] { "bosses.imp.crimson", "bosses.imp.violet" })
         {
             var imp = Art.Value.Sprite(key)!;

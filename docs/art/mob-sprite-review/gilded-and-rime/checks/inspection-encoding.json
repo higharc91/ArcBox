@@ -1,0 +1,20 @@
+{
+  "dragon_gold": {
+    "sourceBytes": 16794002,
+    "reviewBytes": 10688986,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  },
+  "troll_frost": {
+    "sourceBytes": 10930508,
+    "reviewBytes": 6861646,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  },
+  "troll_ogre": {
+    "sourceBytes": 11142109,
+    "reviewBytes": 6819410,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  }
+}

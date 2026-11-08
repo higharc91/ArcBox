@@ -1,0 +1,3122 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 0,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      163,
+      198,
+      359,
+      397
+    ],
+    "count": 27920
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 1,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      163,
+      197,
+      360,
+      398
+    ],
+    "count": 27963
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 2,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      159,
+      196,
+      356,
+      398
+    ],
+    "count": 27812
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 3,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      163,
+      199,
+      360,
+      397
+    ],
+    "count": 27559
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 0,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      161,
+      199,
+      363,
+      400
+    ],
+    "count": 29695
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 1,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      157,
+      199,
+      356,
+      400
+    ],
+    "count": 29238
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 2,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      159,
+      201,
+      356,
+      400
+    ],
+    "count": 28626
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 3,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      164,
+      201,
+      362,
+      400
+    ],
+    "count": 28889
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 0,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      155,
+      201,
+      353,
+      400
+    ],
+    "count": 28733
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 1,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      201,
+      352,
+      400
+    ],
+    "count": 28108
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 2,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      121,
+      197,
+      378,
+      400
+    ],
+    "count": 35111
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 3,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      157,
+      201,
+      354,
+      400
+    ],
+    "count": 28497
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 0,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      155,
+      209,
+      349,
+      400
+    ],
+    "count": 26532
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 1,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      144,
+      258,
+      367,
+      400
+    ],
+    "count": 20708
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 0,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      201,
+      358,
+      400
+    ],
+    "count": 28455
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 1,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      165,
+      201,
+      358,
+      400
+    ],
+    "count": 28219
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 2,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      151,
+      201,
+      371,
+      400
+    ],
+    "count": 29938
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 3,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      165,
+      201,
+      360,
+      400
+    ],
+    "count": 28199
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 0,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      159,
+      200,
+      353,
+      400
+    ],
+    "count": 28148
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 1,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      112,
+      171,
+      390,
+      400
+    ],
+    "count": 41013
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 2,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      90,
+      212,
+      428,
+      400
+    ],
+    "count": 36771
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 3,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      132,
+      202,
+      374,
+      400
+    ],
+    "count": 31880
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 0,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      163,
+      201,
+      359,
+      400
+    ],
+    "count": 27982
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 1,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      165,
+      199,
+      361,
+      400
+    ],
+    "count": 28155
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 2,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      148,
+      199,
+      374,
+      400
+    ],
+    "count": 31176
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 3,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      163,
+      202,
+      360,
+      400
+    ],
+    "count": 27858
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 4,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      171,
+      226,
+      373,
+      397
+    ],
+    "count": 24148
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 5,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      171,
+      218,
+      373,
+      398
+    ],
+    "count": 25253
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 6,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      171,
+      219,
+      372,
+      398
+    ],
+    "count": 24755
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 7,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      172,
+      226,
+      373,
+      397
+    ],
+    "count": 24004
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 4,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      171,
+      225,
+      375,
+      400
+    ],
+    "count": 25783
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 5,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      168,
+      219,
+      375,
+      400
+    ],
+    "count": 26488
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 6,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      170,
+      221,
+      377,
+      400
+    ],
+    "count": 26657
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 7,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      169,
+      228,
+      377,
+      400
+    ],
+    "count": 26119
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 4,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      169,
+      231,
+      371,
+      400
+    ],
+    "count": 24108
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 5,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      229,
+      371,
+      400
+    ],
+    "count": 24722
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 6,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      142,
+      208,
+      398,
+      400
+    ],
+    "count": 31970
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 7,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      168,
+      231,
+      370,
+      400
+    ],
+    "count": 24118
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 2,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      169,
+      218,
+      370,
+      400
+    ],
+    "count": 24935
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 3,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      144,
+      278,
+      367,
+      400
+    ],
+    "count": 19927
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 4,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      171,
+      227,
+      373,
+      400
+    ],
+    "count": 24829
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 5,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      172,
+      221,
+      373,
+      400
+    ],
+    "count": 25568
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 6,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      154,
+      225,
+      387,
+      400
+    ],
+    "count": 27582
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 7,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      171,
+      226,
+      373,
+      400
+    ],
+    "count": 24853
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 4,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      171,
+      208,
+      379,
+      400
+    ],
+    "count": 26296
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 5,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      149,
+      172,
+      411,
+      400
+    ],
+    "count": 38802
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 6,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      111,
+      224,
+      451,
+      400
+    ],
+    "count": 35311
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 7,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      151,
+      215,
+      397,
+      400
+    ],
+    "count": 30982
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 4,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      170,
+      227,
+      374,
+      400
+    ],
+    "count": 24466
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 5,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      171,
+      211,
+      376,
+      400
+    ],
+    "count": 26147
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 6,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      160,
+      214,
+      385,
+      400
+    ],
+    "count": 29564
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 7,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      174,
+      223,
+      376,
+      400
+    ],
+    "count": 24554
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 8,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      144,
+      269,
+      345,
+      398
+    ],
+    "count": 16919
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 9,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      146,
+      259,
+      348,
+      397
+    ],
+    "count": 17897
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 10,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      144,
+      262,
+      345,
+      398
+    ],
+    "count": 17336
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 11,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      145,
+      268,
+      347,
+      398
+    ],
+    "count": 16766
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 8,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      142,
+      268,
+      348,
+      400
+    ],
+    "count": 17751
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 9,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      140,
+      261,
+      348,
+      400
+    ],
+    "count": 18121
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 10,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      140,
+      266,
+      347,
+      400
+    ],
+    "count": 18057
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 11,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      139,
+      272,
+      346,
+      400
+    ],
+    "count": 17854
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 8,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      127,
+      252,
+      354,
+      400
+    ],
+    "count": 20607
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 9,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      128,
+      251,
+      356,
+      400
+    ],
+    "count": 20710
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 10,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      99,
+      216,
+      369,
+      400
+    ],
+    "count": 29830
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 11,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      128,
+      251,
+      355,
+      400
+    ],
+    "count": 20521
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 4,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      128,
+      224,
+      357,
+      400
+    ],
+    "count": 24968
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 5,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      137,
+      282,
+      375,
+      400
+    ],
+    "count": 19379
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 8,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      144,
+      270,
+      348,
+      400
+    ],
+    "count": 17840
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 9,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      142,
+      266,
+      349,
+      400
+    ],
+    "count": 18447
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 10,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      128,
+      247,
+      365,
+      400
+    ],
+    "count": 22626
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 11,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      141,
+      271,
+      345,
+      400
+    ],
+    "count": 17891
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 8,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      141,
+      219,
+      389,
+      400
+    ],
+    "count": 27564
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 9,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      138,
+      172,
+      408,
+      400
+    ],
+    "count": 38747
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 10,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      124,
+      229,
+      425,
+      400
+    ],
+    "count": 32819
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-front.png",
+    "sourcePose": 11,
+    "scale": 0.9852216748768473,
+    "bounds": [
+      134,
+      221,
+      392,
+      400
+    ],
+    "count": 28978
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 8,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      148,
+      267,
+      349,
+      400
+    ],
+    "count": 17349
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 9,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      143,
+      258,
+      347,
+      400
+    ],
+    "count": 18259
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 10,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      140,
+      257,
+      354,
+      400
+    ],
+    "count": 20859
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 11,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      149,
+      268,
+      351,
+      400
+    ],
+    "count": 17157
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 12,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      151,
+      236,
+      353,
+      398
+    ],
+    "count": 20178
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 13,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      154,
+      229,
+      355,
+      398
+    ],
+    "count": 21104
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 14,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      153,
+      230,
+      352,
+      398
+    ],
+    "count": 20425
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 15,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      153,
+      236,
+      354,
+      398
+    ],
+    "count": 20286
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 12,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      127,
+      231,
+      333,
+      400
+    ],
+    "count": 21998
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 13,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      130,
+      228,
+      332,
+      400
+    ],
+    "count": 22243
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 14,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      151,
+      231,
+      354,
+      400
+    ],
+    "count": 21933
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 15,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      151,
+      234,
+      355,
+      400
+    ],
+    "count": 21539
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 12,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      138,
+      217,
+      355,
+      400
+    ],
+    "count": 24187
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 13,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      138,
+      216,
+      358,
+      400
+    ],
+    "count": 24072
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 14,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      110,
+      199,
+      360,
+      400
+    ],
+    "count": 31553
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 15,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      139,
+      217,
+      356,
+      400
+    ],
+    "count": 24295
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-rear-left-damage.png",
+    "sourcePose": 0,
+    "scale": 0.3163097199341021,
+    "bounds": [
+      118,
+      209,
+      294,
+      400
+    ],
+    "count": 20739
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-rear-left-damage.png",
+    "sourcePose": 1,
+    "scale": 0.3163097199341021,
+    "bounds": [
+      149,
+      267,
+      361,
+      400
+    ],
+    "count": 18033
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 12,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      153,
+      239,
+      355,
+      400
+    ],
+    "count": 21151
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 13,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      154,
+      237,
+      353,
+      400
+    ],
+    "count": 21502
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 14,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      135,
+      235,
+      351,
+      400
+    ],
+    "count": 23925
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 15,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      153,
+      239,
+      354,
+      400
+    ],
+    "count": 21145
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-northwest.png",
+    "sourcePose": 0,
+    "scale": 0.7092198581560284,
+    "bounds": [
+      157,
+      201,
+      327,
+      400
+    ],
+    "count": 20925
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-northwest.png",
+    "sourcePose": 1,
+    "scale": 0.7092198581560284,
+    "bounds": [
+      84,
+      152,
+      359,
+      400
+    ],
+    "count": 39118
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-northwest.png",
+    "sourcePose": 2,
+    "scale": 0.7092198581560284,
+    "bounds": [
+      50,
+      201,
+      387,
+      400
+    ],
+    "count": 35828
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-northwest.png",
+    "sourcePose": 3,
+    "scale": 0.7092198581560284,
+    "bounds": [
+      123,
+      201,
+      328,
+      400
+    ],
+    "count": 25686
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 12,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      149,
+      237,
+      354,
+      400
+    ],
+    "count": 20960
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 13,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      149,
+      228,
+      354,
+      400
+    ],
+    "count": 21380
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 14,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      138,
+      228,
+      358,
+      400
+    ],
+    "count": 23938
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 15,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      150,
+      237,
+      355,
+      400
+    ],
+    "count": 21040
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 16,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      160,
+      188,
+      336,
+      397
+    ],
+    "count": 25283
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 17,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      160,
+      188,
+      336,
+      397
+    ],
+    "count": 25269
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 18,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      162,
+      188,
+      337,
+      397
+    ],
+    "count": 25365
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 19,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      160,
+      188,
+      336,
+      397
+    ],
+    "count": 25242
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 16,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      157,
+      188,
+      342,
+      400
+    ],
+    "count": 27362
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 17,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      159,
+      187,
+      339,
+      400
+    ],
+    "count": 27141
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 18,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      160,
+      191,
+      340,
+      400
+    ],
+    "count": 26708
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 19,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      158,
+      191,
+      339,
+      400
+    ],
+    "count": 26431
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 16,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      187,
+      338,
+      400
+    ],
+    "count": 26118
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 17,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      162,
+      187,
+      335,
+      400
+    ],
+    "count": 25701
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 18,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      120,
+      184,
+      376,
+      400
+    ],
+    "count": 33539
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 19,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      187,
+      338,
+      400
+    ],
+    "count": 26052
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 8,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      155,
+      196,
+      338,
+      400
+    ],
+    "count": 25868
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 9,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      147,
+      263,
+      365,
+      400
+    ],
+    "count": 19807
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 16,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      193,
+      337,
+      400
+    ],
+    "count": 25962
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 17,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      193,
+      337,
+      400
+    ],
+    "count": 25809
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 18,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      144,
+      191,
+      349,
+      400
+    ],
+    "count": 28210
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 19,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      193,
+      338,
+      400
+    ],
+    "count": 25869
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 0,
+    "scale": 0.851063829787234,
+    "bounds": [
+      178,
+      200,
+      332,
+      400
+    ],
+    "count": 21290
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 1,
+    "scale": 0.851063829787234,
+    "bounds": [
+      131,
+      197,
+      372,
+      400
+    ],
+    "count": 29302
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 2,
+    "scale": 0.851063829787234,
+    "bounds": [
+      122,
+      219,
+      375,
+      400
+    ],
+    "count": 23833
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 3,
+    "scale": 0.851063829787234,
+    "bounds": [
+      166,
+      203,
+      339,
+      400
+    ],
+    "count": 22629
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 16,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      162,
+      191,
+      337,
+      400
+    ],
+    "count": 25320
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 17,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      157,
+      191,
+      342,
+      400
+    ],
+    "count": 26507
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 18,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      136,
+      192,
+      360,
+      400
+    ],
+    "count": 30287
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 19,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      162,
+      192,
+      336,
+      400
+    ],
+    "count": 25274
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 20,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      178,
+      219,
+      379,
+      398
+    ],
+    "count": 22607
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 21,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      178,
+      212,
+      381,
+      398
+    ],
+    "count": 24066
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 22,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      178,
+      218,
+      377,
+      398
+    ],
+    "count": 22974
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 23,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      178,
+      225,
+      380,
+      398
+    ],
+    "count": 22480
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 20,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      177,
+      220,
+      381,
+      400
+    ],
+    "count": 24507
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 21,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      174,
+      214,
+      381,
+      400
+    ],
+    "count": 25597
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 22,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      176,
+      221,
+      380,
+      400
+    ],
+    "count": 24217
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 23,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      178,
+      228,
+      384,
+      400
+    ],
+    "count": 23501
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-attack-northeast.png",
+    "sourcePose": 0,
+    "scale": 0.5050505050505051,
+    "bounds": [
+      175,
+      200,
+      398,
+      400
+    ],
+    "count": 27265
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_gold-attack-northeast.png",
+    "sourcePose": 1,
+    "scale": 0.5050505050505051,
+    "bounds": [
+      174,
+      200,
+      404,
+      400
+    ],
+    "count": 26693
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_gold-attack-northeast.png",
+    "sourcePose": 2,
+    "scale": 0.5050505050505051,
+    "bounds": [
+      135,
+      174,
+      472,
+      400
+    ],
+    "count": 42030
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_gold-attack-northeast.png",
+    "sourcePose": 3,
+    "scale": 0.5050505050505051,
+    "bounds": [
+      175,
+      195,
+      397,
+      400
+    ],
+    "count": 27286
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 10,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      179,
+      213,
+      370,
+      400
+    ],
+    "count": 23022
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 11,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      146,
+      272,
+      366,
+      400
+    ],
+    "count": 18773
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 20,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      177,
+      222,
+      376,
+      400
+    ],
+    "count": 24165
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 21,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      176,
+      215,
+      381,
+      400
+    ],
+    "count": 24901
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 22,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      175,
+      222,
+      389,
+      400
+    ],
+    "count": 24882
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 23,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      178,
+      226,
+      382,
+      400
+    ],
+    "count": 23613
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 4,
+    "scale": 0.851063829787234,
+    "bounds": [
+      188,
+      205,
+      331,
+      400
+    ],
+    "count": 18671
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 5,
+    "scale": 0.851063829787234,
+    "bounds": [
+      147,
+      183,
+      364,
+      400
+    ],
+    "count": 27774
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 6,
+    "scale": 0.851063829787234,
+    "bounds": [
+      84,
+      216,
+      360,
+      400
+    ],
+    "count": 27049
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 7,
+    "scale": 0.851063829787234,
+    "bounds": [
+      179,
+      217,
+      345,
+      400
+    ],
+    "count": 19100
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 20,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      179,
+      222,
+      381,
+      400
+    ],
+    "count": 23742
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 21,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      180,
+      211,
+      377,
+      400
+    ],
+    "count": 24698
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 22,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      166,
+      215,
+      387,
+      400
+    ],
+    "count": 26250
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 23,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      178,
+      226,
+      381,
+      400
+    ],
+    "count": 23248
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 24,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      163,
+      266,
+      365,
+      397
+    ],
+    "count": 17093
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 25,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      154,
+      257,
+      356,
+      398
+    ],
+    "count": 18225
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 26,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      159,
+      258,
+      358,
+      398
+    ],
+    "count": 18002
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 27,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      165,
+      270,
+      367,
+      397
+    ],
+    "count": 16922
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-east-walk.png",
+    "sourcePose": 0,
+    "scale": 0.5747126436781609,
+    "bounds": [
+      100,
+      201,
+      400,
+      400
+    ],
+    "count": 34550
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_gold-east-walk.png",
+    "sourcePose": 1,
+    "scale": 0.5747126436781609,
+    "bounds": [
+      95,
+      203,
+      392,
+      400
+    ],
+    "count": 33123
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_gold-east-walk.png",
+    "sourcePose": 2,
+    "scale": 0.5747126436781609,
+    "bounds": [
+      94,
+      203,
+      394,
+      400
+    ],
+    "count": 33318
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_gold-east-walk.png",
+    "sourcePose": 3,
+    "scale": 0.5747126436781609,
+    "bounds": [
+      93,
+      205,
+      392,
+      400
+    ],
+    "count": 32317
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 24,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      260,
+      379,
+      400
+    ],
+    "count": 19558
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 25,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      256,
+      377,
+      400
+    ],
+    "count": 20267
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 26,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      141,
+      234,
+      392,
+      400
+    ],
+    "count": 25175
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_gold-attack.png",
+    "sourcePose": 27,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      260,
+      379,
+      400
+    ],
+    "count": 19634
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 12,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      137,
+      232,
+      363,
+      400
+    ],
+    "count": 23275
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 13,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      142,
+      292,
+      368,
+      400
+    ],
+    "count": 18046
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 24,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      165,
+      271,
+      366,
+      400
+    ],
+    "count": 17484
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 25,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      165,
+      262,
+      369,
+      400
+    ],
+    "count": 18641
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 26,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      139,
+      259,
+      367,
+      400
+    ],
+    "count": 20826
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 27,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      270,
+      365,
+      400
+    ],
+    "count": 17620
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 8,
+    "scale": 0.851063829787234,
+    "bounds": [
+      176,
+      229,
+      382,
+      400
+    ],
+    "count": 19501
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 9,
+    "scale": 0.851063829787234,
+    "bounds": [
+      177,
+      189,
+      424,
+      400
+    ],
+    "count": 28898
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 10,
+    "scale": 0.851063829787234,
+    "bounds": [
+      162,
+      240,
+      423,
+      400
+    ],
+    "count": 22780
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 11,
+    "scale": 0.851063829787234,
+    "bounds": [
+      221,
+      230,
+      433,
+      400
+    ],
+    "count": 21707
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 24,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      156,
+      264,
+      361,
+      400
+    ],
+    "count": 17677
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 25,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      162,
+      256,
+      371,
+      400
+    ],
+    "count": 18549
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 26,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      151,
+      256,
+      372,
+      400
+    ],
+    "count": 20413
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 27,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      158,
+      268,
+      362,
+      400
+    ],
+    "count": 17501
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 28,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      143,
+      218,
+      345,
+      398
+    ],
+    "count": 24983
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 29,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      146,
+      212,
+      345,
+      398
+    ],
+    "count": 25286
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 30,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      146,
+      213,
+      345,
+      398
+    ],
+    "count": 25085
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_gold-idle.png",
+    "sourcePose": 31,
+    "scale": 1.2195121951219512,
+    "bounds": [
+      143,
+      223,
+      344,
+      398
+    ],
+    "count": 24678
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 28,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      143,
+      231,
+      345,
+      400
+    ],
+    "count": 23902
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 29,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      144,
+      226,
+      343,
+      400
+    ],
+    "count": 24773
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 30,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      145,
+      230,
+      347,
+      400
+    ],
+    "count": 24280
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_gold-walk.png",
+    "sourcePose": 31,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      144,
+      236,
+      346,
+      400
+    ],
+    "count": 24220
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-attack-southeast.png",
+    "sourcePose": 0,
+    "scale": 0.6230529595015576,
+    "bounds": [
+      130,
+      200,
+      329,
+      400
+    ],
+    "count": 25289
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_gold-attack-southeast.png",
+    "sourcePose": 1,
+    "scale": 0.6230529595015576,
+    "bounds": [
+      136,
+      229,
+      365,
+      400
+    ],
+    "count": 25251
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_gold-attack-southeast.png",
+    "sourcePose": 2,
+    "scale": 0.6230529595015576,
+    "bounds": [
+      59,
+      203,
+      430,
+      400
+    ],
+    "count": 44432
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_gold-attack-southeast.png",
+    "sourcePose": 3,
+    "scale": 0.6230529595015576,
+    "bounds": [
+      128,
+      209,
+      342,
+      400
+    ],
+    "count": 26819
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 14,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      143,
+      226,
+      347,
+      400
+    ],
+    "count": 23817
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-damage.png",
+    "sourcePose": 15,
+    "scale": 0.8311688311688312,
+    "bounds": [
+      148,
+      279,
+      364,
+      400
+    ],
+    "count": 18995
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 28,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      144,
+      225,
+      346,
+      400
+    ],
+    "count": 24896
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 29,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      145,
+      222,
+      346,
+      400
+    ],
+    "count": 25184
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 30,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      118,
+      223,
+      346,
+      400
+    ],
+    "count": 27078
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_gold-breath.png",
+    "sourcePose": 31,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      142,
+      227,
+      344,
+      400
+    ],
+    "count": 24525
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 12,
+    "scale": 0.851063829787234,
+    "bounds": [
+      180,
+      232,
+      368,
+      400
+    ],
+    "count": 19308
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 13,
+    "scale": 0.851063829787234,
+    "bounds": [
+      147,
+      193,
+      379,
+      400
+    ],
+    "count": 29594
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 14,
+    "scale": 0.851063829787234,
+    "bounds": [
+      125,
+      243,
+      398,
+      400
+    ],
+    "count": 26311
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_gold-wingbeat-back.png",
+    "sourcePose": 15,
+    "scale": 0.851063829787234,
+    "bounds": [
+      177,
+      232,
+      370,
+      400
+    ],
+    "count": 21309
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 28,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      142,
+      220,
+      346,
+      400
+    ],
+    "count": 25047
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 29,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      140,
+      213,
+      343,
+      400
+    ],
+    "count": 25706
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 30,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      124,
+      215,
+      345,
+      400
+    ],
+    "count": 27705
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_gold-roar.png",
+    "sourcePose": 31,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      140,
+      225,
+      347,
+      400
+    ],
+    "count": 24806
+  }
+]

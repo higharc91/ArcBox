@@ -24,14 +24,17 @@
     "bosses.mimic.ironbound",
     "bosses.dragon.black",
     "bosses.dragon.blue",
-    "bosses.dragon.green"
+    "bosses.dragon.green",
+    "bosses.dragon.gold",
+    "bosses.troll.frost",
+    "bosses.troll.ogre"
   ],
-  "libraryBatchCount": 8,
-  "overallBatchCount": 23,
+  "libraryBatchCount": 9,
+  "overallBatchCount": 24,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 7,
+  "remainingTwoDirectionLooks": 4,
   "looks": [
     {
       "baselineNumber": 42,
@@ -297,7 +300,7 @@
       "key": "bosses.dragon.gold",
       "name": "Dragon Gold",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch9"
     },
     {
       "baselineNumber": 80,
@@ -402,14 +405,14 @@
       "key": "bosses.troll.frost",
       "name": "Troll Frost",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch9"
     },
     {
       "baselineNumber": 95,
       "key": "bosses.troll.ogre",
       "name": "Troll Ogre",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch9"
     },
     {
       "baselineNumber": 96,

@@ -14,6 +14,9 @@ public static class LibraryVariantReview
         [new("dragon.fire_breath", "breath", .5), new("dragon.frightful_roar", "roar", .5),
             new("dragon.cataclysm", "wingbeat", .7)]);
 
+    private static Creature Giant(string id, string name, string variant) => new(id, name, "bosses.troll." + variant,
+        [new("troll.boulder_toss", "boulder", .4, true), new("troll.frenzy_roar", "roar", .4)]);
+
     public static IReadOnlyList<Creature> Creatures(string batch) => batch switch
     {
         "crypt-kin" => [new("Bat", "Vampire Bat", "beasts.bat.vampire"),
@@ -23,6 +26,7 @@ public static class LibraryVariantReview
         "iron-and-fangs" => [new("Scorpion", "Black Scorpion", "bestiary.scorpion.black"),
             new("Rider", "Warg Rider", "bestiary.warg.rider"), new("Mimic", "Ironbound Mimic", "bosses.mimic.ironbound")],
         "wyrm-triad" => [Dragon("Black"), Dragon("Blue"), Dragon("Green")],
+        "gilded-and-rime" => [Dragon("Gold"), Giant("Frost", "Frost Troll", "frost"), Giant("Ogre", "Ogre", "ogre")],
         _ => throw new ArgumentException($"Unknown library art batch: {batch}", nameof(batch)),
     };
 

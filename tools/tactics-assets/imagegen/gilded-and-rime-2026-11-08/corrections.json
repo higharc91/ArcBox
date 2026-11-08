@@ -1,0 +1,106 @@
+[
+  {
+    "mob": "dragon_gold",
+    "source": "dragon_gold-rear-left-damage",
+    "count": 2,
+    "columns": 2,
+    "heightFactor": 0.96,
+    "action": "hurt",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_gold",
+    "source": "dragon_gold-rear-left-damage",
+    "count": 2,
+    "columns": 2,
+    "heightFactor": 0.96,
+    "action": "down",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_gold",
+    "source": "dragon_gold-east-walk",
+    "count": 4,
+    "columns": 2,
+    "action": "walk",
+    "targets": [
+      {
+        "row": 6,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_gold",
+    "source": "dragon_gold-wingbeat-northwest",
+    "count": 4,
+    "columns": 4,
+    "action": "buff",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_gold",
+    "source": "dragon_gold-attack-northeast",
+    "count": 4,
+    "columns": 2,
+    "action": "attack",
+    "targets": [
+      {
+        "row": 5,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "dragon_gold",
+    "source": "dragon_gold-attack-southeast",
+    "count": 4,
+    "columns": 2,
+    "action": "attack",
+    "targets": [
+      {
+        "row": 7,
+        "poses": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  }
+]
