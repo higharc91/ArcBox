@@ -226,3 +226,6 @@ The integration includes the approved shared toolkit and Wizard through Ranger s
 
 
 The main integration gate found the refreshed Ranger hound’s full bite plus separate save/condition holds exceeded its existing 0.8 s ordinary-attack cap (0.96 s). Party-hound save/condition badges now resolve during the complete 0.8 s recovery. All real damage/save/condition events and all animation frames remain. A new real companion regression and the related Fighter/creature/timing checks pass (260 tests); the stricter budget assertion is unchanged.
+
+
+The merged asset guard identified 97 retained originals from the separate mob refresh: 96 portraits and the old drake sheet. All are exact historical/current-main bytes and were referenced before #273; they are now individually documented as source assets. The existing unknown/unreferenced-file test remains unchanged and all seven manifest crosschecks pass. No runtime art is removed or replaced.
