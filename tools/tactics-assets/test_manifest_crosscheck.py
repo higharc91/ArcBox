@@ -3,6 +3,7 @@
 Run with python -m unittest tools/tactics-assets/test_manifest_crosscheck.py.
 """
 import json
+import hashlib
 import re
 import unittest
 from pathlib import Path
@@ -56,6 +57,28 @@ class ManifestCrosscheckTests(unittest.TestCase):
         self.assertEqual(set(), missing, f"Missing manifest files: {sorted(missing)}")
         self.assertEqual(set(), set(source) - shipped, "Stale source-asset allowlist")
         self.assertEqual(set(), shipped - referenced - set(source), "Unreferenced shipped assets")
+
+    def test_retained_mob_sources_are_unchanged_and_have_live_replacements(self):
+        inventory = json.loads((Path(__file__).parent / "baseline/retained-mob-sources.json").read_text())
+        assets = inventory["assets"]
+        self.assertTrue(assets, "Historical sources must be individually inventoried")
+        allowed = {path for path, reason in ALLOW["sourceAssets"].items()
+                   if reason.startswith("Historical mob-refresh source:")}
+        self.assertEqual(set(assets), allowed, "Retained-source exceptions must match the inventory exactly")
+        runtime = set()
+        for manifest in BASE.rglob("manifest.json"):
+            runtime.update((manifest.parent / path).relative_to(BASE).as_posix()
+                           for path in manifest_files(json.loads(manifest.read_text())))
+        for path, entry in assets.items():
+            with self.subTest(path=path):
+                source = BASE / path
+                replacement = entry["replacement"]
+                self.assertTrue(source.is_file(), "Retained source missing")
+                self.assertEqual(entry["sha256"], hashlib.sha256(source.read_bytes()).hexdigest(),
+                                 "Historical source changed; refreshes must use their replacement path")
+                self.assertNotEqual(path, replacement)
+                self.assertIn(replacement, runtime, "Replacement must remain referenced by a runtime manifest")
+                self.assertTrue((BASE / replacement).is_file(), "Replacement missing")
 
     def test_rules_ids_have_art_or_a_documented_fallback(self):
         icons = json.loads((BASE / "icons/manifest.json").read_text())
