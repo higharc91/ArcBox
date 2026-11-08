@@ -613,7 +613,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.heal.holy, fx.restore.holy"
+  "use": "fx.heal.holy, fx.restore.holy; fx.cleric_cure_wounds.healing; fx.cleric_healing_word.healing; fx.cleric_lesser_restoration.healing; fx.cleric_mass_healing_word.healing; fx.cleric_mass_cure_wounds.healing; fx.cleric_greater_restoration.healing; fx.cleric_divine_spark.healing; fx.cleric_preserve_life.healing"
  },
  "spell_holy_pillar": {
   "prompt": "Pillar of holy light descending, bright resonant shimmering beam with a sacred chime",
@@ -622,7 +622,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*"
+  "use": "fx.pillar.holy, fx.aura.holy, fx.radiant.*; fx.cleric_sacred_flame.radiant; fx.cleric_word_of_radiance.radiant; fx.cleric_guiding_bolt.radiant; fx.cleric_banishment.holy; fx.cleric_sear_undead.radiant; fx.cleric_divine_intervention.healing"
  },
  "spell_shield": {
   "prompt": "Magical protective shield forming, glassy shimmering hum that snaps into place",
@@ -631,7 +631,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane"
+  "use": "fx.shield.*, fx.ward.*; fx.wizard_shield.arcane; fx.wizard_mage_armor.arcane; fx.sorcerer_shield.arcane; fx.cleric_resistance.holy; fx.cleric_shield_of_faith.holy; fx.cleric_death_ward.holy"
  },
  "spell_bless": {
   "prompt": "Blessing spell, gentle golden sparkling chimes rising",
@@ -640,7 +640,7 @@
   "variants": 1,
   "group": "spell",
   "loop": false,
-  "use": "fx.bless.*, fx.inspire.*"
+  "use": "fx.bless.*, fx.inspire.*; fx.cleric_bless.holy; fx.cleric_aid.healing"
  },
  "spell_arcane_circle": {
   "prompt": "Arcane magic circle activating on the ground, mystical humming resonance with glittering sparkles",
@@ -685,7 +685,7 @@
   "variants": 2,
   "group": "spell",
   "loop": false,
-  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave; fx.sorcerer_chill_touch.grave; fx.warlock_hex.shadow; fx.warlock_chill_touch.grave; fx.warlock_arms_of_hadar.grave; fx.warlock_darkness.shadow; fx.warlock_vampiric_touch.grave"
+  "use": "fx.hex.shadow, fx.circle.shadow, fx.pillar.shadow, fx.necrotic.*; fx.wizard_chill_touch.grave; fx.sorcerer_chill_touch.grave; fx.warlock_hex.shadow; fx.warlock_chill_touch.grave; fx.warlock_arms_of_hadar.grave; fx.warlock_darkness.shadow; fx.warlock_vampiric_touch.grave; fx.cleric_toll_the_dead.grave; fx.cleric_bane.grave; fx.cleric_inflict_wounds.grave; fx.cleric_blindness.grave; fx.cleric_bestow_curse.grave"
  },
  "spell_poison_cloud": {
   "prompt": "Poison gas cloud spreading, hissing bubbling toxic vapour",
