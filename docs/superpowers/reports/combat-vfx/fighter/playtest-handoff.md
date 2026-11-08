@@ -15,3 +15,6 @@ Fighter’s full final-art gallery, revised three-run performance matrix, textur
 Next implementation: Barbarian, Monk, Rogue, then common actions and racial abilities, with the existing per-class review process. Tonight’s playtest feedback should be recorded in #274 before continuing.
 
 CI is manually disabled and must remain disabled unless the owner explicitly changes that instruction. Existing source/art checkpoints are 58b322c5 and d6915bba; original Fighter-before reference is 4d37f2ea. The original verification.json is explicitly scoped to d6915bba before the main mob integration.
+
+
+While the checkpoint was being validated, main gained the phone battle-map update (#275, 77bab0d7) and the stronger hash-checked retained-source catalog (#276). Both are retained. The canonical current-main source catalog takes precedence over the equivalent interim descriptions, so all replacement/hash checks remain enabled. The completed full gate on 967e9e8c is retained as evidence; the later independent main update is checked with a fresh full Release build, the complete affected game-test project, phone tests/build, all asset tests and Node checks. These results are reported separately rather than presented as a second complete full-gate run.

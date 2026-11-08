@@ -229,3 +229,6 @@ The main integration gate found the refreshed Ranger hound’s full bite plus se
 
 
 The merged asset guard identified 97 retained originals from the separate mob refresh: 96 portraits and the old drake sheet. All are exact historical/current-main bytes and were referenced before #273; they are now individually documented as source assets. The existing unknown/unreferenced-file test remains unchanged and all seven manifest crosschecks pass. No runtime art is removed or replaced.
+
+
+The full gate passed on 967e9e8c. Concurrent main changes #275 (phone battle map) and #276 (hash-checked legacy source inventory) were then integrated without dropping either. Current main’s stronger source catalog is canonical. The post-update Release build, entire affected game-test project, phone tests/build, complete asset suite and Node checks validate the changed paths; full-gate and post-update evidence are recorded separately.
