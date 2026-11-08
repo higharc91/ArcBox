@@ -1,4 +1,4 @@
-> Status: Fighter recovered after workspace loss. Focused checks and native review are in progress; owner approval remains pending.
+> Status: Owner-authorized implementation merge for tonight’s main playtest. Final Fighter gallery, measurements and remaining classes are tracked in #274.
 
 # Fighter — #247
 
@@ -16,8 +16,8 @@ Only six neutral fixture/capture files are backported to the detached baseline. 
 
 ## Verification and budgets
 
-Final full-suite counts, media and performance results are pending.
+The current-art integration gate is recorded in `playtest-handoff.md`. Final native media and revised measurements are deferred to [#274](https://github.com/higharc91/ArcBox/issues/274); partial local media and the intermediate +4.44% result are not final evidence.
 
 Source preservation is in `verification.json`: all gameplay/passive data, original frames, other class art, creatures, phone/fixtures, audio clips, workflow files and non-presentation replay events remain unchanged. Only five Warlord Bridge AbilityUsed presentation objects change. Hardware 16 ms frames and physical TV readability remain hardware checks. CI remains manually disabled.
 
-Fighter stays unchecked pending owner approval. Its PR and Barbarian wait for that approval.
+The owner explicitly requested merging the completed implementation for tonight’s main playtest and recording unfinished work. Fighter’s final visual review remains open in #274; Barbarian, Monk, Rogue and common/racial actions are future work.

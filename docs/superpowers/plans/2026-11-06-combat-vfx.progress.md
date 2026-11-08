@@ -1,4 +1,4 @@
-> Status: Ranger approved, PR #268 open. Fighter recovered after workspace loss; final native review in progress. CI remains disabled.
+> Status: Owner requested merging completed work through Fighter into main for tonight’s playtest. Remaining review/measurement and implementation work is tracked in #274. CI remains disabled.
 
 # Combat VFX #247 progress
 
@@ -216,3 +216,10 @@ Fighter covers 20 abilities, seven actual hooks, ordinary Attack and seven level
 
 
 The final native visual check found that Goading Attack’s solid shield hid the victim during its lingering frames. All nine shield-bearing sheets now restrict the solid impact to two frames (0.1 s) and retain an open outline afterward. A central-body coverage regression passes. Eleven affected native cases are refreshed; the 24 unaffected revised cases and all baseline captures/measurements are retained. The full gate and all three revised measurements are rerun on the final art.
+
+
+## Owner-authorized main playtest handoff
+
+The owner requested: “merge what we have so far once you're at a good stopping place” so main can be tested tonight, and create an issue for the remaining work. This authorizes the implementation merge before the unfinished Fighter gallery/performance handoff. Follow-up [#274](https://github.com/higharc91/ArcBox/issues/274) records the final Fighter review, clean measurements and TV checks, followed by Barbarian, Monk, Rogue and common/racial actions. #247 remains open.
+
+The integration includes the approved shared toolkit and Wizard through Ranger stack, plus Fighter source d6915bba. Current main’s separate mob refresh (#273, c662c42c) is preserved: every current-main mob sprite record remains identical and the four approved Druid form records are added. BeatScript keeps both the refreshed creature attack/special timings and class casting, multiattacks, Counterspell handling and Fighter Charge arrival ordering. The focused integration checks pass (186 tests). The final complete local gate and merge result are recorded in the Fighter playtest handoff. CI remains manually disabled; unfinished or stale Fighter gallery files are not included in this checkpoint.
