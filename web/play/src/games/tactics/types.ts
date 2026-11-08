@@ -123,7 +123,18 @@ export interface ControlNoticeData {
   recap?: string | null;
 }
 
+export interface BattleTerrain {
+  w: number;
+  h: number;
+  heights: number[];
+  flags: number[];
+  materials: string[];
+  tileMaterial: number[];
+  zones: { name: string; tiles: Tile[]; hazard: boolean; detail: string }[];
+}
+
 export interface TurnData {
+  terrain?: BattleTerrain;
   controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;

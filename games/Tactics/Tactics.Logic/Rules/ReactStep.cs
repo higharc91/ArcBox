@@ -72,7 +72,8 @@ public sealed record ReactStep(UnitId Source, AbilityId Ability, Tile Aim, Immut
 public sealed record ReactionDamage(UnitId Target, DamageEffect Effect);
 
 /// <summary>Shared effect-tree queries for rules, previews and content validation.</summary>
-internal static class EffectTree
+/// <summary>Read-only traversal of nested effect definitions.</summary>
+public static class EffectTree
 {
     public static IEnumerable<EffectDef> All(ImmutableArray<EffectDef> effects)
     {
