@@ -69,7 +69,7 @@ def build_characters() -> None:
 
     # 4. The manifest: everything the game needs to cut sheets up and compose a character.
     anims = {a.name: {"frames": a.frames, "fps": a.fps, "loop": a.loop} for a in C.anim_table()}
-    from parts.wizard_casts import classic_aliases
+    from parts.class_casts import classic_aliases
     classic_aliases(anims)
     write_json({
         "frame": {"width": FRAME_W, "height": FRAME_H, "anchor": list(ANCHOR)},

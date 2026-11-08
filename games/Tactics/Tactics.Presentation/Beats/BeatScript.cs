@@ -660,6 +660,14 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
 
         private void Swing(AbilityUsed used)
         {
+            if (fx.HasDamageVariants(used.Presentation?.Fx))
+            {
+                var materials = beat.Events.Skip(_at + 1).TakeWhile(e => e is not AbilityUsed)
+                    .OfType<Damaged>().Select(d => d.Type).Distinct().Take(2).ToArray();
+                // An area rolls separately for each victim. Mixed outcomes keep a neutral central release.
+                if (materials.Length == 1 && used.Presentation is { } presentation)
+                    used = used with { Presentation = presentation with { Fx = fx.ForDamage(presentation.Fx, materials[0]) } };
+            }
             var from = TileOf(used.Source);
             var aim = used.Target.Unit is { } unit ? TileOf(unit) : used.Target.Tile;
             var anim = used.Presentation?.Anim ?? Attack;
@@ -707,8 +715,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             {
                 anim = plain ? Shoot : anim;
                 var flight = Math.Min(BeatTiming.FlightBase + BeatTiming.FlightPerTile * reach, BeatTiming.FlightMost);
-                // The authored Wizard volley winds up once, then releases the remaining real attack rolls as quick rays.
-                var ray = key == "fx.wizard_scorching_ray_shot.fire" && _swings > 0;
+                // The authored caster volley winds up once, then releases the remaining real attack rolls as quick rays.
+                var ray = (key is "fx.wizard_scorching_ray_shot.fire" or "fx.sorcerer_scorching_ray_shot.fire") && _swings > 0;
                 var windup = ray ? .04 : BeatTiming.Windup;
                 if (ray) flight = .12;
                 _cues.Add(new PoseCue(_t, windup + flight, used.Source, anim, source, target));
@@ -774,7 +782,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private void PlayDamage(Damaged hit)
         {
             if (hit.Amount > 0) _cues.Add(new ImpactCue(_t, BeatTiming.Impact, hit.Unit, hit.Amount));
-            Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
+            if (_reaction is null && fx.HasDamageVariants(_ability?.Presentation?.Fx))
+                Burst(fx.ForDamage(_ability?.Presentation?.Fx, hit.Type), TileOf(hit.Unit), scale: .5f, alpha: .4f);
+            else
+                Burst(_reaction?.Rule == "conduct" ? "fx.shock.storm" : hit.Type is { } type && !Physical.Contains(type) ? Magic : Spark, TileOf(hit.Unit));
             if (hit.Amount > 0)
                 Pop(hit.Unit, $"-{hit.Amount}", PopStyle.Damage);
             var length = _view.Units.FirstOrDefault(u => u.Id == hit.Unit)?.Sprite switch

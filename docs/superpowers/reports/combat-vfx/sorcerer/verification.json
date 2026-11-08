@@ -1,0 +1,11 @@
+{
+  "baseline": "a3c5e0d3ad61e059ff470a9fc0fe7b67c4a45244",
+  "sorcererGameplayDefinitionsIdentical": true,
+  "abilityCount": 45,
+  "phoneFilesUnchanged": true,
+  "audioClipsUnchanged": true,
+  "nonSorcererAtlasesUnchanged": true,
+  "engineRulesAiOrBalanceChanges": false,
+  "paidGenerationUsed": false,
+  "newAudioUsed": false
+}

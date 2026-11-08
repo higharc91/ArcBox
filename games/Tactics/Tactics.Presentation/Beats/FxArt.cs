@@ -81,6 +81,7 @@ public sealed class FxArt
 
     private readonly Dictionary<string, ShotArt> _shots = new(StringComparer.Ordinal);
     private readonly Dictionary<string, string> _passives = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, Dictionary<string, string>> _damageVariants = new(StringComparer.Ordinal);
 
     private FxArt()
     {
@@ -113,6 +114,18 @@ public sealed class FxArt
 
     /// <summary>Optional visible proc art, kept in the presentation manifest rather than the rules.</summary>
     public string? Passive(string id) => _passives.GetValueOrDefault(id);
+
+    public bool HasDamageVariants(string? key)
+        => key is not null && _damageVariants.ContainsKey(string.Join('.', key.Split('.').Take(2)));
+
+    /// <summary>Only opted-in chaotic effects follow the actual resolved damage material.</summary>
+    public string? ForDamage(string? key, string? damage)
+    {
+        if (key is null || damage is null) return key;
+        var parts = key.Split('.');
+        var stem = parts.Length < 2 ? key : $"{parts[0]}.{parts[1]}";
+        return _damageVariants.TryGetValue(stem, out var variants) && variants.TryGetValue(damage, out var variant) ? stem + "." + variant : key;
+    }
 
     /// <summary>The effect for a key, or null.</summary>
     public FxClip? Clip(string key)
@@ -149,6 +162,8 @@ public sealed class FxArt
                     LiftOf(attach), e.GetProperty("blend").GetString() == "add", attach == "projectile")
                     { Emission = SpellEmission.ForAsset($"{set}.{effect.Name}.{variant.Name}", e.GetProperty("blend").GetString() == "add") };
             var key = $"{set}.{effect.Name}";
+            if (e.TryGetProperty("variantsByDamage", out var damage))
+                _damageVariants[key] = damage.EnumerateObject().ToDictionary(v => v.Name, v => v.Value.GetString()!, StringComparer.Ordinal);
             _sets[key] = clips;
             _defaults[key] = clips.GetValueOrDefault(e.TryGetProperty("default", out var first) ? first.GetString() ?? "" : "") ?? clips.Values.First();
         }

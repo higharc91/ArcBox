@@ -1,0 +1,1169 @@
+{
+  "before": [
+    {
+      "id": "sorcerer.acid_splash",
+      "name": "Acid Splash",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.acid.acid"
+      }
+    },
+    {
+      "id": "sorcerer.burning_hands",
+      "name": "Burning Hands",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.draconic_dragon_breath.fire"
+      }
+    },
+    {
+      "id": "sorcerer.chill_touch",
+      "name": "Chill Touch",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.necrotic.grave"
+      }
+    },
+    {
+      "id": "sorcerer.chromatic_orb",
+      "name": "Chromatic Orb",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.shock.storm",
+        "projectile": "projectiles.lightning"
+      }
+    },
+    {
+      "id": "sorcerer.fire_bolt",
+      "name": "Fire Bolt",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.flames.fire",
+        "projectile": "projectiles.fireball"
+      }
+    },
+    {
+      "id": "sorcerer.innate_sorcery",
+      "name": "Innate Sorcery",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.aura.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.magic_missile",
+      "name": "Magic Missile",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.force.force",
+        "projectile": "projectiles.missile"
+      }
+    },
+    {
+      "id": "sorcerer.poison_spray",
+      "name": "Poison Spray",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.toxin.venom"
+      }
+    },
+    {
+      "id": "sorcerer.ray_of_frost",
+      "name": "Ray of Frost",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.frost.frost",
+        "projectile": "projectiles.ice"
+      }
+    },
+    {
+      "id": "sorcerer.shield",
+      "name": "Shield",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "fx.shield.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.shocking_grasp",
+      "name": "Shocking Grasp",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.shock.storm"
+      }
+    },
+    {
+      "id": "sorcerer.sleep",
+      "name": "Sleep",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.misty.fey"
+      }
+    },
+    {
+      "id": "sorcerer.thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.thunder.thunder"
+      }
+    },
+    {
+      "id": "sorcerer.font_of_magic_mana",
+      "name": "Font of Magic: Create Mana",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.aura.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.font_of_magic_sorcery",
+      "name": "Font of Magic: Draw Sorcery",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.aura.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_careful",
+      "name": "Metamagic: Careful Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_distant",
+      "name": "Metamagic: Distant Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_extended",
+      "name": "Metamagic: Extended Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_twinned",
+      "name": "Metamagic: Twinned Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.misty_step",
+      "name": "Misty Step",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.misty.mist"
+      }
+    },
+    {
+      "id": "sorcerer.scorching_ray",
+      "name": "Scorching Ray",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.flames.fire",
+        "projectile": "projectiles.fireball"
+      }
+    },
+    {
+      "id": "sorcerer.shatter",
+      "name": "Shatter",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.spell_shatter.thunder"
+      }
+    },
+    {
+      "id": "sorcerer.web",
+      "name": "Web",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "fx.web.silk"
+      }
+    },
+    {
+      "id": "sorcerer.counterspell",
+      "name": "Counterspell",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.dispel.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.fireball",
+      "name": "Fireball",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_fireball.fire",
+        "projectile": "projectiles.fireball"
+      }
+    },
+    {
+      "id": "sorcerer.haste",
+      "name": "Haste",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "signature.chronomancer_time_dial.haste"
+      }
+    },
+    {
+      "id": "sorcerer.lightning_bolt",
+      "name": "Lightning Bolt",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_lightning_bolt.storm"
+      }
+    },
+    {
+      "id": "sorcerer.slow",
+      "name": "Slow",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.chronomancer_time_dial.slow"
+      }
+    },
+    {
+      "id": "sorcerer.banishment",
+      "name": "Banishment",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.pillar.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.greater_invisibility",
+      "name": "Greater Invisibility",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.misty.mist"
+      }
+    },
+    {
+      "id": "sorcerer.ice_storm",
+      "name": "Ice Storm",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.ice.frost"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_quickened",
+      "name": "Metamagic: Quickened Spell",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.circle.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.wall_of_fire",
+      "name": "Wall of Fire",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.flames.fire"
+      }
+    },
+    {
+      "id": "sorcerer.cone_of_cold",
+      "name": "Cone of Cold",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_cone_of_cold.frost"
+      }
+    },
+    {
+      "id": "sorcerer.hold_monster",
+      "name": "Hold Monster",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.arcane"
+      }
+    },
+    {
+      "id": "chaos.tides_of_chaos",
+      "name": "Tides of Chaos",
+      "level": 3,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "signature.chaos_wild_surge.wild"
+      }
+    },
+    {
+      "id": "chaos.wild_surge",
+      "name": "Wild Surge",
+      "level": 3,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.chaos_wild_surge.wild"
+      }
+    },
+    {
+      "id": "chaos.bend_luck",
+      "name": "Bend Luck",
+      "level": 6,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "signature.chaos_wild_surge.wild"
+      }
+    },
+    {
+      "id": "chaos.controlled_surge",
+      "name": "Controlled Surge",
+      "level": 10,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.chaos_wild_surge.wild"
+      }
+    },
+    {
+      "id": "draconic.dragon_breath",
+      "name": "Draconic Breath",
+      "level": 3,
+      "subclass": "sorcerer.draconic",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.draconic_dragon_breath.fire"
+      }
+    },
+    {
+      "id": "draconic.dragon_scales",
+      "name": "Dragon Scales",
+      "level": 3,
+      "subclass": "sorcerer.draconic",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "draconic.elemental_affinity",
+      "name": "Elemental Affinity",
+      "level": 6,
+      "subclass": "sorcerer.draconic",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "draconic.dragon_wings",
+      "name": "Dragon Wings",
+      "level": 10,
+      "subclass": "sorcerer.draconic",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.jump",
+        "fx": "signature.draconic_dragon_breath.fire"
+      }
+    },
+    {
+      "id": "runeborn.ember_rune",
+      "name": "Ember Rune",
+      "level": 3,
+      "subclass": "sorcerer.runeborn",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "signature.runeborn_rune_circle.ember"
+      }
+    },
+    {
+      "id": "runeborn.frost_rune",
+      "name": "Frost Rune",
+      "level": 6,
+      "subclass": "sorcerer.runeborn",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "signature.runeborn_rune_circle.teal"
+      }
+    },
+    {
+      "id": "runeborn.runic_ward",
+      "name": "Runic Ward",
+      "level": 6,
+      "subclass": "sorcerer.runeborn",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "runeborn.grand_sigil",
+      "name": "Grand Sigil",
+      "level": 10,
+      "subclass": "sorcerer.runeborn",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.runeborn_rune_circle.teal"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "sorcerer.acid_splash",
+      "name": "Acid Splash",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_acid_splash.acid"
+      }
+    },
+    {
+      "id": "sorcerer.burning_hands",
+      "name": "Burning Hands",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_burning_hands.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.chill_touch",
+      "name": "Chill Touch",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_chill_touch.grave"
+      }
+    },
+    {
+      "id": "sorcerer.chromatic_orb",
+      "name": "Chromatic Orb",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_chromatic_orb.storm",
+        "projectile": "fx.sorcerer_chromatic_orb_shot.storm"
+      }
+    },
+    {
+      "id": "sorcerer.fire_bolt",
+      "name": "Fire Bolt",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_fire_bolt.fire",
+        "projectile": "fx.sorcerer_fire_bolt_shot.fire"
+      }
+    },
+    {
+      "id": "sorcerer.innate_sorcery",
+      "name": "Innate Sorcery",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_innate_sorcery.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.magic_missile",
+      "name": "Magic Missile",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_magic_missile.force",
+        "projectile": "fx.sorcerer_magic_missile_shot.force"
+      }
+    },
+    {
+      "id": "sorcerer.poison_spray",
+      "name": "Poison Spray",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_poison_spray.venom"
+      }
+    },
+    {
+      "id": "sorcerer.ray_of_frost",
+      "name": "Ray of Frost",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_ray_of_frost.frost",
+        "projectile": "fx.sorcerer_ray_of_frost_shot.frost"
+      }
+    },
+    {
+      "id": "sorcerer.shield",
+      "name": "Shield",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_shield.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.shocking_grasp",
+      "name": "Shocking Grasp",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_shocking_grasp.storm"
+      }
+    },
+    {
+      "id": "sorcerer.sleep",
+      "name": "Sleep",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_sleep.fey"
+      }
+    },
+    {
+      "id": "sorcerer.thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_thunderwave.thunder"
+      }
+    },
+    {
+      "id": "sorcerer.font_of_magic_mana",
+      "name": "Font of Magic: Create Mana",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_font_of_magic_mana.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.font_of_magic_sorcery",
+      "name": "Font of Magic: Draw Sorcery",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_font_of_magic_sorcery.psychic"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_careful",
+      "name": "Metamagic: Careful Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_metamagic_careful.gold"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_distant",
+      "name": "Metamagic: Distant Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_metamagic_distant.force"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_extended",
+      "name": "Metamagic: Extended Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_metamagic_extended.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_twinned",
+      "name": "Metamagic: Twinned Spell",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_metamagic_twinned.force"
+      }
+    },
+    {
+      "id": "sorcerer.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_hold_person.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.misty_step",
+      "name": "Misty Step",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_misty_step.mist"
+      }
+    },
+    {
+      "id": "sorcerer.scorching_ray",
+      "name": "Scorching Ray",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_scorching_ray.fire",
+        "projectile": "fx.sorcerer_scorching_ray_shot.fire"
+      }
+    },
+    {
+      "id": "sorcerer.shatter",
+      "name": "Shatter",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_shatter.thunder",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.web",
+      "name": "Web",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_web.silk"
+      }
+    },
+    {
+      "id": "sorcerer.counterspell",
+      "name": "Counterspell",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_counterspell.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.fireball",
+      "name": "Fireball",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_fireball.fire",
+        "projectile": "fx.sorcerer_fireball_shot.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.haste",
+      "name": "Haste",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_haste.gold",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.lightning_bolt",
+      "name": "Lightning Bolt",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_lightning_bolt.storm",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.slow",
+      "name": "Slow",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_slow.frost",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.banishment",
+      "name": "Banishment",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_banishment.arcane"
+      }
+    },
+    {
+      "id": "sorcerer.greater_invisibility",
+      "name": "Greater Invisibility",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_greater_invisibility.mist"
+      }
+    },
+    {
+      "id": "sorcerer.ice_storm",
+      "name": "Ice Storm",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_ice_storm.frost"
+      }
+    },
+    {
+      "id": "sorcerer.metamagic_quickened",
+      "name": "Metamagic: Quickened Spell",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_metamagic_quickened.storm"
+      }
+    },
+    {
+      "id": "sorcerer.wall_of_fire",
+      "name": "Wall of Fire",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_wall_of_fire.fire"
+      }
+    },
+    {
+      "id": "sorcerer.cone_of_cold",
+      "name": "Cone of Cold",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_cone_of_cold.frost",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "sorcerer.hold_monster",
+      "name": "Hold Monster",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_hold_monster.arcane"
+      }
+    },
+    {
+      "id": "chaos.tides_of_chaos",
+      "name": "Tides of Chaos",
+      "level": 3,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_tides_of_chaos.psychic",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "chaos.wild_surge",
+      "name": "Wild Surge",
+      "level": 3,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_wild_surge.force",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "chaos.bend_luck",
+      "name": "Bend Luck",
+      "level": 6,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_bend_luck.psychic"
+      }
+    },
+    {
+      "id": "chaos.controlled_surge",
+      "name": "Controlled Surge",
+      "level": 10,
+      "subclass": "sorcerer.chaos",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_controlled_surge.arcane",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "draconic.dragon_breath",
+      "name": "Draconic Breath",
+      "level": 3,
+      "subclass": "sorcerer.draconic",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_breath",
+        "fx": "fx.sorcerer_dragon_breath.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "draconic.dragon_scales",
+      "name": "Dragon Scales",
+      "level": 3,
+      "subclass": "sorcerer.draconic",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "draconic.elemental_affinity",
+      "name": "Elemental Affinity",
+      "level": 6,
+      "subclass": "sorcerer.draconic",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.sorcerer_elemental_affinity.fire"
+      }
+    },
+    {
+      "id": "draconic.dragon_wings",
+      "name": "Dragon Wings",
+      "level": 10,
+      "subclass": "sorcerer.draconic",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_dragon_wings.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "runeborn.ember_rune",
+      "name": "Ember Rune",
+      "level": 3,
+      "subclass": "sorcerer.runeborn",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_ember_rune.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "runeborn.frost_rune",
+      "name": "Frost Rune",
+      "level": 6,
+      "subclass": "sorcerer.runeborn",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_frost_rune.frost",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "runeborn.runic_ward",
+      "name": "Runic Ward",
+      "level": 6,
+      "subclass": "sorcerer.runeborn",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "runeborn.grand_sigil",
+      "name": "Grand Sigil",
+      "level": 10,
+      "subclass": "sorcerer.runeborn",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.sorcerer_surge",
+        "fx": "fx.sorcerer_grand_sigil.arcane",
+        "cutIn": "full"
+      }
+    }
+  ]
+}

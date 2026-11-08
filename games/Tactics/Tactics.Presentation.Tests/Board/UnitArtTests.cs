@@ -123,16 +123,22 @@ public sealed class UnitArtTests
             var sprite = Art.Value.Sprite("characters." + preset.GetString())!;
             Assert.True(OnDisk(sprite.Path));
             var wizard = preset.GetString()!.EndsWith("_wizard", StringComparison.Ordinal);
-            var count = wizard ? 223 : 189;
+            var sorcerer = preset.GetString()!.EndsWith("_sorcerer", StringComparison.Ordinal);
+            var count = wizard ? 223 : sorcerer ? 209 : 189;
             var last = sprite.Source(count - 1, 1);
             Assert.InRange(last.X + last.Width, 1, 3840);
-            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : 2560);
-            Assert.Equal(wizard ? 10 : 8, sprite.RowsPerDirection);
+            Assert.InRange(last.Y + last.Height, 1, wizard ? 3200 : sorcerer ? 2880 : 2560);
+            Assert.Equal(wizard ? 10 : sorcerer ? 9 : 8, sprite.RowsPerDirection);
             if (wizard)
                 foreach (var name in new[] { "wizard_bolt", "wizard_weave", "wizard_ward", "wizard_nova", "wizard_stomp" })
                     Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 222));
             else
                 Assert.Same(sprite.Anim("point"), sprite.Anim("wizard_bolt"));
+            if (sorcerer)
+                foreach (var name in new[] { "sorcerer_fling", "sorcerer_surge", "sorcerer_focus", "sorcerer_breath" })
+                    Assert.All(sprite.Anim(name).Frames, frame => Assert.InRange(frame, 189, 208));
+            else
+                Assert.Same(sprite.Anim("point"), sprite.Anim("sorcerer_fling"));
             Assert.Equal(32, sprite.FootprintWidth);
         }
     }
