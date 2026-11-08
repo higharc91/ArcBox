@@ -77,4 +77,14 @@ public sealed class RangerVfxTests
   using var old=System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Pack.Root,"../../../tools/tactics-assets/baseline/ranger-vfx.json"))));
   foreach(var a in old.RootElement.EnumerateObject())Assert.Equal(sounds.ForEffect(a.Value.GetProperty("fx").GetString()!),sounds.ForEffect(rules.Abilities[new(a.Name)].Presentation!.Fx!));
  }
+
+ [Fact]
+ public void Refreshed_companion_bite_keeps_all_frames_and_real_save_results_inside_the_attack_budget()
+ {
+  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("ranger","ranger.companion.attack",rules);
+  var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);var lunge=Assert.Single(script.Cues.OfType<LungeCue>());
+  Assert.Equal(.8,lunge.Length);Assert.True(script.Length>=lunge.At+lunge.Length);Assert.InRange(script.Length,0,.8+1e-6);
+  Assert.Contains(s.After.Beats.Single().Events,e=>e is Damaged);Assert.NotEmpty(script.Cues.OfType<BadgeCue>());
+  Assert.Contains(script.Cues.OfType<ApplyCue>(),c=>c.Event is ConditionApplied);
+ }
 }

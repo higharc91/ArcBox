@@ -462,7 +462,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     Sound(e is ConditionApplied gained ? SoundChoice.Condition(gained.Condition.Value) : null);
                     Moment(e is ConditionApplied ? "condition" : "condition-ends", BeatTiming.Condition * 0.8);
-                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon || RangerVolley || FighterCadence ? .06 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon || RangerVolley || RangerCompanionAttack || FighterCadence ? .06 : BeatTiming.Condition;
                     break;
                 case ConcentrationBroken broken:
                     Burst(Puff, TileOf(broken.Caster));
@@ -492,7 +492,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 case CountdownTicked:
                     Sound("ui_countdown_tick");
                     Apply(e);
-                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon || RangerVolley || FighterCadence ? .06 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon || RangerVolley || RangerCompanionAttack || FighterCadence ? .06 : BeatTiming.Condition;
                     break;
                 case Spawned spawned:
                     Burst(Puff, spawned.At);
@@ -517,7 +517,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     break;
                 case ZoneEnded:
                     Apply(e);
-                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon || RangerVolley || FighterCadence ? .06 : BeatTiming.Condition;
+                    _t += InArea ? 0 : DruidFormVolley || PaladinWeapon || RangerVolley || RangerCompanionAttack || FighterCadence ? .06 : BeatTiming.Condition;
                     break;
                 case TerrainAltered altered:
                     PlayTerrain(altered);
@@ -921,7 +921,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             _cues.Add(new BadgeCue(_t, BeatTiming.Badge, unit, tile, roll.Kept, roll.Success));
             Sound("ui_dice_roll");
             Moment("save", 0.1);
-            _t += _reaction is not null ? 0 : RangerVolley || FighterCadence ? .05 : DruidFormVolley || PaladinWeapon ? .08 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
+            _t += _reaction is not null ? 0 : RangerVolley || RangerCompanionAttack || FighterCadence ? .05 : DruidFormVolley || PaladinWeapon ? .08 : _rolls++ == 0 ? BeatTiming.BadgeHold : BeatTiming.Stagger;   // a second roll is an area's: they resolve together
             _rolled = true;
         }
 
@@ -940,7 +940,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 if(_stackedDamageNumbers)_stackedDamageRows[resolved.Target]=row/2+1;
                 Sound("attack_miss");
                 _cues.Add(new PoseCue(_t, BeatTiming.Impact, resolved.Target, Dodge));
-                _t += DruidFormVolley || PaladinWeapon || RangerVolley || FighterCadence ? .08 : EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
+                _t += DruidFormVolley || PaladinWeapon || RangerVolley || RangerCompanionAttack || FighterCadence ? .08 : EldritchVolley ? .08 : InArea ? BeatTiming.Stagger : BeatTiming.Impact;
             }
         }
 
@@ -952,6 +952,11 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private bool PaladinWeapon => _ability is {} used && (used.Ability.Value is "crusader.searing_smite" or "avenger.soul_of_vengeance"
             || used.Ability.Value=="common.attack" && _view.Units.Any(u=>u.Id==used.Source&&u.Sprite?.EndsWith("_paladin",StringComparison.Ordinal)==true));
         private bool RangerVolley => _ability?.Ability.Value=="common.attack" && _view.Units.Any(u=>u.Id==_ability.Source && u.Sprite?.EndsWith("_ranger",StringComparison.Ordinal)==true);
+        // The refreshed party hound keeps all eight bite frames. Its save/condition badges
+        // resolve during that recovery instead of extending an ordinary attack past .8 s.
+        private bool RangerCompanionAttack => _ability?.Ability.Value=="common.attack"
+            && _view.Units.Any(u=>u.Id==_ability.Source && UnitPlan.ToneOf(u.Side)==UnitTone.Party
+                && u.Sprite is "monsters.hound" or "bosses.hound.tan" or "bosses.hound.black" or "bosses.hound.grey");
         private bool FighterWeapon => _ability is {} used && (used.Presentation?.Fx?.StartsWith("fx.fighter_",StringComparison.Ordinal)==true
             || used.Ability.Value=="common.attack" && used.Presentation?.Fx is null && used.Presentation?.Projectile is null
             && (used.Presentation?.Anim is null or "attack" or "characters.attack")

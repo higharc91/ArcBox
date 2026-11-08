@@ -4,7 +4,7 @@ The owner authorized merging the completed work through Fighter to main for toni
 
 Included: shared cut-ins, camera/impact/accessibility controls and spell lighting; approved Wizard, Sorcerer, Warlock, Cleric, Druid, Paladin, Bard and Ranger work; Fighter’s 20 abilities, seven visible hooks, native poses and 28 effects. Charge follows actual movement before its strike. Shield fills last two frames, then become outlines that keep units and HP bars readable. Gameplay, balance and AI are unchanged by the presentation work. No new sounds or paid generation were added.
 
-Current main’s #273 mob refresh is integrated. All current-main mob sprite records remain identical; the four approved Druid forms are retained alongside them. Natural creature attacks/specials and class/counterspell/volley timings are combined. The focused integration checks pass: 186 tests.
+Current main’s #273 mob refresh is integrated. All current-main mob sprite records remain identical; the four approved Druid forms are retained alongside them. Natural creature attacks/specials and class/counterspell/volley timings are combined. The initial focused integration checks pass: 186 tests. The complete gate then caught a Ranger companion pacing conflict: the refreshed hound’s full 0.8 s bite plus separate save/condition holds took 0.96 s. Party-hound save/condition updates now resolve during recovery, preserving every animation frame and rule result inside 0.8 s. The targeted companion, Fighter, creature and timing checks pass: 260 tests.
 
 Final full local gate: pending completion before merge.
 
