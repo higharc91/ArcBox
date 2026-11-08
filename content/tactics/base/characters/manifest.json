@@ -762,6 +762,62 @@
       ],
       "fps": 8,
       "loop": false
+    },
+    "bard_play": {
+      "frames": [
+        144,
+        145,
+        146,
+        147
+      ],
+      "fps": 8,
+      "loop": true
+    },
+    "bard_verse": {
+      "frames": [
+        108,
+        109,
+        110,
+        111
+      ],
+      "fps": 5,
+      "loop": true
+    },
+    "bard_crescendo": {
+      "frames": [
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "fps": 9,
+      "loop": false
+    },
+    "bard_lore": {
+      "frames": [
+        155,
+        156,
+        157,
+        158
+      ],
+      "fps": 12,
+      "loop": false
+    },
+    "bard_valor": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "fps": 14,
+      "loop": false
     }
   },
   "builds": {

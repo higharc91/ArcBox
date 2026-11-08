@@ -185,7 +185,7 @@ public sealed class PhaseScreenTests
         Assert.Equal("4–6 players · +2 AI companions", row.Detail);
         Assert.Equal("Lv 1", row.Value);
         Assert.False(row.Dim);
-        Assert.Null(row.Chip);
+        Assert.Equal("Recommended", row.Chip);
     }
 
     [Theory]
@@ -201,11 +201,13 @@ public sealed class PhaseScreenTests
     }
 
     [Fact]
-    public void An_encounter_without_a_level_shows_a_question_mark()
+    public void An_encounter_without_a_level_is_explicitly_unrated()
     {
         var screen = PhaseScreen.Of(View("EncounterPick", encounters: [new EncounterOption("a", "A", null, 1, 6, true)]));
 
-        Assert.Equal("Lv ?", Assert.Single(screen.Rows).Value);
+        var row = Assert.Single(screen.Rows);
+        Assert.Equal("Unrated", row.Value);
+        Assert.Equal("Level not specified", row.Chip);
     }
 
     [Fact]
@@ -220,7 +222,7 @@ public sealed class PhaseScreenTests
         Assert.Equal("Encounter pick · 2 battles", screen.Meta);
         Assert.False(screen.Rows[0].Dim);
         Assert.True(screen.Rows[1].Dim);
-        Assert.Equal("PARTY TOO BIG", screen.Rows[1].Chip);
+        Assert.Equal("Party too big (max 2)", screen.Rows[1].Chip);
     }
 
     [Fact]

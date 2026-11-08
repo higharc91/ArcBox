@@ -238,8 +238,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         private readonly Dictionary<UnitId, int> _stackedDamageRows = [];
         private readonly bool _stackedDamageNumbers = beat.Events.Any(e => e switch
         {
-            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.druid_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.paladin_",StringComparison.Ordinal)==true,
-            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.druid_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.paladin_",StringComparison.Ordinal)==true,
+            AbilityUsed used => used.Presentation?.Fx?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.druid_", StringComparison.Ordinal) == true || used.Presentation?.Fx?.StartsWith("fx.paladin_",StringComparison.Ordinal)==true || used.Presentation?.Fx?.StartsWith("fx.bard_",StringComparison.Ordinal)==true,
+            PassiveTriggered proc => fx.Passive(proc.Passive)?.StartsWith("fx.cleric_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.druid_", StringComparison.Ordinal) == true || fx.Passive(proc.Passive)?.StartsWith("fx.paladin_",StringComparison.Ordinal)==true || fx.Passive(proc.Passive)?.StartsWith("fx.bard_",StringComparison.Ordinal)==true,
             _ => false,
         }) || shown.Units.Any(u => u.Id == beat.Actor && (IsDruidForm(u.Sprite)||u.Sprite?.EndsWith("_paladin",StringComparison.Ordinal)==true));
         private int _rolls;
@@ -654,7 +654,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Sound(sounds?.Has("kobold_pick") == true ? "kobold_pick" : "swing_blunt");
                 return;
             }
-            var blow = used.Presentation?.Fx is null && used.Presentation?.Projectile is null || Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]);
+            var blow = used.Presentation?.Fx is null && used.Presentation?.Projectile is null || Blows.Contains(anim[(anim.LastIndexOf('.') + 1)..]) || used.Ability.Value=="valor.battle_magic";
             Cry(used.Source, "attack");
             Sound(blow ? SoundChoice.Swing(GearOf(used.Source).Weapon) : SoundChoice.IsSpell(used.Presentation?.Fx) ? "spell_cast" : null);
         }
@@ -707,7 +707,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     "ashmaw.cinder_roar" => 1.2, // six frames at five fps
                     "ashmaw.ash_shake" => 1.0,
                     "grisk.dig_faster" => 0.7,
-                    "cleric.word_of_radiance" => .24, // brief prayer; the real area saves share the release
+                    "cleric.word_of_radiance" or "bard.thunderclap" => .24, // brief prayer; the real area saves share the release
                     _ => BeatTiming.Cast,
                 };
                 _cues.Add(new PoseCue(_t, length, used.Source, anim));

@@ -9141,6 +9141,1026 @@
         "fire": "paladin_elemental_strike_fire.png"
       },
       "default": "fire"
+    },
+    "bard_bardic_inspiration": {
+      "name": "Bardic Inspiration",
+      "group": "Bard",
+      "frame": [
+        69,
+        55
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        42
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "bard_bardic_inspiration_gold.png"
+      },
+      "default": "gold"
+    },
+    "bard_song_of_rest": {
+      "name": "Song Of Rest",
+      "group": "Bard",
+      "frame": [
+        66,
+        44
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        42
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "bard_song_of_rest_healing.png"
+      },
+      "default": "healing"
+    },
+    "bard_countercharm": {
+      "name": "Countercharm",
+      "group": "Bard",
+      "frame": [
+        66,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        42
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_countercharm_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_vicious_mockery": {
+      "name": "Vicious Mockery",
+      "group": "Bard",
+      "frame": [
+        44,
+        41
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        23,
+        36
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        17,
+        17
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "bard_vicious_mockery_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "bard_thunderclap": {
+      "name": "Thunderclap",
+      "group": "Bard",
+      "frame": [
+        61,
+        34
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        30,
+        32
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        10,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "bard_thunderclap_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "bard_minor_illusion": {
+      "name": "Minor Illusion",
+      "group": "Bard",
+      "frame": [
+        51,
+        36
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        25,
+        37
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        15,
+        16
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "illusion": "bard_minor_illusion_illusion.png"
+      },
+      "default": "illusion"
+    },
+    "bard_healing_word": {
+      "name": "Healing Word",
+      "group": "Bard",
+      "frame": [
+        66,
+        43
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        34
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        40
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "bard_healing_word_healing.png"
+      },
+      "default": "healing"
+    },
+    "bard_cure_wounds": {
+      "name": "Cure Wounds",
+      "group": "Bard",
+      "frame": [
+        66,
+        57
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        42
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "bard_cure_wounds_healing.png"
+      },
+      "default": "healing"
+    },
+    "bard_dissonant_whispers": {
+      "name": "Dissonant Whispers",
+      "group": "Bard",
+      "frame": [
+        66,
+        42
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        41
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        33
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "bard_dissonant_whispers_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "bard_faerie_fire": {
+      "name": "Faerie Fire",
+      "group": "Bard",
+      "frame": [
+        139,
+        69
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        69,
+        43
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        35,
+        52
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "fey": "bard_faerie_fire_fey.png"
+      },
+      "default": "fey"
+    },
+    "bard_heroism": {
+      "name": "Heroism",
+      "group": "Bard",
+      "frame": [
+        72,
+        51
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        37
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        37
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "bard_heroism_gold.png"
+      },
+      "default": "gold"
+    },
+    "bard_thunderwave": {
+      "name": "Thunderwave",
+      "group": "Bard",
+      "frame": [
+        167,
+        64
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        83,
+        43
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        21,
+        52
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "bard_thunderwave_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "bard_shatter": {
+      "name": "Shatter",
+      "group": "Bard",
+      "frame": [
+        145,
+        70
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        71,
+        51
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        33,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "bard_shatter_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "bard_hold_person": {
+      "name": "Hold Person",
+      "group": "Bard",
+      "frame": [
+        66,
+        61
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        50
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        24
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_hold_person_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_lesser_restoration": {
+      "name": "Lesser Restoration",
+      "group": "Bard",
+      "frame": [
+        70,
+        45
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        44
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        30
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "bard_lesser_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "bard_silence": {
+      "name": "Silence",
+      "group": "Bard",
+      "frame": [
+        139,
+        69
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        69,
+        43
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        35,
+        52
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "illusion": "bard_silence_illusion.png"
+      },
+      "default": "illusion"
+    },
+    "bard_hypnotic_pattern": {
+      "name": "Hypnotic Pattern",
+      "group": "Bard",
+      "frame": [
+        139,
+        74
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        69,
+        51
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        35,
+        44
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "bard_hypnotic_pattern_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "bard_mass_healing_word": {
+      "name": "Mass Healing Word",
+      "group": "Bard",
+      "frame": [
+        139,
+        67
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        69,
+        43
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        35,
+        52
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "bard_mass_healing_word_healing.png"
+      },
+      "default": "healing"
+    },
+    "bard_dispel_magic": {
+      "name": "Dispel Magic",
+      "group": "Bard",
+      "frame": [
+        82,
+        50
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        41,
+        43
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        15,
+        31
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_dispel_magic_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_greater_invisibility": {
+      "name": "Greater Invisibility",
+      "group": "Bard",
+      "frame": [
+        67,
+        41
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        35
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        39
+      ],
+      "attach": "feet",
+      "blend": "normal",
+      "layer": "over",
+      "variants": {
+        "illusion": "bard_greater_invisibility_illusion.png"
+      },
+      "default": "illusion"
+    },
+    "bard_dimension_door": {
+      "name": "Dimension Door",
+      "group": "Bard",
+      "frame": [
+        66,
+        63
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        52
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        22
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_dimension_door_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_hold_monster": {
+      "name": "Hold Monster",
+      "group": "Bard",
+      "frame": [
+        132,
+        72
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        52
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        43
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_hold_monster_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_greater_restoration": {
+      "name": "Greater Restoration",
+      "group": "Bard",
+      "frame": [
+        69,
+        51
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        42
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        32
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "healing": "bard_greater_restoration_healing.png"
+      },
+      "default": "healing"
+    },
+    "bard_combat_inspiration": {
+      "name": "Combat Inspiration",
+      "group": "Bard",
+      "frame": [
+        139,
+        75
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        69,
+        49
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        35,
+        46
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "bard_combat_inspiration_gold.png"
+      },
+      "default": "gold"
+    },
+    "bard_battle_magic": {
+      "name": "Battle Magic",
+      "group": "Bard",
+      "frame": [
+        66,
+        46
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        38
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        36
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "bard_battle_magic_thunder.png"
+      },
+      "default": "thunder"
+    },
+    "bard_cutting_words": {
+      "name": "Cutting Words",
+      "group": "Bard",
+      "frame": [
+        66,
+        49
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        39
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        35
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "psychic": "bard_cutting_words_psychic.png"
+      },
+      "default": "psychic"
+    },
+    "bard_counterspell": {
+      "name": "Counterspell",
+      "group": "Bard",
+      "frame": [
+        79,
+        62
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        37,
+        53
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        19,
+        21
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_counterspell_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_magical_secrets": {
+      "name": "Magical Secrets",
+      "group": "Bard",
+      "frame": [
+        143,
+        63
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        67,
+        54
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        37,
+        41
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "force": "bard_magical_secrets_force.png"
+      },
+      "default": "force"
+    },
+    "bard_peerless_skill": {
+      "name": "Peerless Skill",
+      "group": "Bard",
+      "frame": [
+        79,
+        53
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        36,
+        45
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        20,
+        29
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "arcane": "bard_peerless_skill_arcane.png"
+      },
+      "default": "arcane"
+    },
+    "bard_alluring_verse": {
+      "name": "Alluring Verse",
+      "group": "Bard",
+      "frame": [
+        66,
+        50
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        34,
+        47
+      ],
+      "sourceFrame": [
+        112,
+        112
+      ],
+      "trim": [
+        22,
+        27
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "charm": "bard_alluring_verse_charm.png"
+      },
+      "default": "charm"
+    },
+    "bard_enthralling_aria": {
+      "name": "Enthralling Aria",
+      "group": "Bard",
+      "frame": [
+        152,
+        82
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        73,
+        56
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        31,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "charm": "bard_enthralling_aria_charm.png"
+      },
+      "default": "charm"
+    },
+    "bard_sirens_call": {
+      "name": "Sirens Call",
+      "group": "Bard",
+      "frame": [
+        152,
+        82
+      ],
+      "frames": 12,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        73,
+        56
+      ],
+      "sourceFrame": [
+        208,
+        144
+      ],
+      "trim": [
+        31,
+        39
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "charm": "bard_sirens_call_charm.png"
+      },
+      "default": "charm"
+    },
+    "bard_font_of_inspiration": {
+      "name": "Font Of Inspiration",
+      "group": "Bard",
+      "frame": [
+        45,
+        60
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        23,
+        51
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        17,
+        2
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "gold": "bard_font_of_inspiration_gold.png"
+      },
+      "default": "gold"
+    },
+    "bard_silence_turn": {
+      "name": "Silence Turn",
+      "group": "Bard",
+      "frame": [
+        48,
+        29
+      ],
+      "frames": 8,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        24,
+        33
+      ],
+      "sourceFrame": [
+        80,
+        80
+      ],
+      "trim": [
+        16,
+        20
+      ],
+      "attach": "feet",
+      "blend": "add",
+      "layer": "over",
+      "variants": {
+        "thunder": "bard_silence_turn_thunder.png"
+      },
+      "default": "thunder"
     }
   },
   "passives": {
@@ -9170,6 +10190,8 @@
     "paladin.aura_of_protection": "fx.paladin_aura_refresh.azure",
     "crusader.radiant_blades": "fx.paladin_radiant_blades.holy",
     "avenger.vengeful_strikes": "fx.paladin_vengeful_strikes.ember",
-    "crusader.consecrated.tick": "fx.paladin_consecrated_tick.holy"
+    "crusader.consecrated.tick": "fx.paladin_consecrated_tick.holy",
+    "bard.font_of_inspiration": "fx.bard_font_of_inspiration.gold",
+    "bard.silence.turn": "fx.bard_silence_turn.thunder"
   }
 }
