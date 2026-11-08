@@ -12,21 +12,24 @@
     "bosses.fire_elemental.shadow",
     "bosses.hound.black",
     "bosses.hound.grey",
-    "bosses.imp.violet"
+    "bosses.imp.violet",
+    "beasts.bat.vampire",
+    "beasts.bear.undead",
+    "beasts.slime.crystal"
   ],
-  "libraryBatchCount": 4,
-  "overallBatchCount": 19,
+  "libraryBatchCount": 5,
+  "overallBatchCount": 20,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 19,
+  "remainingTwoDirectionLooks": 16,
   "looks": [
     {
       "baselineNumber": 42,
       "key": "beasts.bat.vampire",
       "name": "Bat Vampire",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch5"
     },
     {
       "baselineNumber": 43,
@@ -54,7 +57,7 @@
       "key": "beasts.bear.undead",
       "name": "Bear Undead",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch5"
     },
     {
       "baselineNumber": 47,
@@ -89,7 +92,7 @@
       "key": "beasts.slime.crystal",
       "name": "Slime Crystal",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch5"
     },
     {
       "baselineNumber": 52,

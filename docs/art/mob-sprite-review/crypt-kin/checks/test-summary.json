@@ -1,0 +1,26 @@
+{
+  "focused": {
+    "passed": 607,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hostBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "testBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "fullPresentation": "Deferred until issue #272 remaining batches are complete; starting main checkpoint passed3128/3128.",
+  "browserValidationPassed": true,
+  "packedFrameKeys": 336,
+  "distinctSelectedWholeFigures": 336,
+  "preservedSourceSheets": 14,
+  "priorRuntimeArtUnchanged": true,
+  "finalBeatRecheck": {
+    "passed": 179,
+    "failed": 0,
+    "skipped": 0
+  }
+}

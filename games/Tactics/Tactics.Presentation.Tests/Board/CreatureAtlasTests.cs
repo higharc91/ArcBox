@@ -77,8 +77,8 @@ public sealed class CreatureAtlasTests
     {
         var art = UnitArt.Load(Pack.Root);
         Assert.Equal("bestiary/warg_rider.png", art.Sprite("bestiary.warg.rider")!.Path);
-        Assert.Equal("beasts/bear_undead.png", art.Sprite("beasts.bear.undead")!.Path);
-        Assert.Equal("beasts/slime_crystal.png", art.Sprite("beasts.slime.crystal")!.Path);
+        Assert.Equal("creatures/mob_refresh_bear_undead.png", art.Sprite("beasts.bear.undead")!.Path);
+        Assert.Equal("creatures/mob_refresh_slime_crystal.png", art.Sprite("beasts.slime.crystal")!.Path);
     }
 
     [Fact]

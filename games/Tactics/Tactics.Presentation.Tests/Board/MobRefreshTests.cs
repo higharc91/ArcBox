@@ -47,6 +47,9 @@ public sealed class MobRefreshTests
     [InlineData("bosses.hound.black", "hound_black")]
     [InlineData("bosses.hound.grey", "hound_grey")]
     [InlineData("bosses.imp.violet", "imp_violet")]
+    [InlineData("beasts.bat.vampire", "bat_vampire")]
+    [InlineData("beasts.bear.undead", "bear_undead")]
+    [InlineData("beasts.slime.crystal", "slime_crystal")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -346,6 +349,10 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.hound.black")!.HeadLift / person, .35f, .65f);
         Assert.InRange(art.Sprite("bosses.hound.grey")!.HeadLift / person, .35f, .65f);
         Assert.InRange(art.Sprite("bosses.imp.violet")!.HeadLift / person, .4f, .75f);
+        // Neutral wing clearance can rise above the small torso in three-quarter views.
+        Assert.InRange(art.Sprite("beasts.bat.vampire")!.HeadLift / person, .6f, 1.1f);
+        Assert.InRange(art.Sprite("beasts.bear.undead")!.HeadLift / person, .9f, 1.35f);
+        Assert.InRange(art.Sprite("beasts.slime.crystal")!.HeadLift / person, .4f, .8f);
         Assert.InRange(art.Sprite("bosses.mimic.oak")!.HeadLift / person, .4f, .8f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }

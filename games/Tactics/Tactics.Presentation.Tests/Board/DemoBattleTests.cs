@@ -55,6 +55,19 @@ public sealed class DemoBattleTests
     }
 
     [Fact]
+    public void Library_variant_reviews_use_walkable_positions_and_the_registered_runtime_keys()
+    {
+        var creatures = LibraryVariantReview.Creatures("crypt-kin");
+        var view = DemoBattle.View("river_crossing:library-crypt-kin");
+        var battle = view.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        Assert.Equal(5, battle.Units.Length);
+        Assert.Equal(LibraryVariantReview.WorldRoster("crypt-kin").Order(), battle.Units.Select(u => u.Sprite).Order());
+        Assert.All(battle.Units, u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+        Assert.All(creatures, c => Assert.Contains(battle.Units, u => u.Id.Value == c.Id && u.Sprite == c.Sprite));
+    }
+
+    [Fact]
     public void Night_companions_review_places_all_three_library_variants_with_human_scale_references()
     {
         var battle = DemoBattle.View("river_crossing:night-companions").Battle!;

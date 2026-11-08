@@ -1,0 +1,16 @@
+{
+  "bat_vampire-attack.png": "df8947548953c81ea634761d305caf530571a5a853f5daa9f7d21f2b9eeb52a7",
+  "bat_vampire-damage.png": "6b97f2bca81b48c858ef3ce3ee8b3d4c579f2662504f617a6f8388f99d77ddc7",
+  "bat_vampire-idle.png": "dbe931cd3222d7c461e1577b3abf7ae7b8546d024e66680acf769d3b71ac6944",
+  "bat_vampire-walk-draft.png": "6659ccada00f1f746fdc6c9d983ea473e65a90ae993941493b83e12246a5ccd9",
+  "bat_vampire-walk.png": "0c2531e9e584c45a80df332fb037cae81d2a2f341ce17fb2e61d783ac331a8f1",
+  "bear_undead-attack.png": "ffbfbc8f38a95d9acb4db50abff146aeb68d6241ec1298b08ba5c94a01f46f6d",
+  "bear_undead-damage.png": "1e76d36e2f5be12cb54b0183e64aafaacfc1479c5ff2fbccff2dddc8a4271d36",
+  "bear_undead-idle.png": "cf4269e0bf1c979f09a8d9c577426aad2be4fb1eddd5d2b2771f8275f0435b85",
+  "bear_undead-rear-down.png": "883272e77b50a08513a0583e9c4db6589ead73317d4b7c00a3ec4bcbbc2f146c",
+  "bear_undead-walk.png": "7f1c7a49d13a1baf3ebc02648fae340c311d61eebc56c010a4b6c981ec5bbe7d",
+  "slime_crystal-attack.png": "6138198df07fab6e481a7228fe190f9ed6a485b553844906b8504716e5c92b69",
+  "slime_crystal-damage.png": "8dd6370143120371f8444ae425ab376aeec41a928721277d20669ca2717fc827",
+  "slime_crystal-idle.png": "28316f8807d6af58ad7bf728628120391c5c7b9574faba52d7a6605baa001ebc",
+  "slime_crystal-walk.png": "178e8ec4bbdc6d482aa211487c68704f1cef715268780aea6448957f636a3e49"
+}

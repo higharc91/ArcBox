@@ -1,0 +1,72 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1120
+    },
+    {
+      "title": "Development battle · creatures beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Bat bite, bear maul and slime strike through the Godot beat path",
+      "width": 960,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · Creature scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "54768ed9",
+    "walk": "467ea07e",
+    "attack": "df0add44",
+    "hurt": "3ed9f1c1",
+    "down": "16f6e351"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "bat_vampire",
+      "hashes": [
+        "4abd6849",
+        "f436e563",
+        "e47b1f7f",
+        "21dffdcc"
+      ]
+    },
+    {
+      "id": "bear_undead",
+      "hashes": [
+        "31ff69f7",
+        "c5880a2b",
+        "a4d75cc7",
+        "ff98db02"
+      ]
+    },
+    {
+      "id": "slime_crystal",
+      "hashes": [
+        "7faf183d",
+        "261b3adf",
+        "f7960140",
+        "e762c268"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

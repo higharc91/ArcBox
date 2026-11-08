@@ -1,0 +1,50 @@
+[
+  {
+    "id": "bat_vampire",
+    "label": "Vampire Bat",
+    "key": "beasts.bat.vampire",
+    "primaryId": "bat_dusk",
+    "height": 84,
+    "size": 320,
+    "anchor": [
+      160,
+      240
+    ],
+    "portraitSize": 54,
+    "identity": "Large animal vampire BAT, compact charcoal fur torso, two large upright ears, short muzzle and small pale fangs, tiny dark garnet eyes, TWO broad leathery wings ROOTED continuously to shoulders and forelimbs, deep burgundy membranes and pale grey finger struts. TWO tucked hind legs/claws and short joined tail membrane. NOT humanoid, no horns, clothing, jewelry or weapons. Wingspan about1.5m beside1.75m adult. Full back has no front face. All wing membranes/ears/feet remain connected.",
+    "idleFps": 4,
+    "walkFps": 8
+  },
+  {
+    "id": "bear_undead",
+    "label": "Undead Bear",
+    "key": "beasts.bear.undead",
+    "primaryId": "bear_brown",
+    "height": 116,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "portraitSize": 64,
+    "identity": "Heavy adult quadruped BEAR, shoulder hump, broad long muzzle, tiny dull pale eyes, TWO rounded ears, FOUR continuous strong legs and grounded broad clawed paws, short rooted bear tail. Ash-grey matted fur, muted dark moss at shoulders, restrained ivory bone patches at ONE cheek and rib edge, weathered undead scavenger, no gore or open wounds, no armor/spikes, no magical flames/glowing eyes. About1.25m shoulder/2m body beside1.75m adult. Full back has no front face. Preserve low grounded bear center of mass.",
+    "idleFps": 3,
+    "walkFps": 5
+  },
+  {
+    "id": "slime_crystal",
+    "label": "Crystal Slime",
+    "key": "beasts.slime.crystal",
+    "primaryId": "slime_green",
+    "height": 64,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "portraitSize": 48,
+    "identity": "Knee-high connected gelatinous CRYSTAL SLIME, translucent blue-grey/aquamarine gel with deliberate opaque pixel shade ramps, small dark eyes and tiny mouth on FRONT only. Pale lavender/aquamarine crystal facets rooted in an asymmetric dorsal ridge, internal mineral inclusions, continuous gel base/rim. About0.7m high beside1.75m adult. Slime is gel containing crystal, not freestanding rock pile. NO arms/legs/claws/human face/teeth/equipment. Full back has no eyes/mouth, dorsal ridge rotates coherently. All gel lobes and crystals attached, no floating shards/bubbles/particles.",
+    "idleFps": 2,
+    "walkFps": 4
+  }
+]

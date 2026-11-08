@@ -1,0 +1,30 @@
+{
+  "reviewed": [
+    "before-after.png",
+    "idle-all-facings.png",
+    "walk-all-facings.png",
+    "attack-all-facings.png",
+    "attack-impact-all-facings.png",
+    "hurt-all-facings.png",
+    "down-all-facings.png",
+    "battle.png",
+    "actions-in-game.png",
+    "overworld-lineup.png",
+    "overworld-lighting-occlusion.png",
+    "crypt-kin-motion.mp4",
+    "godot-specials.mp4"
+  ],
+  "observations": [
+    "Rejected initial tilted-wing flight; replacement has genuine upstroke, horizontal spread, downstroke and recovery in eight facings. Torso landmarks register complete figures without editing pixels.",
+    "Grounded bear gait, connected forepaw/jaw contact, ash-grey fur and bone/moss identity. Three new complete prone rear figures fix sideways down fallbacks. Front HUD crop now includes the face.",
+    "Crystal ridge stays rooted in gel through ooze and pseudopod strike; full backs are faceless.",
+    "Relative scale checked beside the party and established giant-bat/bear/slime families. Padded bat cells accommodate wing reach; body scale is independent of padding.",
+    "Gallery and reel use a common zoom for all creatures and complete silhouettes fit every inspection panel. Five embedded scenes decode and phone390 px view has no overflow.",
+    "Native replay uses three round trips, three adjacent natural hits and recovery. Final fixture uses real physical damage types so unknown physical does not trigger elemental hit visuals.179 beat cases rechecked after that fixture correction.",
+    "Native replay20s at20fps,960x540, silent Dummy audio. Inspection reel24s at16fps,1440x540. Software renderer verifies appearance, not target-device performance."
+  ],
+  "sourceImages": 14,
+  "packedFrameKeys": 336,
+  "selectedWholeFigures": 336,
+  "mainUntouchedForPlaytest": true
+}

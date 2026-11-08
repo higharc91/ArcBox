@@ -281,6 +281,9 @@ public static class DemoBattle
     /// <summary>The host view for a demo spec: a map id, with <c>:changed</c> or <c>:fight</c> or neither.</summary>
     public static TacticsHostView View(string spec)
     {
+        var libraryAt = spec.LastIndexOf(":library-", StringComparison.Ordinal);
+        if (libraryAt >= 0)
+            return LibraryVariantReview.View(spec[..libraryAt], spec[(libraryAt + ":library-".Length)..]);
         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
         var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);

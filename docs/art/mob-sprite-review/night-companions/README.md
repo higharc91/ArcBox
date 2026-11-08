@@ -39,3 +39,5 @@ Use Godot Mono 4.7.2 with the .NET 10 host build. Before `--`: `--audio-driver D
 ```
 
 Collect with `python tools/tactics-assets/imagegen/night-companions-2026-11-07/collect-scenes.py --battle /absolute/battle-shots --world /absolute/world-shots --specials /absolute/move-shots`. Then run action-scenes.cjs, review.cjs and verify-review.cjs. Hound jaw contacts and imp target impact follow engine beat-clock captures; imp hand release/windup captures and video allow the launch to be reviewed separately. The silent replay includes three movement round trips, two bites, a ranged hellfire bolt and return to ready.
+
+[Next: Vampire Bat, Undead Bear and Crystal Slime](../crypt-kin/index.html), library batch 5 for issue #272 on the separate follow-up branch.

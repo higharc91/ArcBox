@@ -1,0 +1,109 @@
+{
+  "bat_vampire_idle": {
+    "promptKey": "bat_vampire_idle",
+    "references": [
+      "references/bat_vampire-idle.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png"
+    ]
+  },
+  "bat_vampire_walk": {
+    "promptKey": "bat_vampire_walk",
+    "references": [
+      "references/bat_vampire-walk.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png"
+    ]
+  },
+  "bat_vampire_attack": {
+    "promptKey": "bat_vampire_attack",
+    "references": [
+      "references/bat_vampire-attack.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/bat_vampire-idle.png"
+    ]
+  },
+  "bat_vampire_damage": {
+    "promptKey": "bat_vampire_damage",
+    "references": [
+      "references/bat_vampire-damage.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/bat_vampire-idle.png"
+    ]
+  },
+  "bear_undead_idle": {
+    "promptKey": "bear_undead_idle",
+    "references": [
+      "references/bear_undead-idle.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png"
+    ]
+  },
+  "bear_undead_walk": {
+    "promptKey": "bear_undead_walk",
+    "references": [
+      "references/bear_undead-walk.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/bear_undead-idle.png"
+    ]
+  },
+  "bear_undead_attack": {
+    "promptKey": "bear_undead_attack",
+    "references": [
+      "references/bear_undead-attack.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/bear_undead-idle.png"
+    ]
+  },
+  "bear_undead_damage": {
+    "promptKey": "bear_undead_damage",
+    "references": [
+      "references/bear_undead-damage.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/bear_undead-idle.png"
+    ]
+  },
+  "slime_crystal_idle": {
+    "promptKey": "slime_crystal_idle",
+    "references": [
+      "references/slime_crystal-idle.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png"
+    ]
+  },
+  "slime_crystal_walk": {
+    "promptKey": "slime_crystal_walk",
+    "references": [
+      "references/slime_crystal-walk.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/slime_crystal-idle.png"
+    ]
+  },
+  "slime_crystal_attack": {
+    "promptKey": "slime_crystal_attack",
+    "references": [
+      "references/slime_crystal-attack.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/slime_crystal-idle.png"
+    ]
+  },
+  "slime_crystal_damage": {
+    "promptKey": "slime_crystal_damage",
+    "references": [
+      "references/slime_crystal-damage.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/slime_crystal-idle.png"
+    ]
+  },
+  "bat_vampire_walk_original": {
+    "promptKey": "bat_vampire_walk_original",
+    "references": [
+      "references/bat_vampire-walk.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png",
+      "source/bat_vampire-idle.png"
+    ]
+  },
+  "bear_undead_rear_down": {
+    "promptKey": "bear_undead_rear_down",
+    "references": [
+      "source/bear_undead-idle.png",
+      "../../concepts/crypt-kin-2026-11-08/three-variants.png"
+    ]
+  }
+}

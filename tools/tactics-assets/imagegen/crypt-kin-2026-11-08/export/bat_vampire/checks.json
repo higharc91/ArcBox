@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 0,
+    "scale": 0.875,
+    "bounds": [
+      76,
+      158,
+      245,
+      238
+    ],
+    "count": 7433
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 1,
+    "scale": 0.875,
+    "bounds": [
+      75,
+      157,
+      242,
+      238
+    ],
+    "count": 7431
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 2,
+    "scale": 0.875,
+    "bounds": [
+      74,
+      158,
+      242,
+      238
+    ],
+    "count": 7131
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 3,
+    "scale": 0.875,
+    "bounds": [
+      78,
+      156,
+      245,
+      238
+    ],
+    "count": 7265
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 0,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      90,
+      100,
+      229,
+      251
+    ],
+    "count": 8804
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 1,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      57,
+      165,
+      261,
+      249
+    ],
+    "count": 8046
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 2,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      100,
+      167,
+      227,
+      288
+    ],
+    "count": 7196
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 3,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      67,
+      163,
+      253,
+      247
+    ],
+    "count": 8099
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 0,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      65,
+      160,
+      254,
+      248
+    ],
+    "count": 9259
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 1,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      69,
+      149,
+      252,
+      246
+    ],
+    "count": 9805
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 2,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      61,
+      165,
+      246,
+      246
+    ],
+    "count": 8192
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 3,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      68,
+      157,
+      253,
+      245
+    ],
+    "count": 9134
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 0,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      88,
+      161,
+      222,
+      240
+    ],
+    "count": 6095
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 1,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      99,
+      195,
+      219,
+      240
+    ],
+    "count": 3960
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 4,
+    "scale": 0.875,
+    "bounds": [
+      99,
+      135,
+      248,
+      238
+    ],
+    "count": 6866
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 5,
+    "scale": 0.875,
+    "bounds": [
+      106,
+      132,
+      250,
+      238
+    ],
+    "count": 6681
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 6,
+    "scale": 0.875,
+    "bounds": [
+      104,
+      139,
+      249,
+      238
+    ],
+    "count": 6408
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 7,
+    "scale": 0.875,
+    "bounds": [
+      103,
+      132,
+      251,
+      238
+    ],
+    "count": 7358
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 4,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      106,
+      82,
+      238,
+      236
+    ],
+    "count": 9118
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 5,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      65,
+      159,
+      263,
+      239
+    ],
+    "count": 7000
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 6,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      97,
+      159,
+      222,
+      282
+    ],
+    "count": 7302
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 7,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      80,
+      149,
+      252,
+      240
+    ],
+    "count": 8094
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 4,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      92,
+      116,
+      261,
+      234
+    ],
+    "count": 8526
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 5,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      96,
+      110,
+      257,
+      235
+    ],
+    "count": 8275
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 6,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      90,
+      126,
+      262,
+      236
+    ],
+    "count": 7126
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 7,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      91,
+      113,
+      260,
+      234
+    ],
+    "count": 8901
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 2,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      101,
+      160,
+      229,
+      240
+    ],
+    "count": 5396
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 3,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      97,
+      195,
+      223,
+      240
+    ],
+    "count": 3628
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 8,
+    "scale": 0.875,
+    "bounds": [
+      131,
+      134,
+      256,
+      238
+    ],
+    "count": 7126
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 9,
+    "scale": 0.875,
+    "bounds": [
+      127,
+      134,
+      252,
+      239
+    ],
+    "count": 7165
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 10,
+    "scale": 0.875,
+    "bounds": [
+      132,
+      139,
+      260,
+      238
+    ],
+    "count": 6807
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 11,
+    "scale": 0.875,
+    "bounds": [
+      135,
+      137,
+      263,
+      238
+    ],
+    "count": 7406
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 8,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      116,
+      86,
+      240,
+      241
+    ],
+    "count": 9814
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 9,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      86,
+      156,
+      268,
+      232
+    ],
+    "count": 5968
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 10,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      125,
+      165,
+      238,
+      293
+    ],
+    "count": 7643
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 11,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      121,
+      139,
+      269,
+      232
+    ],
+    "count": 7511
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 8,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      122,
+      117,
+      267,
+      233
+    ],
+    "count": 9610
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 9,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      130,
+      130,
+      267,
+      251
+    ],
+    "count": 9512
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 10,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      114,
+      124,
+      258,
+      232
+    ],
+    "count": 8565
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 11,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      124,
+      122,
+      273,
+      234
+    ],
+    "count": 9378
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 4,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      105,
+      158,
+      212,
+      240
+    ],
+    "count": 5359
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 5,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      104,
+      194,
+      215,
+      240
+    ],
+    "count": 3635
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 12,
+    "scale": 0.875,
+    "bounds": [
+      94,
+      137,
+      248,
+      238
+    ],
+    "count": 8191
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 13,
+    "scale": 0.875,
+    "bounds": [
+      93,
+      133,
+      242,
+      239
+    ],
+    "count": 8265
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 14,
+    "scale": 0.875,
+    "bounds": [
+      88,
+      131,
+      243,
+      238
+    ],
+    "count": 8499
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 15,
+    "scale": 0.875,
+    "bounds": [
+      90,
+      134,
+      242,
+      239
+    ],
+    "count": 8320
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 12,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      118,
+      87,
+      248,
+      241
+    ],
+    "count": 9827
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 13,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      104,
+      158,
+      275,
+      236
+    ],
+    "count": 6277
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 14,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      132,
+      171,
+      235,
+      301
+    ],
+    "count": 7262
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 15,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      129,
+      140,
+      287,
+      238
+    ],
+    "count": 8223
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 12,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      83,
+      122,
+      256,
+      236
+    ],
+    "count": 10362
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 13,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      86,
+      116,
+      251,
+      239
+    ],
+    "count": 10296
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 14,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      81,
+      119,
+      250,
+      237
+    ],
+    "count": 10305
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 15,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      84,
+      134,
+      256,
+      248
+    ],
+    "count": 10212
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 6,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      110,
+      154,
+      223,
+      240
+    ],
+    "count": 5155
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 7,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      106,
+      194,
+      214,
+      240
+    ],
+    "count": 3410
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 16,
+    "scale": 0.875,
+    "bounds": [
+      72,
+      146,
+      241,
+      238
+    ],
+    "count": 7841
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 17,
+    "scale": 0.875,
+    "bounds": [
+      75,
+      145,
+      242,
+      238
+    ],
+    "count": 7832
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 18,
+    "scale": 0.875,
+    "bounds": [
+      74,
+      144,
+      241,
+      238
+    ],
+    "count": 7537
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 19,
+    "scale": 0.875,
+    "bounds": [
+      72,
+      144,
+      239,
+      238
+    ],
+    "count": 7529
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 16,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      84,
+      97,
+      238,
+      252
+    ],
+    "count": 9752
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 17,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      48,
+      159,
+      265,
+      249
+    ],
+    "count": 8731
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 18,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      97,
+      164,
+      221,
+      291
+    ],
+    "count": 7497
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 19,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      60,
+      156,
+      257,
+      250
+    ],
+    "count": 8588
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 16,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      65,
+      143,
+      254,
+      239
+    ],
+    "count": 9217
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 17,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      68,
+      136,
+      251,
+      241
+    ],
+    "count": 9789
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 18,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      59,
+      140,
+      251,
+      240
+    ],
+    "count": 9044
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 19,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      65,
+      138,
+      252,
+      238
+    ],
+    "count": 9110
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 8,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      87,
+      161,
+      224,
+      240
+    ],
+    "count": 6178
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 9,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      103,
+      193,
+      216,
+      240
+    ],
+    "count": 3301
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 20,
+    "scale": 0.875,
+    "bounds": [
+      76,
+      139,
+      228,
+      238
+    ],
+    "count": 8141
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 21,
+    "scale": 0.875,
+    "bounds": [
+      75,
+      131,
+      230,
+      238
+    ],
+    "count": 8622
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 22,
+    "scale": 0.875,
+    "bounds": [
+      72,
+      127,
+      227,
+      238
+    ],
+    "count": 8631
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 23,
+    "scale": 0.875,
+    "bounds": [
+      73,
+      133,
+      228,
+      239
+    ],
+    "count": 8414
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 20,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      73,
+      81,
+      199,
+      232
+    ],
+    "count": 8158
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 21,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      54,
+      164,
+      259,
+      243
+    ],
+    "count": 6752
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 22,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      97,
+      168,
+      209,
+      296
+    ],
+    "count": 6934
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 23,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      71,
+      155,
+      243,
+      242
+    ],
+    "count": 7497
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 20,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      68,
+      126,
+      236,
+      238
+    ],
+    "count": 10300
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 21,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      67,
+      118,
+      237,
+      239
+    ],
+    "count": 10752
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 22,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      61,
+      123,
+      228,
+      241
+    ],
+    "count": 9969
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 23,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      66,
+      118,
+      235,
+      232
+    ],
+    "count": 10252
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 10,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      98,
+      154,
+      220,
+      239
+    ],
+    "count": 5313
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 11,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      108,
+      194,
+      210,
+      240
+    ],
+    "count": 3164
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 24,
+    "scale": 0.875,
+    "bounds": [
+      62,
+      133,
+      188,
+      239
+    ],
+    "count": 7316
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 25,
+    "scale": 0.875,
+    "bounds": [
+      58,
+      132,
+      190,
+      238
+    ],
+    "count": 7526
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 26,
+    "scale": 0.875,
+    "bounds": [
+      53,
+      135,
+      191,
+      238
+    ],
+    "count": 7352
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 27,
+    "scale": 0.875,
+    "bounds": [
+      51,
+      135,
+      191,
+      238
+    ],
+    "count": 7560
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 24,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      75,
+      78,
+      204,
+      235
+    ],
+    "count": 10287
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 25,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      38,
+      157,
+      199,
+      232
+    ],
+    "count": 5814
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 26,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      82,
+      160,
+      192,
+      284
+    ],
+    "count": 7241
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 27,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      50,
+      140,
+      201,
+      233
+    ],
+    "count": 6659
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 24,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      48,
+      110,
+      196,
+      234
+    ],
+    "count": 10165
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 25,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      47,
+      111,
+      200,
+      236
+    ],
+    "count": 10418
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 26,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      47,
+      123,
+      206,
+      239
+    ],
+    "count": 9330
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 27,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      45,
+      118,
+      200,
+      236
+    ],
+    "count": 9977
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 12,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      119,
+      156,
+      222,
+      240
+    ],
+    "count": 5125
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 13,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      104,
+      198,
+      216,
+      240
+    ],
+    "count": 3066
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 28,
+    "scale": 0.875,
+    "bounds": [
+      58,
+      147,
+      222,
+      238
+    ],
+    "count": 7501
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 29,
+    "scale": 0.875,
+    "bounds": [
+      62,
+      148,
+      227,
+      239
+    ],
+    "count": 7424
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 30,
+    "scale": 0.875,
+    "bounds": [
+      56,
+      151,
+      221,
+      238
+    ],
+    "count": 7096
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bat_vampire-idle.png",
+    "sourcePose": 31,
+    "scale": 0.875,
+    "bounds": [
+      62,
+      146,
+      229,
+      238
+    ],
+    "count": 7441
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 28,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      80,
+      78,
+      191,
+      233
+    ],
+    "count": 8578
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 29,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      48,
+      159,
+      233,
+      232
+    ],
+    "count": 6306
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 30,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      98,
+      165,
+      221,
+      264
+    ],
+    "count": 6197
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bat_vampire-walk.png",
+    "sourcePose": 31,
+    "scale": 0.9438202247191011,
+    "bounds": [
+      65,
+      151,
+      229,
+      240
+    ],
+    "count": 6925
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 28,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      52,
+      135,
+      238,
+      238
+    ],
+    "count": 9251
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 29,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      56,
+      136,
+      236,
+      240
+    ],
+    "count": 9093
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 30,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      54,
+      145,
+      234,
+      240
+    ],
+    "count": 8462
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bat_vampire-attack.png",
+    "sourcePose": 31,
+    "scale": 0.9767441860465116,
+    "bounds": [
+      47,
+      144,
+      233,
+      244
+    ],
+    "count": 9382
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 14,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      97,
+      158,
+      224,
+      240
+    ],
+    "count": 5566
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bat_vampire-damage.png",
+    "sourcePose": 15,
+    "scale": 0.47058823529411764,
+    "bounds": [
+      101,
+      197,
+      218,
+      240
+    ],
+    "count": 3399
+  }
+]

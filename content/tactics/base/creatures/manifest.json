@@ -14152,6 +14152,383 @@
         }
       },
       "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/night-companions-2026-11-07/."
+    },
+    "mob_refresh_bat_vampire": {
+      "file": "mob_refresh_bat_vampire.png",
+      "family": "bat_dusk",
+      "variant": "crypt-kin",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          240
+        ]
+      },
+      "portrait": [
+        133,
+        150,
+        54,
+        54
+      ],
+      "headTop": 127,
+      "overheadClearance": {
+        "walk": 17.68,
+        "attack": 7.44
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 54.4,
+      "footprintHeight": 35.84,
+      "keys": [
+        "beasts.bat.vampire"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/crypt-kin-2026-11-08/."
+    },
+    "mob_refresh_bear_undead": {
+      "file": "mob_refresh_bear_undead.png",
+      "family": "bear_brown",
+      "variant": "crypt-kin",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        96,
+        154,
+        64,
+        64
+      ],
+      "headTop": 99,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 41.92,
+      "footprintHeight": 39.68,
+      "keys": [
+        "beasts.bear.undead"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/crypt-kin-2026-11-08/."
+    },
+    "mob_refresh_slime_crystal": {
+      "file": "mob_refresh_slime_crystal.png",
+      "family": "slime_green",
+      "variant": "crypt-kin",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        111,
+        170,
+        48,
+        48
+      ],
+      "headTop": 156,
+      "overheadClearance": {
+        "walk": 4.88
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 24.96,
+      "footprintHeight": 21.76,
+      "keys": [
+        "beasts.slime.crystal"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 2,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/crypt-kin-2026-11-08/."
     }
   },
   "legacyDistinctForms": [

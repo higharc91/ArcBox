@@ -131,6 +131,44 @@ public sealed class BeatScriptTests
     }
 
     [Fact]
+    public void Library_variant_replay_keeps_targets_stable_and_all_natural_attacks_adjacent()
+    {
+        var steps = LibraryVariantDemo.Steps(Pack.Root, "crypt-kin");
+        Assert.Equal(11, steps.Count);
+        var battle = steps[0].View.Battle!;
+        var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
+        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var moves = 0;
+        var attacks = 0;
+        BattleView? previous = null;
+        foreach (var step in steps)
+        {
+            var current = step.View.Battle!;
+            Assert.All(current.Units, u => Assert.False(terrain.Map[u.At].Flags.HasFlag(TileFlags.Impassable)));
+            foreach (var walk in current.Beats.SelectMany(b => b.Events).OfType<Moved>())
+            {
+                moves++;
+                Assert.Equal(walk.Path[0], walk.Path[^1]);
+                Assert.All(walk.Path, t => Assert.False(terrain.Map[t].Flags.HasFlag(TileFlags.Impassable)));
+            }
+            foreach (var used in current.Beats.SelectMany(b => b.Events).OfType<AbilityUsed>())
+            {
+                attacks++;
+                Assert.NotNull(previous);
+                Assert.Equal(previous.Units.Select(u => u.At), current.Units.Select(u => u.At));
+                Assert.Equal("common.attack", used.Ability.Value);
+                Assert.Equal(rules.Abilities[used.Ability].Presentation, used.Presentation);
+                var from = Assert.Single(current.Units, u => u.Id == used.Source).At;
+                var to = Assert.Single(current.Units, u => u.Id == used.Target.Unit).At;
+                Assert.Equal(1, Math.Max(Math.Abs(from.X-to.X), Math.Abs(from.Y-to.Y)));
+            }
+            previous = current;
+        }
+        Assert.Equal(3, moves);
+        Assert.Equal(3, attacks);
+    }
+
+    [Fact]
     public void Small_library_companions_replay_round_trips_bites_and_real_ranged_hellfire()
     {
         var steps = NightCompanionsDemo.Steps(Pack.Root);
@@ -493,6 +531,9 @@ public sealed class BeatScriptTests
     [InlineData("bosses.hound.tan")]
     [InlineData("bosses.hound.black")]
     [InlineData("bosses.hound.grey")]
+    [InlineData("beasts.bat.vampire")]
+    [InlineData("beasts.bear.undead")]
+    [InlineData("beasts.slime.crystal")]
     public void Companion_bite_finishes_its_complete_clip_and_contacts_on_the_forward_jaw_pose(string key)
     {
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };

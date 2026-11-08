@@ -147,6 +147,9 @@ public partial class Main : Control
             if (board == "environment")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
+            else if (board.StartsWith("library-", StringComparison.Ordinal) && board.EndsWith("-moves", StringComparison.Ordinal))
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.LibraryVariantDemo.Steps(pack, board["library-".Length..^"-moves".Length])));
             else if (board == "stone-and-mire-moves")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.StoneAndMireDemo.Steps(pack)));

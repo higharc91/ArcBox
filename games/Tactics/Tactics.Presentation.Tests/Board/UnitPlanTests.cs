@@ -65,6 +65,9 @@ public sealed class UnitPlanTests
     [InlineData("bosses.hound.black", "bosses.attack", .4)]
     [InlineData("bosses.hound.grey", "bosses.attack", .4)]
     [InlineData("bosses.imp.violet", "bosses.attack", .4)]
+    [InlineData("beasts.bat.vampire", "beasts.attack", .4)]
+    [InlineData("beasts.bear.undead", "beasts.attack", .4)]
+    [InlineData("beasts.slime.crystal", "beasts.attack", .4)]
     public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
     {
         var view = Unit("a", "Enemy", 11, 10, key);

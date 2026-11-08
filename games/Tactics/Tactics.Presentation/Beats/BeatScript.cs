@@ -793,7 +793,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                         "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.hound.black" or "bosses.hound.grey" or "bosses.sapling.spring"
                             or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
                             or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
-                            or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow" => 0.8,
+                            or "bosses.fire_elemental.azure" or "bosses.fire_elemental.radiant" or "bosses.fire_elemental.shadow"
+                            or "beasts.bat.vampire" or "beasts.bear.undead" or "beasts.slime.crystal" => 0.8,
                         "bosses.dragon.red" => 1.0,
                         _ => BeatTiming.Lunge,
                     };
