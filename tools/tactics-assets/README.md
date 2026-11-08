@@ -573,10 +573,10 @@ twist, a gold tab is the spell tier, a gold hook marks a reaction and three dots
 
 ## Effects
 
-`content/tactics/base/fx/` holds 41 effects in colour variants. Each is a horizontal strip, and its manifest
+`content/tactics/base/fx/` holds combat effects in colour variants. Each is a horizontal strip, and its manifest
 entry gives:
 
-- frame size (up to 96–128 px for big spells), fps, `loop` and `loopStart`;
+- frame size (up to 256 px for the Wizard area fronts), fps, `loop` and `loopStart`;
 - the anchor, and where it attaches: `feet`, `body`, `overhead` or `projectile` (projectile art faces +x and the
   game rotates it);
 - blend mode: `add` for glows, `normal` for smoke and dust;
@@ -588,6 +588,74 @@ frost, shock, necrotic, radiant, psychic, thunder, acid, toxin, force); Boons an
 inspire, rage, hold, dispel and web. `signature/` adds 12 school spells (`spell_*`: Fireball, Lightning Bolt, Cone
 of Cold, Spirit Guardians and others), whose entries carry `school` instead of `subclass`. Abilities pick their
 effect in `presentation.fx`.
+
+### Wizard pilot (#247)
+
+`parts/wizard_fx.py` adds 48 spell/proc identities and seven flight sheets. Each damaging Wizard spell has its own silhouette and sheet. The 0.4 s cantrip / 0.6 s levelled sheets use indexed ramps, angular lines, a single white-hot frame and travelling residue. Larger sparse fronts keep figures, marks and the grid visible. Fire, frost, force, arcane, psychic and time magic emit matching light; poison, acid, silk and ordinary earth stay unlit.
+
+`parts/wizard_casts.py` appends 34 Wizard-only frames for bolt, weave, ward, nova and stomp. The tactical manifest's optional `classes.<class>` entry overrides that class's frame count and adds animations; existing indices remain stable. Eleven Wizard sheets grow to ten rows per facing; other classes use their own override or keep eight. Classic sheets and non-Wizard spell learners use the authored fallback poses.
+
+Run `python tools/tactics-assets/dev/build_wizard_vfx.py` for effects, presentation keys and manifests; bake Wizard tactical sheets through `parts.tactical_art.build.bake`. This targeted export preserves authored townsfolk and unrelated assets. Existing sound IDs are associated with the new keys in both the shipped manifest and `tools/tactics-audio/sfx-list.json`. The optional FX-manifest `passives` map names visible procs without editing gameplay definitions. Wizard exports trim only transparent margins. Anchors, projectile centres and beam-light reach are preserved; the export test restores every original RGBA pixel exactly. Counterspell holds an offered incantation before release; declined and failed counters resume that original spell, while Countered cancels its projectile and detonation. This affects playback only.
+
+### Sorcerer (#247)
+
+`parts/sorcerer_fx.py` adds 46 ability/proc identities and six flight sheets. Its innate coils, flame streams, draconic wings, fractured Chaos and carved Runeborn motifs follow the shared palettes. Four gestures in `parts/sorcerer_casts.py` append 20 Sorcerer-only frames, giving nine rows per facing. `parts/class_casts.py` routes each class to its native poses and manifest while preserving the original animation indices and fallback poses.
+
+Use `python tools/tactics-assets/dev/build_sorcerer_vfx.py` for the targeted effects/keys/manifests/audio reuse export, then bake the eleven Sorcerer sheets through `parts.tactical_art.build.bake`. Full FX and tactical builders use the same generators. Both class exporters preserve the other class's passive and manifest entries; avoid full classic-character regeneration over authored townsfolk.
+
+The optional per-effect `variantsByDamage` map selects an existing palette variant from real `Damaged.Type` events. Only Wild Surge and Controlled Surge opt in. Controlled Surge rolls per victim: mixed outcomes keep a neutral central release, then each victim receives a smaller typed impact and matching light at its actual damage cue. This changes no engine event or gameplay roll. The 50-sample native review includes all damage branches and a mixed burst.
+
+### Warlock (#247)
+
+`parts/warlock_fx.py` adds 41 distinct ability/proc identities and an Eldritch Blast flight sheet. Curses, barbed force, infernal fire, spectral blades and broken void geometry retain the shared damage palettes. Darkness/veils/Moil/Hunger use normal blending and emit no light; luminous fire, force, frost, psychic and lightning effects use the shared emission system.
+
+`parts/warlock_casts.py` appends four five-frame gestures and a held release frame (210 frames per facing, nine rows). The real higher-level Eldritch Blast rolls use one charged wind-up followed by rapid beams, separately stacked damage numbers, and the engine's repelling movement. `dev/build_warlock_vfx.py` exports only Warlock effects, presentation keys, audio reuse and manifests; bake the eleven Warlock sheets with the tactical builder. Existing art and passives for the other classes remain intact.
+
+The 44-sample native review covers all 33 abilities, seven class procs, the real Hunger of Hadar turn pulse, an ordinary attack and both higher-level beam counts. Summon, round-recovery, kill and Hex triggers use real engine events. Source gameplay definitions and existing audio clips remain unchanged.
+
+### Shared combat language (#247)
+
+Keep effects at the characters' pixel scale, with nearest-neighbour filtering and quantised ramps; no smooth
+particles or gradients. Reuse the existing ramps below. These are the shared design defaults for the class
+passes, not a claim that all existing effects have been converted. Distinguish elements by motion and silhouette
+as well as colour, so Reduced effects still communicate the action.
+
+| Type | Body ramp (in `parts/fx.py`) | Motif |
+|---|---|---|
+| Fire | `magic/fire` | Rising tapered tongues, hot core, falling embers |
+| Cold | `fx/ice` | Angular crystal wedges, outward frost, brittle shards |
+| Lightning | `fx/storm` | Narrow branching zigzags, quick forks, short afterimage |
+| Thunder | `fx/thunder` | Expanding broken pressure rings and displaced dust |
+| Acid | `fx/acid` | Heavy droplets, splash crown, low corrosive residue |
+| Poison | `fx/poison` | Rounded low drifting puffs and sparse suspended motes |
+| Necrotic | `fx/necro` with `fx/grave` accent | Inward wisps and broken green-black tendrils |
+| Radiant | `fx/radiant` | Clean outward rays and a brief star-shaped impact |
+| Force | `fx/force` | Hard-edged concentric facets and compact geometric pulses |
+| Psychic | `fx/psychic` | Offset mirrored arcs and a small ripple above the head |
+| Piercing | `fx/steel` | Thin directional streak and a compact puncture spark |
+| Slashing | `fx/steel` with `fx/spark` accent | Curved directional smear and short edge sparks |
+| Bludgeoning | `fx/dust` with `fx/spark` accent | Compressed impact disk, chunky chips and low dust |
+| Healing | `magic/nature` with `magic/holy` core | Ascending separated motes and an opening leaf-like ring |
+| Buffs | `fx/gold` with `fx/wind` core | Stable broken ward ring and slowly orbiting rune marks |
+
+Use anticipation → release → impact → short residue. A flash is local to the struck unit/effect, never a
+full-screen white overlay. Reduced must omit flash, hit-stop and camera shake, keep the identifying shape,
+and shorten the residue. Area telegraphs must use the rule's affected tile set; the art must not suggest a
+larger hit area. Effects must leave figures, HP bars and the grid readable beyond the brief impact.
+
+Luminous magic also lights the scene. Shared `SpellEmission` defaults give fire an amber pool, lightning/frost
+a cool blue cast, force an arcane blue cast, and holy magic warm cream. The light follows a projectile or the
+rotated beam/cone, illuminates floor/wall vertices, props and figures, and fades with the effect. Persistent
+spell fire and luminous zones remain lit between turns and clear when their zone disappears. Ordinary arrows,
+dust and poison do not glow; impact sparks are small and faint so they cannot drown out a spell's colour.
+Reduced retains softer spell lighting without flashing or flickering. Reuse the board's static illumination and
+brightness ceiling; do not bake temporary spell light into cached scenery or add duplicate glow textures.
+
+The optional `presentation.cutIn` is `none`, `short` or `full`. Missing values resolve in the presentation
+layer: ordinary attacks/cantrips/reactions have no cut-in, paid features and levelled spells are short,
+and `signature.*` art and downing criticals are full. The TV preference can shorten or disable a tier;
+five/six-player sessions default to Short unless the viewer explicitly chooses otherwise. The pure timeline
+foundation is in `BattleCutIn`; TV playback/settings integration is tracked in the #247 progress ledger.
 
 ## Backgrounds
 
@@ -636,3 +704,20 @@ The manifest pairs each biome with a sky.
 
 See `STYLE.md` for the art rules. A set is `parts/<name>.py` with a `build()` function. `build.py` finds it, and
 it writes under `content/tactics/base/<name>/` plus `previews/NN-<name>*.png`.
+
+### Cleric (#247)
+
+`parts/cleric_fx.py` adds 42 separate ability/proc identities and a Guiding Bolt flight sheet. Restoration uses the shared nature-green ramp with a holy core and gold accents; radiant judgement keeps the holy/gold language. Life uses rising crosses and chalices, War uses consecrated weapon and armour shapes, and Light uses dawn rays and coronas. Flame Strike combines fire tongues with radiant streaks. Each luminous material emits matching local light while its effect is present.
+
+`parts/cleric_casts.py` appends four five-frame gestures (209 frames per facing, nine rows): prayer, restoration, judgement and a weapon strike. `dev/build_cleric_vfx.py` exports only Cleric effects, presentation fields, existing sound associations and manifests. Bake the eleven Cleric race sheets through the tactical builder. Existing frame indices and other classes' art remain stable. Word of Radiance uses a brief 0.24 s prayer so its real multi-target saves fit the cantrip budget.
+
+The neutral showcase establishes wounded/downed allies, actual undead, restoration conditions, a concentrating ally for Dispel Magic, and a real lethal attack against Death Ward. Spiritual Weapon is one spectral weapon attack and Spirit Guardians is the rules' immediate burst; their art does not invent persistent summons or zones.
+
+
+### Druid (#247)
+
+`parts/druid_fx.py` authors 40 ability/proc identities, four beast hit identities, a real-target Chain Tempest impact and Produce Flame flight. Plants, bark and fog retain normal blending; fire, moonlight, weather and restoration use matching shared spell light. Five class gestures in `parts/druid_casts.py` append 25 frames (214 per facing, nine rows) on the eleven Druid race atlases. Existing indices and other classes stay stable. `dev/build_druid_vfx.py` performs the targeted export and preserves original sounds and cinematic tiers.
+
+The owner specifically requested extra work on shapeshifts and consistency with the other sprites. `parts/druid_forms.py` builds four Druid-only variants on the approved eight-direction wolf/dire-wolf/bear anatomy and motion: natural coats, attached leaf ties, pale dire-wolf ruff and grizzled elder-bear bark shoulders. Dire and elder forms are larger. Idle/walk frames are normalized to their actual ground anchor; airborne attack motion is retained. Five attack frames play at 100/7 fps, aligning their impact with the 0.14 s bite/swipe cue. All real attack rolls, saves, prone procs and damage remain intact. Original source creature atlases stay untouched.
+
+Each form is packed into six columns, removing unused atlas cells without changing frame indices or actual frame pixels. The four monster `sprite` strings name Druid-only creature entries registered as variants of the existing beast species. These are presentation fields; statistics, abilities, AI, HP, movement and transformation/reversion rules remain unchanged. `dev/review_druid_forms.py` exports a player-scale atlas inspector and eight-direction movement/attack GIFs. The native 53-sample gallery separately covers actual casts, all five zone hooks, the sapling, each form's movement, attacks and damage-triggered reversion.

@@ -135,6 +135,26 @@ public partial class Main : Control
             AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom, _args.RedlineDemoWinner));
             return;
         }
+        if (_args.FxDemo is { } demo)
+        {
+            if (_shots is not null && System.Environment.GetEnvironmentVariable("ARCBOX_FX_CAPTURE") == "0") _shots.CaptureEnabled = false;
+            ShowGame("tactics");
+            var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "tactics", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
+            var parts = demo.Split(':', 2);
+            var demoRules = global::Tactics.Logic.RulesPack.Load([System.IO.Path.Combine(pack, "rules")]);
+            if (parts[0] != "step0" && _shots is not null)
+                System.IO.File.WriteAllText(System.IO.Path.Combine(_shots.Dir, "inventory.json"),
+                    JsonSerializer.Serialize(global::Tactics.Presentation.Beats.FxShowcase.Inventory(parts[0], demoRules), new JsonSerializerOptions(ArcJson.Options) { WriteIndented = true }));
+            var samples = parts[0] == "step0" ? global::Tactics.Presentation.Beats.FxShowcase.StepZero(pack)
+                : parts.Length == 2 ? System.Collections.Immutable.ImmutableArray.Create(global::Tactics.Presentation.Beats.FxShowcase.Specific(parts[0], parts[1], demoRules))
+                : global::Tactics.Presentation.Beats.FxShowcase.ForClass(parts[0], demoRules);
+            var feeder = new Games.Tactics.FxDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _shots, samples,
+                global::Tactics.Presentation.Beats.FxArt.Load(pack));
+            if (_scene is ISignalingScene signaling) signaling.Signal = feeder.Signal;
+            AddChild(feeder);
+            return;
+        }
         if (_args.TacticsDemo is { } board)
         {
             // Dev only: a battle's board through the normal host-view path, no server; the art comes from the repository.

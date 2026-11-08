@@ -1,0 +1,190 @@
+{
+  "method": "Median of 29 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
+  "beforeMs": 20.7833,
+  "afterMs": 21.9784,
+  "changePercent": 5.750289896214755,
+  "capPercent": 10,
+  "capPassed": true,
+  "largestIndividual": {
+    "id": "ranger.companion.move",
+    "beforeMs": 19.5406,
+    "afterMs": 21.9435,
+    "changePercent": 12.296961198734934
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 20.6829,
+      "afterMs": 22.8954,
+      "changePercent": 10.697242649725137
+    },
+    {
+      "id": "ensnared.thorns",
+      "beforeMs": 20.1663,
+      "afterMs": 20.4428,
+      "changePercent": 1.3710993092436397
+    },
+    {
+      "id": "ranger.cure_wounds",
+      "beforeMs": 20.4528,
+      "afterMs": 20.1735,
+      "changePercent": -1.3655831964327625
+    },
+    {
+      "id": "ranger.ensnaring_strike",
+      "beforeMs": 20.4931,
+      "afterMs": 20.7452,
+      "changePercent": 1.2301701548326216
+    },
+    {
+      "id": "ranger.entangle",
+      "beforeMs": 21.459,
+      "afterMs": 21.9784,
+      "changePercent": 2.420429656554357
+    },
+    {
+      "id": "ranger.hail_of_thorns",
+      "beforeMs": 20.7044,
+      "afterMs": 20.3829,
+      "changePercent": -1.5528100307181103
+    },
+    {
+      "id": "ranger.hunters_mark",
+      "beforeMs": 20.5988,
+      "afterMs": 20.7672,
+      "changePercent": 0.8175233508747937
+    },
+    {
+      "id": "ranger.hunters_mark_bonus",
+      "beforeMs": 20.3891,
+      "afterMs": 20.2136,
+      "changePercent": -0.8607540303397387
+    },
+    {
+      "id": "ranger.barkskin",
+      "beforeMs": 20.4279,
+      "afterMs": 20.3729,
+      "changePercent": -0.26923961836508026
+    },
+    {
+      "id": "ranger.lesser_restoration",
+      "beforeMs": 20.6801,
+      "afterMs": 21.2978,
+      "changePercent": 2.986929463590604
+    },
+    {
+      "id": "ranger.spike_growth",
+      "beforeMs": 22.6066,
+      "afterMs": 22.8779,
+      "changePercent": 1.200092008528486
+    },
+    {
+      "id": "spike_growth.thorns",
+      "beforeMs": 22.533,
+      "afterMs": 22.3749,
+      "changePercent": -0.7016375981893308
+    },
+    {
+      "id": "ranger.conjure_barrage",
+      "beforeMs": 21.0309,
+      "afterMs": 22.6249,
+      "changePercent": 7.57932375694812
+    },
+    {
+      "id": "ranger.lightning_arrow",
+      "beforeMs": 20.4437,
+      "afterMs": 20.6991,
+      "changePercent": 1.2492846206900055
+    },
+    {
+      "id": "ranger.vanish",
+      "beforeMs": 20.5871,
+      "afterMs": 21.5662,
+      "changePercent": 4.755890824836917
+    },
+    {
+      "id": "beastmaster.companion",
+      "beforeMs": 20.6904,
+      "afterMs": 20.2242,
+      "changePercent": -2.2532188841201783
+    },
+    {
+      "id": "beastmaster.sic",
+      "beforeMs": 22.0116,
+      "afterMs": 21.804,
+      "changePercent": -0.9431390721256205
+    },
+    {
+      "id": "beastmaster.pack_bond",
+      "beforeMs": 20.4909,
+      "afterMs": 22.654,
+      "changePercent": 10.556393325817792
+    },
+    {
+      "id": "beastmaster.alpha_howl",
+      "beforeMs": 22.3313,
+      "afterMs": 24.3953,
+      "changePercent": 9.242632538186314
+    },
+    {
+      "id": "beastmaster.ferocious_bond",
+      "beforeMs": 20.7833,
+      "afterMs": 23.2829,
+      "changePercent": 12.02696395663827
+    },
+    {
+      "id": "sharpshooter.deadeye",
+      "beforeMs": 21.8574,
+      "afterMs": 21.9106,
+      "changePercent": 0.2433958293301064
+    },
+    {
+      "id": "sharpshooter.high_ground_mastery",
+      "beforeMs": 21.4647,
+      "afterMs": 23.1045,
+      "changePercent": 7.639519769668346
+    },
+    {
+      "id": "sharpshooter.piercing_shot",
+      "beforeMs": 22.3203,
+      "afterMs": 22.9971,
+      "changePercent": 3.032217308907148
+    },
+    {
+      "id": "sharpshooter.volley",
+      "beforeMs": 21.8518,
+      "afterMs": 23.534,
+      "changePercent": 7.698221656797144
+    },
+    {
+      "id": "warden.vine_snare",
+      "beforeMs": 21.2894,
+      "afterMs": 22.5417,
+      "changePercent": 5.882270049883975
+    },
+    {
+      "id": "warden.natures_veil",
+      "beforeMs": 21.3306,
+      "afterMs": 23.1495,
+      "changePercent": 8.527186295744137
+    },
+    {
+      "id": "warden.guardian_tree",
+      "beforeMs": 22.847,
+      "afterMs": 22.0296,
+      "changePercent": -3.5777126099706846
+    },
+    {
+      "id": "ranger.companion.move",
+      "beforeMs": 19.5406,
+      "afterMs": 21.9435,
+      "changePercent": 12.296961198734934
+    },
+    {
+      "id": "ranger.companion.attack",
+      "beforeMs": 21.1318,
+      "afterMs": 22.7935,
+      "changePercent": 7.8635042921095355
+    }
+  ]
+}

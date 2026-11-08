@@ -1,0 +1,17 @@
+{
+  "baseline": "4d37f2eab86b19a638c57349745678255325dfe7",
+  "abilityGameplayDefinitionsUnchanged": 20,
+  "allPassiveDataUnchanged": true,
+  "originalCreatureArtAndMetadataUnchanged": true,
+  "otherClassAtlasesUnchanged": true,
+  "phoneFilesAndFixturesUnchanged": true,
+  "audioClipsUnchanged": true,
+  "replaysAndNonPresentationGoldenEventsUnchanged": true,
+  "goldenPresentationEventsChanged": 5,
+  "rulesAiImplementationUnchanged": true,
+  "workflowFilesUnchanged": true,
+  "allExistingEffectEntriesUnchanged": true,
+  "originalFighterFramesPixelIdentical": 4158,
+  "verifiedSourceCommit": "d6915bba944750e877c2cb413d8c0cfea1e549c0",
+  "scope": "Fighter-only source/art snapshot before integrating current main and its separate mob refresh. See playtest-handoff.md for integration evidence."
+}

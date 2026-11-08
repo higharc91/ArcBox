@@ -1,0 +1,139 @@
+{
+  "druid.wild_shape_wolf": {
+    "anim": "characters.summon",
+    "fx": "fx.poof.white"
+  },
+  "druid.wild_shape_bear": {
+    "anim": "characters.summon",
+    "fx": "fx.poof.white"
+  },
+  "druid.wild_shape_dire_wolf": {
+    "anim": "characters.summon",
+    "fx": "fx.poof.white"
+  },
+  "druid.thorn_whip": {
+    "anim": "characters.point",
+    "fx": "fx.slash.steel"
+  },
+  "druid.produce_flame": {
+    "anim": "characters.point",
+    "projectile": "projectiles.fireball",
+    "fx": "fx.flames.fire"
+  },
+  "druid.shillelagh": {
+    "anim": "characters.ready",
+    "fx": "fx.aura.nature"
+  },
+  "druid.entangle": {
+    "anim": "characters.summon",
+    "fx": "signature.warden_vine_snare.root"
+  },
+  "druid.faerie_fire": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.nature"
+  },
+  "druid.thunderwave": {
+    "anim": "characters.slam",
+    "fx": "fx.thunder.thunder"
+  },
+  "druid.cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.nature"
+  },
+  "druid.healing_word": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.nature"
+  },
+  "druid.fog_cloud": {
+    "anim": "characters.summon",
+    "fx": "fx.smoke.grey"
+  },
+  "druid.hold_person": {
+    "anim": "characters.cast",
+    "fx": "fx.hold.nature"
+  },
+  "druid.spike_growth": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.nature"
+  },
+  "druid.barkskin": {
+    "anim": "characters.buff",
+    "fx": "fx.ward.nature"
+  },
+  "druid.moonbeam": {
+    "anim": "characters.channel",
+    "fx": "signature.spell_moonbeam.moon"
+  },
+  "druid.lesser_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.nature"
+  },
+  "druid.call_lightning": {
+    "anim": "characters.cast",
+    "fx": "signature.stormcaller_storm.storm"
+  },
+  "druid.sleet_storm": {
+    "anim": "characters.summon",
+    "fx": "fx.ice.frost"
+  },
+  "druid.dispel_magic": {
+    "anim": "characters.channel",
+    "fx": "fx.dispel.arcane"
+  },
+  "druid.conjure_animals": {
+    "anim": "characters.summon",
+    "fx": "fx.circle.nature"
+  },
+  "druid.ice_storm": {
+    "anim": "characters.summon",
+    "fx": "fx.ice.frost"
+  },
+  "druid.blight": {
+    "anim": "characters.cast",
+    "fx": "signature.spell_blight.rot"
+  },
+  "druid.mass_cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.nature"
+  },
+  "druid.greater_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.nature"
+  },
+  "shapeshifter.dire_form": {
+    "anim": "characters.buff",
+    "fx": "signature.shapeshifter_wild_shape.spring"
+  },
+  "shapeshifter.elder_bear_form": {
+    "anim": "characters.buff",
+    "fx": "signature.shapeshifter_wild_shape.spring"
+  },
+  "shapeshifter.primal_mend": {
+    "anim": "characters.cast",
+    "fx": "signature.shapeshifter_wild_shape.spring"
+  },
+  "stormcaller.gale_burst": {
+    "anim": "characters.cast",
+    "fx": "signature.stormcaller_storm.storm"
+  },
+  "stormcaller.chain_tempest": {
+    "anim": "characters.cast",
+    "fx": "signature.stormcaller_storm.storm"
+  },
+  "stormcaller.wrath_of_the_tempest": {
+    "anim": "characters.summon",
+    "fx": "signature.stormcaller_storm.storm"
+  },
+  "grovekeeper.bloom": {
+    "anim": "characters.cast",
+    "fx": "signature.grovekeeper_bloom.blossom"
+  },
+  "grovekeeper.sanctuary_grove": {
+    "anim": "characters.summon",
+    "fx": "signature.grovekeeper_bloom.blossom"
+  },
+  "grovekeeper.ancient_canopy": {
+    "anim": "characters.summon",
+    "fx": "signature.grovekeeper_bloom.blossom"
+  }
+}

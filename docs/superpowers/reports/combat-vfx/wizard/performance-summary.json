@@ -1,0 +1,312 @@
+{
+  "method": "Median of 49 ability medians; each ability uses the median of three independent native runs. Screenshots disabled during all benchmark frames.",
+  "beforeMs": 20.6423,
+  "afterMs": 21.3141,
+  "changePercent": 3.2544823009063917,
+  "capPercent": 10,
+  "capPassed": true,
+  "meanBeforeMs": 20.750769387755103,
+  "meanAfterMs": 21.472273469387755,
+  "largestIndividual": {
+    "id": "chronomancer.temporal_stasis",
+    "beforeMs": 20.0742,
+    "afterMs": 24.6191,
+    "changePercent": 22.640503731157402
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 20.7166,
+      "afterMs": 20.9216,
+      "changePercent": 0.9895446163945998
+    },
+    {
+      "id": "wizard.acid_splash",
+      "beforeMs": 20.151,
+      "afterMs": 20.6305,
+      "changePercent": 2.3795345144161706
+    },
+    {
+      "id": "wizard.arcane_recovery",
+      "beforeMs": 19.9614,
+      "afterMs": 20.4453,
+      "changePercent": 2.4241786648230956
+    },
+    {
+      "id": "wizard.burning_hands",
+      "beforeMs": 20.8338,
+      "afterMs": 21.0833,
+      "changePercent": 1.1975731743609108
+    },
+    {
+      "id": "wizard.chill_touch",
+      "beforeMs": 19.6266,
+      "afterMs": 19.8307,
+      "changePercent": 1.0399152171033155
+    },
+    {
+      "id": "wizard.chromatic_orb",
+      "beforeMs": 20.1423,
+      "afterMs": 20.4973,
+      "changePercent": 1.7624600964140091
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "beforeMs": 19.6847,
+      "afterMs": 19.7784,
+      "changePercent": 0.47600420631253026
+    },
+    {
+      "id": "wizard.grease",
+      "beforeMs": 21.2829,
+      "afterMs": 21.3141,
+      "changePercent": 0.14659656343825045
+    },
+    {
+      "id": "wizard.mage_armor",
+      "beforeMs": 20.2616,
+      "afterMs": 20.2597,
+      "changePercent": -0.009377344336092275
+    },
+    {
+      "id": "wizard.magic_missile",
+      "beforeMs": 19.951,
+      "afterMs": 20.2062,
+      "changePercent": 1.279133878001093
+    },
+    {
+      "id": "wizard.poison_spray",
+      "beforeMs": 19.4902,
+      "afterMs": 19.8053,
+      "changePercent": 1.616709936275651
+    },
+    {
+      "id": "wizard.ray_of_frost",
+      "beforeMs": 20.8879,
+      "afterMs": 19.9456,
+      "changePercent": -4.51122420157124
+    },
+    {
+      "id": "wizard.ray_of_sickness",
+      "beforeMs": 20.1438,
+      "afterMs": 20.2574,
+      "changePercent": 0.5639452337692141
+    },
+    {
+      "id": "wizard.shield",
+      "beforeMs": 19.312,
+      "afterMs": 20.0396,
+      "changePercent": 3.7676056338028063
+    },
+    {
+      "id": "wizard.shocking_grasp",
+      "beforeMs": 19.8131,
+      "afterMs": 19.8184,
+      "changePercent": 0.026749978549545084
+    },
+    {
+      "id": "wizard.sleep",
+      "beforeMs": 21.316,
+      "afterMs": 21.4666,
+      "changePercent": 0.706511540626753
+    },
+    {
+      "id": "wizard.thunderwave",
+      "beforeMs": 21.5002,
+      "afterMs": 21.4443,
+      "changePercent": -0.2599975814178479
+    },
+    {
+      "id": "wizard.blur",
+      "beforeMs": 20.9036,
+      "afterMs": 19.9729,
+      "changePercent": -4.452343137067305
+    },
+    {
+      "id": "wizard.hold_person",
+      "beforeMs": 20.6759,
+      "afterMs": 20.3868,
+      "changePercent": -1.3982462673934326
+    },
+    {
+      "id": "wizard.invisibility",
+      "beforeMs": 20.5695,
+      "afterMs": 20.6584,
+      "changePercent": 0.4321932958992525
+    },
+    {
+      "id": "wizard.misty_step",
+      "beforeMs": 20.6441,
+      "afterMs": 20.8379,
+      "changePercent": 0.9387670084915367
+    },
+    {
+      "id": "wizard.scorching_ray",
+      "beforeMs": 20.6409,
+      "afterMs": 21.5658,
+      "changePercent": 4.480909262677502
+    },
+    {
+      "id": "wizard.shatter",
+      "beforeMs": 21.3171,
+      "afterMs": 21.7344,
+      "changePercent": 1.957583348579317
+    },
+    {
+      "id": "wizard.web",
+      "beforeMs": 21.0462,
+      "afterMs": 21.4749,
+      "changePercent": 2.036947287396318
+    },
+    {
+      "id": "wizard.counterspell",
+      "beforeMs": 21.3564,
+      "afterMs": 21.0012,
+      "changePercent": -1.6632016632016633
+    },
+    {
+      "id": "wizard.dispel_magic",
+      "beforeMs": 20.6626,
+      "afterMs": 21.0259,
+      "changePercent": 1.7582492038755948
+    },
+    {
+      "id": "wizard.fireball",
+      "beforeMs": 21.6589,
+      "afterMs": 22.8256,
+      "changePercent": 5.386700155594237
+    },
+    {
+      "id": "wizard.haste",
+      "beforeMs": 20.3538,
+      "afterMs": 21.8682,
+      "changePercent": 7.440379683400655
+    },
+    {
+      "id": "wizard.hypnotic_pattern",
+      "beforeMs": 21.3613,
+      "afterMs": 22.6732,
+      "changePercent": 6.141480153361467
+    },
+    {
+      "id": "wizard.lightning_bolt",
+      "beforeMs": 21.825,
+      "afterMs": 22.1523,
+      "changePercent": 1.4996563573883126
+    },
+    {
+      "id": "wizard.slow",
+      "beforeMs": 22.4658,
+      "afterMs": 21.7056,
+      "changePercent": -3.3838100579547614
+    },
+    {
+      "id": "wizard.banishment",
+      "beforeMs": 21.3137,
+      "afterMs": 22.5283,
+      "changePercent": 5.698682068341032
+    },
+    {
+      "id": "wizard.blight",
+      "beforeMs": 21.4231,
+      "afterMs": 20.5435,
+      "changePercent": -4.105848359947906
+    },
+    {
+      "id": "wizard.greater_invisibility",
+      "beforeMs": 20.6423,
+      "afterMs": 21.7641,
+      "changePercent": 5.434471933844587
+    },
+    {
+      "id": "wizard.ice_storm",
+      "beforeMs": 23.278,
+      "afterMs": 23.938,
+      "changePercent": 2.835295128447468
+    },
+    {
+      "id": "wizard.wall_of_fire",
+      "beforeMs": 23.4607,
+      "afterMs": 26.5827,
+      "changePercent": 13.307360820435887
+    },
+    {
+      "id": "wizard.cloudkill",
+      "beforeMs": 22.3721,
+      "afterMs": 23.1223,
+      "changePercent": 3.3532837775622326
+    },
+    {
+      "id": "wizard.cone_of_cold",
+      "beforeMs": 21.2174,
+      "afterMs": 23.0928,
+      "changePercent": 8.838971787306637
+    },
+    {
+      "id": "wizard.hold_monster",
+      "beforeMs": 19.7614,
+      "afterMs": 21.3316,
+      "changePercent": 7.94579331423888
+    },
+    {
+      "id": "chronomancer.time_shift",
+      "beforeMs": 19.8078,
+      "afterMs": 22.2812,
+      "changePercent": 12.487000070679223
+    },
+    {
+      "id": "chronomancer.accelerate",
+      "beforeMs": 19.7058,
+      "afterMs": 21.2988,
+      "changePercent": 8.083914380537705
+    },
+    {
+      "id": "chronomancer.temporal_stasis",
+      "beforeMs": 20.0742,
+      "afterMs": 24.6191,
+      "changePercent": 22.640503731157402
+    },
+    {
+      "id": "evoker.sculpted_nova",
+      "beforeMs": 20.6062,
+      "afterMs": 21.3718,
+      "changePercent": 3.715386631208073
+    },
+    {
+      "id": "evoker.empowered_evocation",
+      "beforeMs": 19.9062,
+      "afterMs": 20.3228,
+      "changePercent": 2.09281530377472
+    },
+    {
+      "id": "evoker.sculpted_inferno",
+      "beforeMs": 20.9112,
+      "afterMs": 22.4369,
+      "changePercent": 7.296090133516975
+    },
+    {
+      "id": "geomancer.raise_earth",
+      "beforeMs": 20.3495,
+      "afterMs": 20.6864,
+      "changePercent": 1.655568932897622
+    },
+    {
+      "id": "geomancer.sink_earth",
+      "beforeMs": 20.3415,
+      "afterMs": 21.8103,
+      "changePercent": 7.22070643757835
+    },
+    {
+      "id": "geomancer.tremor",
+      "beforeMs": 20.4261,
+      "afterMs": 23.199,
+      "changePercent": 13.575278687561498
+    },
+    {
+      "id": "geomancer.stone_spire",
+      "beforeMs": 20.6343,
+      "afterMs": 23.5844,
+      "changePercent": 14.297068473367158
+    }
+  ]
+}

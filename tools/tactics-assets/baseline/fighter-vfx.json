@@ -1,0 +1,81 @@
+{
+  "fighter.second_wind": {
+    "anim": "characters.ready",
+    "fx": "fx.heal.nature"
+  },
+  "fighter.action_surge": {
+    "anim": "characters.buff",
+    "fx": "fx.rage.valor"
+  },
+  "fighter.trip_attack": {
+    "anim": "characters.slam",
+    "fx": "fx.slash.steel"
+  },
+  "fighter.pushing_attack": {
+    "anim": "characters.bash",
+    "fx": "fx.slash.steel"
+  },
+  "fighter.menacing_attack": {
+    "anim": "characters.attack",
+    "fx": "fx.slash.shadow"
+  },
+  "fighter.precision_attack": {
+    "anim": "characters.thrust",
+    "fx": "fx.thrust.steel"
+  },
+  "fighter.goading_attack": {
+    "anim": "characters.attack",
+    "fx": "fx.slash.fire"
+  },
+  "fighter.rally": {
+    "anim": "characters.buff",
+    "fx": "fx.inspire.gold"
+  },
+  "fighter.feinting_attack": {
+    "anim": "characters.ready"
+  },
+  "vanguard.charge": {
+    "anim": "characters.bash",
+    "fx": "signature.vanguard_shield_wall.gold"
+  },
+  "vanguard.challenge": {
+    "anim": "characters.wave",
+    "fx": "fx.rage.valor"
+  },
+  "vanguard.shield_wall": {
+    "anim": "characters.block",
+    "fx": "signature.vanguard_shield_wall.azure"
+  },
+  "vanguard.mass_challenge": {
+    "anim": "characters.slam",
+    "fx": "signature.vanguard_shield_wall.gold"
+  },
+  "weaponmaster.cleave": {
+    "anim": "characters.spin",
+    "fx": "signature.weaponmaster_blade_dance.steel"
+  },
+  "weaponmaster.blade_dance": {
+    "anim": "characters.spin",
+    "fx": "signature.weaponmaster_blade_dance.steel"
+  },
+  "weaponmaster.execution_strike": {
+    "anim": "characters.slam",
+    "fx": "signature.weaponmaster_blade_dance.steel"
+  },
+  "warlord.commanders_strike": {
+    "anim": "characters.wave",
+    "fx": "signature.warlord_rally.royal"
+  },
+  "warlord.maneuvering_order": {
+    "anim": "characters.buff",
+    "fx": "signature.warlord_rally.royal"
+  },
+  "warlord.rallying_cry": {
+    "anim": "characters.summon",
+    "fx": "signature.warlord_rally.royal"
+  },
+  "warlord.to_arms": {
+    "anim": "characters.summon",
+    "fx": "signature.warlord_rally.royal"
+  }
+}

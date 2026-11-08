@@ -2,7 +2,8 @@ import { SurfaceScene } from "./surfaces";
 import { useEffect, useMemo, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
 import { AbilityIcon, Portrait, abilityClass, useIcons } from "./art";
-import { tileStyle, useMap, type MapData } from "./map";
+import { useMap } from "./map";
+import { BattleMap } from "./battleMap";
 import { FallBack } from "./fallback";
 import { ReactionsSheet } from "./reactions";
 import { classFrom, remembered, rememberTurn } from "./memory";
@@ -40,13 +41,15 @@ const GROUPS: { title: string; has(c: Cost): boolean }[] = [
  * option comes from the server's `Choices.For`, so anything you can pick, the game accepts.
  */
 export function Turn({ data, send }: CustomScreenProps) {
-  const { me, units, choices, map: mapId, summoned, fallBack } = data as TurnData;
-  const map = useMap(mapId);
+  const { me, units, choices, map: mapId, terrain, summoned, fallBack } = data as TurnData;
+  const loadedMap = useMap(terrain ? null : mapId);
+  const map = terrain ?? loadedMap;
   const icons = useIcons();
   const sfx = useSfx();
   useAlertOnMount("yourTurn", `turn ${me.id}`);
   const [abilityIx, setAbilityIx] = useState<number | null>(null);
   const [cursor, setCursor] = useState<Tile>(me.at);
+  const [aimedUnit, setAimedUnit] = useState<string | null>(null);
   // A multi-attack's earlier attacks, aimed already: the one being aimed is the next (#107).
   const [picks, setPicks] = useState<Pick[]>([]);
   const [endTurnUntil, setEndTurnUntil] = useState<number | null>(null);
@@ -56,6 +59,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
+    setAimedUnit(null);
     setPicks([]);
     setEndTurnUntil(null);
   }, [content]);
@@ -81,7 +85,7 @@ export function Turn({ data, send }: CustomScreenProps) {
     setEndTurnUntil(null);
     send("endTurn");
   };
-  const browse = (at: Tile) => { setEndTurnUntil(null); setCursor(at); };
+  const browse = (at: Tile) => { setEndTurnUntil(null); setAimedUnit(null); setCursor(at); };
 
   const cls = useMemo(() => classFrom(choices.abilities, (id) => abilityClass(icons, id)) ?? remembered().classes[me.id],
     [icons, content]);
@@ -94,13 +98,21 @@ export function Turn({ data, send }: CustomScreenProps) {
   const all: TargetChoice[] = useMemo(() => ability
     ? [...ability.targets, ...ability.tiles.map((t): TargetChoice => ({ target: { unit: null, tile: t }, aim: t, affected: [] }))]
     : [], [ability]);
-  const target: TargetChoice | undefined = all.find((t) => same(t.aim, cursor)) ?? (all.length === 1 ? all[0] : undefined);
+  const target: TargetChoice | undefined = all.find(t => same(t.aim, cursor) && (aimedUnit === null || t.target.unit === aimedUnit));
+  const unitLabel = (unit: UnitView) => units.some(other => other.id !== unit.id && other.name === unit.name)
+    ? `#${units.indexOf(unit) + 1} ${unit.name}` : unit.name;
 
   const pick = (i: number) => {
     sfx("select");
     setEndTurnUntil(null);
     setAbilityIx(i);
     setPicks([]);
+    const chosen = choices.abilities[i]!;
+    const aims = [...chosen.targets.map(t => t.aim), ...chosen.tiles];
+    if (aims.length === 1) {
+      setCursor(aims[0]!);
+      setAimedUnit(chosen.targets[0]?.target.unit ?? null);
+    } else if (!chosen.targets.some(t => t.target.unit === aimedUnit)) setAimedUnit(null);
     window.scrollTo(0, 0);
   };
   const back = () => {
@@ -110,6 +122,7 @@ export function Turn({ data, send }: CustomScreenProps) {
       // Back to aiming the attack before, where it was aimed.
       setPicks(picks.slice(0, -1));
       setCursor(last.aim);
+      setAimedUnit(last.unit);
       return;
     }
     setAbilityIx(null);
@@ -146,7 +159,7 @@ export function Turn({ data, send }: CustomScreenProps) {
       {ability ? null : <ReactionsSheet reactions={(data as TurnData).reactions} send={send} />}
 
       {ability ? (
-        <Aim ability={ability} target={target} unit={targetUnit} byId={byId} onPick={(t) => { sfx("select"); setCursor(t.aim); }}
+        <Aim ability={ability} target={target} unit={targetUnit} byId={byId} unitLabel={unitLabel} onPick={(t) => { sfx("select"); setCursor(t.aim); setAimedUnit(t.target.unit); }}
           strikes={plan ? { plan, at: picks.length, onNext: next } : undefined} />
       ) : (
         <>
@@ -155,13 +168,16 @@ export function Turn({ data, send }: CustomScreenProps) {
         </>
       )}
 
-      <div class="tx-field">
-        <MiniMap me={me} units={units} cursor={cursor} onPick={browse} map={map}
-          reach={ability ? [] : choices.moves.map((m) => m.to)} risks={ability ? [] : choices.moves.filter(m => m.warn || (m.risk ?? 0) > 0).map(m => m.to)}
-          spread={target?.spread ?? []} aims={all.map((t) => t.aim)} />
-        <DPad cursor={cursor} onMove={browse} />
-        {(target?.spread?.length ?? 0) > 0 ? <span class="tx-spread-key">Dashed blue: reaction spread · includes allies</span> : null}
-      </div>
+      <BattleMap me={me} units={units} cursor={cursor} onPick={browse} map={map} zones={terrain?.zones ?? []}
+        reach={ability ? [] : choices.moves.map(m => m.to)}
+        risks={ability ? [] : choices.moves.filter(m => m.warn || (m.risk ?? 0) > 0).map(m => m.to)}
+        warning={move?.warn} spread={target?.spread ?? []} aims={all.map(t => t.aim)}
+        onUnit={unit => {
+          const aim = all.find(t => t.target.unit === unit.id) ?? all.find(t => same(t.aim, unit.at))
+            ?? all.find(t => t.affected.some(p => p.unit === unit.id));
+          browse(aim?.aim ?? unit.at);
+          setAimedUnit(aim ? aim.target.unit : unit.id);
+        }} />
 
       {ability ? null : <AbilityList abilities={choices.abilities} cls={cls} onPick={pick} />}
 
@@ -171,7 +187,7 @@ export function Turn({ data, send }: CustomScreenProps) {
         <div class="tx-foot tx-commit aim">
           <button type="button" class="tx-btn ghost" onClick={back}>Back</button>
           <button type="button" class="tx-btn gold" disabled={!target} onClick={() => target && use(ability, target)}>
-            {target ? spread ? `Use · ${attacks} attacks` : `Use${targetUnit ? ` on ${targetUnit.name}` : ""}`
+            {target ? spread ? `Use · ${attacks} attacks` : `Use${targetUnit ? ` on ${unitLabel(targetUnit)}` : ""}`
               : ability.aim === "direction" ? "Pick a direction" : ability.aim === "tile" ? "Pick a tile" : "Pick a target"}
           </button>
         </div>
@@ -249,8 +265,8 @@ function Tags({ a, cls }: { a: AbilityChoice; cls?: string }) {
  * the targets to step through or tap. For a multi-attack (`strikes`), which attack is being aimed, each attack's target so
  * far, and the button to aim the next one ("Attack 2 of 3"), which starts on the same target.
  */
-function Aim({ ability, target, unit, byId, onPick, strikes }: {
-  ability: AbilityChoice; target?: TargetChoice; unit?: UnitView; byId: Map<string, UnitView>; onPick(t: TargetChoice): void;
+function Aim({ ability, target, unit, byId, unitLabel, onPick, strikes }: {
+  ability: AbilityChoice; target?: TargetChoice; unit?: UnitView; byId: Map<string, UnitView>; unitLabel(unit: UnitView): string; onPick(t: TargetChoice): void;
   strikes?: { plan: string[]; at: number; onNext(): void };
 }) {
   const targets = ability.targets;
@@ -259,7 +275,7 @@ function Aim({ ability, target, unit, byId, onPick, strikes }: {
     if (targets.length === 0) return;
     onPick(targets[(Math.max(at, d > 0 ? -1 : 0) + d + targets.length) % targets.length]!);
   };
-  const label = (t: TargetChoice) => (t.target.unit ? byId.get(t.target.unit)?.name ?? "You"
+  const label = (t: TargetChoice) => (t.target.unit ? (byId.get(t.target.unit) ? unitLabel(byId.get(t.target.unit)!) : "You")
     : t.affected.length > 0 ? `${t.affected.length} target${t.affected.length === 1 ? "" : "s"}` : `(${t.aim[0]}, ${t.aim[1]})`);
   return (
     <div class="tx-aim">
@@ -267,7 +283,7 @@ function Aim({ ability, target, unit, byId, onPick, strikes }: {
         <div class={`tx-target ${unit.side === "Enemy" ? "enemy" : "ally"}`}>
           <Portrait unit={unit} size={60} />
           <div class="tx-target-body">
-            <b>{unit.name}</b>
+            <b>{unitLabel(unit)}</b>
             <HpBar unit={unit} enemy={unit.side === "Enemy"} />
             <small class="tx-target-hp"><HpText unit={unit} /> HP</small>
           </div>
@@ -286,7 +302,7 @@ function Aim({ ability, target, unit, byId, onPick, strikes }: {
           </div>
           <ol class="tx-strike-plan" aria-label="Each attack's target">
             {strikes.plan.map((id, i) => (
-              <li key={i} class={i === strikes.at ? "on" : i > strikes.at ? "later" : ""}>{byId.get(id)?.name ?? id}</li>
+              <li key={i} class={i === strikes.at ? "on" : i > strikes.at ? "later" : ""}>{byId.get(id) ? unitLabel(byId.get(id)!) : id}</li>
             ))}
           </ol>
         </div>
@@ -299,7 +315,7 @@ function Aim({ ability, target, unit, byId, onPick, strikes }: {
             const bits = [p.damage > 0 ? `−${Math.max(1, Math.round(p.damage))}` : "", p.heal > 0 ? `+${Math.max(1, Math.round(p.heal))}` : ""].filter(Boolean).join(" ");
             return (
               <span key={p.unit} class={`tx-chip ${p.damage > 0 ? "bad" : p.heal > 0 ? "good" : ""}`}>
-                {u?.name ?? "You"}{bits ? ` ${bits}` : ""}
+                {u ? unitLabel(u) : "You"}{bits ? ` ${bits}` : ""}
               </span>
             );
           })}
@@ -321,56 +337,6 @@ function Aim({ ability, target, unit, byId, onPick, strikes }: {
           </ul>
         </>
       ) : null}
-    </div>
-  );
-}
-
-/**
- * The battlefield: the whole map with its terrain once it has loaded from the content pack, else (and in tests) just
- * the box around the units, your moves and the aims. Tap a tile to put the cursor there.
- */
-function MiniMap({ me, units, cursor, reach, risks, spread, aims, onPick, map }: {
-  me: UnitView; units: UnitView[]; cursor: Tile; reach: Tile[]; risks: Tile[]; spread: Tile[]; aims: Tile[]; onPick(t: Tile): void; map: MapData | null;
-}) {
-  const tiles = [me.at, cursor, ...units.map((u) => u.at), ...reach, ...aims, ...spread];
-  const [x0, x1] = map ? [0, map.w - 1] : [Math.max(0, Math.min(...tiles.map((t) => t[0])) - 1), Math.max(...tiles.map((t) => t[0])) + 1];
-  const [y0, y1] = map ? [0, map.h - 1] : [Math.max(0, Math.min(...tiles.map((t) => t[1])) - 1), Math.max(...tiles.map((t) => t[1])) + 1];
-  const at = (t: Tile) => units.find((u) => same(u.at, t));
-  const rows = [];
-  for (let y = y0; y <= y1; y++) {
-    const cells = [];
-    for (let x = x0; x <= x1; x++) {
-      const t: Tile = [x, y];
-      const u = at(t);
-      const cls = ["tx-cell",
-        u ? (u.id === me.id ? "me" : u.side === me.side ? "ally" : "foe") : "",
-        reach.some((r) => same(r, t)) ? "reach" : "",
-        aims.some((a) => same(a, t)) ? "aim" : "",
-        risks.some(r => same(r, t)) ? "risk" : "",
-        spread.some(r => same(r, t)) ? "spread" : "",
-        same(cursor, t) ? "cursor" : ""].filter(Boolean).join(" ");
-      cells.push(
-        <button type="button" key={x} class={cls} aria-label={u ? u.name : `${x}, ${y}`} aria-description={spread.some(r => same(r, t)) ? "Within reaction spread" : risks.some(r => same(r, t)) ? "Hazardous movement" : undefined} onClick={() => onPick(t)}
-          style={map && !u ? tileStyle(map, y * map.w + x) : undefined}>
-          {u ? u.name[0] : ""}
-        </button>,
-      );
-    }
-    rows.push(<div class="tx-maprow" key={y}>{cells}</div>);
-  }
-  return <div class={`tx-map${map ? " terrain" : ""}`} role="grid" aria-label="Battlefield">{rows}</div>;
-}
-
-/** Moves the cursor a tile at a time: a cross of big buttons beside the map, for when a tile is too small to tap. */
-function DPad({ cursor, onMove }: { cursor: Tile; onMove(t: Tile): void }) {
-  const go = (dx: number, dy: number) => onMove([Math.max(0, cursor[0] + dx), Math.max(0, cursor[1] + dy)]);
-  return (
-    <div class="tx-dpad">
-      <button type="button" class="up" aria-label="Up" onClick={() => go(0, -1)}><LineIcon name="up" /></button>
-      <button type="button" class="left" aria-label="Left" onClick={() => go(-1, 0)}><LineIcon name="up" rotate={-90} /></button>
-      <span class="hub" aria-hidden="true">Cursor</span>
-      <button type="button" class="right" aria-label="Right" onClick={() => go(1, 0)}><LineIcon name="up" rotate={90} /></button>
-      <button type="button" class="down" aria-label="Down" onClick={() => go(0, 1)}><LineIcon name="up" rotate={180} /></button>
     </div>
   );
 }

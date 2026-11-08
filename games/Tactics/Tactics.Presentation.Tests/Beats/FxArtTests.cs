@@ -72,7 +72,7 @@ public sealed class FxArtTests
         => Assert.Equal(aimed, Fx.Value.Clip(key)!.Aimed);
 
     [Fact]
-    public void Exactly_the_four_lines_and_cones_in_the_pack_are_aimed()
+    public void Exactly_the_authored_lines_and_cones_in_the_pack_are_aimed()
     {
         var aimed = new HashSet<string>();
         foreach (var set in new[] { "fx", "signature" })
@@ -84,7 +84,7 @@ public sealed class FxArtTests
                         aimed.Add($"{set}.{effect.Name}");
         }
 
-        Assert.Equal(["signature.draconic_dragon_breath", "signature.guardian_bulwark", "signature.spell_cone_of_cold", "signature.spell_lightning_bolt"], aimed.Order());
+        Assert.Equal(["fx.druid_thorn_whip", "fx.ranger_conjure_barrage", "fx.ranger_piercing_shot", "fx.ranger_vine_snare", "fx.sorcerer_burning_hands", "fx.sorcerer_cone_of_cold", "fx.sorcerer_dragon_breath", "fx.sorcerer_lightning_bolt", "fx.sorcerer_poison_spray", "fx.warlock_poison_spray", "fx.warlock_witch_bolt", "fx.wizard_burning_hands", "fx.wizard_cone_of_cold", "fx.wizard_lightning_bolt", "fx.wizard_poison_spray", "signature.draconic_dragon_breath", "signature.guardian_bulwark", "signature.spell_cone_of_cold", "signature.spell_lightning_bolt"], aimed.Order());
     }
 
     [Theory]

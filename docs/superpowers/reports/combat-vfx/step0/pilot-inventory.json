@@ -1,0 +1,600 @@
+[
+  {
+    "id": "wizard.acid_splash",
+    "name": "Acid Splash",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.acid.acid"
+    }
+  },
+  {
+    "id": "wizard.arcane_recovery",
+    "name": "Arcane Recovery",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.aura.arcane"
+    }
+  },
+  {
+    "id": "wizard.burning_hands",
+    "name": "Burning Hands",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.draconic_dragon_breath.fire"
+    }
+  },
+  {
+    "id": "wizard.chill_touch",
+    "name": "Chill Touch",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.necrotic.grave"
+    }
+  },
+  {
+    "id": "wizard.chromatic_orb",
+    "name": "Chromatic Orb",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.shock.storm",
+      "projectile": "projectiles.lightning"
+    }
+  },
+  {
+    "id": "wizard.fire_bolt",
+    "name": "Fire Bolt",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.flames.fire",
+      "projectile": "projectiles.fireball"
+    }
+  },
+  {
+    "id": "wizard.grease",
+    "name": "Grease",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.channel",
+      "fx": "fx.circle.arcane"
+    }
+  },
+  {
+    "id": "wizard.mage_armor",
+    "name": "Mage Armor",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.buff",
+      "fx": "fx.ward.arcane"
+    }
+  },
+  {
+    "id": "wizard.magic_missile",
+    "name": "Magic Missile",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.force.force",
+      "projectile": "projectiles.missile"
+    }
+  },
+  {
+    "id": "wizard.poison_spray",
+    "name": "Poison Spray",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.toxin.venom"
+    }
+  },
+  {
+    "id": "wizard.ray_of_frost",
+    "name": "Ray of Frost",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.frost.frost",
+      "projectile": "projectiles.ice"
+    }
+  },
+  {
+    "id": "wizard.ray_of_sickness",
+    "name": "Ray of Sickness",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.toxin.sickness",
+      "projectile": "projectiles.poison"
+    }
+  },
+  {
+    "id": "wizard.shield",
+    "name": "Shield",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.block",
+      "fx": "fx.shield.arcane"
+    }
+  },
+  {
+    "id": "wizard.shocking_grasp",
+    "name": "Shocking Grasp",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.shock.storm"
+    }
+  },
+  {
+    "id": "wizard.sleep",
+    "name": "Sleep",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.misty.fey"
+    }
+  },
+  {
+    "id": "wizard.thunderwave",
+    "name": "Thunderwave",
+    "level": 1,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.thunder.thunder"
+    }
+  },
+  {
+    "id": "wizard.blur",
+    "name": "Blur",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.channel",
+      "fx": "fx.misty.mist"
+    }
+  },
+  {
+    "id": "wizard.hold_person",
+    "name": "Hold Person",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.hold.arcane"
+    }
+  },
+  {
+    "id": "wizard.invisibility",
+    "name": "Invisibility",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.buff",
+      "fx": "fx.misty.mist"
+    }
+  },
+  {
+    "id": "wizard.misty_step",
+    "name": "Misty Step",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.misty.mist"
+    }
+  },
+  {
+    "id": "wizard.scorching_ray",
+    "name": "Scorching Ray",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.flames.fire",
+      "projectile": "projectiles.fireball"
+    }
+  },
+  {
+    "id": "wizard.shatter",
+    "name": "Shatter",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "signature.spell_shatter.thunder"
+    }
+  },
+  {
+    "id": "wizard.web",
+    "name": "Web",
+    "level": 3,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.channel",
+      "fx": "fx.web.silk"
+    }
+  },
+  {
+    "id": "wizard.counterspell",
+    "name": "Counterspell",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "none",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "fx.dispel.arcane"
+    }
+  },
+  {
+    "id": "wizard.dispel_magic",
+    "name": "Dispel Magic",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.channel",
+      "fx": "fx.dispel.arcane"
+    }
+  },
+  {
+    "id": "wizard.fireball",
+    "name": "Fireball",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.spell_fireball.fire",
+      "projectile": "projectiles.fireball"
+    }
+  },
+  {
+    "id": "wizard.haste",
+    "name": "Haste",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.buff",
+      "fx": "signature.chronomancer_time_dial.haste"
+    }
+  },
+  {
+    "id": "wizard.hypnotic_pattern",
+    "name": "Hypnotic Pattern",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "fx.misty.fey"
+    }
+  },
+  {
+    "id": "wizard.lightning_bolt",
+    "name": "Lightning Bolt",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.spell_lightning_bolt.storm"
+    }
+  },
+  {
+    "id": "wizard.slow",
+    "name": "Slow",
+    "level": 5,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.chronomancer_time_dial.slow"
+    }
+  },
+  {
+    "id": "wizard.banishment",
+    "name": "Banishment",
+    "level": 7,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.pillar.arcane"
+    }
+  },
+  {
+    "id": "wizard.blight",
+    "name": "Blight",
+    "level": 7,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "signature.spell_blight.rot"
+    }
+  },
+  {
+    "id": "wizard.greater_invisibility",
+    "name": "Greater Invisibility",
+    "level": 7,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.buff",
+      "fx": "fx.misty.mist"
+    }
+  },
+  {
+    "id": "wizard.ice_storm",
+    "name": "Ice Storm",
+    "level": 7,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "fx.ice.frost"
+    }
+  },
+  {
+    "id": "wizard.wall_of_fire",
+    "name": "Wall of Fire",
+    "level": 7,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "fx.flames.fire"
+    }
+  },
+  {
+    "id": "wizard.cloudkill",
+    "name": "Cloudkill",
+    "level": 9,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.spell_cloudkill.poison"
+    }
+  },
+  {
+    "id": "wizard.cone_of_cold",
+    "name": "Cone of Cold",
+    "level": 9,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.spell_cone_of_cold.frost"
+    }
+  },
+  {
+    "id": "wizard.hold_monster",
+    "name": "Hold Monster",
+    "level": 9,
+    "subclass": null,
+    "kind": "ability",
+    "cutIn": "short",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "fx.hold.arcane"
+    }
+  },
+  {
+    "id": "chronomancer.temporal_awareness",
+    "name": "Temporal Awareness",
+    "level": 3,
+    "subclass": "wizard.chronomancer",
+    "kind": "static",
+    "cutIn": "none",
+    "presentation": null
+  },
+  {
+    "id": "chronomancer.time_shift",
+    "name": "Time Shift",
+    "level": 3,
+    "subclass": "wizard.chronomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "signature.chronomancer_time_dial.haste"
+    }
+  },
+  {
+    "id": "chronomancer.accelerate",
+    "name": "Accelerate",
+    "level": 6,
+    "subclass": "wizard.chronomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.buff",
+      "fx": "signature.chronomancer_time_dial.haste"
+    }
+  },
+  {
+    "id": "chronomancer.temporal_stasis",
+    "name": "Temporal Stasis",
+    "level": 10,
+    "subclass": "wizard.chronomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.point",
+      "fx": "signature.chronomancer_time_dial.slow"
+    }
+  },
+  {
+    "id": "evoker.sculpted_nova",
+    "name": "Sculpted Nova",
+    "level": 3,
+    "subclass": "wizard.evoker",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.evoker_sculpted_nova.fire"
+    }
+  },
+  {
+    "id": "evoker.empowered_evocation",
+    "name": "Empowered Evocation",
+    "level": 6,
+    "subclass": "wizard.evoker",
+    "kind": "proc",
+    "cutIn": "none",
+    "presentation": null
+  },
+  {
+    "id": "evoker.sculpted_inferno",
+    "name": "Sculpted Inferno",
+    "level": 10,
+    "subclass": "wizard.evoker",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.summon",
+      "fx": "signature.evoker_sculpted_nova.fire"
+    }
+  },
+  {
+    "id": "geomancer.raise_earth",
+    "name": "Raise Earth",
+    "level": 3,
+    "subclass": "wizard.geomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "signature.geomancer_raise.grass"
+    }
+  },
+  {
+    "id": "geomancer.sink_earth",
+    "name": "Sink Earth",
+    "level": 3,
+    "subclass": "wizard.geomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.cast",
+      "fx": "signature.geomancer_lower.grass"
+    }
+  },
+  {
+    "id": "geomancer.earthen_ward",
+    "name": "Earthen Ward",
+    "level": 6,
+    "subclass": "wizard.geomancer",
+    "kind": "static",
+    "cutIn": "none",
+    "presentation": null
+  },
+  {
+    "id": "geomancer.tremor",
+    "name": "Tremor",
+    "level": 6,
+    "subclass": "wizard.geomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.slam",
+      "fx": "signature.geomancer_lower.grass"
+    }
+  },
+  {
+    "id": "geomancer.stone_spire",
+    "name": "Stone Spire",
+    "level": 10,
+    "subclass": "wizard.geomancer",
+    "kind": "ability",
+    "cutIn": "full",
+    "presentation": {
+      "anim": "characters.slam",
+      "fx": "signature.geomancer_raise.grass"
+    }
+  }
+]

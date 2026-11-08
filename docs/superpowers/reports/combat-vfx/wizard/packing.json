@@ -1,0 +1,10 @@
+{
+  "originalDecodedEffectBytes": 37890048,
+  "packedDecodedEffectBytes": 18906800,
+  "savedBytes": 18983248,
+  "all55SheetsByteIdenticalOnSecondExport": true,
+  "allOriginalRgbaPixelsRestoredExactly": true,
+  "projectileCentresUnchanged": true,
+  "beamLightReachUnchanged": true,
+  "normalEffectAnchorsAdjustedByExactTrimOffset": true
+}

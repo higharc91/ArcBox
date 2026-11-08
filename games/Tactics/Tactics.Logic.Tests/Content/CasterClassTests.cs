@@ -60,9 +60,9 @@ public sealed class CasterClassTests
     }
 
     [Theory]
-    [InlineData(2, "druid.wild_shape_wolf", "Wolf", 14, "beasts.wolf.wildshape")]
-    [InlineData(4, "druid.wild_shape_bear", "Bear", 26, "beasts.bear.wildshape")]
-    [InlineData(6, "druid.wild_shape_dire_wolf", "Dire Wolf", 32, "beasts.wolf.wildshape")]
+    [InlineData(2, "druid.wild_shape_wolf", "Wolf", 14, "beasts.wolf.druid")]
+    [InlineData(4, "druid.wild_shape_bear", "Bear", 26, "beasts.bear.druid")]
+    [InlineData(6, "druid.wild_shape_dire_wolf", "Dire Wolf", 32, "beasts.wolf.druid_dire")]
     public void Druid_wild_shape_transforms_into_wolf_bear_and_dire_wolf(int level, string ability, string beastName, int beastTempHp,
         string sprite)
     {

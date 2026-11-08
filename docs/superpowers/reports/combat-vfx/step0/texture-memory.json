@@ -1,0 +1,38 @@
+{
+  "before": [
+    {
+      "id": "common.attack",
+      "textureBytes": 128904383
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "textureBytes": 129561105
+    },
+    {
+      "id": "wizard.magic_missile",
+      "textureBytes": 130208253
+    },
+    {
+      "id": "wizard.fireball",
+      "textureBytes": 131370289
+    }
+  ],
+  "after": [
+    {
+      "id": "common.attack",
+      "textureBytes": 129089453
+    },
+    {
+      "id": "wizard.fire_bolt",
+      "textureBytes": 129746175
+    },
+    {
+      "id": "wizard.magic_missile",
+      "textureBytes": 130568085
+    },
+    {
+      "id": "wizard.fireball",
+      "textureBytes": 131686431
+    }
+  ]
+}

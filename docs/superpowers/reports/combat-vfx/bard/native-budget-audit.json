@@ -1,0 +1,215 @@
+{
+  "method": "Measured real-engine base script times, excluding cinematic lead/settle. Same strict caps as BardVfxTests.",
+  "samples": [
+    {
+      "id": "common.attack",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "bard.bardic_inspiration",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.cure_wounds",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.dissonant_whispers",
+      "baseSeconds": 1.02,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.faerie_fire",
+      "baseSeconds": 0.78,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.healing_word",
+      "baseSeconds": 0.45999999999999996,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.heroism",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.minor_illusion",
+      "baseSeconds": 0.42000000000000004,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "bard.thunderclap",
+      "baseSeconds": 0.8,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "bard.thunderwave",
+      "baseSeconds": 0.8600000000000001,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.vicious_mockery",
+      "baseSeconds": 0.78,
+      "capSeconds": 0.8,
+      "passed": true
+    },
+    {
+      "id": "bard.song_of_rest",
+      "baseSeconds": 0.72,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.hold_person",
+      "baseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.lesser_restoration",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.shatter",
+      "baseSeconds": 0.78,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "bard.silence",
+      "baseSeconds": 0.52,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.silence.turn",
+      "baseSeconds": 0.44,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.dispel_magic",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.font_of_inspiration",
+      "baseSeconds": 0.2,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.hypnotic_pattern",
+      "baseSeconds": 0.78,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.mass_healing_word",
+      "baseSeconds": 0.72,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.countercharm",
+      "baseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.dimension_door",
+      "baseSeconds": 0.47,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.greater_invisibility",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.greater_restoration",
+      "baseSeconds": 0.58,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "bard.hold_monster",
+      "baseSeconds": 0.54,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "lore.cutting_words",
+      "baseSeconds": 0.88,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "lore.counterspell",
+      "baseSeconds": 0.76,
+      "capSeconds": 1.5,
+      "passed": true
+    },
+    {
+      "id": "lore.magical_secrets",
+      "baseSeconds": 0.78,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "lore.peerless_skill",
+      "baseSeconds": 0.3,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "siren.alluring_verse",
+      "baseSeconds": 1.1400000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "siren.enthralling_aria",
+      "baseSeconds": 1.5,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "siren.sirens_call",
+      "baseSeconds": 0.8600000000000001,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "valor.combat_inspiration",
+      "baseSeconds": 0.33999999999999997,
+      "capSeconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "valor.battle_magic",
+      "baseSeconds": 0.98,
+      "capSeconds": 2.5,
+      "passed": true
+    }
+  ]
+}

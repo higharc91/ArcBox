@@ -9,6 +9,7 @@ from parts.rig import frame_list,ANIMS
 from arcpix.out import PACK,PREVIEWS,previews_enabled,save
 from .animation import FRAME,ANCHOR,COLUMNS,frame,rest,OFFSET
 from parts.rig import Pose
+from parts.class_casts import poses_for,manifests as class_manifests
 import numpy as np
 
 def review():
@@ -40,7 +41,7 @@ def walking_review():
 
 def bake(job):
     role,race,root=job
-    poses=frame_list();rows=(len(poses)+COLUMNS-1)//COLUMNS
+    poses=poses_for(role);rows=(len(poses)+COLUMNS-1)//COLUMNS
     atlas=Image.new('RGBA',(FRAME[0]*COLUMNS,FRAME[1]*rows*2))
     for back in (False,True):
         for i,(_,_,pose) in enumerate(poses):
@@ -74,7 +75,8 @@ def build():
             heads[f'{race}_{role}']=OFFSET[1]+min(ys or [10])
         manifest={'frame':{'width':FRAME[0],'height':FRAME[1],'anchor':ANCHOR},
             'columns':COLUMNS,'framesPerDirection':len(frame_list()),'pixelScale':.5,
-            'footprintWidth':32,'heads':heads,'anims':anims,'presets':keys}
+            'footprintWidth':32,'heads':heads,'anims':anims,'presets':keys,
+            'classes':class_manifests()}
         (staged/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
         for key in keys:
             (staged/f'{key}.png').replace(root/f'{key}.png')

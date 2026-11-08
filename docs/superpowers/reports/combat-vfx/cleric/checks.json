@@ -1,0 +1,50 @@
+{
+  "sourceCommit": "2927f1257f251291bb8885d2131dc0076ad7fde9",
+  "fullLocalCommand": "bash tools/check-all.sh --full",
+  "fullLocalPassed": true,
+  "dotnetTests": 7259,
+  "dotnetSkipped": 0,
+  "phoneTests": 549,
+  "phoneProductionBuild": true,
+  "nodeTests": 24,
+  "assetTests": 40,
+  "audioTests": 9,
+  "loreTests": 23,
+  "loreAndDocsChecks": true,
+  "releaseBuildWarnings": 0,
+  "releaseBuildErrors": 0,
+  "beforeNativeDebugBuildWarnings": 0,
+  "afterNativeDebugBuildWarnings": 0,
+  "focusedTests": 76,
+  "nativeSamples": 44,
+  "correctedNumberStackingRecaptures": 4,
+  "effectIdentities": 42,
+  "flightSheets": 1,
+  "clericRaceAtlases": 11,
+  "addedCastFramesPerFacing": 20,
+  "originalFramesStable": true,
+  "effectExportsByteIdentical": true,
+  "atlasBakeAndContactsValidated": true,
+  "realHardware16msAndPhysicalTvCheck": "pending hardware validation",
+  "ciWorkflowState": "disabled_manually",
+  "paidGenerationUsed": false,
+  "newAudioUsed": false,
+  "initialCorrections": [
+    "Refreshed only 16 presentation objects in two golden event files, then normally verified all goldens.",
+    "Native review reproduced split-damage/proc number overlap; regression passes and all four affected scenes are recaptured."
+  ],
+  "performanceClassMedianBudgetPassed": true,
+  "nativeBaseBudgetAuditPassed": true,
+  "performanceRunsPerVersion": 3,
+  "webmComparisons": 44,
+  "fullResolutionPosters": 44,
+  "losslessGalleryThumbnails": 44,
+  "objectDbShutdownWarningBenchmarkRuns": {
+    "before": 3,
+    "full": 3
+  },
+  "objectDbShutdownWarningRawCaptures": {
+    "before": true,
+    "full": true
+  }
+}

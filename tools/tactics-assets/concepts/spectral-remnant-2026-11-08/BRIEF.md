@@ -1,6 +1,6 @@
 # Spectre concepts
 
-[Concept sheet](three-variants.png) · [Exact brief](brief.txt) · [Receipt](receipts.json)
+[Concept sheet](spectre.png) · [Exact brief](brief.txt) · [Receipt](receipts.json)
 
 Scenario supplied the single-creature turnarounds and gesture concept. OpenAI authored all complete pixel figures, matching the primary Wraith reference.
 

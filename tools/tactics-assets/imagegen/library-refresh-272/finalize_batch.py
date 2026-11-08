@@ -88,8 +88,9 @@ def main(root, log_prefix):
     source_count, keys = scope['sourceImages'], scope['packedFrameKeys']
     features = '\n\n'.join(batch['features'] + batch.get('reviewNotes', []))
     concept = repo / 'tools/tactics-assets/concepts' / (slug + '-' + date)
+    concept_image = batch.get('conceptImage', 'three-variants.png')
     concept_note = batch.get('conceptNote', 'Scenario supplied the shared concept sheet; OpenAI authored complete pixel figures. PixelLab was not used.')
-    (concept / 'BRIEF.md').write_text(f'# {title} concepts\n\n[Concept sheet](three-variants.png) · [Exact brief](brief.txt) · [Receipt](receipts.json)\n\n{concept_note}\n\n{features}\n\nThese are existing library appearances. No new stat block, lore or equipment beyond the documented variant is introduced. Physical labels are approximate design guides; final game scale is checked beside the party and approved family sprites.\n')
+    (concept / 'BRIEF.md').write_text(f'# {title} concepts\n\n[Concept sheet]({concept_image}) · [Exact brief](brief.txt) · [Receipt](receipts.json)\n\n{concept_note}\n\n{features}\n\nThese are existing library appearances. No new stat block, lore or equipment beyond the documented variant is introduced. Physical labels are approximate design guides; final game scale is checked beside the party and approved family sprites.\n')
     commands = '\n'.join(('python' if f.endswith('.py') else 'node') + ' tools/tactics-assets/imagegen/' + root.name + '/' + f
                          for f in ['references.py', 'measure.py', 'export.cjs', 'integrate.py', 'compare.cjs', 'review.cjs', 'reel.cjs', 'verify-review.cjs', 'verify-scope.py'])
     (root / 'README.md').write_text(f'''# {title} pixel production

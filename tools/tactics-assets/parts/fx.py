@@ -2462,6 +2462,25 @@ CATALOGUE: list[Fx] = [
        blend="normal", layer="ground", note="web thrown over a tile; the hazards set's web holds it afterwards"),
 ]
 
+from .wizard_fx import catalogue as _wizard_catalogue
+CATALOGUE += _wizard_catalogue()
+from .sorcerer_fx import catalogue as _sorcerer_catalogue, DAMAGE_VARIANTS as _sorcerer_damage_variants
+CATALOGUE += _sorcerer_catalogue()
+from .warlock_fx import catalogue as _warlock_catalogue, PASSIVES as _warlock_passives
+CATALOGUE += _warlock_catalogue()
+from .cleric_fx import catalogue as _cleric_catalogue, PASSIVES as _cleric_passives
+CATALOGUE += _cleric_catalogue()
+from .druid_fx import catalogue as _druid_catalogue, PASSIVES as _druid_passives
+CATALOGUE += _druid_catalogue()
+from .paladin_fx import catalogue as _paladin_catalogue, PASSIVES as _paladin_passives
+CATALOGUE += _paladin_catalogue()
+from .bard_fx import catalogue as _bard_catalogue, PASSIVES as _bard_passives
+CATALOGUE += _bard_catalogue()
+from .ranger_fx import catalogue as _ranger_catalogue, PASSIVES as _ranger_passives
+CATALOGUE += _ranger_catalogue()
+from .fighter_fx import catalogue as _fighter_catalogue, PASSIVES as _fighter_passives
+CATALOGUE += _fighter_catalogue()
+
 ATTACH = {
     "feet": "anchor goes on the target's ground point (the character's own anchor, 16,37 in its frame)",
     "body": "anchor goes on the target's chest: 15 px above its ground point",
@@ -2484,20 +2503,28 @@ def build() -> None:
         rendered[e.id] = {}
         for vname, v in e.variants.items():
             imgs = [fr.render(ramps(v)) for fr in frames]
-            sheet = Image.new("RGBA", (w * len(imgs), h))
-            for k, im in enumerate(imgs):
+            packed, anchor, trim = imgs, e.anchor, (0, 0)
+            if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_', 'bard_', 'ranger_', 'fighter_')):
+                from .fx_packing import pack
+                packed, anchor, trim = pack(imgs, e.anchor, e.attach)
+            w, h = packed[0].size
+            sheet = Image.new("RGBA", (w * len(packed), h))
+            for k, im in enumerate(packed):
                 sheet.paste(im, (k * w, 0))
             rel = f"{e.id}_{vname}.png"
             save(sheet, out / rel)
             files[vname] = rel
             rendered[e.id][vname] = imgs
         entry = {"name": e.name, "group": e.group, "frame": [w, h], "frames": len(frames), "fps": e.fps,
-                 "loop": e.loop, "anchor": list(e.anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
+                 "loop": e.loop, "anchor": list(anchor), "attach": e.attach, "blend": e.blend, "layer": e.layer,
                  "variants": files, "default": next(iter(files))}
+        if e.id.startswith(('wizard_', 'sorcerer_', 'warlock_', 'cleric_', 'druid_', 'paladin_', 'bard_', 'ranger_', 'fighter_')):
+            entry.update(sourceFrame=[frames[0].w, frames[0].h], trim=list(trim))
         if e.loop and e.loop_start:
             entry["loopStart"] = e.loop_start
         if e.note:
             entry["note"] = e.note
+        if e.id in _sorcerer_damage_variants: entry["variantsByDamage"] = _sorcerer_damage_variants[e.id]
         effects[e.id] = entry
     write_json({
         "layout": "each file is one horizontal strip of frames, left to right, all the same size",
@@ -2509,6 +2536,8 @@ def build() -> None:
         "attach": ATTACH,
         "scale": "drawn at the characters' pixel scale: show at the same multiple as the sprites",
         "effects": effects,
+        "passives": {"evoker.empowered_evocation": "fx.wizard_empowered_evocation.force",
+                     "draconic.elemental_affinity": "fx.sorcerer_elemental_affinity.fire", **_warlock_passives, **_cleric_passives, **_druid_passives, **_paladin_passives, **_bard_passives, **_ranger_passives, **_fighter_passives},
     }, out / "manifest.json")
     _preview_sheet(rendered)
     _preview_gif(rendered)

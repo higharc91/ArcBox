@@ -49,7 +49,8 @@ public sealed record TargetDef(TargetKind Kind, int Range, bool Los, AreaDef Are
 public sealed record PresentationDef(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Anim,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Fx,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Projectile);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Projectile,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CutIn = null);
 
 /// <summary>Hints for the AI planner, such as <c>"damage"</c>, <c>"single"</c> or <c>"heal"</c>.</summary>
 public sealed record AiHints(ImmutableArray<string> Tags);

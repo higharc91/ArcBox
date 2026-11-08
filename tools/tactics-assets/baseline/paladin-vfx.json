@@ -1,0 +1,98 @@
+{
+  "paladin.lay_on_hands": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "paladin.divine_smite": {
+    "anim": "characters.ready",
+    "fx": "fx.radiant.dawn"
+  },
+  "paladin.divine_smite_2": {
+    "anim": "characters.ready",
+    "fx": "fx.radiant.dawn"
+  },
+  "paladin.divine_smite_3": {
+    "anim": "characters.ready",
+    "fx": "fx.radiant.dawn"
+  },
+  "paladin.bless": {
+    "anim": "characters.pray",
+    "fx": "fx.bless.gold"
+  },
+  "paladin.command": {
+    "anim": "characters.pray",
+    "fx": "fx.hold.holy"
+  },
+  "paladin.compelled_duel": {
+    "anim": "characters.pray",
+    "fx": "fx.hold.holy"
+  },
+  "paladin.cure_wounds": {
+    "anim": "characters.pray",
+    "fx": "fx.heal.holy"
+  },
+  "paladin.shield_of_faith": {
+    "anim": "characters.pray",
+    "fx": "fx.ward.holy"
+  },
+  "paladin.aid": {
+    "anim": "characters.pray",
+    "fx": "fx.bless.gold"
+  },
+  "paladin.lesser_restoration": {
+    "anim": "characters.pray",
+    "fx": "fx.restore.holy"
+  },
+  "paladin.dispel_magic": {
+    "anim": "characters.pray",
+    "fx": "fx.dispel.arcane"
+  },
+  "paladin.elemental_weapon": {
+    "anim": "characters.pray",
+    "fx": "fx.aura.fire"
+  },
+  "guardian.sanctuary_aegis": {
+    "anim": "characters.block",
+    "fx": "signature.guardian_bulwark.azure"
+  },
+  "guardian.righteous_challenge": {
+    "anim": "characters.summon",
+    "fx": "signature.guardian_bulwark.holy"
+  },
+  "guardian.divine_intervention": {
+    "anim": "characters.block",
+    "fx": "signature.guardian_bulwark.azure"
+  },
+  "guardian.aegis_of_faith": {
+    "anim": "characters.summon",
+    "fx": "signature.guardian_bulwark.holy"
+  },
+  "crusader.searing_smite": {
+    "anim": "characters.slam",
+    "fx": "signature.crusader_smite.radiant"
+  },
+  "crusader.consecrated_ground": {
+    "anim": "characters.slam",
+    "fx": "signature.crusader_smite.radiant"
+  },
+  "crusader.dawnbreaker": {
+    "anim": "characters.pray",
+    "fx": "signature.crusader_smite.radiant"
+  },
+  "avenger.vow_of_enmity": {
+    "anim": "characters.point",
+    "fx": "signature.avenger_vengeance_brand.ember"
+  },
+  "avenger.abjure_enemy": {
+    "anim": "characters.cast",
+    "fx": "signature.avenger_vengeance_brand.ember"
+  },
+  "avenger.relentless_step": {
+    "anim": "characters.jump",
+    "fx": "signature.avenger_vengeance_brand.ember"
+  },
+  "avenger.soul_of_vengeance": {
+    "anim": "characters.slam",
+    "fx": "signature.avenger_vengeance_brand.ember"
+  }
+}

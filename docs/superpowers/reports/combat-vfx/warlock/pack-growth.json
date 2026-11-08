@@ -1,0 +1,356 @@
+{
+  "baseline": "4eb38ab6a3d287849553c8c0012cb5e39483d76e",
+  "beforeBytes": 215288006,
+  "afterBytes": 215875877,
+  "deltaBytes": 587871,
+  "changes": [
+    {
+      "path": "content/tactics/base/characters/manifest.json",
+      "before": 12896,
+      "after": 13688,
+      "delta": 792
+    },
+    {
+      "path": "content/tactics/base/fx/manifest.json",
+      "before": 78372,
+      "after": 101251,
+      "delta": 22879
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_abyssal_singularity_psychic.png",
+      "before": 0,
+      "after": 8574,
+      "delta": 8574
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_agonizing_blast_force.png",
+      "before": 0,
+      "after": 911,
+      "delta": 911
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_armor_of_agathys_frost.png",
+      "before": 0,
+      "after": 2563,
+      "delta": 2563
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_armor_of_hexes_hex.png",
+      "before": 0,
+      "after": 3526,
+      "delta": 3526
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_arms_of_hadar_grave.png",
+      "before": 0,
+      "after": 8141,
+      "delta": 8141
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_blight_grave.png",
+      "before": 0,
+      "after": 8785,
+      "delta": 8785
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_chill_touch_grave.png",
+      "before": 0,
+      "after": 869,
+      "delta": 869
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_companion_hellfire.png",
+      "before": 0,
+      "after": 1496,
+      "delta": 1496
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_counterspell_arcane.png",
+      "before": 0,
+      "after": 2007,
+      "delta": 2007
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_cursed_slash_grave.png",
+      "before": 0,
+      "after": 2867,
+      "delta": 2867
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_dark_ones_blessing_hellfire.png",
+      "before": 0,
+      "after": 1410,
+      "delta": 1410
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_darkness_shadow.png",
+      "before": 0,
+      "after": 14513,
+      "delta": 14513
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_dimension_door_arcane.png",
+      "before": 0,
+      "after": 1815,
+      "delta": 1815
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_eldritch_blast_force.png",
+      "before": 0,
+      "after": 1467,
+      "delta": 1467
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_eldritch_blast_shot_force.png",
+      "before": 0,
+      "after": 547,
+      "delta": 547
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_entropic_ward_arcane.png",
+      "before": 0,
+      "after": 2413,
+      "delta": 2413
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_fiendish_vigor_hellfire.png",
+      "before": 0,
+      "after": 1955,
+      "delta": 1955
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_gravitational_pull_force.png",
+      "before": 0,
+      "after": 11151,
+      "delta": 11151
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hellfire_surge_hellfire.png",
+      "before": 0,
+      "after": 6781,
+      "delta": 6781
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hellish_rebuke_hellfire.png",
+      "before": 0,
+      "after": 2327,
+      "delta": 2327
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hex_damage_grave.png",
+      "before": 0,
+      "after": 1138,
+      "delta": 1138
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hex_shadow.png",
+      "before": 0,
+      "after": 3308,
+      "delta": 3308
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hexblades_curse_hex.png",
+      "before": 0,
+      "after": 3336,
+      "delta": 3336
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hold_monster_shadow.png",
+      "before": 0,
+      "after": 3923,
+      "delta": 3923
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hold_person_shadow.png",
+      "before": 0,
+      "after": 3247,
+      "delta": 3247
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hunger_of_hadar_pulse_frost.png",
+      "before": 0,
+      "after": 1215,
+      "delta": 1215
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hunger_of_hadar_void.png",
+      "before": 0,
+      "after": 7924,
+      "delta": 7924
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_hurl_through_hell_hellfire.png",
+      "before": 0,
+      "after": 9390,
+      "delta": 9390
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_lifedrinker_grave.png",
+      "before": 0,
+      "after": 508,
+      "delta": 508
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_maddening_hex_psychic.png",
+      "before": 0,
+      "after": 167,
+      "delta": 167
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_misty_step_mist.png",
+      "before": 0,
+      "after": 2907,
+      "delta": 2907
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_one_with_shadows_shadow.png",
+      "before": 0,
+      "after": 1485,
+      "delta": 1485
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_pact_magic_force.png",
+      "before": 0,
+      "after": 975,
+      "delta": 975
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_poison_spray_venom.png",
+      "before": 0,
+      "after": 5136,
+      "delta": 5136
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_repelling_blast_force.png",
+      "before": 0,
+      "after": 617,
+      "delta": 617
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_rift_step_arcane.png",
+      "before": 0,
+      "after": 1914,
+      "delta": 1914
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_shadow_of_moil_shadow.png",
+      "before": 0,
+      "after": 5039,
+      "delta": 5039
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_shatter_thunder.png",
+      "before": 0,
+      "after": 10019,
+      "delta": 10019
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_shroud_of_shadow_shadow.png",
+      "before": 0,
+      "after": 1792,
+      "delta": 1792
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_synaptic_static_psychic.png",
+      "before": 0,
+      "after": 9122,
+      "delta": 9122
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_vampiric_touch_grave.png",
+      "before": 0,
+      "after": 2317,
+      "delta": 2317
+    },
+    {
+      "path": "content/tactics/base/fx/warlock_witch_bolt_storm.png",
+      "before": 0,
+      "after": 4769,
+      "delta": 4769
+    },
+    {
+      "path": "content/tactics/base/rules/abilities/warlock.json",
+      "before": 19605,
+      "after": 20204,
+      "delta": 599
+    },
+    {
+      "path": "content/tactics/base/sfx/manifest.json",
+      "before": 40790,
+      "after": 41203,
+      "delta": 413
+    },
+    {
+      "path": "content/tactics/base/tactical/aasimar_warlock.png",
+      "before": 376536,
+      "after": 413555,
+      "delta": 37019
+    },
+    {
+      "path": "content/tactics/base/tactical/dragonborn_warlock.png",
+      "before": 379238,
+      "after": 416372,
+      "delta": 37134
+    },
+    {
+      "path": "content/tactics/base/tactical/dwarf_warlock.png",
+      "before": 329057,
+      "after": 362318,
+      "delta": 33261
+    },
+    {
+      "path": "content/tactics/base/tactical/elf_warlock.png",
+      "before": 380653,
+      "after": 417670,
+      "delta": 37017
+    },
+    {
+      "path": "content/tactics/base/tactical/gnome_warlock.png",
+      "before": 340796,
+      "after": 374039,
+      "delta": 33243
+    },
+    {
+      "path": "content/tactics/base/tactical/goliath_warlock.png",
+      "before": 361389,
+      "after": 398868,
+      "delta": 37479
+    },
+    {
+      "path": "content/tactics/base/tactical/half_elf_warlock.png",
+      "before": 380766,
+      "after": 417306,
+      "delta": 36540
+    },
+    {
+      "path": "content/tactics/base/tactical/half_orc_warlock.png",
+      "before": 369014,
+      "after": 408036,
+      "delta": 39022
+    },
+    {
+      "path": "content/tactics/base/tactical/halfling_warlock.png",
+      "before": 342640,
+      "after": 374898,
+      "delta": 32258
+    },
+    {
+      "path": "content/tactics/base/tactical/human_warlock.png",
+      "before": 374780,
+      "after": 411027,
+      "delta": 36247
+    },
+    {
+      "path": "content/tactics/base/tactical/manifest.json",
+      "before": 14312,
+      "after": 15334,
+      "delta": 1022
+    },
+    {
+      "path": "content/tactics/base/tactical/tiefling_warlock.png",
+      "before": 406880,
+      "after": 445460,
+      "delta": 38580
+    }
+  ]
+}

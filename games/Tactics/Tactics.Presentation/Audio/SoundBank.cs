@@ -108,13 +108,17 @@ public sealed partial class SoundBank
     private UnitGear WorkOutGear(string sprite)
     {
         var parts = sprite.Split('.');
-        var monsters = _monsters.GetValueOrDefault(sprite) ?? (parts.Length >= 3
+        // An inherited roaming coat can have an exact sprite record without its own voice/weapon.
+        // Keep that coat’s species sounds when canonical wild forms receive separate sprite keys.
+        var species = parts.Length >= 3
             ? _monsters.Where(m => m.Key.StartsWith(parts[0] + "." + parts[1] + ".", StringComparison.Ordinal)).SelectMany(m => m.Value).Distinct().ToList()
-            : []);
+            : [];
+        var monsters = _monsters.GetValueOrDefault(sprite) ?? species;
         var (layer, torso) = parts is ["characters", var preset, ..] ? Preset(preset) : (null, null);
         var ids = monsters.Select(m => m.Id).ToArray();
-        return new UnitGear(monsters.Select(m => m.Weapon).FirstOrDefault(w => w is not null) ?? layer, torso is not null && Armour.Contains(torso),
-            ids.Contains("ashmaw") ? "ashmaw" : ids.Contains("kobold_foreman") ? "goblin" : ids.Select(id => Named(_families, id)).FirstOrDefault(f => f is not null), ids.Any(id => Listed(_heavy, id)), ids.Any(id => Listed(_fliers, id)));
+        return new UnitGear(monsters.Select(m => m.Weapon).FirstOrDefault(w => w is not null) ?? species.Select(m => m.Weapon).FirstOrDefault(w => w is not null) ?? layer, torso is not null && Armour.Contains(torso),
+            ids.Contains("ashmaw") ? "ashmaw" : ids.Contains("kobold_foreman") ? "goblin" : ids.Select(id => Named(_families, id)).FirstOrDefault(f => f is not null)
+                ?? species.Select(m => Named(_families, m.Id)).FirstOrDefault(f => f is not null), ids.Any(id => Listed(_heavy, id)), ids.Any(id => Listed(_fliers, id)));
     }
 
     private (string? Weapon, string? Torso) Preset(string id)
@@ -143,9 +147,9 @@ public sealed partial class SoundBank
             var entry = new SoundEntry(sound.Name, [.. v.GetProperty("files").EnumerateArray().Select(f => $"sfx/{f.GetString()}")],
                 v.TryGetProperty("loop", out var loop) && loop.GetBoolean(), v.GetProperty("group").GetString() ?? "", v.GetProperty("use").GetString() ?? "");
             _sounds[entry.Id] = entry;
-            if (entry.Group == "spell")
-                ReadEffects(entry);
-            else if (entry.Group == "creature" && entry.Id.EndsWith("_attack", StringComparison.Ordinal))
+            // Explicit art bindings may reuse existing weapon and battle clips.
+            ReadEffects(entry);
+            if (entry.Group == "creature" && entry.Id.EndsWith("_attack", StringComparison.Ordinal))
                 foreach (var name in v.GetProperty("families").EnumerateArray())
                     _families.TryAdd(name.GetString()!, entry.Id[..^"_attack".Length]);
         }
@@ -189,7 +193,7 @@ public sealed partial class SoundBank
         }
     }
 
-    [GeneratedRegex(@"fx\.[a-z_]+(?:\.(?:[a-z_]+|\*))?")]
+    [GeneratedRegex(@"fx\.[a-z0-9_]+(?:\.(?:[a-z0-9_]+|\*))?")]
     private static partial Regex EffectKey();
 
     [GeneratedRegex("[a-z_]+")]

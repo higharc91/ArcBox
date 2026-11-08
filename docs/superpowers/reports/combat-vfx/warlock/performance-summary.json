@@ -1,0 +1,280 @@
+{
+  "method": "Median of 44 sample medians, each the median of three independent native runs. Screenshots disabled during benchmarks; tests/builds/encoding completed separately.",
+  "beforeMs": 19.788400000000003,
+  "afterMs": 20.11125,
+  "changePercent": 1.6315113905115863,
+  "capPercent": 10,
+  "capPassed": true,
+  "largestIndividual": {
+    "id": "warlock.eldritch_blast.level7",
+    "beforeMs": 19.7131,
+    "afterMs": 21.479,
+    "changePercent": 8.958002546529965
+  },
+  "abilities": [
+    {
+      "id": "common.attack",
+      "beforeMs": 20.1087,
+      "afterMs": 19.8421,
+      "changePercent": -1.3257943079363677
+    },
+    {
+      "id": "warlock.armor_of_agathys",
+      "beforeMs": 19.6379,
+      "afterMs": 19.3765,
+      "changePercent": -1.3310995574883133
+    },
+    {
+      "id": "warlock.arms_of_hadar",
+      "beforeMs": 19.9097,
+      "afterMs": 20.317,
+      "changePercent": 2.045736500298845
+    },
+    {
+      "id": "warlock.chill_touch",
+      "beforeMs": 19.1587,
+      "afterMs": 19.0005,
+      "changePercent": -0.8257345226972634
+    },
+    {
+      "id": "warlock.eldritch_blast",
+      "beforeMs": 19.1312,
+      "afterMs": 19.0937,
+      "changePercent": -0.19601488667726485
+    },
+    {
+      "id": "warlock.hellish_rebuke",
+      "beforeMs": 19.125,
+      "afterMs": 19.4609,
+      "changePercent": 1.7563398692810317
+    },
+    {
+      "id": "warlock.hex",
+      "beforeMs": 19.0674,
+      "afterMs": 19.4152,
+      "changePercent": 1.8240557181367079
+    },
+    {
+      "id": "warlock.hex_damage",
+      "beforeMs": 19.2471,
+      "afterMs": 19.3627,
+      "changePercent": 0.6006099620202487
+    },
+    {
+      "id": "warlock.pact_magic",
+      "beforeMs": 18.078,
+      "afterMs": 18.8177,
+      "changePercent": 4.091713685142162
+    },
+    {
+      "id": "warlock.poison_spray",
+      "beforeMs": 19.2208,
+      "afterMs": 19.0297,
+      "changePercent": -0.9942354116374008
+    },
+    {
+      "id": "warlock.witch_bolt",
+      "beforeMs": 19.461,
+      "afterMs": 20.0733,
+      "changePercent": 3.1462925851703405
+    },
+    {
+      "id": "warlock.agonizing_blast",
+      "beforeMs": 19.6258,
+      "afterMs": 19.6243,
+      "changePercent": -0.007643000540102918
+    },
+    {
+      "id": "warlock.fiendish_vigor",
+      "beforeMs": 19.1204,
+      "afterMs": 19.0423,
+      "changePercent": -0.40846425806990716
+    },
+    {
+      "id": "warlock.repelling_blast",
+      "beforeMs": 19.166,
+      "afterMs": 19.6207,
+      "changePercent": 2.372430345403309
+    },
+    {
+      "id": "warlock.darkness",
+      "beforeMs": 20.6284,
+      "afterMs": 20.8493,
+      "changePercent": 1.0708537744080981
+    },
+    {
+      "id": "warlock.hold_person",
+      "beforeMs": 19.4384,
+      "afterMs": 19.7143,
+      "changePercent": 1.4193555025104887
+    },
+    {
+      "id": "warlock.misty_step",
+      "beforeMs": 19.2451,
+      "afterMs": 19.2234,
+      "changePercent": -0.11275597424799111
+    },
+    {
+      "id": "warlock.shatter",
+      "beforeMs": 20.331,
+      "afterMs": 20.7629,
+      "changePercent": 2.124342137622337
+    },
+    {
+      "id": "warlock.counterspell",
+      "beforeMs": 19.7354,
+      "afterMs": 19.8314,
+      "changePercent": 0.48643554222362884
+    },
+    {
+      "id": "warlock.hunger_of_hadar",
+      "beforeMs": 21.2175,
+      "afterMs": 22.1453,
+      "changePercent": 4.3728054671851035
+    },
+    {
+      "id": "warlock.hunger_of_hadar.turn",
+      "beforeMs": 20.2194,
+      "afterMs": 21.7693,
+      "changePercent": 7.665410447392107
+    },
+    {
+      "id": "warlock.maddening_hex",
+      "beforeMs": 19.3191,
+      "afterMs": 20.2558,
+      "changePercent": 4.848569550341386
+    },
+    {
+      "id": "warlock.one_with_shadows",
+      "beforeMs": 19.2229,
+      "afterMs": 19.1349,
+      "changePercent": -0.457787326574044
+    },
+    {
+      "id": "warlock.vampiric_touch",
+      "beforeMs": 19.7028,
+      "afterMs": 19.8461,
+      "changePercent": 0.7273077938161121
+    },
+    {
+      "id": "warlock.blight",
+      "beforeMs": 19.8149,
+      "afterMs": 20.8987,
+      "changePercent": 5.469621345553088
+    },
+    {
+      "id": "warlock.dimension_door",
+      "beforeMs": 19.5342,
+      "afterMs": 20.439,
+      "changePercent": 4.631876401388335
+    },
+    {
+      "id": "warlock.shadow_of_moil",
+      "beforeMs": 20.2877,
+      "afterMs": 19.9779,
+      "changePercent": -1.527033621356777
+    },
+    {
+      "id": "warlock.hold_monster",
+      "beforeMs": 19.4204,
+      "afterMs": 19.8507,
+      "changePercent": 2.215711313876123
+    },
+    {
+      "id": "warlock.lifedrinker",
+      "beforeMs": 20.0089,
+      "afterMs": 20.1492,
+      "changePercent": 0.7011879713527458
+    },
+    {
+      "id": "warlock.shroud_of_shadow",
+      "beforeMs": 20.7694,
+      "afterMs": 20.4515,
+      "changePercent": -1.5306171579342776
+    },
+    {
+      "id": "warlock.synaptic_static",
+      "beforeMs": 21.7486,
+      "afterMs": 21.8062,
+      "changePercent": 0.2648446336775745
+    },
+    {
+      "id": "fiendbound.companion",
+      "beforeMs": 19.8186,
+      "afterMs": 20.194,
+      "changePercent": 1.8941802145459263
+    },
+    {
+      "id": "fiendbound.dark_ones_blessing",
+      "beforeMs": 21.0352,
+      "afterMs": 21.1224,
+      "changePercent": 0.41454324180421054
+    },
+    {
+      "id": "fiendbound.hellfire_surge",
+      "beforeMs": 22.2313,
+      "afterMs": 23.0587,
+      "changePercent": 3.7217796530117475
+    },
+    {
+      "id": "fiendbound.hurl_through_hell",
+      "beforeMs": 21.7198,
+      "afterMs": 20.8359,
+      "changePercent": -4.0695586515529625
+    },
+    {
+      "id": "hexblade.hexblades_curse",
+      "beforeMs": 20.9422,
+      "afterMs": 19.9676,
+      "changePercent": -4.653761304924975
+    },
+    {
+      "id": "hexblade.cursed_slash",
+      "beforeMs": 21.2294,
+      "afterMs": 21.5245,
+      "changePercent": 1.390053416488457
+    },
+    {
+      "id": "hexblade.armor_of_hexes",
+      "beforeMs": 20.0721,
+      "afterMs": 19.6397,
+      "changePercent": -2.1542339864787374
+    },
+    {
+      "id": "void.gravitational_pull",
+      "beforeMs": 21.1071,
+      "afterMs": 21.8541,
+      "changePercent": 3.539093480392852
+    },
+    {
+      "id": "void.rift_step",
+      "beforeMs": 20.3561,
+      "afterMs": 21.4288,
+      "changePercent": 5.269673463973934
+    },
+    {
+      "id": "void.entropic_ward",
+      "beforeMs": 19.7619,
+      "afterMs": 20.3431,
+      "changePercent": 2.9410127568705313
+    },
+    {
+      "id": "void.abyssal_singularity",
+      "beforeMs": 20.7642,
+      "afterMs": 21.4204,
+      "changePercent": 3.1602469635237718
+    },
+    {
+      "id": "warlock.eldritch_blast.level5",
+      "beforeMs": 20.7971,
+      "afterMs": 20.7141,
+      "changePercent": -0.39909410446650195
+    },
+    {
+      "id": "warlock.eldritch_blast.level7",
+      "beforeMs": 19.7131,
+      "afterMs": 21.479,
+      "changePercent": 8.958002546529965
+    }
+  ]
+}

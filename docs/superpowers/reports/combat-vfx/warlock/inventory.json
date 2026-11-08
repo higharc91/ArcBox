@@ -1,0 +1,1026 @@
+{
+  "before": [
+    {
+      "id": "warlock.armor_of_agathys",
+      "name": "Armor of Agathys",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.frost.frost"
+      }
+    },
+    {
+      "id": "warlock.arms_of_hadar",
+      "name": "Arms of Hadar",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.slam",
+        "fx": "fx.necrotic.grave"
+      }
+    },
+    {
+      "id": "warlock.chill_touch",
+      "name": "Chill Touch",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.necrotic.grave"
+      }
+    },
+    {
+      "id": "warlock.eldritch_blast",
+      "name": "Eldritch Blast",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.force.eldritch",
+        "projectile": "projectiles.eldritch"
+      }
+    },
+    {
+      "id": "warlock.hellish_rebuke",
+      "name": "Hellish Rebuke",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.flames.hellfire"
+      }
+    },
+    {
+      "id": "warlock.hex",
+      "name": "Hex",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.hex.shadow"
+      }
+    },
+    {
+      "id": "warlock.hex_damage",
+      "name": "Hex Damage",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.pact_magic",
+      "name": "Pact Magic",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.poison_spray",
+      "name": "Poison Spray",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.toxin.venom"
+      }
+    },
+    {
+      "id": "warlock.witch_bolt",
+      "name": "Witch Bolt",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.shock.violet",
+        "projectile": "projectiles.lightning"
+      }
+    },
+    {
+      "id": "warlock.agonizing_blast",
+      "name": "Agonizing Blast",
+      "level": 2,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.devils_sight",
+      "name": "Devils Sight",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.fiendish_vigor",
+      "name": "Fiendish Vigor",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.aura.shadow"
+      }
+    },
+    {
+      "id": "warlock.repelling_blast",
+      "name": "Repelling Blast",
+      "level": 2,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.darkness",
+      "name": "Darkness",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.circle.shadow"
+      }
+    },
+    {
+      "id": "warlock.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.shadow"
+      }
+    },
+    {
+      "id": "warlock.misty_step",
+      "name": "Misty Step",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.misty.shadow"
+      }
+    },
+    {
+      "id": "warlock.shatter",
+      "name": "Shatter",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_shatter.thunder"
+      }
+    },
+    {
+      "id": "warlock.counterspell",
+      "name": "Counterspell",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.dispel.shadow"
+      }
+    },
+    {
+      "id": "warlock.hunger_of_hadar",
+      "name": "Hunger of Hadar",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_hunger_of_hadar.void"
+      }
+    },
+    {
+      "id": "warlock.hunger_of_hadar.turn",
+      "name": "Hadar Turn Pulse",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.maddening_hex",
+      "name": "Maddening Hex",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.psychic.dread"
+      }
+    },
+    {
+      "id": "warlock.one_with_shadows",
+      "name": "One with Shadows",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.dodge",
+        "fx": "fx.misty.shadow"
+      }
+    },
+    {
+      "id": "warlock.vampiric_touch",
+      "name": "Vampiric Touch",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "fx.necrotic.blood"
+      }
+    },
+    {
+      "id": "warlock.blight",
+      "name": "Blight",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.spell_blight.rot"
+      }
+    },
+    {
+      "id": "warlock.dimension_door",
+      "name": "Dimension Door",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.misty.shadow"
+      }
+    },
+    {
+      "id": "warlock.shadow_of_moil",
+      "name": "Shadow of Moil",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.channel",
+        "fx": "fx.aura.shadow"
+      }
+    },
+    {
+      "id": "warlock.hold_monster",
+      "name": "Hold Monster",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "fx.hold.shadow"
+      }
+    },
+    {
+      "id": "warlock.lifedrinker",
+      "name": "Lifedrinker",
+      "level": 9,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.shroud_of_shadow",
+      "name": "Shroud of Shadow",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.buff",
+        "fx": "fx.misty.shadow"
+      }
+    },
+    {
+      "id": "warlock.synaptic_static",
+      "name": "Synaptic Static",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.spell_synaptic_static.mind"
+      }
+    },
+    {
+      "id": "fiendbound.companion",
+      "name": "Companion",
+      "level": 3,
+      "subclass": "warlock.fiendbound",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fiendbound.dark_ones_blessing",
+      "name": "Dark Ones Blessing",
+      "level": 3,
+      "subclass": "warlock.fiendbound",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fiendbound.fiendish_resilience",
+      "name": "Fiendish Resilience",
+      "level": 6,
+      "subclass": "warlock.fiendbound",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fiendbound.hellfire_surge",
+      "name": "Hellfire Surge",
+      "level": 6,
+      "subclass": "warlock.fiendbound",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.fiendbound_infernal_gate.hellfire"
+      }
+    },
+    {
+      "id": "fiendbound.hurl_through_hell",
+      "name": "Hurl Through Hell",
+      "level": 10,
+      "subclass": "warlock.fiendbound",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.fiendbound_infernal_gate.hellfire"
+      }
+    },
+    {
+      "id": "hexblade.hex_warrior",
+      "name": "Hex Warrior",
+      "level": 3,
+      "subclass": "warlock.hexblade",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "hexblade.hexblades_curse",
+      "name": "Hexblade's Curse",
+      "level": 3,
+      "subclass": "warlock.hexblade",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.point",
+        "fx": "signature.hexblade_cursed_edge.hex"
+      }
+    },
+    {
+      "id": "hexblade.cursed_slash",
+      "name": "Cursed Slash",
+      "level": 6,
+      "subclass": "warlock.hexblade",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.attack",
+        "fx": "signature.hexblade_cursed_edge.hex"
+      }
+    },
+    {
+      "id": "hexblade.armor_of_hexes",
+      "name": "Armor of Hexes",
+      "level": 10,
+      "subclass": "warlock.hexblade",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "signature.hexblade_cursed_edge.fel"
+      }
+    },
+    {
+      "id": "void.gravitational_pull",
+      "name": "Gravitational Pull",
+      "level": 3,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.void_rift_step.void"
+      }
+    },
+    {
+      "id": "void.rift_step",
+      "name": "Rift Step",
+      "level": 3,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.void_rift_step.void"
+      }
+    },
+    {
+      "id": "void.entropic_ward",
+      "name": "Entropic Ward",
+      "level": 6,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "signature.void_rift_step.void"
+      }
+    },
+    {
+      "id": "void.abyssal_singularity",
+      "name": "Abyssal Singularity",
+      "level": 10,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.void_rift_step.void"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "warlock.armor_of_agathys",
+      "name": "Armor of Agathys",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_armor_of_agathys.frost"
+      }
+    },
+    {
+      "id": "warlock.arms_of_hadar",
+      "name": "Arms of Hadar",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_arms_of_hadar.grave"
+      }
+    },
+    {
+      "id": "warlock.chill_touch",
+      "name": "Chill Touch",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_chill_touch.grave"
+      }
+    },
+    {
+      "id": "warlock.eldritch_blast",
+      "name": "Eldritch Blast",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_eldritch_blast.force",
+        "projectile": "fx.warlock_eldritch_blast_shot.force"
+      }
+    },
+    {
+      "id": "warlock.hellish_rebuke",
+      "name": "Hellish Rebuke",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_hellish_rebuke.hellfire"
+      }
+    },
+    {
+      "id": "warlock.hex",
+      "name": "Hex",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_hex.shadow"
+      }
+    },
+    {
+      "id": "warlock.hex_damage",
+      "name": "Hex Damage",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_hex_damage.grave"
+      }
+    },
+    {
+      "id": "warlock.pact_magic",
+      "name": "Pact Magic",
+      "level": 1,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_pact_magic.force"
+      }
+    },
+    {
+      "id": "warlock.poison_spray",
+      "name": "Poison Spray",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_poison_spray.venom"
+      }
+    },
+    {
+      "id": "warlock.witch_bolt",
+      "name": "Witch Bolt",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_witch_bolt.storm"
+      }
+    },
+    {
+      "id": "warlock.agonizing_blast",
+      "name": "Agonizing Blast",
+      "level": 2,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_agonizing_blast.force"
+      }
+    },
+    {
+      "id": "warlock.devils_sight",
+      "name": "Devils Sight",
+      "level": 2,
+      "subclass": null,
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "warlock.fiendish_vigor",
+      "name": "Fiendish Vigor",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_fiendish_vigor.hellfire"
+      }
+    },
+    {
+      "id": "warlock.repelling_blast",
+      "name": "Repelling Blast",
+      "level": 2,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_repelling_blast.force"
+      }
+    },
+    {
+      "id": "warlock.darkness",
+      "name": "Darkness",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_darkness.shadow"
+      }
+    },
+    {
+      "id": "warlock.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_hold_person.shadow"
+      }
+    },
+    {
+      "id": "warlock.misty_step",
+      "name": "Misty Step",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_misty_step.mist"
+      }
+    },
+    {
+      "id": "warlock.shatter",
+      "name": "Shatter",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_shatter.thunder",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "warlock.counterspell",
+      "name": "Counterspell",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_counterspell.arcane"
+      }
+    },
+    {
+      "id": "warlock.hunger_of_hadar",
+      "name": "Hunger of Hadar",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_hunger_of_hadar.void",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "warlock.hunger_of_hadar.turn",
+      "name": "Hadar Turn Pulse",
+      "level": 5,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_hunger_of_hadar_pulse.frost"
+      }
+    },
+    {
+      "id": "warlock.maddening_hex",
+      "name": "Maddening Hex",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_maddening_hex.psychic"
+      }
+    },
+    {
+      "id": "warlock.one_with_shadows",
+      "name": "One with Shadows",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_one_with_shadows.shadow"
+      }
+    },
+    {
+      "id": "warlock.vampiric_touch",
+      "name": "Vampiric Touch",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_vampiric_touch.grave"
+      }
+    },
+    {
+      "id": "warlock.blight",
+      "name": "Blight",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_blight.grave",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "warlock.dimension_door",
+      "name": "Dimension Door",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_dimension_door.arcane"
+      }
+    },
+    {
+      "id": "warlock.shadow_of_moil",
+      "name": "Shadow of Moil",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_shadow_of_moil.shadow"
+      }
+    },
+    {
+      "id": "warlock.hold_monster",
+      "name": "Hold Monster",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_hold_monster.shadow"
+      }
+    },
+    {
+      "id": "warlock.lifedrinker",
+      "name": "Lifedrinker",
+      "level": 9,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_lifedrinker.grave"
+      }
+    },
+    {
+      "id": "warlock.shroud_of_shadow",
+      "name": "Shroud of Shadow",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_shroud_of_shadow.shadow"
+      }
+    },
+    {
+      "id": "warlock.synaptic_static",
+      "name": "Synaptic Static",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_synaptic_static.psychic",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "fiendbound.companion",
+      "name": "Companion",
+      "level": 3,
+      "subclass": "warlock.fiendbound",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_companion.hellfire"
+      }
+    },
+    {
+      "id": "fiendbound.dark_ones_blessing",
+      "name": "Dark Ones Blessing",
+      "level": 3,
+      "subclass": "warlock.fiendbound",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.warlock_dark_ones_blessing.hellfire"
+      }
+    },
+    {
+      "id": "fiendbound.fiendish_resilience",
+      "name": "Fiendish Resilience",
+      "level": 6,
+      "subclass": "warlock.fiendbound",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "fiendbound.hellfire_surge",
+      "name": "Hellfire Surge",
+      "level": 6,
+      "subclass": "warlock.fiendbound",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_hellfire_surge.hellfire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "fiendbound.hurl_through_hell",
+      "name": "Hurl Through Hell",
+      "level": 10,
+      "subclass": "warlock.fiendbound",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_hurl_through_hell.hellfire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "hexblade.hex_warrior",
+      "name": "Hex Warrior",
+      "level": 3,
+      "subclass": "warlock.hexblade",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "hexblade.hexblades_curse",
+      "name": "Hexblade's Curse",
+      "level": 3,
+      "subclass": "warlock.hexblade",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_hexblades_curse.hex",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "hexblade.cursed_slash",
+      "name": "Cursed Slash",
+      "level": 6,
+      "subclass": "warlock.hexblade",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_blade",
+        "fx": "fx.warlock_cursed_slash.grave",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "hexblade.armor_of_hexes",
+      "name": "Armor of Hexes",
+      "level": 10,
+      "subclass": "warlock.hexblade",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_armor_of_hexes.hex"
+      }
+    },
+    {
+      "id": "void.gravitational_pull",
+      "name": "Gravitational Pull",
+      "level": 3,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_gravitational_pull.force",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "void.rift_step",
+      "name": "Rift Step",
+      "level": 3,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_rift_step.arcane",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "void.entropic_ward",
+      "name": "Entropic Ward",
+      "level": 6,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_entropic_ward.arcane"
+      }
+    },
+    {
+      "id": "void.abyssal_singularity",
+      "name": "Abyssal Singularity",
+      "level": 10,
+      "subclass": "warlock.void",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_abyssal_singularity.psychic",
+        "cutIn": "full"
+      }
+    }
+  ]
+}

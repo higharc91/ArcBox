@@ -14153,6 +14153,550 @@
       },
       "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/night-companions-2026-11-07/."
     },
+    "druid_wolf": {
+      "file": "druid_wolf.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 6,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 45.2,
+      "footprintHeight": 37.6,
+      "keys": [
+        "beasts.wolf.druid"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 14.285714285714286,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "druid_wolf",
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved wolf_grey anatomy and eight-direction motion. No source creature atlas is modified."
+    },
+    "druid_dire_wolf": {
+      "file": "druid_dire_wolf.png",
+      "frame": {
+        "width": 125,
+        "height": 101,
+        "anchor": [
+          59,
+          96
+        ]
+      },
+      "portrait": [
+        23,
+        27,
+        72,
+        72
+      ],
+      "headTop": 29,
+      "pixelScale": 0.5,
+      "unlit": false,
+      "columns": 6,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          1
+        ],
+        "west": [
+          0,
+          3
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          2
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          3
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 56.5,
+      "footprintHeight": 47.0,
+      "keys": [
+        "beasts.wolf.druid_dire"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 14.285714285714286,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "wolf",
+      "variant": "druid_dire_wolf",
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved wolf_dire anatomy and eight-direction motion. No source creature atlas is modified."
+    },
+    "druid_bear": {
+      "file": "druid_bear.png",
+      "frame": {
+        "width": 152,
+        "height": 129,
+        "anchor": [
+          77,
+          124
+        ]
+      },
+      "portrait": [
+        22,
+        18,
+        109,
+        109
+      ],
+      "headTop": 20,
+      "pixelScale": 0.4,
+      "unlit": false,
+      "columns": 6,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          4
+        ],
+        "west": [
+          0,
+          6
+        ],
+        "north-west": [
+          0,
+          2
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          -1
+        ],
+        "east": [
+          0,
+          1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 59.2,
+      "footprintHeight": 48.800000000000004,
+      "keys": [
+        "beasts.bear.druid"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 14.285714285714286,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bear",
+      "variant": "druid_bear",
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
+    },
+    "druid_elder_bear": {
+      "file": "druid_elder_bear.png",
+      "frame": {
+        "width": 152,
+        "height": 129,
+        "anchor": [
+          77,
+          124
+        ]
+      },
+      "portrait": [
+        22,
+        18,
+        109,
+        109
+      ],
+      "headTop": 20,
+      "pixelScale": 0.5,
+      "unlit": false,
+      "columns": 6,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          1
+        ],
+        "south-west": [
+          0,
+          4
+        ],
+        "west": [
+          0,
+          6
+        ],
+        "north-west": [
+          0,
+          2
+        ],
+        "north": [
+          0,
+          3
+        ],
+        "north-east": [
+          0,
+          -1
+        ],
+        "east": [
+          0,
+          1
+        ],
+        "south-east": [
+          0,
+          1
+        ]
+      },
+      "footprintWidth": 74.0,
+      "footprintHeight": 61.0,
+      "keys": [
+        "beasts.bear.druid_elder"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 5.555555555555555,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "fps": 9.090909090909092,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 14.285714285714286,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            12,
+            13,
+            14,
+            15,
+            0
+          ],
+          "fps": 9,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            16
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            17
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "family": "bear",
+      "variant": "druid_elder_bear",
+      "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
+    },
     "mob_refresh_bat_vampire": {
       "file": "mob_refresh_bat_vampire.png",
       "family": "bat_dusk",

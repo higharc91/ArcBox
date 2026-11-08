@@ -67,6 +67,11 @@ public sealed class ViewSizeTests(ITestOutputHelper output)
             output.WriteLine($"{when}, {hero.Character.Class}: {bytes / 1024.0:0.0} KB, {choices.Abilities.Length} abilities, " +
                              $"{choices.Abilities.Sum(a => a.Targets.Length)} targets, {choices.Moves.Length} moves");
             Assert.True(bytes < Budget, $"{when}: {hero.Character.Class}'s turn choices are {bytes / 1024} KB.");
+            var units = turn.Units.Values.Where(DownedRules.InBattle).Select(u => new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(),
+                u.Sheet.Sprite, u.Pos, u.Hp, u.Sheet.MaxHp, u.TempHp, u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], null)).ToArray();
+            var packet = JsonSerializer.SerializeToUtf8Bytes(new { me = units.First(u => u.Id == hero.Id), units,
+                choices = PhoneChoices.Of(choices, rules), terrain = PhoneTerrain.Of(turn, rules) }, ArcJson.Options);
+            Assert.True(packet.Length < 60 * 1024, $"{when}: {hero.Character.Class}'s terrain and turn packet is {packet.Length} bytes (4 KiB reserved for headers/settings).");
         }
     }
 

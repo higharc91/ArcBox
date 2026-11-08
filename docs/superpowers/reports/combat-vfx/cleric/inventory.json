@@ -1,0 +1,1032 @@
+{
+  "before": [
+    {
+      "id": "cleric.bane",
+      "name": "Bane",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.hex.shadow"
+      }
+    },
+    {
+      "id": "cleric.bless",
+      "name": "Bless",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.bless.gold"
+      }
+    },
+    {
+      "id": "cleric.command",
+      "name": "Command",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.hold.holy"
+      }
+    },
+    {
+      "id": "cleric.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "cleric.guiding_bolt",
+      "name": "Guiding Bolt",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.radiant.dawn",
+        "projectile": "projectiles.radiant"
+      }
+    },
+    {
+      "id": "cleric.healing_word",
+      "name": "Healing Word",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "cleric.inflict_wounds",
+      "name": "Inflict Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.necrotic.blood"
+      }
+    },
+    {
+      "id": "cleric.resistance",
+      "name": "Resistance",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.ward.holy"
+      }
+    },
+    {
+      "id": "cleric.sacred_flame",
+      "name": "Sacred Flame",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.radiant.dawn"
+      }
+    },
+    {
+      "id": "cleric.shield_of_faith",
+      "name": "Shield of Faith",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.ward.holy"
+      }
+    },
+    {
+      "id": "cleric.toll_the_dead",
+      "name": "Toll the Dead",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.necrotic.grave"
+      }
+    },
+    {
+      "id": "cleric.word_of_radiance",
+      "name": "Word of Radiance",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.radiant.dawn"
+      }
+    },
+    {
+      "id": "cleric.divine_spark",
+      "name": "Channel Divinity: Divine Spark",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "cleric.turn_undead",
+      "name": "Channel Divinity: Turn Undead",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.circle.holy"
+      }
+    },
+    {
+      "id": "cleric.aid",
+      "name": "Aid",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.bless.gold"
+      }
+    },
+    {
+      "id": "cleric.blindness",
+      "name": "Blindness",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.pillar.shadow"
+      }
+    },
+    {
+      "id": "cleric.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.hold.holy"
+      }
+    },
+    {
+      "id": "cleric.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.holy"
+      }
+    },
+    {
+      "id": "cleric.spiritual_weapon",
+      "name": "Spiritual Weapon",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "signature.spell_spiritual_weapon.force"
+      }
+    },
+    {
+      "id": "cleric.bestow_curse",
+      "name": "Bestow Curse",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.hex.shadow"
+      }
+    },
+    {
+      "id": "cleric.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.dispel.arcane"
+      }
+    },
+    {
+      "id": "cleric.mass_healing_word",
+      "name": "Mass Healing Word",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "cleric.sear_undead",
+      "name": "Channel Divinity: Sear Undead",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.radiant.dawn"
+      }
+    },
+    {
+      "id": "cleric.spirit_guardians",
+      "name": "Spirit Guardians",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "signature.spell_spirit_guardians.radiant"
+      }
+    },
+    {
+      "id": "cleric.banishment",
+      "name": "Banishment",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.pillar.holy"
+      }
+    },
+    {
+      "id": "cleric.death_ward",
+      "name": "Death Ward",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.ward.holy"
+      }
+    },
+    {
+      "id": "cleric.divine_strike",
+      "name": "Divine Strike",
+      "level": 7,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "death_ward.save",
+      "name": "Death Ward Rescue",
+      "level": 7,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "cleric.flame_strike",
+      "name": "Flame Strike",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "signature.spell_flame_strike.holy"
+      }
+    },
+    {
+      "id": "cleric.greater_restoration",
+      "name": "Greater Restoration",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.restore.holy"
+      }
+    },
+    {
+      "id": "cleric.mass_cure_wounds",
+      "name": "Mass Cure Wounds",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "cleric.divine_intervention",
+      "name": "Divine Intervention",
+      "level": 10,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "fx.pillar.holy"
+      }
+    },
+    {
+      "id": "life.preserve_life",
+      "name": "Channel Divinity: Preserve Life",
+      "level": 3,
+      "subclass": "cleric.life",
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "fx.heal.holy"
+      }
+    },
+    {
+      "id": "life.word_of_renewal",
+      "name": "Word of Renewal",
+      "level": 6,
+      "subclass": "cleric.life",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.life_revive.holy"
+      }
+    },
+    {
+      "id": "life.mass_revival",
+      "name": "Light of Life",
+      "level": 10,
+      "subclass": "cleric.life",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.life_revive.holy"
+      }
+    },
+    {
+      "id": "light.radiance_of_the_dawn",
+      "name": "Channel Divinity: Radiance of the Dawn",
+      "level": 3,
+      "subclass": "cleric.light",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "signature.light_radiant_burst.dawn"
+      }
+    },
+    {
+      "id": "light.burning_luminescence",
+      "name": "Burning Luminescence",
+      "level": 6,
+      "subclass": "cleric.light",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "light.warding_flare",
+      "name": "Warding Flare",
+      "level": 6,
+      "subclass": "cleric.light",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.block",
+        "fx": "signature.light_radiant_burst.dawn"
+      }
+    },
+    {
+      "id": "light.corona_of_light",
+      "name": "Corona of Light",
+      "level": 10,
+      "subclass": "cleric.light",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.pray",
+        "fx": "signature.light_radiant_burst.dawn"
+      }
+    },
+    {
+      "id": "war.guided_strike",
+      "name": "Channel Divinity: Guided Strike",
+      "level": 3,
+      "subclass": "cleric.war",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cast",
+        "fx": "signature.war_divine_strike.gold"
+      }
+    },
+    {
+      "id": "war.war_priest",
+      "name": "War Priest Strike",
+      "level": 3,
+      "subclass": "cleric.war",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.attack",
+        "fx": "signature.war_divine_strike.gold"
+      }
+    },
+    {
+      "id": "war.crusaders_zeal",
+      "name": "Crusaders Zeal",
+      "level": 6,
+      "subclass": "cleric.war",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "war.avatar_of_battle",
+      "name": "Avatar of Battle",
+      "level": 10,
+      "subclass": "cleric.war",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.summon",
+        "fx": "signature.war_divine_strike.gold"
+      }
+    }
+  ],
+  "full": [
+    {
+      "id": "cleric.bane",
+      "name": "Bane",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_bane.grave"
+      }
+    },
+    {
+      "id": "cleric.bless",
+      "name": "Bless",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_bless.holy"
+      }
+    },
+    {
+      "id": "cleric.command",
+      "name": "Command",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_command.holy"
+      }
+    },
+    {
+      "id": "cleric.cure_wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_cure_wounds.healing"
+      }
+    },
+    {
+      "id": "cleric.guiding_bolt",
+      "name": "Guiding Bolt",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_guiding_bolt.radiant",
+        "projectile": "fx.cleric_guiding_bolt_shot.radiant"
+      }
+    },
+    {
+      "id": "cleric.healing_word",
+      "name": "Healing Word",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_healing_word.healing"
+      }
+    },
+    {
+      "id": "cleric.inflict_wounds",
+      "name": "Inflict Wounds",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_inflict_wounds.grave"
+      }
+    },
+    {
+      "id": "cleric.resistance",
+      "name": "Resistance",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_resistance.holy"
+      }
+    },
+    {
+      "id": "cleric.sacred_flame",
+      "name": "Sacred Flame",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_sacred_flame.radiant"
+      }
+    },
+    {
+      "id": "cleric.shield_of_faith",
+      "name": "Shield of Faith",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_shield_of_faith.holy"
+      }
+    },
+    {
+      "id": "cleric.toll_the_dead",
+      "name": "Toll the Dead",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_toll_the_dead.grave"
+      }
+    },
+    {
+      "id": "cleric.word_of_radiance",
+      "name": "Word of Radiance",
+      "level": 1,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_word_of_radiance.radiant"
+      }
+    },
+    {
+      "id": "cleric.divine_spark",
+      "name": "Channel Divinity: Divine Spark",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_divine_spark.healing"
+      }
+    },
+    {
+      "id": "cleric.turn_undead",
+      "name": "Channel Divinity: Turn Undead",
+      "level": 2,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_turn_undead.radiant"
+      }
+    },
+    {
+      "id": "cleric.aid",
+      "name": "Aid",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_aid.healing"
+      }
+    },
+    {
+      "id": "cleric.blindness",
+      "name": "Blindness",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_blindness.grave"
+      }
+    },
+    {
+      "id": "cleric.hold_person",
+      "name": "Hold Person",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_hold_person.holy"
+      }
+    },
+    {
+      "id": "cleric.lesser_restoration",
+      "name": "Lesser Restoration",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_lesser_restoration.healing"
+      }
+    },
+    {
+      "id": "cleric.spiritual_weapon",
+      "name": "Spiritual Weapon",
+      "level": 3,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_spiritual_weapon.force",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "cleric.bestow_curse",
+      "name": "Bestow Curse",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_bestow_curse.grave"
+      }
+    },
+    {
+      "id": "cleric.dispel_magic",
+      "name": "Dispel Magic",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_dispel_magic.holy"
+      }
+    },
+    {
+      "id": "cleric.mass_healing_word",
+      "name": "Mass Healing Word",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_mass_healing_word.healing"
+      }
+    },
+    {
+      "id": "cleric.sear_undead",
+      "name": "Channel Divinity: Sear Undead",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_sear_undead.radiant"
+      }
+    },
+    {
+      "id": "cleric.spirit_guardians",
+      "name": "Spirit Guardians",
+      "level": 5,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_spirit_guardians.radiant",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "cleric.banishment",
+      "name": "Banishment",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_banishment.holy"
+      }
+    },
+    {
+      "id": "cleric.death_ward",
+      "name": "Death Ward",
+      "level": 7,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_death_ward.holy"
+      }
+    },
+    {
+      "id": "cleric.divine_strike",
+      "name": "Divine Strike",
+      "level": 7,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.cleric_divine_strike.radiant"
+      }
+    },
+    {
+      "id": "death_ward.save",
+      "name": "Death Ward Rescue",
+      "level": 7,
+      "subclass": null,
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.cleric_death_ward_rescue.holy"
+      }
+    },
+    {
+      "id": "cleric.flame_strike",
+      "name": "Flame Strike",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_flame_strike.fire",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "cleric.greater_restoration",
+      "name": "Greater Restoration",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_greater_restoration.healing"
+      }
+    },
+    {
+      "id": "cleric.mass_cure_wounds",
+      "name": "Mass Cure Wounds",
+      "level": 9,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_mass_cure_wounds.healing"
+      }
+    },
+    {
+      "id": "cleric.divine_intervention",
+      "name": "Divine Intervention",
+      "level": 10,
+      "subclass": null,
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_divine_intervention.healing"
+      }
+    },
+    {
+      "id": "life.preserve_life",
+      "name": "Channel Divinity: Preserve Life",
+      "level": 3,
+      "subclass": "cleric.life",
+      "kind": "ability",
+      "cutIn": "short",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_preserve_life.healing"
+      }
+    },
+    {
+      "id": "life.word_of_renewal",
+      "name": "Word of Renewal",
+      "level": 6,
+      "subclass": "cleric.life",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_word_of_renewal.healing",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "life.mass_revival",
+      "name": "Light of Life",
+      "level": 10,
+      "subclass": "cleric.life",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_restore",
+        "fx": "fx.cleric_mass_revival.healing",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "light.radiance_of_the_dawn",
+      "name": "Channel Divinity: Radiance of the Dawn",
+      "level": 3,
+      "subclass": "cleric.light",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_radiance_of_the_dawn.radiant",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "light.burning_luminescence",
+      "name": "Burning Luminescence",
+      "level": 6,
+      "subclass": "cleric.light",
+      "kind": "proc",
+      "cutIn": "none",
+      "presentation": {
+        "fx": "fx.cleric_burning_luminescence.radiant"
+      }
+    },
+    {
+      "id": "light.warding_flare",
+      "name": "Warding Flare",
+      "level": 6,
+      "subclass": "cleric.light",
+      "kind": "ability",
+      "cutIn": "none",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_warding_flare.radiant"
+      }
+    },
+    {
+      "id": "light.corona_of_light",
+      "name": "Corona of Light",
+      "level": 10,
+      "subclass": "cleric.light",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_judgement",
+        "fx": "fx.cleric_corona_of_light.radiant",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "war.guided_strike",
+      "name": "Channel Divinity: Guided Strike",
+      "level": 3,
+      "subclass": "cleric.war",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_guided_strike.holy",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "war.war_priest",
+      "name": "War Priest Strike",
+      "level": 3,
+      "subclass": "cleric.war",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_strike",
+        "fx": "fx.cleric_war_priest.radiant",
+        "cutIn": "full"
+      }
+    },
+    {
+      "id": "war.crusaders_zeal",
+      "name": "Crusaders Zeal",
+      "level": 6,
+      "subclass": "cleric.war",
+      "kind": "static",
+      "cutIn": "none",
+      "presentation": null
+    },
+    {
+      "id": "war.avatar_of_battle",
+      "name": "Avatar of Battle",
+      "level": 10,
+      "subclass": "cleric.war",
+      "kind": "ability",
+      "cutIn": "full",
+      "presentation": {
+        "anim": "characters.cleric_prayer",
+        "fx": "fx.cleric_avatar_of_battle.holy",
+        "cutIn": "full"
+      }
+    }
+  ]
+}

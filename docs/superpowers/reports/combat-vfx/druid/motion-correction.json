@@ -1,0 +1,58 @@
+{
+  "previousReviewCommit": "973287973e1b43ea0d82db5c02e84c4c927adef7",
+  "artCorrectionCommit": "ec4bd6ac66647a8765ab820aed3bd9f7abc05e6e",
+  "sourceCommit": "82dc24e6dc45b1b5c7f3ddaf30e0afe492eac04e",
+  "cause": "Silhouette bounds repositioned decoration; a luminance window repainted fur and silhouette clipping changed the ornament shape each frame.",
+  "fix": "Retain original fur shading, use 18 explicit pose attachment keys for each of eight facings per source species, simplify leaves/bark and keep each motif whole.",
+  "forms": 4,
+  "sourceSpecies": 2,
+  "facings": 8,
+  "poseKeysPerFacing": 18,
+  "atlasLayoutAndFrameTimingsUnchanged": true,
+  "runtimeCodeUnchanged": true,
+  "gameplayUnchanged": true,
+  "affectedNativeSamples": [
+    "druid.conjure_animals",
+    "druid.form.bear.attack",
+    "druid.form.bear.move",
+    "druid.form.bear.revert",
+    "druid.form.dire_wolf.attack",
+    "druid.form.dire_wolf.move",
+    "druid.form.dire_wolf.revert",
+    "druid.form.elder_bear.attack",
+    "druid.form.elder_bear.move",
+    "druid.form.elder_bear.revert",
+    "druid.form.wolf.attack",
+    "druid.form.wolf.move",
+    "druid.form.wolf.revert",
+    "druid.wild_shape_bear",
+    "druid.wild_shape_dire_wolf",
+    "druid.wild_shape_wolf",
+    "shapeshifter.dire_form",
+    "shapeshifter.elder_bear_form"
+  ],
+  "unaffectedNativeSamplesRetained": 35,
+  "browserChecks": {
+    "forms": 4,
+    "facingsPerForm": 8,
+    "actionsPerFacing": 6,
+    "steppedFrameChecks": 768,
+    "playbackAdvances": true,
+    "pageErrors": [],
+    "playerAnchorMatchesManifest": true,
+    "playerGroundAnchor": [
+      80,
+      123
+    ],
+    "revisedLayoutPlaybackPassed": true
+  },
+  "focusedNativeMotionComparisons": 8,
+  "performanceRunsPerVersion": 3,
+  "nativeMotionBrowserPlayback": {
+    "nativeComparisons": 8,
+    "firstVideoPlaybackAdvances": true,
+    "videoWidth": 1920,
+    "videoHeight": 540,
+    "pageErrors": []
+  }
+}

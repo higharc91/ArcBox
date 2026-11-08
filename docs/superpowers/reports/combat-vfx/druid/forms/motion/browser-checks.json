@@ -1,0 +1,14 @@
+{
+  "forms": 4,
+  "facingsPerForm": 8,
+  "actionsPerFacing": 6,
+  "steppedFrameChecks": 768,
+  "playbackAdvances": true,
+  "pageErrors": [],
+  "playerAnchorMatchesManifest": true,
+  "playerGroundAnchor": [
+    80,
+    123
+  ],
+  "revisedLayoutPlaybackPassed": true
+}
