@@ -17,10 +17,20 @@ public static class ZoneRules
         if (!DownedRules.InBattle(unit) || state.Zones.IsDefaultOrEmpty)
             yield break;
         foreach (var zone in state.Zones)
-            if (zone.Tiles.Contains(unit.Pos))
+            if (zone.Tiles.Contains(unit.Pos) && Affects(zone.Affects,
+                    zone.Owner is { } owner && state.Units.TryGetValue(owner, out var source) ? source.Sheet.Side : null, unit.Sheet.Side))
                 foreach (var passive in zone.Passives.IsDefault ? [] : zone.Passives)
                     yield return (passive, zone);
     }
+
+    /// <summary>Whether a unit receives an area's or zone's passives. A filtered orphan with no known side affects nobody.</summary>
+    public static bool Affects(AffectedSide? filter, Side? source, Side target) => filter switch
+    {
+        null or AffectedSide.All => true,
+        AffectedSide.Allies => source is { } side && side == target,
+        AffectedSide.Enemies => source is { } side && side != target,
+        _ => false,
+    };
 
     /// <summary>The tiles of every zone that blocks line of sight (<see cref="Zone.BlocksSight"/>).</summary>
     public static ImmutableSortedSet<Tile> Obscured(BattleState state)
@@ -34,10 +44,11 @@ public static class ZoneRules
     /// leaves incapacitated loses its concentration. Units already there aren't "entering" it.
     /// </summary>
     public static Zone Create(BattleWriter w, UnitId? owner, string kind, ImmutableArray<Tile> tiles, int? rounds,
-        bool concentration, bool difficult, ImmutableArray<PassiveDef> passives, bool blocksSight = false, bool surface = false, string? source = null, bool? appliedThisTurn = null)
+        bool concentration, bool difficult, ImmutableArray<PassiveDef> passives, bool blocksSight = false, bool surface = false, string? source = null, bool? appliedThisTurn = null,
+        AffectedSide? affects = null)
     {
         var zone = new Zone(w.State.NextSerial, owner, kind, tiles, rounds, concentration, difficult,
-            passives.IsDefault ? [] : passives, AppliedThisTurn: appliedThisTurn ?? (owner is { } id && w.State.Active == id), BlocksSight: blocksSight, Surface: surface, Source: source);
+            passives.IsDefault ? [] : passives, AppliedThisTurn: appliedThisTurn ?? (owner is { } id && w.State.Active == id), BlocksSight: blocksSight, Surface: surface, Source: source, Affects: affects);
         w.State = w.State with { Zones = w.State.Zones.Add(zone), NextSerial = w.State.NextSerial + 1 };
         w.Emit(new ZoneCreated(zone));
         foreach (var unit in w.State.Units.Values.Where(u => DownedRules.InBattle(u) && tiles.Contains(u.Pos)).Select(u => u.Id).ToArray())
@@ -110,7 +121,8 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
         if (def.Concentration)
             text += ", ends if you lose concentration";
         if (!def.Passives.IsDefaultOrEmpty)
-            text += "; units inside: " + string.Join(" / ", def.Passives.Select(p => Tooltips.For(p, level, rules)));
+            text += $"; {(def.Affects == AffectedSide.Allies ? "allies" : def.Affects == AffectedSide.Enemies ? "enemies" : "units")} inside: "
+                    + string.Join(" / ", def.Passives.Select(p => Tooltips.For(p, level, rules)));
         return text;
     }
 
@@ -129,7 +141,7 @@ public sealed class ZoneBlock : EffectBlock<ZoneEffect>
         }
         if (!tiles.IsEmpty)
             ZoneRules.Create(ctx.W, source.Id, def.Kind, tiles, Metamagic.ExtendRounds(ctx, def.Rounds, def.Concentration),
-                def.Concentration, def.Difficult, def.Passives, def.BlocksSight);
+                def.Concentration, def.Difficult, def.Passives, def.BlocksSight, affects: def.Affects);
     }
 }
 

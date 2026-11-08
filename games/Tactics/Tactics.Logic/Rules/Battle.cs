@@ -292,7 +292,8 @@ public static partial class Battle
     /// <c>downed_ally</c>), on the side the kind picks: <c>ally</c>/<c>downed_ally</c> the user's side, <c>any_unit</c> any
     /// side, everything else (enemy, tile, a self-centred area) the other sides, plus allies with
     /// <see cref="AreaDef.FriendlyFire"/>. The user counts only with <see cref="AreaDef.IncludeSelf"/>, except a
-    /// <c>self</c> ability on a single or self area, which affects just the user. A single-target unit ability needs one
+    /// <c>self</c> ability on a single or self area, which affects just the user. An explicit <see cref="AreaDef.Affects"/>
+    /// overrides the side filter while preserving IncludeSelf. A single-target unit ability needs one
     /// fitting unit at the aim.</item>
     /// </list>
     /// </summary>
@@ -441,6 +442,8 @@ public static partial class Battle
     {
         if (unit.Id == user.Id)
             return area.IncludeSelf;
+        if (area.Affects is { } filter)
+            return ZoneRules.Affects(filter, user.Sheet.Side, unit.Sheet.Side);
         var sameSide = unit.Sheet.Side == user.Sheet.Side;
         return side switch
         {

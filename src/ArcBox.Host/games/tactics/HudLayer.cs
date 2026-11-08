@@ -66,7 +66,9 @@ public partial class HudLayer : Control
         _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective));
         _head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
-        _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 22, Ink);
+        _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
+        _noticeText.CustomMinimumSize = new Vector2(600, 0);
+        _noticeText.AutowrapMode = TextServer.AutowrapMode.WordSmart;
         _notice = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), _noticeText);
         _notice.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
         _notice.Visible = false;

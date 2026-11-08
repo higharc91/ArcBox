@@ -8,7 +8,7 @@ import { ReactionsSheet } from "./reactions";
 import { classFrom, remembered, rememberTurn } from "./memory";
 import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView } from "./types";
-import { Conditions, EconomyChips, HpBar, HpText, LineIcon, MeCard, Section, TurnBanner } from "./ui";
+import { ControlNotice, Conditions, EconomyChips, HpBar, HpText, LineIcon, MeCard, Section, TurnBanner } from "./ui";
 
 const same = (a: Tile, b: Tile) => a[0] === b[0] && a[1] === b[1];
 
@@ -49,14 +49,39 @@ export function Turn({ data, send }: CustomScreenProps) {
   const [cursor, setCursor] = useState<Tile>(me.at);
   // A multi-attack's earlier attacks, aimed already: the one being aimed is the next (#107).
   const [picks, setPicks] = useState<Pick[]>([]);
+  const [endTurnUntil, setEndTurnUntil] = useState<number | null>(null);
   // A new view resets the selection, but the same view sent again (a reconnect, a refresh) keeps what you were doing.
   // A vote to fall back changes the view for everyone, which mustn't undo what this player is aiming.
-  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined, reactions: undefined }), [data]);
+  const content = useMemo(() => JSON.stringify({ ...(data as TurnData), fallBack: undefined, reactions: undefined, controlNotice: undefined }), [data]);
   useEffect(() => {
     setAbilityIx(null);
     setCursor(me.at);
     setPicks([]);
+    setEndTurnUntil(null);
   }, [content]);
+  useEffect(() => {
+    if (endTurnUntil === null) return;
+    const timer = window.setTimeout(() => setEndTurnUntil(null), Math.max(0, endTurnUntil - Date.now()));
+    return () => window.clearTimeout(timer);
+  }, [endTurnUntil]);
+
+  // Choices already exclude abilities with no legal target or insufficient resources.
+  const unused = [
+    (choices.economy.action || choices.economy.extraActions > 0) && choices.abilities.some(a =>
+      (a.cost.action ?? 0) > 0 && (a.targets.length > 0 || a.tiles.length > 0)) ? "Action" : null,
+    choices.economy.bonus && choices.abilities.some(a =>
+      (a.cost.bonus ?? 0) > 0 && (a.targets.length > 0 || a.tiles.length > 0)) ? "Bonus" : null,
+  ].filter(Boolean).join(" & ");
+  const endTurn = () => {
+    if (unused && (endTurnUntil === null || Date.now() >= endTurnUntil)) {
+      sfx("select");
+      setEndTurnUntil(Date.now() + 3000);
+      return;
+    }
+    setEndTurnUntil(null);
+    send("endTurn");
+  };
+  const browse = (at: Tile) => { setEndTurnUntil(null); setCursor(at); };
 
   const cls = useMemo(() => classFrom(choices.abilities, (id) => abilityClass(icons, id)) ?? remembered().classes[me.id],
     [icons, content]);
@@ -73,6 +98,7 @@ export function Turn({ data, send }: CustomScreenProps) {
 
   const pick = (i: number) => {
     sfx("select");
+    setEndTurnUntil(null);
     setAbilityIx(i);
     setPicks([]);
     window.scrollTo(0, 0);
@@ -110,6 +136,7 @@ export function Turn({ data, send }: CustomScreenProps) {
   return (
     <div class={`tx tx-controls-layout tx-turn${ability ? " aiming" : ""}`}><div class="tx-controls-scroll">
       <SurfaceScene kinds={(data as TurnData).surfaces} />
+      <ControlNotice notice={(data as TurnData).controlNotice} />
       {ability ? (
         <MeCard me={me} title={ability.name} subtitle={target ? "Ready: tap Use" : aimHint(ability)}
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />
@@ -129,10 +156,10 @@ export function Turn({ data, send }: CustomScreenProps) {
       )}
 
       <div class="tx-field">
-        <MiniMap me={me} units={units} cursor={cursor} onPick={setCursor} map={map}
+        <MiniMap me={me} units={units} cursor={cursor} onPick={browse} map={map}
           reach={ability ? [] : choices.moves.map((m) => m.to)} risks={ability ? [] : choices.moves.filter(m => m.warn || (m.risk ?? 0) > 0).map(m => m.to)}
           spread={target?.spread ?? []} aims={all.map((t) => t.aim)} />
-        <DPad cursor={cursor} onMove={setCursor} />
+        <DPad cursor={cursor} onMove={browse} />
         {(target?.spread?.length ?? 0) > 0 ? <span class="tx-spread-key">Dashed blue: reaction spread · includes allies</span> : null}
       </div>
 
@@ -151,14 +178,16 @@ export function Turn({ data, send }: CustomScreenProps) {
       ) : (
         <div class="tx-foot tx-commit">
           <button type="button" class={`tx-btn${move ? " gold" : ""}`} disabled={!move}
-            onClick={() => { if (move) { sfx("confirm"); send("move", { path: move.path }); } }}>
+            onClick={() => { if (move) { setEndTurnUntil(null); sfx("confirm"); send("move", { path: move.path }); } }}>
             {move ? `Move here · ${move.cost}${move.warn ? ` · ${move.warn}` : ""}` : "Pick a tile to move"}
           </button>
           {/* Delay stays when it's spent, so End turn doesn't jump into its place under a thumb. */}
-          <button type="button" class="tx-btn" disabled={!choices.canDelay} onClick={() => send("delay", { slots: 1 })}>
+          <button type="button" class="tx-btn" disabled={!choices.canDelay} onClick={() => { setEndTurnUntil(null); send("delay", { slots: 1 }); }}>
             <LineIcon name="swap" />Delay
           </button>
-          <button type="button" class="tx-btn" onClick={() => send("endTurn")}><LineIcon name="hourglass" />End turn</button>
+          <button type="button" class={`tx-btn tx-end-turn${endTurnUntil !== null ? " gold" : ""}`} onClick={endTurn}>
+            <LineIcon name="hourglass" /><span aria-live="polite">{endTurnUntil !== null ? `End turn? ${unused} unused` : "End turn"}</span>
+          </button>
         </div>
       )}
     </div>

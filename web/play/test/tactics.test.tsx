@@ -95,6 +95,7 @@ describe("tactics phone module", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
     fireEvent.click(screen.getByRole("button", { name: "End turn" }));
+    fireEvent.click(screen.getByRole("button", { name: /End turn\?/ }));
     expect(send).toHaveBeenLastCalledWith({ action: "endTurn" });
   });
 
@@ -290,7 +291,7 @@ describe("tactics phone module", () => {
     show("status");
     // The "Now acting" card: its label, then the acting unit's name.
     expect(screen.getByText("Now acting").nextElementSibling!.textContent).toBe("Player3");
-    expect(screen.getByText("You're up in 9")).toBeTruthy();
+    expect(screen.getByText("You're up in 9 turns")).toBeTruthy();
   });
 
   it("costText names the parts of a cost", () => {

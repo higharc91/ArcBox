@@ -124,7 +124,7 @@ internal sealed partial class Validation
                 if (zone.Surface)
                 {
                     Ref(RefKind.Surface, zone.Kind, file, At("kind"));
-                    if (zone.Concentration || zone.BlocksSight || zone.Difficult || !zone.Passives.IsDefaultOrEmpty)
+                    if (zone.Concentration || zone.BlocksSight || zone.Difficult || !zone.Passives.IsDefaultOrEmpty || zone.Affects is not null)
                         Error(file, ptr, "Surface zones take their traits from environment.json and cannot require concentration.");
                 }
                 AreaSize(zone.Area, file, At("area"));

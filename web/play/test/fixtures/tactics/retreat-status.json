@@ -20,6 +20,254 @@
       "conditions": [],
       "player": "Player1"
     },
+    "cls": "fighter",
+    "round": 3,
+    "objective": "Defeat every enemy",
+    "party": [
+      {
+        "id": "hero1",
+        "name": "Player1",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          1,
+          9
+        ],
+        "hp": 12,
+        "maxHp": 12,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player1"
+      },
+      {
+        "id": "hero2",
+        "name": "Player2",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          2,
+          9
+        ],
+        "hp": 10,
+        "maxHp": 10,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player2"
+      },
+      {
+        "id": "hero3",
+        "name": "Player3",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          1,
+          10
+        ],
+        "hp": 10,
+        "maxHp": 10,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player3"
+      },
+      {
+        "id": "hero4",
+        "name": "Player4",
+        "side": "Party",
+        "sprite": null,
+        "at": [
+          2,
+          10
+        ],
+        "hp": 8,
+        "maxHp": 8,
+        "tempHp": 0,
+        "life": "Up",
+        "countdown": 0,
+        "conditions": [],
+        "player": "Player4"
+      }
+    ],
+    "acting": {
+      "id": "hero3",
+      "name": "Player3",
+      "side": "Party",
+      "sprite": null,
+      "at": [
+        1,
+        10
+      ],
+      "hp": 10,
+      "maxHp": 10,
+      "tempHp": 0,
+      "life": "Up",
+      "countdown": 0,
+      "conditions": [],
+      "player": "Player3"
+    },
+    "abilities": [
+      {
+        "ability": "common.attack",
+        "item": null,
+        "name": "Attack",
+        "tooltip": "Weapon attack, weapon range: weapon damage",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.dash",
+        "item": null,
+        "name": "Dash",
+        "tooltip": "Self: you gain your Move again",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.disengage",
+        "item": null,
+        "name": "Disengage",
+        "tooltip": "Self: you are Disengaged until the end of your turn",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.dodge",
+        "item": null,
+        "name": "Dodge",
+        "tooltip": "Self: you are Dodging for 1 round",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.extinguish",
+        "item": null,
+        "name": "Put out flames",
+        "tooltip": "1 tile: ends Burning on target \u2014 Spend your Action to put out burning on yourself or an adjacent ally.",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.help",
+        "item": null,
+        "name": "Help",
+        "tooltip": "1 tile: gets a downed target up at 1 HP; otherwise gives it advantage on its next d20",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.shove",
+        "item": null,
+        "name": "Shove: push",
+        "tooltip": "Better of Str/Dex save, 1 tile: pushes target 1 tile away \u2014 Push 1 tile. The target resists with its better STR or DEX save against DC 8 \u002B your proficiency \u002B your STR modifier.",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.shove_prone",
+        "item": null,
+        "name": "Shove: knock prone",
+        "tooltip": "Better of Str/Dex save, 1 tile: target is Prone \u2014 Knock the target prone instead of pushing it. It resists with its better STR or DEX save against DC 8 \u002B proficiency \u002B your STR modifier. Standing costs half its Move, rounded up.",
+        "cost": {
+          "action": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "fighter.precision_attack",
+        "item": null,
+        "name": "Precision Attack",
+        "tooltip": "Weapon attack, weapon range: weapon damage. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit.",
+        "cost": {
+          "action": 1,
+          "resource": {
+            "superiority": 1
+          }
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "fighter.second_wind",
+        "item": null,
+        "name": "Second Wind",
+        "tooltip": "Self: heals 1d4 \u002B level \u2014 Game balance: one use per battle, restoring 1d4 plus your level HP.",
+        "cost": {
+          "bonus": 1,
+          "resource": {
+            "second_wind": 1
+          }
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "fighter.trip_attack",
+        "item": null,
+        "name": "Trip Attack",
+        "tooltip": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits",
+        "cost": {
+          "action": 1,
+          "resource": {
+            "superiority": 1
+          }
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      },
+      {
+        "ability": "common.use_item",
+        "item": "potion_of_healing",
+        "name": "Potion of Healing",
+        "tooltip": "1 tile: heals 2d4\u002B2",
+        "cost": {
+          "bonus": 1
+        },
+        "targets": [],
+        "tiles": [],
+        "aim": "unit"
+      }
+    ],
+    "recent": [
+      "Round 1 began."
+    ],
     "active": "Player3",
     "upIn": 9,
     "aiPlaying": false,

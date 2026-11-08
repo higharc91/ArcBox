@@ -135,7 +135,21 @@ public sealed record BattleView(string Encounter, string Map, int Round, Immutab
     RetreatView? Retreat = null);
 
 /// <summary>An encounter the VIP can pick, with how many AI companions would fill the party up to its minimum.</summary>
-public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0);
+public sealed record EncounterOption(string Id, string Name, int? Level, int Min, int Max, bool Fits, int Companions = 0,
+    string? Guidance = null)
+{
+    /// <summary>Small parties get companions; only the encounter's maximum prevents entry.</summary>
+    public string? UnavailableReason => Fits ? null : $"Party too big (max {Max})";
+
+    /// <summary>Level guidance compares the intended level, not a prediction of the battle's outcome.</summary>
+    public static string GuidanceFor(int? level, int partyLevel) => level switch
+    {
+        null => "Level not specified",
+        _ when level > partyLevel => "Higher level",
+        _ when level < partyLevel => "Lower level",
+        _ => "Recommended",
+    };
+}
 
 /// <summary>A class a member can pick at Muster.</summary>
 public sealed record ClassOption(string Id, string Name, string Role);
@@ -496,7 +510,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Exploration => WalkScreen(player, profile),
             TacticsPhase.Story => StoryScreen(player, profile),
             // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
-            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null }),
+            TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null, partyLevel = _doc.PartyLevel }),
             TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
@@ -513,6 +527,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
         };
+        view = WithControlNotice(view, profile);
         // Recovery is rare and uses the existing header; it stays stable across walk presses/releases.
         if (_phase == TacticsPhase.Exploration && view is CustomView recovered && _worldRecoveryNotice is { } recovery)
             return recovered with { Header = recovery };
@@ -634,10 +649,14 @@ public sealed partial class TacticsGame
                 actor = offer.Cause is { } c && state.Units.TryGetValue(c.Actor, out var actor) ? actor.Sheet.Name : null,
                 targetName = offer.Cause?.Target is { } t && state.Units.TryGetValue(t, out var tu) ? (t == unit ? "you" : tu.Sheet.Name) : null,
                 ability = offer.Cause?.Ability is { } ca ? Rules.Abilities.GetValueOrDefault(ca)?.Name : null,
+                timeout = ReactionTimeoutWords(state, offer),
+                incomingDamage = Ai.PreviewReaction(state, offer, Pass(offer), Rules).IncomingDamage,
                 options = offer.Options.Select(o => new
                 {
                     id = o.Id,
-                    label = o.Ability is { } a ? Rules.Abilities.GetValueOrDefault(a)?.Name ?? a.Value : "Don't react",
+                    label = ReactionWords.Label(o, Rules),
+                    outcome = Ai.PreviewReaction(state, offer, o, Rules).Outcome,
+                    cost = ReactionWords.Cost(o, me, Rules),
                     target = o.Target,
                     tooltip = o.Ability is { } ta && Rules.Abilities.TryGetValue(ta, out var def) ? Tooltips.For(def, me.Sheet.Level, Rules, state.Environment) : null,
                 }),
@@ -662,9 +681,16 @@ public sealed partial class TacticsGame
         return WithFallBack(PhoneSurfaces.Attach(Custom(Screens.Status, new
         {
             me = UnitViewOf(heroUnit),
+            cls = _doc.For(profile)?.Character.Class,
+            round = state.Round,
+            objective = BattleObjectiveWords.Of(state.Objectives.Current, state.Units.Values.Select(UnitViewOf)),
+            party = state.Units.Values.Where(u => u.Sheet.Side == heroUnit.Sheet.Side && u.SummonedBy is null).Select(UnitViewOf),
+            acting = state.Active is { } acting ? UnitViewOf(state.Units[acting]) : null,
+            abilities = WaitingAbilities(heroUnit),
+            recent = RecentBattleEvents(),
             active = state.Active is { } a2 && state.Units.TryGetValue(a2, out var au) ? au.Sheet.Name : null,
             upIn = UpIn(state, hero),
-            aiPlaying = !IsPlayed(hero),
+            aiPlaying = !IsPlayed(hero) || _aiFinishing is { } finishing && Plays(State, hero, finishing),
         }), state, heroUnit, Rules), profile, hero);
     }
 
@@ -687,7 +713,8 @@ public sealed partial class TacticsGame
     private ImmutableArray<EncounterOption> EncounterOptions()
         => [.. Rules.Encounters.Values.Where(e => !e.StoryOnly).OrderBy(e => e.Level ?? 0).ThenBy(e => e.Id, StringComparer.Ordinal)
             .Select(e => new EncounterOption(e.Id, e.Name, e.Level, e.Party.Min, e.Party.Max,
-                _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count)))];
+                _players.Count <= e.Party.Max, Math.Max(0, e.Party.Min - _players.Count),
+                EncounterOption.GuidanceFor(e.Level, _doc.PartyLevel)))];
 
     /// <summary>
     /// The one line Results show after a loss, on the phone and the TV alike: the party wakes with that fight's wounds tended, no XP, and the

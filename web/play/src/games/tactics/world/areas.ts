@@ -70,7 +70,9 @@ export const AREAS: Area[] = [
       { id: "pine", at: [13, 3] },
       { id: "rock_medium", variant: "grey", at: [10, 0] },
       { id: "signpost", at: [5, 7] },
-      { id: "log", at: [11, 10] },
+      { id: "red_fox_anim", at: [3, 8] },
+      { id: "field_crow_anim", at: [2, 2] },
+      { id: "river_duck_anim", at: [7, 10] },
     ],
   },
   {
@@ -103,6 +105,8 @@ export const AREAS: Area[] = [
       { id: "reeds", at: [3, 11] },
       { id: "reeds", at: [0, 11] },
       { id: "ruin_wall", variant: "grey", at: [12, 4] },
+      { id: "red_fox_anim", at: [2, 8] },
+      { id: "field_crow_anim", at: [10, 1] },
     ],
   },
   {

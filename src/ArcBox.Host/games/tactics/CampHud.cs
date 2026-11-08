@@ -39,12 +39,12 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
         AddChild(heading);
         var ribbonPanel = ArcTheme.Panel(ArcTheme.GlassBox(null, 12, 10), _ribbon = ArcTheme.HBox(7));
         ribbonPanel.SetAnchorsPreset(LayoutPreset.BottomWide);
-        ribbonPanel.OffsetLeft = 42; ribbonPanel.OffsetRight = -42; ribbonPanel.OffsetTop = -184; ribbonPanel.OffsetBottom = -26;
+        ribbonPanel.OffsetLeft = 42; ribbonPanel.OffsetRight = -42; ribbonPanel.OffsetTop = -360; ribbonPanel.OffsetBottom = -26;
         AddChild(ribbonPanel);
         _caption = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 20, 12), _result = ArcTheme.Label("", ArcTheme.SemiBold, 25));
         _result.AutowrapMode = TextServer.AutowrapMode.WordSmart;
         _caption.SetAnchorsPreset(LayoutPreset.CenterBottom);
-        _caption.OffsetLeft = -520; _caption.OffsetRight = 520; _caption.OffsetTop = -300; _caption.OffsetBottom = -210;
+        _caption.OffsetLeft = -520; _caption.OffsetRight = 520; _caption.OffsetTop = -470; _caption.OffsetBottom = -382;
         AddChild(_caption);
         var file = Path.Combine(root, "camp", "hearth.png");
         if (File.Exists(file)) _hearth = ImageTexture.CreateFromImage(Image.LoadFromFile(file));

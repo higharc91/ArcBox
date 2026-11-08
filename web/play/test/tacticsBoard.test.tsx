@@ -11,7 +11,7 @@ suite("tactics dev board log", () => {
       .toBe("Ann uses magic missile on Goblin");
     expect(line({ $type: "AttackResolved", source: "goblin.1", target: "hero1", hit: true, crit: false })).toBe("Goblin hits Ann");
     expect(line({ $type: "Damaged", unit: "hero1", amount: 9, type: "piercing", hpAfter: 0 })).toBe("Ann takes 9 piercing (0 HP left)");
-    expect(line({ $type: "Reacted", reactor: "hero1", choice: "pass" })).toBe("Ann lets it go");
+    expect(line({ $type: "Reacted", reactor: "hero1", choice: "pass" })).toBe("Ann: Don't react");
     expect(line({ $type: "Reacted", reactor: "hero1", choice: "wizard.shield" })).toBe("Ann reacts: shield");
   });
 

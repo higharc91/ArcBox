@@ -58,6 +58,13 @@ export interface BackgroundsManifest {
 
 export interface GradesManifest { size: number; grades: Record<string, string> }
 
+export interface AmbientManifest {
+  assets: Record<string, {
+    frame: [number, number]; frames: number; fps: number;
+    variants: Record<string, string>; blend: "normal" | "add";
+  }>;
+}
+
 /** Everything the world reads, loaded once. Null when the pack can't be reached. */
 export interface WorldManifests {
   base: string;
@@ -66,25 +73,27 @@ export interface WorldManifests {
   dungeon: DungeonManifest | null;
   backgrounds: BackgroundsManifest;
   grades: GradesManifest | null;
+  ambient: AmbientManifest | null;
 }
 
 let manifests: Promise<WorldManifests | null> | null = null;
 
 export function loadManifests(): Promise<WorldManifests | null> {
   manifests ??= (async () => {
-    const [base, terrain, props, dungeon, backgrounds, grades] = await Promise.all([
+    const [base, terrain, props, dungeon, backgrounds, grades, ambient] = await Promise.all([
       packBase(),
       packJson<TerrainManifest>("terrain/manifest.json"),
       packJson<PropsManifest>("props/manifest.json"),
       packJson<DungeonManifest>("dungeon/manifest.json"),
       packJson<BackgroundsManifest>("backgrounds/manifest.json"),
       packJson<GradesManifest>("grades/manifest.json"),
+      packJson<AmbientManifest>("ambient/manifest.json"),
     ]);
     if (!base || !terrain || !props || !backgrounds) {
       manifests = null;   // try again next time
       return null;
     }
-    return { base, terrain, props, dungeon, backgrounds, grades };
+    return { base, terrain, props, dungeon, backgrounds, grades, ambient };
   })();
   return manifests;
 }

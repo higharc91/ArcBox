@@ -148,9 +148,12 @@ public sealed partial class TacticsGame
         return true;
     }
 
-    /// <summary>The TV's notice: <see cref="_notice"/>, then the failure notice while it stands.</summary>
+    /// <summary>The TV's current story, failure and control notices.</summary>
     private string? Notice()
-        => _faultAt is null ? _notice : _notice is null ? MoveFailed : $"{_notice} {MoveFailed}";
+    {
+        var text = _faultAt is null ? _notice : _notice is null ? MoveFailed : $"{_notice} {MoveFailed}";
+        return TvControlNotice() is { } control ? text is null ? control : $"{text} {control}" : text;
+    }
 
     /// <summary>
     /// A command applied normally: the AI isn't skipping any more, and the failure notice comes down once it has been up

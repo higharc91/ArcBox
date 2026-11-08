@@ -35,7 +35,7 @@ public partial class TacticsScene
     {
         var row = ArcTheme.VBox(3);
         row.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-        row.AddChild(ArcTheme.Label($"{label}  {current}/{max}", ArcTheme.SemiBold, compact ? 12 : 15, new Color(.75f, .78f, .8f)));
+        row.AddChild(ArcTheme.Label($"{label}  {current}/{max}", ArcTheme.SemiBold, 24, new Color(.75f, .78f, .8f)));
         var bar = new ProgressBar { MinValue = 0, MaxValue = Math.Max(1, max), Value = current, ShowPercentage = false, CustomMinimumSize = new Vector2(compact ? 20 : 100, 6), MouseFilter = MouseFilterEnum.Ignore };
         bar.AddThemeStyleboxOverride("background", new StyleBoxFlat { BgColor = new Color(0, 0, 0, .5f) });
         bar.AddThemeStyleboxOverride("fill", new StyleBoxFlat { BgColor = color });
@@ -46,7 +46,7 @@ public partial class TacticsScene
     private Control RecoveryCard(RecoveryMemberView member, string? note = null, bool compact = false)
     {
         var body = ArcTheme.VBox(5);
-        var name = ArcTheme.Label(member.Name, ArcTheme.Bold, compact ? 18 : 23);
+        var name = ArcTheme.Label(member.Name, ArcTheme.Bold, compact ? 24 : 28);
         name.ClipText = true;
         name.SizeFlagsHorizontal = SizeFlags.ExpandFill;
         var heading = ArcTheme.HBox(6, name);
@@ -65,17 +65,23 @@ public partial class TacticsScene
         }
         if (member.Room) note = "Room booked";
         if (!member.Here && note is null) note = "Away";
-        if (note is not null) heading.AddChild(ArcTheme.Label(note, ArcTheme.SemiBold, 17, ArcTheme.Gold));
+        if (note is not null) heading.AddChild(ArcTheme.Label(note, ArcTheme.SemiBold, 24, ArcTheme.Gold));
         body.AddChild(heading);
         var meters = ArcTheme.HBox(12, RecoveryMeter("HP", member.Hp, member.MaxHp, new Color(.4f, .73f, .5f), compact));
         if (compact) body.AddChild(meters);
-        var resources = compact ? ArcTheme.HBox(8) : meters;
+        BoxContainer resources = compact ? ArcTheme.VBox(5) : meters;
         foreach (var resource in member.Resources)
         {
             var label = System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(resource.Name.Replace('_', ' '));
             resources.AddChild(RecoveryMeter(label, resource.Current, resource.Max, new Color(.4f, .57f, .8f), compact));
         }
         body.AddChild(resources);
+        if (member.WellFed)
+        {
+            var fed = ArcTheme.Label("Well fed · 3 temporary HP next battle", ArcTheme.SemiBold, 24, ArcTheme.Gold);
+            fed.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+            body.AddChild(fed);
+        }
         return ArcTheme.Panel(ArcTheme.GlassBox(null, 12, 8), body);
     }
 }

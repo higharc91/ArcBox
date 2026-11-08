@@ -9,7 +9,7 @@ import { useAlertOnMount, useSfx } from "./sfx";
 import type { AbilityChoice, CharacterChoicesData, ClassOption, EncounterOption, ReactData, ResultsData, StatusData, UnitView } from "./types";
 import { FallBack } from "./fallback";
 import { ReactionsSheet } from "./reactions";
-import { HpBar, HpText, MeCard, Section } from "./ui";
+import { ControlNotice, HpBar, HpText, MeCard, Section } from "./ui";
 import { ChoicesCard } from "./choices";
 
 export { costText, Turn } from "./turn";
@@ -61,23 +61,26 @@ export function PickClass({ data, send }: CustomScreenProps) {
 
 export function PickEncounter({ data, send }: CustomScreenProps) {
   // canWalk: whether there's a world to go back to; a pack with no region has none, and an older server sends nothing (no button).
-  const { encounters, canWalk } = data as { encounters: EncounterOption[]; canWalk?: boolean };
+  const { encounters, canWalk, partyLevel } = data as { encounters: EncounterOption[]; canWalk?: boolean; partyLevel?: number };
   const sfx = useSfx();
   return (
     <div class="tx tx-muster tx-controls-layout"><div class="tx-controls-scroll">
       <h2 class="tx-title">Choose a battle</h2>
+      {partyLevel != null ? <p class="tx-note center">Party level {partyLevel}</p> : null}
       <ul class="tx-encounters">
         {encounters.map((e) => (
           <li key={e.id}>
             <button type="button" class="tx-encounter" disabled={!e.fits}
               onClick={() => { sfx("confirm"); send("pickEncounter", { encounter: e.id }); }}>
-              <span class="tx-lv"><small>Lv </small>{e.level ?? "–"}</span>
+              <span class={`tx-lv${e.level == null ? " unrated" : ""}`}>{e.level == null ? "Unrated" : <><small>Lv </small>{e.level}</>}</span>
               <span class="tx-enc-text">
                 <b>{e.name}</b>
                 <span class="tx-tip">
                   {e.min}–{e.max} heroes
                   {e.companions ? ` · +${e.companions} AI companion${e.companions === 1 ? "" : "s"}` : ""}
                 </span>
+                <span class="tx-enc-guidance">{e.guidance ?? (e.level == null ? "Level not specified" : "")}</span>
+                {!e.fits ? <span class="tx-enc-reason">{e.unavailableReason ?? `Party too big (max ${e.max})`}</span> : null}
               </span>
             </button>
           </li>
@@ -124,6 +127,7 @@ export function Results({ data, send }: CustomScreenProps) {
   const bannerText = r.leveledUp ? "Level Up!" : won ? "Victory" : fled ? "Retreat" : "Defeat";
   return (
     <div class="tx tx-results">
+      <ControlNotice notice={r.controlNotice} />
       <MomentBanner art={bannerArt} text={bannerText} tone={won ? "won" : "lost"} />
       <p class="tx-note center">{r.encounter} · party level {r.level}</p>
       {r.leveledUp ? <p class="tx-note center tx-levelup-note">LEVEL UP! The party reached level {r.level}.</p> : null}
@@ -178,29 +182,41 @@ export function Results({ data, send }: CustomScreenProps) {
 type Tab = "abilities" | "sheet" | "bag";
 
 /**
- * Waiting your turn: who's acting, when you're up, and your character (sheet, abilities and bag as of your last turn,
- * which this phone remembers, since the status view doesn't carry them).
+ * Waiting your turn: current battle context and read-only abilities, sent before the first turn too.
  */
 export function Status({ data, send }: CustomScreenProps) {
   const s = data as StatusData;
   const [tab, setTab] = useState<Tab>("sheet");
   const sfx = useSfx();
-  const cls = remembered().classes[s.me.id];
-  const abilities = remembered().abilities[s.me.id] ?? [];
-  const active = seen(s.active);
+  const cls = s.cls ?? remembered().classes[s.me.id];
+  const abilities = s.abilities ?? remembered().abilities[s.me.id] ?? [];
+  const active = s.acting ?? seen(s.active);
   return (
     <div class="tx tx-status">
       <SurfaceScene kinds={s.surfaces} />
       <MeCard me={s.me} cls={cls} />
+      <ControlNotice notice={s.controlNotice} />
       <div class={`tx-now${active?.side === "Enemy" ? " enemy" : ""}`}>
-        {s.active ? <NamedPortrait name={s.active} size={60} /> : null}
+        {active ? <Portrait unit={active} size={60} /> : s.active ? <NamedPortrait name={s.active} size={60} /> : null}
         <div>
           <span class="tx-eyebrow">{s.active ? "Now acting" : "Waiting"}</span>
           <b class="tx-now-name">{s.active ?? "Waiting…"}</b>
-          {s.aiPlaying ? <span class="tx-note">The AI is playing your character</span> : null}
+          {s.aiPlaying && !s.controlNotice ? <span class="tx-note">The AI is playing your character</span> : null}
         </div>
       </div>
-      {s.upIn ? <Section>You're up in {s.upIn}</Section> : null}
+      {s.upIn ? <Section>You're up in {s.upIn} {s.upIn === 1 ? "turn" : "turns"}</Section> : null}
+      {s.round ? <div class="tx-card tx-battle-objective"><b>Round {s.round}</b><span>{s.objective ?? "Defeat every enemy"}</span></div> : null}
+      {s.party?.length ? <section aria-label="Party status" class="tx-wait-party">
+        <Section>Party status</Section>
+        <ul>{s.party.map(ally => <li key={ally.id}>
+          <b>{ally.name}{ally.id === s.me.id ? " (you)" : ""}</b>
+          <span><HpText unit={ally} />{ally.life !== "Up" ? ` · ${ally.life}` : ""}</span>
+          <HpBar unit={ally} />
+        </li>)}</ul>
+      </section> : null}
+      {s.recent?.length ? <section aria-label="Recent events" class="tx-wait-recent">
+        <Section>Recent events</Section><ol>{s.recent.map((event, i) => <li key={i}>{event}</li>)}</ol>
+      </section> : null}
       <FallBack fallBack={s.fallBack} send={send} />
       <ReactionsSheet reactions={s.reactions} send={send} />
 
@@ -215,7 +231,7 @@ export function Status({ data, send }: CustomScreenProps) {
       <div role="tabpanel" class="tx-tabpanel">
         {tab === "sheet" ? <Sheet me={s.me} /> : null}
         {tab === "abilities" ? (
-          <Known list={abilities.filter((a) => !a.item)} empty="Your abilities show here after your first turn." />
+          <Known list={abilities.filter((a) => !a.item)} empty="No abilities to show." />
         ) : null}
         {tab === "bag" ? <Known list={abilities.filter((a) => a.item)} empty="Nothing in your bag to use." /> : null}
       </div>
@@ -287,13 +303,16 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
   const pass = r.options.find((o) => o.id === "pass");
   return (
     <div class="tx tx-react">
+      <ControlNotice notice={r.controlNotice} />
       <SurfaceScene kinds={r.surfaces} />
       <FallBack fallBack={r.fallBack} send={send} />
       <div class="tx-alert" role="alert">
         <span class="tx-eyebrow">Reaction</span>
         <p class="tx-alert-title">{TRIGGERS[r.trigger] ?? "You can react"}</p>
         {detail ? <p class="tx-react-detail">{detail}</p> : null}
+        {r.incomingDamage != null ? <p class="tx-react-detail">About {r.incomingDamage} incoming damage on average, before your reaction.</p> : null}
       </div>
+      {r.timeout ? <p class="tx-react-timeout" role="note">{r.timeout}</p> : null}
       <Section>Your reactions</Section>
       <ul class="tx-abilities tx-react-options">
         {r.options.filter((o) => o.id !== "pass").map((o) => (
@@ -302,6 +321,8 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
               <span class="tx-ic"><AbilityIcon ability={o.id} /></span>
               <span class="tx-ab-text">
                 <b>{o.label}</b>
+                {o.outcome ? <span class="tx-react-outcome">{o.outcome}</span> : null}
+                {o.cost ? <span class="tx-react-cost">{o.cost}</span> : null}
                 {o.tooltip ? <span class="tx-react-tip">{o.tooltip}</span> : null}
               </span>
             </button>
@@ -311,6 +332,8 @@ export function ReactPrompt({ data, send }: CustomScreenProps) {
       {pass ? (
         <div class="tx-foot">
           <button type="button" class="tx-btn ghost" onClick={() => answer(pass.id)}>{pass.label}</button>
+          {pass.outcome ? <p class="tx-note">{pass.outcome}</p> : null}
+          {pass.cost ? <p class="tx-note">{pass.cost}</p> : null}
         </div>
       ) : null}
     </div>

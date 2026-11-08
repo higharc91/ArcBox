@@ -53,7 +53,7 @@ public sealed record BattleHud(string Title, string Round, string? Turn, string?
     public const string PromptLabel = "Reaction";
 
     /// <summary>The line under a reaction prompt.</summary>
-    public const string PromptNote = "Choosing on their phone";
+    public const string PromptNote = ReactionWords.PassLabel + " keeps your Reaction";
 
     /// <summary>The badge on a unit whose turn the AI finished.</summary>
     public const string AiFinishedBadge = "AI finished";

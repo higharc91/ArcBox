@@ -115,7 +115,16 @@ export interface ReactionPrefsData {
   defence: "ask" | "miss" | "never";
 }
 
+export interface ControlNoticeData {
+  seq: number;
+  reason: "turnTimeout" | "reactionTimeout" | "disconnected" | "reconnected" | "controlUnavailable";
+  text: string;
+  policy?: string | null;
+  recap?: string | null;
+}
+
 export interface TurnData {
+  controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;
   reactions?: ReactionPrefsData;
@@ -129,6 +138,8 @@ export interface TurnData {
 }
 
 export interface ReactOption {
+  outcome?: string;
+  cost?: string;
   id: string;
   label: string;
   target: string | null;
@@ -137,6 +148,9 @@ export interface ReactOption {
 }
 
 export interface ReactData {
+  timeout?: string;
+  incomingDamage?: number | null;
+  controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;
   reactions?: ReactionPrefsData;
@@ -154,6 +168,14 @@ export interface ReactData {
 }
 
 export interface StatusData {
+  cls?: string | null;
+  round?: number;
+  objective?: string | null;
+  party?: UnitView[];
+  acting?: UnitView | null;
+  abilities?: AbilityChoice[];
+  recent?: string[];
+  controlNotice?: ControlNoticeData;
   surfaces?: string[];
   fallBack?: FallBackData;
   reactions?: ReactionPrefsData;
@@ -178,6 +200,9 @@ export interface EncounterOption {
   fits: boolean;
   /** AI companions who'd join to bring the party up to the minimum. */
   companions?: number;
+  /** Intended encounter level compared with the campaign's current party level. */
+  guidance?: string | null;
+  unavailableReason?: string | null;
 }
 
 export interface WalkMember {
@@ -367,6 +392,7 @@ export interface CharacterChoicesData {
 }
 
 export interface ResultsData {
+  controlNotice?: ControlNoticeData;
   outcome: "Won" | "Lost" | "Fled" | string | null;
   encounter: string | null;
   lines: {

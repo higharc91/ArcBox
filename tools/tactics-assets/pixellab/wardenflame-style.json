@@ -33,6 +33,12 @@
     "ashen_ford": {
       "palette_name": "Wardenflame / Ashen Ford",
       "palette": [
+        "#153b48",
+        "#1c5262",
+        "#286a78",
+        "#3b8491",
+        "#6fa9ad",
+        "#acd3d0",
         "#140f1a",
         "#454152",
         "#585464",
