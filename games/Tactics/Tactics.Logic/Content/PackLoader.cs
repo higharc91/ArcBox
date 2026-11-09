@@ -1,3 +1,4 @@
+using ArcBox.Sdk.Content;
 using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -72,20 +73,20 @@ internal static class PackLoader
     }
 
     /// <summary>Loads the packs in <paramref name="packDirectories"/>; see <see cref="RulesPack.Load"/>.</summary>
-    public static Result Load(IEnumerable<string> packDirectories, ArtManifest? art)
+    public static Result Load(IEnumerable<string> packDirectories, ArtManifest? art, IFileSource source)
     {
         var v = new Validation(art);
         var hashed = new List<(string, byte[])>();
         var content = new Content();
 
-        foreach (var pack in Order(ReadManifests(packDirectories, v), v))
+        foreach (var pack in Order(ReadManifests(packDirectories, v, source), v))
         {
             hashed.Add((pack.ManifestFile, pack.ManifestBytes));
             // Material traits must validate even for callers (such as the simulator) that do not load all art.
             var terrainManifest = Path.Combine(Path.GetDirectoryName(pack.Dir)!, "terrain", "manifest.json");
-            if (art is null && File.Exists(terrainManifest))
+            if (art is null && source.Exists(terrainManifest))
             {
-                using var terrain = JsonDocument.Parse(File.ReadAllBytes(terrainManifest));
+                using var terrain = JsonDocument.Parse(source.ReadAllBytes(terrainManifest));
                 if (terrain.RootElement.TryGetProperty("textures", out var textures))
                     foreach (var family in textures.EnumerateObject())
                         v.MaterialFamilies.Add(family.Name);
@@ -101,14 +102,14 @@ internal static class PackLoader
                     v.Error(pack.ManifestFile, at, $"'{file}' is listed twice.");
                 else if (KindOf(file) is not { } kind)
                     v.Error(pack.ManifestFile, at, $"'{file}' isn't a known content file (see rules/schema for the file kinds).");
-                else if (!File.Exists(Path.Combine(pack.Dir, file)))
+                else if (!source.Exists(Path.Combine(pack.Dir, file)))
                     v.Error(pack.ManifestFile, at, $"The file '{file}' doesn't exist.");
                 else
                 {
                     var label = $"{pack.Id}/{file}";
                     try
                     {
-                        var bytes = File.ReadAllBytes(Path.Combine(pack.Dir, file));
+                        var bytes = source.ReadAllBytes(Path.Combine(pack.Dir, file));
                         if (kind is not (FileKind.Region or FileKind.Interactables))    // battles never read the world, so a repaint mustn't restart one
                             hashed.Add((label, bytes));
                         if (Parse(bytes, label, v) is { } doc)
@@ -205,14 +206,14 @@ internal static class PackLoader
 
     // ---- Packs ------------------------------------------------------------------------------------------------------
 
-    private static List<Pack> ReadManifests(IEnumerable<string> packDirectories, Validation v)
+    private static List<Pack> ReadManifests(IEnumerable<string> packDirectories, Validation v, IFileSource source)
     {
         var packs = new List<Pack>();
         foreach (var dir in packDirectories)
         {
             var label = $"{Path.GetFileName(Path.TrimEndingDirectorySeparator(Path.GetFullPath(dir)))}/manifest.json";
             var path = Path.Combine(dir, "manifest.json");
-            if (!File.Exists(path))
+            if (!source.Exists(path))
             {
                 v.Error(label, "", "The pack has no manifest.json.");
                 continue;
@@ -220,7 +221,7 @@ internal static class PackLoader
             byte[] bytes;
             try
             {
-                bytes = File.ReadAllBytes(path);
+                bytes = source.ReadAllBytes(path);
             }
             catch (Exception ex) when (Validation.NonFatal(ex))
             {

@@ -1,3 +1,4 @@
+using ArcBox.Sdk.Content;
 using System.Collections.Frozen;
 using System.Collections.Immutable;
 
@@ -194,8 +195,14 @@ public sealed partial class RulesPack
     /// every error found.
     /// </summary>
     public static RulesPack Load(IEnumerable<string> packDirectories, ArtManifest? art = null)
+        => Load(packDirectories, art, PhysicalFileSource.Instance);
+
+    public static RulesPack Load(IEnumerable<string> packDirectories, IFileSource source)
+        => Load(packDirectories, null, source);
+
+    public static RulesPack Load(IEnumerable<string> packDirectories, ArtManifest? art, IFileSource source)
     {
-        var loaded = PackLoader.Load(packDirectories, art);
+        var loaded = PackLoader.Load(packDirectories, art, source);
         return new RulesPack(loaded.Hash, loaded.Abilities, loaded.Passives, loaded.Conditions, loaded.Injuries, loaded.Maps,
             loaded.Catalog, art: art);
     }

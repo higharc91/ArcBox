@@ -1,0 +1,17 @@
+# Deterministic rules: time/entropy must come from the battle's saved inputs.
+P:System.DateTime.Now; Use the saved battle state, never the machine clock.
+P:System.DateTime.UtcNow; Use the saved battle state, never the machine clock.
+P:System.DateTime.Today; Use the saved battle state, never the machine clock.
+P:System.DateTimeOffset.Now; Use the saved battle state, never the machine clock.
+P:System.DateTimeOffset.UtcNow; Use the saved battle state, never the machine clock.
+T:System.Random; Use Tactics.Logic.Rng threaded through BattleState.
+M:System.Guid.NewGuid; IDs must be deterministic.
+T:System.IO.File; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.Directory; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.FileInfo; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.DirectoryInfo; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.FileStream; Read content through IFileSource; parse supplied streams without acquiring file handles.
+T:System.IO.StreamReader; Read content through IFileSource.
+T:System.IO.StreamWriter; Rules never write files.
+T:System.Diagnostics.Stopwatch; Performance measurement belongs to callers and tests.
+T:System.Security.Cryptography.RandomNumberGenerator; Use the saved deterministic battle RNG.

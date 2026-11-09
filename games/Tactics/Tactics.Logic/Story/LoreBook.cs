@@ -1,3 +1,4 @@
+using ArcBox.Sdk.Content;
 using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Text.Json;
@@ -38,6 +39,7 @@ public sealed partial class LoreBook
     private readonly ImmutableDictionary<string, LoreCharacter> _characters;
     private readonly ImmutableDictionary<string, string> _clipFiles;
     private readonly ImmutableDictionary<string, string> _places;
+    private IFileSource _source = PhysicalFileSource.Instance;
     private readonly ConcurrentDictionary<string, double?> _clipSeconds = new(StringComparer.Ordinal);
 
     private LoreBook(ImmutableArray<Arc> arcs, ImmutableArray<SceneDef> scenes, ImmutableArray<LoreCharacter> characters,
@@ -99,14 +101,14 @@ public sealed partial class LoreBook
     /// lines are spoken one at a time and reading all 829 would hold up the first room; the answer is kept after that.
     /// </summary>
     public double? ClipSeconds(string line)
-        => _clipFiles.TryGetValue(line, out var path) ? _clipSeconds.GetOrAdd(line, static (_, file) => Measure(file), path) : null;
+        => _clipFiles.TryGetValue(line, out var path) ? _clipSeconds.GetOrAdd(line, (_, file) => Measure(file), path) : null;
 
     /// <summary>A clip's length, or null when it isn't there, can't be opened, or isn't a whole Ogg Vorbis stream.</summary>
-    private static double? Measure(string path)
+    private double? Measure(string path)
     {
         try
         {
-            using var ogg = File.OpenRead(path);
+            using var ogg = _source.OpenRead(path);
             return ClipLength.Of(ogg);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
@@ -123,19 +125,22 @@ public sealed partial class LoreBook
     /// JSON, a field missing or of the wrong type, two arcs sharing a region, an arc repeating a beat, a character listed twice, or a scene
     /// that can't be played (<see cref="ReadScene"/>).
     /// </summary>
-    public static LoreBook Load(string basePack)
+    public static LoreBook Load(string basePack) => Load(basePack, PhysicalFileSource.Instance);
+
+    public static LoreBook Load(string basePack, IFileSource source)
     {
+        T ReadFile<T>(string path, Func<JsonElement, T> parse) => Read(path, parse, source);
         var lore = Path.Combine(basePack, "lore");
         var pack = Path.Combine(lore, "pack.json");
-        if (!File.Exists(pack))
+        if (!source.Exists(pack))
             return Empty;
-        var files = Read(pack, root => List(root, "files", "the pack", required: false)
+        var files = ReadFile(pack, root => List(root, "files", "the pack", required: false)
             .Where(f => f.ValueKind == JsonValueKind.String).Select(f => f.GetString()!).ToImmutableArray());
         if (!files.Contains("arcs.json"))
             return Empty;
 
         var path = Path.Combine(lore, "arcs.json");
-        var arcs = Read(path, root => List(root, "arcs", "the file", required: true).Select(ReadArc).ToImmutableArray());
+        var arcs = ReadFile(path, root => List(root, "arcs", "the file", required: true).Select(ReadArc).ToImmutableArray());
         if (arcs.GroupBy(a => a.Region, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } shared)
             throw new InvalidDataException($"{path}: the region '{shared.Key}' has more than one arc.");
         foreach (var arc in arcs)
@@ -144,7 +149,7 @@ public sealed partial class LoreBook
 
         var characterPath = Path.Combine(lore, "characters.json");
         ImmutableArray<LoreCharacter> characters = files.Contains("characters.json")
-            ? Read(characterPath, root => List(root, "characters", "the file", required: true).Select(ReadCharacter).ToImmutableArray())
+            ? ReadFile(characterPath, root => List(root, "characters", "the file", required: true).Select(ReadCharacter).ToImmutableArray())
             : [];
         if (characters.GroupBy(c => c.Id, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } twice)
             throw new InvalidDataException($"{characterPath}: the character '{twice.Key}' is listed twice.");
@@ -158,7 +163,7 @@ public sealed partial class LoreBook
         foreach (var file in files.Where(f => f.StartsWith("scenes/", StringComparison.Ordinal)))
         {
             var scenePath = Path.Combine(lore, file);
-            foreach (var scene in Read(scenePath, root => List(root, "scenes", "the file", required: true).Select(s => ReadScene(s, beats)).ToImmutableArray()))
+            foreach (var scene in ReadFile(scenePath, root => List(root, "scenes", "the file", required: true).Select(s => ReadScene(s, beats)).ToImmutableArray()))
             {
                 if (!seen.Add(scene.Id))
                     throw new InvalidDataException($"{scenePath}: the scene '{scene.Id}' is already in the pack.");
@@ -175,14 +180,14 @@ public sealed partial class LoreBook
         var conversations = ImmutableArray.CreateBuilder<ConversationDef>();
         foreach (var file in files.Where(f => f.StartsWith("conversations/", StringComparison.Ordinal)))
         {
-            var conversation = Read(Path.Combine(lore, file), root => ReadConversation(root, beats));
+            var conversation = ReadFile(Path.Combine(lore, file), root => ReadConversation(root, beats));
             if (!seen.Add(conversation.Scene.Id)) throw new InvalidDataException($"{file}: duplicate scene '{conversation.Scene.Id}'.");
             if (!characters.Any(c => c.Id == conversation.Character)) throw new InvalidDataException($"{file}: unknown character '{conversation.Character}'.");
             if (conversations.Any(c => c.Character == conversation.Character)) throw new InvalidDataException($"{file}: duplicate conversation for '{conversation.Character}'.");
             conversations.Add(conversation);
             scenes.Add(conversation.Scene);
         }
-        var quests = files.Contains("quests.json") ? Read(Path.Combine(lore, "quests.json"), root =>
+        var quests = files.Contains("quests.json") ? ReadFile(Path.Combine(lore, "quests.json"), root =>
             List(root, "quests", "quests", required: true).Select(ReadQuest).ToImmutableArray()) : [];
         if (quests.Select(q => q.Id).Distinct().Count() != quests.Length) throw new InvalidDataException("quests.json: duplicate quest ID.");
         foreach (var action in scenes.SelectMany(s => s.Nodes).SelectMany(n => n.Options).Select(o => o.Quest).OfType<SceneQuest>())
@@ -201,12 +206,12 @@ public sealed partial class LoreBook
                 if (mainFlags.Contains(flag))
                     throw new InvalidDataException($"the hook scene '{hook.Id}' sets the main-story flag '{flag}'.");
 
-        var barks = BarkBook.Load(lore, files);
-        ValidateSideContent(basePack, quests, scenes, conversations, characters, mainFlags, barks, arcs.SelectMany(a => a.Beats).SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))));
+        var barks = BarkBook.Load(lore, files, source);
+        ValidateSideContent(basePack, quests, scenes, conversations, characters, mainFlags, barks, arcs.SelectMany(a => a.Beats).SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))), source);
 
         var regionsPath = Path.Combine(lore, "regions.json");
         var places = files.Contains("regions.json")
-            ? Read(regionsPath, root => List(root, "regions", "the file", required: true)
+            ? ReadFile(regionsPath, root => List(root, "regions", "the file", required: true)
                 .SelectMany(r => List(r, "places", $"the region '{Optional(r, "id", "a region")}'", required: false))
                 .Select(p => (Id: Required(p, "id", "a place"), Name: Required(p, "name", $"the place '{Optional(p, "id", "a place")}'")))
                 .ToImmutableArray())
@@ -215,8 +220,8 @@ public sealed partial class LoreBook
             throw new InvalidDataException($"{regionsPath}: the place '{named.Key}' is listed twice.");
 
         var lines = scenes.SelectMany(s => s.Lines).Select(l => l.Id).Concat(barks.LineIds).ToImmutableHashSet(StringComparer.Ordinal);
-        return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines),
-            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable()) { Barks = barks, Conversations = conversations.ToImmutable(), Quests = quests };
+        return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines, source),
+            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable()) { _source = source, Barks = barks, Conversations = conversations.ToImmutable(), Quests = quests };
     }
 
     /// <summary>What of <paramref name="scene"/> can never show (<see cref="Warnings"/>), node by node.</summary>
@@ -240,17 +245,17 @@ public sealed partial class LoreBook
     /// the manifest is read here. No manifest means no clips; a manifest that's there and can't be read is lore that can't be read, as
     /// is one naming a file outside the audio folder (an absolute path, or one with <c>..</c>).
     /// </summary>
-    private static ImmutableDictionary<string, string> Clips(string audio, ImmutableHashSet<string> lines)
+    private static ImmutableDictionary<string, string> Clips(string audio, ImmutableHashSet<string> lines, IFileSource source)
     {
         var manifest = Path.Combine(audio, "manifest.json");
-        if (lines.IsEmpty || !File.Exists(manifest))
+        if (lines.IsEmpty || !source.Exists(manifest))
             return ImmutableDictionary<string, string>.Empty;
         var listed = Read(manifest, root => Field(root, "lines", "the manifest") switch
         {
             { ValueKind: JsonValueKind.Object } all => all.EnumerateObject().Where(l => lines.Contains(l.Name))
                 .Select(l => (Line: l.Name, File: Optional(l.Value, "main", $"the line '{l.Name}'"))).ToImmutableArray(),
             _ => throw new BadLore("the manifest has no 'lines' object."),
-        });
+        }, source);
 
         var clips = ImmutableDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
         foreach (var (line, file) in listed)
@@ -267,11 +272,11 @@ public sealed partial class LoreBook
     /// <summary>Lore that can't be read; <see cref="Read{T}"/> names the file.</summary>
     private sealed class BadLore(string message) : Exception(message);
 
-    private static T Read<T>(string path, Func<JsonElement, T> read)
+    private static T Read<T>(string path, Func<JsonElement, T> read, IFileSource source)
     {
         try
         {
-            using var json = JsonDocument.Parse(File.ReadAllBytes(path));
+            using var json = JsonDocument.Parse(source.ReadAllBytes(path));
             return read(json.RootElement);
         }
         catch (Exception ex) when (ex is JsonException or BadLore or IOException or UnauthorizedAccessException)
