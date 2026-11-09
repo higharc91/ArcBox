@@ -352,6 +352,18 @@ public sealed class TravelTests
     }
 
     [Fact]
+    public void The_map_never_pins_mother_skarrow()
+    {
+        // The owner's call: she stands at the goblin camp from the start (unless slain), and a pin there reads as a spoiler.
+        var s = ShopTests.AtShop(0);
+        var lead = StageBattleTests.Lead(s);
+        s.Send(lead, "mapOpen");
+        var pins = JsonSerializer.Deserialize<MapPin[]>(Walk(s, lead).GetProperty("map").GetProperty("pins").GetRawText(), ArcJson.Options)!;
+        Assert.NotEmpty(pins);
+        Assert.DoesNotContain(pins, p => p.Label.Contains("Skarrow", StringComparison.Ordinal) || p.At == new Tile(134, 24));
+    }
+
+    [Fact]
     public void The_map_pins_the_towns_shops_inn_and_temple_by_name()
     {
         var s = ShopTests.AtShop(0);

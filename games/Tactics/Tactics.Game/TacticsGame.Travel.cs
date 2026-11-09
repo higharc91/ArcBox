@@ -171,6 +171,12 @@ public sealed partial class TacticsGame
     /// turn-ins, the pinned quest's target, the shops, inn and temple open now, campfires, shrines, wells and cave mouths that have been
     /// seen, and the region's named people who are about and have something to say. Never a thing that's hidden or not yet found.
     /// </summary>
+    /// <summary>
+    /// People the map never pins, wherever they stand (the owner's call): Mother Skarrow at the goblin camp reads as a spoiler, or at least
+    /// an odd destination, on a map the leader browses. The TV still shows them as it always has.
+    /// </summary>
+    private static readonly IReadOnlySet<string> Unpinned = new HashSet<string>(StringComparer.Ordinal) { "mother_skarrow" };
+
     private ImmutableArray<MapPin> MapPins()
     {
         var pins = new List<MapPin>();
@@ -185,7 +191,8 @@ public sealed partial class TacticsGame
         var named = PresentPeople().ToDictionary(p => p.Person.At, p => p.Person);
         string Who(Tile at) => named.TryGetValue(at, out var person) && person.Character is { } c ? Lore.Character(c)?.Name ?? c : "Someone";
         foreach (var marker in QuestPersonMarkers() ?? [])
-            pins.Add(new MapPin(marker.TurnIn ? "turnIn" : "quest", Who(marker.At), marker.At));
+            if (!(named.TryGetValue(marker.At, out var giver) && giver.Character is { } c && Unpinned.Contains(c)))
+                pins.Add(new MapPin(marker.TurnIn ? "turnIn" : "quest", Who(marker.At), marker.At));
         foreach (var shop in RegionShops.Where(s => ShopRules.Present(s, StoryFlags())))
         {
             var kind = shop.Services.Any(s => s.Kind == "room") ? "inn" : shop.Services.IsEmpty ? "shop" : "temple";
@@ -195,7 +202,7 @@ public sealed partial class TacticsGame
             if (thing.Kind switch { "campfire" => "rest", "shrine" or "well" or "cave_mouth" or "bounty_board" => "place", _ => null } is { } kind)
                 pins.Add(new MapPin(kind, thing.Name, thing.At));
         foreach (var (person, _) in PresentPeople())
-            if (person.Character is { } character && (ConversationFor(person) is not null || Lore.Barks.For(person) is not null))
+            if (person.Character is { } character && !Unpinned.Contains(character) && (ConversationFor(person) is not null || Lore.Barks.For(person) is not null))
                 pins.Add(new MapPin("person", Lore.Character(character)?.Name ?? character, person.At));
         var seen = new HashSet<Tile>();
         return [.. pins.Where(p => seen.Add(p.At))];
