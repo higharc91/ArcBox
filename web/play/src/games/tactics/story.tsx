@@ -99,7 +99,7 @@ export function Dialogue({ data, send, viewId }: CustomScreenProps) {
           </figure>
         ) : (
           <div class="tx-say quiet">
-            <p class="tx-note center">The story goes on. Watch the TV.</p>
+            <p class="tx-note center">Follow the dialogue on the TV.</p>
           </div>
         )}
       </div>
@@ -244,7 +244,7 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
       ? d.canChoose ? "Cast your vote" : "The party is voting"
       : d.canChoose ? "You choose for the party" : `${d.decider ?? "The leader"} chooses for the party`;
   const hint = !d.canChoose
-    ? "Watch the TV."
+    ? "Follow the choice and its result on the TV."
     : d.tie
       ? "Only the tied options are left."
       : d.party
@@ -415,7 +415,7 @@ function CheckQuestion({ data, send, viewId, question }: CustomScreenProps & { q
               );
             })}
           </ul>
-          <p class="tx-note">{d.group ? "Every present hero rolls once. Half or more must succeed." : d.canChoose ? "If nobody picks, the best bonus rolls." : "Watch the TV."}</p>
+          <p class="tx-note">{d.group ? "Every present hero rolls once. Half or more must succeed." : d.canChoose ? "If nobody picks, the best bonus rolls." : "Follow the chosen hero’s roll on the TV."}</p>
         </>
       )}
     </div>

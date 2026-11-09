@@ -172,7 +172,7 @@ export function Results({ data, send }: CustomScreenProps) {
           <button type="button" class="tx-btn gold" onClick={() => send("next")}>Carry on</button>
           <button type="button" class="tx-btn ghost" onClick={() => send("end")}>End session</button>
         </div>
-      ) : <p class="tx-note center">Waiting for the host…</p>}
+      ) : <p class="tx-note center">Waiting for the VIP to carry on…</p>}
     </div>
   );
 }

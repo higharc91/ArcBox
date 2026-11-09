@@ -32,7 +32,7 @@ public sealed record EngineFault(string Where, string Encounter, ulong Seed, int
 public sealed partial class TacticsGame
 {
     /// <summary>What the TV says, and the phone of whoever made the move, when the engine fails on a command (spec §8).</summary>
-    public const string MoveFailed = "Something went wrong with that move.";
+    public const string MoveFailed = "That move could not finish. The acting player can try another move.";
 
     /// <summary>What a player whose own command failed is told: the turn is still theirs.</summary>
     public const string MoveFailedTryAgain = MoveFailed + " Try something else.";

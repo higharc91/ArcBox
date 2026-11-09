@@ -229,7 +229,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-ab-text { flex: 1; min-width: 0; }
 .tx-ab-text b { display: block; font-size: 17px; font-weight: 700; line-height: 1.2; }
 .tx-tags { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; flex: none; }
-.tx-tag { font: 800 10px var(--wf-sans); letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px;
+.tx-tag { font: 800 14px var(--wf-sans); letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px;
   background: rgba(255, 255, 255, 0.08); color: var(--wf-muted); }
 
 /* ---------------------------------------------------------------- aiming */
@@ -654,7 +654,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-rcard-bonus { font: 800 30px/1.05 var(--wf-sans); color: var(--wf-ink); margin-top: 2px; }
 .tx-rcard-note { font-size: 13px; line-height: 1.25; color: var(--wf-muted); }
 .tx-rcard-tag { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 2px 8px; border-radius: 3px;
-  font: 800 10px var(--wf-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-on-gold); background: var(--wf-gold); }
+  font: 800 14px var(--wf-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-on-gold); background: var(--wf-gold); }
 .tx-rcard-tag.away { color: #08263a; background: var(--wf-magic); }
 /* A tie-break shows your vote from before the tie, unpressed: it isn't this question's answer until you tap. */
 .tx-opt-tag.earlier, .tx-rcard-tag.earlier { color: var(--wf-gold-hi); background: transparent; border: 1px dashed rgba(230, 189, 92, 0.6); }
@@ -793,7 +793,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-recovery > header .tx-eyebrow { font-size: 10px; grid-column: 1 / -1; }
 .tx-recovery-purse { font-size: 13px; color: var(--wf-gold-hi); align-self: center; white-space: nowrap; }
 .tx-recovery-menu { position: absolute; z-index: 20; top: 0; right: 0; }
-.tx-recovery-menu > summary { cursor: pointer; list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; color: var(--wf-gold); }
+.tx-recovery-menu > summary { padding:0 8px; font-size:14px; cursor: pointer; list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; color: var(--wf-gold); }
 .tx-recovery-menu > summary::-webkit-details-marker { display: none; }
 .tx-recovery-menu .tx-walk-host { position: absolute; right: 0; width: 240px; padding: 10px; border: 1px solid var(--wf-edge); border-radius: 10px; background: #111326; box-shadow: 0 8px 24px #000a; }
 .tx-recovery-menu .tx-walk-host > span { display: none; }
@@ -925,7 +925,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-walk-leadrow { display:flex; align-items:stretch; gap:8px; }
 .tx-walk-leadrow .tx-walk-who { flex:1; min-width:0; }
 .tx-walk-session { position:relative; flex:none; }
-.tx-walk-session summary { display:grid; place-items:center; list-style:none; min-width:44px; min-height:44px; height:100%; border:1px solid var(--wf-line); border-radius:8px; color:var(--wf-gold-hi); cursor:pointer; }
+.tx-walk-session summary { padding:0 8px; font-size:14px; display:grid; place-items:center; list-style:none; min-width:44px; min-height:44px; height:100%; border:1px solid var(--wf-line); border-radius:8px; color:var(--wf-gold-hi); cursor:pointer; }
 .tx-walk-session summary::-webkit-details-marker { display:none; }
 .tx-walk-session summary:focus-visible { outline:2px solid var(--wf-gold-hi); outline-offset:2px; }
 .tx-walk-session .tx-walk-host { position:absolute; right:0; top:calc(100% + 6px); z-index:5; width:min(240px,70vw); grid-template-columns:1fr; padding:10px; background:#111326; border:1px solid var(--wf-edge); border-radius:10px; box-shadow:0 8px 24px #000a; }
