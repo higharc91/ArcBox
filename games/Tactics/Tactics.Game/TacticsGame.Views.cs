@@ -601,6 +601,11 @@ public sealed partial class TacticsGame
         // The leader's own bump count, so their phone can buzz and flash the held sector: it goes up only when a wall the TV draws refuses
         // a step (never an unfound secret door), once per press, so the new view it mints comes with the thumb already stopped by the wall.
         if (leads && _bumps > 0) data["bumps"] = _bumps;
+        // Tap to travel: the journey under way (only where to, so the screen doesn't change as it walks), why the last pick went nowhere,
+        // and the map while it's open on this phone, which does change with every step, as no thumb is on the pad then.
+        if (leads && _travel is { } journey) data["travel"] = JsonSerializer.SerializeToNode(new { to = journey.Goal }, ArcJson.Options);
+        if (leads && _travelNote is { } note) data["travelNote"] = note;
+        if (leads && MapView(profile.Value) is { } map) data["map"] = JsonSerializer.SerializeToNode(map, ArcJson.Options);
         return Custom(Screens.Walk, data);
     }
 

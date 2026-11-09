@@ -293,6 +293,12 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             case TacticsPhase.Exploration when custom.Action == "walk":
                 WalkInput(player, custom.Data);
                 break;
+            case TacticsPhase.Exploration when custom.Action == "travel":
+                TravelInput(player, custom.Data);
+                break;
+            case TacticsPhase.Exploration when custom.Action is "mapOpen" or "mapClose":
+                MapInput(player, custom.Action == "mapOpen");
+                break;
             case TacticsPhase.Exploration when custom.Action == "pickClass":
                 PickClass(player, profile, custom.Data);
                 break;
