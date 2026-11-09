@@ -1069,7 +1069,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-map-pin.quest, .tx .tx-map-pin.turnIn, .tx .tx-map-pin.pinned { background: #8fd0ff; }
 .tx .tx-map-pin.shop, .tx .tx-map-pin.inn, .tx .tx-map-pin.temple { background: #f0e2c0; }
 .tx .tx-map-pin.rest { background: #ff9d5c; }
-.tx .tx-map-pin.person, .tx .tx-map-pin.place { width: 18px; height: 18px; font-size: 11px; background: #d9d3c2; }
+.tx .tx-map-pin.person, .tx .tx-map-pin.place { width: 24px; height: 24px; font-size: 12px; background: #d9d3c2; }
 .tx-map-party { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; background: var(--wf-you); box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.45); z-index: 2; pointer-events: none; }
 .tx-map-to { width: 14px; height: 14px; border: 2px dashed #fff; border-radius: 3px; transform: translate(-50%, -50%) rotate(45deg); pointer-events: none; }
 .tx-map-places { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
