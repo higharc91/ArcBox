@@ -353,6 +353,91 @@ describe("the walk pad", () => {
     key("keyup", "ArrowRight");
     expect(walks(send)).toEqual(["n", "ne", "e", null]);
   });
+
+  describe("a wall in the way (bumps)", () => {
+    const withBumps = (n?: number) => (d: Record<string, unknown>) => {
+      if (n !== undefined) d.bumps = n;
+    };
+    function bumpable() {
+      const vibrate = vi.fn(() => true);
+      vi.stubGlobal("navigator", { ...navigator, vibrate });
+      const feedback = quietFeedback();
+      let id = 1;
+      const shown = (n?: number) => (
+        <FeedbackContext.Provider value={feedback}>
+          <ControllerScreen view={view("walk-leader", withBumps(n), `v${id++}`)} send={vi.fn()} me="ALEX" game="tactics" />
+        </FeedbackContext.Provider>
+      );
+      const utils = render(shown());
+      const bumpBuzzes = () => vibrate.mock.calls.filter((c) => (c as unknown[])[0] === 30).length;
+      return { ...utils, shown, bumpBuzzes, vibrate };
+    }
+
+    it("buzzes and flashes the held sector when the count goes up, and only then", () => {
+      const { rerender, shown, bumpBuzzes } = bumpable();
+      const { zone, face } = pad();
+      pointer(zone, "pointerdown", ...NORTH);
+      expect(bumpBuzzes()).toBe(0);
+
+      rerender(shown(1));
+      expect(bumpBuzzes()).toBe(1);
+      expect(face.dataset.bump).toBe("n");
+      vi.advanceTimersByTime(400);
+      expect(face.dataset.bump).toBeUndefined();     // a brief flash
+
+      rerender(shown(1));                             // the same count in a new view isn't another bump
+      expect(bumpBuzzes()).toBe(1);
+      expect(face.dataset.bump).toBeUndefined();
+      rerender(shown(0));                             // nor is a count going down
+      expect(bumpBuzzes()).toBe(1);
+    });
+
+    it("buzzes at most every 400 ms, but flashes for every bump", () => {
+      const { rerender, shown, bumpBuzzes } = bumpable();
+      const { zone, face } = pad();
+      pointer(zone, "pointerdown", ...EAST);
+      rerender(shown(1));
+      vi.advanceTimersByTime(100);
+      rerender(shown(2));
+      expect(bumpBuzzes()).toBe(1);
+      expect(face.dataset.bump).toBe("e");
+      vi.advanceTimersByTime(400);
+      rerender(shown(3));
+      expect(bumpBuzzes()).toBe(2);
+    });
+
+    it("is quiet for the count a screen opens with, and flashes the whole pad with no sector held", () => {
+      const vibrate = vi.fn(() => true);
+      vi.stubGlobal("navigator", { ...navigator, vibrate });
+      const feedback = quietFeedback();
+      const shown = (n: number, id: string) => (
+        <FeedbackContext.Provider value={feedback}>
+          <ControllerScreen view={view("walk-leader", withBumps(n), id)} send={vi.fn()} me="ALEX" game="tactics" />
+        </FeedbackContext.Provider>
+      );
+      const { rerender } = render(shown(5, "v1"));
+      vi.advanceTimersByTime(10);
+      expect(vibrate.mock.calls.filter((c) => (c as unknown[])[0] === 30)).toHaveLength(0);
+      const { face } = pad();
+      rerender(shown(6, "v2"));      // a latched tap's bump arrives after the thumb has gone
+      expect(face.dataset.bump).toBe("all");
+      expect(vibrate.mock.calls.filter((c) => (c as unknown[])[0] === 30)).toHaveLength(1);
+    });
+
+    it("works without vibration", () => {
+      vi.stubGlobal("navigator", { ...navigator, vibrate: undefined });
+      const feedback = quietFeedback();
+      const shown = (n?: number) => (
+        <FeedbackContext.Provider value={feedback}>
+          <ControllerScreen view={view("walk-leader", withBumps(n), `v${n ?? 0}`)} send={vi.fn()} me="ALEX" game="tactics" />
+        </FeedbackContext.Provider>
+      );
+      const { rerender } = render(shown());
+      const { face } = pad();
+      expect(() => rerender(shown(1))).not.toThrow();
+      expect(face.dataset.bump).toBe("all");
+    });
+  });
 });
 
 describe("the walk screen", () => {

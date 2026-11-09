@@ -267,7 +267,24 @@ export interface WalkData {
    */
   search?: boolean;
   choices?: CharacterChoicesData | null;
+  /**
+   * The leader's count of steps a wall the TV draws has refused this session (never an unfound secret door): it goes up once per press
+   * into a wall, and the pad buzzes and flashes the held sector when it does. Absent while it's 0, and for everyone else.
+   */
+  bumps?: number;
+  /** The leader's map, while it's open on this phone (`mapOpen`, `mapClose`): absent otherwise, and for everyone else. */
+  map?: WalkMapData;
+  /** A journey under way (tap to travel), on the leader's screen: where to. A press on the pad ends it. */
+  travel?: { to: [number, number] };
+  /** Why the leader's last pick on the map went nowhere ("Can't find a way there."), until they walk again. */
+  travelNote?: string;
 }
+
+/** A landmark on the leader's map: only what the TV shows. `kind` is story, quest, turnIn, pinned, shop, inn, temple, rest, place or person. */
+export interface MapPinData { kind: string; label: string; at: [number, number] }
+
+/** The leader's map of the region: its id and size (the tiles come from the content pack), the party's tile, where it's going, and the landmarks. */
+export interface WalkMapData { region: string; size: [number, number]; at: [number, number]; to: [number, number] | null; pins: MapPinData[] }
 
 /**
  * A line of a scene. Everything is null between lines (the gap between scenes, or while a roll is revealed). The narrator

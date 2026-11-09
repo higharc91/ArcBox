@@ -1,0 +1,74 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": true,
+    "leaderName": "Player1",
+    "region": "The Ashen Ford",
+    "objective": "Go to Emberwick",
+    "me": {
+      "name": "Player1",
+      "cls": "Fighter",
+      "level": 1,
+      "color": "#ffd23f"
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true,
+        "color": "#ffd23f"
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false,
+        "color": "#7ccbff"
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false,
+        "color": "#ffab94"
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": true,
+        "leads": false,
+        "color": "#8ff0c4"
+      }
+    ],
+    "vip": true,
+    "difficulty": "Normal",
+    "canBattle": false,
+    "portal": "/c/ABCD",
+    "interact": "Talk to Halden Varrow",
+    "canGive": true,
+    "journal": {
+      "quests": [],
+      "selected": null,
+      "pinned": null,
+      "canPin": true,
+      "reading": null
+    },
+    "canOpenLog": true,
+    "gold": 0,
+    "targets": [
+      {
+        "id": "person:halden_varrow",
+        "label": "Talk to Halden Varrow"
+      }
+    ],
+    "beat": false,
+    "search": true,
+    "travelNote": "Can\u0027t find a way there."
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

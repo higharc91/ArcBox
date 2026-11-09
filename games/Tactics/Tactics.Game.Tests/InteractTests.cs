@@ -435,6 +435,7 @@ public sealed class InteractTests
         Assert.Equal(new Tile(4, 2), s.Host.Explore!.At);
         Assert.Equal(bumps, s.Host.Explore!.Bumps);
         Assert.False(s.Host.Explore!.Blocked);
+        Assert.False(s.Screen(0)!.Data.TryGetProperty("bumps", out _));    // and the leader's phone doesn't buzz: that would give it away too
         Assert.Null(s.Host.Explore!.Things!.Value.FirstOrDefault(t => t.Id == "seam"));
         s.Send(0, "walk", new { dir = (string?)null });
 
@@ -443,6 +444,7 @@ public sealed class InteractTests
         found.Send(0, "walk", new { dir = "sw" });
         Assert.Equal(bumps + 1, found.Host.Explore!.Bumps);             // found, it's a door like any other
         Assert.True(found.Host.Explore!.Blocked);
+        Assert.Equal(bumps + 1, found.Screen(0)!.Data.GetProperty("bumps").GetInt32());     // and the leader's phone feels it
     }
 
     [Fact]

@@ -195,7 +195,7 @@ public sealed record WalkerView(string Id, string Name, string Sprite, bool Here
 /// <param name="Blocked">
 /// True while the leader holds a direction a wall refused (spec §4.5, overworld 5b review item 2), so the TV can bump the leader
 /// against it: a press that does nothing must not look like letting go or a dropped phone. It's false again once the thumb lifts, so
-/// each press against a wall is its own bump. The phone isn't told, because that would mint a new view under the thumb.
+/// each press against a wall is its own bump. The phone isn't told, because that would mint a new view at every release; the leader's phone has the count instead (<paramref name="Bumps"/>).
 /// </param>
 /// <param name="Bumps">
 /// How many steps a wall has refused, counting up from 0 each session: every press, change of direction or latched quick tap that a
@@ -600,6 +600,14 @@ public sealed partial class TacticsGame
             data["beat"] = leads && InteractLabel() is not null;     // the button is the beat's, not the first thing's
             data["search"] = leads && !AllThings.IsEmpty;     // the leader's Search (design §7.4): only where there are things, so a walk screen elsewhere is as it was
         }
+        // The leader's own bump count, so their phone can buzz and flash the held sector: it goes up only when a wall the TV draws refuses
+        // a step (never an unfound secret door), once per press, so the new view it mints comes with the thumb already stopped by the wall.
+        if (leads && _bumps > 0) data["bumps"] = _bumps;
+        // Tap to travel: the journey under way (only where to, so the screen doesn't change as it walks), why the last pick went nowhere,
+        // and the map while it's open on this phone, which does change with every step, as no thumb is on the pad then.
+        if (leads && _travel is { } journey) data["travel"] = JsonSerializer.SerializeToNode(new { to = journey.Goal }, ArcJson.Options);
+        if (leads && _travelNote is { } note) data["travelNote"] = note;
+        if (leads && MapView(profile.Value) is { } map) data["map"] = JsonSerializer.SerializeToNode(map, ArcJson.Options);
         return Custom(Screens.Walk, data);
     }
 

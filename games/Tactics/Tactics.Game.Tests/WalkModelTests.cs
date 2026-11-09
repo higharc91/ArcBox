@@ -528,6 +528,21 @@ public sealed class WalkModelTests
             return node.ToJsonString();
         }
 
+        /// <summary>A phone's view with the leader's bump count taken out: the one thing a press into a wall may change on a phone.</summary>
+        private static string WithoutBumps(string phone)
+        {
+            var node = System.Text.Json.Nodes.JsonNode.Parse(phone)!;
+            (node["data"] as System.Text.Json.Nodes.JsonObject)?.Remove("bumps");
+            return node.ToJsonString();
+        }
+
+        /// <summary>A phone's <c>bumps</c>, 0 when it's left out, and whether it's the leader's walk screen.</summary>
+        private static (int Bumps, bool Leads) BumpsOf(string phone)
+        {
+            var data = System.Text.Json.Nodes.JsonNode.Parse(phone)!["data"] as System.Text.Json.Nodes.JsonObject;
+            return (data?["bumps"]?.GetValue<int>() ?? 0, data?["leader"] is System.Text.Json.Nodes.JsonValue lead && lead.TryGetValue<bool>(out var l) && l);
+        }
+
         /// <summary>Runs battle code, setting aside "hero1 and hero2 share the tile", a battle bug of its own with nothing to do with walking.</summary>
         private static void Applied(Action battle)
         {
@@ -676,7 +691,11 @@ public sealed class WalkModelTests
                 Must(before.Host == after.Host, "the host view changed with no step and no change in Held or Blocked");
             Must(!party.Blocked || !party.Held, "blocked and held at once");
             if (e.Kind == "walk" && before.Phase == after.Phase && was.Leader == party.Leader)
-                Must(moved == 0 ? before.Phones.SequenceEqual(after.Phones) : before.Phones.Select(WithoutInteract).SequenceEqual(after.Phones.Select(WithoutInteract)), "a walk input changed a phone");
+                Must(moved == 0 ? before.Phones.Select(WithoutBumps).SequenceEqual(after.Phones.Select(WithoutBumps))
+                    : before.Phones.Select(p => WithoutInteract(WithoutBumps(p))).SequenceEqual(after.Phones.Select(p => WithoutInteract(WithoutBumps(p)))), "a walk input changed a phone");
+            if (after.Phase == TacticsPhase.Exploration)
+                foreach (var phone in after.Phones.Select(BumpsOf))
+                    Must(phone.Bumps == (phone.Leads ? party.Bumps : 0), $"a phone's bumps are {phone.Bumps}, the TV's {party.Bumps}");
         }
 
         private void CheckStep(Event e, Seen before, Seen after, DateTimeOffset now)

@@ -370,6 +370,8 @@ In Exploration the TV shows the world instead of the header and table, and the s
 
 **The panels** (`WorldHud`, worded by `WalkHud`) are the chapter and region at the top left and the leader at the top right, in the battle HUD's glass and gold. They go see-through over the party, as the battle's do. The chapter comes in the host view's `ExploreView.Chapter`, which phones don't get.
 
+**Bumps and tap to travel** need nothing new on the TV. A press into a wall still bumps the leader against it from `ExploreView.Bumps`; the same count now also reaches the leader's phone (its walk screen's `bumps`), which buzzes and flashes the held sector, and as before nothing counts for a door nobody has found. A journey the leader picks on the phone's map (`travel {x, y}`) is walked by the server through the same steps as a held pad, so the TV sees ordinary `Legs`, `Held` and stops, and a fight, beat or scene it walks into starts exactly as walking in would.
+
 **The sound.** Footsteps go by distance, a foot every `FootstepTiles` of the leader's walk, by the ground underfoot (`SoundBank.Step`), at `FootstepDb` under a battle's. What's skipped or snapped past makes no sound. The Ashen Ford plays `town_emberwick`, as the manifest gives it.
 
 ### Separate art review packs

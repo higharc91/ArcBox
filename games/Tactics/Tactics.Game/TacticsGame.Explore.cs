@@ -90,7 +90,7 @@ public sealed partial class TacticsGame
     /// <summary>Whether the party has been told that the road goes on past the region's edge: once a session is enough.</summary>
     private bool _edgeSaid;
 
-    /// <summary>How many steps a wall has refused this session: what <see cref="ExploreView.Bumps"/> says.</summary>
+    /// <summary>How many steps a wall has refused this session: what <see cref="ExploreView.Bumps"/> says, and the leader's walk screen's <c>bumps</c>.</summary>
     private int _bumps;
 
     /// <summary>What the TV says when the party is stopped by the region's edge. The user's to reword.</summary>
@@ -119,7 +119,7 @@ public sealed partial class TacticsGame
     /// rather than read as a command the battle doesn't know.
     /// </summary>
     private static bool IsWorldAction(string action)
-        => action is "help" or "groupRoll" or "giveOpen" or "giveClose" or "give" or "walk" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService" or "chooseSubclass" or "spendIncrease" or "setPicks";
+        => action is "help" or "groupRoll" or "giveOpen" or "giveClose" or "give" or "walk" or "travel" or "mapOpen" or "mapClose" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService" or "chooseSubclass" or "spendIncrease" or "setPicks";
 
     // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
 
@@ -295,7 +295,7 @@ public sealed partial class TacticsGame
         _ctx.CancelTimer(Timers.Lead);     // no pad, no idle ping: the silence rule would take the lead away during any battle
         Unnote(_leadNote);                 // the walk's own notes would mean nothing over a battle
         Unnote(RoadGoesOn);
-        _leadNote = null;
+        (_leadNote, _mapOpen, _travelNote) = (null, null, null);
         SaveWorld();
     }
 
@@ -330,6 +330,14 @@ public sealed partial class TacticsGame
         if (QuestLogOpen) return;
         if (!ReadDir(data, out var dir) || player.Profile?.Value != _lead)
             return;
+        if (_travel is not null)
+        {
+            if (dir is null)
+                return;     // the pings of a pad nobody holds: the journey goes on
+            Halt();         // a press takes the walk back from the journey, at once
+        }
+        if (dir is not null)
+            _travelNote = null;
         if (dir is null)
         {
             if (_owed && !_latched)
@@ -383,8 +391,9 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>
-    /// Takes the step the held direction asks for, or turns to face it if the way is blocked. A blocked step tells only the TV
-    /// (<see cref="ExploreView.Blocked"/>, and the road going on at the region's edge): a toast would change the phone's view.
+    /// Takes the step the held direction asks for, or turns to face it if the way is blocked. A blocked step tells the TV
+    /// (<see cref="ExploreView.Blocked"/>, and the road going on at the region's edge) and the leader's phone, by its <c>bumps</c> count, so it
+    /// can buzz; never as a toast, and never for a wall the TV doesn't draw (<see cref="_unseenWall"/>).
     /// </summary>
     private void TakeStep(bool onTime)
     {
@@ -472,6 +481,8 @@ public sealed partial class TacticsGame
                     ArmStep();
                 else if (now >= _heldUntil)
                     StopWalking();
+                else if (!_blocked && now >= _stepDue && _travel is not null)
+                    TravelStep(onTime: true);
                 else if (!_blocked && now >= _stepDue)
                     TakeStep(onTime: true);
                 else
@@ -486,9 +497,10 @@ public sealed partial class TacticsGame
         }
     }
 
-    /// <summary>Ends the hold and its timer. Everything that stops the party goes through here. False if it wasn't walking.</summary>
+    /// <summary>Ends the hold, any journey, and the step timer. Everything that stops the party goes through here. False if it wasn't walking.</summary>
     private bool Halt()
     {
+        _travel = null;
         if (_dir is null)
             return false;
         (_dir, _blocked, _owed, _latched) = (null, false, false, false);
@@ -652,7 +664,7 @@ public sealed partial class TacticsGame
         }
         var was = _lead;
         _lead = wanted;
-        if (was != wanted) _questLogLeader = null;
+        if (was != wanted) (_questLogLeader, _mapOpen, _travelNote) = (null, null, null);
         (_heardAt, _settledAt) = (_ctx.Now, _ctx.Now);      // a stand-in gets the pad for at least TakebackAfter, however long the party stood before
         if (_phase == TacticsPhase.Exploration && was is not null && !_electionOpen && Leader is { } leader)     // not a seat found empty at Start
             SayLeader(leader.Name);

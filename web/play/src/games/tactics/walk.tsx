@@ -9,6 +9,7 @@ import { useAlertOnMount, useSfx } from "./sfx";
 import type { WalkData, WalkMember } from "./types";
 import { LineIcon } from "./ui";
 import { ChoicesCard } from "./choices";
+import { MapSheet } from "./travel";
 import { DEAD_ZONE, dirAt, SECTORS, stickyDirAt, WalkSender, type Dir, type Sector } from "./walkModel";
 
 /** How long "Choose a battle" and "End session" wait for their confirm before they stand down. */
@@ -17,6 +18,10 @@ const CONFIRM_MS = 4000;
 const KNOB_REACH = 0.6;
 /** How long a tapped Interact stays asleep when no new view comes (the server found the spot out of reach by then). */
 const INTERACT_REARM_MS = 2000;
+/** The most often a wall buzzes the phone, so a thumb drumming into one doesn't buzz without a break. */
+export const BUMP_BUZZ_MS = 400;
+/** How long the pad's bump (the held sector's flash, and the shake) lasts. */
+const BUMP_MS = 320;
 
 const ARROWS: Record<string, [number, number]> = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] };
 
@@ -62,13 +67,36 @@ function PadFace() {
  * thumb that lands a little wide while the eyes are on the TV still counts, and the pad's place is read at every move,
  * so a page that shifts under a held thumb doesn't throw it off.
  */
-function Pad({ sender }: { sender: WalkSender }) {
+function Pad({ sender, bumps = 0 }: { sender: WalkSender; bumps?: number }) {
   const zone = useRef<HTMLDivElement>(null);
   const face = useRef<HTMLDivElement>(null);
   const knob = useRef<HTMLSpanElement>(null);
   const feedback = useFeedback();
   const buzz = useRef(feedback);
   buzz.current = feedback;
+
+  // A wall refused the step (the server's `bumps` went up): a buzz, at most every BUMP_BUZZ_MS, and the held sector flashes. Only a rise
+  // counts, so the count a new leader's screen opens with, or a reconnect re-sends, is quiet. Written to the DOM like the rest of the pad.
+  const bumped = useRef(bumps);
+  const buzzedAt = useRef(-Infinity);
+  const unbump = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(unbump.current), []);
+  useEffect(() => {
+    const was = bumped.current;
+    bumped.current = bumps;
+    const pad = face.current;
+    if (bumps <= was || !pad) return;
+    const now = Date.now();
+    if (now - buzzedAt.current >= BUMP_BUZZ_MS) {
+      buzzedAt.current = now;
+      buzz.current?.buzz("walkBump");
+    }
+    clearTimeout(unbump.current);
+    pad.removeAttribute("data-bump");
+    void pad.offsetWidth;       // so a bump during the last one plays again from its start
+    pad.dataset.bump = pad.dataset.dir || "all";
+    unbump.current = setTimeout(() => pad.removeAttribute("data-bump"), BUMP_MS);
+  }, [bumps]);
 
   useEffect(() => {
     const area = zone.current!;
@@ -458,6 +486,30 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
     mounted.current = true;
   }, [d.leader]);
 
+  // Tap to travel (the leader's): the map is a sheet over the screen, with the pad let go under it. The server sends the map's data while it
+  // knows the sheet is open, so a reconnect with it open opens it again; a pick closes it, and the party walks.
+  const [mapShown, setMapShown] = useState(!!d.map);
+  const showMap = d.leader && mapShown;
+  useEffect(() => {
+    if (!d.leader) setMapShown(false);
+  }, [d.leader]);
+  const openMap = () => {
+    sender.release();
+    sfx("select");
+    send("mapOpen");
+    setMapShown(true);
+  };
+  const closeMap = () => {
+    sfx("cancel");
+    send("mapClose");
+    setMapShown(false);
+  };
+  const travel = ([x, y]: [number, number]) => {
+    sfx("confirm");
+    send("travel", { x, y });
+    setMapShown(false);
+  };
+
   if (d.ambush) return <div class="tx tx-mob-ambush" role="alert"><span class="tx-mob-warning" aria-hidden="true"><LineIcon name="sword" /></span><span class="tx-eyebrow">Danger on the road</span><h1>Ambush!</h1><p>{d.ambush} attack!</p><span class="tx-note">Watch the TV—the party is taking position.</span></div>;
 
   return (
@@ -480,10 +532,13 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         <div class="tx-walk-goal">
           <div class="tx-walk-meta">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}
+          {d.leader && d.region ? <button type="button" class="tx-btn ghost tx-map-open" aria-haspopup="dialog" onClick={openMap}>Map</button> : null}
           {d.restReady && <span class="tx-rest-ready">Ready to rest</span>}
           {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
           </div>
           <p>{d.objective}</p>
+          {d.leader && d.travel ? <p class="tx-travel" role="status">Travelling… (tap the pad to stop)</p> : null}
+          {d.leader && d.travelNote ? <p class="tx-travel note" role="status">{d.travelNote}</p> : null}
           {d.leader && d.danger ? <p class="tx-mob-danger" role="status">Danger nearby: {d.danger}</p> : null}
         </div>
         {d.leader ? null : (
@@ -507,7 +562,8 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           </div>
         ) : d.leader && choices.length > 0 ? <div class="tx-walk-dock"><Interact choices={choices} send={send} viewId={viewId} /></div> : null}
       </div>
-      {d.leader ? <Pad sender={sender} /> : null}
+      {d.leader ? <Pad sender={sender} bumps={d.bumps} /> : null}
+      {showMap ? <MapSheet map={d.map} regionName={d.region} onPick={travel} onClose={closeMap} /> : null}
     </div>
   );
 }

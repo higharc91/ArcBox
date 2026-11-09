@@ -1,0 +1,223 @@
+{
+  "kind": "custom",
+  "module": "tactics",
+  "screen": "walk",
+  "data": {
+    "leader": true,
+    "leaderName": "Player1",
+    "region": "The Ashen Ford",
+    "objective": "Go to Emberwick",
+    "me": {
+      "name": "Player1",
+      "cls": "Fighter",
+      "level": 1,
+      "color": "#ffd23f"
+    },
+    "party": [
+      {
+        "name": "Player1",
+        "cls": "Fighter",
+        "here": true,
+        "leads": true,
+        "color": "#ffd23f"
+      },
+      {
+        "name": "Player2",
+        "cls": "Cleric",
+        "here": true,
+        "leads": false,
+        "color": "#7ccbff"
+      },
+      {
+        "name": "Player3",
+        "cls": "Rogue",
+        "here": true,
+        "leads": false,
+        "color": "#ffab94"
+      },
+      {
+        "name": "Player4",
+        "cls": "Wizard",
+        "here": true,
+        "leads": false,
+        "color": "#8ff0c4"
+      }
+    ],
+    "vip": true,
+    "difficulty": "Normal",
+    "canBattle": false,
+    "portal": "/c/ABCD",
+    "interact": "Talk to Halden Varrow",
+    "canGive": true,
+    "journal": {
+      "quests": [],
+      "selected": null,
+      "pinned": null,
+      "canPin": true,
+      "reading": null
+    },
+    "canOpenLog": true,
+    "gold": 0,
+    "targets": [
+      {
+        "id": "person:halden_varrow",
+        "label": "Talk to Halden Varrow"
+      }
+    ],
+    "beat": false,
+    "search": true,
+    "map": {
+      "region": "ashen_ford",
+      "size": [
+        160,
+        120
+      ],
+      "at": [
+        29,
+        62
+      ],
+      "to": null,
+      "pins": [
+        {
+          "kind": "story",
+          "label": "Emberwick",
+          "at": [
+            33,
+            59
+          ]
+        },
+        {
+          "kind": "quest",
+          "label": "Tobin Fell",
+          "at": [
+            36,
+            55
+          ]
+        },
+        {
+          "kind": "quest",
+          "label": "Pip Ashdown",
+          "at": [
+            30,
+            59
+          ]
+        },
+        {
+          "kind": "quest",
+          "label": "Halden Varrow",
+          "at": [
+            29,
+            62
+          ]
+        },
+        {
+          "kind": "temple",
+          "label": "Chapel of the Hearth",
+          "at": [
+            30,
+            55
+          ]
+        },
+        {
+          "kind": "inn",
+          "label": "The Last Coal",
+          "at": [
+            25,
+            55
+          ]
+        },
+        {
+          "kind": "shop",
+          "label": "Wenna\u0027s Remedies",
+          "at": [
+            26,
+            64
+          ]
+        },
+        {
+          "kind": "place",
+          "label": "Square well",
+          "at": [
+            31,
+            60
+          ]
+        },
+        {
+          "kind": "place",
+          "label": "Hearthstone",
+          "at": [
+            27,
+            68
+          ]
+        },
+        {
+          "kind": "rest",
+          "label": "Ford campfire",
+          "at": [
+            119,
+            62
+          ]
+        },
+        {
+          "kind": "rest",
+          "label": "Road campfire",
+          "at": [
+            73,
+            64
+          ]
+        },
+        {
+          "kind": "place",
+          "label": "Watch bounty board",
+          "at": [
+            37,
+            60
+          ]
+        },
+        {
+          "kind": "person",
+          "label": "Lark",
+          "at": [
+            29,
+            58
+          ]
+        },
+        {
+          "kind": "person",
+          "label": "Corvin Ashby",
+          "at": [
+            36,
+            58
+          ]
+        },
+        {
+          "kind": "person",
+          "label": "Dagna Holt",
+          "at": [
+            45,
+            64
+          ]
+        },
+        {
+          "kind": "person",
+          "label": "Lady Celandine Marrowby",
+          "at": [
+            41,
+            68
+          ]
+        },
+        {
+          "kind": "person",
+          "label": "Old Maud",
+          "at": [
+            130,
+            90
+          ]
+        }
+      ]
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}
