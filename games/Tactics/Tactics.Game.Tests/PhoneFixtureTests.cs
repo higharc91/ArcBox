@@ -429,6 +429,28 @@ public sealed class PhoneFixtureTests
         Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal) { ["vote-loot"] = Node(s.Harness.PlayerView(1)) });
     }
 
+    /// <summary>
+    /// Tap to travel: the leader's walk screen with the map open in the town (its landmarks pinned), with a journey under way, and after a
+    /// pick nothing reaches.
+    /// </summary>
+    [Fact]
+    public void The_walk_map_and_a_journey_match_their_fixtures()
+    {
+        var s = ConversationQuestTests.At("halden_varrow");      // in town, with the story's lore: its beat, its people and its shops
+        var lead = ConversationQuestTests.Lead(s);
+        var screens = new SortedDictionary<string, JsonNode>(StringComparer.Ordinal);
+        s.Send(lead, "mapOpen");
+        screens["walk-map"] = Node(s.Harness.PlayerView(lead));
+        var to = TacticsGameTests.Rules.RegionFor("ashen_ford")!.Def.Spawns.Recovery;
+        s.Send(lead, "travel", new { x = to.X, y = to.Y });
+        screens["walk-travelling"] = Node(s.Harness.PlayerView(lead));
+        s.Send(lead, "walk", new { dir = "n" });
+        s.Send(lead, "walk", new { dir = (string?)null });
+        s.Send(lead, "travel", new { x = 0, y = 0 });
+        screens["walk-travel-nowhere"] = Node(s.Harness.PlayerView(lead));
+        Check(screens);
+    }
+
     private static void Check(SortedDictionary<string, JsonNode> screens)
     {
         var dir = FixtureDir();
