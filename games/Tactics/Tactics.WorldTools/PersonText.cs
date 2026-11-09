@@ -12,6 +12,11 @@ public static class PersonText
         + (person.Id is null && person.Character is null && person.Requires.IsDefault && person.Unless.IsDefault && person.Bark is null && person.Voice is null && person.Variant is null
             ? "" : $" {person.Id} {person.Character} {Flags(person.Requires)} {Flags(person.Unless)} {person.Bark} {person.Voice} {person.Variant}");
 
+    /// <summary>The exact canonical ordering used by region export and indexed shopkeeper bindings.</summary>
+    public static IEnumerable<RegionPerson> Ordered(IEnumerable<RegionPerson> people) => people.DistinctBy(Key)
+        .OrderBy(p => p.At.Y).ThenBy(p => p.At.X).ThenBy(p => p.Preset, StringComparer.Ordinal)
+        .ThenBy(p => p.Face, StringComparer.Ordinal).ThenBy(p => p.Variant, StringComparer.Ordinal);
+
     public static ImmutableArray<string> Flags(string text)
     {
         var flags = text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Distinct(StringComparer.Ordinal).ToImmutableArray();

@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://addons/region_tools/SpawnMarker.cs" id="8_wfe18"]
 [ext_resource type="Script" path="res://addons/region_tools/BuildingMarker.cs" id="9_2ptrv"]
 [ext_resource type="Script" path="res://addons/region_tools/PersonMarker.cs" id="10_q22gg"]
+[ext_resource type="Script" path="res://addons/region_tools/InteractableMarker.cs" id="11_d6wau"]
+[ext_resource type="Script" path="res://addons/region_tools/MobPatchMarker.cs" id="12_cinhb"]
 
 [node name="Region" type="Node2D" unique_id=1456418877]
 script = ExtResource("1_mrhb6")
@@ -1328,6 +1330,7 @@ Face = "se"
 [node name="innkeeper_1" type="Marker2D" parent="People" unique_id=170956571]
 position = Vector2(816, 1776)
 script = ExtResource("10_q22gg")
+ShopId = "af_inn"
 Id = "bree_tallow"
 Character = "bree_tallow"
 Preset = "innkeeper"
@@ -1335,6 +1338,7 @@ Preset = "innkeeper"
 [node name="priest_2" type="Marker2D" parent="People" unique_id=287721059]
 position = Vector2(976, 1776)
 script = ExtResource("10_q22gg")
+ShopId = "af_chapel"
 Id = "mother_aubrine"
 Character = "mother_aubrine"
 Preset = "priest"
@@ -1407,6 +1411,7 @@ Face = "se"
 [node name="merchant_11" type="Marker2D" parent="People" unique_id=169338645]
 position = Vector2(848, 2064)
 script = ExtResource("10_q22gg")
+ShopId = "af_market_herbalist"
 Id = "af_merchant_2"
 Variant = "b"
 Voice = "townsfolk_merchant"
@@ -1754,3 +1759,187 @@ Requires = "sq_forge_contact"
 Unless = "sq_forge_done"
 Preset = "bandit_captain"
 Face = "se"
+
+[node name="Interactables" type="Node2D" parent="." unique_id=1529588407]
+
+[node name="af_square_notice" type="Marker2D" parent="Interactables" unique_id=660994662]
+position = Vector2(1136, 1968)
+script = ExtResource("11_d6wau")
+Id = "af_square_notice"
+
+[node name="af_square_well" type="Marker2D" parent="Interactables" unique_id=1093045388]
+position = Vector2(1008, 1936)
+script = ExtResource("11_d6wau")
+Id = "af_square_well"
+
+[node name="af_hearth_shrine" type="Marker2D" parent="Interactables" unique_id=681468960]
+position = Vector2(880, 2192)
+script = ExtResource("11_d6wau")
+Id = "af_hearth_shrine"
+
+[node name="af_grave_coll" type="Marker2D" parent="Interactables" unique_id=1298503948]
+position = Vector2(816, 2192)
+script = ExtResource("11_d6wau")
+Id = "af_grave_coll"
+
+[node name="af_grave_annet" type="Marker2D" parent="Interactables" unique_id=884710569]
+position = Vector2(848, 2192)
+script = ExtResource("11_d6wau")
+Id = "af_grave_annet"
+
+[node name="af_east_signpost" type="Marker2D" parent="Interactables" unique_id=1819221482]
+position = Vector2(1648, 2032)
+script = ExtResource("11_d6wau")
+Id = "af_east_signpost"
+
+[node name="af_granary_crate" type="Marker2D" parent="Interactables" unique_id=624129162]
+position = Vector2(1232, 2224)
+script = ExtResource("11_d6wau")
+Id = "af_granary_crate"
+
+[node name="af_granary_sack" type="Marker2D" parent="Interactables" unique_id=320215607]
+position = Vector2(1296, 2256)
+script = ExtResource("11_d6wau")
+Id = "af_granary_sack"
+
+[node name="af_granary_barrel" type="Marker2D" parent="Interactables" unique_id=262582074]
+position = Vector2(1488, 2288)
+script = ExtResource("11_d6wau")
+Id = "af_granary_barrel"
+
+[node name="af_market_crate" type="Marker2D" parent="Interactables" unique_id=1279622633]
+position = Vector2(752, 2064)
+script = ExtResource("11_d6wau")
+Id = "af_market_crate"
+
+[node name="af_reeves_key" type="Marker2D" parent="Interactables" unique_id=583623169]
+position = Vector2(624, 2704)
+script = ExtResource("11_d6wau")
+Id = "af_reeves_key"
+
+[node name="af_reeves_chest" type="Marker2D" parent="Interactables" unique_id=1857020066]
+position = Vector2(976, 2672)
+script = ExtResource("11_d6wau")
+Id = "af_reeves_chest"
+
+[node name="af_dock_crate" type="Marker2D" parent="Interactables" unique_id=156609606]
+position = Vector2(3408, 2992)
+script = ExtResource("11_d6wau")
+Id = "af_dock_crate"
+
+[node name="af_dock_barrel" type="Marker2D" parent="Interactables" unique_id=62193921]
+position = Vector2(3408, 3376)
+script = ExtResource("11_d6wau")
+Id = "af_dock_barrel"
+
+[node name="af_ash_market_tally" type="Marker2D" parent="Interactables" unique_id=419069561]
+position = Vector2(2960, 3280)
+script = ExtResource("11_d6wau")
+Id = "af_ash_market_tally"
+
+[node name="af_ash_market_scuffs" type="Marker2D" parent="Interactables" unique_id=2126511136]
+position = Vector2(2992, 3152)
+script = ExtResource("11_d6wau")
+Id = "af_ash_market_scuffs"
+
+[node name="af_ash_market_cache" type="Marker2D" parent="Interactables" unique_id=1318385520]
+position = Vector2(2960, 3088)
+script = ExtResource("11_d6wau")
+Id = "af_ash_market_cache"
+
+[node name="af_ford_campfire" type="Marker2D" parent="Interactables" unique_id=1849463781]
+position = Vector2(3824, 2000)
+script = ExtResource("11_d6wau")
+Id = "af_ford_campfire"
+
+[node name="af_road_campfire" type="Marker2D" parent="Interactables" unique_id=764105494]
+position = Vector2(2352, 2064)
+script = ExtResource("11_d6wau")
+Id = "af_road_campfire"
+
+[node name="af_dock_charcoal" type="Marker2D" parent="Interactables" unique_id=846474270]
+position = Vector2(3344, 3376)
+script = ExtResource("11_d6wau")
+Id = "af_dock_charcoal"
+
+[node name="af_bounty_board" type="Marker2D" parent="Interactables" unique_id=1453115955]
+position = Vector2(1200, 1936)
+script = ExtResource("11_d6wau")
+Id = "af_bounty_board"
+
+[node name="af_cinder_hollow_mouth" type="Marker2D" parent="Interactables" unique_id=1232362568]
+position = Vector2(4208, 3152)
+script = ExtResource("11_d6wau")
+Id = "af_cinder_hollow_mouth"
+
+[node name="af_reed_bank_track" type="Marker2D" parent="Interactables" unique_id=1940904673]
+position = Vector2(3792, 2768)
+script = ExtResource("11_d6wau")
+Id = "af_reed_bank_track"
+
+[node name="af_market_cellar_hatch" type="Marker2D" parent="Interactables" unique_id=2114801859]
+position = Vector2(2960, 3248)
+script = ExtResource("11_d6wau")
+Id = "af_market_cellar_hatch"
+
+[node name="af_market_cellar_draft" type="Marker2D" parent="Interactables" unique_id=772896665]
+position = Vector2(2992, 3248)
+script = ExtResource("11_d6wau")
+Id = "af_market_cellar_draft"
+
+[node name="af_market_cellar_store" type="Marker2D" parent="Interactables" unique_id=1794132422]
+position = Vector2(2960, 3216)
+script = ExtResource("11_d6wau")
+Id = "af_market_cellar_store"
+
+[node name="af_market_cellar_ledger" type="Marker2D" parent="Interactables" unique_id=89608884]
+position = Vector2(2992, 3216)
+script = ExtResource("11_d6wau")
+Id = "af_market_cellar_ledger"
+
+[node name="af_bank_claw_marks" type="Marker2D" parent="Interactables" unique_id=377500324]
+position = Vector2(3792, 2576)
+script = ExtResource("11_d6wau")
+Id = "af_bank_claw_marks"
+
+[node name="af_bridge_carving" type="Marker2D" parent="Interactables" unique_id=61100097]
+position = Vector2(3024, 2160)
+script = ExtResource("11_d6wau")
+Id = "af_bridge_carving"
+
+[node name="af_southfield_goat_tracks" type="Marker2D" parent="Interactables" unique_id=1626525088]
+position = Vector2(752, 2768)
+script = ExtResource("11_d6wau")
+Id = "af_southfield_goat_tracks"
+
+[node name="MobPatches" type="Node2D" parent="." unique_id=1536577616]
+
+[node name="mob_pine_wolves" type="Marker2D" parent="MobPatches" unique_id=1559402980]
+position = Vector2(496, 1200)
+script = ExtResource("12_cinhb")
+Id = "mob_pine_wolves"
+Offsets = "0,0 1,0 0,1 1,1 -1,1 0,2 1,2 -2,1"
+
+[node name="mob_rooting_boars" type="Marker2D" parent="MobPatches" unique_id=1587338869]
+position = Vector2(1360, 1040)
+script = ExtResource("12_cinhb")
+Id = "mob_rooting_boars"
+Offsets = "0,0 0,-1"
+
+[node name="mob_kobold_scouts" type="Marker2D" parent="MobPatches" unique_id=1955856667]
+position = Vector2(4048, 2544)
+script = ExtResource("12_cinhb")
+Id = "mob_kobold_scouts"
+Offsets = "0,0 1,0 -1,0 0,1 0,-1 2,0 1,1 1,-1"
+
+[node name="mob_river_slimes" type="Marker2D" parent="MobPatches" unique_id=1375746653]
+position = Vector2(3312, 2608)
+script = ExtResource("12_cinhb")
+Id = "mob_river_slimes"
+Offsets = "0,0 1,0 -1,0 0,1 0,-1 2,0 1,1 1,-1"
+
+[node name="mob_road_bandits" type="Marker2D" parent="MobPatches" unique_id=1700939686]
+position = Vector2(4752, 2192)
+script = ExtResource("12_cinhb")
+Id = "mob_road_bandits"
+Offsets = "0,0 1,0 -1,0 0,1 0,-1 2,0 1,1 1,-1"

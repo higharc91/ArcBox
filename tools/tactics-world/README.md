@@ -83,7 +83,17 @@ gets dragged, Ctrl+Z, or the export tells you to set its Position back to zero.
 | `Stamps` | `StampMarker`, a battle map placed at its corner | `Map`, `HeightOffset` |
 | `Spawns` | `SpawnMarker`, one Start and one Recovery, plus optional named destinations | `Kind`: `Start`, `Recovery` (where a beaten party wakes), or `Named` with a unique `SpawnName` |
 | `Buildings` | `BuildingMarker`, a piece of the town kit, on its footprint's back corner | `Building`, an id from `town/manifest.json`, and `Variant`. It snaps to the tile grid and outlines the full footprint |
+| `Interactables` | `InteractableMarker`, an existing chest, door, notice or other thing | `Id` binds to the authored definition; drag to change only `at` |
+| `MobPatches` | `MobPatchMarker`, an existing roaming group | `Id` and relative `Offsets`; dragging translates the entire patch |
 | `People` | `PersonMarker`, a person placed on one tile | `Preset` from `characters/manifest.json`, `Face`, and an optional `Walk` loop. People are decorative in the TV world and don't block walking |
+
+Press **Import placement markers** once for an older scene (or use `--import-placements=<region>`).
+Ashen Ford already includes them. Import refuses existing placement groups and supports Undo.
+Definitions, text, gates, stock and combat statistics remain authored in their existing JSON files.
+Shops label their existing keeper in `People` with `ShopId`: drag that person to move the shop.
+Export retains the binding even when the generated people array changes order. Keep the label with its keeper.
+Both new groups must stay at the origin; missing, duplicate or unknown IDs block export instead of deleting content.
+Legacy scenes without either group still export as before.
 
 **To move one,** select it in the Scene dock and drag it. It snaps to tiles and outlines the tile it's on. A stamp is different: see below.
 
@@ -106,7 +116,15 @@ A hand-authored `cave_mouth` interactable links to `{ "to": { "region": "cinder_
 
 - **To place one,** add a `StampMarker`, set `Map` and `HeightOffset`, drag it to the map's corner, keep it selected and press **Apply stamp**.
   That writes the map to all three layers, and one Ctrl+Z takes it back.
-- **To move one,** drag it (its outline turns orange until it's applied) and press **Apply stamp** again. The tiles it used to cover stay
+- Press **Import placement markers** once for an older scene (or use `--import-placements=<region>`).
+Ashen Ford already includes them. Import refuses existing placement groups and supports Undo.
+Definitions, text, gates, stock and combat statistics remain authored in their existing JSON files.
+Shops label their existing keeper in `People` with `ShopId`: drag that person to move the shop.
+Export retains the binding even when the generated people array changes order. Keep the label with its keeper.
+Both new groups must stay at the origin; missing, duplicate or unknown IDs block export instead of deleting content.
+Legacy scenes without either group still export as before.
+
+**To move one,** drag it (its outline turns orange until it's applied) and press **Apply stamp** again. The tiles it used to cover stay
   as they were, because nothing records what was under it.
 - **Then repaint the old area.** It's drawn in thin orange and listed in the dock. Click the row to go there, repaint, and press
   **Done repainting**. Moving the stamp back over the area clears it too. The export warns until then, and still writes the file.
@@ -289,3 +307,11 @@ painted export and JSON round-trip in a temporary scene, preserving production w
 Mob groups live in manifest-listed `rules/mobs/<region>.json`; see `rules/schema/mobs.schema.json`. Each arena is an explicitly painted 14×12 battle-map stamp. Keep the patch and its cardinal contact tiles clear of required routes. The loader validates bounds, connected walkable tiles, roads, NPCs, things, spawns and route reachability. Export twice and compare bytes.
 
 The development command `--apply-mob-arenas=<absolute JSON path>` can register stamps and apply a small set of explicitly supplied tiles to an existing scene. The JSON has a `regions` array; each entry has `region`, `stamps` (`map`, `at`, `height`) and `paint` (`at`, `material`). Painted additions use height zero and clear flags; untouched terrain keeps its original height and flags. It removes scene props inside those stamps because the battle map owns their props. This is an authoring operation, not a runtime extraction mechanism; review its scene diff before exporting. `--world-demo=mobs` in the TV previews all seven current placements.
+
+## Placement regression check
+
+After building, run `godot --headless --path tools/tactics-world -- --check-placement-markers`.
+It uses copies of the production pack and native Ashen Ford scene: no-op export retains original bytes,
+interactable/keeper/patch moves survive scene save/load, and a second export is byte-identical.
+All changed side files and the region are validated as one shadow pack before replacement; a later
+write failure restores earlier file bytes. Commit the scene and every changed generated JSON together.

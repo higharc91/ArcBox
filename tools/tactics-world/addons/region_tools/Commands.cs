@@ -19,6 +19,8 @@ public partial class Commands : Node
           --remap-props=<id>       remap a scene's prop atlas after a rebuild; requires --old-props=<manifest>; repeat --replace-prop=old@variant=new@variant to change painted variants
           --paint-region=<json>   paint explicit material/height/flags cells, preserving markers and unrelated paint
           --edit-props=<id>        change single props in a scene and leave its paint alone; repeat --clear-prop=<x>,<y> and --place-prop=<id>@<variant>@<x>,<y>
+          --import-placements=<id> add interactable/mob markers and bind shopkeeper labels, refusing existing placement groups
+          --check-placement-markers verify native position edits and deterministic exports in temporary files
           --check-person-variants   verify native editor variant save/load/export in a temporary scene
           --swatches               write the palette's images (then run Godot's --import)
           --tilesets               write the palette's tile sets
@@ -57,6 +59,16 @@ public partial class Commands : Node
 
     private static int Run()
     {
+        if (Flag("check-placement-markers")) return PlacementMarkerCheck.Run();
+        if (Arg("import-placements") is { } placements)
+        {
+            var path = RegionPaths.Scene(placements);
+            var root = ResourceLoader.Load<PackedScene>(path).Instantiate<Region>();
+            try { Placements.Import(root, Arg("rules") ?? RegionPaths.Rules); RegionScene.Save(root, path, overwrite: true); }
+            finally { root.Free(); }
+            GD.Print("Imported placement markers: " + path);
+            return 0;
+        }
         if (Flag("check-person-variants"))
             return PersonVariantCheck.Run();
 

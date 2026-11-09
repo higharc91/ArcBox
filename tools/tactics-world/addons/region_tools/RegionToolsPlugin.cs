@@ -16,6 +16,7 @@ public partial class RegionToolsPlugin : EditorPlugin
     private EditorDock _dock = null!;
     private Button _export = null!;
     private Button _apply = null!;
+    private Button _placements = null!;
     private Label _status = null!;
     private VBoxContainer _problems = null!;
     private VBoxContainer _pending = null!;
@@ -33,6 +34,8 @@ public partial class RegionToolsPlugin : EditorPlugin
         _export.Pressed += ExportEditedScene;
         _apply = new Button { Text = "Apply stamp", TooltipText = "Write the selected StampMarker's battle map to the layers, at the marker. Undo takes it back." };
         _apply.Pressed += ApplySelectedStamp;
+        _placements = new Button { Text = "Import placement markers", TooltipText = "Add draggable interactables and mob patches; label the existing shopkeeper people. Does not overwrite existing placement groups." };
+        _placements.Pressed += ImportPlacements;
         _status = new Label { Text = "Open a region scene, then export it.", AutowrapMode = TextServer.AutowrapMode.WordSmart };
         _problems = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
         _pending = new VBoxContainer { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
@@ -61,6 +64,7 @@ public partial class RegionToolsPlugin : EditorPlugin
         var column = new VBoxContainer();
         column.AddChild(_export);
         column.AddChild(_apply);
+        column.AddChild(_placements);
         column.AddChild(goTo);
         column.AddChild(_status);
         column.AddChild(scroll);
@@ -144,6 +148,43 @@ public partial class RegionToolsPlugin : EditorPlugin
         {
             Finish("The export failed, and no file was written.", [$"{ex.GetType().Name}: {ex.Message} Export again, and report this if it stays."]);
         }
+    }
+
+    private void ImportPlacements()
+    {
+        if (EditedRegion is not { } root) { Finish("Open a region scene first.", []); return; }
+        try
+        {
+            var people = root.GetNode(RegionScene.People).GetChildren().OfType<PersonMarker>().ToArray();
+            var old = people.Select(p => p.ShopId).ToArray();
+            Placements.Import(root, Commands.Arg("rules") ?? RegionPaths.Rules);
+            var groups = new[] { root.GetNode<Node2D>(Placements.Things), root.GetNode<Node2D>(Placements.Mobs) };
+            var labels = people.Select(p => p.ShopId).ToArray();
+            foreach (var group in groups) root.RemoveChild(group);
+            for (var i = 0; i < people.Length; i++) people[i].ShopId = old[i];
+            var undo = GetUndoRedo();
+            undo.CreateAction("Import placement markers", UndoRedo.MergeMode.Disable, root);
+            foreach (var group in groups)
+            {
+                undo.AddDoMethod(this, MethodName.AttachPlacementGroup, root, group);
+                undo.AddUndoMethod(root, Node.MethodName.RemoveChild, group);
+                undo.AddDoReference(group);
+            }
+            for (var i = 0; i < people.Length; i++)
+            {
+                undo.AddDoProperty(people[i], PersonMarker.PropertyName.ShopId, labels[i]);
+                undo.AddUndoProperty(people[i], PersonMarker.PropertyName.ShopId, old[i]);
+            }
+            undo.CommitAction();
+            Finish("Placement markers imported. Drag them, save the scene, then export.", []);
+        }
+        catch (Exception ex) { Finish("Placement markers were not imported.", [ex.Message]); }
+    }
+
+    private void AttachPlacementGroup(Region root, Node2D group)
+    {
+        root.AddChild(group); group.Owner = root;
+        foreach (var marker in group.GetChildren()) marker.Owner = root;
     }
 
     private void ApplySelectedStamp()

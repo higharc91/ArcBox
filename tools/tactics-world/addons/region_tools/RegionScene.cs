@@ -52,7 +52,10 @@ public static class RegionScene
     public static ExportResult Export(Region root, string? rulesDirectory = null)
     {
         var missing = MissingParts(root);
-        return missing.Count > 0 ? new ExportResult(null, [.. missing]) : RegionExport.Export(Read(root), rulesDirectory ?? RegionPaths.Rules, RegionPaths.Content);
+        if (missing.Count > 0) return new ExportResult(null, [.. missing]);
+        var rules = rulesDirectory ?? RegionPaths.Rules;
+        try { return RegionExport.Export(Read(root), rules, RegionPaths.Content, Placements.Plan(root, rules)); }
+        catch (InvalidDataException ex) { return new ExportResult(null, [ex.Message]); }
     }
 
     /// <summary>What's in the scene, without judging it. Every part must be there: see <see cref="MissingParts"/>.</summary>
