@@ -482,12 +482,14 @@ public partial class BoardCanvas : Node2D
     /// <summary>The ring at a unit's feet, on the slant of the tile.</summary>
     private void DrawRing(Vector2 feet, BoardUnit unit)
     {
-        var points = new Vector2[RingPoints + 1];
-        for (var i = 0; i <= RingPoints; i++)
+        var count = unit.Tone == UnitTone.Enemy ? 4 : unit.Tone == UnitTone.Neutral ? 3 : RingPoints;
+        var points = new Vector2[count + 1];
+        for (var i = 0; i <= count; i++)
         {
-            var angle = Mathf.Tau * i / RingPoints;
+            var angle = Mathf.Tau * i / count;
             points[i] = feet + new Vector2(Mathf.Cos(angle) * unit.Ring, Mathf.Sin(angle) * unit.Ring / 2);
         }
+        if (unit.Active) DrawPolyline(points, Colors.White, 7);
         var ring = Colour(unit.RingColour);
         if (unit.Outlined)
         {

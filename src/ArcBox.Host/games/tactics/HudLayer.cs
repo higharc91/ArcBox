@@ -73,7 +73,7 @@ public partial class HudLayer : Control
         _tag = TvText.Label("", ArcTheme.SemiBold, 22, Muted);
         _objectiveText = TvText.Label("", ArcTheme.SemiBold, 24, Ink);
         _objective = ArcTheme.HBox(8, TvText.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
-        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective));
+        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective, TvText.Label("○ Party · ◇ Enemy · △ Neutral", ArcTheme.SemiBold, 20, Ink)));
         _head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
         _noticeText = TvText.Label("", ArcTheme.SemiBold, 24, Ink);

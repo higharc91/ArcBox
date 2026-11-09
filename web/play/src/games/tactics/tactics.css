@@ -1041,3 +1041,14 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-cell.neutral { background: #606775; }
 
 .tx-tile-details .tx-hp-text { display: inline; }
+
+/* Colour-independent battlefield cues. These remain visible with reduced motion. */
+.tx .tx-cell.ally, .tx .tx-cell.me { border-radius: 50%; }
+.tx .tx-cell.foe { border-radius: 0; border-left: 2px solid #fff; }
+.tx .tx-cell.me { outline: 2px solid #fff; outline-offset: -2px; }
+.tx .tx-cell.reach { border-bottom: 3px dotted #fff; }
+.tx .tx-cell.aim { border: 3px double #fff; }
+.tx .tx-cell.risk { background-image: repeating-linear-gradient(135deg, #ffffff66 0 2px, transparent 2px 6px) !important; }
+.tx .tx-cell.spread::after { border: 2px dashed #fff; }
+
+.tx .tx-cell-label { color: #f4ecd6; background: #0b0d1c; border-radius: 2px; padding: 0 1px; }
