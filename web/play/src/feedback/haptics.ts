@@ -12,6 +12,8 @@ export const PATTERNS = {
   walkPress: 8,
   /** The held direction changing under the thumb: a double tick, to tell it from a press without looking. */
   walkTurn: [4, 24, 4],
+  /** A wall refusing the step the pad holds. */
+  walkBump: 30,
 } as const satisfies Record<string, number | readonly number[]>;
 
 export type HapticName = keyof typeof PATTERNS;

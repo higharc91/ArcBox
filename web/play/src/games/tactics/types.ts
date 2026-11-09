@@ -267,6 +267,11 @@ export interface WalkData {
    */
   search?: boolean;
   choices?: CharacterChoicesData | null;
+  /**
+   * The leader's count of steps a wall the TV draws has refused this session (never an unfound secret door): it goes up once per press
+   * into a wall, and the pad buzzes and flashes the held sector when it does. Absent while it's 0, and for everyone else.
+   */
+  bumps?: number;
 }
 
 /**

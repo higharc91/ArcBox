@@ -17,6 +17,10 @@ const CONFIRM_MS = 4000;
 const KNOB_REACH = 0.6;
 /** How long a tapped Interact stays asleep when no new view comes (the server found the spot out of reach by then). */
 const INTERACT_REARM_MS = 2000;
+/** The most often a wall buzzes the phone, so a thumb drumming into one doesn't buzz without a break. */
+export const BUMP_BUZZ_MS = 400;
+/** How long the pad's bump (the held sector's flash, and the shake) lasts. */
+const BUMP_MS = 320;
 
 const ARROWS: Record<string, [number, number]> = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] };
 
@@ -62,13 +66,36 @@ function PadFace() {
  * thumb that lands a little wide while the eyes are on the TV still counts, and the pad's place is read at every move,
  * so a page that shifts under a held thumb doesn't throw it off.
  */
-function Pad({ sender }: { sender: WalkSender }) {
+function Pad({ sender, bumps = 0 }: { sender: WalkSender; bumps?: number }) {
   const zone = useRef<HTMLDivElement>(null);
   const face = useRef<HTMLDivElement>(null);
   const knob = useRef<HTMLSpanElement>(null);
   const feedback = useFeedback();
   const buzz = useRef(feedback);
   buzz.current = feedback;
+
+  // A wall refused the step (the server's `bumps` went up): a buzz, at most every BUMP_BUZZ_MS, and the held sector flashes. Only a rise
+  // counts, so the count a new leader's screen opens with, or a reconnect re-sends, is quiet. Written to the DOM like the rest of the pad.
+  const bumped = useRef(bumps);
+  const buzzedAt = useRef(-Infinity);
+  const unbump = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(unbump.current), []);
+  useEffect(() => {
+    const was = bumped.current;
+    bumped.current = bumps;
+    const pad = face.current;
+    if (bumps <= was || !pad) return;
+    const now = Date.now();
+    if (now - buzzedAt.current >= BUMP_BUZZ_MS) {
+      buzzedAt.current = now;
+      buzz.current?.buzz("walkBump");
+    }
+    clearTimeout(unbump.current);
+    pad.removeAttribute("data-bump");
+    void pad.offsetWidth;       // so a bump during the last one plays again from its start
+    pad.dataset.bump = pad.dataset.dir || "all";
+    unbump.current = setTimeout(() => pad.removeAttribute("data-bump"), BUMP_MS);
+  }, [bumps]);
 
   useEffect(() => {
     const area = zone.current!;
@@ -507,7 +534,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           </div>
         ) : d.leader && choices.length > 0 ? <div class="tx-walk-dock"><Interact choices={choices} send={send} viewId={viewId} /></div> : null}
       </div>
-      {d.leader ? <Pad sender={sender} /> : null}
+      {d.leader ? <Pad sender={sender} bumps={d.bumps} /> : null}
     </div>
   );
 }

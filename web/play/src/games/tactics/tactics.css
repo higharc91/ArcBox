@@ -537,6 +537,14 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-pad[data-dir="s"] .tx-wedge.s, .tx-pad[data-dir="sw"] .tx-wedge.sw, .tx-pad[data-dir="w"] .tx-wedge.w, .tx-pad[data-dir="nw"] .tx-wedge.nw { fill: var(--wf-gold); }
 .tx-pad[data-dir="n"] .tx-chevron.n, .tx-pad[data-dir="ne"] .tx-chevron.ne, .tx-pad[data-dir="e"] .tx-chevron.e, .tx-pad[data-dir="se"] .tx-chevron.se,
 .tx-pad[data-dir="s"] .tx-chevron.s, .tx-pad[data-dir="sw"] .tx-chevron.sw, .tx-pad[data-dir="w"] .tx-chevron.w, .tx-pad[data-dir="nw"] .tx-chevron.nw { stroke: var(--wf-on-gold); opacity: 1; }
+/* A step a wall refused (the walk screen's `bumps`): the held sector flashes red, and the face gives a small shake; "all" when no sector is held. */
+.tx-pad[data-bump="n"] .tx-wedge.n, .tx-pad[data-bump="ne"] .tx-wedge.ne, .tx-pad[data-bump="e"] .tx-wedge.e, .tx-pad[data-bump="se"] .tx-wedge.se,
+.tx-pad[data-bump="s"] .tx-wedge.s, .tx-pad[data-bump="sw"] .tx-wedge.sw, .tx-pad[data-bump="w"] .tx-wedge.w, .tx-pad[data-bump="nw"] .tx-wedge.nw,
+.tx-pad[data-bump="all"] .tx-wedge { animation: tx-wedge-bump 0.32s ease-out; }
+.tx-pad[data-bump] svg { animation: tx-pad-bump 0.24s ease-out; }
+@keyframes tx-wedge-bump { 0%, 45% { fill: #c8504a; } }
+@keyframes tx-pad-bump { 0%, 100% { transform: none; } 25% { transform: translateX(-4px); } 60% { transform: translateX(3px); } }
+@media (prefers-reduced-motion: reduce) { .tx-pad[data-bump] svg { animation: none; } }    /* the colour still flashes */
 
 /* Becoming leader, with eyes on the TV: the pad swells in and the line above it flashes. */
 .tx-walk.arrived .tx-pad { animation: tx-pad-arrive 1.1s ease-out backwards; }
