@@ -105,7 +105,7 @@ public partial class TacticsScene
                 }
                 foreach (var item in shop.Items)
                 {
-                    var row = ArcTheme.Label($"{item.Name}\n{item.Price} gold · {(item.Count == -1 ? "Unlimited" : item.Count == 0 ? "Sold out" : item.Count + " in stock")}", ArcTheme.SemiBold, 26,
+                    var row = ArcTheme.Label($"{item.Name}\n{item.Price} gold · {(item.Count == -1 ? "Unlimited stock" : item.Count == 0 ? "Out of stock" : item.Count + " in stock")}", ArcTheme.SemiBold, 26,
                         item.Count == 0 ? new Color(.5f, .5f, .5f) : Colors.White);
                     _shopRows.AddChild(row);
                 }

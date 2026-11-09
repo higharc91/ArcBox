@@ -254,7 +254,7 @@ function Tags({ a, cls }: { a: AbilityChoice; cls?: string }) {
   const tags: string[] = [];
   if (cls && !a.item && prefix !== cls && prefix !== "common" && prefix !== "race") tags.push(prefix.replaceAll("_", " "));
   for (const [name, n] of Object.entries(a.cost.resource ?? {})) tags.push(`${n} ${name}`);
-  if (a.cost.concentration) tags.push("conc.");
+  if (a.cost.concentration) tags.push("Concentration");
   if (a.item) tags.push("item");
   if (tags.length === 0) return null;
   return <span class="tx-tags">{tags.map((t) => <span class="tx-tag" key={t}>{t}</span>)}</span>;

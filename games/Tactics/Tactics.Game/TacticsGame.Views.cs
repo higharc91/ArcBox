@@ -511,7 +511,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Story => StoryScreen(player, profile),
             // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
             TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null, partyLevel = _doc.PartyLevel }),
-            TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
+            TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the VIP"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
@@ -787,7 +787,7 @@ public sealed partial class TacticsGame
             case TacticsPhase.Muster:
                 return "Choose your classes on your phones";
             case TacticsPhase.EncounterPick:
-                return $"{Vip?.Name ?? "The host"} is choosing a battle";
+                return $"{Vip?.Name ?? "The VIP"} is choosing a battle";
             case TacticsPhase.Results:
                 return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : _result?.Outcome == BattleOutcome.Fled ? $"The party fled {_resultEncounter}" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:

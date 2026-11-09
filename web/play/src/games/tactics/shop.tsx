@@ -83,7 +83,7 @@ export function Shop({ data, send, viewId }: CustomScreenProps) {
         const can = !pending && d.you.canBuy && limit > 0 && (tab === "sell" || row.can !== false);
         return <li key={row.item}>
           <button type="button" class="tx-shop-name" onClick={() => setDetail(row)} aria-label={`Details for ${row.name}`}>{row.name}</button>
-          <span>{row.price} gold each · {row.count === -1 ? "unlimited" : row.count === 0 ? "Sold out" : `${row.count} ${tab === "buy" ? "in stock" : "in your bag"}`}</span>
+          <span>{row.price} gold each · {row.count === -1 ? "Unlimited stock" : row.count === 0 ? "Out of stock" : `${row.count} ${tab === "buy" ? "in stock" : "in your bag"}`}</span>
           <div class="tx-shop-quantity">
             <button class="tx-btn ghost" aria-label={`Fewer ${row.name}`} disabled={!can || count <= 1} onClick={() => setCounts({ ...counts, [row.item]: count - 1 })}>−</button>
             <output aria-label={`Quantity of ${row.name}`}>{count}</output>
