@@ -16,7 +16,7 @@ export function remainingSeconds(deadlineUtc: string, now: number): number {
 const format = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
 /** `onSecond` hears each whole second shown (for the phone's countdown ticks). */
-export function Countdown({ deadlineUtc, onSecond }: { deadlineUtc: string; onSecond?: (secondsLeft: number) => void }) {
+export function Countdown({ deadlineUtc, onSecond, showUrgency = false }: { deadlineUtc: string; onSecond?: (secondsLeft: number) => void; showUrgency?: boolean }) {
   const [now, setNow] = useState(() => Date.now());
   const total = useRef<{ deadline: string; seconds: number } | null>(null);
   const onSecondRef = useRef(onSecond);
@@ -37,6 +37,7 @@ export function Countdown({ deadlineUtc, onSecond }: { deadlineUtc: string; onSe
   return (
     <div class={`ptimer${left <= 3 ? " urgent" : ""}`} role="timer" aria-live="off">
       <b>{format(left)}</b>
+      {showUrgency && left <= 3 ? <small class="timer-warning">{left === 0 ? "Time up" : "Act now"}</small> : null}
       <div class="bar"><i style={{ width: `${(fraction * 100).toFixed(1)}%` }} /></div>
     </div>
   );

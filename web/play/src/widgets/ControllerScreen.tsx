@@ -71,7 +71,7 @@ export function ControllerScreen({ view, send, me, game }: { view: ControllerVie
         <main class="widget">
           <Widget view={view} send={sendWithFeedback} />
         </main>
-        {view.deadlineUtc ? <Countdown deadlineUtc={view.deadlineUtc} onSecond={feedback ? (s) => feedback.onCountdown(s) : undefined} /> : null}
+        {view.deadlineUtc ? <Countdown deadlineUtc={view.deadlineUtc} showUrgency={game === "tactics"} onSecond={feedback ? (s) => feedback.onCountdown(s) : undefined} /> : null}
       </div>
     </SkinContext.Provider>
   );

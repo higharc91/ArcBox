@@ -482,20 +482,20 @@ public partial class BoardCanvas : Node2D
     /// <summary>The ring at a unit's feet, on the slant of the tile.</summary>
     private void DrawRing(Vector2 feet, BoardUnit unit)
     {
-        var points = new Vector2[RingPoints + 1];
-        for (var i = 0; i <= RingPoints; i++)
+        var count = unit.Tone == UnitTone.Enemy ? 4 : unit.Tone == UnitTone.Neutral ? 3 : RingPoints;
+        var points = new Vector2[count + 1];
+        for (var i = 0; i <= count; i++)
         {
-            var angle = Mathf.Tau * i / RingPoints;
+            var angle = Mathf.Tau * i / count;
             points[i] = feet + new Vector2(Mathf.Cos(angle) * unit.Ring, Mathf.Sin(angle) * unit.Ring / 2);
         }
         var ring = Colour(unit.RingColour);
-        if (unit.Outlined)
-        {
-            DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), RingOutlineWidth + (unit.Active ? ActiveRingWidth - OutlinedRingWidth : 0));
-            DrawPolyline(points, unit.Away ? ring * AwayShade : ring, unit.Active ? ActiveRingWidth : OutlinedRingWidth);
-            return;
-        }
-        DrawPolyline(points, ring, unit.Active ? ActiveRingWidth : RingWidth);
+        // A dark/light keyline preserves the geometry on both light grass and dark stone,
+        // including when side hues converge in red/green colour-vision simulations.
+        DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), unit.Active ? 10 : 6);
+        DrawPolyline(points, Colors.White, unit.Active ? 7 : RingOutlineWidth);
+        DrawPolyline(points, unit.Away ? ring * AwayShade : ring,
+            unit.Active ? ActiveRingWidth : unit.Outlined ? OutlinedRingWidth : RingWidth);
     }
 
     /// <summary>What's left when a sprite's file is missing: a marker in the unit's colour, so it's still on the board.</summary>
