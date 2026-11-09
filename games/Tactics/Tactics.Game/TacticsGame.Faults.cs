@@ -252,11 +252,11 @@ public sealed partial class TacticsGame
     }
 
     /// <summary><see cref="Begin"/>, or null if the engine failed, which is logged.</summary>
-    private Resolution? TryBegin(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
+    private Resolution? TryBegin(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions, string? spawn = null)
     {
         try
         {
-            return Begin(encounter, seed, members, companions);
+            return Begin(encounter, seed, members, companions, spawn);
         }
         catch (Exception e) when (IsEngineFailure(e))
         {

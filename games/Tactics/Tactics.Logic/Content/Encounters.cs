@@ -31,6 +31,10 @@ public static class Encounters
     /// doesn't take (the wrong size, or the same id twice).
     /// </summary>
     public static BattleSetup Setup(string encounterId, ImmutableArray<PartyMember> party, Difficulty d, RulesPack rules)
+        => Setup(encounterId, party, d, rules, PartySpawn);
+
+    /// <summary>Set up an encounter using an authored party entry zone; ordinary encounters use party_spawn.</summary>
+    public static BattleSetup Setup(string encounterId, ImmutableArray<PartyMember> party, Difficulty d, RulesPack rules, string partySpawn)
     {
         var problems = new ContentProblems($"encounter '{encounterId}'");
         if (!rules.Encounters.TryGetValue(encounterId, out var def))
@@ -52,12 +56,12 @@ public static class Encounters
         var map = rules.MapFor(def.Map);
         if (map is null)
             problems.Add("/map", $"Unknown map '{def.Map}'.");
-        else if (!map.Zones.ContainsKey(PartySpawn))
-            problems.Add("/map", $"The map '{map.Id}' has no \"{PartySpawn}\" zone.");
+        else if (!map.Zones.ContainsKey(partySpawn))
+            problems.Add("/map", $"The map '{map.Id}' has no \"{partySpawn}\" zone.");
         problems.ThrowIfAny();
 
         var placer = new Placer(map!, problems, [.. def.Enemies.Concat(def.Npcs).Select(u => u.At).OfType<Tile>()]);
-        var spawn = map!.Zones[PartySpawn];
+        var spawn = map!.Zones[partySpawn];
         for (var i = 0; i < party.Length; i++)
         {
             if (i >= spawn.Length)

@@ -24,6 +24,37 @@ public sealed class MobRuntimeTests
         finally { Directory.Delete(folder, true); }
     }
 
+    [Theory]
+    [InlineData("ashen_ford", "mob_pine_wolves")]
+    [InlineData("ashen_ford", "mob_rooting_boars")]
+    [InlineData("ashen_ford", "mob_river_slimes")]
+    [InlineData("ashen_ford", "mob_road_bandits")]
+    [InlineData("ashen_ford", "mob_kobold_scouts")]
+    [InlineData("cinder_hollow", "mob_hollow_bats")]
+    [InlineData("cinder_hollow", "mob_hollow_kobolds")]
+    public void Real_mob_contact_selects_and_persists_its_nearest_entry(string region, string id)
+    {
+        var mob = Rules.MobsIn(region).Single(m => m.Id == id);
+        var contact = mob.Patch[0];
+        var world = Saved(contact, region) with { MobAmbush = id, MobChapter = 1,
+            Flags = [.. mob.Requires.IsDefault ? [] : mob.Requires] };
+        var s = new Session(document: DocumentAt(world), game: new TacticsGame(Rules));
+        s.Harness.StartCampaign(s.Lease);
+        var at = s.Host.Explore!.At;
+        var stamp = Rules.RegionFor(region)!.StampFor(mob.Arena)!;
+        var map = Rules.MapFor(mob.Arena)!;
+        var expected = MobSpawns.For(map, new Tile(at.X - stamp.At.X, at.Y - stamp.At.Y));
+        s.Harness.Advance(TimeSpan.FromSeconds(1));
+        Assert.Equal(TacticsPhase.Battle, s.Game.Phase);
+        var saved = TacticsDocument.Read(s.Lease.Document).Battle!;
+        Assert.Equal(expected, saved.Spawn);
+        Assert.Equal(map.Zones[expected].Take(4), saved.Members.Select((_, i) => saved.State.Units[TacticsGame.UnitFor(i)].Pos));
+        var again = new Session(document: s.Lease.Document, game: new TacticsGame(Rules));
+        again.Harness.StartCampaign(again.Lease);
+        Assert.Equal(expected, TacticsDocument.Read(again.Lease.Document).Battle!.Spawn);
+        Assert.Equal(saved.State.Units[TacticsGame.UnitFor(0)].Pos, again.Host.Battle!.Units.Single(u => u.Id == TacticsGame.UnitFor(0)).At);
+    }
+
     [Fact]
     public void A_step_without_nearby_mobs_omits_the_optional_view_fields()
     {

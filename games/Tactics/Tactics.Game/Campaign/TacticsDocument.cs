@@ -87,7 +87,8 @@ public sealed record BattleSave(string Encounter, ulong Seed, ImmutableArray<Pro
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] string? Beat = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SavedStage? Stage = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Plain = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Mob = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Mob = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Spawn = null);
 
 /// <summary>Where a battle was drawn in the world (<see cref="BattleStage"/>), as saved with it: its map's tile (0, 0) and the height added.</summary>
 public sealed record SavedStage(Tile Origin, int Height);
