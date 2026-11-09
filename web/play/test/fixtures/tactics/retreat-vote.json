@@ -1217,25 +1217,32 @@
                 1,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero3",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero3",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.disengage",
@@ -1255,25 +1262,32 @@
                 1,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero3",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero3",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.dodge",
@@ -1293,25 +1307,32 @@
                 1,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero3",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero3",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.extinguish",
@@ -1331,20 +1352,9 @@
                 1,
                 9
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             },
             {
@@ -1356,20 +1366,9 @@
                 1,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero3",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                1
               ]
             },
             {
@@ -1381,25 +1380,44 @@
                 2,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero4",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                2
               ]
             }
           ],
           "tiles": [],
-          "aim": "unit"
+          "aim": "unit",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            },
+            {
+              "unit": "hero3",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            },
+            {
+              "unit": "hero4",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.help",
@@ -1419,20 +1437,9 @@
                 1,
                 9
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             },
             {
@@ -1444,25 +1451,38 @@
                 2,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero4",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                1
               ]
             }
           ],
           "tiles": [],
-          "aim": "unit"
+          "aim": "unit",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            },
+            {
+              "unit": "hero4",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.use_item",
@@ -1482,20 +1502,9 @@
                 1,
                 9
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 7,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             },
             {
@@ -1507,20 +1516,9 @@
                 1,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero3",
-                  "damage": 0,
-                  "heal": 7,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                1
               ]
             },
             {
@@ -1532,25 +1530,44 @@
                 2,
                 10
               ],
-              "affected": [
-                {
-                  "unit": "hero4",
-                  "damage": 0,
-                  "heal": 7,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                2
               ]
             }
           ],
           "tiles": [],
-          "aim": "unit"
+          "aim": "unit",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 7,
+              "roll": 0
+            },
+            {
+              "unit": "hero3",
+              "damage": 0,
+              "heal": 7,
+              "roll": 0
+            },
+            {
+              "unit": "hero4",
+              "damage": 0,
+              "heal": 7,
+              "roll": 0
+            }
+          ]
         }
       ],
       "canDelay": true

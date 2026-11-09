@@ -14,7 +14,7 @@ it.each(["hit", "fail save"] as const)("aim target list and selected chip both e
   const data = view.data as unknown as TurnData;
   const ability = data.choices.abilities.find(a => a.ability === "common.attack")!;
   data.choices.abilities = [ability];
-  for (const t of ability.targets) for (const p of t.affected) Object.assign(p, {
+  for (const t of ability.targets) for (const p of (t.p ? t.p.map(i => ability.previews![i]!) : t.affected)) Object.assign(p, {
     roll: { kind, chance: 75, modifier: 5, vs: 14, edge: "advantage", reason: "flanking" }, damageMin: 0, damageMax: 16,
   });
   render(<ControllerScreen view={view} send={vi.fn()} me="ALEX" game="tactics" />);

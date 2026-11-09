@@ -41,11 +41,12 @@ export interface Target {
   tile: Tile | null;
 }
 
+export type AimRoll = { kind: "hit" | "fail save" | "automatic" | "reaction damage"; chance: number; modifier: number; vs: number; edge: "none" | "advantage" | "disadvantage"; reason: string };
 export interface UnitPreview {
   unit: string;
   damage: number;
   heal: number;
-  roll?: { kind: "hit" | "fail save" | "automatic" | "reaction damage"; chance: number; modifier: number; vs: number; edge: "none" | "advantage" | "disadvantage"; reason: string };
+  roll?: AimRoll | number;
   damageMin?: number;
   damageMax?: number;
 }
@@ -55,6 +56,8 @@ export interface TargetChoice {
   aim: Tile;
   affected: UnitPreview[];
   spread?: Tile[];
+  /** Indices into the ability preview table; decoded before rendering. */
+  p?: number[];
 }
 
 export interface Cost {
@@ -84,6 +87,8 @@ export interface AbilityChoice {
    * `targets`, one unit id per attack. Without a list every attack goes at the one target. Previews are for all at one.
    */
   attacks?: number;
+  rolls?: AimRoll[];
+  previews?: UnitPreview[];
 }
 
 export interface TurnChoices {

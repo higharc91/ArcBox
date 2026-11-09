@@ -12,7 +12,7 @@ import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView, UnitP
 import { ControlNotice, Conditions, EconomyChips, HpBar, HpText, LineIcon, MeCard, Section, TurnBanner } from "./ui";
 
 export function previewText(p: UnitPreview): string {
-  const roll = p.roll;
+  const roll = typeof p.roll === "object" ? p.roll : undefined;
   const d20 = roll?.kind === "hit" || roll?.kind === "fail save";
   const against = roll && d20 ? ` (${roll.modifier >= 0 ? "+" : ""}${roll.modifier} vs ${roll.kind === "hit" ? "AC" : "DC"} ${roll.vs})` : "";
   const chance = roll ? `${roll.chance}% ${roll.kind}${against}` : "";
@@ -53,7 +53,12 @@ const GROUPS: { title: string; has(c: Cost): boolean }[] = [
  * option comes from the server's `Choices.For`, so anything you can pick, the game accepts.
  */
 export function Turn({ data, send }: CustomScreenProps) {
-  const { me, units, choices, map: mapId, terrain, summoned, fallBack } = data as TurnData;
+  const { me, units, choices: wireChoices, map: mapId, terrain, summoned, fallBack } = data as TurnData;
+  const choices = useMemo(() => ({ ...wireChoices, abilities: wireChoices.abilities.map(a => ({ ...a,
+    targets: a.targets.map(t => ({ ...t, affected: (t.p ? t.p.map(i => a.previews![i]!) : t.affected).map(p => ({ ...p,
+      roll: typeof p.roll === "number" ? a.rolls?.[p.roll] : p.roll,
+    })) })),
+  })) }), [wireChoices]);
   const loadedMap = useMap(terrain ? null : mapId);
   const map = terrain ?? loadedMap;
   const icons = useIcons();
@@ -343,7 +348,7 @@ function Aim({ ability, target, unit, byId, unitLabel, onPick, strikes }: {
           <ul class="tx-targets">
             {targets.map((t, i) => (
               <li key={i}>
-                <button type="button" class={target === t ? "on" : ""} onClick={() => onPick(t)}>{label(t)}
+                <button type="button" aria-label={label(t)} aria-description={t.affected.map(previewText).filter(Boolean).join("; ")} class={target === t ? "on" : ""} onClick={() => onPick(t)}>{label(t)}
                   {t.affected.map(p => <small class="tx-target-preview" key={p.unit}>{t.affected.length > 1 ? `${byId.get(p.unit) ? unitLabel(byId.get(p.unit)!) : "You"}: ` : ""}{previewText(p)}</small>)}
                 </button>
               </li>

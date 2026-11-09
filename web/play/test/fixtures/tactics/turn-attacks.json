@@ -1096,22 +1096,9 @@
                 9,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.1",
-                  "damage": 4.4,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 45,
-                    "modifier": 3,
-                    "vs": 15,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             },
             {
@@ -1123,22 +1110,9 @@
                 10,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.2",
-                  "damage": 3.5,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 35,
-                    "modifier": 3,
-                    "vs": 17,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                1
               ]
             },
             {
@@ -1150,22 +1124,9 @@
                 11,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.3",
-                  "damage": 2.2,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 20,
-                    "modifier": 3,
-                    "vs": 20,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                2
               ]
             },
             {
@@ -1177,22 +1138,9 @@
                 11,
                 2
               ],
-              "affected": [
-                {
-                  "unit": "goblin_archer.1",
-                  "damage": 5.3,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 55,
-                    "modifier": 3,
-                    "vs": 13,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                3
               ]
             },
             {
@@ -1204,28 +1152,91 @@
                 12,
                 2
               ],
-              "affected": [
-                {
-                  "unit": "goblin_archer.2",
-                  "damage": 4.4,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 45,
-                    "modifier": 3,
-                    "vs": 15,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                4
               ]
             }
           ],
           "tiles": [],
           "aim": "unit",
-          "attacks": 2
+          "attacks": 2,
+          "rolls": [
+            {
+              "kind": "hit",
+              "chance": 45,
+              "modifier": 3,
+              "vs": 15,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 35,
+              "modifier": 3,
+              "vs": 17,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 20,
+              "modifier": 3,
+              "vs": 20,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 55,
+              "modifier": 3,
+              "vs": 13,
+              "edge": "none",
+              "reason": ""
+            }
+          ],
+          "previews": [
+            {
+              "unit": "goblin.1",
+              "damage": 4.4,
+              "heal": 0,
+              "roll": 0,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin.2",
+              "damage": 3.5,
+              "heal": 0,
+              "roll": 1,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin.3",
+              "damage": 2.2,
+              "heal": 0,
+              "roll": 2,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin_archer.1",
+              "damage": 5.3,
+              "heal": 0,
+              "roll": 3,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin_archer.2",
+              "damage": 4.4,
+              "heal": 0,
+              "roll": 0,
+              "damageMin": 0,
+              "damageMax": 13
+            }
+          ]
         },
         {
           "ability": "common.dash",
@@ -1245,25 +1256,32 @@
                 0,
                 0
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.disengage",
@@ -1283,25 +1301,32 @@
                 0,
                 0
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.dodge",
@@ -1321,25 +1346,32 @@
                 0,
                 0
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "common.extinguish",
@@ -1359,25 +1391,32 @@
                 0,
                 0
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "unit"
+          "aim": "unit",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 0,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "fighter.precision_attack",
@@ -1400,22 +1439,9 @@
                 9,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.1",
-                  "damage": 5.6,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 65,
-                    "modifier": 7,
-                    "vs": 15,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             },
             {
@@ -1427,22 +1453,9 @@
                 10,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.2",
-                  "damage": 4.8,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 55,
-                    "modifier": 7,
-                    "vs": 17,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                1
               ]
             },
             {
@@ -1454,22 +1467,9 @@
                 11,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.3",
-                  "damage": 3.6,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 40,
-                    "modifier": 7,
-                    "vs": 20,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                2
               ]
             },
             {
@@ -1481,22 +1481,9 @@
                 11,
                 2
               ],
-              "affected": [
-                {
-                  "unit": "goblin_archer.1",
-                  "damage": 6.4,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 75,
-                    "modifier": 7,
-                    "vs": 13,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                3
               ]
             },
             {
@@ -1508,28 +1495,91 @@
                 12,
                 2
               ],
-              "affected": [
-                {
-                  "unit": "goblin_archer.2",
-                  "damage": 5.6,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 65,
-                    "modifier": 7,
-                    "vs": 15,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 13
-                }
+              "affected": [],
+              "p": [
+                4
               ]
             }
           ],
           "tiles": [],
           "aim": "unit",
-          "attacks": 2
+          "attacks": 2,
+          "rolls": [
+            {
+              "kind": "hit",
+              "chance": 65,
+              "modifier": 7,
+              "vs": 15,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 55,
+              "modifier": 7,
+              "vs": 17,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 40,
+              "modifier": 7,
+              "vs": 20,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 75,
+              "modifier": 7,
+              "vs": 13,
+              "edge": "none",
+              "reason": ""
+            }
+          ],
+          "previews": [
+            {
+              "unit": "goblin.1",
+              "damage": 5.6,
+              "heal": 0,
+              "roll": 0,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin.2",
+              "damage": 4.8,
+              "heal": 0,
+              "roll": 1,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin.3",
+              "damage": 3.6,
+              "heal": 0,
+              "roll": 2,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin_archer.1",
+              "damage": 6.4,
+              "heal": 0,
+              "roll": 3,
+              "damageMin": 0,
+              "damageMax": 13
+            },
+            {
+              "unit": "goblin_archer.2",
+              "damage": 5.6,
+              "heal": 0,
+              "roll": 0,
+              "damageMin": 0,
+              "damageMax": 13
+            }
+          ]
         },
         {
           "ability": "fighter.second_wind",
@@ -1552,25 +1602,32 @@
                 0,
                 0
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 3.5,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "self"
+          "aim": "self",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 3.5,
+              "roll": 0
+            }
+          ]
         },
         {
           "ability": "fighter.trip_attack",
@@ -1593,22 +1650,9 @@
                 9,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.1",
-                  "damage": 7.9,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 45,
-                    "modifier": 3,
-                    "vs": 15,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 29
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             },
             {
@@ -1620,22 +1664,9 @@
                 10,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.2",
-                  "damage": 6.5,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 35,
-                    "modifier": 3,
-                    "vs": 17,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 29
-                }
+              "affected": [],
+              "p": [
+                1
               ]
             },
             {
@@ -1647,22 +1678,9 @@
                 11,
                 5
               ],
-              "affected": [
-                {
-                  "unit": "goblin.3",
-                  "damage": 4.2,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 20,
-                    "modifier": 3,
-                    "vs": 20,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 29
-                }
+              "affected": [],
+              "p": [
+                2
               ]
             },
             {
@@ -1674,22 +1692,9 @@
                 11,
                 2
               ],
-              "affected": [
-                {
-                  "unit": "goblin_archer.1",
-                  "damage": 9.2,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 55,
-                    "modifier": 3,
-                    "vs": 13,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 29
-                }
+              "affected": [],
+              "p": [
+                3
               ]
             },
             {
@@ -1701,28 +1706,91 @@
                 12,
                 2
               ],
-              "affected": [
-                {
-                  "unit": "goblin_archer.2",
-                  "damage": 7.9,
-                  "heal": 0,
-                  "roll": {
-                    "kind": "hit",
-                    "chance": 45,
-                    "modifier": 3,
-                    "vs": 15,
-                    "edge": "none",
-                    "reason": ""
-                  },
-                  "damageMin": 0,
-                  "damageMax": 29
-                }
+              "affected": [],
+              "p": [
+                4
               ]
             }
           ],
           "tiles": [],
           "aim": "unit",
-          "attacks": 2
+          "attacks": 2,
+          "rolls": [
+            {
+              "kind": "hit",
+              "chance": 45,
+              "modifier": 3,
+              "vs": 15,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 35,
+              "modifier": 3,
+              "vs": 17,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 20,
+              "modifier": 3,
+              "vs": 20,
+              "edge": "none",
+              "reason": ""
+            },
+            {
+              "kind": "hit",
+              "chance": 55,
+              "modifier": 3,
+              "vs": 13,
+              "edge": "none",
+              "reason": ""
+            }
+          ],
+          "previews": [
+            {
+              "unit": "goblin.1",
+              "damage": 7.9,
+              "heal": 0,
+              "roll": 0,
+              "damageMin": 0,
+              "damageMax": 29
+            },
+            {
+              "unit": "goblin.2",
+              "damage": 6.5,
+              "heal": 0,
+              "roll": 1,
+              "damageMin": 0,
+              "damageMax": 29
+            },
+            {
+              "unit": "goblin.3",
+              "damage": 4.2,
+              "heal": 0,
+              "roll": 2,
+              "damageMin": 0,
+              "damageMax": 29
+            },
+            {
+              "unit": "goblin_archer.1",
+              "damage": 9.2,
+              "heal": 0,
+              "roll": 3,
+              "damageMin": 0,
+              "damageMax": 29
+            },
+            {
+              "unit": "goblin_archer.2",
+              "damage": 7.9,
+              "heal": 0,
+              "roll": 0,
+              "damageMin": 0,
+              "damageMax": 29
+            }
+          ]
         },
         {
           "ability": "common.use_item",
@@ -1742,25 +1810,32 @@
                 0,
                 0
               ],
-              "affected": [
-                {
-                  "unit": "hero1",
-                  "damage": 0,
-                  "heal": 7,
-                  "roll": {
-                    "kind": "automatic",
-                    "chance": 100,
-                    "modifier": 0,
-                    "vs": 0,
-                    "edge": "none",
-                    "reason": "no roll"
-                  }
-                }
+              "affected": [],
+              "p": [
+                0
               ]
             }
           ],
           "tiles": [],
-          "aim": "unit"
+          "aim": "unit",
+          "rolls": [
+            {
+              "kind": "automatic",
+              "chance": 100,
+              "modifier": 0,
+              "vs": 0,
+              "edge": "none",
+              "reason": "no roll"
+            }
+          ],
+          "previews": [
+            {
+              "unit": "hero1",
+              "damage": 0,
+              "heal": 7,
+              "roll": 0
+            }
+          ]
         }
       ],
       "canDelay": true

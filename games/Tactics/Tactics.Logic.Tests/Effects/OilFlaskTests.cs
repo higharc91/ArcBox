@@ -115,7 +115,7 @@ public sealed class OilFlaskTests
         Assert.Contains(result.State.Units[U("foe")].Conditions, c => c.Id == Oiled);
     }
     [Theory]
-    [InlineData("single", 8)] [InlineData("two", 11)] [InlineData("repeat", 14)] [InlineData("attack", 11.7)]
+    [InlineData("single", 8)] [InlineData("two", 11)] [InlineData("repeat", 14)] [InlineData("attack", 10.6)]
     [InlineData("save", 11)] [InlineData("half", 9)] [InlineData("random", 11)]
     public void Damage_previews_apply_the_coating_bonus_once_per_use_including_misses(string mode, double expected)
     {
@@ -135,7 +135,16 @@ public sealed class OilFlaskTests
         var state = Coat(battle).Change("mage", u => u with { Sheet = u.Sheet with { Abilities = u.Sheet.Abilities.Add(spell.Id) } });
         var choice = Assert.Single(Choices.For(state, U("mage"), battle.Rules).Abilities, a => a.Ability == spell.Id);
         var target = Assert.Single(choice.Targets, t => t.Target.Unit == U("foe"));
-        Assert.Equal(expected, Assert.Single(target.Affected).Damage, precision: 8);
+        var preview = Assert.Single(target.Affected);
+        Assert.Equal(expected, preview.Damage, precision: 8);
+        if (mode == "attack")
+        {
+            // The friend between caster and foe grants cover: +12 vs AC 20 means 65%, not neutral-map 75%.
+            var roll = Assert.IsType<AimRoll>(preview.Roll);
+            Assert.Equal(65, roll.Chance); Assert.Equal(20, roll.Vs);
+            var hit = roll.Chance / 100;
+            Assert.Equal(Math.Round(9 * hit + 5 * (1 - Math.Pow(1 - hit, 3)), 1), preview.Damage);
+        }
     }
 
     [Fact]

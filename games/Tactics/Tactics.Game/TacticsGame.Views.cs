@@ -24,9 +24,19 @@ public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprit
 /// set for a weapon attack of several attacks (<see cref="AbilityChoice.Attacks"/>): the phone offers "Attack 2 of N" and
 /// sends a <c>targets</c> list (<see cref="Use.Targets"/>).
 /// </summary>
+public sealed record PhonePreview(UnitId Unit, double Damage, double Heal,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Roll = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? DamageMin = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? DamageMax = null);
+public sealed record PhoneTarget(Target Target, Tile Aim, ImmutableArray<PhonePreview> Affected,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<Tile> Spread = default,
+    [property: JsonPropertyName("p"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<int> PreviewIds = default);
+
 public sealed record PhoneAbility(AbilityId Ability, ItemId? Item, string Name, string Tooltip, CostDef Cost,
-    ImmutableArray<TargetChoice> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit",
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null);
+    ImmutableArray<PhoneTarget> Targets, ImmutableArray<Tile> Tiles, string Aim = "unit",
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Attacks = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<AimRoll> Rolls = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<PhonePreview> Previews = default);
 
 /// <summary><see cref="TurnChoices"/> as the phone gets them, abilities compacted (<see cref="PhoneAbility"/>).</summary>
 public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArray<MoveChoice> Moves,
@@ -43,8 +53,29 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
             var def = rules is null ? null
                 : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? rules.Abilities.GetValueOrDefault(it.Use)
                 : rules.Abilities.GetValueOrDefault(a.Ability);
+            var rolls = ImmutableArray.CreateBuilder<AimRoll>();
+            PhonePreview Preview(UnitPreview p)
+            {
+                int? index = null;
+                if (p.Roll is { } roll)
+                {
+                    var found = rolls.IndexOf(roll);
+                    if (found < 0) { found = rolls.Count; rolls.Add(roll); }
+                    index = found;
+                }
+                return new(p.Unit, p.Damage, p.Heal, index, p.DamageMin, p.DamageMax);
+            }
+            var previews = ImmutableArray.CreateBuilder<PhonePreview>();
+            int Intern(UnitPreview p)
+            {
+                var value = Preview(p); var found = previews.IndexOf(value);
+                if (found < 0) { found = previews.Count; previews.Add(value); }
+                return found;
+            }
+            var targets = a.Targets.Where(t => !Bare(t)).Select(t => new PhoneTarget(t.Target, t.Aim, [], t.Spread,
+                t.Affected.IsEmpty ? default : [.. t.Affected.Select(Intern)])).ToImmutableArray();
             return new PhoneAbility(a.Ability, a.Item, a.Name, a.Tooltip, a.Cost,
-                [.. a.Targets.Where(t => !Bare(t))], [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def), a.Attacks);
+                targets, [.. a.Targets.Where(Bare).Select(t => t.Aim)], AimOf(def), a.Attacks, rolls.Count == 0 ? default : rolls.ToImmutable(), previews.Count == 0 ? default : previews.ToImmutable());
         })],
         choices.CanDelay);
 

@@ -58,4 +58,19 @@ public sealed class AimPreviewTests
         Assert.Equal(roll.Modifier, save.Result.Modifier); Assert.Equal(roll.Vs, save.Result.Vs);
     }
 
+    [Fact]
+    public void Splittable_multiattack_ranges_describe_the_opening_attack_instead_of_claiming_all_attacks_hit_one_target()
+    {
+        var battle = TestBattle.On("0. 0. 0.\n0. 0. 0.")
+            .Party("hero", TestSheets.Fighter with { InitiativeBonus = 30, Attacks = 2 }, new(0, 0))
+            .Enemy("foe", TestSheets.Goblin, new(1, 0));
+        var (state, _) = battle.Start();
+        UnitPreview Preview(BattleState at) => Choices.For(at, new("hero"), battle.Rules).Abilities
+            .Single(a => a.Ability.Value == "common.attack").Targets.Single().Affected.Single();
+        var two = Preview(state);
+        var one = Preview(state.Change("hero", u => u with { Sheet = u.Sheet with { Attacks = 1 } }));
+        Assert.Equal(one.DamageMin, two.DamageMin); Assert.Equal(one.DamageMax, two.DamageMax);
+        Assert.True(two.Damage > one.Damage); // existing whole-use expectation remains available to callers
+    }
+
 }
