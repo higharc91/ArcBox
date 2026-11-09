@@ -37,6 +37,8 @@ ARCBOX_GAME=tactics ARCBOX_PHONES=2 ARCBOX_WALK=1 \
   bash tools/tv-e2e.sh
 ```
 
+Daily .NET checks: `bash tools/test-dotnet.sh`. Run `bash tools/check-all.sh --full` before merging a feature.
+
 See [Developing Wardenflame](games/Tactics/DEVELOPING.md) for prerequisite details, Windows notes, automated-run logs, Chapter I routes, the fast test loop and asset rebuilds. Checked-in assets are ready to play.
 
 ## Platform design

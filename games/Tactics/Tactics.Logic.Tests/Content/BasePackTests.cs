@@ -7,7 +7,7 @@ namespace Tactics.Logic.Tests;
 /// <summary>The shipped base pack (<c>content/tactics/base/rules</c>): it loads, and every piece of it builds and describes itself.</summary>
 public sealed class BasePackTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase)));
+    private static readonly Lazy<RulesPack> Pack = new(() => BaseContent.Rules);
 
     /// <summary>The base pack, loaded once with the art manifests.</summary>
     internal static RulesPack Rules => Pack.Value;

@@ -149,22 +149,32 @@ public sealed class StoryCheckTests
         Assert.Equal(Member(s, lead), Cursor(s)!.Roll!.Member);     // a three-way tie the leader is in: theirs at once
     }
 
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    public void A_single_roll_goes_to_its_matching_branch(int seed) => CheckRoll(seed);
+
     [Fact]
+    [Trait("Category", "Sim")]
     public void A_roll_goes_to_pass_or_fail()
     {
         for (var seed = 1; seed <= 12; seed++)
-        {
-            var s = Paying(harnessSeed: seed);
-            s.Harness.Advance(StoryTiming.Default.Roller);
+            CheckRoll(seed);
+    }
 
-            var roll = Cursor(s)!.Roll!;
-            var bonus = SkillCheck.Bonus(s.Game.Document.Members[roll.Member].Character, "persuasion", Rules);
-            Assert.InRange(roll.Die, 1, 20);
-            Assert.Equal(bonus, roll.Bonus);
-            Assert.Equal(roll.Die + roll.Bonus >= 15, roll.Passed);       // no natural 20 or 1 (5d default 7)
-            Assert.Equal(roll.Passed ? "pay_pass" : "pay_fail", Cursor(s)!.Node);
-            Assert.Equal((roll.Die, roll.Die + roll.Bonus, roll.Passed), (Check(s).Roll!.Kept, Check(s).Roll!.Total, Check(s).Roll!.Success));
-        }
+    private static void CheckRoll(int seed)
+    {
+        var s = Paying(harnessSeed: seed);
+        s.Harness.Advance(StoryTiming.Default.Roller);
+
+        var roll = Cursor(s)!.Roll!;
+        var bonus = SkillCheck.Bonus(s.Game.Document.Members[roll.Member].Character, "persuasion", Rules);
+        Assert.InRange(roll.Die, 1, 20);
+        Assert.Equal(bonus, roll.Bonus);
+        Assert.Equal(roll.Die + roll.Bonus >= 15, roll.Passed);       // no natural 20 or 1 (5d default 7)
+        Assert.Equal(roll.Passed ? "pay_pass" : "pay_fail", Cursor(s)!.Node);
+        Assert.Equal((roll.Die, roll.Die + roll.Bonus, roll.Passed), (Check(s).Roll!.Kept, Check(s).Roll!.Total, Check(s).Roll!.Success));
     }
 
     [Fact]

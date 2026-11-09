@@ -1,0 +1,210 @@
+{
+  "context": "Diagnostic xUnit XML profiles captured before final lane assignment, while other work could run; not an isolated benchmark. Original workloads and assertions are retained in full.",
+  "top20": [
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.TurnWaitTests.Six_phones_against_ten_foes_wait_less_between_their_turns",
+      "seconds": 89.46
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.StoryModelTests.Scenes_hold_up_against_their_model",
+      "seconds": 26.593
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneUnansweredTests.Chapter_1_plays_with_every_vote_unanswered",
+      "seconds": 25.716
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneRestartLineTests.Chapter_1_plays_with_a_restart_at_every_line(branch: \\\"force\\\")",
+      "seconds": 24.752
+    },
+    {
+      "assembly": "presentation",
+      "test": "Tactics.Presentation.Tests.World.OverlayPictureTests.Walks_past_trees_one_tile_beside_them_come_out_as_true_painters_order",
+      "seconds": 22.978
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.WalkModelTests.Walking_into_fights_holds_up_against_its_model",
+      "seconds": 19.62
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneRestartLineTests.Chapter_1_plays_with_a_restart_at_every_line(branch: \\\"parley\\\")",
+      "seconds": 16.268
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneNoClipsTests.Chapter_1_plays_with_no_clips",
+      "seconds": 11.093
+    },
+    {
+      "assembly": "presentation",
+      "test": "Tactics.Presentation.Tests.World.OverlayPictureTests.A_walk_across_the_ford_fading_what_it_passes_comes_out_as_true_painters_order",
+      "seconds": 9.055
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.StoryCheckTests.A_roll_goes_to_pass_or_fail",
+      "seconds": 8.393
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneRestartMomentTests.Chapter_1_plays_with_a_restart_at_every_moment(branch: \\\"parley\\\")",
+      "seconds": 7.66
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.WalkModelTests.Walking_holds_up_against_its_model",
+      "seconds": 7.412
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneTests.Chapter_1_plays_by_parley",
+      "seconds": 6.625
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.EngineFaultTests.A_reaction_the_engine_fails_on_is_refused_to_the_player_and_passed_when_it_times_out",
+      "seconds": 6.59
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneRestartMomentTests.Chapter_1_plays_with_a_restart_at_every_moment(branch: \\\"force\\\")",
+      "seconds": 6.526
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.ChapterOneCompanionTests.Chapter_1_plays_with_one_player_and_companions",
+      "seconds": 5.805
+    },
+    {
+      "assembly": "presentation",
+      "test": "Tactics.Presentation.Tests.World.OverlayPictureTests.A_walk_across_the_ashen_ford_comes_out_as_true_painters_order",
+      "seconds": 5.667
+    },
+    {
+      "assembly": "presentation",
+      "test": "Tactics.Presentation.Tests.World.OverlayPictureTests.A_walk_round_a_tavern_that_fades_it_comes_out_as_true_painters_order",
+      "seconds": 5.318
+    },
+    {
+      "assembly": "presentation",
+      "test": "Tactics.Presentation.Tests.World.FordBridgeTests.Only_the_matching_outcome_is_drawn_and_permanent_road_art_is_not_duplicated",
+      "seconds": 5.222
+    },
+    {
+      "assembly": "game",
+      "test": "Tactics.Game.Tests.EngineFaultTests.A_reaction_the_ai_rule_fails_to_choose_on_a_timeout_is_passed_and_counts_as_a_skip",
+      "seconds": 5.167
+    }
+  ],
+  "followUpTop20": {
+    "context": "Filtered game/logic diagnostic profiles, before final planner/reaction/replay/story-roll classification. Used to identify remaining full simulations; not a benchmark.",
+    "tests": [
+      {
+        "assembly": "logic",
+        "test": "Tactics.Logic.Tests.PlannerTests.Every_plan_command_is_accepted_by_Apply",
+        "seconds": 16.145
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.StoryCheckTests.A_roll_goes_to_pass_or_fail",
+        "seconds": 11.401
+      },
+      {
+        "assembly": "logic",
+        "test": "Tactics.Logic.Tests.SceneRunTests.Every_reachable_node_offers_something_on_both_branches",
+        "seconds": 6.903
+      },
+      {
+        "assembly": "logic",
+        "test": "Tactics.Logic.Tests.WorldWalkTests.Holding_a_direction_along_any_wall_never_steps_back_and_forth",
+        "seconds": 6.634
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.EngineFaultTests.A_reaction_the_ai_rule_fails_to_choose_on_a_timeout_is_passed_and_counts_as_a_skip",
+        "seconds": 4.754
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.EngineFaultTests.A_reaction_the_engine_fails_on_is_refused_to_the_player_and_passed_when_it_times_out",
+        "seconds": 4.726
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.PhoneFixtureTests.Every_phone_screen_matches_its_fixture",
+        "seconds": 3.723
+      },
+      {
+        "assembly": "logic",
+        "test": "Tactics.Logic.Tests.ChoicesTests.Every_offered_option_is_accepted(level: 10)",
+        "seconds": 3.718
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.TacticsGameTests.A_battle_resumed_after_a_restart_ends_as_if_it_had_never_stopped",
+        "seconds": 3.051
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.PhoneFixtureTests.A_pack_with_no_region_sends_the_phones_what_it_always_did",
+        "seconds": 2.972
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.ExplorationTests.Results_carry_on_to_the_world_with_the_switch_off",
+        "seconds": 2.938
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.EngineFaultTests.A_seat_the_engine_fails_to_hand_back_stays_the_ais_and_the_returning_player_is_told",
+        "seconds": 2.624
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.EngineFaultTests.A_save_whose_next_ai_step_fails_moves_on_the_same_way_each_time_it_is_opened",
+        "seconds": 2.581
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.WaitingScreenTests.Waiting_updates_party_hp_and_recent_events_from_completed_commands",
+        "seconds": 2.504
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.ExplorationTests.A_pack_with_no_region_keeps_its_battle_list_either_way(battleList: False)",
+        "seconds": 2.455
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.ShopTests.Encounter_gold_is_awarded_with_the_winning_checkpoint",
+        "seconds": 2.354
+      },
+      {
+        "assembly": "logic",
+        "test": "Tactics.Logic.Tests.WorldWalkTests.Walking_reaches_what_the_floods_reach_and_nothing_more",
+        "seconds": 2.231
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.ViewSizeTests.Turn_choices_for_level_10_kits_stay_under_half_the_warning(classes: [\\\"paladin\\\", \\\"ranger\\\", \\\"rogue\\\", \\\"sorcerer\\\", \\\"warlock\\\", \u00b7\u00b7\u00b7])",
+        "seconds": 2.203
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.ViewSizeTests.Turn_choices_for_level_10_kits_stay_under_half_the_warning(classes: [\\\"barbarian\\\", \\\"bard\\\", \\\"cleric\\\", \\\"druid\\\", \\\"fighter\\\", \u00b7\u00b7\u00b7])",
+        "seconds": 2.185
+      },
+      {
+        "assembly": "game",
+        "test": "Tactics.Game.Tests.PhoneEnvironmentViewTests.Current_surface_tracks_the_actual_tile_and_ice_suppresses_water_art",
+        "seconds": 2.163
+      }
+    ]
+  }
+}

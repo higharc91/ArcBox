@@ -69,7 +69,7 @@ public sealed class AshenFordDraftTests
     /// <summary>Exports the draft into a copy of the pack, over the region the pack lists, and loads the copy, which runs every check the game does.</summary>
     private static Proved Prove()
     {
-        var pack = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
+        var pack = BaseContent.Rules;
         var source = AshenFordDraft.Build(pack);
         var rules = Directory.CreateTempSubdirectory("tactics-draft-test-").FullName;
         try
@@ -87,7 +87,7 @@ public sealed class AshenFordDraftTests
             Assert.True(export.Written is not null, string.Join("\n", export.Problems));
             Assert.True(export.Listed);
 
-            var region = RulesPack.Load([rules], ArtManifests.Load(ContentPaths.ContentBase)).RegionFor(Id)!;
+            var region = RulesPack.Load([rules], BaseContent.Art).RegionFor(Id)!;
             return new Proved(pack, source, export, region, new RegionWalk(region, pack.Maps, pack.Art!));
         }
         finally

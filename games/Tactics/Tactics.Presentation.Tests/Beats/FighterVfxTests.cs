@@ -7,7 +7,7 @@ public sealed class FighterVfxTests
  [Fact]
  public void Every_fighter_ability_and_hook_has_a_real_fixture_including_failure_and_recovery()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var samples=FxShowcase.ForClass("fighter",rules);Assert.Equal(35,samples.Length);
+  var rules=BaseContent.LogicRules;var samples=ShowcaseFixtures.ForClass("fighter",rules);Assert.Equal(35,samples.Length);
   foreach(var f in FxShowcase.Inventory("fighter",rules).Where(f=>f.Kind!="static"))
   {
    var s=Assert.Single(samples,x=>x.Id==f.Id);var e=s.After.Beats.Single().Events;
@@ -26,8 +26,8 @@ public sealed class FighterVfxTests
  [Fact]
  public void Every_real_script_has_its_own_unlit_effect_and_fits_the_original_budgets()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);var art=Tactics.Presentation.Board.UnitArt.Load(Pack.Root);var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);var failures=new List<string>();var keys=new HashSet<string>();
-  foreach(var s in FxShowcase.ForClass("fighter",rules))
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);var art=Tactics.Presentation.Board.UnitArt.Load(Pack.Root);var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);var failures=new List<string>();var keys=new HashSet<string>();
+  foreach(var s in ShowcaseFixtures.ForClass("fighter",rules))
   {
    var variant=s.Id.EndsWith(".level10",StringComparison.Ordinal)||s.Id.EndsWith(".wounded",StringComparison.Ordinal);
    var a=rules.Abilities.GetValueOrDefault(new(variant?s.Id[..s.Id.LastIndexOf('.')]:s.Id));
@@ -45,7 +45,7 @@ public sealed class FighterVfxTests
  [Fact]
  public void On_hit_and_miss_marks_land_on_the_actual_resolved_victim()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);
   foreach(var id in new[]{"fighter.studied_attacks","vanguard.hold_the_line","weaponmaster.keen_edge"})
   {
    var s=FxShowcase.Specific("fighter",id,rules);var events=s.After.Beats.Single().Events;var at=Array.FindIndex(events.ToArray(),e=>e is PassiveTriggered p&&p.Passive==id);var victim=events.Take(at).OfType<AttackResolved>().Last().Target;
@@ -55,13 +55,13 @@ public sealed class FighterVfxTests
  [Fact]
  public void Two_real_basic_attacks_get_two_complete_nonoverlapping_physical_gestures()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("fighter","common.attack.level10",rules);var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("fighter","common.attack.level10",rules);var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);
   var lunges=script.Cues.OfType<LungeCue>().ToArray();Assert.Equal(2,lunges.Length);Assert.All(lunges,l=>Assert.Equal("characters.fighter_cut",l.Anim));Assert.True(lunges[1].At>=lunges[0].At+lunges[0].Length);Assert.All(lunges,l=>Assert.True(l.Length>=.2));
  }
  [Fact]
  public void Every_ability_retains_its_existing_sound_mapping_or_reuses_a_physical_clip()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);
+  var rules=BaseContent.LogicRules;var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);
   using var old=System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Pack.Root,"../../../tools/tactics-assets/baseline/fighter-vfx.json"))));
   foreach(var a in old.RootElement.EnumerateObject())
   {
@@ -72,14 +72,14 @@ public sealed class FighterVfxTests
  [Fact]
  public void Wounded_execution_keeps_the_conditional_damage_as_a_separate_result()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var samples=FxShowcase.ForClass("fighter",rules);
+  var rules=BaseContent.LogicRules;var samples=ShowcaseFixtures.ForClass("fighter",rules);
   static int FirstSwing(FxShowcaseSample s)=>s.After.Beats.Single().Events.SkipWhile(e=>e is not AttackResolved).Skip(1).TakeWhile(e=>e is not Rolled { Kind:RollKind.Attack }).OfType<Damaged>().Count();
   Assert.True(FirstSwing(samples.Single(s=>s.Id=="weaponmaster.execution_strike.wounded"))>FirstSwing(samples.Single(s=>s.Id=="weaponmaster.execution_strike")));
  }
  [Fact]
  public void Charge_braces_then_reaches_the_foe_before_its_single_strike_and_impact()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("fighter","vanguard.charge",rules);var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("fighter","vanguard.charge",rules);var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);
   var used=s.After.Beats.Single().Events.OfType<AbilityUsed>().Single();var lunge=Assert.Single(script.Cues.OfType<LungeCue>());var walk=script.Cues.OfType<WalkCue>().Where(w=>w.Unit==used.Source).ToArray();Assert.NotEmpty(walk);
   Assert.True(lunge.At>=walk.Max(w=>w.At+w.Length));Assert.Equal(walk[^1].To,lunge.From);Assert.Equal("characters.fighter_cut",lunge.Anim);
   Assert.Single(script.Cues.OfType<AbilityCue>());Assert.Contains(script.Cues.OfType<PoseCue>(),p=>p.Unit==used.Source&&p.Anim=="characters.fighter_guard"&&p.At<walk[0].At);
@@ -88,7 +88,7 @@ public sealed class FighterVfxTests
  [Fact]
  public void Keen_edge_on_a_real_self_centered_cleave_marks_the_struck_enemy()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("fighter","weaponmaster.cleave",rules);var events=s.After.Beats.Single().Events;
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);var s=FxShowcase.Specific("fighter","weaponmaster.cleave",rules);var events=s.After.Beats.Single().Events;
   var used=events.OfType<AbilityUsed>().Single();Assert.Equal(TargetKind.Self,rules.Abilities[used.Ability].Target.Kind);Assert.Null(used.Target.Unit);
   var at=Array.FindIndex(events.ToArray(),e=>e is PassiveTriggered { Passive:"weaponmaster.keen_edge" });Assert.True(at>=0);var target=events.Take(at).OfType<AttackResolved>().Last().Target;Assert.NotEqual(used.Source,target);
   var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);var clip=fx.Clip(fx.Passive("weaponmaster.keen_edge")!)!;

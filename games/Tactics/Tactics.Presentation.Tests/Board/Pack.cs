@@ -19,9 +19,9 @@ internal static class Pack
 
     private static readonly Lazy<ArtIndex> ArtOnce = new(() => ArtIndex.Load(Root));
 
-    private static readonly Lazy<ArtManifest> ManifestsOnce = new(() => ArtManifests.Load(Root));
+    private static readonly Lazy<ArtManifest> ManifestsOnce = new(() => BaseContent.Art);
 
-    private static readonly Lazy<RulesPack> RulesOnce = new(() => RulesPack.Load([Path.Combine(Root, "rules")], ManifestsOnce.Value));
+    private static readonly Lazy<RulesPack> RulesOnce = new(() => BaseContent.Rules);
 
     public static string Root => RootDir.Value;
 

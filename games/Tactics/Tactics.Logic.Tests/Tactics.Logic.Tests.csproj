@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+    <Using Include="Tactics.Testing" />
+    <Compile Include="..\Testing\BaseContent.cs" Link="Support\BaseContent.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -163,6 +163,7 @@ public sealed class RestTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_story_beat_earns_a_rest_but_an_interaction_does_not()
     {
         var s = StoryTests.Telling(StoryTests.Mayor);

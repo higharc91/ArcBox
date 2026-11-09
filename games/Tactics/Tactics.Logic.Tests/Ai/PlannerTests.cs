@@ -429,6 +429,7 @@ public sealed class PlannerTests
     }
 
     [Fact]
+    [Trait("Category", "Sim")]
     public void Every_plan_command_is_accepted_by_Apply()
     {
         var rules = Base;

@@ -14,6 +14,7 @@ namespace Tactics.Presentation.Tests.World;
 /// rastered in art pixels and held against true painter's order. The shape each thing covers stands in for its pixels, opaque all the way to its edge, which is the
 /// harshest case: a repainted item shows at once wherever it's wrong.
 /// </summary>
+[Trait("Category", "Integration")]
 public sealed class OverlayPictureTests
 {
     private const int Crop = 96;    // art pixels round the party: further than anything repainted can reach and still be tested

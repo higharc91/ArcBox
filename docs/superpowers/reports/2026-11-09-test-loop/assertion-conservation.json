@@ -1,0 +1,375 @@
+{
+  "base": "17dc7f76",
+  "method": "Balanced Assert calls compared per touched test file, ignoring whitespace and normalizing the renamed immutable fixture factory. No existing assertion call was removed or changed.",
+  "files": [
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/BoardChangesTests.cs",
+      "originalAssertions": 13,
+      "retained": 13,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/ChapterOneGoldTests.cs",
+      "originalAssertions": 19,
+      "retained": 19,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/ChapterOneTests.cs",
+      "originalAssertions": 82,
+      "retained": 82,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/CharacterTests.cs",
+      "originalAssertions": 64,
+      "retained": 64,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/CompanionTests.cs",
+      "originalAssertions": 15,
+      "retained": 15,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/DifficultyTests.cs",
+      "originalAssertions": 17,
+      "retained": 17,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/EngineFaultTests.cs",
+      "originalAssertions": 142,
+      "retained": 142,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/ExplorationTests.cs",
+      "originalAssertions": 143,
+      "retained": 143,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/InSessionLevelUpTests.cs",
+      "originalAssertions": 28,
+      "retained": 28,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/InteractModelTests.cs",
+      "originalAssertions": 18,
+      "retained": 18,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/RestTests.cs",
+      "originalAssertions": 63,
+      "retained": 63,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/ShopTests.cs",
+      "originalAssertions": 73,
+      "retained": 73,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/StoryCheckTests.cs",
+      "originalAssertions": 63,
+      "retained": 63,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/StoryModelTests.cs",
+      "originalAssertions": 8,
+      "retained": 8,
+      "added": 1
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/TacticsGameTests.cs",
+      "originalAssertions": 62,
+      "retained": 62,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/TurnWaitTests.cs",
+      "originalAssertions": 8,
+      "retained": 8,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/ViewSizeTests.cs",
+      "originalAssertions": 3,
+      "retained": 3,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/WalkModelTests.cs",
+      "originalAssertions": 2,
+      "retained": 2,
+      "added": 1
+    },
+    {
+      "file": "games/Tactics/Tactics.Game.Tests/WalkingTests.cs",
+      "originalAssertions": 291,
+      "retained": 291,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Logic.Tests/Ai/PlannerTests.cs",
+      "originalAssertions": 67,
+      "retained": 67,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Logic.Tests/Ai/SimSmokeTests.cs",
+      "originalAssertions": 72,
+      "retained": 72,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Logic.Tests/Content/BasePackTests.cs",
+      "originalAssertions": 71,
+      "retained": 71,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Logic.Tests/Golden/GoldenTests.cs",
+      "originalAssertions": 52,
+      "retained": 52,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Logic.Tests/World/InteractableLoreTests.cs",
+      "originalAssertions": 5,
+      "retained": 5,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Audio/BeatSoundsTests.cs",
+      "originalAssertions": 66,
+      "retained": 66,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Audio/SoundBankTests.cs",
+      "originalAssertions": 63,
+      "retained": 63,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/BardVfxTests.cs",
+      "originalAssertions": 22,
+      "retained": 22,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/BattleCutInTests.cs",
+      "originalAssertions": 35,
+      "retained": 35,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/BeatScriptTests.cs",
+      "originalAssertions": 378,
+      "retained": 378,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/ClericVfxTests.cs",
+      "originalAssertions": 31,
+      "retained": 31,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/CounterspellChainTests.cs",
+      "originalAssertions": 20,
+      "retained": 20,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/DruidVfxTests.cs",
+      "originalAssertions": 42,
+      "retained": 42,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/FighterVfxTests.cs",
+      "originalAssertions": 51,
+      "retained": 51,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/FxArtTests.cs",
+      "originalAssertions": 19,
+      "retained": 19,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/FxRoundBudgetTests.cs",
+      "originalAssertions": 10,
+      "retained": 10,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/FxShowcaseTests.cs",
+      "originalAssertions": 51,
+      "retained": 51,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/PaladinVfxTests.cs",
+      "originalAssertions": 27,
+      "retained": 27,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/RangerVfxTests.cs",
+      "originalAssertions": 42,
+      "retained": 42,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/RealBattleTimingTests.cs",
+      "originalAssertions": 14,
+      "retained": 14,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/SorcererVfxTests.cs",
+      "originalAssertions": 22,
+      "retained": 22,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/WarlockVfxTests.cs",
+      "originalAssertions": 26,
+      "retained": 26,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Beats/WizardVfxTests.cs",
+      "originalAssertions": 12,
+      "retained": 12,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Board/MobRefreshTests.cs",
+      "originalAssertions": 90,
+      "retained": 90,
+      "added": 5
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Board/SpellLightingTests.cs",
+      "originalAssertions": 27,
+      "retained": 27,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Board/UnitArtTests.cs",
+      "originalAssertions": 108,
+      "retained": 108,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/Board/UnitPlanTests.cs",
+      "originalAssertions": 127,
+      "retained": 127,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/WordsTests.cs",
+      "originalAssertions": 2,
+      "retained": 2,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/World/FaunaTests.cs",
+      "originalAssertions": 40,
+      "retained": 40,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/World/OverlayPictureTests.cs",
+      "originalAssertions": 46,
+      "retained": 46,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/World/StagePlanTests.cs",
+      "originalAssertions": 75,
+      "retained": 75,
+      "added": 2
+    },
+    {
+      "file": "games/Tactics/Tactics.Presentation.Tests/World/WorldPlanTests.cs",
+      "originalAssertions": 95,
+      "retained": 95,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.WorldTools.Tests/AshenFordDraftTests.cs",
+      "originalAssertions": 229,
+      "retained": 229,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.WorldTools.Tests/BasePackRegionTests.cs",
+      "originalAssertions": 20,
+      "retained": 20,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.WorldTools.Tests/CinderHollowDraftTests.cs",
+      "originalAssertions": 8,
+      "retained": 8,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.WorldTools.Tests/PaletteTests.cs",
+      "originalAssertions": 39,
+      "retained": 39,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.WorldTools.Tests/RegionExportTests.cs",
+      "originalAssertions": 178,
+      "retained": 178,
+      "added": 0
+    },
+    {
+      "file": "games/Tactics/Tactics.WorldTools.Tests/RegionWriterTests.cs",
+      "originalAssertions": 104,
+      "retained": 104,
+      "added": 0
+    },
+    {
+      "file": "src/ArcBox.Host.Core.Tests/Audio/TtsClientTests.cs",
+      "originalAssertions": 40,
+      "retained": 40,
+      "added": 0
+    },
+    {
+      "file": "src/ArcBox.Server.Tests/Storage/StorageWriterTests.cs",
+      "originalAssertions": 62,
+      "retained": 62,
+      "added": 0
+    },
+    {
+      "file": "src/ArcBox.Server.Tests/Tactics/TacticsEndToEndTests.cs",
+      "originalAssertions": 2,
+      "retained": 2,
+      "added": 0
+    }
+  ],
+  "originalAssertions": 3604,
+  "retained": 3604,
+  "added": 9,
+  "approvedMobTheoryRows": {
+    "original": 41,
+    "retainedInOriginalExhaustiveTest": 41,
+    "identicalOrderAndValues": true,
+    "alsoCoveredByNewDailyMetadataGuard": 41
+  }
+}

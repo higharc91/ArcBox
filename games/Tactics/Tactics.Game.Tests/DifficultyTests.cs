@@ -55,6 +55,7 @@ public sealed class DifficultyTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void It_can_be_changed_at_results_too()
     {
         var s = new TacticsGameTests.Session();

@@ -1,0 +1,123 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ArcBox.Sdk -> /workspace/ArcBox-loop/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Counter.Logic -> /workspace/ArcBox-loop/games/Counter/Counter.Logic/bin/Release/net10.0/Counter.Logic.dll
+  ArcBox.Sdk.Testing -> /workspace/ArcBox-loop/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Counter.Logic.Tests -> /workspace/ArcBox-loop/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll
+  Redline.Logic -> /workspace/ArcBox-loop/games/Redline/Redline.Logic/bin/Release/net10.0/Redline.Logic.dll
+  Redline.Logic.Tests -> /workspace/ArcBox-loop/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll
+  Redline.Presentation -> /workspace/ArcBox-loop/games/Redline/Redline.Presentation/bin/Release/net10.0/Redline.Presentation.dll
+  Redline.Presentation.Tests -> /workspace/ArcBox-loop/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll
+  Redline.Sim -> /workspace/ArcBox-loop/games/Redline/tools/Redline.Sim/bin/Release/net10.0/Redline.Sim.dll
+  Tactics.Logic -> /workspace/ArcBox-loop/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/ArcBox-loop/games/Tactics/Tactics.Game/bin/Release/net10.0/Tactics.Game.dll
+  Tactics.Game.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll
+  Tactics.Sim -> /workspace/ArcBox-loop/games/Tactics/Tactics.Sim/bin/Release/net10.0/Tactics.Sim.dll
+  Tactics.Logic.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll
+  Tactics.Presentation -> /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation/bin/Release/net10.0/Tactics.Presentation.dll
+  Tactics.Presentation.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll
+  Tactics.WorldTools -> /workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools/bin/Release/net10.0/Tactics.WorldTools.dll
+  Tactics.WorldTools.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll
+  ArcBox.Host.Core -> /workspace/ArcBox-loop/src/ArcBox.Host.Core/bin/Release/net10.0/ArcBox.Host.Core.dll
+  ArcBox.Server -> /workspace/ArcBox-loop/src/ArcBox.Server/bin/Release/net10.0/ArcBox.Server.dll
+  ArcBox.Host.Core.Tests -> /workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll
+  ArcBox.Host -> /workspace/ArcBox-loop/src/ArcBox.Host/.godot/mono/temp/bin/Release/ArcBox.Host.dll
+  ArcBox.Sdk.Tests -> /workspace/ArcBox-loop/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll
+  ArcBox.Server.Tests -> /workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll
+  Tactics.World.Editor -> /workspace/ArcBox-loop/tools/tactics-world/.godot/mono/temp/bin/Release/Tactics.World.Editor.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.39
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_with_oil_coated_targets_and_consumable_damage_forecasts (6s 120ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    oil-coated river stress, fire/cold/lightning: 64 turn states; plan times (ms): median 11.9, p95 65.9, max 251.9
+    
+  Error output
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_on_6_vs_10 (1s 321ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    river_crossing stress, level 10: 64 turn states; plan times (ms): median 4.1, p95 21.3, max 33.4
+    
+  Error output
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_in_the_largest_sample_encounters(encounter: "crypt_hall", level: 5) (712ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    crypt_hall, level 5: 64 turn states; plan times (ms): median 3.5, p95 8.0, max 10.5
+    
+  Error output
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_in_the_largest_sample_encounters(encounter: "crystal_cave", level: 7) (879ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    crystal_cave, level 7: 64 turn states; plan times (ms): median 4.5, p95 12.0, max 16.8
+    
+  Error output
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_with_conduction_and_surface_choices_on_6_vs_10 (1s 065ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    environment-enabled river stress, fire/cold/lightning: 64 turn states; plan times (ms): median 4.1, p95 17.0, max 24.5
+    
+  Error output
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_with_overlapping_hazard_paths_on_6_vs_10 (1s 043ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    river_crossing stress with spell hazards: 64 turn states; plan times (ms): median 3.9, p95 21.2, max 23.2
+    
+  Error output
+passed Tactics.Logic.Tests.AiPerformanceTests.P95_under_250ms_with_teleporting_melee_heroes (1s 031ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  Standard output
+    crystal_cave, level 7, elves with a Shadow rogue: 64 turn states; plan times (ms): median 5.2, p95 11.5, max 15.1
+    
+  Error output
+/workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (14s 065ms)
+
+Test run summary: Passed!
+  total: 7
+  failed: 0
+  succeeded: 7
+  skipped: 0
+  duration: 14s 279ms
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+passed Tactics.Presentation.Tests.World.FaunaTests.A_pen_is_found_quickly_however_much_fence_is_about (26ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+passed Tactics.Presentation.Tests.World.StagePlanTests.A_rebuild_on_the_largest_region_is_quick (1s 860ms)
+  from /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+  Standard output
+    160x120: whole BoardTerrain 4.60 ms; stage rebuild 5.92 ms against 13.28 ms without the window (646 items, 1554 lit, 63 lights); 4 world blocks 22.79 ms
+    
+  Error output
+/workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (2s 549ms)
+
+Test run summary: Passed!
+  total: 2
+  failed: 0
+  succeeded: 2
+  skipped: 0
+  duration: 2s 743ms
+Running tests from /workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+passed ArcBox.Host.Core.Tests.Audio.TtsClientTests.Gives_up_after_the_timeout (227ms)
+  from /workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+/workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (603ms)
+
+Test run summary: Passed!
+  total: 1
+  failed: 0
+  succeeded: 1
+  skipped: 0
+  duration: 808ms
+Running tests from /workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+passed ArcBox.Server.Tests.Storage.StorageWriterTests.StopAsync_on_a_disk_that_stays_down_gives_up_at_the_cap_and_says_so (1s 262ms)
+  from /workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+/workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (1s 701ms)
+
+Test run summary: Passed!
+  total: 1
+  failed: 0
+  succeeded: 1
+  skipped: 0
+  duration: 1s 911ms

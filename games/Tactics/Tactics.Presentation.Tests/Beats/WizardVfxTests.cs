@@ -12,7 +12,7 @@ public sealed class WizardVfxTests
     [Fact]
     public void Renamed_spell_effects_retain_their_existing_sound_ids()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var sounds = SoundBank.Load(Pack.Root);
         var baseline = Path.GetFullPath(Path.Combine(Pack.Root, "../../../tools/tactics-assets/baseline/wizard-vfx.json"));
         using var doc = JsonDocument.Parse(File.ReadAllText(baseline));
@@ -24,12 +24,12 @@ public sealed class WizardVfxTests
     [Fact]
     public void Every_real_wizard_beat_and_effect_fits_its_budget_and_uses_resolved_distinct_art()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var art = FxArt.Load(Pack.Root);
         var units = UnitArt.Load(Pack.Root);
         var keys = new HashSet<string>();
         var failures = new List<string>();
-        foreach (var sample in FxShowcase.ForClass("wizard", rules))
+        foreach (var sample in ShowcaseFixtures.ForClass("wizard", rules))
         {
             var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, art);
             if (sample.Id == "common.attack") continue;

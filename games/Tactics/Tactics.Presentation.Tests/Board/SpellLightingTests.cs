@@ -12,7 +12,7 @@ public sealed class SpellLightingTests
     [Fact]
     public void A_real_lightning_beam_lights_its_length_instead_of_only_the_casters_feet()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var sample = FxShowcase.Sample("wizard", new("wizard.lightning_bolt"), 5, rules, 1);
         var player = new BeatPlayer(FxArt.Load(Pack.Root), UnitArt.Load(Pack.Root)) { EnhancedEffects = true };
         var terrain = new BoardTerrain(Pack.Map(sample.Before.Map), sample.Before.Board);

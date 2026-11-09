@@ -12,7 +12,7 @@ public sealed class SorcererVfxTests
     [Fact]
     public void Renamed_spell_effects_retain_their_existing_sound_ids()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var sounds = SoundBank.Load(Pack.Root);
         var baseline = Path.GetFullPath(Path.Combine(Pack.Root, "../../../tools/tactics-assets/baseline/sorcerer-vfx.json"));
         using var doc = JsonDocument.Parse(File.ReadAllText(baseline));
@@ -24,10 +24,10 @@ public sealed class SorcererVfxTests
     [Fact]
     public void Every_random_outcome_uses_its_actual_damage_material_and_existing_sound()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var art = FxArt.Load(Pack.Root);
         var sounds = SoundBank.Load(Pack.Root);
-        var samples = FxShowcase.ForClass("sorcerer", rules);
+        var samples = ShowcaseFixtures.ForClass("sorcerer", rules);
         Assert.Equal(50, samples.Length);
         var outcomes = new HashSet<string>();
         foreach (var sample in samples.Where(s => s.Id.StartsWith("chaos.wild_surge") || s.Id.StartsWith("chaos.controlled_surge")))
@@ -63,12 +63,12 @@ public sealed class SorcererVfxTests
     [Fact]
     public void Every_real_sorcerer_beat_and_effect_fits_its_budget_and_uses_resolved_distinct_art()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var art = FxArt.Load(Pack.Root);
         var units = UnitArt.Load(Pack.Root);
         var keys = new HashSet<string>();
         var failures = new List<string>();
-        foreach (var sample in FxShowcase.ForClass("sorcerer", rules))
+        foreach (var sample in ShowcaseFixtures.ForClass("sorcerer", rules))
         {
             var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, art);
             if (sample.Id == "common.attack") continue;

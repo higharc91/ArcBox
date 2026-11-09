@@ -11,6 +11,7 @@ namespace ArcBox.Server.Tests.Tactics;
 /// finished battle. Phones end their turns and pass on reactions; the TV answers every beat with <c>shown</c>, so the AI
 /// is paced by the signal alone (the rooms' fake clock never moves).
 /// </summary>
+[Trait("Category", "Integration")]
 public sealed class TacticsEndToEndTests
 {
     private static string? Str(JsonElement e, string name) =>

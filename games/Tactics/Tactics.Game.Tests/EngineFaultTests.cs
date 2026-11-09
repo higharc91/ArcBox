@@ -76,6 +76,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void An_ai_step_the_engine_fails_on_ends_that_units_turn_and_the_battle_plays_on()
     {
         var (game, faults) = Watched();
@@ -97,6 +98,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_save_taken_after_an_ai_failure_holds_a_good_state_and_plays_out_when_reopened()
     {
         var (game, faults) = Watched();
@@ -119,6 +121,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_save_whose_next_ai_step_fails_moves_on_the_same_way_each_time_it_is_opened()
     {
         // The seed-108 shape: the save is good, but the AI's next step fails, and it would make the same step on every open.
@@ -228,6 +231,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void When_every_unit_fails_every_step_the_battle_is_called_off_after_a_round_of_skipped_turns()
     {
         var (game, faults) = Watched();
@@ -246,6 +250,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_reaction_the_engine_fails_on_is_refused_to_the_player_and_passed_when_it_times_out()
     {
         // An AI reactor is never offered (the engine decides at once), so the adapter answers only a player's prompt: theirs,
@@ -342,6 +347,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_turn_the_ai_fails_to_plan_is_ended_and_the_battle_plays_on()
     {
         var (game, faults) = Watched();
@@ -360,6 +366,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_reaction_the_ai_rule_fails_to_choose_on_a_timeout_is_passed_and_counts_as_a_skip()
     {
         var (game, faults) = Watched();
@@ -416,6 +423,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_battle_whose_result_the_engine_fails_on_is_called_off()
     {
         var (game, faults) = Watched();
@@ -437,6 +445,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_seat_the_engine_fails_to_hand_back_stays_the_ais_and_the_returning_player_is_told()
     {
         var (game, faults) = Watched();
@@ -460,6 +469,7 @@ public sealed class EngineFaultTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_seat_that_leaves_and_returns_while_hand_overs_fail_is_still_theirs_and_nobody_is_told_otherwise()
     {
         var (game, faults) = Watched();

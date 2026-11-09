@@ -65,6 +65,7 @@ public sealed class UnitPlanTests
     [InlineData("bosses.hound.black", "bosses.attack", .4)]
     [InlineData("bosses.hound.grey", "bosses.attack", .4)]
     [InlineData("bosses.imp.violet", "bosses.attack", .4)]
+    [Trait("Category", "Integration")]
     public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
     {
         var view = Unit("a", "Enemy", 11, 10, key);
@@ -86,6 +87,7 @@ public sealed class UnitPlanTests
     [InlineData("bosses.troll.troll", "bosses.special")]
     [InlineData("bosses.golem.granite", "bosses.special")]
     [InlineData("bosses.mimic.oak", "bosses.attack")]
+    [Trait("Category", "Integration")]
     public void Raised_boulders_fists_and_jaws_stay_below_their_health_bar(string key, string binding)
     {
         var view = Unit("a", "Enemy", 11, 10, key);

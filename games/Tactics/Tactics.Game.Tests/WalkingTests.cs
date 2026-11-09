@@ -606,6 +606,7 @@ public sealed class WalkingTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_walk_at_the_battle_list_or_results_is_ignored()
     {
         var s = At(Road());
@@ -1070,6 +1071,7 @@ public sealed class WalkingTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_battle_comes_back_to_a_party_stood_still_with_the_clock_running()
     {
         var s = At(Road());

@@ -9,7 +9,7 @@ public sealed class FxArtTests
 {
     private static readonly Lazy<FxArt> Fx = new(() => FxArt.Load(Pack.Root));
 
-    private static readonly Lazy<RulesPack> Rules = new(() => RulesPack.Load([Path.Combine(Pack.Root, "rules")]));
+    private static readonly Lazy<RulesPack> Rules = new(() => BaseContent.LogicRules);
 
     private static bool OnDisk(string path) => File.Exists(Path.Combine(Pack.Root, path));
 

@@ -7,6 +7,7 @@ namespace Tactics.Game.Tests;
 public sealed class ChapterOneGoldTests
 {
     [Fact]
+    [Trait("Category", "Integration")]
     public void The_council_advance_is_paid_once_and_can_fund_a_purchase_from_each_players_own_purse()
     {
         var s = StoryTests.Telling(StoryTests.Mayor);
@@ -48,6 +49,7 @@ public sealed class ChapterOneGoldTests
     [Theory]
     [InlineData("af_reeves_chest", 15, "potion_of_healing")]
     [InlineData("af_ash_market_cache", 10, "smoke_bomb")]
+    [Trait("Category", "Integration")]
     public void Shipped_treasure_splits_gold_keeps_item_loot_and_cannot_be_collected_again(string id, int share, string item)
     {
         var s = new Session();

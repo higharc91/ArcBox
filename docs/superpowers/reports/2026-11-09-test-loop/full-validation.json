@@ -1,0 +1,27 @@
+{
+  "command": "bash tools/check-all.sh --full",
+  "wallSeconds": 344.756,
+  "exitCode": 0,
+  "utc": "2026-11-09T19:38:59.004742+00:00",
+  "groups": {
+    ".NET build": "PASS",
+    ".NET tests": "PASS",
+    "Phone tests and build": "PASS",
+    "Node tool tests": "PASS",
+    "Python tools and lore": "PASS"
+  },
+  "tests": {
+    ".NET": 7736,
+    "phone": 601,
+    "Node": 24,
+    "assets": 61,
+    "audio": 9,
+    "lore": 23
+  },
+  "totalTests": 8454,
+  "failed": 0,
+  "skipped": 0,
+  "buildWarnings": 0,
+  "phoneProductionBuild": "PASS",
+  "ci": "Deliberately disabled; unchanged"
+}

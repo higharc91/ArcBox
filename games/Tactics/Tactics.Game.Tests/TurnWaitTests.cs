@@ -17,6 +17,7 @@ namespace Tactics.Game.Tests;
 /// prompt answered after <see cref="Bot.ReactSeconds"/>. A "brisk" bot taps End turn once it is done; a "dawdler" never does, so its
 /// clock runs out (the worst case the short clock is for). Set <c>TURN_WAIT_REPORT</c> to a file to have the numbers written there.</para>
 /// </summary>
+[Trait("Category", "Sim")]
 public sealed class TurnWaitTests
 {
     private static readonly string[] Classes = ["fighter", "cleric", "rogue", "wizard", "fighter", "rogue"];

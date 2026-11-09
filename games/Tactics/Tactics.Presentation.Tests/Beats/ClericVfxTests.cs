@@ -7,8 +7,8 @@ public sealed class ClericVfxTests
     [Fact]
     public void The_complete_reel_uses_real_healing_restoration_revival_undead_and_death_ward_triggers()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
-        var samples = FxShowcase.ForClass("cleric", rules);
+        var rules = BaseContent.LogicRules;
+        var samples = ShowcaseFixtures.ForClass("cleric", rules);
         Assert.Equal(44,samples.Length);
         foreach (var feature in FxShowcase.Inventory("cleric",rules).Where(f => f.Kind != "static"))
         {
@@ -44,12 +44,12 @@ public sealed class ClericVfxTests
     [Fact]
     public void Every_real_beat_fits_its_budget_and_every_ability_or_proc_has_its_own_resolved_effect()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var fx = FxArt.Load(Pack.Root);
         var units = Tactics.Presentation.Board.UnitArt.Load(Pack.Root);
         var failures = new List<string>();
         var effects = new HashSet<string>();
-        foreach (var sample in FxShowcase.ForClass("cleric", rules))
+        foreach (var sample in ShowcaseFixtures.ForClass("cleric", rules))
         {
             var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, fx);
             var extra = sample.Id == "cleric.toll_the_dead.wounded";
@@ -75,7 +75,7 @@ public sealed class ClericVfxTests
         }
         Assert.Empty(failures);
         Assert.Equal(42,effects.Count);
-        foreach (var sample in FxShowcase.ForClass("cleric",rules).Where(s=>s.Id!="common.attack"))
+        foreach (var sample in ShowcaseFixtures.ForClass("cleric",rules).Where(s=>s.Id!="common.attack"))
         {
             var id = sample.Id == "cleric.toll_the_dead.wounded" ? "cleric.toll_the_dead" : sample.Id;
             var key = rules.Abilities.GetValueOrDefault(new(id))?.Presentation?.Fx ?? fx.Passive(id);
@@ -89,7 +89,7 @@ public sealed class ClericVfxTests
     public void All_renamed_effects_retain_their_existing_sounds()
     {
         var sounds = Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+        var rules = BaseContent.LogicRules;
         using var old = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Pack.Root,"../../../tools/tactics-assets/baseline/cleric-vfx.json"))));
         foreach (var a in old.RootElement.EnumerateObject())
             Assert.Equal(sounds.ForEffect(a.Value.GetProperty("fx").GetString()!),sounds.ForEffect(rules.Abilities[new(a.Name)].Presentation!.Fx!));
@@ -97,7 +97,7 @@ public sealed class ClericVfxTests
     [Fact]
     public void Cleric_split_damage_and_visible_procs_keep_separate_number_rows()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+        var rules = BaseContent.LogicRules;
         var fx = FxArt.Load(Pack.Root);
         foreach (var id in new[] {"cleric.flame_strike","war.war_priest","cleric.divine_strike","light.burning_luminescence"})
         {

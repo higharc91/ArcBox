@@ -15,6 +15,7 @@ public sealed class SimCollection;
 /// with an outcome, and the report renders every section.
 /// </summary>
 [Collection(typeof(SimCollection))]
+[Trait("Category", "Sim")]
 public sealed class SimSmokeTests
 {
     [Fact]

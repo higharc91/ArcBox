@@ -5,51 +5,73 @@ namespace Tactics.Presentation.Tests.Board;
 
 public sealed class MobRefreshTests
 {
+    // xUnit serializes this class: keep its mutable sprite cache local to this collection.
+    private static readonly Lazy<UnitArt> Art = new(() => UnitArt.Load(Pack.Root));
+
+    public static TheoryData<string, string> ApprovedMobs => new()
+    {
+        { "characters.goblin_cutthroat", "goblin" },
+        { "characters.orc_brute", "orc" },
+        { "beasts.drake.red", "drake" },
+        { "characters.goblin_archer", "goblin_archer" },
+        { "characters.goblin_shaman", "goblin_shaman" },
+        { "characters.goblin_spear", "goblin_boss" },
+        { "characters.hobgoblin", "hobgoblin" },
+        { "characters.bandit", "bandit" },
+        { "characters.cultist", "cultist" },
+        { "characters.cult_leader", "cult_leader" },
+        { "characters.skeleton", "skeleton" },
+        { "characters.skeleton_archer", "skeleton_archer" },
+        { "characters.zombie", "zombie" },
+        { "bosses.wraith.wraith", "wraith" },
+        { "characters.necromancer", "necromancer" },
+        { "characters.lich", "lich" },
+        { "characters.black_knight", "black_knight" },
+        { "characters.dark_elf", "dark_elf" },
+        { "bosses.troll.troll", "troll" },
+        { "bosses.golem.granite", "golem" },
+        { "bosses.mimic.oak", "mimic" },
+        { "bosses.hound.tan", "hound" },
+        { "bosses.imp.crimson", "imp" },
+        { "bosses.sapling.spring", "sapling" },
+        { "bosses.air_elemental.gale", "air_elemental" },
+        { "bosses.earth_elemental.stone", "earth_elemental" },
+        { "bosses.fire_elemental.ember", "fire_elemental" },
+        { "bosses.water_elemental.sea", "water_elemental" },
+        { "bosses.dragon.red", "dragon" },
+        { "bosses.air_elemental.storm", "air_storm" },
+        { "bosses.earth_elemental.magma", "earth_magma" },
+        { "bosses.water_elemental.swamp", "water_swamp" },
+        { "bosses.golem.basalt", "golem_basalt" },
+        { "bosses.golem.crystal", "golem_crystal" },
+        { "bosses.golem.temple", "golem_temple" },
+        { "bosses.fire_elemental.azure", "fire_azure" },
+        { "bosses.fire_elemental.radiant", "fire_radiant" },
+        { "bosses.fire_elemental.shadow", "fire_shadow" },
+        { "bosses.hound.black", "hound_black" },
+        { "bosses.hound.grey", "hound_grey" },
+        { "bosses.imp.violet", "imp_violet" },
+    };
+
     [Theory]
-    [InlineData("characters.goblin_cutthroat", "goblin")]
-    [InlineData("characters.orc_brute", "orc")]
-    [InlineData("beasts.drake.red", "drake")]
-    [InlineData("characters.goblin_archer", "goblin_archer")]
-    [InlineData("characters.goblin_shaman", "goblin_shaman")]
-    [InlineData("characters.goblin_spear", "goblin_boss")]
-    [InlineData("characters.hobgoblin", "hobgoblin")]
-    [InlineData("characters.bandit", "bandit")]
-    [InlineData("characters.cultist", "cultist")]
-    [InlineData("characters.cult_leader", "cult_leader")]
-    [InlineData("characters.skeleton", "skeleton")]
-    [InlineData("characters.skeleton_archer", "skeleton_archer")]
-    [InlineData("characters.zombie", "zombie")]
-    [InlineData("bosses.wraith.wraith", "wraith")]
-    [InlineData("characters.necromancer", "necromancer")]
-    [InlineData("characters.lich", "lich")]
-    [InlineData("characters.black_knight", "black_knight")]
-    [InlineData("characters.dark_elf", "dark_elf")]
-    [InlineData("bosses.troll.troll", "troll")]
-    [InlineData("bosses.golem.granite", "golem")]
-    [InlineData("bosses.mimic.oak", "mimic")]
-    [InlineData("bosses.hound.tan", "hound")]
-    [InlineData("bosses.imp.crimson", "imp")]
-    [InlineData("bosses.sapling.spring", "sapling")]
-    [InlineData("bosses.air_elemental.gale", "air_elemental")]
-    [InlineData("bosses.earth_elemental.stone", "earth_elemental")]
-    [InlineData("bosses.fire_elemental.ember", "fire_elemental")]
-    [InlineData("bosses.water_elemental.sea", "water_elemental")]
-    [InlineData("bosses.dragon.red", "dragon")]
-    [InlineData("bosses.air_elemental.storm", "air_storm")]
-    [InlineData("bosses.earth_elemental.magma", "earth_magma")]
-    [InlineData("bosses.water_elemental.swamp", "water_swamp")]
-    [InlineData("bosses.golem.basalt", "golem_basalt")]
-    [InlineData("bosses.golem.crystal", "golem_crystal")]
-    [InlineData("bosses.golem.temple", "golem_temple")]
-    [InlineData("bosses.fire_elemental.azure", "fire_azure")]
-    [InlineData("bosses.fire_elemental.radiant", "fire_radiant")]
-    [InlineData("bosses.fire_elemental.shadow", "fire_shadow")]
-    [InlineData("bosses.hound.black", "hound_black")]
-    [InlineData("bosses.hound.grey", "hound_grey")]
-    [InlineData("bosses.imp.violet", "imp_violet")]
+    [MemberData(nameof(ApprovedMobs))]
+    public void Approved_mob_manifests_keep_their_paths_directions_and_motion_clips(string key, string name)
+    {
+        var sprite = Art.Value.Sprite(key);
+        Assert.NotNull(sprite);
+        Assert.Equal($"creatures/mob_refresh_{name}.png", sprite.Path);
+        Assert.Equal(8, sprite.Directions.Length);
+        foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" })
+            Assert.True(sprite.Anims.TryGetValue(action, out var anim) && !anim.Frames.IsEmpty, $"Missing {key}/{action}");
+        Assert.False(sprite.Down.Loop);
+    }
+
+    [Theory]
+    [MemberData(nameof(ApprovedMobs))]
+    [Trait("Category", "Integration")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var sprite = Art.Value.Sprite(key)!;
         Assert.Equal($"creatures/mob_refresh_{name}.png", sprite.Path);
         Assert.Equal(8, sprite.Directions.Length);
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
@@ -108,8 +130,8 @@ public sealed class MobRefreshTests
     [InlineData("bosses.golem.temple", "golem.seismic_slam", "golem.stone_aegis")]
     public void Giants_bind_their_two_special_moves_to_distinct_complete_clips(string key, string primary, string buff)
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")], Pack.Manifests);
+        var sprite = Art.Value.Sprite(key)!;
+        var rules = BaseContent.Rules;
         var primaryBinding = rules.Abilities[new(primary)].Presentation!.Anim!;
         var buffBinding = rules.Abilities[new(buff)].Presentation!.Anim!;
         Assert.Equal("bosses.special", primaryBinding);
@@ -126,7 +148,7 @@ public sealed class MobRefreshTests
     [InlineData("bosses.troll.frost")]
     public void Legacy_boss_variants_keep_their_existing_special_clip_for_the_buff_binding(string key)
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var sprite = Art.Value.Sprite(key)!;
         Assert.Equal(sprite.Anim("special").Frames.ToArray(), sprite.Anim("bosses.buff").Frames.ToArray());
         Assert.Equal(sprite.Anim("special").Fps, sprite.Anim("bosses.buff").Fps);
         Assert.Equal(sprite.Anim("special").Loop, sprite.Anim("bosses.buff").Loop);
@@ -136,7 +158,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Halvard_cleave_uses_the_greatsword_swing_and_ward_uses_a_separate_guard()
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.black_knight")!;
+        var sprite = Art.Value.Sprite("characters.black_knight")!;
         Assert.Equal(sprite.Anim("attack").Frames.ToArray(), sprite.Anim("characters.slam").Frames.ToArray());
         Assert.Equal(sprite.Anim("attack").Fps, sprite.Anim("characters.slam").Fps);
         Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim("characters.buff").Frames.ToArray());
@@ -147,7 +169,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Drow_shadow_step_uses_an_invocation_separate_from_the_rapier_thrust()
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.dark_elf")!;
+        var sprite = Art.Value.Sprite("characters.dark_elf")!;
         Assert.Equal(sprite.Anim("cast").Frames.ToArray(), sprite.Anim("characters.cast").Frames.ToArray());
         Assert.False(sprite.Anim("cast").Loop);
         Assert.False(sprite.Anim("cast").Frames.SequenceEqual(sprite.Anim("attack").Frames));
@@ -158,7 +180,7 @@ public sealed class MobRefreshTests
     [InlineData("characters.lich", true)]
     public void Rime_keeper_staff_focus_stays_on_the_right_side_when_walking_and_turning(string key, bool ivory)
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var sprite = Art.Value.Sprite(key)!;
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         foreach (var row in new[] { 0, 1, 3, 4, 5, 7 })
             foreach (var action in new[] { "idle", "walk" })
@@ -188,7 +210,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Rime_keeper_spells_use_free_hand_casting_separate_from_staff_melee()
     {
-        var art = UnitArt.Load(Pack.Root);
+        var art = Art.Value;
         foreach (var key in new[] { "characters.necromancer", "characters.lich" })
         {
             var sprite = art.Sprite(key)!;
@@ -202,7 +224,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Wraith_life_drain_uses_gathering_poses_separate_from_its_physical_touch()
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("bosses.wraith.wraith")!;
+        var sprite = Art.Value.Sprite("bosses.wraith.wraith")!;
         var special = sprite.Anim("bosses.special");
         Assert.Equal(sprite.Anim("cast").Frames.ToArray(), special.Frames.ToArray());
         Assert.False(special.Loop);
@@ -213,7 +235,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Bone_warden_archer_uses_the_authored_bow_shot_for_ranged_attacks()
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.skeleton_archer")!;
+        var sprite = Art.Value.Sprite("characters.skeleton_archer")!;
         var shoot = sprite.Anim("characters.shoot");
         Assert.Equal(sprite.Anim("attack").Frames.ToArray(), shoot.Frames.ToArray());
         Assert.Equal(sprite.Anim("attack").Fps, shoot.Fps);
@@ -224,7 +246,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Maren_keeps_the_staff_on_her_left_side_through_front_and_rear_motion()
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("characters.cult_leader")!;
+        var sprite = Art.Value.Sprite("characters.cult_leader")!;
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         foreach (var row in new[] { 0, 1, 3, 4, 5, 7 })
             foreach (var action in new[] { "idle", "walk", "cast" })
@@ -252,7 +274,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Kindled_spells_use_casting_poses_separate_from_dagger_and_staff_melee()
     {
-        var art = UnitArt.Load(Pack.Root);
+        var art = Art.Value;
         foreach (var key in new[] { "characters.cultist", "characters.cult_leader" })
         {
             var sprite = art.Sprite(key)!;
@@ -265,7 +287,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Goblin_roles_use_their_authored_shooting_spell_and_rally_poses()
     {
-        var art = UnitArt.Load(Pack.Root);
+        var art = Art.Value;
         var archer = art.Sprite("characters.goblin_archer")!;
         Assert.Equal(archer.Anim("attack").Frames.ToArray(), archer.Anim("characters.shoot").Frames.ToArray());
         Assert.Equal(archer.Anim("attack").Fps, archer.Anim("characters.shoot").Fps);
@@ -282,7 +304,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Drake_spreads_its_wings_in_every_attack_facing()
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("beasts.drake.red")!;
+        var sprite = Art.Value.Sprite("beasts.drake.red")!;
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         (int Width, int Top) Bounds(int frame, int row)
         {
@@ -306,7 +328,7 @@ public sealed class MobRefreshTests
     [Fact]
     public void Visible_mob_heights_keep_the_approved_party_scale_regardless_of_atlas_padding()
     {
-        var art = UnitArt.Load(Pack.Root);
+        var art = Art.Value;
         var person = art.Sprite("characters.class_fighter")!.HeadLift;
         Assert.InRange(art.Sprite("characters.goblin_cutthroat")!.HeadLift / person, .5f, .9f);
         Assert.InRange(art.Sprite("characters.orc_brute")!.HeadLift / person, 1f, 1.5f);

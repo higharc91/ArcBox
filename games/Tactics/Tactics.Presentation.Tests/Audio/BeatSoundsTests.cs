@@ -16,7 +16,7 @@ public sealed class BeatSoundsTests
     private static readonly Lazy<FxArt> Fx = new(() => FxArt.Load(Pack.Root));
     private static readonly Lazy<UnitArt> Art = new(() => UnitArt.Load(Pack.Root));
     private static readonly Lazy<SoundBank> Bank = new(() => SoundBank.Load(Pack.Root));
-    private static readonly Lazy<RulesPack> Rules = new(() => RulesPack.Load([Path.Combine(Pack.Root, "rules")]));
+    private static readonly Lazy<RulesPack> Rules = new(() => BaseContent.LogicRules);
     private static readonly UnitId Hero = new("hero1");
     private static readonly UnitId Foe = new("goblin.1");
     private static readonly AbilityId Attack = new("common.attack");

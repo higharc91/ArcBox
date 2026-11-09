@@ -350,6 +350,18 @@ public sealed class StagePlanTests(ITestOutputHelper output)
     // Plan 5c Task 5, step 5: a beat that changes the ground rebuilds the stage on the TV's frame, so that has to fit in 8 ms, measured alone. The world's blocks
     // round the change cost what any block does to bake (about 4 ms each on the stress region), so they go through the world's own block queue.
     [Fact]
+    public void A_stage_rebuild_reads_a_window_rather_than_the_whole_region()
+    {
+        var ground = Hills.Value;
+        var stage = new BattleStage("hills", new Tile(60, 30), 0, 14, 12);
+        var changes = BoardChanges.None with { Heights = [new HeightChange(new Tile(3, 3), 2)], Sunk = [new Tile(5, 5)] };
+        var plan = StagePlan.Build(ground, stage, null, Pack.Art).With(changes);
+        var most = (plan.Drawn.W + 9) * (plan.Drawn.H + 9);
+        Assert.True(plan.Read <= most, $"read {plan.Read} tiles; window bound {most}");
+        Assert.True(plan.Read * 10 < ground.Map.Width * ground.Map.Height);
+    }
+
+    [Fact]
     [Trait("Category", "Perf")]
     public void A_rebuild_on_the_largest_region_is_quick()
     {

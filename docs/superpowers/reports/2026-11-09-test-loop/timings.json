@@ -1,0 +1,106 @@
+{
+  "daily": {
+    "command": "bash tools/test-dotnet.sh",
+    "wallSeconds": 95.173,
+    "exitCode": 0,
+    "includesBuild": true,
+    "context": "Final daily checks; Release build of every test dependency; 10 modules / 1 collection thread; warm incremental build; no competing build/test jobs; 4-core managed Linux .NET 10.0.403",
+    "utc": "2026-11-09T19:31:02.633415+00:00",
+    "tests": {
+      "passed": 7308,
+      "failed": 0,
+      "skipped": 0,
+      "assemblies": 10,
+      "executionSeconds": 86.832
+    }
+  },
+  "isolatedPerf": {
+    "command": "bash tools/test-dotnet.sh --perf",
+    "wallSeconds": 29.36,
+    "exitCode": 0,
+    "includesBuild": true,
+    "context": "Isolated assemblies and collections, no competing build/test jobs; original runtime/JIT settings",
+    "utc": "2026-11-09T19:32:29.027421+00:00",
+    "passedTests": 11,
+    "failedTests": 0,
+    "skippedTests": 0,
+    "aiScenarios": [
+      {
+        "label": "oil-coated river stress, fire/cold/lightning",
+        "medianMs": 11.9,
+        "p95Ms": 65.9,
+        "maxMs": 251.9,
+        "p95BudgetMs": 250
+      },
+      {
+        "label": "river_crossing stress, level 10",
+        "medianMs": 4.1,
+        "p95Ms": 21.3,
+        "maxMs": 33.4,
+        "p95BudgetMs": 250
+      },
+      {
+        "label": "crypt_hall, level 5",
+        "medianMs": 3.5,
+        "p95Ms": 8.0,
+        "maxMs": 10.5,
+        "p95BudgetMs": 250
+      },
+      {
+        "label": "crystal_cave, level 7",
+        "medianMs": 4.5,
+        "p95Ms": 12.0,
+        "maxMs": 16.8,
+        "p95BudgetMs": 250
+      },
+      {
+        "label": "environment-enabled river stress, fire/cold/lightning",
+        "medianMs": 4.1,
+        "p95Ms": 17.0,
+        "maxMs": 24.5,
+        "p95BudgetMs": 250
+      },
+      {
+        "label": "river_crossing stress with spell hazards",
+        "medianMs": 3.9,
+        "p95Ms": 21.2,
+        "maxMs": 23.2,
+        "p95BudgetMs": 250
+      },
+      {
+        "label": "crystal_cave, level 7, elves with a Shadow rogue",
+        "medianMs": 5.2,
+        "p95Ms": 11.5,
+        "maxMs": 15.1,
+        "p95BudgetMs": 250
+      }
+    ]
+  },
+  "fullGate": {
+    "command": "bash tools/check-all.sh --full",
+    "wallSeconds": 344.756,
+    "exitCode": 0,
+    "utc": "2026-11-09T19:38:59.004742+00:00",
+    "groups": {
+      ".NET build": "PASS",
+      ".NET tests": "PASS",
+      "Phone tests and build": "PASS",
+      "Node tool tests": "PASS",
+      "Python tools and lore": "PASS"
+    },
+    "tests": {
+      ".NET": 7736,
+      "phone": 601,
+      "Node": 24,
+      "assets": 61,
+      "audio": 9,
+      "lore": 23
+    },
+    "totalTests": 8454,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "phoneProductionBuild": "PASS",
+    "ci": "Deliberately disabled; unchanged"
+  }
+}

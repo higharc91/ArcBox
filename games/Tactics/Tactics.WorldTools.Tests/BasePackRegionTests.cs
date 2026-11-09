@@ -11,7 +11,7 @@ namespace Tactics.WorldTools.Tests;
 /// </summary>
 public sealed class BasePackRegionTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase)));
+    private static readonly Lazy<RulesPack> Pack = new(() => BaseContent.Rules);
 
     private static string World(params string[] parts) => Path.Combine([ContentPaths.RepoRoot, "tools", "tactics-world", .. parts]);
 

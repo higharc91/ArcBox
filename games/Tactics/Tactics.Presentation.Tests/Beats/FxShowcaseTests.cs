@@ -8,12 +8,13 @@ using Tactics.Presentation.Tests.Board;
 
 namespace Tactics.Presentation.Tests.Beats;
 
+[Trait("Category", "Sim")]
 public sealed class FxShowcaseTests
 {
     [Fact]
     public void A_ranged_class_gets_a_distant_real_target_and_an_ordinary_arrow()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var sample = FxShowcase.Sample("ranger", RulesPack.CommonAttack.Id, 1, rules, 1);
         var hero = sample.Before.Units.First(u => u.Id.Value == "hero1");
         var used = sample.After.Beats.Single().Events.OfType<AbilityUsed>().First();
@@ -27,7 +28,7 @@ public sealed class FxShowcaseTests
     [Fact]
     public void Inventory_includes_all_class_and_subclass_choices_and_uses_the_shared_tiers_and_real_art_keys()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var art = FxArt.Load(Pack.Root);
         foreach (var cls in rules.Classes.Values)
         {
@@ -60,9 +61,9 @@ public sealed class FxShowcaseTests
     [Fact]
     public void The_pilot_class_reel_plays_every_ability_and_visible_proc_including_real_defensive_reactions()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var inventory = FxShowcase.Inventory("wizard", rules);
-        var samples = FxShowcase.ForClass("wizard", rules);
+        var samples = ShowcaseFixtures.ForClass("wizard", rules);
         Assert.Equal(inventory.Count(r => r.Kind != "static") + 1, samples.Length);
         foreach (var feature in inventory.Where(r => r.Kind != "static"))
         {
@@ -92,7 +93,7 @@ public sealed class FxShowcaseTests
     public void Close_up_plays_the_real_cast_frames_without_releasing_the_spell_or_its_light_early()
     {
         var sample = FxShowcase.StepZero(Pack.Root)[3];
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var terrain = new global::Tactics.Presentation.Board.BoardTerrain(rules.Maps[sample.Before.Map], sample.Before.Board);
         var player = new BeatPlayer(FxArt.Load(Pack.Root), global::Tactics.Presentation.Board.UnitArt.Load(Pack.Root)) { EnhancedEffects = true };
         player.CutIn = (beat, before, script) => CutInPlayback.For(beat, before, script, rules, terrain, BattleCinematics.Full);
@@ -112,7 +113,7 @@ public sealed class FxShowcaseTests
     [InlineData(true, true)]
     public void A_real_counterspell_keeps_the_frame_and_releases_only_when_the_reaction_allows_it(bool counter, bool fail)
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var fireball = new AbilityId(fail ? "wizard.ice_storm" : "wizard.fireball");
         var counterspell = new AbilityId("wizard.counterspell");
         var caster = new UnitId("enemycaster");
@@ -206,7 +207,7 @@ public sealed class FxShowcaseTests
     public void Area_telegraphs_are_the_rules_tiles_even_with_cinematics_off()
     {
         var sample = FxShowcase.StepZero(Pack.Root)[3];
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var script = BeatScript.Of(sample.After.Beats[0], sample.Before, sample.After, FxArt.Load(Pack.Root));
         var terrain = new global::Tactics.Presentation.Board.BoardTerrain(rules.Maps[sample.Before.Map], sample.Before.Board);
         var playback = CutInPlayback.For(sample.After.Beats[0], sample.Before, script, rules, terrain, BattleCinematics.Off)!;

@@ -7,6 +7,7 @@ namespace Tactics.Logic.Tests;
 /// Every <c>Golden/*.replay.json</c> must produce exactly the events in its <c>*.events.json</c>. Set
 /// <c>UPDATE_GOLDENS=1</c> to rewrite the event files from the engine instead, then review the diff.
 /// </summary>
+[Trait("Category", "Sim")]
 public sealed class GoldenTests
 {
     private const string Suffix = ".replay.json";

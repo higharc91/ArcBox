@@ -7,8 +7,8 @@ public sealed class DruidVfxTests
     [Fact]
     public void All_spells_zones_companion_and_four_beast_forms_have_real_engine_fixtures()
     {
-        var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
-        var samples=FxShowcase.ForClass("druid",rules);
+        var rules=BaseContent.LogicRules;
+        var samples=ShowcaseFixtures.ForClass("druid",rules);
         Assert.Equal(53,samples.Length);
         Assert.Equal(samples.Single(s=>s.Id=="common.attack").Before.Units,FxShowcase.Specific("druid","common.attack",rules).Before.Units);
         foreach(var feature in FxShowcase.Inventory("druid",rules).Where(f=>f.Kind!="static"))
@@ -38,12 +38,12 @@ public sealed class DruidVfxTests
     [Fact]
     public void Every_real_beat_fits_its_budget_and_every_ability_or_proc_has_its_own_resolved_effect()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var fx = FxArt.Load(Pack.Root);
         var units = Tactics.Presentation.Board.UnitArt.Load(Pack.Root);
         var failures = new List<string>();
         var effects = new HashSet<string>();
-        foreach (var sample in FxShowcase.ForClass("druid", rules))
+        foreach (var sample in ShowcaseFixtures.ForClass("druid", rules))
         {
             var script = BeatScript.Of(sample.After.Beats.Single(), sample.Before, sample.After, fx);
             var extra = sample.Id.StartsWith("druid.form.",StringComparison.Ordinal);
@@ -79,7 +79,7 @@ public sealed class DruidVfxTests
     public void All_renamed_effects_retain_their_existing_sounds()
     {
         var sounds = Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+        var rules = BaseContent.LogicRules;
         using var old = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Pack.Root,"../../../tools/tactics-assets/baseline/druid-vfx.json"))));
         foreach (var a in old.RootElement.EnumerateObject())
             Assert.Equal(sounds.ForEffect(a.Value.GetProperty("fx").GetString()!),sounds.ForEffect(rules.Abilities[new(a.Name)].Presentation!.Fx!));
@@ -87,7 +87,7 @@ public sealed class DruidVfxTests
     [Fact]
     public void Four_forms_resolve_distinct_native_compass_atlases_and_all_weapon_rolls_keep_their_visual_hit()
     {
-        var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+        var rules=BaseContent.LogicRules;
         var art=Tactics.Presentation.Board.UnitArt.Load(Pack.Root);
         var fx=FxArt.Load(Pack.Root);
         var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);
@@ -112,7 +112,7 @@ public sealed class DruidVfxTests
     [Fact]
     public void Ice_storm_split_damage_keeps_separate_readable_numbers()
     {
-        var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);
+        var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);
         var sample=FxShowcase.Specific("druid","druid.ice_storm",rules);
         var script=BeatScript.Of(sample.After.Beats.Single(),sample.Before,sample.After,fx);
         var groups=script.Cues.OfType<PopCue>().Where(p=>p.Style==PopStyle.Damage&&p.Text.StartsWith('-')).GroupBy(p=>p.Unit).Where(g=>g.Count()>1).ToArray();
