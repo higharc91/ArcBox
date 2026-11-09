@@ -246,6 +246,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             _ => false,
         }) || shown.Units.Any(u => u.Id == beat.Actor && (IsDruidForm(u.Sprite)||u.Sprite?.EndsWith("_paladin",StringComparison.Ordinal)==true||u.Sprite?.EndsWith("_fighter",StringComparison.Ordinal)==true));
         private int _rolls;
+        private UnitId? _lastAreaDamage;
         private bool _rolled;          // the last thing to advance the clock was a roll, which already spaced this target from the last
         private int _areaEnd = -1;     // the last event of the area effect being played: before it, its targets resolve together
         private int _at;
@@ -420,6 +421,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     _cues.Add(new FocusCue(_t, used.Target.Unit));
                     _stackedDamageRows.Clear();
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
+                    _lastAreaDamage = null;
                     Swing(used);
                     break;
                 case PassiveTriggered passive:
@@ -1009,7 +1011,9 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             Cry(hit.Unit, "hurt");
             Moment("hit", 0.08);
             Apply(hit);
-            Land();
+            if (!InArea || _lastAreaDamage != hit.Unit) Land();
+            else _rolled = false;
+            if (InArea) _lastAreaDamage = hit.Unit;
         }
 
         // A blow takes its moment; the rest of an area effect's targets follow close behind it.

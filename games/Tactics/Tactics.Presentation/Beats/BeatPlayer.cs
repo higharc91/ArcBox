@@ -121,6 +121,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private int _played;        // the last beat begun
     private double _cinematicClock;
     private CutInPlayback? _cutIn;
+    private readonly CinematicBudget _cinematicBudget = new();
     private CutInFrame? _carriedCamera;
     private double _clock;      // into the current beat
     private double _now;        // since the start, as beats see it: a hitch doesn't count past LongestFrame
@@ -176,6 +177,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         if (_queue.Offer(live.Beats, _real))
         {
             (_script, Shown, _cutIn, _carriedCamera) = (null, null, null, null);
+            _cinematicBudget.Reset();
             _waitingSpells.Clear();
         }
         _live = live;
@@ -207,6 +209,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     {
         _waitingSpells.Clear();
         _queue.Clear();
+        _cinematicBudget.Reset();
         _fading.Clear();
         (_script, _live, Shown, Caption, _rest, AiFinished, _caughtUp, _cutIn) = (null, null, null, null, 0, null, null, null);
         _unread.Clear();
@@ -285,7 +288,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         beat = ResumeSpell(beat);
         (_opening, _played) = (beat.Seq, beat.Seq);     // if working out its script throws, it's already off the queue
         (_script, _next, _clock, _cinematicClock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0, 0);
-        _cutIn = CutIn?.Invoke(beat, Shown, _script);
+        _cutIn = _cinematicBudget.Apply(Shown.Round, Shown.Units.Count(u => u.Side == nameof(Side.Party)), CutIn?.Invoke(beat, Shown, _script));
         _opening = null;
         Target = null;
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))

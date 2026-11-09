@@ -45,6 +45,8 @@ public sealed class BattleCutIn
         ScriptLength = actions.Sum(a => a.Seconds);
     }
 
+    public BattleCutIn WithoutExtra() => new(_actions, BattleCinematics.Off, _zoom);
+
     public double ScriptLength { get; }
     public double Lead => _tier == CutInTier.None ? 0 : PushSeconds + (_tier == CutInTier.Full ? FullHoldSeconds : 0);
     public double Extra => _tier == CutInTier.None ? 0 : Lead + SettleSeconds;

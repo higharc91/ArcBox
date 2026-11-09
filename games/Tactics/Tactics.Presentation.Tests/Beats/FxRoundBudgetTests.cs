@@ -33,6 +33,7 @@ public sealed class FxRoundBudgetTests
             var state = Battle.Start(setup, rules, seed).State;
             var totals = new Dictionary<(int Round, BattleCinematics Mode), double>();
             var carried = new Dictionary<BattleCinematics, CutInFrame?>();
+            var budgets = Enum.GetValues<BattleCinematics>().ToDictionary(mode => mode, _ => new CinematicBudget());
             var actual = new Dictionary<(int Round, BattleCinematics Mode), double>();
             var players = Enum.GetValues<BattleCinematics>().ToDictionary(mode => mode, mode =>
             {
@@ -95,7 +96,8 @@ public sealed class FxRoundBudgetTests
                 var terrain = new BoardTerrain(setup.Map, old.Board);
                 foreach (var mode in Enum.GetValues<BattleCinematics>())
                 {
-                    var playback = CutInPlayback.For(beat, old, script, rules, terrain, mode, incoming: carried.GetValueOrDefault(mode));
+                    var playback = budgets[mode].Apply(before.Round, party.Length,
+                        CutInPlayback.For(beat, old, script, rules, terrain, mode, incoming: carried.GetValueOrDefault(mode)));
                     totals[(before.Round, mode)] = totals.GetValueOrDefault((before.Round, mode)) + (playback?.Extra ?? 0);
                     carried[mode] = playback?.HoldsForReaction == true ? playback.Frame(playback.Length) : null;
                     var player = players[mode];

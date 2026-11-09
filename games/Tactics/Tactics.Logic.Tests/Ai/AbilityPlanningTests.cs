@@ -199,21 +199,23 @@ public sealed class AbilityPlanningTests
         Assert.Null(UseOf(Ai.Plan(alone.Start().State, U("sora"), alone.Rules), "sorcerer.metamagic_twinned"));
     }
 
-    [Fact]
-    public void A_sorcerer_does_not_twin_a_spell_when_the_second_hit_is_not_worth_the_sorcery()
+    [Theory]
+    [InlineData(1, false)]
+    [InlineData(5, true)]
+    public void A_sorcerer_spends_on_a_resisted_twin_only_when_the_second_hit_is_worth_the_sorcery(int level, bool worthIt)
     {
-        // As above, but Bree resists fire: the twin still has a second target, yet half a Fire Bolt on her is worth less than
-        // the 2 Sorcery it costs, so the bolt goes plain.
+        // Fire Bolt now shares the wizard's level-5 scaling. A resisted level-1 bolt is below the 2-Sorcery price;
+        // a resisted level-5 bolt is worth it. Keep both sides of the planner's resource decision covered.
         var (bolt, twin) = (A("sorcerer.fire_bolt"), A("sorcerer.metamagic_twinned"));
         var battle = On(Open(8, 3)).With(bolt, twin)
-            .Enemy("sora", Mage(bolt, twin) with { Move = 0, Resources = Ordinal.Map(("sorcery", 6)) }, T(1, 1), new AiControlled("caster"))
+            .Enemy("sora", Mage(bolt, twin) with { Move = 0, Level = level, Resources = Ordinal.Map(("sorcery", 6)) }, T(1, 1), new AiControlled("caster"))
             .Party("aldo", TestSheets.Fighter with { Move = 0 }, T(5, 1))
             .Party("bree", TestSheets.Fighter with { Move = 0, Resist = Ordinal.Set("fire") }, T(5, 2));
         var state = battle.Start().State;
 
         var plan = Ai.Plan(state, U("sora"), battle.Rules);
 
-        Assert.True(UseOf(plan, "sorcerer.fire_bolt") is not null && UseOf(plan, "sorcerer.metamagic_twinned") is null, plan.Explain);
+        Assert.True(UseOf(plan, "sorcerer.fire_bolt") is not null && (UseOf(plan, "sorcerer.metamagic_twinned") is not null) == worthIt, plan.Explain);
     }
 
     [Fact]
