@@ -29,7 +29,7 @@
 {"$type":"RoundStarted","round":2,"order":["shaman","mage","gob","wet"]},
 {"$type":"TurnStarted","unit":"shaman","round":2},
 {"$type":"AbilityUsed","source":"shaman","ability":"kobold_slinger.fire_pot","target":{"unit":null,"tile":[5,6]},"presentation":{"anim":"characters.cast","fx":"fx.explosion","projectile":"projectiles.fireball"}},
-{"$type":"Rolled","roller":"mage","kind":"Save","result":{"d20s":[17],"kept":17,"modifier":-5,"total":12,"vs":13,"success":false,"crit":false,"fumble":false}},
+{"$type":"Rolled","roller":"mage","kind":"Save","result":{"d20s":[17],"kept":17,"modifier":-5,"total":12,"vs":13,"success":false,"crit":false,"fumble":false},"context":{"source":"shaman","ability":"kobold_slinger.fire_pot"}},
 {"$type":"Damaged","unit":"mage","amount":9,"type":"fire","hpAfter":91},
 {"$type":"ConditionApplied","unit":"mage","condition":"burning"},
 {"$type":"TileReacted","rule":"ignite","source":"shaman","tiles":[[4,6],[5,5],[5,6]]},

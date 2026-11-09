@@ -77,7 +77,11 @@ public sealed record Delayed(UnitId Unit, int ToIndex) : BattleEvent;
 public sealed record AbilityUsed(UnitId Source, AbilityId Ability, Target Target, PresentationDef? Presentation) : BattleEvent;
 
 /// <summary>A unit rolled a d20 (both dice when it had an edge).</summary>
-public sealed record Rolled(UnitId Roller, RollKind Kind, RollResult Result) : BattleEvent;
+public sealed record RollContext(UnitId Source, AbilityId Ability);
+public sealed record Rolled(UnitId Roller, RollKind Kind, RollResult Result) : BattleEvent
+{
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public RollContext? Context { get; init; }
+}
 
 /// <summary>A unit took <see cref="Amount"/> damage (after resistances, temporary HP included) and has <see cref="HpAfter"/> left.</summary>
 public sealed record Damaged(UnitId Unit, int Amount, string? Type, int HpAfter) : BattleEvent;
@@ -138,7 +142,11 @@ public sealed record PassiveTriggered(UnitId Owner, string Passive,
 /// An attack's final outcome, after any reaction to its roll (a <see cref="Rolled"/> hit can become a miss, a hit on a
 /// helpless adjacent target a critical hit). The TV labels the attack from this.
 /// </summary>
-public sealed record AttackResolved(UnitId Source, UnitId Target, bool Hit, bool Crit) : BattleEvent;
+public sealed record AttackResolved(UnitId Source, UnitId Target, bool Hit, bool Crit) : BattleEvent
+{
+    /// <summary>The final AC when a reaction changed it after Rolled was emitted.</summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int? FinalAc { get; init; }
+}
 
 /// <summary>
 /// The next attack of <see cref="Unit"/>'s multi-attack goes to <see cref="Target"/>, not to the unit its last attack (or,

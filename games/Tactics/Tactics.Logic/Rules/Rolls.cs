@@ -141,7 +141,7 @@ public static class Rolls
     /// unit) and returns the roll.
     /// </summary>
     public static RollResult Save(BattleWriter w, UnitId unit, Stat stat, int dc, RulesPack rules, int cover = 0,
-        UnitId? source = null, bool autoSucceed = false)
+        UnitId? source = null, bool autoSucceed = false, RollContext? context = null)
     {
         var sheet = w.Unit(unit).Sheet;
         var sources = Modifiers.Sources(w.State, unit, rules).ToArray();
@@ -163,7 +163,7 @@ public static class Rolls
             roll = roll with { Success = false };
         if (autoSucceed)
             roll = roll with { Success = true };
-        w.Emit(new Rolled(unit, RollKind.Save, roll));
+        w.Emit(new Rolled(unit, RollKind.Save, roll) { Context = context });
         Hooks.Fire(w, HookKind.OnSave, new HookArgs(unit, source, roll), rules);
         return roll;
     }

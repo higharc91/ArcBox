@@ -538,7 +538,7 @@ public sealed class ReactionTests
             new Reacted(U("kara"), "test.shield"),
             new AbilityUsed(U("kara"), ShieldSpell.Id, new Target(Unit: U("kara")), null),
             new ConditionApplied(U("kara"), Shielded.Id),
-            new AttackResolved(U("gob"), U("kara"), Hit: false, Crit: false),
+            new AttackResolved(U("gob"), U("kara"), Hit: false, Crit: false) { FinalAc = 23 },
         ], reacted);
         Assert.Equal(12, after.Units[U("kara")].Hp);
         Assert.False(after.Units[U("kara")].Economy.Reaction);

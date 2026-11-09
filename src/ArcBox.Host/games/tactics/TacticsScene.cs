@@ -1294,6 +1294,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
             _fx ??= FxArt.Load(root);
             _cinemaRules ??= RulesPack.Load([Path.Combine(root, "rules")]);
             _player ??= new BeatPlayer(_fx, _unitArt, _sound, _voices);
+            _player.Rules = _cinemaRules;
             _player.EnhancedEffects = true;
             _player.ReducedEffects = ReducedEffects;
             _player.CutIn = (beat, before, script) => _map is null ? null : CutInPlayback.For(beat, before, script, _cinemaRules,
@@ -1366,6 +1367,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, framed, _player.AiFinished);
         _hud?.ShowCards(shown, _said.Lead, _player.Target, units, framed);
+        _hud?.ShowCombat(frame.Combat);
         ShowRetreat(_player.Live ?? shown);
     }
 
@@ -1423,6 +1425,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, stage.HudFit, _player.AiFinished);
         _hud?.ShowCards(shown, _said.Lead, _player.Target, units, stage.HudFit);
+        _hud?.ShowCombat(beat.Combat);
         ShowRetreat(_player.Live ?? shown);
     }
 
