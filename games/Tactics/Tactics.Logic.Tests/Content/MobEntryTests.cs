@@ -20,7 +20,7 @@ public sealed class MobEntryTests
             Assert.All(tiles, t => { Assert.True(terrain.Walkable(t)); Assert.False(map[t].Flags.HasFlag(TileFlags.Water)); });
             var reached = WorldWalk.Reach(terrain, tiles[0], ClassDef.DefaultJump);
             var walkable = Enumerable.Range(0, map.Width).SelectMany(x => Enumerable.Range(0, map.Height).Select(y => new Tile(x, y))).Where(terrain.Walkable).ToArray();
-            Assert.Empty(walkable.Where(t => !reached.Contains(t)));
+            Assert.DoesNotContain(walkable, t => !reached.Contains(t));
             var pending = tiles.ToHashSet(); var queue = new Queue<Tile>(); queue.Enqueue(tiles[0]); pending.Remove(tiles[0]);
             while (queue.TryDequeue(out var at))
                 foreach (var next in new[] { new Tile(at.X + 1, at.Y), new Tile(at.X - 1, at.Y), new Tile(at.X, at.Y + 1), new Tile(at.X, at.Y - 1) })
