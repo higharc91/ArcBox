@@ -5,8 +5,8 @@
 /* ---------------------------------------------------------------- palette and type */
 :is(.screen[data-game="tactics"], .screen.portal:has(.tx-portal)) {
   --wf-ink: #f4ecd6;
-  --wf-muted: #bdb093;
-  --wf-dim: #8a826d;
+  --wf-muted: #d0c5ad;
+  --wf-dim: #b0a58d;
   --wf-gold: #e6bd5c;
   --wf-gold-2: #a07c33;
   --wf-gold-hi: #ffe7a8;
@@ -65,8 +65,8 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 4px var(--gutter) 16px; }
 .tx :is(h1, h2, h3, p) { margin: 0; }
 .tx-title { font: 800 24px/1.15 var(--wf-serif); letter-spacing: 0.06em; color: var(--wf-ink); }
-.tx-sect { font: 700 12px/1.3 var(--wf-serif); letter-spacing: 0.2em; text-transform: uppercase; color: var(--wf-gold); margin-top: 4px; }
-.tx-eyebrow { display: block; font: 700 11px var(--wf-serif); letter-spacing: 0.22em; text-transform: uppercase; color: var(--wf-gold); }
+.tx-sect { font: 700 13px/1.3 var(--wf-serif); letter-spacing: 0.2em; text-transform: uppercase; color: var(--wf-gold); margin-top: 4px; }
+.tx-eyebrow { display: block; font: 700 13px var(--wf-serif); letter-spacing: 0.22em; text-transform: uppercase; color: var(--wf-gold); }
 .tx-note { display: block; color: var(--wf-muted); font-size: 15px; line-height: 1.35; }
 .tx-note.center { text-align: center; }
 .tx .tx-trinket { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; margin: 12px 0; padding: 12px; border-color: var(--wf-gold, #e6bd5c); }
@@ -182,22 +182,22 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-clock { font: 700 22px var(--wf-pixel); color: var(--wf-gold-hi); font-variant-numeric: tabular-nums; }
 .tx-clock.urgent { color: var(--wf-bad); animation: tx-pulse 1s ease-in-out infinite; }
 @keyframes tx-banner-in { from { opacity: 0; transform: translateY(-6px); } }
-@keyframes tx-pulse { 50% { opacity: 0.55; } }
+@keyframes tx-pulse { 50% { transform: scale(1.02); } }
 
 .tx-econ { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.tx-econ span { text-align: center; padding: 6px 0; border-radius: 5px; font: 800 12px var(--wf-sans); letter-spacing: 0.1em; text-transform: uppercase;
+.tx-econ span { text-align: center; padding: 6px 0; border-radius: 5px; font: 800 13px var(--wf-sans); letter-spacing: 0.1em; text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.18); color: var(--wf-muted); }
 .tx-econ .on { color: var(--wf-gold-hi); border-color: var(--wf-edge); background: rgba(230, 189, 92, 0.12); }
-.tx-econ .done { opacity: 0.5; text-decoration: line-through; }
+.tx-econ .done { opacity: 1; text-decoration: line-through; }
 
 /* ---------------------------------------------------------------- the battlefield and the d-pad */
 .tx-field { display: grid; grid-template-columns: 1fr 132px; gap: 10px; align-items: center; }
 .tx-map { display: flex; flex-direction: column; gap: 1px; padding: 3px; border-radius: 8px; border: 1px solid var(--wf-edge);
   background: rgba(5, 6, 14, 0.85); max-width: 100%; overflow-x: auto; }
 .tx-maprow { display: flex; gap: 1px; }
-.tx .tx-cell { width: 22px; height: 22px; min-height: 0; padding: 0; border: 0; border-radius: 2px; font: 800 11px var(--wf-sans); line-height: 1;
+.tx .tx-cell { width: 22px; height: 22px; min-height: 0; padding: 0; border: 0; border-radius: 2px; font: 800 13px var(--wf-sans); line-height: 1;
   background: rgba(255, 255, 255, 0.06); color: #fff; }
-.tx-map.terrain .tx-maprow { display: grid; grid-auto-columns: 1fr; grid-auto-flow: column; }
+.tx-map.terrain .tx-maprow { display: grid; grid-auto-columns: minmax(24px, 1fr); grid-auto-flow: column; }
 .tx-map.terrain .tx-cell { width: auto; height: auto; aspect-ratio: 1; }
 .tx .tx-cell.reach { box-shadow: inset 0 0 0 2px rgba(116, 224, 138, 0.9); }
 .tx .tx-cell.aim { box-shadow: inset 0 0 0 2px #ff9f3a; background-color: rgba(255, 159, 58, 0.35); }
@@ -213,7 +213,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-dpad .left { grid-area: 2 / 1; border-radius: 10px 4px 4px 10px; }
 .tx-dpad .right { grid-area: 2 / 3; border-radius: 4px 10px 10px 4px; }
 .tx-dpad .down { grid-area: 3 / 2; border-radius: 4px 4px 10px 10px; }
-.tx-dpad .hub { grid-area: 2 / 2; display: grid; place-items: center; font: 800 8px var(--wf-sans); letter-spacing: 0.08em; text-transform: uppercase;
+.tx-dpad .hub { grid-area: 2 / 2; display: grid; place-items: center; font: 800 13px var(--wf-sans); letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--wf-dim); border: 1px dashed rgba(255, 255, 255, 0.22); border-radius: 50%; margin: 4px; }
 
 /* ---------------------------------------------------------------- abilities */
@@ -290,9 +290,9 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-encounter { width: 100%; display: flex; gap: 12px; align-items: center; padding: 10px 12px; text-align: left; min-height: 64px; }
 .tx-lv { flex: none; width: 46px; height: 46px; border-radius: 8px; display: grid; place-content: center; text-align: center;
   font: 800 20px/1 var(--wf-serif); color: var(--wf-gold-hi); background: rgba(230, 189, 92, 0.1); border: 1px solid rgba(230, 189, 92, 0.45); }
-.tx-lv small { font: 700 9px var(--wf-serif); letter-spacing: 0.15em; text-transform: uppercase; color: var(--wf-gold); }
+.tx-lv small { font: 700 13px var(--wf-serif); letter-spacing: 0.15em; text-transform: uppercase; color: var(--wf-gold); }
 .tx-enc-text b { display: block; font: 700 18px var(--wf-serif); letter-spacing: 0.02em; }
-.tx-lv.unrated { font: 700 12px var(--wf-sans); }
+.tx-lv.unrated { font: 700 13px var(--wf-sans); }
 .tx-enc-guidance, .tx-enc-reason { display: block; font: 700 16px/1.3 var(--wf-sans); }
 .tx-enc-guidance { color: var(--wf-gold-hi); }
 .tx-enc-reason { color: var(--wf-ink); }
@@ -332,7 +332,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-score-row.boosted { border: 1px solid rgba(192, 140, 255, 0.45); background: rgba(192, 140, 255, 0.08); }
 .tx-score-name { font: 800 14px var(--wf-serif); color: var(--wf-muted); letter-spacing: 0.08em; }
 .tx-score { font: 800 22px var(--wf-sans); }
-.tx-score em { font-style: normal; font-size: 12px; font-weight: 800; color: var(--wf-gold); margin-left: 6px; padding: 1px 5px; border-radius: 3px; background: rgba(230, 189, 92, 0.15); vertical-align: middle; }
+.tx-score em { font-style: normal; font-size: 13px; font-weight: 800; color: var(--wf-gold); margin-left: 6px; padding: 1px 5px; border-radius: 3px; background: rgba(230, 189, 92, 0.15); vertical-align: middle; }
 .tx-score-mod { font: 700 16px var(--wf-sans); color: var(--wf-muted); text-align: right; }
 .tx .tx-step { min-height: 44px; padding: 0; font: 800 20px var(--wf-sans); }
 .tx-panel .tx-hero { display: flex; gap: 14px; align-items: center; padding: 12px; border-color: rgba(62, 199, 255, 0.55);
@@ -340,16 +340,16 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-hero .tx-title { text-transform: uppercase; }
 .tx-score-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
 .tx-score-grid div { text-align: center; padding: 6px 0; border-radius: 6px; border: 1px solid var(--wf-line); background: rgba(255, 255, 255, 0.03); }
-.tx-score-grid small { display: block; font: 700 10px var(--wf-serif); letter-spacing: 0.08em; color: var(--wf-muted); }
+.tx-score-grid small { display: block; font: 700 13px var(--wf-serif); letter-spacing: 0.08em; color: var(--wf-muted); }
 .tx-score-grid b { display: block; font-size: 20px; line-height: 1.1; }
-.tx-score-grid i { font-style: normal; font-size: 12px; color: var(--wf-gold); }
+.tx-score-grid i { font-style: normal; font-size: 13px; color: var(--wf-gold); }
 .tx-block { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
 .tx-subclasses { display: flex; flex-direction: column; gap: 8px; }
 .tx .tx-subclass { min-height: 56px; text-align: left; padding: 10px 14px; font: 800 18px var(--wf-serif); letter-spacing: 0.04em; }
 .tx .tx-subclass:not(:disabled):hover { border-color: var(--wf-gold); }
 .tx-count { color: var(--wf-muted); letter-spacing: 0.1em; margin-left: 6px; }
 .tx-choice { margin: 0; padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
-.tx-choice legend { padding: 0 6px; font: 700 12px var(--wf-serif); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-gold); }
+.tx-choice legend { padding: 0 6px; font: 700 13px var(--wf-serif); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-gold); }
 /* A pick: checkbox, then the name with its description under it. */
 .tx-pick { display: grid; grid-template-columns: 28px 1fr; column-gap: 8px; align-items: baseline; padding: 8px; border-radius: 8px; cursor: pointer; min-height: 44px; }
 .tx-pick.on { background: rgba(230, 189, 92, 0.1); }
@@ -388,14 +388,14 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-more { flex: none; min-height: 44px; padding: 4px 14px; font-size: 15px; border-color: var(--wf-edge); color: var(--wf-gold-hi); }
 .tx .tx-score-name { min-height: 44px; padding: 0; border: 0; background: none; text-align: left; text-decoration: underline dotted; text-underline-offset: 4px; color: var(--wf-gold-hi); }
 .tx-score-grid button { display: block; min-height: 0; padding: 6px 0; text-align: center; border-radius: 6px; border: 1px solid var(--wf-line); background: rgba(255, 255, 255, 0.03); }
-.tx-score-grid button small { display: block; font: 700 10px var(--wf-serif); letter-spacing: 0.08em; color: var(--wf-gold-hi); }
+.tx-score-grid button small { display: block; font: 700 13px var(--wf-serif); letter-spacing: 0.08em; color: var(--wf-gold-hi); }
 .tx-score-grid button b { display: block; font-size: 20px; line-height: 1.1; }
-.tx-score-grid button i { font-style: normal; font-size: 12px; color: var(--wf-gold); }
+.tx-score-grid button i { font-style: normal; font-size: 13px; color: var(--wf-gold); }
 
 .tx-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .tx .tx-chipbtn { min-height: 40px; padding: 4px 12px; border-radius: 999px; font-size: 15px; font-weight: 700; border-color: rgba(230, 189, 92, 0.45); }
 .tx-ftags { display: flex; flex-wrap: wrap; gap: 4px; }
-.tx-ftags i { font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 4px; color: var(--wf-gold-hi); background: rgba(230, 189, 92, 0.13); }
+.tx-ftags i { font-style: normal; font-size: 13px; font-weight: 700; padding: 2px 7px; border-radius: 4px; color: var(--wf-gold-hi); background: rgba(230, 189, 92, 0.13); }
 
 /* The look: the sprite in its ring on a scrap of grass, and the portrait. */
 .tx-look { margin: 0; display: grid; grid-template-columns: auto auto 1fr; align-items: end; gap: 12px; padding: 10px 12px; border-radius: var(--wf-radius);
@@ -417,7 +417,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-swatch { position: relative; min-height: 48px; border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.18); background: var(--c); cursor: pointer; }
 .tx .tx-swatch.on { border-color: var(--wf-ink); box-shadow: 0 0 0 3px #0b0c1c, 0 0 0 5px var(--wf-gold-hi); }
 .tx-swatch.taken { display: grid; place-items: end end; padding: 3px; }
-.tx-swatch-who { min-width: 20px; padding: 1px 5px; border-radius: 999px; font: 800 12px/1.3 var(--wf-sans); color: #fff; background: rgba(10, 11, 26, 0.85); }
+.tx-swatch-who { min-width: 20px; padding: 1px 5px; border-radius: 999px; font: 800 13px/1.3 var(--wf-sans); color: #fff; background: rgba(10, 11, 26, 0.85); }
 .tx-swatch.custom { display: grid; place-items: center; font: 800 24px var(--wf-sans); color: var(--wf-gold-hi);
   background: conic-gradient(#ff8a80, #ffd23f, #b9f26b, #8ff0c4, #7ccbff, #d2b4ff, #ffa8dd, #ff8a80); }
 .tx-swatch.custom.on { background: var(--c); }
@@ -426,7 +426,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-swatch:focus-within { outline: 2px solid var(--wf-gold-hi); outline-offset: 2px; }
 .tx-grounds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .tx-ground { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 0 4px; border-radius: 8px; background: var(--g);
-  font-size: 12px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000; text-transform: capitalize; }
+  font-size: 13px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000; text-transform: capitalize; }
 .tx-ground i { width: 30px; height: 11px; border-radius: 50%; border: 3px solid var(--c); box-shadow: 0 0 0 1.5px #140f1a; }
 .tx-color-row { display: flex; align-items: center; gap: 10px; }
 .tx-color-row span { flex: 1; font-weight: 700; }
@@ -435,7 +435,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-pick-groups { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .tx-pick-group { display: flex; flex-direction: column; gap: 6px; padding: 8px 10px 10px; border-radius: var(--wf-radius); border: 1px solid var(--wf-line); background: rgba(255, 255, 255, 0.035); }
 .tx-pick-group-head { display: flex; align-items: center; gap: 8px; }
-.tx-pick-group-head span { flex: 1; font: 700 12px var(--wf-serif); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-gold); }
+.tx-pick-group-head span { flex: 1; font: 700 13px var(--wf-serif); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-gold); }
 .tx-picklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .tx-picklist .tx-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 6px 8px; border: 1px solid var(--wf-line); }
 .tx-picklist .tx-pick label { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
@@ -471,12 +471,12 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-feature-text.large { font-size: 17px; }
 .tx-levels { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .tx-levels > li { display: grid; grid-template-columns: 58px 1fr; gap: 8px; }
-.tx-level-n { font: 700 12px/1.6 var(--wf-serif); letter-spacing: 0.1em; text-transform: uppercase; color: var(--wf-gold); }
+.tx-level-n { font: 700 13px/1.6 var(--wf-serif); letter-spacing: 0.1em; text-transform: uppercase; color: var(--wf-gold); }
 .tx-level-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .tx-level-choice { display: flex; flex-direction: column; gap: 4px; }
 .tx-stat-now { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .tx-stat-now span { display: flex; flex-direction: column; align-items: center; padding: 8px; border-radius: 8px; border: 1px solid var(--wf-edge); background: rgba(230, 189, 92, 0.08); }
-.tx-stat-now small { font: 700 11px var(--wf-serif); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-muted); }
+.tx-stat-now small { font: 700 13px var(--wf-serif); letter-spacing: 0.14em; text-transform: uppercase; color: var(--wf-muted); }
 .tx-stat-now b { font: 800 28px var(--wf-sans); }
 /* The reaction prompt has the shell's countdown at the bottom, so its footer stays in the flow. */
 .tx-react .tx-foot { position: static; margin-bottom: 0; background: none; }
@@ -625,7 +625,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-opt-text b { font-size: 18px; font-weight: 700; line-height: 1.25; }
 .tx-opt-check { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--wf-magic); }
 .tx-opt-check i { width: 9px; height: 9px; transform: rotate(45deg); background: var(--wf-magic); flex: none; }
-.tx-opt-tag { grid-column: 2; justify-self: start; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font: 800 11px var(--wf-sans);
+.tx-opt-tag { grid-column: 2; justify-self: start; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font: 800 13px var(--wf-sans);
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--wf-on-gold); background: var(--wf-gold); }
 .tx .tx-options .tx-option.on { border: 2px solid var(--wf-gold); padding: 11px 13px 11px 11px;
   background: linear-gradient(90deg, rgba(230, 189, 92, 0.22), rgba(230, 189, 92, 0.05)); box-shadow: 0 0 16px rgba(230, 189, 92, 0.25); }
@@ -790,7 +790,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-recovery { position: relative; padding-top: 4px; }
 .tx-recovery > header { padding-right: 40px; margin-bottom: 4px; display: grid; grid-template-columns: 1fr auto; gap: 3px 8px; }
 .tx-recovery > header h1 { font-size: 25px; line-height: 1.12; margin: 0; }
-.tx-recovery > header .tx-eyebrow { font-size: 10px; grid-column: 1 / -1; }
+.tx-recovery > header .tx-eyebrow { font-size: 13px; grid-column: 1 / -1; }
 .tx-recovery-purse { font-size: 13px; color: var(--wf-gold-hi); align-self: center; white-space: nowrap; }
 .tx-recovery-menu { position: absolute; z-index: 20; top: 0; right: 0; }
 .tx-recovery-menu > summary { padding:0 8px; font-size:14px; cursor: pointer; list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; color: var(--wf-gold); }
@@ -808,7 +808,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-recovery-card-main { flex: 1; min-width: 0; }
 .tx-recovery-name { display: flex; gap: 6px; align-items: center; min-height: 20px; margin-bottom: 5px; }
 .tx-recovery-name > strong { font-size: 15px; overflow: hidden; text-overflow: ellipsis; }
-.tx-recovery-name > span { font-size: 10px; color: var(--wf-muted); margin-left: auto; white-space: nowrap; }
+.tx-recovery-name > span { font-size: 13px; color: var(--wf-muted); margin-left: auto; white-space: nowrap; }
 .tx-recovery-meter > span { display: flex; justify-content: space-between; gap: 5px; font-size: 14px; line-height: 1.2; margin-bottom: 3px; color: #c4c7c9; }
 .tx-recovery-meter b { font-weight: 500; color: #ecefe7; }
 .tx-recovery-meter > div { height: 6px; background: #0008; border-radius: 3px; overflow: hidden; }
@@ -829,7 +829,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-recovery-book { border: 1px solid var(--wf-edge); border-radius: 5px; padding: 5px 7px; min-height: 44px; color: var(--wf-gold-hi); background: #e6bd5c15; font: 600 14px var(--wf-sans); white-space: nowrap; cursor: pointer; }
 .tx-recovery-book:disabled { opacity: .45; cursor: default; }
 .tx-recovery-book.booked { color: #a4d8ac; border-color: #a4d8ac66; opacity: 1; }
-.tx-recovery-help { margin: 14px 0; font-size: 12px; color: var(--wf-muted); }
+.tx-recovery-help { margin: 14px 0; font-size: 13px; color: var(--wf-muted); }
 .tx-recovery-help summary { cursor: pointer; }
 .tx-recovery-help p { font-size: 13px; line-height: 1.4; }
 .tx-recovery-propose { width: 100%; margin: 5px 0; font-size: 15px; min-height: 44px; }
@@ -839,7 +839,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-job-text b, .tx-job-text span, .tx-job-text small { display: block; }
 .tx-job-text > span { font: 400 16px/1.3 var(--wf-sans); margin-top: 4px; }
 .tx-job-text small { color: var(--wf-gold-hi); font-size: 15px; margin-top: 3px; }
-.tx-recovery .tx-job-disc { width: 23px; height: 23px; font-size: 12px; }
+.tx-recovery .tx-job-disc { width: 23px; height: 23px; font-size: 13px; }
 .tx-recovery > .tx-note, .tx-recovery > .tx-note p { font-size: 16px; margin: 8px 0; }
 .tx-recovery-continue { width: 100%; margin-top: 10px; font-size: 14px; }
 .tx-recovery-result { font-size: 14px; color: var(--wf-muted); margin: 0 0 14px; }
@@ -856,7 +856,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-injury-button.spirit { border-color: #a28bca; }
 .tx .tx-injury-button.rest { border-color: #9f987f; }
 .tx-recovery-section { margin-top: 8px; }
-.tx-recovery-roll-party { font-size: 12px; color: var(--wf-muted); }
+.tx-recovery-roll-party { font-size: 13px; color: var(--wf-muted); }
 .tx-recovery-roll-party > summary { cursor: pointer; padding: 10px 0; }
 @media (max-width: 340px) {
   .tx-recovery-card { padding: 8px; gap: 7px; }
@@ -889,7 +889,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .camp-pot { left: calc(50% + 22px); bottom: 10px; width: 32px; height: 32px; background: var(--pot) center/contain no-repeat; }
 .camp-person { width: 32px; height: 40px; z-index: 2; transform: translate(-50%,-75%); }
 .camp-sprite { display: block; width: 32px; height: 40px; background-image: var(--sprite); background-repeat: no-repeat; background-position: var(--first) 0; animation: camp-actor var(--speed) steps(var(--frames)) infinite; animation-delay: var(--delay); }
-.camp-heart, .camp-zzz { position: absolute; left: 50%; top: -9px; color: #ffddad; font: normal 11px/1 sans-serif; text-shadow: 0 1px #573f3b; animation: camp-float 2.5s ease-in-out infinite; }
+.camp-heart, .camp-zzz { position: absolute; left: 50%; top: -9px; color: #ffddad; font: normal 13px/1 sans-serif; text-shadow: 0 1px #573f3b; animation: camp-float 2.5s ease-in-out infinite; }
 .camp-zzz { left: 75%; color: #e5eeff; animation-delay: var(--delay); }
 .camp-sparks { inset: 0; z-index: 3; }
 .camp-sparks i { position: absolute; bottom: 32px; width: 3px; height: 3px; background: #ffd980; animation: camp-spark 3s linear infinite; }
@@ -957,7 +957,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 @media (prefers-reduced-motion: reduce) { .tx-mob-warning { animation: none; } }
 
 .tx-walk-host .tx-difficulty { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.tx-difficulty-label { grid-column: 1 / -1; font: 700 11px/1 var(--wf-sans); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+.tx-difficulty-label { grid-column: 1 / -1; font: 700 13px/1 var(--wf-sans); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
 .tx .tx-difficulty .tx-btn { min-height: 40px; padding: 0 6px; }
 .tx .tx-difficulty .tx-btn.on { border-color: var(--wf-gold, #e6bd5c); color: var(--wf-gold, #e6bd5c); }
 
@@ -967,7 +967,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-xp-progress { display: flex; flex-direction: column; gap: 2px; width: 100%; max-width: 220px; }
 .tx-xp-bar { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.12); border-radius: 3px; overflow: hidden; }
 .tx-xp-fill { height: 100%; background: linear-gradient(90deg, var(--wf-gold, #e6bd5c), var(--wf-gold-hi, #ffd782)); border-radius: 3px; transition: width 0.3s ease; }
-.tx-xp-text { font-size: 11px; color: var(--wf-muted, #a2a8b6); }
+.tx-xp-text { font-size: 13px; color: var(--wf-muted, #a2a8b6); }
 .tx-loot-line { margin: 6px 0; font-size: 14px; color: var(--wf-gold-hi, #ffd782); text-align: center; }
 
 .tx-choices-card { display: flex; flex-direction: column; gap: 12px; margin: 12px 0; padding: 14px; border: 1px solid var(--wf-gold, #e6bd5c); border-radius: var(--wf-radius, 12px); background: rgba(20, 24, 48, 0.85); }
@@ -979,9 +979,9 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-choice-btn { display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding: 8px 12px; border: 1px solid var(--wf-line, #383e58); border-radius: 8px; background: rgba(255, 255, 255, 0.04); color: var(--wf-ink, #f5f2eb); cursor: pointer; }
 .tx-choice-btn:hover { border-color: var(--wf-gold, #e6bd5c); }
 .tx-choice-btn.selected { border-color: var(--wf-gold, #e6bd5c); background: rgba(230, 189, 92, 0.15); opacity: 0.8; }
-.tx-choice-tip { font-size: 12px; color: var(--wf-muted, #a2a8b6); margin-top: 2px; }
+.tx-choice-tip { font-size: 13px; color: var(--wf-muted, #a2a8b6); margin-top: 2px; }
 .tx-stat-pills { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
-.tx-stat-pills .tx-pill { min-height: 36px; padding: 4px 2px; border: 1px solid var(--wf-line, #383e58); border-radius: 6px; background: transparent; color: var(--wf-ink, #f5f2eb); font-weight: 700; font-size: 12px; cursor: pointer; }
+.tx-stat-pills .tx-pill { min-height: 36px; padding: 4px 2px; border: 1px solid var(--wf-line, #383e58); border-radius: 6px; background: transparent; color: var(--wf-ink, #f5f2eb); font-weight: 700; font-size: 13px; cursor: pointer; }
 .tx-stat-pills .tx-pill.on { border-color: var(--wf-gold, #e6bd5c); background: rgba(230, 189, 92, 0.25); color: var(--wf-gold-hi, #ffd782); }
 
 /* A control handover stays readable on turn, reaction, status and results screens. */
@@ -1017,7 +1017,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-map-tools b { margin-right: auto; font-size: 16px; }
 .tx-map-tools .tx-btn { min-height: 44px; font-size: 14px; padding: 6px 8px; }
 .tx-battle-map .tx-map { width: 100%; box-sizing: border-box; }
-.tx-battle-map .tx-maprow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+.tx-battle-map .tx-maprow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(24px, 1fr); }
 .tx-battle-map .tx-cell { width: 100%; height: auto; aspect-ratio: 1; min-width: 0; font-size: 13px; position: relative; }
 .tx-map-key { margin: 0; font-size: 14px; color: var(--wf-muted); line-height: 1.3; }
 .tx-map-controls { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 10px; align-items: start; }
@@ -1052,3 +1052,30 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-cell.spread::after { border: 2px dashed #fff; }
 
 .tx .tx-cell-label { color: #f4ecd6; background: #0b0d1c; border-radius: 2px; padding: 0 1px; }
+
+/* Readable disabled/spent states, with shape/text cues instead of faded words. */
+.tx button:disabled { opacity: 1; color: var(--wf-muted); background: #141725; border-style: dashed; box-shadow: none; }
+.tx .tx-rcards .tx-rcard.out, .tx-walk-party li.away { opacity: 1; }
+.tx .tx-rcards .tx-rcard.out { border-style: dashed; }
+.tx :is(a[href], summary):not(.tx-cell) { min-height: 24px; }
+.tx a.tx-link { display: inline-flex; align-items: center; }
+.tx summary { line-height: 1.5; }
+.tx-clock-warning { display: block; font: 700 13px var(--wf-sans); text-align: right; }
+.screen[data-game="tactics"] .timer-warning { display: block; font: 700 13px var(--wf-sans); color: var(--wf-ink); }
+
+.tx small { font-size: max(13px, 0.85em); }
+
+/* Terrain reflections stay on the rim so they cannot wash out foreground words. */
+.tx .tx-surface-glare { padding: 4px; box-sizing: border-box; mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0); mask-origin: content-box, border-box; mask-clip: content-box, border-box; mask-composite: exclude; }
+
+.tx-portal-head { flex-wrap: wrap; }
+.tx-portal-head > div { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+
+.tx-roll { flex-wrap: wrap; }
+.tx-roll-text { flex: 1 1 160px; }
+.tx-roll > .tx-note { flex: 1 1 120px; }
+/* Keep both authored look previews; put their caption on its own row on phones. */
+.tx-look:not(.compact) { grid-template-columns: auto minmax(0, 1fr); }
+.tx-look:not(.compact) figcaption { grid-column: 1 / -1; min-width: 0; overflow-wrap: anywhere; }
+/* The sticky footer has its own opaque panel; avoid dimming nearby readable text. */
+.tx-foot { box-shadow: none; }
