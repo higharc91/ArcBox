@@ -18,7 +18,8 @@ public sealed record SimConfig(ImmutableArray<string> Encounters, ImmutableArray
     ImmutableArray<int> PartySizes, int Seeds, Difficulty Difficulty, int RoundCap = 30,
     ImmutableDictionary<string, string>? Trinkets = null, int Companions = 0,
     ImmutableDictionary<string, string>? Subclasses = null, string? Race = null, string? WithClass = null,
-    ImmutableDictionary<string, string>? Weapons = null, string? Policy = null, bool RotateFormation = false);
+    ImmutableDictionary<string, string>? Weapons = null, string? Policy = null, bool RotateFormation = false, bool AbilityIncreases = true,
+    ImmutableArray<string> FixedParty = default, ImmutableDictionary<string, string>? Races = null);
 
 /// <summary>
 /// One simulated battle: the encounter, the party's level and classes (one entry per member, ordinal order), the seed,
@@ -102,6 +103,8 @@ public static class SimRunner
     /// </summary>
     public static ImmutableArray<ImmutableArray<string>> Parties(SimConfig config, RulesPack rules)
     {
+        if (!config.FixedParty.IsDefaultOrEmpty)
+            return [config.FixedParty];
         var classes = rules.Classes.Keys.Order(StringComparer.Ordinal).ToArray();
         var rng = Rng.Seeded(PartySeed);
         var parties = ImmutableArray.CreateBuilder<ImmutableArray<string>>();
@@ -174,6 +177,11 @@ public static class SimRunner
                 throw new ArgumentException($"Weapon '{weapon}' for class '{cls}': unknown class or weapon.", nameof(config));
         if (config.Policy is { } policy && policy != HiddenRogue.Name)
             throw new ArgumentException($"Unknown policy '{policy}' (the only one is '{HiddenRogue.Name}').", nameof(config));
+        foreach (var (cls, memberRace) in config.Races ?? ImmutableDictionary<string, string>.Empty)
+            if (!rules.Classes.ContainsKey(cls) || !rules.Races.ContainsKey(memberRace))
+                throw new ArgumentException($"Unknown race '{memberRace}' or class '{cls}'.", nameof(config));
+        if (!config.FixedParty.IsDefaultOrEmpty && (config.FixedParty.Length is < 1 or > 6 || config.FixedParty.Any(c => !rules.Classes.ContainsKey(c))))
+            throw new ArgumentException("An explicit party needs 1–6 known classes.", nameof(config));
         var parties = Parties(config, rules);
         var jobs = new List<(string Encounter, int Level, ImmutableArray<string> Party, ulong Seed)>();
         foreach (var encounter in config.Encounters)
@@ -248,8 +256,21 @@ public static class SimRunner
     /// </summary>
     internal static CharacterRecord Character(SimConfig config, RulesPack rules, string id, string cls, int level)
     {
-        var race = config.Race ?? (rules.Races.ContainsKey(Race) ? Race : rules.Races.Keys.First());
+        var race = config.Races?.GetValueOrDefault(cls) ?? config.Race ?? (rules.Races.ContainsKey(Race) ? Race : rules.Races.Keys.First());
         var character = SheetBuilder.DefaultCharacter(id, race, cls, config.Subclasses?.GetValueOrDefault(cls), level, rules);
+        if (config.AbilityIncreases)
+        {
+            var points = level >= 8 ? 4 : level >= 4 ? 2 : 0;
+            var scores = SheetBuilder.ForCharacter(character, rules).Scores;
+            var increases = character.Increases;
+            foreach (var stat in rules.Classes[cls].AiTags.Priority)
+            {
+                var spent = Math.Min(points, 20 - scores.GetValueOrDefault(stat));
+                if (spent > 0) { increases = increases.SetItem(stat, spent); points -= spent; }
+                if (points == 0) break;
+            }
+            character = character with { Increases = increases };
+        }
         return character with
         {
             Trinket = config.Trinkets?.GetValueOrDefault(cls),
