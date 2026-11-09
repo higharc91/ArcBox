@@ -39,4 +39,27 @@ public sealed class PhoneEnvironmentViewTests
         Assert.Single(bare.Abilities[0].Tiles);
         Assert.DoesNotContain("spread", JsonSerializer.Serialize(bare, ArcJson.Options));
     }
+    [Fact]
+    public void Compaction_interns_repeated_previews_without_losing_roll_or_damage_information()
+    {
+        var id = new UnitId("hero1");
+        var preview = new UnitPreview(new("foe"), 4.2, 0, new AimRoll("hit", 65, 5, 13, Edge.Advantage, "flanking"), 0, 16);
+        var targets = new[] { new Tile(1, 0), new Tile(2, 0) }.Select(t => new TargetChoice(new Target(Tile: t), t, [preview])).ToImmutableArray();
+        var choices = new TurnChoices(id, new TurnEconomy(4, true, true, true, 0), [],
+            [new AbilityChoice(new("test"), null, "Test", "", new CostDef(), targets)], false);
+        var ability = Assert.Single(PhoneChoices.Of(choices).Abilities);
+        var pooled = Assert.Single(ability.Previews);
+        Assert.Single(ability.Rolls);
+        foreach (var target in ability.Targets)
+        {
+            Assert.Empty(target.Affected);
+            var restored = ability.Previews[Assert.Single(target.PreviewIds)];
+            Assert.Equal(preview.Unit, restored.Unit); Assert.Equal(preview.Damage, restored.Damage);
+            Assert.Equal(preview.Heal, restored.Heal); Assert.Equal(preview.DamageMin, restored.DamageMin);
+            Assert.Equal(preview.DamageMax, restored.DamageMax);
+            Assert.Equal(preview.Roll, ability.Rolls[restored.Roll!.Value]);
+        }
+        Assert.Equal(0, pooled.Roll);
+    }
+
 }

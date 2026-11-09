@@ -9,7 +9,11 @@ public sealed record MoveChoice(Tile To, int Cost, ImmutableArray<Tile> Path,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Warn = null);
 
 /// <summary>What one use is expected to do to a unit it affects: average damage (after resistances) and healing.</summary>
-public sealed record UnitPreview(UnitId Unit, double Damage, double Heal);
+public sealed record AimRoll(string Kind, double Chance, int Modifier, int Vs, Edge Edge, string Reason);
+public sealed record UnitPreview(UnitId Unit, double Damage, double Heal,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] AimRoll? Roll = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? DamageMin = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? DamageMax = null);
 
 /// <summary>A legal target for an ability: what to send in <see cref="Use.Target"/>, where it lands and whom it affects.</summary>
 public sealed record TargetChoice(Target Target, Tile Aim, ImmutableArray<UnitPreview> Affected,
@@ -146,15 +150,17 @@ public static class Choices
         BattleWriter w, Scorer scorer)
     {
         var unitEffects = Scorer.UnitBlocks(ability.Effects);
-        var strike = new Strike(w, me, ability, aim, neutral: true);
+        var strike = new Strike(w, me, ability, aim, neutral: false);
         var selfHeal = 0.0;
         var previews = affected.Select(id =>
         {
-            var outcome = ability.IsWeaponAttack
-                ? scorer.StrikeOutcomes(ability, me.Sheet.Attacks, strike, w.State.Units[id])[^1]
-                : scorer.Walk(unitEffects, strike, w.State.Units[id]);
+            var outcomes = ability.IsWeaponAttack ? scorer.StrikeOutcomes(ability, me.Sheet.Attacks, strike, w.State.Units[id]) : default;
+            var outcome = ability.IsWeaponAttack ? outcomes[^1] : scorer.Walk(unitEffects, strike, w.State.Units[id]);
+            var range = ability.IsWeaponAttack ? outcomes[0].Damage : outcome.Damage;
             selfHeal += outcome.SelfHeal;
-            return new UnitPreview(id, Math.Round(outcome.Damage.Mean, 1), Math.Round(outcome.Heal, 1));
+            return new UnitPreview(id, Math.Round(outcome.Damage.Mean, 1), Math.Round(outcome.Heal, 1),
+                scorer.AimRoll(ability, strike, w.State.Units[id]), range.Max > 0 ? range.Min : null,
+                range.Max > 0 ? range.Max : null);
         }).ToList();
         if (selfHeal > 0)
         {

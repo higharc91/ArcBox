@@ -1116,3 +1116,6 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-look:not(.compact) figcaption { grid-column: 1 / -1; min-width: 0; overflow-wrap: anywhere; }
 /* The sticky footer has its own opaque panel; avoid dimming nearby readable text. */
 .tx-foot { box-shadow: none; }
+
+.tx-target-preview { display:block; font-size:1rem; line-height:1.35; white-space:normal; overflow-wrap:anywhere; margin-top:0.3rem; }
+.tx-chips .tx-chip { white-space:normal; overflow-wrap:anywhere; }
