@@ -13,7 +13,9 @@ namespace Tactics.Game;
 /// </param>
 public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprite, Tile At, int Hp, int MaxHp, int TempHp,
     string Life, int Countdown, ImmutableArray<string> Conditions, string? Player,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? BaseAc = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Role = null);
 
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
@@ -749,7 +751,7 @@ public sealed partial class TacticsGame
         var save = Save_;
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
-            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), Color = HeroColor(save, u.Id) })],
+            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), Color = HeroColor(save, u.Id), BaseAc = u.Sheet.Ac, Role = HostRole(u) })],
             save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
             state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null,
             Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
@@ -769,6 +771,14 @@ public sealed partial class TacticsGame
             if (UnitFor(i) == unit)
                 return PlayerColors.Parse(_doc.Members.GetValueOrDefault(save.Members[i].Value)?.Color);
         return null;
+    }
+
+    private string HostRole(UnitState unit)
+    {
+        var cls = unit.Sheet.Tags.FirstOrDefault(t => t.StartsWith(SheetBuilder.ClassTag, StringComparison.Ordinal))?[SheetBuilder.ClassTag.Length..];
+        return cls is not null ? Rules.Classes.GetValueOrDefault(cls)?.Name ?? cls
+            : unit.Sheet.Weapon.Ranged ? "Ranged " + unit.Sheet.Side.ToString().ToLowerInvariant()
+            : "Melee " + unit.Sheet.Side.ToString().ToLowerInvariant();
     }
 
     private UnitView UnitViewOf(UnitState u)
