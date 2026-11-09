@@ -489,15 +489,13 @@ public partial class BoardCanvas : Node2D
             var angle = Mathf.Tau * i / count;
             points[i] = feet + new Vector2(Mathf.Cos(angle) * unit.Ring, Mathf.Sin(angle) * unit.Ring / 2);
         }
-        if (unit.Active) DrawPolyline(points, Colors.White, 7);
         var ring = Colour(unit.RingColour);
-        if (unit.Outlined)
-        {
-            DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), RingOutlineWidth + (unit.Active ? ActiveRingWidth - OutlinedRingWidth : 0));
-            DrawPolyline(points, unit.Away ? ring * AwayShade : ring, unit.Active ? ActiveRingWidth : OutlinedRingWidth);
-            return;
-        }
-        DrawPolyline(points, ring, unit.Active ? ActiveRingWidth : RingWidth);
+        // A dark/light keyline preserves the geometry on both light grass and dark stone,
+        // including when side hues converge in red/green colour-vision simulations.
+        DrawPolyline(points, Colour(UnitPlan.RingOutline, RingOutlineAlpha), unit.Active ? 10 : 6);
+        DrawPolyline(points, Colors.White, unit.Active ? 7 : RingOutlineWidth);
+        DrawPolyline(points, unit.Away ? ring * AwayShade : ring,
+            unit.Active ? ActiveRingWidth : unit.Outlined ? OutlinedRingWidth : RingWidth);
     }
 
     /// <summary>What's left when a sprite's file is missing: a marker in the unit's colour, so it's still on the board.</summary>
