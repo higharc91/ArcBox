@@ -31,7 +31,8 @@ public readonly record struct WalkMove(Tile To, int Cost, bool Diagonal, bool Sl
 /// <summary>
 /// The rule for walking the world, and the only one: the party's steps, the region checks and the world tools all use it. It adds to
 /// <see cref="Paths.StepCost"/> only what a battle doesn't have: diagonals and sliding along walls. A diagonal is legal only if
-/// both corner tiles are walkable and one L-path is legal leg by leg, so what can be reached with diagonals is what can be reached without.
+/// both corner tiles are walkable, or one is held by a slim prop (<see cref="PropPlacement.Slim"/>: a tree, a lamp post), and one L-path
+/// is legal leg by leg, so what can be reached with diagonals is what can be reached without.
 /// </summary>
 public static class WorldWalk
 {
@@ -174,7 +175,10 @@ public static class WorldWalk
     /// <summary>A diagonal's cost, or null if it isn't legal.</summary>
     private static int? DiagonalCost(Terrain terrain, Tile from, Tile to, Tile cornerX, Tile cornerY, int jump)
     {
-        if (!terrain.Walkable(cornerX) || !terrain.Walkable(cornerY))
+        // Both corners must be open, except that a slim prop (a tree) may stand on one: the party steps past its trunk rather than
+        // snagging on it. The step still needs a legal L-path through the other corner, below, so the diagonal reaches nothing that
+        // straight steps can't, and every reach and story-order check is unchanged.
+        if (!(terrain.Walkable(cornerX) || terrain.SlimBlocked(cornerX)) || !(terrain.Walkable(cornerY) || terrain.SlimBlocked(cornerY)))
             return null;
 
         var cheapest = int.MaxValue;

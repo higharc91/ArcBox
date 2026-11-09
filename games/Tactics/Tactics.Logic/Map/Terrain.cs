@@ -50,6 +50,17 @@ public sealed class Terrain
         return PropAt(t) is not { Blocks: true };
     }
 
+    /// <summary>
+    /// True when only a slim prop (<see cref="PropPlacement.Slim"/>, a tree or a lamp post) stops a unit standing on the tile: the
+    /// ground under it is walkable. An overworld diagonal may cut past such a corner (<see cref="WorldWalk"/>).
+    /// </summary>
+    public bool SlimBlocked(Tile t)
+    {
+        if (!Map.InBounds(t) || (Map[t].Flags & (TileFlags.Impassable | TileFlags.Deep)) != 0 || _sunk.Contains(t))
+            return false;
+        return PropAt(t) is { Blocks: true, Slim: true };
+    }
+
     /// <summary>True when entering the tile costs 2 (a difficult tile or difficult zone). False outside the map.</summary>
     public bool Difficult(Tile t)
         => Map.InBounds(t) && ((Map[t].Flags & TileFlags.Difficult) != 0 || _difficultZones.Contains(t));
