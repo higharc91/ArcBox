@@ -108,11 +108,11 @@ public static partial class RegionExport
     /// loads but can't be played in story order, which <see cref="StoryOrder"/> checks here since the loader can't read lore. A file that
     /// can't be read or replaced is a problem, not an exception. The file changes in one move, so a failure can't leave half of it.
     /// </summary>
-    public static ExportResult Export(PaintedRegion painted, string rulesDirectory, string contentBase)
+    public static ExportResult Export(PaintedRegion painted, string rulesDirectory, string contentBase, IReadOnlyDictionary<string, byte[]>? sideContent = null)
     {
         try
         {
-            return Run(painted, rulesDirectory, contentBase);
+            return Run(painted, rulesDirectory, contentBase, sideContent);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {
@@ -239,7 +239,7 @@ public static partial class RegionExport
                     yield return $"The door of the '{building.Id}' at {building.At} opens onto {step}, which can't be stood on. Move the building, or clear that tile.";
     }
 
-    private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase)
+    private static ExportResult Run(PaintedRegion painted, string rulesDirectory, string contentBase, IReadOnlyDictionary<string, byte[]>? sideContent)
     {
         if (!File.Exists(Path.Combine(rulesDirectory, "manifest.json")))
             return new ExportResult(null, [$"{rulesDirectory} isn't a rules pack: it has no manifest.json. Copy content/tactics/base/rules there, or fix --rules."]);
@@ -270,7 +270,7 @@ public static partial class RegionExport
             return new ExportResult(null, [.. problems]) { Warnings = warnings };
 
         var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(region, FileOptions) + "\n");
-        var checks = Check(rulesDirectory, region.Id, bytes, contentBase);
+        var checks = Check(rulesDirectory, region.Id, bytes, contentBase, sideContent);
         if (checks.Pack is { } checkedPack)
             warnings = [.. warnings, .. DoorWarnings(region, checkedPack)];
         problems.AddRange(painted.Starts.Count == 0 ? checks.Problems.Where(p => !NeedsTheStart(p)) : checks.Problems);
@@ -282,7 +282,9 @@ public static partial class RegionExport
             ? StoryOrder.Check(pack.RegionFor(region.Id)!, pack, contentBase).Problems
             : [];
         var path = Path.Combine(rulesDirectory, "world", $"{region.Id}.json");
-        if (Replace(path, bytes) is { } failure)
+        var files = (sideContent ?? new Dictionary<string, byte[]>()).ToDictionary(p => Path.Combine(rulesDirectory, p.Key), p => p.Value, StringComparer.Ordinal);
+        files[path] = bytes;
+        if (ReplaceTogether(files) is { } failure)
             return new ExportResult(null, [failure]) { Warnings = warnings };
         var entry = $"world/{region.Id}.json";
         return new ExportResult(path, [])
@@ -331,7 +333,7 @@ public static partial class RegionExport
     /// region already listed would then have its id twice; the copy also means an old file there is replaced, not checked. Gives what's
     /// wrong, or the loaded pack if nothing is.
     /// </summary>
-    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region, string contentBase)
+    private static (List<string> Problems, RulesPack? Pack) Check(string rulesDirectory, string id, byte[] region, string contentBase, IReadOnlyDictionary<string, byte[]>? sideContent)
     {
         var copy = Directory.CreateTempSubdirectory("tactics-region-check-").FullName;
         var entry = $"world/{id}.json";
@@ -358,6 +360,14 @@ public static partial class RegionExport
             Directory.CreateDirectory(Path.Combine(copy, "world"));
             File.WriteAllBytes(regionFile, region);
 
+            foreach (var (relative, content) in sideContent ?? new Dictionary<string, byte[]>())
+            {
+                if (!(relative.StartsWith("interactables/", StringComparison.Ordinal) || relative.StartsWith("mobs/", StringComparison.Ordinal) || relative.StartsWith("shops/", StringComparison.Ordinal)) || Path.IsPathRooted(relative) || relative.Split('/', '\\').Contains("..") || !relative.EndsWith(".json", StringComparison.Ordinal))
+                    return (["Side-content paths must be JSON files inside the rules pack."], null);
+                var destination = Path.Combine(copy, relative);
+                Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
+                File.WriteAllBytes(destination, content);
+            }
             var manifestPath = Path.Combine(copy, "manifest.json");
             var manifest = JsonNode.Parse(File.ReadAllText(manifestPath))!;
             var files = manifest["files"]!.AsArray();
@@ -422,6 +432,32 @@ public static partial class RegionExport
     }
 
     /// <summary>Puts <paramref name="bytes"/> at <paramref name="path"/> in one move, or says why it couldn't.</summary>
+    // All content has been checked as one shadow pack before any file changes. Restore prior bytes if a later atomic replacement fails.
+    private static string? ReplaceTogether(IReadOnlyDictionary<string, byte[]> files)
+    {
+        var before = files.Keys.ToDictionary(path => path, path => File.Exists(path) ? File.ReadAllBytes(path) : null, StringComparer.Ordinal);
+        var done = new List<string>();
+        foreach (var (path, bytes) in files.OrderBy(p => p.Key, StringComparer.Ordinal))
+        {
+            if (before[path] is { } old && old.SequenceEqual(bytes)) continue;
+            if (Replace(path, bytes) is { } failure)
+            {
+                var rollback = new List<string>();
+                foreach (var written in done.AsEnumerable().Reverse())
+                {
+                    if (before[written] is { } original)
+                    {
+                        if (Replace(written, original) is { } problem) rollback.Add(problem);
+                    }
+                    else Discard(written);
+                }
+                return rollback.Count == 0 ? failure : failure + " Restore failed: " + string.Join("; ", rollback);
+            }
+            done.Add(path);
+        }
+        return null;
+    }
+
     private static string? Replace(string path, byte[] bytes)
     {
         var temporary = $"{path}.{Environment.ProcessId}.tmp";

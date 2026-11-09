@@ -8,6 +8,7 @@ namespace Tactics.World.Editor;
 [GlobalClass]
 public partial class PersonMarker : TileMarker
 {
+    [Export] public string ShopId { get; set; } = "";
     [Export] public string Id { get; set; } = "";
     [Export] public string Character { get; set; } = "";
     [Export] public string Requires { get; set; } = "";
@@ -67,7 +68,7 @@ public partial class PersonMarker : TileMarker
         if (!Engine.IsEditorHint())
             return;
         DrawTile(Ink);
-        DrawString(ThemeDB.FallbackFont, new Vector2(-14, -18), Preset.Length > 0 ? Preset : "(no Preset)", modulate: Ink);
+        DrawString(ThemeDB.FallbackFont, new Vector2(-14, -18), ShopId.Length > 0 ? $"Shop: {ShopId}" : Preset.Length > 0 ? Preset : "(no Preset)", modulate: Ink);
 
         // Its walk, so a loop can be seen and put right where it's painted.
         var from = Vector2.Zero;

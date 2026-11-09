@@ -83,7 +83,7 @@ public static class RegionWriter
             : source.Buildings.Distinct().OrderBy(b => b.At.Y).ThenBy(b => b.At.X).ThenBy(b => b.Id, StringComparer.Ordinal).ThenBy(b => b.Variant, StringComparer.Ordinal).ToImmutableArray();
         var people = source.People.Count == 0
             ? default
-            : source.People.DistinctBy(PersonText.Key).OrderBy(p => p.At.Y).ThenBy(p => p.At.X).ThenBy(p => p.Preset, StringComparer.Ordinal).ThenBy(p => p.Face, StringComparer.Ordinal).ThenBy(p => p.Variant, StringComparer.Ordinal).ToImmutableArray();
+            : PersonText.Ordered(source.People).ToImmutableArray();
         var def = new RegionDef(source.Id, source.Name, source.Chapter, [source.Width, source.Height],
             [.. materials.OrderBy(m => m.Value).Select(m => m.Key)], [.. chunks], [.. source.Stamps], [.. source.Beats],
             new RegionSpawns(source.Start, source.Recovery, source.NamedSpawns.Count == 0 ? null : source.NamedSpawns.ToImmutableSortedDictionary(StringComparer.Ordinal)), [], props, buildings, people);
