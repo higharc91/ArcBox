@@ -138,7 +138,7 @@ public sealed record AttackStep(UnitId Source, UnitId Target, Tile? Aim, Ability
         var crit = hit && (rolled.Crit
                            || Modifiers.For(w, Target, rules).CritWhenAdjacent && Reach.Distance(source.Pos, target.Pos) == 1);
         var roll = rolled with { Vs = ac, Success = hit, Crit = crit };
-        w.Emit(new AttackResolved(Source, Target, hit, crit));
+        w.Emit(new AttackResolved(Source, Target, hit, crit) { FinalAc = rolled.Vs == ac ? null : ac });
         if (HookDepth == 0)
         {
             Surfaces.RecordHit(w, Source, Ability, hit);
@@ -217,7 +217,7 @@ public sealed class SaveBlock : EffectBlock<SaveEffect>
         // Careful Spell: the caster's allies succeed, and the event and their OnSave hooks see the success.
         var careful = target.Id != ctx.Source && target.Sheet.Side == ctx.SourceUnit.Sheet.Side && Metamagic.Has(ctx.SourceUnit, Metamagic.Careful);
         var roll = Rolls.Save(ctx.W, target.Id, stat, def.Dc ?? (def.DcStat is { } dcStat ? ctx.DcFor(dcStat) : ctx.SaveDc), ctx.Rules, cover,
-            ctx.Source, autoSucceed: careful);
+            ctx.Source, autoSucceed: careful, context: ctx.Ability is { } ability ? new RollContext(ctx.Source, ability.Id) : null);
         ctx.Last = roll;
         // Evasion: against a DEX save for half, none on a success and half on a failure.
         var evades = stat == Stat.Dex && def.HalfOnSuccess && Modifiers.For(ctx.W, target.Id, ctx.Rules).Evasion;

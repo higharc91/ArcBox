@@ -124,6 +124,11 @@ public abstract record Cue(double At, double Length);
 /// <summary>The unit card follows the target when its action starts, without changing battle state or timing.</summary>
 public sealed record FocusCue(double At, UnitId? Unit) : Cue(At, 0);
 
+/// <summary>A HUD readout signal. Playback owns its display lifetime; it adds no combat or FX tail time.</summary>
+public sealed record CombatCue(double At, UnitId Actor, AbilityId? Ability = null, UnitId? Target = null,
+    RollKind? Kind = null, RollResult? Roll = null, string? Effect = null, int? FinalAc = null, bool? Hit = null, bool? Crit = null, ConditionId? Condition = null, bool Ended = false) : Cue(At, 0);
+public sealed record RollMemoryCue(double At, Rolled Rolled) : Cue(At, 0);
+
 /// <summary>The start of a real cast or swing, with its rule event and resolved aiming tiles.</summary>
 public sealed record AbilityCue(double At, AbilityUsed Used, Tile From, Tile Toward) : Cue(At, 0);
 
@@ -389,6 +394,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     PlayWalk(moved);
                     break;
                 case Pushed pushed:
+                    Moment("push-tag");
+                    _cues.Add(new CombatCue(_t, pushed.Unit, Effect: "Pushed 1 tile"));
                     var slide = EldritchVolley ? .05 : _ability?.Presentation?.Fx?.StartsWith("fx.druid_",StringComparison.Ordinal) == true ? .06 : BeatTiming.Slide;
                     _cues.Add(new SlideCue(_t, slide, pushed.Unit, pushed.From, pushed.To));
                     Sound("pushed");
@@ -418,6 +425,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AbilityUsed used:
+                    _cues.Add(new CombatCue(_t, used.Source, used.Ability, used.Target.Unit));
                     _cues.Add(new FocusCue(_t, used.Target.Unit));
                     _stackedDamageRows.Clear();
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
@@ -437,7 +445,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     _cues.Add(new FocusCue(_t, turned.Target));
                     _ability = aimed with { Target = new Target(Unit: turned.Target) };   // the next swing goes at it
                     break;
-                case Rolled { Kind: RollKind.Attack } when _ability is { } again:
+                case Rolled { Kind: RollKind.Attack } attackRoll when _ability is { } again:
+                    _cues.Add(new RollMemoryCue(_t, attackRoll));
                     if (_swings > 0 && !InArea || _swings==0 && again.Ability.Value=="vanguard.charge")
                     {
                         _hits = 0;
@@ -445,7 +454,13 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     }
                     _swings++;
                     break;
+                case Rolled { Kind: RollKind.Attack } attackRoll:
+                    _cues.Add(new RollMemoryCue(_t, attackRoll));
+                    break;
                 case Rolled { Kind: RollKind.Save or RollKind.Contest or RollKind.Check } rolled:
+                    Moment("roll-save");
+                    _cues.Add(new CombatCue(_t, rolled.Context?.Source ?? _ability?.Source ?? rolled.Roller,
+                        rolled.Context?.Ability ?? _ability?.Ability, rolled.Roller, rolled.Kind, rolled.Result));
                     Badge(rolled.Roller, rolled.Result);
                     break;
                 case ConditionSaved saved:
@@ -453,6 +468,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AttackResolved resolved:
+                    Moment("roll");
+                    _cues.Add(new CombatCue(_t, resolved.Source, Target: resolved.Target, Kind: RollKind.Attack, FinalAc: resolved.FinalAc, Hit: resolved.Hit, Crit: resolved.Crit));
                     _cues.Add(new FocusCue(_t, resolved.Target));
                     PlayResolved(resolved);
                     break;
@@ -467,6 +484,10 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Land();
                     break;
                 case ConditionApplied or ConditionRemoved:
+                    var (conditionUnit, conditionId, ending) = e is ConditionApplied gainedCondition
+                        ? (gainedCondition.Unit, gainedCondition.Condition, false)
+                        : (((ConditionRemoved)e).Unit, ((ConditionRemoved)e).Condition, true);
+                    _cues.Add(new CombatCue(_t, conditionUnit, Effect: Words.Title(conditionId.Value) + (ending ? " ended" : ""), Condition: conditionId, Ended: ending));
                     Apply(e);
                     Sound(e is ConditionApplied gained ? SoundChoice.Condition(gained.Condition.Value) : null);
                     Moment(e is ConditionApplied ? "condition" : "condition-ends", BeatTiming.Condition * 0.8);

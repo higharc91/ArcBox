@@ -53,6 +53,7 @@ public sealed record BeatFrame(ImmutableDictionary<UnitId, UnitPlace> Places, Im
     public ImmutableArray<PopBox> Pops { get; init; } = [];
     public ImmutableHashSet<UnitId> Flashes { get; init; } = [];
     public ImmutableArray<SpellLight> Lights { get; init; } = [];
+    public CombatReadout? Combat { get; init; }
 }
 
 /// <summary>The TV dropped back to the newest beat.</summary>
@@ -112,6 +113,9 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
 
     private readonly BeatQueue _queue = new();
     private readonly List<(Cue Cue, double Start)> _fading = [];
+    private readonly Dictionary<UnitId, RollResult> _attackRolls = [];
+    private readonly Dictionary<UnitId, AbilityId> _combatAbilities = [];
+    public RulesPack? Rules { get; set; }
     private readonly Queue<SpokenLine> _unread = [];     // lines waiting their turn, as the voice speaks one at a time
     private BattleView? _live;
     private BeatScript? _script;
@@ -157,7 +161,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     public string? AbilityBanner => _cutIn?.Banner(_cinematicClock);
     public bool EnhancedEffects { get; set; }
     public bool ReducedEffects { get; set; }
-    private double FadeLength(Cue cue) => cue.Length * (ReducedEffects && cue is BurstCue or HazardCue ? 0.6 : 1);
+    private double FadeLength(Cue cue) => cue is CombatCue ? 1.8 : cue.Length * (ReducedEffects && cue is BurstCue or HazardCue ? 0.6 : 1);
 
     /// <summary>The unit to badge: its turn timed out, or its player left, and the AI is finishing it on screen.</summary>
     public UnitId? AiFinished { get; private set; }
@@ -179,6 +183,8 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
             (_script, Shown, _cutIn, _carriedCamera) = (null, null, null, null);
             _cinematicBudget.Reset();
             _waitingSpells.Clear();
+            _attackRolls.Clear(); _combatAbilities.Clear();
+            _fading.RemoveAll(f => f.Cue is CombatCue);
         }
         _live = live;
         if (_script is null && _queue.Late(_real))
@@ -191,6 +197,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private void CatchUp(BattleView live)
     {
         _waitingSpells.Clear();
+        _attackRolls.Clear(); _combatAbilities.Clear();
         _queue.KeepNewest();
         ClearCinematics();
         _fading.Clear();
@@ -208,6 +215,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     public void Reset()
     {
         _waitingSpells.Clear();
+        _attackRolls.Clear(); _combatAbilities.Clear();
         _queue.Clear();
         _cinematicBudget.Reset();
         _fading.Clear();
@@ -367,6 +375,20 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
                 };
                 Shown = DisplayedBattle.Apply(Shown, apply.Event, _live);
                 break;
+            case AbilityCue action:
+                _combatAbilities[action.Used.Source] = action.Used.Ability;
+                break;
+            case RollMemoryCue memory:
+                _attackRolls[memory.Rolled.Roller] = memory.Rolled.Result;
+                break;
+            case CombatCue combat:
+                if (combat.Condition is { } readoutCondition)
+                    combat = combat with { Effect = CombatReadout.ConditionName(readoutCondition, Rules) + (combat.Ended ? " ended" : "") };
+                if (combat.Kind == RollKind.Attack && _attackRolls.TryGetValue(combat.Actor, out var roll))
+                    combat = combat with { Ability = _combatAbilities.TryGetValue(combat.Actor, out var ability) ? ability : null,
+                        Roll = roll with { Vs = combat.FinalAc ?? roll.Vs, Success = combat.Hit ?? roll.Success, Crit = combat.Crit ?? roll.Crit } };
+                _fading.Add((combat, _now - (_clock - cue.At)));
+                break;
             case FocusCue focus:
                 Target = focus.Unit;
                 break;
@@ -472,6 +494,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         return new BeatFrame(places.ToImmutable(), poses.ToImmutable(), draws.ToImmutable(), ReducedEffects ? Vector2.Zero : shake)
         {
             Pops = pops.ToImmutable(), Flashes = flashes.ToImmutable(),
+            Combat = CombatReadout.Of(_fading.Select(f => f.Cue).OfType<CombatCue>(), Shown, Rules),
             Lights = EnhancedEffects ? [.. draws.SelectMany(d => d.Lights).OrderByDescending(l => l.Power).Take(12)
                 .Select(l => ReducedEffects ? l with { Power = l.Power * .75f } : l), .. SpellLighting.ForZones(terrain, _now, ReducedEffects)] : []
         };

@@ -145,11 +145,16 @@ With screenshots on, the same fight start took 216.7 ms. Only this GPU has been 
 6. **`tools/tv-e2e.sh`:** the Tactics modes now pass on Linux, including `RESTART`, `WALK`, `STAGE` and `CHAPTER`, and plain, `WALK`, `RECONNECT` and `RESTART` passed on Windows. Still unrun: REDLINE on either (Windows lacks Playwright), `ARCBOX_RESTART=kill`, and `STAGE` and `CHAPTER` on Windows.
 7. **A slow TV:** a TV falling over 8 s behind drops to the newest beat. That's tested, but the 8 s margin is unmeasured and it hasn't been seen on a slow machine.
 8. **Lower-level polish:** crypt props are low contrast without lighting, the ford draws a thin brown line over the river, the strip twitches 28 px between turns, and sides are told apart by hue alone, which is weak for red-green colour blindness. Followers briefly overlap on quick U-turns. The Ash ground repeats every 4 tiles.
-9. **The dice panel from mockup 01 isn't built.** The TV shows save rolls as badges, but not the attack roll panel with advantage. Story skill checks do have a d20 panel now.
-10. **A mid-fight TV takeover on the GPU:** the hold that waits for the cut's blocks (`584d9bd`) fixed late blocks seen only on Windows. It hasn't been rerun there.
+9. **A mid-fight TV takeover on the GPU:** the hold that waits for the cut's blocks (`584d9bd`) fixed late blocks seen only on Windows. It hasn't been rerun there.
 
 ## Decisions for the user
 
 - **The finale's size:** `hall_of_the_flame` draws at half size, because it's just too tall for 2x. It plays fine, but units are small. It could use the top strip or be trimmed. Still open.
 - **Overworld plan:** done. Milestones 5a to 5d are built; 5e, tuning and a real session, needs the user. The open overworld decisions are at the top of the [overworld report](2026-11-02-tactics-overworld.md).
 - **Balance:** the decisions listed under "Decisions for the user" in the rules-engine tracker are still open.
+
+## Attack and save panel — 2026-11-09 (#164)
+
+The TV now names the actor and ability, displays each attack/save roll with its modifier and AC/DC, explains MISS against the final AC after a reaction, and names push/condition effects. Existing timing tests pass without extra beat holds. Native fixture screenshots and full validation notes are in [the readout report](2026-11-09-tv-rolls/README.md); no physical-TV or human readability test is claimed.
+
+![A Shield reaction explains the miss against AC 17](2026-11-09-tv-rolls/shield.png)

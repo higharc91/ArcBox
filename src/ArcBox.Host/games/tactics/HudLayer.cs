@@ -5,6 +5,7 @@ using Tactics.Logic;
 using Tactics.Game;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
+using Tactics.Presentation.Beats;
 using Tactics.Presentation.Story;
 
 namespace ArcBox.Host.Games.Tactics;
@@ -33,6 +34,8 @@ public partial class HudLayer : Control
     private const int LayoutWidth = 1920;
     private const int PanelGap = 28;     // past the studs on two panels' corners
 
+    private readonly PanelContainer _combat;
+    private readonly Label _combatHeading, _combatRolls, _combatEffect;
     private readonly string _root;
     private readonly Dictionary<string, Texture2D?> _textures = [];
     private readonly VBoxContainer _left;
@@ -56,6 +59,14 @@ public partial class HudLayer : Control
     /// <param name="story">The story panels' art, for the vote to fall back (#111); with none, the vote isn't drawn.</param>
     public HudLayer(string packRoot, HudArt art, StoryArt? story = null)
     {
+        _combatHeading = TvText.Label("", ArcTheme.Bold, 28, Gold);
+        _combatRolls = TvText.Label("", ArcTheme.SemiBold, 30, Ink);
+        _combatEffect = TvText.Label("", ArcTheme.SemiBold, 26, Ink);
+        // Wrap measured text below: this keeps Godot from caching a tall minimum at the initial zero width.
+        _combat = new PanelContainer { Position = new Vector2(520, 164), CustomMinimumSize = new Vector2(880, 0), Visible = false, MouseFilter = MouseFilterEnum.Ignore };
+        _combat.AddThemeStyleboxOverride("panel", ArcTheme.GlassBox(Gold, 20, 12));
+        _combat.AddChild(ArcTheme.VBox(6, _combatHeading, _combatRolls, _combatEffect));
+        AddChild(_combat);
         if (story is not null)
         {
             _activeCard = new UnitCard(story, "Active unit");
@@ -110,6 +121,36 @@ public partial class HudLayer : Control
             _retreat = new VoteBoard(story);     // the same panel as a party vote, bottom right
             AddChild(_retreat);
         }
+    }
+
+    public void ShowCombat(CombatReadout? readout)
+    {
+        _combat.Visible = readout is not null;
+        if (readout is null) return;
+        CombatText(_combatHeading, readout.Heading);
+        CombatText(_combatRolls, string.Join("\n", readout.Rolls));
+        _combatRolls.Visible = readout.Rolls.Length > 0;
+        CombatText(_combatEffect, readout.Effect ?? "");
+        _combatEffect.Visible = readout.Effect is not null;
+        _combat.Size = new Vector2(880, _combat.GetCombinedMinimumSize().Y);
+    }
+
+    private static void CombatText(Label label, string text)
+    {
+        var font = label.GetThemeFont("font"); var size = label.GetThemeFontSize("font_size");
+        var lines = new List<string>();
+        foreach (var paragraph in text.Split('\n'))
+        {
+            var line = "";
+            foreach (var word in paragraph.Split(' '))
+            {
+                var next = line.Length == 0 ? word : line + " " + word;
+                if (line.Length > 0 && font.GetStringSize(next, fontSize: size).X > 840) { lines.Add(line); line = word; }
+                else line = next;
+            }
+            lines.Add(line);
+        }
+        label.Text = string.Join("\n", lines);
     }
 
     /// <summary>Shows the party's vote to fall back (<see cref="RetreatPlan"/>), or nothing.</summary>

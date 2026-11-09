@@ -102,7 +102,7 @@ public sealed class AiReactionTests
         Assert.True(Assert.IsType<Rolled>(events[1]).Result.Success);
         Assert.DoesNotContain(events, e => e is ReactionOffered);
         Assert.Contains(new Reacted(U("mage"), "wizard.shield"), events);
-        Assert.Contains(new AttackResolved(U("kara"), U("mage"), Hit: false, Crit: false), events);
+        Assert.Contains(new AttackResolved(U("kara"), U("mage"), Hit: false, Crit: false) { FinalAc = 17 }, events);
         Assert.Equal((40, 0), (after.Units[U("mage")].Hp, after.Units[U("mage")].Resources["mana"]));
         Assert.Null(after.Pending);
     }
@@ -180,7 +180,7 @@ public sealed class AiReactionTests
         Assert.Equal("wizard.shield", before.Id);
         Assert.Equal(before, after);
         var (_, events) = battle.Apply(loaded, new React(U("mage"), after));
-        Assert.Contains(new AttackResolved(U("gob"), U("mage"), Hit: false, Crit: false), events);
+        Assert.Contains(new AttackResolved(U("gob"), U("mage"), Hit: false, Crit: false) { FinalAc = 17 }, events);
     }
 
     // ---- Damage-reducing reactions ----------------------------------------------------------------------------------

@@ -167,6 +167,9 @@ public partial class Main : Control
             if (board == "mob-entries")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.World.MobEntryDemo.Steps(pack)));
+            else if (board == "rolls")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.Beats.RollPanelDemo.Steps()));
             else if (board == "environment")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
