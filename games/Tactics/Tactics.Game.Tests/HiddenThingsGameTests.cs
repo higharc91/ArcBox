@@ -181,6 +181,7 @@ public sealed class HiddenThingsGameTests
         Step(s, "sw");                                                              // south, along y: onto the path
         Assert.Equal(new Tile(4, 2), s.Host.Explore!.At);
         Assert.Equal(bumps, s.Host.Explore!.Bumps);                                 // no bump: that would give it away
+        Assert.False(Walk(s).TryGetProperty("bumps", out _));                       // nor a buzz on the leader's phone
         Assert.False(s.Host.Explore!.Blocked);
         Assert.DoesNotContain("\"ford\"", Sent(s));
         Assert.Equal([new WallPlug(new Tile(4, 3), "sw")], s.Host.Explore!.Plugs!.Value);    // drawn as the wall either side, as a secret door is

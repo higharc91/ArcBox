@@ -74,6 +74,18 @@ public sealed class WalkingTests
 
     private static string PhoneJson(Session s, int player) => JsonSerializer.Serialize(s.Harness.PlayerView(player), ArcJson.Options);
 
+    /// <summary>The walk screen's <c>bumps</c> for <paramref name="player"/>: 0 when it's left out.</summary>
+    private static int Bumps(Session s, int player)
+        => s.Screen(player)!.Data.TryGetProperty("bumps", out var bumps) ? bumps.GetInt32() : 0;
+
+    /// <summary>A phone's view with the leader's bump count taken out, for the tests of what else a bump leaves alone.</summary>
+    private static string WithoutBumps(string phone)
+    {
+        var node = JsonNode.Parse(phone)!;
+        (node["data"] as JsonObject)?.Remove("bumps");
+        return node.ToJsonString(ArcJson.Options);
+    }
+
     private static string HostJson(Session s) => JsonSerializer.Serialize(s.Game.HostView(), ArcJson.Options);
 
     /// <summary>Holds <paramref name="dir"/>, pinging as a phone does, until the party has taken <paramref name="steps"/> more steps.</summary>
@@ -633,14 +645,15 @@ public sealed class WalkingTests
         var (at, dir, blocked) = Wall();
         var s = At(at);
         var (dx, dy) = WorldWalk.Delta(blocked);
-        var phone = PhoneJson(s, 0);
+        var phone = WithoutBumps(PhoneJson(s, 0));
 
         Walk(s, dir);
 
         Assert.Equal(at, Party(s).At);
         Assert.Equal(new Tile(at.X + dx, at.Y + dy), Party(s).Facing);
         Assert.Empty(Party(s).Legs);
-        Assert.Equal(phone, PhoneJson(s, 0));
+        Assert.Equal(phone, WithoutBumps(PhoneJson(s, 0)));    // no word: the leader's phone hears only its bump count
+        Assert.Equal(1, Bumps(s, 0));
     }
 
     [Fact]
@@ -649,13 +662,14 @@ public sealed class WalkingTests
         var (at, dir, _) = Wall();
         var s = At(at);
         Assert.False(Party(s).Blocked);
-        var phones = Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)).ToArray();
+        var phones = Enumerable.Range(0, 4).Select(p => WithoutBumps(PhoneJson(s, p))).ToArray();
 
         Walk(s, dir);
 
         Assert.True(Party(s).Blocked);
         Assert.False(Party(s).Held);
-        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)));    // the phone stays silent: telling it would mint a view
+        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => WithoutBumps(PhoneJson(s, p))));    // Blocked isn't the phone's: telling it would mint a view at every release
+        Assert.Equal(1, Bumps(s, 0));
         s.Harness.Advance(Ms100);
         Walk(s, dir);
         Assert.True(Party(s).Blocked);      // still pressed against it
@@ -709,12 +723,13 @@ public sealed class WalkingTests
     {
         var (at, dir) = Edge();
         var s = At(at);
-        var phones = Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)).ToArray();
+        var phones = Enumerable.Range(0, 4).Select(p => WithoutBumps(PhoneJson(s, p))).ToArray();
 
         Walk(s, Name(dir));
 
         Assert.Equal(RoadGoesOn, s.Host.Notice);
-        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)));
+        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => WithoutBumps(PhoneJson(s, p))));     // the TV's to say, not the phones'
+        Assert.Equal(1, Bumps(s, 0));       // the edge is a wall like any other to the leader's thumb
     }
 
     [Fact]
@@ -1563,9 +1578,32 @@ public sealed class WalkingTests
 
         Assert.False(Party(s).Blocked);      // refused and let go in the same moment: Blocked never shows it...
         Assert.Equal(1, Party(s).Bumps);     // ...but the count does
-        var phones = Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)).ToArray();
+        var phones = Enumerable.Range(0, 4).Select(p => WithoutBumps(PhoneJson(s, p))).ToArray();
         Walk(s, dir);
-        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => PhoneJson(s, p)));
+        Assert.Equal(phones, Enumerable.Range(0, 4).Select(p => WithoutBumps(PhoneJson(s, p))));
+        Assert.Equal(2, Bumps(s, 0));       // only the leader's count moves
+    }
+
+    [Fact]
+    public void The_leaders_phone_counts_the_bumps_and_nobody_elses_does()
+    {
+        var (at, dir, _) = Wall();
+        var s = At(at);
+        Assert.Equal(0, Bumps(s, 0));
+        Assert.DoesNotContain("\"bumps\"", PhoneJson(s, 0));      // left out while there are none, so the screen is as it was
+        var followers = Enumerable.Range(1, 3).Select(p => PhoneJson(s, p)).ToArray();
+
+        Walk(s, dir);
+        Assert.Equal(1, Bumps(s, 0));
+        s.Harness.Advance(Ms100);
+        Walk(s, dir);                       // still held against it: no new bump, so no new view
+        Assert.Equal(1, Bumps(s, 0));
+        Walk(s, null);
+        Walk(s, dir);
+
+        Assert.Equal(2, Bumps(s, 0));
+        Assert.Equal(Party(s).Bumps, Bumps(s, 0));
+        Assert.Equal(followers, Enumerable.Range(1, 3).Select(p => PhoneJson(s, p)));
     }
 
     [Fact]

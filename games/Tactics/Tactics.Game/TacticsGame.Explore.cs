@@ -90,7 +90,7 @@ public sealed partial class TacticsGame
     /// <summary>Whether the party has been told that the road goes on past the region's edge: once a session is enough.</summary>
     private bool _edgeSaid;
 
-    /// <summary>How many steps a wall has refused this session: what <see cref="ExploreView.Bumps"/> says.</summary>
+    /// <summary>How many steps a wall has refused this session: what <see cref="ExploreView.Bumps"/> says, and the leader's walk screen's <c>bumps</c>.</summary>
     private int _bumps;
 
     /// <summary>What the TV says when the party is stopped by the region's edge. The user's to reword.</summary>
@@ -383,8 +383,9 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>
-    /// Takes the step the held direction asks for, or turns to face it if the way is blocked. A blocked step tells only the TV
-    /// (<see cref="ExploreView.Blocked"/>, and the road going on at the region's edge): a toast would change the phone's view.
+    /// Takes the step the held direction asks for, or turns to face it if the way is blocked. A blocked step tells the TV
+    /// (<see cref="ExploreView.Blocked"/>, and the road going on at the region's edge) and the leader's phone, by its <c>bumps</c> count, so it
+    /// can buzz; never as a toast, and never for a wall the TV doesn't draw (<see cref="_unseenWall"/>).
     /// </summary>
     private void TakeStep(bool onTime)
     {
