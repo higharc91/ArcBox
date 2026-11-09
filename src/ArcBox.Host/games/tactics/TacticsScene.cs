@@ -1365,6 +1365,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _board.SetEffects(draws, ReducedEffects ? System.Numerics.Vector2.Zero : frame.Shake);
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, framed, _player.AiFinished);
+        _hud?.ShowCards(shown, _said.Lead, _player.Target, units, framed);
         ShowRetreat(_player.Live ?? shown);
     }
 
@@ -1421,6 +1422,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _stageShake = ReducedEffects ? System.Numerics.Vector2.Zero : beat.Shake;      // on the camera: the world and the board shake together
         _said = BattleHud.Of(shown, _player.Live ?? shown, _banner, _said, _player.AiFinished);
         _hud?.Show(_said, units, stage.HudFit, _player.AiFinished);
+        _hud?.ShowCards(shown, _said.Lead, _player.Target, units, stage.HudFit);
         ShowRetreat(_player.Live ?? shown);
     }
 

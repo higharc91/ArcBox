@@ -121,6 +121,9 @@ public static class BeatTiming
 /// <summary>Something that happens at <paramref name="At"/> seconds into a beat, for <paramref name="Length"/> seconds.</summary>
 public abstract record Cue(double At, double Length);
 
+/// <summary>The unit card follows the target when its action starts, without changing battle state or timing.</summary>
+public sealed record FocusCue(double At, UnitId? Unit) : Cue(At, 0);
+
 /// <summary>The start of a real cast or swing, with its rule event and resolved aiming tiles.</summary>
 public sealed record AbilityCue(double At, AbilityUsed Used, Tile From, Tile Toward) : Cue(At, 0);
 
@@ -414,6 +417,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AbilityUsed used:
+                    _cues.Add(new FocusCue(_t, used.Target.Unit));
                     _stackedDamageRows.Clear();
                     (_ability, _swings, _hits, _rolls, _shot, _voiced) = (used, 0, 0, 0, false, false);
                     Swing(used);
@@ -428,6 +432,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case Retargeted turned when _ability is { } aimed && aimed.Source == turned.Unit:
+                    _cues.Add(new FocusCue(_t, turned.Target));
                     _ability = aimed with { Target = new Target(Unit: turned.Target) };   // the next swing goes at it
                     break;
                 case Rolled { Kind: RollKind.Attack } when _ability is { } again:
@@ -446,6 +451,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Apply(e);
                     break;
                 case AttackResolved resolved:
+                    _cues.Add(new FocusCue(_t, resolved.Target));
                     PlayResolved(resolved);
                     break;
                 case Damaged hit:

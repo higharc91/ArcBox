@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using ArcBox.Host.Shell;
 using Godot;
 using Tactics.Logic;
+using Tactics.Game;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
 using Tactics.Presentation.Story;
@@ -49,10 +50,19 @@ public partial class HudLayer : Control
     private readonly Label _promptText;
     private readonly Control _badge;
     private readonly VoteBoard? _retreat;
+    private readonly UnitCard? _activeCard;
+    private readonly UnitCard? _targetCard;
 
     /// <param name="story">The story panels' art, for the vote to fall back (#111); with none, the vote isn't drawn.</param>
     public HudLayer(string packRoot, HudArt art, StoryArt? story = null)
     {
+        if (story is not null)
+        {
+            _activeCard = new UnitCard(story, "Active unit");
+            _targetCard = new UnitCard(story, "Current target");
+            AddChild(_activeCard);
+            AddChild(_targetCard);
+        }
         _root = packRoot;
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         MouseFilter = MouseFilterEnum.Ignore;
@@ -142,6 +152,21 @@ public partial class HudLayer : Control
             var size = _badge.GetCombinedMinimumSize();
             var at = BattleHud.BadgeAt(badged, fit, new System.Numerics.Vector2(size.X, size.Y));
             _badge.Position = new Vector2(at.X, at.Y);
+        }
+    }
+
+    /// <summary>Cards use the same displayed snapshot and overlap fade as the battlefield HUD.</summary>
+    public void ShowCards(BattleView shown, UnitId? active, UnitId? target, ImmutableArray<BoardUnit> units, BoardFit fit)
+    {
+        PlaceCard(_activeCard, active, Margin);
+        PlaceCard(_targetCard, target, LayoutWidth - Margin - 480);
+        void PlaceCard(UnitCard? card, UnitId? id, float x)
+        {
+            if (card is null) return;
+            card.Show(shown.Units.FirstOrDefault(u => u.Id == id));
+            if (!card.Visible) return;
+            card.Position = new Vector2(x, 1080 - Margin - card.Size.Y);
+            card.Modulate = Over(card, units, fit) ? new Color(1, 1, 1, SeeThrough) : Colors.White;
         }
     }
 

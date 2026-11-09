@@ -142,6 +142,10 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     /// <summary>The newest view, which runs ahead of <see cref="Shown"/>.</summary>
     public BattleView? Live => _live;
 
+    /// <summary>The unit targeted by the currently displayed action; never taken from a future queued beat.</summary>
+    public UnitId? Target { get; private set; }
+
+
     /// <summary>Optional TV framing factory. Without it the original playback timing is byte-for-byte unchanged.</summary>
     public Func<Beat, BattleView, BeatScript, CutInPlayback?>? CutIn { get; set; }
 
@@ -283,6 +287,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         (_script, _next, _clock, _cinematicClock) = (BeatScript.Of(beat, Shown, _live, fx, sounds), 0, 0, 0);
         _cutIn = CutIn?.Invoke(beat, Shown, _script);
         _opening = null;
+        Target = null;
         if (beat.Actor is { } actor && beat.Events.Any(e => e.AiFinished))
             (AiFinished, _aiFinishedUntil, _aiBegan) = (actor, _now + Math.Max(_script.Length, BeatTiming.AiFinished), true);
         return _script;
@@ -346,7 +351,21 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
         switch (cue)
         {
             case ApplyCue apply when Shown is not null && _live is not null:
+                Target = apply.Event switch
+                {
+                    AbilityUsed used => used.Target.Unit,
+                    AttackResolved hit => hit.Target,
+                    Damaged hit => hit.Unit,
+                    Healed healed => healed.Unit,
+                    ConditionApplied condition => condition.Unit,
+                    ConditionRemoved condition => condition.Unit,
+                    TurnStarted or TurnEnded or BattleEnded => null,
+                    _ => Target,
+                };
                 Shown = DisplayedBattle.Apply(Shown, apply.Event, _live);
+                break;
+            case FocusCue focus:
+                Target = focus.Unit;
                 break;
             case LineCue line:
                 lines.Add(Say(line));
