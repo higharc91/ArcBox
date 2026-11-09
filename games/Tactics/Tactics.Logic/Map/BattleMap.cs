@@ -39,17 +39,18 @@ public sealed record TileInfo(int Height, int Material, TileFlags Flags);
 /// <summary>An object standing on a tile. A blocking prop cannot be walked into; any prop may give cover.</summary>
 public sealed record PropPlacement(string Id, Tile At, bool Blocks, Cover Cover, string? Variant = null,
     [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Requires = default,
-    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default)
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Unless = default,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] bool Slim = false)
 {
     public bool Equals(PropPlacement? other) => other is not null
-        && Id == other.Id && At == other.At && Blocks == other.Blocks && Cover == other.Cover && Variant == other.Variant
+        && Id == other.Id && At == other.At && Blocks == other.Blocks && Cover == other.Cover && Variant == other.Variant && Slim == other.Slim
         && (Requires.IsDefaultOrEmpty ? other.Requires.IsDefaultOrEmpty : !other.Requires.IsDefaultOrEmpty && Requires.SequenceEqual(other.Requires))
         && (Unless.IsDefaultOrEmpty ? other.Unless.IsDefaultOrEmpty : !other.Unless.IsDefaultOrEmpty && Unless.SequenceEqual(other.Unless));
 
     public override int GetHashCode()
     {
         var hash = new HashCode();
-        hash.Add(Id); hash.Add(At); hash.Add(Blocks); hash.Add(Cover); hash.Add(Variant);
+        hash.Add(Id); hash.Add(At); hash.Add(Blocks); hash.Add(Cover); hash.Add(Variant); hash.Add(Slim);
         if (!Requires.IsDefaultOrEmpty) foreach (var flag in Requires) hash.Add(flag);
         hash.Add(0);
         if (!Unless.IsDefaultOrEmpty) foreach (var flag in Unless) hash.Add(flag);

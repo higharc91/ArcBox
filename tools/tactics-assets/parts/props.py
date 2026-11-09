@@ -1440,6 +1440,7 @@ class Prop:
     height: int = 1                              # height steps, for line of sight
     fps: float = 0.0
     tags: list[str] = field(default_factory=list)
+    slim: bool = False                           # a blocking prop the overworld lets a diagonal step past (a trunk, a post)
     light: tuple[str, float, str] | None = None  # (slot whose shade 4 is the light colour, radius in tiles, flicker)
     layer: str = "over"                          # over: a billboard; ground: lies flat under units (lily pads)
 
@@ -1479,15 +1480,15 @@ _ROCK = {"grey": _v(stone="terrain/stone", moss="terrain/moss"),
 _ROCK_BUILT = {k: dict(_ROCK[k], dark="cloth/charcoal") for k in ("grey", "warm", "dark", "sandstone", "snowy")}
 
 CATALOGUE: list[Prop] = [
-    Prop("tree", tree_round, _TREE, cover="full", height=4, tags=["nature"]),
+    Prop("tree", tree_round, _TREE, cover="full", height=4, tags=["nature"], slim=True),
     Prop("tree_fruit", lambda: tree_round(12, fruit=True),
-         {"apple": _v(bark="foliage/bark", leaf="foliage/leaf", fruit="prop/apple")}, cover="full", height=4),
+         {"apple": _v(bark="foliage/bark", leaf="foliage/leaf", fruit="prop/apple")}, cover="full", height=4, slim=True),
     Prop("pine", tree_pine, {"green": _v(bark="foliage/bark", leaf="foliage/pine", glow="prop/snow")},
-         cover="full", height=4, tags=["nature"]),
+         cover="full", height=4, tags=["nature"], slim=True),
     Prop("pine_snowy", lambda: tree_pine(2, snowy=True),
-         {"snow": _v(bark="foliage/bark", leaf="foliage/pine", glow="prop/snow")}, cover="full", height=4),
+         {"snow": _v(bark="foliage/bark", leaf="foliage/pine", glow="prop/snow")}, cover="full", height=4, slim=True),
     Prop("dead_tree", tree_dead, {"grey": _v(bark="foliage/bark_pale", dark="cloth/charcoal"),
-                                  "dark": _v(bark="foliage/dead", dark="cloth/charcoal")}, cover="half", height=3),
+                                  "dark": _v(bark="foliage/dead", dark="cloth/charcoal")}, cover="half", height=3, slim=True),
     Prop("bush", bush, {k: v for k, v in _TREE.items() if k != "blossom"}, blocks=False, cover="half"),
     Prop("bush_berry", lambda: bush(14, berries=True), {"green": _v(leaf="foliage/leaf", fruit="prop/berry")},
          blocks=False, cover="half"),
@@ -1495,7 +1496,7 @@ CATALOGUE: list[Prop] = [
     Prop("rock_medium", lambda: rock("medium", 15), _STONE, cover="half"),
     Prop("rock_large", lambda: rock("large", 25), _STONE, cover="full", height=2),
     Prop("rock_mossy", lambda: rock("large", 35, mossy=True), _STONE, cover="full", height=2),
-    Prop("stump", stump, {"oak": _v(bark="foliage/bark", wood="wood/pale")}, cover="half"),
+    Prop("stump", stump, {"oak": _v(bark="foliage/bark", wood="wood/pale")}, cover="half", slim=True),
     Prop("log", log, {"oak": _v(bark="foliage/bark", wood="wood/pale")}, cover="half"),
     Prop("tall_grass", tall_grass, {"green": _v(leaf="terrain/grass"), "dry": _v(leaf="terrain/grass_dry")},
          blocks=False),
@@ -1516,7 +1517,7 @@ CATALOGUE: list[Prop] = [
          fps=10, tags=["light"]),
     Prop("torch", torch_frames, {"fire": _v(wood="wood/dark", metal="metal/iron", glow="prop/flame")},
          blocks=False, fps=8, tags=["light"]),
-    Prop("lamp_post", lamp_post, {"iron": _v(metal="metal/dark", glow="prop/flame")}, height=3, tags=["light"]),
+    Prop("lamp_post", lamp_post, {"iron": _v(metal="metal/dark", glow="prop/flame")}, height=3, tags=["light"], slim=True),
     Prop("banner", banner_frames, {
         "crimson": _v(wood="wood/dark", cloth1="cloth/crimson", cloth2="metal/gold", gold="metal/gold"),
         "navy": _v(wood="wood/dark", cloth1="cloth/navy", cloth2="cloth/ivory", gold="metal/gold"),
@@ -1602,7 +1603,7 @@ CATALOGUE: list[Prop] = [
          blocks=False, cover="half", tags=["desert"]),
     Prop("swamp_tree", swamp_tree, {"cypress": _v(bark="foliage/dead", leaf="prop/cypress",
                                                   straw="prop/spanish_moss")}, cover="full", height=4,
-         tags=["swamp", "nature"]),
+         tags=["swamp", "nature"], slim=True),
     Prop("will_o_wisp", will_o_wisp_frames, {"blue": _v(glow="prop/wisp"), "green": _v(glow="prop/wisp_green")},
          blocks=False, height=0, fps=6, light=("glow", 2.0, "pulse"), tags=["swamp", "light"]),
     # ---- shrines, tombs, lights, the training ground
@@ -1694,6 +1695,8 @@ def build() -> None:
             tiles.append(Tile(imgs[0], p.id, vname + (f" · {len(imgs)}f" if len(imgs) > 1 else "")))
         entries[p.id] = {"variants": files, "size": [w, h], "anchor": anchor, "frames": len(frames), "fps": p.fps,
                          "blocks": p.blocks, "cover": p.cover, "height": p.height, "tags": p.tags}
+        if p.slim:
+            entries[p.id]["slim"] = True
         if p.layer != "over":
             entries[p.id]["layer"] = p.layer
         if p.light:
