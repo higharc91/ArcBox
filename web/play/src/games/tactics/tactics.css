@@ -1049,3 +1049,32 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx .tx-cell.neutral { background: #606775; }
 
 .tx-tile-details .tx-hp-text { display: inline; }
+
+/* Tap to travel: the leader's Map button, the journey's line on the walk screen, and the map sheet. */
+.tx .tx-btn.tx-map-open { min-height: 32px; padding: 4px 12px; font-size: 14px; }
+.tx-walk-goal p.tx-travel { width: fit-content; max-width: 100%; margin-top: 8px; padding: 6px 10px; border: 1px solid var(--wf-edge); border-radius: 999px;
+  background: rgba(230, 189, 92, 0.12); color: var(--wf-gold-hi); font-size: 14px; }
+.tx-walk-goal p.tx-travel.note { border-color: #bd655d88; background: #4c232a88; color: #ffd4ad; }
+.tx-map-tools { display: flex; justify-content: flex-end; }
+.tx-map-wait, .tx-map-hint { color: var(--wf-muted); font-size: 14px; text-align: center; }
+.tx-map-hint { margin: 0; padding: 8px 16px 12px; }
+.tx-map-scroll { flex: none; max-height: 62vh; max-height: 62dvh; overflow: auto; overscroll-behavior: contain; border: 1px solid var(--wf-line);
+  border-radius: var(--wf-radius); background: #07080f; touch-action: pan-x pan-y; }
+.tx-map-plane { position: relative; width: calc(100% * var(--zoom, 1)); cursor: crosshair; }
+.tx-map-plane canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.tx-map-pin, .tx-map-party, .tx-map-to { position: absolute; transform: translate(-50%, -50%); }
+.tx .tx-map-pin { width: 26px; height: 26px; min-height: 0; padding: 0; display: grid; place-items: center; border-radius: 50%; border: 2px solid #0b0c16;
+  background: var(--wf-gold); color: var(--wf-on-gold); font: 800 14px/1 var(--wf-sans); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6); cursor: pointer; }
+.tx .tx-map-pin.story { background: #ffcf3f; }
+.tx .tx-map-pin.quest, .tx .tx-map-pin.turnIn, .tx .tx-map-pin.pinned { background: #8fd0ff; }
+.tx .tx-map-pin.shop, .tx .tx-map-pin.inn, .tx .tx-map-pin.temple { background: #f0e2c0; }
+.tx .tx-map-pin.rest { background: #ff9d5c; }
+.tx .tx-map-pin.person, .tx .tx-map-pin.place { width: 18px; height: 18px; font-size: 11px; background: #d9d3c2; }
+.tx-map-party { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; background: var(--wf-you); box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.45); z-index: 2; pointer-events: none; }
+.tx-map-to { width: 14px; height: 14px; border: 2px dashed #fff; border-radius: 3px; transform: translate(-50%, -50%) rotate(45deg); pointer-events: none; }
+.tx-map-places { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+.tx .tx-map-places .tx-btn { width: 100%; justify-content: flex-start; gap: 8px; text-align: left; min-height: 44px; padding: 6px 10px; }
+.tx-map-name { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.tx-map-name b { font-size: 14px; line-height: 1.15; }
+.tx-map-kind { color: var(--wf-dim); font-size: 12px; }
+.tx-map-mark { flex: none; width: 20px; text-align: center; color: var(--wf-gold-hi); }

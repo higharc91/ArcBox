@@ -9,6 +9,7 @@ import { useAlertOnMount, useSfx } from "./sfx";
 import type { WalkData, WalkMember } from "./types";
 import { LineIcon } from "./ui";
 import { ChoicesCard } from "./choices";
+import { MapSheet } from "./travel";
 import { DEAD_ZONE, dirAt, SECTORS, stickyDirAt, WalkSender, type Dir, type Sector } from "./walkModel";
 
 /** How long "Choose a battle" and "End session" wait for their confirm before they stand down. */
@@ -485,6 +486,30 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
     mounted.current = true;
   }, [d.leader]);
 
+  // Tap to travel (the leader's): the map is a sheet over the screen, with the pad let go under it. The server sends the map's data while it
+  // knows the sheet is open, so a reconnect with it open opens it again; a pick closes it, and the party walks.
+  const [mapShown, setMapShown] = useState(!!d.map);
+  const showMap = d.leader && mapShown;
+  useEffect(() => {
+    if (!d.leader) setMapShown(false);
+  }, [d.leader]);
+  const openMap = () => {
+    sender.release();
+    sfx("select");
+    send("mapOpen");
+    setMapShown(true);
+  };
+  const closeMap = () => {
+    sfx("cancel");
+    send("mapClose");
+    setMapShown(false);
+  };
+  const travel = ([x, y]: [number, number]) => {
+    sfx("confirm");
+    send("travel", { x, y });
+    setMapShown(false);
+  };
+
   if (d.ambush) return <div class="tx tx-mob-ambush" role="alert"><span class="tx-mob-warning" aria-hidden="true"><LineIcon name="sword" /></span><span class="tx-eyebrow">Danger on the road</span><h1>Ambush!</h1><p>{d.ambush} attack!</p><span class="tx-note">Watch the TV—the party is taking position.</span></div>;
 
   return (
@@ -507,10 +532,13 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         <div class="tx-walk-goal">
           <div class="tx-walk-meta">
           {d.region ? <span class="tx-eyebrow">{d.region}</span> : null}
+          {d.leader && d.region ? <button type="button" class="tx-btn ghost tx-map-open" aria-haspopup="dialog" onClick={openMap}>Map</button> : null}
           {d.restReady && <span class="tx-rest-ready">Ready to rest</span>}
           {d.gold !== undefined && <span class="tx-shop-gold">◆ {d.gold} gold</span>}
           </div>
           <p>{d.objective}</p>
+          {d.leader && d.travel ? <p class="tx-travel" role="status">Travelling… (tap the pad to stop)</p> : null}
+          {d.leader && d.travelNote ? <p class="tx-travel note" role="status">{d.travelNote}</p> : null}
           {d.leader && d.danger ? <p class="tx-mob-danger" role="status">Danger nearby: {d.danger}</p> : null}
         </div>
         {d.leader ? null : (
@@ -535,6 +563,7 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         ) : d.leader && choices.length > 0 ? <div class="tx-walk-dock"><Interact choices={choices} send={send} viewId={viewId} /></div> : null}
       </div>
       {d.leader ? <Pad sender={sender} bumps={d.bumps} /> : null}
+      {showMap ? <MapSheet map={d.map} regionName={d.region} onPick={travel} onClose={closeMap} /> : null}
     </div>
   );
 }
