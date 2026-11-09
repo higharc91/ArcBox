@@ -1,7 +1,10 @@
 { "id": "forest_ruins", "name": "Forest Ruins", "map": "forest_ruins", "level": 3, "environment": true, "party": { "min": 4, "max": 6 },
-  "enemies": [ { "unit": "bandit_captain", "zone": "ruin_courtyard", "count": 1 },
+  "enemies": [ { "unit": "bandit_captain", "tag": "ruins_captain", "zone": "ruin_courtyard", "count": 1 },
                { "unit": "bandit", "zone": "ruin_courtyard", "count": 2 },
                { "unit": "cultist", "zone": "ruin_courtyard", "count": 2 },
                { "unit": "wolf", "zone": "wolf_den", "count": 2, "level": 3, "variant": "grey" } ],
   "xp": 500, "loot": ["bandit_cache"],
-  "objectives": { "win": "defeat_all" } }
+  "objectives": { "win": "defeat_all" },
+  "triggers": [ { "id": "captain_dirty_fighting", "when": { "hpBelow": { "tag": "ruins_captain", "percent": 50 } },
+    "do": [ { "say": { "speaker": "narrator", "line": "The bandit captain turns to dirty fighting." } },
+            { "phase": { "tag": "ruins_captain", "number": 1 } } ] } ] }
