@@ -227,6 +227,7 @@ public sealed class StageEndTests
         Assert.Equal(World(nearBank), s.Host.Explore!.At);
         Assert.Contains(s.Host.Explore.At, reached);
         s.Send(0, "next");
+        BattleLootTests.TakePending(s);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
     }
 
@@ -245,6 +246,7 @@ public sealed class StageEndTests
         Assert.Contains("ford_assault", TacticsDocument.Read(s.Lease.Document).Completed);
 
         s.Send(0, "next");
+        BattleLootTests.TakePending(s);
 
         Assert.Equal([.. Force.Beats, "ch1_ford_assault"], Saved(s).Beats);
         Assert.Null(Saved(s).Story);
@@ -258,6 +260,7 @@ public sealed class StageEndTests
         var s = Fighting(Force);
         Ended(s, BattleOutcome.Won, Put(HeroOf(s, LeaderOf(s)), WestBank));
         s.Send(0, "next");
+        BattleLootTests.TakePending(s);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
 
         // Out of the stamp and in again, at the place the fight began.
@@ -531,10 +534,11 @@ public sealed class StageEndTests
             Assert.Equal([.. was.Character.Injuries, .. result.Injuries.GetValueOrDefault(TacticsGame.UnitFor(i), [])], now.Character.Injuries);
             Assert.NotEmpty(now.Character.Injuries);
             var expectedBag = was.Character.Bag.IsDefaultOrEmpty ? [] : was.Character.Bag.RemoveAt(0);
-            if (outcome == BattleOutcome.Won && i == 0)
-                expectedBag = expectedBag.Add(new ItemStack(new ItemId("oil_flask"), 1)); // Ford's one party-wide victory reward
             Assert.Equal(expectedBag, now.Character.Bag);
         }
+        var pending = s.Game.Document.World!.Loot?.Items ?? [];
+        Assert.Equal(outcome == BattleOutcome.Won ? 1 : 0, pending.Where(i => i.Item == "oil_flask").Sum(i => i.Count));
+        Assert.Equal(outcome == BattleOutcome.Won ? 1 : 0, pending.Where(i => i.Item == "potion_of_healing").Sum(i => i.Count));
     }
 
     [Fact]
@@ -668,9 +672,10 @@ public sealed class StageEndTests
         for (var i = 0; i < 4; i++)
             resumed.Harness.SetConnected(i, true);
 
+        Assert.Null(resumed.Host.Notice);
+        BattleLootTests.TakePending(resumed);
         Assert.Equal(TacticsPhase.Exploration, resumed.Game.Phase);
         Assert.Equal(World(WestBank), resumed.Host.Explore!.At);
-        Assert.Null(resumed.Host.Notice);
         Assert.Contains("ch1_ford_assault", Saved(resumed).Beats);
     }
 
@@ -972,6 +977,7 @@ public sealed class StageEndTests
         Ended(s, BattleOutcome.Won, Put(HeroOf(s, LeaderOf(s)), WestBank));
         var at = s.Host.Explore!.At;
         s.Send(0, "next");
+        BattleLootTests.TakePending(s);
         Assert.Equal(TacticsPhase.Exploration, s.Game.Phase);
         var lead = Lead(s);
         Assert.True(s.Screen(lead)!.Data.GetProperty("leader").GetBoolean());

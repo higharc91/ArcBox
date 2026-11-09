@@ -96,6 +96,7 @@
     "encounters/mob_hollow_kobolds.json",
     "mobs/ashen_ford.json",
     "mobs/cinder_hollow.json",
-    "monsters/roamers.json"
+    "monsters/roamers.json",
+    "loot.json"
   ]
 }

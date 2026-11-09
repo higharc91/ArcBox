@@ -19,11 +19,11 @@ public abstract class ChapterOne
 
     /// <summary>The scenes each branch plays, in order, and the battle between them.</summary>
     protected static readonly string[] ByForce =
-        ["ch1_mayor", "ch1_ford", "ch1_dawn", "fight:ch1_ford_assault", "ch1_bridge_cost", "ch1_maud", "ch1_docks", "ch1_kindler", "ch1_four_more"];
+        ["ch1_mayor", "ch1_ford", "ch1_dawn", "fight:ch1_ford_assault", "ch1_bridge_cost", TacticsGame.LootVoteId, "ch1_maud", "ch1_docks", "ch1_kindler", "ch1_four_more"];
 
     protected static readonly string[] ByParley =
     [
-        "ch1_mayor", "ch1_ford", "ch1_parley", "ch1_young_ones", "fight:ch1_river_crossing", "ch1_road_east", "ch1_maud", "ch1_granary",
+        "ch1_mayor", "ch1_ford", "ch1_parley", "ch1_young_ones", "fight:ch1_river_crossing", "ch1_road_east", TacticsGame.LootVoteId, "ch1_maud", "ch1_granary",
         "ch1_song", "ch1_docks", "ch1_kindler", "ch1_four_more",
     ];
 
@@ -253,6 +253,14 @@ public abstract class ChapterOne
         {
             var explore = Host.Explore!;
             var cast = explore.Cast!.Value;
+            if (story.Scene == TacticsGame.LootVoteId)
+            {
+                Assert.Empty(cast); // reward allocation is narrated, with no lore actors placed in the world
+                Assert.NotNull(World.Loot);
+                if (story.Ask is { } ask)
+                    Assert.Equal(Profiles.Select(p => p!.Value.Value).Order(StringComparer.Ordinal), ask.Options.Select(o => o.Id));
+                return;
+            }
             if (Host.Chapter is not null || story.State == TacticsGame.StoryStates.Gap || World.Story?.Node is not { } node)
             {
                 Assert.Empty(cast);
@@ -420,6 +428,17 @@ public abstract class ChapterOne
         // Each line came up once, in an order the scenes allow: never one from a scene that wasn't played.
         Assert.Equal(play.Lines.Count, play.Lines.Distinct().Count());
         var sceneOf = StoryTests.Lore.Scenes.SelectMany(sc => sc.Lines.Select(l => (l.Id, sc.Id))).ToDictionary(x => x.Item1, x => x.Item2);
+        var rewardLines = play.Lines.Where(l => l.StartsWith(TacticsGame.LootVoteId + ".", StringComparison.Ordinal)).ToArray();
+        foreach (var line in rewardLines)
+        {
+            Assert.Matches("^loot_vote\\.[0-9]+$", line);
+            sceneOf.Add(line, TacticsGame.LootVoteId);
+        }
+        var encounter = play.Fights.Contains(BattleOutcome.Won) && play.Profiles.Count > 1
+            ? Rules.Encounters[play.Game.Document.Completed.Contains("ford_assault") ? "ford_assault" : "river_crossing"] : null;
+        var rewardCount = encounter is null ? 0 : encounter.ItemLoot.Length + encounter.Loot.Sum(l => Rules.LootTables[l.Value].Items.Length);
+        Assert.Equal(rewardCount, rewardLines.Length);
+        Assert.Null(play.World.Loot);
         Assert.Equal(scenes.Where(s => !s.StartsWith("fight:", StringComparison.Ordinal)), play.Lines.Select(l => sceneOf[l]).Distinct());
         return play;
     }
@@ -497,7 +516,7 @@ public sealed class ChapterOneCompanionTests : ChapterOne
     [Fact]
     public void Chapter_1_plays_with_one_player_and_companions()
     {
-        var play = Played(new Play(players: 1, branch: "parley"), ByParley);
+        var play = Played(new Play(players: 1, branch: "parley"), ByParley.Where(s => s != TacticsGame.LootVoteId).ToArray());
 
         Assert.Single(TacticsDocument.Read(play.Lease.Document).Members);
     }

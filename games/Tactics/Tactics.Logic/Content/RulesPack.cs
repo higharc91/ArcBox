@@ -32,6 +32,7 @@ public sealed partial class RulesPack
         Backgrounds = catalog.Backgrounds;
         Monsters = catalog.Monsters;
         Items = catalog.Items;
+        LootTables = catalog.LootTables ?? Ordinal.Map<LootTableDef>();
         Weapons = catalog.Weapons;
         Armors = catalog.Armors;
         Encounters = catalog.Encounters;
@@ -102,6 +103,9 @@ public sealed partial class RulesPack
 
     /// <summary>Consumable items by id.</summary>
     public ImmutableSortedDictionary<ItemId, ItemDef> Items { get; }
+
+    /// <summary>Fixed battle reward bundles by id.</summary>
+    public ImmutableSortedDictionary<string, LootTableDef> LootTables { get; }
 
     /// <summary>Weapons characters can carry (<c>weapons.json</c>) by id, ordinal.</summary>
     public ImmutableSortedDictionary<string, WeaponDef> Weapons { get; }
@@ -207,7 +211,8 @@ public sealed partial class RulesPack
         ImmutableSortedDictionary<string, ImmutableArray<ShopDef>>? Shops = null,
         EnvironmentDef? Environment = null, ImmutableArray<ContentError> Warnings = default,
         ImmutableSortedDictionary<string, TrinketDef>? Trinkets = null,
-        ImmutableSortedDictionary<string, ImmutableArray<MobDef>>? Mobs = null)
+        ImmutableSortedDictionary<string, ImmutableArray<MobDef>>? Mobs = null,
+        ImmutableSortedDictionary<string, LootTableDef>? LootTables = null)
     {
         public static Catalog Empty { get; } = new(Ordinal.Map<ClassDef>(), Ordinal.Map<RaceDef>(), Ordinal.Map<BackgroundDef>(),
             Ordinal.Map<MonsterDef>(), ImmutableSortedDictionary<ItemId, ItemDef>.Empty, Ordinal.Map<WeaponDef>(),
