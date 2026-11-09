@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using ArcBox.Host.Shell;
 using Godot;
 using Tactics.Logic;
+using Tactics.Game;
 using Tactics.Presentation.Board;
 using Tactics.Presentation.Hud;
 using Tactics.Presentation.Story;
@@ -49,24 +50,33 @@ public partial class HudLayer : Control
     private readonly Label _promptText;
     private readonly Control _badge;
     private readonly VoteBoard? _retreat;
+    private readonly UnitCard? _activeCard;
+    private readonly UnitCard? _targetCard;
 
     /// <param name="story">The story panels' art, for the vote to fall back (#111); with none, the vote isn't drawn.</param>
     public HudLayer(string packRoot, HudArt art, StoryArt? story = null)
     {
+        if (story is not null)
+        {
+            _activeCard = new UnitCard(story, "Active unit");
+            _targetCard = new UnitCard(story, "Current target");
+            AddChild(_activeCard);
+            AddChild(_targetCard);
+        }
         _root = packRoot;
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         MouseFilter = MouseFilterEnum.Ignore;
 
         var panels = Scaled(packRoot, art.PanelsPath);
-        _title = ArcTheme.Label("", ArcTheme.Bold, 36, Ink);
-        _round = ArcTheme.Label("", ArcTheme.SemiBold, 26, Gold);
-        _tag = ArcTheme.Label("", ArcTheme.SemiBold, 22, Muted);
-        _objectiveText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
-        _objective = ArcTheme.HBox(8, ArcTheme.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
-        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective));
+        _title = TvText.Label("", ArcTheme.Bold, 36, Ink);
+        _round = TvText.Label("", ArcTheme.SemiBold, 26, Gold);
+        _tag = TvText.Label("", ArcTheme.SemiBold, 22, Muted);
+        _objectiveText = TvText.Label("", ArcTheme.SemiBold, 24, Ink);
+        _objective = ArcTheme.HBox(8, TvText.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
+        _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective, TvText.Label("○ Party · ◇ Enemy · △ Neutral", ArcTheme.SemiBold, 20, Ink)));
         _head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
-        _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
+        _noticeText = TvText.Label("", ArcTheme.SemiBold, 24, Ink);
         _noticeText.CustomMinimumSize = new Vector2(600, 0);
         _noticeText.AutowrapMode = TextServer.AutowrapMode.WordSmart;
         _notice = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), _noticeText);
@@ -81,17 +91,17 @@ public partial class HudLayer : Control
         _order = ArcTheme.Panel(Box(panels, art.Panel("turn_strip")), _strip);
         AddChild(_order);
 
-        _promptText = ArcTheme.Label("", ArcTheme.Black, 44, Gold);
+        _promptText = TvText.Label("", ArcTheme.Black, 44, Gold);
         _promptText.HorizontalAlignment = HorizontalAlignment.Center;
-        var label = ArcTheme.Meta(BattleHud.PromptLabel, 16, Muted);
+        var label = TvText.Meta(BattleHud.PromptLabel, 16, Muted);
         label.HorizontalAlignment = HorizontalAlignment.Center;
-        var note = ArcTheme.Label(BattleHud.PromptNote, ArcTheme.SemiBold, 22, Ink);
+        var note = TvText.Label(BattleHud.PromptNote, ArcTheme.SemiBold, 24, Ink);
         note.HorizontalAlignment = HorizontalAlignment.Center;
         _prompt = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, label, _promptText, note));
         _prompt.Visible = false;
         AddChild(_prompt);
 
-        _badge = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), ArcTheme.Label(BattleHud.AiFinishedBadge, ArcTheme.Bold, 22, Gold));
+        _badge = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), TvText.Label(BattleHud.AiFinishedBadge, ArcTheme.Bold, 22, Gold));
         _badge.Visible = false;
         AddChild(_badge);
 
@@ -142,6 +152,21 @@ public partial class HudLayer : Control
             var size = _badge.GetCombinedMinimumSize();
             var at = BattleHud.BadgeAt(badged, fit, new System.Numerics.Vector2(size.X, size.Y));
             _badge.Position = new Vector2(at.X, at.Y);
+        }
+    }
+
+    /// <summary>Cards use the same displayed snapshot and overlap fade as the battlefield HUD.</summary>
+    public void ShowCards(BattleView shown, UnitId? active, UnitId? target, ImmutableArray<BoardUnit> units, BoardFit fit)
+    {
+        PlaceCard(_activeCard, active, Margin);
+        PlaceCard(_targetCard, target, LayoutWidth - Margin - 480);
+        void PlaceCard(UnitCard? card, UnitId? id, float x)
+        {
+            if (card is null) return;
+            card.Show(shown.Units.FirstOrDefault(u => u.Id == id));
+            if (!card.Visible) return;
+            card.Position = new Vector2(x, 1080 - Margin - card.Size.Y);
+            card.Modulate = Over(card, units, fit) ? new Color(1, 1, 1, SeeThrough) : Colors.White;
         }
     }
 

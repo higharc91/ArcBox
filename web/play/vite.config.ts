@@ -11,6 +11,13 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
+      output: {
+        // The renderer already imports this shared core separately. Preserve that boundary
+        // instead of shipping one oversized flyover chunk on phones.
+        manualChunks(id) {
+          if (id.endsWith("/three/build/three.core.js")) return "three-core";
+        },
+      },
       input: {
         index: here("./index.html"),
         dev: here("./dev.html"),

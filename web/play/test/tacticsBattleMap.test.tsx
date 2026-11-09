@@ -135,3 +135,19 @@ it("the d-pad stays within the live map bounds", () => {
   fireEvent.click(screen.getByRole("button", { name: "Down", exact: true }));
   expect(selected().textContent).toContain("Tile 9, 2");
 });
+
+it("names movement risk, legal aim and reaction spread without colour words", () => {
+  const { send } = setup(d => {
+    d.choices.moves = [{ to: [1, 0], path: [[0, 0], [1, 0]], cost: 1, risk: 1, warn: "A foe can react" }];
+    d.choices.abilities[0]!.targets[0]!.spread = [[1, 0]];
+  });
+  const move = screen.getByRole("button", { name: "1, 0", exact: true });
+  expect(move.getAttribute("aria-description")).toContain("Reachable");
+  expect(move.getAttribute("aria-description")).toContain("Hazardous movement");
+  fireEvent.click(screen.getByRole("button", { name: /^Attack/ }));
+  expect(screen.getByRole("button", { name: "#2 Goblin, Enemy", exact: true }).getAttribute("aria-description")).toContain("Legal aim");
+  fireEvent.click(screen.getByRole("button", { name: "#2 Goblin, Enemy", exact: true }));
+  expect(screen.getByRole("button", { name: "1, 0", exact: true }).getAttribute("aria-description")).toContain("Within reaction spread");
+  expect(screen.getByText(/Dashed box: reaction spread/)).toBeTruthy();
+  expect(send).not.toHaveBeenCalled();
+});

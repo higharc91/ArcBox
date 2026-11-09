@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcbox.local/tactics/rules/schema/loot.schema.json",
+  "title": "Battle loot bundles",
+  "description": "loot.json: fixed item bundles awarded once per battle win. No RNG is consumed. The C# loader validates references and quantities. Existing encounter gold is split separately.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "$ref": "common.schema.json#/$defs/id"
+      },
+      "replaces": {
+        "$ref": "common.schema.json#/$defs/replaces"
+      },
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string",
+              "description": "An existing consumable item id."
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "item",
+            "count"
+          ]
+        }
+      }
+    },
+    "required": [
+      "id",
+      "items"
+    ]
+  }
+}

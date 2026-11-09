@@ -8,6 +8,24 @@ public sealed class LoaderTests
 
     private static string Chapter(string fixture) => ContentPaths.Fixture(fixture, "chapter-01");
 
+    [Theory]
+    [InlineData("missing_table", "potion", 1, "/loot/0", "Unknown loot table")]
+    [InlineData("common", "missing_item", 1, "/0/items/0/item", "Unknown item")]
+    [InlineData("common", "potion", 0, "/0/items/0/count", "at least 1")]
+    public void Rejects_invalid_battle_loot(string table, string item, int count, string pointer, string message)
+    {
+        var copy = CopyToTemp(Base);
+        try
+        {
+            var encounter = Path.Combine(copy, "encounters", "field_skirmish.json");
+            File.WriteAllText(encounter, File.ReadAllText(encounter).Replace("\"common\"", $"\"{table}\"", StringComparison.Ordinal));
+            File.WriteAllText(Path.Combine(copy, "loot.json"), $$"""[{"id":"common","items":[{"item":"{{item}}","count":{{count}}}]}]""");
+            var ex = Assert.Throws<ContentException>(() => RulesPack.Load([copy]));
+            Assert.Contains(ex.Errors, e => e.Pointer == pointer && e.Message.Contains(message, StringComparison.OrdinalIgnoreCase));
+        }
+        finally { Directory.Delete(Path.GetDirectoryName(copy)!, recursive: true); }
+    }
+
     [Fact]
     public void Loads_minimal_pack()
     {

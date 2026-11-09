@@ -14,7 +14,7 @@ public partial class AbilityBanner : PanelContainer
         Position = new Vector2(620, 84);
         CustomMinimumSize = new Vector2(680, 0);
         AddThemeStyleboxOverride("panel", ArcTheme.GlassBox(ArcTheme.Gold, 24, 10));
-        _name = ArcTheme.Label("", ArcTheme.Bold, 28, ArcTheme.Gold);
+        _name = TvText.Label("", ArcTheme.Bold, 28, ArcTheme.Gold);
         _name.HorizontalAlignment = HorizontalAlignment.Center;
         AddChild(_name);
         Visible = false;

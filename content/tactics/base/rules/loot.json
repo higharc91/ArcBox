@@ -1,0 +1,46 @@
+[
+  {
+    "id": "goblin_camp",
+    "items": [
+      {
+        "item": "potion_of_healing",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "bandit_cache",
+    "items": [
+      {
+        "item": "potion_of_healing",
+        "count": 1
+      },
+      {
+        "item": "smoke_bomb",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "crypt_vault",
+    "items": [
+      {
+        "item": "greater_healing",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "crystal_hoard",
+    "items": [
+      {
+        "item": "greater_healing",
+        "count": 1
+      },
+      {
+        "item": "potion_of_healing",
+        "count": 1
+      }
+    ]
+  }
+]

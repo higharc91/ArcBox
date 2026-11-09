@@ -13,7 +13,9 @@ namespace Tactics.Game;
 /// </param>
 public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprite, Tile At, int Hp, int MaxHp, int TempHp,
     string Life, int Countdown, ImmutableArray<string> Conditions, string? Player,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? BaseAc = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Role = null);
 
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
@@ -511,7 +513,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Story => StoryScreen(player, profile),
             // canWalk: whether "Back to walking" goes anywhere, which it doesn't in a pack with no region (decisions 9 and 29).
             TacticsPhase.EncounterPick when IsVip(player) => Custom(Screens.PickEncounter, new { encounters = EncounterOptions(), canWalk = _region is not null, partyLevel = _doc.PartyLevel }),
-            TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the host"} to choose a battle"),
+            TacticsPhase.EncounterPick => new WaitView($"Waiting for {Vip?.Name ?? "the VIP"} to choose a battle"),
             TacticsPhase.Battle => BattleScreen(profile),
             TacticsPhase.Results => Custom(Screens.Results, new
             {
@@ -757,7 +759,7 @@ public sealed partial class TacticsGame
         var save = Save_;
         var state = save.State;
         return new BattleView(save.Encounter, state.MapId, state.Round, state.Order, state.Active,
-            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), Color = HeroColor(save, u.Id) })],
+            [.. state.Units.Values.Select(u => UnitViewOf(u) with { Sprite = HostSprite.Of(u.Sheet.Sprite, u.Sheet.Tags), Color = HeroColor(save, u.Id), BaseAc = u.Sheet.Ac, Role = HostRole(u) })],
             save.Log.IsDefault ? [] : save.Log, state.Outcome?.ToString(), BoardChanges.Of(state), state.Objectives.Current,
             state.Pending is ReactionOffer offer && IsPlayed(offer.Reactor) ? offer.Reactor : null,
             Rules.Encounters.GetValueOrDefault(save.Encounter)?.Name,
@@ -779,6 +781,14 @@ public sealed partial class TacticsGame
         return null;
     }
 
+    private string HostRole(UnitState unit)
+    {
+        var cls = unit.Sheet.Tags.FirstOrDefault(t => t.StartsWith(SheetBuilder.ClassTag, StringComparison.Ordinal))?[SheetBuilder.ClassTag.Length..];
+        return cls is not null ? Rules.Classes.GetValueOrDefault(cls)?.Name ?? cls
+            : unit.Sheet.Weapon.Ranged ? "Ranged " + unit.Sheet.Side.ToString().ToLowerInvariant()
+            : "Melee " + unit.Sheet.Side.ToString().ToLowerInvariant();
+    }
+
     private UnitView UnitViewOf(UnitState u)
     {
         var player = u.Controller is PlayerControlled { Owner: var owner }
@@ -795,7 +805,7 @@ public sealed partial class TacticsGame
             case TacticsPhase.Muster:
                 return "Choose your classes on your phones";
             case TacticsPhase.EncounterPick:
-                return $"{Vip?.Name ?? "The host"} is choosing a battle";
+                return $"{Vip?.Name ?? "The VIP"} is choosing a battle";
             case TacticsPhase.Results:
                 return _result?.Outcome == BattleOutcome.Won ? $"Victory at {_resultEncounter}!" : _result?.Outcome == BattleOutcome.Fled ? $"The party fled {_resultEncounter}" : $"Defeat at {_resultEncounter}";
             case TacticsPhase.Resuming:

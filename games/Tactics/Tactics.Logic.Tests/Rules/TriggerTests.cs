@@ -46,6 +46,66 @@ public sealed class TriggerTests
     }
 
     [Fact]
+    public void Fully_occupied_spawn_zone_keeps_the_full_count_on_nearest_free_tiles()
+    {
+        var map = AsciiMap.Parse(Field, Ordinal.Map(("ridge", ImmutableArray.Create(T(5, 0)))));
+        var battle = TestBattle.On(map).Party("kara", First(TestSheets.Fighter), T(0, 0))
+            .Enemy("gob", TestSheets.Goblin, T(5, 0)).WithMonsters(("archer", TestSheets.Goblin))
+            .WithTriggers(Trigger("ambush", new TriggerWhen(Round: 1),
+                new TriggerAction(Spawn: new SpawnAction("archer", new PlaceRef("ridge", null), Count: 3))));
+        var (state, events) = battle.Start(seed: 7);
+        var spawned = events.OfType<Spawned>().ToArray();
+        Assert.Equal([T(4, 0), T(5, 1), T(3, 0)], spawned.Select(e => e.At));
+        Assert.Equal(3, spawned.Select(e => e.At).Distinct().Count());
+        Assert.All(spawned, e => Assert.Contains(e.Unit, state.Joining));
+        Assert.Equal(spawned, battle.Start(seed: 7).Events.OfType<Spawned>());
+    }
+
+    [Fact]
+    public void Spawn_prefers_remaining_authored_tiles_before_falling_back_and_never_uses_blocked_ground()
+    {
+        var map = AsciiMap.Parse("0. 0. 0. 0# 0. 0.\n0. 0. 0. 0. 0x 0C",
+            Ordinal.Map(("ridge", ImmutableArray.Create(T(4, 0), T(5, 0)))));
+        var battle = TestBattle.On(map).Party("kara", First(TestSheets.Fighter), T(0, 0))
+            .Enemy("gob", TestSheets.Goblin, T(4, 0)).WithMonsters(("archer", TestSheets.Goblin))
+            .WithTriggers(Trigger("ambush", new TriggerWhen(Round: 1),
+                new TriggerAction(Spawn: new SpawnAction("archer", new PlaceRef("ridge", null), Count: 2))));
+        var (_, events) = battle.Start(seed: 1);
+        Assert.Equal([T(5, 0), T(2, 0)], events.OfType<Spawned>().Select(e => e.At));
+    }
+
+    [Fact]
+    public void A_map_with_no_free_spawn_tiles_finishes_without_overlapping_or_looping()
+    {
+        var battle = TestBattle.On("0. 0.").Party("kara", First(TestSheets.Fighter), T(0, 0))
+            .Enemy("gob", TestSheets.Goblin, T(1, 0)).WithMonsters(("archer", TestSheets.Goblin))
+            .WithTriggers(Trigger("ambush", new TriggerWhen(Round: 1),
+                new TriggerAction(Spawn: new SpawnAction("archer", new PlaceRef(null, T(1, 0)), Count: 3))));
+        var (state, events) = battle.Start(seed: 1);
+        Assert.Empty(events.OfType<Spawned>());
+        Assert.Equal(2, state.Units.Count);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public void Loading_warns_when_a_placed_or_spawned_monster_has_an_unwired_phase(bool spawned)
+    {
+        var encounter = spawned
+            ? "{ \"unit\": \"wolf\", \"at\": [4,4] }"
+            : "{ \"unit\": \"warboss\", \"at\": [5,4], \"tag\": \"boss\" }";
+        var triggers = spawned ? "[{ \"id\": \"arrive\", \"when\": {\"round\": 2}, \"do\": [{\"spawn\": {\"unit\": \"warboss\", \"at\": [5,4], \"tag\": \"boss\"}}]}]" : "[]";
+        var rules = ValidationTests.LoadChapter(Warboss, ("encounters/e.json", $$"""
+            { "id": "e", "name": "E", "map": "field", "party": {"min": 1, "max": 4},
+              "enemies": [{{encounter}}], "triggers": {{triggers}} }
+            """));
+        var warning = Assert.Single(rules.Warnings);
+        Assert.Contains("Monster 'warboss' has phase 1", warning.Message);
+        Assert.Contains("no trigger enters it for tag 'boss'", warning.Message);
+        Assert.Equal(spawned ? "/triggers/0/do/0" : "/enemies/0", warning.Pointer);
+    }
+
+    [Fact]
     public void Round_3_spawns_and_says()
     {
         var map = AsciiMap.Parse(Field, Ordinal.Map(("ridge", ImmutableArray.Create(T(5, 0), T(5, 1), T(5, 2)))));

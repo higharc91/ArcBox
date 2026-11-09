@@ -594,19 +594,14 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             result = result with { Xp = result.Xp.ToImmutableSortedDictionary(x => x.Key, x => result.Outcome == BattleOutcome.Won ? mob.Xp : 0), Loot = [] };
         var members = _doc.Members;
         var rewards = result.Outcome == BattleOutcome.Won && mob is null
-            ? Rules.Encounters.GetValueOrDefault(save.Encounter)?.ItemLoot ?? [] : [];
-        var rewardGiven = false;
+            ? ImmutableArray.CreateRange((Rules.Encounters.GetValueOrDefault(save.Encounter)?.ItemLoot is { IsDefault: false } fixedLoot ? fixedLoot : [])
+                .Concat(result.Loot.SelectMany(id => Rules.LootTables[id.Value].Items))) : [];
         for (var i = 0; i < save.Members.Length; i++)
         {
             var unit = UnitFor(i);
             if (!members.TryGetValue(save.Members[i].Value, out var record) || !state.Units.TryGetValue(unit, out var u))
                 continue;
             var bag = u.Bag;
-            if (!rewardGiven && !rewards.IsDefaultOrEmpty)
-            {
-                bag = StackLoot(bag, rewards);
-                rewardGiven = true; // one party-wide reward, assigned to the first participating hero
-            }
             members = members.SetItem(save.Members[i].Value, record with
             {
                 Xp = record.Xp + result.Xp.GetValueOrDefault(unit),
@@ -633,6 +628,9 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
             Completed = result.Outcome == BattleOutcome.Won ? _doc.Completed.Add(save.Encounter) : _doc.Completed,
             World = StoryAfter(save, result),
         };
+        // Queue after restoring battle bags/story, before the single post-battle checkpoint. A restart cannot award twice.
+        GiveFound(rewards.Select(i => (i.Item, i.Count)),
+            LootChoices().FirstOrDefault() ?? save.Members.FirstOrDefault().Value, name);
         var goldWon = 0;
         if (result.Outcome == BattleOutcome.Won)
         {

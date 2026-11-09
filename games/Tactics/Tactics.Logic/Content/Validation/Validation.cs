@@ -7,7 +7,7 @@ using ArcBox.Sdk;
 namespace Tactics.Logic;
 
 /// <summary>What a content reference points at; see <see cref="Validation.Resolve"/>.</summary>
-internal enum RefKind { Ability, Passive, AbilityOrPassive, Condition, Monster, Item, Weapon, Armor, Map, AiProfile, Surface, Art }
+internal enum RefKind { Ability, Passive, AbilityOrPassive, Condition, Monster, Item, Weapon, Armor, Map, AiProfile, Surface, Art, LootTable }
 
 /// <summary>A reference from one content file to an id, checked once every pack is loaded.</summary>
 internal sealed record ContentRef(RefKind Kind, string Id, string File, string Pointer);
@@ -87,6 +87,7 @@ internal sealed partial class Validation(ArtManifest? art)
     private static string KindName(RefKind kind) => kind switch
     {
         RefKind.AiProfile => "AI profile",
+        RefKind.LootTable => "loot table",
         _ => kind.ToString().ToLowerInvariant(),
     };
 

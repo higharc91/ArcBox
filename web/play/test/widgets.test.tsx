@@ -295,6 +295,19 @@ describe("Countdown", () => {
     expect(remainingSeconds("garbage", now)).toBe(0);
   });
 
+  it("offers a persistent text urgency cue when requested, including at expiry", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(now);
+    render(<Countdown deadlineUtc="2026-01-01T00:00:03Z" showUrgency />);
+    expect(screen.getByText("0:03")).toBeTruthy();
+    expect(screen.getByText("Act now")).toBeTruthy();
+    act(() => { vi.advanceTimersByTime(3000); });
+    expect(screen.getByText("0:00")).toBeTruthy();
+    expect(screen.getByText("Time up")).toBeTruthy();
+    expect(screen.queryByText("Act now")).toBeNull();
+    vi.useRealTimers();
+  });
+
   it("renders m:ss", () => {
     vi.useFakeTimers();
     vi.setSystemTime(now);

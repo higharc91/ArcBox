@@ -1084,6 +1084,7 @@ public sealed class WalkingTests
         Assert.DoesNotContain(Lead, s.Harness.ActiveTimers);
 
         s.Send(0, "next");
+        BattleLootTests.TakePending(s);
 
         Assert.False(Party(s).Held);
         Assert.Equal([Lead], s.Harness.ActiveTimers);

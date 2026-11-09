@@ -605,10 +605,10 @@ describe("the walk screen", () => {
 
   it("says under the banner what to do: the leader walks, everyone watches the TV", () => {
     show("walk-leader");
-    expect(screen.getByText("Hold a direction to walk. Watch the TV.")).toBeTruthy();
+    expect(screen.getByText("Hold a direction to walk. Follow the party on the TV map.")).toBeTruthy();
     cleanup();
     show("walk-follower");
-    expect(screen.getByText("Player1 steers. Watch the TV.")).toBeTruthy();
+    expect(screen.getByText("Player1 steers. Follow the party on the TV map.")).toBeTruthy();
     cleanup();
     show("walk-follower", (d) => {
       d.leaderName = null;

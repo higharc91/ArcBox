@@ -105,7 +105,7 @@ public sealed partial class TacticsGame
         var bag = member.Character.Bag;
         var stack = bag.FirstOrDefault(s => s.Item == item.Id);
         var available = stock.Stock.GetValueOrDefault(itemId);
-        if (buy && (!stock.Stock.ContainsKey(itemId) || available != -1 && available < count)) { Toast(player.Id, "Sold out"); return; }
+        if (buy && (!stock.Stock.ContainsKey(itemId) || available != -1 && available < count)) { Toast(player.Id, "Out of stock"); return; }
         if (!buy && (Str(input.Data, "member") != profile.Value || stack is null || stack.Count < count)) { Toast(player.Id, "You may only sell items in your own bag."); return; }
         if (!buy && !ShopRules.Accepts(item, shop)) { Toast(player.Id, "The keeper does not buy that item."); return; }
         var total = (long)(buy ? ShopRules.Buy(item, shop, Haggled) : ShopRules.Sell(item, shop, Haggled)) * count;

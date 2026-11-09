@@ -521,11 +521,11 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
           <span class="tx-crown"><LineIcon name="crown" /></span>
           <b>{d.leader ? "You lead the party" : d.leaderName ? `${d.leaderName} leads` : "The party waits for someone to lead it"}</b>
         </div>
-        {d.vip ? <details class="tx-walk-session" onKeyDown={e => { if (e.key === "Escape") e.currentTarget.open = false; }}><summary aria-label="Session actions">•••</summary><HostMenu canBattle={d.canBattle} difficulty={d.difficulty} send={send} /></details> : null}
+        {d.vip ? <details class="tx-walk-session" onKeyDown={e => { if (e.key === "Escape") e.currentTarget.open = false; }}><summary aria-label="Party menu">Party menu</summary><HostMenu canBattle={d.canBattle} difficulty={d.difficulty} send={send} /></details> : null}
         </div>
         <div class="tx-walk-info">
         {d.leader || d.leaderName
-          ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Watch the TV." : `${d.leaderName} steers. Watch the TV.`}</p>
+          ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Follow the party on the TV map." : `${d.leaderName} steers. Follow the party on the TV map.`}</p>
           : null}
         {d.journal ? <WalkJournal journal={d.journal} pinned={d.pinned} notice={d.questNotice} send={send} stop={() => sender.release()} /> : null}
         {(d.canGive || d.give) && <Give data={d.give} gold={d.gold ?? 0} send={send} viewId={viewId} stop={() => sender.release()} />}
