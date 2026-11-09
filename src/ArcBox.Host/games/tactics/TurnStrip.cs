@@ -12,7 +12,7 @@ namespace ArcBox.Host.Games.Tactics;
 public partial class TurnStrip : Control
 {
     /// <summary>The label's row over the frames.</summary>
-    private const int HeaderHeight = 22;
+    private const int HeaderHeight = 28;
     private const int ActiveBox = 92;
     private const int Box = 66;
     private const int ActiveStep = 104;
@@ -21,8 +21,8 @@ public partial class TurnStrip : Control
     private const int FrameInset = 6;       // ui/manifest.json: a frame's window
     private const int ArtScale = 2;         // the tabs are drawn at twice the art
     private const int StripeHeight = 5;
-    private const int NameHeight = 28;
-    private const int NameSize = 16;
+    private const int NameHeight = 32;
+    private const int NameSize = 20;
 
     private static readonly Color Dimmed = new(0.55f, 0.55f, 0.6f);
 
@@ -58,10 +58,10 @@ public partial class TurnStrip : Control
     public override void _Draw()
     {
         var font = global::ArcBox.Host.Shell.ArcTheme.Spaced("Bold", 3);
-        DrawString(font, new Vector2(0, HeaderHeight - 6), BattleHud.OrderLabel.ToUpperInvariant(), HorizontalAlignment.Left, -1, 16, HudLayer.Muted);
+        DrawString(font, new Vector2(0, HeaderHeight - 6), BattleHud.OrderLabel.ToUpperInvariant(), HorizontalAlignment.Left, -1, 20, HudLayer.Muted);
         if (_more > 0)
         {
-            DrawString(font, new Vector2(0, HeaderHeight - 6), $"+{_more}", HorizontalAlignment.Right, Size.X, 16, HudLayer.Muted);
+            DrawString(font, new Vector2(0, HeaderHeight - 6), $"+{_more}", HorizontalAlignment.Right, Size.X, 20, HudLayer.Muted);
         }
 
         var x = 0f;

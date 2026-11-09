@@ -21,7 +21,7 @@ public sealed partial class ChapterBoard : Control
         dim.SetAnchorsPreset(LayoutPreset.FullRect);
         AddChild(dim);
 
-        _kicker = ArcTheme.Meta("", 24, HudLayer.Muted);
+        _kicker = TvText.Meta("", 24, HudLayer.Muted);
         _chapter = StoryArt.Text("", ArcTheme.Spaced("Black", 12), 110, HudLayer.Gold);
         _title = StoryArt.Text("", ArcTheme.Spaced("Bold", 4), 44, HudLayer.Ink);
         foreach (var label in new[] { _kicker, _chapter, _title })

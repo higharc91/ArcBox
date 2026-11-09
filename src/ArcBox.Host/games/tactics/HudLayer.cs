@@ -68,15 +68,15 @@ public partial class HudLayer : Control
         MouseFilter = MouseFilterEnum.Ignore;
 
         var panels = Scaled(packRoot, art.PanelsPath);
-        _title = ArcTheme.Label("", ArcTheme.Bold, 36, Ink);
-        _round = ArcTheme.Label("", ArcTheme.SemiBold, 26, Gold);
-        _tag = ArcTheme.Label("", ArcTheme.SemiBold, 22, Muted);
-        _objectiveText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
-        _objective = ArcTheme.HBox(8, ArcTheme.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
+        _title = TvText.Label("", ArcTheme.Bold, 36, Ink);
+        _round = TvText.Label("", ArcTheme.SemiBold, 26, Gold);
+        _tag = TvText.Label("", ArcTheme.SemiBold, 22, Muted);
+        _objectiveText = TvText.Label("", ArcTheme.SemiBold, 24, Ink);
+        _objective = ArcTheme.HBox(8, TvText.Label("Objective:", ArcTheme.SemiBold, 24, Muted), _objectiveText);
         _head = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _round, _tag, _objective));
         _head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
-        _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 24, Ink);
+        _noticeText = TvText.Label("", ArcTheme.SemiBold, 24, Ink);
         _noticeText.CustomMinimumSize = new Vector2(600, 0);
         _noticeText.AutowrapMode = TextServer.AutowrapMode.WordSmart;
         _notice = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), _noticeText);
@@ -91,17 +91,17 @@ public partial class HudLayer : Control
         _order = ArcTheme.Panel(Box(panels, art.Panel("turn_strip")), _strip);
         AddChild(_order);
 
-        _promptText = ArcTheme.Label("", ArcTheme.Black, 44, Gold);
+        _promptText = TvText.Label("", ArcTheme.Black, 44, Gold);
         _promptText.HorizontalAlignment = HorizontalAlignment.Center;
-        var label = ArcTheme.Meta(BattleHud.PromptLabel, 16, Muted);
+        var label = TvText.Meta(BattleHud.PromptLabel, 16, Muted);
         label.HorizontalAlignment = HorizontalAlignment.Center;
-        var note = ArcTheme.Label(BattleHud.PromptNote, ArcTheme.SemiBold, 22, Ink);
+        var note = TvText.Label(BattleHud.PromptNote, ArcTheme.SemiBold, 24, Ink);
         note.HorizontalAlignment = HorizontalAlignment.Center;
         _prompt = ArcTheme.Panel(Box(panels, art.Panel("main")), ArcTheme.VBox(0, label, _promptText, note));
         _prompt.Visible = false;
         AddChild(_prompt);
 
-        _badge = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), ArcTheme.Label(BattleHud.AiFinishedBadge, ArcTheme.Bold, 22, Gold));
+        _badge = ArcTheme.Panel(Box(panels, art.Panel("tooltip")), TvText.Label(BattleHud.AiFinishedBadge, ArcTheme.Bold, 22, Gold));
         _badge.Visible = false;
         AddChild(_badge);
 

@@ -59,7 +59,7 @@ public sealed class StoryDemoTests
 
         Assert.Contains(screens, s => s.Vote is { Party: false, Tally: "Jess chooses for the party" });
         Assert.Contains(screens, s => s.Vote is { Tie: true, Tally: "4 of 4 voted · 2–2 tie, Sam decides" });
-        Assert.Contains(screens, s => s.Vote is { Rows.Length: 11 } vote && vote.Scale < 1);
+        Assert.Contains(screens, s => s.Vote is { Rows.Length: 11 } vote && vote.Scale == 1 && VoteLayout.ColumnCount(vote.Rows) > 1);
         Assert.Contains(screens, s => s.Check is { Cards.Length: 6, Roll: null });
         Assert.Contains(screens, s => s.Check?.Roll is { Landed: true, Success: true, Sum: "14 + 5 = 19 vs DC 15" });
         Assert.Contains(screens, s => s.Check?.Roll is { Landed: true, Success: false, Sum: "3 + 2 = 5 vs DC 15" });

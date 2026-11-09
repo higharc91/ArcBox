@@ -21,10 +21,10 @@ public partial class BattlePresentationControls : Control
         mode.ItemSelected += _ => Apply();
         effects.ItemSelected += _ => Apply();
         _panel = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 20, 16), ArcTheme.VBox(8,
-            ArcTheme.Label("Battle cinematics", ArcTheme.Bold, 22), mode,
-            ArcTheme.Label("Auto uses Short for 5–6 players. Full is used otherwise.", ArcTheme.SemiBold, 16),
-            ArcTheme.Label("Effects", ArcTheme.Bold, 22), effects,
-            ArcTheme.Label("Reduced removes flashes and shake, and shortens effects.", ArcTheme.SemiBold, 16)));
+            TvText.Label("Battle cinematics", ArcTheme.Bold, 22), mode,
+            TvText.Label("Auto uses Short for 5–6 players. Full is used otherwise.", ArcTheme.SemiBold, 16),
+            TvText.Label("Effects", ArcTheme.Bold, 22), effects,
+            TvText.Label("Reduced removes flashes and shake, and shortens effects.", ArcTheme.SemiBold, 16)));
         _panel.Position = new Vector2(1260, 730);
         _panel.Visible = false;
         AddChild(_panel);

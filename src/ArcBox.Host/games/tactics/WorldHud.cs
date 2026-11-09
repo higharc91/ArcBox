@@ -37,12 +37,12 @@ public partial class WorldHud : Control
         MouseFilter = MouseFilterEnum.Ignore;
 
         var panels = HudLayer.Scaled(packRoot, art.PanelsPath);
-        _title = ArcTheme.Label("", ArcTheme.Spaced("Bold", 2), 38, HudLayer.Ink);
-        _detail = ArcTheme.Label("", ArcTheme.SemiBold, 26, HudLayer.Muted);
+        _title = TvText.Label("", ArcTheme.Spaced("Bold", 2), 38, HudLayer.Ink);
+        _detail = TvText.Label("", ArcTheme.SemiBold, 26, HudLayer.Muted);
         var head = ArcTheme.Panel(HudLayer.Box(panels, art.Panel("main")), ArcTheme.VBox(0, _title, _detail));
         head.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
 
-        _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 24, HudLayer.Ink);
+        _noticeText = TvText.Label("", ArcTheme.SemiBold, 24, HudLayer.Ink);
         _notice = ArcTheme.Panel(HudLayer.Box(panels, art.Panel("tooltip")), _noticeText);
         _notice.SizeFlagsHorizontal = SizeFlags.ShrinkBegin;
         _notice.Visible = false;
@@ -52,8 +52,8 @@ public partial class WorldHud : Control
         AddChild(_left);
 
         _face = new LeaderFace(packRoot, art) { CustomMinimumSize = new Vector2(FaceSize, FaceSize), SizeFlagsVertical = SizeFlags.ShrinkCenter };
-        _leader = ArcTheme.Label("", ArcTheme.Spaced("Bold", 1), 36, HudLayer.Ink);
-        var words = ArcTheme.VBox(0, ArcTheme.Meta(WalkHud.LeaderLabel, 18, HudLayer.Gold), _leader, ArcTheme.Label(WalkHud.LeaderNote, ArcTheme.SemiBold, 24, HudLayer.Muted));
+        _leader = TvText.Label("", ArcTheme.Spaced("Bold", 1), 36, HudLayer.Ink);
+        var words = ArcTheme.VBox(0, TvText.Meta(WalkHud.LeaderLabel, 18, HudLayer.Gold), _leader, TvText.Label(WalkHud.LeaderNote, ArcTheme.SemiBold, 24, HudLayer.Muted));
         words.Alignment = BoxContainer.AlignmentMode.Center;
         _right = ArcTheme.Panel(HudLayer.Box(panels, art.Panel("main")), ArcTheme.HBox(18, _face, words));
         AddChild(_right);
