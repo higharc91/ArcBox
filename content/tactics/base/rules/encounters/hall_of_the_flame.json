@@ -8,11 +8,9 @@
   "objectives": { "win": "defeat:maren_sorrel", "lose": { "any": ["party_out", "survive:14"] } },
   "triggers": [
     { "id": "hierophant_north_zeal", "when": { "hpBelow": { "tag": "hierophant_north", "percent": 50 } },
-      "do": [ { "say": { "speaker": "narrator", "line": "The northern Hierophant burns with fanatic zeal." } },
-              { "phase": { "tag": "hierophant_north", "number": 1 } } ] },
+      "do": [ { "phase": { "tag": "hierophant_north", "number": 1 } } ] },
     { "id": "hierophant_south_zeal", "when": { "hpBelow": { "tag": "hierophant_south", "percent": 50 } },
-      "do": [ { "say": { "speaker": "narrator", "line": "The southern Hierophant burns with fanatic zeal." } },
-              { "phase": { "tag": "hierophant_south", "number": 1 } } ] },
+      "do": [ { "phase": { "tag": "hierophant_south", "number": 1 } } ] },
     { "id": "maren_ritual", "when": { "round": 1 },
       "do": [ { "say": { "speaker": "maren_sorrel", "line": "You came. I hoped you would. Stand with me and watch the Vale grow warm again." } },
               { "cameraHint": "heart" } ] },

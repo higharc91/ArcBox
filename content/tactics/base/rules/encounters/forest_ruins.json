@@ -6,5 +6,4 @@
   "xp": 500, "loot": ["bandit_cache"],
   "objectives": { "win": "defeat_all" },
   "triggers": [ { "id": "captain_dirty_fighting", "when": { "hpBelow": { "tag": "ruins_captain", "percent": 50 } },
-    "do": [ { "say": { "speaker": "narrator", "line": "The bandit captain turns to dirty fighting." } },
-            { "phase": { "tag": "ruins_captain", "number": 1 } } ] } ] }
+    "do": [ { "phase": { "tag": "ruins_captain", "number": 1 } } ] } ] }
