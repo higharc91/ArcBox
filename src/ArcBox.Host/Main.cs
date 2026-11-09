@@ -164,7 +164,10 @@ public partial class Main : Control
             if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } previewPack)
                 pack = System.IO.Path.GetFullPath(previewPack);
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
-            if (board == "environment")
+            if (board == "mob-entries")
+                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                    global::Tactics.Presentation.World.MobEntryDemo.Steps(pack)));
+            else if (board == "environment")
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.EnvironmentDemo.Steps()));
             else if (board == "stone-and-mire-moves")

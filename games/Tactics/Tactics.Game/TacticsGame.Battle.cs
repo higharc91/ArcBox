@@ -103,7 +103,9 @@ public sealed partial class TacticsGame
         string? beat = null, string? mob = null)
     {
         seed = BattleSeed ?? seed;
-        if (TryBegin(encounter, seed, members, companions) is not { } resolution)
+        var spawn = mob is not null && _region?.StampFor(Rules.Encounters[encounter].Map) is { } entry
+            ? MobSpawns.For(Rules.MapFor(entry.Map)!, new Tile(_at.X - entry.At.X, _at.Y - entry.At.Y)) : null;
+        if (TryBegin(encounter, seed, members, companions, spawn) is not { } resolution)
             return false;
         (_lastBattle, _arrived) = (null, null);
         _controlNotices.Clear();
@@ -114,7 +116,7 @@ public sealed partial class TacticsGame
         _doc = _doc with
         {
             Battle = new BattleSave(encounter, seed, members, resolution.State, [], companions.IsEmpty ? default : companions, beat,
-                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null, Mob: mob),
+                stage is { } st ? new SavedStage(st.Origin, st.Height) : null, Plain: stage is null, Mob: mob, Spawn: spawn),
         };
         _seq = 0;
         (_retreat, _retreatFailedRound) = (null, 0);
@@ -133,7 +135,7 @@ public sealed partial class TacticsGame
     /// Starts the encounter: the members as <c>hero1</c>, <c>hero2</c>, … and any companions as <c>ally1</c>, <c>ally2</c>, …,
     /// always played by the companion AI.
     /// </summary>
-    private Resolution Begin(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions)
+    private Resolution Begin(string encounter, ulong seed, ImmutableArray<ProfileId> members, ImmutableArray<CharacterRecord> companions, string? spawn = null)
     {
         ImmutableArray<PartyMember> party =
         [
@@ -141,7 +143,7 @@ public sealed partial class TacticsGame
             .. (companions.IsDefault ? [] : companions).Select((c, i) =>
                 new PartyMember(new UnitId($"ally{i + 1}"), c, new AiControlled(Companion))),
         ];
-        var setup = Encounters.Setup(encounter, party, CampaignDifficulty, Rules);
+        var setup = Encounters.Setup(encounter, party, CampaignDifficulty, Rules, spawn ?? "party_spawn");
         var fed = members.Select((p, i) => (p, i)).Where(m => _doc.For(m.p)?.WellFed == true).Select(m => UnitFor(m.i)).ToHashSet();
         if (fed.Count > 0 && Rules.Passives.ContainsKey("rest.well_fed"))
             setup = setup with { Units = [.. setup.Units.Select(u => fed.Contains(u.Id)
@@ -155,7 +157,7 @@ public sealed partial class TacticsGame
     /// </summary>
     private bool RestartBattle(BattleSave save)
     {
-        if (TryBegin(save.Encounter, save.Seed, save.Members, save.Companions) is not { } resolution)
+        if (TryBegin(save.Encounter, save.Seed, save.Members, save.Companions, save.Spawn) is not { } resolution)
         {
             CallOffBattle();     // its notice only: the battle doesn't start again after all
             return false;

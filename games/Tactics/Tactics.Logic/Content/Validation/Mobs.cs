@@ -46,6 +46,26 @@ internal sealed partial class Validation
                     if (!reached.Any(t => t.X == 0 || t.Y == 0 || t.X == arena.Width - 1 || t.Y == arena.Height - 1))
                         Bad("arena", "A mob arena needs a walkable party spawn edge.");
                 }
+                foreach (var (name, entry) in arena.Zones.Where(z => z.Key.StartsWith(MobSpawns.Prefix, StringComparison.Ordinal)))
+                {
+                    var terrain = new Terrain(arena, ImmutableSortedDictionary<Tile, int>.Empty, []);
+                    if (entry.Length < (encounter?.Party.Max ?? 6) || entry.Any(t => !terrain.Walkable(t) || arena[t].Flags.HasFlag(TileFlags.Water)))
+                    { Bad("arena", $"Entry '{name}' needs enough dry walkable party tiles."); continue; }
+                    var side = name[MobSpawns.Prefix.Length..];
+                    bool Strip(Tile t) => side switch { "north" => t.Y <= 1, "south" => t.Y >= arena.Height - 2,
+                        "west" => t.X <= 1, "east" => t.X >= arena.Width - 2, _ => false };
+                    if (!entry.All(Strip) || !entry.Any(t => t.X == 0 || t.Y == 0 || t.X == arena.Width - 1 || t.Y == arena.Height - 1))
+                        Bad("arena", $"Entry '{name}' must stay on one two-tile-deep boundary strip.");
+                    var pending = entry.ToHashSet(); var queue = new Queue<Tile>(); queue.Enqueue(entry[0]); pending.Remove(entry[0]);
+                    while (queue.TryDequeue(out var at))
+                        foreach (var next in new[] { new Tile(at.X + 1, at.Y), new Tile(at.X - 1, at.Y), new Tile(at.X, at.Y + 1), new Tile(at.X, at.Y - 1) })
+                            if (pending.Remove(next)) queue.Enqueue(next);
+                    if (pending.Count > 0) Bad("arena", $"Entry '{name}' must keep the whole party cardinally connected.");
+                    var reached = WorldWalk.Reach(terrain, entry[0], ClassDef.DefaultJump);
+                    var walkable = Enumerable.Range(0, arena.Width).SelectMany(x => Enumerable.Range(0, arena.Height).Select(y => new Tile(x, y))).Where(terrain.Walkable).ToArray();
+                    if (entry.Any(t => !reached.Contains(t)) || walkable.Count(t => !reached.Contains(t)) > walkable.Length * .1)
+                        Bad("arena", $"Entry '{name}' leaves over 10% of walkable arena tiles unreachable.");
+                }
                 foreach (var tile in mob.Patch.IsDefault ? [] : mob.Patch)
                 {
                     var local = new Tile(tile.X - stamp.At.X, tile.Y - stamp.At.Y);
