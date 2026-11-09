@@ -1221,7 +1221,15 @@
                 {
                   "unit": "hero3",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             }
@@ -1251,7 +1259,15 @@
                 {
                   "unit": "hero3",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             }
@@ -1281,7 +1297,15 @@
                 {
                   "unit": "hero3",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             }
@@ -1311,7 +1335,15 @@
                 {
                   "unit": "hero1",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             },
@@ -1328,7 +1360,15 @@
                 {
                   "unit": "hero3",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             },
@@ -1345,7 +1385,15 @@
                 {
                   "unit": "hero4",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             }
@@ -1375,7 +1423,15 @@
                 {
                   "unit": "hero1",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             },
@@ -1392,7 +1448,15 @@
                 {
                   "unit": "hero4",
                   "damage": 0,
-                  "heal": 0
+                  "heal": 0,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             }
@@ -1422,7 +1486,15 @@
                 {
                   "unit": "hero1",
                   "damage": 0,
-                  "heal": 7
+                  "heal": 7,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             },
@@ -1439,7 +1511,15 @@
                 {
                   "unit": "hero3",
                   "damage": 0,
-                  "heal": 7
+                  "heal": 7,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             },
@@ -1456,7 +1536,15 @@
                 {
                   "unit": "hero4",
                   "damage": 0,
-                  "heal": 7
+                  "heal": 7,
+                  "roll": {
+                    "kind": "automatic",
+                    "chance": 100,
+                    "modifier": 0,
+                    "vs": 0,
+                    "edge": "none",
+                    "reason": "no roll"
+                  }
                 }
               ]
             }

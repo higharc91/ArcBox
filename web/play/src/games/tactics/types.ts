@@ -45,6 +45,9 @@ export interface UnitPreview {
   unit: string;
   damage: number;
   heal: number;
+  roll?: { kind: "hit" | "fail save" | "automatic" | "reaction damage"; chance: number; modifier: number; vs: number; edge: "none" | "advantage" | "disadvantage"; reason: string };
+  damageMin?: number;
+  damageMax?: number;
 }
 
 export interface TargetChoice {

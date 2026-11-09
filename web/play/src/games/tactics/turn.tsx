@@ -8,8 +8,20 @@ import { FallBack } from "./fallback";
 import { ReactionsSheet } from "./reactions";
 import { classFrom, remembered, rememberTurn } from "./memory";
 import { useAlertOnMount, useSfx } from "./sfx";
-import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView } from "./types";
+import type { AbilityChoice, Cost, TargetChoice, Tile, TurnData, UnitView, UnitPreview } from "./types";
 import { ControlNotice, Conditions, EconomyChips, HpBar, HpText, LineIcon, MeCard, Section, TurnBanner } from "./ui";
+
+export function previewText(p: UnitPreview): string {
+  const roll = p.roll;
+  const d20 = roll?.kind === "hit" || roll?.kind === "fail save";
+  const against = roll && d20 ? ` (${roll.modifier >= 0 ? "+" : ""}${roll.modifier} vs ${roll.kind === "hit" ? "AC" : "DC"} ${roll.vs})` : "";
+  const chance = roll ? `${roll.chance}% ${roll.kind}${against}` : "";
+  const edgeLabel = roll?.edge === "advantage" ? "Advantage" : roll?.edge === "disadvantage" ? "Disadvantage" : d20 && roll?.reason ? "Straight roll" : "";
+  const edge = [edgeLabel, roll?.reason].filter(Boolean).join(": ");
+  const damage = p.damageMax != null ? `${p.damageMin}–${p.damageMax} damage (all outcomes)` : p.damage > 0 ? `~${Math.max(1, Math.round(p.damage))} damage` : "";
+  const heal = p.heal > 0 ? `~${Math.max(1, Math.round(p.heal))} healing` : "";
+  return [chance, edge, damage, heal].filter(Boolean).join(" · ");
+}
 
 const same = (a: Tile, b: Tile) => a[0] === b[0] && a[1] === b[1];
 
@@ -292,6 +304,7 @@ function Aim({ ability, target, unit, byId, unitLabel, onPick, strikes }: {
       <p class="tx-aim-what"><span class="tx-cost">{costText(ability.cost)}</span> {ability.tooltip}</p>
       {strikes ? (
         <div class="tx-strikes">
+          <p>Previews show the opening attack. Later attacks can change as effects are spent.</p>
           <div class="tx-strike-step">
             <span>{`Aiming attack ${strikes.at + 1} of ${strikes.plan.length}`}</span>
             {strikes.at + 1 < strikes.plan.length ? (
@@ -311,8 +324,7 @@ function Aim({ ability, target, unit, byId, unitLabel, onPick, strikes }: {
         <div class="tx-chips">
           {target.affected.map((p) => {
             const u = byId.get(p.unit);
-            // Previews are expected values (hit chance included): whole numbers read better.
-            const bits = [p.damage > 0 ? `−${Math.max(1, Math.round(p.damage))}` : "", p.heal > 0 ? `+${Math.max(1, Math.round(p.heal))}` : ""].filter(Boolean).join(" ");
+            const bits = previewText(p);
             return (
               <span key={p.unit} class={`tx-chip ${p.damage > 0 ? "bad" : p.heal > 0 ? "good" : ""}`}>
                 {u ? unitLabel(u) : "You"}{bits ? ` ${bits}` : ""}
@@ -331,7 +343,9 @@ function Aim({ ability, target, unit, byId, unitLabel, onPick, strikes }: {
           <ul class="tx-targets">
             {targets.map((t, i) => (
               <li key={i}>
-                <button type="button" class={target === t ? "on" : ""} onClick={() => onPick(t)}>{label(t)}</button>
+                <button type="button" class={target === t ? "on" : ""} onClick={() => onPick(t)}>{label(t)}
+                  {t.affected.map(p => <small class="tx-target-preview" key={p.unit}>{t.affected.length > 1 ? `${byId.get(p.unit) ? unitLabel(byId.get(p.unit)!) : "You"}: ` : ""}{previewText(p)}</small>)}
+                </button>
               </li>
             ))}
           </ul>

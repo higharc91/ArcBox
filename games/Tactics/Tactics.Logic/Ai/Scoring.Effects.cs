@@ -321,7 +321,7 @@ internal sealed partial class Scorer
     }
 
     /// <summary>A saving throw (see <see cref="SaveBlock"/>): fail and success branches, half damage, evasion.</summary>
-    private (double Fail, bool Evades, RollResult Failed) SaveOdds(SaveEffect def, Strike st, UnitState target)
+    private (double Fail, bool Evades, RollResult Failed, Edge Edge) SaveOdds(SaveEffect def, Strike st, UnitState target)
     {
         var sheet = target.Sheet;
         var sources = Sources(target.Id, target.Pos);
@@ -346,12 +346,12 @@ internal sealed partial class Scorer
 
         var evades = stat == Stat.Dex && def.HalfOnSuccess && mods.Evasion;
         var failed = new RollResult([], 0, bonus, 0, dc, Success: false, Crit: false, Fumble: false);
-        return (pFail, evades, failed);
+        return (pFail, evades, failed, Rolls.Combine(advantages, disadvantages));
     }
 
     private Outcome Save(SaveEffect def, Strike st, UnitState target)
     {
-        var (pFail, evades, failed) = SaveOdds(def, st, target);
+        var (pFail, evades, failed, _) = SaveOdds(def, st, target);
         var saved = failed with { Success = true };
         var onFail = Walk(def.OnFail, st, target, half: evades, last: failed);
         var onSuccess = Walk(def.OnSuccess, st, target, last: saved);
