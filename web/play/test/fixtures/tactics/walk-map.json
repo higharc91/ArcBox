@@ -68,6 +68,10 @@
     "search": true,
     "map": {
       "region": "ashen_ford",
+      "size": [
+        160,
+        120
+      ],
       "at": [
         29,
         62

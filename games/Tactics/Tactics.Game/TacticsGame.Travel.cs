@@ -153,10 +153,14 @@ public sealed partial class TacticsGame
         return WorldWalk.Next(WalkGround(), _at, dir, ClassDef.DefaultJump, _lastAlongX) is { Slid: false } move && move.To == new Tile(_at.X + dx, _at.Y + dy);
     }
 
-    /// <summary>The leader's map, while it's open on their phone: the region, the party's tile, where it's going, and the landmarks.</summary>
+    /// <summary>
+    /// The leader's map, while it's open on their phone: the region and its size (the phone draws its tiles from the content pack), the
+    /// party's tile, where it's going, and the landmarks.
+    /// </summary>
     private object? MapView(string member) => !MapShown(member) ? null : new
     {
         region = _region!.Def.Id,
+        size = _region.Def.Size,
         at = _at,
         to = _travel?.Goal,
         pins = MapPins(),
