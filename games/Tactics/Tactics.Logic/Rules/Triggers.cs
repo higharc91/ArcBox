@@ -122,8 +122,8 @@ public static class Triggers
     }
 
     /// <summary>
-    /// Brings <see cref="SpawnAction.Count"/> of the monster into the battle (fewer if the place has fewer free tiles): each
-    /// on the next free tile of the place (<see cref="Motion.CanLand"/>), named <c>"&lt;monster&gt;.&lt;n&gt;"</c> with the
+    /// Brings <see cref="SpawnAction.Count"/> of the monster into the battle: first on free tiles of the place, then
+    /// the nearest free tiles on the map, with ties in tile order (<see cref="Motion.CanLand"/>), named <c>"&lt;monster&gt;.&lt;n&gt;"</c> with the
     /// lowest n not in use, on the enemy side (the party's for an ally, as a <see cref="UnitState.Helper"/>), AI-controlled,
     /// tagged, joining the turn order next round (<see cref="BattleState.Joining"/>). Emits <see cref="Spawned"/> for each. Throws
     /// <see cref="InvalidOperationException"/> when the rules pack has no such monster (the loader checks it).
@@ -140,7 +140,7 @@ public static class Triggers
             AiProfile = profile,
         };
         var placed = 0;
-        foreach (var tile in spawn.At.Tiles(w.Terrain.Map))
+        foreach (var tile in SpawnTiles(spawn.At, w.Terrain.Map))
         {
             if (placed >= spawn.Count)
                 break;
@@ -155,6 +155,18 @@ public static class Triggers
             w.Emit(new Spawned(id, tile, sheet.Sprite));
             placed++;
         }
+    }
+
+    /// <summary>Preferred positions keep their authored order; fallback is deterministic and only visited if needed.</summary>
+    private static IEnumerable<Tile> SpawnTiles(PlaceRef place, BattleMap map)
+    {
+        var preferred = place.Tiles(map).Where(map.InBounds).Distinct().ToArray();
+        foreach (var tile in preferred) yield return tile;
+        if (preferred.Length == 0) yield break;
+        var nearby = Enumerable.Range(0, map.Width).SelectMany(x => Enumerable.Range(0, map.Height).Select(y => new Tile(x, y)))
+            .Where(t => !preferred.Contains(t))
+            .OrderBy(t => preferred.Min(p => Math.Abs(t.X - p.X) + Math.Abs(t.Y - p.Y))).ThenBy(t => t);
+        foreach (var tile in nearby) yield return tile;
     }
 
     private static UnitId FreeId(BattleState state, string monster)
