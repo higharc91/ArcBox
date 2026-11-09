@@ -51,7 +51,7 @@ public sealed partial class StoryPanel : Control
 
         _interludeTitle = StoryArt.Text("", ArcTheme.Spaced("Bold", 4), 48, HudLayer.Ink);
         _interludeTitle.HorizontalAlignment = HorizontalAlignment.Center;
-        var kicker = ArcTheme.Meta("Next", 18, HudLayer.Gold);
+        var kicker = TvText.Meta("Next", 18, HudLayer.Gold);
         kicker.HorizontalAlignment = HorizontalAlignment.Center;
         _interlude = ArcTheme.Panel(art.Box("main"), ArcTheme.Margin(40, 10, 40, 14, ArcTheme.VBox(4, kicker, _interludeTitle)));
         AddChild(_interlude);

@@ -50,7 +50,7 @@ body:has(.screen.wf-lobby) { background: #07080f; }
 
 /* ---------------------------------------------------------------- shared pieces */
 .wf-lobby :is(button, input) { font-family: var(--wf-sans); }
-.wf-lobby small { font: 700 12px var(--wf-serif); letter-spacing: 0.22em; text-transform: uppercase; color: var(--wf-muted); }
+.wf-lobby small { font: 700 13px var(--wf-serif); letter-spacing: 0.22em; text-transform: uppercase; color: var(--wf-muted); }
 .wf-lobby button:not(.primary) {
   border-radius: var(--wf-radius);
   border-color: var(--wf-line);
@@ -78,7 +78,7 @@ body:has(.screen.wf-lobby) { background: #07080f; }
   border-radius: var(--wf-radius); background: rgba(10, 11, 26, 0.85); border-color: rgba(230, 189, 92, 0.35); color: var(--wf-ink);
 }
 .wf-lobby .text-input::placeholder { color: var(--wf-dim); }
-.wf-lobby .field > span { font: 700 12px var(--wf-serif); letter-spacing: 0.2em; color: var(--wf-gold); }
+.wf-lobby .field > span { font: 700 13px var(--wf-serif); letter-spacing: 0.2em; color: var(--wf-gold); }
 .wf-lobby .hint { color: var(--wf-muted); font-weight: 500; text-shadow: 0 1px 4px rgba(7, 8, 15, 0.9); }
 .wf-lobby .form-error { border-radius: 6px; }
 .wf-lobby .picked { background: rgba(230, 189, 92, 0.12); border-color: var(--wf-gold); box-shadow: 0 0 16px rgba(230, 189, 92, 0.25); }
@@ -98,7 +98,7 @@ body:has(.screen.wf-lobby) { background: #07080f; }
 /* ---------------------------------------------------------------- the lobby */
 .wf-lobby.lobby { gap: 14px; }
 .wf-lobby .lobby-head { padding: 6px 20px 0; align-items: center; }
-.wf-lobby .lobby-head small { font-size: 11px; }
+.wf-lobby .lobby-head small { font-size: 13px; }
 .wf-lobby .room-code { font: 800 40px/1 var(--wf-serif); letter-spacing: 0.16em; color: var(--wf-gold-hi); text-shadow: 0 0 14px rgba(230, 189, 92, 0.35); }
 .wf-lobby .lobby-head .count b { font: 800 30px var(--wf-serif); color: var(--wf-ink); }
 .wf-lobby .mute-toggle { border-radius: var(--wf-radius); color: var(--wf-gold-hi); }
@@ -122,8 +122,8 @@ body:has(.screen.wf-lobby) { background: #07080f; }
 .wf-lobby .player:nth-child(6n + 6) { --p: #ff7fb6; }
 .wf-lobby .player.me { border-color: rgba(230, 189, 92, 0.6); border-left-color: var(--p); box-shadow: 0 0 12px rgba(230, 189, 92, 0.2); }
 .wf-lobby .player .pname { font: 700 17px var(--wf-serif); letter-spacing: 0.04em; color: var(--wf-ink); }
-.wf-lobby .player .vip { font: 800 10px var(--wf-sans); letter-spacing: 0.12em; background: var(--wf-gold); color: var(--wf-on-gold); border-radius: 4px; }
-.wf-lobby .player .away { font: 700 10px var(--wf-sans); color: var(--wf-dim); }
+.wf-lobby .player .vip { font: 800 13px var(--wf-sans); letter-spacing: 0.12em; background: var(--wf-gold); color: var(--wf-on-gold); border-radius: 4px; }
+.wf-lobby .player .away { font: 700 13px var(--wf-sans); color: var(--wf-dim); }
 .wf-lobby .player.offline { opacity: 0.55; }
 
 .wf-lobby .picker > small, .wf-lobby .campaigns > small {
@@ -177,7 +177,7 @@ body:has(.screen.wf-lobby) { background: #07080f; }
 .wf-lobby .claim .claim-new { border-style: dashed; border-color: rgba(230, 189, 92, 0.55); color: var(--wf-gold-hi); }
 
 /* ---------------------------------------------------------------- "Who are you?" */
-.wf-lobby .pick-head small { font-size: 12px; letter-spacing: 0.3em; }
+.wf-lobby .pick-head small { font-size: 13px; letter-spacing: 0.3em; }
 .wf-lobby .pick-head h1 { font: 800 30px/1.15 var(--wf-serif); letter-spacing: 0.06em; color: var(--wf-ink); text-shadow: 0 2px 10px rgba(7, 8, 15, 0.8); }
 .wf-lobby .pick-head p { color: var(--wf-muted); font-weight: 500; font-size: 17px; }
 .wf-lobby .pick-grid { gap: 12px; }

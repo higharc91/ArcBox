@@ -46,7 +46,7 @@ public sealed partial class CheckBoard : Control
         _dim.SetAnchorsPreset(LayoutPreset.FullRect);
         AddChild(_dim);
 
-        var kicker = ArcTheme.Meta("Skill check", 20, HudLayer.Muted);
+        var kicker = TvText.Meta("Skill check", 20, HudLayer.Muted);
         kicker.HorizontalAlignment = HorizontalAlignment.Center;
         _skill = StoryArt.Text("", ArcTheme.Spaced("Black", 8), 76, HudLayer.Gold);
         _skill.HorizontalAlignment = HorizontalAlignment.Center;
@@ -144,8 +144,8 @@ public sealed partial class CheckBoard : Control
             Centred(StoryArt.Text(card.Name.ToUpperInvariant(), ArcTheme.Spaced("Bold", 3), 30, HudLayer.Ink)),
             Centred(StoryArt.Text(card.Who, ArcTheme.SemiBold, 22, HudLayer.Muted)),
             Centred(StoryArt.Text(card.Bonus, ArcTheme.Black, 52, card.Chosen ? HudLayer.Gold : HudLayer.Ink)),
-            Centred(StoryArt.Text(card.Note, ArcTheme.SemiBold, 18, HudLayer.Muted)),
-            Centred(StoryArt.Text(card.VotesText.Length > 0 ? card.VotesText : " ", ArcTheme.Bold, 18, HudLayer.Gold)));
+            Centred(StoryArt.Text(card.Note, ArcTheme.SemiBold, 24, HudLayer.Muted)),
+            Centred(StoryArt.Text(card.VotesText.Length > 0 ? card.VotesText : " ", ArcTheme.Bold, 20, HudLayer.Gold)));
         var box = ArcTheme.Panel(_art.Box(card.Chosen ? "card_selected" : "card"), ArcTheme.Margin(8, 10, 8, 10, inside));
         box.CustomMinimumSize = new Vector2(CardWidth, 0);
         if (card.Tag is not { } tag)

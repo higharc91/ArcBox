@@ -133,7 +133,7 @@ describe("dialogue", () => {
     expect(document.querySelector(".tx-story [aria-live='polite']")).toBe(live);
     expect(live.textContent).toBe("Rain on the ford.");
     again(view("dialogue", (d) => { d.line = null; d.speaker = null; d.text = null; }, "v3"));
-    expect(live.textContent).toBe("The story goes on. Watch the TV.");
+    expect(live.textContent).toBe("Follow the dialogue on the TV.");
   });
 
   it("between lines, shows the scene and no skip", () => {

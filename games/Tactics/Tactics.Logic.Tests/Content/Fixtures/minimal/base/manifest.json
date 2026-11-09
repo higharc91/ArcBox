@@ -16,6 +16,7 @@
     "classes/fighter.json",
     "monsters/beasts.json",
     "maps/field.json",
-    "encounters/field_skirmish.json"
+    "encounters/field_skirmish.json",
+    "loot.json"
   ]
 }

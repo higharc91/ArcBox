@@ -325,7 +325,13 @@ public sealed class StoryScreenTests
 
         Assert.Equal(11, vote.Rows.Length);
         Assert.True(vote.Height <= VoteLayout.MaxHeight, $"{vote.Height} tall");
-        Assert.True(vote.Scale < 1);
+        Assert.Equal(1, vote.Scale);
+        Assert.True(VoteLayout.ColumnCount(vote.Rows) > 1);
+        Assert.True(VoteLayout.PanelWidth(vote.Rows) <= 1848);
+        var crowded = vote with { Rows = [.. vote.Rows.Select(r => r with { Detail = "Persuasion check · DC 15", Voters = [VoterPip.Of("Ana", null)] })] };
+        Assert.Equal(1, crowded.Scale);
+        Assert.True(crowded.Height <= VoteLayout.MaxHeight);
+        Assert.True(VoteLayout.PanelWidth(crowded.Rows) <= 1848);
         Assert.All(vote.Rows, r => Assert.True(r.Label.Length <= StoryScreen.LabelRows));
         Assert.All(vote.Rows.SelectMany(r => r.Label), row => Assert.True(row.Length <= VoteLayout.Columns(vote.Scale), row));
     }

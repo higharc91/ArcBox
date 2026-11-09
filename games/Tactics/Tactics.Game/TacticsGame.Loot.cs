@@ -26,7 +26,7 @@ public sealed partial class TacticsGame
 
     /// <summary>
     /// <paramref name="items"/>, found by <paramref name="by"/> in <paramref name="from"/>, go to the party (USER DECISION 1): straight into
-    /// <paramref name="by"/>'s bag when only one player here has a character, as they always did; otherwise they wait for the party's vote,
+    /// the sole present character's bag when only one player here has a character; otherwise they wait for the party's vote,
     /// which begins when the party would walk again. Only the pack's items: gold and anything unknown aren't here. The caller saves.
     /// </summary>
     private void GiveFound(IEnumerable<(ItemId Item, int Count)> items, string? by, string from)
@@ -34,12 +34,15 @@ public sealed partial class TacticsGame
         var found = items.Where(i => i.Count > 0 && Rules.Items.ContainsKey(i.Item)).ToList();
         if (found.Count == 0 || by is null || !_doc.Members.ContainsKey(by))
             return;
-        if (LootChoices().Length <= 1 && _doc.World?.Loot is not { Items.IsEmpty: false })
+        var choices = LootChoices();
+        // Standalone packs have no world/story cursor in which to persist a vote. Keep their fixed recipient fallback.
+        if (_doc.World is null || _region is null
+            || choices.Length == 1 && _doc.World.Loot is not { Items.IsEmpty: false })
         {
-            Stack(by, found);
+            Stack(choices.FirstOrDefault() ?? by, found);
             return;
         }
-        var world = _doc.World!;
+        var world = _doc.World;
         var loot = world.Loot ?? new LootSave([]);
         _doc = _doc with { World = world with { Loot = loot with { Items = loot.Items.AddRange(found.Select(i => new LootDue(i.Item.Value, i.Count, by, from))) } } };
     }

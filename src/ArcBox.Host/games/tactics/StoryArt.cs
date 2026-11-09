@@ -66,7 +66,7 @@ public sealed class StoryArt
     }
 
     /// <summary>A label in the story's type: Titillium, in the HUD's ink unless said.</summary>
-    public static Label Text(string text, Font font, int size, Color? colour = null) => ArcTheme.Label(text, font, size, colour ?? HudLayer.Ink);
+    public static Label Text(string text, Font font, int size, Color? colour = null) => TvText.Label(text, font, size, colour ?? HudLayer.Ink);
 
     /// <summary>A rectangle of the art, for drawing.</summary>
     public static Rect2 Region(ArtRect rect) => new(rect.X, rect.Y, rect.Width, rect.Height);

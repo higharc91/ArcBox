@@ -1,0 +1,49 @@
+using System.Collections.Immutable;
+using ArcBox.Host.Games.Tactics;
+using Godot;
+using Tactics.Game;
+using Tactics.Logic;
+using Tactics.Presentation.Board;
+using Tactics.Presentation.Hud;
+using NV = System.Numerics.Vector2;
+
+public partial class CardReview : Node
+{
+    public override async void _Ready()
+    {
+        try
+        {
+            var root = "/workspace/ArcBox-tv/content/tactics/base";
+            var art = ArtIndex.Load(root);
+            var ua = UnitArt.Load(root);
+            var ha = HudArt.Load(root, ua);
+            var map = BoardMap.Parse(File.ReadAllText(Path.Combine(root,"rules/maps/river_crossing.json")));
+            var terrain = new BoardTerrain(map, null);
+            var fit = BoardFit.For(terrain, art);
+            var plan = BoardPlan.Build(terrain, art);
+            var board = new BoardCanvas();
+            AddChild(board);
+            board.SetPlan(plan, LitBoard.Build(plan, BoardLighting.Of(plan, map.Id, art.Lighting)), fit, root);
+            var a = new UnitView(new UnitId("hero"), "Kara", "Party", "characters.class_fighter", new Tile(6,3), 19,34,3,"Up",0,["prone"],"Ana",BaseAc:16,Role:"Fighter");
+            var t = new UnitView(new UnitId("foe"), "Goblin Cutthroat", "Enemy", "monsters.goblin_cutthroat",new Tile(9,3),3,12,0,"Up",0,["frightened","poisoned"],null,BaseAc:13,Role:"Melee enemy");
+            var shown = new BattleView("river_crossing",map.Id,2,[a.Id,t.Id],a.Id,[a,t],[],null);
+            var units = UnitPlan.Build(shown, terrain, ua, fit);
+            board.SetUnits(units,ua);
+            var hud = new HudLayer(root,ha,new StoryArt(root,ha,ua));
+            AddChild(hud);
+            var words = BattleHud.Of(shown,shown,"",null,null);
+            for(var i=0;i<8;i++){hud.Show(words,units,fit,null);hud.ShowCards(shown,a.Id,t.Id,units,fit);await ToSignal(GetTree(),SceneTree.SignalName.ProcessFrame);}
+            await ToSignal(RenderingServer.Singleton,RenderingServer.SignalName.FramePostDraw);
+            var dest="/workspace/ArcBox-tv/docs/superpowers/reports/2026-11-09-unit-cards";
+            Directory.CreateDirectory(dest);
+            GetViewport().GetTexture().GetImage().SavePng(dest+"/battle-cards.png");
+            var overlap=units.Select(u=>u with { Feet=(new NV(100,1000)-fit.Origin)/fit.Scale }).ToImmutableArray();
+            hud.ShowCards(shown,a.Id,t.Id,overlap,fit);
+            var cards=hud.GetChildren().OfType<UnitCard>().ToArray();
+            if(cards.Length!=2 || cards[0].Modulate.A>0.46f)throw new Exception("Unit overlap did not fade the active card");
+            GD.Print("CARD REVIEW PASS: two native cards; overlap fade; displayed HP and named conditions");
+            GetTree().Quit();
+        }
+        catch(Exception e){GD.PushError(e.ToString());GetTree().Quit(1);}
+    }
+}

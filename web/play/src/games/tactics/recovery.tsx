@@ -54,5 +54,5 @@ export function RecoveryParty({ members, you, status, action, injuryAction }: {
 
 /** Host controls are available without taking a row from every recovery screen. */
 export function RecoveryMenu({ send, keep, difficulty }: { send: CustomScreenProps["send"]; keep: string; difficulty?: string }) {
-  return <details class="tx-recovery-menu"><summary aria-label="Session options">•••</summary><HostMenu canBattle={false} keep={keep} difficulty={difficulty} send={send} /></details>;
+  return <details class="tx-recovery-menu"><summary aria-label="Party menu">Party menu</summary><HostMenu canBattle={false} keep={keep} difficulty={difficulty} send={send} /></details>;
 }

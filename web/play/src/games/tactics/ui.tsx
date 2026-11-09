@@ -91,7 +91,7 @@ export function TurnBanner({ summon }: { summon?: string }) {
   return (
     <div class="tx-banner" ref={ref}>
       <b>{summon ? `${summon}'s turn` : "Your turn"}</b>
-      {clock ? <span class={`tx-clock${clock.urgent ? " urgent" : ""}`} role="timer">{clock.text}</span> : null}
+      {clock ? <span class={`tx-clock${clock.urgent ? " urgent" : ""}`} role="timer">{clock.text}{clock.urgent ? <small class="tx-clock-warning">{clock.text === "0:00" ? "Time up" : "Act now"}</small> : null}</span> : null}
     </div>
   );
 }

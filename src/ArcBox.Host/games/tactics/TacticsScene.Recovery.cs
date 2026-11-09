@@ -35,7 +35,7 @@ public partial class TacticsScene
     {
         var row = ArcTheme.VBox(3);
         row.SizeFlagsHorizontal = SizeFlags.ExpandFill;
-        row.AddChild(ArcTheme.Label($"{label}  {current}/{max}", ArcTheme.SemiBold, 24, new Color(.75f, .78f, .8f)));
+        row.AddChild(TvText.Label($"{label}  {current}/{max}", ArcTheme.SemiBold, 24, new Color(.75f, .78f, .8f)));
         var bar = new ProgressBar { MinValue = 0, MaxValue = Math.Max(1, max), Value = current, ShowPercentage = false, CustomMinimumSize = new Vector2(compact ? 20 : 100, 6), MouseFilter = MouseFilterEnum.Ignore };
         bar.AddThemeStyleboxOverride("background", new StyleBoxFlat { BgColor = new Color(0, 0, 0, .5f) });
         bar.AddThemeStyleboxOverride("fill", new StyleBoxFlat { BgColor = color });
@@ -46,7 +46,7 @@ public partial class TacticsScene
     private Control RecoveryCard(RecoveryMemberView member, string? note = null, bool compact = false)
     {
         var body = ArcTheme.VBox(5);
-        var name = ArcTheme.Label(member.Name, ArcTheme.Bold, compact ? 24 : 28);
+        var name = TvText.Label(member.Name, ArcTheme.Bold, compact ? 24 : 28);
         name.ClipText = true;
         name.SizeFlagsHorizontal = SizeFlags.ExpandFill;
         var heading = ArcTheme.HBox(6, name);
@@ -61,11 +61,11 @@ public partial class TacticsScene
             if (MealTexture() is { } meal) heading.AddChild(new TextureRect { Texture = meal, CustomMinimumSize = new Vector2(24, 24),
                 ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
                 TextureFilter = TextureFilterEnum.Nearest, TooltipText = "Well fed · 3 temporary HP next battle" });
-            else heading.AddChild(ArcTheme.Label("♨", ArcTheme.Bold, 24, ArcTheme.Gold));
+            else heading.AddChild(TvText.Label("♨", ArcTheme.Bold, 24, ArcTheme.Gold));
         }
         if (member.Room) note = "Room booked";
         if (!member.Here && note is null) note = "Away";
-        if (note is not null) heading.AddChild(ArcTheme.Label(note, ArcTheme.SemiBold, 24, ArcTheme.Gold));
+        if (note is not null) heading.AddChild(TvText.Label(note, ArcTheme.SemiBold, 24, ArcTheme.Gold));
         body.AddChild(heading);
         var meters = ArcTheme.HBox(12, RecoveryMeter("HP", member.Hp, member.MaxHp, new Color(.4f, .73f, .5f), compact));
         if (compact) body.AddChild(meters);
@@ -78,7 +78,7 @@ public partial class TacticsScene
         body.AddChild(resources);
         if (member.WellFed)
         {
-            var fed = ArcTheme.Label("Well fed · 3 temporary HP next battle", ArcTheme.SemiBold, 24, ArcTheme.Gold);
+            var fed = TvText.Label("Well fed · 3 temporary HP next battle", ArcTheme.SemiBold, 24, ArcTheme.Gold);
             fed.AutowrapMode = TextServer.AutowrapMode.WordSmart;
             body.AddChild(fed);
         }

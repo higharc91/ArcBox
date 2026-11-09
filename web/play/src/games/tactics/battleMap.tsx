@@ -59,9 +59,10 @@ export function BattleMap(props: Props) {
     </div>
     <MiniMap {...props} />
     <p class="tx-map-key"># = unit · numbers = height · ! = hazard · ↓ = deep · × = blocked · Z = zone</p>
+    <p class="tx-map-key">Round = ally · square = enemy · outline = you. Dotted edge = reachable · double edge = aim · stripes = risky move.</p>
     <p class="tx-map-key">Dashed cliff edge = drop of 4+ levels. Tap a tile to inspect.</p>
     <div class="tx-map-controls">{dpad}<TileDetails {...props} /></div>
-    {props.spread.length ? <span class="tx-spread-key">Dashed blue: reaction spread · includes allies</span> : null}
+    {props.spread.length ? <span class="tx-spread-key">Dashed box: reaction spread · includes allies</span> : null}
     {open === "units" ? <Sheet title="Battlefield units" onClose={() => setOpen(null)}>
       <p class="tx-note">Tap a unit to inspect it or aim a legal ability at it.</p>
       <ul class="tx-map-units">{units.map((unit, i) => <li key={unit.id}>
@@ -104,12 +105,12 @@ function MiniMap({ me, units, cursor, reach, risks, spread, aims, zones, onPick,
         hazard ? "hazard" : "", active.length ? "zone" : "", flags & 16 ? "deep" : "", ...cliffs,
         same(cursor, t) ? "cursor" : ""].filter(Boolean).join(" ");
       const label = occupants.length ? occupants.map(o => `#${o.number} ${o.unit.name}, ${side(o.unit, me)}`).join("; ") : `${x}, ${y}`;
-      const description = [map ? `Height ${height(map, t)}` : "", hazard ? "Hazard" : "", flags & 16 ? "Deep ground" : "",
+      const description = [reach.some(r => same(r, t)) ? "Reachable" : "", aims.some(a => same(a, t)) ? "Legal aim" : "", map ? `Height ${height(map, t)}` : "", hazard ? "Hazard" : "", flags & 16 ? "Deep ground" : "",
         active.map(z => z.name).join(", "), spread.some(r => same(r, t)) ? "Within reaction spread" : "",
         risks.some(r => same(r, t)) ? "Hazardous movement" : ""].filter(Boolean).join(". ");
       cells.push(<button type="button" key={x} class={cls} aria-label={label} aria-description={description || undefined}
         aria-pressed={same(cursor, t)} onClick={() => onPick(t)} style={map && !first ? tileStyle(map, index) : undefined}>
-        {first ? `#${first.number}${occupants.length > 1 ? "+" : ""}` : flags & 16 ? "↓" : flags & 4 ? "×" : hazard ? "!" : active.length ? "Z" : map ? height(map, t) : ""}
+        <span class="tx-cell-label">{first ? `#${first.number}${occupants.length > 1 ? "+" : ""}` : flags & 16 ? "↓" : flags & 4 ? "×" : hazard ? "!" : active.length ? "Z" : map ? height(map, t) : ""}</span>
       </button>);
     }
     rows.push(<div class="tx-maprow" key={y}>{cells}</div>);

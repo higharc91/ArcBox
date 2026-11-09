@@ -28,11 +28,11 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
         TextureFilter = TextureFilterEnum.Nearest;
         var top = ArcTheme.VBox(6);
 
-        _title = ArcTheme.Label("", ArcTheme.Bold, 30, ArcTheme.Gold);
-        _progress = ArcTheme.Label("", ArcTheme.SemiBold, 23);
+        _title = TvText.Label("", ArcTheme.Bold, 30, ArcTheme.Gold);
+        _progress = TvText.Label("", ArcTheme.SemiBold, 23);
         var timeline = ArcTheme.HBox(25);
         foreach (var text in new[] { "SETTLE IN", "CAMP JOBS", "NIGHT", "DAWN" })
-        { var label = ArcTheme.Meta(text); _steps.Add(label); timeline.AddChild(label); }
+        { var label = TvText.Meta(text); _steps.Add(label); timeline.AddChild(label); }
         top.AddChild(_title); top.AddChild(timeline); top.AddChild(_progress);
         var heading = ArcTheme.Panel(ArcTheme.GlassBox(null, 20, 12), top);
         heading.Position = new Vector2(50, 25);
@@ -41,7 +41,7 @@ internal sealed partial class CampHud(Func<RecoveryMemberView, Control> card, st
         ribbonPanel.SetAnchorsPreset(LayoutPreset.BottomWide);
         ribbonPanel.OffsetLeft = 42; ribbonPanel.OffsetRight = -42; ribbonPanel.OffsetTop = -360; ribbonPanel.OffsetBottom = -26;
         AddChild(ribbonPanel);
-        _caption = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 20, 12), _result = ArcTheme.Label("", ArcTheme.SemiBold, 25));
+        _caption = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 20, 12), _result = TvText.Label("", ArcTheme.SemiBold, 25));
         _result.AutowrapMode = TextServer.AutowrapMode.WordSmart;
         _caption.SetAnchorsPreset(LayoutPreset.CenterBottom);
         _caption.OffsetLeft = -520; _caption.OffsetRight = 520; _caption.OffsetTop = -470; _caption.OffsetBottom = -382;

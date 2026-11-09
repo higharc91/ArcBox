@@ -42,7 +42,7 @@ internal static class PackLoader
     }
 
     /// <summary>The kinds of content file, by where they sit in a pack.</summary>
-    private enum FileKind { Environment, Conditions, Races, Backgrounds, Injuries, Trinkets, Xp, AiProfiles, Items, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables, Shops, Mobs }
+    private enum FileKind { Environment, Conditions, Races, Backgrounds, Injuries, Trinkets, Xp, AiProfiles, Items, LootTables, Weapons, Armor, Abilities, Class, Monsters, Map, Encounter, Region, Interactables, Shops, Mobs }
 
     /// <summary>Everything read from the packs, in load order, before ids are merged.</summary>
     private sealed class Content
@@ -54,6 +54,7 @@ internal static class PackLoader
         public List<Loaded<RaceDef>> Races { get; } = [];
         public List<Loaded<BackgroundDef>> Backgrounds { get; } = [];
         public List<Loaded<MonsterDef>> Monsters { get; } = [];
+        public List<Loaded<LootTableDef>> LootTables { get; } = [];
         public List<Loaded<ItemDef>> Items { get; } = [];
         public List<Loaded<WeaponDef>> Weapons { get; } = [];
         public List<Loaded<ArmorDef>> Armors { get; } = [];
@@ -130,6 +131,7 @@ internal static class PackLoader
         var backgrounds = Merge(content.Backgrounds, "background", v);
         var monsters = Merge(content.Monsters, "monster", v);
         var items = Merge(content.Items, "item", v);
+        var lootTables = Merge(content.LootTables, "loot table", v);
         var weapons = Merge(content.Weapons, "weapon", v);
         var armors = Merge(content.Armors, "armor", v);
         var maps = Merge(content.Maps, "map", v);
@@ -154,6 +156,7 @@ internal static class PackLoader
             RefKind.Condition => conditions.ContainsKey(id),
             RefKind.Monster => monsters.ContainsKey(id),
             RefKind.Item => items.ContainsKey(id),
+            RefKind.LootTable => lootTables.ContainsKey(id),
             RefKind.Weapon => weapons.ContainsKey(id),
             RefKind.Armor => armors.ContainsKey(id),
             RefKind.Map => maps.ContainsKey(id),
@@ -193,6 +196,7 @@ internal static class PackLoader
                     .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
                 shops.Values.GroupBy(t => t.Def.Region, StringComparer.Ordinal)
                     .ToImmutableSortedDictionary(g => g.Key, g => g.Select(t => t.Def.Def).ToImmutableArray(), StringComparer.Ordinal),
+                LootTables: Index(lootTables.Values, l => l.Id, l => l.Def, StringComparer.Ordinal),
                 Environment: environments.Values.SingleOrDefault()?.Def, Warnings: [.. v.Warnings],
                 Trinkets: Index(trinkets.Values, t => t.Id, t => t.Def, StringComparer.Ordinal),
                 Mobs: mobs.Values.GroupBy(m => m.Def.Region, StringComparer.Ordinal)
@@ -293,6 +297,7 @@ internal static class PackLoader
         ["xp.json"] => FileKind.Xp,
         ["ai-profiles.json"] => FileKind.AiProfiles,
         ["items.json"] => FileKind.Items,
+        ["loot.json"] => FileKind.LootTables,
         ["weapons.json"] => FileKind.Weapons,
         ["armor.json"] => FileKind.Armor,
         ["abilities", var name] when name.EndsWith(".json", StringComparison.Ordinal) => FileKind.Abilities,
@@ -354,6 +359,10 @@ internal static class PackLoader
             case FileKind.AiProfiles:
                 List(root, file, "AI profiles", v, (e, p) => Add(c.AiProfiles, v.AiProfile(e, file, p), d => d.Id, d => d.Replaces,
                     file, p, v, e, RefKind.AiProfile));
+                break;
+            case FileKind.LootTables:
+                List(root, file, "loot tables", v, (e, p) => Add(c.LootTables, v.LootTable(e, file, p), d => d.Id, d => d.Replaces,
+                    file, p, v, e, RefKind.LootTable));
                 break;
             case FileKind.Items:
                 List(root, file, "items", v, (e, p) => Add(c.Items, v.Item(e, file, p), d => d.Id.Value, d => d.Replaces?.Value,

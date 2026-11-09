@@ -28,6 +28,7 @@ internal sealed partial class Validation
             });
             if (def is null)
                 return null;
+            Refs(RefKind.LootTable, def.Loot.Select(l => l.Value), file, Pointer.Append(ptr, "loot"));
             for (var i = 0; !def.ItemLoot.IsDefault && i < def.ItemLoot.Length; i++)
             {
                 var at = Pointer.Append(Pointer.Append(ptr, "itemLoot"), i);
@@ -63,8 +64,8 @@ internal sealed partial class Validation
                             if (!Enumerable.Range(def.Party.Min, def.Party.Max - def.Party.Min + 1).SequenceEqual(values.Keys))
                                 Error(file, Pointer.Append(at, field), "Provide one value for every supported party size.");
                             foreach (var (size, value) in values)
-                                if (value < 1 || field == "countByParty" && value > units[i].Count)
-                                    Error(file, Pointer.Append(at, field), "Values must be positive; counts cannot exceed count.");
+                                if (value < (field == "countByParty" ? 0 : 1) || field == "countByParty" && value > units[i].Count)
+                                    Error(file, Pointer.Append(at, field), "HP must be positive; counts must be between zero and count.");
                         }
                     if (units[i].Id is { } id)
                     {
@@ -260,6 +261,15 @@ internal sealed partial class Validation
                         Leaves(patch.Lose);
                     }
                 }
+            foreach (var (units, name) in new[] { (def.Enemies, "enemies"), (def.Npcs, "npcs") })
+                for (var i = 0; i < units.Length; i++)
+                    WarnUnusedPhases(units[i].Unit, units[i].UnitTag, Pointer.Append(Pointer.Append(ptr, name), i));
+            for (var i = 0; i < def.Triggers.Length; i++)
+                for (var j = 0; j < def.Triggers[i].Do.Length; j++)
+                    if (def.Triggers[i].Do[j].Spawn is { } spawned)
+                        WarnUnusedPhases(spawned.Unit, spawned.UnitTag,
+                            Pointer.Append(Pointer.Append(Pointer.Append(Pointer.Append(ptr, "triggers"), i), "do"), j));
+
             Leaves(def.Objectives.Win);
             Leaves(def.Objectives.Lose);
 
@@ -292,6 +302,15 @@ internal sealed partial class Validation
                 for (var j = 0; j < def.Triggers[i].Do.Length; j++)
                     Action(def.Triggers[i].Do[j], Pointer.Append(Pointer.Append(at, "do"), j), def.Triggers[i].When, Pointer.Append(at, "when"));
             }
+        }
+
+        private void WarnUnusedPhases(string monster, string tag, string at)
+        {
+            if (!monsters.TryGetValue(monster, out var unit)) return;
+            for (var number = 1; number <= unit.Phases.Length; number++)
+                if (!def.Triggers.Any(t => t.Do.Any(a => a.Phase is { } phase && phase.Tag == tag && phase.Number == number)))
+                    v.Warnings.Add(new ContentError(file, at,
+                        $"Monster '{monster}' has phase {number}, but no trigger enters it for tag '{tag}'."));
         }
 
         private void Tagged(string tag, string monster)

@@ -37,6 +37,33 @@ public sealed class BeatPlayerTests
         return shown;
     }
 
+    [Fact]
+    public void Target_card_tracks_the_playing_action_without_leaking_queued_health_or_targets()
+    {
+        var player = Player();
+        player.Receive(View(8, 10));
+        var first = new Beat(1, Hero, [new AbilityUsed(Hero, RulesPack.CommonAttack.Id, new Target(Unit: Foe), null),
+            new AttackResolved(Hero, Foe, true, false), new Damaged(Foe, 7, "slashing", 3)]);
+        player.Receive(View(8, 3, first));
+        player.Tick(Frame);
+        Assert.Equal(Foe, player.Target);
+        Assert.Equal(10, player.Shown!.Units.Single(u => u.Id == Foe).Hp);
+        var second = new Beat(2, Foe, [new AbilityUsed(Foe, RulesPack.CommonAttack.Id, new Target(Unit: Hero), null),
+            new AttackResolved(Foe, Hero, false, false)]);
+        player.Receive(View(8, 3, first, second));
+        Assert.Equal(Foe, player.Target);
+        Assert.Equal(10, player.Shown.Units.Single(u => u.Id == Foe).Hp);
+        var sawImpact = false;
+        for (var i = 0; i < 180; i++)
+        {
+            player.Tick(Frame);
+            if (player.Target == Foe && player.Shown.Units.Single(u => u.Id == Foe).Hp == 3) sawImpact = true;
+            if (player.Target == Hero) break;
+        }
+        Assert.True(sawImpact);
+        Assert.Equal(Hero, player.Target);
+    }
+
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
