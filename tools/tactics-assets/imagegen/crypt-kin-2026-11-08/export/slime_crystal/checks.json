@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 0,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      160,
+      162,
+      223
+    ],
+    "count": 2971
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 1,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      93,
+      161,
+      163,
+      223
+    ],
+    "count": 2987
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 2,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      159,
+      162,
+      223
+    ],
+    "count": 3083
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 3,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      93,
+      161,
+      163,
+      223
+    ],
+    "count": 2956
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 0,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      87,
+      161,
+      168,
+      224
+    ],
+    "count": 3433
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 1,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      93,
+      154,
+      169,
+      224
+    ],
+    "count": 3725
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 2,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      96,
+      151,
+      171,
+      224
+    ],
+    "count": 4066
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 3,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      90,
+      155,
+      169,
+      224
+    ],
+    "count": 3709
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 0,
+    "scale": 0.463768115942029,
+    "bounds": [
+      93,
+      161,
+      162,
+      224
+    ],
+    "count": 3150
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 1,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      165,
+      165,
+      224
+    ],
+    "count": 3049
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 2,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      157,
+      164,
+      224
+    ],
+    "count": 3308
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 3,
+    "scale": 0.463768115942029,
+    "bounds": [
+      93,
+      161,
+      162,
+      224
+    ],
+    "count": 3089
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 0,
+    "scale": 0.3,
+    "bounds": [
+      97,
+      165,
+      160,
+      224
+    ],
+    "count": 2561
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 1,
+    "scale": 0.3,
+    "bounds": [
+      93,
+      181,
+      162,
+      224
+    ],
+    "count": 1943
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 4,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      160,
+      163,
+      223
+    ],
+    "count": 3085
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 5,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      93,
+      159,
+      163,
+      223
+    ],
+    "count": 3204
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 6,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      157,
+      162,
+      223
+    ],
+    "count": 3338
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 7,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      160,
+      163,
+      223
+    ],
+    "count": 3102
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 4,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      87,
+      159,
+      168,
+      224
+    ],
+    "count": 3712
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 5,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      94,
+      152,
+      174,
+      224
+    ],
+    "count": 4042
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 6,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      103,
+      152,
+      183,
+      224
+    ],
+    "count": 4111
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 7,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      89,
+      156,
+      169,
+      224
+    ],
+    "count": 3930
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 4,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      161,
+      164,
+      224
+    ],
+    "count": 3271
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 5,
+    "scale": 0.463768115942029,
+    "bounds": [
+      90,
+      166,
+      166,
+      224
+    ],
+    "count": 3094
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 6,
+    "scale": 0.463768115942029,
+    "bounds": [
+      88,
+      163,
+      171,
+      224
+    ],
+    "count": 3390
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 7,
+    "scale": 0.463768115942029,
+    "bounds": [
+      92,
+      162,
+      165,
+      224
+    ],
+    "count": 3232
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 2,
+    "scale": 0.3,
+    "bounds": [
+      97,
+      165,
+      161,
+      225
+    ],
+    "count": 2701
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 3,
+    "scale": 0.3,
+    "bounds": [
+      92,
+      183,
+      164,
+      224
+    ],
+    "count": 1944
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 8,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      161,
+      166,
+      223
+    ],
+    "count": 3140
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 9,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      161,
+      166,
+      223
+    ],
+    "count": 3271
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 10,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      159,
+      166,
+      223
+    ],
+    "count": 3425
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 11,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      162,
+      167,
+      224
+    ],
+    "count": 3212
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 8,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      85,
+      161,
+      169,
+      224
+    ],
+    "count": 3736
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 9,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      89,
+      157,
+      175,
+      224
+    ],
+    "count": 4044
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 10,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      93,
+      156,
+      180,
+      224
+    ],
+    "count": 4264
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 11,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      84,
+      159,
+      171,
+      224
+    ],
+    "count": 4034
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 8,
+    "scale": 0.463768115942029,
+    "bounds": [
+      90,
+      163,
+      164,
+      224
+    ],
+    "count": 3188
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 9,
+    "scale": 0.463768115942029,
+    "bounds": [
+      88,
+      168,
+      167,
+      224
+    ],
+    "count": 3152
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 10,
+    "scale": 0.463768115942029,
+    "bounds": [
+      69,
+      166,
+      162,
+      224
+    ],
+    "count": 3572
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 11,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      164,
+      165,
+      224
+    ],
+    "count": 3200
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 4,
+    "scale": 0.3,
+    "bounds": [
+      96,
+      170,
+      159,
+      224
+    ],
+    "count": 2444
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 5,
+    "scale": 0.3,
+    "bounds": [
+      93,
+      183,
+      163,
+      224
+    ],
+    "count": 1827
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 12,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      162,
+      163,
+      223
+    ],
+    "count": 2903
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 13,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      161,
+      163,
+      223
+    ],
+    "count": 2956
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 14,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      159,
+      162,
+      223
+    ],
+    "count": 3047
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 15,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      162,
+      163,
+      223
+    ],
+    "count": 2902
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 12,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      87,
+      158,
+      169,
+      224
+    ],
+    "count": 3651
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 13,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      91,
+      153,
+      171,
+      224
+    ],
+    "count": 3956
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 14,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      91,
+      151,
+      173,
+      224
+    ],
+    "count": 4001
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 15,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      88,
+      156,
+      168,
+      224
+    ],
+    "count": 3822
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 12,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      162,
+      165,
+      224
+    ],
+    "count": 3242
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 13,
+    "scale": 0.463768115942029,
+    "bounds": [
+      90,
+      165,
+      165,
+      224
+    ],
+    "count": 3048
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 14,
+    "scale": 0.463768115942029,
+    "bounds": [
+      82,
+      163,
+      162,
+      224
+    ],
+    "count": 3331
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 15,
+    "scale": 0.463768115942029,
+    "bounds": [
+      92,
+      163,
+      164,
+      224
+    ],
+    "count": 3068
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 6,
+    "scale": 0.3,
+    "bounds": [
+      97,
+      168,
+      160,
+      224
+    ],
+    "count": 2401
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 7,
+    "scale": 0.3,
+    "bounds": [
+      93,
+      185,
+      163,
+      224
+    ],
+    "count": 1773
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 16,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      161,
+      161,
+      223
+    ],
+    "count": 2935
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 17,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      159,
+      161,
+      223
+    ],
+    "count": 3068
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 18,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      156,
+      162,
+      223
+    ],
+    "count": 3227
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 19,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      161,
+      162,
+      223
+    ],
+    "count": 2983
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 16,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      88,
+      154,
+      167,
+      224
+    ],
+    "count": 3714
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 17,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      89,
+      150,
+      164,
+      224
+    ],
+    "count": 3818
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 18,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      88,
+      147,
+      164,
+      224
+    ],
+    "count": 4076
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 19,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      89,
+      152,
+      166,
+      224
+    ],
+    "count": 3834
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 16,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      160,
+      164,
+      224
+    ],
+    "count": 3278
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 17,
+    "scale": 0.463768115942029,
+    "bounds": [
+      89,
+      166,
+      167,
+      224
+    ],
+    "count": 3130
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 18,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      160,
+      165,
+      224
+    ],
+    "count": 3350
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 19,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      161,
+      165,
+      224
+    ],
+    "count": 3262
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 8,
+    "scale": 0.3,
+    "bounds": [
+      97,
+      165,
+      159,
+      224
+    ],
+    "count": 2498
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 9,
+    "scale": 0.3,
+    "bounds": [
+      94,
+      182,
+      161,
+      224
+    ],
+    "count": 1826
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 20,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      91,
+      161,
+      165,
+      223
+    ],
+    "count": 3082
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 21,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      91,
+      158,
+      165,
+      223
+    ],
+    "count": 3217
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 22,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      91,
+      156,
+      165,
+      223
+    ],
+    "count": 3388
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 23,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      161,
+      166,
+      223
+    ],
+    "count": 3100
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 20,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      88,
+      159,
+      170,
+      224
+    ],
+    "count": 3730
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 21,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      89,
+      155,
+      170,
+      224
+    ],
+    "count": 4066
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 22,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      91,
+      151,
+      176,
+      224
+    ],
+    "count": 4309
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 23,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      89,
+      158,
+      172,
+      224
+    ],
+    "count": 3826
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 20,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      160,
+      166,
+      224
+    ],
+    "count": 3492
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 21,
+    "scale": 0.463768115942029,
+    "bounds": [
+      89,
+      166,
+      169,
+      224
+    ],
+    "count": 3362
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 22,
+    "scale": 0.463768115942029,
+    "bounds": [
+      87,
+      163,
+      168,
+      224
+    ],
+    "count": 3654
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 23,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      163,
+      166,
+      224
+    ],
+    "count": 3379
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 10,
+    "scale": 0.3,
+    "bounds": [
+      99,
+      165,
+      162,
+      224
+    ],
+    "count": 2595
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 11,
+    "scale": 0.3,
+    "bounds": [
+      92,
+      181,
+      163,
+      224
+    ],
+    "count": 1933
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 24,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      164,
+      166,
+      223
+    ],
+    "count": 3074
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 25,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      162,
+      166,
+      223
+    ],
+    "count": 3226
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 26,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      160,
+      166,
+      223
+    ],
+    "count": 3326
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 27,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      90,
+      165,
+      166,
+      223
+    ],
+    "count": 3053
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 24,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      88,
+      158,
+      172,
+      224
+    ],
+    "count": 3901
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 25,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      82,
+      156,
+      168,
+      224
+    ],
+    "count": 4152
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 26,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      84,
+      158,
+      174,
+      224
+    ],
+    "count": 4279
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 27,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      85,
+      160,
+      169,
+      224
+    ],
+    "count": 3828
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 24,
+    "scale": 0.463768115942029,
+    "bounds": [
+      88,
+      162,
+      167,
+      224
+    ],
+    "count": 3561
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 25,
+    "scale": 0.463768115942029,
+    "bounds": [
+      88,
+      167,
+      170,
+      224
+    ],
+    "count": 3320
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 26,
+    "scale": 0.463768115942029,
+    "bounds": [
+      92,
+      166,
+      175,
+      224
+    ],
+    "count": 3315
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 27,
+    "scale": 0.463768115942029,
+    "bounds": [
+      90,
+      164,
+      166,
+      224
+    ],
+    "count": 3383
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 12,
+    "scale": 0.3,
+    "bounds": [
+      97,
+      170,
+      161,
+      224
+    ],
+    "count": 2470
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 13,
+    "scale": 0.3,
+    "bounds": [
+      93,
+      183,
+      162,
+      224
+    ],
+    "count": 1909
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 28,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      91,
+      162,
+      163,
+      223
+    ],
+    "count": 3040
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 29,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      92,
+      162,
+      164,
+      224
+    ],
+    "count": 3143
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 30,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      91,
+      160,
+      165,
+      223
+    ],
+    "count": 3254
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/slime_crystal-idle.png",
+    "sourcePose": 31,
+    "scale": 0.4383561643835616,
+    "bounds": [
+      91,
+      163,
+      164,
+      223
+    ],
+    "count": 2998
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 28,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      86,
+      159,
+      168,
+      224
+    ],
+    "count": 3747
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 29,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      85,
+      158,
+      167,
+      224
+    ],
+    "count": 3834
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 30,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      82,
+      155,
+      169,
+      224
+    ],
+    "count": 4089
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/slime_crystal-walk.png",
+    "sourcePose": 31,
+    "scale": 0.4740740740740741,
+    "bounds": [
+      87,
+      159,
+      168,
+      224
+    ],
+    "count": 3697
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 28,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      161,
+      164,
+      224
+    ],
+    "count": 3425
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 29,
+    "scale": 0.463768115942029,
+    "bounds": [
+      89,
+      164,
+      167,
+      224
+    ],
+    "count": 3337
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 30,
+    "scale": 0.463768115942029,
+    "bounds": [
+      92,
+      162,
+      172,
+      224
+    ],
+    "count": 3361
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/slime_crystal-attack.png",
+    "sourcePose": 31,
+    "scale": 0.463768115942029,
+    "bounds": [
+      91,
+      164,
+      164,
+      224
+    ],
+    "count": 3289
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 14,
+    "scale": 0.3,
+    "bounds": [
+      95,
+      170,
+      159,
+      224
+    ],
+    "count": 2514
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/slime_crystal-damage.png",
+    "sourcePose": 15,
+    "scale": 0.3,
+    "bounds": [
+      93,
+      183,
+      163,
+      224
+    ],
+    "count": 1921
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "priorCommit": "6b767166",
+  "addedCreatureEntries": [
+    "mob_refresh_mimic_ironbound",
+    "mob_refresh_scorpion_black",
+    "mob_refresh_warg_rider"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "rulesAndAbilitiesUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "sourceImages": 16,
+  "sourceOriginalsAvailableAndChecked": true,
+  "packedFrameKeys": 336,
+  "distinctSelectedWholeFigures": 336,
+  "runtimeAssets": 3,
+  "mainUntouchedForPlaytest": true
+}

@@ -1,0 +1,182 @@
+{
+  "mobCount": 19,
+  "facings": 8,
+  "seconds": 24,
+  "fps": 20,
+  "commonWorldZoom": 3,
+  "partyReference": "characters.class_fighter",
+  "frameCoordinates": "UnitArt.Character / UnitSprite.Source; tactical manifest; fighter held in real front idle",
+  "figures": [
+    {
+      "key": "beasts.bat.vampire",
+      "batch": "crypt-kin",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "beasts.bear.undead",
+      "batch": "crypt-kin",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "beasts.slime.crystal",
+      "batch": "crypt-kin",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "beasts.spider.phase",
+      "batch": "web-and-hunt",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "beasts.wolf.alpha",
+      "batch": "web-and-hunt",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bestiary.crab.deep",
+      "batch": "web-and-hunt",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bestiary.scorpion.black",
+      "batch": "iron-and-fangs",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bestiary.warg.rider",
+      "batch": "iron-and-fangs",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.mimic.ironbound",
+      "batch": "iron-and-fangs",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.dragon.black",
+      "batch": "wyrm-triad",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.dragon.blue",
+      "batch": "wyrm-triad",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.dragon.green",
+      "batch": "wyrm-triad",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.dragon.gold",
+      "batch": "gilded-and-rime",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.troll.frost",
+      "batch": "gilded-and-rime",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.troll.ogre",
+      "batch": "gilded-and-rime",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.sapling.autumn",
+      "batch": "autumn-and-veil",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.sapling.blossom",
+      "batch": "autumn-and-veil",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.wraith.shade",
+      "batch": "autumn-and-veil",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    },
+    {
+      "key": "bosses.wraith.spectre",
+      "batch": "spectral-remnant",
+      "walkFacings": 8,
+      "distinctKeys": 32,
+      "commonWorldZoom": 3,
+      "runtimePixelScale": 0.32,
+      "allPanelsFit": true
+    }
+  ]
+}

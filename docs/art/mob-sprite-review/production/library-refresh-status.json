@@ -12,21 +12,40 @@
     "bosses.fire_elemental.shadow",
     "bosses.hound.black",
     "bosses.hound.grey",
-    "bosses.imp.violet"
+    "bosses.imp.violet",
+    "beasts.bat.vampire",
+    "beasts.bear.undead",
+    "beasts.slime.crystal",
+    "beasts.spider.phase",
+    "beasts.wolf.alpha",
+    "bestiary.crab.deep",
+    "bestiary.scorpion.black",
+    "bestiary.warg.rider",
+    "bosses.mimic.ironbound",
+    "bosses.dragon.black",
+    "bosses.dragon.blue",
+    "bosses.dragon.green",
+    "bosses.dragon.gold",
+    "bosses.troll.frost",
+    "bosses.troll.ogre",
+    "bosses.sapling.autumn",
+    "bosses.sapling.blossom",
+    "bosses.wraith.shade",
+    "bosses.wraith.spectre"
   ],
-  "libraryBatchCount": 4,
-  "overallBatchCount": 19,
+  "libraryBatchCount": 11,
+  "overallBatchCount": 26,
   "totalLibraryLooks": 57,
   "baselineTwoDirectionLooks": 31,
   "existingEightDirectionLooks": 26,
-  "remainingTwoDirectionLooks": 19,
+  "remainingTwoDirectionLooks": 0,
   "looks": [
     {
       "baselineNumber": 42,
       "key": "beasts.bat.vampire",
       "name": "Bat Vampire",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch5"
     },
     {
       "baselineNumber": 43,
@@ -54,7 +73,7 @@
       "key": "beasts.bear.undead",
       "name": "Bear Undead",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch5"
     },
     {
       "baselineNumber": 47,
@@ -89,7 +108,7 @@
       "key": "beasts.slime.crystal",
       "name": "Slime Crystal",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch5"
     },
     {
       "baselineNumber": 52,
@@ -103,7 +122,7 @@
       "key": "beasts.spider.phase",
       "name": "Spider Phase",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch6"
     },
     {
       "baselineNumber": 54,
@@ -117,7 +136,7 @@
       "key": "beasts.wolf.alpha",
       "name": "Wolf Alpha",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch6"
     },
     {
       "baselineNumber": 56,
@@ -152,7 +171,7 @@
       "key": "bestiary.crab.deep",
       "name": "Crab Deep",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch6"
     },
     {
       "baselineNumber": 61,
@@ -208,7 +227,7 @@
       "key": "bestiary.scorpion.black",
       "name": "Scorpion Black",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch7"
     },
     {
       "baselineNumber": 69,
@@ -243,7 +262,7 @@
       "key": "bestiary.warg.rider",
       "name": "Warg Rider",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch7"
     },
     {
       "baselineNumber": 74,
@@ -271,28 +290,28 @@
       "key": "bosses.dragon.black",
       "name": "Dragon Black",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch8"
     },
     {
       "baselineNumber": 78,
       "key": "bosses.dragon.blue",
       "name": "Dragon Blue",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch8"
     },
     {
       "baselineNumber": 79,
       "key": "bosses.dragon.gold",
       "name": "Dragon Gold",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch9"
     },
     {
       "baselineNumber": 80,
       "key": "bosses.dragon.green",
       "name": "Dragon Green",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch8"
     },
     {
       "baselineNumber": 81,
@@ -369,35 +388,35 @@
       "key": "bosses.mimic.ironbound",
       "name": "Mimic Ironbound",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch7"
     },
     {
       "baselineNumber": 92,
       "key": "bosses.sapling.autumn",
       "name": "Sapling Autumn",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch10"
     },
     {
       "baselineNumber": 93,
       "key": "bosses.sapling.blossom",
       "name": "Sapling Blossom",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch10"
     },
     {
       "baselineNumber": 94,
       "key": "bosses.troll.frost",
       "name": "Troll Frost",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch9"
     },
     {
       "baselineNumber": 95,
       "key": "bosses.troll.ogre",
       "name": "Troll Ogre",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch9"
     },
     {
       "baselineNumber": 96,
@@ -411,14 +430,14 @@
       "key": "bosses.wraith.shade",
       "name": "Wraith Shade",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch10"
     },
     {
       "baselineNumber": 98,
       "key": "bosses.wraith.spectre",
       "name": "Wraith Spectre",
       "baselineDirections": 2,
-      "status": "awaiting refresh"
+      "status": "integrated library batch11"
     }
   ]
 }

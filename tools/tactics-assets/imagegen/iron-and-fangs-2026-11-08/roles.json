@@ -1,0 +1,50 @@
+[
+  {
+    "id": "scorpion_black",
+    "label": "Black Scorpion",
+    "key": "bestiary.scorpion.black",
+    "primaryId": "scorpion_sand",
+    "height": 124,
+    "size": 320,
+    "anchor": [
+      160,
+      260
+    ],
+    "portraitSize": 86,
+    "idleFps": 3,
+    "walkFps": 6,
+    "identity": "Giant obsidian/charcoal SCORPION, cool slate-blue segmented edges, TWO rooted front chelae/pincers, EIGHT jointed ground-walking legs, ONE segmented tail continuously rooted to rear abdomen and arching over body to hooked stinger, subtle muted olive tip. Broad low animal stance and continuous joints. No extra tail/legs, wings, clothes, weapons, magic or loose venom spray. Full back shows tail base/back plates, no pasted front mouth."
+  },
+  {
+    "id": "warg_rider",
+    "label": "Warg Rider",
+    "key": "bestiary.warg.rider",
+    "primaryId": "warg_black",
+    "height": 156,
+    "size": 320,
+    "anchor": [
+      160,
+      272
+    ],
+    "portraitSize": 110,
+    "idleFps": 3,
+    "walkFps": 6,
+    "identity": "ONE complete WARG RIDER: large charcoal/ash-grey coarse-furred wolf-like WARG mount, long heavy muzzle, two upright ears, FOUR grounded canine legs/paws and ONE bushy rooted tail. SMALL GREEN GOBLIN SPEARMAN securely astride worn leather saddle/blanket, long pointed ears, tiny amber eyes, simple patched russet/dark leather clothing, rope belt and boots. Goblin RIGHT hand continuously grips wood SPEAR with small dull iron point; LEFT hand holds joined reins; thighs/knees/boots stay astride mount, no floating rider. Back shows goblin back/plain belt and mount rump, NO front face/clasp. Mount shoulder about1.2m, rider crown1.7m, spear above; no giant boss proportions, flags, armor, horns or magic. Always one connected mounted unit, including down pose."
+  },
+  {
+    "id": "mimic_ironbound",
+    "label": "Ironbound Mimic",
+    "key": "bosses.mimic.ironbound",
+    "primaryId": "mob_refresh_mimic",
+    "height": 68,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "portraitSize": 86,
+    "idleFps": 3,
+    "walkFps": 6,
+    "identity": "Squat IRONBOUND MIMIC treasure chest, dark aged oak panels with broad worn cold-iron corner plates/straps and rivets, front iron latch ONLY at front and real hinge barrels ONLY at rear. Closed or narrowly ajar wary idle; small dark rooted feet below corners for creeping walk. Bite opens hinged lid as upper jaw with small ivory teeth and ONE plum tongue visibly rooted inside, extending toward facing; full body still one chest. Rear hinge/front latch orientation coherent across facings, rear bite tongue points AWAY rather than copying front mouth. Same existing Oak Mimic anatomy and scale, slightly heavier iron material. No humanoid arms, floating coins/treasure, particles or magic."
+  }
+]

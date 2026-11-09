@@ -1,0 +1,33 @@
+{
+  "images": [
+    {
+      "width": 1920,
+      "height": 2600
+    },
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1440,
+      "height": 1600
+    }
+  ],
+  "media": {
+    "duration": 24,
+    "width": 1920,
+    "height": 1700,
+    "seeked": 22.5
+  },
+  "phone": {
+    "width": 390,
+    "document": 390
+  },
+  "batchLinks": 7,
+  "pageErrors": [],
+  "passed": true
+}

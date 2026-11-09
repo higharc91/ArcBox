@@ -1,0 +1,3122 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 0,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      166,
+      198,
+      365,
+      397
+    ],
+    "count": 29126
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 1,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      169,
+      198,
+      366,
+      397
+    ],
+    "count": 28846
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 2,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      171,
+      197,
+      367,
+      398
+    ],
+    "count": 28769
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 3,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      168,
+      202,
+      367,
+      398
+    ],
+    "count": 28618
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 0,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      199,
+      355,
+      400
+    ],
+    "count": 28609
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 1,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      166,
+      201,
+      357,
+      400
+    ],
+    "count": 27466
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 2,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      168,
+      201,
+      361,
+      400
+    ],
+    "count": 28058
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 3,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      164,
+      202,
+      359,
+      400
+    ],
+    "count": 27868
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 0,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      164,
+      201,
+      368,
+      400
+    ],
+    "count": 30273
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 1,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      165,
+      199,
+      371,
+      400
+    ],
+    "count": 29876
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 2,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      130,
+      196,
+      394,
+      400
+    ],
+    "count": 36545
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 3,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      165,
+      201,
+      369,
+      400
+    ],
+    "count": 30262
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 0,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      158,
+      209,
+      355,
+      400
+    ],
+    "count": 26442
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 1,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      157,
+      263,
+      355,
+      400
+    ],
+    "count": 21722
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 0,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      162,
+      201,
+      365,
+      400
+    ],
+    "count": 29916
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 1,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      162,
+      201,
+      365,
+      400
+    ],
+    "count": 30010
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 2,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      144,
+      201,
+      376,
+      400
+    ],
+    "count": 32122
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 3,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      163,
+      201,
+      367,
+      400
+    ],
+    "count": 30038
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 0,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      165,
+      199,
+      364,
+      400
+    ],
+    "count": 29695
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 1,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      168,
+      198,
+      364,
+      400
+    ],
+    "count": 29169
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 2,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      138,
+      198,
+      384,
+      400
+    ],
+    "count": 34958
+  },
+  {
+    "action": "cast",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 3,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      165,
+      202,
+      364,
+      400
+    ],
+    "count": 29593
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 0,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      165,
+      201,
+      360,
+      400
+    ],
+    "count": 28662
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 1,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      142,
+      201,
+      377,
+      400
+    ],
+    "count": 32878
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 2,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      123,
+      217,
+      401,
+      400
+    ],
+    "count": 30785
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 3,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      166,
+      202,
+      359,
+      400
+    ],
+    "count": 28215
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 4,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      173,
+      220,
+      374,
+      398
+    ],
+    "count": 24560
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 5,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      175,
+      214,
+      376,
+      398
+    ],
+    "count": 25719
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 6,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      178,
+      216,
+      375,
+      397
+    ],
+    "count": 24602
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 7,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      172,
+      228,
+      374,
+      397
+    ],
+    "count": 24343
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 4,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      169,
+      222,
+      372,
+      400
+    ],
+    "count": 25139
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 5,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      170,
+      221,
+      373,
+      400
+    ],
+    "count": 25018
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 6,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      172,
+      222,
+      374,
+      400
+    ],
+    "count": 24615
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 7,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      169,
+      229,
+      373,
+      400
+    ],
+    "count": 24241
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 4,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      167,
+      216,
+      375,
+      400
+    ],
+    "count": 26382
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 5,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      161,
+      214,
+      375,
+      400
+    ],
+    "count": 27510
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 6,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      141,
+      210,
+      407,
+      400
+    ],
+    "count": 33450
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 7,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      165,
+      221,
+      374,
+      400
+    ],
+    "count": 26360
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 2,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      160,
+      202,
+      374,
+      400
+    ],
+    "count": 27981
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 3,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      150,
+      269,
+      361,
+      400
+    ],
+    "count": 20493
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 4,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      166,
+      220,
+      375,
+      400
+    ],
+    "count": 25844
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 5,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      164,
+      213,
+      374,
+      400
+    ],
+    "count": 26485
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 6,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      155,
+      216,
+      381,
+      400
+    ],
+    "count": 27776
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 7,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      162,
+      222,
+      377,
+      400
+    ],
+    "count": 25849
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 4,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      157,
+      221,
+      371,
+      400
+    ],
+    "count": 26430
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 5,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      168,
+      215,
+      382,
+      400
+    ],
+    "count": 26917
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 6,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      147,
+      221,
+      380,
+      400
+    ],
+    "count": 29217
+  },
+  {
+    "action": "cast",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 7,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      168,
+      227,
+      383,
+      400
+    ],
+    "count": 26023
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 4,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      164,
+      227,
+      362,
+      400
+    ],
+    "count": 23923
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 5,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      124,
+      201,
+      378,
+      400
+    ],
+    "count": 33244
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 6,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      132,
+      237,
+      403,
+      400
+    ],
+    "count": 27745
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 7,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      235,
+      361,
+      400
+    ],
+    "count": 23468
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 8,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      144,
+      267,
+      346,
+      398
+    ],
+    "count": 17280
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 9,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      147,
+      261,
+      346,
+      398
+    ],
+    "count": 17501
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 10,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      146,
+      264,
+      348,
+      397
+    ],
+    "count": 17318
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 11,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      145,
+      266,
+      348,
+      398
+    ],
+    "count": 17209
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 8,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      156,
+      269,
+      363,
+      400
+    ],
+    "count": 17884
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 9,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      145,
+      269,
+      354,
+      400
+    ],
+    "count": 17588
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 10,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      143,
+      272,
+      351,
+      400
+    ],
+    "count": 17541
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 11,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      143,
+      271,
+      353,
+      400
+    ],
+    "count": 17343
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 8,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      148,
+      262,
+      363,
+      400
+    ],
+    "count": 20056
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 9,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      135,
+      261,
+      349,
+      400
+    ],
+    "count": 19394
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 10,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      89,
+      239,
+      384,
+      400
+    ],
+    "count": 29390
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 11,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      145,
+      262,
+      360,
+      400
+    ],
+    "count": 20066
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 4,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      143,
+      228,
+      377,
+      400
+    ],
+    "count": 25489
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 5,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      141,
+      291,
+      370,
+      400
+    ],
+    "count": 18293
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 8,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      133,
+      266,
+      349,
+      400
+    ],
+    "count": 18943
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 9,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      133,
+      261,
+      349,
+      400
+    ],
+    "count": 19400
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 10,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      117,
+      261,
+      356,
+      400
+    ],
+    "count": 21811
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 11,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      133,
+      266,
+      349,
+      400
+    ],
+    "count": 18963
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 8,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      133,
+      264,
+      349,
+      400
+    ],
+    "count": 18866
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 9,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      137,
+      260,
+      351,
+      400
+    ],
+    "count": 19304
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 10,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      125,
+      255,
+      358,
+      400
+    ],
+    "count": 22320
+  },
+  {
+    "action": "cast",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 11,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      133,
+      266,
+      349,
+      400
+    ],
+    "count": 18920
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 8,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      133,
+      260,
+      346,
+      400
+    ],
+    "count": 18813
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 9,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      120,
+      227,
+      374,
+      400
+    ],
+    "count": 27534
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 10,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      111,
+      268,
+      374,
+      400
+    ],
+    "count": 20717
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 11,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      123,
+      265,
+      345,
+      400
+    ],
+    "count": 18586
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 12,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      155,
+      232,
+      350,
+      398
+    ],
+    "count": 20550
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 13,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      155,
+      226,
+      351,
+      398
+    ],
+    "count": 21560
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 14,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      156,
+      227,
+      352,
+      397
+    ],
+    "count": 21345
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 15,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      152,
+      228,
+      350,
+      397
+    ],
+    "count": 21311
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 12,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      129,
+      226,
+      330,
+      400
+    ],
+    "count": 21825
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 13,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      131,
+      225,
+      330,
+      400
+    ],
+    "count": 21500
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 14,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      129,
+      226,
+      331,
+      400
+    ],
+    "count": 21698
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 15,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      127,
+      225,
+      329,
+      400
+    ],
+    "count": 21571
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 12,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      130,
+      221,
+      334,
+      400
+    ],
+    "count": 23656
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 13,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      118,
+      221,
+      337,
+      400
+    ],
+    "count": 23946
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 14,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      61,
+      212,
+      358,
+      400
+    ],
+    "count": 32885
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 15,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      127,
+      221,
+      335,
+      400
+    ],
+    "count": 23766
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragons-rear-left-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5026178010471204,
+    "bounds": [
+      138,
+      209,
+      333,
+      400
+    ],
+    "count": 24525
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragons-rear-left-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5026178010471204,
+    "bounds": [
+      152,
+      247,
+      359,
+      400
+    ],
+    "count": 21140
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 12,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      145,
+      222,
+      350,
+      400
+    ],
+    "count": 23669
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 13,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      141,
+      221,
+      353,
+      400
+    ],
+    "count": 24419
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 14,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      131,
+      224,
+      352,
+      400
+    ],
+    "count": 26065
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 15,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      145,
+      224,
+      353,
+      400
+    ],
+    "count": 23544
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 12,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      128,
+      230,
+      330,
+      400
+    ],
+    "count": 22769
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 13,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      129,
+      222,
+      330,
+      400
+    ],
+    "count": 23054
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 14,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      119,
+      227,
+      333,
+      400
+    ],
+    "count": 24639
+  },
+  {
+    "action": "cast",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 15,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      125,
+      228,
+      330,
+      400
+    ],
+    "count": 22903
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 12,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      152,
+      232,
+      350,
+      400
+    ],
+    "count": 21536
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 13,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      140,
+      217,
+      374,
+      400
+    ],
+    "count": 28062
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 14,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      139,
+      234,
+      397,
+      400
+    ],
+    "count": 24781
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 15,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      145,
+      232,
+      350,
+      400
+    ],
+    "count": 21323
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 16,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      158,
+      209,
+      336,
+      398
+    ],
+    "count": 24720
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 17,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      157,
+      204,
+      335,
+      397
+    ],
+    "count": 25417
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 18,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      160,
+      204,
+      337,
+      397
+    ],
+    "count": 24430
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 19,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      156,
+      205,
+      333,
+      397
+    ],
+    "count": 24498
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 16,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      159,
+      208,
+      334,
+      400
+    ],
+    "count": 24699
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 17,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      161,
+      208,
+      332,
+      400
+    ],
+    "count": 24101
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 18,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      208,
+      332,
+      400
+    ],
+    "count": 23839
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 19,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      160,
+      209,
+      334,
+      400
+    ],
+    "count": 24104
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 16,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      122,
+      180,
+      309,
+      400
+    ],
+    "count": 29407
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 17,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      124,
+      175,
+      310,
+      400
+    ],
+    "count": 29721
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 18,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      103,
+      175,
+      379,
+      400
+    ],
+    "count": 38684
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 19,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      124,
+      180,
+      312,
+      400
+    ],
+    "count": 29657
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 8,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      106,
+      198,
+      334,
+      400
+    ],
+    "count": 28457
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 9,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      164,
+      245,
+      347,
+      400
+    ],
+    "count": 20298
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 16,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      156,
+      204,
+      342,
+      400
+    ],
+    "count": 26683
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 17,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      156,
+      201,
+      341,
+      400
+    ],
+    "count": 26965
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 18,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      141,
+      201,
+      355,
+      400
+    ],
+    "count": 29010
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 19,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      157,
+      204,
+      342,
+      400
+    ],
+    "count": 26514
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 16,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      161,
+      204,
+      340,
+      400
+    ],
+    "count": 25799
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 17,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      160,
+      198,
+      337,
+      400
+    ],
+    "count": 26234
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 18,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      142,
+      197,
+      359,
+      400
+    ],
+    "count": 30863
+  },
+  {
+    "action": "cast",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 19,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      156,
+      202,
+      336,
+      400
+    ],
+    "count": 26157
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 16,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      198,
+      337,
+      400
+    ],
+    "count": 25721
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 17,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      128,
+      197,
+      373,
+      400
+    ],
+    "count": 32889
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 18,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      103,
+      207,
+      393,
+      400
+    ],
+    "count": 32002
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 19,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      199,
+      336,
+      400
+    ],
+    "count": 25315
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 20,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      181,
+      222,
+      379,
+      397
+    ],
+    "count": 22338
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 21,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      182,
+      216,
+      379,
+      397
+    ],
+    "count": 23089
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 22,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      180,
+      217,
+      376,
+      397
+    ],
+    "count": 22502
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 23,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      180,
+      221,
+      381,
+      398
+    ],
+    "count": 22493
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 20,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      179,
+      222,
+      377,
+      400
+    ],
+    "count": 22702
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 21,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      181,
+      219,
+      379,
+      400
+    ],
+    "count": 22810
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 22,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      181,
+      222,
+      379,
+      400
+    ],
+    "count": 22043
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 23,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      178,
+      222,
+      380,
+      400
+    ],
+    "count": 22599
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 20,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      178,
+      224,
+      379,
+      400
+    ],
+    "count": 23652
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 21,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      178,
+      225,
+      382,
+      400
+    ],
+    "count": 23434
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 22,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      143,
+      226,
+      406,
+      400
+    ],
+    "count": 29786
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 23,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      176,
+      226,
+      379,
+      400
+    ],
+    "count": 23382
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 10,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      162,
+      206,
+      374,
+      400
+    ],
+    "count": 25466
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 11,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      158,
+      266,
+      353,
+      400
+    ],
+    "count": 18658
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 20,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      179,
+      220,
+      383,
+      400
+    ],
+    "count": 24407
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 21,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      179,
+      218,
+      383,
+      400
+    ],
+    "count": 24654
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 22,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      176,
+      218,
+      396,
+      400
+    ],
+    "count": 26606
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 23,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      179,
+      218,
+      387,
+      400
+    ],
+    "count": 24156
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 20,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      152,
+      233,
+      350,
+      400
+    ],
+    "count": 23590
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 21,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      156,
+      225,
+      353,
+      400
+    ],
+    "count": 24111
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 22,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      149,
+      226,
+      365,
+      400
+    ],
+    "count": 25565
+  },
+  {
+    "action": "cast",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 23,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      153,
+      236,
+      355,
+      400
+    ],
+    "count": 23174
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 20,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      165,
+      223,
+      366,
+      400
+    ],
+    "count": 23833
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 21,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      140,
+      193,
+      363,
+      400
+    ],
+    "count": 31437
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 22,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      122,
+      227,
+      367,
+      400
+    ],
+    "count": 26731
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 23,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      162,
+      223,
+      365,
+      400
+    ],
+    "count": 24202
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 24,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      167,
+      260,
+      369,
+      398
+    ],
+    "count": 17563
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 25,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      167,
+      255,
+      370,
+      398
+    ],
+    "count": 18228
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 26,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      166,
+      256,
+      369,
+      398
+    ],
+    "count": 17957
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 27,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      168,
+      260,
+      370,
+      398
+    ],
+    "count": 17520
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 24,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      152,
+      257,
+      361,
+      400
+    ],
+    "count": 18279
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 25,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      154,
+      258,
+      363,
+      400
+    ],
+    "count": 18255
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 26,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      152,
+      257,
+      361,
+      400
+    ],
+    "count": 18433
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 27,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      152,
+      257,
+      361,
+      400
+    ],
+    "count": 18480
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 24,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      168,
+      264,
+      376,
+      400
+    ],
+    "count": 19082
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 25,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      162,
+      252,
+      376,
+      400
+    ],
+    "count": 20745
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 26,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      130,
+      230,
+      410,
+      400
+    ],
+    "count": 28010
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 27,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      169,
+      264,
+      378,
+      400
+    ],
+    "count": 19269
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 12,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      127,
+      221,
+      358,
+      400
+    ],
+    "count": 26484
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 13,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      145,
+      284,
+      367,
+      400
+    ],
+    "count": 19746
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 24,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      161,
+      254,
+      376,
+      400
+    ],
+    "count": 20025
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 25,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      156,
+      250,
+      377,
+      400
+    ],
+    "count": 21279
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 26,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      148,
+      250,
+      387,
+      400
+    ],
+    "count": 24074
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 27,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      161,
+      256,
+      379,
+      400
+    ],
+    "count": 20071
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 24,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      149,
+      255,
+      360,
+      400
+    ],
+    "count": 19457
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 25,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      150,
+      246,
+      361,
+      400
+    ],
+    "count": 20426
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 26,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      141,
+      248,
+      375,
+      400
+    ],
+    "count": 22877
+  },
+  {
+    "action": "cast",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 27,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      148,
+      254,
+      362,
+      400
+    ],
+    "count": 19778
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 24,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      163,
+      262,
+      370,
+      400
+    ],
+    "count": 18653
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 25,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      125,
+      231,
+      383,
+      400
+    ],
+    "count": 26451
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 26,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      125,
+      262,
+      381,
+      400
+    ],
+    "count": 20716
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 27,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      156,
+      263,
+      370,
+      400
+    ],
+    "count": 18397
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 28,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      146,
+      230,
+      344,
+      398
+    ],
+    "count": 23182
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 29,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      145,
+      216,
+      341,
+      397
+    ],
+    "count": 24754
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 30,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      146,
+      216,
+      344,
+      397
+    ],
+    "count": 24297
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_green-idle.png",
+    "sourcePose": 31,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      145,
+      230,
+      346,
+      398
+    ],
+    "count": 23188
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 28,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      143,
+      228,
+      342,
+      400
+    ],
+    "count": 23471
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 29,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      149,
+      226,
+      348,
+      400
+    ],
+    "count": 23221
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 30,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      154,
+      225,
+      355,
+      400
+    ],
+    "count": 24069
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_green-walk.png",
+    "sourcePose": 31,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      143,
+      227,
+      345,
+      400
+    ],
+    "count": 24038
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 28,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      136,
+      229,
+      339,
+      400
+    ],
+    "count": 24725
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 29,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      137,
+      223,
+      339,
+      400
+    ],
+    "count": 24701
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 30,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      95,
+      210,
+      363,
+      400
+    ],
+    "count": 31850
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_green-attack.png",
+    "sourcePose": 31,
+    "scale": 1.2269938650306749,
+    "bounds": [
+      135,
+      228,
+      343,
+      400
+    ],
+    "count": 26012
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 14,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      130,
+      206,
+      345,
+      400
+    ],
+    "count": 27441
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-damage.png",
+    "sourcePose": 15,
+    "scale": 0.8067226890756303,
+    "bounds": [
+      153,
+      279,
+      358,
+      400
+    ],
+    "count": 18424
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 28,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      142,
+      224,
+      347,
+      400
+    ],
+    "count": 25408
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 29,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      142,
+      215,
+      347,
+      400
+    ],
+    "count": 26137
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 30,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      126,
+      214,
+      351,
+      400
+    ],
+    "count": 27948
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_green-breath.png",
+    "sourcePose": 31,
+    "scale": 1.2121212121212122,
+    "bounds": [
+      142,
+      224,
+      351,
+      400
+    ],
+    "count": 25720
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 28,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      143,
+      233,
+      342,
+      400
+    ],
+    "count": 24162
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 29,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      147,
+      220,
+      343,
+      400
+    ],
+    "count": 25621
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 30,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      128,
+      219,
+      344,
+      400
+    ],
+    "count": 26693
+  },
+  {
+    "action": "cast",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_green-roar.png",
+    "sourcePose": 31,
+    "scale": 1.2048192771084338,
+    "bounds": [
+      151,
+      234,
+      352,
+      400
+    ],
+    "count": 23962
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 28,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      151,
+      229,
+      346,
+      400
+    ],
+    "count": 23337
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 29,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      114,
+      201,
+      359,
+      400
+    ],
+    "count": 30834
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 30,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      118,
+      237,
+      375,
+      400
+    ],
+    "count": 26194
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/dragon_green-wingbeat.png",
+    "sourcePose": 31,
+    "scale": 1.1976047904191616,
+    "bounds": [
+      151,
+      232,
+      348,
+      400
+    ],
+    "count": 23520
+  }
+]

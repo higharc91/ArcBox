@@ -1,0 +1,22 @@
+{
+  "sapling_autumn-idle": "3c8d5123-b926-4702-a225-8b2ba0756b23",
+  "sapling_blossom-idle": "09752973-8504-4d71-8a2c-891dfa02fd99",
+  "wraith_shade-idle": "c1314a1e-a1a8-4660-a56b-378a0935c3ff",
+  "sapling_autumn-walk": "162c7a4e-27d9-4f32-8119-e113cc01b715",
+  "sapling_blossom-walk": "9a32259a-4e8a-42aa-8a7c-e5727af41f11",
+  "wraith_shade-walk": "e53d43b3-96e1-46e9-8706-ce092ac7eb2b",
+  "sapling_autumn-attack": "b231db61-b3ca-4b6a-af12-16ec89be2b18",
+  "sapling_blossom-attack": "b0a4f1b6-a368-4e05-9852-cf7524a22625",
+  "wraith_shade-attack": "238063bd-3a90-4405-b16c-1fc6717b3f79",
+  "sapling_autumn-damage": "74eae0f5-0555-403b-a84d-752ba8c56ca3",
+  "sapling_blossom-damage": "a42fc89e-abc8-4794-81b1-f4853645910a",
+  "wraith_shade-damage": "3ce6523a-c266-4048-a53b-6a8f974e49e7",
+  "wraith_shade-cast": "9e9bf96d-78d3-4828-86eb-622a980c2de6",
+  "sapling_autumn-attack-draft": "121312e2-49ac-4b20-9952-1e92016024cf",
+  "sapling_blossom-attack-draft": "50931ad4-c785-4d6b-9dc0-f76ffdb53008",
+  "wraith_shade-idle-draft": "8eb4d295-6b20-43c7-9753-fc1f67826f7b",
+  "wraith_shade-walk-draft": "f2aed1b2-4c0d-48c7-94f4-bb0535bf25e1",
+  "wraith_shade-attack-draft": "fd3f2d54-30c3-4936-840d-3654b5337627",
+  "wraith_shade-damage-draft": "bac1dd9f-26d7-4950-9bed-2320f8b91a52",
+  "sapling_blossom-walk-draft": "217457e9-8b54-4ce6-9ba1-2995948acd43"
+}

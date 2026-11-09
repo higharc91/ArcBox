@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-secrets/content/tactics/base
+THINGS demo: 7 views, 8 shots
+THINGS demo step Library creatures ready at 2.02 s
+TACTICS screen tactics-battle-river_crossing
+THINGS demo step Spectre moving at 2.02 s
+SHOT /workspace/mob-review/library-completion-spectre-moves/001-tactics.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/002-tactics-battle-river-crossing.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/003-spectre-walk.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/004-library-ready.png
+THINGS demo step Target ready at 7.21 s
+THINGS demo step Spectre natural attack at 8.04 s
+SHOT /workspace/mob-review/library-completion-spectre-moves/005-spectre-attack-windup.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/006-tactics-beat-attack-2.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/007-spectre-attack-contact.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/008-tactics-beat-hit-2.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/009-spectre-recovery.png
+THINGS demo step Spectre special target ready at 17.21 s
+THINGS demo step spectre-drain at 18.01 s
+SHOT /workspace/mob-review/library-completion-spectre-moves/010-spectre-drain-windup.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/011-spectre-drain-impact.png
+SHOT /workspace/mob-review/library-completion-spectre-moves/012-tactics-beat-special-contact-3.png
+THINGS demo step Library creatures ready again at 21.03 s
+SHOT /workspace/mob-review/library-completion-spectre-moves/013-library-restored.png
+THINGS demo done
+TACTICS left: narrator cleared

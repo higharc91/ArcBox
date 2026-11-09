@@ -1,0 +1,15 @@
+{
+  "dragon_black-wingbeat": [
+    24,
+    25,
+    26,
+    27
+  ],
+  "dragon_blue-wingbeat": [
+    24,
+    25,
+    26,
+    27
+  ],
+  "reason": "East wing rectangles interleaved at windup/contact. Four fresh complete east keys per dragon replace the entire row. All selected crops must remain neighbor-free."
+}

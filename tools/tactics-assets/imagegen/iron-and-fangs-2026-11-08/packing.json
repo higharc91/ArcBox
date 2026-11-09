@@ -1,0 +1,10142 @@
+[
+  {
+    "id": "scorpion_black",
+    "size": 320,
+    "anchor": [
+      160,
+      260
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          111.5,
+          20
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          23,
+          18,
+          175,
+          183
+        ],
+        "bounds": [
+          25,
+          20,
+          196,
+          199
+        ],
+        "foot": [
+          110.0,
+          199
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          20
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          245,
+          18,
+          175,
+          182
+        ],
+        "bounds": [
+          247,
+          20,
+          418,
+          198
+        ],
+        "foot": [
+          332.5,
+          198
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          25
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          467,
+          23,
+          175,
+          178
+        ],
+        "bounds": [
+          469,
+          25,
+          640,
+          199
+        ],
+        "foot": [
+          554.5,
+          199
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          26
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          689,
+          24,
+          175,
+          177
+        ],
+        "bounds": [
+          691,
+          26,
+          862,
+          199
+        ],
+        "foot": [
+          776.5,
+          199
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          23
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          21,
+          20,
+          179,
+          186
+        ],
+        "bounds": [
+          23,
+          22,
+          198,
+          204
+        ],
+        "foot": [
+          110.5,
+          204
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          22
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          242,
+          20,
+          175,
+          180
+        ],
+        "bounds": [
+          244,
+          22,
+          415,
+          198
+        ],
+        "foot": [
+          317.5,
+          198
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          26
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          461,
+          24,
+          177,
+          181
+        ],
+        "bounds": [
+          463,
+          26,
+          636,
+          203
+        ],
+        "foot": [
+          547.5,
+          203
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          780.5,
+          27
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          689,
+          24,
+          176,
+          178
+        ],
+        "bounds": [
+          691,
+          26,
+          863,
+          200
+        ],
+        "foot": [
+          775.5,
+          200
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          126.5,
+          36
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          30,
+          34,
+          176,
+          196
+        ],
+        "bounds": [
+          32,
+          36,
+          204,
+          228
+        ],
+        "foot": [
+          117.5,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          343.0,
+          63
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          251,
+          60,
+          176,
+          170
+        ],
+        "bounds": [
+          253,
+          62,
+          425,
+          228
+        ],
+        "foot": [
+          338.5,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          562.0,
+          92
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          468,
+          90,
+          179,
+          140
+        ],
+        "bounds": [
+          470,
+          92,
+          645,
+          228
+        ],
+        "foot": [
+          554.0,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          785.5,
+          48
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          690,
+          46,
+          173,
+          184
+        ],
+        "bounds": [
+          692,
+          48,
+          861,
+          228
+        ],
+        "foot": [
+          776.0,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          162.5,
+          55
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          41,
+          53,
+          241,
+          242
+        ],
+        "bounds": [
+          43,
+          55,
+          280,
+          293
+        ],
+        "foot": [
+          162.0,
+          293
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          472.5,
+          119
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          375,
+          116,
+          190,
+          173
+        ],
+        "bounds": [
+          377,
+          118,
+          563,
+          287
+        ],
+        "foot": [
+          470.0,
+          287
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          144.5,
+          251
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          20,
+          249,
+          186,
+          173
+        ],
+        "bounds": [
+          22,
+          251,
+          204,
+          420
+        ],
+        "foot": [
+          85.5,
+          420
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          368.5,
+          250
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          241,
+          247,
+          185,
+          171
+        ],
+        "bounds": [
+          243,
+          249,
+          424,
+          416
+        ],
+        "foot": [
+          307.0,
+          416
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          590.0,
+          253
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          464,
+          250,
+          185,
+          172
+        ],
+        "bounds": [
+          466,
+          252,
+          647,
+          420
+        ],
+        "foot": [
+          529.0,
+          420
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          813.0,
+          250
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          685,
+          248,
+          188,
+          172
+        ],
+        "bounds": [
+          687,
+          250,
+          871,
+          418
+        ],
+        "foot": [
+          751.5,
+          418
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          139.0,
+          255
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          18,
+          253,
+          186,
+          170
+        ],
+        "bounds": [
+          20,
+          255,
+          202,
+          421
+        ],
+        "foot": [
+          85.5,
+          421
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          364.5,
+          254
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          240,
+          252,
+          184,
+          170
+        ],
+        "bounds": [
+          242,
+          254,
+          422,
+          420
+        ],
+        "foot": [
+          306.0,
+          420
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          586.0,
+          257
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          459,
+          255,
+          186,
+          170
+        ],
+        "bounds": [
+          461,
+          257,
+          643,
+          423
+        ],
+        "foot": [
+          528.5,
+          423
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          810.5,
+          254
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          681,
+          252,
+          189,
+          171
+        ],
+        "bounds": [
+          683,
+          254,
+          868,
+          421
+        ],
+        "foot": [
+          751.5,
+          421
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          149.0,
+          268
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          23,
+          266,
+          185,
+          182
+        ],
+        "bounds": [
+          25,
+          268,
+          206,
+          446
+        ],
+        "foot": [
+          89.0,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          363.0,
+          285
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          242,
+          282,
+          185,
+          166
+        ],
+        "bounds": [
+          244,
+          284,
+          425,
+          446
+        ],
+        "foot": [
+          308.0,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          577.5,
+          307
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          460,
+          304,
+          189,
+          143
+        ],
+        "bounds": [
+          462,
+          306,
+          647,
+          445
+        ],
+        "foot": [
+          529.5,
+          445
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          803.0,
+          268
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          681,
+          266,
+          186,
+          182
+        ],
+        "bounds": [
+          683,
+          268,
+          865,
+          446
+        ],
+        "foot": [
+          748.5,
+          446
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          826.0,
+          64
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          659,
+          62,
+          258,
+          230
+        ],
+        "bounds": [
+          661,
+          64,
+          915,
+          290
+        ],
+        "foot": [
+          771.5,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1132.5,
+          121
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          978,
+          119,
+          232,
+          170
+        ],
+        "bounds": [
+          980,
+          121,
+          1208,
+          287
+        ],
+        "foot": [
+          1094.0,
+          287
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          167.0,
+          480
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          16,
+          478,
+          194,
+          146
+        ],
+        "bounds": [
+          18,
+          480,
+          208,
+          622
+        ],
+        "foot": [
+          106.0,
+          622
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          389.5,
+          480
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          239,
+          478,
+          192,
+          146
+        ],
+        "bounds": [
+          241,
+          480,
+          429,
+          622
+        ],
+        "foot": [
+          328.5,
+          622
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          611.5,
+          482
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          461,
+          480,
+          192,
+          145
+        ],
+        "bounds": [
+          463,
+          482,
+          651,
+          623
+        ],
+        "foot": [
+          550.5,
+          623
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          834.5,
+          480
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          683,
+          478,
+          192,
+          146
+        ],
+        "bounds": [
+          685,
+          480,
+          873,
+          622
+        ],
+        "foot": [
+          773.0,
+          622
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          159.5,
+          483
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          17,
+          481,
+          192,
+          144
+        ],
+        "bounds": [
+          19,
+          483,
+          207,
+          623
+        ],
+        "foot": [
+          95.0,
+          623
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          387.5,
+          481
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          242,
+          479,
+          186,
+          143
+        ],
+        "bounds": [
+          244,
+          481,
+          426,
+          620
+        ],
+        "foot": [
+          335.0,
+          620
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          610.5,
+          484
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          461,
+          482,
+          186,
+          143
+        ],
+        "bounds": [
+          463,
+          484,
+          645,
+          623
+        ],
+        "foot": [
+          538.5,
+          623
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          831.0,
+          484
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          682,
+          481,
+          188,
+          143
+        ],
+        "bounds": [
+          684,
+          483,
+          868,
+          622
+        ],
+        "foot": [
+          781.5,
+          622
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          166.0,
+          491
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          21,
+          489,
+          188,
+          158
+        ],
+        "bounds": [
+          23,
+          491,
+          207,
+          645
+        ],
+        "foot": [
+          112.0,
+          645
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          379.5,
+          507
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          241,
+          504,
+          190,
+          143
+        ],
+        "bounds": [
+          243,
+          506,
+          429,
+          645
+        ],
+        "foot": [
+          335.0,
+          645
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          586.0,
+          523
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          458,
+          521,
+          195,
+          126
+        ],
+        "bounds": [
+          460,
+          523,
+          651,
+          645
+        ],
+        "foot": [
+          553.5,
+          645
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          821.0,
+          497
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          681,
+          494,
+          188,
+          153
+        ],
+        "bounds": [
+          683,
+          496,
+          867,
+          645
+        ],
+        "foot": [
+          773.5,
+          645
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          225.5,
+          361
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          24,
+          359,
+          285,
+          224
+        ],
+        "bounds": [
+          26,
+          361,
+          307,
+          581
+        ],
+        "foot": [
+          189.5,
+          581
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          522.0,
+          409
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          361,
+          406,
+          222,
+          162
+        ],
+        "bounds": [
+          363,
+          408,
+          581,
+          566
+        ],
+        "foot": [
+          472.0,
+          566
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          168.0,
+          696
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          16,
+          694,
+          194,
+          158
+        ],
+        "bounds": [
+          18,
+          696,
+          208,
+          850
+        ],
+        "foot": [
+          134.5,
+          850
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          388.0,
+          689
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          239,
+          687,
+          193,
+          162
+        ],
+        "bounds": [
+          241,
+          689,
+          430,
+          847
+        ],
+        "foot": [
+          338.0,
+          847
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          612.0,
+          696
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          460,
+          694,
+          193,
+          157
+        ],
+        "bounds": [
+          462,
+          696,
+          651,
+          849
+        ],
+        "foot": [
+          559.0,
+          849
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          833.0,
+          693
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          682,
+          691,
+          193,
+          159
+        ],
+        "bounds": [
+          684,
+          693,
+          873,
+          848
+        ],
+        "foot": [
+          779.0,
+          848
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          166.0,
+          701
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          16,
+          698,
+          197,
+          154
+        ],
+        "bounds": [
+          18,
+          700,
+          211,
+          850
+        ],
+        "foot": [
+          117.5,
+          850
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          390.0,
+          694
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          239,
+          692,
+          193,
+          155
+        ],
+        "bounds": [
+          241,
+          694,
+          430,
+          845
+        ],
+        "foot": [
+          337.0,
+          845
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          611.5,
+          700
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          456,
+          698,
+          198,
+          155
+        ],
+        "bounds": [
+          458,
+          700,
+          652,
+          851
+        ],
+        "foot": [
+          554.0,
+          851
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          829.5,
+          701
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          682,
+          699,
+          194,
+          153
+        ],
+        "bounds": [
+          684,
+          701,
+          874,
+          850
+        ],
+        "foot": [
+          779.5,
+          850
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          163.0,
+          700
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          23,
+          698,
+          190,
+          161
+        ],
+        "bounds": [
+          25,
+          700,
+          211,
+          857
+        ],
+        "foot": [
+          106.0,
+          857
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          374.5,
+          707
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          243,
+          705,
+          193,
+          153
+        ],
+        "bounds": [
+          245,
+          707,
+          434,
+          856
+        ],
+        "foot": [
+          328.5,
+          856
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          567.0,
+          723
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          460,
+          721,
+          193,
+          138
+        ],
+        "bounds": [
+          462,
+          723,
+          651,
+          857
+        ],
+        "foot": [
+          545.0,
+          857
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          821.0,
+          701
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          683,
+          699,
+          190,
+          160
+        ],
+        "bounds": [
+          685,
+          701,
+          871,
+          857
+        ],
+        "foot": [
+          766.0,
+          857
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          336.5,
+          122
+        ],
+        "source": "source/scorpion_black-rear-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          97,
+          120,
+          370,
+          379
+        ],
+        "bounds": [
+          99,
+          122,
+          465,
+          497
+        ],
+        "foot": [
+          243.0,
+          497
+        ],
+        "sourceEdge": false,
+        "scale": 0.32,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          685
+        ],
+        "source": "source/scorpion_black-rear-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          71,
+          683,
+          398,
+          257
+        ],
+        "bounds": [
+          73,
+          685,
+          467,
+          938
+        ],
+        "foot": [
+          270.0,
+          938
+        ],
+        "sourceEdge": false,
+        "scale": 0.32,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          113.0,
+          908
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          22,
+          906,
+          174,
+          178
+        ],
+        "bounds": [
+          24,
+          908,
+          194,
+          1082
+        ],
+        "foot": [
+          109.0,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          902
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          246,
+          900,
+          174,
+          180
+        ],
+        "bounds": [
+          248,
+          902,
+          418,
+          1078
+        ],
+        "foot": [
+          334.0,
+          1078
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          898
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          467,
+          896,
+          175,
+          188
+        ],
+        "bounds": [
+          469,
+          898,
+          640,
+          1082
+        ],
+        "foot": [
+          556.5,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          912
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          689,
+          910,
+          176,
+          174
+        ],
+        "bounds": [
+          691,
+          912,
+          863,
+          1082
+        ],
+        "foot": [
+          780.5,
+          1082
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.5,
+          911
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          23,
+          909,
+          173,
+          174
+        ],
+        "bounds": [
+          25,
+          911,
+          194,
+          1081
+        ],
+        "foot": [
+          109.5,
+          1081
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          909
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          247,
+          907,
+          170,
+          176
+        ],
+        "bounds": [
+          249,
+          909,
+          415,
+          1081
+        ],
+        "foot": [
+          335.5,
+          1081
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          910
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          469,
+          907,
+          170,
+          176
+        ],
+        "bounds": [
+          471,
+          909,
+          637,
+          1081
+        ],
+        "foot": [
+          551.5,
+          1081
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.5,
+          913
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          690,
+          911,
+          170,
+          167
+        ],
+        "bounds": [
+          692,
+          913,
+          858,
+          1076
+        ],
+        "foot": [
+          765.5,
+          1076
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.0,
+          911
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          30,
+          909,
+          173,
+          179
+        ],
+        "bounds": [
+          32,
+          911,
+          201,
+          1086
+        ],
+        "foot": [
+          118.0,
+          1086
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          918
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          251,
+          916,
+          170,
+          172
+        ],
+        "bounds": [
+          253,
+          918,
+          419,
+          1086
+        ],
+        "foot": [
+          338.5,
+          1086
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          932
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          471,
+          929,
+          169,
+          160
+        ],
+        "bounds": [
+          473,
+          931,
+          638,
+          1087
+        ],
+        "foot": [
+          556.5,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          919
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          691,
+          917,
+          170,
+          172
+        ],
+        "bounds": [
+          693,
+          919,
+          859,
+          1087
+        ],
+        "foot": [
+          777.5,
+          1087
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          764.5,
+          113
+        ],
+        "source": "source/scorpion_black-rear-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          594,
+          111,
+          343,
+          376
+        ],
+        "bounds": [
+          596,
+          113,
+          935,
+          485
+        ],
+        "foot": [
+          764.5,
+          485
+        ],
+        "sourceEdge": false,
+        "scale": 0.32,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          771.0,
+          689
+        ],
+        "source": "source/scorpion_black-rear-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          590,
+          687,
+          351,
+          253
+        ],
+        "bounds": [
+          592,
+          689,
+          939,
+          938
+        ],
+        "foot": [
+          765.5,
+          938
+        ],
+        "sourceEdge": false,
+        "scale": 0.32,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          65.0,
+          1145
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          15,
+          1143,
+          190,
+          149
+        ],
+        "bounds": [
+          17,
+          1145,
+          203,
+          1290
+        ],
+        "foot": [
+          114.5,
+          1290
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          287.0,
+          1143
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          238,
+          1140,
+          188,
+          151
+        ],
+        "bounds": [
+          240,
+          1142,
+          424,
+          1289
+        ],
+        "foot": [
+          339.0,
+          1289
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          508.0,
+          1146
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          460,
+          1144,
+          188,
+          148
+        ],
+        "bounds": [
+          462,
+          1146,
+          646,
+          1290
+        ],
+        "foot": [
+          558.5,
+          1290
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          731.0,
+          1146
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          681,
+          1143,
+          189,
+          149
+        ],
+        "bounds": [
+          683,
+          1145,
+          868,
+          1290
+        ],
+        "foot": [
+          762.5,
+          1290
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          65.5,
+          1143
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          14,
+          1141,
+          190,
+          154
+        ],
+        "bounds": [
+          16,
+          1143,
+          202,
+          1293
+        ],
+        "foot": [
+          116.0,
+          1293
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          286.5,
+          1141
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          236,
+          1139,
+          192,
+          154
+        ],
+        "bounds": [
+          238,
+          1141,
+          426,
+          1291
+        ],
+        "foot": [
+          335.5,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          507.5,
+          1144
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          458,
+          1142,
+          189,
+          151
+        ],
+        "bounds": [
+          460,
+          1144,
+          645,
+          1291
+        ],
+        "foot": [
+          545.5,
+          1291
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          728.5,
+          1145
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          679,
+          1143,
+          189,
+          151
+        ],
+        "bounds": [
+          681,
+          1145,
+          866,
+          1292
+        ],
+        "foot": [
+          770.5,
+          1292
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          83.5,
+          1145
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          24,
+          1143,
+          190,
+          151
+        ],
+        "bounds": [
+          26,
+          1145,
+          212,
+          1292
+        ],
+        "foot": [
+          123.5,
+          1292
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          307.5,
+          1149
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          244,
+          1147,
+          184,
+          149
+        ],
+        "bounds": [
+          246,
+          1149,
+          426,
+          1294
+        ],
+        "foot": [
+          342.0,
+          1294
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.5,
+          1166
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          461,
+          1164,
+          187,
+          132
+        ],
+        "bounds": [
+          463,
+          1166,
+          646,
+          1294
+        ],
+        "foot": [
+          560.5,
+          1294
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          733.0,
+          1150
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          678,
+          1147,
+          185,
+          147
+        ],
+        "bounds": [
+          680,
+          1149,
+          861,
+          1292
+        ],
+        "foot": [
+          777.0,
+          1292
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          1231.0,
+          122
+        ],
+        "source": "source/scorpion_black-rear-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          1063,
+          120,
+          378,
+          379
+        ],
+        "bounds": [
+          1065,
+          122,
+          1439,
+          497
+        ],
+        "foot": [
+          1286.5,
+          497
+        ],
+        "sourceEdge": false,
+        "scale": 0.32,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1234.5,
+          706
+        ],
+        "source": "source/scorpion_black-rear-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          1057,
+          703,
+          406,
+          237
+        ],
+        "bounds": [
+          1059,
+          705,
+          1461,
+          938
+        ],
+        "foot": [
+          1260.0,
+          938
+        ],
+        "sourceEdge": false,
+        "scale": 0.32,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          56.0,
+          1360
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          13,
+          1358,
+          193,
+          146
+        ],
+        "bounds": [
+          15,
+          1360,
+          204,
+          1502
+        ],
+        "foot": [
+          97.0,
+          1502
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          280.0,
+          1360
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          237,
+          1357,
+          191,
+          146
+        ],
+        "bounds": [
+          239,
+          1359,
+          426,
+          1501
+        ],
+        "foot": [
+          319.0,
+          1501
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          501.0,
+          1360
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          458,
+          1358,
+          190,
+          146
+        ],
+        "bounds": [
+          460,
+          1360,
+          646,
+          1502
+        ],
+        "foot": [
+          544.0,
+          1502
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          723.0,
+          1360
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          681,
+          1358,
+          190,
+          145
+        ],
+        "bounds": [
+          683,
+          1360,
+          869,
+          1501
+        ],
+        "foot": [
+          764.0,
+          1501
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          59.0,
+          1365
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          15,
+          1363,
+          192,
+          143
+        ],
+        "bounds": [
+          17,
+          1365,
+          205,
+          1504
+        ],
+        "foot": [
+          93.5,
+          1504
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          281.5,
+          1365
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          237,
+          1363,
+          192,
+          144
+        ],
+        "bounds": [
+          239,
+          1365,
+          427,
+          1505
+        ],
+        "foot": [
+          314.5,
+          1505
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          502.5,
+          1366
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          457,
+          1364,
+          191,
+          143
+        ],
+        "bounds": [
+          459,
+          1366,
+          646,
+          1505
+        ],
+        "foot": [
+          537.0,
+          1505
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          724.5,
+          1365
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          679,
+          1362,
+          192,
+          147
+        ],
+        "bounds": [
+          681,
+          1364,
+          869,
+          1507
+        ],
+        "foot": [
+          772.5,
+          1507
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          68.5,
+          1351
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          16,
+          1348,
+          196,
+          154
+        ],
+        "bounds": [
+          18,
+          1350,
+          210,
+          1500
+        ],
+        "foot": [
+          108.0,
+          1500
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          290.0,
+          1360
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          239,
+          1358,
+          193,
+          144
+        ],
+        "bounds": [
+          241,
+          1360,
+          430,
+          1500
+        ],
+        "foot": [
+          310.5,
+          1500
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          507.5,
+          1370
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          456,
+          1368,
+          196,
+          136
+        ],
+        "bounds": [
+          458,
+          1370,
+          650,
+          1502
+        ],
+        "foot": [
+          548.0,
+          1502
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          727.5,
+          1360
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          679,
+          1357,
+          192,
+          145
+        ],
+        "bounds": [
+          681,
+          1359,
+          869,
+          1500
+        ],
+        "foot": [
+          748.5,
+          1500
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          98.5,
+          972
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          27,
+          969,
+          277,
+          222
+        ],
+        "bounds": [
+          29,
+          971,
+          302,
+          1189
+        ],
+        "foot": [
+          129.5,
+          1189
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          435.0,
+          1020
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          368,
+          1017,
+          217,
+          162
+        ],
+        "bounds": [
+          370,
+          1019,
+          583,
+          1177
+        ],
+        "foot": [
+          476.5,
+          1177
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          73.5,
+          1579
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          15,
+          1577,
+          188,
+          167
+        ],
+        "bounds": [
+          17,
+          1579,
+          201,
+          1742
+        ],
+        "foot": [
+          131.0,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          296.0,
+          1578
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          238,
+          1576,
+          186,
+          162
+        ],
+        "bounds": [
+          240,
+          1578,
+          422,
+          1736
+        ],
+        "foot": [
+          348.5,
+          1736
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          518.0,
+          1580
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          460,
+          1577,
+          186,
+          168
+        ],
+        "bounds": [
+          462,
+          1579,
+          644,
+          1743
+        ],
+        "foot": [
+          572.5,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          741.0,
+          1579
+        ],
+        "source": "source/scorpion_black-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          681,
+          1576,
+          187,
+          164
+        ],
+        "bounds": [
+          683,
+          1578,
+          866,
+          1738
+        ],
+        "foot": [
+          792.5,
+          1738
+        ],
+        "sourceEdge": false,
+        "scale": 0.6927374301675978,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          73.0,
+          1584
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          15,
+          1581,
+          189,
+          163
+        ],
+        "bounds": [
+          17,
+          1583,
+          202,
+          1742
+        ],
+        "foot": [
+          122.5,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          294.5,
+          1582
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          238,
+          1579,
+          183,
+          162
+        ],
+        "bounds": [
+          240,
+          1581,
+          419,
+          1739
+        ],
+        "foot": [
+          347.0,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          516.0,
+          1586
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          458,
+          1584,
+          186,
+          160
+        ],
+        "bounds": [
+          460,
+          1586,
+          642,
+          1742
+        ],
+        "foot": [
+          567.5,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          740.5,
+          1584
+        ],
+        "source": "source/scorpion_black-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          679,
+          1582,
+          187,
+          162
+        ],
+        "bounds": [
+          681,
+          1584,
+          864,
+          1742
+        ],
+        "foot": [
+          792.0,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.6850828729281768,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          76.0,
+          1574
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          14,
+          1572,
+          194,
+          172
+        ],
+        "bounds": [
+          16,
+          1574,
+          206,
+          1742
+        ],
+        "foot": [
+          127.0,
+          1742
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          299.5,
+          1576
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          235,
+          1574,
+          193,
+          168
+        ],
+        "bounds": [
+          237,
+          1576,
+          426,
+          1740
+        ],
+        "foot": [
+          346.5,
+          1740
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          523.0,
+          1589
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          456,
+          1587,
+          192,
+          158
+        ],
+        "bounds": [
+          458,
+          1589,
+          646,
+          1743
+        ],
+        "foot": [
+          567.0,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          742.5,
+          1575
+        ],
+        "source": "source/scorpion_black-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          679,
+          1573,
+          193,
+          172
+        ],
+        "bounds": [
+          681,
+          1575,
+          870,
+          1743
+        ],
+        "foot": [
+          790.0,
+          1743
+        ],
+        "sourceEdge": false,
+        "scale": 0.6458333333333334,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          742.0,
+          974
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          649,
+          972,
+          266,
+          231
+        ],
+        "bounds": [
+          651,
+          974,
+          913,
+          1201
+        ],
+        "foot": [
+          807.0,
+          1201
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1055.5,
+          1034
+        ],
+        "source": "source/scorpion_black-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          994,
+          1032,
+          221,
+          161
+        ],
+        "bounds": [
+          996,
+          1034,
+          1213,
+          1191
+        ],
+        "foot": [
+          1104.5,
+          1191
+        ],
+        "sourceEdge": false,
+        "scale": 0.5042016806722689,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "warg_rider",
+    "size": 320,
+    "anchor": [
+      160,
+      272
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          122.0,
+          13
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          80,
+          10,
+          86,
+          215
+        ],
+        "bounds": [
+          82,
+          12,
+          164,
+          223
+        ],
+        "foot": [
+          122.5,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          338.5,
+          13
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          296,
+          10,
+          87,
+          215
+        ],
+        "bounds": [
+          298,
+          12,
+          381,
+          223
+        ],
+        "foot": [
+          339.0,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          13
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          512,
+          10,
+          87,
+          215
+        ],
+        "bounds": [
+          514,
+          12,
+          597,
+          223
+        ],
+        "foot": [
+          555.0,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.5,
+          13
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          728,
+          10,
+          87,
+          215
+        ],
+        "bounds": [
+          730,
+          12,
+          813,
+          223
+        ],
+        "foot": [
+          771.0,
+          223
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          94.5,
+          15
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          79,
+          13,
+          89,
+          213
+        ],
+        "bounds": [
+          81,
+          15,
+          166,
+          224
+        ],
+        "foot": [
+          125.0,
+          224
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          312.5,
+          15
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          296,
+          12,
+          91,
+          215
+        ],
+        "bounds": [
+          298,
+          14,
+          385,
+          225
+        ],
+        "foot": [
+          344.5,
+          225
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          529.0,
+          15
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          515,
+          12,
+          87,
+          217
+        ],
+        "bounds": [
+          517,
+          14,
+          600,
+          227
+        ],
+        "foot": [
+          547.5,
+          227
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          748.0,
+          14
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          730,
+          12,
+          90,
+          218
+        ],
+        "bounds": [
+          732,
+          14,
+          818,
+          228
+        ],
+        "foot": [
+          777.5,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          125.0,
+          25
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          77,
+          22,
+          95,
+          205
+        ],
+        "bounds": [
+          79,
+          24,
+          170,
+          225
+        ],
+        "foot": [
+          124.5,
+          225
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          325.0,
+          24
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          280,
+          22,
+          114,
+          208
+        ],
+        "bounds": [
+          282,
+          24,
+          392,
+          228
+        ],
+        "foot": [
+          339.0,
+          228
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          557.5,
+          55
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          509,
+          53,
+          99,
+          175
+        ],
+        "bounds": [
+          511,
+          55,
+          606,
+          226
+        ],
+        "foot": [
+          557.0,
+          226
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          784.5,
+          49
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          725,
+          21,
+          98,
+          207
+        ],
+        "bounds": [
+          727,
+          23,
+          821,
+          226
+        ],
+        "foot": [
+          773.5,
+          226
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          155.0,
+          30
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          120,
+          28,
+          118,
+          271
+        ],
+        "bounds": [
+          122,
+          30,
+          236,
+          297
+        ],
+        "foot": [
+          173.5,
+          297
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          445.0,
+          66
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          397,
+          64,
+          159,
+          229
+        ],
+        "bounds": [
+          399,
+          66,
+          554,
+          291
+        ],
+        "foot": [
+          476.5,
+          291
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          119.5,
+          271
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          36,
+          241,
+          158,
+          195
+        ],
+        "bounds": [
+          38,
+          243,
+          192,
+          434
+        ],
+        "foot": [
+          106.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.0,
+          271
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          255,
+          241,
+          157,
+          195
+        ],
+        "bounds": [
+          257,
+          243,
+          410,
+          434
+        ],
+        "foot": [
+          322.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.5,
+          271
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          471,
+          241,
+          161,
+          195
+        ],
+        "bounds": [
+          473,
+          243,
+          630,
+          434
+        ],
+        "foot": [
+          539.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          769.0,
+          272
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          689,
+          241,
+          166,
+          195
+        ],
+        "bounds": [
+          691,
+          243,
+          853,
+          434
+        ],
+        "foot": [
+          757.5,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          76.0,
+          241
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          35,
+          239,
+          155,
+          199
+        ],
+        "bounds": [
+          37,
+          241,
+          188,
+          436
+        ],
+        "foot": [
+          98.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          293.5,
+          243
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          250,
+          241,
+          163,
+          193
+        ],
+        "bounds": [
+          252,
+          243,
+          411,
+          432
+        ],
+        "foot": [
+          308.0,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          513.0,
+          242
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          469,
+          239,
+          163,
+          197
+        ],
+        "bounds": [
+          471,
+          241,
+          630,
+          434
+        ],
+        "foot": [
+          540.0,
+          434
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          729.5,
+          243
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          690,
+          241,
+          164,
+          197
+        ],
+        "bounds": [
+          692,
+          243,
+          852,
+          436
+        ],
+        "foot": [
+          755.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.0,
+          270
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          40,
+          247,
+          158,
+          191
+        ],
+        "bounds": [
+          42,
+          249,
+          196,
+          436
+        ],
+        "foot": [
+          111.5,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          313.5,
+          257
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          254,
+          254,
+          162,
+          184
+        ],
+        "bounds": [
+          256,
+          256,
+          414,
+          436
+        ],
+        "foot": [
+          324.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.5,
+          254
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          467,
+          251,
+          171,
+          187
+        ],
+        "bounds": [
+          469,
+          253,
+          636,
+          436
+        ],
+        "foot": [
+          545.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          768.5,
+          270
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          682,
+          247,
+          170,
+          191
+        ],
+        "bounds": [
+          684,
+          249,
+          850,
+          436
+        ],
+        "foot": [
+          760.0,
+          436
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          769.0,
+          34
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          686,
+          32,
+          190,
+          263
+        ],
+        "bounds": [
+          688,
+          34,
+          874,
+          293
+        ],
+        "foot": [
+          769.5,
+          293
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1040.0,
+          86
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          981,
+          84,
+          217,
+          208
+        ],
+        "bounds": [
+          983,
+          86,
+          1196,
+          290
+        ],
+        "foot": [
+          1089.5,
+          290
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          117.5,
+          480
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          22,
+          460,
+          189,
+          176
+        ],
+        "bounds": [
+          24,
+          462,
+          209,
+          634
+        ],
+        "foot": [
+          122.5,
+          634
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.5,
+          480
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          240,
+          463,
+          190,
+          173
+        ],
+        "bounds": [
+          242,
+          465,
+          428,
+          634
+        ],
+        "foot": [
+          341.0,
+          634
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          548.0,
+          480
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          454,
+          463,
+          193,
+          173
+        ],
+        "bounds": [
+          456,
+          465,
+          645,
+          634
+        ],
+        "foot": [
+          557.5,
+          634
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.0,
+          481
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          674,
+          463,
+          192,
+          174
+        ],
+        "bounds": [
+          676,
+          465,
+          864,
+          635
+        ],
+        "foot": [
+          775.0,
+          635
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          115.5,
+          483
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          16,
+          465,
+          190,
+          173
+        ],
+        "bounds": [
+          18,
+          467,
+          204,
+          636
+        ],
+        "foot": [
+          119.0,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          484
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          236,
+          466,
+          196,
+          172
+        ],
+        "bounds": [
+          238,
+          468,
+          430,
+          636
+        ],
+        "foot": [
+          342.5,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          550.0,
+          483
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          451,
+          465,
+          196,
+          169
+        ],
+        "bounds": [
+          453,
+          467,
+          645,
+          632
+        ],
+        "foot": [
+          559.5,
+          632
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          766.5,
+          483
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          672,
+          465,
+          198,
+          173
+        ],
+        "bounds": [
+          674,
+          467,
+          868,
+          636
+        ],
+        "foot": [
+          775.0,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          114.5,
+          483
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          16,
+          466,
+          199,
+          172
+        ],
+        "bounds": [
+          18,
+          468,
+          213,
+          636
+        ],
+        "foot": [
+          121.5,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          314.0,
+          472
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          240,
+          470,
+          195,
+          167
+        ],
+        "bounds": [
+          242,
+          472,
+          433,
+          635
+        ],
+        "foot": [
+          342.0,
+          635
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          532.5,
+          484
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          453,
+          481,
+          201,
+          157
+        ],
+        "bounds": [
+          455,
+          483,
+          652,
+          636
+        ],
+        "foot": [
+          561.5,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          770.5,
+          483
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          673,
+          466,
+          198,
+          172
+        ],
+        "bounds": [
+          675,
+          468,
+          869,
+          636
+        ],
+        "foot": [
+          778.0,
+          636
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          181.0,
+          376
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          37,
+          354,
+          254,
+          230
+        ],
+        "bounds": [
+          39,
+          356,
+          289,
+          582
+        ],
+        "foot": [
+          177.0,
+          582
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          469.5,
+          436
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          345,
+          416,
+          258,
+          167
+        ],
+        "bounds": [
+          347,
+          418,
+          601,
+          581
+        ],
+        "foot": [
+          474.0,
+          581
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          114.5,
+          693
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          35,
+          670,
+          161,
+          200
+        ],
+        "bounds": [
+          37,
+          672,
+          194,
+          868
+        ],
+        "foot": [
+          148.5,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.0,
+          692
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          253,
+          669,
+          164,
+          201
+        ],
+        "bounds": [
+          255,
+          671,
+          415,
+          868
+        ],
+        "foot": [
+          368.0,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          544.0,
+          693
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          471,
+          670,
+          155,
+          200
+        ],
+        "bounds": [
+          473,
+          672,
+          624,
+          868
+        ],
+        "foot": [
+          580.0,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.0,
+          693
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          691,
+          670,
+          155,
+          200
+        ],
+        "bounds": [
+          693,
+          672,
+          844,
+          868
+        ],
+        "foot": [
+          799.0,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.0,
+          695
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          35,
+          672,
+          161,
+          200
+        ],
+        "bounds": [
+          37,
+          674,
+          194,
+          870
+        ],
+        "foot": [
+          135.0,
+          870
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          311.0,
+          674
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          251,
+          671,
+          165,
+          200
+        ],
+        "bounds": [
+          253,
+          673,
+          414,
+          869
+        ],
+        "foot": [
+          354.0,
+          869
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.0,
+          695
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          467,
+          673,
+          158,
+          197
+        ],
+        "bounds": [
+          469,
+          675,
+          623,
+          868
+        ],
+        "foot": [
+          595.5,
+          868
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          761.0,
+          695
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          688,
+          673,
+          160,
+          198
+        ],
+        "bounds": [
+          690,
+          675,
+          846,
+          869
+        ],
+        "foot": [
+          802.0,
+          869
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          107.5,
+          694
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          33,
+          674,
+          164,
+          192
+        ],
+        "bounds": [
+          35,
+          676,
+          195,
+          864
+        ],
+        "foot": [
+          152.5,
+          864
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          309.5,
+          677
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          247,
+          675,
+          167,
+          189
+        ],
+        "bounds": [
+          249,
+          677,
+          412,
+          862
+        ],
+        "foot": [
+          363.5,
+          862
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          524.5,
+          683
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          465,
+          680,
+          168,
+          187
+        ],
+        "bounds": [
+          467,
+          682,
+          631,
+          865
+        ],
+        "foot": [
+          571.5,
+          865
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          746.5,
+          676
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          683,
+          674,
+          168,
+          193
+        ],
+        "bounds": [
+          685,
+          676,
+          849,
+          865
+        ],
+        "foot": [
+          795.0,
+          865
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          783.0,
+          340
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          699,
+          337,
+          188,
+          254
+        ],
+        "bounds": [
+          701,
+          339,
+          885,
+          589
+        ],
+        "foot": [
+          825.0,
+          589
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1044.0,
+          402
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          993,
+          400,
+          212,
+          191
+        ],
+        "bounds": [
+          995,
+          402,
+          1203,
+          589
+        ],
+        "foot": [
+          1099.0,
+          589
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          120.0,
+          889
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          76,
+          886,
+          84,
+          210
+        ],
+        "bounds": [
+          78,
+          888,
+          158,
+          1094
+        ],
+        "foot": [
+          118.5,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          337.5,
+          888
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          293,
+          885,
+          83,
+          211
+        ],
+        "bounds": [
+          295,
+          887,
+          374,
+          1094
+        ],
+        "foot": [
+          336.0,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          547.5,
+          923
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          509,
+          886,
+          84,
+          210
+        ],
+        "bounds": [
+          511,
+          888,
+          591,
+          1094
+        ],
+        "foot": [
+          551.5,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          763.5,
+          924
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          726,
+          886,
+          83,
+          210
+        ],
+        "bounds": [
+          728,
+          888,
+          807,
+          1094
+        ],
+        "foot": [
+          769.0,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          119.5,
+          892
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          72,
+          889,
+          89,
+          208
+        ],
+        "bounds": [
+          74,
+          891,
+          159,
+          1095
+        ],
+        "foot": [
+          117.5,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          922
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          288,
+          889,
+          87,
+          210
+        ],
+        "bounds": [
+          290,
+          891,
+          373,
+          1097
+        ],
+        "foot": [
+          335.0,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          892
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          507,
+          889,
+          87,
+          210
+        ],
+        "bounds": [
+          509,
+          891,
+          592,
+          1097
+        ],
+        "foot": [
+          549.5,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          773.5,
+          892
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          726,
+          889,
+          86,
+          208
+        ],
+        "bounds": [
+          728,
+          891,
+          810,
+          1095
+        ],
+        "foot": [
+          769.5,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          120.5,
+          893
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          73,
+          890,
+          95,
+          211
+        ],
+        "bounds": [
+          75,
+          892,
+          166,
+          1099
+        ],
+        "foot": [
+          120.0,
+          1099
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          342.5,
+          893
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          288,
+          891,
+          94,
+          209
+        ],
+        "bounds": [
+          290,
+          893,
+          380,
+          1098
+        ],
+        "foot": [
+          336.5,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.5,
+          898
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          505,
+          896,
+          95,
+          204
+        ],
+        "bounds": [
+          507,
+          898,
+          598,
+          1098
+        ],
+        "foot": [
+          553.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          765.5,
+          922
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          723,
+          891,
+          95,
+          209
+        ],
+        "bounds": [
+          725,
+          893,
+          816,
+          1098
+        ],
+        "foot": [
+          770.0,
+          1098
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          162.0,
+          634
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 8,
+        "cell": [
+          105,
+          632,
+          108,
+          269
+        ],
+        "bounds": [
+          107,
+          634,
+          211,
+          899
+        ],
+        "foot": [
+          157.5,
+          899
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          492.5,
+          681
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          384,
+          679,
+          149,
+          223
+        ],
+        "bounds": [
+          386,
+          681,
+          531,
+          900
+        ],
+        "foot": [
+          458.5,
+          900
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.5,
+          1141
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          37,
+          1112,
+          141,
+          197
+        ],
+        "bounds": [
+          39,
+          1114,
+          176,
+          1307
+        ],
+        "foot": [
+          86.0,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.0,
+          1141
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          250,
+          1112,
+          147,
+          197
+        ],
+        "bounds": [
+          252,
+          1114,
+          395,
+          1307
+        ],
+        "foot": [
+          301.5,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          546.0,
+          1141
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          472,
+          1112,
+          144,
+          197
+        ],
+        "bounds": [
+          474,
+          1114,
+          614,
+          1307
+        ],
+        "foot": [
+          521.0,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          764.5,
+          1141
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          686,
+          1112,
+          150,
+          197
+        ],
+        "bounds": [
+          688,
+          1114,
+          834,
+          1307
+        ],
+        "foot": [
+          739.0,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          1143
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          35,
+          1114,
+          146,
+          198
+        ],
+        "bounds": [
+          37,
+          1116,
+          179,
+          1310
+        ],
+        "foot": [
+          79.5,
+          1310
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          327.5,
+          1143
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          247,
+          1114,
+          152,
+          198
+        ],
+        "bounds": [
+          249,
+          1116,
+          397,
+          1310
+        ],
+        "foot": [
+          304.0,
+          1310
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          543.0,
+          1144
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          466,
+          1114,
+          147,
+          199
+        ],
+        "bounds": [
+          468,
+          1116,
+          611,
+          1311
+        ],
+        "foot": [
+          517.5,
+          1311
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          764.5,
+          1143
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          677,
+          1114,
+          164,
+          198
+        ],
+        "bounds": [
+          679,
+          1116,
+          839,
+          1310
+        ],
+        "foot": [
+          743.0,
+          1310
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          118.5,
+          1119
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          35,
+          1116,
+          159,
+          193
+        ],
+        "bounds": [
+          37,
+          1118,
+          192,
+          1307
+        ],
+        "foot": [
+          83.5,
+          1307
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.0,
+          1142
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          245,
+          1117,
+          168,
+          193
+        ],
+        "bounds": [
+          247,
+          1119,
+          411,
+          1308
+        ],
+        "foot": [
+          302.5,
+          1308
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          560.0,
+          1124
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          462,
+          1122,
+          163,
+          190
+        ],
+        "bounds": [
+          464,
+          1124,
+          623,
+          1310
+        ],
+        "foot": [
+          516.5,
+          1310
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          1119
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          684,
+          1116,
+          169,
+          196
+        ],
+        "bounds": [
+          686,
+          1118,
+          851,
+          1310
+        ],
+        "foot": [
+          742.0,
+          1310
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          773.5,
+          634
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          674,
+          632,
+          196,
+          271
+        ],
+        "bounds": [
+          676,
+          634,
+          868,
+          901
+        ],
+        "foot": [
+          747.0,
+          901
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1141.5,
+          706
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          984,
+          704,
+          223,
+          197
+        ],
+        "bounds": [
+          986,
+          706,
+          1205,
+          899
+        ],
+        "foot": [
+          1095.5,
+          899
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          104.0,
+          1362
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          14,
+          1346,
+          195,
+          170
+        ],
+        "bounds": [
+          16,
+          1348,
+          207,
+          1514
+        ],
+        "foot": [
+          98.5,
+          1514
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          320.5,
+          1361
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          232,
+          1346,
+          195,
+          171
+        ],
+        "bounds": [
+          234,
+          1348,
+          425,
+          1515
+        ],
+        "foot": [
+          312.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          537.5,
+          1362
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          443,
+          1346,
+          201,
+          171
+        ],
+        "bounds": [
+          445,
+          1348,
+          642,
+          1515
+        ],
+        "foot": [
+          534.0,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          754.0,
+          1363
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          663,
+          1346,
+          199,
+          171
+        ],
+        "bounds": [
+          665,
+          1348,
+          860,
+          1515
+        ],
+        "foot": [
+          751.0,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          104.0,
+          1365
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          12,
+          1348,
+          199,
+          170
+        ],
+        "bounds": [
+          14,
+          1350,
+          209,
+          1516
+        ],
+        "foot": [
+          97.5,
+          1516
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          318.5,
+          1363
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          235,
+          1349,
+          197,
+          169
+        ],
+        "bounds": [
+          237,
+          1351,
+          430,
+          1516
+        ],
+        "foot": [
+          313.0,
+          1516
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          538.0,
+          1366
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          449,
+          1352,
+          199,
+          167
+        ],
+        "bounds": [
+          451,
+          1354,
+          646,
+          1517
+        ],
+        "foot": [
+          530.5,
+          1517
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          757.0,
+          1365
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          669,
+          1349,
+          200,
+          171
+        ],
+        "bounds": [
+          671,
+          1351,
+          867,
+          1518
+        ],
+        "foot": [
+          753.0,
+          1518
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          102.5,
+          1358
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          12,
+          1348,
+          202,
+          169
+        ],
+        "bounds": [
+          14,
+          1350,
+          212,
+          1515
+        ],
+        "foot": [
+          99.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          339.5,
+          1356
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          231,
+          1354,
+          197,
+          163
+        ],
+        "bounds": [
+          233,
+          1356,
+          426,
+          1515
+        ],
+        "foot": [
+          317.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          559.0,
+          1357
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          448,
+          1355,
+          199,
+          162
+        ],
+        "bounds": [
+          450,
+          1357,
+          645,
+          1515
+        ],
+        "foot": [
+          534.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.5,
+          1362
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          667,
+          1347,
+          199,
+          170
+        ],
+        "bounds": [
+          669,
+          1349,
+          864,
+          1515
+        ],
+        "foot": [
+          754.5,
+          1515
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          146.5,
+          991
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          31,
+          967,
+          257,
+          240
+        ],
+        "bounds": [
+          33,
+          969,
+          286,
+          1205
+        ],
+        "foot": [
+          129.5,
+          1205
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          516.0,
+          1031
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          341,
+          1029,
+          255,
+          171
+        ],
+        "bounds": [
+          343,
+          1031,
+          594,
+          1198
+        ],
+        "foot": [
+          468.5,
+          1198
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          106.0,
+          1559
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          26,
+          1556,
+          166,
+          185
+        ],
+        "bounds": [
+          28,
+          1558,
+          190,
+          1739
+        ],
+        "foot": [
+          129.0,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          319.5,
+          1560
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          242,
+          1557,
+          165,
+          184
+        ],
+        "bounds": [
+          244,
+          1559,
+          405,
+          1739
+        ],
+        "foot": [
+          340.0,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          536.0,
+          1560
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          456,
+          1557,
+          171,
+          184
+        ],
+        "bounds": [
+          458,
+          1559,
+          625,
+          1739
+        ],
+        "foot": [
+          556.5,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          753.0,
+          1560
+        ],
+        "source": "source/warg_rider-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          676,
+          1558,
+          168,
+          183
+        ],
+        "bounds": [
+          678,
+          1560,
+          842,
+          1739
+        ],
+        "foot": [
+          775.0,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.7428571428571429,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          104.0,
+          1561
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          25,
+          1559,
+          167,
+          184
+        ],
+        "bounds": [
+          27,
+          1561,
+          190,
+          1741
+        ],
+        "foot": [
+          124.5,
+          1741
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          322.5,
+          1562
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          244,
+          1559,
+          167,
+          184
+        ],
+        "bounds": [
+          246,
+          1561,
+          409,
+          1741
+        ],
+        "foot": [
+          316.0,
+          1741
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          539.5,
+          1562
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          455,
+          1560,
+          173,
+          181
+        ],
+        "bounds": [
+          457,
+          1562,
+          626,
+          1739
+        ],
+        "foot": [
+          533.5,
+          1739
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.5,
+          1561
+        ],
+        "source": "source/warg_rider-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          681,
+          1559,
+          168,
+          187
+        ],
+        "bounds": [
+          683,
+          1561,
+          847,
+          1744
+        ],
+        "foot": [
+          779.0,
+          1744
+        ],
+        "sourceEdge": false,
+        "scale": 0.7464114832535885,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1560
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          28,
+          1557,
+          169,
+          189
+        ],
+        "bounds": [
+          30,
+          1559,
+          195,
+          1744
+        ],
+        "foot": [
+          123.0,
+          1744
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          326.5,
+          1565
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          243,
+          1562,
+          172,
+          186
+        ],
+        "bounds": [
+          245,
+          1564,
+          413,
+          1746
+        ],
+        "foot": [
+          343.5,
+          1746
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          542.0,
+          1565
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          460,
+          1563,
+          179,
+          184
+        ],
+        "bounds": [
+          462,
+          1565,
+          637,
+          1745
+        ],
+        "foot": [
+          560.5,
+          1745
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          758.0,
+          1563
+        ],
+        "source": "source/warg_rider-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          679,
+          1561,
+          174,
+          185
+        ],
+        "bounds": [
+          681,
+          1563,
+          851,
+          1744
+        ],
+        "foot": [
+          780.5,
+          1744
+        ],
+        "sourceEdge": false,
+        "scale": 0.78,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          750.5,
+          991
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          665,
+          960,
+          195,
+          248
+        ],
+        "bounds": [
+          667,
+          962,
+          858,
+          1206
+        ],
+        "foot": [
+          772.5,
+          1206
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1068.5,
+          1054
+        ],
+        "source": "source/warg_rider-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          963,
+          1028,
+          235,
+          173
+        ],
+        "bounds": [
+          965,
+          1030,
+          1196,
+          1199
+        ],
+        "foot": [
+          1080.5,
+          1199
+        ],
+        "sourceEdge": false,
+        "scale": 0.5692883895131086,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  },
+  {
+    "id": "mimic_ironbound",
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "pixelScale": 0.32,
+    "headRegistration": false,
+    "rowsPerDirection": 2,
+    "actionOffsets": {
+      "idle": 0,
+      "walk": 4,
+      "attack": 8,
+      "hurt": 12,
+      "down": 13
+    },
+    "frames": [
+      {
+        "head": [
+          111.0,
+          63
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 0,
+        "cell": [
+          23,
+          61,
+          176,
+          148
+        ],
+        "bounds": [
+          25,
+          63,
+          197,
+          207
+        ],
+        "foot": [
+          110.5,
+          207
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          61
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 1,
+        "cell": [
+          246,
+          58,
+          174,
+          151
+        ],
+        "bounds": [
+          248,
+          60,
+          418,
+          207
+        ],
+        "foot": [
+          332.5,
+          207
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          63
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 2,
+        "cell": [
+          467,
+          61,
+          176,
+          148
+        ],
+        "bounds": [
+          469,
+          63,
+          641,
+          207
+        ],
+        "foot": [
+          556.0,
+          207
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          63
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 3,
+        "cell": [
+          690,
+          61,
+          174,
+          148
+        ],
+        "bounds": [
+          692,
+          63,
+          862,
+          207
+        ],
+        "foot": [
+          777.0,
+          207
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south",
+        "row": 0,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          60
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 0,
+        "cell": [
+          19,
+          58,
+          182,
+          153
+        ],
+        "bounds": [
+          21,
+          60,
+          199,
+          209
+        ],
+        "foot": [
+          111.0,
+          209
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          60
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 1,
+        "cell": [
+          242,
+          57,
+          181,
+          154
+        ],
+        "bounds": [
+          244,
+          59,
+          421,
+          209
+        ],
+        "foot": [
+          331.5,
+          209
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          60
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 2,
+        "cell": [
+          464,
+          58,
+          182,
+          153
+        ],
+        "bounds": [
+          466,
+          60,
+          644,
+          209
+        ],
+        "foot": [
+          554.0,
+          209
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          60
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 3,
+        "cell": [
+          686,
+          58,
+          181,
+          153
+        ],
+        "bounds": [
+          688,
+          60,
+          865,
+          209
+        ],
+        "foot": [
+          775.5,
+          209
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south",
+        "row": 0,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          62
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 0,
+        "cell": [
+          19,
+          60,
+          180,
+          152
+        ],
+        "bounds": [
+          21,
+          62,
+          197,
+          210
+        ],
+        "foot": [
+          111.0,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.5,
+          50
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 1,
+        "cell": [
+          243,
+          48,
+          178,
+          164
+        ],
+        "bounds": [
+          245,
+          50,
+          419,
+          210
+        ],
+        "foot": [
+          332.0,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.5,
+          51
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 2,
+        "cell": [
+          465,
+          49,
+          180,
+          163
+        ],
+        "bounds": [
+          467,
+          51,
+          643,
+          210
+        ],
+        "foot": [
+          555.0,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          62
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 3,
+        "cell": [
+          687,
+          59,
+          179,
+          153
+        ],
+        "bounds": [
+          689,
+          61,
+          864,
+          210
+        ],
+        "foot": [
+          776.5,
+          210
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south",
+        "row": 0,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          161.5,
+          58
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 0,
+        "cell": [
+          48,
+          55,
+          228,
+          251
+        ],
+        "bounds": [
+          50,
+          57,
+          274,
+          304
+        ],
+        "foot": [
+          162.0,
+          304
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "south",
+        "row": 0,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          463.0,
+          121
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 1,
+        "cell": [
+          346,
+          118,
+          234,
+          187
+        ],
+        "bounds": [
+          348,
+          120,
+          578,
+          303
+        ],
+        "foot": [
+          463.0,
+          303
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "south",
+        "row": 0,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.5,
+          278
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 4,
+        "cell": [
+          20,
+          275,
+          181,
+          158
+        ],
+        "bounds": [
+          22,
+          277,
+          199,
+          431
+        ],
+        "foot": [
+          86.0,
+          431
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          278
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 5,
+        "cell": [
+          243,
+          276,
+          180,
+          157
+        ],
+        "bounds": [
+          245,
+          278,
+          421,
+          431
+        ],
+        "foot": [
+          309.0,
+          431
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          278
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 6,
+        "cell": [
+          464,
+          275,
+          181,
+          158
+        ],
+        "bounds": [
+          466,
+          277,
+          643,
+          431
+        ],
+        "foot": [
+          529.5,
+          431
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          279
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 7,
+        "cell": [
+          686,
+          277,
+          179,
+          156
+        ],
+        "bounds": [
+          688,
+          279,
+          863,
+          431
+        ],
+        "foot": [
+          750.5,
+          431
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-west",
+        "row": 1,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          274
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 4,
+        "cell": [
+          19,
+          271,
+          185,
+          164
+        ],
+        "bounds": [
+          21,
+          273,
+          202,
+          433
+        ],
+        "foot": [
+          83.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          274
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 5,
+        "cell": [
+          241,
+          271,
+          184,
+          164
+        ],
+        "bounds": [
+          243,
+          273,
+          423,
+          433
+        ],
+        "foot": [
+          308.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          274
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 6,
+        "cell": [
+          463,
+          271,
+          184,
+          163
+        ],
+        "bounds": [
+          465,
+          273,
+          645,
+          432
+        ],
+        "foot": [
+          527.5,
+          432
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          274
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 7,
+        "cell": [
+          685,
+          271,
+          184,
+          164
+        ],
+        "bounds": [
+          687,
+          273,
+          867,
+          433
+        ],
+        "foot": [
+          746.5,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-west",
+        "row": 1,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          277
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 4,
+        "cell": [
+          18,
+          275,
+          186,
+          160
+        ],
+        "bounds": [
+          20,
+          277,
+          202,
+          433
+        ],
+        "foot": [
+          88.0,
+          433
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          271
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 5,
+        "cell": [
+          240,
+          269,
+          184,
+          168
+        ],
+        "bounds": [
+          242,
+          271,
+          422,
+          435
+        ],
+        "foot": [
+          310.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          277
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 6,
+        "cell": [
+          463,
+          274,
+          184,
+          163
+        ],
+        "bounds": [
+          465,
+          276,
+          645,
+          435
+        ],
+        "foot": [
+          529.5,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          282
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 7,
+        "cell": [
+          683,
+          280,
+          185,
+          157
+        ],
+        "bounds": [
+          685,
+          282,
+          866,
+          435
+        ],
+        "foot": [
+          750.0,
+          435
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-west",
+        "row": 1,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          773.0,
+          56
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 2,
+        "cell": [
+          649,
+          54,
+          252,
+          261
+        ],
+        "bounds": [
+          651,
+          56,
+          899,
+          313
+        ],
+        "foot": [
+          793.0,
+          313
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "south-west",
+        "row": 1,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1081.0,
+          123
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 3,
+        "cell": [
+          957,
+          120,
+          253,
+          196
+        ],
+        "bounds": [
+          959,
+          122,
+          1208,
+          314
+        ],
+        "foot": [
+          1083.5,
+          314
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "south-west",
+        "row": 1,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          108.5,
+          485
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 8,
+        "cell": [
+          31,
+          483,
+          153,
+          170
+        ],
+        "bounds": [
+          33,
+          485,
+          182,
+          651
+        ],
+        "foot": [
+          108.0,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          485
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 9,
+        "cell": [
+          252,
+          483,
+          154,
+          170
+        ],
+        "bounds": [
+          254,
+          485,
+          404,
+          651
+        ],
+        "foot": [
+          331.0,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.0,
+          485
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 10,
+        "cell": [
+          476,
+          483,
+          153,
+          169
+        ],
+        "bounds": [
+          478,
+          485,
+          627,
+          650
+        ],
+        "foot": [
+          553.5,
+          650
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          485
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 11,
+        "cell": [
+          698,
+          483,
+          153,
+          169
+        ],
+        "bounds": [
+          700,
+          485,
+          849,
+          650
+        ],
+        "foot": [
+          773.5,
+          650
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "west",
+        "row": 2,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.0,
+          483
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 8,
+        "cell": [
+          31,
+          480,
+          157,
+          169
+        ],
+        "bounds": [
+          33,
+          482,
+          186,
+          647
+        ],
+        "foot": [
+          110.0,
+          647
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          483
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 9,
+        "cell": [
+          253,
+          481,
+          159,
+          170
+        ],
+        "bounds": [
+          255,
+          483,
+          410,
+          649
+        ],
+        "foot": [
+          332.5,
+          649
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          483
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 10,
+        "cell": [
+          475,
+          481,
+          156,
+          168
+        ],
+        "bounds": [
+          477,
+          483,
+          629,
+          647
+        ],
+        "foot": [
+          552.5,
+          647
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          483
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 11,
+        "cell": [
+          697,
+          481,
+          158,
+          168
+        ],
+        "bounds": [
+          699,
+          483,
+          853,
+          647
+        ],
+        "foot": [
+          774.0,
+          647
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "west",
+        "row": 2,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.0,
+          490
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 8,
+        "cell": [
+          31,
+          487,
+          153,
+          166
+        ],
+        "bounds": [
+          33,
+          489,
+          182,
+          651
+        ],
+        "foot": [
+          106.5,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          329.5,
+          483
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 9,
+        "cell": [
+          249,
+          481,
+          163,
+          172
+        ],
+        "bounds": [
+          251,
+          483,
+          410,
+          651
+        ],
+        "foot": [
+          328.5,
+          651
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          487
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 10,
+        "cell": [
+          462,
+          485,
+          175,
+          167
+        ],
+        "bounds": [
+          464,
+          487,
+          635,
+          650
+        ],
+        "foot": [
+          558.0,
+          650
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          490
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 11,
+        "cell": [
+          694,
+          488,
+          162,
+          162
+        ],
+        "bounds": [
+          696,
+          490,
+          854,
+          648
+        ],
+        "foot": [
+          775.0,
+          648
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "west",
+        "row": 2,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          156.0,
+          364
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 4,
+        "cell": [
+          36,
+          362,
+          228,
+          251
+        ],
+        "bounds": [
+          38,
+          364,
+          262,
+          611
+        ],
+        "foot": [
+          161.0,
+          611
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "west",
+        "row": 2,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          463.5,
+          422
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 5,
+        "cell": [
+          350,
+          420,
+          226,
+          193
+        ],
+        "bounds": [
+          352,
+          422,
+          574,
+          611
+        ],
+        "foot": [
+          463.0,
+          611
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "west",
+        "row": 2,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          718
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 12,
+        "cell": [
+          20,
+          716,
+          182,
+          160
+        ],
+        "bounds": [
+          22,
+          718,
+          200,
+          874
+        ],
+        "foot": [
+          87.0,
+          874
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          720
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 13,
+        "cell": [
+          242,
+          718,
+          181,
+          157
+        ],
+        "bounds": [
+          244,
+          720,
+          421,
+          873
+        ],
+        "foot": [
+          308.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          718
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 14,
+        "cell": [
+          465,
+          716,
+          180,
+          158
+        ],
+        "bounds": [
+          467,
+          718,
+          643,
+          872
+        ],
+        "foot": [
+          528.0,
+          872
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          720
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 15,
+        "cell": [
+          686,
+          717,
+          181,
+          158
+        ],
+        "bounds": [
+          688,
+          719,
+          865,
+          873
+        ],
+        "foot": [
+          751.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-west",
+        "row": 3,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          709
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 12,
+        "cell": [
+          19,
+          707,
+          184,
+          168
+        ],
+        "bounds": [
+          21,
+          709,
+          201,
+          873
+        ],
+        "foot": [
+          87.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          335.5,
+          711
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 13,
+        "cell": [
+          240,
+          708,
+          188,
+          167
+        ],
+        "bounds": [
+          242,
+          710,
+          426,
+          873
+        ],
+        "foot": [
+          308.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.5,
+          711
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 14,
+        "cell": [
+          464,
+          708,
+          184,
+          167
+        ],
+        "bounds": [
+          466,
+          710,
+          646,
+          873
+        ],
+        "foot": [
+          529.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          778.0,
+          710
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 15,
+        "cell": [
+          684,
+          708,
+          185,
+          166
+        ],
+        "bounds": [
+          686,
+          710,
+          867,
+          872
+        ],
+        "foot": [
+          754.0,
+          872
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-west",
+        "row": 3,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          712
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 12,
+        "cell": [
+          18,
+          710,
+          186,
+          165
+        ],
+        "bounds": [
+          20,
+          712,
+          202,
+          873
+        ],
+        "foot": [
+          89.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.0,
+          701
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 13,
+        "cell": [
+          243,
+          699,
+          183,
+          176
+        ],
+        "bounds": [
+          245,
+          701,
+          424,
+          873
+        ],
+        "foot": [
+          316.0,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          709
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 14,
+        "cell": [
+          460,
+          707,
+          189,
+          168
+        ],
+        "bounds": [
+          462,
+          709,
+          647,
+          873
+        ],
+        "foot": [
+          543.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          714
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 15,
+        "cell": [
+          684,
+          711,
+          186,
+          164
+        ],
+        "bounds": [
+          686,
+          713,
+          868,
+          873
+        ],
+        "foot": [
+          754.5,
+          873
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-west",
+        "row": 3,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          780.0,
+          373
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 6,
+        "cell": [
+          645,
+          370,
+          257,
+          247
+        ],
+        "bounds": [
+          647,
+          372,
+          900,
+          615
+        ],
+        "foot": [
+          775.5,
+          615
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "north-west",
+        "row": 3,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1087.5,
+          430
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 7,
+        "cell": [
+          961,
+          427,
+          251,
+          188
+        ],
+        "bounds": [
+          963,
+          429,
+          1210,
+          613
+        ],
+        "foot": [
+          1086.5,
+          613
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "north-west",
+        "row": 3,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.0,
+          946
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 16,
+        "cell": [
+          23,
+          943,
+          176,
+          153
+        ],
+        "bounds": [
+          25,
+          945,
+          197,
+          1094
+        ],
+        "foot": [
+          110.5,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          945
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 17,
+        "cell": [
+          246,
+          942,
+          176,
+          154
+        ],
+        "bounds": [
+          248,
+          944,
+          420,
+          1094
+        ],
+        "foot": [
+          333.0,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          945
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 18,
+        "cell": [
+          467,
+          943,
+          175,
+          154
+        ],
+        "bounds": [
+          469,
+          945,
+          640,
+          1095
+        ],
+        "foot": [
+          555.0,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.0,
+          945
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 19,
+        "cell": [
+          688,
+          943,
+          177,
+          156
+        ],
+        "bounds": [
+          690,
+          945,
+          863,
+          1097
+        ],
+        "foot": [
+          777.5,
+          1097
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north",
+        "row": 4,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          939
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 16,
+        "cell": [
+          19,
+          936,
+          184,
+          160
+        ],
+        "bounds": [
+          21,
+          938,
+          201,
+          1094
+        ],
+        "foot": [
+          110.5,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.0,
+          939
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 17,
+        "cell": [
+          242,
+          936,
+          183,
+          160
+        ],
+        "bounds": [
+          244,
+          938,
+          423,
+          1094
+        ],
+        "foot": [
+          332.5,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          939
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 18,
+        "cell": [
+          464,
+          937,
+          182,
+          158
+        ],
+        "bounds": [
+          466,
+          939,
+          644,
+          1093
+        ],
+        "foot": [
+          554.5,
+          1093
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          939
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 19,
+        "cell": [
+          685,
+          936,
+          184,
+          160
+        ],
+        "bounds": [
+          687,
+          938,
+          867,
+          1094
+        ],
+        "foot": [
+          775.5,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north",
+        "row": 4,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.5,
+          944
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 16,
+        "cell": [
+          23,
+          942,
+          177,
+          155
+        ],
+        "bounds": [
+          25,
+          944,
+          198,
+          1095
+        ],
+        "foot": [
+          111.5,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          331.0,
+          933
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 17,
+        "cell": [
+          240,
+          931,
+          183,
+          166
+        ],
+        "bounds": [
+          242,
+          933,
+          421,
+          1095
+        ],
+        "foot": [
+          331.0,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          937
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 18,
+        "cell": [
+          461,
+          935,
+          185,
+          161
+        ],
+        "bounds": [
+          463,
+          937,
+          644,
+          1094
+        ],
+        "foot": [
+          555.0,
+          1094
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.5,
+          944
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 19,
+        "cell": [
+          684,
+          942,
+          183,
+          155
+        ],
+        "bounds": [
+          686,
+          944,
+          865,
+          1095
+        ],
+        "foot": [
+          776.0,
+          1095
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north",
+        "row": 4,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          648.5,
+          283
+        ],
+        "source": "source/mimic_ironbound-rear-hurt.png",
+        "sourcePose": 0,
+        "cell": [
+          279,
+          281,
+          728,
+          685
+        ],
+        "bounds": [
+          281,
+          283,
+          1005,
+          964
+        ],
+        "foot": [
+          657.5,
+          964
+        ],
+        "sourceEdge": false,
+        "scale": 0.09397944199706314,
+        "direction": "north",
+        "row": 4,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          465.5,
+          725
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 9,
+        "cell": [
+          347,
+          722,
+          234,
+          184
+        ],
+        "bounds": [
+          349,
+          724,
+          579,
+          904
+        ],
+        "foot": [
+          464.0,
+          904
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "north",
+        "row": 4,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          1165
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 20,
+        "cell": [
+          20,
+          1162,
+          182,
+          158
+        ],
+        "bounds": [
+          22,
+          1164,
+          200,
+          1318
+        ],
+        "foot": [
+          125.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1164
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 21,
+        "cell": [
+          241,
+          1161,
+          182,
+          159
+        ],
+        "bounds": [
+          243,
+          1163,
+          421,
+          1318
+        ],
+        "foot": [
+          346.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          1164
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 22,
+        "cell": [
+          464,
+          1162,
+          182,
+          158
+        ],
+        "bounds": [
+          466,
+          1164,
+          644,
+          1318
+        ],
+        "foot": [
+          569.0,
+          1318
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          1165
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 23,
+        "cell": [
+          686,
+          1162,
+          182,
+          156
+        ],
+        "bounds": [
+          688,
+          1164,
+          866,
+          1316
+        ],
+        "foot": [
+          791.5,
+          1316
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "north-east",
+        "row": 5,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          108.0,
+          1145
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 20,
+        "cell": [
+          17,
+          1142,
+          186,
+          169
+        ],
+        "bounds": [
+          19,
+          1144,
+          201,
+          1309
+        ],
+        "foot": [
+          123.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          1145
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 21,
+        "cell": [
+          239,
+          1142,
+          187,
+          169
+        ],
+        "bounds": [
+          241,
+          1144,
+          424,
+          1309
+        ],
+        "foot": [
+          350.0,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          551.5,
+          1145
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 22,
+        "cell": [
+          460,
+          1142,
+          187,
+          169
+        ],
+        "bounds": [
+          462,
+          1144,
+          645,
+          1309
+        ],
+        "foot": [
+          567.0,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          774.0,
+          1145
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 23,
+        "cell": [
+          683,
+          1142,
+          185,
+          169
+        ],
+        "bounds": [
+          685,
+          1144,
+          866,
+          1309
+        ],
+        "foot": [
+          789.5,
+          1309
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "north-east",
+        "row": 5,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          106.5,
+          1152
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 20,
+        "cell": [
+          18,
+          1149,
+          185,
+          170
+        ],
+        "bounds": [
+          20,
+          1151,
+          201,
+          1317
+        ],
+        "foot": [
+          120.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          330.5,
+          1147
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 21,
+        "cell": [
+          240,
+          1145,
+          184,
+          174
+        ],
+        "bounds": [
+          242,
+          1147,
+          422,
+          1317
+        ],
+        "foot": [
+          347.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          552.0,
+          1152
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 22,
+        "cell": [
+          462,
+          1149,
+          186,
+          170
+        ],
+        "bounds": [
+          464,
+          1151,
+          646,
+          1317
+        ],
+        "foot": [
+          568.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          775.0,
+          1155
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 23,
+        "cell": [
+          687,
+          1153,
+          183,
+          166
+        ],
+        "bounds": [
+          689,
+          1155,
+          868,
+          1317
+        ],
+        "foot": [
+          789.5,
+          1317
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "north-east",
+        "row": 5,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          767.0,
+          664
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 10,
+        "cell": [
+          649,
+          662,
+          244,
+          244
+        ],
+        "bounds": [
+          651,
+          664,
+          891,
+          904
+        ],
+        "foot": [
+          786.5,
+          904
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "north-east",
+        "row": 5,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1086.0,
+          724
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 11,
+        "cell": [
+          956,
+          721,
+          253,
+          191
+        ],
+        "bounds": [
+          958,
+          723,
+          1207,
+          910
+        ],
+        "foot": [
+          1082.5,
+          910
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "north-east",
+        "row": 5,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          110.0,
+          1371
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 24,
+        "cell": [
+          34,
+          1368,
+          155,
+          170
+        ],
+        "bounds": [
+          36,
+          1370,
+          187,
+          1536
+        ],
+        "foot": [
+          109.0,
+          1536
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1371
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 25,
+        "cell": [
+          256,
+          1368,
+          155,
+          173
+        ],
+        "bounds": [
+          258,
+          1370,
+          409,
+          1539
+        ],
+        "foot": [
+          330.5,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1371
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 26,
+        "cell": [
+          478,
+          1368,
+          154,
+          173
+        ],
+        "bounds": [
+          480,
+          1370,
+          630,
+          1539
+        ],
+        "foot": [
+          552.0,
+          1539
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1371
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 27,
+        "cell": [
+          700,
+          1368,
+          157,
+          172
+        ],
+        "bounds": [
+          702,
+          1370,
+          855,
+          1538
+        ],
+        "foot": [
+          774.0,
+          1538
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "east",
+        "row": 6,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          109.5,
+          1367
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 24,
+        "cell": [
+          31,
+          1364,
+          159,
+          171
+        ],
+        "bounds": [
+          33,
+          1366,
+          188,
+          1533
+        ],
+        "foot": [
+          111.5,
+          1533
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          332.0,
+          1367
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 25,
+        "cell": [
+          252,
+          1364,
+          160,
+          172
+        ],
+        "bounds": [
+          254,
+          1366,
+          410,
+          1534
+        ],
+        "foot": [
+          331.0,
+          1534
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.0,
+          1367
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 26,
+        "cell": [
+          475,
+          1364,
+          158,
+          171
+        ],
+        "bounds": [
+          477,
+          1366,
+          631,
+          1533
+        ],
+        "foot": [
+          554.5,
+          1533
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.5,
+          1367
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 27,
+        "cell": [
+          697,
+          1364,
+          159,
+          172
+        ],
+        "bounds": [
+          699,
+          1366,
+          854,
+          1534
+        ],
+        "foot": [
+          775.5,
+          1534
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "east",
+        "row": 6,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          110.5,
+          1369
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 24,
+        "cell": [
+          33,
+          1367,
+          155,
+          167
+        ],
+        "bounds": [
+          35,
+          1369,
+          186,
+          1532
+        ],
+        "foot": [
+          111.0,
+          1532
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          328.5,
+          1362
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 25,
+        "cell": [
+          250,
+          1359,
+          154,
+          173
+        ],
+        "bounds": [
+          252,
+          1361,
+          402,
+          1530
+        ],
+        "foot": [
+          329.5,
+          1530
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          553.5,
+          1369
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 26,
+        "cell": [
+          471,
+          1367,
+          176,
+          165
+        ],
+        "bounds": [
+          473,
+          1369,
+          645,
+          1530
+        ],
+        "foot": [
+          553.5,
+          1530
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          779.0,
+          1369
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 27,
+        "cell": [
+          697,
+          1367,
+          160,
+          165
+        ],
+        "bounds": [
+          699,
+          1369,
+          855,
+          1530
+        ],
+        "foot": [
+          777.0,
+          1530
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "east",
+        "row": 6,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          170.5,
+          965
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 12,
+        "cell": [
+          57,
+          963,
+          220,
+          255
+        ],
+        "bounds": [
+          59,
+          965,
+          275,
+          1216
+        ],
+        "foot": [
+          155.0,
+          1216
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "east",
+        "row": 6,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          462.0,
+          1026
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 13,
+        "cell": [
+          349,
+          1024,
+          218,
+          192
+        ],
+        "bounds": [
+          351,
+          1026,
+          565,
+          1214
+        ],
+        "foot": [
+          458.0,
+          1214
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "east",
+        "row": 6,
+        "action": "down",
+        "frame": 0
+      },
+      {
+        "head": [
+          111.5,
+          1605
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 28,
+        "cell": [
+          20,
+          1602,
+          182,
+          158
+        ],
+        "bounds": [
+          22,
+          1604,
+          200,
+          1758
+        ],
+        "foot": [
+          84.0,
+          1758
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1610
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 29,
+        "cell": [
+          243,
+          1607,
+          180,
+          155
+        ],
+        "bounds": [
+          245,
+          1609,
+          421,
+          1760
+        ],
+        "foot": [
+          309.0,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 1
+      },
+      {
+        "head": [
+          556.0,
+          1607
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 30,
+        "cell": [
+          464,
+          1605,
+          183,
+          156
+        ],
+        "bounds": [
+          466,
+          1607,
+          645,
+          1759
+        ],
+        "foot": [
+          527.0,
+          1759
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          1608
+        ],
+        "source": "source/mimic_ironbound-idle.png",
+        "sourcePose": 31,
+        "cell": [
+          686,
+          1605,
+          181,
+          157
+        ],
+        "bounds": [
+          688,
+          1607,
+          865,
+          1760
+        ],
+        "foot": [
+          749.0,
+          1760
+        ],
+        "sourceEdge": false,
+        "scale": 0.4722222222222222,
+        "direction": "south-east",
+        "row": 7,
+        "action": "idle",
+        "frame": 3
+      },
+      {
+        "head": [
+          112.0,
+          1593
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 28,
+        "cell": [
+          18,
+          1590,
+          187,
+          169
+        ],
+        "bounds": [
+          20,
+          1592,
+          203,
+          1757
+        ],
+        "foot": [
+          86.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 0
+      },
+      {
+        "head": [
+          334.5,
+          1595
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 29,
+        "cell": [
+          240,
+          1593,
+          187,
+          166
+        ],
+        "bounds": [
+          242,
+          1595,
+          425,
+          1757
+        ],
+        "foot": [
+          309.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 1
+      },
+      {
+        "head": [
+          554.5,
+          1595
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 30,
+        "cell": [
+          460,
+          1593,
+          187,
+          166
+        ],
+        "bounds": [
+          462,
+          1595,
+          645,
+          1757
+        ],
+        "foot": [
+          530.0,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 2
+      },
+      {
+        "head": [
+          777.5,
+          1596
+        ],
+        "source": "source/mimic_ironbound-walk.png",
+        "sourcePose": 31,
+        "cell": [
+          684,
+          1593,
+          188,
+          166
+        ],
+        "bounds": [
+          686,
+          1595,
+          870,
+          1757
+        ],
+        "foot": [
+          748.0,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4563758389261745,
+        "direction": "south-east",
+        "row": 7,
+        "action": "walk",
+        "frame": 3
+      },
+      {
+        "head": [
+          111.0,
+          1599
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 28,
+        "cell": [
+          18,
+          1596,
+          186,
+          163
+        ],
+        "bounds": [
+          20,
+          1598,
+          202,
+          1757
+        ],
+        "foot": [
+          85.0,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 0
+      },
+      {
+        "head": [
+          333.5,
+          1591
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 29,
+        "cell": [
+          240,
+          1588,
+          185,
+          171
+        ],
+        "bounds": [
+          242,
+          1590,
+          423,
+          1757
+        ],
+        "foot": [
+          311.0,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 1
+      },
+      {
+        "head": [
+          555.0,
+          1599
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 30,
+        "cell": [
+          460,
+          1597,
+          187,
+          162
+        ],
+        "bounds": [
+          462,
+          1599,
+          645,
+          1757
+        ],
+        "foot": [
+          527.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 2
+      },
+      {
+        "head": [
+          776.0,
+          1600
+        ],
+        "source": "source/mimic_ironbound-attack.png",
+        "sourcePose": 31,
+        "cell": [
+          683,
+          1597,
+          187,
+          162
+        ],
+        "bounds": [
+          685,
+          1599,
+          868,
+          1757
+        ],
+        "foot": [
+          749.5,
+          1757
+        ],
+        "sourceEdge": false,
+        "scale": 0.4594594594594595,
+        "direction": "south-east",
+        "row": 7,
+        "action": "attack",
+        "frame": 3
+      },
+      {
+        "head": [
+          776.5,
+          966
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 14,
+        "cell": [
+          643,
+          964,
+          250,
+          258
+        ],
+        "bounds": [
+          645,
+          966,
+          891,
+          1220
+        ],
+        "foot": [
+          754.0,
+          1220
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "south-east",
+        "row": 7,
+        "action": "hurt",
+        "frame": 0
+      },
+      {
+        "head": [
+          1088.0,
+          1033
+        ],
+        "source": "source/mimic_ironbound-damage.png",
+        "sourcePose": 15,
+        "cell": [
+          961,
+          1031,
+          249,
+          192
+        ],
+        "bounds": [
+          963,
+          1033,
+          1208,
+          1221
+        ],
+        "foot": [
+          1085.5,
+          1221
+        ],
+        "sourceEdge": false,
+        "scale": 0.2601626016260163,
+        "direction": "south-east",
+        "row": 7,
+        "action": "down",
+        "frame": 0
+      }
+    ]
+  }
+]

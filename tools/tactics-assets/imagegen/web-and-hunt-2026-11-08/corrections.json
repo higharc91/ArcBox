@@ -1,0 +1,30 @@
+[
+  {
+    "mob": "wolf_alpha",
+    "action": "down",
+    "source": "wolf_alpha-rear-down",
+    "count": 3,
+    "columns": 3,
+    "heightFactor": 0.55,
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          0
+        ]
+      },
+      {
+        "row": 4,
+        "poses": [
+          1
+        ]
+      },
+      {
+        "row": 5,
+        "poses": [
+          2
+        ]
+      }
+    ]
+  }
+]

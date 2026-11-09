@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 0,
+    "scale": 1.125748502994012,
+    "bounds": [
+      104,
+      130,
+      279,
+      317
+    ],
+    "count": 20067
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 1,
+    "scale": 1.125748502994012,
+    "bounds": [
+      103,
+      132,
+      278,
+      318
+    ],
+    "count": 19858
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 2,
+    "scale": 1.125748502994012,
+    "bounds": [
+      103,
+      132,
+      277,
+      318
+    ],
+    "count": 20076
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 3,
+    "scale": 1.125748502994012,
+    "bounds": [
+      103,
+      130,
+      279,
+      317
+    ],
+    "count": 20178
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 0,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      104,
+      131,
+      285,
+      320
+    ],
+    "count": 22000
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 1,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      97,
+      127,
+      271,
+      320
+    ],
+    "count": 21835
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 2,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      101,
+      128,
+      274,
+      320
+    ],
+    "count": 21563
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 3,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      101,
+      130,
+      281,
+      320
+    ],
+    "count": 22009
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 0,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      101,
+      133,
+      282,
+      320
+    ],
+    "count": 21757
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 1,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      106,
+      131,
+      278,
+      320
+    ],
+    "count": 20582
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 2,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      102,
+      138,
+      283,
+      320
+    ],
+    "count": 19814
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 3,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      96,
+      132,
+      278,
+      320
+    ],
+    "count": 22075
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 0,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      96,
+      140,
+      251,
+      320
+    ],
+    "count": 16977
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 1,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      110,
+      206,
+      273,
+      320
+    ],
+    "count": 12916
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 0,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      103,
+      132,
+      279,
+      320
+    ],
+    "count": 20932
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 1,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      109,
+      127,
+      297,
+      320
+    ],
+    "count": 20613
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 2,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      90,
+      128,
+      288,
+      320
+    ],
+    "count": 18580
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 3,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      103,
+      132,
+      278,
+      320
+    ],
+    "count": 21073
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 0,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      102,
+      132,
+      282,
+      320
+    ],
+    "count": 21322
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 1,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      104,
+      133,
+      280,
+      320
+    ],
+    "count": 21263
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 2,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      95,
+      132,
+      284,
+      320
+    ],
+    "count": 21177
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 3,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      101,
+      132,
+      282,
+      320
+    ],
+    "count": 21512
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 4,
+    "scale": 1.125748502994012,
+    "bounds": [
+      111,
+      132,
+      269,
+      318
+    ],
+    "count": 18677
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 5,
+    "scale": 1.125748502994012,
+    "bounds": [
+      115,
+      133,
+      271,
+      318
+    ],
+    "count": 18319
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 6,
+    "scale": 1.125748502994012,
+    "bounds": [
+      114,
+      132,
+      271,
+      318
+    ],
+    "count": 18447
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 7,
+    "scale": 1.125748502994012,
+    "bounds": [
+      114,
+      132,
+      270,
+      318
+    ],
+    "count": 18260
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 4,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      80,
+      127,
+      240,
+      320
+    ],
+    "count": 19930
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 5,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      80,
+      128,
+      246,
+      320
+    ],
+    "count": 19492
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 6,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      101,
+      134,
+      263,
+      320
+    ],
+    "count": 20032
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 7,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      80,
+      130,
+      238,
+      320
+    ],
+    "count": 19417
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 4,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      102,
+      136,
+      271,
+      320
+    ],
+    "count": 19932
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 5,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      65,
+      135,
+      244,
+      320
+    ],
+    "count": 19023
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 6,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      33,
+      138,
+      245,
+      320
+    ],
+    "count": 19662
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 7,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      103,
+      136,
+      269,
+      320
+    ],
+    "count": 20222
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 2,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      52,
+      136,
+      211,
+      320
+    ],
+    "count": 15907
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 3,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      102,
+      204,
+      280,
+      320
+    ],
+    "count": 13878
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 4,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      103,
+      131,
+      270,
+      320
+    ],
+    "count": 19603
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 5,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      92,
+      119,
+      278,
+      320
+    ],
+    "count": 19967
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 6,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      67,
+      128,
+      282,
+      320
+    ],
+    "count": 19162
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 7,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      104,
+      132,
+      272,
+      320
+    ],
+    "count": 19606
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 4,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      106,
+      130,
+      275,
+      320
+    ],
+    "count": 20463
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 5,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      108,
+      130,
+      274,
+      320
+    ],
+    "count": 20521
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 6,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      102,
+      127,
+      279,
+      320
+    ],
+    "count": 20987
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 7,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      109,
+      132,
+      273,
+      320
+    ],
+    "count": 20012
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 8,
+    "scale": 1.125748502994012,
+    "bounds": [
+      98,
+      128,
+      226,
+      318
+    ],
+    "count": 14687
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 9,
+    "scale": 1.125748502994012,
+    "bounds": [
+      101,
+      129,
+      224,
+      317
+    ],
+    "count": 14195
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 10,
+    "scale": 1.125748502994012,
+    "bounds": [
+      101,
+      127,
+      224,
+      318
+    ],
+    "count": 14330
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 11,
+    "scale": 1.125748502994012,
+    "bounds": [
+      100,
+      128,
+      223,
+      318
+    ],
+    "count": 14109
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 8,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      88,
+      127,
+      225,
+      320
+    ],
+    "count": 15680
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 9,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      93,
+      127,
+      228,
+      320
+    ],
+    "count": 15667
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 10,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      95,
+      127,
+      232,
+      320
+    ],
+    "count": 15179
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 11,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      89,
+      129,
+      227,
+      320
+    ],
+    "count": 15214
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 8,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      86,
+      135,
+      223,
+      320
+    ],
+    "count": 15563
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 9,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      90,
+      135,
+      228,
+      320
+    ],
+    "count": 15479
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 10,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      18,
+      135,
+      224,
+      320
+    ],
+    "count": 18202
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 11,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      93,
+      135,
+      225,
+      320
+    ],
+    "count": 15414
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 4,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      93,
+      141,
+      233,
+      320
+    ],
+    "count": 13464
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 5,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      105,
+      208,
+      278,
+      320
+    ],
+    "count": 13673
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 8,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      98,
+      126,
+      230,
+      320
+    ],
+    "count": 14617
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 9,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      54,
+      109,
+      215,
+      320
+    ],
+    "count": 16784
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 10,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      9,
+      125,
+      230,
+      320
+    ],
+    "count": 17952
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 11,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      101,
+      126,
+      233,
+      320
+    ],
+    "count": 14735
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 8,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      92,
+      135,
+      225,
+      320
+    ],
+    "count": 15592
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 9,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      91,
+      132,
+      223,
+      320
+    ],
+    "count": 16045
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 10,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      85,
+      133,
+      224,
+      320
+    ],
+    "count": 16137
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 11,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      89,
+      133,
+      225,
+      320
+    ],
+    "count": 15949
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 12,
+    "scale": 1.125748502994012,
+    "bounds": [
+      114,
+      128,
+      244,
+      318
+    ],
+    "count": 16239
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 13,
+    "scale": 1.125748502994012,
+    "bounds": [
+      119,
+      129,
+      243,
+      317
+    ],
+    "count": 16013
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 14,
+    "scale": 1.125748502994012,
+    "bounds": [
+      118,
+      129,
+      243,
+      317
+    ],
+    "count": 16087
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 15,
+    "scale": 1.125748502994012,
+    "bounds": [
+      117,
+      129,
+      243,
+      317
+    ],
+    "count": 16135
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 12,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      111,
+      127,
+      249,
+      320
+    ],
+    "count": 17941
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 13,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      130,
+      131,
+      260,
+      320
+    ],
+    "count": 16790
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 14,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      111,
+      129,
+      247,
+      320
+    ],
+    "count": 17579
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 15,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      113,
+      133,
+      252,
+      320
+    ],
+    "count": 17552
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 12,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      127,
+      131,
+      266,
+      320
+    ],
+    "count": 18341
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 13,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      127,
+      128,
+      274,
+      320
+    ],
+    "count": 18409
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 14,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      78,
+      133,
+      273,
+      320
+    ],
+    "count": 17643
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 15,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      128,
+      131,
+      271,
+      320
+    ],
+    "count": 18308
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 6,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      130,
+      138,
+      260,
+      320
+    ],
+    "count": 13540
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 7,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      103,
+      205,
+      279,
+      320
+    ],
+    "count": 12862
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 12,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      130,
+      124,
+      257,
+      320
+    ],
+    "count": 17265
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 13,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      123,
+      114,
+      264,
+      320
+    ],
+    "count": 19227
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 14,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      66,
+      124,
+      270,
+      320
+    ],
+    "count": 17097
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 15,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      131,
+      124,
+      259,
+      320
+    ],
+    "count": 17398
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 12,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      126,
+      128,
+      263,
+      320
+    ],
+    "count": 17893
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 13,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      125,
+      126,
+      265,
+      320
+    ],
+    "count": 18489
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 14,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      127,
+      126,
+      264,
+      320
+    ],
+    "count": 18508
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 15,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      129,
+      128,
+      265,
+      320
+    ],
+    "count": 18168
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 16,
+    "scale": 1.125748502994012,
+    "bounds": [
+      102,
+      126,
+      278,
+      318
+    ],
+    "count": 20631
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 17,
+    "scale": 1.125748502994012,
+    "bounds": [
+      103,
+      127,
+      278,
+      318
+    ],
+    "count": 20570
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 18,
+    "scale": 1.125748502994012,
+    "bounds": [
+      103,
+      127,
+      277,
+      318
+    ],
+    "count": 20546
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 19,
+    "scale": 1.125748502994012,
+    "bounds": [
+      102,
+      126,
+      278,
+      318
+    ],
+    "count": 20789
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 16,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      101,
+      119,
+      284,
+      320
+    ],
+    "count": 23308
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 17,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      105,
+      122,
+      277,
+      320
+    ],
+    "count": 21875
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 18,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      100,
+      120,
+      276,
+      320
+    ],
+    "count": 22893
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 19,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      101,
+      120,
+      281,
+      320
+    ],
+    "count": 23156
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 16,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      98,
+      134,
+      282,
+      320
+    ],
+    "count": 22216
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 17,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      96,
+      133,
+      272,
+      320
+    ],
+    "count": 20313
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 18,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      72,
+      135,
+      284,
+      320
+    ],
+    "count": 20232
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 19,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      97,
+      135,
+      283,
+      320
+    ],
+    "count": 22141
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 8,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      133,
+      133,
+      282,
+      320
+    ],
+    "count": 16335
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 9,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      108,
+      204,
+      274,
+      320
+    ],
+    "count": 13572
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 16,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      104,
+      123,
+      280,
+      320
+    ],
+    "count": 20849
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 17,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      117,
+      103,
+      302,
+      320
+    ],
+    "count": 19904
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 18,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      119,
+      122,
+      343,
+      320
+    ],
+    "count": 19080
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 19,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      104,
+      122,
+      278,
+      320
+    ],
+    "count": 20956
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 16,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      102,
+      128,
+      283,
+      320
+    ],
+    "count": 21941
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 17,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      102,
+      126,
+      284,
+      320
+    ],
+    "count": 22463
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 18,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      99,
+      126,
+      280,
+      320
+    ],
+    "count": 22348
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 19,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      102,
+      127,
+      283,
+      320
+    ],
+    "count": 22038
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 20,
+    "scale": 1.125748502994012,
+    "bounds": [
+      133,
+      127,
+      264,
+      318
+    ],
+    "count": 17087
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 21,
+    "scale": 1.125748502994012,
+    "bounds": [
+      134,
+      127,
+      263,
+      318
+    ],
+    "count": 16862
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 22,
+    "scale": 1.125748502994012,
+    "bounds": [
+      133,
+      126,
+      263,
+      318
+    ],
+    "count": 17156
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 23,
+    "scale": 1.125748502994012,
+    "bounds": [
+      135,
+      127,
+      263,
+      318
+    ],
+    "count": 16917
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 20,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      129,
+      126,
+      254,
+      320
+    ],
+    "count": 17533
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 21,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      113,
+      126,
+      241,
+      320
+    ],
+    "count": 17592
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 22,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      129,
+      124,
+      252,
+      320
+    ],
+    "count": 17637
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 23,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      127,
+      127,
+      257,
+      320
+    ],
+    "count": 17867
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 20,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      118,
+      134,
+      261,
+      320
+    ],
+    "count": 18395
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 21,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      113,
+      133,
+      248,
+      320
+    ],
+    "count": 17029
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 22,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      119,
+      131,
+      296,
+      320
+    ],
+    "count": 16730
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 23,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      117,
+      134,
+      265,
+      320
+    ],
+    "count": 18448
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 10,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      111,
+      127,
+      248,
+      320
+    ],
+    "count": 14720
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 11,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      105,
+      205,
+      277,
+      320
+    ],
+    "count": 12412
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 20,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      122,
+      128,
+      267,
+      320
+    ],
+    "count": 18152
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 21,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      102,
+      106,
+      288,
+      320
+    ],
+    "count": 19199
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 22,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      83,
+      127,
+      314,
+      320
+    ],
+    "count": 17997
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 23,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      123,
+      125,
+      268,
+      320
+    ],
+    "count": 18412
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 20,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      132,
+      127,
+      265,
+      320
+    ],
+    "count": 18165
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 21,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      133,
+      124,
+      265,
+      320
+    ],
+    "count": 18239
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 22,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      133,
+      125,
+      271,
+      320
+    ],
+    "count": 18528
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 23,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      132,
+      127,
+      268,
+      320
+    ],
+    "count": 18100
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 24,
+    "scale": 1.125748502994012,
+    "bounds": [
+      155,
+      129,
+      276,
+      317
+    ],
+    "count": 14049
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 25,
+    "scale": 1.125748502994012,
+    "bounds": [
+      155,
+      130,
+      274,
+      317
+    ],
+    "count": 13670
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 26,
+    "scale": 1.125748502994012,
+    "bounds": [
+      153,
+      130,
+      274,
+      317
+    ],
+    "count": 13928
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 27,
+    "scale": 1.125748502994012,
+    "bounds": [
+      153,
+      129,
+      273,
+      317
+    ],
+    "count": 13726
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 24,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      148,
+      126,
+      277,
+      320
+    ],
+    "count": 14779
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 25,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      161,
+      126,
+      288,
+      320
+    ],
+    "count": 14346
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 26,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      144,
+      127,
+      276,
+      320
+    ],
+    "count": 14937
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 27,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      153,
+      126,
+      280,
+      320
+    ],
+    "count": 15103
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 24,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      152,
+      131,
+      285,
+      320
+    ],
+    "count": 14999
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 25,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      153,
+      129,
+      290,
+      320
+    ],
+    "count": 15602
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 26,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      152,
+      134,
+      344,
+      320
+    ],
+    "count": 16107
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 27,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      153,
+      131,
+      290,
+      320
+    ],
+    "count": 15401
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 12,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      144,
+      136,
+      262,
+      320
+    ],
+    "count": 12664
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 13,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      110,
+      206,
+      273,
+      320
+    ],
+    "count": 12790
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 24,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      148,
+      125,
+      281,
+      320
+    ],
+    "count": 15062
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 25,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      134,
+      113,
+      275,
+      320
+    ],
+    "count": 15668
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 26,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      152,
+      124,
+      351,
+      320
+    ],
+    "count": 15528
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 27,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      148,
+      125,
+      280,
+      320
+    ],
+    "count": 15060
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 24,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      155,
+      133,
+      282,
+      320
+    ],
+    "count": 14903
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 25,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      155,
+      130,
+      280,
+      320
+    ],
+    "count": 14898
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 26,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      148,
+      131,
+      278,
+      320
+    ],
+    "count": 15274
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 27,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      152,
+      131,
+      279,
+      320
+    ],
+    "count": 14978
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 28,
+    "scale": 1.125748502994012,
+    "bounds": [
+      106,
+      134,
+      271,
+      318
+    ],
+    "count": 18850
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 29,
+    "scale": 1.125748502994012,
+    "bounds": [
+      106,
+      134,
+      270,
+      318
+    ],
+    "count": 18798
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 30,
+    "scale": 1.125748502994012,
+    "bounds": [
+      106,
+      134,
+      271,
+      318
+    ],
+    "count": 18943
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_frost-idle.png",
+    "sourcePose": 31,
+    "scale": 1.125748502994012,
+    "bounds": [
+      105,
+      133,
+      271,
+      318
+    ],
+    "count": 18952
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 28,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      122,
+      134,
+      278,
+      320
+    ],
+    "count": 19711
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 29,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      119,
+      134,
+      277,
+      320
+    ],
+    "count": 19170
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 30,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      115,
+      136,
+      284,
+      320
+    ],
+    "count": 20101
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_frost-walk.png",
+    "sourcePose": 31,
+    "scale": 1.1677018633540373,
+    "bounds": [
+      112,
+      136,
+      281,
+      320
+    ],
+    "count": 20511
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 28,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      140,
+      134,
+      305,
+      320
+    ],
+    "count": 19340
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 29,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      144,
+      134,
+      306,
+      320
+    ],
+    "count": 18660
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 30,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      168,
+      139,
+      346,
+      320
+    ],
+    "count": 16814
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_frost-attack.png",
+    "sourcePose": 31,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      137,
+      134,
+      305,
+      320
+    ],
+    "count": 19629
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 14,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      165,
+      134,
+      314,
+      320
+    ],
+    "count": 15765
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-damage.png",
+    "sourcePose": 15,
+    "scale": 0.7003891050583657,
+    "bounds": [
+      105,
+      208,
+      277,
+      320
+    ],
+    "count": 12911
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 28,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      114,
+      131,
+      285,
+      320
+    ],
+    "count": 19822
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 29,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      162,
+      117,
+      335,
+      320
+    ],
+    "count": 19602
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 30,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      167,
+      131,
+      358,
+      320
+    ],
+    "count": 15972
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_frost-throw.png",
+    "sourcePose": 31,
+    "scale": 1.1124260355029585,
+    "bounds": [
+      116,
+      131,
+      285,
+      320
+    ],
+    "count": 19964
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 28,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      104,
+      138,
+      273,
+      320
+    ],
+    "count": 19910
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 29,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      105,
+      136,
+      276,
+      320
+    ],
+    "count": 20457
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 30,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      101,
+      136,
+      277,
+      320
+    ],
+    "count": 20080
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_frost-roar.png",
+    "sourcePose": 31,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      105,
+      136,
+      278,
+      320
+    ],
+    "count": 20563
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "dragon_black",
+    "label": "Black Dragon",
+    "key": "bosses.dragon.black",
+    "primaryId": "mob_refresh_dragon",
+    "height": 200,
+    "size": 512,
+    "anchor": [
+      256,
+      400
+    ],
+    "portraitSize": 88,
+    "idleFps": 3,
+    "walkFps": 4,
+    "identity": "Charcoal/obsidian scales, slate-blue highlights, smoky wine wing membranes, grey belly scutes, aged ivory horns. Angular lean crocodilian skull and small amber eyes."
+  },
+  {
+    "id": "dragon_blue",
+    "label": "Blue Dragon",
+    "key": "bosses.dragon.blue",
+    "primaryId": "mob_refresh_dragon",
+    "height": 200,
+    "size": 512,
+    "anchor": [
+      256,
+      400
+    ],
+    "portraitSize": 88,
+    "idleFps": 3,
+    "walkFps": 4,
+    "identity": "Deep cobalt/steel-blue scales, indigo shadows, slate violet wing membranes, warm grey belly scutes, ivory swept horns and compact jagged crown, small amber eyes."
+  },
+  {
+    "id": "dragon_green",
+    "label": "Green Dragon",
+    "key": "bosses.dragon.green",
+    "primaryId": "mob_refresh_dragon",
+    "height": 200,
+    "size": 512,
+    "anchor": [
+      256,
+      400
+    ],
+    "portraitSize": 88,
+    "idleFps": 3,
+    "walkFps": 4,
+    "identity": "Forest/moss green scales, desaturated olive highlights, fern green wing membranes, pale tan belly scutes, paired bone swept horns and small amber eyes."
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "freshPhone": {
+    "facing": "0",
+    "width": 320,
+    "loaded": 3,
+    "viewport": 390,
+    "document": 390
+  },
+  "phoneAfterTurn": {
+    "loaded": 3,
+    "facing": "4"
+  },
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1390
+    },
+    {
+      "title": "Development battle · creatures beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Vine lashes, spectral touch and Life Drain contact through the Godot beat path",
+      "width": 960,
+      "height": 680
+    },
+    {
+      "title": "Overworld · Creature scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "29832553",
+    "walk": "c8b8038a",
+    "attack": "d006b9fa",
+    "hurt": "feb263b7",
+    "down": "e89a4d0a",
+    "cast": "f1b2db30"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "sapling_autumn",
+      "hashes": [
+        "c77d5394",
+        "e550198e",
+        "5a8486b1",
+        "a50ab381"
+      ]
+    },
+    {
+      "id": "sapling_blossom",
+      "hashes": [
+        "823c4c0e",
+        "e9afd1d8",
+        "8b96cb4f",
+        "e19fee5c"
+      ]
+    },
+    {
+      "id": "wraith_shade",
+      "hashes": [
+        "2ed06a23",
+        "9a446fa4",
+        "adae2fcc",
+        "c2ac9bfb"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

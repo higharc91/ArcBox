@@ -1,0 +1,183 @@
+{
+  "dragon_black_idle": {
+    "promptKey": "dragon_black_idle",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png"
+    ]
+  },
+  "dragon_blue_idle": {
+    "promptKey": "dragon_blue_idle",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png"
+    ]
+  },
+  "dragon_green_idle": {
+    "promptKey": "dragon_green_idle",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png"
+    ]
+  },
+  "dragon_black_walk": {
+    "promptKey": "dragon_black_walk",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_black-idle.png"
+    ]
+  },
+  "dragon_blue_walk": {
+    "promptKey": "dragon_blue_walk",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_blue-idle.png"
+    ]
+  },
+  "dragon_green_walk": {
+    "promptKey": "dragon_green_walk",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragon_black_attack": {
+    "promptKey": "dragon_black_attack",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_black-idle.png"
+    ]
+  },
+  "dragon_blue_attack": {
+    "promptKey": "dragon_blue_attack",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_blue-idle.png"
+    ]
+  },
+  "dragon_green_attack": {
+    "promptKey": "dragon_green_attack",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragon_black_damage": {
+    "promptKey": "dragon_black_damage",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_black-idle.png"
+    ]
+  },
+  "dragon_blue_damage": {
+    "promptKey": "dragon_blue_damage",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_blue-idle.png"
+    ]
+  },
+  "dragon_green_damage": {
+    "promptKey": "dragon_green_damage",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragon_black_breath": {
+    "promptKey": "dragon_black_breath",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_black-idle.png"
+    ]
+  },
+  "dragon_blue_breath": {
+    "promptKey": "dragon_blue_breath",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_blue-idle.png"
+    ]
+  },
+  "dragon_green_breath": {
+    "promptKey": "dragon_green_breath",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragon_black_roar": {
+    "promptKey": "dragon_black_roar",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_black-idle.png"
+    ]
+  },
+  "dragon_blue_roar": {
+    "promptKey": "dragon_blue_roar",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_blue-idle.png"
+    ]
+  },
+  "dragon_green_roar": {
+    "promptKey": "dragon_green_roar",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragon_black_wingbeat": {
+    "promptKey": "dragon_black_wingbeat",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_black-idle.png"
+    ]
+  },
+  "dragon_blue_wingbeat": {
+    "promptKey": "dragon_blue_wingbeat",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_blue-idle.png"
+    ]
+  },
+  "dragon_green_wingbeat": {
+    "promptKey": "dragon_green_wingbeat",
+    "references": [
+      "references/dragon_black-idle.png",
+      "../../concepts/wyrm-triad-2026-11-08/three-variants.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragons_rear_left_damage": {
+    "promptKey": "dragons_rear_left_damage",
+    "references": [
+      "source/dragon_black-idle.png",
+      "source/dragon_blue-idle.png",
+      "source/dragon_green-idle.png"
+    ]
+  },
+  "dragons_east_wingbeat": {
+    "promptKey": "dragons_east_wingbeat",
+    "references": [
+      "source/dragon_black-idle.png",
+      "source/dragon_blue-idle.png",
+      "source/dragon_green-idle.png"
+    ]
+  }
+}

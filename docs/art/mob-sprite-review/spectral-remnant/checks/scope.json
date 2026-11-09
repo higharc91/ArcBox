@@ -1,0 +1,18 @@
+{
+  "priorCommit": "d5ce1853",
+  "addedCreatureEntries": [
+    "mob_refresh_wraith_spectre"
+  ],
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "rulesAndAbilitiesUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "sourceImages": 6,
+  "sourceOriginalsAvailableAndChecked": true,
+  "packedFrameKeys": 144,
+  "distinctSelectedWholeFigures": 144,
+  "runtimeAssets": 1,
+  "mainUntouchedForPlaytest": true
+}

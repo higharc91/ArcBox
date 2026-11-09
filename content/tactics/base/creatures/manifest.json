@@ -117,7 +117,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_goat": {
       "file": "fauna_goat.png",
@@ -224,7 +224,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_fox": {
       "file": "fauna_fox.png",
@@ -331,7 +331,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_duck": {
       "file": "fauna_duck.png",
@@ -438,7 +438,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_crow": {
       "file": "fauna_crow.png",
@@ -556,7 +556,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_dog": {
       "file": "fauna_dog.png",
@@ -663,7 +663,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_sheep": {
       "file": "fauna_sheep.png",
@@ -770,7 +770,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "wolf_grey": {
       "file": "wolf_grey.png",
@@ -14696,6 +14696,2886 @@
       "family": "bear",
       "variant": "druid_elder_bear",
       "provenance": "Pose-keyed Druid leaf ties and shoulder bark on the approved bear_brown anatomy and eight-direction motion. No source creature atlas is modified."
+    },
+    "mob_refresh_bat_vampire": {
+      "file": "mob_refresh_bat_vampire.png",
+      "family": "bat_dusk",
+      "variant": "crypt-kin",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          240
+        ]
+      },
+      "portrait": [
+        133,
+        150,
+        54,
+        54
+      ],
+      "headTop": 127,
+      "overheadClearance": {
+        "walk": 17.68,
+        "attack": 7.44
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 54.4,
+      "footprintHeight": 35.84,
+      "keys": [
+        "beasts.bat.vampire"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 8,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/crypt-kin-2026-11-08/."
+    },
+    "mob_refresh_bear_undead": {
+      "file": "mob_refresh_bear_undead.png",
+      "family": "bear_brown",
+      "variant": "crypt-kin",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        96,
+        154,
+        64,
+        64
+      ],
+      "headTop": 99,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 41.92,
+      "footprintHeight": 39.68,
+      "keys": [
+        "beasts.bear.undead"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/crypt-kin-2026-11-08/."
+    },
+    "mob_refresh_slime_crystal": {
+      "file": "mob_refresh_slime_crystal.png",
+      "family": "slime_green",
+      "variant": "crypt-kin",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        111,
+        170,
+        48,
+        48
+      ],
+      "headTop": 156,
+      "overheadClearance": {
+        "walk": 4.88
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 24.96,
+      "footprintHeight": 21.76,
+      "keys": [
+        "beasts.slime.crystal"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 2,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-companion concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/crypt-kin-2026-11-08/."
+    },
+    "mob_refresh_spider_phase": {
+      "file": "mob_refresh_spider_phase.png",
+      "family": "spider_black",
+      "variant": "web-and-hunt",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          260
+        ]
+      },
+      "portrait": [
+        131,
+        182,
+        58,
+        58
+      ],
+      "headTop": 133,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 48.32,
+      "footprintHeight": 40.64,
+      "keys": [
+        "beasts.spider.phase"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/web-and-hunt-2026-11-08/."
+    },
+    "mob_refresh_wolf_alpha": {
+      "file": "mob_refresh_wolf_alpha.png",
+      "family": "wolf_dire",
+      "variant": "web-and-hunt",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        100,
+        117,
+        56,
+        56
+      ],
+      "headTop": 108,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 37.76,
+      "footprintHeight": 36.8,
+      "keys": [
+        "beasts.wolf.alpha"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/web-and-hunt-2026-11-08/."
+    },
+    "mob_refresh_crab_deep": {
+      "file": "mob_refresh_crab_deep.png",
+      "family": "crab_shore",
+      "variant": "web-and-hunt",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          260
+        ]
+      },
+      "portrait": [
+        126,
+        161,
+        66,
+        66
+      ],
+      "headTop": 135,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 55.04,
+      "footprintHeight": 39.68,
+      "keys": [
+        "bestiary.crab.deep"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/web-and-hunt-2026-11-08/."
+    },
+    "mob_refresh_scorpion_black": {
+      "file": "mob_refresh_scorpion_black.png",
+      "family": "scorpion_sand",
+      "variant": "iron-and-fangs",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          260
+        ]
+      },
+      "portrait": [
+        117,
+        174,
+        86,
+        86
+      ],
+      "headTop": 132,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 42.24,
+      "footprintHeight": 40.96,
+      "keys": [
+        "bestiary.scorpion.black"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/iron-and-fangs-2026-11-08/."
+    },
+    "mob_refresh_warg_rider": {
+      "file": "mob_refresh_warg_rider.png",
+      "family": "warg_black",
+      "variant": "iron-and-fangs",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          272
+        ]
+      },
+      "portrait": [
+        105,
+        138,
+        110,
+        110
+      ],
+      "headTop": 114,
+      "overheadClearance": {
+        "walk": 2.32,
+        "attack": 2.64
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 47.04,
+      "footprintHeight": 50.24,
+      "keys": [
+        "bestiary.warg.rider"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/iron-and-fangs-2026-11-08/."
+    },
+    "mob_refresh_mimic_ironbound": {
+      "file": "mob_refresh_mimic_ironbound.png",
+      "family": "mob_refresh_mimic",
+      "variant": "iron-and-fangs",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        85,
+        148,
+        86,
+        86
+      ],
+      "headTop": 144,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 26.88,
+      "footprintHeight": 25.6,
+      "keys": [
+        "bosses.mimic.ironbound"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 6,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/iron-and-fangs-2026-11-08/."
+    },
+    "mob_refresh_dragon_black": {
+      "file": "mob_refresh_dragon_black.png",
+      "family": "dragon",
+      "variant": "wyrm-triad",
+      "frame": {
+        "width": 512,
+        "height": 512,
+        "anchor": [
+          256,
+          400
+        ]
+      },
+      "portrait": [
+        219,
+        208,
+        88,
+        88
+      ],
+      "headTop": 180,
+      "overheadClearance": {
+        "cast": 3.6,
+        "buff": 10.96
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 68.16,
+      "footprintHeight": 70.08,
+      "keys": [
+        "bosses.dragon.black"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            17,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            25,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/wyrm-triad-2026-11-08/."
+    },
+    "mob_refresh_dragon_blue": {
+      "file": "mob_refresh_dragon_blue.png",
+      "family": "dragon",
+      "variant": "wyrm-triad",
+      "frame": {
+        "width": 512,
+        "height": 512,
+        "anchor": [
+          256,
+          400
+        ]
+      },
+      "portrait": [
+        221,
+        208,
+        88,
+        88
+      ],
+      "headTop": 187,
+      "overheadClearance": {
+        "buff": 13.2
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 66.56,
+      "footprintHeight": 67.52,
+      "keys": [
+        "bosses.dragon.blue"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            17,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            25,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/wyrm-triad-2026-11-08/."
+    },
+    "mob_refresh_dragon_green": {
+      "file": "mob_refresh_dragon_green.png",
+      "family": "dragon",
+      "variant": "wyrm-triad",
+      "frame": {
+        "width": 512,
+        "height": 512,
+        "anchor": [
+          256,
+          400
+        ]
+      },
+      "portrait": [
+        223,
+        208,
+        88,
+        88
+      ],
+      "headTop": 197,
+      "overheadClearance": {
+        "attack": 9.04,
+        "buff": 3.28
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 65.28,
+      "footprintHeight": 64.64,
+      "keys": [
+        "bosses.dragon.green"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            17,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            25,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/wyrm-triad-2026-11-08/."
+    },
+    "mob_refresh_dragon_gold": {
+      "file": "mob_refresh_dragon_gold.png",
+      "family": "dragon",
+      "variant": "gilded-and-rime",
+      "frame": {
+        "width": 512,
+        "height": 512,
+        "anchor": [
+          256,
+          400
+        ]
+      },
+      "portrait": [
+        219,
+        208,
+        88,
+        88
+      ],
+      "headTop": 188,
+      "overheadClearance": {
+        "walk": 2.32,
+        "attack": 6.48,
+        "buff": 13.52
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 4,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 65.28,
+      "footprintHeight": 67.2,
+      "keys": [
+        "bosses.dragon.gold"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            15,
+            16,
+            16,
+            16,
+            17,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            19,
+            19,
+            19,
+            19,
+            20,
+            20,
+            20,
+            21,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            22,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            24,
+            24,
+            24,
+            25,
+            0,
+            0,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept sheet; OpenAI complete pixel figures. Sources/packing: tools/tactics-assets/imagegen/gilded-and-rime-2026-11-08/."
+    },
+    "mob_refresh_troll_frost": {
+      "file": "mob_refresh_troll_frost.png",
+      "family": "troll",
+      "variant": "gilded-and-rime",
+      "frame": {
+        "width": 384,
+        "height": 384,
+        "anchor": [
+          192,
+          320
+        ]
+      },
+      "portrait": [
+        151,
+        140,
+        80,
+        80
+      ],
+      "headTop": 126,
+      "overheadClearance": {
+        "walk": 4.24,
+        "special": 9.36,
+        "buff": 2.64,
+        "cast": 2.64,
+        "point": 2.64,
+        "pray": 2.64,
+        "channel": 2.64,
+        "summon": 2.64
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 56.64,
+      "footprintHeight": 61.76,
+      "keys": [
+        "bosses.troll.frost"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept sheet; OpenAI complete pixel figures. Sources/packing: tools/tactics-assets/imagegen/gilded-and-rime-2026-11-08/."
+    },
+    "mob_refresh_troll_ogre": {
+      "file": "mob_refresh_troll_ogre.png",
+      "family": "troll",
+      "variant": "gilded-and-rime",
+      "frame": {
+        "width": 384,
+        "height": 384,
+        "anchor": [
+          192,
+          320
+        ]
+      },
+      "portrait": [
+        152,
+        140,
+        80,
+        80
+      ],
+      "headTop": 123,
+      "overheadClearance": {
+        "walk": 2.64,
+        "special": 9.04,
+        "buff": 3.92,
+        "cast": 3.92,
+        "point": 3.92,
+        "pray": 3.92,
+        "channel": 3.92,
+        "summon": 3.92
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 57.92,
+      "footprintHeight": 62.72,
+      "keys": [
+        "bosses.troll.ogre"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            14,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "buff": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "point": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "pray": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "channel": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "summon": {
+          "frames": [
+            18,
+            18,
+            19,
+            19,
+            20,
+            20,
+            21,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario concept sheet; OpenAI complete pixel figures. Sources/packing: tools/tactics-assets/imagegen/gilded-and-rime-2026-11-08/."
+    },
+    "mob_refresh_sapling_autumn": {
+      "file": "mob_refresh_sapling_autumn.png",
+      "family": "mob_refresh_sapling",
+      "variant": "autumn-and-veil",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          192
+        ]
+      },
+      "portrait": [
+        131,
+        123,
+        54,
+        54
+      ],
+      "headTop": 125,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 16.0,
+      "footprintHeight": 21.44,
+      "keys": [
+        "bosses.sapling.autumn"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/autumn-and-veil-2026-11-08/."
+    },
+    "mob_refresh_sapling_blossom": {
+      "file": "mob_refresh_sapling_blossom.png",
+      "family": "mob_refresh_sapling",
+      "variant": "autumn-and-veil",
+      "frame": {
+        "width": 320,
+        "height": 320,
+        "anchor": [
+          160,
+          192
+        ]
+      },
+      "portrait": [
+        130,
+        123,
+        54,
+        54
+      ],
+      "headTop": 125,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 2,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 17.28,
+      "footprintHeight": 21.44,
+      "keys": [
+        "bosses.sapling.blossom"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/autumn-and-veil-2026-11-08/."
+    },
+    "mob_refresh_wraith_shade": {
+      "file": "mob_refresh_wraith_shade.png",
+      "family": "mob_refresh_wraith",
+      "variant": "autumn-and-veil",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        94,
+        91,
+        64,
+        64
+      ],
+      "headTop": 95,
+      "overheadClearance": {
+        "walk": 2.32
+      },
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 25.6,
+      "footprintHeight": 41.28,
+      "keys": [
+        "bosses.wraith.shade"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/autumn-and-veil-2026-11-08/."
+    },
+    "mob_refresh_wraith_spectre": {
+      "file": "mob_refresh_wraith_spectre.png",
+      "family": "mob_refresh_wraith",
+      "variant": "spectral-remnant",
+      "frame": {
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          128,
+          224
+        ]
+      },
+      "portrait": [
+        94,
+        91,
+        64,
+        64
+      ],
+      "headTop": 95,
+      "overheadClearance": {},
+      "pixelScale": 0.32,
+      "columns": 8,
+      "rowsPerDirection": 3,
+      "directions": [
+        "south",
+        "south-west",
+        "west",
+        "north-west",
+        "north",
+        "north-east",
+        "east",
+        "south-east"
+      ],
+      "facingOffsets": {
+        "south": [
+          0,
+          0
+        ],
+        "south-west": [
+          0,
+          0
+        ],
+        "west": [
+          0,
+          0
+        ],
+        "north-west": [
+          0,
+          0
+        ],
+        "north": [
+          0,
+          0
+        ],
+        "north-east": [
+          0,
+          0
+        ],
+        "east": [
+          0,
+          0
+        ],
+        "south-east": [
+          0,
+          0
+        ]
+      },
+      "footprintWidth": 24.0,
+      "footprintHeight": 40.96,
+      "keys": [
+        "bosses.wraith.spectre"
+      ],
+      "anims": {
+        "idle": {
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "fps": 3,
+          "loop": true
+        },
+        "walk": {
+          "frames": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "fps": 5,
+          "loop": true
+        },
+        "attack": {
+          "frames": [
+            8,
+            9,
+            9,
+            9,
+            10,
+            10,
+            11,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            12
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "down": {
+          "frames": [
+            13
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "cast": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        },
+        "special": {
+          "frames": [
+            14,
+            15,
+            15,
+            15,
+            16,
+            16,
+            17,
+            0
+          ],
+          "fps": 10,
+          "loop": false
+        }
+      },
+      "provenance": "Scenario three-creature concepts; OpenAI complete pixel figures. Exact sources/packing receipts: tools/tactics-assets/imagegen/spectral-remnant-2026-11-08/."
     }
   },
   "legacyDistinctForms": [

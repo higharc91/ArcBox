@@ -1,0 +1,260 @@
+{
+  "dragon_gold": {
+    "sourceAtlasSha256": "ed245595ad5d69c90623daeb570118d021a784ed84aaf3bdfe0839a0d1d10ee4",
+    "sourceBytes": 16794002,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/dragon_gold-0.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "6c5ceb7bf75d548aa3e6991d9b42c68c9132a6c3ca6e8eaac9fc45cef117d5f7",
+        "webpSha256": "386eda9838b7ab70b5d81ee000f450579311e8ff7a5192e351ee201bf71e57e2",
+        "bytes": 1500346,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/dragon_gold-1.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "5f3d478b5384ca0074af59ad61d5b919a8387342bdde92d4ea458db830c1b640",
+        "webpSha256": "4ec6d234d8ecf5052150d8cde7b1d57edb3b52df858fb1354e2af9d01bf37045",
+        "bytes": 1392302,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/dragon_gold-2.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "f8245750df1b774f3da07c14ef8b1ad0d4b4c6a03eb524177bdee70a8d7a813b",
+        "webpSha256": "6f9b36edcb5e2d01902fee912dde74b0da52dadd2914c2f9662d771d91e26815",
+        "bytes": 1177756,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/dragon_gold-3.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "61b2f0f6924576d7217d720cc505c9cccb6f942fc818511e48956bfddf895538",
+        "webpSha256": "4f51e88c54692b8be8ff5e8a55ee3b1fa17a02b90359b64482dc9514ee45d90f",
+        "bytes": 1248882,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/dragon_gold-4.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "449265707bdd4ba83007dccd4c2ed8c3be46723d62db5761c6c1cf6eb83aeb56",
+        "webpSha256": "2356a353b91d4448664922ac87766fd224f7c0b7810c37a4af7f95d95ea79c1d",
+        "bytes": 1319420,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/dragon_gold-5.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "c55b89b17cf4d514af93368e30c0e1df46a7f56aab0572589c8897faf012c30b",
+        "webpSha256": "14bb463996fdb87f5ebb6b09b22d99274157ee8828dcc768bf5bffe7a811e81a",
+        "bytes": 1376786,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/dragon_gold-6.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "89d54ab4ac1b57dd42f7aac2431b20819444a8eb7674a0fbd026b92826dcc773",
+        "webpSha256": "b86e3680aa129a042f61686e5b11bca2823f59de0f954a6d62605c263de47029",
+        "bytes": 1261040,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/dragon_gold-7.webp",
+        "width": 4096,
+        "height": 2048,
+        "rgbaSha256": "821650f29a74b8290d63ab940cd2dd8705b81c44ed742107feaa4e634f66bd57",
+        "webpSha256": "2fffc3e708ca32cb90c941ff349adb49569fbacc1bc291688c9ecc12de8611cd",
+        "bytes": 1412454,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  },
+  "troll_frost": {
+    "sourceAtlasSha256": "08af6555a094f1995943795c74d58e8feeb29279ae34fa5b18db627a1fc54fb0",
+    "sourceBytes": 10930508,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/troll_frost-0.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "2165a3f5b88568e2f36b426fb5ab41b62df959b7fea300d63bdc7146b85fcc37",
+        "webpSha256": "bb37160f7dde3300ed7edd735dedc42e4cd2436afd53bb419a93706e081b0a9d",
+        "bytes": 1002236,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/troll_frost-1.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "a4b762504fe30b5140a6476e874303a9da884eb6c1178164627ec3ced5f398c7",
+        "webpSha256": "5f15bb5d039eded303a6a36cddeecbfa1063d9631c6ee25c5af2f5f603282e12",
+        "bytes": 930502,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/troll_frost-2.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "da42f9756d5d49e5efa7629bb1be49ee6e80694ff104d76cc33fdef0d2fca02f",
+        "webpSha256": "78e53827be50a9fefe07d25f377bfa25f4aa856d33f73b560d4cd3537c1bf838",
+        "bytes": 733476,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/troll_frost-3.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "8cc068ff66908e465b65e74cbd374fe215bded52442f76e255e5966264abd04e",
+        "webpSha256": "3e407bd55fa712e9419948d4264860d05c24e56141f3fcdafbae3cf884995fcf",
+        "bytes": 800192,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/troll_frost-4.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "fdf2de68e9c7d4ac8bbf2c6bd5f2bedb85e7fc04283b71728528c112d287d8e7",
+        "webpSha256": "492dafb22f30ca11ea0abbc0bea42b8623648ae5ee39a3697b7452ddd3f25b56",
+        "bytes": 992604,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/troll_frost-5.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "8cb6a09c43be8ae0a1282734e7d3172176db784b4764106693f5c66a811aaf5e",
+        "webpSha256": "4be91a98a5d281dadf95dc5276edf114acfa27dc1d0c65715c6e46b359a51db6",
+        "bytes": 797790,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/troll_frost-6.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "0c96fd83483278d46d45b7f30292828bb2f0b66cfb59581b18e29435955126d0",
+        "webpSha256": "633e484af8347c6b73c843990b67d220a9872c17452446f4d3140241b321980e",
+        "bytes": 695424,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/troll_frost-7.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "a2982ad38b88b2b94708b3c059f50349d64f4d46330cd9db8b3e0ad49af524bc",
+        "webpSha256": "5701058d886eacfaa91066ae21f64c56cb37c52c1a6d08638d30c3cd2d9fc918",
+        "bytes": 909422,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  },
+  "troll_ogre": {
+    "sourceAtlasSha256": "11dad3bbe52fd0f8d564a983bb2632bc828b5b4576c9330576eff9bf131ab893",
+    "sourceBytes": 11142109,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/troll_ogre-0.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "50f3dbab886e1272f94875531d4c8738dbccd5b9366d7ea0af02b02ffa2ae69d",
+        "webpSha256": "7f1914e75e316ad544dee7234d2b96bd67d9ee89f380b2999b7feba4fc21a1ee",
+        "bytes": 971272,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/troll_ogre-1.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "2dd32a88e4df8112dfd0bee1e81e05d4e7bbe6b97f7f00af8f9a55e630803d34",
+        "webpSha256": "07ea7248a96d4bd12da6edd038cfd5e04d8364d9d133f24e0214c95613a8f0dd",
+        "bytes": 925164,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/troll_ogre-2.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "f6c166c69e55dcc6f061f5503a6ce5e1c9adfd90738674ca78280f24e541efa9",
+        "webpSha256": "0643e335d224e74c97273df8a3f681acff09f2a8a2a2cdb9181c0d398da7a729",
+        "bytes": 727178,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/troll_ogre-3.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "0fb572c2617b35bbe89c4a638ec2ad591052c63ca494f796978b9294fec238c1",
+        "webpSha256": "3abbca338c7075f19cdb5778f6b8b90d8af10e667ab4d7827b8e5b814a58010c",
+        "bytes": 812184,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/troll_ogre-4.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "58550d9b9022d7d8fdbc5fb6d48859b367c6aa1bb6addf400e6dafe40261e39b",
+        "webpSha256": "f3a491bdd5d9f63485610852ecd262c88427f85211b2c6c39de9e9a4e651eb90",
+        "bytes": 958784,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/troll_ogre-5.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "bc06d4c4beda209250f52dea0d8e9800beda1742db767e57f3429fd424c7d7bf",
+        "webpSha256": "c8004b747bccb4e13aecd8ef9360e5cb9656e01484465f3ee0e9e0ccb7a2cc2f",
+        "bytes": 788256,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/troll_ogre-6.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "39a082fcbb14071b238b79d58ba83224d35655123c29649750af997abb99b70e",
+        "webpSha256": "b46362afdac08170de6f0e02aed2200b41d85b3374bce92057f0994fa3fff311",
+        "bytes": 709852,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/troll_ogre-7.webp",
+        "width": 3072,
+        "height": 1152,
+        "rgbaSha256": "0b5f64afb96d4d5f857afcc41bbe718dd9889998a3429a472c81c421b6653c03",
+        "webpSha256": "5ac35a322025001c15eeb26fd459be8611d03a4cdc74fb471ceb0ebf3cda0f8b",
+        "bytes": 926720,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  }
+}

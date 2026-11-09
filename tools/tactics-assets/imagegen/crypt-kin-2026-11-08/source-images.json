@@ -1,0 +1,16 @@
+{
+  "bat_vampire-idle": "d5bacdc5-6cd7-4d40-a423-f17b64a34fff",
+  "bear_undead-idle": "fcf2bfd4-31ea-4754-b0b4-afb5e30f0b01",
+  "slime_crystal-idle": "d3083323-3750-4950-b318-80df1768071a",
+  "bat_vampire-walk": "3756d1f0-3d63-439c-9afc-ba0db8d6ef9c",
+  "bear_undead-walk": "f91b1cdd-4bf0-40a3-8ff0-0a9568069b58",
+  "slime_crystal-walk": "e47ff2c2-51cb-4d69-8a18-9a353b5f64fd",
+  "bat_vampire-attack": "9e88c7fb-cad7-46e3-881e-dbdf6926ad5c",
+  "bear_undead-attack": "c6f0a5a5-0c97-4a6e-9c0e-196106a9566c",
+  "slime_crystal-attack": "807ee867-57da-467c-89a1-6cdc873bde25",
+  "bat_vampire-damage": "5781804d-1c6c-4f69-ac0a-49cfd19df5eb",
+  "bear_undead-damage": "bfaa8df3-1129-40c6-86ef-038c7440ddd2",
+  "slime_crystal-damage": "1a379601-3b2e-43c6-bab4-3b53fd07b437",
+  "bat_vampire-walk-draft": "d16fa1bb-ee70-4d49-a1fb-60d96b79c943",
+  "bear_undead-rear-down": "69a5e4c8-705d-4475-a21c-afc9e6e4c489"
+}

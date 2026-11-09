@@ -1,0 +1,23 @@
+[
+  {
+    "id": "bat_vampire",
+    "framesChecked": 112,
+    "galleryZoom": 1.1,
+    "reelZoom": 1.7,
+    "completeSilhouettesFit": true
+  },
+  {
+    "id": "bear_undead",
+    "framesChecked": 112,
+    "galleryZoom": 1.1,
+    "reelZoom": 1.7,
+    "completeSilhouettesFit": true
+  },
+  {
+    "id": "slime_crystal",
+    "framesChecked": 112,
+    "galleryZoom": 1.1,
+    "reelZoom": 1.7,
+    "completeSilhouettesFit": true
+  }
+]

@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 0,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      128,
+      182,
+      191
+    ],
+    "count": 2184
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 1,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      128,
+      182,
+      191
+    ],
+    "count": 2181
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 2,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      128,
+      182,
+      191
+    ],
+    "count": 2156
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 3,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      133,
+      129,
+      182,
+      191
+    ],
+    "count": 2130
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 0,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      135,
+      129,
+      183,
+      192
+    ],
+    "count": 2198
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 1,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      132,
+      130,
+      181,
+      192
+    ],
+    "count": 2230
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 2,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      133,
+      130,
+      180,
+      192
+    ],
+    "count": 2155
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 3,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      135,
+      130,
+      182,
+      192
+    ],
+    "count": 2173
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 0,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      129,
+      184,
+      192
+    ],
+    "count": 2324
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 1,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      134,
+      129,
+      186,
+      192
+    ],
+    "count": 2291
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 2,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      133,
+      129,
+      203,
+      192
+    ],
+    "count": 2283
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 3,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      130,
+      184,
+      192
+    ],
+    "count": 2260
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 0,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      136,
+      136,
+      182,
+      192
+    ],
+    "count": 1666
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 1,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      132,
+      155,
+      186,
+      192
+    ],
+    "count": 1380
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 4,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      136,
+      127,
+      180,
+      191
+    ],
+    "count": 2043
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 5,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      136,
+      127,
+      181,
+      191
+    ],
+    "count": 2075
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 6,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      136,
+      127,
+      181,
+      191
+    ],
+    "count": 2066
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 7,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      136,
+      128,
+      181,
+      191
+    ],
+    "count": 2016
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 4,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      134,
+      129,
+      179,
+      192
+    ],
+    "count": 2069
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 5,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      133,
+      129,
+      178,
+      192
+    ],
+    "count": 2054
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 6,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      131,
+      129,
+      175,
+      192
+    ],
+    "count": 1999
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 7,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      129,
+      130,
+      174,
+      192
+    ],
+    "count": 2015
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 4,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      136,
+      128,
+      181,
+      192
+    ],
+    "count": 2186
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 5,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      128,
+      185,
+      192
+    ],
+    "count": 2220
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 6,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      133,
+      129,
+      201,
+      192
+    ],
+    "count": 2182
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 7,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      136,
+      129,
+      181,
+      192
+    ],
+    "count": 2138
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 2,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      135,
+      136,
+      178,
+      192
+    ],
+    "count": 1605
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 3,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      133,
+      157,
+      185,
+      192
+    ],
+    "count": 1232
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 8,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      126,
+      175,
+      191
+    ],
+    "count": 1750
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 9,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      136,
+      126,
+      174,
+      191
+    ],
+    "count": 1738
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 10,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      138,
+      126,
+      174,
+      191
+    ],
+    "count": 1717
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 11,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      126,
+      174,
+      191
+    ],
+    "count": 1753
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 8,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      134,
+      126,
+      173,
+      192
+    ],
+    "count": 1777
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 9,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      138,
+      127,
+      177,
+      192
+    ],
+    "count": 1759
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 10,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      133,
+      127,
+      174,
+      192
+    ],
+    "count": 1767
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 11,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      132,
+      127,
+      174,
+      192
+    ],
+    "count": 1815
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 8,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      127,
+      176,
+      192
+    ],
+    "count": 1838
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 9,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      127,
+      175,
+      192
+    ],
+    "count": 1871
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 10,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      123,
+      127,
+      174,
+      192
+    ],
+    "count": 1882
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 11,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      127,
+      174,
+      192
+    ],
+    "count": 1834
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 4,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      140,
+      133,
+      177,
+      192
+    ],
+    "count": 1301
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 5,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      136,
+      154,
+      183,
+      192
+    ],
+    "count": 1177
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 12,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      127,
+      181,
+      191
+    ],
+    "count": 2094
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 13,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      139,
+      127,
+      184,
+      191
+    ],
+    "count": 2116
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 14,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      127,
+      181,
+      191
+    ],
+    "count": 2090
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 15,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      127,
+      180,
+      191
+    ],
+    "count": 2088
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 12,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      133,
+      127,
+      179,
+      192
+    ],
+    "count": 2192
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 13,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      138,
+      128,
+      184,
+      192
+    ],
+    "count": 2085
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 14,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      131,
+      128,
+      178,
+      192
+    ],
+    "count": 2134
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 15,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      133,
+      128,
+      180,
+      192
+    ],
+    "count": 2129
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 12,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      133,
+      128,
+      181,
+      192
+    ],
+    "count": 2220
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 13,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      133,
+      129,
+      181,
+      192
+    ],
+    "count": 2180
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 14,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      118,
+      129,
+      182,
+      193
+    ],
+    "count": 2183
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 15,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      133,
+      129,
+      180,
+      192
+    ],
+    "count": 2173
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 6,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      142,
+      133,
+      185,
+      192
+    ],
+    "count": 1567
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 7,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      134,
+      155,
+      185,
+      192
+    ],
+    "count": 1256
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 16,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      130,
+      184,
+      192
+    ],
+    "count": 2223
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 17,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      128,
+      184,
+      191
+    ],
+    "count": 2254
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 18,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      128,
+      184,
+      192
+    ],
+    "count": 2291
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 19,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      135,
+      129,
+      184,
+      191
+    ],
+    "count": 2181
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 16,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      134,
+      130,
+      183,
+      192
+    ],
+    "count": 2330
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 17,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      136,
+      131,
+      185,
+      192
+    ],
+    "count": 2253
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 18,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      137,
+      130,
+      187,
+      192
+    ],
+    "count": 2255
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 19,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      135,
+      131,
+      185,
+      192
+    ],
+    "count": 2266
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 16,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      130,
+      184,
+      192
+    ],
+    "count": 2371
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 17,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      134,
+      130,
+      184,
+      192
+    ],
+    "count": 2367
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 18,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      119,
+      129,
+      184,
+      192
+    ],
+    "count": 2370
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 19,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      134,
+      130,
+      183,
+      192
+    ],
+    "count": 2354
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 8,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      136,
+      135,
+      181,
+      192
+    ],
+    "count": 1781
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 9,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      133,
+      156,
+      186,
+      192
+    ],
+    "count": 1320
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 20,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      127,
+      182,
+      191
+    ],
+    "count": 2050
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 21,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      138,
+      127,
+      183,
+      191
+    ],
+    "count": 2044
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 22,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      126,
+      182,
+      191
+    ],
+    "count": 2072
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 23,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      128,
+      182,
+      192
+    ],
+    "count": 2030
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 20,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      137,
+      130,
+      180,
+      192
+    ],
+    "count": 2100
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 21,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      141,
+      129,
+      186,
+      192
+    ],
+    "count": 2087
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 22,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      138,
+      129,
+      182,
+      192
+    ],
+    "count": 2110
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 23,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      138,
+      129,
+      183,
+      192
+    ],
+    "count": 2147
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 20,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      137,
+      128,
+      183,
+      192
+    ],
+    "count": 2185
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 21,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      134,
+      128,
+      184,
+      192
+    ],
+    "count": 2181
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 22,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      117,
+      128,
+      184,
+      192
+    ],
+    "count": 2188
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 23,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      138,
+      129,
+      183,
+      192
+    ],
+    "count": 2143
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 10,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      141,
+      135,
+      182,
+      192
+    ],
+    "count": 1507
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 11,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      134,
+      155,
+      184,
+      192
+    ],
+    "count": 1238
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 24,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      144,
+      125,
+      183,
+      191
+    ],
+    "count": 1751
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 25,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      142,
+      125,
+      182,
+      191
+    ],
+    "count": 1757
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 26,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      143,
+      125,
+      181,
+      191
+    ],
+    "count": 1736
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 27,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      142,
+      126,
+      182,
+      191
+    ],
+    "count": 1735
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 24,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      142,
+      127,
+      181,
+      192
+    ],
+    "count": 1737
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 25,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      144,
+      128,
+      186,
+      192
+    ],
+    "count": 1814
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 26,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      140,
+      127,
+      181,
+      192
+    ],
+    "count": 1775
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 27,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      140,
+      127,
+      181,
+      192
+    ],
+    "count": 1837
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 24,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      142,
+      128,
+      183,
+      193
+    ],
+    "count": 1896
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 25,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      139,
+      127,
+      183,
+      192
+    ],
+    "count": 1990
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 26,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      143,
+      127,
+      206,
+      192
+    ],
+    "count": 2028
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 27,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      143,
+      128,
+      184,
+      192
+    ],
+    "count": 1891
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 12,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      147,
+      134,
+      184,
+      192
+    ],
+    "count": 1369
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 13,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      136,
+      153,
+      182,
+      192
+    ],
+    "count": 1163
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 28,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      128,
+      185,
+      191
+    ],
+    "count": 2105
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 29,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      128,
+      186,
+      191
+    ],
+    "count": 2096
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 30,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      128,
+      185,
+      191
+    ],
+    "count": 2076
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/sapling_autumn-idle.png",
+    "sourcePose": 31,
+    "scale": 0.3855421686746988,
+    "bounds": [
+      137,
+      128,
+      185,
+      191
+    ],
+    "count": 2100
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 28,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      137,
+      129,
+      185,
+      192
+    ],
+    "count": 2204
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 29,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      143,
+      130,
+      191,
+      192
+    ],
+    "count": 2106
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 30,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      136,
+      130,
+      185,
+      192
+    ],
+    "count": 2217
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/sapling_autumn-walk.png",
+    "sourcePose": 31,
+    "scale": 0.36363636363636365,
+    "bounds": [
+      141,
+      129,
+      189,
+      192
+    ],
+    "count": 2177
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 28,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      136,
+      130,
+      183,
+      192
+    ],
+    "count": 2227
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 29,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      136,
+      130,
+      185,
+      192
+    ],
+    "count": 2150
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 30,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      136,
+      130,
+      204,
+      192
+    ],
+    "count": 2176
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/sapling_autumn-attack.png",
+    "sourcePose": 31,
+    "scale": 0.3742690058479532,
+    "bounds": [
+      135,
+      130,
+      182,
+      192
+    ],
+    "count": 2196
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 14,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      149,
+      135,
+      191,
+      192
+    ],
+    "count": 1533
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/sapling_autumn-damage.png",
+    "sourcePose": 15,
+    "scale": 0.24034334763948498,
+    "bounds": [
+      133,
+      155,
+      185,
+      192
+    ],
+    "count": 1297
+  }
+]

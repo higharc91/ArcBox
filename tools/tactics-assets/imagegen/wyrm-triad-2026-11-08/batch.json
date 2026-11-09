@@ -1,0 +1,46 @@
+{
+  "slug": "wyrm-triad",
+  "date": "2026-11-08",
+  "title": "Black, Blue and Green Dragon",
+  "priorCommit": "82f13e16",
+  "libraryBatch": 8,
+  "overallBatch": 23,
+  "features": [
+    "Three mature six-limbed dragons match the approved Red Dragon scale: four grounded legs, two dorsal bat wings and one rooted tail.",
+    "Obsidian/wine, cobalt/violet and moss/fern palettes are complete authored figures, with folded wings during walking and visibly unfurled wings during jaw contact.",
+    "All three existing ability gestures are authored in eight facings: Fire Breath brace, Frightful Presence mantle and Cataclysmic Wingbeat sweep. Existing shared gameplay and FX remain unchanged."
+  ],
+  "conceptJob": "job_xgXWXVqvHgovh8Mow3cuqnW2",
+  "conceptAsset": "asset_g5cyoVhu5PM1kocy53Rg9thY",
+  "creativeUnits": 12,
+  "actions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "down",
+    "special",
+    "cast",
+    "buff"
+  ],
+  "motionActions": [
+    "idle",
+    "walk",
+    "attack",
+    "special",
+    "cast",
+    "buff"
+  ],
+  "nativeSeconds": 48,
+  "reelSeconds": 56,
+  "cadenceNote": "Dragon Jaws contacts at .5 s through a full 1 s clip; Breath and Presence contact at .5 s through 1.2 s, and Wingbeat at .7 s through 1.4 s. Shared rules, effects and explicit projectile overrides are preserved.",
+  "replayNote": "The replay contains three movement round trips, three natural jaw attacks, all nine existing special gestures and return to ready.",
+  "contactLabel": "twelve engine-timed attacks and specials",
+  "reviewNotes": [
+    "Texture padding remains 512 pixels: four rows per facing fit the runtime 16384-pixel texture limit.",
+    "Live battle/world review checks the same mature family scale beside the party, plus head portraits, wing clearance and whole-silhouette occlusion.",
+    "Three complete rear-left hurt/down pairs replace forward-facing damage poses. Black and Blue east Wingbeat rows use fresh whole figures with empty gutters; no selected crop contains a neighboring figure.",
+    "Diagnostic beat screenshots allow twelve examples per moment so the nine genuine ability contacts can all be captured; gameplay and world screenshot limits are unchanged.",
+    "Lossless WebP compass strips preserve every runtime RGBA pixel while reducing the embedded atlas payload by 41%. Phones decode one facing at a time and release previous views."
+  ]
+}

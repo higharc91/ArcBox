@@ -1,0 +1,70 @@
+{
+  "appearances": 19,
+  "sourceImages": 118,
+  "distinctSelectedWholeFigures": 2704,
+  "batches": [
+    {
+      "batch": "crypt-kin",
+      "appearances": 3,
+      "sourceImages": 14,
+      "distinctSelectedWholeFigures": 336,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    },
+    {
+      "batch": "web-and-hunt",
+      "appearances": 3,
+      "sourceImages": 13,
+      "distinctSelectedWholeFigures": 336,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    },
+    {
+      "batch": "iron-and-fangs",
+      "appearances": 3,
+      "sourceImages": 16,
+      "distinctSelectedWholeFigures": 336,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    },
+    {
+      "batch": "wyrm-triad",
+      "appearances": 3,
+      "sourceImages": 23,
+      "distinctSelectedWholeFigures": 624,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    },
+    {
+      "batch": "gilded-and-rime",
+      "appearances": 3,
+      "sourceImages": 26,
+      "distinctSelectedWholeFigures": 560,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    },
+    {
+      "batch": "autumn-and-veil",
+      "appearances": 3,
+      "sourceImages": 20,
+      "distinctSelectedWholeFigures": 368,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    },
+    {
+      "batch": "spectral-remnant",
+      "appearances": 1,
+      "sourceImages": 6,
+      "distinctSelectedWholeFigures": 144,
+      "sourceAndReferenceReceiptsUnchanged": true,
+      "availableOriginalGenerationFilesIdentical": true,
+      "rejectedDraftsExcluded": true
+    }
+  ]
+}

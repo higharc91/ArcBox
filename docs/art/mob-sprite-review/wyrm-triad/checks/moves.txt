@@ -1,0 +1,89 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset low (--preset)
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/arcbox-secrets/content/tactics/base
+THINGS demo: 23 views, 32 shots
+THINGS demo step Library creatures ready at 1.60 s
+TACTICS screen tactics-battle-river_crossing
+THINGS demo step Black moving at 3.60 s
+SHOT /workspace/mob-review/wyrm-triad-moves/001-tactics.png
+SHOT /workspace/mob-review/wyrm-triad-moves/002-tactics-battle-river-crossing.png
+THINGS demo step Blue moving at 4.00 s
+SHOT /workspace/mob-review/wyrm-triad-moves/003-library-ready.png
+SHOT /workspace/mob-review/wyrm-triad-moves/004-black-walk.png
+SHOT /workspace/mob-review/wyrm-triad-moves/005-blue-walk.png
+THINGS demo step Green moving at 6.03 s
+SHOT /workspace/mob-review/wyrm-triad-moves/006-green-walk.png
+THINGS demo step Target ready at 7.22 s
+THINGS demo step Black Dragon natural attack at 8.00 s
+SHOT /workspace/mob-review/wyrm-triad-moves/007-black-attack-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/008-tactics-beat-attack-4.png
+SHOT /workspace/mob-review/wyrm-triad-moves/009-black-attack-contact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/010-tactics-beat-hit-4.png
+SHOT /workspace/mob-review/wyrm-triad-moves/011-black-recovery.png
+THINGS demo step Target ready at 10.21 s
+THINGS demo step Blue Dragon natural attack at 11.03 s
+SHOT /workspace/mob-review/wyrm-triad-moves/012-blue-attack-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/013-tactics-beat-attack-5.png
+SHOT /workspace/mob-review/wyrm-triad-moves/014-blue-attack-contact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/015-tactics-beat-hit-5.png
+SHOT /workspace/mob-review/wyrm-triad-moves/016-blue-recovery.png
+THINGS demo step Target ready at 13.22 s
+THINGS demo step Green Dragon natural attack at 14.01 s
+SHOT /workspace/mob-review/wyrm-triad-moves/017-green-attack-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/018-tactics-beat-attack-6.png
+SHOT /workspace/mob-review/wyrm-triad-moves/019-green-attack-contact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/020-tactics-beat-hit-6.png
+SHOT /workspace/mob-review/wyrm-triad-moves/021-green-recovery.png
+THINGS demo step Black Dragon special target ready at 17.21 s
+THINGS demo step black-breath at 18.01 s
+SHOT /workspace/mob-review/wyrm-triad-moves/022-black-breath-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/023-black-breath-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/024-tactics-beat-special-contact-7.png
+THINGS demo step black-roar at 21.00 s
+SHOT /workspace/mob-review/wyrm-triad-moves/025-black-roar-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/026-black-roar-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/027-tactics-beat-special-contact-8.png
+THINGS demo step black-wingbeat at 24.01 s
+SHOT /workspace/mob-review/wyrm-triad-moves/028-black-wingbeat-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/029-black-wingbeat-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/030-tactics-beat-special-contact-9.png
+THINGS demo step Blue Dragon special target ready at 26.22 s
+THINGS demo step blue-breath at 27.03 s
+SHOT /workspace/mob-review/wyrm-triad-moves/031-blue-breath-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/032-blue-breath-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/033-tactics-beat-special-contact-10.png
+THINGS demo step blue-roar at 30.02 s
+SHOT /workspace/mob-review/wyrm-triad-moves/034-blue-roar-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/035-blue-roar-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/036-tactics-beat-special-contact-11.png
+THINGS demo step blue-wingbeat at 33.01 s
+SHOT /workspace/mob-review/wyrm-triad-moves/037-blue-wingbeat-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/038-blue-wingbeat-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/039-tactics-beat-special-contact-12.png
+THINGS demo step Green Dragon special target ready at 35.20 s
+THINGS demo step green-breath at 36.03 s
+SHOT /workspace/mob-review/wyrm-triad-moves/040-green-breath-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/041-green-breath-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/042-tactics-beat-special-contact-13.png
+THINGS demo step green-roar at 39.01 s
+SHOT /workspace/mob-review/wyrm-triad-moves/043-green-roar-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/044-green-roar-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/045-tactics-beat-special-contact-14.png
+THINGS demo step green-wingbeat at 42.03 s
+SHOT /workspace/mob-review/wyrm-triad-moves/046-green-wingbeat-windup.png
+SHOT /workspace/mob-review/wyrm-triad-moves/047-green-wingbeat-impact.png
+SHOT /workspace/mob-review/wyrm-triad-moves/048-tactics-beat-special-contact-15.png
+THINGS demo step Library creatures ready again at 45.00 s
+SHOT /workspace/mob-review/wyrm-triad-moves/049-library-restored.png
+THINGS demo done
+TACTICS left: narrator cleared

@@ -1,0 +1,29 @@
+{
+  "dragon_gold-damage": [
+    6,
+    7
+  ],
+  "dragon_gold-walk": [
+    24,
+    25,
+    26,
+    27
+  ],
+  "troll_ogre-throw-draft": "All poses rejected: carried stone remained in the release key. New whole throw sheet uses empty release hands.",
+  "dragon_gold-wingbeat-front": [
+    12,
+    13,
+    14,
+    15
+  ],
+  "dragon_gold-attack": [
+    20,
+    21,
+    22,
+    23,
+    28,
+    29,
+    30,
+    31
+  ]
+}

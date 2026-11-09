@@ -47,12 +47,33 @@ public sealed class MobRefreshTests
     [InlineData("bosses.hound.black", "hound_black")]
     [InlineData("bosses.hound.grey", "hound_grey")]
     [InlineData("bosses.imp.violet", "imp_violet")]
+    [InlineData("beasts.bat.vampire", "bat_vampire")]
+    [InlineData("beasts.bear.undead", "bear_undead")]
+    [InlineData("beasts.slime.crystal", "slime_crystal")]
+    [InlineData("beasts.spider.phase", "spider_phase")]
+    [InlineData("beasts.wolf.alpha", "wolf_alpha")]
+    [InlineData("bestiary.crab.deep", "crab_deep")]
+    [InlineData("bestiary.scorpion.black", "scorpion_black")]
+    [InlineData("bestiary.warg.rider", "warg_rider")]
+    [InlineData("bosses.mimic.ironbound", "mimic_ironbound")]
+    [InlineData("bosses.dragon.black", "dragon_black")]
+    [InlineData("bosses.dragon.blue", "dragon_blue")]
+    [InlineData("bosses.dragon.green", "dragon_green")]
+    [InlineData("bosses.dragon.gold", "dragon_gold")]
+    [InlineData("bosses.troll.frost", "troll_frost")]
+    [InlineData("bosses.troll.ogre", "troll_ogre")]
+    [InlineData("bosses.sapling.autumn", "sapling_autumn")]
+    [InlineData("bosses.sapling.blossom", "sapling_blossom")]
+    [InlineData("bosses.wraith.shade", "wraith_shade")]
+    [InlineData("bosses.wraith.spectre", "wraith_spectre")]
     public void Approved_mobs_have_real_directional_motion_and_complete_baked_figures(string key, string name)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
         Assert.Equal($"creatures/mob_refresh_{name}.png", sprite.Path);
         Assert.Equal(8, sprite.Directions.Length);
-        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        var (pixels, width, height) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        Assert.InRange(width, 1, 16384);
+        Assert.InRange(height, 1, 16384);
         for (var row = 0; row < 8; row++)
         {
             foreach (var action in new[] { "idle", "walk", "attack", "hurt", "down" }.Concat(new[] { "cast", "special", "buff" }.Where(sprite.Anims.ContainsKey)))
@@ -101,11 +122,64 @@ public sealed class MobRefreshTests
     }
 
     [Theory]
+    [InlineData("bosses.sapling.autumn", true)]
+    [InlineData("bosses.sapling.blossom", true)]
+    [InlineData("bosses.wraith.shade", false)]
+    [InlineData("bosses.wraith.spectre", false)]
+    public void Seasonal_plants_keep_root_wood_and_shades_never_turn_into_orange_foliage(string key, bool plant)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        for (var row = 0; row < 8; row++)
+            foreach (var action in sprite.Anims.Values)
+                foreach (var frame in action.Frames.Distinct())
+                {
+                    var box = sprite.Source(frame, row);
+                    var visible = 0; var wood = 0; var orange = 0;
+                    for (var y = box.Y; y < box.Y + box.Height; y++)
+                        for (var x = box.X; x < box.X + box.Width; x++)
+                        {
+                            var at = (y * width + x) * 4;
+                            if (pixels[at + 3] < 128) continue;
+                            visible++;
+                            var r = (int)pixels[at]; var g = (int)pixels[at + 1]; var b = (int)pixels[at + 2];
+                            if (r > g + 12 && g > b + 8) wood++;
+                            if (r > g + 35 && g > b + 20) orange++;
+                        }
+                    Assert.True(plant ? wood > 30 : orange < visible * .02,
+                        $"Mixed creature material in {key}/{row}/{frame}: wood={wood}, orange={orange}, visible={visible}");
+                }
+    }
+
+    [Theory]
+    [InlineData("bosses.wraith.spectre")]
+    public void Spectres_have_a_low_complete_collapsed_robe_silhouette_in_every_facing(string key)
+    {
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
+        var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
+        int Height(int frame, int row)
+        {
+            var rect = sprite.Source(frame, row); var top = rect.Height; var bottom = -1;
+            for (var y = 0; y < rect.Height; y++)
+                for (var x = 0; x < rect.Width; x++)
+                    if (pixels[((rect.Y + y) * width + rect.X + x) * 4 + 3] >= 128)
+                    { top = Math.Min(top, y); bottom = Math.Max(bottom, y); }
+            Assert.True(bottom >= top);
+            return bottom - top + 1;
+        }
+        for (var row = 0; row < 8; row++)
+            Assert.True(Height(sprite.Anim("down").Frames[0], row) < Height(sprite.Idle.Frames[0], row) * .65,
+                $"Upright down pose: {key}/{row}");
+    }
+
+    [Theory]
     [InlineData("bosses.troll.troll", "troll.boulder_toss", "troll.frenzy_roar")]
     [InlineData("bosses.golem.granite", "golem.seismic_slam", "golem.stone_aegis")]
     [InlineData("bosses.golem.basalt", "golem.seismic_slam", "golem.stone_aegis")]
     [InlineData("bosses.golem.crystal", "golem.seismic_slam", "golem.stone_aegis")]
     [InlineData("bosses.golem.temple", "golem.seismic_slam", "golem.stone_aegis")]
+    [InlineData("bosses.troll.frost", "troll.boulder_toss", "troll.frenzy_roar")]
+    [InlineData("bosses.troll.ogre", "troll.boulder_toss", "troll.frenzy_roar")]
     public void Giants_bind_their_two_special_moves_to_distinct_complete_clips(string key, string primary, string buff)
     {
         var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
@@ -122,16 +196,6 @@ public sealed class MobRefreshTests
         Assert.False(sprite.Anim("attack").Frames.SequenceEqual(sprite.Anim(primaryBinding).Frames));
     }
 
-    [Theory]
-    [InlineData("bosses.troll.frost")]
-    public void Legacy_boss_variants_keep_their_existing_special_clip_for_the_buff_binding(string key)
-    {
-        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
-        Assert.Equal(sprite.Anim("special").Frames.ToArray(), sprite.Anim("bosses.buff").Frames.ToArray());
-        Assert.Equal(sprite.Anim("special").Fps, sprite.Anim("bosses.buff").Fps);
-        Assert.Equal(sprite.Anim("special").Loop, sprite.Anim("bosses.buff").Loop);
-        Assert.Equal(Pack.Frames("bosses", "special"), sprite.Anim("bosses.buff").Frames.ToArray());
-    }
 
     [Fact]
     public void Halvard_cleave_uses_the_greatsword_swing_and_ward_uses_a_separate_guard()
@@ -279,10 +343,15 @@ public sealed class MobRefreshTests
         Assert.Equal("creatures/mother_skarrow.png", art.Sprite("characters.mother_skarrow")!.Path);
     }
 
-    [Fact]
-    public void Drake_spreads_its_wings_in_every_attack_facing()
+    [Theory]
+    [InlineData("beasts.drake.red")]
+    [InlineData("bosses.dragon.black")]
+    [InlineData("bosses.dragon.blue")]
+    [InlineData("bosses.dragon.green")]
+    [InlineData("bosses.dragon.gold")]
+    public void Winged_creatures_spread_their_wings_in_every_attack_facing(string key)
     {
-        var sprite = UnitArt.Load(Pack.Root).Sprite("beasts.drake.red")!;
+        var sprite = UnitArt.Load(Pack.Root).Sprite(key)!;
         var (pixels, width, _) = PngPixels.Read(Path.Combine(Pack.Root, sprite.Path));
         (int Width, int Top) Bounds(int frame, int row)
         {
@@ -298,8 +367,8 @@ public sealed class MobRefreshTests
         {
             var idle = Bounds(sprite.Idle.Frames[0], row);
             var attack = Bounds(10, row);
-            Assert.True(attack.Width > idle.Width * 1.25, $"Wings did not widen facing {row}");
-            Assert.True(attack.Top < idle.Top - 4, $"Wings did not rise facing {row}");
+            Assert.True(attack.Width > idle.Width * (key == "beasts.drake.red" ? 1.25 : 1.2), $"Wings did not widen facing {row}");
+            if (key == "beasts.drake.red") Assert.True(attack.Top < idle.Top - 4, $"Wings did not rise facing {row}");
         }
     }
 
@@ -340,12 +409,33 @@ public sealed class MobRefreshTests
         Assert.InRange(art.Sprite("bosses.earth_elemental.magma")!.HeadLift / person, 1.35f, 1.9f);
         Assert.InRange(art.Sprite("bosses.water_elemental.swamp")!.HeadLift / person, 1.2f, 1.7f);
         Assert.InRange(art.Sprite("bosses.dragon.red")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.black")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.blue")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.green")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.dragon.gold")!.HeadLift / person, 1.7f, 2.3f);
+        Assert.InRange(art.Sprite("bosses.troll.frost")!.HeadLift / person, 1.35f, 1.95f);
+        Assert.InRange(art.Sprite("bosses.troll.ogre")!.HeadLift / person, 1.35f, 1.95f);
+        Assert.InRange(art.Sprite("bosses.sapling.autumn")!.HeadLift / person, .45f, .8f);
+        Assert.InRange(art.Sprite("bosses.sapling.blossom")!.HeadLift / person, .45f, .8f);
+        Assert.InRange(art.Sprite("bosses.wraith.spectre")!.HeadLift / person, .95f, 1.3f);
+        Assert.InRange(art.Sprite("bosses.wraith.shade")!.HeadLift / person, .95f, 1.3f);
         Assert.InRange(art.Sprite("bosses.sapling.spring")!.HeadLift / person, .45f, .8f);
         Assert.InRange(art.Sprite("bosses.imp.crimson")!.HeadLift / person, .4f, .75f);
         Assert.InRange(art.Sprite("bosses.hound.tan")!.HeadLift / person, .35f, .65f);
         Assert.InRange(art.Sprite("bosses.hound.black")!.HeadLift / person, .35f, .65f);
         Assert.InRange(art.Sprite("bosses.hound.grey")!.HeadLift / person, .35f, .65f);
         Assert.InRange(art.Sprite("bosses.imp.violet")!.HeadLift / person, .4f, .75f);
+        // Neutral wing clearance can rise above the small torso in three-quarter views.
+        Assert.InRange(art.Sprite("beasts.bat.vampire")!.HeadLift / person, .6f, 1.1f);
+        Assert.InRange(art.Sprite("beasts.bear.undead")!.HeadLift / person, .9f, 1.35f);
+        Assert.InRange(art.Sprite("beasts.slime.crystal")!.HeadLift / person, .4f, .8f);
+        Assert.InRange(art.Sprite("beasts.spider.phase")!.HeadLift / person, .75f, 1.25f);
+        Assert.InRange(art.Sprite("beasts.wolf.alpha")!.HeadLift / person, .75f, 1.15f);
+        // Rear carapace depth contributes to the clearance envelope above this low animal.
+        Assert.InRange(art.Sprite("bestiary.crab.deep")!.HeadLift / person, .6f, 1.25f);
+        Assert.InRange(art.Sprite("bestiary.scorpion.black")!.HeadLift / person, .8f, 1.5f);
+        Assert.InRange(art.Sprite("bestiary.warg.rider")!.HeadLift / person, 1.0f, 1.9f);
+        Assert.InRange(art.Sprite("bosses.mimic.ironbound")!.HeadLift / person, .4f, .9f);
         Assert.InRange(art.Sprite("bosses.mimic.oak")!.HeadLift / person, .4f, .8f);
         Assert.InRange(art.Sprite("beasts.drake.red")!.HeadLift / person, .5f, 1.1f);
     }

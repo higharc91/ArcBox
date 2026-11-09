@@ -1,0 +1,168 @@
+{
+  "dragon_gold": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "special": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "cast": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "buff": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  },
+  "troll_frost": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "special": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "buff": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  },
+  "troll_ogre": {
+    "idle": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "walk": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "attack": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "special": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    },
+    "buff": {
+      "east": 4,
+      "north": 4,
+      "north-east": 4,
+      "north-west": 4,
+      "south": 4,
+      "south-east": 4,
+      "south-west": 4,
+      "west": 4
+    }
+  }
+}

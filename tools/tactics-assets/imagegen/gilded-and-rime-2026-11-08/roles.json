@@ -1,0 +1,72 @@
+[
+  {
+    "id": "dragon_gold",
+    "label": "Gold Dragon",
+    "key": "bosses.dragon.gold",
+    "primaryId": "mob_refresh_dragon",
+    "height": 200,
+    "size": 512,
+    "anchor": [
+      256,
+      400
+    ],
+    "portraitSize": 88,
+    "idleFps": 3,
+    "walkFps": 4,
+    "identity": "Living mature GOLD DRAGON: antique brass/gold scales, restrained ochre highlights, bronze-brown shadows, cream belly scutes, muted honey/umber leathery wing membranes, swept ivory horns and small amber eyes. This is scaled flesh, NO metallic armor/jewels/crown/coins. FOUR grounded clawed legs plus TWO separate dorsal bat wings (SIX limbs), long rooted tail, stern crocodilian skull/neck; same mature proportions as approved Red Dragon, folded neutral wings below horns. NEVER upright/bipedal/rearing/wyvern. Concept raised-pose study excluded; production always FOUR feet grounded.",
+    "motionActions": [
+      "idle",
+      "walk",
+      "attack",
+      "special",
+      "cast",
+      "buff"
+    ]
+  },
+  {
+    "id": "troll_frost",
+    "label": "Frost Troll",
+    "key": "bosses.troll.frost",
+    "primaryId": "mob_refresh_troll",
+    "height": 188,
+    "size": 384,
+    "anchor": [
+      192,
+      320
+    ],
+    "portraitSize": 80,
+    "idleFps": 3,
+    "walkFps": 5,
+    "identity": "FROST TROLL, rangy long-forearmed hunched giant, cold PALE SLATE-BLUE skin with deep steel-blue joint shadows, short FIXED frost-white scalp crest firmly rooted, hooked nose and small deep-set eyes, two small lower tusks, long rooted CLAW fingers, broad grounded bare feet. Simple dark ragged hipwrap bound by rope, rear plain rope knot. No weapons/armor, no ice spikes/magic or loose frost/snow particles. Skin/shaded anatomy same approved Troll with winter color/material. About2.6m hunched/3m upright, do not enlarge beyond approved family. Claws attached through shoulder/elbow/wrist, NO floating crest/hair/hands.",
+    "motionActions": [
+      "idle",
+      "walk",
+      "attack",
+      "special",
+      "buff"
+    ]
+  },
+  {
+    "id": "troll_ogre",
+    "label": "Ogre",
+    "key": "bosses.troll.ogre",
+    "primaryId": "mob_refresh_troll",
+    "height": 188,
+    "size": 384,
+    "anchor": [
+      192,
+      320
+    ],
+    "portraitSize": 80,
+    "idleFps": 3,
+    "walkFps": 5,
+    "identity": "OGRE visual appearance of existing giant family. WARM GREY/TAUPE skin, broad heavy belly/shoulders, shorter thick neck, blunt square nose/brow, small lower tusks and deep-set eyes, sparse SHORT FIXED dark scalp hair. Huge bare forearms and broad hands with thick rooted claw-like nails, strong grounded bare feet. Simple patched brown hipwrap and rope binding, rear plain knot, no front belt/clasp copied on back. Natural empty-hand fist/claw strike, NO club/hammer/shield or invented armor/weapons. About2.6\u20133m, SAME physical scale as approved Troll, broader physique without being bigger boss. Hands/feet/garment remain connected in every pose.",
+    "motionActions": [
+      "idle",
+      "walk",
+      "attack",
+      "special",
+      "buff"
+    ]
+  }
+]

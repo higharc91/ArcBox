@@ -1,0 +1,14 @@
+{
+  "dragon_gold": {
+    "wingbeat": [
+      {
+        "source": "dragon_gold-wingbeat-front",
+        "count": 16
+      },
+      {
+        "source": "dragon_gold-wingbeat-back",
+        "count": 16
+      }
+    ]
+  }
+}

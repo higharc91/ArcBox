@@ -1,0 +1,29 @@
+[
+  {
+    "id": "spider_phase",
+    "framesChecked": 112,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 1.1,
+    "reelZoom": 1.7,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  },
+  {
+    "id": "wolf_alpha",
+    "framesChecked": 112,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 1.1,
+    "reelZoom": 1.7,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  },
+  {
+    "id": "crab_deep",
+    "framesChecked": 112,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 1.1,
+    "reelZoom": 1.7,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  }
+]

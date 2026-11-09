@@ -1,0 +1,37 @@
+{
+  "slug": "spectral-remnant",
+  "date": "2026-11-08",
+  "title": "Spectre",
+  "priorCommit": "d5ce1853",
+  "libraryBatch": 11,
+  "overallBatch": 26,
+  "features": [
+    "Pale mist-grey hood and robe preserve the approved human-sized Wraith anatomy and cool material planes.",
+    "Eight genuine facings have plain rear hoods, grey hands joined to sleeves and a continuous drifting tail without legs or loose wisps.",
+    "Natural spectral touch and the existing targeted Life Drain have distinct full gestures; hurt and low collapsed down poses read clearly."
+  ],
+  "conceptJob": "job_sftiaB1QZB21xQrTxriTWdvb",
+  "conceptAsset": "asset_8qD8jbW5uzJD745S6qD8gZzM",
+  "creativeUnits": 8,
+  "conceptNote": "Scenario supplied the single-creature turnarounds and gesture concept. OpenAI authored all complete pixel figures, matching the primary Wraith reference.",
+  "actions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "down",
+    "cast"
+  ],
+  "actionsNote": "Eight facings and six unique actions; the existing special alias selects the distinct Life Drain gathering clip.",
+  "nativeSeconds": 24,
+  "reelSeconds": 40,
+  "cadenceNote": "Spectral touch and Life Drain contact at .4 s and recover through .8 s. Rules, stats, ranges, encounter placements and FX are unchanged.",
+  "replayNote": "One movement round trip, one natural touch, one real targeted Life Drain and return to ready.",
+  "contactLabel": "two engine-timed spectral touch and Life Drain contacts",
+  "reviewNotes": [
+    "The rejected damage draft remained upright in down cells. A fresh complete sheet supplies low collapsed robes in every facing.",
+    "Each hand remains connected to its sleeve, with no carried weapons or detached spectral fragments.",
+    "The final singleton batch completes all 31 older library appearances; separate TV/phone playtest feedback remains open on issue #272."
+  ],
+  "conceptImage": "spectre.png"
+}

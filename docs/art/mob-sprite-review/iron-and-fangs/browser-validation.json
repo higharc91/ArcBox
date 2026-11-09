@@ -1,0 +1,72 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1390
+    },
+    {
+      "title": "Development battle · creatures beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Stinger, mounted strike and Adhesive Bite contact through the Godot beat path",
+      "width": 960,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · Creature scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "5ac4e3b8",
+    "walk": "28bd2ee3",
+    "attack": "3eee0cad",
+    "hurt": "ee78b9f3",
+    "down": "93dc773a"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "scorpion_black",
+      "hashes": [
+        "8e5cf5ad",
+        "814d73fd",
+        "daa71cbd",
+        "5c82b01"
+      ]
+    },
+    {
+      "id": "warg_rider",
+      "hashes": [
+        "fbb6d7fd",
+        "b926ccbf",
+        "e970402e",
+        "bb7f21a8"
+      ]
+    },
+    {
+      "id": "mimic_ironbound",
+      "hashes": [
+        "624321e4",
+        "f642045d",
+        "a794f197",
+        "50a4c4e2"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

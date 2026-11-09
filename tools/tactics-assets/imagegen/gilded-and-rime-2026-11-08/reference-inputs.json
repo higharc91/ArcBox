@@ -1,0 +1,195 @@
+{
+  "dragon_gold_idle": {
+    "promptKey": "dragon_gold_idle",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png"
+    ]
+  },
+  "troll_frost_idle": {
+    "promptKey": "troll_frost_idle",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png"
+    ]
+  },
+  "troll_ogre_idle": {
+    "promptKey": "troll_ogre_idle",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png"
+    ]
+  },
+  "dragon_gold_walk": {
+    "promptKey": "dragon_gold_walk",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "troll_frost_walk": {
+    "promptKey": "troll_frost_walk",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_frost-idle.png"
+    ]
+  },
+  "troll_ogre_walk": {
+    "promptKey": "troll_ogre_walk",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_ogre-idle.png"
+    ]
+  },
+  "dragon_gold_attack": {
+    "promptKey": "dragon_gold_attack",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "troll_frost_attack": {
+    "promptKey": "troll_frost_attack",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_frost-idle.png"
+    ]
+  },
+  "troll_ogre_attack": {
+    "promptKey": "troll_ogre_attack",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_ogre-idle.png"
+    ]
+  },
+  "dragon_gold_damage": {
+    "promptKey": "dragon_gold_damage",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "troll_frost_damage": {
+    "promptKey": "troll_frost_damage",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_frost-idle.png"
+    ]
+  },
+  "troll_ogre_damage": {
+    "promptKey": "troll_ogre_damage",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_ogre-idle.png"
+    ]
+  },
+  "troll_frost_throw": {
+    "promptKey": "troll_frost_throw",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_frost-idle.png"
+    ]
+  },
+  "troll_ogre_throw": {
+    "promptKey": "troll_ogre_throw",
+    "references": [
+      "source/troll_ogre-idle.png"
+    ]
+  },
+  "troll_frost_roar": {
+    "promptKey": "troll_frost_roar",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_frost-idle.png"
+    ]
+  },
+  "troll_ogre_roar": {
+    "promptKey": "troll_ogre_roar",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_ogre-idle.png"
+    ]
+  },
+  "dragon_gold_breath": {
+    "promptKey": "dragon_gold_breath",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_roar": {
+    "promptKey": "dragon_gold_roar",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_wingbeat_front": {
+    "promptKey": "dragon_gold_wingbeat_front",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_wingbeat_back": {
+    "promptKey": "dragon_gold_wingbeat_back",
+    "references": [
+      "../wyrm-triad-2026-11-08/references/dragon_black-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "troll_ogre_throw_original": {
+    "promptKey": "troll_ogre_throw_original",
+    "references": [
+      "references/troll_frost-idle.png",
+      "../../concepts/gilded-and-rime-2026-11-08/three-variants.png",
+      "source/troll_ogre-idle.png"
+    ]
+  },
+  "dragon_gold_rear_left_damage": {
+    "promptKey": "dragon_gold_rear_left_damage",
+    "references": [
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_east_walk": {
+    "promptKey": "dragon_gold_east_walk",
+    "references": [
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_wingbeat_northwest": {
+    "promptKey": "dragon_gold_wingbeat_northwest",
+    "references": [
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_attack_northeast": {
+    "promptKey": "dragon_gold_attack_northeast",
+    "references": [
+      "source/dragon_gold-idle.png"
+    ]
+  },
+  "dragon_gold_attack_southeast": {
+    "promptKey": "dragon_gold_attack_southeast",
+    "references": [
+      "source/dragon_gold-idle.png"
+    ]
+  }
+}

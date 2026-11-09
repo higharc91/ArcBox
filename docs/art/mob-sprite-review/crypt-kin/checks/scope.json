@@ -1,0 +1,22 @@
+{
+  "priorCommit": "c662c42c",
+  "addedCreatureEntries": [
+    "mob_refresh_bat_vampire",
+    "mob_refresh_bear_undead",
+    "mob_refresh_slime_crystal"
+  ],
+  "combatMechanicsUnchanged": true,
+  "combatTrackerUnchanged": true,
+  "abilityBindingsUnchanged": true,
+  "priorCreatureEntriesUnchanged": true,
+  "priorRuntimeArtUnchanged": true,
+  "dialoguePortraitsUnchanged": true,
+  "historicalBaselineUnchanged": true,
+  "sourceImages": 14,
+  "packedFrameKeys": 336,
+  "distinctAuthoredPoseSelections": 336,
+  "runtimeAssets": 3,
+  "naturalAttacksPerCreature": 1,
+  "wholePoseFacingSelection": true,
+  "visualContactTimingRefined": true
+}

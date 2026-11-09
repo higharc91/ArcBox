@@ -1,0 +1,2642 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 0,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      102,
+      130,
+      280,
+      318
+    ],
+    "count": 23098
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 1,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      102,
+      130,
+      280,
+      318
+    ],
+    "count": 23090
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 2,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      102,
+      127,
+      279,
+      317
+    ],
+    "count": 23198
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 3,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      102,
+      132,
+      280,
+      318
+    ],
+    "count": 22809
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 0,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      104,
+      132,
+      281,
+      320
+    ],
+    "count": 23129
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 1,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      105,
+      132,
+      285,
+      320
+    ],
+    "count": 22450
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 2,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      104,
+      132,
+      279,
+      320
+    ],
+    "count": 22374
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 3,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      103,
+      132,
+      278,
+      320
+    ],
+    "count": 22947
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 0,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      101,
+      132,
+      281,
+      320
+    ],
+    "count": 23794
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 1,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      100,
+      135,
+      283,
+      320
+    ],
+    "count": 22364
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 2,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      97,
+      134,
+      284,
+      320
+    ],
+    "count": 21974
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 3,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      97,
+      132,
+      279,
+      320
+    ],
+    "count": 23875
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 0,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      121,
+      141,
+      277,
+      320
+    ],
+    "count": 17216
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 1,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      114,
+      202,
+      269,
+      320
+    ],
+    "count": 14034
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 0,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      101,
+      133,
+      281,
+      320
+    ],
+    "count": 23032
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 1,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      95,
+      113,
+      284,
+      320
+    ],
+    "count": 24581
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 2,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      81,
+      134,
+      290,
+      320
+    ],
+    "count": 22840
+  },
+  {
+    "action": "special",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 3,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      101,
+      136,
+      280,
+      320
+    ],
+    "count": 22840
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 0,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      100,
+      132,
+      285,
+      320
+    ],
+    "count": 24210
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 1,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      97,
+      126,
+      284,
+      320
+    ],
+    "count": 24828
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 2,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      86,
+      126,
+      290,
+      320
+    ],
+    "count": 24546
+  },
+  {
+    "action": "buff",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 3,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      98,
+      132,
+      283,
+      320
+    ],
+    "count": 24119
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 4,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      105,
+      127,
+      271,
+      317
+    ],
+    "count": 21717
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 5,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      106,
+      127,
+      271,
+      317
+    ],
+    "count": 21797
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 6,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      107,
+      127,
+      272,
+      317
+    ],
+    "count": 21765
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 7,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      107,
+      128,
+      270,
+      317
+    ],
+    "count": 21400
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 4,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      101,
+      125,
+      270,
+      320
+    ],
+    "count": 22184
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 5,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      87,
+      123,
+      250,
+      320
+    ],
+    "count": 20543
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 6,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      103,
+      124,
+      270,
+      320
+    ],
+    "count": 21486
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 7,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      82,
+      128,
+      246,
+      320
+    ],
+    "count": 20577
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 4,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      70,
+      128,
+      238,
+      320
+    ],
+    "count": 22225
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 5,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      65,
+      129,
+      227,
+      320
+    ],
+    "count": 19480
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 6,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      51,
+      133,
+      247,
+      320
+    ],
+    "count": 20128
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 7,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      66,
+      130,
+      233,
+      320
+    ],
+    "count": 21899
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 2,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      91,
+      145,
+      253,
+      320
+    ],
+    "count": 16879
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 3,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      106,
+      204,
+      277,
+      320
+    ],
+    "count": 13829
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 4,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      101,
+      130,
+      269,
+      320
+    ],
+    "count": 21877
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 5,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      102,
+      104,
+      280,
+      320
+    ],
+    "count": 23186
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 6,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      52,
+      131,
+      275,
+      320
+    ],
+    "count": 22302
+  },
+  {
+    "action": "special",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 7,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      103,
+      131,
+      269,
+      320
+    ],
+    "count": 21466
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 4,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      98,
+      127,
+      272,
+      320
+    ],
+    "count": 23218
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 5,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      97,
+      125,
+      272,
+      320
+    ],
+    "count": 23483
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 6,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      90,
+      125,
+      279,
+      320
+    ],
+    "count": 23472
+  },
+  {
+    "action": "buff",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 7,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      96,
+      126,
+      271,
+      320
+    ],
+    "count": 23363
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 8,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      100,
+      126,
+      228,
+      318
+    ],
+    "count": 15924
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 9,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      99,
+      125,
+      227,
+      318
+    ],
+    "count": 15822
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 10,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      101,
+      126,
+      227,
+      318
+    ],
+    "count": 15635
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 11,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      101,
+      126,
+      229,
+      318
+    ],
+    "count": 15799
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 8,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      102,
+      124,
+      237,
+      320
+    ],
+    "count": 16963
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 9,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      111,
+      125,
+      241,
+      320
+    ],
+    "count": 16623
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 10,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      122,
+      127,
+      254,
+      320
+    ],
+    "count": 17375
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 11,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      96,
+      123,
+      231,
+      320
+    ],
+    "count": 16668
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 8,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      107,
+      123,
+      242,
+      320
+    ],
+    "count": 17142
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 9,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      115,
+      131,
+      259,
+      320
+    ],
+    "count": 16824
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 10,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      67,
+      127,
+      254,
+      320
+    ],
+    "count": 18194
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 11,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      105,
+      123,
+      240,
+      320
+    ],
+    "count": 16986
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 4,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      124,
+      140,
+      247,
+      320
+    ],
+    "count": 13958
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 5,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      108,
+      204,
+      274,
+      320
+    ],
+    "count": 14035
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 8,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      99,
+      130,
+      231,
+      320
+    ],
+    "count": 16129
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 9,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      82,
+      102,
+      229,
+      320
+    ],
+    "count": 17612
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 10,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      26,
+      130,
+      232,
+      320
+    ],
+    "count": 19077
+  },
+  {
+    "action": "special",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 11,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      96,
+      131,
+      228,
+      320
+    ],
+    "count": 15706
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 8,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      92,
+      123,
+      235,
+      320
+    ],
+    "count": 17357
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 9,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      94,
+      123,
+      234,
+      320
+    ],
+    "count": 17089
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 10,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      95,
+      123,
+      238,
+      320
+    ],
+    "count": 18551
+  },
+  {
+    "action": "buff",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 11,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      92,
+      123,
+      233,
+      320
+    ],
+    "count": 17070
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 12,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      126,
+      124,
+      268,
+      318
+    ],
+    "count": 18897
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 13,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      128,
+      124,
+      266,
+      318
+    ],
+    "count": 18724
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 14,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      130,
+      124,
+      267,
+      318
+    ],
+    "count": 18686
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 15,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      129,
+      123,
+      268,
+      318
+    ],
+    "count": 18784
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 12,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      130,
+      122,
+      267,
+      320
+    ],
+    "count": 19650
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 13,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      124,
+      121,
+      260,
+      320
+    ],
+    "count": 19238
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 14,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      119,
+      121,
+      269,
+      320
+    ],
+    "count": 19825
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 15,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      120,
+      122,
+      259,
+      320
+    ],
+    "count": 19294
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 12,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      121,
+      131,
+      278,
+      320
+    ],
+    "count": 20489
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 13,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      120,
+      132,
+      290,
+      320
+    ],
+    "count": 19891
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 14,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      84,
+      133,
+      276,
+      320
+    ],
+    "count": 19470
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 15,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      118,
+      132,
+      280,
+      320
+    ],
+    "count": 20662
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 6,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      136,
+      140,
+      281,
+      320
+    ],
+    "count": 15882
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 7,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      109,
+      209,
+      275,
+      320
+    ],
+    "count": 13571
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 12,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      125,
+      129,
+      267,
+      320
+    ],
+    "count": 18729
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 13,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      113,
+      108,
+      268,
+      320
+    ],
+    "count": 19018
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 14,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      68,
+      131,
+      272,
+      320
+    ],
+    "count": 19452
+  },
+  {
+    "action": "special",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 15,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      130,
+      130,
+      271,
+      320
+    ],
+    "count": 18641
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 12,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      124,
+      123,
+      269,
+      320
+    ],
+    "count": 20421
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 13,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      124,
+      120,
+      273,
+      320
+    ],
+    "count": 20890
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 14,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      105,
+      120,
+      272,
+      320
+    ],
+    "count": 21688
+  },
+  {
+    "action": "buff",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 15,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      123,
+      123,
+      268,
+      320
+    ],
+    "count": 20310
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 16,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      101,
+      127,
+      279,
+      317
+    ],
+    "count": 23285
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 17,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      101,
+      123,
+      281,
+      318
+    ],
+    "count": 23893
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 18,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      101,
+      123,
+      279,
+      318
+    ],
+    "count": 23814
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 19,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      100,
+      127,
+      280,
+      317
+    ],
+    "count": 23188
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 16,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      103,
+      127,
+      281,
+      320
+    ],
+    "count": 23779
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 17,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      99,
+      125,
+      279,
+      320
+    ],
+    "count": 23646
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 18,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      101,
+      125,
+      281,
+      320
+    ],
+    "count": 23700
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 19,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      102,
+      127,
+      277,
+      320
+    ],
+    "count": 23513
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 16,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      100,
+      132,
+      282,
+      320
+    ],
+    "count": 23490
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 17,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      95,
+      132,
+      287,
+      320
+    ],
+    "count": 22609
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 18,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      95,
+      131,
+      282,
+      320
+    ],
+    "count": 21615
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 19,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      98,
+      132,
+      282,
+      320
+    ],
+    "count": 23750
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 8,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      131,
+      139,
+      277,
+      320
+    ],
+    "count": 16268
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 9,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      106,
+      195,
+      277,
+      320
+    ],
+    "count": 15217
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 16,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      98,
+      133,
+      282,
+      320
+    ],
+    "count": 23187
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 17,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      92,
+      104,
+      265,
+      320
+    ],
+    "count": 22996
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 18,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      94,
+      133,
+      282,
+      320
+    ],
+    "count": 21513
+  },
+  {
+    "action": "special",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 19,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      98,
+      133,
+      281,
+      320
+    ],
+    "count": 23007
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 16,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      98,
+      123,
+      284,
+      320
+    ],
+    "count": 25185
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 17,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      95,
+      117,
+      285,
+      320
+    ],
+    "count": 26028
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 18,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      87,
+      117,
+      294,
+      320
+    ],
+    "count": 25984
+  },
+  {
+    "action": "buff",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 19,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      97,
+      123,
+      284,
+      320
+    ],
+    "count": 25188
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 20,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      128,
+      126,
+      267,
+      318
+    ],
+    "count": 18985
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 21,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      128,
+      125,
+      266,
+      318
+    ],
+    "count": 18881
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 22,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      127,
+      126,
+      265,
+      318
+    ],
+    "count": 18774
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 23,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      128,
+      125,
+      265,
+      318
+    ],
+    "count": 18733
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 20,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      119,
+      124,
+      251,
+      320
+    ],
+    "count": 18598
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 21,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      115,
+      123,
+      251,
+      320
+    ],
+    "count": 18536
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 22,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      122,
+      123,
+      256,
+      320
+    ],
+    "count": 18292
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 23,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      113,
+      124,
+      250,
+      320
+    ],
+    "count": 18922
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 20,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      122,
+      123,
+      268,
+      320
+    ],
+    "count": 20391
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 21,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      110,
+      123,
+      246,
+      320
+    ],
+    "count": 19117
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 22,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      108,
+      125,
+      294,
+      320
+    ],
+    "count": 19638
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 23,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      119,
+      128,
+      272,
+      320
+    ],
+    "count": 20743
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 10,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      130,
+      137,
+      278,
+      320
+    ],
+    "count": 14711
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 11,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      106,
+      202,
+      277,
+      320
+    ],
+    "count": 13206
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 20,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      121,
+      131,
+      269,
+      320
+    ],
+    "count": 18900
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 21,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      116,
+      101,
+      255,
+      320
+    ],
+    "count": 18720
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 22,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      115,
+      135,
+      306,
+      320
+    ],
+    "count": 19047
+  },
+  {
+    "action": "special",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 23,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      120,
+      133,
+      267,
+      320
+    ],
+    "count": 18664
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 20,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      104,
+      122,
+      253,
+      320
+    ],
+    "count": 20572
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 21,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      103,
+      122,
+      254,
+      320
+    ],
+    "count": 20873
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 22,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      96,
+      122,
+      254,
+      320
+    ],
+    "count": 21244
+  },
+  {
+    "action": "buff",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 23,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      104,
+      122,
+      252,
+      320
+    ],
+    "count": 20470
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 24,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      145,
+      124,
+      268,
+      318
+    ],
+    "count": 16067
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 25,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      144,
+      124,
+      265,
+      318
+    ],
+    "count": 16178
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 26,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      144,
+      123,
+      265,
+      318
+    ],
+    "count": 16226
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 27,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      145,
+      124,
+      266,
+      318
+    ],
+    "count": 15881
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 24,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      144,
+      122,
+      273,
+      320
+    ],
+    "count": 16975
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 25,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      154,
+      123,
+      281,
+      320
+    ],
+    "count": 16216
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 26,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      152,
+      121,
+      282,
+      320
+    ],
+    "count": 16748
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 27,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      147,
+      121,
+      274,
+      320
+    ],
+    "count": 16667
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 24,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      139,
+      123,
+      263,
+      320
+    ],
+    "count": 17319
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 25,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      147,
+      124,
+      275,
+      320
+    ],
+    "count": 16316
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 26,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      148,
+      128,
+      333,
+      320
+    ],
+    "count": 18271
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 27,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      131,
+      124,
+      261,
+      320
+    ],
+    "count": 18205
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 12,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      142,
+      136,
+      268,
+      320
+    ],
+    "count": 13188
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 13,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      111,
+      205,
+      271,
+      320
+    ],
+    "count": 13148
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 24,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      144,
+      129,
+      268,
+      320
+    ],
+    "count": 15749
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 25,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      130,
+      104,
+      263,
+      320
+    ],
+    "count": 18586
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 26,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      148,
+      127,
+      332,
+      320
+    ],
+    "count": 17449
+  },
+  {
+    "action": "special",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 27,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      146,
+      127,
+      268,
+      320
+    ],
+    "count": 15775
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 24,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      138,
+      124,
+      270,
+      320
+    ],
+    "count": 17127
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 25,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      138,
+      121,
+      270,
+      320
+    ],
+    "count": 17327
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 26,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      132,
+      117,
+      265,
+      320
+    ],
+    "count": 17499
+  },
+  {
+    "action": "buff",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 27,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      137,
+      124,
+      268,
+      320
+    ],
+    "count": 16972
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 28,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      106,
+      127,
+      281,
+      317
+    ],
+    "count": 22449
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 29,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      108,
+      124,
+      281,
+      318
+    ],
+    "count": 22514
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 30,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      113,
+      124,
+      282,
+      318
+    ],
+    "count": 22454
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_ogre-idle.png",
+    "sourcePose": 31,
+    "scale": 1.0930232558139534,
+    "bounds": [
+      105,
+      127,
+      280,
+      317
+    ],
+    "count": 22336
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 28,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      110,
+      130,
+      279,
+      320
+    ],
+    "count": 22131
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 29,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      139,
+      130,
+      307,
+      320
+    ],
+    "count": 20929
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 30,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      136,
+      129,
+      306,
+      320
+    ],
+    "count": 21291
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_ogre-walk.png",
+    "sourcePose": 31,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      115,
+      130,
+      281,
+      320
+    ],
+    "count": 21946
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 28,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      105,
+      132,
+      278,
+      320
+    ],
+    "count": 22403
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 29,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      130,
+      134,
+      312,
+      320
+    ],
+    "count": 21068
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 30,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      166,
+      135,
+      332,
+      320
+    ],
+    "count": 19327
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_ogre-attack.png",
+    "sourcePose": 31,
+    "scale": 1.0621468926553672,
+    "bounds": [
+      102,
+      133,
+      283,
+      320
+    ],
+    "count": 22685
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 14,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      128,
+      141,
+      287,
+      320
+    ],
+    "count": 17065
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-damage.png",
+    "sourcePose": 15,
+    "scale": 0.6474820143884892,
+    "bounds": [
+      106,
+      207,
+      276,
+      320
+    ],
+    "count": 13384
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 28,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      108,
+      134,
+      282,
+      320
+    ],
+    "count": 21754
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 29,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      104,
+      108,
+      290,
+      320
+    ],
+    "count": 23824
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 30,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      160,
+      130,
+      318,
+      320
+    ],
+    "count": 19746
+  },
+  {
+    "action": "special",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_ogre-throw.png",
+    "sourcePose": 31,
+    "scale": 1.0561797752808988,
+    "bounds": [
+      110,
+      134,
+      284,
+      320
+    ],
+    "count": 21683
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 28,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      107,
+      130,
+      282,
+      320
+    ],
+    "count": 23107
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 29,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      107,
+      123,
+      284,
+      320
+    ],
+    "count": 23785
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 30,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      95,
+      123,
+      290,
+      320
+    ],
+    "count": 23959
+  },
+  {
+    "action": "buff",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/troll_ogre-roar.png",
+    "sourcePose": 31,
+    "scale": 1.0994152046783625,
+    "bounds": [
+      103,
+      130,
+      281,
+      320
+    ],
+    "count": 23534
+  }
+]

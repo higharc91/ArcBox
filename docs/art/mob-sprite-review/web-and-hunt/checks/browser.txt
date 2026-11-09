@@ -1,0 +1,72 @@
+{
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 1120
+    },
+    {
+      "title": "Development battle · creatures beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Fang bite, wolf bite and pincer contact through the Godot beat path",
+      "width": 960,
+      "height": 1800
+    },
+    {
+      "title": "Overworld · Creature scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "28db6ecf",
+    "walk": "439c6e0e",
+    "attack": "eb2be029",
+    "hurt": "e637ebe7",
+    "down": "fea8edc0"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "spider_phase",
+      "hashes": [
+        "1459a376",
+        "c9ca498e",
+        "7a62fa8d",
+        "c43fcc9e"
+      ]
+    },
+    {
+      "id": "wolf_alpha",
+      "hashes": [
+        "6a638e5d",
+        "e8df3ab5",
+        "f8ae4201",
+        "1b5eb8e2"
+      ]
+    },
+    {
+      "id": "crab_deep",
+      "hashes": [
+        "4acd5cf5",
+        "5bde534d",
+        "6ad72de",
+        "7c9758a9"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

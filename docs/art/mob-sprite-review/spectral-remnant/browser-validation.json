@@ -1,0 +1,66 @@
+{
+  "freshPhone": {
+    "facing": "0",
+    "width": 320,
+    "loaded": 1,
+    "viewport": 390,
+    "document": 390
+  },
+  "phoneAfterTurn": {
+    "loaded": 1,
+    "facing": "4"
+  },
+  "scenes": [
+    {
+      "title": "Original → refreshed at the same world zoom",
+      "width": 1440,
+      "height": 550
+    },
+    {
+      "title": "Development battle · creatures beside the fighter and refreshed mobs",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Spectral touch and Life Drain contact through the Godot beat path",
+      "width": 960,
+      "height": 340
+    },
+    {
+      "title": "Overworld · Creature scale beside the party",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "title": "Town lighting and foreground occlusion",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "actionHashes": {
+    "idle": "9c8b0449",
+    "walk": "5cdcc886",
+    "attack": "73acec28",
+    "hurt": "f22652c7",
+    "down": "3e2ba0d",
+    "cast": "ffb05427"
+  },
+  "walkFrameHashes": [
+    {
+      "id": "wraith_spectre",
+      "hashes": [
+        "e5fddce7",
+        "4c7d82a3",
+        "5cdcc886",
+        "58c37491"
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "phone": {
+    "viewport": 390,
+    "document": 390
+  },
+  "singleFacingWidth": 320,
+  "passed": true
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "spider_phase",
+    "label": "Phase Spider",
+    "key": "beasts.spider.phase",
+    "primaryId": "spider_black",
+    "height": 112,
+    "size": 320,
+    "anchor": [
+      160,
+      260
+    ],
+    "portraitSize": 58,
+    "idleFps": 3,
+    "walkFps": 6,
+    "identity": "Giant PHASE SPIDER animal, one coherent arachnid with compact thorax and larger ONE rounded abdomen; EIGHT jointed walking legs rooted to thorax, two small pedipalps and small joined fangs. Smoky lavender/indigo carapace with pale silver segment edges and restrained violet abdomen mottling; small cyan front eye cluster, no human eyes/face. All8 legs anatomically present with correct occlusion, two per side may hide behind near legs in exact profile. Rear no front eyes/fangs. Broad low spider rather than upright monster. No wings, weapons, clothes, ghosts, portals, floating particles or new spell effects. Crisp substantial legs with continuous joints and contact tips, no spaghetti limbs."
+  },
+  {
+    "id": "wolf_alpha",
+    "label": "Alpha Wolf",
+    "key": "beasts.wolf.alpha",
+    "primaryId": "wolf_dire",
+    "height": 104,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "portraitSize": 56,
+    "idleFps": 3,
+    "walkFps": 6,
+    "identity": "Mature large ALPHA GREY WOLF, FOUR grounded canine legs/paws, long wolf muzzle, tiny amber eyes, TWO upright triangular ears (one subtly notched), ONE bushy tail ROOTED to rump carried low. Dense charcoal-and-silver layered fur with dark full shoulder ruff/saddle, pale muzzle/chest. Pack leader somewhat bigger than standard wolf, same body scale as approved Dire Wolf primary. No collar/flags/jewelry/weapons/armor, no red demon eyes, no magic. Clear quadruped anatomy and grounded weight, full back no front face. Tail stays attached, not left-right sliding."
+  },
+  {
+    "id": "crab_deep",
+    "label": "Deep Crab",
+    "key": "bestiary.crab.deep",
+    "primaryId": "crab_shore",
+    "height": 94,
+    "size": 320,
+    "anchor": [
+      160,
+      260
+    ],
+    "portraitSize": 66,
+    "idleFps": 3,
+    "walkFps": 5,
+    "identity": "Giant DEEP CRAB, low broad armored navy/cobalt carapace with weathered muted teal edges and a few pale barnacle clusters, TWO connected front pincers on jointed arms, EIGHT walking legs on sides (decapod total10 appendages), TWO tiny short FRONT eyestalks, no tail. Animal LEFT crusher pincer slightly larger than RIGHT cutter; rotate this chirality coherently through views. Broad low stance, shell well below human waist. Full back shows shell rump and away-facing front claws, no eyes/front pincer tips pasted onto rear. All legs and claws continuous, correct occlusion in side/rear, no floating bubbles/water/glow/magic/equipment."
+  }
+]

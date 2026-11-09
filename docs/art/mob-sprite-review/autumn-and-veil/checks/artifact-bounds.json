@@ -1,0 +1,29 @@
+[
+  {
+    "id": "sapling_autumn",
+    "framesChecked": 112,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 1.5,
+    "reelZoom": 2,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  },
+  {
+    "id": "sapling_blossom",
+    "framesChecked": 112,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 1.5,
+    "reelZoom": 2,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  },
+  {
+    "id": "wraith_shade",
+    "framesChecked": 144,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 1.5,
+    "reelZoom": 2,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  }
+]

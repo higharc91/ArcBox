@@ -1,0 +1,14 @@
+{
+  "dragon_gold-attack.png": "76f7af893843eb190917cb71152c8e668112e217e3094859cd040e9c323c3c34",
+  "dragon_gold-damage.png": "3ff0aa382277e5af11729c91a4234d0f3c644f30ac6de937ad07135ae4ab2c52",
+  "dragon_gold-idle.png": "94f5d542e2fb4673be473dba8a529fc8e9598dc2fe731eb850fbc5c465da30a8",
+  "dragon_gold-walk.png": "a3ca0f817c5836118651bc372169e791ba478776b8f162faffaba5abb07c0fb4",
+  "troll_frost-attack.png": "470b7af4c2c0ed16db3d651a99fccedab65a0382899a9b58bca7dc20ba6b5dfb",
+  "troll_frost-damage.png": "78b80ceeea46857372f4af2290d3ee6830e3465319cf9f8d7c1b2b598c912338",
+  "troll_frost-idle.png": "c1e1bce0b4fa48335453e59cda1ebb21b2c54f9ce32c6b99ce102959b0fd9bc4",
+  "troll_frost-walk.png": "2fe888b38847b529ab8228d4c6fc64ad7f482d21758185ee828d5a48c12168db",
+  "troll_ogre-attack.png": "470b7af4c2c0ed16db3d651a99fccedab65a0382899a9b58bca7dc20ba6b5dfb",
+  "troll_ogre-damage.png": "78b80ceeea46857372f4af2290d3ee6830e3465319cf9f8d7c1b2b598c912338",
+  "troll_ogre-idle.png": "c1e1bce0b4fa48335453e59cda1ebb21b2c54f9ce32c6b99ce102959b0fd9bc4",
+  "troll_ogre-walk.png": "2fe888b38847b529ab8228d4c6fc64ad7f482d21758185ee828d5a48c12168db"
+}

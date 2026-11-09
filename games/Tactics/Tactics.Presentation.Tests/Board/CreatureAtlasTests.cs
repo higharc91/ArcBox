@@ -60,7 +60,7 @@ public sealed class CreatureAtlasTests
                 // Authored walk cycles use four, six or eight keys; padding them with duplicates adds no motion.
                 Assert.Contains(sprite.Anim("walk").Frames.Length, new[] { 4, 6, 8 });
                 var attack = sprite.Anim("attack");
-                if (item.Name == "mob_refresh_dragon")
+                if (entry.GetProperty("family").GetString() == "dragon")
                 {
                     // The dragon deliberately holds its wind-up before the jaw/wing contact.
                     Assert.Equal(1, attack.Frames.Length / attack.Fps, 3);
@@ -76,9 +76,9 @@ public sealed class CreatureAtlasTests
     public void Distinct_structural_forms_keep_their_identity_and_their_original_art()
     {
         var art = UnitArt.Load(Pack.Root);
-        Assert.Equal("bestiary/warg_rider.png", art.Sprite("bestiary.warg.rider")!.Path);
-        Assert.Equal("beasts/bear_undead.png", art.Sprite("beasts.bear.undead")!.Path);
-        Assert.Equal("beasts/slime_crystal.png", art.Sprite("beasts.slime.crystal")!.Path);
+        Assert.Equal("creatures/mob_refresh_warg_rider.png", art.Sprite("bestiary.warg.rider")!.Path);
+        Assert.Equal("creatures/mob_refresh_bear_undead.png", art.Sprite("beasts.bear.undead")!.Path);
+        Assert.Equal("creatures/mob_refresh_slime_crystal.png", art.Sprite("beasts.slime.crystal")!.Path);
     }
 
     [Fact]

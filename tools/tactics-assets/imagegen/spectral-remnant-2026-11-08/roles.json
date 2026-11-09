@@ -1,0 +1,18 @@
+[
+  {
+    "id": "wraith_spectre",
+    "label": "Spectre",
+    "key": "bosses.wraith.spectre",
+    "primaryId": "mob_refresh_wraith",
+    "height": 128,
+    "size": 256,
+    "anchor": [
+      128,
+      224
+    ],
+    "portraitSize": 64,
+    "idleFps": 3,
+    "walkFps": 5,
+    "identity": "Pale mist-grey spectral Wraith family appearance; continuous hood/robe/tail and cold-grey hands."
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "dragon_black": {
+    "sourceBytes": 15233722,
+    "reviewBytes": 8856326,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  },
+  "dragon_blue": {
+    "sourceBytes": 15948676,
+    "reviewBytes": 9532462,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  },
+  "dragon_green": {
+    "sourceBytes": 14956327,
+    "reviewBytes": 8860070,
+    "facings": 8,
+    "rgbaPixelsPreserved": true
+  }
+}

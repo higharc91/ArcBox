@@ -1,0 +1,88 @@
+{
+  "wraith_spectre": {
+    "sourceAtlasSha256": "cb7d2b5d7bba1d9e169dd2c53eedc863288c2cc59a2f16252e24eaadf36649f7",
+    "sourceBytes": 3407784,
+    "facings": [
+      {
+        "row": 0,
+        "file": "inspection-strips/wraith_spectre-0.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "f5b1d5ee63c0b8e975386deedd9953b65b67a55dad53b5d56c5cb3e4b2ba0553",
+        "webpSha256": "6f279ad2416a0f8bb212931c09a92d95e8b26cf88ad24f8d64f67a80bd6bf8a4",
+        "bytes": 257276,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 1,
+        "file": "inspection-strips/wraith_spectre-1.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "19fd9094c668c9e06375764052acdf4992f309dc02cba8713ae03b203e6cd95c",
+        "webpSha256": "dc94f93c3a918d93513d9463320f4e2a7bf1e4421b54d896b45fc55cf6ec815c",
+        "bytes": 253800,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 2,
+        "file": "inspection-strips/wraith_spectre-2.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "018882ecbae522d0f1da8901de9e7ac5cce58f79e399cc64b31165c39e629a69",
+        "webpSha256": "28bc3eb2e5e06f05f082eb4cabc01968c766020871a19eecbc914f0c545426da",
+        "bytes": 238268,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 3,
+        "file": "inspection-strips/wraith_spectre-3.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "04386c3839ac93e7d0d82f80d6bcbbc2c05ff62e93ff1e2e8dc7815b9d29555b",
+        "webpSha256": "8c21f2dfa93c77810cc0b56057163643f2c83f4c87e491632b1e76cf1e3a55d6",
+        "bytes": 253224,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 4,
+        "file": "inspection-strips/wraith_spectre-4.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "be0bbe9f41dea25cb853b8f5925d4f2bc87e7cca46ed44d2d675a3f0be82d4a7",
+        "webpSha256": "653d937a16b5d952343a9dc4f31333cb6512c93a97e680ec0ea56c4106b87808",
+        "bytes": 257922,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 5,
+        "file": "inspection-strips/wraith_spectre-5.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "2af03a07606078b9e674d96c2a43b5c1e2a70eb6cdb46f2e9493d3a6dce18943",
+        "webpSha256": "042fa974812bbb8e9a5467b59e3b6548097780ca7c72a2f988c28ff3ea93f56d",
+        "bytes": 245986,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 6,
+        "file": "inspection-strips/wraith_spectre-6.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "2cb4477e8002e06c92b2be8c3cc165b53b4eeccf6cb430c7ab813c0c68141f0c",
+        "webpSha256": "0422ea45e8c5c8d20c36c3d3eee61d0edddf331c942b3710208ba69e6c7c759c",
+        "bytes": 228214,
+        "pixelsMatchSourceAtlas": true
+      },
+      {
+        "row": 7,
+        "file": "inspection-strips/wraith_spectre-7.webp",
+        "width": 2048,
+        "height": 768,
+        "rgbaSha256": "370003c5c7839ac411a3da213153e3a2e71db4475229216c507d993cd63ba457",
+        "webpSha256": "22c9d46a5095737cf72c4cd75f3bcabb7c21b3501f7cdd4ab0cbbb3211dbcfb7",
+        "bytes": 248410,
+        "pixelsMatchSourceAtlas": true
+      }
+    ]
+  }
+}

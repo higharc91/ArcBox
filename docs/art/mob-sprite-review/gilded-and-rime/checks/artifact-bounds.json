@@ -1,0 +1,29 @@
+[
+  {
+    "id": "dragon_gold",
+    "framesChecked": 208,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 0.6,
+    "reelZoom": 1.0,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  },
+  {
+    "id": "troll_frost",
+    "framesChecked": 176,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 0.6,
+    "reelZoom": 1.0,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  },
+  {
+    "id": "troll_ogre",
+    "framesChecked": 176,
+    "completeSilhouettesFit": true,
+    "galleryZoom": 0.6,
+    "reelZoom": 1.0,
+    "galleryBaseline": 300,
+    "reelBaseline": 400
+  }
+]

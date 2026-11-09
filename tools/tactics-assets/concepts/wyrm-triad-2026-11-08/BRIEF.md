@@ -1,0 +1,23 @@
+# Black, Blue and Green Dragon concepts
+
+[Concept sheet](three-variants.png) · [Exact brief](brief.txt) · [Receipt](receipts.json)
+
+Scenario supplied the shared concept sheet; OpenAI authored complete pixel figures. PixelLab was not used.
+
+Three mature six-limbed dragons match the approved Red Dragon scale: four grounded legs, two dorsal bat wings and one rooted tail.
+
+Obsidian/wine, cobalt/violet and moss/fern palettes are complete authored figures, with folded wings during walking and visibly unfurled wings during jaw contact.
+
+All three existing ability gestures are authored in eight facings: Fire Breath brace, Frightful Presence mantle and Cataclysmic Wingbeat sweep. Existing shared gameplay and FX remain unchanged.
+
+Texture padding remains 512 pixels: four rows per facing fit the runtime 16384-pixel texture limit.
+
+Live battle/world review checks the same mature family scale beside the party, plus head portraits, wing clearance and whole-silhouette occlusion.
+
+Three complete rear-left hurt/down pairs replace forward-facing damage poses. Black and Blue east Wingbeat rows use fresh whole figures with empty gutters; no selected crop contains a neighboring figure.
+
+Diagnostic beat screenshots allow twelve examples per moment so the nine genuine ability contacts can all be captured; gameplay and world screenshot limits are unchanged.
+
+Lossless WebP compass strips preserve every runtime RGBA pixel while reducing the embedded atlas payload by 41%. Phones decode one facing at a time and release previous views.
+
+These are existing library appearances. No new stat block, lore or equipment beyond the documented variant is introduced. Physical labels are approximate design guides; final game scale is checked beside the party and approved family sprites.

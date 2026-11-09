@@ -1,0 +1,74 @@
+[
+  {
+    "mob": "scorpion_black",
+    "source": "scorpion_black-rear-damage",
+    "count": 6,
+    "columns": 3,
+    "heightFactor": 0.967741935483871,
+    "action": "hurt",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          0
+        ]
+      },
+      {
+        "row": 4,
+        "poses": [
+          1
+        ]
+      },
+      {
+        "row": 5,
+        "poses": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "scorpion_black",
+    "source": "scorpion_black-rear-damage",
+    "count": 6,
+    "columns": 3,
+    "heightFactor": 0.967741935483871,
+    "action": "down",
+    "targets": [
+      {
+        "row": 3,
+        "poses": [
+          3
+        ]
+      },
+      {
+        "row": 4,
+        "poses": [
+          4
+        ]
+      },
+      {
+        "row": 5,
+        "poses": [
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "mob": "mimic_ironbound",
+    "source": "mimic_ironbound-rear-hurt",
+    "count": 1,
+    "columns": 1,
+    "heightFactor": 0.9411764705882353,
+    "action": "hurt",
+    "targets": [
+      {
+        "row": 4,
+        "poses": [
+          0
+        ]
+      }
+    ]
+  }
+]

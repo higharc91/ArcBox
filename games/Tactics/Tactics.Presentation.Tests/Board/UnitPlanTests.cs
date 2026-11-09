@@ -65,6 +65,43 @@ public sealed class UnitPlanTests
     [InlineData("bosses.hound.black", "bosses.attack", .4)]
     [InlineData("bosses.hound.grey", "bosses.attack", .4)]
     [InlineData("bosses.imp.violet", "bosses.attack", .4)]
+    [InlineData("beasts.bat.vampire", "beasts.attack", .4)]
+    [InlineData("beasts.bear.undead", "beasts.attack", .4)]
+    [InlineData("beasts.slime.crystal", "beasts.attack", .4)]
+    [InlineData("beasts.spider.phase", "beasts.attack", .4)]
+    [InlineData("beasts.wolf.alpha", "beasts.attack", .4)]
+    [InlineData("bestiary.crab.deep", "bestiary.attack", .4)]
+    [InlineData("bestiary.scorpion.black", "bestiary.attack", .4)]
+    [InlineData("bestiary.warg.rider", "bestiary.attack", .4)]
+    [InlineData("bosses.mimic.ironbound", "bosses.attack", .4)]
+    [InlineData("bosses.dragon.black", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.black", "bosses.special", .5)]
+    [InlineData("bosses.dragon.black", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.black", "bosses.buff", .7)]
+    [InlineData("bosses.dragon.blue", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.blue", "bosses.special", .5)]
+    [InlineData("bosses.dragon.blue", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.blue", "bosses.buff", .7)]
+    [InlineData("bosses.dragon.green", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.green", "bosses.special", .5)]
+    [InlineData("bosses.dragon.green", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.green", "bosses.buff", .7)]
+    [InlineData("bosses.dragon.gold", "bosses.attack", .5)]
+    [InlineData("bosses.dragon.gold", "bosses.special", .5)]
+    [InlineData("bosses.dragon.gold", "bosses.cast", .5)]
+    [InlineData("bosses.dragon.gold", "bosses.buff", .7)]
+    [InlineData("bosses.troll.frost", "bosses.attack", .4)]
+    [InlineData("bosses.troll.frost", "bosses.special", .4)]
+    [InlineData("bosses.troll.frost", "bosses.buff", .4)]
+    [InlineData("bosses.troll.ogre", "bosses.attack", .4)]
+    [InlineData("bosses.troll.ogre", "bosses.special", .4)]
+    [InlineData("bosses.troll.ogre", "bosses.buff", .4)]
+    [InlineData("bosses.sapling.autumn", "bosses.attack", .4)]
+    [InlineData("bosses.sapling.blossom", "bosses.attack", .4)]
+    [InlineData("bosses.wraith.shade", "bosses.attack", .4)]
+    [InlineData("bosses.wraith.shade", "bosses.cast", .4)]
+    [InlineData("bosses.wraith.spectre", "bosses.attack", .4)]
+    [InlineData("bosses.wraith.spectre", "bosses.cast", .4)]
     public void Elemental_health_bars_clear_their_active_wind_stone_and_flame_silhouettes(string key, string binding, double time)
     {
         var view = Unit("a", "Enemy", 11, 10, key);
@@ -489,7 +526,11 @@ public sealed class UnitPlanTests
 
     [Fact]
     public void A_downed_monster_holds_its_last_down_frame()
-        => Assert.Equal(Pack.Frames("bosses", "down")[^1], One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.frost", life: "Downed", countdown: 1)).Anim.FrameAt(0));
+    {
+        var down = One(null, Unit("a", "Enemy", 5, 5, "bosses.troll.frost", life: "Downed", countdown: 1)).Anim;
+        Assert.Equal(13, down.FrameAt(0));
+        Assert.Equal(13, down.FrameAt(120));
+    }
 
     [Fact]
     public void A_standing_unit_idles_and_units_do_not_bob_in_step()

@@ -1,0 +1,1682 @@
+[
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 0,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      86,
+      107,
+      169,
+      223
+    ],
+    "count": 7529
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 1,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      87,
+      107,
+      169,
+      223
+    ],
+    "count": 7562
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 2,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      86,
+      106,
+      168,
+      223
+    ],
+    "count": 7564
+  },
+  {
+    "action": "idle",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 3,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      87,
+      107,
+      169,
+      223
+    ],
+    "count": 7551
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 0,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      85,
+      109,
+      171,
+      224
+    ],
+    "count": 7619
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 1,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      104,
+      107,
+      190,
+      224
+    ],
+    "count": 7701
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 2,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      68,
+      107,
+      155,
+      224
+    ],
+    "count": 7739
+  },
+  {
+    "action": "walk",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 3,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      86,
+      107,
+      172,
+      224
+    ],
+    "count": 7797
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 0,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      88,
+      108,
+      169,
+      224
+    ],
+    "count": 7587
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 1,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      62,
+      109,
+      151,
+      224
+    ],
+    "count": 7785
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 2,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      109,
+      103,
+      195,
+      224
+    ],
+    "count": 8008
+  },
+  {
+    "action": "attack",
+    "direction": "south",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 3,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      88,
+      107,
+      173,
+      224
+    ],
+    "count": 7791
+  },
+  {
+    "action": "hurt",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 0,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      85,
+      113,
+      170,
+      224
+    ],
+    "count": 7485
+  },
+  {
+    "action": "down",
+    "direction": "south",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 1,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      74,
+      146,
+      182,
+      224
+    ],
+    "count": 6246
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 4,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      94,
+      114,
+      203,
+      223
+    ],
+    "count": 8818
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 5,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      94,
+      113,
+      203,
+      222
+    ],
+    "count": 8883
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 6,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      93,
+      113,
+      204,
+      223
+    ],
+    "count": 9080
+  },
+  {
+    "action": "idle",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 7,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      92,
+      114,
+      203,
+      223
+    ],
+    "count": 9007
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 4,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      80,
+      119,
+      188,
+      224
+    ],
+    "count": 8408
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 5,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      87,
+      119,
+      196,
+      224
+    ],
+    "count": 8528
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 6,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      90,
+      118,
+      198,
+      224
+    ],
+    "count": 8421
+  },
+  {
+    "action": "walk",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 7,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      96,
+      123,
+      204,
+      224
+    ],
+    "count": 8257
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 4,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      91,
+      114,
+      202,
+      224
+    ],
+    "count": 9329
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 5,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      80,
+      117,
+      192,
+      224
+    ],
+    "count": 9033
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 6,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      87,
+      113,
+      204,
+      224
+    ],
+    "count": 9445
+  },
+  {
+    "action": "attack",
+    "direction": "south-west",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 7,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      80,
+      116,
+      195,
+      224
+    ],
+    "count": 9355
+  },
+  {
+    "action": "hurt",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 2,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      72,
+      111,
+      190,
+      224
+    ],
+    "count": 9802
+  },
+  {
+    "action": "down",
+    "direction": "south-west",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 3,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      61,
+      150,
+      193,
+      224
+    ],
+    "count": 6929
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 8,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      50,
+      133,
+      179,
+      223
+    ],
+    "count": 8132
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 9,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      52,
+      132,
+      180,
+      222
+    ],
+    "count": 8094
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 10,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      51,
+      132,
+      179,
+      223
+    ],
+    "count": 8177
+  },
+  {
+    "action": "idle",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 11,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      51,
+      132,
+      179,
+      222
+    ],
+    "count": 8176
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 8,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      51,
+      135,
+      179,
+      224
+    ],
+    "count": 8160
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 9,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      44,
+      135,
+      171,
+      224
+    ],
+    "count": 8174
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 10,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      52,
+      135,
+      179,
+      224
+    ],
+    "count": 7957
+  },
+  {
+    "action": "walk",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 11,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      56,
+      135,
+      185,
+      224
+    ],
+    "count": 7883
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 8,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      46,
+      134,
+      176,
+      224
+    ],
+    "count": 8480
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 9,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      48,
+      133,
+      174,
+      224
+    ],
+    "count": 8183
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 10,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      56,
+      135,
+      187,
+      224
+    ],
+    "count": 8478
+  },
+  {
+    "action": "attack",
+    "direction": "west",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 11,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      48,
+      135,
+      178,
+      224
+    ],
+    "count": 8265
+  },
+  {
+    "action": "hurt",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 4,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      45,
+      122,
+      177,
+      224
+    ],
+    "count": 9618
+  },
+  {
+    "action": "down",
+    "direction": "west",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 5,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      57,
+      161,
+      198,
+      224
+    ],
+    "count": 6337
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 12,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      41,
+      111,
+      169,
+      222
+    ],
+    "count": 8748
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 13,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      43,
+      110,
+      169,
+      223
+    ],
+    "count": 8724
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 14,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      43,
+      109,
+      169,
+      222
+    ],
+    "count": 8831
+  },
+  {
+    "action": "idle",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 15,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      43,
+      110,
+      168,
+      223
+    ],
+    "count": 8806
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 12,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      45,
+      114,
+      172,
+      224
+    ],
+    "count": 8707
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 13,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      44,
+      114,
+      165,
+      224
+    ],
+    "count": 8395
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 14,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      50,
+      113,
+      171,
+      224
+    ],
+    "count": 8616
+  },
+  {
+    "action": "walk",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 15,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      52,
+      115,
+      173,
+      224
+    ],
+    "count": 8374
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 12,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      41,
+      112,
+      170,
+      224
+    ],
+    "count": 9075
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 13,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      42,
+      111,
+      167,
+      224
+    ],
+    "count": 9014
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 14,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      39,
+      111,
+      169,
+      224
+    ],
+    "count": 9052
+  },
+  {
+    "action": "attack",
+    "direction": "north-west",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 15,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      42,
+      111,
+      168,
+      224
+    ],
+    "count": 8879
+  },
+  {
+    "action": "hurt",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 6,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      51,
+      112,
+      173,
+      224
+    ],
+    "count": 9105
+  },
+  {
+    "action": "down",
+    "direction": "north-west",
+    "frame": 0,
+    "source": "source/bear_undead-rear-down.png",
+    "sourcePose": 0,
+    "scale": 0.19451219512195123,
+    "bounds": [
+      81,
+      161,
+      173,
+      224
+    ],
+    "count": 4069
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 16,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      88,
+      101,
+      168,
+      222
+    ],
+    "count": 7517
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 17,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      88,
+      101,
+      169,
+      223
+    ],
+    "count": 7540
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 18,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      88,
+      99,
+      167,
+      222
+    ],
+    "count": 7628
+  },
+  {
+    "action": "idle",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 19,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      88,
+      101,
+      167,
+      222
+    ],
+    "count": 7512
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 16,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      89,
+      103,
+      169,
+      224
+    ],
+    "count": 7597
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 17,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      104,
+      99,
+      186,
+      224
+    ],
+    "count": 7672
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 18,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      105,
+      99,
+      184,
+      224
+    ],
+    "count": 7453
+  },
+  {
+    "action": "walk",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 19,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      85,
+      99,
+      167,
+      224
+    ],
+    "count": 7944
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 16,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      88,
+      104,
+      166,
+      224
+    ],
+    "count": 7245
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 17,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      108,
+      102,
+      192,
+      224
+    ],
+    "count": 7431
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 18,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      71,
+      102,
+      166,
+      224
+    ],
+    "count": 7675
+  },
+  {
+    "action": "attack",
+    "direction": "north",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 19,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      83,
+      104,
+      167,
+      224
+    ],
+    "count": 7462
+  },
+  {
+    "action": "hurt",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 8,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      90,
+      101,
+      169,
+      224
+    ],
+    "count": 7725
+  },
+  {
+    "action": "down",
+    "direction": "north",
+    "frame": 0,
+    "source": "source/bear_undead-rear-down.png",
+    "sourcePose": 1,
+    "scale": 0.19451219512195123,
+    "bounds": [
+      93,
+      159,
+      162,
+      224
+    ],
+    "count": 3452
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 20,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      86,
+      110,
+      203,
+      223
+    ],
+    "count": 8719
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 21,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      86,
+      110,
+      204,
+      223
+    ],
+    "count": 8739
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 22,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      95,
+      110,
+      212,
+      223
+    ],
+    "count": 8749
+  },
+  {
+    "action": "idle",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 23,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      86,
+      109,
+      203,
+      222
+    ],
+    "count": 8736
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 20,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      87,
+      110,
+      205,
+      224
+    ],
+    "count": 8942
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 21,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      82,
+      111,
+      200,
+      224
+    ],
+    "count": 8502
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 22,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      83,
+      110,
+      200,
+      224
+    ],
+    "count": 8749
+  },
+  {
+    "action": "walk",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 23,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      90,
+      113,
+      204,
+      224
+    ],
+    "count": 8391
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 20,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      94,
+      110,
+      209,
+      224
+    ],
+    "count": 8782
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 21,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      97,
+      109,
+      210,
+      224
+    ],
+    "count": 8357
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 22,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      97,
+      110,
+      214,
+      224
+    ],
+    "count": 8179
+  },
+  {
+    "action": "attack",
+    "direction": "north-east",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 23,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      97,
+      113,
+      210,
+      224
+    ],
+    "count": 8592
+  },
+  {
+    "action": "hurt",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 10,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      80,
+      105,
+      204,
+      224
+    ],
+    "count": 9687
+  },
+  {
+    "action": "down",
+    "direction": "north-east",
+    "frame": 0,
+    "source": "source/bear_undead-rear-down.png",
+    "sourcePose": 2,
+    "scale": 0.19451219512195123,
+    "bounds": [
+      81,
+      162,
+      173,
+      224
+    ],
+    "count": 4034
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 24,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      73,
+      128,
+      203,
+      223
+    ],
+    "count": 8904
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 25,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      73,
+      125,
+      203,
+      223
+    ],
+    "count": 8930
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 26,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      72,
+      126,
+      202,
+      223
+    ],
+    "count": 8981
+  },
+  {
+    "action": "idle",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 27,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      73,
+      128,
+      203,
+      223
+    ],
+    "count": 8866
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 24,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      74,
+      129,
+      207,
+      224
+    ],
+    "count": 9107
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 25,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      82,
+      127,
+      216,
+      224
+    ],
+    "count": 8957
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 26,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      79,
+      127,
+      210,
+      224
+    ],
+    "count": 8911
+  },
+  {
+    "action": "walk",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 27,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      74,
+      127,
+      208,
+      224
+    ],
+    "count": 8992
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 24,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      82,
+      127,
+      213,
+      224
+    ],
+    "count": 9320
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 25,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      77,
+      126,
+      206,
+      224
+    ],
+    "count": 8955
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 26,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      71,
+      123,
+      204,
+      224
+    ],
+    "count": 9585
+  },
+  {
+    "action": "attack",
+    "direction": "east",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 27,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      80,
+      127,
+      210,
+      224
+    ],
+    "count": 9376
+  },
+  {
+    "action": "hurt",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 12,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      78,
+      124,
+      218,
+      224
+    ],
+    "count": 9630
+  },
+  {
+    "action": "down",
+    "direction": "east",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 13,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      57,
+      164,
+      198,
+      224
+    ],
+    "count": 6118
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 28,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      43,
+      126,
+      169,
+      222
+    ],
+    "count": 8831
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 29,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      43,
+      124,
+      166,
+      222
+    ],
+    "count": 8880
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 30,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      44,
+      124,
+      166,
+      222
+    ],
+    "count": 8804
+  },
+  {
+    "action": "idle",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bear_undead-idle.png",
+    "sourcePose": 31,
+    "scale": 0.6783625730994152,
+    "bounds": [
+      43,
+      127,
+      166,
+      223
+    ],
+    "count": 8773
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 28,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      46,
+      125,
+      171,
+      224
+    ],
+    "count": 8759
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 29,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      56,
+      128,
+      174,
+      224
+    ],
+    "count": 8387
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 30,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      58,
+      125,
+      178,
+      224
+    ],
+    "count": 8574
+  },
+  {
+    "action": "walk",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bear_undead-walk.png",
+    "sourcePose": 31,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      76,
+      125,
+      197,
+      224
+    ],
+    "count": 8528
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 28,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      79,
+      125,
+      205,
+      224
+    ],
+    "count": 9180
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 1,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 29,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      77,
+      124,
+      202,
+      224
+    ],
+    "count": 8946
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 2,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 30,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      75,
+      123,
+      199,
+      224
+    ],
+    "count": 9052
+  },
+  {
+    "action": "attack",
+    "direction": "south-east",
+    "frame": 3,
+    "source": "source/bear_undead-attack.png",
+    "sourcePose": 31,
+    "scale": 0.6628571428571428,
+    "bounds": [
+      71,
+      125,
+      198,
+      224
+    ],
+    "count": 9253
+  },
+  {
+    "action": "hurt",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 14,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      53,
+      121,
+      181,
+      224
+    ],
+    "count": 9669
+  },
+  {
+    "action": "down",
+    "direction": "south-east",
+    "frame": 0,
+    "source": "source/bear_undead-damage.png",
+    "sourcePose": 15,
+    "scale": 0.5410628019323671,
+    "bounds": [
+      57,
+      164,
+      200,
+      224
+    ],
+    "count": 5918
+  }
+]

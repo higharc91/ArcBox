@@ -95,6 +95,7 @@ internal sealed partial class WorldDemo : Node
         RenderingServer.ViewportSetMeasureRenderTime(GetViewport().GetViewportRid(), true);
         _art = UnitArt.Load(_pack);
         var parts = _spec.Split(':');
+        var libraryBatch = parts.FirstOrDefault(p => p.StartsWith("library-", StringComparison.Ordinal))?["library-".Length..];
         var nightCompanions = parts.Contains("night-companions", StringComparer.Ordinal);
         var prismaticFlames = parts.Contains("prismatic-flames", StringComparer.Ordinal);
         var stoneSentinels = parts.Contains("stone-sentinels", StringComparer.Ordinal);
@@ -113,8 +114,10 @@ internal sealed partial class WorldDemo : Node
         var kindled = parts.Contains("kindled", StringComparer.Ordinal);
         var roadAndHost = parts.Contains("road-and-host", StringComparer.Ordinal);
         var goblinRoles = parts.Contains("goblin-roles", StringComparer.Ordinal);
-        _mobReview = nightCompanions || prismaticFlames || stoneSentinels || wildElements || tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
-        if (nightCompanions)
+        _mobReview = libraryBatch is not null || nightCompanions || prismaticFlames || stoneSentinels || wildElements || tideAndWyrm || elementalTriad || groveWard || emberFamiliar || trailCompanion || oakAmbush || stoneAndMire || oathAndShadow || rimeKeepers || hollowDead || boneWardens || kindled || roadAndHost || goblinRoles || parts.Contains("mob-refresh", StringComparer.Ordinal);
+        if (libraryBatch is not null)
+            _roster = [.. LibraryVariantReview.WorldRoster(libraryBatch)];
+        else if (nightCompanions)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.hound.black", "bosses.hound.grey", "bosses.imp.violet"];
         else if (prismaticFlames)
             _roster = ["characters.class_fighter", "characters.bandit", "bosses.fire_elemental.azure", "bosses.fire_elemental.radiant", "bosses.fire_elemental.shadow"];

@@ -64,3 +64,19 @@ Seventeenth overall / second library batch: [Basalt, Crystal and Temple Golems](
 Eighteenth overall / third library batch: [Azure, Radiant and Shadow Fire Elementals](../prismatic-flames/README.md). Combat tracker stays complete at 29; nine additional library appearances refreshed, 22 older two-direction looks remaining, 26 existing eight-direction looks preserved.
 
 Nineteenth overall / fourth library batch: [Black Hound, Grey Hound and Violet Imp](../night-companions/README.md). Combat tracker stays complete at 29; 12 additional library appearances refreshed, 19 older two-direction looks remaining, 26 existing eight-direction looks preserved.
+
+[Batch 20: Vampire Bat, Undead Bear and Crystal Slime](../crypt-kin/index.html) adds library batch 5. 44 designs refreshed; 16 older library appearances remain. Main playtest checkpoint is PR #273; follow-up work stays on `mob-library-refresh-272` for issue #272.
+
+[Batch 21: Phase Spider, Alpha Wolf and Deep Crab](../web-and-hunt/index.html) adds library batch 6; 13 older appearances remain.
+
+[Batch 22: Black Scorpion, Warg Rider and Ironbound Mimic](../iron-and-fangs/index.html) adds library batch 7; 10 older appearances remain.
+
+[Batch 23: Black, Blue and Green Dragon](../wyrm-triad/index.html) adds library batch 8; 7 older appearances remain.
+
+[Batch 24: Gold Dragon, Frost Troll and Ogre](../gilded-and-rime/index.html) adds library batch 9; 4 older appearances remain.
+
+[Batch 25: Autumn Sapling, Blossom Sapling and Shade](../autumn-and-veil/index.html) adds library batch 10; 1 older appearance remains.
+
+[Batch 26: Spectre](../spectral-remnant/index.html) adds library batch 11; 0 older appearances remain.
+
+[Complete issue #272 follow-up review](../library-completion/README.md): all nineteen additions together, shared party scale, eight-direction walking, and final verification against main `0d808be2`. The 31 older library appearances are complete; TV/phone playtest feedback remains on the issue.

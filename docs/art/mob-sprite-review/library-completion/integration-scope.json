@@ -1,0 +1,33 @@
+{
+  "integrationBase": "0d808be20ccb00e3fe3891983c40c60470e29cbc",
+  "newAppearances": 19,
+  "priorMainCreatureEntriesPreserved": true,
+  "priorMainContentFilesPreserved": true,
+  "rulesStatsAbilitiesPlacementsAndDialoguePortraitsPreserved": true,
+  "historicalBaselineAndCombatTrackerPreserved": true,
+  "remainingOlderLibraryAppearances": 0,
+  "olderLibraryAppearancesComplete": 31,
+  "totalRefreshedDesigns": 60,
+  "batches": 26,
+  "newAtlasSha256": {
+    "mob_refresh_bat_vampire.png": "f5cd1ffb5615606a5aa13eb196ae66480e8da68a5bbb1bcb35d807d77dbf375d",
+    "mob_refresh_bear_undead.png": "726f7cb48e288819554d94f197b175bae0f69ca49d3a2e663a5b4f5ac7a5fc48",
+    "mob_refresh_crab_deep.png": "d67a47cb7d710865e435a38160c84647c201285a0355e7053f0b0e4431e0d2cf",
+    "mob_refresh_dragon_black.png": "e2737fcbddc762cbaa6ec11f38481aac02d44f196ac91551324606f9630d9708",
+    "mob_refresh_dragon_blue.png": "524618f823b230d533de8ec1d2436fb2b00bfcce28ff80ad720ac6c4996e50b5",
+    "mob_refresh_dragon_gold.png": "ed245595ad5d69c90623daeb570118d021a784ed84aaf3bdfe0839a0d1d10ee4",
+    "mob_refresh_dragon_green.png": "416fb6f91436b670355001198f89bc34278f4a4eaa1b9f5c7534edaa195ed235",
+    "mob_refresh_mimic_ironbound.png": "04e2aa01401fba97d05508bc5ed435a07965ad9489520a3e02c681c40292cc89",
+    "mob_refresh_sapling_autumn.png": "b545b1a2596a0a354a5a75e613dff82d1f04f8b642c240114334186b01d6e088",
+    "mob_refresh_sapling_blossom.png": "8a457a10e9d1c644d08b007506e116e670b1e96493c8f0d7aad0f27b59e2ba58",
+    "mob_refresh_scorpion_black.png": "242c1ecd4d1ebba2808c09a3b35dbb4817d1cd2c7e02edab3985c5808b8a13b3",
+    "mob_refresh_slime_crystal.png": "5368aa2e2bc3821993617ab56182a7a079ad95db9d19f887f86becd2a7530c1d",
+    "mob_refresh_spider_phase.png": "50e29cc931cd3c4a478c9a938fb46845e997839c7dda1dc59e10161959cdd6f7",
+    "mob_refresh_troll_frost.png": "08af6555a094f1995943795c74d58e8feeb29279ae34fa5b18db627a1fc54fb0",
+    "mob_refresh_troll_ogre.png": "11dad3bbe52fd0f8d564a983bb2632bc828b5b4576c9330576eff9bf131ab893",
+    "mob_refresh_warg_rider.png": "d0ff5a21660051724fc1cc713a15d6c8547633213b3739860ea57a305012a853",
+    "mob_refresh_wolf_alpha.png": "a6232f8840a37292418f2e4170c557215a7fdecdc9dfc18705fe87ec9d278e78",
+    "mob_refresh_wraith_shade.png": "cd42eb672341c64d56581db9e243ec47223d14e815e346974bbd46a70781060c",
+    "mob_refresh_wraith_spectre.png": "cb7d2b5d7bba1d9e169dd2c53eedc863288c2cc59a2f16252e24eaadf36649f7"
+  }
+}
