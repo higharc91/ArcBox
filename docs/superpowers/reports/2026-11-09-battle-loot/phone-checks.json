@@ -1,0 +1,71 @@
+{
+  "fixtures": 1,
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "results": [
+    {
+      "width": 320,
+      "file": "vote-loot.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 320,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 19,
+      "sampledLabels": [
+        "ANA",
+        "Party vote",
+        "Who takes the Smoke Bomb?",
+        "0:00",
+        "“",
+        "Player1",
+        "”",
+        "Player2",
+        "Player3",
+        "Your vote",
+        "Player4",
+        "You can change your vote until time runs out."
+      ],
+      "scrollStates": 1
+    },
+    {
+      "width": 390,
+      "file": "vote-loot.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 390,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 19,
+      "sampledLabels": [
+        "ANA",
+        "Party vote",
+        "Who takes the Smoke Bomb?",
+        "0:00",
+        "“",
+        "Player1",
+        "”",
+        "Player2",
+        "Player3",
+        "Your vote",
+        "Player4",
+        "You can change your vote until time runs out."
+      ],
+      "scrollStates": 1
+    }
+  ]
+}

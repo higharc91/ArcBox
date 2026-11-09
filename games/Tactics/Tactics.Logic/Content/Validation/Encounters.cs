@@ -28,6 +28,7 @@ internal sealed partial class Validation
             });
             if (def is null)
                 return null;
+            Refs(RefKind.LootTable, def.Loot.Select(l => l.Value), file, Pointer.Append(ptr, "loot"));
             for (var i = 0; !def.ItemLoot.IsDefault && i < def.ItemLoot.Length; i++)
             {
                 var at = Pointer.Append(Pointer.Append(ptr, "itemLoot"), i);
