@@ -1,0 +1,3641 @@
+{
+  "bard.cure_wounds": {
+    "before": {
+      "id": "bard.cure_wounds",
+      "name": "Cure Wounds",
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": {
+              "byLevel": {
+                "1": "2d8"
+              }
+            },
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_cure_wounds.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.cure_wounds",
+      "name": "Cure Wounds",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_cure_wounds.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "2d8",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.cure_wounds": {
+    "before": {
+      "id": "druid.cure_wounds",
+      "name": "Cure Wounds",
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "1d8",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_cure_wounds.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.cure_wounds",
+      "name": "Cure Wounds",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_cure_wounds.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "2d8",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.entangle": {
+    "before": {
+      "id": "druid.entangle",
+      "name": "Entangle",
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "vines",
+            "area": {
+              "shape": "burst",
+              "size": 2
+            },
+            "rounds": 3,
+            "concentration": true,
+            "difficult": true,
+            "passives": []
+          }
+        },
+        {
+          "save": {
+            "stat": "str"
+          },
+          "onFail": [
+            {
+              "apply": "restrained",
+              "untilSave": true
+            },
+            {
+              "apply": "stunned",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_entangle.nature",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "zone",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.entangle",
+      "name": "Entangle",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_entangle.nature",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "zone",
+          "area"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "entangle",
+            "area": {
+              "shape": "burst",
+              "size": 1
+            },
+            "rounds": 10,
+            "concentration": true,
+            "difficult": true
+          }
+        },
+        {
+          "save": {
+            "stat": "str"
+          },
+          "onFail": [
+            {
+              "apply": "restrained",
+              "untilSave": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "druid.spike_growth": {
+    "before": {
+      "id": "druid.spike_growth",
+      "name": "Spike Growth",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "thorns",
+            "area": {
+              "shape": "burst",
+              "size": 2
+            },
+            "rounds": 3,
+            "concentration": true,
+            "difficult": true,
+            "passives": [
+              {
+                "id": "druid.spike_growth.step",
+                "hook": "onEnterTile",
+                "target": "self",
+                "effects": [
+                  {
+                    "damage": {
+                      "dice": "2d4",
+                      "type": "piercing"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_spike_growth.nature"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "zone",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.spike_growth",
+      "name": "Spike Growth",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_spike_growth.nature"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "zone",
+          "area"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "spikes",
+            "area": {
+              "shape": "burst",
+              "size": 2
+            },
+            "rounds": 10,
+            "concentration": true,
+            "difficult": true,
+            "passives": [
+              {
+                "id": "spike_growth.thorns",
+                "hook": "onEnterTile",
+                "target": "self",
+                "effects": [
+                  {
+                    "damage": {
+                      "dice": "2d4",
+                      "type": "piercing"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.barkskin": {
+    "before": {
+      "id": "druid.barkskin",
+      "name": "Barkskin",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "apply": "barkskin",
+          "rounds": 3
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_barkskin.earth"
+      },
+      "ai": {
+        "tags": [
+          "buff",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.barkskin",
+      "name": "Barkskin",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_barkskin.earth"
+      },
+      "ai": {
+        "tags": [
+          "buff",
+          "single"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "apply": "barkskin"
+        }
+      ]
+    }
+  },
+  "bard.lesser_restoration": {
+    "before": {
+      "id": "bard.lesser_restoration",
+      "name": "Lesser Restoration",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "magical",
+              "physical",
+              "poison"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_lesser_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.lesser_restoration",
+      "name": "Lesser Restoration",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_lesser_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "poison"
+            ]
+          }
+        },
+        {
+          "remove": "blinded"
+        },
+        {
+          "remove": "paralysed"
+        }
+      ]
+    }
+  },
+  "druid.lesser_restoration": {
+    "before": {
+      "id": "druid.lesser_restoration",
+      "name": "Lesser Restoration",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "magical",
+              "physical",
+              "poison"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_lesser_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.lesser_restoration",
+      "name": "Lesser Restoration",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_lesser_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "poison"
+            ]
+          }
+        },
+        {
+          "remove": "blinded"
+        },
+        {
+          "remove": "paralysed"
+        }
+      ]
+    }
+  },
+  "sorcerer.chill_touch": {
+    "before": {
+      "id": "sorcerer.chill_touch",
+      "name": "Chill Touch",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d10",
+                    "7": "2d10"
+                  }
+                },
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_chill_touch.grave"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "sorcerer.chill_touch",
+      "name": "Chill Touch",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_chill_touch.grave"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      },
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d10",
+                    "5": "2d10"
+                  }
+                },
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "warlock.chill_touch": {
+    "before": {
+      "id": "warlock.chill_touch",
+      "name": "Chill Touch",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d8",
+                    "5": "2d8",
+                    "10": "3d8"
+                  }
+                },
+                "type": "necrotic"
+              }
+            },
+            {
+              "statMod": {
+                "mods": {
+                  "attack": -1
+                },
+                "rounds": 1
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_chill_touch.grave"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "debuff",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "warlock.chill_touch",
+      "name": "Chill Touch",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_chill_touch.grave"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "debuff",
+          "single"
+        ]
+      },
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d10",
+                    "5": "2d10"
+                  }
+                },
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "warlock.poison_spray": {
+    "before": {
+      "id": "warlock.poison_spray",
+      "name": "Poison Spray",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 3,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d12",
+                    "5": "2d12",
+                    "10": "3d12"
+                  }
+                },
+                "type": "poison"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_poison_spray.venom"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "warlock.poison_spray",
+      "name": "Poison Spray",
+      "presentation": {
+        "anim": "characters.warlock_lash",
+        "fx": "fx.warlock_poison_spray.venom"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      },
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 4,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d12",
+                    "5": "2d12"
+                  }
+                },
+                "type": "poison"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bard.shatter": {
+    "before": {
+      "id": "bard.shatter",
+      "name": "Shatter",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_shatter.thunder",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.shatter",
+      "name": "Shatter",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_shatter.thunder",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "warlock.shatter": {
+    "before": {
+      "id": "warlock.shatter",
+      "name": "Shatter",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "pact": 2
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d8",
+                    "5": "3d8",
+                    "9": "4d8"
+                  }
+                },
+                "type": "thunder"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_shatter.thunder",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "warlock.shatter",
+      "name": "Shatter",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_shatter.thunder",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "pact": 2
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "warlock.misty_step": {
+    "before": {
+      "id": "warlock.misty_step",
+      "name": "Misty Step",
+      "tier": 2,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "pact": 1
+        }
+      },
+      "target": {
+        "kind": "empty_tile",
+        "range": 5,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "teleport": {
+            "range": 5
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_misty_step.mist"
+      },
+      "ai": {
+        "tags": [
+          "move",
+          "escape"
+        ]
+      }
+    },
+    "after": {
+      "id": "warlock.misty_step",
+      "name": "Misty Step",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_misty_step.mist"
+      },
+      "ai": {
+        "tags": [
+          "move",
+          "escape"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "pact": 1
+        }
+      },
+      "target": {
+        "kind": "empty_tile",
+        "range": 4,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "teleport": {
+            "range": 4
+          }
+        }
+      ]
+    }
+  },
+  "bard.hold_person": {
+    "before": {
+      "id": "bard.hold_person",
+      "name": "Hold Person",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "humanoid"
+            }
+          },
+          "then": [
+            {
+              "save": {
+                "stat": "wis"
+              },
+              "onFail": [
+                {
+                  "apply": "paralysed",
+                  "untilSave": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_hold_person.arcane"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.hold_person",
+      "name": "Hold Person",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_hold_person.arcane"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "humanoid"
+            },
+            "then": [
+              {
+                "save": {
+                  "stat": "wis"
+                },
+                "onFail": [
+                  {
+                    "apply": "paralysed",
+                    "untilSave": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.hold_person": {
+    "before": {
+      "id": "druid.hold_person",
+      "name": "Hold Person",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "humanoid"
+            }
+          },
+          "then": [
+            {
+              "save": {
+                "stat": "wis"
+              },
+              "onFail": [
+                {
+                  "apply": "paralysed",
+                  "untilSave": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_hold_person.nature"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.hold_person",
+      "name": "Hold Person",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_hold_person.nature"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "humanoid"
+            },
+            "then": [
+              {
+                "save": {
+                  "stat": "wis"
+                },
+                "onFail": [
+                  {
+                    "apply": "paralysed",
+                    "untilSave": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "warlock.hold_person": {
+    "before": {
+      "id": "warlock.hold_person",
+      "name": "Hold Person",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "pact": 1
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "humanoid"
+            }
+          },
+          "then": [
+            {
+              "save": {
+                "stat": "wis"
+              },
+              "onFail": [
+                {
+                  "apply": "paralysed",
+                  "untilSave": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_hold_person.shadow"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "warlock.hold_person",
+      "name": "Hold Person",
+      "presentation": {
+        "anim": "characters.warlock_pact",
+        "fx": "fx.warlock_hold_person.shadow"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "pact": 1
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "if": {
+            "when": {
+              "targetTag": "humanoid"
+            },
+            "then": [
+              {
+                "save": {
+                  "stat": "wis"
+                },
+                "onFail": [
+                  {
+                    "apply": "paralysed",
+                    "untilSave": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "lore.counterspell": {
+    "before": {
+      "id": "lore.counterspell",
+      "name": "Counterspell",
+      "tier": 3,
+      "cost": {
+        "reaction": 1,
+        "resource": {
+          "mana": 2
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "transform": {
+            "hook": "counterspell",
+            "args": {}
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_counterspell.arcane"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single",
+          "reactsTo:spellCast"
+        ]
+      }
+    },
+    "after": {
+      "id": "lore.counterspell",
+      "name": "Counterspell",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_counterspell.arcane"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "single",
+          "reactsTo:spellCast"
+        ]
+      },
+      "tier": 3,
+      "cost": {
+        "reaction": 1,
+        "resource": {
+          "mana": 3
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "transform": {
+            "hook": "counterspell",
+            "args": {}
+          }
+        }
+      ]
+    }
+  },
+  "druid.blight": {
+    "before": {
+      "id": "druid.blight",
+      "name": "Blight",
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 5,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "8d8",
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_blight.grave",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.blight",
+      "name": "Blight",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_blight.grave",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      },
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 4,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "8d8",
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "warlock.blight": {
+    "before": {
+      "id": "warlock.blight",
+      "name": "Blight",
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "pact": 1
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 5,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "8d8",
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_blight.grave",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "warlock.blight",
+      "name": "Blight",
+      "presentation": {
+        "anim": "characters.warlock_rift",
+        "fx": "fx.warlock_blight.grave",
+        "cutIn": "full"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      },
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "pact": 1
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 4,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "8d8",
+                "type": "necrotic"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sorcerer.fire_bolt": {
+    "before": {
+      "id": "sorcerer.fire_bolt",
+      "name": "Fire Bolt",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d10",
+                    "7": "2d10"
+                  }
+                },
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_fire_bolt.fire",
+        "projectile": "fx.sorcerer_fire_bolt_shot.fire"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "sorcerer.fire_bolt",
+      "name": "Fire Bolt",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_fire_bolt.fire",
+        "projectile": "fx.sorcerer_fire_bolt_shot.fire"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      },
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d10",
+                    "5": "2d10"
+                  }
+                },
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sorcerer.acid_splash": {
+    "before": {
+      "id": "sorcerer.acid_splash",
+      "name": "Acid Splash",
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d6",
+                    "7": "2d6"
+                  }
+                },
+                "type": "acid"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_acid_splash.acid"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "sorcerer.acid_splash",
+      "name": "Acid Splash",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_acid_splash.acid"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area"
+        ]
+      },
+      "tier": 0,
+      "cost": {
+        "action": 1
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": {
+                  "byLevel": {
+                    "1": "1d6",
+                    "5": "2d6"
+                  }
+                },
+                "type": "acid"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bard.thunderwave": {
+    "before": {
+      "id": "bard.thunderwave",
+      "name": "Thunderwave",
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 1
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            },
+            {
+              "push": {
+                "distance": 2
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_thunderwave.thunder"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "push",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.thunderwave",
+      "name": "Thunderwave",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_thunderwave.thunder"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "push",
+          "area"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            },
+            {
+              "push": {
+                "distance": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "druid.thunderwave": {
+    "before": {
+      "id": "druid.thunderwave",
+      "name": "Thunderwave",
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 1
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            },
+            {
+              "push": {
+                "distance": 2
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_thunderwave.thunder"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "push",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.thunderwave",
+      "name": "Thunderwave",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_thunderwave.thunder"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "push",
+          "area"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "con"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "thunder"
+              }
+            },
+            {
+              "push": {
+                "distance": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sorcerer.chromatic_orb": {
+    "before": {
+      "id": "sorcerer.chromatic_orb",
+      "name": "Chromatic Orb",
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "lightning"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_chromatic_orb.storm",
+        "projectile": "fx.sorcerer_chromatic_orb_shot.storm"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "sorcerer.chromatic_orb",
+      "name": "Chromatic Orb",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_chromatic_orb.storm",
+        "projectile": "fx.sorcerer_chromatic_orb_shot.storm"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "spell"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "3d8",
+                "type": "lightning"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sorcerer.web": {
+    "before": {
+      "id": "sorcerer.web",
+      "name": "Web",
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "web",
+            "area": {
+              "shape": "burst",
+              "size": 1
+            },
+            "concentration": true,
+            "difficult": true,
+            "passives": [
+              {
+                "id": "sorcerer_web.stick",
+                "hook": "onEnterTile",
+                "target": "self",
+                "effects": [
+                  {
+                    "save": {
+                      "stat": "dex"
+                    },
+                    "onFail": [
+                      {
+                        "apply": "restrained",
+                        "untilSave": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "onFail": [
+            {
+              "apply": "restrained",
+              "untilSave": true
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_web.silk"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area",
+          "zone"
+        ]
+      }
+    },
+    "after": {
+      "id": "sorcerer.web",
+      "name": "Web",
+      "presentation": {
+        "anim": "characters.sorcerer_focus",
+        "fx": "fx.sorcerer_web.silk"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area",
+          "zone"
+        ]
+      },
+      "tier": 2,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 2
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 1,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "web",
+            "area": {
+              "shape": "burst",
+              "size": 1
+            },
+            "concentration": true,
+            "difficult": true,
+            "passives": [
+              {
+                "id": "web.stick",
+                "hook": "onEnterTile",
+                "target": "self",
+                "effects": [
+                  {
+                    "save": {
+                      "stat": "dex"
+                    },
+                    "onFail": [
+                      {
+                        "apply": "restrained",
+                        "untilSave": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "onFail": [
+            {
+              "apply": "restrained",
+              "untilSave": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "wizard.hypnotic_pattern": {
+    "before": {
+      "id": "wizard.hypnotic_pattern",
+      "name": "Hypnotic Pattern",
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "wis"
+          },
+          "onFail": [
+            {
+              "apply": "incapacitated",
+              "untilSave": true
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.wizard_nova",
+        "fx": "fx.wizard_hypnotic_pattern.psychic"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area"
+        ]
+      },
+      "flavor": "A twisting pattern of colours leaves those who see it charmed and dazed."
+    },
+    "after": {
+      "id": "wizard.hypnotic_pattern",
+      "name": "Hypnotic Pattern",
+      "presentation": {
+        "anim": "characters.wizard_nova",
+        "fx": "fx.wizard_hypnotic_pattern.psychic"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area"
+        ]
+      },
+      "flavor": "A twisting pattern of colours leaves those who see it charmed and dazed.",
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "wis"
+          },
+          "onFail": [
+            {
+              "apply": "charmed",
+              "untilSave": true
+            },
+            {
+              "apply": "incapacitated",
+              "untilSave": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bard.hypnotic_pattern": {
+    "before": {
+      "id": "bard.hypnotic_pattern",
+      "name": "Hypnotic Pattern",
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "wis"
+          },
+          "onFail": [
+            {
+              "apply": "charmed",
+              "untilSave": true
+            },
+            {
+              "apply": "incapacitated",
+              "untilSave": true
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_hypnotic_pattern.psychic"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.hypnotic_pattern",
+      "name": "Hypnotic Pattern",
+      "presentation": {
+        "anim": "characters.bard_crescendo",
+        "fx": "fx.bard_hypnotic_pattern.psychic"
+      },
+      "ai": {
+        "tags": [
+          "control",
+          "area"
+        ]
+      },
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "save": {
+            "stat": "wis"
+          },
+          "onFail": [
+            {
+              "apply": "charmed",
+              "untilSave": true
+            },
+            {
+              "apply": "incapacitated",
+              "untilSave": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bard.dispel_magic": {
+    "before": {
+      "id": "bard.dispel_magic",
+      "name": "Dispel Magic",
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "dispel": {
+            "concentration": true,
+            "zones": true
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_dispel_magic.arcane"
+      },
+      "ai": {
+        "tags": [
+          "dispel",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.dispel_magic",
+      "name": "Dispel Magic",
+      "presentation": {
+        "anim": "characters.bard_lore",
+        "fx": "fx.bard_dispel_magic.arcane"
+      },
+      "ai": {
+        "tags": [
+          "dispel",
+          "single"
+        ]
+      },
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        }
+      },
+      "target": {
+        "kind": "any_unit",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "dispel": {
+            "concentration": true
+          }
+        },
+        {
+          "cleanse": {
+            "tags": [
+              "magical"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.dispel_magic": {
+    "before": {
+      "id": "druid.dispel_magic",
+      "name": "Dispel Magic",
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "dispel": {
+            "concentration": true,
+            "zones": true
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_dispel_magic.arcane"
+      },
+      "ai": {
+        "tags": [
+          "dispel",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.dispel_magic",
+      "name": "Dispel Magic",
+      "presentation": {
+        "anim": "characters.druid_roots",
+        "fx": "fx.druid_dispel_magic.arcane"
+      },
+      "ai": {
+        "tags": [
+          "dispel",
+          "single"
+        ]
+      },
+      "tier": 3,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 3
+        }
+      },
+      "target": {
+        "kind": "any_unit",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "dispel": {
+            "concentration": true
+          }
+        },
+        {
+          "cleanse": {
+            "tags": [
+              "magical"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.ice_storm": {
+    "before": {
+      "id": "druid.ice_storm",
+      "name": "Ice Storm",
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "ice",
+            "area": {
+              "shape": "burst",
+              "size": 2
+            },
+            "rounds": 1,
+            "difficult": true,
+            "passives": []
+          }
+        },
+        {
+          "save": {
+            "stat": "dex",
+            "halfOnSuccess": true
+          },
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "bludgeoning"
+              }
+            },
+            {
+              "damage": {
+                "dice": "4d6",
+                "type": "cold"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_ice_storm.frost"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "control",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.ice_storm",
+      "name": "Ice Storm",
+      "presentation": {
+        "anim": "characters.druid_gale",
+        "fx": "fx.druid_ice_storm.frost"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "control",
+          "area"
+        ]
+      },
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "ice",
+            "area": {
+              "shape": "burst",
+              "size": 2
+            },
+            "rounds": 1,
+            "difficult": true
+          }
+        },
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "2d8",
+                "type": "bludgeoning"
+              }
+            },
+            {
+              "damage": {
+                "dice": "4d6",
+                "type": "cold"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bard.greater_invisibility": {
+    "before": {
+      "id": "bard.greater_invisibility",
+      "name": "Greater Invisibility",
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "apply": "invisible",
+          "rounds": 3
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_greater_invisibility.illusion"
+      },
+      "ai": {
+        "tags": [
+          "buff",
+          "stealth",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.greater_invisibility",
+      "name": "Greater Invisibility",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_greater_invisibility.illusion"
+      },
+      "ai": {
+        "tags": [
+          "buff",
+          "stealth",
+          "single"
+        ]
+      },
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "apply": "invisible",
+          "rounds": 10
+        }
+      ]
+    }
+  },
+  "sorcerer.wall_of_fire": {
+    "before": {
+      "id": "sorcerer.wall_of_fire",
+      "name": "Wall of Fire",
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "ring",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "fire",
+            "area": {
+              "shape": "ring",
+              "size": 2
+            },
+            "rounds": 10,
+            "concentration": true,
+            "passives": [
+              {
+                "id": "sorcerer_wall_of_fire.burn",
+                "hook": "onTurnStart",
+                "target": "self",
+                "effects": [
+                  {
+                    "save": {
+                      "stat": "dex"
+                    },
+                    "halfOnSuccess": true,
+                    "onFail": [
+                      {
+                        "damage": {
+                          "dice": "1d8",
+                          "type": "fire"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "5d8",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_wall_of_fire.fire"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area",
+          "zone"
+        ]
+      },
+      "flavor": "Game balance: the initial hit deals 5d8; ongoing damage is 1d8 per turn instead of SRD 5d8."
+    },
+    "after": {
+      "id": "sorcerer.wall_of_fire",
+      "name": "Wall of Fire",
+      "presentation": {
+        "anim": "characters.sorcerer_fling",
+        "fx": "fx.sorcerer_wall_of_fire.fire"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "area",
+          "zone"
+        ]
+      },
+      "flavor": "Game balance: the initial hit deals 5d8; ongoing damage is 1d8 per turn instead of SRD 5d8.",
+      "tier": 4,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 4
+        },
+        "concentration": true
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "ring",
+          "size": 2,
+          "friendlyFire": true
+        }
+      },
+      "effects": [
+        {
+          "zone": {
+            "kind": "fire",
+            "area": {
+              "shape": "ring",
+              "size": 2
+            },
+            "rounds": 10,
+            "concentration": true,
+            "passives": [
+              {
+                "id": "wall_of_fire.burn",
+                "hook": "onTurnStart",
+                "target": "self",
+                "effects": [
+                  {
+                    "save": {
+                      "stat": "dex"
+                    },
+                    "halfOnSuccess": true,
+                    "onFail": [
+                      {
+                        "damage": {
+                          "dice": "1d8",
+                          "type": "fire"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "save": {
+            "stat": "dex"
+          },
+          "halfOnSuccess": true,
+          "onFail": [
+            {
+              "damage": {
+                "dice": "5d8",
+                "type": "fire"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bard.healing_word": {
+    "before": {
+      "id": "bard.healing_word",
+      "name": "Healing Word",
+      "tier": 1,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": {
+              "byLevel": {
+                "1": "2d4"
+              }
+            },
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_healing_word.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.healing_word",
+      "name": "Healing Word",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_healing_word.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "2d4",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.healing_word": {
+    "before": {
+      "id": "druid.healing_word",
+      "name": "Healing Word",
+      "tier": 1,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "1d4",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_healing_word.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.healing_word",
+      "name": "Healing Word",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_healing_word.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "single"
+        ]
+      },
+      "tier": 1,
+      "cost": {
+        "bonus": 1,
+        "resource": {
+          "mana": 1
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "2d4",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "bard.greater_restoration": {
+    "before": {
+      "id": "bard.greater_restoration",
+      "name": "Greater Restoration",
+      "tier": 5,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 5
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "charm",
+              "curse",
+              "fear",
+              "magical",
+              "physical",
+              "poison",
+              "sleep"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_greater_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "bard.greater_restoration",
+      "name": "Greater Restoration",
+      "presentation": {
+        "anim": "characters.bard_play",
+        "fx": "fx.bard_greater_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      },
+      "tier": 5,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 5
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "charm",
+              "fear",
+              "magical",
+              "poison",
+              "sleep"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.greater_restoration": {
+    "before": {
+      "id": "druid.greater_restoration",
+      "name": "Greater Restoration",
+      "tier": 5,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 5
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "charm",
+              "curse",
+              "fear",
+              "magical",
+              "physical",
+              "poison",
+              "sleep"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_greater_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.greater_restoration",
+      "name": "Greater Restoration",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_greater_restoration.healing"
+      },
+      "ai": {
+        "tags": [
+          "cleanse",
+          "single"
+        ]
+      },
+      "tier": 5,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 5
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 1,
+        "los": false,
+        "area": {
+          "shape": "single",
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "cleanse": {
+            "tags": [
+              "charm",
+              "fear",
+              "magical",
+              "poison",
+              "sleep"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "druid.mass_cure_wounds": {
+    "before": {
+      "id": "druid.mass_cure_wounds",
+      "name": "Mass Cure Wounds",
+      "tier": 5,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 5
+        }
+      },
+      "target": {
+        "kind": "tile",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 2,
+          "includeSelf": true,
+          "affects": "allies"
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "3d8",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_mass_cure_wounds.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "area"
+        ]
+      }
+    },
+    "after": {
+      "id": "druid.mass_cure_wounds",
+      "name": "Mass Cure Wounds",
+      "presentation": {
+        "anim": "characters.druid_mend",
+        "fx": "fx.druid_mass_cure_wounds.healing"
+      },
+      "ai": {
+        "tags": [
+          "heal",
+          "area"
+        ]
+      },
+      "tier": 5,
+      "cost": {
+        "action": 1,
+        "resource": {
+          "mana": 5
+        }
+      },
+      "target": {
+        "kind": "ally",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "burst",
+          "size": 3,
+          "includeSelf": true
+        }
+      },
+      "effects": [
+        {
+          "heal": {
+            "dice": "5d8",
+            "bonus": [
+              "mod.cast"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

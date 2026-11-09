@@ -1,0 +1,243 @@
+{
+  "pactCosts": {
+    "warlock.shatter": 2,
+    "warlock.misty_step": 1,
+    "warlock.hold_person": 1,
+    "warlock.counterspell": 1,
+    "warlock.blight": 1,
+    "warlock.dimension_door": 1,
+    "warlock.hold_monster": 1
+  },
+  "groups": [
+    {
+      "spell": "Cure Wounds",
+      "canonical": "cleric.cure_wounds",
+      "versions": 5
+    },
+    {
+      "spell": "Entangle",
+      "canonical": "ranger.entangle",
+      "versions": 2
+    },
+    {
+      "spell": "Spike Growth",
+      "canonical": "ranger.spike_growth",
+      "versions": 2
+    },
+    {
+      "spell": "Barkskin",
+      "canonical": "ranger.barkskin",
+      "versions": 2
+    },
+    {
+      "spell": "Lesser Restoration",
+      "canonical": "cleric.lesser_restoration",
+      "versions": 5
+    },
+    {
+      "spell": "Chill Touch",
+      "canonical": "wizard.chill_touch",
+      "versions": 3
+    },
+    {
+      "spell": "Poison Spray",
+      "canonical": "wizard.poison_spray",
+      "versions": 3
+    },
+    {
+      "spell": "Shatter",
+      "canonical": "wizard.shatter",
+      "versions": 4
+    },
+    {
+      "spell": "Misty Step",
+      "canonical": "wizard.misty_step",
+      "versions": 3
+    },
+    {
+      "spell": "Hold Person",
+      "canonical": "wizard.hold_person",
+      "versions": 6
+    },
+    {
+      "spell": "Counterspell",
+      "canonical": "wizard.counterspell",
+      "versions": 4
+    },
+    {
+      "spell": "Blight",
+      "canonical": "wizard.blight",
+      "versions": 3
+    },
+    {
+      "spell": "Dimension Door",
+      "canonical": "bard.dimension_door",
+      "versions": 2
+    },
+    {
+      "spell": "Hold Monster",
+      "canonical": "wizard.hold_monster",
+      "versions": 4
+    },
+    {
+      "spell": "Fire Bolt",
+      "canonical": "wizard.fire_bolt",
+      "versions": 2
+    },
+    {
+      "spell": "Ray of Frost",
+      "canonical": "wizard.ray_of_frost",
+      "versions": 2
+    },
+    {
+      "spell": "Shocking Grasp",
+      "canonical": "wizard.shocking_grasp",
+      "versions": 2
+    },
+    {
+      "spell": "Acid Splash",
+      "canonical": "wizard.acid_splash",
+      "versions": 2
+    },
+    {
+      "spell": "Magic Missile",
+      "canonical": "wizard.magic_missile",
+      "versions": 2
+    },
+    {
+      "spell": "Burning Hands",
+      "canonical": "wizard.burning_hands",
+      "versions": 2
+    },
+    {
+      "spell": "Shield",
+      "canonical": "wizard.shield",
+      "versions": 2
+    },
+    {
+      "spell": "Sleep",
+      "canonical": "wizard.sleep",
+      "versions": 2
+    },
+    {
+      "spell": "Thunderwave",
+      "canonical": "wizard.thunderwave",
+      "versions": 4
+    },
+    {
+      "spell": "Chromatic Orb",
+      "canonical": "wizard.chromatic_orb",
+      "versions": 2
+    },
+    {
+      "spell": "Scorching Ray",
+      "canonical": "wizard.scorching_ray",
+      "versions": 2
+    },
+    {
+      "spell": "Web",
+      "canonical": "wizard.web",
+      "versions": 2
+    },
+    {
+      "spell": "Fireball",
+      "canonical": "wizard.fireball",
+      "versions": 2
+    },
+    {
+      "spell": "Lightning Bolt",
+      "canonical": "wizard.lightning_bolt",
+      "versions": 2
+    },
+    {
+      "spell": "Haste",
+      "canonical": "wizard.haste",
+      "versions": 2
+    },
+    {
+      "spell": "Slow",
+      "canonical": "wizard.slow",
+      "versions": 2
+    },
+    {
+      "spell": "Hypnotic Pattern",
+      "canonical": "wizard.hypnotic_pattern",
+      "versions": 2
+    },
+    {
+      "spell": "Dispel Magic",
+      "canonical": "wizard.dispel_magic",
+      "versions": 5
+    },
+    {
+      "spell": "Ice Storm",
+      "canonical": "wizard.ice_storm",
+      "versions": 3
+    },
+    {
+      "spell": "Greater Invisibility",
+      "canonical": "wizard.greater_invisibility",
+      "versions": 3
+    },
+    {
+      "spell": "Wall of Fire",
+      "canonical": "wizard.wall_of_fire",
+      "versions": 2
+    },
+    {
+      "spell": "Banishment",
+      "canonical": "wizard.banishment",
+      "versions": 3
+    },
+    {
+      "spell": "Cone of Cold",
+      "canonical": "wizard.cone_of_cold",
+      "versions": 2
+    },
+    {
+      "spell": "Healing Word",
+      "canonical": "cleric.healing_word",
+      "versions": 3
+    },
+    {
+      "spell": "Faerie Fire",
+      "canonical": "bard.faerie_fire",
+      "versions": 2
+    },
+    {
+      "spell": "Mass Healing Word",
+      "canonical": "cleric.mass_healing_word",
+      "versions": 2
+    },
+    {
+      "spell": "Greater Restoration",
+      "canonical": "cleric.greater_restoration",
+      "versions": 3
+    },
+    {
+      "spell": "Bless",
+      "canonical": "cleric.bless",
+      "versions": 2
+    },
+    {
+      "spell": "Command",
+      "canonical": "cleric.command",
+      "versions": 2
+    },
+    {
+      "spell": "Shield of Faith",
+      "canonical": "cleric.shield_of_faith",
+      "versions": 2
+    },
+    {
+      "spell": "Aid",
+      "canonical": "cleric.aid",
+      "versions": 2
+    },
+    {
+      "spell": "Mass Cure Wounds",
+      "canonical": "cleric.mass_cure_wounds",
+      "versions": 2
+    }
+  ]
+}
