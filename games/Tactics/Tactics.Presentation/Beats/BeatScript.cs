@@ -124,9 +124,9 @@ public abstract record Cue(double At, double Length);
 /// <summary>The unit card follows the target when its action starts, without changing battle state or timing.</summary>
 public sealed record FocusCue(double At, UnitId? Unit) : Cue(At, 0);
 
-/// <summary>Mechanical readout layered over existing beat time; no extra hold.</summary>
+/// <summary>A HUD readout signal. Playback owns its display lifetime; it adds no combat or FX tail time.</summary>
 public sealed record CombatCue(double At, UnitId Actor, AbilityId? Ability = null, UnitId? Target = null,
-    RollKind? Kind = null, RollResult? Roll = null, string? Effect = null, int? FinalAc = null, bool? Hit = null, bool? Crit = null, ConditionId? Condition = null, bool Ended = false) : Cue(At, 1.8);
+    RollKind? Kind = null, RollResult? Roll = null, string? Effect = null, int? FinalAc = null, bool? Hit = null, bool? Crit = null, ConditionId? Condition = null, bool Ended = false) : Cue(At, 0);
 public sealed record RollMemoryCue(double At, Rolled Rolled) : Cue(At, 0);
 
 /// <summary>The start of a real cast or swing, with its rule event and resolved aiming tiles.</summary>

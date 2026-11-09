@@ -161,7 +161,7 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     public string? AbilityBanner => _cutIn?.Banner(_cinematicClock);
     public bool EnhancedEffects { get; set; }
     public bool ReducedEffects { get; set; }
-    private double FadeLength(Cue cue) => cue.Length * (ReducedEffects && cue is BurstCue or HazardCue ? 0.6 : 1);
+    private double FadeLength(Cue cue) => cue is CombatCue ? 1.8 : cue.Length * (ReducedEffects && cue is BurstCue or HazardCue ? 0.6 : 1);
 
     /// <summary>The unit to badge: its turn timed out, or its player left, and the AI is finishing it on screen.</summary>
     public UnitId? AiFinished { get; private set; }
