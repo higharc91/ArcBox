@@ -68,7 +68,7 @@ public sealed record VoteRow(string Id, string Letter, ImmutableArray<string> La
 /// <param name="Rows">What's offered.</param>
 /// <param name="Tally">The line under them: "4 of 4 voted · 2–2 tie, Sam decides".</param>
 /// <param name="Away">"Dave is away and doesn't vote", or null.</param>
-/// <param name="Scale">The size its rows are drawn at, from 1 down (<see cref="VoteLayout"/>), so every option fits the panel's height.</param>
+/// <param name="Scale">The retained full-size factor; columns keep every option legible (<see cref="VoteLayout"/>).</param>
 public sealed record VotePanel(string Heading, bool Party, bool Tie, string? Clock, ImmutableArray<VoteRow> Rows, string Tally, string? Away,
     float Scale = 1)
 {

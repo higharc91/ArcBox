@@ -30,10 +30,10 @@ public partial class TacticsScene
             _shopPanel.OffsetTop = -340;
             _shopPanel.OffsetBottom = 340;
             AddChild(_shopPanel);
-            _shopPurse = ArcTheme.Label("", ArcTheme.Bold, 28, ArcTheme.Gold);
+            _shopPurse = TvText.Label("", ArcTheme.Bold, 28, ArcTheme.Gold);
             _shopPurse.Position = new Vector2(44, 136);
             AddChild(_shopPurse);
-            _goldGain = ArcTheme.Label("", ArcTheme.Bold, 38, ArcTheme.Gold);
+            _goldGain = TvText.Label("", ArcTheme.Bold, 38, ArcTheme.Gold);
             _goldGain.Position = new Vector2(44, 180);
             AddChild(_goldGain);
         }
@@ -55,7 +55,7 @@ public partial class TacticsScene
         {
             foreach (var child in _shopRows!.GetChildren()) { _shopRows.RemoveChild(child); child.QueueFree(); }
             var recovery = shop.Services is { IsEmpty: false } && shop.Members is not null;
-            var heading = ArcTheme.VBox(5, ArcTheme.Meta((recovery ? "REST · " : "TRADER · ") + shop.Keeper), ArcTheme.Label(shop.Name, ArcTheme.Bold, recovery ? 30 : 38, ArcTheme.Gold));
+            var heading = ArcTheme.VBox(5, TvText.Meta((recovery ? "REST · " : "TRADER · ") + shop.Keeper), TvText.Label(shop.Name, ArcTheme.Bold, recovery ? 30 : 38, ArcTheme.Gold));
             if (_unitArt is not null && _content.TryGetValue(BasePack, out var packRoot))
             {
                 var portrait = HudArt.Load(packRoot, _unitArt).Portrait(shop.Portrait, UnitTone.Neutral);
@@ -75,10 +75,10 @@ public partial class TacticsScene
             if (shop.Services is { IsEmpty: false } services && shop.Members is { } members)
             {
                 foreach (var service in services)
-                    _shopRows.AddChild(ArcTheme.Label($"{service.Name} · {service.Price} gold", ArcTheme.SemiBold, 23, ArcTheme.Gold));
-                _shopRows.AddChild(ArcTheme.Meta("PARTY · BATTLE READY"));
+                    _shopRows.AddChild(TvText.Label($"{service.Name} · {service.Price} gold", ArcTheme.SemiBold, 24, ArcTheme.Gold));
+                _shopRows.AddChild(TvText.Meta("PARTY · BATTLE READY"));
                 foreach (var member in members) _shopRows.AddChild(RecoveryCard(member));
-                var help = ArcTheme.Meta(services.Any(s => s.Kind == "room")
+                var help = TvText.Meta(services.Any(s => s.Kind == "room")
                     ? view.Camp?.Stage == "rooms" ? "Book rooms on your phone · Dawn follows shortly" : "The leader proposes a night on their phone"
                     : "Tap an injury on your phone to heal it");
                 help.AutowrapMode = TextServer.AutowrapMode.WordSmart;
@@ -88,39 +88,39 @@ public partial class TacticsScene
             {
                 var purses = shop.Purses.IsDefaultOrEmpty ? "Trade from your own purse on your phone"
                     : string.Join(" · ", shop.Purses.Select(p => $"{p.Name}: {p.Gold} gold"));
-                var purseLabel = ArcTheme.Label(purses, ArcTheme.Bold, 24);
+                var purseLabel = TvText.Label(purses, ArcTheme.Bold, 24);
                 purseLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
                 _shopRows.AddChild(purseLabel);
-                var greeting = ArcTheme.Label(shop.Greeting, ArcTheme.SemiBold, 23);
+                var greeting = TvText.Label(shop.Greeting, ArcTheme.SemiBold, 24);
                 greeting.AutowrapMode = TextServer.AutowrapMode.WordSmart;
                 _shopRows.AddChild(greeting);
                 if (shop.Haggle is { } haggle)
                 {
-                    var deal = ArcTheme.Label(haggle.Passed
+                    var deal = TvText.Label(haggle.Passed
                             ? $"Haggled · {haggle.Name} {haggle.Die} + {haggle.Bonus} vs DC {haggle.Dc} · a tenth off buys, a tenth more for sales"
                             : $"No deal · {haggle.Name} {haggle.Die} + {haggle.Bonus} vs DC {haggle.Dc} · prices stand",
-                        ArcTheme.Bold, 22, haggle.Passed ? ArcTheme.Gold : new Color(.75f, .75f, .75f));
+                        ArcTheme.Bold, 24, haggle.Passed ? ArcTheme.Gold : new Color(.75f, .75f, .75f));
                     deal.AutowrapMode = TextServer.AutowrapMode.WordSmart;
                     _shopRows.AddChild(deal);
                 }
                 foreach (var item in shop.Items)
                 {
-                    var row = ArcTheme.Label($"{item.Name}\n{item.Price} gold · {(item.Count == -1 ? "Unlimited stock" : item.Count == 0 ? "Out of stock" : item.Count + " in stock")}", ArcTheme.SemiBold, 26,
+                    var row = TvText.Label($"{item.Name}\n{item.Price} gold · {(item.Count == -1 ? "Unlimited stock" : item.Count == 0 ? "Out of stock" : item.Count + " in stock")}", ArcTheme.SemiBold, 26,
                         item.Count == 0 ? new Color(.5f, .5f, .5f) : Colors.White);
                     _shopRows.AddChild(row);
                 }
-                foreach (var service in shop.Services ?? []) _shopRows.AddChild(ArcTheme.Label($"{service.Name} · {service.Price} gold", ArcTheme.Bold, 26));
+                foreach (var service in shop.Services ?? []) _shopRows.AddChild(TvText.Label($"{service.Name} · {service.Price} gold", ArcTheme.Bold, 26));
                 foreach (var guest in shop.Guests ?? [])
                 {
                     var status = guest.Room ? "Room paid · full recovery at dawn" : guest.Injuries.IsEmpty ? "No injuries" : string.Join(", ", guest.Injuries);
-                    var row = ArcTheme.Label($"{guest.Name}: {status}", ArcTheme.SemiBold, 21);
+                    var row = TvText.Label($"{guest.Name}: {status}", ArcTheme.SemiBold, 24);
                     row.AutowrapMode = TextServer.AutowrapMode.WordSmart; _shopRows.AddChild(row);
                 }
-                foreach (var line in shop.Feed) _shopRows.AddChild(ArcTheme.Label(line, ArcTheme.SemiBold, 21, ArcTheme.Gold));
+                foreach (var line in shop.Feed) _shopRows.AddChild(TvText.Label(line, ArcTheme.SemiBold, 24, ArcTheme.Gold));
                 var hint = shop.Services?.Any(s => s.Kind == "room") == true
                     ? view.Camp?.Stage == "rooms" ? "Buy rooms on your phone · Dawn follows when purchases close" : "Take rooms on your phone · The leader proposes a night"
                     : shop.Services?.Any(s => s.Kind == "cure") == true ? "Choose healing on your phone · The leader leaves" : "Buy and sell on your phone · The leader leaves";
-                var help = ArcTheme.Meta(hint); help.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+                var help = TvText.Meta(hint); help.AutowrapMode = TextServer.AutowrapMode.WordSmart;
                 _shopRows.AddChild(help);
             }
             var action = _lastShop is null ? "open" : shop.Gold < _lastShop.Gold ? "buy" : "sell";

@@ -160,7 +160,7 @@ public partial class UnitMarks : Node2D
         DrawSetTransform(Vector2.Zero, 0, Vector2.One);
     }
 
-    private const int LabelSize = 15;
+    private const int LabelSize = 20;
     private const int LabelOutline = 5;
     private const float LabelWidth = 420;
 

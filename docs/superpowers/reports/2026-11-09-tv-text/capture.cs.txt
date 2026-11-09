@@ -1,0 +1,57 @@
+using System.Collections.Immutable;
+using ArcBox.Host.Games.Tactics;
+using Godot;
+using Tactics.Logic;
+using Tactics.Presentation.Board;
+using Tactics.Presentation.Hud;
+using Tactics.Presentation.Story;
+
+public partial class TextReview : Node
+{
+    public override async void _Ready()
+    {
+        try
+        {
+            var root="/workspace/ArcBox/content/tactics/base";
+            var art=new StoryArt(root,HudArt.Load(root,UnitArt.Load(root)),UnitArt.Load(root));
+            var lore=LoreBook.Load(root);
+            var options=lore.Scenes.Single(s=>s.Id=="ch3_maren_parley").Node("ask_me")!.Options;
+            var rows=options.Select((o,i)=>new VoteRow(o.Id,((char)('A'+i)).ToString(),StoryScreen.Label(o.Label),null,[])).ToImmutableArray();
+            var vote=new VotePanel("Leader's choice",false,false,"45",rows,"11 choices · choose on your phone",null);
+            var board=new VoteBoard(art);AddChild(board);
+            var dest="/workspace/ArcBox/docs/superpowers/reports/2026-11-09-tv-text";Directory.CreateDirectory(dest);
+            for(var i=0;i<8;i++){board.Show(vote with {Clock=(45-i).ToString()});await ToSignal(GetTree(),SceneTree.SignalName.ProcessFrame);}
+            AssertLabels(board);
+            await ToSignal(RenderingServer.Singleton,RenderingServer.SignalName.FramePostDraw);
+            GetViewport().GetTexture().GetImage().SavePng(dest+"/eleven-options.png");
+            var crowded=vote with {Rows=[.. rows.Select(r=>r with {Detail="Persuasion check · DC 15",Voters=[VoterPip.Of("Ana",null)]})]};
+            for(var i=0;i<8;i++){board.Show(crowded with {Clock=(45-i).ToString()});await ToSignal(GetTree(),SceneTree.SignalName.ProcessFrame);}
+            AssertLabels(board);
+            await ToSignal(RenderingServer.Singleton,RenderingServer.SignalName.FramePostDraw);
+            GetViewport().GetTexture().GetImage().SavePng(dest+"/eleven-details.png");
+            board.Visible=false;
+            var checks=new CheckBoard(art);AddChild(checks);
+            var cards=Enumerable.Range(0,6).Select(i=>new CheckCard("p"+i,new[]{"Kara","Priya","Bo","Rook","Lark","Maren"}[i],"Player "+(i+1),"characters.class_fighter","+5","Proficient · CHA 14",i==0?"Rolls for the party":null,i==0,true,i==0?4:0,"Player "+(i+1)+" · Fighter")).ToImmutableArray();
+            var check=new CheckPanel("Skill check","Persuasion","DC 15","Convince the warden to hear the party",cards,"30","Vote for who rolls · 4 voted",null);
+            for(var i=0;i<8;i++){checks.Show(check with {Clock=(30-i).ToString()});await ToSignal(GetTree(),SceneTree.SignalName.ProcessFrame);}
+            AssertLabels(checks);
+            await ToSignal(RenderingServer.Singleton,RenderingServer.SignalName.FramePostDraw);
+            GetViewport().GetTexture().GetImage().SavePng(dest+"/six-hero-check.png");
+            GD.Print("TEXT REVIEW PASS: native eleven-option and six-hero panels; all labels >=20 px and inside viewport");GetTree().Quit();
+        }
+        catch(Exception e){GD.PushError(e.ToString());GetTree().Quit(1);}
+    }
+    private static void AssertLabels(Node node)
+    {
+        foreach(var child in node.GetChildren())
+        {
+            if(child is Label label && label.IsVisibleInTree() && !string.IsNullOrWhiteSpace(label.Text))
+            {
+                if(label.GetThemeFontSize("font_size")<20)throw new Exception("Small label: "+label.Text);
+                var r=label.GetGlobalRect();
+                if(r.Position.X<0||r.Position.Y<0||r.End.X>1921||r.End.Y>1081)throw new Exception("Clipped label: "+label.Text+" "+r);
+            }
+            AssertLabels(child);
+        }
+    }
+}

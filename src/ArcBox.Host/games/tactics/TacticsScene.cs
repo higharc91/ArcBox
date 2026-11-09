@@ -189,10 +189,10 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         var column = ShellLayout.Frame(this, 24);
         _backdrop = GetChild<Control>(0);
 
-        _meta = ArcTheme.Meta(Brand.Name);
-        _title = ArcTheme.Label("", ArcTheme.Bold, 42);
-        _level = ArcTheme.Label("1", ArcTheme.Display("Black", 0, 18, 14), 60);
-        _header = ShellLayout.Header(Brand.Name.ToUpperInvariant(), _meta, _title, ShellLayout.StatBox(ArcTheme.Meta("Party level", 16), _level, null, 220));
+        _meta = TvText.Meta(Brand.Name);
+        _title = TvText.Label("", ArcTheme.Bold, 42);
+        _level = TvText.Label("1", ArcTheme.Display("Black", 0, 18, 14), 60);
+        _header = ShellLayout.Header(Brand.Name.ToUpperInvariant(), _meta, _title, ShellLayout.StatBox(TvText.Meta("Party level", 16), _level, null, 220));
         column.AddChild(_header);
 
         _board = new BoardCanvas { Visible = false };
@@ -216,7 +216,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         AddChild(_stageFade);
         MoveChild(_stageFade, 2);   // over the world and the board, under the header, the table and the HUD
 
-        _noticeText = ArcTheme.Label("", ArcTheme.SemiBold, 28, ArcTheme.Gold);
+        _noticeText = TvText.Label("", ArcTheme.SemiBold, 28, ArcTheme.Gold);
         _notice = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 28, 10), _noticeText);
         _notice.Visible = false;
         column.AddChild(_notice);
@@ -226,7 +226,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
 
         _rows = ArcTheme.VBox(0);
         _rows.SizeFlagsVertical = SizeFlags.ExpandFill;
-        _empty = ArcTheme.Label("", ArcTheme.Black, 72);
+        _empty = TvText.Label("", ArcTheme.Black, 72);
         _empty.HorizontalAlignment = HorizontalAlignment.Center;
         _empty.VerticalAlignment = VerticalAlignment.Center;
         _empty.SizeFlagsVertical = SizeFlags.ExpandFill;
@@ -236,7 +236,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         _table.SizeFlagsVertical = SizeFlags.ExpandFill;
         column.AddChild(_table);
 
-        _captionText = ArcTheme.Label("", ArcTheme.SemiBold, 34);
+        _captionText = TvText.Label("", ArcTheme.SemiBold, 34);
         _caption = ArcTheme.Panel(ArcTheme.GlassBox(ArcTheme.Gold, 28, 12), _captionText);
         _caption.SetAnchorsPreset(LayoutPreset.CenterBottom);
         _caption.GrowHorizontal = GrowDirection.Both;
@@ -1460,7 +1460,7 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
     {
         var bar = new ColorRect { Color = accent, CustomMinimumSize = new Vector2(7, 54), SizeFlagsVertical = SizeFlags.ShrinkCenter };
 
-        var name = ArcTheme.Label(row.Title, ArcTheme.Bold, 46);
+        var name = TvText.Label(row.Title, ArcTheme.Bold, 46);
         name.TextOverrunBehavior = TextServer.OverrunBehavior.TrimEllipsis;
         name.ClipText = true;
         var text = ArcTheme.VBox(0, name);
@@ -1468,20 +1468,20 @@ public partial class TacticsScene : Control, IGameScene, IContentScene, ISignali
         text.SizeFlagsHorizontal = SizeFlags.ExpandFill;
         if (row.Detail.Length > 0)
         {
-            text.AddChild(ArcTheme.Label(row.Detail, ArcTheme.SemiBold, 26, ArcTheme.Dim));
+            text.AddChild(TvText.Label(row.Detail, ArcTheme.SemiBold, 26, ArcTheme.Dim));
         }
 
         var content = ArcTheme.HBox(22, bar, text);
         if (row.Chip is { } chip)
         {
-            var label = ArcTheme.Label(chip, ArcTheme.Spaced("Black", 2), 18, new Color("15151e"));
+            var label = TvText.Label(chip, ArcTheme.Spaced("Black", 2), 18, new Color("15151e"));
             var panel = ArcTheme.Panel(ArcTheme.Flat(accent), ArcTheme.Margin(14, 3, 12, 3, label));
             panel.SizeFlagsVertical = SizeFlags.ShrinkCenter;
             content.AddChild(panel);
         }
         if (row.Value is { } value)
         {
-            var label = ArcTheme.Label(value, ArcTheme.Black, 56);
+            var label = TvText.Label(value, ArcTheme.Black, 56);
             label.HorizontalAlignment = HorizontalAlignment.Right;
             label.VerticalAlignment = VerticalAlignment.Center;
             label.CustomMinimumSize = new Vector2(220, 0);
