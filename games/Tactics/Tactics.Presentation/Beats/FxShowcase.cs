@@ -330,7 +330,7 @@ public static class FxShowcase
         if(rangerPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(rangerPreparation)] };
         if(paladinPreparation is not null)sheet=sheet with { Abilities=[abilityId,new(paladinPreparation)] };
         var friendly = (cls is "cleric" or "druid" or "paladin" or "bard" or "ranger" or "fighter") && (ability.Target.Kind is TargetKind.Ally or TargetKind.DownedAlly
-            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || cls is "druid" or "paladin" or "bard" or "ranger" && ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
+            || abilityId.Value is "cleric.dispel_magic" or "paladin.dispel_magic" || ability.Ai?.Tags.Any(t => t is "heal" or "cleanse") == true || zoneProc=="crusader.consecrated.tick");
         var from = Place(new(3, 5));
         var selfArea = ability.Target.Kind == TargetKind.Self && ability.Target.Area.Shape == AreaShape.Burst;
         var melee = weaponFollowThrough || formAction is "attack" or "revert" || !friendly && (selfArea || (ability.IsWeaponAttack ? !sheet.Weapon.Ranged : ability.Target.Range == 1));
@@ -425,6 +425,7 @@ public static class FxShowcase
                 state = Battle.Apply(state, new EndTurn(state.Active!.Value), rules).State;
                 if (state.Active == caster) break;
             }
+            target = state.Units[helper].Pos; // shared Dispel Magic aims at the actual concentrating caster's tile
         }
         if (abilityId.Value is "druid.dispel_magic" or "bard.dispel_magic")
         {

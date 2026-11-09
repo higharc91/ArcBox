@@ -140,8 +140,8 @@
       "ai": {"tags": ["dispel", "single"]},
       "tier": 3,
       "cost": {"action": 1, "resource": {"mana": 3}},
-      "target": {"kind": "any_unit", "range": 6, "los": true, "area": {"shape": "single"}},
-      "effects": [{"dispel": {"concentration": true}}, {"cleanse": {"tags": ["magical"]}}] },
+      "target": {"kind": "tile", "range": 6, "los": true, "area": {"shape": "single"}},
+      "effects": [{"dispel": {"concentration": true, "zones": true}}, {"cleanse": {"tags": ["magical"]}}] },
 
     { "id": "bard.greater_invisibility",
       "name": "Greater Invisibility",

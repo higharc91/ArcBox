@@ -3109,7 +3109,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "6 tiles: ends concentration and ends zones on the aimed tile"
+        "text": "6 tiles: ends concentration and ends zones on the aimed tile; ends magical conditions on target"
       },
       "bard.dissonant_whispers": {
         "name": "Dissonant Whispers",
@@ -3187,10 +3187,10 @@
         "name": "Lesser Restoration",
         "tags": [
           "Tier 2 spell",
-          "Action",
+          "Bonus action",
           "2 mana"
         ],
-        "text": "1 tile: ends magical, physical, poison conditions on target"
+        "text": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
       },
       "bard.mass_healing_word": {
         "name": "Mass Healing Word",
@@ -3215,7 +3215,7 @@
           "Action",
           "2 mana"
         ],
-        "text": "Con save, 6 tiles, burst 2: 2d8 thunder; half damage on a save"
+        "text": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save"
       },
       "bard.silence": {
         "name": "Silence",
@@ -3249,7 +3249,7 @@
           "Action",
           "1 mana"
         ],
-        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 2 tiles away; half damage on a save"
+        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save"
       },
       "bard.vicious_mockery": {
         "name": "Vicious Mockery",
@@ -3391,7 +3391,7 @@
           "Action",
           "3 devotion"
         ],
-        "text": "6 tiles: ends concentration; ends magical conditions on target"
+        "text": "6 tiles: ends concentration and ends zones on the aimed tile; ends magical conditions on target"
       },
       "cleric.divine_spark": {
         "name": "Channel Divinity: Divine Spark",
@@ -3571,11 +3571,10 @@
         "name": "Barkskin",
         "tags": [
           "Tier 2 spell",
-          "Action",
-          "2 mana",
-          "Concentration"
+          "Bonus action",
+          "2 mana"
         ],
-        "text": "1 tile: target is Barkskinned for 3 rounds"
+        "text": "1 tile: target is Barkskinned"
       },
       "druid.call_lightning": {
         "name": "Call Lightning",
@@ -3603,7 +3602,7 @@
           "Action",
           "1 mana"
         ],
-        "text": "1 tile: heals 1d8 \u002B casting modifier"
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
       },
       "druid.dispel_magic": {
         "name": "Dispel Magic",
@@ -3612,7 +3611,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "6 tiles: ends concentration and ends zones on the aimed tile"
+        "text": "6 tiles: ends concentration and ends zones on the aimed tile; ends magical conditions on target"
       },
       "druid.entangle": {
         "name": "Entangle",
@@ -3622,7 +3621,7 @@
           "1 mana",
           "Concentration"
         ],
-        "text": "6 tiles, burst 2: creates a vines zone (burst 2) for 3 rounds, difficult terrain, ends if you lose concentration; Str save (target is Restrained until saved; target is Stunned for 1 round)"
+        "text": "6 tiles, burst 1: creates a entangle zone (burst 1) for 10 rounds, difficult terrain, ends if you lose concentration; Str save (target is Restrained until saved)"
       },
       "druid.faerie_fire": {
         "name": "Faerie Fire",
@@ -3651,7 +3650,7 @@
           "Bonus action",
           "1 mana"
         ],
-        "text": "6 tiles: heals 1d4 \u002B casting modifier"
+        "text": "6 tiles: heals 2d4 \u002B casting modifier"
       },
       "druid.hold_person": {
         "name": "Hold Person",
@@ -3667,10 +3666,10 @@
         "name": "Lesser Restoration",
         "tags": [
           "Tier 2 spell",
-          "Action",
+          "Bonus action",
           "2 mana"
         ],
-        "text": "1 tile: ends magical, physical, poison conditions on target"
+        "text": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
       },
       "druid.moonbeam": {
         "name": "Moonbeam",
@@ -3714,7 +3713,7 @@
           "2 mana",
           "Concentration"
         ],
-        "text": "6 tiles, burst 2: creates a thorns zone (burst 2) for 3 rounds, difficult terrain, ends if you lose concentration; units inside: When you enter a tile, on yourself: 2d4 piercing"
+        "text": "6 tiles, burst 2: creates a spikes zone (burst 2) for 10 rounds, difficult terrain, ends if you lose concentration; units inside: When you enter a tile, on yourself: 2d4 piercing"
       },
       "druid.thorn_whip": {
         "name": "Thorn Whip",
@@ -3730,7 +3729,7 @@
           "Action",
           "1 mana"
         ],
-        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 2 tiles away; half damage on a save"
+        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save"
       },
       "druid.wild_shape_bear": {
         "name": "Wild Shape: Bear",
@@ -4512,7 +4511,7 @@
         "tags": [
           "Action"
         ],
-        "text": "Spell attack, 6 tiles: 1d10 necrotic"
+        "text": "Spell attack, 1 tile: 1d10 necrotic"
       },
       "sorcerer.chromatic_orb": {
         "name": "Chromatic Orb",
@@ -4521,7 +4520,7 @@
           "Action",
           "1 mana"
         ],
-        "text": "Spell attack, 6 tiles: 2d8 lightning"
+        "text": "Spell attack, 6 tiles: 3d8 lightning"
       },
       "sorcerer.counterspell": {
         "name": "Counterspell",
@@ -4904,7 +4903,7 @@
         "tags": [
           "Action"
         ],
-        "text": "Spell attack, 6 tiles: 1d8 necrotic; target gets -1 to attack rolls for 1 round"
+        "text": "Spell attack, 1 tile: 1d10 necrotic"
       },
       "warlock.counterspell": {
         "name": "Counterspell",
@@ -5006,7 +5005,7 @@
           "Bonus action",
           "1 pact"
         ],
-        "text": "5 tiles: teleports you to the aimed tile, up to 5 tiles away"
+        "text": "4 tiles: teleports you to the aimed tile, up to 4 tiles away"
       },
       "warlock.one_with_shadows": {
         "name": "One with Shadows",
@@ -5027,7 +5026,7 @@
         "tags": [
           "Action"
         ],
-        "text": "Con save, 3 tiles: 1d12 poison"
+        "text": "Spell attack, 4 tiles: 1d12 poison"
       },
       "warlock.repelling_blast": {
         "name": "Repelling blast",
@@ -5043,7 +5042,7 @@
           "Action",
           "2 pact"
         ],
-        "text": "Con save, 6 tiles, burst 2: 1d8 thunder; half damage on a save"
+        "text": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save"
       },
       "warlock.vampiric_touch": {
         "name": "Vampiric Touch",
@@ -5175,7 +5174,7 @@
           "Action",
           "3 mana"
         ],
-        "text": "6 tiles: ends concentration; ends magical conditions on target"
+        "text": "6 tiles: ends concentration and ends zones on the aimed tile; ends magical conditions on target"
       },
       "wizard.fire_bolt": {
         "name": "Fire Bolt",
@@ -5230,7 +5229,7 @@
           "3 mana",
           "Concentration"
         ],
-        "text": "Wis save, 6 tiles, burst 2: target is Incapacitated until saved \u2014 A twisting pattern of colours leaves those who see it charmed and dazed."
+        "text": "Wis save, 6 tiles, burst 2: target is Charmed until saved; target is Incapacitated until saved \u2014 A twisting pattern of colours leaves those who see it charmed and dazed."
       },
       "wizard.invisibility": {
         "name": "Invisibility",

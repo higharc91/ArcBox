@@ -1,0 +1,14 @@
+[
+  {
+    "id": "druid.mass_cure_wounds",
+    "name": "Mass Cure Wounds",
+    "description": "6 tiles, burst 3: heals 5d8 \u002B casting modifier",
+    "level": 9,
+    "seconds": 2.5633876666666655,
+    "baseSeconds": 0.64,
+    "posterAt": 0.32,
+    "frames": 17,
+    "frameMedianMs": 173.7717,
+    "textureBytes": 221991841
+  }
+]

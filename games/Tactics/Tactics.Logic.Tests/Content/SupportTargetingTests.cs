@@ -80,11 +80,12 @@ public sealed class SupportTargetingTests
 
     [Theory]
     [InlineData("druid.mass_cure_wounds")]
+    [InlineData("cleric.mass_cure_wounds")]
     [InlineData("grovekeeper.bloom")]
     [InlineData("grovekeeper.sanctuary_grove")]
     public void Tile_heals_preview_and_heal_allies_without_healing_foes(string ability)
     {
-        var (battle, state) = Start(ability, "druid");
+        var (battle, state) = Start(ability, ability.StartsWith("cleric.", StringComparison.Ordinal) ? "cleric" : "druid");
         var choices = Choices.For(state, U("caster"), battle.Rules);
         var cast = Assert.Single(choices.Abilities, a => a.Ability.Value == ability);
         var target = Assert.Single(cast.Targets, t => t.Target.Tile == T(1, 1));

@@ -21,6 +21,7 @@ public sealed class CutInPlayback(BattleCutIn plan, double start, string name, I
     public bool HoldsForReaction => open && (plan.Extra > 0 || incoming is not null);
     public double Length => start + Lead + plan.ScriptLength + Tail;
     public double Extra => Lead + Tail;
+    public CutInPlayback WithoutExtra() => new(plan.WithoutExtra(), start, name, windows, open);
     public bool CanReach(double seconds, double cueAt) => cueAt < start || seconds >= start + Lead;
     /// <summary>Let the cast's existing frames play during the close-up without releasing projectiles or applying results early.</summary>
     public double PoseLead(double seconds, double cueAt) => cueAt >= start ? Math.Clamp(seconds - start, 0, Lead) : 0;
