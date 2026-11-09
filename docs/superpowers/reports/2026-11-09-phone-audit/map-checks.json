@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "width": 320,
+      "height": 844,
+      "normalCellPx": 24,
+      "enlargedCellPx": 44,
+      "escapeCloses": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "normalCellPx": 24.0625,
+      "enlargedCellPx": 44,
+      "escapeCloses": true
+    }
+  ],
+  "commandsSent": 0
+}

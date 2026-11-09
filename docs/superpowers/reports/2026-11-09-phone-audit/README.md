@@ -4,6 +4,8 @@
 
 The sweep raises metadata to at least 13 px (ability tags remain 14 px), keeps disabled/spent text readable, enlarges text links and summary targets, and gives normal map cells at least 24 px with horizontal panning plus the existing 44 px enlarged map and d-pad. Roll/advantage results wrap at narrow widths. Both authored character-look previews are preserved; their caption moves below them instead of expanding a mobile viewport. Between-session headers wrap. Terrain reflections are confined to the screen rim, and the sticky footer no longer casts a shadow over nearby text. Completed quest text now has stronger contrast.
 
+A separate real-Chromium geometry check confirms normal cells are at least 24 px and enlarged cells are exactly 44×44 at both widths. Escape closes the enlarged map and inspection sends no gameplay command; [results](map-checks.json) and enlarged-map screenshots are retained.
+
 The turn clock keeps its numeric time and adds **Act now** then **Time up**, including with reduced motion enabled. A unit regression advances from three seconds to expiry. An actual Chromium check at 320×844 verified both text cues and computed `animation-name: none`. Existing reduced-motion behavior remains supported.
 
 ![Live reduced-motion urgency](act-now-320.png)
