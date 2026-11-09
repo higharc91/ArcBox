@@ -596,6 +596,16 @@ public sealed class StoryModelTests
         /// <summary>The cursor names a real line of a beat that isn't done, and the nodes played are never forgotten.</summary>
         private void CheckCursor(StorySave c, WorldSave world)
         {
+            if (c.Scene == TacticsGame.LootVoteId)
+            {
+                Must(world.Loot is { Voting: true, Items.IsEmpty: false }, "a loot cursor without pending rewards");
+                Must(c.Beat == "" && c.Stage == StorySave.Lead && c.Node == "ask" && c.Line == 0 && c.Roll is null,
+                    "the reward vote has an invalid cursor");
+                Must(c.Played.SequenceEqual(["ask"]), "the reward question isn't the only played node");
+                Must(world.Loot!.Items.All(i => i.Count > 0 && Rules.Items.ContainsKey(new ItemId(i.Item))), "invalid items in the vote queue");
+                (_sceneOf, _played) = (null, []);
+                return;
+            }
             var beat = Arc.Beats.FirstOrDefault(b => b.Id == c.Beat);
             Must(beat is not null && !world.Beats.Contains(c.Beat), $"the cursor's beat {c.Beat} isn't one on offer");
             if (c.Stage == StorySave.Fight || c.Scene is null)
@@ -630,12 +640,17 @@ public sealed class StoryModelTests
             Must(story.Seq >= _lastSeq, $"the line number went back from {_lastSeq} to {story.Seq}");
             _lastSeq = story.Seq;
             Must(story.Scene == c.Scene, $"the TV shows {story.Scene}, the save says {c.Scene}");
-            var node = c.Node is null ? null : Lore.ScenesOf(c.Beat).Single(s => s.Id == c.Scene).Node(c.Node);
+            var reward = c.Scene == TacticsGame.LootVoteId ? _lease.Read().World!.Loot : null;
+            var node = c.Node is null || reward is not null ? null : Lore.ScenesOf(c.Beat).Single(s => s.Id == c.Scene).Node(c.Node);
             switch (story.State)
             {
                 case TacticsGame.StoryStates.Lines or TacticsGame.StoryStates.Asking:
-                    Must(c.Roll is null && node is not null && story.Line?.Id == node.Lines[c.Line].Id && story.Seq == c.Seq,
-                        $"the TV's line {story.Line?.Id} #{story.Seq} isn't the saved {c.Node}/{c.Line} #{c.Seq}");
+                    if (reward is not null)
+                        Must(c.Roll is null && story.Line?.Id == $"{TacticsGame.LootVoteId}.{reward.Seq}" && story.Seq == c.Seq,
+                            "the reward line does not match its saved queue position");
+                    else
+                        Must(c.Roll is null && node is not null && story.Line?.Id == node.Lines[c.Line].Id && story.Seq == c.Seq,
+                            $"the TV's line {story.Line?.Id} #{story.Seq} isn't the saved {c.Node}/{c.Line} #{c.Seq}");
                     break;
                 case TacticsGame.StoryStates.Rolled:
                     Must(c.Roll is not null, "a roll shown that isn't saved");
@@ -643,6 +658,13 @@ public sealed class StoryModelTests
                 case TacticsGame.StoryStates.Gap:
                     Must(c.Node is null, "a gap with a node saved");
                     break;
+            }
+
+            if (reward is not null && story.Ask is { } allocation)
+            {
+                Must(allocation.Party && allocation.Options.Select(o => o.Id).SequenceEqual(reward.Choices), "the reward question differs from saved recipients");
+                Must(reward.Choices.All(_lease.Read().Members.ContainsKey), "an unknown member can take a reward");
+                Must(reward.Choices.Distinct(StringComparer.Ordinal).Count() == reward.Choices.Length, "a reward recipient is offered twice");
             }
 
             // A question offers nothing that leads back to a node already played.
@@ -668,6 +690,7 @@ public sealed class StoryModelTests
                 {
                     TacticsGame.StoryStates.TieBreak => StoryTiming.Default.TieBreak,
                     TacticsGame.StoryStates.PickRoller => StoryTiming.Default.Roller,
+                    _ when reward is not null => TacticsGame.LootVoteLength,
                     _ when story.Ask is { Party: false } => StoryTiming.Default.Choice,
                     _ => StoryTiming.Default.Vote,
                 };
@@ -704,7 +727,14 @@ public sealed class StoryModelTests
             Must(after is not null && after.Scene == before.Scene && after.Beat == before.Beat, "a restart moved the scene");
             Must(after!.Roll == before.Roll, "a restart changed the roll");
             Must(after.Played.SequenceEqual(before.Played) || before.Node is null, "a restart changed what's played");
-            if (before.Roll is not null)
+            if (before.Scene == TacticsGame.LootVoteId)
+            {
+                var reward = _lease.Read().World!.Loot!;
+                Must(story.Line?.Id == $"{TacticsGame.LootVoteId}.{reward.Seq}" && after.Node == before.Node && after.Line == before.Line,
+                    "a restart moved the pending reward");
+                Must(story.Seq == before.Seq + 1, "the resumed reward question wasn't repeated");
+            }
+            else if (before.Roll is not null)
                 Must(story.State == TacticsGame.StoryStates.Rolled && after.Node == before.Node, "a restart after a roll didn't show it again");
             else if (before.Node is null)
             {

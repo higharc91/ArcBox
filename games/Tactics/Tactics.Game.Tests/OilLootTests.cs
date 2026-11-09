@@ -17,9 +17,12 @@ public sealed class OilLootTests
         var session = new Session(); session.ToBattle("ford_assault");
         Assert.Equal(0, Oil(session));
         Ended(session, outcome);
-        Assert.Equal(count, Oil(session));
+        Assert.Equal(count, Oil(session) + (session.Game.Document.World?.Loot?.Items.Where(i => i.Item == "oil_flask").Sum(i => i.Count) ?? 0));
         var resumed = new Session(document: session.Lease.Document);
         resumed.Harness.Resume(resumed.Lease);
+        Assert.Equal(count, Oil(resumed) + (resumed.Game.Document.World?.Loot?.Items.Where(i => i.Item == "oil_flask").Sum(i => i.Count) ?? 0));
+        for (var i = 0; i < 4; i++) resumed.Harness.SetConnected(i, true);
+        BattleLootTests.TakePending(resumed);
         Assert.Equal(count, Oil(resumed));
     }
 
