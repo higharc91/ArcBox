@@ -24,6 +24,10 @@ const string Usage = """
       --subclasses cls:id,...
                              give the listed classes that subclass (default none)
       --race ID              every party member's race (default human)
+      --races cls:id,...     per-class race overrides for mixed parties
+      --party a,b,c,d        an explicit party instead of sampled compositions
+      --no-increases        controlled legacy comparison without level-4/8 stat increases
+      --build-audit          paired sweep of all 36 subclasses and all races at levels 3/5/7/10
       --with-class CLS       play only the sampled parties that include this class
       --weapons cls:id,...   give the listed classes this weapon instead of their starting kit's
       --policy hidden-rogue  party rogues play the scripted rogue that hides whenever it may and strikes from hiding
@@ -48,6 +52,10 @@ string? withClass = null;
 ImmutableDictionary<string, string>? weapons = null;
 string? policy = null;
 var rotateFormation = false;
+var increases = true;
+var buildAudit = false;
+ImmutableArray<string> fixedParty = default;
+ImmutableDictionary<string, string>? races = null;
 string? rulesDir = null;
 string? outPath = null;
 
@@ -75,6 +83,10 @@ try
             case "--trinkets": trinkets = Pairs("Trinkets"); break;
             case "--subclasses": subclasses = Pairs("Subclasses"); break;
             case "--race": race = Next(); break;
+            case "--races": races = Pairs("Races"); break;
+            case "--party": fixedParty = [.. Next().Split(',')]; sizes = [fixedParty.Length]; break;
+            case "--no-increases": increases = false; break;
+            case "--build-audit": buildAudit = true; break;
             case "--with-class": withClass = Next(); break;
             case "--weapons": weapons = Pairs("Weapons"); break;
             case "--policy": policy = Next(); break;
@@ -95,7 +107,13 @@ catch (Exception e) when (e is ArgumentException or FormatException or OverflowE
 rulesDir ??= Path.Combine(RepoRoot(), "content", "tactics", "base", "rules");
 var rules = RulesPack.Load([rulesDir]);
 var config = new SimConfig(encounters ?? [.. rules.Encounters.Keys], levels, parties, sizes, seeds, difficulty, roundCap, trinkets, companions,
-    subclasses, race, withClass, weapons, policy, rotateFormation);
+    subclasses, race, withClass, weapons, policy, rotateFormation, increases, fixedParty, races);
+if (buildAudit)
+{
+    if (outPath is null) throw new ArgumentException("--build-audit needs --out for its Markdown and raw JSON reports.");
+    BuildAudit.Write(rules, seeds, roundCap, outPath);
+    return 0;
+}
 
 var watch = Stopwatch.StartNew();
 var battles = new List<SimBattle>();

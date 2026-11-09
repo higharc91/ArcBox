@@ -236,7 +236,10 @@ public static class Report
                  + (config.Race is { } race ? $" --race {race}" : "")
                  + (config.WithClass is { } only ? $" --with-class {only}" : "") + weapons
                  + (config.Policy is { } policy ? $" --policy {policy}" : "")
-                 + (config.RotateFormation ? " --rotate-formation" : ""));
+                 + (config.RotateFormation ? " --rotate-formation" : "")
+                 + (!config.AbilityIncreases ? " --no-increases" : "")
+                 + (!config.FixedParty.IsDefaultOrEmpty ? " --party " + string.Join(",", config.FixedParty) : "")
+                 + (config.Races is { Count: > 0 } ? " --races " + string.Join(",", config.Races.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ":" + p.Value)) : ""));
         Line(md, "```");
         Line(md);
         Line(md, $"- **Encounters:** {string.Join(", ", config.Encounters)}.");
@@ -252,6 +255,9 @@ public static class Report
         Line(md, config.Companions > 0
             ? $"- **Companions:** the first {config.Companions} members of every party (class order) play the `companion` profile."
             : "- **Companions:** none.");
+        Line(md, config.AbilityIncreases ? "- **Ability increases:** earned points at levels 4/8 are spent in class priority order, up to score 20."
+            : "- **Ability increases:** disabled for the requested base-array control.");
+        if (config.Races is { Count: > 0 }) Line(md, "- **Race overrides:** " + string.Join(", ", config.Races.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Key + ": " + p.Value)) + ".");
         var withSubclasses = config.Subclasses is { Count: > 0 };
         if (withSubclasses)
             Line(md, "- **Subclasses:** " + string.Join(", ", config.Subclasses!.OrderBy(p => p.Key, StringComparer.Ordinal)
