@@ -151,6 +151,7 @@ public sealed class InSessionLevelUpTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void Results_screen_has_xp_progress_and_loot()
     {
         var s = new Session(seed: 2);

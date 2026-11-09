@@ -922,6 +922,7 @@ public sealed class WalkModelTests
 
     /// <summary>Walking with no story, so no stamp is ever armed: the seeds as they were before fights in the world.</summary>
     [Fact]
+    [Trait("Category", "Sim")]
     public void Walking_holds_up_against_its_model() => Hold(seed => Setup.Of(seed) with { Armed = 0 });
 
     /// <summary>
@@ -929,6 +930,7 @@ public sealed class WalkModelTests
     /// story, so a seed named in a failure here is the same run in a longer sweep; the rest take the force and parley in turn.
     /// </summary>
     [Fact]
+    [Trait("Category", "Sim")]
     public void Walking_into_fights_holds_up_against_its_model()
         => Hold(seed => Setup.Of(seed) is { Armed: > 0 } armed ? armed : Setup.Of(seed) with { Armed = 1 + seed % 2 });
 
@@ -941,4 +943,8 @@ public sealed class WalkModelTests
         var setup = new Setup(4, 4, 0, false, true, 0, "pr_member1", absent == 1 ? 0b0010 : 0b0110);
         Assert.Null(Failure(setup, Generate(4, EventsPerSeed)));
     }
+    [Fact]
+    public void A_short_walk_trace_checks_the_model_on_every_transition()
+        => Assert.Null(Failure(Setup.Of(1), Generate(1, 48)));
+
 }

@@ -13,7 +13,7 @@ public sealed class RegionWriterTests
 
     private static readonly HashSet<string> Known = [Grass, River, Ash];
 
-    private static readonly Lazy<RulesPack> Base = new(() => RulesPack.Load([ContentPaths.BaseRules]));
+    private static readonly Lazy<RulesPack> Base = new(() => BaseContent.LogicRules);
 
     /// <summary>A 2x2 map: heights 1, 1, 2, 1, listing its materials in the other order, with shallow water at (0, 1).</summary>
     private static BattleMap Ford() => BattleMap.FromBytes("ford", 2, 2, (byte[])[1, 1, 0, 1, 1, 0, 2, 0, 1, 1, 1, 0],

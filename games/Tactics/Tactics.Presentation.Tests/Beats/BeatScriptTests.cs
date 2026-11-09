@@ -66,7 +66,7 @@ public sealed class BeatScriptTests
     [InlineData("bosses.fire_elemental.shadow", "drake.flame_breath", "bosses.cast", .4, 1, 20)]
     public void Elemental_effects_and_damage_wait_for_their_distinct_authored_contact_frame(string key, string ability, string binding, double impact, double duration, int contact)
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var def = rules.Abilities[new(ability)];
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var used = new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), def.Presentation);
@@ -95,7 +95,7 @@ public sealed class BeatScriptTests
     [InlineData("bosses.dragon.blue", "dragon.fire_breath")]
     public void Legacy_elemental_variants_keep_their_existing_visual_bindings_and_effect_timing(string key, string ability)
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var def = rules.Abilities[new(ability)];
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var script = Script(view, new AbilityUsed(Hero, new(ability), new Target(Unit: Hero), def.Presentation));
@@ -138,7 +138,7 @@ public sealed class BeatScriptTests
         Assert.Equal(11, steps.Count);
         var battle = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var moves = 0;
         var attacks = 0;
         BattleView? previous = null;
@@ -174,7 +174,7 @@ public sealed class BeatScriptTests
     {
         var steps = WildElementsDemo.Steps(Pack.Root);
         Assert.Equal(20, steps.Count);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var battle = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
         var used = new List<string>();
@@ -211,7 +211,7 @@ public sealed class BeatScriptTests
     {
         var steps = StoneSentinelsDemo.Steps(Pack.Root);
         Assert.Equal(20, steps.Count);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var battle = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
         var used = new List<string>();
@@ -250,7 +250,7 @@ public sealed class BeatScriptTests
     {
         var steps = PrismaticFlamesDemo.Steps(Pack.Root);
         Assert.Equal(20, steps.Count);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var battle = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
         var used = new List<string>();
@@ -289,7 +289,7 @@ public sealed class BeatScriptTests
     [InlineData("bosses.water_elemental.swamp")]
     public void Undertow_pulls_with_a_directed_gesture_and_target_effect_at_contact(string key)
     {
-        var def = RulesPack.Load([Path.Combine(Pack.Root, "rules")]).Abilities[new("water_elemental.undertow")];
+        var def = BaseContent.LogicRules.Abilities[new("water_elemental.undertow")];
         var view = Near with { Units = [.. Near.Units.Select(u => u.Id == Hero ? u with { Sprite = key } : u)] };
         var script = Script(view, new AbilityUsed(Hero, new("water_elemental.undertow"), new Target(Unit: Foe), def.Presentation));
         var pose = Assert.Single(script.Cues.OfType<PoseCue>());
@@ -332,7 +332,7 @@ public sealed class BeatScriptTests
     {
         var steps = ElementalTriadDemo.Steps(Pack.Root);
         Assert.Equal(20, steps.Count);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var battle = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(battle.Map), battle.Board);
         var used = new List<string>();
@@ -369,7 +369,7 @@ public sealed class BeatScriptTests
     {
         var steps = TideAndWyrmDemo.Steps(Pack.Root);
         Assert.Equal(15, steps.Count);
-        var rules = RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+        var rules = BaseContent.LogicRules;
         var board = steps[0].View.Battle!;
         var terrain = new BoardTerrain(Pack.Map(board.Map),board.Board);
         BattleView? previous = null;

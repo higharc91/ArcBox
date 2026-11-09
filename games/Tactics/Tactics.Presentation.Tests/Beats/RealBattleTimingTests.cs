@@ -10,9 +10,10 @@ namespace Tactics.Presentation.Tests.Beats;
 /// <see cref="BeatScript"/> on the engine's own event streams. A level 9 party with every caster, which takes the most targets it
 /// can each turn, produces what a level 1 AI fight doesn't: area spells, passives firing inside them, on-hit passives, extra attacks.
 /// </summary>
+[Trait("Category", "Sim")]
 public sealed class RealBattleTimingTests
 {
-    private static readonly Lazy<RulesPack> Rules = new(() => RulesPack.Load([Path.Combine(Pack.Root, "rules")]));
+    private static readonly Lazy<RulesPack> Rules = new(() => BaseContent.LogicRules);
     private static readonly Lazy<FxArt> Fx = new(() => FxArt.Load(Pack.Root));
     private static readonly Lazy<ImmutableArray<(Beat Beat, BattleView Before)>> Beats = new(Play);
 

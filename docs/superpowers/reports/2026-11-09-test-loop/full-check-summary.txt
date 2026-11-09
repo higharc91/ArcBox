@@ -1,0 +1,14 @@
+bash tools/check-all.sh --full
+Elapsed: 344.756 seconds
+Release build: 0 warnings, 0 errors
+.NET: 7,736 passed, 0 failed, 0 skipped
+Phone: 40 files / 601 tests passed; production build passed
+Node: 24 passed, 0 failed, 0 skipped
+Python assets: 61 passed; audio: 9 passed; lore: 23 passed
+Lore and documentation drift checks: PASS
+Total: 8,454 tests passed
+PASS .NET build
+PASS .NET tests
+PASS Phone tests and build
+PASS Node tool tests
+PASS Python tools and lore

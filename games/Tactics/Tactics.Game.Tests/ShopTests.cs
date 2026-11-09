@@ -229,6 +229,7 @@ public sealed class ShopTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void Encounter_gold_is_awarded_with_the_winning_checkpoint()
     {
         var rules = ExplorationTests.EditedRules(folder =>

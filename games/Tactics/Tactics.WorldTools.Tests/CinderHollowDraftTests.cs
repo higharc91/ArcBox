@@ -8,7 +8,7 @@ public sealed class CinderHollowDraftTests
     [Fact]
     public void Each_chamber_is_forced_in_order_and_the_last_approach_has_a_safe_fire()
     {
-        var rules = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
+        var rules = BaseContent.Rules;
         var region = rules.RegionFor("cinder_hollow")!;
         var walk = new RegionWalk(rules.GroundFor("cinder_hollow")!);
         var start = region.Def.Spawns.Start;

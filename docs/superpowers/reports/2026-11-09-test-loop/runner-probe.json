@@ -1,0 +1,61 @@
+{
+  "method": "Controlled DOTNET substitute verifies project discovery/filter build graph, test failure propagation, unfiltered full mode, isolated perf arguments, failure/usage exits and temporary directory cleanup. Real test runs are recorded separately.",
+  "results": [
+    {
+      "mode": "--fast",
+      "scenario": "success",
+      "exitCode": 0,
+      "testCommands": 1,
+      "discoveredTestProjects": 10,
+      "passed": true
+    },
+    {
+      "mode": "--fast",
+      "scenario": "module_failure",
+      "exitCode": 17,
+      "testCommands": 1,
+      "discoveredTestProjects": 10,
+      "passed": true
+    },
+    {
+      "mode": "--fast",
+      "scenario": "build_failure",
+      "exitCode": 19,
+      "testCommands": 0,
+      "discoveredTestProjects": null,
+      "passed": true
+    },
+    {
+      "mode": "--fast",
+      "scenario": "empty",
+      "exitCode": 1,
+      "testCommands": 0,
+      "discoveredTestProjects": null,
+      "passed": true
+    },
+    {
+      "mode": "--full",
+      "scenario": "success",
+      "exitCode": 0,
+      "testCommands": 1,
+      "discoveredTestProjects": null,
+      "passed": true
+    },
+    {
+      "mode": "--perf",
+      "scenario": "success",
+      "exitCode": 0,
+      "testCommands": 4,
+      "discoveredTestProjects": null,
+      "passed": true
+    },
+    {
+      "mode": "--invalid",
+      "scenario": "success",
+      "exitCode": 2,
+      "testCommands": 0,
+      "discoveredTestProjects": null,
+      "passed": true
+    }
+  ]
+}

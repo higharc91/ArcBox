@@ -17,6 +17,7 @@ cd "$(dirname "$0")/.." || exit 2
 
 # Content text is UTF-8; Windows otherwise defaults to a locale code page.
 export PYTHONUTF8=1
+export MSBUILDDISABLENODEREUSE=1 DOTNET_CLI_USE_MSBUILD_SERVER=0
 
 dotnet_cmd=${DOTNET:-dotnet}
 node_cmd=${NODE:-node}
@@ -44,17 +45,14 @@ run_group() {
 }
 
 dotnet_build() {
-    "$dotnet_cmd" build ArcBox.slnx -c Release
+    "$dotnet_cmd" build ArcBox.slnx -c Release -m:1 -nr:false
 }
 
 dotnet_tests() {
     if [[ $mode == --full ]]; then
-        "$dotnet_cmd" test ArcBox.slnx -c Release
+        "$dotnet_cmd" test ArcBox.slnx -c Release --no-build
     else
-        local status=0
-        "$dotnet_cmd" test games/Tactics/Tactics.Logic.Tests/Tactics.Logic.Tests.csproj -c Release || status=1
-        "$dotnet_cmd" test games/Tactics/Tactics.Game.Tests/Tactics.Game.Tests.csproj -c Release || status=1
-        return "$status"
+        DOTNET="$dotnet_cmd" bash tools/test-dotnet.sh --fast
     fi
 }
 

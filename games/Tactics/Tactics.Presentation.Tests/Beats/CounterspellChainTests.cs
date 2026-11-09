@@ -14,7 +14,7 @@ public sealed class CounterspellChainTests
     [InlineData(false)]
     public void A_wizard_can_counter_a_counter_to_their_own_spell_without_releasing_either_pending_cast(bool counterAgain)
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var a = new UnitId("a"); var b = new UnitId("b");
         var fireball = new AbilityId("wizard.fireball"); var counterspell = new AbilityId("wizard.counterspell");
         var sheet = SheetBuilder.ForCharacter(SheetBuilder.DefaultCharacter("Caster", "human", "wizard", null, 10, rules), rules)

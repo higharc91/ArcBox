@@ -385,7 +385,7 @@ public sealed class WorldPlanTests
     public void The_tvs_ground_and_the_servers_agree_on_every_tile_of_the_ford()
     {
         var tv = DemoRegion.FromPack(Pack.Root, "ashen_ford");
-        var server = RulesPack.Load([Path.Combine(Pack.Root, "rules")], ArtManifests.Load(Pack.Root)).GroundFor("ashen_ford")!;
+        var server = BaseContent.Rules.GroundFor("ashen_ford")!;
         var blocked = 0;
 
         for (var y = 0; y < server.Map.Height; y++)

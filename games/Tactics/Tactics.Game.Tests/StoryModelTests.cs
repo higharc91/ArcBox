@@ -760,7 +760,18 @@ public sealed class StoryModelTests
 
     private static int Seeds => int.TryParse(Environment.GetEnvironmentVariable("STORY_MODEL_SEEDS"), out var n) && n > 0 ? n : DefaultSeeds;
 
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void A_short_story_trace_checks_the_model_on_every_transition(int seed)
+    {
+        var run = new Run(seed);
+        run.Play(32);
+        Assert.NotEmpty(run.States);
+    }
+
     [Fact]
+    [Trait("Category", "Sim")]
     public void Scenes_hold_up_against_their_model()
     {
         var beats = 0;

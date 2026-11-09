@@ -79,7 +79,7 @@ public sealed class BattleCutInTests
     [Fact]
     public void Every_shipped_ability_resolves_and_basic_attacks_and_cantrips_stay_unframed()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         foreach (var ability in rules.Abilities.Values) Assert.True(Enum.IsDefined(BattleCutIn.Tier(ability)), ability.Id.Value);
         Assert.Equal(CutInTier.None, BattleCutIn.Tier(RulesPack.CommonAttack));
         Assert.Equal(CutInTier.None, BattleCutIn.Tier(rules.Abilities[new("wizard.fire_bolt")]));

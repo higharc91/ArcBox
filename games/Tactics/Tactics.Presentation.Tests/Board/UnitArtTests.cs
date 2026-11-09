@@ -253,7 +253,7 @@ public sealed class UnitArtTests
     [Fact]
     public void Every_sprite_in_the_rules_and_every_class_resolves_to_a_real_file()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var keys = rules.Monsters.Values.Select(m => m.Sprite).Concat(rules.Classes.Keys.Select(c => $"characters.class_{c}")).ToArray();
 
         Assert.Equal(12, rules.Classes.Count);

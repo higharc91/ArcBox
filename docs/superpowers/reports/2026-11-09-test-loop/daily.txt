@@ -1,0 +1,69 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ArcBox.Sdk -> /workspace/ArcBox-loop/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Counter.Logic -> /workspace/ArcBox-loop/games/Counter/Counter.Logic/bin/Release/net10.0/Counter.Logic.dll
+  ArcBox.Sdk.Testing -> /workspace/ArcBox-loop/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Counter.Logic.Tests -> /workspace/ArcBox-loop/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll
+  Redline.Logic -> /workspace/ArcBox-loop/games/Redline/Redline.Logic/bin/Release/net10.0/Redline.Logic.dll
+  Redline.Logic.Tests -> /workspace/ArcBox-loop/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll
+  Redline.Presentation -> /workspace/ArcBox-loop/games/Redline/Redline.Presentation/bin/Release/net10.0/Redline.Presentation.dll
+  Redline.Presentation.Tests -> /workspace/ArcBox-loop/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll
+  Tactics.Logic -> /workspace/ArcBox-loop/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/ArcBox-loop/games/Tactics/Tactics.Game/bin/Release/net10.0/Tactics.Game.dll
+  Tactics.Game.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll
+  Tactics.Sim -> /workspace/ArcBox-loop/games/Tactics/Tactics.Sim/bin/Release/net10.0/Tactics.Sim.dll
+  Tactics.Logic.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll
+  Tactics.Presentation -> /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation/bin/Release/net10.0/Tactics.Presentation.dll
+  Tactics.Presentation.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll
+  Tactics.WorldTools -> /workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools/bin/Release/net10.0/Tactics.WorldTools.dll
+  Tactics.WorldTools.Tests -> /workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll
+  ArcBox.Host.Core -> /workspace/ArcBox-loop/src/ArcBox.Host.Core/bin/Release/net10.0/ArcBox.Host.Core.dll
+  ArcBox.Server -> /workspace/ArcBox-loop/src/ArcBox.Server/bin/Release/net10.0/ArcBox.Server.dll
+  ArcBox.Host.Core.Tests -> /workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll
+  ArcBox.Sdk.Tests -> /workspace/ArcBox-loop/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll
+  ArcBox.Server.Tests -> /workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.19
+Functional lane: Perf, Sim and exhaustive Integration checks run in --full.
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64)
+Running tests from /workspace/ArcBox-loop/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64)
+/workspace/ArcBox-loop/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 363ms)
+/workspace/ArcBox-loop/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 888ms)
+/workspace/ArcBox-loop/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (3s 372ms)
+/workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (22s 070ms)
+/workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (35s 263ms)
+/workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (49s 074ms)
+/workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (59s 957ms)
+/workspace/ArcBox-loop/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1m 07s 751ms)
+/workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (1m 12s 816ms)
+/workspace/ArcBox-loop/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (1m 26s 181ms)
+
+Test run summary: Passed!
+  /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (49s 074ms)
+  /workspace/ArcBox-loop/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll (net10.0|x64) passed (35s 263ms)
+  /workspace/ArcBox-loop/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll (net10.0|x64) passed (1s 363ms)
+  /workspace/ArcBox-loop/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll (net10.0|x64) passed (1m 07s 751ms)
+  /workspace/ArcBox-loop/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll (net10.0|x64) passed (22s 070ms)
+  /workspace/ArcBox-loop/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll (net10.0|x64) passed (1s 888ms)
+  /workspace/ArcBox-loop/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll (net10.0|x64) passed (3s 372ms)
+  /workspace/ArcBox-loop/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll (net10.0|x64) passed (1m 26s 181ms)
+  /workspace/ArcBox-loop/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll (net10.0|x64) passed (59s 957ms)
+  /workspace/ArcBox-loop/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll (net10.0|x64) passed (1m 12s 816ms)
+
+  total: 7308
+  failed: 0
+  succeeded: 7308
+  skipped: 0
+  duration: 1m 26s 832ms

@@ -36,7 +36,15 @@ public sealed class InteractModelTests
     [InlineData(2)]
     [InlineData(3)]
     [InlineData(4)]
-    public void Random_play_keeps_every_invariant(int seed)
+    [Trait("Category", "Sim")]
+    public void Random_play_keeps_every_invariant(int seed) => CheckPlay(seed, Events);
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void A_short_interaction_trace_checks_every_invariant(int seed) => CheckPlay(seed, 48);
+
+    private static void CheckPlay(int seed, int events)
     {
         var rng = new Random(seed);
         var s = Vault.At(Vault.Start, seed: seed);
@@ -44,7 +52,7 @@ public sealed class InteractModelTests
         var worked = Interactables.Worked(Defs);
         var before = Doc(s);
         var log = new List<string>();
-        for (var i = 0; i < Events; i++)
+        for (var i = 0; i < events; i++)
         {
             var roll = rng.Next(100);
             string what;

@@ -9,7 +9,7 @@ namespace Tactics.Presentation.Tests.Audio;
 public sealed class SoundBankTests
 {
     private static readonly Lazy<SoundBank> Bank = new(() => SoundBank.Load(Pack.Root));
-    private static readonly Lazy<RulesPack> Rules = new(() => RulesPack.Load([Path.Combine(Pack.Root, "rules")]));
+    private static readonly Lazy<RulesPack> Rules = new(() => BaseContent.LogicRules);
 
     private static JsonDocument Rule(string file) => JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "rules", file)));
 

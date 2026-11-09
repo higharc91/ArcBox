@@ -16,7 +16,7 @@ public sealed class PaletteTests
 
     private static readonly string TerrainManifest = Path.Combine(ContentPaths.ContentBase, "terrain", "manifest.json");
 
-    private static readonly Lazy<RulesPack> Base = new(() => RulesPack.Load([ContentPaths.BaseRules]));
+    private static readonly Lazy<RulesPack> Base = new(() => BaseContent.LogicRules);
 
     /// <summary>Runs <paramref name="read"/> on a temporary manifest holding <paramref name="json"/>.</summary>
     private static T WithManifest<T>(string json, Func<string, T> read)

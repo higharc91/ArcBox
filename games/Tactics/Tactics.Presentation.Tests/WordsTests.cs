@@ -20,7 +20,7 @@ public sealed class WordsTests
     [Fact]
     public void No_two_kinds_of_enemy_in_an_encounter_share_a_short_name()
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         foreach (var encounter in rules.Encounters.Values)
         {
             var units = encounter.Enemies.Select(e => e.Unit)

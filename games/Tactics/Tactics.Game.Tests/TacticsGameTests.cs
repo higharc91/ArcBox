@@ -9,7 +9,7 @@ namespace Tactics.Game.Tests;
 /// <summary><see cref="TacticsGame"/> on the platform harness: muster, encounter pick, the battle loop, results and resume.</summary>
 public sealed class TacticsGameTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([Path.Combine(ContentBase(), "rules")], ArtManifests.Load(ContentBase())));
+    private static readonly Lazy<RulesPack> Pack = new(() => BaseContent.Rules);
 
     internal static string ContentBase()
     {
@@ -110,6 +110,7 @@ public sealed class TacticsGameTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void An_all_ai_battle_plays_out_and_writes_its_result_to_the_campaign()
     {
         var s = new Session(seed: 2);     // a seed the party wins (seed 1 has lost since #108's rogue), so XP is written
@@ -180,6 +181,7 @@ public sealed class TacticsGameTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void A_battle_resumed_after_a_restart_ends_as_if_it_had_never_stopped()
     {
         var straight = new Session();
@@ -415,6 +417,7 @@ public sealed class TacticsGameTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void Results_name_each_member_however_the_room_is_seated()
     {
         var s = new Session();

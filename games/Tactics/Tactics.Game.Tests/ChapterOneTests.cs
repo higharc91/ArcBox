@@ -444,6 +444,7 @@ public abstract class ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneTests : ChapterOne
 {
     [Fact]
@@ -482,6 +483,7 @@ public sealed class ChapterOneTests : ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneSkippedAssaultTests : ChapterOne
 {
     /// <summary>
@@ -499,6 +501,7 @@ public sealed class ChapterOneSkippedAssaultTests : ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneUnansweredTests : ChapterOne
 {
     /// <summary>Nobody touches a phone from the mayor to the ember: every vote and choice runs out, which takes the first option (decision 2).</summary>
@@ -511,6 +514,7 @@ public sealed class ChapterOneUnansweredTests : ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneCompanionTests : ChapterOne
 {
     [Fact]
@@ -522,6 +526,7 @@ public sealed class ChapterOneCompanionTests : ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneRestartLineTests : ChapterOne
 {
     [Theory]
@@ -536,6 +541,7 @@ public sealed class ChapterOneRestartLineTests : ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneRestartMomentTests : ChapterOne
 {
     /// <summary>
@@ -559,6 +565,7 @@ public sealed class ChapterOneRestartMomentTests : ChapterOne
     }
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneNoClipsTests : ChapterOne
 {
     [Fact]
@@ -566,6 +573,7 @@ public sealed class ChapterOneNoClipsTests : ChapterOne
         => Played(new Play(branch: "parley", lore: StoryTests.NoClips.Value), ByParley);
 }
 
+[Trait("Category", "Integration")]
 public sealed class ChapterOneDefeatTests : ChapterOne
 {
     /// <summary>The assault lost twice: the party wakes at the recovery spawn, walks back, and the retry goes straight to the fight.</summary>

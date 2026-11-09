@@ -177,6 +177,7 @@ public sealed class ExplorationTests
 
     /// <summary>Results' "Carry on" goes back to walking whether or not the list is offered: it's how every fight ends.</summary>
     [Fact]
+    [Trait("Category", "Integration")]
     public void Results_carry_on_to_the_world_with_the_switch_off()
     {
         var s = StageBattleTests.Fighting(StageBattleTests.Force);
@@ -196,6 +197,7 @@ public sealed class ExplorationTests
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
+    [Trait("Category", "Integration")]
     public void A_pack_with_no_region_keeps_its_battle_list_either_way(bool battleList)
     {
         var s = new Session(game: new TacticsGame(NoRegion.Value, battleList: battleList));
@@ -545,6 +547,7 @@ public sealed class ExplorationTests
     }
 
     [Fact]
+    [Trait("Category", "Integration")]
     public void Next_after_results_goes_back_to_walking_on_the_same_tile()
     {
         // A fight on a map the region doesn't stamp is on a plain board, so the party is where it was. (One on a stamped map stands

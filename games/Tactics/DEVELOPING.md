@@ -77,18 +77,30 @@ Set `GODOT` when needed. `--skip-build` reuses a successful build; `TV_ENGINE_AR
 
 ## Test loop
 
+The default daily .NET command builds all test dependencies serially in Release and runs functional tests across every test assembly:
+
 ```sh
-# Game behavior while iterating; MTP arguments follow the second --.
-dotnet test games/Tactics/Tactics.Game.Tests -c Release -- --filter-class '*RestTests'
+bash tools/test-dotnet.sh
+# Machine-time budgets, one assembly at a time; AI reports median and P95.
+bash tools/test-dotnet.sh --perf
+# Every .NET test, including performance, simulations and exhaustive integration.
+bash tools/test-dotnet.sh --full
 # Phone changes.
 npm --prefix web/play test
 npm --prefix web/play run build
-# Tactics-focused repository checks, then the complete merge gate.
-bash tools/check-all.sh --fast
+# Complete multi-language gate required before merging a feature.
 bash tools/check-all.sh --full
 ```
 
-Both checker modes include phone, Node, asset/audio and lore checks; `--fast` narrows the .NET test projects. Godot TV automation is separate. GitHub Actions is currently intentionally disabled; run checks locally without enabling the workflow.
+The daily lane filters `Category=Perf`, `Category=Sim` and `Category=Integration`. Perf contains machine-time measurements and thresholds (AI planning, stage rebuilds, pen lookup, timeout and shutdown bounds). Sim contains full battle/planner sweeps, multi-seed story rolls, full randomized story/walk traces and long timing reels. Integration contains whole-chapter/restart paths, full-battle replay/reaction-recovery runs, socket end-to-end checks, the exhaustive world-export rejection matrix and whole-sheet pixel/connectivity and other long raster/alpha proofs. Their original assertions and workloads remain in the unfiltered full command. Short story/walk/interaction model traces still check every transition in the daily lane. It also checks all approved mob manifest paths/directions/core clips, single-seed story roll branches, a work-based stage-rebuild bound, rules, packet sizes, content and world-tool behavior.
+
+Pristine rules/art manifests load once per assembly, preserving separate with-art and logic-only variants. Edited and negative-loader fixtures still load fresh copies. Immutable real-engine showcase samples are reused per pack instance and class; existing determinism checks still create fresh samples. Mutable drawing helpers remain isolated by class; the mob raster suite reuses its own sprite catalog within its serialized xUnit collection.
+
+The daily runner discovers `.Tests.csproj` entries from `ArcBox.slnx`, builds their entire dependency graph and runs every discovered test assembly. It starts up to ten modules together with one collection thread per module to limit CPU contention. The full command also builds the native host/editor and remaining tool executables. The perf command isolates assemblies and collections, and prints the original median/P95 measurements.
+
+`bash tools/check-all.sh --fast` uses the daily .NET lane and also runs all phone, Node, asset/audio and lore checks, so it takes longer than the .NET loop alone. `--full` runs every group without test filters. Raw `dotnet test ArcBox.slnx -c Release` also remains unfiltered. Godot TV automation is separate. GitHub Actions is intentionally disabled; run these checks locally without enabling it.
+
+For focused work, use `dotnet test --project games/Tactics/Tactics.Game.Tests -c Release --filter-class '*RestTests'`. Put new machine-time thresholds in Perf; retain deterministic work/state assertions in functional tests. Measured timings and profiling evidence live in [the loop report](../../docs/superpowers/reports/2026-11-09-test-loop/README.md).
 
 ## Content and asset tools
 

@@ -4,7 +4,7 @@ namespace Tactics.Logic.Tests;
 public sealed class InteractableLoreTests
 {
     private static readonly Lazy<LoreBook> Book = new(() => LoreBook.Load(ContentPaths.ContentBase));
-    private static readonly Lazy<RulesPack> Pack = new(() => RulesPack.Load([ContentPaths.BaseRules]));
+    private static readonly Lazy<RulesPack> Pack = new(() => BaseContent.LogicRules);
 
     [Fact]
     public void A_flag_nothing_sets_and_a_choices_flag_are_problems()

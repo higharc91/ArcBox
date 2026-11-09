@@ -9,13 +9,7 @@ namespace Tactics.Game.Tests;
 /// <summary>Sub-project 4: making and growing a character between sessions, through the portal's commands.</summary>
 public sealed class CharacterTests
 {
-    private static readonly Lazy<RulesPack> Pack = new(() =>
-    {
-        for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
-            if (File.Exists(Path.Combine(dir.FullName, "ArcBox.slnx")))
-                return RulesPack.Load([Path.Combine(dir.FullName, "content", "tactics", "base", "rules")], ArtManifests.Load(Path.Combine(dir.FullName, "content", "tactics", "base")));
-        throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
-    });
+    private static readonly Lazy<RulesPack> Pack = new(() => BaseContent.Rules);
 
     private static RulesPack Rules => Pack.Value;
 

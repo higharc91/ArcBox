@@ -7,7 +7,7 @@ public sealed class PaladinVfxTests
  [Fact]
  public void Every_ability_and_visible_proc_uses_real_combat_including_smite_undead_and_enchanted_hits()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var samples=FxShowcase.ForClass("paladin",rules);
+  var rules=BaseContent.LogicRules;var samples=ShowcaseFixtures.ForClass("paladin",rules);
   Assert.Equal(37,samples.Length);
   foreach(var f in FxShowcase.Inventory("paladin",rules).Where(f=>f.Kind!="static"))
   {
@@ -34,8 +34,8 @@ public sealed class PaladinVfxTests
  [Fact]
  public void Every_real_paladin_script_fits_its_budget_and_resolves_unique_effects_and_light()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);var art=Tactics.Presentation.Board.UnitArt.Load(Pack.Root);var failures=new List<string>();var keys=new HashSet<string>();
-  foreach(var sample in FxShowcase.ForClass("paladin",rules))
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);var art=Tactics.Presentation.Board.UnitArt.Load(Pack.Root);var failures=new List<string>();var keys=new HashSet<string>();
+  foreach(var sample in ShowcaseFixtures.ForClass("paladin",rules))
   {
    var id=sample.Id;var a=rules.Abilities.GetValueOrDefault(new(id));var script=BeatScript.Of(sample.After.Beats.Single(),sample.Before,sample.After,fx);
    var weapon=id=="common.attack"||id.StartsWith("paladin.smite_damage",StringComparison.Ordinal)||id is "crusader.radiant_blades" or "avenger.vengeful_strikes" or "paladin.elemental_weapon.strike";
@@ -51,7 +51,7 @@ public sealed class PaladinVfxTests
  [Fact]
  public void Smites_keep_separate_damage_numbers_and_place_the_real_rider_effect_on_the_victim()
  {
-  var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);var fx=FxArt.Load(Pack.Root);
+  var rules=BaseContent.LogicRules;var fx=FxArt.Load(Pack.Root);
   foreach(var id in new[]{"paladin.smite_damage","paladin.smite_damage_2","paladin.smite_damage_3"})
   {
    var s=FxShowcase.Specific("paladin",id+".undead",rules);var script=BeatScript.Of(s.After.Beats.Single(),s.Before,s.After,fx);var target=s.Before.Units.Single(u=>u.Id.Value=="target1");
@@ -62,7 +62,7 @@ public sealed class PaladinVfxTests
  [Fact]
  public void All_paladin_spells_keep_their_existing_sound()
  {
-  var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);var rules=RulesPack.Load([Path.Combine(Pack.Root,"rules")]);
+  var sounds=Tactics.Presentation.Audio.SoundBank.Load(Pack.Root);var rules=BaseContent.LogicRules;
   using var old=System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.GetFullPath(Path.Combine(Pack.Root,"../../../tools/tactics-assets/baseline/paladin-vfx.json"))));
   foreach(var a in old.RootElement.EnumerateObject())Assert.Equal(sounds.ForEffect(a.Value.GetProperty("fx").GetString()!),sounds.ForEffect(rules.Abilities[new(a.Name)].Presentation!.Fx!));
  }

@@ -8,6 +8,7 @@ using Tactics.Presentation.Tests.Board;
 
 namespace Tactics.Presentation.Tests.Beats;
 
+[Trait("Category", "Sim")]
 public sealed class FxRoundBudgetTests
 {
     [Theory]
@@ -19,7 +20,7 @@ public sealed class FxRoundBudgetTests
     [InlineData("ranger")]
     public void Six_hero_chapter_one_rounds_preserve_rules_and_stay_within_the_proposed_cinematic_budget(string caster)
     {
-        var rules = RulesPack.Load([Path.Combine(Pack.Root, "rules")]);
+        var rules = BaseContent.LogicRules;
         var art = FxArt.Load(Pack.Root);
         var unitArt = UnitArt.Load(Pack.Root);
         string[] classes = ["fighter", "cleric", "rogue", caster, "barbarian", "bard"];

@@ -198,6 +198,7 @@ public sealed class FaunaTests
     }
 
     [Fact]
+    [Trait("Category", "Perf")]
     public void A_pen_is_found_quickly_however_much_fence_is_about()
     {
         // A field of fences in rows, as a farm drawn without care might have: the pen search tries every rectangle within reach.

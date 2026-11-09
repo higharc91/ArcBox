@@ -58,6 +58,7 @@ public class TtsClientTests
     }
 
     [Fact]
+    [Trait("Category", "Perf")]
     public async Task Gives_up_after_the_timeout()
     {
         var handler = new FakeHandler(async (_, ct) =>

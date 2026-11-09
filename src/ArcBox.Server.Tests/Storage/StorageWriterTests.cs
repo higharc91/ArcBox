@@ -471,6 +471,7 @@ public class StorageWriterTests
     }
 
     [Fact]
+    [Trait("Category", "Perf")]
     public async Task StopAsync_on_a_disk_that_stays_down_gives_up_at_the_cap_and_says_so()
     {
         var (db, _, time) = Create();
