@@ -175,9 +175,14 @@ Each export changes the pack's hash: see the note at the end of [Exporting from 
 
 ## First refinements
 
-- **The scarp is one long even ridge,** x 54 to 59 from the south edge up to about y 17. It's the first thing to break up. Keep it closed:
-  it's what sends the road north round its tip, and a gap shortens the walk.
-- **Start to ford is about 40 seconds,** and the far ends a little over a minute. Walking and route tools now use the exported scene; remeasure routes after painting.
+- **The scarp is one long even ridge,** x 54 to 63 from the south edge up to about y 17. Two cuts now cross it, after play feedback
+  that every trip east looped north round its tip: **a pass from the town's east gate** (rows 57–59, cut to height 3, with a packed path on
+  to the north–south road at x 76) and **a trail from the south fields** (rows 98–99, through a gap in the field fence at x 47, on to the
+  road at x 86). The road north round the tip still runs. Keep both cuts open: the walk times below assume them.
+- **Walk times from the start** (`RegionWalk`, 0.3 s a step), measured after the cuts: the ford about 20 s (it was 39), the Ember about 28 s
+  (52), Maud's hut about 38 s (55), and the far corners under 47 s (64). Remeasure routes after painting.
+- **The reed-bank track** (`af_reed_bank_track`, a hidden path at 118,86) is the one gap in a raised rock bank along x 118 from y 82 to 99.
+  Until it's found, the walk to Maud's hut goes round the bank's ends.
 - **Woods, boats and tents use authored props/buildings** in the integrated world; keep their collision and navigation clear.
 
 Keep a note of how long Ashen Ford takes to paint. It's the guide for how long later chapters will take, and it decides whether a chapter a
