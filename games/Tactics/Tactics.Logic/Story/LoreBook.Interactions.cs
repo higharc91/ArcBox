@@ -1,3 +1,4 @@
+using ArcBox.Sdk.Content;
 using System.Collections.Immutable;
 using System.Text.Json;
 
@@ -91,7 +92,7 @@ public sealed partial class LoreBook
     }
     private static void ValidateSideContent(string basePack, ImmutableArray<QuestDef> quests,
         IEnumerable<SceneDef> scenes, IEnumerable<ConversationDef> conversations, ImmutableArray<LoreCharacter> characters,
-        IReadOnlySet<string> mainFlags, BarkBook barks, IEnumerable<string> beatFlags)
+        IReadOnlySet<string> mainFlags, BarkBook barks, IEnumerable<string> beatFlags, IFileSource source)
     {
         if (quests.IsEmpty && !conversations.Any() && !scenes.Any(s => s.Beat is null)) return;
         var allScenes = scenes.ToArray();
@@ -106,12 +107,12 @@ public sealed partial class LoreBook
         var hooks = new List<(string Thing,string Scene)>();
         var rules = Path.Combine(basePack, "rules");
         var manifest = Path.Combine(rules, "manifest.json");
-        if (File.Exists(manifest))
+        if (source.Exists(manifest))
         {
-            using var index = JsonDocument.Parse(File.ReadAllText(manifest));
+            using var index = JsonDocument.Parse(source.ReadAllText(manifest));
             foreach (var file in index.RootElement.GetProperty("files").EnumerateArray().Select(f => f.GetString()!))
             {
-                using var doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(rules, file)));
+                using var doc = JsonDocument.Parse(source.ReadAllText(Path.Combine(rules, file)));
                 var root = doc.RootElement;
                 Gather(root);
                 if (file.StartsWith("interactables/", StringComparison.Ordinal))
@@ -157,8 +158,8 @@ public sealed partial class LoreBook
         }
         foreach (var option in allScenes.SelectMany(s => s.Nodes).SelectMany(n => n.Options))
         {
-            if (File.Exists(manifest) && option.Give is { } give && !items.Contains(give)) throw new InvalidDataException($"unknown reward item '{give}'.");
-            if (File.Exists(manifest) && option.Service is { } service && !shops.Contains(service)) throw new InvalidDataException($"unknown service '{service}'.");
+            if (source.Exists(manifest) && option.Give is { } give && !items.Contains(give)) throw new InvalidDataException($"unknown reward item '{give}'.");
+            if (source.Exists(manifest) && option.Service is { } service && !shops.Contains(service)) throw new InvalidDataException($"unknown service '{service}'.");
             if (option.Quest is { } action)
             {
                 var quest = quests.First(q => q.Id == (action.Start ?? action.Advance ?? action.Complete));
@@ -170,31 +171,31 @@ public sealed partial class LoreBook
         foreach (var quest in quests)
         {
             if (!characters.Any(c => c.Id == quest.Giver)) throw new InvalidDataException($"quest '{quest.Id}' has unknown giver '{quest.Giver}'.");
-            if (File.Exists(manifest) && !regions.ContainsKey(quest.Region)) throw new InvalidDataException($"quest '{quest.Id}' has unknown region '{quest.Region}'.");
+            if (source.Exists(manifest) && !regions.ContainsKey(quest.Region)) throw new InvalidDataException($"quest '{quest.Id}' has unknown region '{quest.Region}'.");
             foreach (var stage in quest.Stages)
             {
                 var targetRegion = stage.Target?.Region ?? quest.Region;
-                if (File.Exists(manifest) && !regions.ContainsKey(targetRegion))
+                if (source.Exists(manifest) && !regions.ContainsKey(targetRegion))
                     throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown target region '{targetRegion}'.");
                 var region = regions.GetValueOrDefault(targetRegion);
-                if (stage.When.IsDefaultOrEmpty || File.Exists(manifest) && !stage.When.All(setters.Contains)) throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has flags nothing in the pack can set.");
-                if (File.Exists(manifest) && stage.Target?.Thing is { } thing && (!things.TryGetValue(targetRegion, out var regionThings) || !regionThings.Contains(thing)))
+                if (stage.When.IsDefaultOrEmpty || source.Exists(manifest) && !stage.When.All(setters.Contains)) throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has flags nothing in the pack can set.");
+                if (source.Exists(manifest) && stage.Target?.Thing is { } thing && (!things.TryGetValue(targetRegion, out var regionThings) || !regionThings.Contains(thing)))
                     throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown thing '{thing}'.");
-                if (File.Exists(manifest) && stage.Target?.Tile is { } tile)
+                if (source.Exists(manifest) && stage.Target?.Tile is { } tile)
                 {
                     var size = region.GetProperty("size").EnumerateArray().Select(v => v.GetInt32()).ToArray();
                     if (tile.X < 0 || tile.Y < 0 || tile.X >= size[0] || tile.Y >= size[1])
                         throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' target is outside region '{targetRegion}'.");
                 }
-                if (File.Exists(manifest) && stage.Target?.Person is { } person && (!region.TryGetProperty("people", out var people)
+                if (source.Exists(manifest) && stage.Target?.Person is { } person && (!region.TryGetProperty("people", out var people)
                     || !people.EnumerateArray().Any(p => p.TryGetProperty("id", out var id) && id.GetString() == person)))
                     throw new InvalidDataException($"quest '{quest.Id}' stage '{stage.Id}' has unknown person '{person}'.");
             }
             if (!quest.Rewards.Sets.IsDefault && quest.Rewards.Sets.Any(mainFlags.Contains))
                 throw new InvalidDataException($"quest '{quest.Id}' cannot set main-story flags.");
             foreach (var item in quest.Rewards.Items)
-                if (File.Exists(manifest) && !items.Contains(item.Item)) throw new InvalidDataException($"quest '{quest.Id}' has unknown item '{item.Item}'.");
-            if (File.Exists(manifest) && quest.Rewards.Trinkets is { } rewardMap)
+                if (source.Exists(manifest) && !items.Contains(item.Item)) throw new InvalidDataException($"quest '{quest.Id}' has unknown item '{item.Item}'.");
+            if (source.Exists(manifest) && quest.Rewards.Trinkets is { } rewardMap)
             {
                 foreach (var (cls, id) in rewardMap)
                     if (!classes.Contains(cls) || !trinkets.TryGetValue(id, out var owner) || owner != cls)

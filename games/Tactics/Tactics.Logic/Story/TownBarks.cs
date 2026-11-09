@@ -1,3 +1,4 @@
+using ArcBox.Sdk.Content;
 using System.Collections.Immutable;
 using System.Text.Json;
 
@@ -47,7 +48,7 @@ public sealed class BarkBook(ImmutableDictionary<string, BarkSet> sets, Immutabl
     public BarkSet? ForBattle(string speaker, string moment) => battle?.GetValueOrDefault(speaker + ":" + moment);
     public IEnumerable<string> LineIds => sets.Values.SelectMany(s => s.Lines).Select(l => l.Id);
 
-    internal static BarkBook Load(string lore, ImmutableArray<string> files)
+    internal static BarkBook Load(string lore, ImmutableArray<string> files, IFileSource source)
     {
         var result = ImmutableDictionary.CreateBuilder<string, BarkSet>(StringComparer.Ordinal);
         var battle = ImmutableDictionary.CreateBuilder<string, BarkSet>(StringComparer.Ordinal);
@@ -57,7 +58,7 @@ public sealed class BarkBook(ImmutableDictionary<string, BarkSet> sets, Immutabl
             var path = Path.Combine(lore, file);
             try
             {
-                using var doc = JsonDocument.Parse(File.ReadAllText(path));
+                using var doc = JsonDocument.Parse(source.ReadAllText(path));
                 var root = doc.RootElement;
                 if (file == "barks/townsfolk.json")
                 {

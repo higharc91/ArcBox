@@ -1,3 +1,4 @@
+using ArcBox.Sdk.Content;
 using System.Collections.Immutable;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -90,21 +91,23 @@ public static class ArtManifests
     /// that can't be read is a <see cref="ContentError"/> for <c>"&lt;set&gt;/manifest.json"</c>; every one found is thrown
     /// together as a <see cref="ContentException"/>.
     /// </summary>
-    public static ArtManifest Load(string contentBaseDir)
+    public static ArtManifest Load(string contentBaseDir) => Load(contentBaseDir, PhysicalFileSource.Instance);
+
+    public static ArtManifest Load(string contentBaseDir, IFileSource source)
     {
         var keys = new List<string>();
         var errors = new List<ContentError>();
         var props = new Dictionary<string, PropArtDef>(StringComparer.Ordinal);
         var buildings = new Dictionary<string, BuildingArtDef>(StringComparer.Ordinal);
-        foreach (var dir in Directory.GetDirectories(contentBaseDir).Order(StringComparer.Ordinal))
+        foreach (var dir in source.GetDirectories(contentBaseDir).Order(StringComparer.Ordinal))
         {
             var set = Path.GetFileName(dir);
             var path = Path.Combine(dir, "manifest.json");
-            if (set == "rules" || !File.Exists(path))
+            if (set == "rules" || !source.Exists(path))
                 continue;
             try
             {
-                var bytes = File.ReadAllBytes(path);
+                var bytes = source.ReadAllBytes(path);
                 keys.AddRange(KeysOf(set, bytes));
                 if (set == "town")
                 {
