@@ -7,7 +7,11 @@ namespace Tactics.Logic;
 /// <summary>
 /// Definition of a prop from <c>props/manifest.json</c>.
 /// </summary>
-public sealed record PropArtDef(string Id, ImmutableSortedSet<string> Variants, bool Blocks, Cover Cover, int Height);
+/// <param name="Slim">
+/// A blocking prop narrow enough to step diagonally past (a tree, a lamp post): on the overworld it stops a party walking into its tile, but
+/// not one cutting the corner beside it. Walls, fences and rocks fill their tile and aren't slim. Battle maps have no diagonals and ignore it.
+/// </param>
+public sealed record PropArtDef(string Id, ImmutableSortedSet<string> Variants, bool Blocks, Cover Cover, int Height, bool Slim = false);
 
 /// <summary>
 /// What walking needs of a building in <c>town/manifest.json</c>. A footprint of <see cref="Width"/> x <see cref="Depth"/> covers tiles
@@ -121,7 +125,8 @@ public static class ArtManifests
                             var blocks = prop.Value.TryGetProperty("blocks", out var b) && b.GetBoolean();
                             var cover = prop.Value.TryGetProperty("cover", out var c) ? ParseCover(c.GetString()) : Cover.None;
                             var height = prop.Value.TryGetProperty("height", out var h) ? h.GetInt32() : 1;
-                            props[prop.Name] = new PropArtDef(prop.Name, Ordinal.Set(variants), blocks, cover, height);
+                            var slim = prop.Value.TryGetProperty("slim", out var s) && s.GetBoolean();
+                            props[prop.Name] = new PropArtDef(prop.Name, Ordinal.Set(variants), blocks, cover, height, slim);
                         }
                     }
                 }

@@ -87,12 +87,16 @@ public sealed class WorldGround
         List<PropPlacement> allProps =
         [
             .. region.Def.Stamps.Where(s => maps.ContainsKey(s.Map))
-                .SelectMany(s => maps[s.Map].Props.Select(p => p with { At = new Tile(p.At.X + s.At.X, p.At.Y + s.At.Y) })),
+                .SelectMany(s => maps[s.Map].Props.Select(p => p with
+                {
+                    At = new Tile(p.At.X + s.At.X, p.At.Y + s.At.Y),
+                    Slim = p.Blocks && art.Props.TryGetValue(p.Id, out var stamped) && stamped.Slim,
+                })),
             .. (region.Def.Props.IsDefault ? [] : region.Def.Props).SelectMany(group =>
             {
                 if (!art.Props.TryGetValue(group.Id, out var def))
                     throw new ArgumentException($"Region '{region.Def.Id}' has the prop '{group.Id}', which the art manifest doesn't define.", nameof(art));
-                return group.At.Select(t => new PropPlacement(group.Id, t, def.Blocks, def.Cover, group.Variant));
+                return group.At.Select(t => new PropPlacement(group.Id, t, def.Blocks, def.Cover, group.Variant, Slim: def.Blocks && def.Slim));
             }),
             .. region.Buildings.SelectMany(b =>
             {

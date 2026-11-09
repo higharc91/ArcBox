@@ -188,6 +188,38 @@ public sealed class WorldWalkTests
         Assert.Null(From00("0. 0#\n0# 0.", WalkDir.S));
     }
 
+    /// <summary>A flat region with the props <paramref name="props"/>: a slim "tree" and a full "fence", as the art manifest says.</summary>
+    private static Terrain Planted(params RegionProps[] props)
+    {
+        var def = new RegionDef("r", "R", 1, [64, 32], ["grass/lush"], [new RegionChunk(0, 0, RegionTests.Tiles())], [], [],
+            new RegionSpawns(Origin, Origin), [], [.. props]);
+        var art = new ArtManifest([], ImmutableDictionary<string, PropArtDef>.Empty
+            .Add("tree", new("tree", ["oak"], true, Cover.Total, 4, Slim: true))
+            .Add("fence", new("fence", ["oak"], true, Cover.Half, 1)));
+        return WorldGround.Of(WorldRegion.From(def), new Dictionary<string, BattleMap>(), art).Terrain;
+    }
+
+    [Fact]
+    public void A_diagonal_steps_past_a_trees_corner()
+    {
+        // A tree on one corner: the party cuts past its trunk instead of snagging and sliding.
+        var terrain = Planted(new RegionProps("tree", "oak", [new Tile(2, 1)]));
+        Assert.Equal(new WalkMove(new Tile(2, 2), 1, Diagonal: true, Slid: false), WorldWalk.Next(terrain, new Tile(1, 1), WalkDir.S, Jump, null));
+        // The tree's own tile still stops the party.
+        Assert.False(terrain.Walkable(new Tile(2, 1)));
+        Assert.NotEqual(new Tile(2, 1), WorldWalk.Next(terrain, new Tile(1, 1), WalkDir.SE, Jump, null)?.To);
+    }
+
+    [Fact]
+    public void A_diagonal_still_snags_on_a_fence_and_never_squeezes_between_two_trees()
+    {
+        var fence = Planted(new RegionProps("fence", "oak", [new Tile(2, 1)]));
+        Assert.NotEqual(new Tile(2, 2), WorldWalk.Next(fence, new Tile(1, 1), WalkDir.S, Jump, null)!.Value.To);
+        // Trees on both corners: no L-path is open, so the diagonal is refused and nothing new is reachable.
+        var pair = Planted(new RegionProps("tree", "oak", [new Tile(2, 1), new Tile(1, 2)]));
+        Assert.Null(WorldWalk.Next(pair, new Tile(1, 1), WalkDir.S, Jump, null));
+    }
+
     [Fact]
     public void A_blocked_diagonal_slides_along_the_wall()
         => Assert.Equal(new WalkMove(new Tile(0, 1), 1, Diagonal: false, Slid: true), From00("0. 0#\n0. 0.", WalkDir.S));

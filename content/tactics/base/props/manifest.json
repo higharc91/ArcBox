@@ -111,7 +111,8 @@
       "height": 4,
       "tags": [
         "nature"
-      ]
+      ],
+      "slim": true
     },
     "tree_fruit": {
       "variants": {
@@ -130,7 +131,8 @@
       "blocks": true,
       "cover": "full",
       "height": 4,
-      "tags": []
+      "tags": [],
+      "slim": true
     },
     "pine": {
       "variants": {
@@ -151,7 +153,8 @@
       "height": 4,
       "tags": [
         "nature"
-      ]
+      ],
+      "slim": true
     },
     "pine_snowy": {
       "variants": {
@@ -170,7 +173,8 @@
       "blocks": true,
       "cover": "full",
       "height": 4,
-      "tags": []
+      "tags": [],
+      "slim": true
     },
     "dead_tree": {
       "variants": {
@@ -190,7 +194,8 @@
       "blocks": true,
       "cover": "half",
       "height": 3,
-      "tags": []
+      "tags": [],
+      "slim": true
     },
     "bush": {
       "variants": {
@@ -334,7 +339,8 @@
       "blocks": true,
       "cover": "half",
       "height": 1,
-      "tags": []
+      "tags": [],
+      "slim": true
     },
     "log": {
       "variants": {
@@ -731,6 +737,7 @@
       "tags": [
         "light"
       ],
+      "slim": true,
       "light": {
         "at": [
           [
@@ -1925,7 +1932,8 @@
       "tags": [
         "swamp",
         "nature"
-      ]
+      ],
+      "slim": true
     },
     "will_o_wisp": {
       "variants": {
