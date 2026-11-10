@@ -1,6 +1,7 @@
 """Tests for check.py against the fixture packs: python3 -m unittest discover tools/tactics-lore"""
 
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,6 +12,17 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class CheckTests(unittest.TestCase):
+    def test_spoken_lore_uses_gold_as_its_only_named_coin(self):
+        lore = check.CONTENT / "lore"
+        currency = re.compile(r"\b(?:crowns?|coppers?|silvers?|electrum|platinum)\b", re.IGNORECASE)
+        for file in json.loads((lore / "pack.json").read_text(encoding="utf-8"))["files"]:
+            if not file.startswith(("scenes/", "conversations/", "barks/")):
+                continue
+            doc = json.loads((lore / file).read_text(encoding="utf-8"))
+            for key, value, pointer in check._walk(doc):
+                if key == "text" and isinstance(value, str):
+                    self.assertIsNone(currency.search(value), f"{file}{pointer}: {value}")
+
     def test_story_gold_matches_the_runtime_int32_contract(self):
         schemas = check.load_schemas()
         for value in (0, 25, -20, 2147483647, -2147483647):

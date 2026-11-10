@@ -30,6 +30,7 @@
           "region": { "$ref": "common.schema.json#/$defs/id" },
           "title": { "$ref": "common.schema.json#/$defs/text" },
           "levels": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "minItems": 2, "description": "[first, last] character level." },
+          "sceneFlags": { "$ref": "common.schema.json#/$defs/flags", "description": "Flags earned only by scene checks; declared here without granting them at beat completion." },
           "summary": { "$ref": "common.schema.json#/$defs/text" },
           "beats": {
             "type": "array",

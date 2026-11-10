@@ -283,7 +283,7 @@
               "id": "ch1_mayor_close_4",
               "speaker": "halden_varrow",
               "mood": "idle",
-              "text": "Come down to the bridge end with me. You should see what we're up against before you tell me anything."
+              "text": "Here are 200 gold as an advance. Come down to the bridge end with me and see what we're up against."
             }
           ],
           "end": true
@@ -397,6 +397,7 @@
         },
         {
           "id": "why_pass",
+          "sets": ["ch1_halden_suspected"],
           "lines": [
             {
               "id": "ch1_ford_why_pass_1",
@@ -539,25 +540,27 @@
         },
         {
           "id": "pay_pass",
+          "gold": 40,
           "lines": [
             {
               "id": "ch1_ford_pay_pass_1",
               "speaker": "halden_varrow",
               "mood": "happy",
-              "text": "Ha. My mother would have liked you. Forty crowns from the town chest, and the Last Coal's best rooms till spring.",
+              "text": "Ha. My mother would have liked you. Forty gold in advance from the town chest. Reopen the ford.",
               "direction": "caught out, then laughing it off"
             },
             {
               "id": "ch1_ford_pay_pass_2",
               "speaker": "bree_tallow",
               "mood": "happy",
-              "text": "My best rooms. He means my only rooms. Still. Done."
+              "text": "He means the town chest, not my till. Still. Done."
             }
           ],
           "next": "vote2"
         },
         {
           "id": "pay_fail",
+          "gold": 20,
           "lines": [
             {
               "id": "ch1_ford_pay_fail_1",
@@ -570,7 +573,7 @@
               "id": "ch1_ford_pay_fail_2",
               "speaker": "dagna_holt",
               "mood": "idle",
-              "text": "Twenty crowns. My own. Now choose."
+              "text": "Twenty gold. My own. Now choose."
             }
           ],
           "next": "vote2"
@@ -833,6 +836,7 @@
         },
         {
           "id": "haggle_pass",
+          "sets": ["ch1_grain_split_delayed"],
           "lines": [
             {
               "id": "ch1_parley_haggle_pass_1",
@@ -864,6 +868,7 @@
         },
         {
           "id": "young_pass",
+          "sets": ["ch1_vorga_warned"],
           "lines": [
             {
               "id": "ch1_parley_young_pass_1",
@@ -1428,6 +1433,7 @@
         },
         {
           "id": "track",
+          "sets": ["ch1_maud_tracks_found"],
           "lines": [
             {
               "id": "ch1_maud_track_1",
@@ -1609,6 +1615,7 @@
         },
         {
           "id": "sums_pass",
+          "sets": ["ch1_halden_ledger_read"],
           "lines": [
             {
               "id": "ch1_granary_sums_pass_1",
@@ -1710,6 +1717,7 @@
         },
         {
           "id": "lend_pass",
+          "sets": ["ch1_celandine_favour"],
           "lines": [
             {
               "id": "ch1_granary_lend_pass_1",
@@ -1943,6 +1951,7 @@
         },
         {
           "id": "crumb",
+          "sets": ["ch1_skarrow_song_clue"],
           "lines": [
             {
               "id": "ch1_song_crumb_1",
