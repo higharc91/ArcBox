@@ -64,6 +64,42 @@ public sealed class StoryCheckTests
     }
 
     [Fact]
+    public void Ford_pay_check_pays_the_promised_gold_once()
+    {
+        var outcomes = new HashSet<bool>();
+        for (var seed = 1; seed <= 20 && outcomes.Count < 2; seed++)
+        {
+            var s = Paying(harnessSeed: seed);
+            var before = s.Game.Document.Members.Values.Sum(member => member.Gold);
+            s.Harness.Advance(StoryTiming.Default.Roller);
+            var passed = Cursor(s)!.Node == "pay_pass";
+            outcomes.Add(passed);
+            s.Harness.Advance(StoryTiming.Default.Reveal);
+            var paid = s.Game.Document.Members.Values.Sum(member => member.Gold) - before;
+            Assert.Equal(passed ? 40 : 20, paid);
+
+            var again = new Session(seed: 99, document: s.Lease.Document, game: new TacticsGame(Rules, lore: Lore));
+            again.Harness.Resume(again.Lease);
+            Assert.Equal(before + paid, again.Game.Document.Members.Values.Sum(member => member.Gold));
+        }
+        Assert.Equal(2, outcomes.Count);
+    }
+
+    [Fact]
+    public void Every_chapter_one_check_win_has_a_reward_or_remembered_flag()
+    {
+        foreach (var scene in Lore.Scenes.Where(scene => scene.Id.StartsWith("ch1_", StringComparison.Ordinal)))
+        {
+            Assert.DoesNotContain(scene.Lines, line => line.Text.Contains("crowns", StringComparison.OrdinalIgnoreCase));
+            foreach (var option in scene.Nodes.SelectMany(node => node.Options).Where(option => option.Check is not null))
+            {
+                var win = scene.Node(option.Check!.Pass)!;
+                Assert.True(win.Gold > 0 || !win.Sets.IsEmpty, $"{scene.Id}/{win.Id} has no lasting check result");
+            }
+        }
+    }
+
+    [Fact]
     public void Check_cards_include_an_away_character()
     {
         var s = Paying(away: 3);

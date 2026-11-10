@@ -4,7 +4,7 @@
     "town": [
       {
         "id": "bark_pip_ashdown_town_1",
-        "text": "I can run that for you! Two coppers. One if you're nice. Three if you're not.",
+        "text": "I can run that for you! One gold if you're nice. Two if you're not.",
         "mood": "happy",
         "direction": "bright and quick",
         "weight": 3,
