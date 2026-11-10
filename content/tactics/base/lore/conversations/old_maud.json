@@ -27,7 +27,7 @@
         {
           "id": "ashmaw_maud_waiting",
           "speaker": "old_maud",
-          "text": "The boy is by my fire. Let his father know. As for that old bear… hunger wakes before a creature does. Go gently, if you can.",
+          "text": "I heard a fisher's boy is missing. I'll keep my fire ready if he finds his way here. As for that old bear... hunger wakes before a creature does. Go gently, if you can.",
           "mood": "sad",
           "direction": "Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation."
         }
@@ -40,7 +40,7 @@
         {
           "id": "ashmaw_maud_after",
           "speaker": "old_maud",
-          "text": "Poor old thing. A hundred winters, and the last was the coldest. No, dearie. Keep the claw. There is nothing else down there to carry home.",
+          "text": "The boy reached my fire, and I sent him home to his father. Poor old bear. A hundred winters, and the last was the coldest. Keep the claw; there is nothing else down there to carry home.",
           "mood": "sad",
           "direction": "Ancient, papery, unhurried; a small grief, without explaining its cause."
         }
