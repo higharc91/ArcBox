@@ -125,7 +125,7 @@ public static class StoryDemo
         Speak("ch1_ford", "The Ford Choice", "ch1_ford_pay_fail_2");
 
         label = "card";
-        Add(Host(nameof(TacticsPhase.Story), "The story goes on", null, marker: null) with { Chapter = "Chapter I · The Bridge at the Ford" }, 6);
+        Add(Host(nameof(TacticsPhase.Story), "The story goes on", null, marker: null) with { Chapter = "Chapter I · The Ashen Ford" }, 6);
         Add(Host(nameof(TacticsPhase.Exploration), "Jess leads the party", null, marker: null), 3);
         return steps.ToImmutable();
     }

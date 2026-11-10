@@ -421,7 +421,7 @@ public abstract class ChapterOne
 
         // The card is up now, for its while, and then the party walks.
         Assert.Equal(TacticsPhase.Story, play.Game.Phase);
-        Assert.Equal("Chapter I · The Bridge at the Ford", play.Host.Chapter);
+        Assert.Equal("Chapter I · The Ashen Ford", play.Host.Chapter);
         Assert.Equal("End of Chapter I", play.Lease.Checkpoints[^1].Label);
         play.Harness.Advance(StoryTiming.Default.Card);
         play.WalksAfter();

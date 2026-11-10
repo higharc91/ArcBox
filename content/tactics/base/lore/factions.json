@@ -8,7 +8,7 @@
       "methods": "A town council led by the mayor, a small guard, and a lot of arguing in the inn. Will pay adventurers in grain, coin and favours.",
       "leader": "halden_varrow",
       "stance": { "church_of_the_hearth": "friendly", "skarrow_clan": "hostile", "the_ash_market": "neutral", "the_kindled": "neutral" },
-      "secret": "The council has known for years that the ember under the ford is fading, and has said nothing so that people would not leave."
+      "secret": "Mayor Halden has known for years that the ember under the ford is fading, and told no one on the council for fear that people would leave."
     },
     {
       "id": "church_of_the_hearth",

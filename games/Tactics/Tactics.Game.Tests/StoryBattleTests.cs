@@ -426,11 +426,11 @@ public sealed class StoryBattleTests
         var s = ToTheCard();
 
         Assert.Equal(TacticsPhase.Story, s.Game.Phase);
-        Assert.Equal("Chapter I · The Bridge at the Ford", s.Host.Chapter);
+        Assert.Equal("Chapter I · The Ashen Ford", s.Host.Chapter);
         Assert.Null(s.Host.Story);
         Assert.Contains(Ember, World(s).Beats);
         Assert.Equal("End of Chapter I", s.Lease.Checkpoints[^1].Label);
-        Assert.Equal("Chapter I · The Bridge at the Ford", Data(s, 0).GetProperty("title").GetString());
+        Assert.Equal("Chapter I · The Ashen Ford", Data(s, 0).GetProperty("title").GetString());
 
         s.Harness.Advance(StoryTiming.Default.Card);
 

@@ -143,6 +143,19 @@ def rules_ids(content: Path) -> dict[str, set[str]] | None:
     return ids
 
 
+def encounter_units(content: Path) -> dict[str, set[str]]:
+    """Units fielded by each rules encounter, including units spawned by a trigger."""
+    manifest = content / "rules" / "manifest.json"
+    if not manifest.is_file():
+        return {}
+    result = {}
+    for file in json.loads(manifest.read_text(encoding="utf-8"))["files"]:
+        if file.startswith("encounters/"):
+            encounter = json.loads((content / "rules" / file).read_text(encoding="utf-8"))
+            result[encounter["id"]] = {value for key, value, _ in _walk(encounter) if key == "unit"}
+    return result
+
+
 def _walk(node, ptr: str = ""):
     """Every (key, value, pointer) in a JSON document, depth first."""
     items = node.items() if isinstance(node, dict) else enumerate(node) if isinstance(node, list) else ()
@@ -296,7 +309,7 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         if not person.get("character") and person["preset"] not in townsfolk:
                             errors.add("townsfolk", "/presets", f"placed preset '{person['preset']}' has no bark set")
     rules = rules_ids(content)
-    _references(defs, barks, art, rules, errors, set(json.loads((content / "portraits/manifest.json").read_text())["presets"]))
+    _references(defs, barks, art, rules, errors, set(json.loads((content / "portraits/manifest.json").read_text())["presets"]), encounter_units(content))
     _side_content(defs, docs, scenes, content, errors)
     _scenes(defs, scenes, rules, errors)
     if defs["arc"]:
@@ -345,7 +358,8 @@ def _define(table: dict, entry: dict, where: str, ptr: str, kind: str, errors: E
         table[id_] = (entry, f"{where}#{ptr}")
 
 
-def _references(defs: dict, barks: list, art: set[str], rules: dict | None, errors: Errors, portraits: set[str] | None = None) -> None:
+def _references(defs: dict, barks: list, art: set[str], rules: dict | None, errors: Errors,
+                portraits: set[str] | None = None, units: dict[str, set[str]] | None = None) -> None:
     def at(location: str) -> tuple[str, str]:
         where, _, ptr = location.partition("#")
         return where, ptr
@@ -359,6 +373,16 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
             errors.add(*at(location + field), f"the art key '{key}' isn't in any art manifest")
 
     subjects = {k for t in ("character", "faction", "region", "place") for k in defs[t]}
+
+    # Region lists are an index of their arcs' battles, not a separate editorial list.
+    by_region: dict[str, set[str]] = {}
+    first_chapter: dict[str, int] = {}
+    for arc, _ in defs["arc"].values():
+        encounters = {beat["encounter"] for beat in arc["beats"] if "encounter" in beat}
+        by_region.setdefault(arc["region"], set()).update(encounters)
+        for encounter in encounters:
+            for unit in (units or {}).get(encounter, set()):
+                first_chapter[unit] = min(first_chapter.get(unit, arc["chapter"]), arc["chapter"])
 
     for id_, (c, loc) in defs["character"].items():
         need_art(f"characters.{c.get('preset', id_)}", loc, "/preset" if "preset" in c else "/id")
@@ -385,6 +409,13 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
         for i, e in enumerate(r.get("encounters", [])):
             if rules is not None and e not in rules["encounters"]:
                 errors.add(*at(loc + f"/encounters/{i}"), f"the rules pack has no encounter '{e}'")
+        if id_ in by_region:
+            missing = by_region[id_] - set(r.get("encounters", []))
+            extra = set(r.get("encounters", [])) - by_region[id_]
+            if missing or extra:
+                errors.add(*at(loc + "/encounters"),
+                           f"encounters differ from arc beats (missing: {', '.join(sorted(missing)) or 'none'}; "
+                           f"extra: {', '.join(sorted(extra)) or 'none'})")
     for id_, (e, loc) in defs["codex"].items():
         if "icon" in e:
             need_art(e["icon"], loc, "/icon")
@@ -394,6 +425,13 @@ def _references(defs: dict, barks: list, art: set[str], rules: dict | None, erro
         if "subject" in e and e["category"] == "bestiary":
             if rules is not None and e["subject"] not in rules["monsters"]:
                 errors.add(*at(loc + "/subject"), f"the rules pack has no monster '{e['subject']}'")
+            # A flag may intentionally reveal a defeated creature afterward; a chapter gate must not hide
+            # a creature through the chapter where the party first meets it.
+            chapter = e.get("unlock", {}).get("chapter", 1)
+            first = first_chapter.get(e["subject"])
+            if first is not None and chapter > first:
+                errors.add(*at(loc + "/unlock/chapter"),
+                           f"bestiary unlocks in chapter {chapter}, after '{e['subject']}' first appears in chapter {first}")
         elif "subject" in e and e["subject"] not in subjects:
             errors.add(*at(loc + "/subject"), f"no character, faction, region or place has the id '{e['subject']}'")
     for id_, (b, loc) in defs["background"].items():

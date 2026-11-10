@@ -1158,9 +1158,6 @@
     "ch1_camp_truth_2": {
       "main": "ch1_camp_truth_2.f40316a9.ogg"
     },
-    "ch1_camp_warmth_1": {
-      "main": "ch1_camp_warmth_1.3e92d833.ogg"
-    },
     "ch1_camp_warmth_2": {
       "main": "ch1_camp_warmth_2.788b7405.ogg"
     },
@@ -3378,9 +3375,6 @@
     "ch5_ritual_lead_plea_3": {
       "main": "ch5_ritual_lead_plea_3.862d6ad3.ogg"
     },
-    "ch5_ritual_lead_wake_1": {
-      "main": "ch5_ritual_lead_wake_1.c8837bae.ogg"
-    },
     "ch5_the_archive_ask_1": {
       "main": "ch5_the_archive_ask_1.23a347c2.ogg"
     },
@@ -3624,12 +3618,6 @@
     "say_ford_assault_3": {
       "main": "say_ford_assault_3.e3ff1147.ogg"
     },
-    "say_hall_of_the_flame_1": {
-      "main": "say_hall_of_the_flame_1.9ed06f98.ogg"
-    },
-    "say_hall_of_the_flame_2": {
-      "main": "say_hall_of_the_flame_2.8a225ca8.ogg"
-    },
     "say_hall_of_the_flame_3": {
       "main": "say_hall_of_the_flame_3.3ce7b06d.ogg"
     },
@@ -3638,9 +3626,6 @@
     },
     "say_hall_of_the_flame_5": {
       "main": "say_hall_of_the_flame_5.f75711dd.ogg"
-    },
-    "say_keep_gate_1": {
-      "main": "say_keep_gate_1.c18de716.ogg"
     },
     "say_keep_gate_2": {
       "main": "say_keep_gate_2.149e91db.ogg"

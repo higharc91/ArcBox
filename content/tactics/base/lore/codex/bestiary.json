@@ -53,12 +53,12 @@
     },
     {
       "id": "bestiary_risen",
-      "title": "The Risen of Frostpeak",
+      "title": "The Restless Dead",
       "category": "bestiary",
       "subject": "zombie",
-      "body": "The dead of the pass, raised by the cold ember: Warden pilgrims, dwarven road-builders and goliaths of the lost holds. They walk the old roads they walked in life, without any memory of who they were. They are not cruel. They are empty.",
+      "body": "The dead walk in the buried Warden crypts of the Sunscar and along the cold roads of Frostpeak Pass: pilgrims, road-builders and people of the lost holds. They follow paths they knew in life, without any memory of who they were. They are not cruel. They are empty.",
       "unlock": {
-        "chapter": 4
+        "chapter": 3
       }
     },
     {
@@ -78,7 +78,7 @@
       "subject": "wraith",
       "body": "What is left when ember-fire burns away every memory a person had. A wraith is cold, hungry, and drawn to the living, because the living still remember.",
       "unlock": {
-        "chapter": 4
+        "chapter": 3
       },
       "related": [
         "codex_ember_cost"
@@ -87,9 +87,8 @@
     {
       "id": "bestiary_elementals",
       "title": "Ember-Born Elementals",
-      "category": "bestiary",
-      "subject": "fire_elemental",
-      "body": "Fragments of the Hearthflame that have woken. Near a burning ember they rise as fire; near water, earth and wind they take those shapes instead, though they always remember being fire. They are not hostile so much as homesick.",
+      "category": "magic",
+      "body": "Some Warden accounts call the shapes seen around the great embers 'elementals': fragments of the Hearthflame stirred by fire, water, earth or wind. No one in the party has yet met one; the records may be mistaking memory for a creature.",
       "unlock": {
         "chapter": 2
       }

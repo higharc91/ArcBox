@@ -112,7 +112,7 @@
       "role": "ally",
       "faction": "emberwick",
       "summary": "The town's scholar, who has noticed that whole years are missing from the records.",
-      "bio": "Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He reads ember-lamps by night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past.",
+      "bio": "Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He has read by ember-lamp at night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past.",
       "wants": "The whole history of the Vale, written down where nothing can burn it.",
       "flaw": "He will trade anyone's safety, including his own, for one more answer.",
       "secret": {
@@ -146,7 +146,7 @@
       "epithet": "Captain of the Ford Watch",
       "role": "ally",
       "faction": "emberwick",
-      "summary": "The captain of Emberwick's eight guards, who lost the bridge and wants it back.",
+      "summary": "The captain of Emberwick's Watch, now down to eight guards after losing the bridge.",
       "bio": "Dagna has commanded Emberwick's guard for twelve years, most of them spent breaking up tavern fights. When the Skarrow clan took the bridge she lost two guards and her nerve, and has not forgiven herself for either. She wants the bridge back by force, and she will be furious if the party makes peace instead, until she isn't.",
       "wants": "To make Emberwick safe, and to stop feeling like she failed it.",
       "flaw": "She wants someone to blame, and goblins are easiest.",
