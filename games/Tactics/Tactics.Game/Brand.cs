@@ -10,5 +10,5 @@ public static class Brand
     public const string Name = "Wardenflame";
 
     /// <summary>One line under the title on the lobby card.</summary>
-    public const string Tagline = "Co-op tactics to keep the last fire burning, week after week";
+    public const string Tagline = "Co-op tactics to carry the Vale's last embers and decide their fate, week after week";
 }
