@@ -197,7 +197,7 @@
       ],
       "name": "fish barrel",
       "text": [
-        "Salt and the last of the summer's eels. The river's too warm for them now, the fishers say."
+        "Salt and the last of the summer's eels. The shallows beside the ember are still too warm for them, though nets downstream come up cold."
       ]
     },
     {
@@ -209,7 +209,7 @@
       ],
       "name": "tally scrap",
       "text": [
-        "First night: two shards, small. Second night: none, the water's too hot. Third night: one, and Gus burned his hand.",
+        "First night: two shards, small. Second night: none, the water over the ember's seam is too hot. Third night: one, and Gus burned his hand.",
         "Tell the lady the price goes up."
       ],
       "scene": "sq_grain_tally"

@@ -7,7 +7,7 @@
   "objectives": { "win": "defeat:halvard" },
   "triggers": [
     { "id": "halvard_challenge", "when": { "round": 1 },
-      "do": [ { "say": { "speaker": "halvard", "line": "I hold this gate for the Keeper. Turn back, or I will hold it against you." } },
+      "do": [ { "say": { "speaker": "halvard", "line": "I had hoped you would turn back. I cannot yield the gate." } },
               { "cameraHint": "gate" } ] },
     { "id": "halvard_wardens", "when": { "round": 3 },
       "do": [ { "say": { "speaker": "halvard", "line": "Wardens, to your posts. Forgive me, friends. The oath does not let me fight you alone." } },

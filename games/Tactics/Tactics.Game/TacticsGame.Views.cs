@@ -452,7 +452,7 @@ public sealed record StoryCheckView(string Skill, int? Dc, string Title, Immutab
 /// </param>
 /// <param name="Explore">The party in the world, in every phase; null for a pack with no region.</param>
 /// <param name="Story">The scene under way, in the Story phase; null otherwise.</param>
-/// <param name="Chapter">The chapter that has just ended, while its card shows ("Chapter I · The Bridge at the Ford"); null otherwise.</param>
+/// <param name="Chapter">The chapter that has just ended, while its card shows ("Chapter I · The Ashen Ford"); null otherwise.</param>
 /// <param name="ResultNote">At Results after a loss, what the loss did to the party (<see cref="TacticsGame.LossNote"/>); null otherwise.</param>
 public sealed record TacticsHostView(string Phase, string Banner, string? Notice, int PartyLevel,
     ImmutableArray<string> Mustered, ImmutableArray<EncounterOption>? Encounters, BattleView? Battle,

@@ -4,7 +4,7 @@
       "id": "arc_ashen_ford",
       "chapter": 1,
       "region": "ashen_ford",
-      "title": "The Bridge at the Ford",
+      "title": "The Ashen Ford",
       "levels": [1, 2],
       "summary": "The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling.",
       "beats": [
@@ -184,7 +184,7 @@
       "id": "arc_frostpeak",
       "chapter": 4,
       "region": "frostpeak",
-      "title": "The Cold Ember",
+      "title": "Frostpeak Pass",
       "levels": [7, 8],
       "summary": "In the frozen pass the dead walk without their memories. The party finds the necromancer studying the cold ember, and Pip remembers the night of the Fall.",
       "beats": [

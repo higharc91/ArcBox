@@ -2,7 +2,7 @@ namespace Tactics.Presentation.Story;
 
 /// <summary>
 /// The card at the end of a chapter (overworld 5d default 13), worded from <see cref="Tactics.Game.TacticsHostView.Chapter"/>
-/// ("Chapter I · The Bridge at the Ford"), for the TV to draw full screen over the world while it shows.
+/// ("Chapter I · The Ashen Ford"), for the TV to draw full screen over the world while it shows.
 /// </summary>
 /// <param name="Kicker">The small line over it: "The end of".</param>
 /// <param name="Chapter">"Chapter I".</param>

@@ -9,7 +9,7 @@
       "history": "On the night of the Fall an ember plunged into the river at the only ford on the road east. The water boiled for a year and the ground for a mile around burned grey. When the fires died the soil stayed warm, and settlers built Emberwick on it. For a century the town has grown its winter food in warm fields the rest of the Vale envies. The ember under the ford is fading now, the fields are cooling, and the Skarrow goblins have taken the bridge.",
       "mood": "Golden-hour autumn turning cold. Woodsmoke, wet ash, a town that is pretending to be fine. Music: warm folk instruments with something uneasy underneath.",
       "factions": ["emberwick", "church_of_the_hearth", "skarrow_clan", "the_ash_market"],
-      "encounters": ["river_crossing"],
+      "encounters": ["ford_assault", "river_crossing"],
       "places": [
         { "id": "emberwick_town", "name": "Emberwick", "kind": "town", "summary": "The party's home: a market square with a chapel, an inn and a general store, on ground that is warm underfoot." },
         { "id": "the_last_coal", "name": "The Last Coal", "kind": "town", "summary": "Emberwick's inn, where the council argues and adventurers are hired. The hearth is the warmest in town and Bree Tallow intends to keep it that way." },
@@ -61,7 +61,7 @@
       "history": "The fourth ember fell high in Frostpeak Pass among the goliath holds and the dwarven roads, and thirty years later it went cold. The cold ember froze the pass solid and began to raise the dead: Warden pilgrims, dwarven road-builders and goliaths of the lost holds, walking without their memories. A necromancer named Ivo Rime has come to study it. In the frozen caves the party meets someone who remembers the night of the Fall.",
       "mood": "Pale dawn on snow, total silence, breath in the air. Grief more than horror. Music: solo voice, bowed metal, long reverbs.",
       "factions": ["the_last_watch", "the_kindled"],
-      "encounters": ["crystal_cave"],
+      "encounters": ["crystal_cave", "rime_tower"],
       "places": [
         { "id": "pilgrim_road", "name": "The Pilgrim Road", "kind": "mountain", "summary": "The old Warden road up through the pass, lined with frozen shrines." },
         { "id": "greyhold", "name": "Greyhold", "kind": "ruins", "summary": "A dwarven road-hold, frozen and empty, where the dwarves' records of the Hearth Age are kept." },
@@ -71,14 +71,14 @@
     },
     {
       "id": "ember_keep",
-      "name": "The Ember Keep",
+      "name": "Ember Keep",
       "chapter": 5,
       "card": "chapters.ember_keep",
       "summary": "The heart of the Hearthflame never left. Something has been feeding it, and it burns red.",
       "history": "Ember Keep was the Wardens' fortress and the hall of the Hearthflame for three hundred years. Since the Fall it has been held by the Last Watch, Oswin Hale and Ser Halvard, against all comers. The heart of the flame still burns in the great hall, and the red dragon that came for its heat sleeps coiled around it. The Kindled have been feeding the heart in secret, and it has turned infernal. Here the party learns the whole truth and makes the final choice.",
       "mood": "Infernal red light in a ruined fortress, ash falling like snow, the heat of a sleeping dragon. Music: full and grave, the folk theme of the Ashen Ford returning in a minor key.",
       "factions": ["the_last_watch", "the_kindled"],
-      "encounters": [],
+      "encounters": ["keep_gate", "hall_of_the_flame"],
       "places": [
         { "id": "keep_gate", "name": "The Broken Gate", "kind": "castle", "summary": "Ember Keep's outer gate, held by Ser Halvard alone." },
         { "id": "warden_archive", "name": "The Warden Archive", "kind": "tower", "summary": "Oswin Hale's library: three centuries of records, the only complete history of the Vale." },

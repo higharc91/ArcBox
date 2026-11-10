@@ -72,7 +72,7 @@ public sealed class StoryDemoTests
     {
         var card = ChapterCard.Of(Demo.Value.Single(s => s.Label == "card").View.Chapter)!;
 
-        Assert.Equal(new ChapterCard("The end of", "Chapter I", "The Bridge at the Ford"), card);
+        Assert.Equal(new ChapterCard("The end of", "Chapter I", "The Ashen Ford"), card);
         Assert.Null(ChapterCard.Of(null));
         Assert.Equal(new ChapterCard("The end of", "Chapter II", ""), ChapterCard.Of("Chapter II"));
     }

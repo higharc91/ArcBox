@@ -239,5 +239,5 @@ that plays it (sub-project 5), so voice, translation and review can start now.
 3. **Sub-project 5's runtime for dialogue.** The scene format exists (§7, Scenes). What's left is the runtime that
    plays scenes, the quest journal, and the "Previously on…" recap. They belong to sub-project 5.
 4. **Port the checker into `Tactics.Logic` validation** once the game loads lore.
-5. **A Chapter V encounter** for `ch5_the_ritual` (the Hall of the Flame with the red dragon), and encounters for the
-   remaining story battles as chapters are built.
+5. **Chapter V encounter completed.** `ch5_the_ritual` now uses `hall_of_the_flame`, including the dragon's
+   mid-fight arrival. Keep the arc and region encounter lists in sync when new battles are added.

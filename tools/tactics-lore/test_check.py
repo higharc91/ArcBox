@@ -1,6 +1,7 @@
 """Tests for check.py against the fixture packs: python3 -m unittest discover tools/tactics-lore"""
 
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,6 +12,38 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class CheckTests(unittest.TestCase):
+    @staticmethod
+    def _mutable_base_lore(root: Path) -> Path:
+        source = check.CONTENT / "lore"
+        target = root / "lore"
+        target.mkdir()
+        shutil.copy2(source / "pack.json", target / "pack.json")
+        for file in json.loads((source / "pack.json").read_text(encoding="utf-8"))["files"]:
+            (target / file).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source / file, target / file)
+        return target
+
+    def test_region_encounters_must_match_arc_beats(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lore = self._mutable_base_lore(Path(tmp))
+            path = lore / "regions.json"
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            doc["regions"][0]["encounters"].remove("ford_assault")
+            path.write_text(json.dumps(doc), encoding="utf-8")
+            errors = check.check([lore])
+        self.assertTrue(any("missing: ford_assault" in error for error in errors), errors)
+
+    def test_bestiary_must_unlock_by_its_first_encounter_chapter(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            lore = self._mutable_base_lore(Path(tmp))
+            path = lore / "codex" / "bestiary.json"
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            wraith = next(entry for entry in doc["entries"] if entry.get("subject") == "wraith")
+            wraith["unlock"]["chapter"] = 4
+            path.write_text(json.dumps(doc), encoding="utf-8")
+            errors = check.check([lore])
+        self.assertTrue(any("after 'wraith' first appears in chapter 3" in error for error in errors), errors)
+
     def test_story_gold_matches_the_runtime_int32_contract(self):
         schemas = check.load_schemas()
         for value in (0, 25, -20, 2147483647, -2147483647):
@@ -57,7 +90,8 @@ class CheckTests(unittest.TestCase):
         """A content folder with the real art sets and a one-of-each rules pack."""
         content = Path(tmp)
         for art_set in ("chapters", "characters", "icons", "portraits"):
-            (content / art_set).symlink_to(check.CONTENT / art_set)
+            (content / art_set).mkdir()
+            shutil.copy2(check.CONTENT / art_set / "manifest.json", content / art_set / "manifest.json")
         rules = content / "rules"
         for folder in ("monsters", "encounters"):
             (rules / folder).mkdir(parents=True)

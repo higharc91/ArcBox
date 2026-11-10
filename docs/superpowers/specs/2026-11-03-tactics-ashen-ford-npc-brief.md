@@ -6,7 +6,7 @@ Generated from the lore files on this branch: `content/tactics/base/lore/charact
 
 ## Chapter 1 in brief
 
-**The Bridge at the Ford** (levels [1, 2]). The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling.
+**The Ashen Ford** (levels [1, 2]). The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling.
 
 | Beat | Kind | Summary |
 |---|---|---|
@@ -93,7 +93,7 @@ Each is placed in the region as a person with this preset. Only one person has e
 - **Preset:** `sage`. **Stands at:** (36, 58).
 - **Role:** ally. **Faction:** emberwick.
 - **Summary:** The town's scholar, who has noticed that whole years are missing from the records.
-- **Bio:** Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He reads ember-lamps by night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past.
+- **Bio:** Corvin keeps Emberwick's small archive and has spent his life reconstructing the history of the Vale from fragments. He has read by ember-lamp at night for thirty years, and he has gaps in his own memory he cannot explain. He is the first to suspect the ember-fire takes something, and he is the party's guide to the Vale's past.
 - **Wants:** The whole history of the Vale, written down where nothing can burn it.
 - **Flaw:** He will trade anyone's safety, including his own, for one more answer.
 - **Secret (writer only):** Corvin's notebooks hold a page in his own handwriting about the cost of ember-fire. He doesn't remember writing it. Revealed in the main story by: flag `ch2_corvin_page`.
@@ -106,7 +106,7 @@ Each is placed in the region as a person with this preset. Only one person has e
 
 - **Preset:** `guard_captain`. **Stands at:** (45, 64).
 - **Role:** ally. **Faction:** emberwick.
-- **Summary:** The captain of Emberwick's eight guards, who lost the bridge and wants it back.
+- **Summary:** The captain of Emberwick's Watch, now down to eight guards after losing the bridge.
 - **Bio:** Dagna has commanded Emberwick's guard for twelve years, most of them spent breaking up tavern fights. When the Skarrow clan took the bridge she lost two guards and her nerve, and has not forgiven herself for either. She wants the bridge back by force, and she will be furious if the party makes peace instead, until she isn't.
 - **Wants:** To make Emberwick safe, and to stop feeling like she failed it.
 - **Flaw:** She wants someone to blame, and goblins are easiest.
@@ -144,7 +144,7 @@ Each is placed in the region as a person with this preset. Only one person has e
 
 ### Old Maud, Who Saw the Ember Fall (`old_maud`)
 
-- **Preset:** `hermit`. **Stands at:** (130, 90).
+- **Lore preset:** `old_maud`. **Placed world preset:** `hermit`, variant `old_maud`. **Stands at:** (130, 90).
 - **Role:** npc. **Faction:** none.
 - **Summary:** A hermit on the burned bank who was there the night the ember fell, a hundred years ago.
 - **Bio:** Maud was a child of seven on the night of the Fall and watched the ember drop into the river. She is now more than a hundred years old and has never used ember-fire, and so she remembers that night better than anyone alive. The town thinks she is mad. She has been waiting for someone to ask her the right question.
@@ -183,9 +183,9 @@ Each is placed in the region as a person with this preset. Only one person has e
 
 ### Mother Skarrow, Chief of the Skarrow Clan (`mother_skarrow`)
 
-- **Where the story leaves her:** she **dies on the bridge** in the force ending (`ch1_skarrow_slain`): give her person `unless: ["ch1_skarrow_slain"]`. After the parley (`ch1_skarrow_spared`) she stays at her camp in the hills. She is the only `goblin_shaman` placed, so that person is her.
+- **Where the story leaves her:** she **dies on the bridge** in the force ending (`ch1_skarrow_slain`): give her person `unless: ["ch1_skarrow_slain"]`. After the parley (`ch1_skarrow_spared`) she stays at her camp in the hills. Her world person uses the generic `goblin_shaman` base with the `mother_skarrow` variant.
 
-- **Preset:** `goblin_shaman`. **Stands at:** (134, 24).
+- **Lore preset:** `mother_skarrow`. **Placed world preset:** `goblin_shaman`, variant `mother_skarrow`. **Stands at:** (134, 24).
 - **Role:** npc. **Faction:** skarrow_clan.
 - **Summary:** The goblin chief who holds the bridge at the ford, because her clan is starving.
 - **Bio:** Mother Skarrow has led her clan for forty winters and is the oldest goblin in the hills. She took the bridge because Emberwick locked its granaries, and she will give it back for food, not coin. Her clan never used ember-fire, so its songs remember the Vale before the Hearthflame and the seven who crossed the Greywall. Whether the party talks to her or kills her is the first choice of the campaign, and it is remembered.
