@@ -16,7 +16,7 @@
               "speaker": "narrator",
               "text": "Bread at the granary gate at noon. Lost: one red hen. The lower ford is closed by order of the Watch.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "options": [
@@ -41,16 +41,16 @@
             {
               "id": "ashmaw_bounty_1",
               "speaker": "narrator",
-              "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher’s boy is missing. Bring proof of the beast’s death to the Ford Watch.",
+              "text": "BY ORDER OF CAPTAIN DAGNA HOLT. A great grey bear hunts the Southfield pens. A fisher's boy is missing. Bring proof of the beast's death to the Ford Watch.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             },
             {
               "id": "ashmaw_bounty_2",
               "speaker": "narrator",
               "text": "Sixty gold, and a fitted Watch gift for each companion. Speak to the captain before entering the Cinder Hollow.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true,
@@ -66,7 +66,7 @@
               "speaker": "narrator",
               "text": "The pins have rusted into the old notices.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true
@@ -89,7 +89,7 @@
               "speaker": "narrator",
               "text": "The passage narrows. Wet wings stir overhead; something thick moves beneath the dripping stone.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true
@@ -137,7 +137,7 @@
               "speaker": "narrator",
               "text": "The last pick marks disappear beneath silk. Warm air carries the clicking of many feet.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true
@@ -147,7 +147,7 @@
     },
     {
       "id": "ashmaw_lair",
-      "title": "Ashmaw’s Bed",
+      "title": "Ashmaw's Bed",
       "cast": [
         "narrator"
       ],
@@ -161,7 +161,7 @@
               "speaker": "narrator",
               "text": "A grey bulk rises from the ash. Its eyes hold the last light of a banked fire. There is hunger in them, and cold.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true
@@ -183,9 +183,9 @@
             {
               "id": "ashmaw_death",
               "speaker": "narrator",
-              "text": "Ashmaw lowers its head. The coal in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+              "text": "Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true
@@ -196,7 +196,7 @@
     },
     {
       "id": "ashmaw_satchel",
-      "title": "The Boy’s Satchel",
+      "title": "The Boy's Satchel",
       "cast": [
         "narrator"
       ],
@@ -208,9 +208,9 @@
             {
               "id": "ashmaw_satchel",
               "speaker": "narrator",
-              "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I’ll wait by your fire. Please tell Da.”",
+              "text": "A small satchel, torn but empty. Inside, charcoal on folded paper: “Maud, I got out. I'll wait by your fire. Please tell Da.”",
               "mood": "idle",
-              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave’s silence linger."
+              "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
             }
           ],
           "end": true

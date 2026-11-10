@@ -4,7 +4,7 @@
     "battle_start": [
       {
         "id": "bark_grisk_battle_start_1",
-        "text": "Bear’s awake! Dig or die!",
+        "text": "Bear's awake! Dig or die!",
         "mood": "angry",
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
       }
@@ -28,7 +28,7 @@
     "low_hp": [
       {
         "id": "bark_grisk_low_hp_1",
-        "text": "The market pays! I’ll split it!",
+        "text": "The market pays! I'll split it!",
         "mood": "sad",
         "direction": "High nasal kobold rasp, quick and greedy; fear catches under each order."
       }

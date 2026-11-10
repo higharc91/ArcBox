@@ -12,6 +12,30 @@ public sealed class HollowBountyTests
     private static readonly string[] Accepted = ["ch1_ford_settled", "sq_ashmaw_posted", "sq_ashmaw_accepted"];
 
     [Fact]
+    public void The_boys_safety_is_revealed_in_the_cave_before_the_turn_in()
+    {
+        var dagna = At("dagna_holt", "ch1_ford_settled", "sq_ashmaw_posted");
+        Talk(dagna, "dagna_holt");
+        Assert.Contains("missing", dagna.Host.Story!.Line!.Text, StringComparison.OrdinalIgnoreCase);
+
+        var maud = At("old_maud", Accepted);
+        Talk(maud, "old_maud");
+        Assert.Contains("missing", maud.Host.Story!.Line!.Text, StringComparison.OrdinalIgnoreCase);
+
+        var note = Book.Value.Scene("ashmaw_satchel")!.Nodes.Single().Lines.Single().Text;
+        Assert.Contains("I got out", note);
+        Assert.Contains("Please tell Da", note);
+
+        var after = At("old_maud", [.. Accepted, "sq_ashmaw_slain"]);
+        Talk(after, "old_maud");
+        Assert.Contains("home to his father", after.Host.Story!.Line!.Text);
+        var done = At("dagna_holt", [.. Accepted, "sq_ashmaw_done"]);
+        Talk(done, "dagna_holt");
+        Assert.Contains("home with his father", done.Host.Story!.Line!.Text);
+        Assert.Contains("home to his father", Book.Value.Quests.Single(q => q.Id == "sq_ashmaw").Done.Log);
+    }
+
+    [Fact]
     public void Dagna_requires_the_posted_bounty_and_accepts_it_without_touching_main_flags()
     {
         var s = At("dagna_holt", "ch1_ford_settled", "sq_ashmaw_posted");

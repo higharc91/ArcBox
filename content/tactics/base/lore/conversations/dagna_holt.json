@@ -56,7 +56,7 @@
         {
           "id": "ashmaw_offer",
           "speaker": "dagna_holt",
-          "text": "Now a grey bear takes goats from the pens. The boy got out; Maud has him by her fire. The cave mouth is below her hut on the burned bank. Will you put an end to this?",
+          "text": "A grey bear is taking goats from the pens, and a fisher's boy is missing. The cave mouth is below Maud's hut on the burned bank. Will you search for him and put an end to the bear?",
           "mood": "idle",
           "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
         }
@@ -111,7 +111,7 @@
         {
           "id": "ashmaw_progress",
           "speaker": "dagna_holt",
-          "text": "Below Maud’s hut. Follow the miners’ track. Come back with the claw, and with every soul you take in.",
+          "text": "Below Maud's hut. Follow the miners' track. Come back with the claw, and with every soul you take in.",
           "mood": "idle",
           "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
         }
@@ -178,7 +178,7 @@
         {
           "id": "ashmaw_done",
           "speaker": "dagna_holt",
-          "text": "The pens are quiet. The boy is home. That is enough good news for one day.",
+          "text": "The pens are quiet, and the boy is home with his father. That is enough good news for one day.",
           "mood": "idle",
           "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
         }

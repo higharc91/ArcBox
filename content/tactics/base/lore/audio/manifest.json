@@ -181,61 +181,46 @@
       "main": "ashmaw_accepted.7b2094b8.ogg"
     },
     "ashmaw_bounty_1": {
-      "main": "ashmaw_bounty_1.3cfd0e65.ogg"
+      "main": "ashmaw_bounty_1.7fd88119.ogg"
     },
     "ashmaw_bounty_2": {
-      "main": "ashmaw_bounty_2.37ac95a8.ogg"
+      "main": "ashmaw_bounty_2.fab0aaae.ogg"
     },
     "ashmaw_busy": {
       "main": "ashmaw_busy.9e9a9aeb.ogg"
     },
-    "ashmaw_death": {
-      "main": "ashmaw_death.df68b839.ogg"
-    },
     "ashmaw_diggings_open": {
       "main": "ashmaw_diggings_open.65724d3b.ogg"
     },
-    "ashmaw_done": {
-      "main": "ashmaw_done.fa47da21.ogg"
-    },
     "ashmaw_lair_open": {
-      "main": "ashmaw_lair_open.4840edf3.ogg"
+      "main": "ashmaw_lair_open.1b0e7f47.ogg"
     },
     "ashmaw_later": {
       "main": "ashmaw_later.be53c235.ogg"
     },
     "ashmaw_leave": {
-      "main": "ashmaw_leave.d9d0647e.ogg"
-    },
-    "ashmaw_maud_after": {
-      "main": "ashmaw_maud_after.4189c88e.ogg"
-    },
-    "ashmaw_maud_waiting": {
-      "main": "ashmaw_maud_waiting.2a9e0989.ogg"
+      "main": "ashmaw_leave.3ad22d7f.ogg"
     },
     "ashmaw_nest_open": {
-      "main": "ashmaw_nest_open.4175425b.ogg"
+      "main": "ashmaw_nest_open.1bb03c72.ogg"
     },
     "ashmaw_notices": {
-      "main": "ashmaw_notices.2616717b.ogg"
-    },
-    "ashmaw_offer": {
-      "main": "ashmaw_offer.0061d72d.ogg"
+      "main": "ashmaw_notices.c185352b.ogg"
     },
     "ashmaw_presented": {
       "main": "ashmaw_presented.167e3765.ogg"
     },
     "ashmaw_progress": {
-      "main": "ashmaw_progress.800a02aa.ogg"
+      "main": "ashmaw_progress.64de913a.ogg"
     },
     "ashmaw_proof": {
       "main": "ashmaw_proof.53b3925b.ogg"
     },
     "ashmaw_satchel": {
-      "main": "ashmaw_satchel.aad805b1.ogg"
+      "main": "ashmaw_satchel.9c46e748.ogg"
     },
     "ashmaw_throat_open": {
-      "main": "ashmaw_throat_open.ee49d2bb.ogg"
+      "main": "ashmaw_throat_open.d68de977.ogg"
     },
     "ashmaw_wait": {
       "main": "ashmaw_wait.b9b16c30.ogg"
@@ -400,7 +385,7 @@
       "main": "bark_grisk_ally_down_1.37f6eed4.ogg"
     },
     "bark_grisk_battle_start_1": {
-      "main": "bark_grisk_battle_start_1.a718e473.ogg"
+      "main": "bark_grisk_battle_start_1.c13528dd.ogg"
     },
     "bark_grisk_candle_1": {
       "main": "bark_grisk_candle_1.f31d8679.ogg"
@@ -412,7 +397,7 @@
       "main": "bark_grisk_hit_1.5a031862.ogg"
     },
     "bark_grisk_low_hp_1": {
-      "main": "bark_grisk_low_hp_1.4c78d900.ogg"
+      "main": "bark_grisk_low_hp_1.32f8f2dc.ogg"
     },
     "bark_grisk_turn_start_1": {
       "main": "bark_grisk_turn_start_1.e04277eb.ogg"
