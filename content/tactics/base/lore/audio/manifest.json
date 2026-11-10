@@ -894,9 +894,6 @@
     "bark_pip_ashdown_camp_5": {
       "main": "bark_pip_ashdown_camp_5.6d263bac.ogg"
     },
-    "bark_pip_ashdown_town_1": {
-      "main": "bark_pip_ashdown_town_1.397e121f.ogg"
-    },
     "bark_pip_ashdown_town_2": {
       "main": "bark_pip_ashdown_town_2.d7b45627.ogg"
     },
@@ -1278,14 +1275,8 @@
     "ch1_ford_pay_fail_1": {
       "main": "ch1_ford_pay_fail_1.b880a0c1.ogg"
     },
-    "ch1_ford_pay_fail_2": {
-      "main": "ch1_ford_pay_fail_2.6ca21a20.ogg"
-    },
     "ch1_ford_pay_pass_1": {
-      "main": "ch1_ford_pay_pass_1.7ad9feb7.ogg"
-    },
-    "ch1_ford_pay_pass_2": {
-      "main": "ch1_ford_pay_pass_2.8f12827f.ogg"
+      "main": "ch1_ford_pay_pass_1.73d69836.ogg"
     },
     "ch1_ford_truth_1": {
       "main": "ch1_ford_truth_1.60a6b2de.ogg"
@@ -1543,7 +1534,7 @@
       "main": "ch1_mayor_close_3.a49692f1.ogg"
     },
     "ch1_mayor_close_4": {
-      "main": "ch1_mayor_close_4.7cdbfd11.ogg"
+      "main": "ch1_mayor_close_4.634425e4.ogg"
     },
     "ch1_mayor_goblins_1": {
       "main": "ch1_mayor_goblins_1.6abdd4d0.ogg"

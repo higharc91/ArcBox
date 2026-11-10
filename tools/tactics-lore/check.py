@@ -572,6 +572,8 @@ def _scenes(defs: dict, scenes: list, rules: dict | None, errors: Errors) -> Non
     that beat's choices, speakers and tags exist, and every flag it sets is one arcs.json (or an encounter) already
     sets, so dialogue can't invent a flag nothing else knows about."""
     arc_flags = set(rules["flags"]) if rules else set()
+    for arc, _ in defs["arc"].values():
+        arc_flags.update(arc.get("sceneFlags", []))
     for table in ("beat", "ending"):
         for entry, _ in defs[table].values():
             arc_flags.update(entry.get("sets", []))

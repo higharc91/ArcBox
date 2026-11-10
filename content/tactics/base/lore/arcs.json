@@ -6,6 +6,7 @@
       "region": "ashen_ford",
       "title": "The Ashen Ford",
       "levels": [1, 2],
+      "sceneFlags": ["ch1_halden_suspected", "ch1_grain_split_delayed", "ch1_vorga_warned", "ch1_maud_tracks_found", "ch1_halden_ledger_read", "ch1_celandine_favour", "ch1_skarrow_song_clue"],
       "summary": "The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling.",
       "beats": [
         {

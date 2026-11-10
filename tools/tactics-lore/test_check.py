@@ -1,6 +1,7 @@
 """Tests for check.py against the fixture packs: python3 -m unittest discover tools/tactics-lore"""
 
 import json
+import re
 import shutil
 import tempfile
 import unittest
@@ -43,6 +44,17 @@ class CheckTests(unittest.TestCase):
             path.write_text(json.dumps(doc), encoding="utf-8")
             errors = check.check([lore])
         self.assertTrue(any("after 'wraith' first appears in chapter 3" in error for error in errors), errors)
+
+    def test_spoken_lore_uses_gold_as_its_only_named_coin(self):
+        lore = check.CONTENT / "lore"
+        currency = re.compile(r"\b(?:crowns?|coppers?|silvers?|electrum|platinum)\b", re.IGNORECASE)
+        for file in json.loads((lore / "pack.json").read_text(encoding="utf-8"))["files"]:
+            if not file.startswith(("scenes/", "conversations/", "barks/")):
+                continue
+            doc = json.loads((lore / file).read_text(encoding="utf-8"))
+            for key, value, pointer in check._walk(doc):
+                if key == "text" and isinstance(value, str):
+                    self.assertIsNone(currency.search(value), f"{file}{pointer}: {value}")
 
     def test_story_gold_matches_the_runtime_int32_contract(self):
         schemas = check.load_schemas()

@@ -104,7 +104,16 @@
       "preset": "Gacrux",
       "pitch": 0,
       "note": "Owner-approved mature veteran captain: low, flat Northern delivery, grounded and lightly weathered. Shares grim.high preset; authored direction distinguishes her.",
-      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue."
+      "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+      "approvedRenderText": {
+        "ch1_ford_pay_fail_2": {
+          "preset": "Gacrux",
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "text": "Twenty gold. My own. Now choose.",
+          "lineDelivery": null,
+          "renderText": "Twenty gold. My own. Now choose."
+        }
+      }
     },
     "pip_ashdown": {
       "preset": "Leda",
