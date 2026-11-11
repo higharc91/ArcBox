@@ -207,8 +207,12 @@ public partial class Main : Control
                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
                     global::Tactics.Presentation.Beats.OakAmbushDemo.Steps(pack)));
             else if (board.StartsWith("encounter:", StringComparison.Ordinal))
+            {
+                var encounter = board["encounter:".Length..].Split(':', 2);
+                int? size = encounter.Length == 2 ? int.Parse(encounter[1], System.Globalization.CultureInfo.InvariantCulture) : null;
                 OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(
-                    global::Tactics.Presentation.Board.DemoBattle.Encounter(board["encounter:".Length..], pack), ArcJson.Options)));
+                    global::Tactics.Presentation.Board.DemoBattle.Encounter(encounter[0], pack, partySize: size), ArcJson.Options)));
+            }
             else
                 OnHostView(new HostViewEvent("tactics", JsonSerializer.SerializeToElement(global::Tactics.Presentation.Board.DemoBattle.View(board), ArcJson.Options)));
             return;

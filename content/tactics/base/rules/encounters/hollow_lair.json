@@ -17,18 +17,18 @@
       "hpByParty": {
         "1": 32,
         "2": 60,
-        "3": 90,
+        "3": 180,
         "4": 240,
-        "5": 320,
-        "6": 400
+        "5": 280,
+        "6": 320
       },
       "unitByParty": {
         "1": "ashmaw",
         "2": "ashmaw",
-        "3": "ashmaw",
+        "3": "ashmaw_size3",
         "4": "ashmaw_party",
-        "5": "ashmaw_party",
-        "6": "ashmaw_party"
+        "5": "ashmaw_size5",
+        "6": "ashmaw_size6"
       }
     }
   ],

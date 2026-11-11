@@ -1,0 +1,21 @@
+{
+  "status": "requires-user-decision-not-implemented",
+  "lineIds": [
+    "ashmaw_death",
+    "ashmaw_done",
+    "ashmaw_maud_after",
+    "ashmaw_maud_waiting",
+    "ashmaw_offer",
+    "bark_pip_ashdown_town_1",
+    "ch1_camp_warmth_1",
+    "ch1_ford_pay_fail_2",
+    "ch1_ford_pay_pass_2",
+    "ch5_ritual_lead_wake_1",
+    "say_hall_of_the_flame_1",
+    "say_hall_of_the_flame_2",
+    "say_keep_gate_1"
+  ],
+  "proposal": "Explicit caption-only exceptions for these 13 lines; preserve timed captions and mandatory matching recordings for every other authored line. Reject stale exceptions and do not restore mismatched old audio.",
+  "alternative": "Retain all-lines-voiced contract and wait for correct recordings.",
+  "reasonDecisionRequired": "The owner requires all groups passing, no skipped or weakened tests, preserved existing voices, and no paid generation."
+}

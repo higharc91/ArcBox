@@ -1,0 +1,36 @@
+# #140: larger-party encounter balance
+
+Seven roaming mobs and all four Hollow chambers have authored size-five/six profiles. Ashmaw gets an intermediate three-player profile; the existing four-player profile is unchanged. The original solo/duo bear remains. Size-six boars and slimes use three smaller enemies to supply action pressure rather than relying entirely on extra HP. No classes, XP, rewards, geometry, art, existing voices or audio change.
+
+The paired small-party guard replays 483 roaming fights and 207 non-boss Hollow fights at sizes one through four: **all 690 battles are identical**, including outcome, rounds and complete measurements. The requested three-player bear adjustment is outside that guard; separate content/AI tests cover its stable identity and attack/phase behavior. Four-player Ashmaw keeps its original 240 HP, AC 14 and Maul profile.
+
+The original diagnostic sweep covers 5,280 battles (all eleven encounters, levels one/two, sizes five/six). Another 240 establish Ashmaw's three/four baseline. The acceptance audit rejects that baseline with 23 failures. These are complete measurements, not selected successful seeds.
+
+Acceptance bands: level-one mobs 85–95% wins and 4–8 mean rounds; intended-level-two Hollow chambers at sizes five/six use the existing report's 60–95% and 8–12 bands. Ashmaw's level-two adjacent-size win-rate difference must be at most 20 percentage points from three through six. Its existing four-player challenge remains a control; sizes three/four are not retuned to the chamber length band.
+
+The final acceptance matrix passes **all 24 required cells**, with **600 battles per cell**: 14,400 acceptance battles plus 3,600 additional smaller-party Hollow diagnostics. [Acceptance table](acceptance.md), [unrounded measurements](acceptance.json). Ashmaw's size-three/four/five/six win rates are **80.7%, 71.5%, 81.7%, 88.2%**; the largest adjacent difference is **10.17 percentage points**. Mobs win 87.5–94.7% with 6.25–7.82 mean rounds. All size-five/six Hollow cells meet 60–95% and 8–12 rounds.
+
+The 100-seed validation exposed three misses after initial tuning: five-player slime length, five-player bat wins and six-player Diggings wins. Those profiles were corrected and rerun completely. Their new 1–100 results replace the rejected cells; all 27 unchanged encounter/map/enemy cells (including six diagnostic cells) are verified against source commit `8d716ae5` by [the reuse proof](sample-reuse-proof.json) and its [reproduction script](verify-sample-reuse.py). Raw derived subsets state exactly which source rows they retain. Rejected complete source exports remain under `raw/final-mobs.json.gz` and `raw/final-hollow.json.gz`; they are not presented as the final acceptance matrix.
+
+Seeds 21–100 are [reported separately](later-seeds.md) and all 24 cells pass, but this subset is **not an untouched holdout for the three corrected profiles**, whose validation misses informed the corrections. Those three also pass **720 untouched-seed battles (101–140)** after their final changes: [fresh validation](fresh-corrections.json). The repeated corrected-mob seeds 1–100 match their earlier corrected export exactly. Fixed-party Diggings exports use precisely the six compositions from the original Hollow size-six schedule. Unique final validation: **18,720 battles** including diagnostics and fresh corrected-profile seeds; derived subsets do not count as extra simulations.
+
+Mobs use `--sizes 5,6`; Hollow uses `--sizes 3,4,5,6` so all four boss sizes share a published schedule. The sampler advances across sizes, so compositions for a size can differ between these configurations; paired comparisons use matched schedules only. The existing four-player Ashmaw profile remains an explicit control, including its longer 13.16-round mean; the issue's adjacent-size win-rate guard passes without changing that owner's profile.
+
+Focused verification: 15 Hollow/phase cases, nine mob content cases, 28 preview cases, eight art-manifest checks, ten Python simulation-audit cases, 14 exact catalogue checks and 137 sound-bank checks, no skips, zero build warnings. The acceptance audit checks every required cell, complete seeds/parties, duplicates, exact unrounded win rates, mean rounds and the adjacent-size guard. Missing or failing cells fail the command.
+
+The native review helper now accepts `--tactics-demo=encounter:<id>:<size>`, using real encounter setup. All existing sprite and animation paths are reused. Native review also exposed an existing card layout defect: zero-width automatic wrapping cached a minimum height that pushed the words off-screen. Cards now measure lines at their actual width and update only when the displayed unit changes. Long unspaced names break by Unicode rune. Four fixed native Godot 1920×1080 viewports were visually reviewed: [six-player boars](native-boars-six.png), [six-player slimes](native-slimes-six.png), [three-player Ashmaw](native-ashmaw-three.png), [six-player Ashmaw](native-ashmaw-six.png). All card fields remain on-screen; [the baseline defect](card-before.png) is retained for comparison. Actual Chromium [deuteranopia](deuteranopia.png) and [protanopia](protanopia.png) simulations were also visually reviewed. Four real Chromium phone fixture/viewport audits (turn/status at 320×844 and 390×844, reduced motion) have zero size, target, contrast or overflow failures. No human usability or physical-TV testing is claimed. The corrected full gate on source `4aaecc1c` completes **7,745/7,752 .NET tests** with only seven strict voice failures, zero skips and zero build warnings. All 601 phone tests plus production build, 24 Node tests, 106 Python tests (61 assets, nine audio, ten simulator audits, 26 lore), lore validation and documentation checks pass. [Totals](full-check-summary.json) · [Complete compressed log](full-check.txt.gz). Merges remain blocked by main's 13 missing recordings; strict voice tests remain unchanged.
+
+Sound metadata preserves the parent profiles: the new bandit gang remains explicitly documented as silent, while the new boar sounder keeps the existing borrowed bear family. No audio recordings are added, removed or altered. The catalogue regression still checks an exact inventory, including all twenty new size profiles.
+
+Reproduce the acceptance audit from the retained exports (the full files explicitly include rejected control cells, so use their proven unchanged subsets):
+
+```sh
+python3 tools/tactics-sim/balance_audit.py \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/final-mobs-unchanged.json.gz \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/corrected-fresh.json.gz \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/final-hollow-unchanged.json.gz \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/diggings-correction.json.gz \
+  --seed-max 100 --out /tmp/party-size-acceptance.json
+```
+
+The sole merge blocker is the [complete thirteen-line recording inventory](missing-recordings.json). The [caption-only proposal](caption-only-proposal.json) is not implemented and requires the owner's product-contract decision. No paid generation, mismatched restored recordings, skipped tests, or weakened voice coverage are used.

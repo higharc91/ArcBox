@@ -97,6 +97,8 @@
     "mobs/ashen_ford.json",
     "mobs/cinder_hollow.json",
     "monsters/roamers.json",
-    "loot.json"
+    "loot.json",
+    "monsters/party-size.json",
+    "abilities/party-size.json"
   ]
 }

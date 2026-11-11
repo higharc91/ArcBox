@@ -26,8 +26,8 @@
         "2": 12,
         "3": 24,
         "4": 34,
-        "5": 42,
-        "6": 51
+        "5": 46,
+        "6": 54
       },
       "unitByParty": {
         "1": "kobold_roamer_lone",
@@ -35,7 +35,7 @@
         "3": "kobold_roamer",
         "4": "kobold_roamer_patrol",
         "5": "kobold_roamer_patrol",
-        "6": "kobold_roamer_patrol"
+        "6": "kobold_roamer_patrol_size6"
       }
     },
     {
@@ -56,8 +56,8 @@
         "2": 15,
         "3": 26,
         "4": 34,
-        "5": 42,
-        "6": 51
+        "5": 46,
+        "6": 54
       },
       "unitByParty": {
         "1": "kobold_roamer_slinger_lone",
@@ -65,7 +65,7 @@
         "3": "kobold_roamer_slinger",
         "4": "kobold_roamer_slinger_patrol",
         "5": "kobold_roamer_slinger_patrol",
-        "6": "kobold_roamer_slinger_patrol"
+        "6": "kobold_roamer_slinger_patrol_size6"
       }
     }
   ],

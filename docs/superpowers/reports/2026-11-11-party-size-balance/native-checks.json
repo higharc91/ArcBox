@@ -1,0 +1,49 @@
+{
+  "engine": "Godot 4.7.2 mono",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "renderer": "gl_compatibility",
+  "audioDriver": "Dummy",
+  "method": "Native viewport screenshots through --shots after drawn frames; X11 root captures were discarded.",
+  "visualReview": "Assistant inspection of four fixed native frames and two actual Chromium vision-deficiency simulations.",
+  "physicalTvTest": false,
+  "humanUsabilityTest": false,
+  "records": [
+    {
+      "fixture": "boars6",
+      "errors": 0,
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.",
+        "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+        "WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+      ]
+    },
+    {
+      "fixture": "mob_river_slimes-6",
+      "errors": 0,
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.",
+        "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer."
+      ]
+    },
+    {
+      "fixture": "hollow_lair-3",
+      "errors": 0,
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.",
+        "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.",
+        "WARNING: 12 ObjectDB instances were leaked at exit (run with `--verbose` for details)."
+      ]
+    },
+    {
+      "fixture": "hollow_lair-6",
+      "errors": 0,
+      "warnings": [
+        "WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.",
+        "WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer."
+      ]
+    }
+  ]
+}

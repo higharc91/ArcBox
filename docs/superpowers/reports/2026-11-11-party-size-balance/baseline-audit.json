@@ -1,0 +1,224 @@
+{
+  "seedMin": 1,
+  "seedMax": 20,
+  "rows": [
+    {
+      "encounter": "hollow_diggings",
+      "level": 2,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.9583333333333334,
+      "meanRounds": 6.041666666666667
+    },
+    {
+      "encounter": "hollow_diggings",
+      "level": 2,
+      "size": 6,
+      "battles": 120,
+      "winRate": 0.9916666666666667,
+      "meanRounds": 6.408333333333333
+    },
+    {
+      "encounter": "hollow_lair",
+      "level": 2,
+      "size": 3,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 4.558333333333334
+    },
+    {
+      "encounter": "hollow_lair",
+      "level": 2,
+      "size": 4,
+      "battles": 120,
+      "winRate": 0.6666666666666666,
+      "meanRounds": 12.791666666666666
+    },
+    {
+      "encounter": "hollow_lair",
+      "level": 2,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.85,
+      "meanRounds": 12.35
+    },
+    {
+      "encounter": "hollow_lair",
+      "level": 2,
+      "size": 6,
+      "battles": 120,
+      "winRate": 0.8333333333333334,
+      "meanRounds": 15.116666666666667
+    },
+    {
+      "encounter": "hollow_nest",
+      "level": 2,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.9666666666666667,
+      "meanRounds": 3.475
+    },
+    {
+      "encounter": "hollow_nest",
+      "level": 2,
+      "size": 6,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 3.316666666666667
+    },
+    {
+      "encounter": "hollow_throat",
+      "level": 2,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.975,
+      "meanRounds": 6.716666666666667
+    },
+    {
+      "encounter": "hollow_throat",
+      "level": 2,
+      "size": 6,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 6.75
+    },
+    {
+      "encounter": "mob_hollow_bats",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.9416666666666667,
+      "meanRounds": 6.85
+    },
+    {
+      "encounter": "mob_hollow_bats",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 7.075
+    },
+    {
+      "encounter": "mob_hollow_kobolds",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 5.583333333333333
+    },
+    {
+      "encounter": "mob_hollow_kobolds",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 6.125
+    },
+    {
+      "encounter": "mob_kobold_scouts",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.9333333333333333,
+      "meanRounds": 5.733333333333333
+    },
+    {
+      "encounter": "mob_kobold_scouts",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 5.266666666666667
+    },
+    {
+      "encounter": "mob_pine_wolves",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.95,
+      "meanRounds": 6.858333333333333
+    },
+    {
+      "encounter": "mob_pine_wolves",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 0.9333333333333333,
+      "meanRounds": 7.925
+    },
+    {
+      "encounter": "mob_river_slimes",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 6.466666666666667
+    },
+    {
+      "encounter": "mob_river_slimes",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 1.0,
+      "meanRounds": 5.841666666666667
+    },
+    {
+      "encounter": "mob_road_bandits",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.9,
+      "meanRounds": 6.883333333333334
+    },
+    {
+      "encounter": "mob_road_bandits",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 0.9916666666666667,
+      "meanRounds": 7.166666666666667
+    },
+    {
+      "encounter": "mob_rooting_boars",
+      "level": 1,
+      "size": 5,
+      "battles": 120,
+      "winRate": 0.8833333333333333,
+      "meanRounds": 6.916666666666667
+    },
+    {
+      "encounter": "mob_rooting_boars",
+      "level": 1,
+      "size": 6,
+      "battles": 120,
+      "winRate": 0.9916666666666667,
+      "meanRounds": 6.625
+    }
+  ],
+  "failures": [
+    "Win rate outside 60%\u201395%: ('hollow_diggings', 2, 5): 0.958333",
+    "Mean rounds outside 8\u201312: ('hollow_diggings', 2, 5): 6.041667",
+    "Win rate outside 60%\u201395%: ('hollow_diggings', 2, 6): 0.991667",
+    "Mean rounds outside 8\u201312: ('hollow_diggings', 2, 6): 6.408333",
+    "Mean rounds outside 8\u201312: ('hollow_lair', 2, 5): 12.350000",
+    "Mean rounds outside 8\u201312: ('hollow_lair', 2, 6): 15.116667",
+    "Win rate outside 60%\u201395%: ('hollow_nest', 2, 5): 0.966667",
+    "Mean rounds outside 8\u201312: ('hollow_nest', 2, 5): 3.475000",
+    "Win rate outside 60%\u201395%: ('hollow_nest', 2, 6): 1.000000",
+    "Mean rounds outside 8\u201312: ('hollow_nest', 2, 6): 3.316667",
+    "Win rate outside 60%\u201395%: ('hollow_throat', 2, 5): 0.975000",
+    "Mean rounds outside 8\u201312: ('hollow_throat', 2, 5): 6.716667",
+    "Win rate outside 60%\u201395%: ('hollow_throat', 2, 6): 1.000000",
+    "Mean rounds outside 8\u201312: ('hollow_throat', 2, 6): 6.750000",
+    "Win rate outside 85%\u201395%: ('mob_hollow_bats', 1, 6): 1.000000",
+    "Win rate outside 85%\u201395%: ('mob_hollow_kobolds', 1, 5): 1.000000",
+    "Win rate outside 85%\u201395%: ('mob_hollow_kobolds', 1, 6): 1.000000",
+    "Win rate outside 85%\u201395%: ('mob_kobold_scouts', 1, 6): 1.000000",
+    "Win rate outside 85%\u201395%: ('mob_river_slimes', 1, 5): 1.000000",
+    "Win rate outside 85%\u201395%: ('mob_river_slimes', 1, 6): 1.000000",
+    "Win rate outside 85%\u201395%: ('mob_road_bandits', 1, 6): 0.991667",
+    "Win rate outside 85%\u201395%: ('mob_rooting_boars', 1, 6): 0.991667",
+    "Ashmaw adjacent win-rate cliff: 3\u21924"
+  ],
+  "passed": false
+}

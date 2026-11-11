@@ -27,8 +27,16 @@
         "2": 20,
         "3": 24,
         "4": 26,
-        "5": 28,
-        "6": 30
+        "5": 88,
+        "6": 95
+      },
+      "unitByParty": {
+        "1": "giant_spider",
+        "2": "giant_spider",
+        "3": "giant_spider",
+        "4": "giant_spider",
+        "5": "giant_spider_size5",
+        "6": "giant_spider"
       }
     }
   ],

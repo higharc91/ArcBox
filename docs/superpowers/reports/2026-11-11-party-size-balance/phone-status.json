@@ -1,0 +1,103 @@
+{
+  "fixtures": 1,
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "results": [
+    {
+      "width": 320,
+      "file": "status.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 320,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 88,
+      "sampledLabels": [
+        "ANA",
+        "Player1",
+        "Fighter",
+        "12",
+        "/",
+        "Now acting",
+        "Player3",
+        "You're up in",
+        "9",
+        "turns",
+        "Round",
+        "1",
+        "Defeat every enemy",
+        "Party status",
+        "(you)",
+        "Player2",
+        "10",
+        "Player4",
+        "8",
+        "Recent events",
+        "Round 1 began.",
+        "Reactions",
+        "Abilities",
+        "Sheet",
+        "Bag",
+        "Hit points",
+        "Conditions",
+        "None"
+      ],
+      "scrollStates": 2
+    },
+    {
+      "width": 390,
+      "file": "status.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 390,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 86,
+      "sampledLabels": [
+        "ANA",
+        "Player1",
+        "Fighter",
+        "12",
+        "/",
+        "Now acting",
+        "Player3",
+        "You're up in",
+        "9",
+        "turns",
+        "Round",
+        "1",
+        "Defeat every enemy",
+        "Party status",
+        "(you)",
+        "Player2",
+        "10",
+        "Player4",
+        "8",
+        "Recent events",
+        "Round 1 began.",
+        "Reactions",
+        "Abilities",
+        "Sheet",
+        "Bag",
+        "Hit points",
+        "Conditions",
+        "None"
+      ],
+      "scrollStates": 2
+    }
+  ]
+}

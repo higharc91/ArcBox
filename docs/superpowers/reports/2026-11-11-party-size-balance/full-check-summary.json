@@ -1,0 +1,40 @@
+{
+  "sourceCodeHead": "4aaecc1cc022c566c0ac29a5d801a123c4fa5994",
+  "command": "bash tools/check-all.sh --full",
+  "mainCommit": "cf156c468557266db94ede7ee388f2f5cff41469",
+  "buildWarnings": 0,
+  "dotnet": {
+    "total": 7752,
+    "passed": 7745,
+    "failed": 7,
+    "skipped": 0
+  },
+  "phone": {
+    "passed": 601,
+    "productionBuild": "PASS"
+  },
+  "node": {
+    "passed": 24
+  },
+  "python": {
+    "assets": 61,
+    "audio": 9,
+    "simulationAudit": 10,
+    "lore": 26,
+    "total": 106
+  },
+  "otherChecks": {
+    "loreValidation": "PASS",
+    "documentationDrift": "PASS"
+  },
+  "failures": [
+    "failed Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip (341ms)",
+    "failed Tactics.Logic.Tests.BaseSceneTests.Every_line_has_a_clip_length (1s 450ms)",
+    "failed Tactics.Presentation.Tests.Audio.VoiceClipsTests.Every_say_line_in_the_pack_has_a_clip_on_disk (6ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryTrackTests.Every_line_of_every_chapter_finds_its_clip (29ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryTrackTests.Every_chapter_1_line_finds_its_clip (7ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch (8ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryDemoTests.The_demo_says_each_line_once_from_the_walk_up (157ms)"
+  ],
+  "blocker": "13 changed main lines lack recordings. Strict voice coverage remains mandatory; no feature merge."
+}

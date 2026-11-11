@@ -168,7 +168,10 @@
     "troll.frenzy_roar": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "water_elemental.tidal_crush": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "water_elemental.undertow": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
-    "wraith.life_drain": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists."
+    "wraith.life_drain": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
+    "ashmaw.maul_size3": "Party-size Ashmaw Maul retains the existing generic monster-action icon and beasts.attack animation.",
+    "ashmaw.maul_size5": "Party-size Ashmaw Maul retains the existing generic monster-action icon and beasts.attack animation.",
+    "ashmaw.maul_size6": "Party-size Ashmaw Maul retains the existing generic monster-action icon and beasts.attack animation."
   },
   "conditionIconFallbacks": {
     "aura_of_protection": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
