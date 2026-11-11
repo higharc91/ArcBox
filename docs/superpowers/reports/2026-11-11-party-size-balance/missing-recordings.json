@@ -1,0 +1,73 @@
+{
+  "mainCommit": "cf156c468557266db94ede7ee388f2f5cff41469",
+  "missingCount": 13,
+  "lines": {
+    "ashmaw_death": {
+      "source": "content/tactics/base/lore/scenes/ashmaw.json",
+      "speaker": "narrator",
+      "text": "Ashmaw lowers its head. The ford's fallen ember sliver gutters in the wall, then crumbles to grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "currentMainText": "Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone."
+    },
+    "ch1_camp_warmth_1": {
+      "source": "content/tactics/base/lore/scenes/camp.json",
+      "speaker": "narrator",
+      "text": "The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently."
+    },
+    "ch1_ford_pay_pass_2": {
+      "source": "content/tactics/base/lore/scenes/ch1.json",
+      "speaker": "bree_tallow",
+      "text": "He means the town chest, not my till. Still. Done."
+    },
+    "ch1_ford_pay_fail_2": {
+      "source": "content/tactics/base/lore/scenes/ch1.json",
+      "speaker": "dagna_holt",
+      "text": "Twenty gold. My own. Now choose."
+    },
+    "ch5_ritual_lead_wake_1": {
+      "source": "content/tactics/base/lore/scenes/ch5.json",
+      "speaker": "narrator",
+      "text": "Around the flame, the dragon lies coiled with its eyes shut. Firelight moves beneath its scales, but it has not yet woken."
+    },
+    "ashmaw_maud_waiting": {
+      "source": "content/tactics/base/lore/conversations/old_maud.json",
+      "speaker": "old_maud",
+      "text": "I heard a fisher's boy is missing. I'll keep my fire ready if he finds his way here. As for that old bear... hunger wakes before a creature does. Go gently, if you can."
+    },
+    "ashmaw_maud_after": {
+      "source": "content/tactics/base/lore/conversations/old_maud.json",
+      "speaker": "old_maud",
+      "text": "The boy reached my fire, and I sent him home to his father. Poor old bear. A hundred winters, and the last was the coldest. Keep the claw; there is nothing else down there to carry home."
+    },
+    "ashmaw_offer": {
+      "source": "content/tactics/base/lore/conversations/dagna_holt.json",
+      "speaker": "dagna_holt",
+      "text": "A grey bear is taking goats from the pens, and a fisher's boy is missing. The cave mouth is below Maud's hut on the burned bank. Will you search for him and put an end to the bear?"
+    },
+    "ashmaw_done": {
+      "source": "content/tactics/base/lore/conversations/dagna_holt.json",
+      "speaker": "dagna_holt",
+      "text": "The pens are quiet, and the boy is home with his father. That is enough good news for one day."
+    },
+    "bark_pip_ashdown_town_1": {
+      "source": "content/tactics/base/lore/barks/pip_ashdown.json",
+      "speaker": null,
+      "text": "I can run that for you! One gold if you're nice. Two if you're not."
+    },
+    "say_keep_gate_1": {
+      "source": "content/tactics/base/rules/encounters/keep_gate.json",
+      "speaker": "halvard",
+      "text": "I had hoped you would turn back. I cannot yield the gate."
+    },
+    "say_hall_of_the_flame_1": {
+      "source": "content/tactics/base/rules/encounters/hall_of_the_flame.json",
+      "speaker": "maren_sorrel",
+      "text": "The circle is open. Bring your embers here and help me finish it!"
+    },
+    "say_hall_of_the_flame_2": {
+      "source": "content/tactics/base/rules/encounters/hall_of_the_flame.json",
+      "speaker": "maren_sorrel",
+      "text": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!"
+    }
+  },
+  "note": "text is the proposed branch wording; ashmaw_death also includes current main wording because PR #301 fits it to the unchanged caption limit."
+}
