@@ -1,0 +1,14 @@
+{
+  "mob_rooting_boars": {
+    "materialTilesChanged": 15,
+    "heightFlagsPropsZonesIdentical": true
+  },
+  "mob_river_slimes": {
+    "materialTilesChanged": 19,
+    "heightFlagsPropsZonesIdentical": true
+  },
+  "crystal_cave": {
+    "materialTilesChanged": 6,
+    "heightFlagsPropsZonesIdentical": true
+  }
+}

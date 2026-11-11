@@ -1,0 +1,3 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+
+PLACEMENT CHECK PASS: Ashen Ford original bytes preserved; moved interactable, shopkeeper and mob patch exported; second export byte-identical; native scene save/load preserved positions. 51 people.

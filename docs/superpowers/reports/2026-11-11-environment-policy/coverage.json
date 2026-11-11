@@ -1,0 +1,401 @@
+{
+  "configurations": [
+    {
+      "Encounters": [
+        "ford_assault",
+        "mob_pine_wolves",
+        "mob_river_slimes",
+        "mob_road_bandits",
+        "mob_rooting_boars",
+        "river_crossing"
+      ],
+      "Levels": [
+        1
+      ],
+      "PartiesPerSize": 6,
+      "PartySizes": [
+        4,
+        5,
+        6
+      ],
+      "Seeds": 20,
+      "Difficulty": "Normal",
+      "RoundCap": 30,
+      "Trinkets": null,
+      "Companions": 0,
+      "Subclasses": null,
+      "Race": null,
+      "WithClass": null,
+      "Weapons": null,
+      "Policy": null,
+      "RotateFormation": false,
+      "AbilityIncreases": true,
+      "FixedParty": [],
+      "Races": null
+    },
+    {
+      "Encounters": [
+        "hollow_diggings"
+      ],
+      "Levels": [
+        2
+      ],
+      "PartiesPerSize": 6,
+      "PartySizes": [
+        4,
+        5,
+        6
+      ],
+      "Seeds": 20,
+      "Difficulty": "Normal",
+      "RoundCap": 30,
+      "Trinkets": null,
+      "Companions": 0,
+      "Subclasses": null,
+      "Race": null,
+      "WithClass": null,
+      "Weapons": null,
+      "Policy": null,
+      "RotateFormation": false,
+      "AbilityIncreases": true,
+      "FixedParty": [],
+      "Races": null
+    },
+    {
+      "Encounters": [
+        "warlord_bridge"
+      ],
+      "Levels": [
+        5
+      ],
+      "PartiesPerSize": 6,
+      "PartySizes": [
+        4,
+        5,
+        6
+      ],
+      "Seeds": 20,
+      "Difficulty": "Normal",
+      "RoundCap": 30,
+      "Trinkets": null,
+      "Companions": 0,
+      "Subclasses": null,
+      "Race": null,
+      "WithClass": null,
+      "Weapons": null,
+      "Policy": null,
+      "RotateFormation": false,
+      "AbilityIncreases": true,
+      "FixedParty": [],
+      "Races": null
+    },
+    {
+      "Encounters": [
+        "crystal_cave",
+        "rime_tower"
+      ],
+      "Levels": [
+        7
+      ],
+      "PartiesPerSize": 6,
+      "PartySizes": [
+        4,
+        5,
+        6
+      ],
+      "Seeds": 20,
+      "Difficulty": "Normal",
+      "RoundCap": 30,
+      "Trinkets": null,
+      "Companions": 0,
+      "Subclasses": null,
+      "Race": null,
+      "WithClass": null,
+      "Weapons": null,
+      "Policy": null,
+      "RotateFormation": false,
+      "AbilityIncreases": true,
+      "FixedParty": [],
+      "Races": null
+    }
+  ],
+  "rows": [
+    {
+      "encounter": "crypt_hall",
+      "map": "crypt_hall",
+      "level": 5,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "crystal_cave",
+      "map": "crystal_cave",
+      "level": 7,
+      "fuel": 18,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 6.775,
+      "winRate": 0.9361111111111111,
+      "meanRounds": 9.727777777777778,
+      "capped": 0,
+      "rejected": 2,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "ford_assault",
+      "map": "river_crossing",
+      "level": 1,
+      "fuel": 84,
+      "shallows": 4,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 9.094444444444445,
+      "winRate": 0.6583333333333333,
+      "meanRounds": 10.694444444444445,
+      "capped": 12,
+      "rejected": 2,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "forest_ruins",
+      "map": "forest_ruins",
+      "level": 3,
+      "fuel": 9,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "The nine-tile decorative dry patch is outside the fighting lanes: the exploratory sweep produced 0.375 reactions per battle. Keep this sparse map off rather than silently presenting an unproductive opt-in.",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "hall_of_the_flame",
+      "map": "hall_of_the_flame",
+      "level": 10,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "hollow_diggings",
+      "map": "hollow_diggings",
+      "level": 2,
+      "fuel": 40,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 9.458333333333334,
+      "winRate": 0.8916666666666667,
+      "meanRounds": 7.1,
+      "capped": 4,
+      "rejected": 0,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "hollow_lair",
+      "map": "hollow_lair",
+      "level": 2,
+      "fuel": 4,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "Four decorative boards do not form a useful reaction area in this stone boss chamber (0.431 reactions per exploratory battle). The boss's fire attacks and existing phase hazards remain unchanged.",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "hollow_nest",
+      "map": "hollow_nest",
+      "level": 2,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "The stone chamber has no native fuel or water. Its existing web hazard still restrains; incidental web burning produced only 0.097 reactions per exploratory battle, so terrain reactions are not enabled here.",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "hollow_throat",
+      "map": "hollow_throat",
+      "level": 2,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "keep_gate",
+      "map": "keep_gate",
+      "level": 9,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "mob_hollow_bats",
+      "map": "mob_hollow_bats",
+      "level": 1,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "mob_hollow_kobolds",
+      "map": "mob_hollow_kobolds",
+      "level": 1,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "mob_kobold_scouts",
+      "map": "mob_kobold_scouts",
+      "level": 1,
+      "fuel": 0,
+      "shallows": 0,
+      "enabled": false,
+      "reason": "No substantial native fuel or shallow water",
+      "battles": 0,
+      "reactionsPerBattle": null
+    },
+    {
+      "encounter": "mob_pine_wolves",
+      "map": "mob_pine_wolves",
+      "level": 1,
+      "fuel": 105,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 2.3,
+      "winRate": 0.9416666666666667,
+      "meanRounds": 6.713888888888889,
+      "capped": 0,
+      "rejected": 17,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "mob_river_slimes",
+      "map": "mob_river_slimes",
+      "level": 1,
+      "fuel": 19,
+      "shallows": 30,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 1.8305555555555555,
+      "winRate": 0.9611111111111111,
+      "meanRounds": 6.455555555555556,
+      "capped": 0,
+      "rejected": 16,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "mob_road_bandits",
+      "map": "mob_road_bandits",
+      "level": 1,
+      "fuel": 120,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 3.5555555555555554,
+      "winRate": 0.8944444444444445,
+      "meanRounds": 7.055555555555555,
+      "capped": 0,
+      "rejected": 8,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "mob_rooting_boars",
+      "map": "mob_rooting_boars",
+      "level": 1,
+      "fuel": 51,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 2.55,
+      "winRate": 0.8916666666666667,
+      "meanRounds": 6.813888888888889,
+      "capped": 0,
+      "rejected": 21,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "rime_tower",
+      "map": "crystal_cave",
+      "level": 7,
+      "fuel": 18,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 1.6722222222222223,
+      "winRate": 0.9583333333333334,
+      "meanRounds": 9.275,
+      "capped": 0,
+      "rejected": 0,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "river_crossing",
+      "map": "river_crossing",
+      "level": 1,
+      "fuel": 84,
+      "shallows": 4,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 2.0972222222222223,
+      "winRate": 0.8583333333333333,
+      "meanRounds": 11.202777777777778,
+      "capped": 11,
+      "rejected": 0,
+      "forcedEnds": 0
+    },
+    {
+      "encounter": "warlord_bridge",
+      "map": "warlord_bridge",
+      "level": 5,
+      "fuel": 8,
+      "shallows": 0,
+      "enabled": true,
+      "reason": "Measured reactive combat terrain",
+      "battles": 360,
+      "reactionsPerBattle": 1.5055555555555555,
+      "winRate": 0.9833333333333333,
+      "meanRounds": 11.21111111111111,
+      "capped": 0,
+      "rejected": 6,
+      "forcedEnds": 0
+    }
+  ],
+  "lava": {
+    "decision": "Lava is deep terrain, not an ambient fire surface: it blocks walking, and forced entry uses the existing deep-fall rule (Downed for party members, death for enemies). It neither adds periodic fire damage nor ignites neighbouring fuel.",
+    "rationale": "Keep a single deterministic fall/ledge contract rather than silently adding a second damage model to the finale. Hazard remains an authoring tag; Deep is the mechanical flag. Any later change to the finale in #141 must explicitly replace this recorded contract."
+  },
+  "totalBattles": 3600,
+  "failures": [],
+  "passed": true
+}

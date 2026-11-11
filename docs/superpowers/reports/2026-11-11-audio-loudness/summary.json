@@ -1,0 +1,118 @@
+{
+  "implementation": "91c16b1a",
+  "files": 321,
+  "sfxFiles": 305,
+  "failures": [],
+  "groups": [
+    {
+      "kind": "music",
+      "group": "music",
+      "count": 12,
+      "target": -20.0,
+      "minLevel": -20.6,
+      "maxLevel": -19.9,
+      "maxTruePeak": -5.5,
+      "rmsFallback": 0
+    },
+    {
+      "kind": "music",
+      "group": "sting",
+      "count": 4,
+      "target": -19.0,
+      "minLevel": -19.1,
+      "maxLevel": -18.9,
+      "maxTruePeak": -5.9,
+      "rmsFallback": 0
+    },
+    {
+      "kind": "sfx",
+      "group": "ambience",
+      "count": 16,
+      "target": -24.0,
+      "minLevel": -24.8,
+      "maxLevel": -21.5,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 0
+    },
+    {
+      "kind": "sfx",
+      "group": "battle",
+      "count": 32,
+      "target": -18.0,
+      "minLevel": -20.3,
+      "maxLevel": -16.830418,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 4
+    },
+    {
+      "kind": "sfx",
+      "group": "creature",
+      "count": 62,
+      "target": -18.0,
+      "minLevel": -20.8,
+      "maxLevel": -16.3,
+      "maxTruePeak": -1.1,
+      "rmsFallback": 1
+    },
+    {
+      "kind": "sfx",
+      "group": "footstep",
+      "count": 36,
+      "target": -18.0,
+      "minLevel": -20.931458,
+      "maxLevel": -17.2,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 5
+    },
+    {
+      "kind": "sfx",
+      "group": "impact",
+      "count": 26,
+      "target": -18.0,
+      "minLevel": -21.0,
+      "maxLevel": -16.6,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 3
+    },
+    {
+      "kind": "sfx",
+      "group": "spell",
+      "count": 32,
+      "target": -18.0,
+      "minLevel": -20.9,
+      "maxLevel": -17.0,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 0
+    },
+    {
+      "kind": "sfx",
+      "group": "ui",
+      "count": 24,
+      "target": -21.0,
+      "minLevel": -23.9,
+      "maxLevel": -20.1,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 11
+    },
+    {
+      "kind": "sfx",
+      "group": "weapon",
+      "count": 43,
+      "target": -18.0,
+      "minLevel": -20.949338,
+      "maxLevel": -16.168362,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 29
+    },
+    {
+      "kind": "sfx",
+      "group": "world",
+      "count": 34,
+      "target": -18.0,
+      "minLevel": -20.5,
+      "maxLevel": -16.2,
+      "maxTruePeak": -1.0,
+      "rmsFallback": 2
+    }
+  ]
+}

@@ -19,7 +19,8 @@ public sealed class EnvironmentContentTests
         Assert.Null(rules.Environment.Surfaces["scorched"].Rounds);
         Assert.True(rules.Encounters["river_crossing"].Environment);
         Assert.True(rules.Encounters["ford_assault"].Environment);
-        string[] enabled = ["crystal_cave", "ford_assault", "forest_ruins", "hollow_lair", "hollow_nest", "river_crossing", "warlord_bridge"];
+        string[] enabled = ["crystal_cave", "ford_assault", "hollow_diggings", "mob_pine_wolves", "mob_river_slimes",
+            "mob_road_bandits", "mob_rooting_boars", "rime_tower", "river_crossing", "warlord_bridge"];
         Assert.Equal(enabled, rules.Encounters.Where(e => e.Value.Environment).Select(e => e.Key));
     }
 

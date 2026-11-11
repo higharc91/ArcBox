@@ -18,7 +18,7 @@ public sealed class HollowEncounterTests
             Assert.Equal(size + setup.Units.Count(u => u.Sheet.Side == Side.Enemy), setup.Units.Select(u => u.At).Distinct().Count());
             var state = Battle.Start(setup, Rules, 74).State;
             Assert.Null(state.Outcome);
-            Assert.Equal(name is "nest" or "lair", state.Environment);
+            Assert.Equal(name == "diggings", state.Environment);
             if (name == "lair")
             {
                 var boss = Assert.Single(setup.Units, u => u.Sheet.Side == Side.Enemy);

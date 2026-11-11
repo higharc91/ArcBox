@@ -164,9 +164,20 @@ public sealed class BaseSceneTests
     [Fact]
     public void Scenes_set_only_flags_the_arcs_set()
     {
-        var arcs = Book.Arcs.SelectMany(a => a.Beats).SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))).ToHashSet();
+        var arcs = Book.Arcs.SelectMany(a => a.Beats.SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets)))
+            .Concat(a.SceneFlags.IsDefault ? [] : a.SceneFlags)).ToHashSet();
         var invented = Book.Scenes.Where(s => !s.Camp && s.Beat is not null).SelectMany(s => s.Nodes.SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets)))).Where(f => !arcs.Contains(f)).Distinct();
         Assert.Empty(invented);
+    }
+
+    [Fact]
+    public void Scene_flags_are_loaded_as_declarations_without_becoming_automatic_beat_rewards()
+    {
+        var arc = Assert.Single(Book.Arcs, a => a.Chapter == 1 && !a.SideAdventure);
+        Assert.Contains("ch1_halden_suspected", arc.SceneFlags);
+        Assert.Contains("ch1_skarrow_song_clue", arc.SceneFlags);
+        var emitted = arc.Beats.SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))).ToHashSet();
+        Assert.All(arc.SceneFlags, flag => Assert.DoesNotContain(flag, emitted));
     }
 
     /// <summary>

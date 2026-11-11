@@ -40,11 +40,11 @@ public sealed class EnvironmentEncounterTests
     }
 
     [Fact]
-    public void Forest_ruins_enables_only_the_small_dry_patch_as_grass_fuel()
+    public void Forest_ruins_retains_its_decorative_dry_patch_with_reactions_explicitly_off()
     {
         var rules = BasePackTests.Rules;
         var state = Battle.Start(Encounters.Setup("forest_ruins", BasePackTests.Party(4, rules), Difficulty.Normal, rules), rules, 7).State;
-        Assert.True(state.Environment);
+        Assert.False(state.Environment);
         var map = rules.MapFor("forest_ruins")!;
         var dry = from y in Enumerable.Range(0, map.Height) from x in Enumerable.Range(0, map.Width)
                   let tile = new Tile(x, y) where map.Materials[map[tile].Material] == "grass/dry" select tile;

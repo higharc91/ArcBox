@@ -1,0 +1,23 @@
+{
+  "exceptions": {
+    "forest_ruins": {
+      "fuel": 9,
+      "shallows": 0,
+      "reason": "The nine-tile decorative dry patch is outside the fighting lanes: the exploratory sweep produced 0.375 reactions per battle. Keep this sparse map off rather than silently presenting an unproductive opt-in."
+    },
+    "hollow_nest": {
+      "fuel": 0,
+      "shallows": 0,
+      "reason": "The stone chamber has no native fuel or water. Its existing web hazard still restrains; incidental web burning produced only 0.097 reactions per exploratory battle, so terrain reactions are not enabled here."
+    },
+    "hollow_lair": {
+      "fuel": 4,
+      "shallows": 0,
+      "reason": "Four decorative boards do not form a useful reaction area in this stone boss chamber (0.431 reactions per exploratory battle). The boss's fire attacks and existing phase hazards remain unchanged."
+    }
+  },
+  "lava": {
+    "decision": "Lava is deep terrain, not an ambient fire surface: it blocks walking, and forced entry uses the existing deep-fall rule (Downed for party members, death for enemies). It neither adds periodic fire damage nor ignites neighbouring fuel.",
+    "rationale": "Keep a single deterministic fall/ledge contract rather than silently adding a second damage model to the finale. Hazard remains an authoring tag; Deep is the mechanical flag. Any later change to the finale in #141 must explicitly replace this recorded contract."
+  }
+}

@@ -1,0 +1,9 @@
+Running tests from /workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+/workspace/ArcBox-loop/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) passed (6s 956ms)
+
+Test run summary: Passed!
+  total: 28
+  failed: 0
+  succeeded: 28
+  skipped: 0
+  duration: 7s 283ms

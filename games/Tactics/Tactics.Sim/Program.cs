@@ -34,6 +34,7 @@ const string Usage = """
       --rotate-formation    rotate spawn seats across seeds (default: fixed class order)
       --rules DIR            the rules pack (default content/tactics/base/rules under the repository root)
       --out PATH             write the report to PATH (default: print it)
+      --json PATH            also write the complete config and battle measurements (gzip for .gz)
       -h, --help             this text
     """;
 
@@ -58,6 +59,7 @@ ImmutableArray<string> fixedParty = default;
 ImmutableDictionary<string, string>? races = null;
 string? rulesDir = null;
 string? outPath = null;
+string? jsonPath = null;
 
 try
 {
@@ -93,6 +95,7 @@ try
             case "--rotate-formation": rotateFormation = true; break;
             case "--rules": rulesDir = Next(); break;
             case "--out": outPath = Next(); break;
+            case "--json": jsonPath = Next(); break;
             default: throw new ArgumentException($"Unknown option '{args[i]}'.");
         }
     }
@@ -124,6 +127,8 @@ foreach (var battle in SimRunner.Run(config, rules))
         Console.Error.WriteLine($"{battles.Count} battles, {watch.Elapsed.TotalSeconds:0}s");
 }
 Console.Error.WriteLine($"{battles.Count} battles in {watch.Elapsed.TotalSeconds:0}s.");
+
+if (jsonPath is not null) RawReport.Write(jsonPath, config, battles);
 
 var report = (config.Encounters.All(e => e.StartsWith("mob_", StringComparison.Ordinal)) ? MobReport.Markdown(battles) : "") + Report.Markdown(battles, config);
 if (outPath is null)

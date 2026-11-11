@@ -37,7 +37,7 @@
   "objectives": {
     "win": "defeat_all"
   },
-  "environment": true,
+  "environment": false,
   "triggers": [
     {
       "id": "ashmaw_half_health",

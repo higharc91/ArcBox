@@ -68,6 +68,7 @@ python_tools() {
     local status=0
     "$python_cmd" -m unittest discover -s tools/tactics-assets -p 'test_*.py' || status=1
     "$python_cmd" -m unittest discover -s tools/tactics-audio -p 'test_*.py' || status=1
+    "$python_cmd" -m unittest discover -s tools/tactics-sim -p 'test_*.py' || status=1
     "$python_cmd" tools/tactics-lore/check.py || status=1
     "$python_cmd" -m unittest discover -s tools/tactics-lore -p 'test_*.py' || status=1
     "$python_cmd" tools/docs-drift.py || status=1
