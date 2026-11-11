@@ -350,6 +350,30 @@ public sealed class InteractTests
     }
 
     [Fact]
+    public void A_shrine_mends_one_minor_injury_once_and_keeps_lasting_injuries_after_restart()
+    {
+        var initial = Vault.At(new Tile(5, 7), world: w => w with
+        { Things = Ordinal.Map(("gate", new InteractableSave("open")), ("lever", new InteractableSave("on"))) });
+        var leader = Leader(initial);
+        var doc = Doc(initial);
+        var member = doc.Members[leader];
+        doc = doc with { Members = doc.Members.SetItem(leader, member with { Character = member.Character with
+        { Injuries = [new("cracked_ribs"), new("black_eye"), new("singed")] } }) };
+        var s = new Session(document: doc.ToJson(), game: new TacticsGame(Vault.Rules.Value));
+        s.Harness.Resume(s.Lease);
+        for (var seat = 0; seat < 4; seat++) s.Harness.SetConnected(seat, true);
+        Interact(s, "shrine");
+        Finish(s);
+        Assert.Equal([new InjuryId("cracked_ribs"), new InjuryId("singed")], Doc(s).Members[leader].Character.Injuries);
+        Assert.Contains("mended", s.Host.Explore!.ThingEvents!.Value.Single(e => e.Id == "shrine").Line);
+        Assert.Equal("used", Saved(s, "shrine")!.State);
+        var again = Again(s);
+        Interact(again, "shrine");
+        Assert.Equal(Doc(s).Members[leader].Character.Injuries, Doc(again).Members[leader].Character.Injuries);
+        Assert.Equal("used", Saved(again, "shrine")!.State);
+    }
+
+    [Fact]
     public void A_shrine_is_used_once()
     {
         var s = Vault.At(new Tile(5, 7), world: w => w with { Things = Ordinal.Map(("gate", new InteractableSave("open")), ("lever", new InteractableSave("on"))) });

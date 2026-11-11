@@ -262,6 +262,8 @@ public sealed partial class TacticsGame
         if (InteractScenes.LootDue(before, outcome))
             GiveLoot(def, by);
         var hurt = InteractScenes.SpringDue(before, outcome) ? Spring(def, sprungBy ?? by) : null;
+        if (def.Kind == "shrine" && before.State == InteractableKinds.Ready && after.State == InteractableKinds.Used)
+            hurt = ShrineBlessing(by);
         Event(def, outcome.Event, by, hurt is null ? line : line is null ? hurt : $"{line} {hurt}");
         if (Interactables.KindOf(def).Family == InteractableFamily.Switch && after.State != before.State)
             foreach (var target in def.Targets.Select(ThingNamed).OfType<InteractableDef>())
@@ -271,6 +273,16 @@ public sealed partial class TacticsGame
                     Event(target, ThingEvents.Toggled, by, null);      // a passage that isn't there, or isn't found, moves unseen
             }
         return hurt;
+    }
+
+    private string? ShrineBlessing(string member)
+    {
+        if (!_doc.Members.TryGetValue(member, out var record)) return null;
+        var injury = record.Character.Injuries.FirstOrDefault(i => Rules.Injuries.GetValueOrDefault(i)?.Mends == "rest");
+        if (injury == default) return null;
+        _doc = _doc with { Members = _doc.Members.SetItem(member, record with
+        { Character = record.Character with { Injuries = record.Character.Injuries.Remove(injury) } }) };
+        return $"{record.Character.Name}'s {Rules.Injuries[injury].Name} is mended by the hearth's blessing.";
     }
 
     private void SetThing(InteractableDef def, InteractableSave save)
@@ -356,15 +368,15 @@ public sealed partial class TacticsGame
     // ---- Walking past things ----------------------------------------------------------------------------------------------------
 
     /// <summary>
-    /// The best passive score of the session's party in each skill a thing may be hidden by (design §7.1), here or not (5d default 8, as checks
-    /// count away characters), and whose it is, the first in member order on a tie; worked out again only when a character or the seats change.
+    /// The best connected member's passive score in each skill (design §7.1, #152), and whose it is, first in member order on a tie.
+    /// Recomputed when characters, seats or connections change. Scene checks retain their separate away-character policy.
     /// </summary>
     private ImmutableDictionary<string, (int Passive, string? Who)> PartyPassives()
     {
         if (_passive is { } cached && cached.Members == _doc.Members && cached.Players == _players)
             return cached.Best;
         var best = HiddenDef.Skills.ToDictionary(s => s, _ => (Passive: int.MinValue, Who: (string?)null), StringComparer.Ordinal);
-        foreach (var (member, _, character, _) in Party())
+        foreach (var (member, _, character, _) in Party().Where(m => m.Here))
         {
             var sheet = SheetBuilder.ForCharacter(character, Rules);
             foreach (var skill in HiddenDef.Skills)

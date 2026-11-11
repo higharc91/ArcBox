@@ -291,7 +291,7 @@ public static class Interactables
                 continue;
             var save = StateOf(def, saves);
             var seen = def.Hidden is null || save.Found;
-            if (!seen && passive(def.Hidden!.Skill) >= def.Hidden.Dc)
+            if (!seen && !def.SearchOnly && passive(def.Hidden!.Skill) >= def.Hidden.Dc)
             {
                 found.Add((def, FindingOf(def), def.Hidden.Skill));
                 seen = true;
@@ -304,12 +304,12 @@ public static class Interactables
 
     /// <summary>
     /// What an active Search from <paramref name="at"/> looks for (design §7.4): every hidden thing there, not found, not already searched
-    /// for since the last long rest (the caller passes saves <see cref="Rested"/>), within <see cref="SearchRange"/> tiles along x and y, and not on the leader's own tile (found there it would stand on them), in
+    /// for since the last long rest (the caller passes saves <see cref="Rested"/>), within <see cref="SearchRange"/> tiles along x and y, and not on the leader's own tile if revealing it would block them. Active-only nonblocking finds can be searched underfoot. In
     /// id order. The scene doesn't say how many: it plays the same with none.
     /// </summary>
     public static ImmutableArray<InteractableDef> Searchable(IEnumerable<InteractableDef> defs, IReadOnlyDictionary<string, InteractableSave>? saves,
         IReadOnlySet<string> flags, Tile at)
-        => [.. defs.Where(d => d.Hidden is not null && d.At != at && Present(d, flags)
+        => [.. defs.Where(d => d.Hidden is not null && (d.At != at || (d.SearchOnly && !Blocks(d, StateOf(d, saves) with { Found = true }, flags))) && Present(d, flags)
                 && Math.Max(Math.Abs(at.X - d.At.X), Math.Abs(at.Y - d.At.Y)) <= SearchRange
                 && StateOf(d, saves) is { Found: false, Searched: false })
             .OrderBy(d => d.Id, StringComparer.Ordinal)];

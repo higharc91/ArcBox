@@ -217,6 +217,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
     {
         if (connected ? !_online.Add(id) : !_online.Remove(id))
             return;
+        _passive = null;
         var player = _players.FirstOrDefault(p => p.Id == id);
         WalkerConnection(player, connected);
         PartyChanged();

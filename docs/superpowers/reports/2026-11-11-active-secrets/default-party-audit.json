@@ -1,0 +1,449 @@
+[
+  {
+    "level": 1,
+    "classes": [
+      "fighter",
+      "cleric",
+      "rogue",
+      "wizard"
+    ],
+    "passives": {
+      "perception": 13,
+      "investigation": 15,
+      "insight": 15,
+      "survival": 13,
+      "nature": 13,
+      "arcana": 15,
+      "history": 15,
+      "religion": 13
+    },
+    "regions": [
+      {
+        "region": "ashen_ford",
+        "secrets": [
+          {
+            "id": "af_ash_market_scuffs",
+            "dc": 15,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": [
+              "af_ash_market_cache"
+            ]
+          },
+          {
+            "id": "af_ash_market_cache",
+            "dc": 16,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_reed_bank_track",
+            "dc": 12,
+            "skill": "survival",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_market_cellar_hatch",
+            "dc": 13,
+            "skill": "investigation",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [],
+            "unless": [],
+            "passive": 15,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": []
+          },
+          {
+            "id": "af_market_cellar_draft",
+            "dc": 10,
+            "skill": "perception",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": [
+              "af_market_cellar_hatch"
+            ]
+          },
+          {
+            "id": "af_bank_claw_marks",
+            "dc": 15,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [
+              "ch1_met_maud"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_bridge_carving",
+            "dc": 16,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [
+              "ch1_skarrow_spared"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_southfield_goat_tracks",
+            "dc": 10,
+            "skill": "perception",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [
+              "ch1_met_maud"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": []
+          }
+        ]
+      },
+      {
+        "region": "cinder_hollow",
+        "secrets": [
+          {
+            "id": "hollow_hidden_cache",
+            "dc": 12,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "classes": [
+      "fighter",
+      "cleric",
+      "rogue",
+      "wizard"
+    ],
+    "passives": {
+      "perception": 13,
+      "investigation": 15,
+      "insight": 15,
+      "survival": 13,
+      "nature": 13,
+      "arcana": 15,
+      "history": 15,
+      "religion": 13
+    },
+    "regions": [
+      {
+        "region": "ashen_ford",
+        "secrets": [
+          {
+            "id": "af_ash_market_scuffs",
+            "dc": 15,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": [
+              "af_ash_market_cache"
+            ]
+          },
+          {
+            "id": "af_ash_market_cache",
+            "dc": 16,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_reed_bank_track",
+            "dc": 12,
+            "skill": "survival",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_market_cellar_hatch",
+            "dc": 13,
+            "skill": "investigation",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [],
+            "unless": [],
+            "passive": 15,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": []
+          },
+          {
+            "id": "af_market_cellar_draft",
+            "dc": 10,
+            "skill": "perception",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": [
+              "af_market_cellar_hatch"
+            ]
+          },
+          {
+            "id": "af_bank_claw_marks",
+            "dc": 15,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [
+              "ch1_met_maud"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_bridge_carving",
+            "dc": 16,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [
+              "ch1_skarrow_spared"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_southfield_goat_tracks",
+            "dc": 10,
+            "skill": "perception",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [
+              "ch1_met_maud"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": []
+          }
+        ]
+      },
+      {
+        "region": "cinder_hollow",
+        "secrets": [
+          {
+            "id": "hollow_hidden_cache",
+            "dc": 12,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "classes": [
+      "fighter",
+      "cleric",
+      "rogue",
+      "wizard"
+    ],
+    "passives": {
+      "perception": 13,
+      "investigation": 15,
+      "insight": 15,
+      "survival": 13,
+      "nature": 13,
+      "arcana": 15,
+      "history": 15,
+      "religion": 13
+    },
+    "regions": [
+      {
+        "region": "ashen_ford",
+        "secrets": [
+          {
+            "id": "af_ash_market_scuffs",
+            "dc": 15,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": [
+              "af_ash_market_cache"
+            ]
+          },
+          {
+            "id": "af_ash_market_cache",
+            "dc": 16,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_reed_bank_track",
+            "dc": 12,
+            "skill": "survival",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_market_cellar_hatch",
+            "dc": 13,
+            "skill": "investigation",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [],
+            "unless": [],
+            "passive": 15,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": []
+          },
+          {
+            "id": "af_market_cellar_draft",
+            "dc": 10,
+            "skill": "perception",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": [
+              "af_market_cellar_hatch"
+            ]
+          },
+          {
+            "id": "af_bank_claw_marks",
+            "dc": 15,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [
+              "ch1_met_maud"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_bridge_carving",
+            "dc": 16,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [
+              "ch1_skarrow_spared"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          },
+          {
+            "id": "af_southfield_goat_tracks",
+            "dc": 10,
+            "skill": "perception",
+            "SearchOnly": false,
+            "range": 3,
+            "requires": [
+              "ch1_met_maud"
+            ],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": true,
+            "Reveals": []
+          }
+        ]
+      },
+      {
+        "region": "cinder_hollow",
+        "secrets": [
+          {
+            "id": "hollow_hidden_cache",
+            "dc": 12,
+            "skill": "perception",
+            "SearchOnly": true,
+            "range": 1,
+            "requires": [],
+            "unless": [],
+            "passive": 13,
+            "foundPassivelyWhenEligibleAndInRange": false,
+            "Reveals": []
+          }
+        ]
+      }
+    ]
+  }
+]

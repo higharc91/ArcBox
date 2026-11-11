@@ -1,0 +1,83 @@
+{
+  "fixtures": 1,
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "results": [
+    {
+      "width": 320,
+      "file": "walk-things.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 320,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 22,
+      "sampledLabels": [
+        "ANA",
+        "You lead the party",
+        "Party menu",
+        "Hold a direction to walk. Follow the party on the TV map.",
+        "Give items or gold",
+        "The Vault",
+        "Map",
+        "Explore the region",
+        "Player1",
+        "Fighter",
+        "Player2",
+        "Cleric",
+        "Player3",
+        "Rogue",
+        "Player4",
+        "Wizard",
+        "Pick up the iron key",
+        "Search"
+      ],
+      "scrollStates": 1
+    },
+    {
+      "width": 390,
+      "file": "walk-things.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 390,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 18,
+      "sampledLabels": [
+        "ANA",
+        "You lead the party",
+        "Party menu",
+        "Hold a direction to walk. Follow the party on the TV map.",
+        "Give items or gold",
+        "The Vault",
+        "Map",
+        "Explore the region",
+        "Player1",
+        "Fighter",
+        "Player2",
+        "Cleric",
+        "Player3",
+        "Rogue",
+        "Player4",
+        "Wizard",
+        "Pick up the iron key",
+        "Search"
+      ],
+      "scrollStates": 1
+    }
+  ]
+}

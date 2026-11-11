@@ -34,6 +34,7 @@ const string Usage = """
       --rotate-formation    rotate spawn seats across seeds (default: fixed class order)
       --rules DIR            the rules pack (default content/tactics/base/rules under the repository root)
       --out PATH             write the report to PATH (default: print it)
+      --secret-audit        write default-party secret detection at levels 1–3 to --out
       --json PATH            also write the complete config and battle measurements (gzip for .gz)
       -h, --help             this text
     """;
@@ -55,6 +56,7 @@ string? policy = null;
 var rotateFormation = false;
 var increases = true;
 var buildAudit = false;
+var secretAudit = false;
 ImmutableArray<string> fixedParty = default;
 ImmutableDictionary<string, string>? races = null;
 string? rulesDir = null;
@@ -88,6 +90,7 @@ try
             case "--races": races = Pairs("Races"); break;
             case "--party": fixedParty = [.. Next().Split(',')]; sizes = [fixedParty.Length]; break;
             case "--no-increases": increases = false; break;
+            case "--secret-audit": secretAudit = true; break;
             case "--build-audit": buildAudit = true; break;
             case "--with-class": withClass = Next(); break;
             case "--weapons": weapons = Pairs("Weapons"); break;
@@ -109,6 +112,11 @@ catch (Exception e) when (e is ArgumentException or FormatException or OverflowE
 
 rulesDir ??= Path.Combine(RepoRoot(), "content", "tactics", "base", "rules");
 var rules = RulesPack.Load([rulesDir]);
+if (secretAudit)
+{
+    SecretAudit.Write(rules, outPath ?? throw new ArgumentException("--secret-audit requires --out"));
+    return 0;
+}
 var config = new SimConfig(encounters ?? [.. rules.Encounters.Keys], levels, parties, sizes, seeds, difficulty, roundCap, trinkets, companions,
     subclasses, race, withClass, weapons, policy, rotateFormation, increases, fixedParty, races);
 if (buildAudit)

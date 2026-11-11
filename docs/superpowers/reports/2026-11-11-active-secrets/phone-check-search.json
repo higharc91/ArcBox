@@ -1,0 +1,95 @@
+{
+  "fixtures": 1,
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "results": [
+    {
+      "width": 320,
+      "file": "check-search.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 320,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 26,
+      "sampledLabels": [
+        "ANA",
+        "Skill check",
+        "Investigation",
+        "DC hidden",
+        "“",
+        "Search the area",
+        "”",
+        "0:00",
+        "Who rolls? Vote for one",
+        "Player1",
+        "Fighter",
+        "−1",
+        "INT 8",
+        "Player2",
+        "Cleric",
+        "Player3",
+        "Rogue",
+        "+1",
+        "INT 12",
+        "Player4",
+        "Wizard",
+        "+5",
+        "Proficient · INT 17",
+        "If nobody picks, the best bonus rolls."
+      ],
+      "scrollStates": 1
+    },
+    {
+      "width": 390,
+      "file": "check-search.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 390,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 26,
+      "sampledLabels": [
+        "ANA",
+        "Skill check",
+        "Investigation",
+        "DC hidden",
+        "“",
+        "Search the area",
+        "”",
+        "0:00",
+        "Who rolls? Vote for one",
+        "Player1",
+        "Fighter",
+        "−1",
+        "INT 8",
+        "Player2",
+        "Cleric",
+        "Player3",
+        "Rogue",
+        "+1",
+        "INT 12",
+        "Player4",
+        "Wizard",
+        "+5",
+        "Proficient · INT 17",
+        "If nobody picks, the best bonus rolls."
+      ],
+      "scrollStates": 1
+    }
+  ]
+}

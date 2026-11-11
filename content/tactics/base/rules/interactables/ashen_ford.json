@@ -186,6 +186,15 @@
       },
       "text": [
         "Packing straw and a smell of hot stone. Whatever was in here has gone."
+      ],
+      "loot": [
+        {
+          "item": "potion_of_healing",
+          "count": 1
+        },
+        {
+          "gold": 15
+        }
       ]
     },
     {
@@ -222,13 +231,15 @@
         98
       ],
       "name": "scuffed boards",
-      "hidden": 10,
+      "hidden": 15,
       "text": [
         "Boot scuffs in the ash, all heading the same way and stopping at nothing in particular."
       ],
       "reveals": [
         "af_ash_market_cache"
-      ]
+      ],
+      "searchOnly": true,
+      "range": 1
     },
     {
       "id": "af_ash_market_cache",
@@ -238,7 +249,7 @@
         96
       ],
       "name": "smugglers' cache",
-      "hidden": 12,
+      "hidden": 16,
       "loot": [
         {
           "item": "smoke_bomb",
@@ -247,7 +258,9 @@
         {
           "gold": 40
         }
-      ]
+      ],
+      "searchOnly": true,
+      "range": 1
     },
     {
       "id": "af_ford_campfire",
@@ -330,7 +343,9 @@
       "hidden": {
         "dc": 12,
         "skill": "survival"
-      }
+      },
+      "searchOnly": true,
+      "range": 1
     },
     {
       "id": "af_market_cellar_hatch",
@@ -407,13 +422,15 @@
         80
       ],
       "name": "claw marks",
-      "hidden": 11,
+      "hidden": 15,
       "text": [
         "Long claws scored the ash. The trail turns north toward a hollow in the cinders."
       ],
       "requires": [
         "ch1_met_maud"
-      ]
+      ],
+      "searchOnly": true,
+      "range": 1
     },
     {
       "id": "af_bridge_carving",
@@ -423,13 +440,15 @@
         67
       ],
       "name": "bridge-stub carving",
-      "hidden": 11,
+      "hidden": 16,
       "text": [
         "A child carved two figures holding hands across the broken span. The ash has settled into the cuts."
       ],
       "requires": [
         "ch1_skarrow_spared"
-      ]
+      ],
+      "searchOnly": true,
+      "range": 1
     },
     {
       "id": "af_southfield_goat_tracks",

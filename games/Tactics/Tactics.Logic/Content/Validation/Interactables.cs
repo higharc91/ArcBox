@@ -58,6 +58,7 @@ internal sealed partial class Validation
             At("art", "An ambient thing has no art of its kind, so it needs an art key of the pack's, such as \"props.cart\".");
 
         if (family == InteractableFamily.Trade && def.Hidden is not null) At("hidden", "A stall cannot be hidden.");
+        if (def.SearchOnly && def.Hidden is null) At("searchOnly", "Only a hidden thing can require an active search.");
         if (def.Hidden is { } hidden)
         {
             Dc(hidden.Dc, "hidden", "The hidden");

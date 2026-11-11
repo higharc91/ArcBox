@@ -688,7 +688,18 @@ public sealed class WalkModelTests
             }
             if (e.Kind is "walk" or "junk" or "fire:save" && was.Held == party.Held && was.Blocked == party.Blocked && was.Seq == party.Seq
                 && was.Facing == party.Facing && was.Leader == party.Leader && before.Phase == after.Phase && before.Notice == after.Notice)
-                Must(before.Host == after.Host, "the host view changed with no step and no change in Held or Blocked");
+            {
+                var expectedHost = before.Host;
+                // HostView omits a timed thing caption after its deadline, even if this input commits no step.
+                // Model that one expected transition and still compare every other host field exactly.
+                if (before.Party.ThingSpeech is { } speech && speech.Until <= now)
+                {
+                    var expected = JsonNode.Parse(expectedHost)!;
+                    expected["explore"]!.AsObject().Remove("thingSpeech");
+                    expectedHost = expected.ToJsonString(ArcJson.Options);
+                }
+                Must(expectedHost == after.Host, "the host view changed with no step and no change in Held or Blocked");
+            }
             Must(!party.Blocked || !party.Held, "blocked and held at once");
             if (e.Kind == "walk" && before.Phase == after.Phase && was.Leader == party.Leader)
                 Must(moved == 0 ? before.Phones.Select(WithoutBumps).SequenceEqual(after.Phones.Select(WithoutBumps))
