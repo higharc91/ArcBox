@@ -1,0 +1,39 @@
+{
+  "sourceHead": "423bd2497881eff062a6ffb6b702889d98623fe6",
+  "command": "bash tools/check-all.sh --full",
+  "buildWarnings": 0,
+  "dotnet": {
+    "total": 7750,
+    "passed": 7743,
+    "failed": 7,
+    "skipped": 0
+  },
+  "phone": {
+    "passed": 601,
+    "productionBuild": "PASS"
+  },
+  "node": {
+    "passed": 24
+  },
+  "python": {
+    "assets": 62,
+    "audio": 9,
+    "simulationAudit": 5,
+    "lore": 26,
+    "total": 102
+  },
+  "otherChecks": {
+    "loreValidation": "PASS",
+    "documentationDrift": "PASS"
+  },
+  "failures": [
+    "failed Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip (507ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryDemoTests.The_demo_says_each_line_once_from_the_walk_up (3s 204ms)",
+    "failed Tactics.Logic.Tests.BaseSceneTests.Every_line_has_a_clip_length (2s 878ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryTrackTests.Every_chapter_1_line_finds_its_clip (19ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryTrackTests.Every_line_of_every_chapter_finds_its_clip (23ms)",
+    "failed Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch (6ms)",
+    "failed Tactics.Presentation.Tests.Audio.VoiceClipsTests.Every_say_line_in_the_pack_has_a_clip_on_disk (1ms)"
+  ],
+  "blocker": "13 changed main-branch lines have no recordings. Strict voice coverage remains mandatory."
+}
