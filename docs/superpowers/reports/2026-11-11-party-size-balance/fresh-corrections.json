@@ -1,0 +1,30 @@
+{
+  "seedMin": 101,
+  "seedMax": 140,
+  "passed": true,
+  "battles": 720,
+  "rows": [
+    {
+      "encounter": "hollow_diggings",
+      "size": 6,
+      "battles": 240,
+      "winRate": 0.9041666666666667,
+      "meanRounds": 10.879166666666666
+    },
+    {
+      "encounter": "mob_hollow_bats",
+      "size": 5,
+      "battles": 240,
+      "winRate": 0.9166666666666666,
+      "meanRounds": 7.445833333333334
+    },
+    {
+      "encounter": "mob_river_slimes",
+      "size": 5,
+      "battles": 240,
+      "winRate": 0.9208333333333333,
+      "meanRounds": 7.908333333333333
+    }
+  ],
+  "note": "Untouched seeds after the three profile corrections; these seeds were not used to select those changes."
+}

@@ -1,0 +1,218 @@
+{
+  "sourceCommit": "8d716ae50f98d954775ebb5a8f2e561139d90d29",
+  "reusedCells": 27,
+  "rerunCells": 3,
+  "unchangedOtherRules": true,
+  "rows": [
+    {
+      "encounter": "mob_pine_wolves",
+      "size": 5,
+      "before": "09f7e8d79af16721458123f3ed18457ebc2db7ca1695675275a21116996e765f",
+      "after": "09f7e8d79af16721458123f3ed18457ebc2db7ca1695675275a21116996e765f",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_pine_wolves",
+      "size": 6,
+      "before": "549e3149139c76ab925d7f1bb34105e5bedbac06f86938fc446054814fe0db01",
+      "after": "549e3149139c76ab925d7f1bb34105e5bedbac06f86938fc446054814fe0db01",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_river_slimes",
+      "size": 5,
+      "before": "d084aa0af89a08c5862128e98c57c2d47a1f49dbc5535bfbc8c24b31ddaf1b62",
+      "after": "fb51c2308772aa6623bf6ad512e4b7cc93e1b7c174a38a80b147ad78c1b08ced",
+      "unchanged": false
+    },
+    {
+      "encounter": "mob_river_slimes",
+      "size": 6,
+      "before": "2ca41ac946b4790c96a1b1a14f54d2bf3aaec5164eaee8fd82e9cdecc25793d1",
+      "after": "2ca41ac946b4790c96a1b1a14f54d2bf3aaec5164eaee8fd82e9cdecc25793d1",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_road_bandits",
+      "size": 5,
+      "before": "f54f680c047d84d3e4cfa76cbf7edab0cf59e59c8543e80a1ecb0d0893817ab6",
+      "after": "f54f680c047d84d3e4cfa76cbf7edab0cf59e59c8543e80a1ecb0d0893817ab6",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_road_bandits",
+      "size": 6,
+      "before": "e4adaa9cfc218b5d47152c1eb46860c03f07647b9b5dd779cb01d525e16499d0",
+      "after": "e4adaa9cfc218b5d47152c1eb46860c03f07647b9b5dd779cb01d525e16499d0",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_rooting_boars",
+      "size": 5,
+      "before": "9cc49d8eaa94a46ad720e262f2534f9a2103f0c6948d87ff9dfc15290fbede90",
+      "after": "9cc49d8eaa94a46ad720e262f2534f9a2103f0c6948d87ff9dfc15290fbede90",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_rooting_boars",
+      "size": 6,
+      "before": "e0c750e2585666168f081319cee28eda13403bf620bad34987fdbbf0bdb0f7f7",
+      "after": "e0c750e2585666168f081319cee28eda13403bf620bad34987fdbbf0bdb0f7f7",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_hollow_bats",
+      "size": 5,
+      "before": "afe8c65d81551504c63fdb2a8134a9b904f808dc64305eff09c50823a3fd7b4a",
+      "after": "e1821d8a8291be76dc5b665dbb5c4d139c78a196bf3d74cb090923724dbec01f",
+      "unchanged": false
+    },
+    {
+      "encounter": "mob_hollow_bats",
+      "size": 6,
+      "before": "ced94e813738698e7873ff94f2a4dc495533fa71491071d4379175472a7bf51c",
+      "after": "ced94e813738698e7873ff94f2a4dc495533fa71491071d4379175472a7bf51c",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_hollow_kobolds",
+      "size": 5,
+      "before": "da6d03635931c82080caa161b62b01951736075ccc7bab08f32d8512d8df1eca",
+      "after": "da6d03635931c82080caa161b62b01951736075ccc7bab08f32d8512d8df1eca",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_hollow_kobolds",
+      "size": 6,
+      "before": "57e1ae5e9ee5aa9692b87981526501b1bd853150a632ae5e65c715bae77a76fc",
+      "after": "57e1ae5e9ee5aa9692b87981526501b1bd853150a632ae5e65c715bae77a76fc",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_kobold_scouts",
+      "size": 5,
+      "before": "ba30ee8beb969a2fe30acfcaa21f7f45104c125455c47244233949f2dc6f3c1e",
+      "after": "ba30ee8beb969a2fe30acfcaa21f7f45104c125455c47244233949f2dc6f3c1e",
+      "unchanged": true
+    },
+    {
+      "encounter": "mob_kobold_scouts",
+      "size": 6,
+      "before": "f66027497351804aff11fa40cd1a966e0277c8a90c4432d2222c094e8d7efd50",
+      "after": "f66027497351804aff11fa40cd1a966e0277c8a90c4432d2222c094e8d7efd50",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_throat",
+      "size": 3,
+      "before": "66f7ee68aed024572df32a08b4ab6ec60f53dc4bf8427c63e4a439f515492b87",
+      "after": "66f7ee68aed024572df32a08b4ab6ec60f53dc4bf8427c63e4a439f515492b87",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_throat",
+      "size": 4,
+      "before": "5fe344a8720593f8155fa2ea44ed33ebdf83b63065b347f236362045ad28c25e",
+      "after": "5fe344a8720593f8155fa2ea44ed33ebdf83b63065b347f236362045ad28c25e",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_throat",
+      "size": 5,
+      "before": "baeeb8697ee46ec7a8daa501925e64f1da713d2fc77dc1d1c260d768bfb59e5a",
+      "after": "baeeb8697ee46ec7a8daa501925e64f1da713d2fc77dc1d1c260d768bfb59e5a",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_throat",
+      "size": 6,
+      "before": "3451ba9da36f6ff9bff0812ce164594a08e2986d1b459881c97ff6b03a36ba7f",
+      "after": "3451ba9da36f6ff9bff0812ce164594a08e2986d1b459881c97ff6b03a36ba7f",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_nest",
+      "size": 3,
+      "before": "25a01f68037204aa0ebc4b74867e7925378d7f8dee2f72ac70eed1a3f516a6ab",
+      "after": "25a01f68037204aa0ebc4b74867e7925378d7f8dee2f72ac70eed1a3f516a6ab",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_nest",
+      "size": 4,
+      "before": "81ae153627c108364d14870cc6f4efed62f7f52bea8684abe95a88c5f2af8e9c",
+      "after": "81ae153627c108364d14870cc6f4efed62f7f52bea8684abe95a88c5f2af8e9c",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_nest",
+      "size": 5,
+      "before": "6dbda4b044910b34b5d6188d5f223526c081ca4ba1ad3d43a1ae4bcbfbe8f445",
+      "after": "6dbda4b044910b34b5d6188d5f223526c081ca4ba1ad3d43a1ae4bcbfbe8f445",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_nest",
+      "size": 6,
+      "before": "53588aa44e9540c6a1791a6bfea4ca2d0712c2ddcc0d7b9b7eee9f2f7be73ee8",
+      "after": "53588aa44e9540c6a1791a6bfea4ca2d0712c2ddcc0d7b9b7eee9f2f7be73ee8",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_diggings",
+      "size": 3,
+      "before": "3faca150c09ed5dd6301381d5a27b0ee929e8ec3989ad6f9ad297d985a1cba27",
+      "after": "3faca150c09ed5dd6301381d5a27b0ee929e8ec3989ad6f9ad297d985a1cba27",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_diggings",
+      "size": 4,
+      "before": "e044acd1b134d36d294096237abeb20329e529f726a7806cdfe8e9bec30630da",
+      "after": "e044acd1b134d36d294096237abeb20329e529f726a7806cdfe8e9bec30630da",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_diggings",
+      "size": 5,
+      "before": "ff9d6b2709adbe2b7da4630c365af873787b0a9d1ecdeb015ee03028460f275e",
+      "after": "ff9d6b2709adbe2b7da4630c365af873787b0a9d1ecdeb015ee03028460f275e",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_diggings",
+      "size": 6,
+      "before": "862a591216301e510c2dff7a715eb8a1a34934ea37d40ed5ba36948f5e92bf6f",
+      "after": "d092df8f4632d4679a804b20c7d8936c1f86e1f19a33aae03f672c0772cde063",
+      "unchanged": false
+    },
+    {
+      "encounter": "hollow_lair",
+      "size": 3,
+      "before": "c56db9eb607d8c180719a764e816cfe7dcfbab93080f2fa717062c7b89973ac7",
+      "after": "c56db9eb607d8c180719a764e816cfe7dcfbab93080f2fa717062c7b89973ac7",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_lair",
+      "size": 4,
+      "before": "5b6d463998c803a569598c4f24081fd181b43cb3028ef7346a3a466b3b895d6a",
+      "after": "5b6d463998c803a569598c4f24081fd181b43cb3028ef7346a3a466b3b895d6a",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_lair",
+      "size": 5,
+      "before": "d9dd2a257fae0885a2e707e9aa6d5be9dd30faf74c99f5f19ad782f58e1a8c4e",
+      "after": "d9dd2a257fae0885a2e707e9aa6d5be9dd30faf74c99f5f19ad782f58e1a8c4e",
+      "unchanged": true
+    },
+    {
+      "encounter": "hollow_lair",
+      "size": 6,
+      "before": "03e8860188be219a60702789616875890f52ade4f2e2733d4e28c75cd83ea614",
+      "after": "03e8860188be219a60702789616875890f52ade4f2e2733d4e28c75cd83ea614",
+      "unchanged": true
+    }
+  ]
+}
