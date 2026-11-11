@@ -322,6 +322,11 @@
           "scene": {
             "type": "string",
             "description": "Optional standalone lore scene hook, used while its flag gates hold."
+          },
+          "searchOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "Hidden things only. Passive scores cannot reveal it; Search, Keep watch or an authored notice can."
           }
         },
         "required": [

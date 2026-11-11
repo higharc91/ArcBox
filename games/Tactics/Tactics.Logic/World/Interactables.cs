@@ -291,7 +291,7 @@ public static class Interactables
                 continue;
             var save = StateOf(def, saves);
             var seen = def.Hidden is null || save.Found;
-            if (!seen && passive(def.Hidden!.Skill) >= def.Hidden.Dc)
+            if (!seen && !def.SearchOnly && passive(def.Hidden!.Skill) >= def.Hidden.Dc)
             {
                 found.Add((def, FindingOf(def), def.Hidden.Skill));
                 seen = true;
@@ -309,7 +309,7 @@ public static class Interactables
     /// </summary>
     public static ImmutableArray<InteractableDef> Searchable(IEnumerable<InteractableDef> defs, IReadOnlyDictionary<string, InteractableSave>? saves,
         IReadOnlySet<string> flags, Tile at)
-        => [.. defs.Where(d => d.Hidden is not null && d.At != at && Present(d, flags)
+        => [.. defs.Where(d => d.Hidden is not null && (d.At != at || d.SearchOnly) && Present(d, flags)
                 && Math.Max(Math.Abs(at.X - d.At.X), Math.Abs(at.Y - d.At.Y)) <= SearchRange
                 && StateOf(d, saves) is { Found: false, Searched: false })
             .OrderBy(d => d.Id, StringComparer.Ordinal)];

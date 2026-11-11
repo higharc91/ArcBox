@@ -637,3 +637,10 @@ The user chose to keep both pieces of work, so read this before changing `WorldG
   gathering nodes) rather than build a second one. World dressing's "out of scope: containers, pickups" stays true for its own milestone.
 - **Art.** Painted props use the pack's prop art; things use `interactables.*` keys (§4 and the art JSON), falling back to existing props
   meanwhile. The user's art AI works from both lists.
+
+
+### #152 implementation decisions (2026-11-11)
+
+Under the owner's authorization to complete #152, decision 4 uses **only connected members** for passive detection. Reconnecting or disconnecting invalidates the cached scores. Scene checks retain their existing away-member rules. Authored `searchOnly` secrets ignore passive scores at every level but remain eligible for Search, Keep watch, and deliberate notice chains. Five of eight Ashen Ford secrets and Cinder Hollow's one secret require active discovery; authored clue chains cannot passively bypass those requirements. The best secrets use range 1; Ashen Ford's new active checks span DC 12–16.
+
+Decision 6: each **shrine** mends one existing minor injury (one marked `mends: rest`) on the member who invokes it, once per shrine per campaign. It never removes a lasting injury, adds combat bonuses, or refreshes at rest/restart. Its existing persisted ready→used state is the receipt; visiting uninjured still spends the blessing. Wells and altars retain their existing words/flags. The trapped pier crate now holds one healing potion and 15 gold.

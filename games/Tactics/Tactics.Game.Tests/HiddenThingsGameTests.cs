@@ -64,6 +64,30 @@ public sealed class HiddenThingsGameTests
     ]));
 
     [Fact]
+    public void Disconnected_experts_do_not_find_secrets_and_reconnection_refreshes_the_cached_scores()
+    {
+        var rules = Vault.Load([
+            """{ "id": "rune", "kind": "rune", "at": [5, 1], "hidden": { "dc": 15, "skill": "arcana" }, "text": ["A quiet rune."] }""",
+            """{ "id": "door", "kind": "door", "at": [4, 3] }""",
+            """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",
+        ]);
+        var s = Vault.At(new Tile(1, 1), rules);
+        var scores = Enumerable.Range(0, 4).Select(seat => (seat, score: Interactables.Passive(
+            SheetBuilder.ForCharacter(Doc(s).Members[s.Profiles[seat]!.Value.Value].Character, rules), "arcana"))).ToArray();
+        var expert = scores.OrderByDescending(x => x.score).First();
+        Assert.True(expert.score >= 15);
+        Assert.All(scores.Where(x => x.seat != expert.seat), x => Assert.True(x.score < 15));
+        Assert.NotEqual(0, expert.seat);
+        s.Harness.SetConnected(expert.seat, false);
+        Step(s, "e");
+        Assert.True(Saved(s, "rune") is null or { Found: false });
+        Assert.DoesNotContain("A quiet rune.", Sent(s));
+        s.Harness.SetConnected(expert.seat, true);
+        Step(s, "e");
+        Assert.True(Saved(s, "rune")!.Found);
+    }
+
+    [Fact]
     public void A_thing_hidden_by_arcana_is_noticed_by_the_partys_best_arcana_and_says_what_was_noticed()
     {
         var s = Vault.At(new Tile(2, 1), Clues.Value);
@@ -204,7 +228,7 @@ public sealed class HiddenThingsGameTests
     /// </summary>
     private static readonly Lazy<RulesPack> Stash = new(() => Vault.Load(
     [
-        """{ "id": "easy", "kind": "cache", "at": [7, 2], "name": "loose flagstone", "hidden": { "dc": 1, "skill": "investigation" }, "range": 1, "loot": [{ "item": "smoke_bomb" }] }""",
+        """{ "id": "easy", "kind": "cache", "at": [7, 2], "name": "loose flagstone", "searchOnly": true, "hidden": { "dc": 1, "skill": "investigation" }, "range": 1, "loot": [{ "item": "smoke_bomb" }] }""",
         """{ "id": "hard", "kind": "cache", "at": [3, 2], "hidden": 30, "range": 1 }""",
         """{ "id": "door", "kind": "door", "at": [4, 3] }""",
         """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",
@@ -301,7 +325,7 @@ public sealed class HiddenThingsGameTests
         Assert.True(Cursor(s)!.Roll!.Passed);
         var harder = Vault.Load(
         [
-            """{ "id": "easy", "kind": "cache", "at": [7, 2], "name": "loose flagstone", "hidden": { "dc": 30, "skill": "investigation" }, "range": 1 }""",
+            """{ "id": "easy", "kind": "cache", "at": [7, 2], "name": "loose flagstone", "searchOnly": true, "hidden": { "dc": 30, "skill": "investigation" }, "range": 1 }""",
             """{ "id": "hard", "kind": "cache", "at": [3, 2], "hidden": 1, "range": 1 }""",
             """{ "id": "door", "kind": "door", "at": [4, 3] }""",
             """{ "id": "gate", "kind": "gate", "at": [5, 6], "open": true }""",

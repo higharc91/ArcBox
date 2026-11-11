@@ -1,0 +1,83 @@
+{
+  "fixtures": 1,
+  "viewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "results": [
+    {
+      "width": 320,
+      "file": "walk-interact.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 320,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 21,
+      "sampledLabels": [
+        "ANA",
+        "You lead the party",
+        "Party menu",
+        "Hold a direction to walk. Follow the party on the TV map.",
+        "Give items or gold",
+        "The Ashen Ford",
+        "Map",
+        "Go to The Ford Bridge",
+        "Player1",
+        "Fighter",
+        "Player2",
+        "Cleric",
+        "Player3",
+        "Rogue",
+        "Player4",
+        "Wizard",
+        "Talk",
+        "Search"
+      ],
+      "scrollStates": 1
+    },
+    {
+      "width": 390,
+      "file": "walk-interact.json",
+      "text": [],
+      "targets": [],
+      "cssViewport": 390,
+      "overflow": false,
+      "denseMap": false,
+      "denseAlternative": true,
+      "axe": [],
+      "pixelFailures": [],
+      "samples": 18,
+      "sampledLabels": [
+        "ANA",
+        "You lead the party",
+        "Party menu",
+        "Hold a direction to walk. Follow the party on the TV map.",
+        "Give items or gold",
+        "The Ashen Ford",
+        "Map",
+        "Go to The Ford Bridge",
+        "Player1",
+        "Fighter",
+        "Player2",
+        "Cleric",
+        "Player3",
+        "Rogue",
+        "Player4",
+        "Wizard",
+        "Talk",
+        "Search"
+      ],
+      "scrollStates": 1
+    }
+  ]
+}

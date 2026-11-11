@@ -46,7 +46,9 @@
           "item": "oil_flask",
           "count": 1
         }
-      ]
+      ],
+      "searchOnly": true,
+      "range": 1
     },
     {
       "id": "hollow_satchel",

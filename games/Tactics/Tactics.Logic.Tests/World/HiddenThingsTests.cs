@@ -34,7 +34,8 @@ public sealed class HiddenThingsTests
         Assert.False(Interactables.Present(store, NoFlags));
 
         int Survival(string skill) => skill == "survival" ? 12 : 9;
-        Assert.Contains(Interactables.Finds(all, null, NoFlags, new Tile(118, 84), Survival), f => f.Def.Id == path.Id);
+        Assert.DoesNotContain(Interactables.Finds(all, null, NoFlags, path.At, Survival), f => f.Def.Id == path.Id);
+        Assert.True(path.SearchOnly);
         Assert.Contains(Interactables.Searchable(all, null, NoFlags, new Tile(118, 84)), d => d.Id == path.Id);
 
         int Investigation(string skill) => skill == "investigation" ? 13 : 9;
@@ -43,6 +44,33 @@ public sealed class HiddenThingsTests
         Assert.Contains(Interactables.Revealing(draft, all, null, NoFlags), f => f.Def.Id == hatch.Id);
         Assert.True(Interactables.Present(store, new HashSet<string> { "af_cellar_open" }));
         Assert.DoesNotContain(all, d => d.Sets.Any(s => s.StartsWith("ch1_", StringComparison.Ordinal)));
+    }
+
+    [Fact]
+    public void Search_only_secrets_ignore_even_extreme_passives_but_remain_searchable()
+    {
+        var def = Vault.Def("""{ "id": "c", "kind": "cache", "at": [1, 1], "hidden": 12, "searchOnly": true }""");
+        Assert.Empty(Interactables.Finds([def], null, NoFlags, def.At, 100));
+        Assert.Contains(def, Interactables.Searchable([def], null, NoFlags, def.At));
+        var json = JsonSerializer.Serialize(def with { Text = [], Requires = [], Unless = [], Sets = [], Loot = [], Targets = [], Reveals = [] }, ArcJson.Options);
+        Assert.True(JsonSerializer.Deserialize<InteractableDef>(json, ArcJson.Options)!.SearchOnly);
+    }
+
+    [Fact]
+    public void Each_regions_secret_budget_requires_active_discovery_without_passive_clue_bypasses()
+    {
+        var rules = RulesPack.Load([ContentPaths.BaseRules], ArtManifests.Load(ContentPaths.ContentBase));
+        foreach (var region in rules.Interactables.Values)
+        {
+            var secrets = region.Where(t => t.Hidden is not null).ToArray();
+            if (secrets.Length == 0) continue;
+            var active = secrets.Where(t => t.SearchOnly).ToArray();
+            Assert.True(active.Length * 3 >= secrets.Length);
+            foreach (var target in active)
+                foreach (var clue in region.Where(t => !t.SearchOnly))
+                    Assert.DoesNotContain(target.Id, Interactables.Revealing(clue, region, null,
+                        region.SelectMany(t => t.Requires).ToHashSet(StringComparer.Ordinal)).Select(f => f.Def.Id));
+        }
     }
 
     private static InteractableSave S(InteractableDef d) => Interactables.Initial(d);
