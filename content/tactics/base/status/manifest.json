@@ -153,5 +153,192 @@
   "notes": {
     "placement": "draw at the unit's anchor; shift overhead effects by headOffset[build]",
     "layer": "over: after the unit; under: before it"
-  }
+  },
+  "conditionIcons": {
+    "blinded": {
+      "icon": "hidden",
+      "reason": "Shares the hidden silhouette; the unit card and phone retain the full condition name."
+    },
+    "charmed": {
+      "icon": "charmed",
+      "reason": "Dedicated overhead glyph."
+    },
+    "frightened": {
+      "icon": "frightened",
+      "reason": "Dedicated overhead glyph."
+    },
+    "grappled": {
+      "icon": "grappled",
+      "reason": "Dedicated overhead glyph."
+    },
+    "incapacitated": {
+      "icon": "stunned",
+      "reason": "Shares the stunned silhouette; the unit card and phone retain the full condition name."
+    },
+    "invisible": {
+      "icon": "hidden",
+      "reason": "Shares the hidden silhouette; the unit card and phone retain the full condition name."
+    },
+    "paralysed": {
+      "icon": "stunned",
+      "reason": "Shares the stunned silhouette; the unit card and phone retain the full condition name."
+    },
+    "poisoned": {
+      "icon": "poisoned",
+      "reason": "Dedicated overhead glyph."
+    },
+    "prone": {
+      "icon": "prone",
+      "reason": "Dedicated overhead glyph."
+    },
+    "restrained": {
+      "icon": "ensnared",
+      "reason": "Shares the ensnared silhouette; the unit card and phone retain the full condition name."
+    },
+    "stunned": {
+      "icon": "stunned",
+      "reason": "Dedicated overhead glyph."
+    },
+    "unconscious": {
+      "icon": "sleeping",
+      "reason": "Shares the sleeping silhouette; the unit card and phone retain the full condition name."
+    },
+    "burning": {
+      "icon": "burning",
+      "reason": "Dedicated overhead glyph."
+    },
+    "bleeding": {
+      "icon": "bleeding",
+      "reason": "Dedicated overhead glyph."
+    },
+    "slowed": {
+      "icon": "slowed",
+      "reason": "Dedicated overhead glyph."
+    },
+    "hasted": {
+      "icon": "hasted",
+      "reason": "Dedicated overhead glyph."
+    },
+    "marked": {
+      "icon": "marked",
+      "reason": "Dedicated overhead glyph."
+    },
+    "vexed": {
+      "icon": "marked",
+      "reason": "Shares the marked silhouette; the unit card and phone retain the full condition name."
+    },
+    "lit": {
+      "icon": "marked",
+      "reason": "Shares the marked silhouette; the unit card and phone retain the full condition name."
+    },
+    "taunted": {
+      "icon": "taunted",
+      "reason": "Dedicated overhead glyph."
+    },
+    "helped": {
+      "icon": "helped",
+      "reason": "Dedicated overhead glyph."
+    },
+    "dodging": {
+      "icon": "dodging",
+      "reason": "Dedicated overhead glyph."
+    },
+    "disengaged": {
+      "icon": "disengaged",
+      "reason": "Dedicated overhead glyph."
+    },
+    "hidden": {
+      "icon": "hidden",
+      "reason": "Dedicated overhead glyph."
+    },
+    "hiding": {
+      "icon": "hidden",
+      "reason": "Shares the hidden silhouette; the unit card and phone retain the full condition name."
+    },
+    "mage_armor": {
+      "icon": "shielded",
+      "reason": "Shares the shielded silhouette; the unit card and phone retain the full condition name."
+    },
+    "hunters_mark": {
+      "icon": "marked",
+      "reason": "Shares the marked silhouette; the unit card and phone retain the full condition name."
+    },
+    "ensnared": {
+      "icon": "ensnared",
+      "reason": "Dedicated overhead glyph."
+    },
+    "barkskin": {
+      "icon": "shielded",
+      "reason": "Shares the shielded silhouette; the unit card and phone retain the full condition name."
+    },
+    "divine_smite": {
+      "icon": "marked",
+      "reason": "Shares the marked silhouette; the unit card and phone retain the full condition name."
+    },
+    "divine_smite_2": {
+      "icon": "marked",
+      "reason": "Shares the marked silhouette; the unit card and phone retain the full condition name."
+    },
+    "divine_smite_3": {
+      "icon": "marked",
+      "reason": "Shares the marked silhouette; the unit card and phone retain the full condition name."
+    },
+    "aura_of_protection": {
+      "icon": "blessed",
+      "reason": "Shares the blessed silhouette; the unit card and phone retain the full condition name."
+    },
+    "elemental_weapon": {
+      "icon": "blessed",
+      "reason": "Shares the blessed silhouette; the unit card and phone retain the full condition name."
+    },
+    "death_ward": {
+      "icon": "shielded",
+      "reason": "Shares the shielded silhouette; the unit card and phone retain the full condition name."
+    },
+    "hex": {
+      "icon": "marked",
+      "reason": "Curse target shares the marked silhouette; full name remains on the unit card."
+    },
+    "inspired": {
+      "icon": "inspired",
+      "reason": "Dedicated overhead glyph."
+    },
+    "countercharm": {
+      "icon": "inspired",
+      "reason": "Shares the inspired silhouette; the unit card and phone retain the full condition name."
+    },
+    "raging": {
+      "icon": "reckless",
+      "reason": "Shares the reckless silhouette; the unit card and phone retain the full condition name."
+    },
+    "reckless": {
+      "icon": "reckless",
+      "reason": "Dedicated overhead glyph."
+    },
+    "metamagic.twinned": {
+      "icon": "concentrating",
+      "reason": "Shares the concentrating silhouette; the unit card and phone retain the full condition name."
+    },
+    "metamagic.extended": {
+      "icon": "concentrating",
+      "reason": "Shares the concentrating silhouette; the unit card and phone retain the full condition name."
+    },
+    "metamagic.careful": {
+      "icon": "concentrating",
+      "reason": "Shares the concentrating silhouette; the unit card and phone retain the full condition name."
+    },
+    "metamagic.quickened": {
+      "icon": "concentrating",
+      "reason": "Shares the concentrating silhouette; the unit card and phone retain the full condition name."
+    },
+    "metamagic.distant": {
+      "icon": "concentrating",
+      "reason": "Shares the concentrating silhouette; the unit card and phone retain the full condition name."
+    },
+    "oiled": {
+      "icon": "oiled",
+      "reason": "Dedicated overhead glyph."
+    }
+  },
+  "unknownConditionIcon": "condition_unknown"
 }

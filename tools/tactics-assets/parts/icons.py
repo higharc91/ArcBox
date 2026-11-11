@@ -881,6 +881,61 @@ def a_second_wind() -> Canvas:
 
 
 # ----------------------------------------------------------------------------------------------- status icons
+def s_condition_glyph(kind: str) -> Canvas:
+    """Static silhouettes: meaning remains readable without colour or animation."""
+    c = new(STATUS)
+    if kind == "grappled":
+        c.ellipse(5, 6, 3, 4, "fx", 4)
+        c.ellipse(11, 10, 3, 4, "fx", 4)
+        c.ellipse(5, 6, 1, 2, "dark", 1)
+        c.ellipse(11, 10, 1, 2, "dark", 1)
+        c.line(5, 6, 11, 10, "fx", 5)
+    elif kind == "dodging":
+        c.polygon([(8, 1), (14, 4), (12, 11), (8, 15), (4, 11), (2, 4)], "fx", 4)
+        c.line(5, 9, 10, 4, "dark", 1)
+        c.line(8, 11, 12, 7, "dark", 1)
+    elif kind == "disengaged":
+        c.line(2, 3, 2, 13, "fx", 4)
+        c.line(2, 3, 6, 3, "fx", 4)
+        c.line(2, 13, 6, 13, "fx", 4)
+        c.rect(6, 7, 13, 9, "fx", 5)
+        c.polygon([(10, 4), (15, 8), (10, 12)], "fx", 5)
+    elif kind == "helped":
+        c.rect(2, 8, 5, 14, "fx", 4)
+        c.polygon([(5, 8), (8, 3), (10, 3), (10, 7), (14, 7), (13, 13), (6, 13)], "fx", 5)
+    elif kind == "taunted":
+        c.ellipse(8, 8, 6, 6, "fx", 4)
+        c.rect(4, 5, 6, 6, "dark", 1)
+        c.rect(10, 5, 12, 6, "dark", 1)
+        c.line(4, 10, 12, 10, "dark", 1)
+        c.line(6, 10, 9, 13, "dark", 1)
+    elif kind == "oiled":
+        c.rect(6, 1, 10, 4, "fx", 5)
+        c.polygon([(6, 4), (10, 4), (13, 8), (12, 14), (4, 14), (3, 8)], "fx", 4)
+        c.polygon([(8, 6), (11, 11), (8, 13), (6, 11)], "dark", 1)
+    elif kind == "reckless":
+        c.line(3, 2, 13, 14, "fx", 5)
+        c.line(13, 2, 3, 14, "fx", 5)
+        c.polygon([(2, 1), (7, 3), (4, 7)], "fx", 4)
+        c.polygon([(14, 1), (9, 3), (12, 7)], "fx", 4)
+    elif kind == "ensnared":
+        for x in (3, 7, 11):
+            c.line(x, 2, x + 2, 14, "fx", 4)
+        for y in (3, 7, 11):
+            c.line(2, y, 14, y + 2, "fx", 5)
+    elif kind == "sleeping":
+        for x, y, w in ((1, 8, 5), (8, 2, 6)):
+            c.line(x, y, x + w, y, "fx", 5)
+            c.line(x + w, y, x, y + w, "fx", 5)
+            c.line(x, y + w, x + w, y + w, "fx", 5)
+    else:
+        # Unknown future conditions still have a visible, deliberately generic diamond.
+        c.polygon([(8, 1), (15, 8), (8, 15), (1, 8)], "fx", 4)
+        c.rect(7, 4, 9, 9, "dark", 1)
+        c.rect(7, 11, 9, 12, "dark", 1)
+    return c
+
+
 def s_poisoned() -> Canvas:
     c = new(STATUS)
     c.ellipse(7, 10, 4.5, 4.5, "fx")
@@ -1679,6 +1734,8 @@ STATUSES = [
     _S("frightened", s_frightened, ["debuff", "control", "fear"], fx="mist", fx2="magic/arcane"),
     _S("charmed", s_charmed, ["debuff", "control", "charm"], fx="charm", core="magic/holy"),
     _S("injured", s_injured, ["debuff", "downed"], paper="bandage", fx="magic/blood"),
+    *[_S(key, lambda key=key: s_condition_glyph(key), ["condition"], fx="slash")
+      for key in ("grappled", "dodging", "disengaged", "helped", "taunted", "oiled", "reckless", "ensnared", "sleeping", "condition_unknown")],
 ]
 
 _POTIONS = {"potion_healing": "healing", "potion_mana": "mana", "potion_antidote": "antidote",
@@ -1984,3 +2041,16 @@ def _in_context(rendered: dict[str, Image.Image], frames: dict[str, Image.Image]
     for i, ic in enumerate(CATALOGUE):
         out.alpha_composite(rendered[ic.id], (22 + (i % 41) * 27, 560 + (i // 41) * 28))
     return out.crop((0, 0, W, 560 + 28 * (-(-len(CATALOGUE) // 41)) + 16))
+
+
+def build_status_icons() -> None:
+    """Refresh only the overhead atlas; preserve independently approved ability artwork."""
+    import json
+    out = PACK / "icons"
+    manifest = json.loads((out / "manifest.json").read_text())
+    sheet, rects = _atlas([ic.render() for ic in STATUSES], 6, STATUS)
+    save(sheet, out / "status.png")
+    for ic, rect in zip(STATUSES, rects):
+        manifest["icons"][ic.id] = {"atlas": "status.png", "rect": rect, "size": [STATUS, STATUS],
+                                    "category": "status", "tags": list(ic.tags)}
+    write_json(manifest, out / "manifest.json")

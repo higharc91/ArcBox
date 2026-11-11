@@ -292,7 +292,7 @@ public sealed class UnitArtTests
     [InlineData("vexed", "marked", true)]           // the rogue's Vex (#108)
     [InlineData("hunters_mark", "marked", true)]
     [InlineData("mage_armor", "shielded", true)]
-    [InlineData("unconscious", "sleeping", false)]    // the pack has the effect, but no icon of it
+    [InlineData("unconscious", "sleeping", true)]    // the pack has the effect, but no icon of it
     public void A_condition_finds_its_status_art(string condition, string effect, bool icon)
     {
         var look = Art.Value.Condition(condition)!;
@@ -315,8 +315,17 @@ public sealed class UnitArtTests
     [InlineData("grappled")]
     [InlineData("disengaged")]
     [InlineData("no_such_condition")]
-    public void A_condition_with_no_art_is_null(string condition)
-        => Assert.Null(Art.Value.Condition(condition));
+    public void Missing_overlays_still_have_a_visible_overhead_glyph(string condition)
+        => Assert.NotNull(Art.Value.Condition(condition)!.Icon);
+
+    [Fact]
+    public void Every_rules_condition_has_an_overhead_icon_and_unknowns_have_a_generic_glyph()
+    {
+        using var rules = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(Pack.Root, "rules", "conditions.json")));
+        foreach (var condition in rules.RootElement.EnumerateArray())
+            Assert.NotNull(Art.Value.Condition(condition.GetProperty("id").GetString()!)!.Icon);
+        Assert.NotEqual(Art.Value.Condition("grappled")!.Icon, Art.Value.Condition("unknown.future")!.Icon);
+    }
 
     [Fact]
     public void A_condition_that_has_its_own_art_now_shows_it_and_keeps_what_it_borrowed()

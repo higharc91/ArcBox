@@ -545,6 +545,9 @@ for _name in PLUGIN_SETS:
     if hasattr(_mod, "build"):          # a set still being written has no build() yet
         SETS[_name] = _mod.build
 
+from parts.icons import build_status_icons
+SETS["status-icons"] = build_status_icons
+
 PREVIEW_ONLY_SETS = {"palettes", "anims", "gallery", "showcase"}
 
 

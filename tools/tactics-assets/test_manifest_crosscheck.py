@@ -89,11 +89,13 @@ class ManifestCrosscheckTests(unittest.TestCase):
         self.assertEqual(set(), fallback - abilities, "Stale ability fallback entries")
 
         conditions = {entry["id"] for entry in json.loads((BASE / "rules/conditions.json").read_text())}
-        status = json.loads((BASE / "status/manifest.json").read_text())["statuses"]
-        icon_keys = set(icons["icons"])
-        fallback = set(ALLOW["conditionIconFallbacks"])
-        self.assertEqual(set(), conditions - set(status) - icon_keys - fallback, "Conditions without icons/overlays")
-        self.assertEqual(set(), fallback - conditions, "Stale condition fallback entries")
+        status = json.loads((BASE / "status/manifest.json").read_text())
+        policy = status["conditionIcons"]
+        self.assertEqual(conditions, set(policy), "Every condition requires an explicit overhead art decision")
+        for condition, entry in policy.items():
+            self.assertTrue(entry["reason"].strip(), f"Missing art decision: {condition}")
+            self.assertEqual("status.png", icons["icons"][entry["icon"]]["atlas"], condition)
+        self.assertEqual("status.png", icons["icons"][status["unknownConditionIcon"]]["atlas"])
 
         injuries = {entry["id"] for entry in json.loads((BASE / "rules/injuries.json").read_text())}
         injury_icons = json.loads((BASE / "injury_icons/manifest.json").read_text())["icons"]
@@ -103,6 +105,22 @@ class ManifestCrosscheckTests(unittest.TestCase):
         fallback = set(ALLOW["itemIconFallbacks"])
         self.assertEqual(set(), {f"item.{x}" for x in items} - ability_icons - fallback, "Items without icons")
         self.assertEqual(set(), fallback - {f"item.{x}" for x in items}, "Stale item fallback entries")
+
+    def test_overhead_policy_matches_its_generator_and_unknown_icon_is_distinct(self):
+        from parts.status import CONDITION_ICONS
+        from PIL import Image
+        status = json.loads((BASE / "status/manifest.json").read_text())
+        icons = json.loads((BASE / "icons/manifest.json").read_text())["icons"]
+        self.assertEqual(CONDITION_ICONS, status["conditionIcons"])
+        sheet = Image.open(BASE / "icons/status.png").convert("RGBA")
+        cells = []
+        for key in ("grappled", "dodging", "disengaged", "helped", "taunted", "oiled", "reckless", "ensnared", "sleeping", "condition_unknown"):
+            x, y, w, h = icons[key]["rect"]
+            cell = sheet.crop((x, y, x + w, y + h))
+            self.assertIsNotNone(cell.getbbox(), key)
+            self.assertEqual(0, cell.getchannel("A").getextrema()[0], key)
+            cells.append(cell.tobytes())
+        self.assertEqual(len(cells), len(set(cells)), "New glyph silhouettes must be distinct")
 
     def test_status_overlays_have_a_rules_condition_or_live_alias(self):
         conditions = {entry["id"] for entry in json.loads((BASE / "rules/conditions.json").read_text())}

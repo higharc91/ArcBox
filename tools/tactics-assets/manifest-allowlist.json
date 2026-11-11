@@ -170,36 +170,6 @@
     "water_elemental.undertow": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists.",
     "wraith.life_drain": "Monster/NPC or item action uses the generic ability fallback until bespoke icon art exists."
   },
-  "conditionIconFallbacks": {
-    "aura_of_protection": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "barkskin": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "countercharm": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "death_ward": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "disengaged": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "divine_smite": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "divine_smite_2": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "divine_smite_3": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "dodging": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "elemental_weapon": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "ensnared": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "grappled": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "hiding": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "vexed": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "helped": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "hunters_mark": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "incapacitated": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "invisible": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "mage_armor": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "metamagic.careful": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "metamagic.distant": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "metamagic.extended": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "metamagic.quickened": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "metamagic.twinned": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "oiled": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "reckless": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "taunted": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required.",
-    "unconscious": "Condition uses the generic status chip or a shared overlay; no dedicated icon is required."
-  },
   "itemIconFallbacks": {
     "item.oil_flask": "Uses the generic item icon until dedicated oil art exists."
   }
