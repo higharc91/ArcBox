@@ -15,4 +15,6 @@
     { "id": "ivo_desperate", "when": { "hpBelow": { "tag": "ivo_rime", "percent": 50 } },
       "do": [ { "say": { "speaker": "ivo_rime", "line": "You don't understand. She is still in there somewhere. I will not lose her twice!" } },
               { "phase": { "tag": "ivo_rime", "number": 1 } } ] }
-  ] }
+  ],
+  "environment": true
+}

@@ -45,5 +45,6 @@
   "objectives": {
     "win": "defeat_all"
   },
-  "storyOnly": true
+  "storyOnly": true,
+  "environment": true
 }

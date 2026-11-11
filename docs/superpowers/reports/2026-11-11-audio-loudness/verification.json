@@ -1,0 +1,14 @@
+{
+  "implementationCommit": "91c16b1a",
+  "verifiedMain": "cf156c46",
+  "lastFullGreenAudioTree": "cdb047fe",
+  "allAudioSourceUnchangedSinceLastFullGreen": true,
+  "registeredFiles": 321,
+  "uniqueFiles": 321,
+  "sfxFiles": 305,
+  "musicFiles": 16,
+  "rmsFallbackFiles": 55,
+  "largestTargetDeviationDb": 3.0,
+  "largestTruePeakDbtp": -1.0,
+  "failures": []
+}
