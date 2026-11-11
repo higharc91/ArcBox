@@ -13,6 +13,7 @@ namespace Tactics.Presentation.Board;
 /// </summary>
 public static class DemoBattle
 {
+    private const string Statuses = ":statuses";
     private const string Changed = ":changed";
     private const string Fight = ":fight";
     private const string Creatures = ":creatures";
@@ -39,6 +40,19 @@ public static class DemoBattle
     private static UnitView Unit(string id, string side, string? sprite, int x, int y, int hp, int maxHp, string life = "Up", int countdown = 0,
         params string[] conditions)
         => new(new UnitId(id), id, side, sprite, new Tile(x, y), hp, maxHp, 0, life, countdown, [.. conditions], null);
+
+    private static ImmutableArray<UnitView> StatusUnits() =>
+    [
+        Unit("Grappled / prone", "Party", "characters.class_fighter", 3, 3, 28, 34, "Up", 0, "grappled", "prone"),
+        Unit("Dodge / leave", "Party", "characters.class_rogue", 6, 3, 20, 20, "Up", 0, "dodging", "disengaged"),
+        Unit("Sleep / stun", "Party", "characters.class_cleric", 9, 3, 18, 22, "Up", 0, "unconscious", "incapacitated"),
+        Unit("Help / taunt", "Party", "characters.class_bard", 3, 6, 18, 22, "Up", 0, "helped", "taunted"),
+        Unit("Oil / reckless", "Party", "characters.class_barbarian", 6, 6, 28, 34, "Up", 0, "oiled", "reckless"),
+        Unit("Snare / unseen", "Party", "characters.class_ranger", 9, 6, 20, 24, "Up", 0, "ensnared", "invisible"),
+        Unit("Armor / aura", "Party", "characters.class_paladin", 3, 9, 28, 34, "Up", 0, "mage_armor", "aura_of_protection"),
+        Unit("Hex / smite", "Party", "characters.class_warlock", 6, 9, 18, 22, "Up", 0, "hex", "divine_smite"),
+        Unit("Spell / unknown", "Party", "characters.class_sorcerer", 9, 9, 18, 22, "Up", 0, "metamagic.twinned", "unknown.future"),
+    ];
 
     private static ImmutableArray<UnitView> Units() =>
     [
@@ -281,6 +295,7 @@ public static class DemoBattle
     /// <summary>The host view for a demo spec: a map id, with <c>:changed</c> or <c>:fight</c> or neither.</summary>
     public static TacticsHostView View(string spec)
     {
+        var statuses = spec.EndsWith(Statuses, StringComparison.Ordinal);
         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
         var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);
@@ -303,8 +318,8 @@ public static class DemoBattle
         var oakAmbush = spec.EndsWith(OakAmbush, StringComparison.Ordinal);
         var stoneAndMire = spec.EndsWith(StoneAndMire, StringComparison.Ordinal);
         var oathAndShadow = spec.EndsWith(OathAndShadow, StringComparison.Ordinal);
-        var map = nightCompanions ? spec[..^NightCompanions.Length] : prismaticFlames ? spec[..^PrismaticFlames.Length] : stoneSentinels ? spec[..^StoneSentinels.Length] : wildElements ? spec[..^WildElements.Length] : tideAndWyrm ? spec[..^TideAndWyrm.Length] : elementalTriad ? spec[..^ElementalTriad.Length] : groveWard ? spec[..^GroveWard.Length] : emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
-        var units = nightCompanions ? RefreshedNightCompanions() : prismaticFlames ? RefreshedPrismaticFlames() : stoneSentinels ? RefreshedStoneSentinels() : wildElements ? RefreshedWildElements() : tideAndWyrm ? RefreshedTideAndWyrm() : elementalTriad ? RefreshedElementalTriad() : groveWard ? RefreshedGroveWard() : emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
+        var map = statuses ? spec[..^Statuses.Length] : nightCompanions ? spec[..^NightCompanions.Length] : prismaticFlames ? spec[..^PrismaticFlames.Length] : stoneSentinels ? spec[..^StoneSentinels.Length] : wildElements ? spec[..^WildElements.Length] : tideAndWyrm ? spec[..^TideAndWyrm.Length] : elementalTriad ? spec[..^ElementalTriad.Length] : groveWard ? spec[..^GroveWard.Length] : emberFamiliar ? spec[..^EmberFamiliar.Length] : trailCompanion ? spec[..^TrailCompanion.Length] : oakAmbush ? spec[..^OakAmbush.Length] : stoneAndMire ? spec[..^StoneAndMire.Length] : oathAndShadow ? spec[..^OathAndShadow.Length] : rimeKeepers ? spec[..^RimeKeepers.Length] : hollowDead ? spec[..^HollowDead.Length] : boneWardens ? spec[..^BoneWardens.Length] : kindled ? spec[..^Kindled.Length] : roadAndHost ? spec[..^RoadAndHost.Length] : goblinRoles ? spec[..^GoblinRoles.Length] : mobRefresh ? spec[..^MobRefresh.Length] : creatures ? spec[..^Creatures.Length] : changed ? spec[..^Changed.Length] : fight ? spec[..^Fight.Length] : spec;
+        var units = statuses ? StatusUnits() : nightCompanions ? RefreshedNightCompanions() : prismaticFlames ? RefreshedPrismaticFlames() : stoneSentinels ? RefreshedStoneSentinels() : wildElements ? RefreshedWildElements() : tideAndWyrm ? RefreshedTideAndWyrm() : elementalTriad ? RefreshedElementalTriad() : groveWard ? RefreshedGroveWard() : emberFamiliar ? RefreshedEmberFamiliar() : trailCompanion ? RefreshedTrailCompanion() : oakAmbush ? RefreshedOakAmbush() : stoneAndMire ? RefreshedStoneAndMire() : oathAndShadow ? RefreshedOathAndShadow() : rimeKeepers ? RefreshedRimeKeepers() : hollowDead ? RefreshedHollowDead() : boneWardens ? RefreshedBoneWardens() : kindled ? RefreshedKindled() : roadAndHost ? RefreshedRoadAndHost() : goblinRoles ? RefreshedGoblinRoles() : mobRefresh ? RefreshedMobs() : creatures ? CreatureUnits() : fight ? Units() : [];
         var battle = new BattleView(map, map, 2, [.. units.Select(u => u.Id)], fight ? new UnitId("fighter") : null, units, [], null,
             changed ? Changes() : BoardChanges.None, ObjectivesDef.Default, fight ? new UnitId("rogue") : null);
         return new TacticsHostView("Battle", fight ? "rogue can react" : "Board demo", null, 1, [], null, battle, null, null);

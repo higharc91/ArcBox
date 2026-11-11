@@ -210,6 +210,8 @@ public sealed class UnitArt
     private readonly string _root;
     private readonly Dictionary<string, UnitSprite> _sprites = new(StringComparer.Ordinal);
     private readonly Dictionary<string, StatusEffect> _effects = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string> _conditionIcons = new(StringComparer.Ordinal);
+    private string? _unknownConditionIcon;
     private readonly Dictionary<string, ArtRect> _icons = new(StringComparer.Ordinal);
     private readonly Dictionary<(string Style, string Text), (ArtRect Rect, int Advance)> _glyphs = [];
     private readonly Dictionary<UnitTone, UnitSprite> _standIns = [];
@@ -338,7 +340,8 @@ public sealed class UnitArt
     {
         var alias = Aliases.GetValueOrDefault(id, id);
         var effect = _effects.GetValueOrDefault(id) ?? _effects.GetValueOrDefault(alias);
-        ArtRect? icon = _icons.TryGetValue(id, out var rect) || _icons.TryGetValue(alias, out rect) ? rect : null;
+        var iconKey = _conditionIcons.GetValueOrDefault(id, _unknownConditionIcon ?? id);
+        ArtRect? icon = _icons.TryGetValue(iconKey, out var rect) || _icons.TryGetValue(id, out rect) || _icons.TryGetValue(alias, out rect) ? rect : null;
         return effect is null && icon is null ? null : new ConditionLook(effect, icon);
     }
 
@@ -464,6 +467,11 @@ public sealed class UnitArt
 
     private void ReadStatus(JsonElement status, JsonElement icons)
     {
+        if (status.TryGetProperty("conditionIcons", out var conditions))
+            foreach (var entry in conditions.EnumerateObject())
+                _conditionIcons[entry.Name] = entry.Value.GetProperty("icon").GetString()!;
+        if (status.TryGetProperty("unknownConditionIcon", out var unknown))
+            _unknownConditionIcon = unknown.GetString();
         foreach (var offset in status.GetProperty("headOffset").EnumerateObject())
             _headOffsets[offset.Name] = offset.Value.GetInt32();
         foreach (var effect in status.GetProperty("statuses").EnumerateObject())

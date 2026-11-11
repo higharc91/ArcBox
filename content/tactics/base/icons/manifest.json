@@ -1699,6 +1699,176 @@
         "quest",
         "goblin"
       ]
+    },
+    "grappled": {
+      "atlas": "status.png",
+      "rect": [
+        1,
+        55,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "dodging": {
+      "atlas": "status.png",
+      "rect": [
+        19,
+        55,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "disengaged": {
+      "atlas": "status.png",
+      "rect": [
+        37,
+        55,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "helped": {
+      "atlas": "status.png",
+      "rect": [
+        55,
+        55,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "taunted": {
+      "atlas": "status.png",
+      "rect": [
+        73,
+        55,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "oiled": {
+      "atlas": "status.png",
+      "rect": [
+        91,
+        55,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "reckless": {
+      "atlas": "status.png",
+      "rect": [
+        1,
+        73,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "ensnared": {
+      "atlas": "status.png",
+      "rect": [
+        19,
+        73,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "sleeping": {
+      "atlas": "status.png",
+      "rect": [
+        37,
+        73,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
+    },
+    "condition_unknown": {
+      "atlas": "status.png",
+      "rect": [
+        55,
+        73,
+        16,
+        16
+      ],
+      "size": [
+        16,
+        16
+      ],
+      "category": "status",
+      "tags": [
+        "condition"
+      ]
     }
   },
   "abilityIcons": {
