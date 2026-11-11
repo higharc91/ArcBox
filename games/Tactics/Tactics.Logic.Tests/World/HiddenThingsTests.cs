@@ -52,6 +52,8 @@ public sealed class HiddenThingsTests
         var def = Vault.Def("""{ "id": "c", "kind": "cache", "at": [1, 1], "hidden": 12, "searchOnly": true }""");
         Assert.Empty(Interactables.Finds([def], null, NoFlags, def.At, 100));
         Assert.Contains(def, Interactables.Searchable([def], null, NoFlags, def.At));
+        var chest = def with { Kind = "chest" };
+        Assert.Empty(Interactables.Searchable([chest], null, NoFlags, chest.At));
         var json = JsonSerializer.Serialize(def with { Text = [], Requires = [], Unless = [], Sets = [], Loot = [], Targets = [], Reveals = [] }, ArcJson.Options);
         Assert.True(JsonSerializer.Deserialize<InteractableDef>(json, ArcJson.Options)!.SearchOnly);
     }

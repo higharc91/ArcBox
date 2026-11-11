@@ -15,3 +15,5 @@ Reproduce:
 ```sh
 dotnet run -c Release --project games/Tactics/Tactics.Sim -- --secret-audit --out /tmp/secrets.json
 ```
+
+The full run completed 7,750 .NET cases: 7,742 passed, seven strict voice tests failed on the 13 missing main recordings, and the walking model exposed a caption-expiry assumption. The model now predicts only the expired caption removal and compares every other host field exactly; its focused replay passes. Underfoot active searching also preserves the prohibition on revealing blocking objects under the party. A fresh complete run follows these corrections. Phone: 601/601 plus production build; Node: 24/24; Python groups all passed.
