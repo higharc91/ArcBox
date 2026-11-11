@@ -6,7 +6,7 @@
   "build": "standard",
   "layers": {
     "body": "human",
-    "headgear": "mask_hood",
+    "headgear": "stranger_mask_hood",
     "torso": "coat",
     "legs": "pants",
     "feet": "boots",
@@ -14,7 +14,7 @@
     "cape": "cloak"
   },
   "palette": {
-    "eyes": "eyes/gold",
+    "eyes": "eyes/dark",
     "leather": "leather/brown",
     "wood": "wood/oak",
     "metal": "metal/steel",
@@ -22,9 +22,9 @@
     "magic": "magic/arcane",
     "horn": "horn/ivory",
     "paint": "paint/woad",
-    "skin": "skin/ash",
+    "skin": "skin/bone",
     "cloth1": "cloth/charcoal",
-    "cloth2": "cloth/charcoal",
+    "cloth2": "cloth/slate",
     "blade": "metal/steel"
   },
   "tags": [

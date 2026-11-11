@@ -54,9 +54,8 @@
       "filter": "helm"
     },
     "hooded_stranger": {
-      "preset": "Sadaltager",
-      "pitch": -2,
-      "filter": "echo"
+      "preset": "Alnilam",
+      "pitch": -1
     },
     "ivo_rime": {
       "preset": "Enceladus"
@@ -466,28 +465,28 @@
       "main": "bark_halvard_victory_1.ab9db06a.ogg"
     },
     "bark_hooded_stranger_camp_1": {
-      "main": "bark_hooded_stranger_camp_1.3547d4cb.ogg"
+      "main": "bark_hooded_stranger_camp_1.497db76d.ogg"
     },
     "bark_hooded_stranger_camp_2": {
-      "main": "bark_hooded_stranger_camp_2.1c9a68ad.ogg"
+      "main": "bark_hooded_stranger_camp_2.0a49b1f6.ogg"
     },
     "bark_hooded_stranger_camp_3": {
-      "main": "bark_hooded_stranger_camp_3.1f726ade.ogg"
+      "main": "bark_hooded_stranger_camp_3.8a41e1d6.ogg"
     },
     "bark_hooded_stranger_camp_4": {
-      "main": "bark_hooded_stranger_camp_4.d26a83a2.ogg"
+      "main": "bark_hooded_stranger_camp_4.ef15bb26.ogg"
     },
     "bark_hooded_stranger_town_1": {
-      "main": "bark_hooded_stranger_town_1.3ac10faa.ogg"
+      "main": "bark_hooded_stranger_town_1.14986731.ogg"
     },
     "bark_hooded_stranger_town_2": {
-      "main": "bark_hooded_stranger_town_2.93452632.ogg"
+      "main": "bark_hooded_stranger_town_2.f8b62dbe.ogg"
     },
     "bark_hooded_stranger_town_3": {
-      "main": "bark_hooded_stranger_town_3.8c354560.ogg"
+      "main": "bark_hooded_stranger_town_3.ca0a8425.ogg"
     },
     "bark_hooded_stranger_town_4": {
-      "main": "bark_hooded_stranger_town_4.e238e97f.ogg"
+      "main": "bark_hooded_stranger_town_4.47f02ded.ogg"
     },
     "bark_ivo_rime_ally_down_1": {
       "main": "bark_ivo_rime_ally_down_1.4b1b763a.ogg"
@@ -1303,31 +1302,31 @@
       "main": "ch1_four_more_open_1.69b16b57.ogg"
     },
     "ch1_four_more_open_2": {
-      "main": "ch1_four_more_open_2.e7c6ba76.ogg"
+      "main": "ch1_four_more_open_2.c22484bb.ogg"
     },
     "ch1_four_more_open_3": {
-      "main": "ch1_four_more_open_3.4e18c8be.ogg"
+      "main": "ch1_four_more_open_3.cdfee82e.ogg"
     },
     "ch1_four_more_outl_1": {
-      "main": "ch1_four_more_outl_1.2dce8732.ogg"
+      "main": "ch1_four_more_outl_1.bb1a9f7e.ogg"
     },
     "ch1_four_more_where_1": {
-      "main": "ch1_four_more_where_1.438a7616.ogg"
+      "main": "ch1_four_more_where_1.8ecd1155.ogg"
     },
     "ch1_four_more_where_2": {
-      "main": "ch1_four_more_where_2.f93db736.ogg"
+      "main": "ch1_four_more_where_2.05936ef4.ogg"
     },
     "ch1_four_more_where_3": {
       "main": "ch1_four_more_where_3.17166954.ogg"
     },
     "ch1_four_more_where_4": {
-      "main": "ch1_four_more_where_4.7125d168.ogg"
+      "main": "ch1_four_more_where_4.cacec05a.ogg"
     },
     "ch1_four_more_who_1": {
-      "main": "ch1_four_more_who_1.3a1f4eeb.ogg"
+      "main": "ch1_four_more_who_1.8b1c3e82.ogg"
     },
     "ch1_four_more_why_1": {
-      "main": "ch1_four_more_why_1.3bd43b7c.ogg"
+      "main": "ch1_four_more_why_1.2e0648c2.ogg"
     },
     "ch1_granary_acolyte_1": {
       "main": "ch1_granary_acolyte_1.a4b408e4.ogg"
@@ -1468,7 +1467,7 @@
       "main": "ch1_maud_fell_6.b060e280.ogg"
     },
     "ch1_maud_fell_7": {
-      "main": "ch1_maud_fell_7.cafa5695.ogg"
+      "main": "ch1_maud_fell_7.ff114988.ogg"
     },
     "ch1_maud_fell_8": {
       "main": "ch1_maud_fell_8.43794a78.ogg"
@@ -1516,7 +1515,7 @@
       "main": "ch1_mayor_close_2.b7ee95c8.ogg"
     },
     "ch1_mayor_close_3": {
-      "main": "ch1_mayor_close_3.a49692f1.ogg"
+      "main": "ch1_mayor_close_3.1e7a975f.ogg"
     },
     "ch1_mayor_close_4": {
       "main": "ch1_mayor_close_4.634425e4.ogg"
@@ -2188,10 +2187,10 @@
       "main": "ch3_crypt_records_gods_1.a6d626d8.ogg"
     },
     "ch3_crypt_records_knew_1": {
-      "main": "ch3_crypt_records_knew_1.744336a2.ogg"
+      "main": "ch3_crypt_records_knew_1.c5ae031e.ogg"
     },
     "ch3_crypt_records_knew_2": {
-      "main": "ch3_crypt_records_knew_2.6428e52e.ogg"
+      "main": "ch3_crypt_records_knew_2.fe8defd7.ogg"
     },
     "ch3_crypt_records_last_page_1": {
       "main": "ch3_crypt_records_last_page_1.648df83b.ogg"
@@ -2254,13 +2253,13 @@
       "main": "ch3_crypt_records_stair_1.f3e641b5.ogg"
     },
     "ch3_crypt_records_stair_2": {
-      "main": "ch3_crypt_records_stair_2.dbe4ff14.ogg"
+      "main": "ch3_crypt_records_stair_2.73a8a249.ogg"
     },
     "ch3_crypt_records_tricked_1": {
       "main": "ch3_crypt_records_tricked_1.9561575a.ogg"
     },
     "ch3_crypt_records_why_now_1": {
-      "main": "ch3_crypt_records_why_now_1.f26ac058.ogg"
+      "main": "ch3_crypt_records_why_now_1.66c823f9.ogg"
     },
     "ch3_guest_right_arrive_1": {
       "main": "ch3_guest_right_arrive_1.1b73b1b4.ogg"
@@ -3205,7 +3204,7 @@
       "main": "ch5_epilogue_returned_wall_1.a147cbba.ogg"
     },
     "ch5_epilogue_returned_wall_2": {
-      "main": "ch5_epilogue_returned_wall_2.e0e066ca.ogg"
+      "main": "ch5_epilogue_returned_wall_2.633a75ab.ogg"
     },
     "ch5_last_vote_extinguish_1": {
       "main": "ch5_last_vote_extinguish_1.74d0936f.ogg"
@@ -3214,13 +3213,13 @@
       "main": "ch5_last_vote_extinguish_2.e812660d.ogg"
     },
     "ch5_last_vote_extinguish_3": {
-      "main": "ch5_last_vote_extinguish_3.0ffbed2e.ogg"
+      "main": "ch5_last_vote_extinguish_3.297446f5.ogg"
     },
     "ch5_last_vote_extinguish_4": {
       "main": "ch5_last_vote_extinguish_4.85500b06.ogg"
     },
     "ch5_last_vote_home_1": {
-      "main": "ch5_last_vote_home_1.fb5d63fe.ogg"
+      "main": "ch5_last_vote_home_1.78595b0c.ogg"
     },
     "ch5_last_vote_lock_1": {
       "main": "ch5_last_vote_lock_1.9ea89188.ogg"
@@ -3235,7 +3234,7 @@
       "main": "ch5_last_vote_open_3.76a82286.ogg"
     },
     "ch5_last_vote_open_4": {
-      "main": "ch5_last_vote_open_4.a1389bd1.ogg"
+      "main": "ch5_last_vote_open_4.e924527c.ogg"
     },
     "ch5_last_vote_open_5": {
       "main": "ch5_last_vote_open_5.b3af1421.ogg"
@@ -3256,13 +3255,13 @@
       "main": "ch5_last_vote_rekindle_2.00d4699a.ogg"
     },
     "ch5_last_vote_rekindle_3": {
-      "main": "ch5_last_vote_rekindle_3.f34ebe79.ogg"
+      "main": "ch5_last_vote_rekindle_3.01959427.ogg"
     },
     "ch5_last_vote_return_1": {
       "main": "ch5_last_vote_return_1.45ff789a.ogg"
     },
     "ch5_last_vote_return_2": {
-      "main": "ch5_last_vote_return_2.f0b42c19.ogg"
+      "main": "ch5_last_vote_return_2.a885a9fa.ogg"
     },
     "ch5_last_vote_return_3": {
       "main": "ch5_last_vote_return_3.e5ec8428.ogg"
@@ -3550,49 +3549,49 @@
       "main": "ch5_the_stranger_close_2.72e05ad6.ogg"
     },
     "ch5_the_stranger_close_3": {
-      "main": "ch5_the_stranger_close_3.5e38f9a7.ogg"
+      "main": "ch5_the_stranger_close_3.32cd731a.ogg"
     },
     "ch5_the_stranger_home_1": {
-      "main": "ch5_the_stranger_home_1.cf566164.ogg"
+      "main": "ch5_the_stranger_home_1.0a669fc0.ogg"
     },
     "ch5_the_stranger_kin_1": {
-      "main": "ch5_the_stranger_kin_1.e6d131ee.ogg"
+      "main": "ch5_the_stranger_kin_1.fdbea949.ogg"
     },
     "ch5_the_stranger_market_1": {
-      "main": "ch5_the_stranger_market_1.8e26e3ea.ogg"
+      "main": "ch5_the_stranger_market_1.c062bca4.ogg"
     },
     "ch5_the_stranger_more_1": {
-      "main": "ch5_the_stranger_more_1.007a3084.ogg"
+      "main": "ch5_the_stranger_more_1.5f0d33f8.ogg"
     },
     "ch5_the_stranger_open_1": {
       "main": "ch5_the_stranger_open_1.0e4943e1.ogg"
     },
     "ch5_the_stranger_open_2": {
-      "main": "ch5_the_stranger_open_2.72cf14b2.ogg"
+      "main": "ch5_the_stranger_open_2.5e7d4e2a.ogg"
     },
     "ch5_the_stranger_open_3": {
       "main": "ch5_the_stranger_open_3.79b4275a.ogg"
     },
     "ch5_the_stranger_open_4": {
-      "main": "ch5_the_stranger_open_4.dc4d2b0f.ogg"
+      "main": "ch5_the_stranger_open_4.5645bb67.ogg"
     },
     "ch5_the_stranger_open_5": {
-      "main": "ch5_the_stranger_open_5.42b4120d.ogg"
+      "main": "ch5_the_stranger_open_5.1d183d93.ogg"
     },
     "ch5_the_stranger_open_6": {
       "main": "ch5_the_stranger_open_6.4e2d9c5b.ogg"
     },
     "ch5_the_stranger_open_7": {
-      "main": "ch5_the_stranger_open_7.f99e6464.ogg"
+      "main": "ch5_the_stranger_open_7.a63fac91.ogg"
     },
     "ch5_the_stranger_pip_1": {
-      "main": "ch5_the_stranger_pip_1.5dcccc67.ogg"
+      "main": "ch5_the_stranger_pip_1.b3e98097.ogg"
     },
     "ch5_the_stranger_who_1": {
-      "main": "ch5_the_stranger_who_1.94bd9263.ogg"
+      "main": "ch5_the_stranger_who_1.657ba620.ogg"
     },
     "ch5_the_stranger_who_2": {
-      "main": "ch5_the_stranger_who_2.b269a6d2.ogg"
+      "main": "ch5_the_stranger_who_2.9efe3813.ogg"
     },
     "say_ford_assault_1": {
       "main": "say_ford_assault_1.fba9424c.ogg"

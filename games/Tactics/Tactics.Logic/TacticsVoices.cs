@@ -60,7 +60,7 @@ public static class TacticsVoices
         new(Npc("grisk"), "Grisk: nasal kobold foreman; rendered clips pitch +4", Voice("Algenib"), Fallback: new FallbackVoice(Pitch: 1.2599f)),
         new(Npc("halden_varrow"), "Halden Varrow: warm baritone, hoarse", Voice("Charon"), Fallback: new FallbackVoice()),
         new(Npc("halvard"), "Ser Halvard: deep and hollow inside the helm", Voice("Schedar"), Fallback: new FallbackVoice()),
-        new(Npc("hooded_stranger"), "The Hooded Stranger: shares scholarly.low; pitch and echo keep them apart", Voice("Sadaltager"), Fallback: new FallbackVoice()),
+        new(Npc("hooded_stranger"), "The Hooded Stranger: quiet, controlled, and close", Voice("Alnilam"), Fallback: new FallbackVoice()),
         new(Npc("ivo_rime"), "Ivo Rime: soft-spoken, exhausted", Voice("Enceladus"), Fallback: new FallbackVoice()),
         new(Npc("lark"), "Lark: androgynous, musical", Voice("Aoede"), Fallback: new FallbackVoice()),
         new(Npc("maren_sorrel"), "Maren Sorrel: warm, persuasive alto", Voice("Sulafat"), Fallback: new FallbackVoice()),

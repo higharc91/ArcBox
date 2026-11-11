@@ -79,10 +79,9 @@
       "note": "deep and hollow inside the helm"
     },
     "hooded_stranger": {
-      "preset": "Sadaltager",
-      "pitch": -2,
-      "filter": "echo",
-      "note": "shares scholarly.low; pitch and echo keep them apart"
+      "preset": "Alnilam",
+      "pitch": -1,
+      "note": "quiet, controlled, and close; a subtle shift distinguishes the steady player voice without echo"
     },
     "lark": {
       "preset": "Aoede",
