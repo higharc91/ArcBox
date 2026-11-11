@@ -587,11 +587,11 @@ public sealed class UnitPlanTests
     }
 
     [Fact]
-    public void Conditions_show_their_art_and_those_without_any_show_nothing()
+    public void Conditions_with_no_overlay_still_show_their_overhead_glyph()
     {
         var unit = One(null, Unit("a", "Party", 5, 5, conditions: ["poisoned", "hasted", "disengaged", "prone"]));
 
-        Assert.Equal(3, unit.Icons.Length);                                  // poisoned, hasted, prone: disengaged has no art
+        Assert.Equal(4, unit.Icons.Length);                                  // poisoned, hasted, disengaged and prone
         Assert.Equal("status/poisoned.png", Assert.Single(unit.Over).Path);
         Assert.Equal("status/hasted.png", Assert.Single(unit.Under).Path);   // prone has only an icon
     }
