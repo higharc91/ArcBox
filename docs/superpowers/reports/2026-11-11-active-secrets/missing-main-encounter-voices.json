@@ -1,0 +1,17 @@
+{
+  "say_keep_gate_1": {
+    "source": "content/tactics/base/rules/encounters/keep_gate.json",
+    "speaker": "halvard",
+    "text": "I had hoped you would turn back. I cannot yield the gate."
+  },
+  "say_hall_of_the_flame_1": {
+    "source": "content/tactics/base/rules/encounters/hall_of_the_flame.json",
+    "speaker": "maren_sorrel",
+    "text": "The circle is open. Bring your embers here and help me finish it!"
+  },
+  "say_hall_of_the_flame_2": {
+    "source": "content/tactics/base/rules/encounters/hall_of_the_flame.json",
+    "speaker": "maren_sorrel",
+    "text": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!"
+  }
+}

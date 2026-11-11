@@ -8,7 +8,7 @@ Decision 4: only connected members contribute passive scores; connection changes
 
 Decision 6: a shrine mends one existing minor (`mends: rest`) injury on its invoking member, once per shrine per campaign. Lasting injuries remain, and persisted `used` state prevents repeats after restart. Using it uninjured spends it. Wells and altars retain their existing words/flags. The trapped pier crate now contains one healing potion and 15 gold. No voices or audio change.
 
-Focused checks: 31 hidden-thing logic tests, 11 server discovery/search tests, 33 interaction tests, six shipped-campfire watch tests; zero skips and zero build warnings. Eight actual Chromium fixture/viewport checks (Search, walking/interactions and camp jobs at 320×844 and 390×844, reduced motion) report zero text-size, target-size, contrast or overflow failures. The strict full gate is also run; main's ten missing story recordings remain a merge blocker until resolved.
+Focused checks: 31 hidden-thing logic tests, 11 server discovery/search tests, 33 interaction tests, six shipped-campfire watch tests; zero skips and zero build warnings. Eight actual Chromium fixture/viewport checks (Search, walking/interactions and camp jobs at 320×844 and 390×844, reduced motion) report zero text-size, target-size, contrast or overflow failures. The strict full gate is also run; main's 13 missing recordings (ten lore lines plus [three encounter lines](missing-main-encounter-voices.json)) remain a merge blocker until resolved.
 
 Reproduce:
 
