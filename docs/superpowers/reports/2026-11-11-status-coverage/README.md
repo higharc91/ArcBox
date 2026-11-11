@@ -1,6 +1,6 @@
 # #184: every condition has overhead art
 
-All 44 rules conditions have an explicit icon decision in `status/manifest.json` (`conditionIcons`, with reasons). Dedicated static silhouettes cover grappling, dodging, disengaging, help, taunting, oil, reckless attacks, ensnaring and sleep. Other conditions share documented existing silhouettes; full names remain on phone and unit cards. Unknown conditions receive an exclamation diamond. The existing four-icon overhead limit remains, with identical icons deduplicated; all conditions remain available in the unit card.
+All 46 current rules conditions have an explicit icon decision in `status/manifest.json` (`conditionIcons`, with reasons). Dedicated static silhouettes cover grappling, dodging, disengaging, help, taunting, oil, reckless attacks, ensnaring and sleep. Other conditions share documented existing silhouettes; full names remain on phone and unit cards. Unknown conditions receive an exclamation diamond. The existing four-icon overhead limit remains, with identical icons deduplicated; all conditions remain available in the unit card.
 
 The cross-check requires exact equality between rules IDs and manifest decisions, a valid status-atlas glyph for every decision, a reason, matching generator policy, and distinct nonempty new glyphs. Generic fallback is reserved for unknown future conditions; a missing policy entry still fails the gate.
 
