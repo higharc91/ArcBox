@@ -62,7 +62,17 @@ public sealed class BasePackTests
             "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga",
             "water_elemental", "wolf", "wolf_roamer", "wolf_roamer_lone", "wraith", "zombie",
         ];
-        Assert.Equal(monsters, pack.Monsters.Keys);
+        string[] partySizeMonsters =
+        [
+            "ashmaw_size3", "ashmaw_size5", "ashmaw_size6",
+            "bandit_roamer_gang_size6", "boar_roamer_sounder_size6", "giant_bat_size5",
+            "giant_bat_size6", "giant_spider_size5", "hollow_bat_swarm_size5",
+            "hollow_bat_swarm_size6", "kobold_foreman_size6", "kobold_hollow_size6",
+            "kobold_roamer_diggers_size5", "kobold_roamer_diggers_size6", "kobold_roamer_patrol_size6",
+            "kobold_roamer_slinger_patrol_size6", "kobold_slinger_hollow_size6", "river_slime_size5",
+            "river_slime_size6", "wolf_roamer_size6",
+        ];
+        Assert.Equal(monsters.Concat(partySizeMonsters).Order(StringComparer.Ordinal), pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
         Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "mob_hollow_bats", "mob_hollow_kobolds", "mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "river_crossing", "warlord_bridge"],
             pack.Maps.Keys);

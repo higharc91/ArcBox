@@ -13,7 +13,8 @@
     "imp": "Needs imp attack, hurt and death calls.",
     "maren_sorrel": "Needs Maren attack, hurt and death voice.",
     "mother_skarrow": "Needs Mother Skarrow attack, hurt and death voice.",
-    "sapling": "Needs sapling attack, hurt and death wood sounds."
+    "sapling": "Needs sapling attack, hurt and death wood sounds.",
+    "bandit_roamer_gang_size6": "Shares bandit_roamer_gang's existing silent humanoid family; its attack, hurt and death grunts remain unrecorded."
   },
   "borrowed": {
     "boar": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
@@ -25,6 +26,7 @@
     "golem": "Dedicated golem family is silent; currently borrows elemental and needs golem attack, hurt and death stone sounds.",
     "hound": "Dedicated hound family is silent; currently borrows wolf and needs hound attack, hurt and death calls.",
     "ivo_rime": "Dedicated Ivo family is silent; currently borrows undead through the necromancer sprite and needs Ivo attack, hurt and death voice.",
-    "vorga": "Dedicated Vorga family is silent; currently borrows goblin through the goblin spear sprite and needs Vorga attack, hurt and death voice."
+    "vorga": "Dedicated Vorga family is silent; currently borrows goblin through the goblin spear sprite and needs Vorga attack, hurt and death voice.",
+    "boar_roamer_sounder_size6": "Size-six sounder keeps the existing boar/bear fallback; dedicated boar attack, hurt and death grunts remain unrecorded."
   }
 }

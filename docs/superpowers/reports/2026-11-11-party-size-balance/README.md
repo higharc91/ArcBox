@@ -16,6 +16,19 @@ Seeds 21–100 are [reported separately](later-seeds.md) and all 24 cells pass, 
 
 Mobs use `--sizes 5,6`; Hollow uses `--sizes 3,4,5,6` so all four boss sizes share a published schedule. The sampler advances across sizes, so compositions for a size can differ between these configurations; paired comparisons use matched schedules only. The existing four-player Ashmaw profile remains an explicit control, including its longer 13.16-round mean; the issue's adjacent-size win-rate guard passes without changing that owner's profile.
 
-Focused verification: 15 Hollow/phase cases, nine mob content cases, 28 preview cases, eight art-manifest checks, ten Python simulation-audit cases, no skips, zero build warnings. The acceptance audit checks every required cell, complete seeds/parties, duplicates, exact unrounded win rates, mean rounds and the adjacent-size guard. Missing or failing cells fail the command.
+Focused verification: 15 Hollow/phase cases, nine mob content cases, 28 preview cases, eight art-manifest checks, ten Python simulation-audit cases, 14 exact catalogue checks and 137 sound-bank checks, no skips, zero build warnings. The acceptance audit checks every required cell, complete seeds/parties, duplicates, exact unrounded win rates, mean rounds and the adjacent-size guard. Missing or failing cells fail the command.
 
-The native review helper now accepts `--tactics-demo=encounter:<id>:<size>`, using real encounter setup. All existing sprite and animation paths are reused. Native review also exposed an existing card layout defect: zero-width automatic wrapping cached a minimum height that pushed the words off-screen. Cards now measure lines at their actual width and update only when the displayed unit changes. Long unspaced names break by Unicode rune. The initial fixed six-player boar viewport shows all card fields within 1080p. Additional native evidence and the full gate are being finalized. Merges remain blocked by main's 13 missing recordings; strict voice tests remain unchanged.
+The native review helper now accepts `--tactics-demo=encounter:<id>:<size>`, using real encounter setup. All existing sprite and animation paths are reused. Native review also exposed an existing card layout defect: zero-width automatic wrapping cached a minimum height that pushed the words off-screen. Cards now measure lines at their actual width and update only when the displayed unit changes. Long unspaced names break by Unicode rune. Four fixed native Godot 1920×1080 viewports were visually reviewed: [six-player boars](native-boars-six.png), [six-player slimes](native-slimes-six.png), [three-player Ashmaw](native-ashmaw-three.png), [six-player Ashmaw](native-ashmaw-six.png). All card fields remain on-screen; [the baseline defect](card-before.png) is retained for comparison. Actual Chromium [deuteranopia](deuteranopia.png) and [protanopia](protanopia.png) simulations were also visually reviewed. Four real Chromium phone fixture/viewport audits (turn/status at 320×844 and 390×844, reduced motion) have zero size, target, contrast or overflow failures. No human usability or physical-TV testing is claimed. The complete gate is being finalized. Merges remain blocked by main's 13 missing recordings; strict voice tests remain unchanged.
+
+Sound metadata preserves the parent profiles: the new bandit gang remains explicitly documented as silent, while the new boar sounder keeps the existing borrowed bear family. No audio recordings are added, removed or altered. The catalogue regression still checks an exact inventory, including all twenty new size profiles.
+
+Reproduce the acceptance audit from the retained exports (the full files explicitly include rejected control cells, so use their proven unchanged subsets):
+
+```sh
+python3 tools/tactics-sim/balance_audit.py \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/final-mobs-unchanged.json.gz \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/corrected-fresh.json.gz \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/final-hollow-unchanged.json.gz \
+  --samples docs/superpowers/reports/2026-11-11-party-size-balance/raw/diggings-correction.json.gz \
+  --seed-max 100 --out /tmp/party-size-acceptance.json
+```
