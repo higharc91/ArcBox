@@ -23,17 +23,21 @@ public sealed class HollowEncounterTests
             {
                 var boss = Assert.Single(setup.Units, u => u.Sheet.Side == Side.Enemy);
                 Assert.Contains("fire", boss.Sheet.Resist);
-                Assert.Equal(size >= 4, boss.Sheet.Abilities.Contains(new AbilityId("ashmaw.party_maul")));
+                Assert.Contains(Maul(size), boss.Sheet.Abilities);
                 Assert.Equal(1, boss.Sheet.Resources["roar"]);
             }
         }
     }
 
-    [Fact]
-    public void Ashmaw_uses_its_attacks_and_keeps_them_when_the_ash_shake_phase_starts()
+    private static AbilityId Maul(int size) => new(size switch
+    { 1 or 2 => "ashmaw.maul", 4 => "ashmaw.party_maul", _ => $"ashmaw.maul_size{size}" });
+
+    [Theory]
+    [InlineData(3)] [InlineData(4)] [InlineData(5)] [InlineData(6)]
+    public void Ashmaw_uses_its_attacks_and_keeps_them_when_the_ash_shake_phase_starts(int size)
     {
-        var setup = Encounters.Setup("hollow_lair", BasePackTests.Party(4, Rules), Difficulty.Normal, Rules);
-        var positions = new[] { new Tile(8, 6), new Tile(8, 7), new Tile(9, 6), new Tile(9, 7) };
+        var setup = Encounters.Setup("hollow_lair", BasePackTests.Party(size, Rules), Difficulty.Normal, Rules);
+        var positions = new[] { new Tile(8, 6), new Tile(8, 7), new Tile(9, 6), new Tile(9, 7), new Tile(8, 8), new Tile(9, 8) };
         var hero = 0;
         setup = setup with { Units = [.. setup.Units.Select(u => u.Sheet.Side == Side.Enemy
             ? u with { Sheet = u.Sheet with { InitiativeBonus = 100 }, At = new(7, 6) }
@@ -55,12 +59,12 @@ public sealed class HollowEncounterTests
         state = state with { Units = state.Units.SetItem(ashmaw.Id, ashmaw with { Hp = ashmaw.Sheet.MaxHp / 2 - 1 }) };
         var phase = Battle.Apply(state, new EndTurn(state.Active!.Value), Rules).State.Units[ashmaw.Id];
         Assert.Contains(new AbilityId("ashmaw.ash_shake"), phase.Sheet.Abilities);
-        Assert.Contains(new AbilityId("ashmaw.party_maul"), phase.Sheet.Abilities);
+        Assert.Contains(Maul(size), phase.Sheet.Abilities);
     }
 
     [Theory]
-    [InlineData(1, 32)] [InlineData(2, 60)] [InlineData(3, 90)]
-    public void Smaller_parties_keep_the_original_bear_fight(int size, int hp)
+    [InlineData(1, 32)] [InlineData(2, 60)]
+    public void Solo_and_duo_keep_the_original_bear_fight(int size, int hp)
     {
         var setup = Encounters.Setup("hollow_lair", BasePackTests.Party(size, Rules), Difficulty.Normal, Rules);
         var boss = Assert.Single(setup.Units, u => u.Sheet.Side == Side.Enemy);
@@ -72,6 +76,27 @@ public sealed class HollowEncounterTests
         Assert.DoesNotContain(new AbilityId("ashmaw.party_maul"), boss.Sheet.Abilities);
         foreach (var attack in Rules.Abilities[new("ashmaw.maul")].Effects.OfType<AttackEffect>())
             Assert.Equal(Dice.Parse("1d6"), Assert.Single(attack.OnHit.OfType<DamageEffect>()).Dice!.At(2));
+    }
+
+    [Fact]
+    public void Group_profiles_keep_a_stable_identity_and_gradual_defensive_scaling()
+    {
+        var previousHp = 0;
+        var previousAc = 13;
+        for (var size = 3; size <= 6; size++)
+        {
+            var setup = Encounters.Setup("hollow_lair", BasePackTests.Party(size, Rules), Difficulty.Normal, Rules);
+            var boss = Assert.Single(setup.Units, u => u.Sheet.Side == Side.Enemy);
+            Assert.Equal(new UnitId("ashmaw"), boss.Id);
+            Assert.Equal("monsters.ashmaw", boss.Sheet.Sprite);
+            Assert.Contains("ashmaw", boss.Sheet.Tags);
+            Assert.Contains(Maul(size), boss.Sheet.Abilities);
+            Assert.InRange(boss.Sheet.Ac - previousAc, 0, 1);
+            Assert.InRange(boss.Sheet.MaxHp / (double)size, 50, 60);
+            if (previousHp != 0) Assert.InRange(boss.Sheet.MaxHp / (double)previousHp, 1, 4.0 / 3);
+            previousHp = boss.Sheet.MaxHp;
+            previousAc = boss.Sheet.Ac;
+        }
     }
 
     [Fact]

@@ -6,6 +6,17 @@ namespace Tactics.Presentation.Tests.Board;
 /// <summary><see cref="DemoBattle"/>: the dev-only <c>--tactics-demo</c> views.</summary>
 public sealed class DemoBattleTests
 {
+    [Theory]
+    [InlineData(3)] [InlineData(4)] [InlineData(5)] [InlineData(6)]
+    public void Encounter_review_uses_the_requested_party_size_and_real_setup(int size)
+    {
+        var battle = DemoBattle.Encounter("hollow_lair", Pack.Root, partySize: size).Battle!;
+        Assert.Equal(size, battle.Units.Count(u => u.Side == "Party"));
+        Assert.Single(battle.Units.Where(u => u.Side == "Enemy"));
+        Assert.Equal(size + 1, battle.Units.Select(u => u.At).Distinct().Count());
+        Assert.NotNull(battle.Name);
+    }
+
     [Fact]
     public void Tide_and_wyrm_review_places_two_bosses_with_human_references()
     {

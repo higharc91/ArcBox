@@ -27,7 +27,7 @@
         "3": 46,
         "4": 65,
         "5": 81,
-        "6": 98
+        "6": 92
       },
       "unitByParty": {
         "1": "bandit_roamer_lone",
@@ -35,7 +35,7 @@
         "3": "bandit_roamer",
         "4": "bandit_roamer_gang",
         "5": "bandit_roamer_gang",
-        "6": "bandit_roamer_gang"
+        "6": "bandit_roamer_gang_size6"
       }
     }
   ],

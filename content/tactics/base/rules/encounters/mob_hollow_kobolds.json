@@ -27,15 +27,15 @@
         "3": 48,
         "4": 68,
         "5": 85,
-        "6": 102
+        "6": 105
       },
       "unitByParty": {
         "1": "kobold_roamer_lone",
         "2": "kobold_roamer",
         "3": "kobold_roamer",
         "4": "kobold_roamer_diggers",
-        "5": "kobold_roamer_diggers",
-        "6": "kobold_roamer_diggers"
+        "5": "kobold_roamer_diggers_size5",
+        "6": "kobold_roamer_diggers_size6"
       }
     }
   ],

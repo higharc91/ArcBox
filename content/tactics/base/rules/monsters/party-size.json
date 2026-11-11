@@ -1,0 +1,886 @@
+[
+  {
+    "id": "wolf_roamer_size6",
+    "name": "Wolf",
+    "level": 1,
+    "cr": "1/4",
+    "xp": 50,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": {
+      "1": 14,
+      "3": 26
+    },
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d8+1",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [
+      "wolf.knockdown"
+    ],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.wolf.wildshape"
+  },
+  {
+    "id": "river_slime_size5",
+    "name": "River Slime",
+    "cr": "1",
+    "xp": 25,
+    "level": 1,
+    "move": 3,
+    "scores": {
+      "str": 16,
+      "dex": 6,
+      "con": 16,
+      "int": 1,
+      "wis": 6,
+      "cha": 1
+    },
+    "hp": 12,
+    "ac": 10,
+    "weapon": {
+      "id": "pseudopod",
+      "damage": "1d8+7",
+      "damageType": "acid",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "resist": [
+      "acid",
+      "slashing"
+    ],
+    "tags": [
+      "ooze"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.slime.green"
+  },
+  {
+    "id": "river_slime_size6",
+    "name": "River Slime",
+    "cr": "1",
+    "xp": 25,
+    "level": 1,
+    "move": 3,
+    "scores": {
+      "str": 16,
+      "dex": 6,
+      "con": 16,
+      "int": 1,
+      "wis": 6,
+      "cha": 1
+    },
+    "hp": 12,
+    "ac": 10,
+    "weapon": {
+      "id": "pseudopod",
+      "damage": "1d8+5",
+      "damageType": "acid",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "resist": [
+      "acid",
+      "slashing"
+    ],
+    "tags": [
+      "ooze"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.slime.green"
+  },
+  {
+    "id": "kobold_roamer_diggers_size5",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 16,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d8+2",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "brute",
+    "sprite": "characters.kobold",
+    "level": 1
+  },
+  {
+    "id": "kobold_roamer_diggers_size6",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 16,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d8+9",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "brute",
+    "sprite": "characters.kobold",
+    "level": 1
+  },
+  {
+    "id": "bandit_roamer_gang_size6",
+    "name": "Roadside Tough",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 12,
+      "dex": 18,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "hp": 12,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "handaxe",
+      "damage": "1d8+5",
+      "damageType": "slashing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [
+      "bandit.dirty_strike"
+    ],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "bandit"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "characters.bandit"
+  },
+  {
+    "id": "boar_roamer_sounder_size6",
+    "name": "Boar",
+    "cr": "1/2",
+    "xp": 100,
+    "level": 1,
+    "move": 5,
+    "scores": {
+      "str": 16,
+      "dex": 11,
+      "con": 14,
+      "int": 2,
+      "wis": 9,
+      "cha": 5
+    },
+    "hp": 20,
+    "ac": 12,
+    "weapon": {
+      "id": "tusk",
+      "damage": "1d10+1",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "boar.gore_charge"
+    ],
+    "passives": [],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "brute",
+    "sprite": "beasts.boar.brown"
+  },
+  {
+    "id": "hollow_bat_swarm_size6",
+    "name": "Hollow Bat",
+    "cr": "1/4",
+    "xp": 25,
+    "level": 1,
+    "move": 5,
+    "jump": 4,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 11,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 8,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d4+5",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.bat.dusk"
+  },
+  {
+    "id": "kobold_roamer_patrol_size6",
+    "name": "Kobold Scout",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 18,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 7,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "1d8+7",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "brute",
+    "sprite": "characters.kobold",
+    "level": 1
+  },
+  {
+    "id": "kobold_roamer_slinger_patrol_size6",
+    "name": "Kobold Scout Slinger",
+    "cr": "1/2",
+    "xp": 25,
+    "level": 1,
+    "scores": {
+      "str": 8,
+      "dex": 16,
+      "con": 11,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "hp": 8,
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "sling",
+      "damage": "1d6+7",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": false,
+      "ranged": true,
+      "range": 6,
+      "reach": false,
+      "tags": [
+        "simple"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "roaming_slinger",
+    "sprite": "characters.kobold_slinger"
+  },
+  {
+    "id": "ashmaw_size3",
+    "steadfast": true,
+    "name": "Ashmaw",
+    "level": 2,
+    "cr": "2",
+    "xp": 0,
+    "move": 4,
+    "attacks": 1,
+    "scores": {
+      "str": 21,
+      "dex": 12,
+      "con": 16,
+      "int": 2,
+      "wis": 12,
+      "cha": 7
+    },
+    "hp": 120,
+    "ac": 13,
+    "weapon": {
+      "id": "claws",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "ashmaw.maul_size3",
+      "ashmaw.cinder_roar"
+    ],
+    "passives": [
+      "ashmaw.roar_recharge"
+    ],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast",
+      "boss",
+      "ashmaw"
+    ],
+    "aiProfile": "ashmaw",
+    "sprite": "monsters.ashmaw",
+    "resources": {
+      "roar": 1
+    },
+    "resist": [
+      "fire"
+    ],
+    "phases": [
+      {
+        "hpBelow": 50,
+        "abilities": [
+          "ashmaw.ash_shake"
+        ],
+        "passives": []
+      }
+    ]
+  },
+  {
+    "id": "ashmaw_size5",
+    "steadfast": true,
+    "name": "Ashmaw",
+    "level": 2,
+    "cr": "2",
+    "xp": 0,
+    "move": 4,
+    "attacks": 1,
+    "scores": {
+      "str": 21,
+      "dex": 12,
+      "con": 16,
+      "int": 2,
+      "wis": 12,
+      "cha": 7
+    },
+    "hp": 120,
+    "ac": 14,
+    "weapon": {
+      "id": "claws",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "ashmaw.maul_size5",
+      "ashmaw.cinder_roar"
+    ],
+    "passives": [
+      "ashmaw.roar_recharge"
+    ],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast",
+      "boss",
+      "ashmaw"
+    ],
+    "aiProfile": "ashmaw",
+    "sprite": "monsters.ashmaw",
+    "resources": {
+      "roar": 1
+    },
+    "resist": [
+      "fire"
+    ],
+    "phases": [
+      {
+        "hpBelow": 50,
+        "abilities": [
+          "ashmaw.ash_shake"
+        ],
+        "passives": []
+      }
+    ]
+  },
+  {
+    "id": "ashmaw_size6",
+    "steadfast": true,
+    "name": "Ashmaw",
+    "level": 2,
+    "cr": "2",
+    "xp": 0,
+    "move": 4,
+    "attacks": 1,
+    "scores": {
+      "str": 21,
+      "dex": 12,
+      "con": 16,
+      "int": 2,
+      "wis": 12,
+      "cha": 7
+    },
+    "hp": 120,
+    "ac": 14,
+    "weapon": {
+      "id": "claws",
+      "damage": "1d6",
+      "damageType": "slashing",
+      "stat": "str",
+      "finesse": false,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "ashmaw.maul_size6",
+      "ashmaw.cinder_roar"
+    ],
+    "passives": [
+      "ashmaw.roar_recharge"
+    ],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast",
+      "boss",
+      "ashmaw"
+    ],
+    "aiProfile": "ashmaw",
+    "sprite": "monsters.ashmaw",
+    "resources": {
+      "roar": 1
+    },
+    "resist": [
+      "fire"
+    ],
+    "phases": [
+      {
+        "hpBelow": 50,
+        "abilities": [
+          "ashmaw.ash_shake"
+        ],
+        "passives": []
+      }
+    ]
+  },
+  {
+    "id": "giant_bat_size5",
+    "name": "Giant Bat",
+    "cr": "1/4",
+    "xp": 50,
+    "level": 1,
+    "move": 5,
+    "jump": 4,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 11,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 12,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d6+1",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "giant_bat.screech"
+    ],
+    "passives": [],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.bat.dusk"
+  },
+  {
+    "id": "giant_bat_size6",
+    "name": "Giant Bat",
+    "cr": "1/4",
+    "xp": 50,
+    "level": 1,
+    "move": 5,
+    "jump": 4,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 11,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 12,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d6+2",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "giant_bat.screech"
+    ],
+    "passives": [],
+    "skills": [
+      "perception"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.bat.dusk"
+  },
+  {
+    "id": "kobold_foreman_size6",
+    "name": "Grisk",
+    "cr": "1/2",
+    "xp": 0,
+    "scores": {
+      "str": 7,
+      "dex": 16,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": 32,
+    "ac": 14,
+    "armor": "Light",
+    "weapon": {
+      "id": "mining_pick",
+      "damage": "1d6+3",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [
+      "grisk.dig_faster"
+    ],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold",
+      "grisk"
+    ],
+    "aiProfile": "brute",
+    "sprite": "monsters.kobold_foreman",
+    "level": 2,
+    "resources": {}
+  },
+  {
+    "id": "giant_spider_size5",
+    "name": "Giant Spider",
+    "cr": "1",
+    "xp": 200,
+    "level": 2,
+    "jump": 4,
+    "scores": {
+      "str": 14,
+      "dex": 14,
+      "con": 12,
+      "int": 2,
+      "wis": 11,
+      "cha": 4
+    },
+    "hp": {
+      "1": 26,
+      "7": 40
+    },
+    "ac": 14,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d8",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "spider.web"
+    ],
+    "passives": [
+      "spider.venom"
+    ],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "beasts.spider.black"
+  },
+  {
+    "id": "kobold_hollow_size6",
+    "name": "Kobold",
+    "cr": "1/8",
+    "xp": 25,
+    "scores": {
+      "str": 7,
+      "dex": 16,
+      "con": 9,
+      "int": 8,
+      "wis": 7,
+      "cha": 8
+    },
+    "hp": {
+      "1": 7,
+      "7": 18
+    },
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "dagger",
+      "damage": "2d6+2",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "simple",
+        "light"
+      ]
+    },
+    "abilities": [],
+    "passives": [],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "coward",
+    "sprite": "characters.kobold"
+  },
+  {
+    "id": "kobold_slinger_hollow_size6",
+    "name": "Kobold Slinger",
+    "cr": "1/2",
+    "xp": 100,
+    "level": 2,
+    "scores": {
+      "str": 8,
+      "dex": 16,
+      "con": 11,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "hp": {
+      "1": 16,
+      "7": 22
+    },
+    "ac": 13,
+    "armor": "Light",
+    "weapon": {
+      "id": "sling",
+      "damage": "2d6+2",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": false,
+      "ranged": true,
+      "range": 6,
+      "reach": false,
+      "tags": [
+        "simple"
+      ]
+    },
+    "abilities": [
+      "kobold_slinger.fire_pot"
+    ],
+    "passives": [],
+    "skills": [
+      "stealth"
+    ],
+    "tags": [
+      "humanoid",
+      "kobold"
+    ],
+    "aiProfile": "archer",
+    "sprite": "characters.kobold_slinger"
+  }
+]

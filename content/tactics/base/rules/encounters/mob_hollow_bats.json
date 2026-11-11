@@ -26,7 +26,7 @@
         "2": 14,
         "3": 27,
         "4": 38,
-        "5": 48,
+        "5": 52,
         "6": 57
       },
       "unitByParty": {
@@ -35,7 +35,7 @@
         "3": "hollow_bat",
         "4": "hollow_bat_swarm",
         "5": "hollow_bat_swarm",
-        "6": "hollow_bat_swarm"
+        "6": "hollow_bat_swarm_size6"
       }
     }
   ],
