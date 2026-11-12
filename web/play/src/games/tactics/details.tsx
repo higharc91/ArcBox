@@ -16,7 +16,7 @@ export interface PortalDetails {
   level: number;
   races: Record<string, { name: string; facts: string[]; traits: string[] }>;
   classes: Record<string, { name: string; role: string; facts: string[]; levels: LevelGuide[]; subclasses: { id: string; name: string; levels: LevelGuide[] }[] }>;
-  backgrounds: Record<string, { name: string; facts: string[]; boosts: Partial<Record<StatKey, number>>; skills: string[] }>;
+  backgrounds: Record<string, { name: string; facts: string[]; boosts: Partial<Record<StatKey, number>>; skills: string[]; hook?: string }>;
   features: Record<string, { name: string; tags: string[]; text: string }>;
   skills: Record<string, { name: string; stat: StatKey; text: string }>;
   stats: Record<StatKey, { name: string; drives: string[] }>;
@@ -250,6 +250,7 @@ function Body({ details: d, topic: t, context, open }: { details: PortalDetails;
       if (!b) return null;
       return (
         <>
+          {b.hook && <p class="tx-background-hook">{b.hook}</p>}
           <Facts facts={b.facts} />
           <h3 class="tx-sect">Skills</h3>
           <div class="tx-chips">{b.skills.map((s) => <button key={s} type="button" class="tx-chipbtn" onClick={() => open({ kind: "skill", id: s })}>{d.skills[s]?.name ?? s}</button>)}</div>

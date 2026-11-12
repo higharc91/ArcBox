@@ -389,7 +389,8 @@ public sealed record StoryView(int Seq, string Scene, string Title, string State
     DateTimeOffset? Until, string? Campaign = null);
 
 /// <summary>An option of a question, for the TV, with who has voted for it: the tally is the TV's alone (5d flag 7).</summary>
-public sealed record StoryOptionView(string Id, string Label, string? Skill, int? Dc, ImmutableArray<string> Voters);
+public sealed record StoryOptionView(string Id, string Label, string? Skill, int? Dc, ImmutableArray<string> Voters,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Credit = null);
 
 /// <summary>A question open in a scene, for the TV.</summary>
 /// <param name="Party">True for a party vote; false for a choice that's the leader's.</param>
@@ -562,7 +563,7 @@ public sealed partial class TacticsGame
             TacticsPhase.Resuming => new WaitView($"Resuming… waiting for {string.Join(", ", Waiting())}"),
             _ => (ControllerView)new WaitView("Waiting…"),
         };
-        view = WithControlNotice(view, profile);
+        view = WithBackgroundSecret(WithControlNotice(view, profile), profile);
         // Recovery is rare and uses the existing header; it stays stable across walk presses/releases.
         if (_phase == TacticsPhase.Exploration && view is CustomView recovered && _worldRecoveryNotice is { } recovery)
             return recovered with { Header = recovery };

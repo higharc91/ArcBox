@@ -126,6 +126,7 @@ function OptionBody({ option, letter, tag }: { option: StoryOption; letter: stri
     <>
       <span class="tx-letter" aria-hidden="true">{letter}</span>
       <span class="tx-opt-text">
+        {option.credit && <small class="tx-personal-credit">{option.credit}</small>}
         <b>“{option.label}”</b>
         {option.needs && <small>{option.needs}</small>}
         {option.skill ? (
@@ -236,14 +237,14 @@ function VoteQuestion({ data, send, viewId, question }: CustomScreenProps & { qu
   const alerted = useAlertOnMount("yourTurn", question, d.canChoose);
   const { mine, earlier, tap: pick } = useAnswer(viewId, d.mine, d.tie, (id) => send("vote", { option: id }));
 
-  const eyebrow = d.tie ? "Tie-break" : d.party ? "Party vote" : "The leader's choice";
+  const eyebrow = d.tie ? "Tie-break" : d.party ? "Party vote" : d.personal ? "Your story" : "The leader's choice";
   const title = d.tie
     ? d.canChoose ? "Tied: you break it" : `Tied: ${d.decider ?? "the leader"} breaks it`
     : d.question ? d.question
     : d.party
       ? d.canChoose ? "Cast your vote" : "The party is voting"
-      : d.canChoose ? "You choose for the party" : `${d.decider ?? "The leader"} chooses for the party`;
-  const hint = !d.canChoose
+      : d.personal ? "Choose your personal option" : d.canChoose ? "You choose for the party" : `${d.decider ?? "The leader"} chooses for the party`;
+  const hint = d.personal ? "Your character unlocked this option. The leader chooses the other options." : !d.canChoose
     ? "Follow the choice and its result on the TV."
     : d.tie
       ? "Only the tied options are left."

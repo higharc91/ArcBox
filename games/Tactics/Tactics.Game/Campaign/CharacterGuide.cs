@@ -32,7 +32,8 @@ public sealed record ClassGuide(string Name, string Role, ImmutableArray<string>
 
 /// <summary>A background: its ability boosts, its skills (by id) and its keepsake.</summary>
 public sealed record BackgroundGuide(string Name, ImmutableArray<string> Facts, ImmutableSortedDictionary<Stat, int> Boosts,
-    ImmutableArray<string> Skills);
+    ImmutableArray<string> Skills,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)] string? Hook = null);
 
 /// <summary>An ability or passive: its name, what it costs or limits (<paramref name="Tags"/>) and what it does.</summary>
 public sealed record FeatureGuide(string Name, ImmutableArray<string> Tags, string Text);
@@ -220,7 +221,7 @@ public static class CharacterGuide
         ];
         if (!string.IsNullOrEmpty(b.Trinket))
             facts.Add($"Keepsake: {b.Trinket}{NotInBattles}.");
-        return new BackgroundGuide(b.Name, [.. facts], b.Boosts, b.Skills.IsDefault ? [] : b.Skills);
+        return new BackgroundGuide(b.Name, [.. facts], b.Boosts, b.Skills.IsDefault ? [] : b.Skills, b.Hook);
     }
 
     // ---- Features -------------------------------------------------------------------------------------------------

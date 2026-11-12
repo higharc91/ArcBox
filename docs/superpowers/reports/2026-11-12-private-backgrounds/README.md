@@ -1,0 +1,11 @@
+# Personal background hooks and secret delivery (#208)
+
+LoreBook now reads background hooks, private secrets and their chapter/flag unlocks. Rules contain only the public hook, cross-checked against lore; the creator and character sheet show it. Secrets are added only to the authenticated character owner's phone view, never the TV or another character's packet. Dismissal is persisted per member/background and survives restart.
+
+Personal options identify the unlocking background/race/class and character. The TV label and phone credit name the owner (for example, Soldier · Kara). The owner can select their option even when another player leads. Other ordinary choices remain the leader's. The leader may back a personal choice only after the owner explicitly chooses it; that agreement is retained in the saved vote ledger. Timer defaults exclude unapproved personal choices. No voiced text, casting or art changes.
+
+Validation: four backend tests cover private delivery, creator hooks, unlock conditions, acknowledgement/restart, credited option views, rejected unauthorised inputs, owner choice and subsequent leader agreement. All 32 existing story-vote tests pass. Forty-four focused phone tests and the production build pass; .NET builds have zero warnings and no focused test is skipped.
+
+Chromium checks at 320×844 and 390×844 cover creator, secret modal, personal owner and leader screens. The creator uses the production portal with a fixture API; game screens use a separately production-bundled component harness fed exact server fixtures. These are layout/focus/permission-display checks, not an end-to-end network privacy test; backend tests check packet privacy. All eight views have no horizontal overflow. The secret modal keeps focus inside its dialog. Reduced motion is enabled for the game-screen checks. Sources and screenshots are retained here; copy the harness files to web/play/evidence-backgrounds.{html,tsx} when rebuilding them, keeping imports relative to the web app.
+
+Final integrated full-gate and native Godot personal-option evidence remain required. Existing main full-check failures still block merging; no physical TV or human usability test is claimed.

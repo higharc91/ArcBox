@@ -1,0 +1,78 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "role": "secret",
+    "overflow": false,
+    "focusManaged": true,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "role": "owner",
+    "overflow": false,
+    "focusManaged": null,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "role": "leader",
+    "overflow": false,
+    "focusManaged": null,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "role": "creator",
+    "overflow": false,
+    "production": true,
+    "fixtureApi": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "role": "secret",
+    "overflow": false,
+    "focusManaged": true,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "role": "owner",
+    "overflow": false,
+    "focusManaged": null,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "role": "leader",
+    "overflow": false,
+    "focusManaged": null,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "role": "creator",
+    "overflow": false,
+    "production": true,
+    "fixtureApi": true
+  }
+]

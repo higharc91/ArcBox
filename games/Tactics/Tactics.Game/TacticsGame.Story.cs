@@ -798,15 +798,20 @@ public sealed partial class TacticsGame
         var member = profile.Value;
         if (pick is null || !Questioning || roller != (_checking is not null) || !Voters().Any(p => p.Profile!.Value.Value == member))
             return;
+        var offeredOption = _checking is null ? _offered.FirstOrDefault(o => o.Id == pick) : null;
+        if (offeredOption is not null && !MayChooseOption(member, offeredOption)) return;
         if (_telling == StoryStates.TieBreak)
         {
             if (member == Decider() && _tied.Contains(pick))
                 Resolve(pick);
             return;
         }
-        if ((!PartyQuestion && member != _lead) || !Answers().Contains(pick))
+        if ((!PartyQuestion && member != _lead && offeredOption?.Tags.Any != true) || !Answers().Contains(pick))
             return;
         _votes[PartyQuestion ? member : LeaderPick] = pick;
+        if (!PartyQuestion && offeredOption is { Tags.Any: true } && OptionOwners(offeredOption).Contains(member))
+            _votes[member] = pick; // Persist the owner's explicit agreement if the leader backs this choice.
+
         if (!PartyQuestion)
             _pickedBy = member;
         Reclose();
@@ -824,6 +829,10 @@ public sealed partial class TacticsGame
         if (LootVote) { LootVoteDue(); return; }      // only the players here count (USER DECISION 1)
         if (!Questioning || CurrentNode() is null)
             return;
+        if (_checking is null && !PartyQuestion && _votes.TryGetValue(LeaderPick, out var savedPick)
+            && _offered.FirstOrDefault(o => o.Id == savedPick) is { Tags.Any: true } savedOption
+            && !MayChooseOption(_pickedBy ?? _lead ?? "", savedOption)) _votes.Remove(LeaderPick);
+        if (_checking is null && DefaultOptions.IsEmpty) { Hold(); return; }
         switch (_telling)
         {
             case StoryStates.TieBreak:
@@ -832,12 +841,12 @@ public sealed partial class TacticsGame
             case StoryStates.Asking when !PartyQuestion:
                 Resolve(_votes.TryGetValue(LeaderPick, out var pick) && Answers().Contains(pick)
                     ? pick
-                    : SceneRun.Unanswered(_offered, vote: false).Id);
+                    : SceneRun.Unanswered(DefaultOptions, vote: false).Id);
                 return;
         }
         var unanswered = _checking is { Check: { } check }
             ? (Func<ImmutableArray<string>, string>)(_ => SkillCheck.Best(Cards(check.Skill).Select(c => (c.Member, c.Bonus))))
-            : _ => SceneRun.Unanswered(_offered, vote: true).Id;
+            : _ => SceneRun.Unanswered(DefaultOptions, vote: true).Id;
         switch (VoteRules.Close(Tally(), _lead, FirstConnected(), unanswered))
         {
             case Won won:
@@ -1074,12 +1083,15 @@ public sealed partial class TacticsGame
     /// <summary>What's on offer now: everything, or only the tied during a tie-break.</summary>
     private IEnumerable<SceneOption> OptionsShown() => _telling == StoryStates.TieBreak ? _offered.Where(o => _tied.Contains(o.Id)) : _shopOptions.IsEmpty ? _offered : _shopOptions;
 
-    private object OptionPhone(SceneOption option)
+    private object OptionPhone(SceneOption option, string member)
     {
         var node = System.Text.Json.JsonSerializer.SerializeToNode(new { id = option.Id, label = option.Label, skill = option.Check?.Skill, dc = option.Check?.Dc }, ArcJson.Options)!.AsObject();
+        if (OptionCredit(option) is { } credit) node["credit"] = credit;
+        if (option.Tags.Any || !PartyQuestion && member != Decider() && OptionsShown().Any(o => o.Tags.Any && OptionOwners(o).Contains(member)))
+            node["can"] = MayChooseOption(member, option) && CanPayGold(option.Gold);
         if (option.Gold < 0)
         {
-            node["can"] = CanPayGold(option.Gold);
+            node["can"] = CanPayGold(option.Gold) && MayChooseOption(member, option);
             node["needs"] = $"needs {-(long)option.Gold} gold";
         }
         return node;
@@ -1090,9 +1102,9 @@ public sealed partial class TacticsGame
         var votes = LiveVotes().ToList();
         var of = PartyQuestion ? Voters().Select(p => p.Profile!.Value.Value).Union(votes.Select(v => v.Key)).Count() : 1;
         return new StoryAskView(PartyQuestion, votes.Count, of, Away(), _telling == StoryStates.TieBreak, Decider() is { } d ? PlayerName(d) : null,
-            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, !CanPayGold(o.Gold) ? $"{o.Label} (needs {-(long)o.Gold} gold)" : o.Label, o.Check?.Skill, o.Check?.Dc, PartyQuestion
+            _closeAt, [.. OptionsShown().Select(o => new StoryOptionView(o.Id, (OptionCredit(o) is { } credit ? credit + "\n" : "") + (!CanPayGold(o.Gold) ? $"{o.Label} (needs {-(long)o.Gold} gold)" : o.Label), o.Check?.Skill, o.Check?.Dc, PartyQuestion
                 ? [.. _players.Where(p => votes.Any(v => v.Key == p.Profile?.Value && v.Value == o.Id)).Select(p => p.Name)]
-                : votes.Any(v => v.Value == o.Id) && Leader is { } leader ? [leader.Name] : []))], _closeAt is null ? null : _span);
+                : votes.Any(v => v.Value == o.Id) && _pickedBy is { } picker ? [PlayerName(picker)] : [], OptionCredit(o)))], _closeAt is null ? null : _span);
     }
 
     /// <summary>
@@ -1156,8 +1168,8 @@ public sealed partial class TacticsGame
             var vote = JsonSerializer.SerializeToNode(new
             {
                 party = PartyQuestion,
-                canChoose = Decider() is { } decider ? decider == member : true,
-                options = OptionsShown().Select(OptionPhone),
+                canChoose = Decider() is { } decider ? decider == member || _telling != StoryStates.TieBreak && OptionsShown().Any(o => o.Tags.Any && OptionOwners(o).Contains(member)) : true,
+                options = OptionsShown().Select(o => OptionPhone(o, member)),
                 mine = MineOf(member),
                 chosen = PartyChoice(),
                 tie = _telling == StoryStates.TieBreak,
@@ -1166,6 +1178,8 @@ public sealed partial class TacticsGame
                 vip = IsVip(player),
                 difficulty = CampaignDifficulty.ToString(),
             }, ArcJson.Options)!.AsObject();
+            if (!PartyQuestion && _telling != StoryStates.TieBreak && member != Decider() && OptionsShown().Any(o => o.Tags.Any && OptionOwners(o).Contains(member)))
+                vote["personal"] = true;
             // The loot vote says what it asks, and which of the votes it is, so each item's is a new question (USER DECISION 1).
             if (LootVote && scene is not null)
             {

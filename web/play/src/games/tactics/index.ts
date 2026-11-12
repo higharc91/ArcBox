@@ -2,6 +2,7 @@ import type { GameModule } from "../module";
 import "./fonts";
 import { lobbyTheme } from "./lobby";
 import { TacticsPortal } from "./portal";
+import { withBackgroundSecret } from "./backgrounds";
 import { PickClass, PickEncounter, ReactPrompt, Results, Status, Turn } from "./screens";
 import { Check, Dialogue, Vote } from "./story";
 import { Camp } from "./camp";
@@ -13,10 +14,10 @@ import "./tactics.css";
 /** Wardenflame's (ArcBox Tactics') phone module: its CustomView screens (adapter spec §8), named as the game sends them, and its portal. */
 export const module: GameModule = {
   id: "tactics",
-  screens: {
+  screens: Object.fromEntries(Object.entries({
     pickClass: PickClass, pickEncounter: PickEncounter, turn: Turn, react: ReactPrompt, status: Status, results: Results, walk: Walk,
     questLog: QuestLog, dialogue: Dialogue, vote: Vote, check: Check, shop: Shop, "camp-job": Camp, "camp-target": Camp, "camp-roll": Camp,
-  },
+  }).map(([id, screen]) => [id, withBackgroundSecret(screen)])),
   portal: TacticsPortal,
   lobbyTheme,
 };

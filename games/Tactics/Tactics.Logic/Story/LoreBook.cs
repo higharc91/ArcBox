@@ -34,8 +34,11 @@ public sealed record Arc(string Id, int Chapter, string Region, string Title, Im
 /// needs to play: every field it reads is there and of the right type, and each scene's graph holds together (see
 /// <see cref="ReadScene"/>). A pack with no lore, or whose lore lists no <c>arcs.json</c>, has no arcs and no scenes.
 /// </summary>
+public sealed record BackgroundLore(string Id, string Hook, string? Secret, string? UnlockFlag, int? UnlockChapter);
+
 public sealed partial class LoreBook
 {
+    public ImmutableSortedDictionary<string, BackgroundLore> Backgrounds { get; private init; } = ImmutableSortedDictionary<string, BackgroundLore>.Empty;
     private readonly ImmutableSortedDictionary<string, Arc> _byRegion;
     private readonly ImmutableDictionary<string, ImmutableArray<SceneDef>> _scenesByBeat;
     private readonly ImmutableDictionary<string, LoreCharacter> _characters;
@@ -221,9 +224,12 @@ public sealed partial class LoreBook
         if (places.GroupBy(p => p.Id, StringComparer.Ordinal).FirstOrDefault(g => g.Count() > 1) is { } named)
             throw new InvalidDataException($"{regionsPath}: the place '{named.Key}' is listed twice.");
 
+        var backgrounds = files.Contains("backgrounds.json")
+            ? ReadFile(Path.Combine(lore, "backgrounds.json"), root => List(root, "backgrounds", "backgrounds", required: true).Select(ReadBackground).ToImmutableSortedDictionary(b => b.Id, b => b, StringComparer.Ordinal))
+            : ImmutableSortedDictionary<string, BackgroundLore>.Empty;
         var lines = scenes.SelectMany(s => s.Lines).Select(l => l.Id).Concat(barks.LineIds).ToImmutableHashSet(StringComparer.Ordinal);
         return new LoreBook(arcs, scenes.ToImmutable(), characters, Clips(Path.Combine(lore, "audio"), lines, source),
-            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable()) { _source = source, Barks = barks, Conversations = conversations.ToImmutable(), Quests = quests };
+            places.ToImmutableDictionary(p => p.Id, p => p.Name, StringComparer.Ordinal), warnings.ToImmutable()) { _source = source, Barks = barks, Conversations = conversations.ToImmutable(), Quests = quests, Backgrounds = backgrounds };
     }
 
     /// <summary>What of <paramref name="scene"/> can never show (<see cref="Warnings"/>), node by node.</summary>
@@ -285,6 +291,19 @@ public sealed partial class LoreBook
         {
             throw new InvalidDataException($"{path} can't be read as lore: {ex.Message}", ex);
         }
+    }
+
+    private static BackgroundLore ReadBackground(JsonElement e)
+    {
+        var id = Required(e, "id", "a background"); var where = $"background '{id}'";
+        var hook = Required(e, "hook", where);
+        if (!e.TryGetProperty("secret", out var secret)) return new(id, hook, null, null, null);
+        var unlock = Field(secret, "unlock", where);
+        var flag = Optional(unlock, "flag", where);
+        int? chapter = unlock.TryGetProperty("chapter", out _) ? Whole(unlock, "chapter", where) : null;
+        if ((flag is null) == (chapter is null) || chapter is < 1)
+            throw new BadLore($"{where} secret needs one unlock flag or positive chapter.");
+        return new(id, hook, Required(secret, "text", where), flag, chapter);
     }
 
     private static Arc ReadArc(JsonElement e)
