@@ -135,6 +135,9 @@ internal sealed partial class Validation
             var def = Deserialize<MonsterDef>(e, file, ptr);
             if (def is null)
                 return null;
+            if (def.Xp < 0) Error(file, Pointer.Append(ptr, "xp"), "Monster XP must be nonnegative; encounter rewards are authored separately.");
+            if (!System.Text.RegularExpressions.Regex.IsMatch(def.Cr ?? "", @"^(0|[1-9][0-9]*|1/[248])$"))
+                Error(file, Pointer.Append(ptr, "cr"), "Challenge rating must be a nonnegative integer or 1/2, 1/4, 1/8.");
             Levels(def.Hp, file, Pointer.Append(ptr, "hp"));
             Refs(RefKind.Ability, def.Abilities.Select(a => a.Value), file, Pointer.Append(ptr, "abilities"));
             Refs(RefKind.Passive, def.Passives, file, Pointer.Append(ptr, "passives"));

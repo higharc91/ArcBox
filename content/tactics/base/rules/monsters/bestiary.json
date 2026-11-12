@@ -1,0 +1,310 @@
+[
+  {
+    "id": "crab",
+    "name": "Shore Crab",
+    "level": 1,
+    "cr": "1",
+    "xp": 100,
+    "move": 3,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 16,
+    "ac": 15,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d6",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "crab.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.crab.shore"
+  },
+  {
+    "id": "gargoyle",
+    "name": "Granite Gargoyle",
+    "level": 5,
+    "cr": "2",
+    "xp": 500,
+    "move": 4,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 72,
+    "ac": 16,
+    "weapon": {
+      "id": "bite",
+      "damage": "2d6",
+      "damageType": "bludgeoning",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "gargoyle.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "construct"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.gargoyle.granite"
+  },
+  {
+    "id": "harpy",
+    "name": "Dusk Harpy",
+    "level": 4,
+    "cr": "2",
+    "xp": 400,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 46,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d8",
+      "damageType": "slashing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "harpy.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "fey"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.harpy.dusk"
+  },
+  {
+    "id": "hookbeak",
+    "name": "Hookbeak",
+    "level": 3,
+    "cr": "1",
+    "xp": 300,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 40,
+    "ac": 13,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d10",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "hookbeak.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.hookbeak.brown"
+  },
+  {
+    "id": "scorpion",
+    "name": "Sand Scorpion",
+    "level": 2,
+    "cr": "1",
+    "xp": 200,
+    "move": 4,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 26,
+    "ac": 14,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d6",
+      "damageType": "poison",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "scorpion.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.scorpion.sand"
+  },
+  {
+    "id": "warg",
+    "name": "Black Warg",
+    "level": 4,
+    "cr": "2",
+    "xp": 400,
+    "move": 6,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 52,
+    "ac": 14,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d10",
+      "damageType": "piercing",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "warg.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "beast"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.warg.black"
+  },
+  {
+    "id": "wisp",
+    "name": "Marsh Wisp",
+    "level": 3,
+    "cr": "1",
+    "xp": 300,
+    "move": 5,
+    "scores": {
+      "str": 12,
+      "dex": 16,
+      "con": 12,
+      "int": 3,
+      "wis": 12,
+      "cha": 6
+    },
+    "hp": 28,
+    "ac": 15,
+    "weapon": {
+      "id": "bite",
+      "damage": "1d8",
+      "damageType": "lightning",
+      "stat": "dex",
+      "finesse": true,
+      "ranged": false,
+      "range": 1,
+      "reach": false,
+      "tags": [
+        "natural"
+      ]
+    },
+    "abilities": [
+      "wisp.signature"
+    ],
+    "passives": [],
+    "skills": [
+      "perception",
+      "stealth"
+    ],
+    "tags": [
+      "fey"
+    ],
+    "aiProfile": "skirmisher",
+    "sprite": "bestiary.wisp.marsh"
+  }
+]
