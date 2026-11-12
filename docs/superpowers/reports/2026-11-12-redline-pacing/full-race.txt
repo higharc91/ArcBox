@@ -1,0 +1,192 @@
+[tv-e2e 18:30:56] starting the server on http://127.0.0.1:37947
+[tv-e2e 18:31:08] starting the TV (1280x720, preset low)
+[tv-e2e 18:31:14] TV opened room XXCV
+[tv-e2e 18:31:14] phones: 3 bots, full race
+[   3.8s] room XXCV, 3 phone(s), game redline (to the end)
+[   4.6s] waiting for the host to start the game
+[  50.8s] P1 driver-select
+[  59.7s] P1 quali-reading  [QUALIFYING · LAP 1/3]  "Who was the first President of the United States? Answers in a moment…"
+[  67.0s] P1 quali-question  [QUALIFYING · LAP 1/3]
+[  70.6s] P1 lap 1: right "George Washington" after 3.6 s
+[  70.8s] P1 quali-answered  [QUALIFYING · LAP 1/3]  "Lap time 3.67 s — checking…"
+[  72.3s] P2 lap 1: right "George Washington" after 5.3 s
+[  74.0s] P3 lap 1: right "George Washington" after 7.1 s
+[  74.1s] P1 quali-result  [QUALIFYING · LAP 1/3]  "✔ 3.67 s P12 so far"
+[  79.1s] P1 quali-reading  [QUALIFYING · LAP 2/3]  "In which sport would you perform a slam dunk? Answers in a moment…"
+[  82.9s] P1 quali-question  [QUALIFYING · LAP 2/3]
+[  86.5s] P1 lap 2: right "Basketball" after 3.6 s
+[  86.7s] P1 quali-answered  [QUALIFYING · LAP 2/3]  "Lap time 3.58 s — checking…"
+[  88.2s] P2 lap 2: right "Basketball" after 5.3 s
+[  90.1s] P3 lap 2: WRONG (planned) "Volleyball" after 7.2 s
+[  90.1s] P1 quali-result  [QUALIFYING · LAP 2/3]  "✔ 3.58 s P9 so far"
+[  95.3s] P1 quali-reading  [QUALIFYING · LAP 3/3]  "How many days are there in a leap year? Answers in a moment…"
+[  99.0s] P1 quali-question  [QUALIFYING · LAP 3/3]
+[ 102.6s] P1 lap 3: right "366" after 3.7 s
+[ 102.9s] P1 quali-answered  [QUALIFYING · LAP 3/3]  "Lap time 3.61 s — checking…"
+[ 104.5s] P2 lap 3: right "366" after 5.4 s
+[ 106.5s] P3 lap 3: right "366" after 7.1 s
+[ 106.5s] P1 quali-result  [QUALIFYING · LAP 3/3]  "✔ 3.61 s P8 so far"
+[ 111.6s] P1 grid  "You're George Russell, #63, Mercedes. Lights out in a moment… · Qualified P8"
+[ 117.6s] P1 throttle  [P8 ROUND 1/15]
+[ 117.8s] rejoin: reloading P2 during throttle [P11 ROUND 1/15]
+[ 118.0s] rejoin: P2 back on throttle [P11 ROUND 1/15]
+[ 125.3s] P1 throttle-locked  [P8 ROUND 1/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 125.7s] P1 reading  [REDLINE P8 ROUND 1/15]  "Which Pokemon is number 25 in the original Pokedex? Answers open in a moment…"
+[ 129.4s] P1 question  [REDLINE P8 ROUND 1/15]
+[ 132.3s] P1 answered  [P8 ROUND 1/15]  "Answer locked. Eyes on the TV!"
+[ 135.5s] P1 reveal  [P1 ROUND 1/15]  "Correct! +4 · now P1"
+[ 141.4s] P1 throttle  [P1 ROUND 2/15]
+[ 141.4s] P1 sits out throttle: the phase timer decides
+[ 151.1s] P1 reading  [CRUISE P1 ROUND 2/15]  "Which element has the atomic number 26? Answers open in a moment…"
+[ 154.5s] P1 question  [CRUISE P1 ROUND 2/15]
+[ 160.9s] P1 answered  [P1 ROUND 2/15]  "Answer locked. Eyes on the TV!"
+[ 162.7s] P1 reveal  [P3 ROUND 2/15]  "Wrong answer. No change · P3"
+[ 167.4s] P1 throttle  [P3 ROUND 3/15]
+[ 175.5s] P1 reading  [PUSH P3 ROUND 3/15]  "Which game series is set in the underwater city of Rapture? Answers open in a moment…"
+[ 179.9s] P1 question  [PUSH P3 ROUND 3/15]
+[ 179.9s] P1 sits out question: the phase timer decides
+[ 179.9s] P3 sits out question: the phase timer decides
+[ 200.0s] P1 reveal  [P4 ROUND 3/15]  "No answer. −1 · now P4"
+[ 204.7s] P1 throttle  [P4 ROUND 4/15]
+[ 213.5s] P1 throttle-locked  [P4 ROUND 4/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 213.7s] P1 reading  [REDLINE P4 ROUND 4/15]  "What is the chemical formula for water? Answers open in a moment…"
+[ 216.6s] P1 question  [REDLINE P4 ROUND 4/15]
+[ 219.1s] P1 answered  [P4 ROUND 4/15]  "Answer locked. Eyes on the TV!"
+[ 220.8s] P1 reveal  [P2 ROUND 4/15]  "Correct! +4 · now P2"
+[ 225.5s] P1 throttle  [P2 ROUND 5/15]
+[ 234.4s] P1 reading  [CRUISE P2 ROUND 5/15]  "Who was the first Roman emperor? Answers open in a moment…"
+[ 237.1s] P1 question  [CRUISE P2 ROUND 5/15]
+[ 237.1s] P1 sits out question: the phase timer decides
+[ 257.2s] P1 reveal  [P4 ROUND 5/15]  "No answer. No change · P4"
+[ 262.5s] P1 throttle  [P4 ROUND 6/15]
+[ 265.7s] P1 throttle-locked  [P4 ROUND 6/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 269.5s] P1 reading  [REDLINE P4 ROUND 6/15]  "In which year did the Second World War end? Answers open in a moment…"
+[ 273.2s] P1 question  [REDLINE P4 ROUND 6/15]
+[ 279.5s] P1 answered  [P4 ROUND 6/15]  "Answer locked. Eyes on the TV!"
+[ 280.4s] P1 reveal  [P13 ROUND 6/15]  "Spun out! −2 · pit limiter next round · now P13"
+[ 285.3s] P1 throttle-locked  [P13 ROUND 7/15]  "Pit limiter: you're on Cruise this round."
+[ 294.3s] P1 reading  [CRUISE P13 ROUND 7/15]  "Who is the bounty hunter hero of the Metroid series? Answers open in a moment…"
+[ 298.7s] P1 question  [CRUISE P13 ROUND 7/15]
+[ 302.4s] P1 answered  [P13 ROUND 7/15]  "Answer locked. Eyes on the TV!"
+[ 305.0s] P1 reveal  [P11 ROUND 7/15]  "Correct! +1 · now P11"
+[ 311.3s] P1 throttle  [P11 ROUND 8/15]
+[ 313.1s] P1 reading  [REDLINE P11 ROUND 8/15]  "Which studio developed the Half-Life series? Answers open in a moment…"
+[ 315.6s] P1 question  [REDLINE P11 ROUND 8/15]
+[ 319.8s] P1 answered  [P11 ROUND 8/15]  "Answer locked. Eyes on the TV!"
+[ 320.2s] P1 reveal  [P14 ROUND 8/15]  "Spun out! −2 · pit limiter next round · now P14"
+[ 325.2s] P1 throttle-locked  [P14 ROUND 9/15]  "Pit limiter: you're on Cruise this round."
+[ 333.8s] P1 reading  [CRUISE P14 ROUND 9/15]  "Which 1648 peace ended the Thirty Years' War? Answers open in a moment…"
+[ 337.4s] P1 question  [CRUISE P14 ROUND 9/15]
+[ 346.5s] P1 reveal  [P10 ROUND 9/15]  "Correct! +1 · now P10"
+[ 351.7s] P1 throttle  [P10 ROUND 10/15]
+[ 356.5s] P1 throttle-locked  [P10 ROUND 10/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 357.6s] P1 reading  [REDLINE P10 ROUND 10/15]  "Who directed the 1960 thriller Psycho? Answers open in a moment…"
+[ 360.2s] P1 question  [REDLINE P10 ROUND 10/15]
+[ 364.1s] P1 answered  [P10 ROUND 10/15]  "Answer locked. Eyes on the TV!"
+[ 367.7s] P1 reveal  [P15 ROUND 10/15]  "Spun out! −2 · pit limiter next round · now P15"
+[ 373.3s] P1 throttle-locked  [P15 ROUND 11/15]  "Pit limiter: you're on Cruise this round."
+[ 380.4s] P1 reading  [CRUISE P15 ROUND 11/15]  "Who directed the 1997 film Titanic? Answers open in a moment…"
+[ 383.4s] P1 question  [CRUISE P15 ROUND 11/15]
+[ 388.7s] P1 answered  [P15 ROUND 11/15]  "Answer locked. Eyes on the TV!"
+[ 390.5s] P1 reveal  [P15 ROUND 11/15]  "Wrong answer. No change · P15"
+[ 395.7s] P1 throttle  [P15 ROUND 12/15]
+[ 404.0s] P1 reading  [PUSH P15 ROUND 12/15]  "In The Lord of the Rings, what is the name of Frodo's loyal gardener companion? Answers open in a moment…"
+[ 409.9s] P1 question  [PUSH P15 ROUND 12/15]
+[ 416.2s] P1 reveal  [P16 ROUND 12/15]  "Wrong answer. −1 · now P16"
+[ 420.5s] P1 throttle  [P16 ROUND 13/15]
+[ 422.0s] P1 throttle-locked  [P16 ROUND 13/15]  "Locked in: PUSH. Waiting for the other drivers…"
+[ 425.9s] P1 reading  [PUSH P16 ROUND 13/15]  "Which planet is known as the Red Planet? Answers open in a moment…"
+[ 429.4s] P1 question  [PUSH P16 ROUND 13/15]
+[ 432.5s] P1 answered  [P16 ROUND 13/15]  "Answer locked. Eyes on the TV!"
+[ 437.5s] P1 reveal  [P18 ROUND 13/15]  "Wrong answer. −1 · now P18"
+[ 443.7s] P1 throttle  [P18 ROUND 14/15]
+[ 448.6s] P1 throttle-locked  [P18 ROUND 14/15]  "Locked in: REDLINE. Waiting for the other drivers…"
+[ 452.3s] P1 reading  [REDLINE P18 ROUND 14/15]  "Which band recorded the song "Hey Jude"? Answers open in a moment…"
+[ 455.4s] P1 question  [REDLINE P18 ROUND 14/15]
+[ 455.6s] P2 sits out question: the phase timer decides
+[ 458.2s] P1 answered  [P18 ROUND 14/15]  "Answer locked. Eyes on the TV!"
+[ 475.6s] P1 reveal  [P19 ROUND 14/15]  "Spun out! −1 · pit limiter next round · now P19"
+[ 481.3s] P1 throttle-locked  [P19 ROUND 15/15]  "Pit limiter: you're on Cruise this round."
+[ 490.2s] P1 reading  [CRUISE P19 ROUND 15/15]  "What is the name of Mario's younger brother? Answers open in a moment…"
+[ 493.4s] P1 question  [CRUISE P19 ROUND 15/15]
+[ 500.5s] P1 answered  [P19 ROUND 15/15]  "Answer locked. Eyes on the TV!"
+[ 502.2s] P1 reveal  [P21 ROUND 15/15]  "Wrong answer. No change · P21"
+[ 506.5s] P1 chequered  [P21 ROUND 15/15]  "You finished P21 of 22."
+[ 512.2s] P1 anthem  [P21 ROUND 15/15]
+[ 527.9s] P1 champagne  [P21 ROUND 15/15]
+[ 528.9s] P3 pops the cork at 1.00 (pop 1)
+[ 529.1s] P2 pops the cork at 1.00 (pop 1)
+[ 529.2s] P1 pops the cork at 1.00 (pop 1)
+[ 530.8s] P3 pops the cork at 0.30 (pop 2)
+[ 531.0s] P2 pops the cork at 0.45 (pop 2)
+[ 531.6s] P1 pops the cork at 0.70 (pop 2)
+[ 532.1s] P3 pops the cork at 0.30 (pop 3)
+[ 533.0s] P2 pops the cork at 0.55 (pop 3)
+[ 533.5s] P3 pops the cork at 0.25 (pop 4)
+[ 534.1s] P1 pops the cork at 0.70 (pop 3)
+[ 535.1s] P2 pops the cork at 0.55 (pop 4)
+[ 535.5s] P3 pops the cork at 0.35 (pop 5)
+[ 537.2s] P1 pops the cork at 0.75 (pop 4)
+[ 537.2s] P3 pops the cork at 0.35 (pop 6)
+[ 537.3s] P2 pops the cork at 0.55 (pop 5)
+[ 539.1s] P3 pops the cork at 0.30 (pop 7)
+[ 539.4s] P2 pops the cork at 0.50 (pop 6)
+[ 539.9s] P1 pops the cork at 0.70 (pop 5)
+[ 540.8s] P3 pops the cork at 0.25 (pop 8)
+[ 541.8s] P2 pops the cork at 0.55 (pop 7)
+[ 542.6s] P3 pops the cork at 0.30 (pop 9)
+[ 542.6s] P1 pops the cork at 0.70 (pop 6)
+[ 544.4s] results:
+1
+Bot2 (HAM)
+4
+2
+Bot1 (RUS)
+0
+3
+Bot3 (HUL)
+0
+[ 544.5s] champagne: P3 9 pop(s), best 1.00, P2 7 pop(s), best 1.00, P1 6 pop(s), best 1.00
+[ 544.5s] race over after round 15
+[ 544.5s] back in the lobby; REDLINE still picked
+[ 544.8s] P1 bottle: locator.click: Timeout 1000ms exceeded.
+[ 544.8s] P2 bottle: locator.click: Timeout 1000ms exceeded.
+[ 574.8s] P3 bottle: locator.click: Timeout 1000ms exceeded.
+[ 575.1s] qualifying plan: P1 RUS 3/3 laps, 10.50 s; P2 HAM 3/3 laps, 15.75 s; P3 HUL 2/3 laps, 14.00 s
+[ 575.1s] QUALI order RUS HAM HUL
+[ 575.1s] phases seen on P1: driver-select, quali-reading, quali-question, quali-answered, quali-result, grid, throttle, throttle-locked, reading, question, answered, reveal, chequered, anthem, champagne, results
+
+OK
+Screenshots: /tmp/redline-25-complete-race/phones
+[tv-e2e 18:40:52] letting the TV finish its shots (2 s)
+[tv-e2e 18:40:55] TV stopped
+[tv-e2e 18:40:55] Xvfb stopped
+[tv-e2e 18:40:56] server stopped
+[tv-e2e 18:40:56] screenshots: 128 from the TV in /tmp/redline-25-complete-race/tv, 28 from phone 1 in /tmp/redline-25-complete-race/phones
+[tv-e2e 18:40:56] TV phases: DriverSelect(0) QualifyingReading(L1) QualifyingQuestion(L1) QualifyingResult(L1) QualifyingReading(L2) QualifyingQuestion(L2) QualifyingResult(L2) QualifyingReading(L3) QualifyingQuestion(L3) QualifyingResult(L3) Grid(0) Throttle(1) Reading(1) Question(1) Reveal(1) Throttle(2) Reading(2) Question(2) Reveal(2) Throttle(3) Reading(3) Question(3) Reveal(3) Throttle(4) Reading(4) Question(4) Reveal(4) Throttle(5) Reading(5) Question(5) Reveal(5) Throttle(6) Reading(6) Question(6) Reveal(6) Throttle(7) Reading(7) Question(7) Reveal(7) Throttle(8) Reading(8) Question(8) Reveal(8) Throttle(9) Reading(9) Question(9) Reveal(9) Throttle(10) Reading(10) Question(10) Reveal(10) Throttle(11) Reading(11) Question(11) Reveal(11) Throttle(12) Reading(12) Question(12) Reveal(12) Throttle(13) Reading(13) Question(13) Reveal(13) Throttle(14) Reading(14) Question(14) Reveal(14) Throttle(15) Reading(15) Question(15) Reveal(15) Chequered(15) Anthem(15) Champagne(15) 
+[tv-e2e 18:40:56] audio: qualifying start · AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+[tv-e2e 18:40:56] audio: pole position · AUDIO Voice redline.announcer: Pole position for Antonelli, 6.64 seconds in total!
+[tv-e2e 18:40:56] audio: start beep 1 · AUDIO Sfx start-beep #1
+[tv-e2e 18:40:56] audio: start beep 2 · AUDIO Sfx start-beep #2
+[tv-e2e 18:40:56] audio: start beep 3 · AUDIO Sfx start-beep #3
+[tv-e2e 18:40:56] audio: start beep 4 · AUDIO Sfx start-beep #4
+[tv-e2e 18:40:56] audio: start beep 5 · AUDIO Sfx start-beep #5
+[tv-e2e 18:40:56] audio: lights out · AUDIO Sfx lights-out
+[tv-e2e 18:40:56] audio: round 1 commentary · AUDIO Voice redline.announcer: And it's lights out!
+[tv-e2e 18:40:56] audio: question read out · AUDIO Voice redline.questions: Which Pokemon is number 25 in the original Pokedex?
+[tv-e2e 18:40:56] audio: Reveal sting or buzz · AUDIO Sfx correct
+[tv-e2e 18:40:56] audio: the answer · AUDIO Voice redline.announcer: The answer is Pikachu.
+[tv-e2e 18:40:56] audio: fanfare · AUDIO Sfx fanfare
+[tv-e2e 18:40:56] audio: the winner · AUDIO Voice redline.announcer: Leclerc takes the win. Best of the players, Bot2 in P17.
+[tv-e2e 18:40:56] podium: REDLINE Anthem round 15 → REDLINE Champagne round 15
+[tv-e2e 18:40:56] podium: music · AUDIO Music anthem gb
+[tv-e2e 18:40:56] podium: music · victory-theme after the anthem
+[tv-e2e 18:40:56] podium: victory sting
+[tv-e2e 18:40:56] podium: step 1 sprayed 7 time(s) · REDLINE spray #2 step 1 strength 1.00
+[tv-e2e 18:40:56] podium: step 2 sprayed 6 time(s) · REDLINE spray #3 step 2 strength 1.00
+[tv-e2e 18:40:56] podium: step 3 sprayed 9 time(s) · REDLINE spray #1 step 3 strength 1.00
+[tv-e2e 18:40:56] qualifying: QualifyingReading → QualifyingQuestion → QualifyingResult for laps 1–3, then Grid
+[tv-e2e 18:40:56] qualifying: race 1: bots on the grid as they qualified: RUS HAM HUL · REDLINE grid ANT VER LIN HAD ALB GAS OCO RUS BEA STR HAM NOR PIA PER BOR LAW BOT ALO HUL LEC COL SAI
+[tv-e2e 18:40:56] narrator: no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off | Off | Google | voice themes: arcbox.host, redline.announcer, redline.questions, tactics.character, tactics.narrator, tactics.npc.bree-tallow, tactics.npc.celandine-marrowby, tactics.npc.corvin-ashby, tactics.npc.dagna-holt, tactics.npc.grisk, tactics.npc.halden-varrow, tactics.npc.halvard, tactics.npc.hooded-stranger, tactics.npc.ivo-rime, tactics.npc.lark, tactics.npc.maren-sorrel, tactics.npc.mother-aubrine, tactics.npc.mother-skarrow, tactics.npc.old-maud, tactics.npc.oswin-hale, tactics.npc.pip-ashdown, tactics.npc.rook, tactics.npc.tobin-fell, tactics.npc.townsfolk-barmaid, tactics.npc.townsfolk-child, tactics.npc.townsfolk-farmer, tactics.npc.townsfolk-farmhand, tactics.npc.townsfolk-fisher, tactics.npc.townsfolk-goblin-archer, tactics.npc.townsfolk-goblin-cutthroat, tactics.npc.townsfolk-goblin-spear, tactics.npc.townsfolk-guard, tactics.npc.townsfolk-merchant, tactics.npc.vorga, tactics.npc.ysolde, tactics.voice.earnest.high, tactics.voice.earnest.low, tactics.voice.fierce.high, tactics.voice.fierce.low, tactics.voice.grim.high, tactics.voice.grim.low, tactics.voice.scholarly.high, tactics.voice.scholarly.low, tactics.voice.steady.high, tactics.voice.steady.low, tactics.voice.wry.high, tactics.voice.wry.low | server voice unavailable (Unavailable 503); built-in voice for 60 s | dropped (waited over 4 s): Provisional pole for Antonelli. | dropped (waited over 4 s): Round 1. Video Games, medium.
+[tv-e2e 18:40:56] audio: 401 AUDIO lines in /tmp/redline-25-complete-race/audio.log
+[tv-e2e 18:40:56] OK
