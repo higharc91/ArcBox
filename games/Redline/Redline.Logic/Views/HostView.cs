@@ -18,7 +18,8 @@ public sealed record RedlineHostView(
     QualifyingSession? Qualifying = null,    // the three Qualifying phases only (qualifying spec §5)
     // Reading and QualifyingReading only: the read-out the TV acknowledges with NarrationDone {seq} (issue #25). Left out of
     // the JSON in every other phase, so those views are unchanged.
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? ReadSeq = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? ReadSeq = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? PaceSeq = null);
 
 /// <summary>
 /// Qualifying spec §5: the session's timing board. Spec §5 names this record <c>Qualifying</c>; that name is the
@@ -124,7 +125,8 @@ internal static class HostViews
             IsQualifying(phase) && qualifying is var (lap, fastest)
                 ? new QualifyingSession(lap, rules.QualifyingLaps, [.. cars.Select(d => QualifyingRow(d, phase, fastest))])
                 : null,
-            phase is RacePhase.Reading or RacePhase.QualifyingReading ? readSeq : null);
+            phase is RacePhase.Reading or RacePhase.QualifyingReading ? readSeq : null,
+            phase is RacePhase.Reveal or RacePhase.Chequered or RacePhase.Anthem ? readSeq : null);
     }
 
     /// <summary>

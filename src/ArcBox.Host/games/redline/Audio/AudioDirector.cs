@@ -72,6 +72,9 @@ public partial class AudioDirector : Node
 
     /// <summary>The question being read out, and the view's <c>readSeq</c> to acknowledge when it ends (issue #25).</summary>
     private (int Seq, string Text)? _reading;
+    private int? _commentarySeq;
+    private readonly List<string> _pendingCommentary = [];
+    private int? _anthemSignaled;
 
     public void SetNarrator(Narrator narrator)
     {
@@ -98,6 +101,11 @@ public partial class AudioDirector : Node
     /// </summary>
     private void OnLineFinished(string text)
     {
+        if (_commentarySeq is { } seq && _pendingCommentary.Remove(text.Trim()) && _pendingCommentary.Count == 0)
+        {
+            _commentarySeq = null;
+            Signal?.Invoke(RedlineGame.NarrationDone, new { seq });
+        }
         if (_reading is not { } reading || text != reading.Text.Trim())
         {
             return;
@@ -164,7 +172,19 @@ public partial class AudioDirector : Node
         // (RedlineRules.QualifyingIntro).
         if (_narrator is { } narrator)
         {
-            foreach (var line in Commentary.Lines(view, previous, _grid))
+            var lines = Commentary.Lines(view, previous, _grid);
+            if (newPhase)
+            {
+                _commentarySeq = view.PaceSeq;
+                _pendingCommentary.Clear();
+                _pendingCommentary.AddRange(lines.Select(line => line.Text.Trim()));
+                if (_commentarySeq is { } seq && lines.Count == 0)
+                {
+                    _commentarySeq = null;
+                    Signal?.Invoke(RedlineGame.NarrationDone, new { seq });
+                }
+            }
+            foreach (var line in lines)
             {
                 var opener = line.Kind == CommentaryKind.Intro && QualifyingText.IsQualifying(view.Phase);
                 narrator.Say(line.Text, RedlineVoices.Announcer, NarrationPriority.Commentary, opener);
@@ -214,6 +234,7 @@ public partial class AudioDirector : Node
             _anthem = PodiumMusic.Anthem(view.Podium?.AnthemId);
             PodiumMusicBank.Prepare(_anthem?.Id);
             _anthemPhaseStart = _time;
+            _anthemSignaled = null;
             _anthemLine = PodiumMusic.LineSeconds(Commentary.Lines(view, null, _grid).FirstOrDefault()?.Text);
             _anthemEnds = double.NegativeInfinity;
             _themeWanted = false;
@@ -232,6 +253,11 @@ public partial class AudioDirector : Node
     {
         if (view.Phase == RacePhase.Anthem && !_themeWanted)
         {
+            if (view.PaceSeq is { } seq && _anthemSignaled != seq && double.IsFinite(_anthemEnds) && _time >= _anthemEnds)
+            {
+                _anthemSignaled = seq;
+                Signal?.Invoke(RedlineGame.AnimationDone, new { seq });
+            }
             var phase = HudClock.PhaseSeconds(view);
             var loops = _anthem is null;
             var clip = _anthem is { } info ? PodiumMusicBank.Anthem(info) : PodiumMusicBank.Theme();

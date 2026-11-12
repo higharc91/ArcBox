@@ -1,0 +1,25 @@
+{
+  "source": "real Chromium P1 phase logs in full native Godot race",
+  "reveals": 15,
+  "seconds": [
+    5.9,
+    4.7,
+    4.7,
+    4.7,
+    5.3,
+    4.9,
+    6.3,
+    5.0,
+    5.2,
+    5.6,
+    5.2,
+    4.3,
+    6.2,
+    5.7,
+    4.3
+  ],
+  "observedTotal": 78.0,
+  "unchangedTimerBudget": 105,
+  "differenceSeconds": 27.0,
+  "comparison": "Observed phone delivery intervals against the unchanged fallback budget; not a separate controlled no-signals run. Narrator silent fallback was active."
+}

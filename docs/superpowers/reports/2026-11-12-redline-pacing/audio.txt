@@ -1,0 +1,68 @@
+AUDIO Music lobby-loop
+AUDIO Sfx whoosh
+AUDIO Music race-bed
+AUDIO Sfx crowd-bed
+AUDIO Voice redline.announcer: Qualifying! Three questions, fastest correct answers take pole.
+AUDIO Voice redline.questions: Which planet is known as the Red Planet?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Hamilton goes purple!
+AUDIO Voice redline.announcer: Provisional pole for Hamilton.
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the name of Mario's younger brother?
+AUDIO Sfx tick
+AUDIO Sfx countdown 5
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Verstappen goes purple!
+AUDIO Voice redline.announcer: Provisional pole for Verstappen.
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: Which 1993 Spielberg film is about a theme park of cloned dinosaurs?
+AUDIO Sfx tick
+AUDIO Sfx countdown 4
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: Leclerc goes purple!
+AUDIO Voice redline.announcer: Pole position for Verstappen, 5.32 seconds in total!
+AUDIO Sfx engine VER
+AUDIO Sfx engine LEC
+AUDIO Sfx engine ANT
+AUDIO Sfx start-beep #1
+AUDIO Sfx start-beep #2
+AUDIO Voice redline.announcer: Welcome to the Circuit of the Americas. Twenty-two cars, 3 players. Lights out in a moment.
+AUDIO Sfx start-beep #3
+AUDIO Sfx start-beep #4
+AUDIO Sfx start-beep #5
+AUDIO Sfx lights-out
+AUDIO Sfx engine LAW
+AUDIO Voice redline.announcer: And it's lights out!
+AUDIO Sfx lock
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Voice redline.announcer: Round 1. Geography, medium.
+AUDIO Sfx lock
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
+AUDIO Sfx whoosh
+AUDIO Voice redline.questions: What is the capital city of Canada?
+AUDIO Sfx engine STR
+AUDIO Sfx engine LAW
+AUDIO Sfx tick
+AUDIO Sfx tick
+AUDIO Sfx correct
+AUDIO Voice redline.announcer: The answer is Ottawa.
+AUDIO Sfx engine ALO
+AUDIO Sfx engine GAS
+AUDIO Voice redline.announcer: Bot3 storms up 9 places!
+AUDIO Sfx engine LIN
+AUDIO Voice redline.announcer: Round 2. Film, hard.
+AUDIO Sfx engine ALO
+AUDIO Sfx countdown 5
+AUDIO Sfx countdown 4
+AUDIO Sfx countdown 3
+AUDIO Sfx countdown 2
