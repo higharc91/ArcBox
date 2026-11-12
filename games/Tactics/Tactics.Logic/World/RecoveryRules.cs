@@ -3,6 +3,36 @@ namespace Tactics.Logic;
 /// <summary>Pure camp job rules; dice are supplied by the caller and saved with their results.</summary>
 public static class RecoveryRules
 {
+    /// <summary>Recovery-service base prices; a shop's existing haggle applies at purchase.</summary>
+    public static int Price(string service) => service switch { "inn" => 10, "temple" => 25, "camp" => 0, _ => throw new ArgumentOutOfRangeException(nameof(service)) };
+
+    /// <summary>What a service offers for an injury kind; camp body/spirit care needs its job check.</summary>
+    public static string Recovery(string service, string kind) => (service, kind) switch
+    {
+        ("inn", "rest") or ("camp", "rest") => "all",
+        ("inn", "body") => "one",
+        ("inn", "spirit") => "none",
+        ("temple", "rest" or "body" or "spirit") => "one",
+        ("camp", "body" or "spirit") => "check",
+        _ => throw new ArgumentOutOfRangeException(nameof(kind)),
+    };
+
+    /// <summary>Both nights clear rest injuries. A paid room additionally mends one body injury, never spirit injuries.</summary>
+    public static System.Collections.Immutable.ImmutableArray<InjuryId> AfterSleep(
+        System.Collections.Immutable.ImmutableArray<InjuryId> injuries, RulesPack rules, bool room)
+    {
+        var bodyMended = false;
+        return [.. injuries.Where(id =>
+        {
+            var kind = rules.Injuries.GetValueOrDefault(id)?.Mends;
+            if (kind is not ("rest" or "body" or "spirit")) return true;
+            var recovery = Recovery(room ? "inn" : "camp", kind);
+            if (recovery == "all") return false;
+            if (recovery == "one" && !bodyMended) { bodyMended = true; return false; }
+            return true;
+        })];
+    }
+
     /// <summary>Watch covers a night's patrol around the fire, including the shipped distant clues.</summary>
     public const int WatchRange = 32;
     public static bool InWatchRange(Tile fire, Tile thing)

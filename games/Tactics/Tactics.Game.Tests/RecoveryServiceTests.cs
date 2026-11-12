@@ -88,7 +88,7 @@ public sealed class RecoveryServiceTests
         s.Send(1, "shopService", trade);
         Assert.Equal(90, s.Game.Document.Members[payer].Gold);
         RestTests.Finish(s);
-        Assert.Empty(s.Game.Document.Members[guest].Character.Injuries);
+        Assert.Equal([new InjuryId("shaken")], s.Game.Document.Members[guest].Character.Injuries);
         Assert.True(s.Game.Document.Members[guest].WellFed);
         Assert.Equal([new InjuryId("cracked_ribs"), new InjuryId("shaken")], s.Game.Document.Members[payer].Character.Injuries);
         Assert.False(s.Game.Document.World!.RestReady);
@@ -120,5 +120,20 @@ public sealed class RecoveryServiceTests
         s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
         Assert.Equal(3, s.Host.Shop!.Items.Single(x => x.Item == "potion_of_healing").Count);
         Assert.Equal(1, s.Host.Shop.Items.Single(x => x.Item == "smoke_bomb").Count);
+    }
+    [Theory]
+    [InlineData("black_eye")]
+    [InlineData("cracked_ribs")]
+    [InlineData("shaken")]
+    public void Temple_matrix_heals_one_selected_injury_for_25_gold_without_a_rest(string injury)
+    {
+        var s = AtService("cure", ready: false);
+        s.Send(0, "interact", new { target = "shop:af_market_herbalist" });
+        var member = s.Profiles[0]!.Value.Value;
+        s.Send(0, "shopService", new { shop = "af_market_herbalist", service = "cure", member, injury, trade = "matrix" });
+        Assert.DoesNotContain(new InjuryId(injury), s.Game.Document.Members[member].Character.Injuries);
+        Assert.Equal(2, s.Game.Document.Members[member].Character.Injuries.Length);
+        Assert.Equal(100 - RecoveryRules.Price("temple"), s.Game.Document.Members[member].Gold);
+        Assert.False(s.Game.Document.World!.RestReady);
     }
 }

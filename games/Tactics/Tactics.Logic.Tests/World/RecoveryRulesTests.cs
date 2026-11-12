@@ -55,4 +55,30 @@ public sealed class RecoveryRulesTests
         var errors = ValidationTests.ErrorsOfChapter(Vault.World(region), ("shops/vault.json", json));
         Assert.Contains(errors, e => e.Pointer.StartsWith("/shops/0/services/0", StringComparison.Ordinal));
     }
+    [Theory]
+    [InlineData(false, "black_eye", false)]
+    [InlineData(false, "cracked_ribs", true)]
+    [InlineData(false, "shaken", true)]
+    [InlineData(true, "black_eye", false)]
+    [InlineData(true, "cracked_ribs", false)]
+    [InlineData(true, "shaken", true)]
+    public void The_sleep_matrix_covers_each_service_and_injury_kind(bool room, string injury, bool remains)
+    {
+        var result = RecoveryRules.AfterSleep([new(injury)], BasePackTests.Rules, room);
+        Assert.Equal(remains, result.Contains(new InjuryId(injury)));
+        Assert.Equal(room ? 10 : 0, RecoveryRules.Price(room ? "inn" : "camp"));
+    }
+
+    [Fact]
+    public void A_room_mends_exactly_one_body_injury_and_keeps_spirit_and_unknown_injuries()
+    {
+        var injuries = new InjuryId[] { new("cracked_ribs"), new("deep_cut"), new("black_eye"), new("shaken"), new("future_injury") };
+        var result = RecoveryRules.AfterSleep([.. injuries], BasePackTests.Rules, true);
+        Assert.Equal([new InjuryId("deep_cut"), new("shaken"), new("future_injury")], result);
+        Assert.Equal("check", RecoveryRules.Recovery("camp", "body"));
+        Assert.Equal("check", RecoveryRules.Recovery("camp", "spirit"));
+        Assert.Equal("body", RecoveryRules.Mends("tend")); Assert.Equal("spirit", RecoveryRules.Mends("rally"));
+        Assert.False(RecoveryRules.Passed(1, 0, RecoveryRules.Dc("tend")));
+        Assert.True(RecoveryRules.Passed(12, 0, RecoveryRules.Dc("rally")));
+    }
 }

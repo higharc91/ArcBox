@@ -218,7 +218,7 @@ public sealed partial class TacticsGame
         {
             var room = camp.Rooms.Contains(m.Key);
             return (m.Key, m.Value with { WellFed = m.Value.WellFed || room,
-                Character = m.Value.Character with { Injuries = room ? [] : [.. m.Value.Character.Injuries.Where(i => Rules.Injuries.GetValueOrDefault(i)?.Mends != "rest")] } });
+                Character = m.Value.Character with { Injuries = RecoveryRules.AfterSleep(m.Value.Character.Injuries, Rules, room) } });
         }));
         _doc = _doc with { Members = members, World = _doc.World! with
         { RestReady = false, RestSeq = checked(_doc.World.RestSeq + 1), Camp = camp with { Stage = "dawn" }, Story = null } };

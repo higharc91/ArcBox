@@ -37,7 +37,7 @@ WorldSave adds optional RestReady, Camp, RestSeq and seen camp scenes; MemberRec
 with no version bump. Camp preserves any paused story cursor. Job choices, targets, rolled dice and applied results are saved.
 Results resolve in profile order and each roll/heal is one save with its result line. A restart replays presentation, never the effect.
 Jobs and inn purchases have 30 seconds. Unchosen jobs become Rest easy. Everyone's rest-kind injuries heal at dawn, including away members.
-Inn rooms heal every injury on the guest and give that guest Well fed. Temple services immediately heal one exact chosen injury.
+Inn rooms clear rest injuries and one body injury on the guest, retain spirit injuries, and give that guest Well fed. Temple services immediately heal one exact chosen injury of any kind without requiring a rest. The service × injury × price contract is the [recovery matrix](2026-11-12-recovery-matrix.md) (#150).
 Shop services share the existing trade-ID window and atomic purse/save path. RestSeq drives per-line rest restocking without resetting
 chapter/never stock. Camp talks play at most one eligible unseen scene each night, preserving the normal 5d line and vote cursor.
 
