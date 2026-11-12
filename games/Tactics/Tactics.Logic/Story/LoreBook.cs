@@ -6,7 +6,8 @@ using System.Text.Json;
 namespace Tactics.Logic;
 
 /// <summary>One option of a choice beat, and the flags choosing it sets.</summary>
-public sealed record ArcChoice(string Id, string Label, ImmutableArray<string> Sets);
+public sealed record ArcChoice(string Id, string Label, ImmutableArray<string> Sets,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] int Xp = 0);
 
 /// <summary>
 /// One beat of an arc, as <c>lore/arcs.json</c> writes it. <see cref="Kind"/> is <c>story</c>, <c>choice</c>, <c>battle</c>,
@@ -15,7 +16,8 @@ public sealed record ArcChoice(string Id, string Label, ImmutableArray<string> S
 /// (<c>ch4_pip_remembers</c> is a camp anywhere).
 /// </summary>
 public sealed record ArcBeat(string Id, string Kind, string? Place, string? Encounter, ImmutableArray<string> Requires,
-    ImmutableArray<string> Sets, ImmutableArray<ArcChoice> Choices)
+    ImmutableArray<string> Sets, ImmutableArray<ArcChoice> Choices,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] int Xp = 0)
 {
     /// <summary>The beat kind that's a fight.</summary>
     public const string Battle = "battle";
@@ -299,14 +301,14 @@ public sealed partial class LoreBook
         var id = Required(e, "id", "a beat");
         var where = $"the beat '{id}'";
         return new(id, Required(e, "kind", where), Optional(e, "place", where), Optional(e, "encounter", where),
-            Strings(e, "requires", where), Strings(e, "sets", where), [.. List(e, "choices", where, required: false).Select(c => ReadChoice(c, where))]);
+            Strings(e, "requires", where), Strings(e, "sets", where), [.. List(e, "choices", where, required: false).Select(c => ReadChoice(c, where))], RewardXp(e, where));
     }
 
     private static ArcChoice ReadChoice(JsonElement e, string beat)
     {
         var id = Required(e, "id", $"a choice of {beat}");
         var where = $"the choice '{id}'";
-        return new(id, Optional(e, "label", where) ?? "", Strings(e, "sets", where));
+        return new(id, Optional(e, "label", where) ?? "", Strings(e, "sets", where), RewardXp(e, where));
     }
 
     private static LoreCharacter ReadCharacter(JsonElement e)
@@ -424,6 +426,14 @@ public sealed partial class LoreBook
         { ValueKind: JsonValueKind.False } => false,
         _ => throw new BadLore($"{where} has a '{name}' that isn't true or false."),
     };
+
+    private static int RewardXp(JsonElement e, string where)
+    {
+        if (!e.TryGetProperty("xp", out _)) return 0;
+        var xp = Whole(e, "xp", where);
+        if (xp < 0) throw new BadLore($"{where} XP cannot be negative.");
+        return xp;
+    }
 
     private static int Gold(JsonElement e, string where)
     {

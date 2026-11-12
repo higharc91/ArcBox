@@ -591,7 +591,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         _lastBattle = BattleViewOf();
         var mob = save.Mob is { } mobId ? Rules.Mobs.Values.SelectMany(m => m).FirstOrDefault(m => m.Id == mobId) : null;
         if (mob is not null)
-            result = result with { Xp = result.Xp.ToImmutableSortedDictionary(x => x.Key, x => result.Outcome == BattleOutcome.Won ? mob.Xp : 0), Loot = [] };
+            result = result with { Xp = result.Xp.ToImmutableSortedDictionary(x => x.Key, x => result.Outcome == BattleOutcome.Won ? CampaignExperience.MobReward(mob.Xp, Rules.Encounters[save.Encounter].Level, _doc.PartyLevel) : 0), Loot = [] };
         var members = _doc.Members;
         var rewards = result.Outcome == BattleOutcome.Won && mob is null
             ? ImmutableArray.CreateRange((Rules.Encounters.GetValueOrDefault(save.Encounter)?.ItemLoot is { IsDefault: false } fixedLoot ? fixedLoot : [])
