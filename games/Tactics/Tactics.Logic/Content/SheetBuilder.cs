@@ -15,7 +15,8 @@ public sealed record CharacterRecord(string Name, string Race, string Class, str
     int Level, ImmutableSortedDictionary<Stat, int> BaseScores, ImmutableSortedDictionary<Stat, int> Increases,
     ImmutableArray<AbilityId> Picks, ImmutableArray<InjuryId> Injuries, string Weapon, string Armor, bool Shield,
     ImmutableArray<ItemStack> Bag,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionName = null);
 
 /// <summary>
 /// Builds the <see cref="UnitSheet"/>s a battle starts from: a character from its <see cref="CharacterRecord"/> (spec §3.1)
@@ -163,7 +164,8 @@ public static class SheetBuilder
             Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon,
             Attacks: weapon.Ranged ? rangedAttacks ?? attacks : attacks,
             Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, RaceTag + race.Id, ClassTag + cls.Id),
-            Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource);
+            Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource,
+            CompanionName: c.CompanionName, CompanionMonster: c.CompanionName is null ? null : subclass?.Companion);
     }
 
     /// <summary><paramref name="percent"/> of <paramref name="hp"/>, rounded down toward 0 and at least 1 in size (0 for 0%).</summary>

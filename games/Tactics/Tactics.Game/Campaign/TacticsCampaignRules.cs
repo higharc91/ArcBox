@@ -158,6 +158,12 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 id, trinket.Name, trinket.Text, trinket.Rarity, @class = trinket.Class,
                 className = rules.Classes[trinket.Class].Name, active = trinket.ActiveFor(c),
             }, ArcJson.Options);
+        if (CompanionNames.Monster(c, rules) is { } monster)
+            view["companion"] = JsonSerializer.SerializeToNode(new
+            {
+                monster, name = c.CompanionName ?? rules.Monsters[monster].Name,
+                defaultName = rules.Monsters[monster].Name, suggestions = CompanionNames.Suggestions(monster),
+            }, ArcJson.Options);
         return view;
     }
 
@@ -231,6 +237,21 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                     break;
                 case "chooseSubclass" when mine is not null:
                     result = CharacterRules.ChooseSubclass(mine.Character, Str(data, "subclass"), rules);
+                    if (result.Character is { } chosenCharacter)
+                    {
+                        var named = CompanionNames.Normalize(Str(data, "companionName"));
+                        if (named.Problem is not null) return new(null, named.Problem);
+                        result = (chosenCharacter with { CompanionName = CompanionNames.Monster(chosenCharacter, rules) is null ? null : named.Name }, null);
+                    }
+                    break;
+                case "nameCompanion" when mine is not null:
+                    if (doc.Battle is not null) return new(null, "Name your companion outside a battle.");
+                    if (data.TryGetProperty("member", out var target) && target.GetString() != member.Value)
+                        return new(null, "Only you can name your companion.");
+                    if (CompanionNames.Monster(mine.Character, rules) is null) return new(null, "Your subclass has no companion.");
+                    var normalized = CompanionNames.Normalize(Str(data, "name"));
+                    if (normalized.Problem is not null) return new(null, normalized.Problem);
+                    result = (mine.Character with { CompanionName = normalized.Name }, null);
                     break;
                 case "spendIncrease" when mine is not null:
                     var stats = data.TryGetProperty("stats", out var st) && st.ValueKind == JsonValueKind.Array

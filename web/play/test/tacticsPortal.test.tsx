@@ -455,3 +455,29 @@ describe("key ring", () => {
     expect(screen.queryByRole("region", { name: "Keys" })).toBeNull();
   });
 });
+
+describe("subclass companion names", () => {
+  it("chooses the subclass and suggested name in one command and rejects invalid names locally", () => {
+    const view = structuredClone(CLERIC);
+    view.me!.class = "ranger";
+    view.me!.subclass = null;
+    view.me!.subclasses = [{ id: "ranger.beastmaster", name: "Beastmaster" }];
+    const send = show(view);
+    fireEvent.input(screen.getByRole("textbox", { name: "Companion name" }), { target: { value: "Ash7" } });
+    expect(screen.getByRole<HTMLButtonElement>("button", { name: "Beastmaster" }).disabled).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Cinder" }));
+    fireEvent.click(screen.getByRole("button", { name: "Beastmaster" }));
+    expect(lastCall(send)).toEqual(["chooseSubclass", { subclass: "ranger.beastmaster", companionName: "Cinder" }]);
+  });
+  it("offers owner rename and clear, and disables renaming during a leased game", () => {
+    const view = structuredClone(CLERIC);
+    view.me!.companion = { monster: "hound", name: "Ash", defaultName: "Hunting Hound", suggestions: ["Ash", "Cinder"] };
+    const send = show(view);
+    fireEvent.click(screen.getByRole("button", { name: "Rename companion" }));
+    fireEvent.input(screen.getByRole("textbox", { name: "Companion name" }), { target: { value: "" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save companion name" }));
+    expect(lastCall(send)).toEqual(["nameCompanion", { name: "" }]);
+    cleanup(); show(view, true);
+    expect(screen.getByRole<HTMLButtonElement>("button", { name: "Rename companion" }).disabled).toBe(true);
+  });
+});

@@ -30,6 +30,10 @@ public static class Summons
                 : (int?)null;
         var sheet = (w.Rules.MonsterSheet(monster, scaleLevel)
                      ?? throw new InvalidOperationException($"There is no monster '{monster}' to summon.")) with { Side = summoner.Sheet.Side };
+        // Only a persistent summon matching the chosen subclass companion inherits its name.
+        // Temporary wolf-pack spells and unrelated summons retain the bestiary name.
+        if (rounds is null && !concentration && summoner.Sheet.CompanionMonster == monster && summoner.Sheet.CompanionName is { } name)
+            sheet = sheet with { Name = name, CompanionOwner = $"{summoner.Sheet.Name}'s {monster}" };
         var id = new UnitId($"{owner.Value}.{monster}.{w.State.NextSerial}");
         ImmutableArray<ActiveCondition> marker = rounds is null && !concentration
             ? []

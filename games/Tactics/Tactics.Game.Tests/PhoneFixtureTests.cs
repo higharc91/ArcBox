@@ -451,7 +451,7 @@ public sealed class PhoneFixtureTests
         Check(screens);
     }
 
-    private static void Check(SortedDictionary<string, JsonNode> screens)
+    internal static void Check(SortedDictionary<string, JsonNode> screens)
     {
         var dir = FixtureDir();
         var update = Environment.GetEnvironmentVariable("UPDATE_FIXTURES") == "1";
