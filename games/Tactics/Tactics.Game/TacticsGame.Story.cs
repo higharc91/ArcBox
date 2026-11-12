@@ -449,6 +449,7 @@ public sealed partial class TacticsGame
         // (review). A beat that ends with no scene of its own is in its own place.
         var here = CurrentScene() is { } last ? StoryRules.PlaceOf(last, beat) : beat.Place;
         EndTelling();
+        _doc = CampaignExperience.CompleteBeat(_doc, beat, Rules);
         var world = _doc.World!;
         _doc = _doc with
         {
