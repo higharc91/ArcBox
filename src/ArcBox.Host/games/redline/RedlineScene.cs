@@ -68,6 +68,8 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     private double _time;
     private double _phaseStart;
     private bool _followUp;
+    private Action<string, object>? _signal;
+    private int? _animationSignaled;
     private int _lightsHeard;
     /// <summary>The <c>REDLINE grid …</c> line is printed once per race, at the first Grid view.</summary>
     private bool _gridLogged;
@@ -106,7 +108,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
     /// <summary>The shell's signal sender: the audio director says when a question's read-out has ended (issue #25).</summary>
     public Action<string, object> Signal
     {
-        set => _audio.Signal = value;
+        set { _signal = value; _audio.Signal = value; }
     }
 
     /// <summary>Takes effect at once when the world is built (F2), else when it is.</summary>
@@ -299,6 +301,7 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
         if (newPhase)
         {
             _phaseStart = _time;
+            _animationSignaled = null;
             _followUp = false;
             _lightsHeard = 0;
             _pendingShots.Clear();
@@ -404,6 +407,12 @@ public partial class RedlineScene : Node3D, IGameScene, IRenderPresetScene, IPre
 
         var phaseTime = _time - _phaseStart;
         PlaceCars(delta);
+        if (_warm == WarmState.Off && _view.Phase == RacePhase.Reveal && phaseTime >= RevealMotion.Duration
+            && _view.PaceSeq is { } seq && _animationSignaled != seq)
+        {
+            _animationSignaled = seq;
+            _signal?.Invoke(RedlineGame.AnimationDone, new { seq });
+        }
 
         if (_view.Phase == RacePhase.Reveal && !_followUp && phaseTime >= FollowUpSeconds)
         {

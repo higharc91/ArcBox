@@ -22,6 +22,8 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
 
     /// <summary>Counts the read-outs (Reading and QualifyingReading phases) so a late signal for an earlier one is ignored.</summary>
     private int _readSeq;
+    public const string AnimationDone = "animationDone";
+    private bool _narrationDone, _animationDone;
 
     private readonly Grid _grid = grid ?? Grid2026.Load();
 
@@ -181,7 +183,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     /// </summary>
     public void OnHostSignal(string kind, PlayerInput payload)
     {
-        if (_ctx is null || kind != NarrationDone || Phase is not (RacePhase.Reading or RacePhase.QualifyingReading))
+        if (_ctx is null || kind is not (NarrationDone or AnimationDone))
             return;
         if (payload.Payload.ValueKind != JsonValueKind.Object
             || !payload.Payload.TryGetProperty("seq", out var seq)
@@ -189,7 +191,21 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
             || !seq.TryGetInt32(out var acknowledged)
             || acknowledged != _readSeq)
             return;
-        OnTimer(PhaseTimer);
+        if (Phase is RacePhase.Reading or RacePhase.QualifyingReading)
+        {
+            if (kind == NarrationDone) OnTimer(PhaseTimer);
+            return;
+        }
+        if (Phase is not (RacePhase.Reveal or RacePhase.Chequered or RacePhase.Anthem)) return;
+        if (kind == NarrationDone) _narrationDone = true;
+        else _animationDone = true;
+        if (_narrationDone && (Phase == RacePhase.Chequered || _animationDone)) OnTimer(PhaseTimer);
+    }
+
+    private void BeginPacedBeat()
+    {
+        _readSeq++;
+        _narrationDone = _animationDone = false;
     }
 
     public void OnPlayerConnectionChanged(PlayerId id, bool connected)
@@ -546,6 +562,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private void Reveal()
     {
         Phase = RacePhase.Reveal;
+        BeginPacedBeat();
         var correctIndex = _answers[Round - 1].CorrectIndex;
         foreach (var d in _field)
         {
@@ -589,6 +606,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
     private void BeginChequered()
     {
         Phase = RacePhase.Chequered;
+        BeginPacedBeat();
         _finish = new FinishSummary(Ranking.Awards(_ranked, Round));
         _ctx!.SetTimer(PhaseTimer, Rules.Chequered);
     }
@@ -606,6 +624,7 @@ public sealed class RedlineGame(IQuestionSource questions, RedlineRules? rules =
         _podium = [.. podium.Select((d, i) => new PodiumPlace(i + 1, d))];
         _anthemCountry = Countries.For(podium[0].Seat.Driver.Nationality);
         Phase = RacePhase.Anthem;
+        BeginPacedBeat();
         _ctx!.SetTimer(PhaseTimer, Rules.Anthem);
     }
 

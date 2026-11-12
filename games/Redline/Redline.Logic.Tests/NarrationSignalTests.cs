@@ -94,7 +94,7 @@ public class NarrationSignalTests
         h.Advance(h.Game.Rules.Reveal);
         for (var i = 0; i < h.Players.Count; i++) RedlineKit.Throttle(h, i, "push");
         Assert.Equal((RacePhase.Reading, 2), (h.Game.Phase, h.Game.Round));
-        Assert.Equal(first + 1, Seq(h));
+        Assert.Equal(first + 2, Seq(h));
 
         // Round 1's late signal doesn't end round 2's read-out.
         h.HostSignal(RedlineGame.NarrationDone, new { seq = first });
@@ -112,5 +112,67 @@ public class NarrationSignalTests
 
         Assert.Equal(RacePhase.QualifyingQuestion, h.Game.Phase);
         Assert.Equal(h.Now + h.Game.Rules.QualifyingAnswer, RedlineKit.View(h).DeadlineUtc);
+    }
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void Reveal_waits_for_both_motion_and_commentary_in_either_order(bool motionFirst)
+    {
+        var h = ReadingRound1();
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = Seq(h) });
+        for (var i = 0; i < h.Players.Count; i++) RedlineKit.AnswerRight(h, i);
+        var seq = RedlineKit.View(h).PaceSeq!.Value;
+        var first = motionFirst ? RedlineGame.AnimationDone : RedlineGame.NarrationDone;
+        var second = motionFirst ? RedlineGame.NarrationDone : RedlineGame.AnimationDone;
+        h.HostSignal(first, new { seq });
+        Assert.Equal(RacePhase.Reveal, h.Game.Phase);
+        h.HostSignal(first, new { seq }); // A duplicate cannot stand in for the other completion.
+        h.HostSignal(second, new { seq = seq - 1 });
+        Assert.Equal(RacePhase.Reveal, h.Game.Phase);
+        h.HostSignal(second, new { seq });
+        Assert.Equal(RacePhase.Throttle, h.Game.Phase);
+        var deadline = RedlineKit.View(h).DeadlineUtc;
+        h.HostSignal(second, new { seq });
+        Assert.Equal(deadline, RedlineKit.View(h).DeadlineUtc);
+    }
+
+    [Fact]
+    public void Missing_motion_signal_still_ends_reveal_at_the_original_deadline()
+    {
+        var h = ReadingRound1();
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = Seq(h) });
+        for (var i = 0; i < h.Players.Count; i++) RedlineKit.AnswerRight(h, i);
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = RedlineKit.View(h).PaceSeq });
+        h.Advance(h.Game.Rules.Reveal - TimeSpan.FromMilliseconds(1));
+        Assert.Equal(RacePhase.Reveal, h.Game.Phase);
+        h.Advance(TimeSpan.FromMilliseconds(1));
+        Assert.Equal(RacePhase.Throttle, h.Game.Phase);
+    }
+    [Fact]
+    public void Finish_narration_and_the_actual_anthem_complete_their_own_beats_only()
+    {
+        var (h, _) = RedlineKit.Start(rules: new RedlineRules { MaxRounds = 1, Celebrate = true });
+        RedlineKit.SeatAllAndGoToRound1(h, Codes);
+        for (var i = 0; i < h.Players.Count; i++) RedlineKit.Throttle(h, i, "push");
+        for (var i = 0; i < h.Players.Count; i++) RedlineKit.AnswerRight(h, i);
+        var reveal = RedlineKit.View(h).PaceSeq;
+        h.HostSignal(RedlineGame.AnimationDone, new { seq = reveal });
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = reveal });
+        Assert.Equal(RacePhase.Chequered, h.Game.Phase);
+        var finish = RedlineKit.View(h).PaceSeq;
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = reveal });
+        h.HostSignal(RedlineGame.AnimationDone, new { seq = finish });
+        Assert.Equal(RacePhase.Chequered, h.Game.Phase);
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = finish });
+        Assert.Equal(RacePhase.Anthem, h.Game.Phase);
+        var anthem = RedlineKit.View(h).PaceSeq;
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = anthem });
+        Assert.Equal(RacePhase.Anthem, h.Game.Phase);
+        h.HostSignal(RedlineGame.AnimationDone, new { seq = anthem });
+        Assert.Equal(RacePhase.Champagne, h.Game.Phase);
+        var deadline = RedlineKit.View(h).DeadlineUtc;
+        h.HostSignal(RedlineGame.NarrationDone, new { seq = anthem });
+        h.HostSignal(RedlineGame.AnimationDone, new { seq = anthem });
+        Assert.Equal(deadline, RedlineKit.View(h).DeadlineUtc); // Players keep their full spraying time.
     }
 }
