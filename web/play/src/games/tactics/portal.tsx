@@ -195,6 +195,7 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
 
       <Section>Background</Section>
       <Options label="Background" kind="background" items={options.backgrounds} value={background} onPick={setBackground} readOnly={readOnly} explain={explain} />
+      {b?.hook && <p class="tx-background-hook">{b.hook}</p>}
       {b ? <Summary title={b.name} lines={b.facts.slice(0, 2)} onMore={explain && (() => explain({ kind: "background", id: background }))} />
         : <p class="tx-note">{Object.entries(boosts).map(([s, n]) => `${s.toUpperCase()} +${n}`).join(", ") || "No score boosts"}</p>}
 
@@ -433,6 +434,7 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
           </div>
         </div>
       ) : null}
+      {details?.backgrounds[me.background]?.hook && <p class="tx-background-hook">{details.backgrounds[me.background]!.hook}</p>}
       {me.equipment && <Equipment equipment={me.equipment} readOnly={readOnly} send={send} />}
       {me.companion && <CompanionRename companion={me.companion} readOnly={readOnly} send={send} />}
       {me.increasesLeft >= 2 ? <Increase readOnly={readOnly} send={send} /> : null}

@@ -498,3 +498,13 @@ describe("equipment", () => {
     expect(screen.getAllByRole<HTMLSelectElement>("combobox").every(select => select.disabled)).toBe(true);
   });
 });
+
+describe("background hooks", () => {
+  it("shows the soldier's public hook as soon as Soldier is chosen in the creator", () => {
+    const view = structuredClone(FRESH);
+    view.details!.backgrounds.soldier!.hook = "You served in the ford garrison under Dagna Holt.";
+    show(view);
+    fireEvent.click(screen.getByRole("button", { name: "Soldier", exact: true }));
+    expect(screen.getByText("You served in the ford garrison under Dagna Holt.")).toBeTruthy();
+  });
+});

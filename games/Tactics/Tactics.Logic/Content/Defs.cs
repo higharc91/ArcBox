@@ -363,7 +363,8 @@ public sealed record RaceDef(string Id, string Name, string Size, int Move,
 /// </summary>
 public sealed record BackgroundDef(string Id, string Name, ImmutableSortedDictionary<Stat, int> Boosts, ImmutableArray<string> Skills,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Replaces = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Hook = null);
 
 /// <summary>
 /// A boss phase: the abilities and passives the monster gains when an encounter trigger's <c>phase</c> action says so (spec

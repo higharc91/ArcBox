@@ -270,6 +270,7 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         }
         if (custom.Action is null)
             return;
+        if (custom.Action == "backgroundSecretRead") { HeardFrom(profile); RememberBackgroundSecret(profile); return; }
         if (_doc.World?.MobAmbush is not null && custom.Action != "endSession") return;
         HeardFrom(profile);
         if (custom.Action == "difficulty") { if (IsVip(player)) SetDifficulty(custom.Data); return; }

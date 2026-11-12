@@ -314,6 +314,7 @@ export interface DialogueData {
 }
 
 export interface StoryOption {
+  credit?: string;
   can?: boolean;
   needs?: string;
   id: string;
@@ -329,6 +330,7 @@ export interface StoryOption {
  * didn't make it.
  */
 export interface VoteData {
+  personal?: boolean;
   party: boolean;
   canChoose: boolean;
   options: StoryOption[];

@@ -27,7 +27,8 @@ public sealed record MemberRecord(CharacterRecord Character, int Xp,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] int Gold = 0,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool WellFed = false,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ReactionPrefs? Reactions = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ReactionPrefs? Reactions = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> BackgroundSecretsRead = default)
 {
     /// <summary>True once the character has been in a battle (or earned XP, for documents from before the flag).</summary>
     [JsonIgnore]
