@@ -51,16 +51,18 @@ public sealed class BasePackTests
         [
             "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bandit_roamer",
             "bandit_roamer_gang", "bandit_roamer_lone", "bear", "black_knight", "boar", "boar_roamer",
-            "boar_roamer_lone", "boar_roamer_pair", "boar_roamer_sounder", "cult_leader", "cultist", "dark_elf",
-            "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental",
+            "boar_roamer_lone", "boar_roamer_pair", "boar_roamer_sounder", "crab", "cult_leader", "cultist",
+            "dark_elf", "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear",
+            "fire_elemental", "form_bear", "form_dire_wolf", "form_elder_bear", "form_wolf", "gargoyle",
             "giant_bat", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman",
-            "goblin_shaman", "golem", "halvard", "hobgoblin", "hollow_bat", "hollow_bat_lone",
-            "hollow_bat_swarm", "hound", "imp", "ivo_rime", "kobold", "kobold_foreman",
-            "kobold_roamer", "kobold_roamer_diggers", "kobold_roamer_lone", "kobold_roamer_patrol", "kobold_roamer_slinger", "kobold_roamer_slinger_lone",
-            "kobold_roamer_slinger_patrol", "kobold_slinger", "lich", "maren_sorrel", "mimic", "mother_skarrow",
-            "necromancer", "orc_brute", "rime_spider", "river_slime", "river_slime_lone", "river_slime_pair",
-            "sapling", "skeleton", "skeleton_archer", "slime", "troll", "vorga",
-            "water_elemental", "wolf", "wolf_roamer", "wolf_roamer_lone", "wraith", "zombie",
+            "goblin_shaman", "golem", "halvard", "harpy", "hobgoblin", "hollow_bat",
+            "hollow_bat_lone", "hollow_bat_swarm", "hookbeak", "hound", "imp", "ivo_rime",
+            "kobold", "kobold_foreman", "kobold_roamer", "kobold_roamer_diggers", "kobold_roamer_lone", "kobold_roamer_patrol",
+            "kobold_roamer_slinger", "kobold_roamer_slinger_lone", "kobold_roamer_slinger_patrol", "kobold_slinger", "lich", "maren_sorrel",
+            "mimic", "mother_skarrow", "necromancer", "orc_brute", "rime_spider", "river_slime",
+            "river_slime_lone", "river_slime_pair", "sapling", "scorpion", "skeleton", "skeleton_archer",
+            "slime", "summon_wolf", "troll", "vorga", "warg", "water_elemental",
+            "wisp", "wolf", "wolf_roamer", "wolf_roamer_lone", "wraith", "zombie",
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);

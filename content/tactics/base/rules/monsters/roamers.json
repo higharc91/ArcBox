@@ -29,7 +29,9 @@
         "light"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "tags": [
       "humanoid",
@@ -69,7 +71,9 @@
         "simple"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "skills": [
       "stealth"
@@ -156,7 +160,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "river_slime.slip"
+    ],
     "passives": [],
     "resist": [
       "acid",
@@ -199,7 +205,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "hollow_bat.dart"
+    ],
     "passives": [],
     "skills": [
       "perception"
@@ -327,7 +335,9 @@
         "light"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "tags": [
       "humanoid",
@@ -370,7 +380,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "wolf.watch"
+    ],
     "passives": [],
     "skills": [
       "perception",
@@ -412,7 +424,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "boar.brace"
+    ],
     "passives": [],
     "tags": [
       "beast"
@@ -450,7 +464,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "boar.brace"
+    ],
     "passives": [],
     "tags": [
       "beast"
@@ -489,7 +505,9 @@
         "light"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "bandit.guard"
+    ],
     "passives": [],
     "skills": [
       "stealth"
@@ -532,7 +550,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "hollow_bat.dart"
+    ],
     "passives": [],
     "skills": [
       "perception"
@@ -573,7 +593,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "river_slime.slip"
+    ],
     "passives": [],
     "resist": [
       "acid",
@@ -615,7 +637,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "river_slime.slip"
+    ],
     "passives": [],
     "resist": [
       "acid",
@@ -657,7 +681,9 @@
         "simple"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "skills": [
       "stealth"
@@ -700,7 +726,9 @@
         "natural"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "hollow_bat.dart"
+    ],
     "passives": [],
     "skills": [
       "perception"
@@ -781,7 +809,9 @@
         "light"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "tags": [
       "humanoid",
@@ -821,7 +851,9 @@
         "simple"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "skills": [
       "stealth"
@@ -908,7 +940,9 @@
         "light"
       ]
     },
-    "abilities": [],
+    "abilities": [
+      "kobold.dirty_trick"
+    ],
     "passives": [],
     "tags": [
       "humanoid",

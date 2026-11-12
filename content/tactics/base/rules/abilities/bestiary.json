@@ -1,0 +1,639 @@
+{
+  "abilities": [
+    {
+      "id": "skeleton_archer.pinning_arrow",
+      "name": "Pinning Arrow",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 6,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "weapon": true
+              }
+            },
+            {
+              "apply": "slowed",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "zombie.clinging_grasp",
+      "name": "Clinging Grasp",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "weapon": true
+              }
+            },
+            {
+              "apply": "slowed",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "kobold.dirty_trick",
+      "name": "Pocket Sand",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d4",
+                "type": "piercing"
+              }
+            },
+            {
+              "apply": "blinded",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "skeleton.brace",
+      "name": "Bone Brace",
+      "tier": 0,
+      "cost": {
+        "bonus": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "self"
+        }
+      },
+      "effects": [
+        {
+          "apply": "dodging",
+          "rounds": 1
+        }
+      ],
+      "presentation": {
+        "anim": "characters.ready"
+      },
+      "ai": {
+        "tags": [
+          "defend"
+        ]
+      }
+    },
+    {
+      "id": "hollow_bat.dart",
+      "name": "Dart Away",
+      "tier": 0,
+      "cost": {
+        "bonus": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "self"
+        }
+      },
+      "effects": [
+        {
+          "apply": "disengaged",
+          "rounds": 1
+        }
+      ],
+      "presentation": {
+        "anim": "characters.ready"
+      },
+      "ai": {
+        "tags": [
+          "escape"
+        ]
+      }
+    },
+    {
+      "id": "river_slime.slip",
+      "name": "Slippery Slide",
+      "tier": 0,
+      "cost": {
+        "bonus": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "self"
+        }
+      },
+      "effects": [
+        {
+          "apply": "disengaged",
+          "rounds": 1
+        }
+      ],
+      "presentation": {
+        "anim": "characters.ready"
+      },
+      "ai": {
+        "tags": [
+          "escape"
+        ]
+      }
+    },
+    {
+      "id": "crab.signature",
+      "name": "Clamping Claw",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "bludgeoning"
+              }
+            },
+            {
+              "apply": "slowed",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "gargoyle.signature",
+      "name": "Stone Slam",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "2d6",
+                "type": "bludgeoning"
+              }
+            },
+            {
+              "push": {
+                "distance": 1
+              }
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "harpy.signature",
+      "name": "Dread Talons",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d8",
+                "type": "slashing"
+              }
+            },
+            {
+              "apply": "frightened",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "hookbeak.signature",
+      "name": "Hooking Lunge",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d10",
+                "type": "piercing"
+              }
+            },
+            {
+              "apply": "prone",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "scorpion.signature",
+      "name": "Venom Sting",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d6",
+                "type": "poison"
+              }
+            },
+            {
+              "apply": "poisoned",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "warg.signature",
+      "name": "Hamstring Bite",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d10",
+                "type": "piercing"
+              }
+            },
+            {
+              "apply": "prone",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "wisp.signature",
+      "name": "Dazzling Spark",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 2
+      },
+      "target": {
+        "kind": "enemy",
+        "range": 1,
+        "los": true,
+        "area": {
+          "shape": "single"
+        }
+      },
+      "effects": [
+        {
+          "attack": {
+            "kind": "weapon"
+          },
+          "onHit": [
+            {
+              "damage": {
+                "dice": "1d8",
+                "type": "lightning"
+              }
+            },
+            {
+              "apply": "blinded",
+              "rounds": 1
+            }
+          ]
+        }
+      ],
+      "presentation": {
+        "anim": "characters.attack"
+      },
+      "ai": {
+        "tags": [
+          "damage",
+          "single"
+        ]
+      }
+    },
+    {
+      "id": "boar.brace",
+      "name": "Bristled Guard",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "self"
+        }
+      },
+      "effects": [
+        {
+          "apply": "dodging",
+          "rounds": 1
+        }
+      ],
+      "presentation": {
+        "anim": "characters.ready"
+      },
+      "ai": {
+        "tags": [
+          "defend"
+        ]
+      }
+    },
+    {
+      "id": "wolf.watch",
+      "name": "Watchful Prowl",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "self"
+        }
+      },
+      "effects": [
+        {
+          "apply": "dodging",
+          "rounds": 1
+        }
+      ],
+      "presentation": {
+        "anim": "characters.ready"
+      },
+      "ai": {
+        "tags": [
+          "defend"
+        ]
+      }
+    },
+    {
+      "id": "bandit.guard",
+      "name": "Roadside Guard",
+      "tier": 0,
+      "cost": {
+        "action": 1,
+        "uses": 1
+      },
+      "target": {
+        "kind": "self",
+        "range": 0,
+        "los": false,
+        "area": {
+          "shape": "self"
+        }
+      },
+      "effects": [
+        {
+          "apply": "dodging",
+          "rounds": 1
+        }
+      ],
+      "presentation": {
+        "anim": "characters.ready"
+      },
+      "ai": {
+        "tags": [
+          "defend"
+        ]
+      }
+    }
+  ]
+}

@@ -97,6 +97,9 @@
     "mobs/ashen_ford.json",
     "mobs/cinder_hollow.json",
     "monsters/roamers.json",
-    "loot.json"
+    "loot.json",
+    "monsters/player_forms.json",
+    "monsters/bestiary.json",
+    "abilities/bestiary.json"
   ]
 }
