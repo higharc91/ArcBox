@@ -1,0 +1,50 @@
+[
+  {
+    "fixture": "portal-build-creation",
+    "width": 320,
+    "height": 844,
+    "overflow": false,
+    "production": true,
+    "reducedMotion": true
+  },
+  {
+    "fixture": "portal-build-feats",
+    "width": 320,
+    "height": 844,
+    "overflow": false,
+    "production": true,
+    "reducedMotion": true
+  },
+  {
+    "fixture": "portal-build-owned-feat",
+    "width": 320,
+    "height": 844,
+    "overflow": false,
+    "production": true,
+    "reducedMotion": true
+  },
+  {
+    "fixture": "portal-build-creation",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "production": true,
+    "reducedMotion": true
+  },
+  {
+    "fixture": "portal-build-feats",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "production": true,
+    "reducedMotion": true
+  },
+  {
+    "fixture": "portal-build-owned-feat",
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "production": true,
+    "reducedMotion": true
+  }
+]

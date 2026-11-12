@@ -69,7 +69,7 @@ public static class CharacterGuide
     /// 10, so a subclass is chosen knowing all it gives; the others stop at <see cref="UpTo"/> too.
     /// </summary>
     public static PortalDetails For(IEnumerable<RaceDef> races, IEnumerable<ClassDef> classes, IEnumerable<BackgroundDef> backgrounds,
-        int level, RulesPack rules, string? fullSubclassesOf = null)
+        int level, RulesPack rules, string? fullSubclassesOf = null, string? ancestry = null)
     {
         var upTo = UpTo(level);
         var featureIds = new SortedSet<string>(StringComparer.Ordinal);
@@ -77,6 +77,7 @@ public static class CharacterGuide
         var classGuides = classes.ToImmutableSortedDictionary(c => c.Id,
             c => Class(c, upTo, c.Id == fullSubclassesOf ? 10 : upTo, rules, featureIds), StringComparer.Ordinal);
         var backgroundGuides = backgrounds.ToImmutableSortedDictionary(b => b.Id, Background, StringComparer.Ordinal);
+        if (ancestry is not null && ancestry != "fire") featureIds.Add(BuildChoices.Breath(ancestry).Value);
         var features = featureIds.Select(id => (id, Feature(id, level, rules))).Where(f => f.Item2 is not null)
             .ToImmutableSortedDictionary(f => f.id, f => f.Item2!, StringComparer.Ordinal);
         var skills = SkillCheck.Skills.ToImmutableSortedDictionary(s => s.Key, s => Skill(s.Key, s.Value, level), StringComparer.Ordinal);
@@ -97,7 +98,9 @@ public static class CharacterGuide
                 ? $"Darkvision: {Tiles(race.Darkvision)}. Battles have no darkness yet, so it doesn't change a fight."
                 : "Senses: normal sight.",
         ];
-        if (!race.Resist.IsEmpty)
+        if (race.Id == "dragonborn")
+            facts.Add("Your chosen dragon ancestry sets your breath damage and resistance (half damage taken).");
+        else if (!race.Resist.IsEmpty)
             facts.Add($"Resistant to {Join(race.Resist)} damage: takes half.");
         if (race.ExtraSkills > 0)
             facts.Add($"Skilled: {Count(race.ExtraSkills, "more skill", "more skills")} from your class's list.");
@@ -123,9 +126,9 @@ public static class CharacterGuide
         [
             $"Hit points: {cls.HitDie} + your CON modifier at level 1, then {hpLevel} + CON modifier each level (hit die d{cls.HitDie}).",
             $"Saving throws: {Join(cls.Saves.Select(StatName))}.",
-            cls.ArmorProf.IsDefaultOrEmpty ? $"Armour: none{NotInBattles}." : $"Armour: {Join(cls.ArmorProf.Select(Armor))}{NotInBattles}.",
-            cls.WeaponProf.IsDefaultOrEmpty ? $"Weapons: none{NotInBattles}." : $"Weapons: {Join(cls.WeaponProf.Select(w => WeaponProf(w, rules)))}{NotInBattles}.",
-            $"Skills: {Count(cls.SkillChoices.Count, "skill", "skills")} from {Join(cls.SkillChoices.From.Select(SkillName), "or")}, the first not already from your background.",
+            cls.ArmorProf.IsDefaultOrEmpty ? $"Armour: none." : $"Armour: {Join(cls.ArmorProf.Select(Armor))}.",
+            cls.WeaponProf.IsDefaultOrEmpty ? $"Weapons: none." : $"Weapons: {Join(cls.WeaponProf.Select(w => WeaponProf(w, rules)))}.",
+            $"Choose {Count(cls.SkillChoices.Count, "class skill", "class skills")} in the creator; background skills are additional.",
         ];
         if (cls.CastingStat is { } casting)
             facts.Add($"Spellcasting: {StatName(casting)}. Spell attacks add its modifier, and your spells' save DC is 8 + proficiency + its modifier.");
@@ -233,7 +236,7 @@ public static class CharacterGuide
     public static FeatureGuide? Feature(string id, int level, RulesPack rules)
     {
         if (rules.Abilities.TryGetValue(new AbilityId(id), out var a))
-            return new FeatureGuide(a.Name, Cost(a), Tooltips.For(a, level, rules));
+            return new FeatureGuide(a.Name, Cost(a), Tooltips.For(a, level, rules) + (id == "dragonborn.breath_weapon" ? " Fire is the default; choosing another ancestry changes the damage type." : ""));
         if (rules.Passives.TryGetValue(id, out var p))
         {
             List<string> tags = ["Always on"];

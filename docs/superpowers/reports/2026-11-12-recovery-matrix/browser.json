@@ -1,0 +1,56 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "fixture": "inn",
+    "overflow": false,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "fixture": "temple",
+    "overflow": false,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "fixture": "camp",
+    "overflow": false,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "fixture": "inn",
+    "overflow": false,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "fixture": "temple",
+    "overflow": false,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "fixture": "camp",
+    "overflow": false,
+    "productionComponentHarness": true,
+    "realServerFixture": true,
+    "reducedMotion": true
+  }
+]

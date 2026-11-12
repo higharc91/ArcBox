@@ -307,10 +307,10 @@ public sealed class CharacterScreenTests
         Assert.Equal("Healer: keeps the party standing.", cleric.Role);
         Assert.Contains("Hit points: 8 + your CON modifier at level 1, then 5 + CON modifier each level (hit die d8).", cleric.Facts);
         Assert.Contains("Saving throws: Wisdom and Charisma.", cleric.Facts);
-        Assert.Contains("Armour: light armour, medium armour and shields (not used in battles yet).", cleric.Facts);
-        Assert.Contains("Weapons: simple weapons (not used in battles yet).", cleric.Facts);
+        Assert.Contains("Armour: light armour, medium armour and shields.", cleric.Facts);
+        Assert.Contains("Weapons: simple weapons.", cleric.Facts);
         Assert.Contains(cleric.Facts, f => f.StartsWith("Spellcasting: Wisdom.", StringComparison.Ordinal));
-        Assert.Contains(cleric.Facts, f => f.StartsWith("Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion", StringComparison.Ordinal));
+        Assert.Contains(cleric.Facts, f => f == "Choose 2 class skills in the creator; background skills are additional.");
         Assert.Equal([1, 2, 3], cleric.Levels.Select(l => l.Level));
         Assert.Contains("cleric.turn_undead", cleric.Levels[1].Features);
         Assert.Equal([3, 4], cleric.Levels[0].Choices.Select(c => c.Choose));
@@ -349,9 +349,9 @@ public sealed class CharacterScreenTests
     {
         var rogue = CharacterGuide.Class(Rules.Classes["rogue"], 2, 2, Rules);
         Assert.Contains("Climbs 3 levels in one step (most climb 2).", rogue.Facts);
-        Assert.Contains("Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        Assert.Contains("Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword.",
             CharacterGuide.Class(Rules.Classes["bard"], 2, 2, Rules).Facts);
-        Assert.Contains("Armour: light armour (not used in battles yet).", rogue.Facts);
+        Assert.Contains("Armour: light armour.", rogue.Facts);
         Assert.DoesNotContain(CharacterGuide.Class(Rules.Classes["cleric"], 2, 2, Rules).Facts, f => f.StartsWith("Climbs", StringComparison.Ordinal));
         Assert.Contains(CharacterGuide.Class(Rules.Classes["monk"], 2, 2, Rules).Facts, f => f.StartsWith("Weapons: simple weapons and light martial weapons", StringComparison.Ordinal));
         Assert.Contains("Size: Medium (not used in battles yet).", CharacterGuide.Race(Rules.Races["dwarf"], Rules).Facts);

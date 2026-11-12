@@ -508,3 +508,42 @@ describe("background hooks", () => {
     expect(screen.getByText("You served in the ford garrison under Dagna Holt.")).toBeTruthy();
   });
 });
+
+describe("creation skills and ancestry", () => {
+  it("offers class skill picks without duplicating background skills", () => {
+    const view = structuredClone(FRESH);
+    view.options!.classes.find(c => c.id === "fighter")!.skillChoices = { count: 2, from: ["acrobatics", "athletics", "history", "perception", "survival"] };
+    view.options!.races.find(r => r.id === "dwarf")!.extraSkills = 0;
+    view.options!.backgrounds.find(b => b.id === "sage")!.skills = ["arcana", "history"];
+    const send = show(view);
+    fireEvent.click(screen.getByRole("button", { name: "Dwarf", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: "Fighter defender" }));
+    fireEvent.click(screen.getByRole("button", { name: "Sage", exact: true }));
+    expect(screen.getByText(/Choose 2 class skills/)).toBeTruthy();
+    expect(screen.queryByRole("checkbox", { name: "History" })).toBeNull();
+    fireEvent.click(screen.getByRole("checkbox", { name: "Acrobatics" }));
+    fireEvent.click(screen.getByRole("checkbox", { name: "Perception" }));
+    fireEvent.click(screen.getByRole("button", { name: "Create", exact: true }));
+    const [, data] = lastCall(send);
+    expect(data.skills).toEqual(["athletics", "perception"]);
+  });
+  it("sends the selected ancestry with a dragonborn character", () => {
+    const send = show(FRESH);
+    fireEvent.click(screen.getByRole("button", { name: "Dragonborn", exact: true }));
+    fireEvent.change(screen.getByRole("combobox", { name: /^Dragon ancestry/ }), { target: { value: "cold" } });
+    fireEvent.click(screen.getByRole("button", { name: "Create", exact: true }));
+    expect(lastCall(send)[1].ancestry).toBe("cold");
+  });
+  it("offers a feat as an alternative to the same ability-increase budget", () => {
+    const view = structuredClone(CLERIC);
+    view.me!.featChoices = [{ id: "feat.alert", name: "Alert", tooltip: "+3 initiative" }];
+    view.me!.feats = [];
+    const send = show(view);
+    expect(screen.getByText("Feat or ability increase")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Alert", exact: true }));
+    expect(lastCall(send)).toEqual(["chooseFeat", { feat: "feat.alert" }]);
+    cleanup(); view.me!.increasesLeft = 0; view.me!.feats = ["feat.alert"]; show(view);
+    expect(screen.queryByRole("button", { name: "Alert", exact: true })).toBeNull();
+    expect(screen.queryByText("Feat or ability increase")).toBeNull();
+  });
+});

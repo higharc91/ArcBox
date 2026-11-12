@@ -8,36 +8,36 @@
     "lines": [
       {
         "name": "Player1",
-        "xp": 125,
+        "xp": 350,
         "injuries": [],
-        "totalXp": 125,
+        "totalXp": 350,
         "nextLevelXp": 1000,
         "prevLevelXp": 0,
         "level": 1
       },
       {
         "name": "Player2",
-        "xp": 125,
+        "xp": 350,
         "injuries": [],
-        "totalXp": 125,
+        "totalXp": 350,
         "nextLevelXp": 1000,
         "prevLevelXp": 0,
         "level": 1
       },
       {
         "name": "Player3",
-        "xp": 125,
+        "xp": 350,
         "injuries": [],
-        "totalXp": 125,
+        "totalXp": 350,
         "nextLevelXp": 1000,
         "prevLevelXp": 0,
         "level": 1
       },
       {
         "name": "Player4",
-        "xp": 125,
+        "xp": 350,
         "injuries": [],
-        "totalXp": 125,
+        "totalXp": 350,
         "nextLevelXp": 1000,
         "prevLevelXp": 0,
         "level": 1
@@ -58,7 +58,7 @@
       "subclass": null,
       "subclassName": null,
       "level": 1,
-      "xp": 125,
+      "xp": 350,
       "nextLevelXp": 1000,
       "prevLevelXp": 0,
       "scores": {

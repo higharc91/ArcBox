@@ -11,7 +11,7 @@ public sealed class PlacementEditsTests
         var source = PlacementEdits.Read(ContentPaths.BaseRules, "ashen_ford");
         Assert.True(source.Points.Count(p => p.Kind == PlacementKind.Interactable) >= 30);
         Assert.Equal(5, source.Points.Count(p => p.Kind == PlacementKind.MobPatch));
-        Assert.Equal(3, source.Shops.Length);
+        Assert.Equal(4, source.Shops.Length);
         Assert.Empty(source.Plan(source.Points));
     }
 

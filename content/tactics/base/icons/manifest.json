@@ -13038,7 +13038,7 @@
       "badge": "wind",
       "reaction": false
     }
-  },
+  , "dragonborn.breath_weapon_acid": {"atlas": "abilities_by_id.png", "rect": [79, 417, 24, 24], "atlas2x": "abilities_by_id@2x.png", "rect2x": [151, 801, 48, 48], "size": [24, 24], "category": "ability", "class": "wizard", "tier": 0, "glyph": "drop", "badge": "burst", "reaction": false}, "dragonborn.breath_weapon_cold": {"atlas": "abilities_by_id.png", "rect": [27, 417, 24, 24], "atlas2x": "abilities_by_id@2x.png", "rect2x": [51, 801, 48, 48], "size": [24, 24], "category": "ability", "class": "wizard", "tier": 0, "glyph": "beam", "badge": "snowflake", "reaction": false}, "dragonborn.breath_weapon_lightning": {"atlas": "abilities_by_id.png", "rect": [53, 417, 24, 24], "atlas2x": "abilities_by_id@2x.png", "rect2x": [101, 801, 48, 48], "size": [24, 24], "category": "ability", "class": "wizard", "tier": 0, "glyph": "hand", "badge": "bolt", "reaction": false}, "dragonborn.breath_weapon_poison": {"atlas": "abilities_by_id.png", "rect": [131, 417, 24, 24], "atlas2x": "abilities_by_id@2x.png", "rect2x": [251, 801, 48, 48], "size": [24, 24], "category": "ability", "class": "wizard", "tier": 0, "glyph": "cone", "badge": null, "reaction": false}},
   "frames": {
     "common": {
       "atlas": "frames.png",

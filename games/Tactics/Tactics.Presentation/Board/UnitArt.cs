@@ -441,6 +441,7 @@ public sealed class UnitArt
                 FootprintWidth = e.GetProperty("footprintWidth").GetSingle(),
                 FootprintHeight = e.GetProperty("footprintHeight").GetSingle(),
             };
+            _sprites["creatures." + entry.Name] = sprite;
             foreach (var key in e.GetProperty("keys").EnumerateArray())
                 _sprites[key.GetString()!] = sprite;
         }

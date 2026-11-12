@@ -66,7 +66,12 @@
     ],
     "beat": false,
     "search": true,
-    "travelNote": "Can\u0027t find a way there."
+    "travelNote": "Can\u0027t find a way there.",
+    "backgroundSecret": {
+      "id": "soldier",
+      "background": "Soldier",
+      "text": "It was Dagna\u0027s guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn\u0027t know; you do."
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,

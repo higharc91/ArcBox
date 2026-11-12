@@ -62,6 +62,16 @@ public sealed class BackgroundPrivacyTests
         s.Send(3, "vote", new { option = "truth" });
         var agreed = s.Screen(lead)!.Data.GetProperty("options").EnumerateArray().Single(o => o.GetProperty("id").GetString() == "truth");
         Assert.True(agreed.GetProperty("can").GetBoolean());
+        s = new TacticsGameTests.Session(document: s.Game.Document.ToJson(), game: new TacticsGame(TacticsGameTests.Rules, lore: StoryTests.Lore));
+        s.Harness.Resume(s.Lease);
+        for (var i = 0; i < 4; i++) s.Harness.SetConnected(i, true);
+        lead = StageBattleTests.Lead(s);
+        // StorySave deliberately resets all votes after restart: the owner must agree again.
+        Assert.False(s.Screen(lead)!.Data.GetProperty("options").EnumerateArray().Single(o => o.GetProperty("id").GetString() == "truth").GetProperty("can").GetBoolean());
+        s.Send(lead, "vote", new { option = "truth" });
+        Assert.False(s.Screen(lead)!.Data.GetProperty("options").EnumerateArray().Single(o => o.GetProperty("id").GetString() == "truth").GetProperty("can").GetBoolean());
+        s.Send(3, "vote", new { option = "truth" });
+        Assert.True(s.Screen(lead)!.Data.GetProperty("options").EnumerateArray().Single(o => o.GetProperty("id").GetString() == "truth").GetProperty("can").GetBoolean());
         s.Send(lead, "vote", new { option = "truth" }); // Only after Kara's explicit choice.
         StoryVoteTests.Until(s, () => s.Game.Document.World!.Story!.Node == "truth", "Kara's personal answer");
     }

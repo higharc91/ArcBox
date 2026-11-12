@@ -49,7 +49,7 @@ public sealed class TrinketTests
         {
             case "barbarian":
                 Assert.Equal(before.Units[hero].Sheet.MaxHp + 4, after.Units[hero].Sheet.MaxHp);
-                Assert.Equal(0, b.MaxHp);
+                Assert.Equal(a.MaxHp, b.MaxHp);
                 Assert.Contains("fire", b.Resist!); break;
             case "bard":
                 Assert.Equal(a.Initiative + 2, b.Initiative);

@@ -11,7 +11,12 @@
     "text": "There. Forty of them, perhaps. Dagna has eight guards left. And she has you.",
     "canSkip": true,
     "vip": true,
-    "difficulty": "Normal"
+    "difficulty": "Normal",
+    "backgroundSecret": {
+      "id": "soldier",
+      "background": "Soldier",
+      "text": "It was Dagna\u0027s guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn\u0027t know; you do."
+    }
   },
   "viewId": "v1",
   "deadlineUtc": null,

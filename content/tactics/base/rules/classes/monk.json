@@ -9,15 +9,15 @@
   "unarmoredDefense": "wis",
   "features": {
     "1": [{"attacks": 2}, {"ability": "monk.unarmed_strike"}, {"ability": "monk.martial_arts"}, {"passive": "monk.unarmored_movement"}],
-    "2": [{"ability": "monk.flurry_of_blows"}, {"ability": "monk.step_of_the_wind"}],
+    "2": [{"ability": "monk.flurry_of_blows"}, {"ability": "monk.step_of_the_wind"}, {"choose": 1, "from": ["monk.technique_crane", "monk.technique_tiger"]}],
     "3": [ { "ability": "monk.deflect_attacks" } ],
     "4": [ { "ability": "monk.patient_defense" } ],
     "5": [ { "attacks": 2 }, { "ability": "monk.stunning_strike" } ],
-    "6": [ { "passive": "monk.unarmored_movement_2" } ],
+    "6": [ { "passive": "monk.unarmored_movement_2" } , {"choose": 1, "from": ["monk.technique_river", "monk.technique_mountain"]}],
     "7": [ { "passive": "monk.evasion" } ],
     "8": [ { "passive": "monk.self_restoration" } ],
     "9": [ { "passive": "monk.acrobatic_movement" } ],
-    "10": [ { "ability": "monk.heightened_flurry" } ]
+    "10": [ { "ability": "monk.heightened_flurry" } , {"choose": 1, "from": ["monk.technique_wind", "monk.technique_steel"]}]
   },
   "subclasses": [
     { "id": "monk.open_hand", "name": "Way of the Open Hand",
@@ -40,7 +40,7 @@
       } }
   ],
   "defaultPicks": {
-    "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
+    "1": [], "2": ["monk.technique_crane"], "3": ["monk.technique_crane"], "4": ["monk.technique_crane"], "5": ["monk.technique_crane"], "6": ["monk.technique_crane", "monk.technique_river"], "7": ["monk.technique_crane", "monk.technique_river"], "8": ["monk.technique_crane", "monk.technique_river"], "9": ["monk.technique_crane", "monk.technique_river"], "10": ["monk.technique_crane", "monk.technique_river", "monk.technique_wind"]
   },
   "aiTags": { "tags": ["striker", "melee", "mobile"], "priority": ["dex", "wis", "con", "str", "int", "cha"] },
   "castingStat": "wis",

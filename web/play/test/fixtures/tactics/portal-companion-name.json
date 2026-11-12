@@ -163,115 +163,300 @@
       "sleight_of_hand": 5,
       "stealth": 5,
       "survival": 4
+    },
+    "equipment": {
+      "weapon": "longbow",
+      "armor": "studded_leather",
+      "shield": false,
+      "items": [
+        {
+          "id": "gear_longbow",
+          "name": "Longbow",
+          "slot": "weapon",
+          "can": true,
+          "equipped": true,
+          "detail": "Longbow: 1d8 piercing. Equip between sessions."
+        },
+        {
+          "id": "gear_studded_leather",
+          "name": "Studded leather",
+          "slot": "armor",
+          "can": true,
+          "equipped": true,
+          "detail": "Studded leather: base AC 12. Equip between sessions."
+        }
+      ]
     }
   },
   "options": {
     "races": [
       {
         "id": "aasimar",
-        "name": "Aasimar"
+        "name": "Aasimar",
+        "extraSkills": 0
       },
       {
         "id": "dragonborn",
-        "name": "Dragonborn"
+        "name": "Dragonborn",
+        "extraSkills": 0
       },
       {
         "id": "dwarf",
-        "name": "Dwarf"
+        "name": "Dwarf",
+        "extraSkills": 0
       },
       {
         "id": "elf",
-        "name": "Elf"
+        "name": "Elf",
+        "extraSkills": 0
       },
       {
         "id": "gnome",
-        "name": "Gnome"
+        "name": "Gnome",
+        "extraSkills": 0
       },
       {
         "id": "goliath",
-        "name": "Goliath"
+        "name": "Goliath",
+        "extraSkills": 0
       },
       {
         "id": "half_elf",
-        "name": "Half-Elf"
+        "name": "Half-Elf",
+        "extraSkills": 1
       },
       {
         "id": "half_orc",
-        "name": "Half-Orc"
+        "name": "Half-Orc",
+        "extraSkills": 0
       },
       {
         "id": "halfling",
-        "name": "Halfling"
+        "name": "Halfling",
+        "extraSkills": 0
       },
       {
         "id": "human",
-        "name": "Human"
+        "name": "Human",
+        "extraSkills": 1
       },
       {
         "id": "tiefling",
-        "name": "Tiefling"
+        "name": "Tiefling",
+        "extraSkills": 0
       }
     ],
     "classes": [
       {
         "id": "barbarian",
         "name": "Barbarian",
-        "role": "defender"
+        "role": "defender",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
       },
       {
         "id": "bard",
         "name": "Bard",
-        "role": "healer"
+        "role": "healer",
+        "skillChoices": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
       },
       {
         "id": "cleric",
         "name": "Cleric",
-        "role": "healer"
+        "role": "healer",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
       },
       {
         "id": "druid",
         "name": "Druid",
-        "role": "control"
+        "role": "control",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
       },
       {
         "id": "fighter",
         "name": "Fighter",
-        "role": "defender"
+        "role": "defender",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
       },
       {
         "id": "monk",
         "name": "Monk",
-        "role": "striker"
+        "role": "striker",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
       },
       {
         "id": "paladin",
         "name": "Paladin",
-        "role": "defender"
+        "role": "defender",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
       },
       {
         "id": "ranger",
         "name": "Ranger",
-        "role": "striker"
+        "role": "striker",
+        "skillChoices": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
       },
       {
         "id": "rogue",
         "name": "Rogue",
-        "role": "striker"
+        "role": "striker",
+        "skillChoices": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
       },
       {
         "id": "sorcerer",
         "name": "Sorcerer",
-        "role": "striker"
+        "role": "striker",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
       },
       {
         "id": "warlock",
         "name": "Warlock",
-        "role": "striker"
+        "role": "striker",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
       },
       {
         "id": "wizard",
         "name": "Wizard",
-        "role": "control"
+        "role": "control",
+        "skillChoices": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
       }
     ],
     "backgrounds": [
@@ -466,7 +651,7 @@
           "Speed: 4 tiles a turn.",
           "Size: Medium (not used in battles yet).",
           "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
-          "Resistant to fire damage: takes half.",
+          "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken).",
           "Ability boosts come from your background, not your race."
         ],
         "traits": [
@@ -594,9 +779,9 @@
         "facts": [
           "Hit points: 12 \u002B your CON modifier at level 1, then 7 \u002B CON modifier each level (hit die d12).",
           "Saving throws: Strength and Constitution.",
-          "Armour: light armour, medium armour and shields (not used in battles yet).",
-          "Weapons: simple weapons and martial weapons (not used in battles yet).",
-          "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+          "Armour: light armour, medium armour and shields.",
+          "Weapons: simple weapons and martial weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Unarmoured defence: without armour, Armour Class adds your CON modifier.",
           "Rage: 3 per battle at level 3, 5 by level 10.",
           "Climbs 3 levels in one step (most climb 2).",
@@ -619,7 +804,15 @@
               "barbarian.danger_sense"
             ],
             "attacks": null,
-            "choices": []
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "barbarian.technique_endurance",
+                  "barbarian.technique_hunter"
+                ]
+              }
+            ]
           },
           {
             "level": 3,
@@ -692,9 +885,9 @@
         "facts": [
           "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
           "Saving throws: Dexterity and Charisma.",
-          "Armour: light armour (not used in battles yet).",
-          "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
-          "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+          "Armour: light armour.",
+          "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword.",
+          "Choose 3 class skills in the creator; background skills are additional.",
           "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Inspiration: 3 per battle at level 3, 6 by level 10.",
           "Mana: 7 per battle at level 3, 12 by level 10.",
@@ -848,9 +1041,9 @@
         "facts": [
           "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
           "Saving throws: Wisdom and Charisma.",
-          "Armour: light armour, medium armour and shields (not used in battles yet).",
-          "Weapons: simple weapons (not used in battles yet).",
-          "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+          "Armour: light armour, medium armour and shields.",
+          "Weapons: simple weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Devotion: 5 per battle at level 3, 16 by level 10.",
           "Starts with: mace, chain shirt, a shield."
@@ -858,7 +1051,9 @@
         "levels": [
           {
             "level": 1,
-            "features": [],
+            "features": [
+              "cleric.steady_faith"
+            ],
             "attacks": null,
             "choices": [
               {
@@ -1020,18 +1215,20 @@
         "facts": [
           "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
           "Saving throws: Intelligence and Wisdom.",
-          "Armour: light armour, medium armour and shields (not used in battles yet).",
-          "Weapons: simple weapons and scimitar (not used in battles yet).",
-          "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+          "Armour: light armour, medium armour and shields.",
+          "Weapons: simple weapons and scimitar.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
-          "Mana: 5 per battle at level 3, 11 by level 10.",
+          "Mana: 5 per battle at level 3, 12 by level 10.",
           "Wild: 2 per battle at level 3, 3 by level 10.",
           "Starts with: quarterstaff, leather armour, a shield."
         ],
         "levels": [
           {
             "level": 1,
-            "features": [],
+            "features": [
+              "druid.wild_shape_wolf"
+            ],
             "attacks": null,
             "choices": [
               {
@@ -1057,9 +1254,7 @@
           },
           {
             "level": 2,
-            "features": [
-              "druid.wild_shape_wolf"
-            ],
+            "features": [],
             "attacks": null,
             "choices": [
               {
@@ -1177,9 +1372,9 @@
         "facts": [
           "Hit points: 10 \u002B your CON modifier at level 1, then 6 \u002B CON modifier each level (hit die d10).",
           "Saving throws: Strength and Constitution.",
-          "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
-          "Weapons: simple weapons and martial weapons (not used in battles yet).",
-          "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+          "Armour: light armour, medium armour, heavy armour and shields.",
+          "Weapons: simple weapons and martial weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Second wind: 1 per battle at level 3, 1 by level 10.",
           "Superiority: 2 per battle at level 3, 5 by level 10.",
           "Starts with: longsword, chain mail, a shield."
@@ -1315,9 +1510,9 @@
         "facts": [
           "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
           "Saving throws: Strength and Dexterity.",
-          "Armour: none (not used in battles yet).",
-          "Weapons: simple weapons and light martial weapons (not used in battles yet).",
-          "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+          "Armour: none.",
+          "Weapons: simple weapons and light martial weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Unarmoured defence: without armour, Armour Class adds your WIS modifier.",
           "Ki: 3 per battle at level 3, 10 by level 10.",
@@ -1342,7 +1537,15 @@
               "monk.step_of_the_wind"
             ],
             "attacks": null,
-            "choices": []
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "monk.technique_crane",
+                  "monk.technique_tiger"
+                ]
+              }
+            ]
           },
           {
             "level": 3,
@@ -1415,9 +1618,9 @@
         "facts": [
           "Hit points: 10 \u002B your CON modifier at level 1, then 6 \u002B CON modifier each level (hit die d10).",
           "Saving throws: Wisdom and Charisma.",
-          "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
-          "Weapons: simple weapons and martial weapons (not used in battles yet).",
-          "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+          "Armour: light armour, medium armour, heavy armour and shields.",
+          "Weapons: simple weapons and martial weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Lay on hands: 3 per battle at level 3, 10 by level 10.",
           "Oath: 3 per battle at level 3, 8 by level 10.",
@@ -1550,11 +1753,11 @@
         "facts": [
           "Hit points: 10 \u002B your CON modifier at level 1, then 6 \u002B CON modifier each level (hit die d10).",
           "Saving throws: Strength and Dexterity.",
-          "Armour: light armour, medium armour and shields (not used in battles yet).",
-          "Weapons: simple weapons and martial weapons (not used in battles yet).",
-          "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+          "Armour: light armour, medium armour and shields.",
+          "Weapons: simple weapons and martial weapons.",
+          "Choose 3 class skills in the creator; background skills are additional.",
           "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
-          "Focus: 2 per battle at level 3, 5 by level 10.",
+          "Focus: 2 per battle at level 3, 7 by level 10.",
           "Starts with: longbow, studded leather."
         ],
         "levels": [
@@ -1721,9 +1924,9 @@
         "facts": [
           "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
           "Saving throws: Dexterity and Intelligence.",
-          "Armour: light armour (not used in battles yet).",
-          "Weapons: simple weapons and martial weapons (not used in battles yet).",
-          "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+          "Armour: light armour.",
+          "Weapons: simple weapons and martial weapons.",
+          "Choose 4 class skills in the creator; background skills are additional.",
           "Edge: 3 per battle at level 3, 5 by level 10.",
           "Climbs 3 levels in one step (most climb 2).",
           "Starts with: rapier, leather armour."
@@ -1825,9 +2028,9 @@
         "facts": [
           "Hit points: 6 \u002B your CON modifier at level 1, then 4 \u002B CON modifier each level (hit die d6).",
           "Saving throws: Constitution and Charisma.",
-          "Armour: none (not used in battles yet).",
-          "Weapons: simple weapons (not used in battles yet).",
-          "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+          "Armour: none.",
+          "Weapons: simple weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Mana: 6 per battle at level 3, 8 by level 10.",
           "Sorcery: 2 per battle at level 3, 5 by level 10.",
@@ -2006,9 +2209,9 @@
         "facts": [
           "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
           "Saving throws: Wisdom and Charisma.",
-          "Armour: light armour (not used in battles yet).",
-          "Weapons: simple weapons (not used in battles yet).",
-          "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+          "Armour: light armour.",
+          "Weapons: simple weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Pact: 2 per battle at level 3, 4 by level 10.",
           "Starts with: quarterstaff, leather armour."
@@ -2044,7 +2247,9 @@
           },
           {
             "level": 2,
-            "features": [],
+            "features": [
+              "warlock.pact_resolve"
+            ],
             "attacks": null,
             "choices": [
               {
@@ -2153,9 +2358,9 @@
         "facts": [
           "Hit points: 6 \u002B your CON modifier at level 1, then 4 \u002B CON modifier each level (hit die d6).",
           "Saving throws: Intelligence and Wisdom.",
-          "Armour: none (not used in battles yet).",
-          "Weapons: simple weapons (not used in battles yet).",
-          "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+          "Armour: none.",
+          "Weapons: simple weapons.",
+          "Choose 2 class skills in the creator; background skills are additional.",
           "Spellcasting: Intelligence. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
           "Mana: 8 per battle at level 3, 16 by level 10.",
           "Starts with: quarterstaff."
@@ -2347,7 +2552,8 @@
         "skills": [
           "insight",
           "religion"
-        ]
+        ],
+        "hook": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
       },
       "criminal": {
         "name": "Criminal",
@@ -2363,7 +2569,8 @@
         "skills": [
           "sleight_of_hand",
           "stealth"
-        ]
+        ],
+        "hook": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
       },
       "entertainer": {
         "name": "Entertainer",
@@ -2379,7 +2586,8 @@
         "skills": [
           "acrobatics",
           "performance"
-        ]
+        ],
+        "hook": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
       },
       "folk_hero": {
         "name": "Folk Hero",
@@ -2395,7 +2603,8 @@
         "skills": [
           "animal_handling",
           "survival"
-        ]
+        ],
+        "hook": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they\u0027re looking at you again."
       },
       "guild_artisan": {
         "name": "Guild Artisan",
@@ -2411,7 +2620,8 @@
         "skills": [
           "insight",
           "persuasion"
-        ]
+        ],
+        "hook": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
       },
       "hermit": {
         "name": "Hermit",
@@ -2427,7 +2637,8 @@
         "skills": [
           "medicine",
           "religion"
-        ]
+        ],
+        "hook": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
       },
       "noble": {
         "name": "Noble",
@@ -2443,7 +2654,8 @@
         "skills": [
           "history",
           "persuasion"
-        ]
+        ],
+        "hook": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don\u0027t upset the town\u0027s arrangements."
       },
       "outlander": {
         "name": "Outlander",
@@ -2459,7 +2671,8 @@
         "skills": [
           "athletics",
           "survival"
-        ]
+        ],
+        "hook": "You weren\u0027t born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
       },
       "sage": {
         "name": "Sage",
@@ -2475,7 +2688,8 @@
         "skills": [
           "arcana",
           "history"
-        ]
+        ],
+        "hook": "You came to Emberwick to study the ember under the ford. You\u0027ve noticed gaps in your own notes, in your own handwriting, about things you don\u0027t remember."
       },
       "sailor": {
         "name": "Sailor",
@@ -2491,7 +2705,8 @@
         "skills": [
           "athletics",
           "perception"
-        ]
+        ],
+        "hook": "You worked the river boats from Emberwick\u0027s docks. You\u0027ve seen what moves at night under the Ash Market\u0027s lanterns."
       },
       "soldier": {
         "name": "Soldier",
@@ -2507,7 +2722,8 @@
         "skills": [
           "athletics",
           "intimidation"
-        ]
+        ],
+        "hook": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
       },
       "urchin": {
         "name": "Urchin",
@@ -2523,7 +2739,8 @@
         "skills": [
           "sleight_of_hand",
           "stealth"
-        ]
+        ],
+        "hook": "You grew up on Emberwick\u0027s streets with Pip, and you look out for her. Lately she\u0027s been remembering things that frighten you both."
       }
     },
     "features": {
@@ -2595,6 +2812,20 @@
           "Once per battle"
         ],
         "text": "Wis save, self, burst 2: target is Frightened for 1 round; taunts target for 1 round"
+      },
+      "barbarian.technique_endurance": {
+        "name": "Technique endurance",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B4 max HP"
+      },
+      "barbarian.technique_hunter": {
+        "name": "Technique hunter",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 Move"
       },
       "bard.bardic_inspiration": {
         "name": "Bardic Inspiration",
@@ -2961,6 +3192,13 @@
         ],
         "text": "Spell attack, 6 tiles: 1d8 \u002B casting modifier force"
       },
+      "cleric.steady_faith": {
+        "name": "Steady faith",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 Wis saves"
+      },
       "cleric.toll_the_dead": {
         "name": "Toll the Dead",
         "tags": [
@@ -3019,7 +3257,7 @@
           "Action",
           "2 uses per battle"
         ],
-        "text": "Dex save, self, cone 3: 1d10 fire; half damage on a save"
+        "text": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
       },
       "druid.barkskin": {
         "name": "Barkskin",
@@ -3153,7 +3391,7 @@
           "Bonus action",
           "1 wild"
         ],
-        "text": "Self: transforms into a bear"
+        "text": "Self: transforms into a form bear"
       },
       "druid.wild_shape_wolf": {
         "name": "Wild Shape: Wolf",
@@ -3161,7 +3399,7 @@
           "Bonus action",
           "1 wild"
         ],
-        "text": "Self: transforms into a wolf"
+        "text": "Self: transforms into a form wolf"
       },
       "duelist.fancy_footwork": {
         "name": "Fancy footwork",
@@ -3513,6 +3751,20 @@
         ],
         "text": "Self: you are Disengaged until the end of your turn; you gain your Move again \u2014 You Disengage and Dash in one bound."
       },
+      "monk.technique_crane": {
+        "name": "Technique crane",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 AC"
+      },
+      "monk.technique_tiger": {
+        "name": "Technique tiger",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 weapon damage"
+      },
       "monk.unarmed_strike": {
         "name": "Unarmed Strike",
         "tags": [
@@ -3758,7 +4010,7 @@
           "Bonus action",
           "1 wild"
         ],
-        "text": "Self: transforms into a dire wolf"
+        "text": "Self: transforms into a form dire wolf"
       },
       "shapeshifter.primal_strike": {
         "name": "Primal strike",
@@ -4258,6 +4510,13 @@
         ],
         "text": "At the start of each round, if the round is even, on yourself: target gains 1 pact"
       },
+      "warlock.pact_resolve": {
+        "name": "Pact resolve",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 Con saves"
+      },
       "warlock.poison_spray": {
         "name": "Poison Spray",
         "tags": [
@@ -4633,7 +4892,7 @@
         "name": "Strength",
         "drives": [
           "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
-          "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+          "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, longsword plus one, mace, maul, morningstar, pike, quarterstaff, quarterstaff plus one, sickle, spear, trident, war pick and warhammer.",
           "Finesse weapons (dagger, dart, rapier, scimitar, shortsword and whip) use whichever of STR and DEX is higher.",
           "STR saving throws, against effects that call for one; proficient for a Barbarian, Fighter, Monk or Ranger.",
           "Skill checks in the story: Athletics."
@@ -4643,7 +4902,7 @@
         "name": "Dexterity",
         "drives": [
           "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
-          "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+          "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow, shortbow plus one and sling.",
           "Finesse weapons (dagger, dart, rapier, scimitar, shortsword and whip) use whichever of STR and DEX is higher.",
           "Armour Class: all of the modifier in light armour or none, at most \u002B2 in medium, none in heavy.",
           "Initiative: 10 \u002B the modifier decides who acts first (heavy armour takes 2).",

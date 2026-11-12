@@ -681,7 +681,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 Sound(used.Ability.Value == "ashmaw.cinder_roar" ? "ashmaw_roar" : "ashmaw_shake");
                 return;
             }
-            if (_view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite == "monsters.kobold_foreman"
+            if (_view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite is "monsters.kobold_foreman" or "creatures.grisk_bounty"
                 && used.Ability.Value == "common.attack")
             {
                 Sound(sounds?.Has("kobold_pick") == true ? "kobold_pick" : "swing_blunt");
@@ -915,7 +915,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                 var length = used.Ability.Value is "ashmaw.maul" or "ashmaw.party_maul" ? 1.0
                     : _view.Units.FirstOrDefault(u => u.Id == used.Source)?.Sprite switch
                     {
-                        "monsters.kobold_foreman" => 0.75,
+                        "monsters.kobold_foreman" or "creatures.grisk_bounty" => 0.75,
                         "bosses.troll.troll" or "bosses.golem.granite" or "bosses.mimic.oak" or "bosses.hound.tan" or "bosses.hound.black" or "bosses.hound.grey" or "bosses.sapling.spring"
                             or "bosses.air_elemental.gale" or "bosses.earth_elemental.stone" or "bosses.fire_elemental.ember" or "bosses.water_elemental.sea" or "bosses.air_elemental.storm" or "bosses.earth_elemental.magma" or "bosses.water_elemental.swamp"
                             or "bosses.golem.basalt" or "bosses.golem.crystal" or "bosses.golem.temple"
@@ -1022,8 +1022,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             }
             var length = _view.Units.FirstOrDefault(u => u.Id == hit.Unit)?.Sprite switch
             {
-                "monsters.ashmaw" => 0.5,
-                "monsters.kobold_foreman" => 2.0 / 3,
+                "monsters.ashmaw" or "creatures.ashmaw_bounty" => 0.5,
+                "monsters.kobold_foreman" or "creatures.grisk_bounty" => 2.0 / 3,
                 _ => BeatTiming.Impact,
             };
             _cues.Add(new PoseCue(_t, length, hit.Unit, Hurt));
@@ -1071,8 +1071,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
         {
             var length = _view.Units.FirstOrDefault(u => u.Id == unit)?.Sprite switch
             {
-                "monsters.ashmaw" => 4.0 / 3,
-                "monsters.kobold_foreman" => 1.0,
+                "monsters.ashmaw" or "creatures.ashmaw_bounty" => 4.0 / 3,
+                "monsters.kobold_foreman" or "creatures.grisk_bounty" => 1.0,
                 _ => BeatTiming.Down,
             };
             _cues.Add(new PoseCue(_t, length, unit, Down));
@@ -1112,7 +1112,8 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
             _cues.Add(new ShakeCue(_t, BeatTiming.Phase * 0.6));
             Burst(Pillar, TileOf(phase.Unit));
             Moment("phase", BeatTiming.Phase * 0.5);
-            _t += BeatTiming.Phase;
+            // A threshold phase triggered inline must not delay the remaining area targets.
+            if (!InArea) _t += BeatTiming.Phase;
         }
     }
 
