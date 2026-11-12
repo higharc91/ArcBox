@@ -368,7 +368,7 @@
       "grisk"
     ],
     "aiProfile": "brute",
-    "sprite": "monsters.kobold_foreman",
+    "sprite": "creatures.grisk_bounty",
     "level": 2,
     "resources": {}
   }

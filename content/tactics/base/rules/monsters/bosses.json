@@ -107,7 +107,7 @@
         "ashmaw"
       ],
       "aiProfile": "ashmaw",
-      "sprite": "monsters.ashmaw",
+      "sprite": "creatures.ashmaw_bounty",
       "resources": {
         "roar": 1
       },
@@ -171,7 +171,7 @@
       "ashmaw"
     ],
     "aiProfile": "ashmaw",
-    "sprite": "monsters.ashmaw",
+    "sprite": "creatures.ashmaw_bounty",
     "resources": {
       "roar": 1
     },

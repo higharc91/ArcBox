@@ -138,10 +138,10 @@ class ManifestCrosscheckTests(unittest.TestCase):
         keys.update(f"characters.{name}" for name in characters["presets"])
         tactical = json.loads((BASE / "tactical/manifest.json").read_text())
         keys.update(f"tactical.{name}" for name in tactical["presets"])
-        aliases = json.loads((BASE / "monsters/manifest.json").read_text())["sprites"]
-        for key, entry in aliases.items():
-            self.assertIn(entry["standIn"], keys, f"Broken legacy sprite alias: {key}")
-            keys.add(f"monsters.{key}")
+        # Old saved sprite keys are optional compatibility aliases of the actual accepted atlases.
+        for entry in creatures["sprites"].values():
+            keys.update(entry.get("keys", []))
+        self.assertFalse((BASE / "monsters").exists(), "Legacy stand-in art must not return")
         missing = set()
         for path in (BASE / "rules/monsters").glob("*.json"):
             for monster in json.loads(path.read_text()):
@@ -149,6 +149,20 @@ class ManifestCrosscheckTests(unittest.TestCase):
                 if sprite and sprite not in keys:
                     missing.add(sprite)
         self.assertEqual(set(), missing, "Unresolved rules monster sprites")
+
+    def test_character_layer_aliases_are_resolvable_and_no_duplicate_bytes_ship(self):
+        manifest = json.loads((BASE / "characters/manifest.json").read_text())
+        aliases = manifest["layerAliases"]
+        self.assertEqual(165, len(aliases))
+        for source, target in aliases.items():
+            self.assertNotIn(target, aliases, "Aliases must resolve in one hop")
+            self.assertFalse((BASE / "characters" / source).exists())
+            self.assertTrue((BASE / "characters" / target).is_file())
+        hashes = {}
+        for path in (BASE / "characters").rglob("*.png"):
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            self.assertNotIn(digest, hashes, f"Duplicate character art: {path} / {hashes.get(digest)}")
+            hashes[digest] = path
 
     def test_creator_traits_and_subclass_names_match_rules(self):
         creator = json.loads((BASE / "characters/creator.json").read_text())

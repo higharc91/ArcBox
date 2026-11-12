@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { compose, paint, recipe, type CharManifest, type Creator, type Palettes } from "../src/games/tactics/look";
+import { compose, paint, recipe, layerPath, type CharManifest, type Creator, type Palettes } from "../src/games/tactics/look";
 import { dataUrlBytes, readPng } from "./png";
 
 // The pack's own files: the creator's options and the class presets the asset tools baked.
@@ -79,5 +79,19 @@ describe("the look", () => {
       if (baked[i + 3] !== mine[i + 3] || (baked[i + 3] && [0, 1, 2].some((k) => Math.abs(baked[i + k]! - mine[i + k]!) > 1))) differ++;
     expect(differ).toBe(0);
     expect(baked.filter((_, i) => i % 4 === 3 && baked[i]! > 0).length).toBeGreaterThan(200);    // a figure, not an empty frame
+  });
+});
+
+
+describe("character layer storage aliases", () => {
+  it("resolves every shared layer in one hop and keeps distinct body sheets", () => {
+    const manifest = file("manifest.json") as CharManifest;
+    for (const [from, to] of Object.entries(manifest.layerAliases ?? {})) {
+      const [build, layer, filename] = from.split("/");
+      expect(layerPath(manifest, build!, layer!, filename!.replace(/\.png$/, ""))).toBe(`characters/${to}`);
+      expect(manifest.layerAliases?.[to]).toBeUndefined();
+    }
+    expect(layerPath(manifest, "short_f", "body", "human")).toBe("characters/short_f/body/human.png");
+    expect(layerPath(manifest, "short_f", "hair", "bun")).toBe("characters/short/hair/bun.png");
   });
 });

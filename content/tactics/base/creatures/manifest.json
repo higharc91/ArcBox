@@ -117,7 +117,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_goat": {
       "file": "fauna_goat.png",
@@ -224,7 +224,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_fox": {
       "file": "fauna_fox.png",
@@ -331,7 +331,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_duck": {
       "file": "fauna_duck.png",
@@ -438,7 +438,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_crow": {
       "file": "fauna_crow.png",
@@ -556,7 +556,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_dog": {
       "file": "fauna_dog.png",
@@ -663,7 +663,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "fauna_sheep": {
       "file": "fauna_sheep.png",
@@ -770,7 +770,7 @@
           "loop": false
         }
       },
-      "provenance": "Scenario concept → PixelLab native sprite, true rotations and direction-specific animations."
+      "provenance": "Scenario concept \u2192 PixelLab native sprite, true rotations and direction-specific animations."
     },
     "wolf_grey": {
       "file": "wolf_grey.png",
@@ -14768,5 +14768,11 @@
   },
   "pending": [],
   "notes": "Distinct structural forms retain their original authored art instead of losing riders, ribs, crystals or other identifying features.",
-  "scalePolicy": "Reviewed beside the 36-world-pixel human fighter. Species scales are shared by every facing and action. Giant species remain larger; ordinary wildlife does not use giant proportions."
+  "scalePolicy": "Reviewed beside the 36-world-pixel human fighter. Species scales are shared by every facing and action. Giant species remain larger; ordinary wildlife does not use giant proportions.",
+  "animations": [
+    "attack",
+    "roar",
+    "shake",
+    "shout"
+  ]
 }

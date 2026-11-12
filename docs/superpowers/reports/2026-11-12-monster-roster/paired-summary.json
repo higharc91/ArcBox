@@ -1,0 +1,21 @@
+{
+  "baseline": "cf156c468557266db94ede7ee388f2f5cff41469",
+  "candidateSource": "b15bbc8b",
+  "battlesEach": 1200,
+  "party": [
+    "fighter",
+    "cleric",
+    "rogue",
+    "wizard"
+  ],
+  "seeds": 100,
+  "levels": [
+    1,
+    2
+  ],
+  "sizes": [
+    4
+  ],
+  "aggregateWinRateRowsIdentical": true,
+  "scope": "six Ford/Hollow encounters; this does not assert all battle states were identical"
+}
