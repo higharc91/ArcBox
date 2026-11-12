@@ -209,7 +209,7 @@ public static partial class Battle
         {
             // common.use_item runs the named item's own ability (its cost, target and effects) and uses one up.
             if (ability.Id != UseItem || use.Item is not { } item || !rules.Items.TryGetValue(item, out var itemDef)
-                || !user.Bag.Any(s => s.Item == item && s.Count > 0) || !rules.Abilities.TryGetValue(itemDef.Use, out var itemAbility))
+                || !user.Bag.Any(s => s.Item == item && s.Count > 0) || itemDef.Use is not { } itemUse || !rules.Abilities.TryGetValue(itemUse, out var itemAbility))
                 return Rejection.Of(RejectCode.NoItem);
             ability = itemAbility;
         }

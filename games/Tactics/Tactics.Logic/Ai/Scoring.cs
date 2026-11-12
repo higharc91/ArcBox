@@ -86,7 +86,7 @@ internal sealed partial class Scorer
         Terrain = W.Terrain;
         _standing = [.. state.Units.Values.Where(u => u.Life == LifeState.Up && u.Id != planner).Select(u => u.Pos)];
         _obscured = ZoneRules.Obscured(state);
-        ItemAbilities = [.. rules.Items.Values.Select(i => i.Use)];
+        ItemAbilities = [.. rules.Items.Values.Select(i => i.Use).OfType<AbilityId>()];
     }
 
     public BattleState State { get; }

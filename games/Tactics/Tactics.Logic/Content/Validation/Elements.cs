@@ -160,7 +160,16 @@ internal sealed partial class Validation
             var def = Deserialize<ItemDef>(e, file, ptr);
             if (def is not null)
             {
-                Ref(RefKind.Ability, def.Use.Value, file, Pointer.Append(ptr, "use"));
+                if (def.Use is { } use) Ref(RefKind.Ability, use.Value, file, Pointer.Append(ptr, "use"));
+                if ((def.Use is null) == (def.Equipment is null))
+                    Error(file, ptr, "An item needs exactly one of use or equipment.");
+                if (def.Equipment is { } gear)
+                {
+                    if ((gear.Weapon is null ? 0 : 1) + (gear.Armor is null ? 0 : 1) + (gear.Shield ? 1 : 0) != 1)
+                        Error(file, Pointer.Append(ptr, "equipment"), "Equipment must fill exactly one slot.");
+                    Ref(RefKind.Weapon, gear.Weapon, file, Pointer.Append(ptr, "equipment/weapon"));
+                    Ref(RefKind.Armor, gear.Armor, file, Pointer.Append(ptr, "equipment/armor"));
+                }
                 if (def.Price is < 0) Error(file, Pointer.Append(ptr, "price"), "A price cannot be negative.");
             }
             return def;

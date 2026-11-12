@@ -16,7 +16,7 @@ public sealed class OilFlaskTests
     {
         Assert.Contains(Oil, Pack.Items.Keys);
         Assert.Contains(Oiled, Pack.Conditions.Keys);
-        var ability = Pack.Abilities[Pack.Items[Oil].Use];
+        var ability = Pack.Abilities[Pack.Items[Oil].Use!.Value];
         return TestBattle.On("0. 0. 0. 0. 0.\n0. 0. 0. 0. 0.\n0. 0. 0. 0. 0.")
             .WithEnvironment(Pack.Environment, enabled).With(ability, Pack.Abilities[Battle.UseItem])
             .WithItems(Pack.Items[Oil]).WithConditions(Pack.Conditions[Oiled])

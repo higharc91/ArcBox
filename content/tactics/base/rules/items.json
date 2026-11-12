@@ -48,5 +48,694 @@
       "thrown"
     ],
     "price": 10
+  },
+  {
+    "id": "gear_club",
+    "name": "Club",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "club"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_dagger",
+    "name": "Dagger",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "dagger"
+    },
+    "price": 2
+  },
+  {
+    "id": "gear_greatclub",
+    "name": "Greatclub",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "greatclub"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_handaxe",
+    "name": "Handaxe",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "handaxe"
+    },
+    "price": 5
+  },
+  {
+    "id": "gear_javelin",
+    "name": "Javelin",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "javelin"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_light_hammer",
+    "name": "Light Hammer",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "light_hammer"
+    },
+    "price": 2
+  },
+  {
+    "id": "gear_mace",
+    "name": "Mace",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "mace"
+    },
+    "price": 5
+  },
+  {
+    "id": "gear_quarterstaff",
+    "name": "Quarterstaff",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "quarterstaff"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_sickle",
+    "name": "Sickle",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "sickle"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_spear",
+    "name": "Spear",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "spear"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_dart",
+    "name": "Dart",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "dart"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_light_crossbow",
+    "name": "Light Crossbow",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "light_crossbow"
+    },
+    "price": 25
+  },
+  {
+    "id": "gear_shortbow",
+    "name": "Shortbow",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "shortbow"
+    },
+    "price": 25
+  },
+  {
+    "id": "gear_sling",
+    "name": "Sling",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "sling"
+    },
+    "price": 1
+  },
+  {
+    "id": "gear_battleaxe",
+    "name": "Battleaxe",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "battleaxe"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_flail",
+    "name": "Flail",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "flail"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_glaive",
+    "name": "Glaive",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "glaive"
+    },
+    "price": 20
+  },
+  {
+    "id": "gear_greataxe",
+    "name": "Greataxe",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "greataxe"
+    },
+    "price": 30
+  },
+  {
+    "id": "gear_greatsword",
+    "name": "Greatsword",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "greatsword"
+    },
+    "price": 50
+  },
+  {
+    "id": "gear_halberd",
+    "name": "Halberd",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "halberd"
+    },
+    "price": 20
+  },
+  {
+    "id": "gear_lance",
+    "name": "Lance",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "lance"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_longsword",
+    "name": "Longsword",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "longsword"
+    },
+    "price": 15
+  },
+  {
+    "id": "gear_maul",
+    "name": "Maul",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "maul"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_morningstar",
+    "name": "Morningstar",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "morningstar"
+    },
+    "price": 15
+  },
+  {
+    "id": "gear_pike",
+    "name": "Pike",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "pike"
+    },
+    "price": 5
+  },
+  {
+    "id": "gear_rapier",
+    "name": "Rapier",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "rapier"
+    },
+    "price": 25
+  },
+  {
+    "id": "gear_scimitar",
+    "name": "Scimitar",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "scimitar"
+    },
+    "price": 25
+  },
+  {
+    "id": "gear_shortsword",
+    "name": "Shortsword",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "shortsword"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_trident",
+    "name": "Trident",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "trident"
+    },
+    "price": 5
+  },
+  {
+    "id": "gear_warhammer",
+    "name": "Warhammer",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "warhammer"
+    },
+    "price": 15
+  },
+  {
+    "id": "gear_war_pick",
+    "name": "War Pick",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "war_pick"
+    },
+    "price": 5
+  },
+  {
+    "id": "gear_whip",
+    "name": "Whip",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "whip"
+    },
+    "price": 2
+  },
+  {
+    "id": "gear_hand_crossbow",
+    "name": "Hand Crossbow",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "hand_crossbow"
+    },
+    "price": 75
+  },
+  {
+    "id": "gear_heavy_crossbow",
+    "name": "Heavy Crossbow",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "heavy_crossbow"
+    },
+    "price": 50
+  },
+  {
+    "id": "gear_longbow",
+    "name": "Longbow",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "longbow"
+    },
+    "price": 50
+  },
+  {
+    "id": "gear_longsword_plus_one",
+    "name": "Longsword +1",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "longsword_plus_one"
+    },
+    "price": 515
+  },
+  {
+    "id": "gear_quarterstaff_plus_one",
+    "name": "Quarterstaff +1",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "quarterstaff_plus_one"
+    },
+    "price": 501
+  },
+  {
+    "id": "gear_shortbow_plus_one",
+    "name": "Shortbow +1",
+    "use": null,
+    "tags": [
+      "equipment",
+      "weapon"
+    ],
+    "equipment": {
+      "weapon": "shortbow_plus_one"
+    },
+    "price": 525
+  },
+  {
+    "id": "gear_padded",
+    "name": "Padded armour",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "padded"
+    },
+    "price": 5
+  },
+  {
+    "id": "gear_leather",
+    "name": "Leather armour",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "leather"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_studded_leather",
+    "name": "Studded leather",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "studded_leather"
+    },
+    "price": 45
+  },
+  {
+    "id": "gear_hide",
+    "name": "Hide armour",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "hide"
+    },
+    "price": 10
+  },
+  {
+    "id": "gear_chain_shirt",
+    "name": "Chain shirt",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "chain_shirt"
+    },
+    "price": 50
+  },
+  {
+    "id": "gear_scale_mail",
+    "name": "Scale mail",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "scale_mail"
+    },
+    "price": 50
+  },
+  {
+    "id": "gear_breastplate",
+    "name": "Breastplate",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "breastplate"
+    },
+    "price": 400
+  },
+  {
+    "id": "gear_half_plate",
+    "name": "Half plate",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "half_plate"
+    },
+    "price": 750
+  },
+  {
+    "id": "gear_ring_mail",
+    "name": "Ring mail",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "ring_mail"
+    },
+    "price": 30
+  },
+  {
+    "id": "gear_chain_mail",
+    "name": "Chain mail",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "chain_mail"
+    },
+    "price": 75
+  },
+  {
+    "id": "gear_splint",
+    "name": "Splint armour",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "splint"
+    },
+    "price": 200
+  },
+  {
+    "id": "gear_plate",
+    "name": "Plate armour",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "plate"
+    },
+    "price": 1500
+  },
+  {
+    "id": "gear_leather_plus_one",
+    "name": "Leather armour +1",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "leather_plus_one"
+    },
+    "price": 510
+  },
+  {
+    "id": "gear_chain_shirt_plus_one",
+    "name": "Chain shirt +1",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "armor": "chain_shirt_plus_one"
+    },
+    "price": 550
+  },
+  {
+    "id": "gear_shield",
+    "name": "Shield",
+    "use": null,
+    "tags": [
+      "equipment",
+      "armor"
+    ],
+    "equipment": {
+      "shield": true
+    },
+    "price": 10
   }
 ]

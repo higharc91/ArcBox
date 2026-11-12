@@ -46,7 +46,7 @@ public sealed class BasePackTests
         Assert.Equal(12, pack.Backgrounds.Count);
         Assert.Equal(["black_eye", "bruised_pride", "concussion", "cracked_ribs", "deep_cut", "scraped_hands", "shaken", "singed", "sprained_ankle",
             "twisted_knee", "wrenched_shoulder"], pack.Injuries.Keys.Select(i => i.Value));
-        Assert.Equal(["alchemists_fire", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb"], pack.Items.Keys.Select(i => i.Value));
+        Assert.Equal(new string[] { "alchemists_fire", "gear_battleaxe", "gear_breastplate", "gear_chain_mail", "gear_chain_shirt", "gear_chain_shirt_plus_one", "gear_club", "gear_dagger", "gear_dart", "gear_flail", "gear_glaive", "gear_greataxe", "gear_greatclub", "gear_greatsword", "gear_halberd", "gear_half_plate", "gear_hand_crossbow", "gear_handaxe", "gear_heavy_crossbow", "gear_hide", "gear_javelin", "gear_lance", "gear_leather", "gear_leather_plus_one", "gear_light_crossbow", "gear_light_hammer", "gear_longbow", "gear_longsword", "gear_longsword_plus_one", "gear_mace", "gear_maul", "gear_morningstar", "gear_padded", "gear_pike", "gear_plate", "gear_quarterstaff", "gear_quarterstaff_plus_one", "gear_rapier", "gear_ring_mail", "gear_scale_mail", "gear_scimitar", "gear_shield", "gear_shortbow", "gear_shortbow_plus_one", "gear_shortsword", "gear_sickle", "gear_sling", "gear_spear", "gear_splint", "gear_studded_leather", "gear_trident", "gear_war_pick", "gear_warhammer", "gear_whip", "greater_healing", "oil_flask", "potion_of_healing", "smoke_bomb" }, pack.Items.Keys.Select(i => i.Value));
         string[] monsters =
         [
             "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bandit_roamer",

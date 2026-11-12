@@ -8,15 +8,15 @@ public sealed partial class TacticsGame
     /// <summary>Read-only descriptions, independent of turn economy, range or previously cached phone views.</summary>
     private ImmutableArray<PhoneAbility> WaitingAbilities(UnitState unit)
     {
-        var itemAbilities = Rules.Items.Values.Select(i => i.Use).ToHashSet();
+        var itemAbilities = Rules.Items.Values.Select(i => i.Use).OfType<AbilityId>().ToHashSet();
         var abilities = unit.Sheet.Abilities.Concat(Rules.Abilities.Keys.Where(a => a.Value.StartsWith("common.", StringComparison.Ordinal)))
             .Distinct().Order().Where(a => a != Battle.UseItem && !itemAbilities.Contains(a)).Where(Rules.Abilities.ContainsKey)
             .Select(a => new PhoneAbility(a, null, Rules.Abilities[a].Name,
                 Tooltips.For(Rules.Abilities[a], unit.Sheet.Level, Rules, State.Environment), Rules.Abilities[a].Cost, [], []));
         var items = unit.Bag.Where(i => i.Count > 0).DistinctBy(i => i.Item).OrderBy(i => i.Item)
-            .Where(i => Rules.Items.ContainsKey(i.Item)).Select(i => Rules.Items[i.Item]).Where(i => Rules.Abilities.ContainsKey(i.Use))
+            .Where(i => Rules.Items.ContainsKey(i.Item)).Select(i => Rules.Items[i.Item]).Where(i => i.Use is { } id && Rules.Abilities.ContainsKey(id))
             .Select(i => new PhoneAbility(Battle.UseItem, i.Id, i.Name,
-                Tooltips.For(Rules.Abilities[i.Use], unit.Sheet.Level, Rules, State.Environment), Rules.Abilities[i.Use].Cost, [], []));
+                Tooltips.For(Rules.Abilities[i.Use!.Value], unit.Sheet.Level, Rules, State.Environment), Rules.Abilities[i.Use!.Value].Cost, [], []));
         return [.. abilities, .. items];
     }
 

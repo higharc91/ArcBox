@@ -1,0 +1,12 @@
+{
+  "abilities": [],
+  "passives": [
+    {
+      "id": "equipment.weapon_plus_one",
+      "static": {
+        "attack": 1,
+        "damage": 1
+      }
+    }
+  ]
+}

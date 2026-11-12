@@ -11659,6 +11659,1384 @@
       "glyph": "shield",
       "badge": "wind",
       "reaction": false
+    },
+    "item.gear_club": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_dagger": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_greatclub": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_handaxe": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_javelin": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_light_hammer": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_mace": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_quarterstaff": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_sickle": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_spear": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_dart": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_light_crossbow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_shortbow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_sling": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_battleaxe": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_flail": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_glaive": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_greataxe": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_greatsword": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_halberd": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_lance": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_longsword": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_maul": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_morningstar": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_pike": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_rapier": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_scimitar": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_shortsword": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_trident": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_warhammer": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_war_pick": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_whip": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_hand_crossbow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_heavy_crossbow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_longbow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_longsword_plus_one": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_quarterstaff_plus_one": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_shortbow_plus_one": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "item.gear_padded": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_leather": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_studded_leather": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_hide": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_chain_shirt": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_scale_mail": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_breastplate": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_half_plate": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_ring_mail": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_chain_mail": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_splint": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_plate": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_leather_plus_one": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_chain_shirt_plus_one": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "item.gear_shield": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
     }
   },
   "frames": {

@@ -92,7 +92,7 @@ public static class Choices
             if (rules.Abilities.TryGetValue(id, out var ability) && !scorer.ItemAbilities.Contains(id) && !Reacts(ability))
                 uses.Add((ability, id, null));
         foreach (var stack in me.Bag.Where(b => b.Count > 0).DistinctBy(b => b.Item).OrderBy(b => b.Item))
-            if (rules.Items.TryGetValue(stack.Item, out var item) && rules.Abilities.TryGetValue(item.Use, out var ability))
+            if (rules.Items.TryGetValue(stack.Item, out var item) && item.Use is { } useAbility && rules.Abilities.TryGetValue(useAbility, out var ability))
                 uses.Add((ability, Battle.UseItem, item.Id));
 
         var choices = ImmutableArray.CreateBuilder<AbilityChoice>();

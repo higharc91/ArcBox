@@ -39,7 +39,8 @@
   ],
   "xp": 1100,
   "loot": [
-    "crypt_vault"
+    "crypt_vault",
+    "equipment_leather"
   ],
   "objectives": {
     "win": "defeat_all"
