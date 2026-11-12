@@ -63,7 +63,7 @@ public sealed class HollowArtTests
     public void Grisk_uses_his_approved_art_in_conversations_and_world_markers()
     {
         var grisk = LoreBook.Load(Pack.Root).Character("grisk")!;
-        Assert.Equal("monsters.kobold_foreman", grisk.SpriteKey);
+        Assert.Equal("creatures.grisk_bounty", grisk.SpriteKey);
         Assert.Equal("grisk", grisk.PortraitKey);
     }
 }

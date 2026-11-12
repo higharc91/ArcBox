@@ -11243,6 +11243,422 @@
       "glyph": "spire",
       "badge": null,
       "reaction": false
+    },
+    "skeleton_archer.pinning_arrow": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "zombie.clinging_grasp": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "kobold.dirty_trick": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "skeleton.brace": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "hollow_bat.dart": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "footprints",
+      "badge": null,
+      "reaction": false
+    },
+    "river_slime.slip": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        287,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        551,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "footprints",
+      "badge": null,
+      "reaction": false
+    },
+    "crab.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "gargoyle.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "harpy.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "hookbeak.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "scorpion.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "warg.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "wisp.signature": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        235,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        451,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "sword",
+      "badge": null,
+      "reaction": false
+    },
+    "boar.brace": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "wolf.watch": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
+    },
+    "bandit.guard": {
+      "atlas": "abilities_by_id.png",
+      "rect": [
+        313,
+        105,
+        24,
+        24
+      ],
+      "atlas2x": "abilities_by_id@2x.png",
+      "rect2x": [
+        601,
+        201,
+        48,
+        48
+      ],
+      "size": [
+        24,
+        24
+      ],
+      "category": "ability",
+      "class": "common",
+      "tier": 0,
+      "glyph": "shield",
+      "badge": "wind",
+      "reaction": false
     }
   },
   "frames": {

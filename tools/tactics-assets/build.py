@@ -17,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from PIL import Image  # noqa: E402
+from arcpix.dedupe import dedupe_pngs  # noqa: E402
 
 from arcpix.palette import FAMILIES, RAMP_LEN  # noqa: E402
 from arcpix.preview import contact_sheet, Tile, strip  # noqa: E402
@@ -46,6 +47,8 @@ def build_characters() -> None:
     variants: dict[str, list[str]] = {layer: sorted(parts) for layer, parts in C.PARTS.items()}
     C.save_layer_sheets([(layer, variant, build, out / build / layer / f"{variant}.png")
                          for layer, parts in C.PARTS.items() for variant in parts for build in BUILDS])
+
+    aliases = dedupe_pngs(out)
 
     # 2. Palettes: every named ramp, plus one palette per recipe, and the LUT texture the shader samples.
     ramps = {fam: {name: ramp for name, ramp in rs.items()} for fam, rs in FAMILIES.items()}
@@ -83,6 +86,7 @@ def build_characters() -> None:
         "layers": variants,
         "order": C.ORDER,
         "path": "characters/{build}/{layer}/{variant}.png",
+        "layerAliases": aliases,
         "rampMap": {"r": "slot * 16", "g": "shade * 32", "b": "1 = outline pixel", "a": "coverage"},
         "outline": {"colour": "#140f1a", "mix": 0.6},
         "presets": [r.id for r in ALL],

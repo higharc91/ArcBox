@@ -1,0 +1,18 @@
+{
+  "skeleton_archer.pinning_arrow": "common.attack",
+  "zombie.clinging_grasp": "common.attack",
+  "kobold.dirty_trick": "common.attack",
+  "skeleton.brace": "common.dodge",
+  "hollow_bat.dart": "common.disengage",
+  "river_slime.slip": "common.disengage",
+  "crab.signature": "common.attack",
+  "gargoyle.signature": "common.attack",
+  "harpy.signature": "common.attack",
+  "hookbeak.signature": "common.attack",
+  "scorpion.signature": "common.attack",
+  "warg.signature": "common.attack",
+  "wisp.signature": "common.attack",
+  "boar.brace": "common.dodge",
+  "wolf.watch": "common.dodge",
+  "bandit.guard": "common.dodge"
+}

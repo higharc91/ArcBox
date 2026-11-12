@@ -283,7 +283,6 @@ public sealed class UnitArt
             art.ReadMonsters(new ManifestSet("bestiary", bestiary.RootElement), bestiary.RootElement.GetProperty("creatures"));
         }
         art.ReadCreatureSprites(packRoot);
-        art.ReadMonsterStandIns(packRoot);
         return art;
     }
 
@@ -388,21 +387,6 @@ public sealed class UnitArt
                     _sprites[$"{set.Name}.{monster.Name}"] = sprite;
                 first = false;
             }
-        }
-    }
-
-    // Kept separate from the production atlas: accepted art wins without changing a monster's identity or sound family.
-    private void ReadMonsterStandIns(string root)
-    {
-        var path = Path.Combine(root, "monsters", "manifest.json");
-        if (!File.Exists(path)) return;
-        using var doc = JsonDocument.Parse(File.ReadAllText(path));
-        foreach (var entry in doc.RootElement.GetProperty("sprites").EnumerateObject())
-        {
-            var key = "monsters." + entry.Name;
-            if (!_sprites.ContainsKey(key) && entry.Value.TryGetProperty("standIn", out var from)
-                && Sprite(from.GetString()) is { } sprite)
-                _sprites[key] = sprite;
         }
     }
 

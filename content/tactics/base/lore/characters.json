@@ -587,7 +587,7 @@
         "description": "Small wiry kobold; high, nasal, raspy and breathless. Barked orders break into terrified bargaining.",
         "sample": "Bear’s awake! Dig or die!"
       },
-      "sprite": "monsters.kobold_foreman",
+      "sprite": "creatures.grisk_bounty",
       "portrait": "grisk"
     }
   ]

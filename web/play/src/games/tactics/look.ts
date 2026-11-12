@@ -17,6 +17,7 @@ export interface CharManifest {
   slotIds: Record<string, number>;
   outline: { colour: string; mix: number };
   path: string;
+  layerAliases?: Record<string, string>;
 }
 export interface Palettes { ramps: Record<string, Record<string, string[]>> }
 export interface PortraitManifest { size: number; scale: number; crop: Record<string, [number, number, number, number]>; skipLayers: string[]; backdrops: Record<string, string> }
@@ -165,7 +166,7 @@ async function build(race: string, cls: string): Promise<Look | null> {
   const { width: w, height: h } = manifest.frame;
   const frames: Record<string, RampFrame | undefined> = {};
   await Promise.all(Object.entries(rec.layers).map(async ([layer, variant]) => {
-    const path = manifest.path.replace("{build}", rec.build).replace("{layer}", layer).replace("{variant}", variant);
+    const path = layerPath(manifest, rec.build, layer, variant);
     frames[layer] = await frameOf(base + path, w, h);
   }));
   const sprite = paint(compose(manifest.order.front, frames, w, h), manifest.slotIds, rec.palette, palettes.ramps, manifest.outline);
@@ -201,4 +202,11 @@ async function portraitOf(head: Uint8ClampedArray, w: number, h: number, crop: [
   }
   const data = ctx.getImageData(0, 0, size, size);
   return { width: size, height: size, data: data.data };
+}
+
+/** Resolve the pack's explicit byte-identical layer aliases before requesting a sheet. */
+export function layerPath(manifest: CharManifest, build: string, layer: string, variant: string): string {
+  const relative = `${build}/${layer}/${variant}.png`;
+  const alias = manifest.layerAliases?.[relative];
+  return alias ? `characters/${alias}` : manifest.path.replace("{build}", build).replace("{layer}", layer).replace("{variant}", variant);
 }
