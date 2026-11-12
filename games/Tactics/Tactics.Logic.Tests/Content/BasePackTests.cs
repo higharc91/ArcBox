@@ -193,7 +193,7 @@ public sealed class BasePackTests
             var enemies = setup.Units.Where(u => u.Sheet.Side == Side.Enemy).ToArray();
             Assert.Equal(6, enemies.Length);
             Assert.All(enemies, e => Assert.Contains("goblinoid", e.Sheet.Tags));
-            Assert.Equal(250, setup.Xp);
+            Assert.Equal(700, setup.Xp);
 
             var started = Battle.Start(setup, rules, seed: 7);
             Assert.Equal(1, started.State.Round);

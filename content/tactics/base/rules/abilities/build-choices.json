@@ -1,0 +1,110 @@
+{
+  "abilities": [],
+  "passives": [
+    {
+      "id": "cleric.steady_faith",
+      "static": {
+        "saves": {
+          "wis": 1
+        }
+      }
+    },
+    {
+      "id": "warlock.pact_resolve",
+      "static": {
+        "saves": {
+          "con": 1
+        }
+      }
+    },
+    {
+      "id": "warlock.pact_ward",
+      "static": {
+        "saves": {
+          "wis": 1
+        }
+      }
+    },
+    {
+      "id": "monk.technique_crane",
+      "static": {
+        "ac": 1
+      }
+    },
+    {
+      "id": "monk.technique_tiger",
+      "static": {
+        "damage": 1
+      }
+    },
+    {
+      "id": "monk.technique_river",
+      "static": {
+        "move": 1
+      }
+    },
+    {
+      "id": "monk.technique_mountain",
+      "static": {
+        "saves": {
+          "con": 1,
+          "wis": 1
+        }
+      }
+    },
+    {
+      "id": "monk.technique_wind",
+      "static": {
+        "move": 2
+      }
+    },
+    {
+      "id": "monk.technique_steel",
+      "static": {
+        "ac": 1,
+        "saves": {
+          "dex": 1
+        }
+      }
+    },
+    {
+      "id": "barbarian.technique_endurance",
+      "static": {
+        "maxHp": 4
+      }
+    },
+    {
+      "id": "barbarian.technique_hunter",
+      "static": {
+        "move": 1
+      }
+    },
+    {
+      "id": "barbarian.technique_thunder",
+      "static": {
+        "damage": 1
+      }
+    },
+    {
+      "id": "barbarian.technique_iron",
+      "static": {
+        "ac": 1
+      }
+    },
+    {
+      "id": "barbarian.technique_resolve",
+      "static": {
+        "saves": {
+          "con": 1,
+          "wis": 1
+        }
+      }
+    },
+    {
+      "id": "barbarian.technique_titan",
+      "static": {
+        "maxHp": 8
+      }
+    }
+  ]
+}

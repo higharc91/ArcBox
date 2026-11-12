@@ -1128,3 +1128,5 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-background-hook, .tx-background-secret { line-height: 1.5; overflow-wrap: anywhere; }
 .tx-background-hook { padding: 12px; border-left: 3px solid currentColor; }
 .tx-personal-credit { display: block; font-weight: 700; line-height: 1.4; }
+.tx-class-skills { min-width: 0; border: 1px solid var(--wf-line); border-radius: var(--wf-radius); padding: 12px; margin-block: 16px; }
+.tx-class-skills .tx-pick { min-height: 48px; }

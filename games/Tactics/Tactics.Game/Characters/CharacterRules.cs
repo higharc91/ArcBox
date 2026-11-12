@@ -41,7 +41,7 @@ public static class CharacterRules
     public static int IncreasesDue(int level) => level >= 8 ? 4 : level >= 4 ? 2 : 0;
 
     /// <summary>Increase points earned and not yet spent.</summary>
-    public static int IncreasesLeft(CharacterRecord c) => IncreasesDue(c.Level) - c.Increases.Values.Sum();
+    public static int IncreasesLeft(CharacterRecord c) => IncreasesDue(c.Level) - c.Increases.Values.Sum() - BuildChoices.SpentFeats(c) * 2;
 
     /// <summary>True when the character has reached its subclass level and hasn't chosen one.</summary>
     public static bool NeedsSubclass(CharacterRecord c) => c.Level >= SubclassLevel && c.Subclass is null;
@@ -52,7 +52,7 @@ public static class CharacterRules
     /// (changeable later). Returns the problem instead when something isn't allowed.
     /// </summary>
     public static (CharacterRecord? Character, string? Problem) Create(string name, string race, string cls, string background,
-        IReadOnlyDictionary<Stat, int> scores, int level, RulesPack rules)
+        IReadOnlyDictionary<Stat, int> scores, int level, RulesPack rules, IReadOnlyList<string>? skills = null, string? ancestry = null)
     {
         if (!rules.Races.ContainsKey(race))
             return (null, "Pick one of the races.");
@@ -70,7 +70,17 @@ public static class CharacterRules
         var character = new CharacterRecord(name, race, cls, null, background, level, Ordinal(scores),
             ImmutableSortedDictionary<Stat, int>.Empty, SheetBuilder.DefaultLoadout(def, level), [], def.StartingKit.Weapon,
             def.StartingKit.Armor, def.StartingKit.Shield, def.StartingKit.Bag);
+        character = character with { ClassSkills = skills is null ? default : [.. skills], DragonAncestry = ancestry };
         return Built(character, rules);
+    }
+
+    public static (CharacterRecord? Character, string? Problem) ChooseFeat(CharacterRecord c, string feat, RulesPack rules)
+    {
+        if (IncreasesLeft(c) < 2) return (null, "You have no level 4 or 8 choice to spend.");
+        if (!BuildChoices.Feats(rules).Contains(feat)) return (null, "Choose an offered feat.");
+        var feats = c.Feats.IsDefault ? ImmutableArray<string>.Empty : c.Feats;
+        if (feats.Contains(feat)) return (null, "You already have that feat.");
+        return Built(c with { Feats = feats.Add(feat) }, rules);
     }
 
     /// <summary>

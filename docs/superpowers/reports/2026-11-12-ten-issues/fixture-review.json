@@ -1,0 +1,5093 @@
+[
+  {
+    "file": "web/play/test/fixtures/tactics/check-group-rolled.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/check-group.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/check-help-rolled.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/check-help.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/choice-follower.json",
+    "changes": [
+      {
+        "path": "/data/options/1/can",
+        "before": null,
+        "after": false
+      },
+      {
+        "path": "/data/options/1/credit",
+        "before": null,
+        "after": "Soldier · Player1"
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/choice-leader.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      },
+      {
+        "path": "/data/options/1/can",
+        "before": null,
+        "after": true
+      },
+      {
+        "path": "/data/options/1/credit",
+        "before": null,
+        "after": "Soldier · Player1"
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/dialogue-leader.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-background-creator.json",
+    "changes": [
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 2 per battle at level 1, 11 by level 10.",
+        "after": "Mana: 2 per battle at level 1, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 1 per battle at level 1, 5 by level 10.",
+        "after": "Focus: 1 per battle at level 1, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-character.json",
+    "changes": [
+      {
+        "path": "/details/backgrounds/acolyte/hook",
+        "before": null,
+        "after": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
+      },
+      {
+        "path": "/details/backgrounds/criminal/hook",
+        "before": null,
+        "after": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
+      },
+      {
+        "path": "/details/backgrounds/entertainer/hook",
+        "before": null,
+        "after": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
+      },
+      {
+        "path": "/details/backgrounds/folk_hero/hook",
+        "before": null,
+        "after": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again."
+      },
+      {
+        "path": "/details/backgrounds/guild_artisan/hook",
+        "before": null,
+        "after": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
+      },
+      {
+        "path": "/details/backgrounds/hermit/hook",
+        "before": null,
+        "after": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
+      },
+      {
+        "path": "/details/backgrounds/noble/hook",
+        "before": null,
+        "after": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements."
+      },
+      {
+        "path": "/details/backgrounds/outlander/hook",
+        "before": null,
+        "after": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
+      },
+      {
+        "path": "/details/backgrounds/sage/hook",
+        "before": null,
+        "after": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember."
+      },
+      {
+        "path": "/details/backgrounds/sailor/hook",
+        "before": null,
+        "after": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns."
+      },
+      {
+        "path": "/details/backgrounds/soldier/hook",
+        "before": null,
+        "after": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
+      },
+      {
+        "path": "/details/backgrounds/urchin/hook",
+        "before": null,
+        "after": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 6 per battle at level 4, 11 by level 10.",
+        "after": "Mana: 6 per battle at level 4, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 3 per battle at level 4, 5 by level 10.",
+        "after": "Focus: 3 per battle at level 4, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/druid.conjure_animals/text",
+        "before": "4 tiles: summons 2 × wolf while you concentrate",
+        "after": "4 tiles: summons 2 × summon wolf while you concentrate"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_bear/text",
+        "before": "Self: transforms into a bear",
+        "after": "Self: transforms into a form bear"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_wolf/text",
+        "before": "Self: transforms into a wolf",
+        "after": "Self: transforms into a form wolf"
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/shapeshifter.dire_form/text",
+        "before": "Self: transforms into a dire wolf",
+        "after": "Self: transforms into a form dire wolf"
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/details/stats/dex/drives/1",
+        "before": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+        "after": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow, shortbow plus one and sling."
+      },
+      {
+        "path": "/details/stats/str/drives/1",
+        "before": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+        "after": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, longsword plus one, mace, maul, morningstar, pike, quarterstaff, quarterstaff plus one, sickle, spear, trident, war pick and warhammer."
+      },
+      {
+        "path": "/me/equipment",
+        "before": null,
+        "after": {
+          "weapon": "mace",
+          "armor": "chain_shirt",
+          "shield": true,
+          "items": [
+            {
+              "id": "gear_chain_shirt",
+              "name": "Chain shirt",
+              "slot": "armor",
+              "can": true,
+              "equipped": true,
+              "detail": "Chain shirt: base AC 13. Equip between sessions."
+            },
+            {
+              "id": "gear_mace",
+              "name": "Mace",
+              "slot": "weapon",
+              "can": true,
+              "equipped": true,
+              "detail": "Mace: 1d6 bludgeoning. Equip between sessions."
+            },
+            {
+              "id": "gear_shield",
+              "name": "Shield",
+              "slot": "shield",
+              "can": true,
+              "equipped": true,
+              "detail": "Shield: +2 AC. Equip between sessions."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/me/featChoices",
+        "before": null,
+        "after": [
+          {
+            "id": "feat.alert",
+            "name": "Alert",
+            "tooltip": "+3 Initiative"
+          },
+          {
+            "id": "feat.mobile",
+            "name": "Mobile",
+            "tooltip": "+1 Move"
+          },
+          {
+            "id": "feat.tough",
+            "name": "Tough",
+            "tooltip": "+12 max HP"
+          }
+        ]
+      },
+      {
+        "path": "/me/feats",
+        "before": null,
+        "after": []
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-companion-name.json",
+    "changes": [
+      {
+        "path": "/details/backgrounds/acolyte/hook",
+        "before": null,
+        "after": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
+      },
+      {
+        "path": "/details/backgrounds/criminal/hook",
+        "before": null,
+        "after": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
+      },
+      {
+        "path": "/details/backgrounds/entertainer/hook",
+        "before": null,
+        "after": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
+      },
+      {
+        "path": "/details/backgrounds/folk_hero/hook",
+        "before": null,
+        "after": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again."
+      },
+      {
+        "path": "/details/backgrounds/guild_artisan/hook",
+        "before": null,
+        "after": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
+      },
+      {
+        "path": "/details/backgrounds/hermit/hook",
+        "before": null,
+        "after": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
+      },
+      {
+        "path": "/details/backgrounds/noble/hook",
+        "before": null,
+        "after": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements."
+      },
+      {
+        "path": "/details/backgrounds/outlander/hook",
+        "before": null,
+        "after": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
+      },
+      {
+        "path": "/details/backgrounds/sage/hook",
+        "before": null,
+        "after": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember."
+      },
+      {
+        "path": "/details/backgrounds/sailor/hook",
+        "before": null,
+        "after": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns."
+      },
+      {
+        "path": "/details/backgrounds/soldier/hook",
+        "before": null,
+        "after": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
+      },
+      {
+        "path": "/details/backgrounds/urchin/hook",
+        "before": null,
+        "after": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 5 per battle at level 3, 11 by level 10.",
+        "after": "Mana: 5 per battle at level 3, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 2 per battle at level 3, 5 by level 10.",
+        "after": "Focus: 2 per battle at level 3, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/druid.wild_shape_bear/text",
+        "before": "Self: transforms into a bear",
+        "after": "Self: transforms into a form bear"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_wolf/text",
+        "before": "Self: transforms into a wolf",
+        "after": "Self: transforms into a form wolf"
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/shapeshifter.dire_form/text",
+        "before": "Self: transforms into a dire wolf",
+        "after": "Self: transforms into a form dire wolf"
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/details/stats/dex/drives/1",
+        "before": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+        "after": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow, shortbow plus one and sling."
+      },
+      {
+        "path": "/details/stats/str/drives/1",
+        "before": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+        "after": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, longsword plus one, mace, maul, morningstar, pike, quarterstaff, quarterstaff plus one, sickle, spear, trident, war pick and warhammer."
+      },
+      {
+        "path": "/me/equipment",
+        "before": null,
+        "after": {
+          "weapon": "longbow",
+          "armor": "studded_leather",
+          "shield": false,
+          "items": [
+            {
+              "id": "gear_longbow",
+              "name": "Longbow",
+              "slot": "weapon",
+              "can": true,
+              "equipped": true,
+              "detail": "Longbow: 1d8 piercing. Equip between sessions."
+            },
+            {
+              "id": "gear_studded_leather",
+              "name": "Studded leather",
+              "slot": "armor",
+              "can": true,
+              "equipped": true,
+              "detail": "Studded leather: base AC 12. Equip between sessions."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-equipment.json",
+    "changes": [
+      {
+        "path": "/details/backgrounds/acolyte/hook",
+        "before": null,
+        "after": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
+      },
+      {
+        "path": "/details/backgrounds/criminal/hook",
+        "before": null,
+        "after": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
+      },
+      {
+        "path": "/details/backgrounds/entertainer/hook",
+        "before": null,
+        "after": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
+      },
+      {
+        "path": "/details/backgrounds/folk_hero/hook",
+        "before": null,
+        "after": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again."
+      },
+      {
+        "path": "/details/backgrounds/guild_artisan/hook",
+        "before": null,
+        "after": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
+      },
+      {
+        "path": "/details/backgrounds/hermit/hook",
+        "before": null,
+        "after": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
+      },
+      {
+        "path": "/details/backgrounds/noble/hook",
+        "before": null,
+        "after": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements."
+      },
+      {
+        "path": "/details/backgrounds/outlander/hook",
+        "before": null,
+        "after": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
+      },
+      {
+        "path": "/details/backgrounds/sage/hook",
+        "before": null,
+        "after": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember."
+      },
+      {
+        "path": "/details/backgrounds/sailor/hook",
+        "before": null,
+        "after": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns."
+      },
+      {
+        "path": "/details/backgrounds/soldier/hook",
+        "before": null,
+        "after": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
+      },
+      {
+        "path": "/details/backgrounds/urchin/hook",
+        "before": null,
+        "after": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 5 per battle at level 3, 11 by level 10.",
+        "after": "Mana: 5 per battle at level 3, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 2 per battle at level 3, 5 by level 10.",
+        "after": "Focus: 2 per battle at level 3, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-new.json",
+    "changes": [
+      {
+        "path": "/details/backgrounds/acolyte/hook",
+        "before": null,
+        "after": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
+      },
+      {
+        "path": "/details/backgrounds/criminal/hook",
+        "before": null,
+        "after": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
+      },
+      {
+        "path": "/details/backgrounds/entertainer/hook",
+        "before": null,
+        "after": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
+      },
+      {
+        "path": "/details/backgrounds/folk_hero/hook",
+        "before": null,
+        "after": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again."
+      },
+      {
+        "path": "/details/backgrounds/guild_artisan/hook",
+        "before": null,
+        "after": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
+      },
+      {
+        "path": "/details/backgrounds/hermit/hook",
+        "before": null,
+        "after": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
+      },
+      {
+        "path": "/details/backgrounds/noble/hook",
+        "before": null,
+        "after": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements."
+      },
+      {
+        "path": "/details/backgrounds/outlander/hook",
+        "before": null,
+        "after": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
+      },
+      {
+        "path": "/details/backgrounds/sage/hook",
+        "before": null,
+        "after": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember."
+      },
+      {
+        "path": "/details/backgrounds/sailor/hook",
+        "before": null,
+        "after": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns."
+      },
+      {
+        "path": "/details/backgrounds/soldier/hook",
+        "before": null,
+        "after": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
+      },
+      {
+        "path": "/details/backgrounds/urchin/hook",
+        "before": null,
+        "after": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 6 per battle at level 4, 11 by level 10.",
+        "after": "Mana: 6 per battle at level 4, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 3 per battle at level 4, 5 by level 10.",
+        "after": "Focus: 3 per battle at level 4, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/druid.conjure_animals/text",
+        "before": "4 tiles: summons 2 × wolf while you concentrate",
+        "after": "4 tiles: summons 2 × summon wolf while you concentrate"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_bear/text",
+        "before": "Self: transforms into a bear",
+        "after": "Self: transforms into a form bear"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_wolf/text",
+        "before": "Self: transforms into a wolf",
+        "after": "Self: transforms into a form wolf"
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/shapeshifter.dire_form/text",
+        "before": "Self: transforms into a dire wolf",
+        "after": "Self: transforms into a form dire wolf"
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/details/stats/dex/drives/1",
+        "before": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+        "after": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow, shortbow plus one and sling."
+      },
+      {
+        "path": "/details/stats/str/drives/1",
+        "before": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+        "after": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, longsword plus one, mace, maul, morningstar, pike, quarterstaff, quarterstaff plus one, sickle, spear, trident, war pick and warhammer."
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-trinket-dormant.json",
+    "changes": [
+      {
+        "path": "/details/backgrounds/acolyte/hook",
+        "before": null,
+        "after": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
+      },
+      {
+        "path": "/details/backgrounds/criminal/hook",
+        "before": null,
+        "after": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
+      },
+      {
+        "path": "/details/backgrounds/entertainer/hook",
+        "before": null,
+        "after": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
+      },
+      {
+        "path": "/details/backgrounds/folk_hero/hook",
+        "before": null,
+        "after": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again."
+      },
+      {
+        "path": "/details/backgrounds/guild_artisan/hook",
+        "before": null,
+        "after": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
+      },
+      {
+        "path": "/details/backgrounds/hermit/hook",
+        "before": null,
+        "after": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
+      },
+      {
+        "path": "/details/backgrounds/noble/hook",
+        "before": null,
+        "after": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements."
+      },
+      {
+        "path": "/details/backgrounds/outlander/hook",
+        "before": null,
+        "after": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
+      },
+      {
+        "path": "/details/backgrounds/sage/hook",
+        "before": null,
+        "after": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember."
+      },
+      {
+        "path": "/details/backgrounds/sailor/hook",
+        "before": null,
+        "after": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns."
+      },
+      {
+        "path": "/details/backgrounds/soldier/hook",
+        "before": null,
+        "after": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
+      },
+      {
+        "path": "/details/backgrounds/urchin/hook",
+        "before": null,
+        "after": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 6 per battle at level 4, 11 by level 10.",
+        "after": "Mana: 6 per battle at level 4, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 3 per battle at level 4, 5 by level 10.",
+        "after": "Focus: 3 per battle at level 4, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/druid.conjure_animals/text",
+        "before": "4 tiles: summons 2 × wolf while you concentrate",
+        "after": "4 tiles: summons 2 × summon wolf while you concentrate"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_bear/text",
+        "before": "Self: transforms into a bear",
+        "after": "Self: transforms into a form bear"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_wolf/text",
+        "before": "Self: transforms into a wolf",
+        "after": "Self: transforms into a form wolf"
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/shapeshifter.dire_form/text",
+        "before": "Self: transforms into a dire wolf",
+        "after": "Self: transforms into a form dire wolf"
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/details/stats/dex/drives/1",
+        "before": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+        "after": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow, shortbow plus one and sling."
+      },
+      {
+        "path": "/details/stats/str/drives/1",
+        "before": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+        "after": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, longsword plus one, mace, maul, morningstar, pike, quarterstaff, quarterstaff plus one, sickle, spear, trident, war pick and warhammer."
+      },
+      {
+        "path": "/me/equipment",
+        "before": null,
+        "after": {
+          "weapon": "mace",
+          "armor": "chain_shirt",
+          "shield": true,
+          "items": [
+            {
+              "id": "gear_chain_shirt",
+              "name": "Chain shirt",
+              "slot": "armor",
+              "can": true,
+              "equipped": true,
+              "detail": "Chain shirt: base AC 13. Equip between sessions."
+            },
+            {
+              "id": "gear_mace",
+              "name": "Mace",
+              "slot": "weapon",
+              "can": true,
+              "equipped": true,
+              "detail": "Mace: 1d6 bludgeoning. Equip between sessions."
+            },
+            {
+              "id": "gear_shield",
+              "name": "Shield",
+              "slot": "shield",
+              "can": true,
+              "equipped": true,
+              "detail": "Shield: +2 AC. Equip between sessions."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/me/featChoices",
+        "before": null,
+        "after": [
+          {
+            "id": "feat.alert",
+            "name": "Alert",
+            "tooltip": "+3 Initiative"
+          },
+          {
+            "id": "feat.mobile",
+            "name": "Mobile",
+            "tooltip": "+1 Move"
+          },
+          {
+            "id": "feat.tough",
+            "name": "Tough",
+            "tooltip": "+12 max HP"
+          }
+        ]
+      },
+      {
+        "path": "/me/feats",
+        "before": null,
+        "after": []
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/portal-trinket.json",
+    "changes": [
+      {
+        "path": "/details/backgrounds/acolyte/hook",
+        "before": null,
+        "after": "You were raised in the Church of the Hearth. You have recited the Gift of the Flame a thousand times. Mother Aubrine wrote to you herself, asking you to come home to Emberwick."
+      },
+      {
+        "path": "/details/backgrounds/criminal/hook",
+        "before": null,
+        "after": "You ran with the river smugglers once. Rook remembers you, and remembers that you still owe the Ash Market for a job that went wrong."
+      },
+      {
+        "path": "/details/backgrounds/entertainer/hook",
+        "before": null,
+        "after": "You learned your trade from Lark, the last songkeeper, who taught you the Warden songs and then vanished."
+      },
+      {
+        "path": "/details/backgrounds/folk_hero/hook",
+        "before": null,
+        "after": "You stood up for Emberwick once, and the town still tells the story. Now the town is going hungry, and they're looking at you again."
+      },
+      {
+        "path": "/details/backgrounds/guild_artisan/hook",
+        "before": null,
+        "after": "Tobin Fell taught you your craft at his ember-forge. His forge is going cold, and so is yours."
+      },
+      {
+        "path": "/details/backgrounds/hermit/hook",
+        "before": null,
+        "after": "You lived alone for years on the burned bank near Old Maud, and never once used ember-fire. Your memory is the sharpest in the Vale."
+      },
+      {
+        "path": "/details/backgrounds/noble/hook",
+        "before": null,
+        "after": "Your family is minor gentry that owes everything to the Marrowbys. Lady Celandine has asked you, personally, to make sure the adventurers don't upset the town's arrangements."
+      },
+      {
+        "path": "/details/backgrounds/outlander/hook",
+        "before": null,
+        "after": "You weren't born in the Vale. You came over the Greywall as a child with no memory of the crossing, and you have always dreamed of a fire."
+      },
+      {
+        "path": "/details/backgrounds/sage/hook",
+        "before": null,
+        "after": "You came to Emberwick to study the ember under the ford. You've noticed gaps in your own notes, in your own handwriting, about things you don't remember."
+      },
+      {
+        "path": "/details/backgrounds/sailor/hook",
+        "before": null,
+        "after": "You worked the river boats from Emberwick's docks. You've seen what moves at night under the Ash Market's lanterns."
+      },
+      {
+        "path": "/details/backgrounds/soldier/hook",
+        "before": null,
+        "after": "You served in the ford garrison under Dagna Holt. You were on the bridge the day the goblins took it, and you lived."
+      },
+      {
+        "path": "/details/backgrounds/urchin/hook",
+        "before": null,
+        "after": "You grew up on Emberwick's streets with Pip, and you look out for her. Lately she's been remembering things that frighten you both."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/barbarian/facts/4",
+        "before": "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/barbarian/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "barbarian.technique_endurance",
+              "barbarian.technique_hunter"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/bard/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/bard/facts/3",
+        "before": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+        "after": "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword."
+      },
+      {
+        "path": "/details/classes/bard/facts/4",
+        "before": "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/cleric/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/cleric/facts/4",
+        "before": "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/cleric/levels/0/features",
+        "before": [],
+        "after": [
+          "cleric.steady_faith"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/druid/facts/3",
+        "before": "Weapons: simple weapons and scimitar (not used in battles yet).",
+        "after": "Weapons: simple weapons and scimitar."
+      },
+      {
+        "path": "/details/classes/druid/facts/4",
+        "before": "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/druid/facts/6",
+        "before": "Mana: 6 per battle at level 4, 11 by level 10.",
+        "after": "Mana: 6 per battle at level 4, 12 by level 10."
+      },
+      {
+        "path": "/details/classes/druid/levels/0/features",
+        "before": [],
+        "after": [
+          "druid.wild_shape_wolf"
+        ]
+      },
+      {
+        "path": "/details/classes/druid/levels/1/features",
+        "before": [
+          "druid.wild_shape_wolf"
+        ],
+        "after": []
+      },
+      {
+        "path": "/details/classes/fighter/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/fighter/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/fighter/facts/4",
+        "before": "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/monk/facts/3",
+        "before": "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and light martial weapons."
+      },
+      {
+        "path": "/details/classes/monk/facts/4",
+        "before": "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/monk/levels/1/choices",
+        "before": [],
+        "after": [
+          {
+            "choose": 1,
+            "from": [
+              "monk.technique_crane",
+              "monk.technique_tiger"
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/details/classes/paladin/facts/2",
+        "before": "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour, heavy armour and shields."
+      },
+      {
+        "path": "/details/classes/paladin/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/paladin/facts/4",
+        "before": "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/2",
+        "before": "Armour: light armour, medium armour and shields (not used in battles yet).",
+        "after": "Armour: light armour, medium armour and shields."
+      },
+      {
+        "path": "/details/classes/ranger/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/ranger/facts/4",
+        "before": "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+        "after": "Choose 3 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/ranger/facts/6",
+        "before": "Focus: 3 per battle at level 4, 5 by level 10.",
+        "after": "Focus: 3 per battle at level 4, 7 by level 10."
+      },
+      {
+        "path": "/details/classes/rogue/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/rogue/facts/3",
+        "before": "Weapons: simple weapons and martial weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons and martial weapons."
+      },
+      {
+        "path": "/details/classes/rogue/facts/4",
+        "before": "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+        "after": "Choose 4 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/sorcerer/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/facts/2",
+        "before": "Armour: light armour (not used in battles yet).",
+        "after": "Armour: light armour."
+      },
+      {
+        "path": "/details/classes/warlock/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/warlock/facts/4",
+        "before": "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/classes/warlock/levels/1/features",
+        "before": [],
+        "after": [
+          "warlock.pact_resolve"
+        ]
+      },
+      {
+        "path": "/details/classes/wizard/facts/2",
+        "before": "Armour: none (not used in battles yet).",
+        "after": "Armour: none."
+      },
+      {
+        "path": "/details/classes/wizard/facts/3",
+        "before": "Weapons: simple weapons (not used in battles yet).",
+        "after": "Weapons: simple weapons."
+      },
+      {
+        "path": "/details/classes/wizard/facts/4",
+        "before": "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+        "after": "Choose 2 class skills in the creator; background skills are additional."
+      },
+      {
+        "path": "/details/features/barbarian.technique_endurance",
+        "before": null,
+        "after": {
+          "name": "Technique endurance",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+4 max HP"
+        }
+      },
+      {
+        "path": "/details/features/barbarian.technique_hunter",
+        "before": null,
+        "after": {
+          "name": "Technique hunter",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Move"
+        }
+      },
+      {
+        "path": "/details/features/cleric.steady_faith",
+        "before": null,
+        "after": {
+          "name": "Steady faith",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Wis saves"
+        }
+      },
+      {
+        "path": "/details/features/dragonborn.breath_weapon/text",
+        "before": "Dex save, self, cone 3: 1d10 fire; half damage on a save",
+        "after": "Dex save, self, cone 3: 1d10 fire; half damage on a save Fire is the default; choosing another ancestry changes the damage type."
+      },
+      {
+        "path": "/details/features/druid.conjure_animals/text",
+        "before": "4 tiles: summons 2 × wolf while you concentrate",
+        "after": "4 tiles: summons 2 × summon wolf while you concentrate"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_bear/text",
+        "before": "Self: transforms into a bear",
+        "after": "Self: transforms into a form bear"
+      },
+      {
+        "path": "/details/features/druid.wild_shape_wolf/text",
+        "before": "Self: transforms into a wolf",
+        "after": "Self: transforms into a form wolf"
+      },
+      {
+        "path": "/details/features/monk.technique_crane",
+        "before": null,
+        "after": {
+          "name": "Technique crane",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 AC"
+        }
+      },
+      {
+        "path": "/details/features/monk.technique_tiger",
+        "before": null,
+        "after": {
+          "name": "Technique tiger",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 weapon damage"
+        }
+      },
+      {
+        "path": "/details/features/shapeshifter.dire_form/text",
+        "before": "Self: transforms into a dire wolf",
+        "after": "Self: transforms into a form dire wolf"
+      },
+      {
+        "path": "/details/features/warlock.pact_resolve",
+        "before": null,
+        "after": {
+          "name": "Pact resolve",
+          "tags": [
+            "Always on"
+          ],
+          "text": "+1 Con saves"
+        }
+      },
+      {
+        "path": "/details/races/dragonborn/facts/3",
+        "before": "Resistant to fire damage: takes half.",
+        "after": "Your chosen dragon ancestry sets your breath damage and resistance (half damage taken)."
+      },
+      {
+        "path": "/details/stats/dex/drives/1",
+        "before": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+        "after": "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow, shortbow plus one and sling."
+      },
+      {
+        "path": "/details/stats/str/drives/1",
+        "before": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+        "after": "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, longsword plus one, mace, maul, morningstar, pike, quarterstaff, quarterstaff plus one, sickle, spear, trident, war pick and warhammer."
+      },
+      {
+        "path": "/me/equipment",
+        "before": null,
+        "after": {
+          "weapon": "mace",
+          "armor": "chain_shirt",
+          "shield": true,
+          "items": [
+            {
+              "id": "gear_chain_shirt",
+              "name": "Chain shirt",
+              "slot": "armor",
+              "can": true,
+              "equipped": true,
+              "detail": "Chain shirt: base AC 13. Equip between sessions."
+            },
+            {
+              "id": "gear_mace",
+              "name": "Mace",
+              "slot": "weapon",
+              "can": true,
+              "equipped": true,
+              "detail": "Mace: 1d6 bludgeoning. Equip between sessions."
+            },
+            {
+              "id": "gear_shield",
+              "name": "Shield",
+              "slot": "shield",
+              "can": true,
+              "equipped": true,
+              "detail": "Shield: +2 AC. Equip between sessions."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/me/featChoices",
+        "before": null,
+        "after": [
+          {
+            "id": "feat.alert",
+            "name": "Alert",
+            "tooltip": "+3 Initiative"
+          },
+          {
+            "id": "feat.mobile",
+            "name": "Mobile",
+            "tooltip": "+1 Move"
+          },
+          {
+            "id": "feat.tough",
+            "name": "Tough",
+            "tooltip": "+12 max HP"
+          }
+        ]
+      },
+      {
+        "path": "/me/feats",
+        "before": null,
+        "after": []
+      },
+      {
+        "path": "/options/classes/0/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "intimidation",
+            "nature",
+            "perception",
+            "survival",
+            "animal_handling"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/1/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "performance",
+            "persuasion",
+            "deception",
+            "acrobatics",
+            "athletics",
+            "history",
+            "insight",
+            "intimidation",
+            "investigation",
+            "nature",
+            "perception",
+            "religion",
+            "sleight_of_hand",
+            "stealth"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/2/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "medicine",
+            "religion",
+            "insight",
+            "history",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/3/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "nature",
+            "survival",
+            "perception",
+            "animal_handling",
+            "arcana",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/4/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "perception",
+            "intimidation",
+            "acrobatics",
+            "animal_handling",
+            "history",
+            "insight",
+            "persuasion",
+            "survival"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/5/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "acrobatics",
+            "stealth",
+            "athletics",
+            "history",
+            "insight",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/6/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "athletics",
+            "religion",
+            "insight",
+            "intimidation",
+            "medicine",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/7/skillChoices",
+        "before": null,
+        "after": {
+          "count": 3,
+          "from": [
+            "perception",
+            "stealth",
+            "survival",
+            "animal_handling",
+            "athletics",
+            "insight",
+            "investigation",
+            "nature"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/8/skillChoices",
+        "before": null,
+        "after": {
+          "count": 4,
+          "from": [
+            "stealth",
+            "acrobatics",
+            "perception",
+            "sleight_of_hand",
+            "athletics",
+            "deception",
+            "insight",
+            "intimidation",
+            "investigation",
+            "persuasion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/9/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "insight",
+            "intimidation",
+            "persuasion",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/10/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "deception",
+            "intimidation",
+            "history",
+            "investigation",
+            "nature",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/classes/11/skillChoices",
+        "before": null,
+        "after": {
+          "count": 2,
+          "from": [
+            "arcana",
+            "history",
+            "investigation",
+            "insight",
+            "medicine",
+            "religion"
+          ]
+        }
+      },
+      {
+        "path": "/options/races/0/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/1/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/2/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/3/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/4/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/5/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/6/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/7/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/8/extraSkills",
+        "before": null,
+        "after": 0
+      },
+      {
+        "path": "/options/races/9/extraSkills",
+        "before": null,
+        "after": 1
+      },
+      {
+        "path": "/options/races/10/extraSkills",
+        "before": null,
+        "after": 0
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/questlog-leader.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/results-fled.json",
+    "changes": [
+      {
+        "path": "/data/choices/xp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/0/totalXp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/0/xp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/1/totalXp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/1/xp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/2/totalXp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/2/xp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/3/totalXp",
+        "before": 125,
+        "after": 350
+      },
+      {
+        "path": "/data/lines/3/xp",
+        "before": 125,
+        "after": 350
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/talk-check.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/talk-vote.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/vote-tie.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-interact.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-map.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-pinned-done.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-pinned.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-travel-nowhere.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-travelling.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      }
+    ]
+  },
+  {
+    "file": "web/play/test/fixtures/tactics/walk-trinket-presented.json",
+    "changes": [
+      {
+        "path": "/data/backgroundSecret",
+        "before": null,
+        "after": {
+          "id": "soldier",
+          "background": "Soldier",
+          "text": "It was Dagna's guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn't know; you do."
+        }
+      },
+      {
+        "path": "/data/journal/quests/0/history/1/log",
+        "before": "Dagna sent us to the cave below Maud’s hut on the burned east bank. Recommended level: 2.",
+        "after": "Dagna sent us to the cave below Maud's hut on the burned east bank. Recommended level: 2."
+      },
+      {
+        "path": "/data/journal/quests/0/result",
+        "before": "The boy is safe at Maud’s. Dagna paid the bounty and set aside a class trinket for every companion, including those away.",
+        "after": "The boy reached Maud's fire and went home to his father. Dagna paid the bounty and set aside a class trinket for every companion, including those away."
+      }
+    ]
+  }
+]

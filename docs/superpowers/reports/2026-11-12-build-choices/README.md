@@ -1,0 +1,9 @@
+# Build choices and level gains (#124)
+
+Every class now gains a non-choice feature or resource increase at every level other than the ability-increase levels (4/8). Existing gains already on main remain. The remaining gaps receive small saving-throw passives, earlier wolf shape, or late resource increases. Monk and barbarian offer two techniques at each of levels 2, 6 and 10, with cumulative default selections.
+
+At levels 4 and 8, Alert (+3 initiative), Mobile (+1 movement) or Tough (+12 maximum HP) consumes the same milestone budget as two ability-score points. Spent ability-score milestones block taking a feat with the same budget; duplicate or forged feats are rejected. Class skills are chosen from the class list, with background skills additional and human extra skill honoured. Dragonborn choose acid, cold, fire, lightning or poison; the choice changes both breath damage and resistance. Old records omit the new fields and retain their existing defaults.
+
+Focused validation: 9 game tests, the all-class level-gain test, 45 portal phone tests and 9 asset checks pass. Production Chromium captures cover creation, available feats and an owned feat at both 320×844 and 390×844, with reduced motion and no horizontal overflow. Browser source and fixture names are retained alongside screenshots. .NET builds have zero warnings. These are automated checks, not a human usability test.
+
+The integrated full gate is still being reviewed. Its missing voice recordings on main prevent merging; no checks are disabled or skipped. The regression run caught an incomplete cumulative technique default list, which was corrected for every level, plus stale content expectations for the new forge, Ford XP and summon-wolf stat block. The trinket test continues to check that its HP bonus is baked into the sheet only once, independently of technique HP.

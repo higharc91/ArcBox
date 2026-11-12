@@ -33,7 +33,7 @@ public sealed class BattleLootTests
     {
         var encounters = Rules.Encounters.Values.Where(e => !e.Loot.IsEmpty).ToArray();
         Assert.Equal(9, encounters.Length);
-        Assert.Equal(4, Rules.LootTables.Count);
+        Assert.Equal(9, Rules.LootTables.Count);
         foreach (var encounter in encounters)
         {
             var s = new Session(); s.ToBattle(encounter.Id);

@@ -1,0 +1,23 @@
+{
+  "abilities": [],
+  "passives": [
+    {
+      "id": "feat.alert",
+      "static": {
+        "initiative": 3
+      }
+    },
+    {
+      "id": "feat.mobile",
+      "static": {
+        "move": 1
+      }
+    },
+    {
+      "id": "feat.tough",
+      "static": {
+        "maxHp": 12
+      }
+    }
+  ]
+}

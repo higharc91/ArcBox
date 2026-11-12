@@ -8,7 +8,7 @@
   "primaryResource": "devotion",
   "features": {
     "1": [ { "choose": 3, "from": ["cleric.sacred_flame", "cleric.toll_the_dead", "cleric.word_of_radiance", "cleric.resistance"] },
-           { "choose": 4, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command"] } ],
+           { "choose": 4, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command"] } , {"passive": "cleric.steady_faith"}],
     "2": [ { "ability": "cleric.divine_spark" },
            { "ability": "cleric.turn_undead" },
            { "choose": 1, "from": ["cleric.bless", "cleric.bane", "cleric.cure_wounds", "cleric.guiding_bolt", "cleric.healing_word", "cleric.inflict_wounds", "cleric.shield_of_faith", "cleric.command"] } ],

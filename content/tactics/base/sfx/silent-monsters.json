@@ -13,7 +13,13 @@
     "imp": "Needs imp attack, hurt and death calls.",
     "maren_sorrel": "Needs Maren attack, hurt and death voice.",
     "mother_skarrow": "Needs Mother Skarrow attack, hurt and death voice.",
-    "sapling": "Needs sapling attack, hurt and death wood sounds."
+    "sapling": "Needs sapling attack, hurt and death wood sounds.",
+    "crab": "The existing crab atlas has no authored crab call; keep it silent rather than substitute a voice or generate audio.",
+    "gargoyle": "The existing gargoyle atlas has no authored stone-creature call; no new audio is generated.",
+    "harpy": "The existing harpy atlas has no authored harpy voice; do not substitute a humanoid or animal voice.",
+    "hookbeak": "The existing hookbeak atlas has no authored hookbeak call; no new audio is generated.",
+    "scorpion": "The existing scorpion atlas has no authored scorpion sound; retain silence.",
+    "wisp": "The existing wisp atlas has no authored wisp sound; retain silence."
   },
   "borrowed": {
     "boar": "Dedicated boar family is silent; currently borrows bear and needs boar attack, hurt and death grunts.",
@@ -25,6 +31,7 @@
     "golem": "Dedicated golem family is silent; currently borrows elemental and needs golem attack, hurt and death stone sounds.",
     "hound": "Dedicated hound family is silent; currently borrows wolf and needs hound attack, hurt and death calls.",
     "ivo_rime": "Dedicated Ivo family is silent; currently borrows undead through the necromancer sprite and needs Ivo attack, hurt and death voice.",
-    "vorga": "Dedicated Vorga family is silent; currently borrows goblin through the goblin spear sprite and needs Vorga attack, hurt and death voice."
+    "vorga": "Dedicated Vorga family is silent; currently borrows goblin through the goblin spear sprite and needs Vorga attack, hurt and death voice.",
+    "warg": "Uses the existing wolf attack, hurt and death family for this wolf-like creature; no new audio."
   }
 }

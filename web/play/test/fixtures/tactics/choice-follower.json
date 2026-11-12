@@ -16,7 +16,9 @@
         "id": "truth",
         "label": "Your guards shot first, Captain. At children.",
         "skill": null,
-        "dc": null
+        "dc": null,
+        "credit": "Soldier \u00B7 Player1",
+        "can": false
       },
       {
         "id": "cases",

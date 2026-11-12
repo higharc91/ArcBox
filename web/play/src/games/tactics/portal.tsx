@@ -30,12 +30,13 @@ interface Me {
   subclasses: { id: string; name: string }[] | null; choices: Choice[];
   color?: string; skills?: string[]; saves?: string[]; bonuses?: Record<string, number> | null;
   trinket?: Trinket;
+  feats?: string[]; featChoices?: { id: string; name: string; tooltip: string }[]; classSkills?: string[]; ancestry?: string;
   equipment?: { weapon: string; armor: string; shield: boolean; items: { id: string; name: string; slot: string; can: boolean; equipped: boolean; detail: string }[] };
   companion?: { monster: string; name: string; defaultName: string; suggestions: string[] };
 }
 interface Options {
-  races: { id: string; name: string }[]; classes: { id: string; name: string; role: string }[];
-  backgrounds: { id: string; name: string; boosts: Partial<Record<StatKey, number>> }[]; pointBuy: number;
+  races: { id: string; name: string; extraSkills?: number }[]; classes: { id: string; name: string; role: string; skillChoices?: { count: number; from: string[] } }[];
+  backgrounds: { id: string; name: string; boosts: Partial<Record<StatKey, number>>; skills?: string[] }[]; pointBuy: number;
   colors?: ColorOptions;
 }
 export interface TacticsPortalView {
@@ -94,6 +95,14 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
   );
 }
 
+const nameSegments = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+function validCompanionName(value: string): boolean {
+  if (/[\p{Cc}\p{Cf}]/u.test(value)) return false;
+  const normalized = value.trim().replace(/\s+/g, " ").normalize();
+  return !normalized || /^[\p{L}\p{M} '-]+$/u.test(normalized) && /\p{L}/u.test(normalized)
+    && Array.from(nameSegments.segment(normalized)).length <= 16;
+}
+
 /** A small "i" that opens an option's details, beside the button that picks it. */
 function InfoButton({ label, onClick }: { label: string; onClick(): void }) {
   return <button type="button" class="tx-info" aria-label={label} onClick={onClick}><span aria-hidden="true">i</span></button>;
@@ -137,6 +146,14 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
   const [background, setBackground] = useState(start?.background ?? options.backgrounds[0]?.id ?? "");
   const [scores, setScores] = useState<Record<StatKey, number>>({ str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8 });
   const [color, setColor] = useState<string | null>(options.colors?.current ?? null);
+  const [ancestry, setAncestry] = useState(start?.ancestry ?? "fire");
+  const [skills, setSkills] = useState<string[]>([]);
+  const skillSpec = options.classes.find(c => c.id === cls)?.skillChoices;
+  const granted = options.backgrounds.find(b => b.id === background)?.skills ?? details?.backgrounds[background]?.skills ?? [];
+  const skillCount = (skillSpec?.count ?? 0) + (options.races.find(r => r.id === race)?.extraSkills ?? 0);
+  const skillOptions = (skillSpec?.from ?? []).filter(s => !granted.includes(s));
+  useEffect(() => { setSkills(skillOptions.slice(0, skillCount)); }, [race, cls, background]);
+  const newChoices = { ...(skillSpec ? { skills } : {}), ...(race === "dragonborn" ? { ancestry } : {}) };
   const left = options.pointBuy - pointsSpent(scores);
   const boosts = options.backgrounds.find((b) => b.id === background)?.boosts ?? {};
   const totals = Object.fromEntries(STATS.map((s) => [s, scores[s] + (boosts[s] ?? 0)])) as Record<StatKey, number>;
@@ -193,6 +210,9 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
       </div>
       {c ? <Summary title={c.name} lines={[c.role, c.facts[0] ?? ""]} onMore={explain && (() => explain({ kind: "class", id: cls }))} /> : null}
 
+      {race === "dragonborn" && <label class="tx-equipment-slot">Dragon ancestry<select class="tx-companion-input" value={ancestry} disabled={readOnly} onChange={e => setAncestry(e.currentTarget.value)}>
+        {["acid", "cold", "fire", "lightning", "poison"].map(a => <option key={a} value={a}>{a[0]!.toUpperCase() + a.slice(1)}</option>)}
+      </select><small class="tx-note">Your ancestry sets your breath damage and resistance.</small></label>}
       <Section>Background</Section>
       <Options label="Background" kind="background" items={options.backgrounds} value={background} onPick={setBackground} readOnly={readOnly} explain={explain} />
       {b?.hook && <p class="tx-background-hook">{b.hook}</p>}
@@ -215,10 +235,15 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
         ))}
       </div>
       {explain ? <p class="tx-note">Tap a score's name for what it does.</p> : null}
+      {skillSpec && <fieldset class="tx-class-skills"><legend>Choose {skillCount} class skills · {skills.length}/{skillCount}</legend>
+        <p class="tx-note">Your background already grants {granted.map(s => details?.skills[s]?.name ?? s.replaceAll("_", " ")).join(" and ")}.</p>
+        {skillOptions.map(skill => <label class="tx-pick" key={skill}><input type="checkbox" checked={skills.includes(skill)} disabled={readOnly || !skills.includes(skill) && skills.length >= skillCount}
+          onChange={() => setSkills(skills.includes(skill) ? skills.filter(s => s !== skill) : [...skills, skill])} /><span>{details?.skills[skill]?.name ?? skill.replaceAll("_", " ")}</span></label>)}
+      </fieldset>}
       <div class="tx-foot">
         {onCancel ? <button type="button" class="tx-btn ghost" onClick={onCancel}>Cancel</button> : null}
-        <button type="button" class="tx-btn gold" disabled={readOnly}
-          onClick={() => void send("createCharacter", color ? { race, class: cls, background, scores, color } : { race, class: cls, background, scores })}>Create</button>
+        <button type="button" class="tx-btn gold" disabled={readOnly || !!skillSpec && skills.length !== skillCount}
+          onClick={() => void send("createCharacter", { race, class: cls, background, scores, ...(color ? { color } : {}), ...newChoices })}>Create</button>
       </div>
     </section>
   );
@@ -373,9 +398,9 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
     "druid.grovekeeper": ["Sprig", "Moss", "Hazel", "Alder", "Briar", "Willow", "Acorn", "Fern"],
     "warlock.fiendbound": ["Soot", "Wick", "Scorch", "Flicker", "Tinder", "Smudge", "Spark", "Crisp"],
   };
-  const companionValid = !companionName.trim() || (/^[\p{L}\p{M} '-]+$/u.test(companionName) && /\p{L}/u.test(companionName) && Array.from(companionName.trim().replace(/\s+/g, " ").normalize()).length <= 16);
+  const companionValid = validCompanionName(companionName);
   const chooseSubclass = (id: string) => void send("chooseSubclass", { subclass: id, ...(companions[id] ? { companionName: companionName || companions[id][0] } : {}) });
-  const choose = (t: Topic) => (t.kind === "subclass" && me.subclasses?.some((s) => s.id === t.id) && !readOnly
+  const choose = (t: Topic) => (t.kind === "subclass" && me.subclasses?.some((s) => s.id === t.id) && !readOnly && (!companions[t.id] || companionValid)
     ? { label: `Choose ${me.subclasses.find((s) => s.id === t.id)!.name}`, run: () => chooseSubclass(t.id) }
     : null);
   const explain = explainWith({ scores: me.scores, skills: me.skills, bonuses: me.bonuses, level: me.level, choose });
@@ -427,7 +452,7 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
             {me.subclasses.map((s) => (
               <div class={`tx-opt tall${companions[s.id] ? " has-companion" : ""}`} key={s.id}>
                 {companions[s.id] && <CompanionField name={companionName} setName={setCompanionName} suggestions={companions[s.id]} disabled={readOnly} valid={companionValid} />}
-                <button type="button" class="tx-subclass" disabled={readOnly || !companionValid} onClick={() => chooseSubclass(s.id)}>{s.name}</button>
+                <button type="button" class="tx-subclass" disabled={readOnly || !!companions[s.id] && !companionValid} onClick={() => chooseSubclass(s.id)}>{s.name}</button>
                 {explain ? <InfoButton label={`About ${s.name}`} onClick={() => explain({ kind: "subclass", id: s.id, cls: me.class })} /> : null}
               </div>
             ))}
@@ -435,8 +460,14 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
         </div>
       ) : null}
       {details?.backgrounds[me.background]?.hook && <p class="tx-background-hook">{details.backgrounds[me.background]!.hook}</p>}
+      {me.ancestry && <p class="tx-note">{me.ancestry[0]!.toUpperCase() + me.ancestry.slice(1)} dragon ancestry · breath and resistance.</p>}
       {me.equipment && <Equipment equipment={me.equipment} readOnly={readOnly} send={send} />}
       {me.companion && <CompanionRename companion={me.companion} readOnly={readOnly} send={send} />}
+      {me.feats?.length ? <div class="tx-block"><h3 class="tx-sect">Feats</h3><p>{me.feats.map(id => me.featChoices?.find(f => f.id === id)?.name ?? id).join(" · ")}</p></div> : null}
+      {me.increasesLeft >= 2 && me.featChoices?.length ? <div class="tx-block"><h3 class="tx-sect">Feat or ability increase</h3>
+        <p class="tx-note">Choose one feat below or spend the same level-up choice on ability scores.</p>
+        {me.featChoices.map(feat => <div class="tx-block" key={feat.id}><button class="tx-btn" disabled={readOnly || me.feats?.includes(feat.id)} onClick={() => void send("chooseFeat", { feat: feat.id })}>{feat.name}</button><p class="tx-note">{feat.tooltip}</p></div>)}
+      </div> : null}
       {me.increasesLeft >= 2 ? <Increase readOnly={readOnly} send={send} /> : null}
       {features.length && explain ? (
         <div class="tx-block">
@@ -457,7 +488,7 @@ function ownFeatures(me: Me, details: PortalDetails | null): string[] {
   if (!details) return [];
   const cls = details.classes[me.class];
   const sub = cls?.subclasses.find((s) => s.id === me.subclass);
-  const ids = [...(details.races[me.race]?.traits ?? [])];
+  const ids = [...(details.races[me.race]?.traits ?? [])].map(id => id === "dragonborn.breath_weapon" && me.ancestry && me.ancestry !== "fire" ? `${id}_${me.ancestry}` : id);
   for (const l of [...(cls?.levels ?? []), ...(sub?.levels ?? [])].filter((x) => x.level <= me.level).sort((a, b) => a.level - b.level))
     ids.push(...l.features);
   return [...new Set(ids)].filter((id) => details.features[id]);
@@ -622,7 +653,7 @@ function CompanionField({ name, setName, suggestions, disabled, valid }: {
 function CompanionRename({ companion, readOnly, send }: { companion: NonNullable<Me["companion"]>; readOnly: boolean; send: PortalProps["send"] }) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(companion.name === companion.defaultName ? "" : companion.name);
-  const valid = !name.trim() || (/^[\p{L}\p{M} '-]+$/u.test(name) && /\p{L}/u.test(name) && Array.from(name.trim().replace(/\s+/g, " ").normalize()).length <= 16);
+  const valid = validCompanionName(name);
   return <div class="tx-block"><h3 class="tx-sect">{companion.name} · {companion.monster}</h3>
     {editing ? <><CompanionField name={name} setName={setName} suggestions={companion.suggestions} disabled={readOnly} valid={valid} />
       <button class="tx-btn" disabled={readOnly || !valid} onClick={() => { void send("nameCompanion", { name }); setEditing(false); }}>Save companion name</button>

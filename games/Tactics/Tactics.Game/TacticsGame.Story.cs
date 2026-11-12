@@ -810,7 +810,7 @@ public sealed partial class TacticsGame
             return;
         _votes[PartyQuestion ? member : LeaderPick] = pick;
         if (!PartyQuestion && offeredOption is { Tags.Any: true } && OptionOwners(offeredOption).Contains(member))
-            _votes[member] = pick; // Persist the owner's explicit agreement if the leader backs this choice.
+            _votes[member] = pick; // Retain the owner's explicit agreement while the leader backs this question.
 
         if (!PartyQuestion)
             _pickedBy = member;

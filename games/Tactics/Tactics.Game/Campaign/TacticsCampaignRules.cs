@@ -70,8 +70,8 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
         object? options = creating
             ? new
             {
-                races = rules.Races.Values.Select(r => new { id = r.Id, name = r.Name }),
-                classes = rules.Classes.Values.Select(c => new { id = c.Id, name = c.Name, role = c.Role }),
+                races = rules.Races.Values.Select(r => new { id = r.Id, name = r.Name, extraSkills = r.ExtraSkills }),
+                classes = rules.Classes.Values.Select(c => new { id = c.Id, name = c.Name, role = c.Role, skillChoices = c.SkillChoices }),
                 backgrounds = rules.Backgrounds.Values.Select(b => new { id = b.Id, name = b.Name, boosts = b.Boosts }),
                 pointBuy = CharacterRules.PointBuy,
                 colors = Colors(mine?.Color ?? NewMemberColor(doc, info, member), info.Members
@@ -85,7 +85,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             creating ? rules.Races.Values : rules.Races.Values.Where(r => r.Id == own!.Race),
             creating ? rules.Classes.Values : rules.Classes.Values.Where(c => c.Id == own!.Class),
             creating ? rules.Backgrounds.Values : rules.Backgrounds.Values.Where(b => b.Id == own!.Background),
-            own?.Level ?? doc.PartyLevel, rules, own?.Class);
+            own?.Level ?? doc.PartyLevel, rules, own?.Class, own?.DragonAncestry);
         var view = JsonSerializer.SerializeToNode(new
         {
             level = doc.PartyLevel, completed = doc.Completed, party,
@@ -158,6 +158,13 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 id, trinket.Name, trinket.Text, trinket.Rarity, @class = trinket.Class,
                 className = rules.Classes[trinket.Class].Name, active = trinket.ActiveFor(c),
             }, ArcJson.Options);
+        if (c.Level >= 4 && BuildChoices.Feats(rules).Any())
+        {
+            view["feats"] = JsonSerializer.SerializeToNode(c.Feats.IsDefault ? [] : c.Feats, ArcJson.Options);
+            view["featChoices"] = JsonSerializer.SerializeToNode(BuildChoices.Feats(rules).Select(id => Option(id, c.Level, rules)), ArcJson.Options);
+        }
+        if (!c.ClassSkills.IsDefault) view["classSkills"] = JsonSerializer.SerializeToNode(c.ClassSkills, ArcJson.Options);
+        if (c.Race == "dragonborn") view["ancestry"] = c.DragonAncestry ?? "fire";
         if (rules.Items.Values.Any(i => i.Equipment is not null))
         {
             var inventory = EquipmentRules.ClaimStarting(c, rules);
@@ -229,8 +236,16 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                         foreach (var p in s.EnumerateObject())
                             if (ParseStat(p.Name) is { } stat && p.Value.TryGetInt32(out var v))
                                 scores[stat] = v;
+                    IReadOnlyList<string>? classSkills = null;
+                    if (data.TryGetProperty("skills", out var skillList))
+                    {
+                        if (skillList.ValueKind != JsonValueKind.Array || skillList.EnumerateArray().Any(e => e.ValueKind != JsonValueKind.String))
+                            return new(null, "Choose your class skills.");
+                        classSkills = skillList.EnumerateArray().Select(e => e.GetString()!).ToArray();
+                    }
+                    var ancestry = data.TryGetProperty("ancestry", out var ancestryValue) && ancestryValue.ValueKind != JsonValueKind.Null ? Str(data, "ancestry") : null;
                     result = CharacterRules.Create(name, Str(data, "race"), Str(data, "class"), Str(data, "background"), scores,
-                        doc.PartyLevel, rules);
+                        doc.PartyLevel, rules, classSkills, ancestry);
                     if (data.TryGetProperty("color", out _))
                     {
                         if (PlayerColors.Readable(Str(data, "color")) is not { } picked)
@@ -270,6 +285,10 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 case "equip" when mine is not null:
                     if (doc.Battle is not null) return new(null, "Change equipment outside a battle.");
                     result = EquipmentRules.Equip(mine.Character, Str(data, "slot"), Str(data, "item"), rules);
+                    break;
+                case "chooseFeat" when mine is not null:
+                    if (doc.Battle is not null) return new(null, "Choose feats outside a battle.");
+                    result = CharacterRules.ChooseFeat(mine.Character, Str(data, "feat"), rules);
                     break;
                 case "spendIncrease" when mine is not null:
                     var stats = data.TryGetProperty("stats", out var st) && st.ValueKind == JsonValueKind.Array

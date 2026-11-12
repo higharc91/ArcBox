@@ -1685,7 +1685,8 @@
       "families": [
         "wolf",
         "dire_wolf",
-        "hound"
+        "hound",
+        "warg"
       ]
     },
     "wolf_death": {

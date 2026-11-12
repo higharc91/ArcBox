@@ -454,7 +454,7 @@ public sealed class AbilityPlanningTests
     {
         var conjure = A("druid.conjure_animals");
         var druid = First(TestSheets.Cleric.Knowing(conjure)) with { Level = 5, Resources = Ordinal.Map(("mana", 6)) };
-        var battle = On(Open(10, 3)).With(conjure).WithMonsters(("wolf", SheetBuilder.ForMonster("wolf", Base)))
+        var battle = On(Open(10, 3)).With(conjure).WithMonsters(("summon_wolf", SheetBuilder.ForMonster("summon_wolf", Base)))
             .Enemy("druid", druid, T(1, 1), new AiControlled("caster"))
             .Party("kara", TestSheets.Fighter with { Move = 0 }, T(8, 1));
         var state = battle.Start().State;

@@ -16,7 +16,9 @@
         "id": "truth",
         "label": "Your guards shot first, Captain. At children.",
         "skill": null,
-        "dc": null
+        "dc": null,
+        "credit": "Soldier \u00B7 Player1",
+        "can": true
       },
       {
         "id": "cases",
@@ -31,7 +33,12 @@
     "decider": "Player1",
     "away": [],
     "vip": true,
-    "difficulty": "Normal"
+    "difficulty": "Normal",
+    "backgroundSecret": {
+      "id": "soldier",
+      "background": "Soldier",
+      "text": "It was Dagna\u0027s guards who shot first on the bridge, at goblin children foraging on the bank. Dagna doesn\u0027t know; you do."
+    }
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:00:58.8000416\u002B00:00",

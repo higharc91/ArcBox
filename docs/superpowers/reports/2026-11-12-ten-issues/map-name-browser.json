@@ -1,0 +1,30 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "reducedMotion": true,
+    "mapDialogs": 1,
+    "secretDialogsAfterMapClose": 1,
+    "dialogsAfterAcknowledgement": 0,
+    "focusStayedInActiveDialog": true,
+    "graphemes16Accepted": true,
+    "graphemes17Rejected": true,
+    "overflow": false,
+    "production": true,
+    "fixtureApiAndComponentHarness": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "reducedMotion": true,
+    "mapDialogs": 1,
+    "secretDialogsAfterMapClose": 1,
+    "dialogsAfterAcknowledgement": 0,
+    "focusStayedInActiveDialog": true,
+    "graphemes16Accepted": true,
+    "graphemes17Rejected": true,
+    "overflow": false,
+    "production": true,
+    "fixtureApiAndComponentHarness": true
+  }
+]

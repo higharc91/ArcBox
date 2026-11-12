@@ -102,5 +102,5 @@
     "monsters/bestiary.json",
     "abilities/bestiary.json",
     "abilities/equipment.json"
-  ]
+  , "abilities/build-choices.json", "abilities/feats.json"]
 }

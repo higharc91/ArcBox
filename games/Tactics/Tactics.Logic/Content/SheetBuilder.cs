@@ -17,7 +17,10 @@ public sealed record CharacterRecord(string Name, string Race, string Class, str
     ImmutableArray<ItemStack> Bag,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionName = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? EquipmentClaimed = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? EquipmentClaimed = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> Feats = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] ImmutableArray<string> ClassSkills = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? DragonAncestry = null);
 
 /// <summary>
 /// Builds the <see cref="UnitSheet"/>s a battle starts from: a character from its <see cref="CharacterRecord"/> (spec §3.1)
@@ -103,6 +106,7 @@ public static class SheetBuilder
         var picks = c.Picks.IsDefaultOrEmpty ? (cls is not null && levelOk ? DefaultPicks(cls, c.Level) : []) : c.Picks;
         if (cls is not null && levelOk)
             CheckPicks(picks, cls, subclass, c.Level, rules, problems);
+        BuildChoices.Validate(c, race, cls, background, rules, problems);
         problems.ThrowIfAny();
 
         return Build(c, race!, cls!, subclass, background!, weapon!, armor, [.. injuries], picks, rules);
@@ -123,7 +127,7 @@ public static class SheetBuilder
         var attacks = 1;
         int? rangedAttacks = null;
         if (race.Ability is { } racial)
-            abilities.Add(racial);
+            abilities.Add(c.Race == "dragonborn" && c.DragonAncestry is { } ancestry ? BuildChoices.Breath(ancestry) : racial);
         for (var level = 1; level <= c.Level; level++)
             foreach (var feature in Features(cls, level).Concat(subclass is null ? [] : Features(subclass, level)))
             {
@@ -142,6 +146,7 @@ public static class SheetBuilder
             else
                 passives.Add(pick.Value);
 
+        if (!c.Feats.IsDefaultOrEmpty) passives.AddRange(c.Feats);
         if (weapon.Tags.Contains("plus_one")) passives.Add("equipment.weapon_plus_one");
         var trinket = c.Trinket is { } worn && rules.Trinkets.TryGetValue(worn, out var known) && known.ActiveFor(c) ? known : null;
         var maxHp = MaxHp(cls.HitDie, c.Level, Stats.Mod(finalScores[Stat.Con]))
@@ -153,7 +158,9 @@ public static class SheetBuilder
         if (trinket is not null) passives.Add(RulesPack.TrinketPassiveId(trinket.Id));
 
         var skills = new List<string>(background.Skills);
-        skills.AddRange(cls.SkillChoices.From.Where(s => !skills.Contains(s)).Take(cls.SkillChoices.Count + race.ExtraSkills));
+        skills.AddRange(c.ClassSkills.IsDefault
+            ? cls.SkillChoices.From.Where(s => !skills.Contains(s)).Take(cls.SkillChoices.Count + race.ExtraSkills)
+            : c.ClassSkills);
 
         var unarmoredMod = cls.UnarmoredDefense is { } s ? Stats.Mod(finalScores[s]) : 0;
 
@@ -165,7 +172,7 @@ public static class SheetBuilder
             Resources: Ordinal.Map(cls.Resources.Select(r => (r.Key, r.Value.At(c.Level)))),
             Abilities: [.. abilities.Distinct()], Passives: [.. passives.Distinct()], Weapon: weapon,
             Attacks: weapon.Ranged ? rangedAttacks ?? attacks : attacks,
-            Resist: race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, RaceTag + race.Id, ClassTag + cls.Id),
+            Resist: c.Race == "dragonborn" && c.DragonAncestry is { } element ? race.Resist.Remove("fire").Add(element) : race.Resist, Immune: Ordinal.Set(), Vulnerable: Ordinal.Set(), Tags: Ordinal.Set("humanoid", race.Id, RaceTag + race.Id, ClassTag + cls.Id),
             Sprite: null, AiProfile: null, CastingStat: cls.CastingStat?.ToString(), PrimaryResource: cls.PrimaryResource,
             CompanionName: c.CompanionName, CompanionMonster: c.CompanionName is null ? null : subclass?.Companion);
     }

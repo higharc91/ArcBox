@@ -1,0 +1,33 @@
+diff --git a/games/Tactics/Tactics.Presentation/Board/DemoBattle.cs b/games/Tactics/Tactics.Presentation/Board/DemoBattle.cs
+index 518e391d..1804d1d1 100644
+--- a/games/Tactics/Tactics.Presentation/Board/DemoBattle.cs
++++ b/games/Tactics/Tactics.Presentation/Board/DemoBattle.cs
+@@ -281,6 +281,28 @@ public static class DemoBattle
+     /// <summary>The host view for a demo spec: a map id, with <c>:changed</c> or <c>:fight</c> or neither.</summary>
+     public static TacticsHostView View(string spec)
+     {
++        // Review-only fixture injection; retained as a report patch, not feature code.
++        if (spec == "named-companion")
++        {
++            var original = View("river_crossing:fight");
++            var reviewBattle = original.Battle!;
++            var hound = new UnitId("hound");
++            return original with { Banner = "Companion name review", Battle = reviewBattle with {
++                Active = hound, Reacting = null,
++                Units = [.. reviewBattle.Units.Select(u => u.Id == hound ? u with { Name = "Brindle Ashthorn", CompanionOwner = "Mara's hound" } : u)],
++                Beats = [new Beat(1, hound, [new TurnStarted(hound, 2)])]
++            }};
++        }
++        if (spec == "personal-credit")
++        {
++            var ask = new StoryAskView(false, 0, 4, [], false, "Jess", null,
++                [new StoryOptionView("truth", "Soldier · Kara\nYour guards shot first, Captain. At children.", null, null, [], "Soldier · Kara"),
++                 new StoryOptionView("why", "Ask what happened at the ford.", null, null, [])]);
++            var explore = new ExploreView("ashen_ford", "The Ashen Ford", 1, 0, new Tile(33,61), new Tile(34,61), false, [], [], "Jess", 1);
++            return new TacticsHostView("Story", "Jess leads the party", null, 1, [], null, null, null, null, null, explore,
++                new StoryView(1, "ch1_ford", "The Ford Choice", "Asking", null, ask, null, null, "review"));
++        }
++
+         var changed = spec.EndsWith(Changed, StringComparison.Ordinal);
+         var fight = spec.EndsWith(Fight, StringComparison.Ordinal);
+         var creatures = spec.EndsWith(Creatures, StringComparison.Ordinal);

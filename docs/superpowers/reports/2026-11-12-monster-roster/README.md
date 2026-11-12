@@ -6,4 +6,4 @@ Player transformations use `form_wolf`, `form_bear`, `form_dire_wolf`, and `form
 
 Challenge rating remains metadata, validated as an integer or supported fraction, with nonnegative monster XP. Encounter XP remains separately authored. Negative-loader tests enforce both metadata rules.
 
-Validation: 12 roster/legality/negative-loader tests, 14 base-pack tests, and 9 caster tests pass with no skips; build has zero warnings. Paired before/after simulations are running against a frozen rules snapshot and will be attached before any merge. Global full-check failures on main remain a merge blocker.
+Validation: 12 roster/legality/negative-loader tests, 14 base-pack tests, and 9 caster tests pass with no skips; build has zero warnings. Frozen paired simulations completed 1,200 fights before and 1,200 after, with identical aggregate win-rate rows for the default four-class party in six Ford/Hollow encounters at levels 1/2. See paired-summary.json and balance-before/after.md; this does not assert identical battle states or all-party balance. Global full-check failures on main remain a merge blocker.

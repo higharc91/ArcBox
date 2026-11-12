@@ -9,15 +9,15 @@
   "unarmoredDefense": "con",
   "features": {
     "1": [ { "ability": "barbarian.rage" }, { "ability": "barbarian.cleaving_blow" } ],
-    "2": [ { "ability": "barbarian.reckless_attack" }, { "passive": "barbarian.danger_sense" } ],
+    "2": [ { "ability": "barbarian.reckless_attack" }, { "passive": "barbarian.danger_sense" } , {"choose": 1, "from": ["barbarian.technique_endurance", "barbarian.technique_hunter"]}],
     "3": [ { "ability": "barbarian.savage_roar" } ],
     "4": [ { "ability": "barbarian.crushing_leap" } ],
     "5": [ { "attacks": 2 }, { "passive": "barbarian.fast_movement" } ],
-    "6": [ { "ability": "barbarian.whirlwind_slash" } ],
+    "6": [ { "ability": "barbarian.whirlwind_slash" } , {"choose": 1, "from": ["barbarian.technique_thunder", "barbarian.technique_iron"]}],
     "7": [ { "passive": "barbarian.feral_instinct" } ],
     "8": [ { "ability": "barbarian.earthshaker" } ],
     "9": [ { "ability": "barbarian.brutal_strike" }, { "ability": "barbarian.relentless_rage" } ],
-    "10": [ { "passive": "barbarian.indomitable_might" } ]
+    "10": [ { "passive": "barbarian.indomitable_might" } , {"choose": 1, "from": ["barbarian.technique_resolve", "barbarian.technique_titan"]}]
   },
   "subclasses": [
     { "id": "barbarian.berserker", "name": "Path of the Berserker",
@@ -40,7 +40,7 @@
       } }
   ],
   "defaultPicks": {
-    "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": []
+    "1": [], "2": ["barbarian.technique_endurance"], "3": ["barbarian.technique_endurance"], "4": ["barbarian.technique_endurance"], "5": ["barbarian.technique_endurance"], "6": ["barbarian.technique_endurance", "barbarian.technique_thunder"], "7": ["barbarian.technique_endurance", "barbarian.technique_thunder"], "8": ["barbarian.technique_endurance", "barbarian.technique_thunder"], "9": ["barbarian.technique_endurance", "barbarian.technique_thunder"], "10": ["barbarian.technique_endurance", "barbarian.technique_thunder", "barbarian.technique_resolve"]
   },
   "aiTags": { "tags": ["defender", "melee", "front"], "priority": ["str", "con", "dex", "wis", "cha", "int"] },
   "castingStat": null,
