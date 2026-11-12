@@ -15,7 +15,8 @@ public sealed record UnitView(UnitId Id, string Name, string Side, string? Sprit
     string Life, int Countdown, ImmutableArray<string> Conditions, string? Player,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Color = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? BaseAc = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Role = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Role = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionOwner = null);
 
 /// <summary>
 /// An ability on the phone's turn screen. <see cref="Targets"/> are the targets that affect someone (with their
@@ -368,7 +369,8 @@ public sealed record StoryMarker(string Beat, Tile At, string? Sprite, string? E
 /// <param name="Mood">The portrait's mood.</param>
 /// <param name="Text">What's said.</param>
 /// <param name="Role">The speaker's role in the lore (<c>ally</c>, <c>npc</c>, <c>rival</c>, <c>villain</c>), for the portrait's backdrop; null for the narrator.</param>
-public sealed record StoryLineView(string Id, string Speaker, string? Name, string? Portrait, string Mood, string Text, string? Role = null);
+public sealed record StoryLineView(string Id, string Speaker, string? Name, string? Portrait, string Mood, string Text, string? Role = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionOwner = null);
 
 /// <summary>What a scene is doing, for the TV (overworld 5d §9). <see cref="Seq"/> is the line's: a new one is a line to say.</summary>
 /// <param name="Seq">The number of the line's showing; it only goes up, across a restart too.</param>
@@ -826,7 +828,7 @@ public sealed partial class TacticsGame
             ? _players.FirstOrDefault(p => p.Profile == owner)?.Name
             : null;
         return new UnitView(u.Id, u.Sheet.Name, u.Sheet.Side.ToString(), u.Sheet.Sprite, u.Pos, u.Hp, u.Sheet.MaxHp, u.TempHp,
-            u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], player);
+            u.Life.ToString(), u.Countdown, [.. u.Conditions.Select(c => c.Id.Value)], player, CompanionOwner: u.Sheet.CompanionOwner);
     }
 
     private string Banner()

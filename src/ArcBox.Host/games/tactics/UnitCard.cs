@@ -46,7 +46,7 @@ public sealed partial class UnitCard : PanelContainer
         var tone = unit.Side == "Enemy" ? UnitTone.Enemy : unit.Side == "Party" ? UnitTone.Party : UnitTone.Neutral;
         _face.Show(_art.Hud.Portrait(unit.Sprite, tone));
         _name.Text = unit.Name;
-        _role.Text = unit.Side + (unit.Role is { } role ? " · " + role : "") + (unit.BaseAc is { } ac ? $" · Base AC {ac}" : "");
+        _role.Text = (unit.CompanionOwner is { } owner ? owner + " · " : "") + unit.Side + (unit.Role is { } role ? " · " + role : "") + (unit.BaseAc is { } ac ? $" · Base AC {ac}" : "");
         _health.Text = $"HP {unit.Hp}/{unit.MaxHp}" + (unit.TempHp > 0 ? $" +{unit.TempHp} temporary" : "");
         var conditions = unit.Conditions.Select(global::Tactics.Presentation.Words.Title).ToList();
         if (unit.Life != "Up") conditions.Insert(0, unit.Life);

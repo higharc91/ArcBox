@@ -1,0 +1,4696 @@
+{
+  "level": 3,
+  "completed": [],
+  "party": [
+    {
+      "name": "Player1",
+      "character": "Human Ranger",
+      "xp": 2000,
+      "you": true,
+      "color": "#ffd23f"
+    },
+    {
+      "name": "Player2",
+      "character": "Human Fighter",
+      "xp": 2000,
+      "you": false,
+      "color": "#7ccbff"
+    },
+    {
+      "name": "Player3",
+      "character": "Human Fighter",
+      "xp": 2000,
+      "you": false,
+      "color": "#ffab94"
+    },
+    {
+      "name": "Player4",
+      "character": "Human Fighter",
+      "xp": 2000,
+      "you": false,
+      "color": "#8ff0c4"
+    }
+  ],
+  "me": {
+    "name": "Player1",
+    "describe": "Human Ranger",
+    "race": "human",
+    "class": "ranger",
+    "subclass": null,
+    "background": "urchin",
+    "level": 3,
+    "xp": 2000,
+    "scores": {
+      "str": 12,
+      "dex": 17,
+      "con": 13,
+      "int": 10,
+      "wis": 15,
+      "cha": 8
+    },
+    "picks": [
+      "ranger.hail_of_thorns",
+      "ranger.ensnaring_strike",
+      "ranger.entangle"
+    ],
+    "freeRemake": true,
+    "injuries": [],
+    "increasesLeft": 0,
+    "subclasses": [
+      {
+        "id": "ranger.sharpshooter",
+        "name": "Sharpshooter"
+      },
+      {
+        "id": "ranger.beastmaster",
+        "name": "Beastmaster"
+      },
+      {
+        "id": "ranger.warden",
+        "name": "Warden"
+      }
+    ],
+    "choices": [
+      {
+        "level": 1,
+        "choose": 2,
+        "from": [
+          {
+            "id": "ranger.cure_wounds",
+            "name": "Cure Wounds",
+            "tooltip": "1 tile: heals 2d8 \u002B casting modifier"
+          },
+          {
+            "id": "ranger.ensnaring_strike",
+            "name": "Ensnaring Strike",
+            "tooltip": "Weapon attack, 8 tiles: weapon damage; Str save (target is Ensnared until saved) \u2014 On a hit, thorny vines bind the target: a STR save or restrained, taking 1d6 piercing each turn until it breaks free."
+          },
+          {
+            "id": "ranger.entangle",
+            "name": "Entangle",
+            "tooltip": "6 tiles, burst 1: creates a entangle zone (burst 1) for 10 rounds, difficult terrain, ends if you lose concentration; Str save (target is Restrained until saved)"
+          },
+          {
+            "id": "ranger.hail_of_thorns",
+            "name": "Hail of Thorns",
+            "tooltip": "Weapon attack, 8 tiles: weapon damage; Dex save (1d6 piercing; half damage on a save); chains to up to 2 more targets within 1 tile \u2014 On a hit, your arrow bursts into thorns: up to two foes make a DEX save against thorns: 1d4 piercing, 1d6 from level 3."
+          }
+        ],
+        "picked": [
+          "ranger.ensnaring_strike",
+          "ranger.entangle"
+        ]
+      },
+      {
+        "level": 3,
+        "choose": 1,
+        "from": [
+          {
+            "id": "ranger.cure_wounds",
+            "name": "Cure Wounds",
+            "tooltip": "1 tile: heals 2d8 \u002B casting modifier"
+          },
+          {
+            "id": "ranger.ensnaring_strike",
+            "name": "Ensnaring Strike",
+            "tooltip": "Weapon attack, 8 tiles: weapon damage; Str save (target is Ensnared until saved) \u2014 On a hit, thorny vines bind the target: a STR save or restrained, taking 1d6 piercing each turn until it breaks free."
+          },
+          {
+            "id": "ranger.entangle",
+            "name": "Entangle",
+            "tooltip": "6 tiles, burst 1: creates a entangle zone (burst 1) for 10 rounds, difficult terrain, ends if you lose concentration; Str save (target is Restrained until saved)"
+          },
+          {
+            "id": "ranger.hail_of_thorns",
+            "name": "Hail of Thorns",
+            "tooltip": "Weapon attack, 8 tiles: weapon damage; Dex save (1d6 piercing; half damage on a save); chains to up to 2 more targets within 1 tile \u2014 On a hit, your arrow bursts into thorns: up to two foes make a DEX save against thorns: 1d4 piercing, 1d6 from level 3."
+          }
+        ],
+        "picked": [
+          "ranger.hail_of_thorns"
+        ]
+      }
+    ],
+    "color": "#ffd23f",
+    "skills": [
+      "animal_handling",
+      "athletics",
+      "perception",
+      "sleight_of_hand",
+      "stealth",
+      "survival"
+    ],
+    "saves": [
+      "str",
+      "dex"
+    ],
+    "bonuses": {
+      "acrobatics": 3,
+      "animal_handling": 4,
+      "arcana": 0,
+      "athletics": 3,
+      "deception": -1,
+      "history": 0,
+      "insight": 2,
+      "intimidation": -1,
+      "investigation": 0,
+      "medicine": 2,
+      "nature": 0,
+      "perception": 4,
+      "performance": -1,
+      "persuasion": -1,
+      "religion": 0,
+      "sleight_of_hand": 5,
+      "stealth": 5,
+      "survival": 4
+    }
+  },
+  "options": {
+    "races": [
+      {
+        "id": "aasimar",
+        "name": "Aasimar"
+      },
+      {
+        "id": "dragonborn",
+        "name": "Dragonborn"
+      },
+      {
+        "id": "dwarf",
+        "name": "Dwarf"
+      },
+      {
+        "id": "elf",
+        "name": "Elf"
+      },
+      {
+        "id": "gnome",
+        "name": "Gnome"
+      },
+      {
+        "id": "goliath",
+        "name": "Goliath"
+      },
+      {
+        "id": "half_elf",
+        "name": "Half-Elf"
+      },
+      {
+        "id": "half_orc",
+        "name": "Half-Orc"
+      },
+      {
+        "id": "halfling",
+        "name": "Halfling"
+      },
+      {
+        "id": "human",
+        "name": "Human"
+      },
+      {
+        "id": "tiefling",
+        "name": "Tiefling"
+      }
+    ],
+    "classes": [
+      {
+        "id": "barbarian",
+        "name": "Barbarian",
+        "role": "defender"
+      },
+      {
+        "id": "bard",
+        "name": "Bard",
+        "role": "healer"
+      },
+      {
+        "id": "cleric",
+        "name": "Cleric",
+        "role": "healer"
+      },
+      {
+        "id": "druid",
+        "name": "Druid",
+        "role": "control"
+      },
+      {
+        "id": "fighter",
+        "name": "Fighter",
+        "role": "defender"
+      },
+      {
+        "id": "monk",
+        "name": "Monk",
+        "role": "striker"
+      },
+      {
+        "id": "paladin",
+        "name": "Paladin",
+        "role": "defender"
+      },
+      {
+        "id": "ranger",
+        "name": "Ranger",
+        "role": "striker"
+      },
+      {
+        "id": "rogue",
+        "name": "Rogue",
+        "role": "striker"
+      },
+      {
+        "id": "sorcerer",
+        "name": "Sorcerer",
+        "role": "striker"
+      },
+      {
+        "id": "warlock",
+        "name": "Warlock",
+        "role": "striker"
+      },
+      {
+        "id": "wizard",
+        "name": "Wizard",
+        "role": "control"
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "acolyte",
+        "name": "Acolyte",
+        "boosts": {
+          "wis": 2,
+          "cha": 1
+        }
+      },
+      {
+        "id": "criminal",
+        "name": "Criminal",
+        "boosts": {
+          "dex": 2,
+          "con": 1
+        }
+      },
+      {
+        "id": "entertainer",
+        "name": "Entertainer",
+        "boosts": {
+          "dex": 1,
+          "cha": 2
+        }
+      },
+      {
+        "id": "folk_hero",
+        "name": "Folk Hero",
+        "boosts": {
+          "str": 2,
+          "wis": 1
+        }
+      },
+      {
+        "id": "guild_artisan",
+        "name": "Guild Artisan",
+        "boosts": {
+          "dex": 1,
+          "int": 2
+        }
+      },
+      {
+        "id": "hermit",
+        "name": "Hermit",
+        "boosts": {
+          "con": 1,
+          "wis": 2
+        }
+      },
+      {
+        "id": "noble",
+        "name": "Noble",
+        "boosts": {
+          "int": 1,
+          "cha": 2
+        }
+      },
+      {
+        "id": "outlander",
+        "name": "Outlander",
+        "boosts": {
+          "str": 1,
+          "con": 2
+        }
+      },
+      {
+        "id": "sage",
+        "name": "Sage",
+        "boosts": {
+          "con": 1,
+          "int": 2
+        }
+      },
+      {
+        "id": "sailor",
+        "name": "Sailor",
+        "boosts": {
+          "str": 2,
+          "dex": 1
+        }
+      },
+      {
+        "id": "soldier",
+        "name": "Soldier",
+        "boosts": {
+          "str": 2,
+          "con": 1
+        }
+      },
+      {
+        "id": "urchin",
+        "name": "Urchin",
+        "boosts": {
+          "dex": 2,
+          "wis": 1
+        }
+      }
+    ],
+    "pointBuy": 27,
+    "colors": {
+      "palette": [
+        {
+          "hex": "#ffd23f",
+          "name": "Gold"
+        },
+        {
+          "hex": "#7ccbff",
+          "name": "Sky"
+        },
+        {
+          "hex": "#ffab94",
+          "name": "Coral"
+        },
+        {
+          "hex": "#8ff0c4",
+          "name": "Mint"
+        },
+        {
+          "hex": "#d2b4ff",
+          "name": "Lilac"
+        },
+        {
+          "hex": "#f4f1ea",
+          "name": "Bone"
+        },
+        {
+          "hex": "#ffa8dd",
+          "name": "Pink"
+        },
+        {
+          "hex": "#b9f26b",
+          "name": "Lime"
+        }
+      ],
+      "grounds": [
+        {
+          "name": "grass",
+          "hex": "#59983f"
+        },
+        {
+          "name": "stone",
+          "hex": "#817e8b"
+        },
+        {
+          "name": "ash",
+          "hex": "#6c6166"
+        },
+        {
+          "name": "panel",
+          "hex": "#1a1e3a"
+        }
+      ],
+      "minContrast": 1.8,
+      "current": "#ffd23f",
+      "taken": [
+        {
+          "hex": "#7ccbff",
+          "name": "Player2"
+        },
+        {
+          "hex": "#ffab94",
+          "name": "Player3"
+        },
+        {
+          "hex": "#8ff0c4",
+          "name": "Player4"
+        }
+      ]
+    }
+  },
+  "details": {
+    "level": 3,
+    "races": {
+      "aasimar": {
+        "name": "Aasimar",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Resistant to necrotic and radiant damage: takes half.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "aasimar.healing_hands"
+        ]
+      },
+      "dragonborn": {
+        "name": "Dragonborn",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Resistant to fire damage: takes half.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "dragonborn.breath_weapon"
+        ]
+      },
+      "dwarf": {
+        "name": "Dwarf",
+        "facts": [
+          "Speed: 3 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 12 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Resistant to poison damage: takes half.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "dwarf.stoneskin"
+        ]
+      },
+      "elf": {
+        "name": "Elf",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "elf.fey_step",
+          "elf.fey_ancestry"
+        ]
+      },
+      "gnome": {
+        "name": "Gnome",
+        "facts": [
+          "Speed: 3 tiles a turn.",
+          "Size: Small (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "gnome.cunning"
+        ]
+      },
+      "goliath": {
+        "name": "Goliath",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Senses: normal sight.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "goliath.stones_endurance"
+        ]
+      },
+      "half_elf": {
+        "name": "Half-Elf",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Skilled: 1 more skill from your class\u0027s list.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "elf.fey_ancestry"
+        ]
+      },
+      "half_orc": {
+        "name": "Half-Orc",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "half_orc.relentless_endurance"
+        ]
+      },
+      "halfling": {
+        "name": "Halfling",
+        "facts": [
+          "Speed: 3 tiles a turn.",
+          "Size: Small (not used in battles yet).",
+          "Senses: normal sight.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "halfling.lucky"
+        ]
+      },
+      "human": {
+        "name": "Human",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Senses: normal sight.",
+          "Skilled: 1 more skill from your class\u0027s list.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "human.resourceful"
+        ]
+      },
+      "tiefling": {
+        "name": "Tiefling",
+        "facts": [
+          "Speed: 4 tiles a turn.",
+          "Size: Medium (not used in battles yet).",
+          "Darkvision: 6 tiles. Battles have no darkness yet, so it doesn\u0027t change a fight.",
+          "Resistant to fire damage: takes half.",
+          "Ability boosts come from your background, not your race."
+        ],
+        "traits": [
+          "tiefling.hellish_rebuke"
+        ]
+      }
+    },
+    "classes": {
+      "barbarian": {
+        "name": "Barbarian",
+        "role": "Defender: stands in front and takes the hits.",
+        "facts": [
+          "Hit points: 12 \u002B your CON modifier at level 1, then 7 \u002B CON modifier each level (hit die d12).",
+          "Saving throws: Strength and Constitution.",
+          "Armour: light armour, medium armour and shields (not used in battles yet).",
+          "Weapons: simple weapons and martial weapons (not used in battles yet).",
+          "Skills: 2 skills from Athletics, Intimidation, Nature, Perception, Survival or Animal Handling, the first not already from your background.",
+          "Unarmoured defence: without armour, Armour Class adds your CON modifier.",
+          "Rage: 3 per battle at level 3, 5 by level 10.",
+          "Climbs 3 levels in one step (most climb 2).",
+          "Starts with: greataxe."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "barbarian.rage",
+              "barbarian.cleaving_blow"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 2,
+            "features": [
+              "barbarian.reckless_attack",
+              "barbarian.danger_sense"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 3,
+            "features": [
+              "barbarian.savage_roar"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 4,
+            "features": [
+              "barbarian.crushing_leap"
+            ],
+            "attacks": null,
+            "choices": []
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "barbarian.berserker",
+            "name": "Path of the Berserker",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "berserker.frenzy_strike",
+                  "berserker.mindless_rage"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "barbarian.earthshaker",
+            "name": "Earthshaker",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "earthshaker.quake_slam",
+                  "earthshaker.stone_hide"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "barbarian.spiritwarden",
+            "name": "Spiritwarden",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "spiritwarden.ancestral_ward",
+                  "spiritwarden.ancestral_protectors"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "bard": {
+        "name": "Bard",
+        "role": "Healer: keeps the party standing.",
+        "facts": [
+          "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
+          "Saving throws: Dexterity and Charisma.",
+          "Armour: light armour (not used in battles yet).",
+          "Weapons: simple weapons, hand crossbow, longsword, rapier and shortsword (not used in battles yet).",
+          "Skills: 3 skills from Performance, Persuasion, Deception, Acrobatics, Athletics, History, Insight, Intimidation, Investigation, Nature, Perception, Religion, Sleight of Hand or Stealth, the first not already from your background.",
+          "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Inspiration: 3 per battle at level 3, 6 by level 10.",
+          "Mana: 7 per battle at level 3, 12 by level 10.",
+          "Starts with: rapier, leather armour."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "bard.bardic_inspiration"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "bard.vicious_mockery",
+                  "bard.thunderclap",
+                  "bard.minor_illusion"
+                ]
+              },
+              {
+                "choose": 3,
+                "from": [
+                  "bard.healing_word",
+                  "bard.cure_wounds",
+                  "bard.dissonant_whispers",
+                  "bard.faerie_fire",
+                  "bard.heroism",
+                  "bard.thunderwave"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "bard.song_of_rest",
+              "bard.jack_of_all_trades"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "bard.healing_word",
+                  "bard.cure_wounds",
+                  "bard.dissonant_whispers",
+                  "bard.faerie_fire",
+                  "bard.heroism",
+                  "bard.thunderwave"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "bard.healing_word",
+                  "bard.cure_wounds",
+                  "bard.dissonant_whispers",
+                  "bard.faerie_fire",
+                  "bard.heroism",
+                  "bard.thunderwave",
+                  "bard.shatter",
+                  "bard.hold_person",
+                  "bard.lesser_restoration",
+                  "bard.silence"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "bard.healing_word",
+                  "bard.cure_wounds",
+                  "bard.dissonant_whispers",
+                  "bard.faerie_fire",
+                  "bard.heroism",
+                  "bard.thunderwave",
+                  "bard.shatter",
+                  "bard.hold_person",
+                  "bard.lesser_restoration",
+                  "bard.silence"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "bard.valor",
+            "name": "College of Valor",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "valor.combat_inspiration",
+                  "valor.battle_readiness"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "bard.lore",
+            "name": "College of Lore",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "lore.cutting_words",
+                  "lore.arcane_scholar"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "bard.siren",
+            "name": "College of the Siren",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "siren.alluring_verse"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "cleric": {
+        "name": "Cleric",
+        "role": "Healer: keeps the party standing.",
+        "facts": [
+          "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
+          "Saving throws: Wisdom and Charisma.",
+          "Armour: light armour, medium armour and shields (not used in battles yet).",
+          "Weapons: simple weapons (not used in battles yet).",
+          "Skills: 2 skills from Medicine, Religion, Insight, History or Persuasion, the first not already from your background.",
+          "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Devotion: 5 per battle at level 3, 16 by level 10.",
+          "Starts with: mace, chain shirt, a shield."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 3,
+                "from": [
+                  "cleric.sacred_flame",
+                  "cleric.toll_the_dead",
+                  "cleric.word_of_radiance",
+                  "cleric.resistance"
+                ]
+              },
+              {
+                "choose": 4,
+                "from": [
+                  "cleric.bless",
+                  "cleric.bane",
+                  "cleric.cure_wounds",
+                  "cleric.guiding_bolt",
+                  "cleric.healing_word",
+                  "cleric.inflict_wounds",
+                  "cleric.shield_of_faith",
+                  "cleric.command"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "cleric.divine_spark",
+              "cleric.turn_undead"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "cleric.bless",
+                  "cleric.bane",
+                  "cleric.cure_wounds",
+                  "cleric.guiding_bolt",
+                  "cleric.healing_word",
+                  "cleric.inflict_wounds",
+                  "cleric.shield_of_faith",
+                  "cleric.command"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "cleric.bless",
+                  "cleric.bane",
+                  "cleric.cure_wounds",
+                  "cleric.guiding_bolt",
+                  "cleric.healing_word",
+                  "cleric.inflict_wounds",
+                  "cleric.shield_of_faith",
+                  "cleric.command",
+                  "cleric.aid",
+                  "cleric.hold_person",
+                  "cleric.lesser_restoration",
+                  "cleric.spiritual_weapon",
+                  "cleric.blindness"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "cleric.sacred_flame",
+                  "cleric.toll_the_dead",
+                  "cleric.word_of_radiance",
+                  "cleric.resistance"
+                ]
+              },
+              {
+                "choose": 1,
+                "from": [
+                  "cleric.bless",
+                  "cleric.bane",
+                  "cleric.cure_wounds",
+                  "cleric.guiding_bolt",
+                  "cleric.healing_word",
+                  "cleric.inflict_wounds",
+                  "cleric.shield_of_faith",
+                  "cleric.command",
+                  "cleric.aid",
+                  "cleric.hold_person",
+                  "cleric.lesser_restoration",
+                  "cleric.spiritual_weapon",
+                  "cleric.blindness"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "cleric.life",
+            "name": "Life Domain",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "life.preserve_life"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "cleric.war",
+            "name": "War Domain",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "war.guided_strike",
+                  "war.war_priest"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "cleric.light",
+            "name": "Light Domain",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "light.radiance_of_the_dawn"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "druid": {
+        "name": "Druid",
+        "role": "Control: shapes the fight with areas and conditions.",
+        "facts": [
+          "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
+          "Saving throws: Intelligence and Wisdom.",
+          "Armour: light armour, medium armour and shields (not used in battles yet).",
+          "Weapons: simple weapons and scimitar (not used in battles yet).",
+          "Skills: 2 skills from Nature, Survival, Perception, Animal Handling, Arcana, Insight, Medicine or Religion, the first not already from your background.",
+          "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Mana: 5 per battle at level 3, 11 by level 10.",
+          "Wild: 2 per battle at level 3, 3 by level 10.",
+          "Starts with: quarterstaff, leather armour, a shield."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "druid.thorn_whip",
+                  "druid.produce_flame",
+                  "druid.shillelagh"
+                ]
+              },
+              {
+                "choose": 3,
+                "from": [
+                  "druid.entangle",
+                  "druid.faerie_fire",
+                  "druid.thunderwave",
+                  "druid.cure_wounds",
+                  "druid.healing_word",
+                  "druid.fog_cloud"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "druid.wild_shape_wolf"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "druid.entangle",
+                  "druid.faerie_fire",
+                  "druid.thunderwave",
+                  "druid.cure_wounds",
+                  "druid.healing_word",
+                  "druid.fog_cloud"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "druid.entangle",
+                  "druid.faerie_fire",
+                  "druid.thunderwave",
+                  "druid.cure_wounds",
+                  "druid.healing_word",
+                  "druid.fog_cloud",
+                  "druid.hold_person",
+                  "druid.spike_growth",
+                  "druid.barkskin",
+                  "druid.moonbeam",
+                  "druid.lesser_restoration"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [
+              "druid.wild_shape_bear"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "druid.entangle",
+                  "druid.faerie_fire",
+                  "druid.thunderwave",
+                  "druid.cure_wounds",
+                  "druid.healing_word",
+                  "druid.fog_cloud",
+                  "druid.hold_person",
+                  "druid.spike_growth",
+                  "druid.barkskin",
+                  "druid.moonbeam",
+                  "druid.lesser_restoration"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "druid.shapeshifter",
+            "name": "Circle of the Shapeshifter",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "shapeshifter.dire_form",
+                  "shapeshifter.primal_strike"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "druid.stormcaller",
+            "name": "Circle of the Stormcaller",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "stormcaller.gale_burst"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "druid.grovekeeper",
+            "name": "Circle of the Grovekeeper",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "grovekeeper.companion",
+                  "grovekeeper.bloom"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "fighter": {
+        "name": "Fighter",
+        "role": "Defender: stands in front and takes the hits.",
+        "facts": [
+          "Hit points: 10 \u002B your CON modifier at level 1, then 6 \u002B CON modifier each level (hit die d10).",
+          "Saving throws: Strength and Constitution.",
+          "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+          "Weapons: simple weapons and martial weapons (not used in battles yet).",
+          "Skills: 2 skills from Athletics, Perception, Intimidation, Acrobatics, Animal Handling, History, Insight, Persuasion or Survival, the first not already from your background.",
+          "Second wind: 1 per battle at level 3, 1 by level 10.",
+          "Superiority: 2 per battle at level 3, 5 by level 10.",
+          "Starts with: longsword, chain mail, a shield."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "fighter.second_wind"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "fighter.style_defense",
+                  "fighter.style_dueling",
+                  "fighter.style_great_weapon"
+                ]
+              },
+              {
+                "choose": 2,
+                "from": [
+                  "fighter.trip_attack",
+                  "fighter.pushing_attack",
+                  "fighter.menacing_attack",
+                  "fighter.precision_attack",
+                  "fighter.goading_attack",
+                  "fighter.rally",
+                  "fighter.feinting_attack"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "fighter.action_surge"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "fighter.trip_attack",
+                  "fighter.pushing_attack",
+                  "fighter.menacing_attack",
+                  "fighter.precision_attack",
+                  "fighter.goading_attack",
+                  "fighter.rally",
+                  "fighter.feinting_attack"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "fighter.trip_attack",
+                  "fighter.pushing_attack",
+                  "fighter.menacing_attack",
+                  "fighter.precision_attack",
+                  "fighter.goading_attack",
+                  "fighter.rally",
+                  "fighter.feinting_attack"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "fighter.vanguard",
+            "name": "Vanguard",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "vanguard.charge",
+                  "vanguard.challenge"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "fighter.weaponmaster",
+            "name": "Weaponmaster",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "weaponmaster.cleave",
+                  "weaponmaster.keen_edge"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "fighter.warlord",
+            "name": "Warlord",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "warlord.commanders_strike",
+                  "warlord.maneuvering_order"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "monk": {
+        "name": "Monk",
+        "role": "Striker: deals the most damage to one foe.",
+        "facts": [
+          "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
+          "Saving throws: Strength and Dexterity.",
+          "Armour: none (not used in battles yet).",
+          "Weapons: simple weapons and light martial weapons (not used in battles yet).",
+          "Skills: 2 skills from Acrobatics, Stealth, Athletics, History, Insight or Religion, the first not already from your background.",
+          "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Unarmoured defence: without armour, Armour Class adds your WIS modifier.",
+          "Ki: 3 per battle at level 3, 10 by level 10.",
+          "Climbs 3 levels in one step (most climb 2).",
+          "Starts with: spear."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "monk.unarmed_strike",
+              "monk.martial_arts",
+              "monk.unarmored_movement"
+            ],
+            "attacks": 2,
+            "choices": []
+          },
+          {
+            "level": 2,
+            "features": [
+              "monk.flurry_of_blows",
+              "monk.step_of_the_wind"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 3,
+            "features": [
+              "monk.deflect_attacks"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 4,
+            "features": [
+              "monk.patient_defense"
+            ],
+            "attacks": null,
+            "choices": []
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "monk.open_hand",
+            "name": "Way of the Open Hand",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "open_hand.palm_strike",
+                  "open_hand.sweeping_kick"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "monk.windstep",
+            "name": "Way of the Windstep",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "windstep.gale_leap",
+                  "windstep.fleet_of_foot"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "monk.iron_body",
+            "name": "Way of Iron Body",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "iron_body.iron_skin",
+                  "iron_body.mountain_stance"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "paladin": {
+        "name": "Paladin",
+        "role": "Defender: stands in front and takes the hits.",
+        "facts": [
+          "Hit points: 10 \u002B your CON modifier at level 1, then 6 \u002B CON modifier each level (hit die d10).",
+          "Saving throws: Wisdom and Charisma.",
+          "Armour: light armour, medium armour, heavy armour and shields (not used in battles yet).",
+          "Weapons: simple weapons and martial weapons (not used in battles yet).",
+          "Skills: 2 skills from Athletics, Religion, Insight, Intimidation, Medicine or Persuasion, the first not already from your background.",
+          "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Lay on hands: 3 per battle at level 3, 10 by level 10.",
+          "Oath: 3 per battle at level 3, 8 by level 10.",
+          "Starts with: longsword, chain mail, a shield."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "paladin.lay_on_hands"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "paladin.bless",
+                  "paladin.command",
+                  "paladin.compelled_duel",
+                  "paladin.cure_wounds",
+                  "paladin.shield_of_faith"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "paladin.divine_smite",
+              "paladin.smite_damage"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "fighter.style_defense",
+                  "fighter.style_dueling",
+                  "fighter.style_great_weapon"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "paladin.bless",
+                  "paladin.command",
+                  "paladin.compelled_duel",
+                  "paladin.cure_wounds",
+                  "paladin.shield_of_faith"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "paladin.bless",
+                  "paladin.command",
+                  "paladin.compelled_duel",
+                  "paladin.cure_wounds",
+                  "paladin.shield_of_faith"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "paladin.guardian",
+            "name": "Guardian",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "guardian.sanctuary_aegis",
+                  "guardian.righteous_challenge"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "paladin.crusader",
+            "name": "Crusader",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "crusader.searing_smite",
+                  "crusader.radiant_blades"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "paladin.avenger",
+            "name": "Avenger",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "avenger.vow_of_enmity",
+                  "avenger.abjure_enemy"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "ranger": {
+        "name": "Ranger",
+        "role": "Striker: deals the most damage to one foe.",
+        "facts": [
+          "Hit points: 10 \u002B your CON modifier at level 1, then 6 \u002B CON modifier each level (hit die d10).",
+          "Saving throws: Strength and Dexterity.",
+          "Armour: light armour, medium armour and shields (not used in battles yet).",
+          "Weapons: simple weapons and martial weapons (not used in battles yet).",
+          "Skills: 3 skills from Perception, Stealth, Survival, Animal Handling, Athletics, Insight, Investigation or Nature, the first not already from your background.",
+          "Spellcasting: Wisdom. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Focus: 2 per battle at level 3, 5 by level 10.",
+          "Starts with: longbow, studded leather."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "ranger.hunters_mark",
+              "ranger.hunters_mark_bonus"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "ranger.cure_wounds",
+                  "ranger.ensnaring_strike",
+                  "ranger.entangle",
+                  "ranger.hail_of_thorns"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "ranger.archery"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "ranger.cure_wounds",
+                  "ranger.ensnaring_strike",
+                  "ranger.entangle",
+                  "ranger.hail_of_thorns"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "ranger.cure_wounds",
+                  "ranger.ensnaring_strike",
+                  "ranger.entangle",
+                  "ranger.hail_of_thorns"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "ranger.sharpshooter",
+            "name": "Sharpshooter",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "sharpshooter.deadeye",
+                  "sharpshooter.high_ground_mastery"
+                ],
+                "attacks": null,
+                "choices": []
+              },
+              {
+                "level": 6,
+                "features": [
+                  "sharpshooter.piercing_shot"
+                ],
+                "attacks": null,
+                "choices": []
+              },
+              {
+                "level": 10,
+                "features": [
+                  "sharpshooter.volley"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "ranger.beastmaster",
+            "name": "Beastmaster",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "beastmaster.companion",
+                  "beastmaster.sic"
+                ],
+                "attacks": null,
+                "choices": []
+              },
+              {
+                "level": 6,
+                "features": [
+                  "beastmaster.pack_bond"
+                ],
+                "attacks": null,
+                "choices": []
+              },
+              {
+                "level": 10,
+                "features": [
+                  "beastmaster.alpha_howl",
+                  "beastmaster.ferocious_bond"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "ranger.warden",
+            "name": "Warden",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "warden.vine_snare",
+                  "warden.tough_bark"
+                ],
+                "attacks": null,
+                "choices": []
+              },
+              {
+                "level": 6,
+                "features": [
+                  "warden.natures_veil"
+                ],
+                "attacks": null,
+                "choices": []
+              },
+              {
+                "level": 10,
+                "features": [
+                  "warden.guardian_tree"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "rogue": {
+        "name": "Rogue",
+        "role": "Striker: deals the most damage to one foe.",
+        "facts": [
+          "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
+          "Saving throws: Dexterity and Intelligence.",
+          "Armour: light armour (not used in battles yet).",
+          "Weapons: simple weapons and martial weapons (not used in battles yet).",
+          "Skills: 4 skills from Stealth, Acrobatics, Perception, Sleight of Hand, Athletics, Deception, Insight, Intimidation, Investigation or Persuasion, the first not already from your background.",
+          "Edge: 3 per battle at level 3, 5 by level 10.",
+          "Climbs 3 levels in one step (most climb 2).",
+          "Starts with: rapier, leather armour."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "rogue.sneak_attack",
+              "rogue.vex",
+              "rogue.cunning_hide"
+            ],
+            "attacks": 2,
+            "choices": [],
+            "rangedAttacks": 1
+          },
+          {
+            "level": 2,
+            "features": [
+              "rogue.cunning_dash"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 3,
+            "features": [
+              "rogue.cunning_disengage"
+            ],
+            "attacks": null,
+            "choices": []
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "rogue.trip",
+                  "rogue.poison_strike",
+                  "rogue.withdraw"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "rogue.shadow",
+            "name": "Shadow",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "shadow.shadowstep"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "rogue.trickster",
+            "name": "Trickster",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "trickster.caltrops",
+                  "trickster.smoke_bomb"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "rogue.duelist",
+            "name": "Duelist",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "duelist.riposte",
+                  "duelist.fancy_footwork"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "sorcerer": {
+        "name": "Sorcerer",
+        "role": "Striker: deals the most damage to one foe.",
+        "facts": [
+          "Hit points: 6 \u002B your CON modifier at level 1, then 4 \u002B CON modifier each level (hit die d6).",
+          "Saving throws: Constitution and Charisma.",
+          "Armour: none (not used in battles yet).",
+          "Weapons: simple weapons (not used in battles yet).",
+          "Skills: 2 skills from Arcana, Deception, Insight, Intimidation, Persuasion or Religion, the first not already from your background.",
+          "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Mana: 6 per battle at level 3, 8 by level 10.",
+          "Sorcery: 2 per battle at level 3, 5 by level 10.",
+          "Starts with: quarterstaff."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "sorcerer.innate_sorcery"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 4,
+                "from": [
+                  "sorcerer.fire_bolt",
+                  "sorcerer.ray_of_frost",
+                  "sorcerer.shocking_grasp",
+                  "sorcerer.acid_splash",
+                  "sorcerer.chill_touch",
+                  "sorcerer.poison_spray"
+                ]
+              },
+              {
+                "choose": 2,
+                "from": [
+                  "sorcerer.chromatic_orb",
+                  "sorcerer.burning_hands",
+                  "sorcerer.magic_missile",
+                  "sorcerer.shield",
+                  "sorcerer.thunderwave",
+                  "sorcerer.sleep"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [
+              "sorcerer.font_of_magic_mana",
+              "sorcerer.font_of_magic_sorcery"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "sorcerer.metamagic_twinned",
+                  "sorcerer.metamagic_extended",
+                  "sorcerer.metamagic_careful",
+                  "sorcerer.metamagic_distant"
+                ]
+              },
+              {
+                "choose": 1,
+                "from": [
+                  "sorcerer.chromatic_orb",
+                  "sorcerer.burning_hands",
+                  "sorcerer.magic_missile",
+                  "sorcerer.shield",
+                  "sorcerer.thunderwave",
+                  "sorcerer.sleep"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "sorcerer.chromatic_orb",
+                  "sorcerer.burning_hands",
+                  "sorcerer.magic_missile",
+                  "sorcerer.shield",
+                  "sorcerer.thunderwave",
+                  "sorcerer.sleep",
+                  "sorcerer.scorching_ray",
+                  "sorcerer.shatter",
+                  "sorcerer.hold_person",
+                  "sorcerer.misty_step",
+                  "sorcerer.web"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "sorcerer.fire_bolt",
+                  "sorcerer.ray_of_frost",
+                  "sorcerer.shocking_grasp",
+                  "sorcerer.acid_splash",
+                  "sorcerer.chill_touch",
+                  "sorcerer.poison_spray"
+                ]
+              },
+              {
+                "choose": 1,
+                "from": [
+                  "sorcerer.chromatic_orb",
+                  "sorcerer.burning_hands",
+                  "sorcerer.magic_missile",
+                  "sorcerer.shield",
+                  "sorcerer.thunderwave",
+                  "sorcerer.sleep",
+                  "sorcerer.scorching_ray",
+                  "sorcerer.shatter",
+                  "sorcerer.hold_person",
+                  "sorcerer.misty_step",
+                  "sorcerer.web"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "sorcerer.draconic",
+            "name": "Draconic Bloodline",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "draconic.dragon_scales",
+                  "draconic.dragon_breath"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "sorcerer.chaos",
+            "name": "Wild Chaos",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "chaos.tides_of_chaos",
+                  "chaos.wild_surge"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "sorcerer.runeborn",
+            "name": "Runeborn",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "runeborn.ember_rune"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "warlock": {
+        "name": "Warlock",
+        "role": "Striker: deals the most damage to one foe.",
+        "facts": [
+          "Hit points: 8 \u002B your CON modifier at level 1, then 5 \u002B CON modifier each level (hit die d8).",
+          "Saving throws: Wisdom and Charisma.",
+          "Armour: light armour (not used in battles yet).",
+          "Weapons: simple weapons (not used in battles yet).",
+          "Skills: 2 skills from Arcana, Deception, Intimidation, History, Investigation, Nature or Religion, the first not already from your background.",
+          "Spellcasting: Charisma. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Pact: 2 per battle at level 3, 4 by level 10.",
+          "Starts with: quarterstaff, leather armour."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "warlock.pact_magic",
+              "warlock.eldritch_blast",
+              "warlock.hex",
+              "warlock.hex_damage"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "warlock.chill_touch",
+                  "warlock.poison_spray"
+                ]
+              },
+              {
+                "choose": 2,
+                "from": [
+                  "warlock.arms_of_hadar",
+                  "warlock.armor_of_agathys",
+                  "warlock.hellish_rebuke",
+                  "warlock.witch_bolt"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 2,
+                "from": [
+                  "warlock.agonizing_blast",
+                  "warlock.repelling_blast",
+                  "warlock.fiendish_vigor",
+                  "warlock.devils_sight"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "warlock.arms_of_hadar",
+                  "warlock.armor_of_agathys",
+                  "warlock.hellish_rebuke",
+                  "warlock.witch_bolt",
+                  "warlock.shatter",
+                  "warlock.misty_step",
+                  "warlock.hold_person",
+                  "warlock.darkness"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "warlock.arms_of_hadar",
+                  "warlock.armor_of_agathys",
+                  "warlock.hellish_rebuke",
+                  "warlock.witch_bolt",
+                  "warlock.shatter",
+                  "warlock.misty_step",
+                  "warlock.hold_person",
+                  "warlock.darkness"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "warlock.hexblade",
+            "name": "Hexblade",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "hexblade.hexblades_curse",
+                  "hexblade.hex_warrior"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "warlock.fiendbound",
+            "name": "Fiendbound",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "fiendbound.companion",
+                  "fiendbound.dark_ones_blessing"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "warlock.void",
+            "name": "Voidcaller",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "void.rift_step",
+                  "void.gravitational_pull"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      },
+      "wizard": {
+        "name": "Wizard",
+        "role": "Control: shapes the fight with areas and conditions.",
+        "facts": [
+          "Hit points: 6 \u002B your CON modifier at level 1, then 4 \u002B CON modifier each level (hit die d6).",
+          "Saving throws: Intelligence and Wisdom.",
+          "Armour: none (not used in battles yet).",
+          "Weapons: simple weapons (not used in battles yet).",
+          "Skills: 2 skills from Arcana, History, Investigation, Insight, Medicine or Religion, the first not already from your background.",
+          "Spellcasting: Intelligence. Spell attacks add its modifier, and your spells\u0027 save DC is 8 \u002B proficiency \u002B its modifier.",
+          "Mana: 8 per battle at level 3, 16 by level 10.",
+          "Starts with: quarterstaff."
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "features": [
+              "wizard.arcane_recovery"
+            ],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 3,
+                "from": [
+                  "wizard.fire_bolt",
+                  "wizard.ray_of_frost",
+                  "wizard.shocking_grasp",
+                  "wizard.acid_splash",
+                  "wizard.chill_touch",
+                  "wizard.poison_spray"
+                ]
+              },
+              {
+                "choose": 4,
+                "from": [
+                  "wizard.magic_missile",
+                  "wizard.burning_hands",
+                  "wizard.shield",
+                  "wizard.sleep",
+                  "wizard.thunderwave",
+                  "wizard.chromatic_orb",
+                  "wizard.mage_armor",
+                  "wizard.ray_of_sickness",
+                  "wizard.grease"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 2,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "wizard.magic_missile",
+                  "wizard.burning_hands",
+                  "wizard.shield",
+                  "wizard.sleep",
+                  "wizard.thunderwave",
+                  "wizard.chromatic_orb",
+                  "wizard.mage_armor",
+                  "wizard.ray_of_sickness",
+                  "wizard.grease"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 3,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "wizard.magic_missile",
+                  "wizard.burning_hands",
+                  "wizard.shield",
+                  "wizard.sleep",
+                  "wizard.thunderwave",
+                  "wizard.chromatic_orb",
+                  "wizard.mage_armor",
+                  "wizard.ray_of_sickness",
+                  "wizard.grease",
+                  "wizard.scorching_ray",
+                  "wizard.hold_person",
+                  "wizard.misty_step",
+                  "wizard.shatter",
+                  "wizard.web",
+                  "wizard.blur",
+                  "wizard.invisibility"
+                ]
+              }
+            ]
+          },
+          {
+            "level": 4,
+            "features": [],
+            "attacks": null,
+            "choices": [
+              {
+                "choose": 1,
+                "from": [
+                  "wizard.fire_bolt",
+                  "wizard.ray_of_frost",
+                  "wizard.shocking_grasp",
+                  "wizard.acid_splash",
+                  "wizard.chill_touch",
+                  "wizard.poison_spray"
+                ]
+              },
+              {
+                "choose": 1,
+                "from": [
+                  "wizard.magic_missile",
+                  "wizard.burning_hands",
+                  "wizard.shield",
+                  "wizard.sleep",
+                  "wizard.thunderwave",
+                  "wizard.chromatic_orb",
+                  "wizard.mage_armor",
+                  "wizard.ray_of_sickness",
+                  "wizard.grease",
+                  "wizard.scorching_ray",
+                  "wizard.hold_person",
+                  "wizard.misty_step",
+                  "wizard.shatter",
+                  "wizard.web",
+                  "wizard.blur",
+                  "wizard.invisibility"
+                ]
+              }
+            ]
+          }
+        ],
+        "subclasses": [
+          {
+            "id": "wizard.evoker",
+            "name": "Evoker",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "evoker.sculpted_nova"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "wizard.chronomancer",
+            "name": "Chronomancer",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "chronomancer.time_shift",
+                  "chronomancer.temporal_awareness"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          },
+          {
+            "id": "wizard.geomancer",
+            "name": "Geomancer",
+            "levels": [
+              {
+                "level": 3,
+                "features": [
+                  "geomancer.raise_earth",
+                  "geomancer.sink_earth"
+                ],
+                "attacks": null,
+                "choices": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "backgrounds": {
+      "acolyte": {
+        "name": "Acolyte",
+        "facts": [
+          "Ability boosts: WIS \u002B2 and CHA \u002B1.",
+          "Skills: Insight and Religion.",
+          "Keepsake: prayer beads (not used in battles yet)."
+        ],
+        "boosts": {
+          "wis": 2,
+          "cha": 1
+        },
+        "skills": [
+          "insight",
+          "religion"
+        ]
+      },
+      "criminal": {
+        "name": "Criminal",
+        "facts": [
+          "Ability boosts: DEX \u002B2 and CON \u002B1.",
+          "Skills: Sleight of Hand and Stealth.",
+          "Keepsake: crowbar (not used in battles yet)."
+        ],
+        "boosts": {
+          "dex": 2,
+          "con": 1
+        },
+        "skills": [
+          "sleight_of_hand",
+          "stealth"
+        ]
+      },
+      "entertainer": {
+        "name": "Entertainer",
+        "facts": [
+          "Ability boosts: DEX \u002B1 and CHA \u002B2.",
+          "Skills: Acrobatics and Performance.",
+          "Keepsake: wooden flute (not used in battles yet)."
+        ],
+        "boosts": {
+          "dex": 1,
+          "cha": 2
+        },
+        "skills": [
+          "acrobatics",
+          "performance"
+        ]
+      },
+      "folk_hero": {
+        "name": "Folk Hero",
+        "facts": [
+          "Ability boosts: STR \u002B2 and WIS \u002B1.",
+          "Skills: Animal Handling and Survival.",
+          "Keepsake: battered shovel (not used in battles yet)."
+        ],
+        "boosts": {
+          "str": 2,
+          "wis": 1
+        },
+        "skills": [
+          "animal_handling",
+          "survival"
+        ]
+      },
+      "guild_artisan": {
+        "name": "Guild Artisan",
+        "facts": [
+          "Ability boosts: DEX \u002B1 and INT \u002B2.",
+          "Skills: Insight and Persuasion.",
+          "Keepsake: artisan\u0027s tools (not used in battles yet)."
+        ],
+        "boosts": {
+          "dex": 1,
+          "int": 2
+        },
+        "skills": [
+          "insight",
+          "persuasion"
+        ]
+      },
+      "hermit": {
+        "name": "Hermit",
+        "facts": [
+          "Ability boosts: CON \u002B1 and WIS \u002B2.",
+          "Skills: Medicine and Religion.",
+          "Keepsake: herbalism kit (not used in battles yet)."
+        ],
+        "boosts": {
+          "con": 1,
+          "wis": 2
+        },
+        "skills": [
+          "medicine",
+          "religion"
+        ]
+      },
+      "noble": {
+        "name": "Noble",
+        "facts": [
+          "Ability boosts: INT \u002B1 and CHA \u002B2.",
+          "Skills: History and Persuasion.",
+          "Keepsake: signet ring (not used in battles yet)."
+        ],
+        "boosts": {
+          "int": 1,
+          "cha": 2
+        },
+        "skills": [
+          "history",
+          "persuasion"
+        ]
+      },
+      "outlander": {
+        "name": "Outlander",
+        "facts": [
+          "Ability boosts: STR \u002B1 and CON \u002B2.",
+          "Skills: Athletics and Survival.",
+          "Keepsake: hunting trap (not used in battles yet)."
+        ],
+        "boosts": {
+          "str": 1,
+          "con": 2
+        },
+        "skills": [
+          "athletics",
+          "survival"
+        ]
+      },
+      "sage": {
+        "name": "Sage",
+        "facts": [
+          "Ability boosts: CON \u002B1 and INT \u002B2.",
+          "Skills: Arcana and History.",
+          "Keepsake: bottle of ink (not used in battles yet)."
+        ],
+        "boosts": {
+          "con": 1,
+          "int": 2
+        },
+        "skills": [
+          "arcana",
+          "history"
+        ]
+      },
+      "sailor": {
+        "name": "Sailor",
+        "facts": [
+          "Ability boosts: STR \u002B2 and DEX \u002B1.",
+          "Skills: Athletics and Perception.",
+          "Keepsake: belaying pin (not used in battles yet)."
+        ],
+        "boosts": {
+          "str": 2,
+          "dex": 1
+        },
+        "skills": [
+          "athletics",
+          "perception"
+        ]
+      },
+      "soldier": {
+        "name": "Soldier",
+        "facts": [
+          "Ability boosts: STR \u002B2 and CON \u002B1.",
+          "Skills: Athletics and Intimidation.",
+          "Keepsake: bone dice (not used in battles yet)."
+        ],
+        "boosts": {
+          "str": 2,
+          "con": 1
+        },
+        "skills": [
+          "athletics",
+          "intimidation"
+        ]
+      },
+      "urchin": {
+        "name": "Urchin",
+        "facts": [
+          "Ability boosts: DEX \u002B2 and WIS \u002B1.",
+          "Skills: Sleight of Hand and Stealth.",
+          "Keepsake: city map (not used in battles yet)."
+        ],
+        "boosts": {
+          "dex": 2,
+          "wis": 1
+        },
+        "skills": [
+          "sleight_of_hand",
+          "stealth"
+        ]
+      }
+    },
+    "features": {
+      "aasimar.healing_hands": {
+        "name": "Healing Hands",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "1 tile: heals 2d4"
+      },
+      "avenger.abjure_enemy": {
+        "name": "Abjure Enemy",
+        "tags": [
+          "Action",
+          "1 oath"
+        ],
+        "text": "Wis save, 6 tiles: target is Frightened for 2 rounds; target is Slowed for 2 rounds; on a save, target is Slowed for 1 round"
+      },
+      "avenger.vow_of_enmity": {
+        "name": "Vow of Enmity",
+        "tags": [
+          "Bonus action",
+          "1 oath"
+        ],
+        "text": "4 tiles: marks target for 3 rounds (your attacks on it have advantage) \u2014 You swear a vow of enmity against one foe."
+      },
+      "barbarian.cleaving_blow": {
+        "name": "Cleaving Blow",
+        "tags": [
+          "Action"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage; pushes target 1 tile away"
+      },
+      "barbarian.crushing_leap": {
+        "name": "Crushing Leap",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "3 tiles: dashes up to 3 tiles toward the aimed tile; weapon attack (weapon damage \u002B 1d8; Str save (target is Prone))"
+      },
+      "barbarian.danger_sense": {
+        "name": "Danger sense",
+        "tags": [
+          "Always on"
+        ],
+        "text": "Advantage on Dex saves"
+      },
+      "barbarian.rage": {
+        "name": "Rage",
+        "tags": [
+          "Bonus action",
+          "1 rage"
+        ],
+        "text": "Self: you are Raging for 3 rounds; if the round is at least 1, target gains 1d6 \u002B CON modifier temporary HP \u2014 You enter a primal rage for 3 rounds: resistance to bludgeoning, piercing and slashing, \u002B2 weapon damage (\u002B3 from level 9) and advantage on STR saves."
+      },
+      "barbarian.reckless_attack": {
+        "name": "Reckless Attack",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Self: you are Reckless for 1 round \u2014 You throw aside all defence: advantage on your attacks this round, but attacks against you also have advantage."
+      },
+      "barbarian.savage_roar": {
+        "name": "Savage Roar",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "Wis save, self, burst 2: target is Frightened for 1 round; taunts target for 1 round"
+      },
+      "bard.bardic_inspiration": {
+        "name": "Bardic Inspiration",
+        "tags": [
+          "Bonus action",
+          "1 inspiration"
+        ],
+        "text": "6 tiles: target gains 1d6 \u002B CHA modifier temporary HP; target is Inspired for 1 round"
+      },
+      "bard.cure_wounds": {
+        "name": "Cure Wounds",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
+      },
+      "bard.dissonant_whispers": {
+        "name": "Dissonant Whispers",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Wis save, 6 tiles: 3d6 psychic; pushes target 2 tiles away; half damage on a save"
+      },
+      "bard.faerie_fire": {
+        "name": "Faerie Fire",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 2: reveals hidden enemies (burst 2); Dex save (target is Lit for 3 rounds)"
+      },
+      "bard.healing_word": {
+        "name": "Healing Word",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "6 tiles: heals 2d4 \u002B casting modifier"
+      },
+      "bard.heroism": {
+        "name": "Heroism",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "1 tile: target gains 1d6 \u002B casting modifier temporary HP; ends fear conditions on target"
+      },
+      "bard.hold_person": {
+        "name": "Hold Person",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+      },
+      "bard.jack_of_all_trades": {
+        "name": "Jack of all trades",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 Initiative"
+      },
+      "bard.lesser_restoration": {
+        "name": "Lesser Restoration",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 mana"
+        ],
+        "text": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
+      },
+      "bard.minor_illusion": {
+        "name": "Minor Illusion",
+        "tags": [
+          "Action"
+        ],
+        "text": "Int save, 5 tiles: target gets -2 to attack rolls for 1 round"
+      },
+      "bard.shatter": {
+        "name": "Shatter",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana"
+        ],
+        "text": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save"
+      },
+      "bard.silence": {
+        "name": "Silence",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 2: creates a silence zone (burst 2) for 3 rounds, ends if you lose concentration; units inside: At the start of your turn, on yourself: 2d6 thunder"
+      },
+      "bard.song_of_rest": {
+        "name": "Song of Rest",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "0 tiles, burst 3: heals 1d6 \u002B CHA modifier"
+      },
+      "bard.thunderclap": {
+        "name": "Thunderclap",
+        "tags": [
+          "Action"
+        ],
+        "text": "Con save, self, burst 1: 1d6 thunder"
+      },
+      "bard.thunderwave": {
+        "name": "Thunderwave",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save"
+      },
+      "bard.vicious_mockery": {
+        "name": "Vicious Mockery",
+        "tags": [
+          "Action"
+        ],
+        "text": "Wis save, 6 tiles: 1d4 psychic; target has disadvantage on its attack rolls for 1 round"
+      },
+      "beastmaster.alpha_howl": {
+        "name": "Alpha Howl",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "0 tiles, burst 3: target gains 2d8 \u002B level temporary HP; target gets \u002B1 Move and has advantage on its attack rolls for 2 rounds"
+      },
+      "beastmaster.companion": {
+        "name": "Companion",
+        "tags": [
+          "Always on"
+        ],
+        "text": "At the start of battle, on yourself: summons a hound for the battle"
+      },
+      "beastmaster.ferocious_bond": {
+        "name": "Ferocious bond",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if the target is Marked: 1d8 piercing (once per turn)"
+      },
+      "beastmaster.pack_bond": {
+        "name": "Pack Bond",
+        "tags": [
+          "Bonus action",
+          "1 focus"
+        ],
+        "text": "6 tiles: heals 1d8 \u002B casting modifier; target gets \u002B2 to attack rolls and \u002B2 weapon damage for 1 round"
+      },
+      "beastmaster.sic": {
+        "name": "Sic \u0027Em",
+        "tags": [
+          "Bonus action",
+          "1 focus"
+        ],
+        "text": "6 tiles: marks target for 2 rounds (your attacks on it have advantage); target is Lit for 1 round"
+      },
+      "berserker.frenzy_strike": {
+        "name": "Frenzy Strike",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Weapon attack, 1 tile: weapon damage \u002B 1d6"
+      },
+      "berserker.mindless_rage": {
+        "name": "Mindless rage",
+        "tags": [
+          "Always on"
+        ],
+        "text": "Advantage on Wis and Cha saves"
+      },
+      "chaos.tides_of_chaos": {
+        "name": "Tides of Chaos",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "Self: you get \u002B1 spell DC and have advantage on your attack rolls for 2 rounds"
+      },
+      "chaos.wild_surge": {
+        "name": "Wild Surge",
+        "tags": [
+          "Action",
+          "1 sorcery"
+        ],
+        "text": "6 tiles: one of, at random: 3d8 force (2 in 5), (3d6 lightning; pushes target 2 tiles away) (2 in 5), (4d6 psychic; target is Slowed for 2 rounds) (1 in 5)"
+      },
+      "chronomancer.temporal_awareness": {
+        "name": "Temporal awareness",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B3 Initiative"
+      },
+      "chronomancer.time_shift": {
+        "name": "Time Shift",
+        "tags": [
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "6 tiles: swaps target\u0027s place with the unit 1 place after it in the turn order"
+      },
+      "cleric.aid": {
+        "name": "Aid",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 devotion"
+        ],
+        "text": "4 tiles, burst 1: target gains 5 temporary HP"
+      },
+      "cleric.bane": {
+        "name": "Bane",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 devotion",
+          "Concentration"
+        ],
+        "text": "Cha save, 4 tiles, burst 1: target gets -2 to attack rolls and -2 Str saves and -2 Dex saves and -2 Con saves and -2 Int saves and -2 Wis saves and -2 Cha saves for 10 rounds"
+      },
+      "cleric.bless": {
+        "name": "Bless",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 devotion",
+          "Concentration"
+        ],
+        "text": "4 tiles, burst 1: target gets \u002B2 to attack rolls and \u002B2 Str saves and \u002B2 Dex saves and \u002B2 Con saves and \u002B2 Int saves and \u002B2 Wis saves and \u002B2 Cha saves for 10 rounds"
+      },
+      "cleric.blindness": {
+        "name": "Blindness",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 devotion"
+        ],
+        "text": "Con save, 6 tiles: target is Blinded until saved"
+      },
+      "cleric.command": {
+        "name": "Command",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 devotion"
+        ],
+        "text": "Wis save, 6 tiles: target is Incapacitated for 1 round \u2014 \u0022Halt!\u0022 The target stands still and does nothing on its next turn."
+      },
+      "cleric.cure_wounds": {
+        "name": "Cure Wounds",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 devotion"
+        ],
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
+      },
+      "cleric.divine_spark": {
+        "name": "Channel Divinity: Divine Spark",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "4 tiles: heals 1d8 \u002B casting modifier"
+      },
+      "cleric.guiding_bolt": {
+        "name": "Guiding Bolt",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 devotion"
+        ],
+        "text": "Spell attack, 6 tiles: 4d6 radiant; target is Lit for 1 round"
+      },
+      "cleric.healing_word": {
+        "name": "Healing Word",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 devotion"
+        ],
+        "text": "6 tiles: heals 2d4 \u002B casting modifier"
+      },
+      "cleric.hold_person": {
+        "name": "Hold Person",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 devotion",
+          "Concentration"
+        ],
+        "text": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+      },
+      "cleric.inflict_wounds": {
+        "name": "Inflict Wounds",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 devotion"
+        ],
+        "text": "Con save, 1 tile: 2d10 necrotic; half damage on a save"
+      },
+      "cleric.lesser_restoration": {
+        "name": "Lesser Restoration",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 devotion"
+        ],
+        "text": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
+      },
+      "cleric.resistance": {
+        "name": "Resistance",
+        "tags": [
+          "Action",
+          "Concentration"
+        ],
+        "text": "1 tile: target gets \u002B1 Str saves and \u002B1 Dex saves and \u002B1 Con saves and \u002B1 Int saves and \u002B1 Wis saves and \u002B1 Cha saves for 10 rounds"
+      },
+      "cleric.sacred_flame": {
+        "name": "Sacred Flame",
+        "tags": [
+          "Action"
+        ],
+        "text": "Dex save, 6 tiles: 1d8 radiant"
+      },
+      "cleric.shield_of_faith": {
+        "name": "Shield of Faith",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 devotion",
+          "Concentration"
+        ],
+        "text": "6 tiles: target gets \u002B2 AC for 10 rounds"
+      },
+      "cleric.spiritual_weapon": {
+        "name": "Spiritual Weapon",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 devotion"
+        ],
+        "text": "Spell attack, 6 tiles: 1d8 \u002B casting modifier force"
+      },
+      "cleric.toll_the_dead": {
+        "name": "Toll the Dead",
+        "tags": [
+          "Action"
+        ],
+        "text": "Wis save, 6 tiles: if the target is below 100% HP, 1d12 necrotic; otherwise 1d8 necrotic"
+      },
+      "cleric.turn_undead": {
+        "name": "Channel Divinity: Turn Undead",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "Self, burst 3: if the target is undead, Wis save (target is Frightened until saved)"
+      },
+      "cleric.word_of_radiance": {
+        "name": "Word of Radiance",
+        "tags": [
+          "Action"
+        ],
+        "text": "Con save, self, burst 1: 1d6 radiant"
+      },
+      "crusader.radiant_blades": {
+        "name": "Radiant blades",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a melee weapon: 1d6 radiant (once per turn)"
+      },
+      "crusader.searing_smite": {
+        "name": "Searing Smite",
+        "tags": [
+          "Action",
+          "1 oath"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage; 2d6 radiant; target is Burning for 2 rounds. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "draconic.dragon_breath": {
+        "name": "Draconic Breath",
+        "tags": [
+          "Action",
+          "1 sorcery"
+        ],
+        "text": "Dex save, self, cone 3: 3d8 fire; target is Burning for 1 round; half damage on a save"
+      },
+      "draconic.dragon_scales": {
+        "name": "Dragon scales",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B2 AC; resists fire"
+      },
+      "dragonborn.breath_weapon": {
+        "name": "Breath Weapon",
+        "tags": [
+          "Action",
+          "2 uses per battle"
+        ],
+        "text": "Dex save, self, cone 3: 1d10 fire; half damage on a save"
+      },
+      "druid.barkskin": {
+        "name": "Barkskin",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 mana"
+        ],
+        "text": "1 tile: target is Barkskinned"
+      },
+      "druid.cure_wounds": {
+        "name": "Cure Wounds",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
+      },
+      "druid.entangle": {
+        "name": "Entangle",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 1: creates a entangle zone (burst 1) for 10 rounds, difficult terrain, ends if you lose concentration; Str save (target is Restrained until saved)"
+      },
+      "druid.faerie_fire": {
+        "name": "Faerie Fire",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 2: reveals hidden enemies (burst 2); Dex save (target is Lit for 3 rounds)"
+      },
+      "druid.fog_cloud": {
+        "name": "Fog Cloud",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 2: creates a smoke zone (burst 2) for 3 rounds, blocks line of sight, ends if you lose concentration"
+      },
+      "druid.healing_word": {
+        "name": "Healing Word",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "6 tiles: heals 2d4 \u002B casting modifier"
+      },
+      "druid.hold_person": {
+        "name": "Hold Person",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+      },
+      "druid.lesser_restoration": {
+        "name": "Lesser Restoration",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 mana"
+        ],
+        "text": "1 tile: ends poison conditions on target; ends Blinded on target; ends Paralysed on target"
+      },
+      "druid.moonbeam": {
+        "name": "Moonbeam",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 1: creates a moonbeam zone (burst 1) for 1 round, ends if you lose concentration; units inside: When you enter a tile, on yourself: Con save (2d10 radiant; half damage on a save) / At the start of your turn, on yourself: Con save (2d10 radiant; half damage on a save)"
+      },
+      "druid.produce_flame": {
+        "name": "Produce Flame",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 5 tiles: 1d8 fire"
+      },
+      "druid.shillelagh": {
+        "name": "Shillelagh",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Self: you get \u002B2 to attack rolls and \u002B2 weapon damage for 3 rounds"
+      },
+      "druid.spike_growth": {
+        "name": "Spike Growth",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 2: creates a spikes zone (burst 2) for 10 rounds, difficult terrain, ends if you lose concentration; units inside: When you enter a tile, on yourself: 2d4 piercing"
+      },
+      "druid.thorn_whip": {
+        "name": "Thorn Whip",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 4 tiles: 1d6 piercing; pulls target up to 2 tiles toward you"
+      },
+      "druid.thunderwave": {
+        "name": "Thunderwave",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save"
+      },
+      "druid.wild_shape_bear": {
+        "name": "Wild Shape: Bear",
+        "tags": [
+          "Bonus action",
+          "1 wild"
+        ],
+        "text": "Self: transforms into a bear"
+      },
+      "druid.wild_shape_wolf": {
+        "name": "Wild Shape: Wolf",
+        "tags": [
+          "Bonus action",
+          "1 wild"
+        ],
+        "text": "Self: transforms into a wolf"
+      },
+      "duelist.fancy_footwork": {
+        "name": "Fancy footwork",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a melee weapon, on yourself: target is Disengaged until the end of your turn (once per turn)"
+      },
+      "duelist.riposte": {
+        "name": "Riposte",
+        "tags": [
+          "Reaction",
+          "1 edge"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "dwarf.stoneskin": {
+        "name": "Stoneskin",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "Self: you resist bludgeoning, piercing, slashing for 1 round \u2014 Your skin takes on the hardness of the mountain\u0027s bones."
+      },
+      "earthshaker.quake_slam": {
+        "name": "Quake Slam",
+        "tags": [
+          "Action",
+          "1 rage"
+        ],
+        "text": "Str save, self, burst 1: 2d8 \u002B STR modifier bludgeoning; target is Prone; half damage on a save; creates a rubble zone (burst 1) for 2 rounds, difficult terrain"
+      },
+      "earthshaker.stone_hide": {
+        "name": "Stone hide",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 AC; \u002B6 max HP"
+      },
+      "elf.fey_ancestry": {
+        "name": "Fey ancestry",
+        "tags": [
+          "Always on"
+        ],
+        "text": "Advantage on Wis saves"
+      },
+      "elf.fey_step": {
+        "name": "Fey Step",
+        "tags": [
+          "Bonus action",
+          "2 uses per battle"
+        ],
+        "text": "4 tiles: teleports you to the aimed tile, up to 4 tiles away"
+      },
+      "evoker.sculpted_nova": {
+        "name": "Sculpted Nova",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Dex save, 6 tiles, burst 2: 2d6 fire; half damage on a save \u2014 You shape the blast around your allies: it strikes only foes."
+      },
+      "fiendbound.companion": {
+        "name": "Companion",
+        "tags": [
+          "Always on"
+        ],
+        "text": "At the start of battle, on yourself: summons an imp for the battle"
+      },
+      "fiendbound.dark_ones_blessing": {
+        "name": "Dark ones blessing",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you kill a unit, on yourself: target gains 1d8 \u002B CHA modifier \u002B level temporary HP"
+      },
+      "fighter.action_surge": {
+        "name": "Action Surge",
+        "tags": [
+          "Once per battle"
+        ],
+        "text": "Self: you gain an extra action this turn"
+      },
+      "fighter.feinting_attack": {
+        "name": "Feint",
+        "tags": [
+          "Bonus action",
+          "1 superiority"
+        ],
+        "text": "Self: you get \u002B4 weapon damage and have advantage on your attack rolls until the end of your turn \u2014 A feint opens your foe up: advantage and \u002B4 damage on your attacks this turn."
+      },
+      "fighter.goading_attack": {
+        "name": "Goading Attack",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (taunts target for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "fighter.menacing_attack": {
+        "name": "Menacing Attack",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Wis save (target is Frightened for 1 round). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "fighter.precision_attack": {
+        "name": "Precision Attack",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits \u2014 Your superiority die steadies the blow: \u002B4 to hit."
+      },
+      "fighter.pushing_attack": {
+        "name": "Pushing Attack",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (pushes target 2 tiles away). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "fighter.rally": {
+        "name": "Rally",
+        "tags": [
+          "Bonus action",
+          "1 superiority"
+        ],
+        "text": "6 tiles: target gains 1d8 \u002B CHA modifier temporary HP"
+      },
+      "fighter.second_wind": {
+        "name": "Second Wind",
+        "tags": [
+          "Bonus action",
+          "1 second wind"
+        ],
+        "text": "Self: heals 1d4 \u002B level \u2014 Game balance: one use per battle, restoring 1d4 plus your level HP."
+      },
+      "fighter.style_defense": {
+        "name": "Style defense",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 AC"
+      },
+      "fighter.style_dueling": {
+        "name": "Style dueling",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B2 weapon damage"
+      },
+      "fighter.style_great_weapon": {
+        "name": "Style great weapon",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 weapon damage"
+      },
+      "fighter.trip_attack": {
+        "name": "Trip Attack",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8; Str save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "geomancer.raise_earth": {
+        "name": "Raise Earth",
+        "tags": [
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "6 tiles: raises the terrain (single tile) by 2"
+      },
+      "geomancer.sink_earth": {
+        "name": "Sink Earth",
+        "tags": [
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "6 tiles: sinks the terrain (single tile) by 2"
+      },
+      "gnome.cunning": {
+        "name": "Cunning",
+        "tags": [
+          "Always on"
+        ],
+        "text": "Advantage on Int and Wis and Cha saves"
+      },
+      "goliath.stones_endurance": {
+        "name": "Stone\u0027s Endurance",
+        "tags": [
+          "Reaction",
+          "2 uses per battle"
+        ],
+        "text": "Self: you gain 1d12 \u002B CON modifier temporary HP \u2014 When a blow is about to land, you shrug part of it off."
+      },
+      "grovekeeper.bloom": {
+        "name": "Verdant Bloom",
+        "tags": [
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "6 tiles, burst 1: heals 1d8 \u002B casting modifier"
+      },
+      "grovekeeper.companion": {
+        "name": "Companion",
+        "tags": [
+          "Always on"
+        ],
+        "text": "At the start of battle, on yourself: summons a sapling for the battle"
+      },
+      "guardian.righteous_challenge": {
+        "name": "Righteous Challenge",
+        "tags": [
+          "Bonus action",
+          "1 oath"
+        ],
+        "text": "Wis save, self, burst 2: taunts target for 1 round"
+      },
+      "guardian.sanctuary_aegis": {
+        "name": "Sanctuary Aegis",
+        "tags": [
+          "Bonus action",
+          "1 oath"
+        ],
+        "text": "4 tiles: target gains 1d8 \u002B casting modifier temporary HP; target gets \u002B2 AC for 2 rounds"
+      },
+      "half_orc.relentless_endurance": {
+        "name": "Relentless endurance",
+        "tags": [
+          "Once per battle"
+        ],
+        "text": "When you are downed, on yourself: revives a downed target with 1 HP (once per battle)"
+      },
+      "halfling.lucky": {
+        "name": "Lucky",
+        "tags": [
+          "Once per battle"
+        ],
+        "text": "When you miss, if it isn\u0027t a spell: weapon attack (weapon damage) (once per battle)"
+      },
+      "hexblade.hex_warrior": {
+        "name": "Hex warrior",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B2 AC; \u002B1 to attack rolls; \u002B2 weapon damage"
+      },
+      "hexblade.hexblades_curse": {
+        "name": "Hexblade\u0027s Curse",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "6 tiles: marks target for 5 rounds (your attacks on it have advantage); target is Hexed for 5 rounds"
+      },
+      "human.resourceful": {
+        "name": "Resourceful",
+        "tags": [
+          "Always on"
+        ],
+        "text": "At the start of battle, on yourself: target gains 1 of its class resource, even above its maximum"
+      },
+      "iron_body.iron_skin": {
+        "name": "Iron Skin",
+        "tags": [
+          "Bonus action",
+          "1 ki"
+        ],
+        "text": "Self: you gain 1d10 \u002B level temporary HP; you get \u002B2 AC for 2 rounds"
+      },
+      "iron_body.mountain_stance": {
+        "name": "Mountain stance",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 AC; \u002B6 max HP"
+      },
+      "life.preserve_life": {
+        "name": "Channel Divinity: Preserve Life",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "0 tiles, burst 3: if the target is below 50% HP, heals 2d6 \u002B level"
+      },
+      "light.radiance_of_the_dawn": {
+        "name": "Channel Divinity: Radiance of the Dawn",
+        "tags": [
+          "Action",
+          "1 devotion"
+        ],
+        "text": "Self, burst 3: reveals hidden enemies (burst 3); Con save (2d10 radiant; target is Lit for 1 round; half damage on a save)"
+      },
+      "lore.arcane_scholar": {
+        "name": "Arcane scholar",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 spell DC"
+      },
+      "lore.cutting_words": {
+        "name": "Cutting Words",
+        "tags": [
+          "Reaction",
+          "1 inspiration"
+        ],
+        "text": "Self: you get \u002B4 AC until the end of your turn"
+      },
+      "monk.deflect_attacks": {
+        "name": "Deflect Attacks",
+        "tags": [
+          "Reaction"
+        ],
+        "text": "Self: you gain 1d10 \u002B DEX modifier \u002B level temporary HP \u2014 You catch or turn aside the blow, taking 1d10 \u002B DEX \u002B your level less of it."
+      },
+      "monk.flurry_of_blows": {
+        "name": "Flurry of Blows",
+        "tags": [
+          "Bonus action",
+          "1 ki"
+        ],
+        "text": "1 tile: 2 times: weapon attack (1d8 \u002B DEX modifier bludgeoning)"
+      },
+      "monk.martial_arts": {
+        "name": "Martial Arts",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Weapon attack, 1 tile: 1d8 \u002B DEX modifier bludgeoning \u2014 A quick unarmed strike as a bonus action."
+      },
+      "monk.patient_defense": {
+        "name": "Patient Defense",
+        "tags": [
+          "Bonus action",
+          "2 ki"
+        ],
+        "text": "Self: you are Dodging for 1 round"
+      },
+      "monk.step_of_the_wind": {
+        "name": "Step of the Wind",
+        "tags": [
+          "Bonus action",
+          "1 ki"
+        ],
+        "text": "Self: you are Disengaged until the end of your turn; you gain your Move again \u2014 You Disengage and Dash in one bound."
+      },
+      "monk.unarmed_strike": {
+        "name": "Unarmed Strike",
+        "tags": [
+          "Action"
+        ],
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning \u2014 Game balance: a 1d8 martial arts die at every level, with two attacks per Attack action. Ki and other features provide progression."
+      },
+      "monk.unarmored_movement": {
+        "name": "Unarmored movement",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 Move"
+      },
+      "open_hand.palm_strike": {
+        "name": "Open Hand Palm",
+        "tags": [
+          "Action",
+          "1 ki"
+        ],
+        "text": "Weapon attack, weapon range: 1d8 \u002B DEX modifier bludgeoning; Str save (pushes target 3 tiles away; target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "open_hand.sweeping_kick": {
+        "name": "Sweeping Kick",
+        "tags": [
+          "Bonus action",
+          "1 ki"
+        ],
+        "text": "Weapon attack, 1 tile: 1d6 \u002B DEX modifier bludgeoning; Dex save (target is Prone)"
+      },
+      "paladin.bless": {
+        "name": "Bless",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 oath",
+          "Concentration"
+        ],
+        "text": "4 tiles, burst 1: target gets \u002B2 to attack rolls and \u002B2 Str saves and \u002B2 Dex saves and \u002B2 Con saves and \u002B2 Int saves and \u002B2 Wis saves and \u002B2 Cha saves for 10 rounds"
+      },
+      "paladin.command": {
+        "name": "Command",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 oath"
+        ],
+        "text": "Wis save, 6 tiles: target is Incapacitated for 1 round \u2014 \u0022Halt!\u0022 The target stands still and does nothing on its next turn."
+      },
+      "paladin.compelled_duel": {
+        "name": "Compelled Duel",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 oath",
+          "Concentration"
+        ],
+        "text": "Wis save, 4 tiles: taunts target for 10 rounds"
+      },
+      "paladin.cure_wounds": {
+        "name": "Cure Wounds",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 oath"
+        ],
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
+      },
+      "paladin.divine_smite": {
+        "name": "Divine Smite",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 oath"
+        ],
+        "text": "1 tile: target is Marked for Smiting for 1 round \u2014 Your next melee hit on the target before the end of your next turn deals an extra 2d8 radiant (3d8 against undead and fiends)."
+      },
+      "paladin.lay_on_hands": {
+        "name": "Lay on Hands",
+        "tags": [
+          "Bonus action",
+          "1 lay on hands"
+        ],
+        "text": "1 tile: heals 5 \u2014 Your healing pool holds 5 HP per paladin level each battle; each touch draws 5 of them."
+      },
+      "paladin.shield_of_faith": {
+        "name": "Shield of Faith",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 oath",
+          "Concentration"
+        ],
+        "text": "6 tiles: target gets \u002B2 AC for 10 rounds"
+      },
+      "paladin.smite_damage": {
+        "name": "Smite damage",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a melee weapon and the target is Marked for Smiting: 2d8 radiant; if the target is undead or the target is fiend, 1d8 radiant; ends Marked for Smiting on target"
+      },
+      "ranger.archery": {
+        "name": "Archery",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B2 to attack rolls"
+      },
+      "ranger.cure_wounds": {
+        "name": "Cure Wounds",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 focus"
+        ],
+        "text": "1 tile: heals 2d8 \u002B casting modifier"
+      },
+      "ranger.ensnaring_strike": {
+        "name": "Ensnaring Strike",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 focus",
+          "Concentration"
+        ],
+        "text": "Weapon attack, 8 tiles: weapon damage; Str save (target is Ensnared until saved) \u2014 On a hit, thorny vines bind the target: a STR save or restrained, taking 1d6 piercing each turn until it breaks free."
+      },
+      "ranger.entangle": {
+        "name": "Entangle",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 focus",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 1: creates a entangle zone (burst 1) for 10 rounds, difficult terrain, ends if you lose concentration; Str save (target is Restrained until saved)"
+      },
+      "ranger.hail_of_thorns": {
+        "name": "Hail of Thorns",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 focus"
+        ],
+        "text": "Weapon attack, 8 tiles: weapon damage; Dex save (1d6 piercing; half damage on a save); chains to up to 2 more targets within 1 tile \u2014 On a hit, your arrow bursts into thorns: up to two foes make a DEX save against thorns: 1d4 piercing, 1d6 from level 3."
+      },
+      "ranger.hunters_mark": {
+        "name": "Hunter\u0027s Mark",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 focus",
+          "Concentration"
+        ],
+        "text": "6 tiles: target is Hunted \u2014 Hits on a Hunted target deal an extra 1d4 force at levels 1 and 2, then 1d6 from level 3: a game balance progression."
+      },
+      "ranger.hunters_mark_bonus": {
+        "name": "Hunters mark bonus",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if the target is Hunted: 1d6 force"
+      },
+      "rogue.cunning_dash": {
+        "name": "Cunning Action: Dash",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Self: you gain your Move again"
+      },
+      "rogue.cunning_disengage": {
+        "name": "Cunning Action: Disengage",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Self: you are Disengaged until the end of your turn"
+      },
+      "rogue.cunning_hide": {
+        "name": "Cunning Action: Hide",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "Self: you are Hiding for 1 round. Only when you aren\u0027t in plain view \u2014 Plain view: a foe next to you, or one that sees you with no cover between (walls, crates, height, smoke). While you\u0027re hiding, attacks against you have disadvantage and your next attack has advantage (this is Steady Aim too). It ends when you attack or end your turn in plain view."
+      },
+      "rogue.poison_strike": {
+        "name": "Cunning Strike: Poison",
+        "tags": [
+          "Action",
+          "1 edge"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage; Con save (target is Poisoned until saved). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "rogue.sneak_attack": {
+        "name": "Sneak attack",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a finesse or ranged weapon and (you have advantage or (an ally is next to the target and you don\u0027t have disadvantage)): 2d6\u002B2 damage (once per turn)"
+      },
+      "rogue.trip": {
+        "name": "Cunning Strike: Trip",
+        "tags": [
+          "Action",
+          "1 edge"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage; Dex save (target is Prone). With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "rogue.vex": {
+        "name": "Vex",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a dart or rapier or shortbow or shortsword weapon: marks target as Vexed for 1 round (your attacks on it have advantage)"
+      },
+      "rogue.withdraw": {
+        "name": "Cunning Strike: Withdraw",
+        "tags": [
+          "Bonus action",
+          "1 edge"
+        ],
+        "text": "Self: you are Disengaged until the end of your turn; you gain your Move again"
+      },
+      "runeborn.ember_rune": {
+        "name": "Ember Rune",
+        "tags": [
+          "Bonus action",
+          "1 sorcery"
+        ],
+        "text": "6 tiles, burst 1: creates a ember rune zone (burst 1) for 3 rounds; units inside: When you enter a tile, on yourself: 2d8 fire; target is Burning for 1 round; Dex save (2d8 fire; half damage on a save)"
+      },
+      "shadow.shadowstep": {
+        "name": "Shadowstep",
+        "tags": [
+          "Bonus action",
+          "1 edge"
+        ],
+        "text": "6 tiles: teleports you to the aimed tile, up to 6 tiles away"
+      },
+      "shapeshifter.dire_form": {
+        "name": "Combat Wild Shape: Dire Wolf",
+        "tags": [
+          "Bonus action",
+          "1 wild"
+        ],
+        "text": "Self: transforms into a dire wolf"
+      },
+      "shapeshifter.primal_strike": {
+        "name": "Primal strike",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 to attack rolls; \u002B2 weapon damage"
+      },
+      "sharpshooter.deadeye": {
+        "name": "Deadeye Shot",
+        "tags": [
+          "Action",
+          "1 focus"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage \u002B 1d8. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "sharpshooter.high_ground_mastery": {
+        "name": "High ground mastery",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a ranged weapon and you are at least 1 level above the target: 1d8 piercing (once per turn)"
+      },
+      "sharpshooter.piercing_shot": {
+        "name": "Piercing Shot",
+        "tags": [
+          "Action",
+          "2 focus"
+        ],
+        "text": "Dex save, self, line 6: 3d8 piercing; half damage on a save"
+      },
+      "sharpshooter.volley": {
+        "name": "Volley",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "Weapon attack, 8 tiles, burst 2: weapon damage \u002B 2d8"
+      },
+      "siren.alluring_verse": {
+        "name": "Alluring Verse",
+        "tags": [
+          "Action",
+          "1 inspiration"
+        ],
+        "text": "Wis save, 6 tiles: 2d6 psychic; pulls target up to 2 tiles toward you; target is Charmed for 1 round; half damage on a save"
+      },
+      "sorcerer.acid_splash": {
+        "name": "Acid Splash",
+        "tags": [
+          "Action"
+        ],
+        "text": "Dex save, 6 tiles, burst 1: 1d6 acid"
+      },
+      "sorcerer.burning_hands": {
+        "name": "Burning Hands",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Dex save, self, cone 3: 3d6 fire; half damage on a save"
+      },
+      "sorcerer.chill_touch": {
+        "name": "Chill Touch",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 1 tile: 1d10 necrotic"
+      },
+      "sorcerer.chromatic_orb": {
+        "name": "Chromatic Orb",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Spell attack, 6 tiles: 3d8 lightning"
+      },
+      "sorcerer.fire_bolt": {
+        "name": "Fire Bolt",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 6 tiles: 1d10 fire"
+      },
+      "sorcerer.font_of_magic_mana": {
+        "name": "Font of Magic: Create Mana",
+        "tags": [
+          "Bonus action",
+          "2 sorcery"
+        ],
+        "text": "Self: you gain 1 mana"
+      },
+      "sorcerer.font_of_magic_sorcery": {
+        "name": "Font of Magic: Draw Sorcery",
+        "tags": [
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "Self: you gain 2 sorcery"
+      },
+      "sorcerer.hold_person": {
+        "name": "Hold Person",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+      },
+      "sorcerer.innate_sorcery": {
+        "name": "Innate Sorcery",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "Self: you get \u002B1 spell DC and have advantage on your attack rolls for 3 rounds \u2014 Your innate magic surges for 3 rounds: \u002B1 spell save DC and advantage on attack rolls."
+      },
+      "sorcerer.magic_missile": {
+        "name": "Magic Missile",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "6 tiles: 3 times: 1d4\u002B1 force"
+      },
+      "sorcerer.metamagic_careful": {
+        "name": "Metamagic: Careful Spell",
+        "tags": [
+          "1 sorcery"
+        ],
+        "text": "Self: allies in the area of your next spell this turn automatically succeed their saves"
+      },
+      "sorcerer.metamagic_distant": {
+        "name": "Metamagic: Distant Spell",
+        "tags": [
+          "1 sorcery"
+        ],
+        "text": "Self: your next spell this turn has \u002B2 range"
+      },
+      "sorcerer.metamagic_extended": {
+        "name": "Metamagic: Extended Spell",
+        "tags": [
+          "1 sorcery"
+        ],
+        "text": "Self: doubles the duration of your concentration spell"
+      },
+      "sorcerer.metamagic_twinned": {
+        "name": "Metamagic: Twinned Spell",
+        "tags": [
+          "2 sorcery"
+        ],
+        "text": "Self: your next single-target spell this turn also hits a second target in range"
+      },
+      "sorcerer.misty_step": {
+        "name": "Misty Step",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 mana"
+        ],
+        "text": "4 tiles: teleports you to the aimed tile, up to 4 tiles away"
+      },
+      "sorcerer.poison_spray": {
+        "name": "Poison Spray",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 4 tiles: 1d12 poison"
+      },
+      "sorcerer.ray_of_frost": {
+        "name": "Ray of Frost",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 6 tiles: 1d8 cold; target gets -1 Move for 1 round"
+      },
+      "sorcerer.scorching_ray": {
+        "name": "Scorching Ray",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana"
+        ],
+        "text": "6 tiles: 3 times: spell attack (2d6 fire)"
+      },
+      "sorcerer.shatter": {
+        "name": "Shatter",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana"
+        ],
+        "text": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save"
+      },
+      "sorcerer.shield": {
+        "name": "Shield",
+        "tags": [
+          "Tier 1 spell",
+          "Reaction",
+          "1 mana"
+        ],
+        "text": "Self: you get \u002B5 AC until the end of your turn"
+      },
+      "sorcerer.shocking_grasp": {
+        "name": "Shocking Grasp",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 1 tile: 1d8 lightning"
+      },
+      "sorcerer.sleep": {
+        "name": "Sleep",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "Wis save, 6 tiles, burst 1: target is Unconscious until saved"
+      },
+      "sorcerer.thunderwave": {
+        "name": "Thunderwave",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save"
+      },
+      "sorcerer.web": {
+        "name": "Web",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 1: creates a web zone (burst 1) for the battle, difficult terrain, ends if you lose concentration; units inside: When you enter a tile, on yourself: Dex save (target is Restrained until saved); Dex save (target is Restrained until saved)"
+      },
+      "spiritwarden.ancestral_protectors": {
+        "name": "Ancestral protectors",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if you attack with a melee weapon: taunts target for 1 round (once per turn)"
+      },
+      "spiritwarden.ancestral_ward": {
+        "name": "Ancestral Ward",
+        "tags": [
+          "Bonus action",
+          "1 rage"
+        ],
+        "text": "4 tiles: target gains 2d6 \u002B level temporary HP; target gets \u002B2 AC for 2 rounds"
+      },
+      "stormcaller.gale_burst": {
+        "name": "Gale Burst",
+        "tags": [
+          "Bonus action",
+          "1 mana"
+        ],
+        "text": "Str save, self, burst 1: 2d6 thunder; pushes target 2 tiles away; half damage on a save"
+      },
+      "tiefling.hellish_rebuke": {
+        "name": "Hellish Rebuke",
+        "tags": [
+          "Tier 1 spell",
+          "Reaction",
+          "Once per battle"
+        ],
+        "text": "Dex save, 6 tiles: 2d10 fire; half damage on a save \u2014 When a foe is about to strike you, hellfire answers it."
+      },
+      "trickster.caltrops": {
+        "name": "Caltrops",
+        "tags": [
+          "Bonus action",
+          "1 edge"
+        ],
+        "text": "4 tiles, burst 1: creates a caltrops zone (burst 1) for 2 rounds; units inside: When you enter a tile, on yourself: 1d4 piercing; target gets -2 Move for 1 round"
+      },
+      "trickster.smoke_bomb": {
+        "name": "Smoke Bomb",
+        "tags": [
+          "Action",
+          "1 edge"
+        ],
+        "text": "5 tiles, burst 1: creates a smoke cloud zone (burst 1) for 2 rounds, blocks line of sight; Con save (target is Blinded for 1 round)"
+      },
+      "valor.battle_readiness": {
+        "name": "Battle readiness",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 AC; \u002B1 weapon damage"
+      },
+      "valor.combat_inspiration": {
+        "name": "Combat Inspiration",
+        "tags": [
+          "Bonus action",
+          "1 inspiration"
+        ],
+        "text": "6 tiles: target gets \u002B2 AC and \u002B2 to attack rolls and \u002B3 weapon damage for 2 rounds"
+      },
+      "vanguard.challenge": {
+        "name": "Challenge",
+        "tags": [
+          "Bonus action"
+        ],
+        "text": "6 tiles: taunts target for 1 round"
+      },
+      "vanguard.charge": {
+        "name": "Vanguard Charge",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "4 tiles: dashes up to 4 tiles toward the aimed tile; weapon attack (weapon damage \u002B 1d8; pushes target 1 tile away)"
+      },
+      "void.gravitational_pull": {
+        "name": "Gravitational Pull",
+        "tags": [
+          "Action",
+          "1 pact"
+        ],
+        "text": "Str save, 6 tiles, burst 2: 3d6 force; pulls target up to 2 tiles toward you; half damage on a save"
+      },
+      "void.rift_step": {
+        "name": "Rift Step",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "5 tiles: teleports you to the aimed tile, up to 5 tiles away"
+      },
+      "war.guided_strike": {
+        "name": "Channel Divinity: Guided Strike",
+        "tags": [
+          "Bonus action",
+          "1 devotion"
+        ],
+        "text": "6 tiles: target gets \u002B4 to attack rolls and \u002B2 weapon damage for 1 round"
+      },
+      "war.war_priest": {
+        "name": "War Priest Strike",
+        "tags": [
+          "Bonus action",
+          "1 devotion"
+        ],
+        "text": "Weapon attack, weapon range: weapon damage; 1d8 radiant"
+      },
+      "warden.guardian_tree": {
+        "name": "Guardian of the Grove",
+        "tags": [
+          "Action",
+          "Once per battle"
+        ],
+        "text": "0 tiles, burst 2: creates a entangle zone (burst 2) for 3 rounds, difficult terrain; target gains 3d8 \u002B level temporary HP; target gets \u002B2 AC for 2 rounds"
+      },
+      "warden.natures_veil": {
+        "name": "Nature\u0027s Veil",
+        "tags": [
+          "Bonus action",
+          "1 focus"
+        ],
+        "text": "Self: you gain 1d10 \u002B level temporary HP; you get \u002B2 AC for 1 round"
+      },
+      "warden.tough_bark": {
+        "name": "Tough bark",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 AC; \u002B5 max HP"
+      },
+      "warden.vine_snare": {
+        "name": "Vine Snare",
+        "tags": [
+          "Action",
+          "1 focus"
+        ],
+        "text": "Str save, 4 tiles: pulls target up to 2 tiles toward you; target is Restrained for 1 round; 2d6 bludgeoning"
+      },
+      "warlock.agonizing_blast": {
+        "name": "Agonizing blast",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if it is a spell: CHA modifier force"
+      },
+      "warlock.armor_of_agathys": {
+        "name": "Armor of Agathys",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 pact"
+        ],
+        "text": "Self: you gain 2d6 \u002B CHA modifier temporary HP"
+      },
+      "warlock.arms_of_hadar": {
+        "name": "Arms of Hadar",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 pact"
+        ],
+        "text": "Str save, self, burst 1: 2d6 necrotic; target is Disengaged for 1 round; half damage on a save"
+      },
+      "warlock.chill_touch": {
+        "name": "Chill Touch",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 1 tile: 1d10 necrotic"
+      },
+      "warlock.darkness": {
+        "name": "Darkness",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "1 pact",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 2: creates a darkness zone (burst 2) for 3 rounds, blocks line of sight, ends if you lose concentration"
+      },
+      "warlock.devils_sight": {
+        "name": "Devils sight",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 to attack rolls"
+      },
+      "warlock.eldritch_blast": {
+        "name": "Eldritch Blast",
+        "tags": [
+          "Action"
+        ],
+        "text": "8 tiles: 1 times: spell attack (1d12 force) \u2014 Game balance: each beam deals 1d12 at every level; two beams from level 5 and three from level 7. Dice never decrease."
+      },
+      "warlock.fiendish_vigor": {
+        "name": "Fiendish Vigor",
+        "tags": [
+          "Action"
+        ],
+        "text": "Self: you gain 1d4 \u002B CHA modifier temporary HP"
+      },
+      "warlock.hellish_rebuke": {
+        "name": "Hellish Rebuke",
+        "tags": [
+          "Tier 1 spell",
+          "Reaction",
+          "1 pact"
+        ],
+        "text": "Dex save, 6 tiles: 2d10 fire; half damage on a save"
+      },
+      "warlock.hex": {
+        "name": "Hex",
+        "tags": [
+          "Tier 1 spell",
+          "Bonus action",
+          "1 pact",
+          "Concentration"
+        ],
+        "text": "6 tiles: target is Hexed"
+      },
+      "warlock.hex_damage": {
+        "name": "Hex damage",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if the target is Hexed: 1d6 necrotic"
+      },
+      "warlock.hold_person": {
+        "name": "Hold Person",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "1 pact",
+          "Concentration"
+        ],
+        "text": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+      },
+      "warlock.misty_step": {
+        "name": "Misty Step",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "1 pact"
+        ],
+        "text": "4 tiles: teleports you to the aimed tile, up to 4 tiles away"
+      },
+      "warlock.pact_magic": {
+        "name": "Pact magic",
+        "tags": [
+          "Always on"
+        ],
+        "text": "At the start of each round, if the round is even, on yourself: target gains 1 pact"
+      },
+      "warlock.poison_spray": {
+        "name": "Poison Spray",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 4 tiles: 1d12 poison"
+      },
+      "warlock.repelling_blast": {
+        "name": "Repelling blast",
+        "tags": [
+          "Always on"
+        ],
+        "text": "When you hit, if it is a spell: pushes target 2 tiles away (once per turn)"
+      },
+      "warlock.shatter": {
+        "name": "Shatter",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 pact"
+        ],
+        "text": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save"
+      },
+      "warlock.witch_bolt": {
+        "name": "Witch Bolt",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 pact"
+        ],
+        "text": "Spell attack, 5 tiles: 2d12 lightning"
+      },
+      "warlord.commanders_strike": {
+        "name": "Commander\u0027s Strike",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "6 tiles: target gains an extra action this turn; target gets \u002B2 to attack rolls and \u002B3 weapon damage for 1 round"
+      },
+      "warlord.maneuvering_order": {
+        "name": "Maneuvering Order",
+        "tags": [
+          "Bonus action",
+          "1 superiority"
+        ],
+        "text": "6 tiles: target gains its Move again; target gains 1d8 \u002B proficiency bonus temporary HP"
+      },
+      "weaponmaster.cleave": {
+        "name": "Sweeping Cleave",
+        "tags": [
+          "Action",
+          "1 superiority"
+        ],
+        "text": "Weapon attack, weapon range, burst 1: weapon damage \u002B 1d8. With more than one attack, these bonuses and riders apply until the first hit; the rest are plain hits"
+      },
+      "weaponmaster.keen_edge": {
+        "name": "Keen edge",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 to attack rolls; When you hit: 1d6 slashing (once per turn)"
+      },
+      "windstep.fleet_of_foot": {
+        "name": "Fleet of foot",
+        "tags": [
+          "Always on"
+        ],
+        "text": "\u002B1 Move; \u002B2 Initiative"
+      },
+      "windstep.gale_leap": {
+        "name": "Gale Leap",
+        "tags": [
+          "Bonus action",
+          "1 ki"
+        ],
+        "text": "5 tiles: leaps to the aimed tile, up to 5 tiles away"
+      },
+      "wizard.acid_splash": {
+        "name": "Acid Splash",
+        "tags": [
+          "Action"
+        ],
+        "text": "Dex save, 6 tiles, burst 1: 1d6 acid"
+      },
+      "wizard.arcane_recovery": {
+        "name": "Arcane Recovery",
+        "tags": [
+          "Bonus action",
+          "Once per battle"
+        ],
+        "text": "Self: you gain 2 mana"
+      },
+      "wizard.blur": {
+        "name": "Blur",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "Self: you are attacked with disadvantage for 10 rounds"
+      },
+      "wizard.burning_hands": {
+        "name": "Burning Hands",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Dex save, self, cone 3: 3d6 fire; half damage on a save"
+      },
+      "wizard.chill_touch": {
+        "name": "Chill Touch",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 1 tile: 1d10 necrotic"
+      },
+      "wizard.chromatic_orb": {
+        "name": "Chromatic Orb",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Spell attack, 6 tiles: 3d8 lightning"
+      },
+      "wizard.fire_bolt": {
+        "name": "Fire Bolt",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 6 tiles: 1d10 fire"
+      },
+      "wizard.grease": {
+        "name": "Grease",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "6 tiles, burst 1: creates a grease zone (burst 1) for 10 rounds, difficult terrain; units inside: When you enter a tile, on yourself: Dex save (target is Prone); Dex save (target is Prone)"
+      },
+      "wizard.hold_person": {
+        "name": "Hold Person",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles: if the target is humanoid, Wis save (target is Paralysed until saved)"
+      },
+      "wizard.invisibility": {
+        "name": "Invisibility",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "1 tile: target is Hidden \u2014 The target can\u0027t be seen until it attacks."
+      },
+      "wizard.mage_armor": {
+        "name": "Mage Armor",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "1 tile: target is Mage Armor"
+      },
+      "wizard.magic_missile": {
+        "name": "Magic Missile",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "6 tiles: 3 times: 1d4\u002B1 force"
+      },
+      "wizard.misty_step": {
+        "name": "Misty Step",
+        "tags": [
+          "Tier 2 spell",
+          "Bonus action",
+          "2 mana"
+        ],
+        "text": "4 tiles: teleports you to the aimed tile, up to 4 tiles away"
+      },
+      "wizard.poison_spray": {
+        "name": "Poison Spray",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 4 tiles: 1d12 poison"
+      },
+      "wizard.ray_of_frost": {
+        "name": "Ray of Frost",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 6 tiles: 1d8 cold; target gets -1 Move for 1 round"
+      },
+      "wizard.ray_of_sickness": {
+        "name": "Ray of Sickness",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Spell attack, 6 tiles: 2d8 poison; Con save (target is Poisoned for 1 round)"
+      },
+      "wizard.scorching_ray": {
+        "name": "Scorching Ray",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana"
+        ],
+        "text": "6 tiles: 3 times: spell attack (2d6 fire)"
+      },
+      "wizard.shatter": {
+        "name": "Shatter",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana"
+        ],
+        "text": "Con save, 6 tiles, burst 1: 2d8 thunder; half damage on a save"
+      },
+      "wizard.shield": {
+        "name": "Shield",
+        "tags": [
+          "Tier 1 spell",
+          "Reaction",
+          "1 mana"
+        ],
+        "text": "Self: you get \u002B5 AC until the end of your turn"
+      },
+      "wizard.shocking_grasp": {
+        "name": "Shocking Grasp",
+        "tags": [
+          "Action"
+        ],
+        "text": "Spell attack, 1 tile: 1d8 lightning"
+      },
+      "wizard.sleep": {
+        "name": "Sleep",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana",
+          "Concentration"
+        ],
+        "text": "Wis save, 6 tiles, burst 1: target is Unconscious until saved"
+      },
+      "wizard.thunderwave": {
+        "name": "Thunderwave",
+        "tags": [
+          "Tier 1 spell",
+          "Action",
+          "1 mana"
+        ],
+        "text": "Con save, self, burst 1: 2d8 thunder; pushes target 1 tile away; half damage on a save"
+      },
+      "wizard.web": {
+        "name": "Web",
+        "tags": [
+          "Tier 2 spell",
+          "Action",
+          "2 mana",
+          "Concentration"
+        ],
+        "text": "6 tiles, burst 1: creates a web zone (burst 1) for the battle, difficult terrain, ends if you lose concentration; units inside: When you enter a tile, on yourself: Dex save (target is Restrained until saved); Dex save (target is Restrained until saved)"
+      }
+    },
+    "skills": {
+      "acrobatics": {
+        "name": "Acrobatics",
+        "stat": "dex",
+        "text": "Story checks: d20 \u002B DEX modifier, \u002B 2 if proficient, against the DC."
+      },
+      "animal_handling": {
+        "name": "Animal Handling",
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
+      },
+      "arcana": {
+        "name": "Arcana",
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
+      },
+      "athletics": {
+        "name": "Athletics",
+        "stat": "str",
+        "text": "Story checks: d20 \u002B STR modifier, \u002B 2 if proficient, against the DC."
+      },
+      "deception": {
+        "name": "Deception",
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
+      },
+      "history": {
+        "name": "History",
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
+      },
+      "insight": {
+        "name": "Insight",
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
+      },
+      "intimidation": {
+        "name": "Intimidation",
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
+      },
+      "investigation": {
+        "name": "Investigation",
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
+      },
+      "medicine": {
+        "name": "Medicine",
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
+      },
+      "nature": {
+        "name": "Nature",
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
+      },
+      "perception": {
+        "name": "Perception",
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
+      },
+      "performance": {
+        "name": "Performance",
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
+      },
+      "persuasion": {
+        "name": "Persuasion",
+        "stat": "cha",
+        "text": "Story checks: d20 \u002B CHA modifier, \u002B 2 if proficient, against the DC."
+      },
+      "religion": {
+        "name": "Religion",
+        "stat": "int",
+        "text": "Story checks: d20 \u002B INT modifier, \u002B 2 if proficient, against the DC."
+      },
+      "sleight_of_hand": {
+        "name": "Sleight of Hand",
+        "stat": "dex",
+        "text": "Story checks: d20 \u002B DEX modifier, \u002B 2 if proficient, against the DC."
+      },
+      "stealth": {
+        "name": "Stealth",
+        "stat": "dex",
+        "text": "Story checks: d20 \u002B DEX modifier, \u002B 2 if proficient, against the DC."
+      },
+      "survival": {
+        "name": "Survival",
+        "stat": "wis",
+        "text": "Story checks: d20 \u002B WIS modifier, \u002B 2 if proficient, against the DC."
+      }
+    },
+    "stats": {
+      "str": {
+        "name": "Strength",
+        "drives": [
+          "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
+          "Attack and damage rolls with battleaxe, club, flail, glaive, greataxe, greatclub, greatsword, halberd, handaxe, javelin, lance, light hammer, longsword, mace, maul, morningstar, pike, quarterstaff, sickle, spear, trident, war pick and warhammer.",
+          "Finesse weapons (dagger, dart, rapier, scimitar, shortsword and whip) use whichever of STR and DEX is higher.",
+          "STR saving throws, against effects that call for one; proficient for a Barbarian, Fighter, Monk or Ranger.",
+          "Skill checks in the story: Athletics."
+        ]
+      },
+      "dex": {
+        "name": "Dexterity",
+        "drives": [
+          "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
+          "Attack and damage rolls with hand crossbow, heavy crossbow, light crossbow, longbow, shortbow and sling.",
+          "Finesse weapons (dagger, dart, rapier, scimitar, shortsword and whip) use whichever of STR and DEX is higher.",
+          "Armour Class: all of the modifier in light armour or none, at most \u002B2 in medium, none in heavy.",
+          "Initiative: 10 \u002B the modifier decides who acts first (heavy armour takes 2).",
+          "DEX saving throws, against effects that call for one; proficient for a Bard, Monk, Ranger or Rogue.",
+          "Skill checks in the story: Acrobatics, Sleight of Hand and Stealth."
+        ]
+      },
+      "con": {
+        "name": "Constitution",
+        "drives": [
+          "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
+          "Hit points: the modifier is added at level 1 and again at every level.",
+          "Armour Class without armour, for a Barbarian.",
+          "The save DC of Breath Weapon (Dragonborn).",
+          "CON saving throws, against effects that call for one; proficient for a Barbarian, Fighter or Sorcerer.",
+          "No skills use it."
+        ]
+      },
+      "int": {
+        "name": "Intelligence",
+        "drives": [
+          "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
+          "Spell attacks and spell save DCs for a Wizard.",
+          "INT saving throws, against effects that call for one; proficient for a Druid, Rogue or Wizard.",
+          "Skill checks in the story: Arcana, History, Investigation, Nature and Religion."
+        ]
+      },
+      "wis": {
+        "name": "Wisdom",
+        "drives": [
+          "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
+          "Armour Class without armour, for a Monk.",
+          "Spell attacks and spell save DCs for a Cleric, Druid, Monk or Ranger.",
+          "WIS saving throws, against effects that call for one; proficient for a Cleric, Druid, Paladin, Warlock or Wizard.",
+          "Skill checks in the story: Animal Handling, Insight, Medicine, Perception and Survival."
+        ]
+      },
+      "cha": {
+        "name": "Charisma",
+        "drives": [
+          "Its modifier is (score \u2212 10) \u00F7 2, rounded down: 8 is \u22121, 10 is \u002B0, 14 is \u002B2, 20 is \u002B5.",
+          "Spell attacks and spell save DCs for a Bard, Paladin, Sorcerer or Warlock.",
+          "The save DC of Hellish Rebuke (Tiefling).",
+          "CHA saving throws, against effects that call for one; proficient for a Bard, Cleric, Paladin, Sorcerer or Warlock.",
+          "Skill checks in the story: Deception, Intimidation, Performance and Persuasion."
+        ]
+      }
+    }
+  }
+}

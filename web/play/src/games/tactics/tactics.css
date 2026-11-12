@@ -1119,3 +1119,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 
 .tx-target-preview { display:block; font-size:1rem; line-height:1.35; white-space:normal; overflow-wrap:anywhere; margin-top:0.3rem; }
 .tx-chips .tx-chip { white-space:normal; overflow-wrap:anywhere; }
+
+.tx-opt.has-companion { flex-wrap: wrap; }
+.tx-opt.has-companion > .tx-block { flex-basis: 100%; min-width: 0; padding: 12px; box-sizing: border-box; }
+.tx-companion-input { display: block; width: 100%; min-width: 0; box-sizing: border-box; min-height: 48px; font: inherit; }

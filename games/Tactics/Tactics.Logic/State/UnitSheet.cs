@@ -35,7 +35,10 @@ public sealed record UnitSheet(
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Vulnerable,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
     string? Sprite, string? AiProfile, string? CastingStat, int Xp = 0,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null)
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? PrimaryResource = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionName = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionMonster = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionOwner = null)
 {
     /// <summary>The score for <paramref name="stat"/>, or 10 when the sheet doesn't list it.</summary>
     public int Score(Stat stat) => Scores.TryGetValue(stat, out var score) ? score : 10;

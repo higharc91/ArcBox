@@ -30,6 +30,7 @@ interface Me {
   subclasses: { id: string; name: string }[] | null; choices: Choice[];
   color?: string; skills?: string[]; saves?: string[]; bonuses?: Record<string, number> | null;
   trinket?: Trinket;
+  companion?: { monster: string; name: string; defaultName: string; suggestions: string[] };
 }
 interface Options {
   races: { id: string; name: string }[]; classes: { id: string; name: string; role: string }[];
@@ -364,8 +365,16 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
   me: Me; readOnly: boolean; send: PortalProps["send"]; onRemake?: () => void; explainWith(c: Context): Explain;
   details: PortalDetails | null; colors: ColorOptions | null;
 }) {
+  const [companionName, setCompanionName] = useState("");
+  const companions: Record<string, string[]> = {
+    "ranger.beastmaster": ["Ash", "Ember", "Brindle", "Cinder", "Flint", "Bramble", "Rowan", "Coal"],
+    "druid.grovekeeper": ["Sprig", "Moss", "Hazel", "Alder", "Briar", "Willow", "Acorn", "Fern"],
+    "warlock.fiendbound": ["Soot", "Wick", "Scorch", "Flicker", "Tinder", "Smudge", "Spark", "Crisp"],
+  };
+  const companionValid = !companionName.trim() || (/^[\p{L}\p{M} '-]+$/u.test(companionName) && /\p{L}/u.test(companionName) && Array.from(companionName.trim().replace(/\s+/g, " ").normalize()).length <= 16);
+  const chooseSubclass = (id: string) => void send("chooseSubclass", { subclass: id, ...(companions[id] ? { companionName: companionName || companions[id][0] } : {}) });
   const choose = (t: Topic) => (t.kind === "subclass" && me.subclasses?.some((s) => s.id === t.id) && !readOnly
-    ? { label: `Choose ${me.subclasses.find((s) => s.id === t.id)!.name}`, run: () => void send("chooseSubclass", { subclass: t.id }) }
+    ? { label: `Choose ${me.subclasses.find((s) => s.id === t.id)!.name}`, run: () => chooseSubclass(t.id) }
     : null);
   const explain = explainWith({ scores: me.scores, skills: me.skills, bonuses: me.bonuses, level: me.level, choose });
   const features = useMemo(() => ownFeatures(me, details), [me, details]);
@@ -414,14 +423,16 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
           <h3 class="tx-sect">Choose your subclass</h3>
           <div class="tx-subclasses">
             {me.subclasses.map((s) => (
-              <div class="tx-opt tall" key={s.id}>
-                <button type="button" class="tx-subclass" disabled={readOnly} onClick={() => void send("chooseSubclass", { subclass: s.id })}>{s.name}</button>
+              <div class={`tx-opt tall${companions[s.id] ? " has-companion" : ""}`} key={s.id}>
+                {companions[s.id] && <CompanionField name={companionName} setName={setCompanionName} suggestions={companions[s.id]} disabled={readOnly} valid={companionValid} />}
+                <button type="button" class="tx-subclass" disabled={readOnly || !companionValid} onClick={() => chooseSubclass(s.id)}>{s.name}</button>
                 {explain ? <InfoButton label={`About ${s.name}`} onClick={() => explain({ kind: "subclass", id: s.id, cls: me.class })} /> : null}
               </div>
             ))}
           </div>
         </div>
       ) : null}
+      {me.companion && <CompanionRename companion={me.companion} readOnly={readOnly} send={send} />}
       {me.increasesLeft >= 2 ? <Increase readOnly={readOnly} send={send} /> : null}
       {features.length && explain ? (
         <div class="tx-block">
@@ -590,4 +601,28 @@ function PickList({ choice, mine, elsewhere, details, readOnly, onClose, onSave 
       </ul>
     </Panel>
   );
+}
+
+function CompanionField({ name, setName, suggestions, disabled, valid }: {
+  name: string; setName(name: string): void; suggestions: string[]; disabled: boolean; valid: boolean;
+}) {
+  return <div class="tx-block">
+    <label>Companion name<input class="tx-companion-input" value={name} placeholder={suggestions[0]} disabled={disabled}
+      aria-invalid={!valid} onInput={e => setName(e.currentTarget.value)} /></label>
+    <p class="tx-note">Up to 16 letters, spaces, apostrophes or hyphens. Leave blank to use the usual name when renaming.</p>
+    <div class="tx-chips">{suggestions.map(n => <button type="button" class="tx-chipbtn" disabled={disabled} onClick={() => setName(n)}>{n}</button>)}</div>
+    {!valid && <p role="alert">Use up to 16 letters, spaces, apostrophes or hyphens.</p>}
+  </div>;
+}
+
+function CompanionRename({ companion, readOnly, send }: { companion: NonNullable<Me["companion"]>; readOnly: boolean; send: PortalProps["send"] }) {
+  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState(companion.name === companion.defaultName ? "" : companion.name);
+  const valid = !name.trim() || (/^[\p{L}\p{M} '-]+$/u.test(name) && /\p{L}/u.test(name) && Array.from(name.trim().replace(/\s+/g, " ").normalize()).length <= 16);
+  return <div class="tx-block"><h3 class="tx-sect">{companion.name} · {companion.monster}</h3>
+    {editing ? <><CompanionField name={name} setName={setName} suggestions={companion.suggestions} disabled={readOnly} valid={valid} />
+      <button class="tx-btn" disabled={readOnly || !valid} onClick={() => { void send("nameCompanion", { name }); setEditing(false); }}>Save companion name</button>
+      <button class="tx-btn ghost" onClick={() => setEditing(false)}>Cancel</button></>
+      : <button class="tx-btn ghost" disabled={readOnly} onClick={() => setEditing(true)}>Rename companion</button>}
+  </div>;
 }
