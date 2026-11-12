@@ -20,6 +20,7 @@ export function Services({ data: d, send, viewId, makeId }: { data: ServiceData;
   const members = d.members ?? d.guests?.map(g => ({ ...g, class: "", here: true, hp: 0, maxHp: 0, resources: [], wellFed: false })) ?? [];
   return <section class="tx-services" aria-label="Recovery services">{d.services?.map(s => <div key={s.id}>
     <div class="tx-recovery-service-line"><span>{s.kind === "room" ? "A room for the night" : "Heal an injury"}</span><b>{s.price} gold{s.kind === "room" ? " each" : ""}</b></div>
+    <p class="tx-note">{s.kind === "room" ? "Clears rest injuries and one body injury; spirit injuries remain. Includes Well fed." : "Heals one injury of any kind, including spirit injuries. No rest needed."}</p>
     {s.kind === "room" && !d.roomsOpen && <>
       {d.leader ? <button class="tx-btn gold tx-recovery-propose" disabled={!d.canPropose} onClick={() => send("restPropose", { shop: d.shop.id })}>Rest for the night</button>
         : <p class="tx-note">The leader proposes the night.</p>}
