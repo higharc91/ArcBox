@@ -24,6 +24,19 @@ class CheckTests(unittest.TestCase):
             shutil.copy2(source / file, target / file)
         return target
 
+    def test_beat_and_choice_experience_rejects_negative_rewards(self):
+        for target in ("beat", "choice"):
+            with self.subTest(target=target), tempfile.TemporaryDirectory() as tmp:
+                lore = self._mutable_base_lore(Path(tmp))
+                path = lore / "arcs.json"
+                doc = json.loads(path.read_text(encoding="utf-8"))
+                beats = [b for arc in doc["arcs"] for b in arc["beats"]]
+                entry = beats[0] if target == "beat" else next(b["choices"][0] for b in beats if b.get("choices"))
+                entry["xp"] = -1
+                path.write_text(json.dumps(doc), encoding="utf-8")
+                errors = check.check([lore])
+                self.assertTrue(any("/xp" in error and "must be at least 0" in error for error in errors), errors)
+
     def test_region_encounters_must_match_arc_beats(self):
         with tempfile.TemporaryDirectory() as tmp:
             lore = self._mutable_base_lore(Path(tmp))

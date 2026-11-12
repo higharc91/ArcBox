@@ -95,6 +95,14 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
   );
 }
 
+const nameSegments = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+function validCompanionName(value: string): boolean {
+  if (/[\p{Cc}\p{Cf}]/u.test(value)) return false;
+  const normalized = value.trim().replace(/\s+/g, " ").normalize();
+  return !normalized || /^[\p{L}\p{M} '-]+$/u.test(normalized) && /\p{L}/u.test(normalized)
+    && Array.from(nameSegments.segment(normalized)).length <= 16;
+}
+
 /** A small "i" that opens an option's details, beside the button that picks it. */
 function InfoButton({ label, onClick }: { label: string; onClick(): void }) {
   return <button type="button" class="tx-info" aria-label={label} onClick={onClick}><span aria-hidden="true">i</span></button>;
@@ -390,9 +398,9 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
     "druid.grovekeeper": ["Sprig", "Moss", "Hazel", "Alder", "Briar", "Willow", "Acorn", "Fern"],
     "warlock.fiendbound": ["Soot", "Wick", "Scorch", "Flicker", "Tinder", "Smudge", "Spark", "Crisp"],
   };
-  const companionValid = !companionName.trim() || (/^[\p{L}\p{M} '-]+$/u.test(companionName) && /\p{L}/u.test(companionName) && Array.from(companionName.trim().replace(/\s+/g, " ").normalize()).length <= 16);
+  const companionValid = validCompanionName(companionName);
   const chooseSubclass = (id: string) => void send("chooseSubclass", { subclass: id, ...(companions[id] ? { companionName: companionName || companions[id][0] } : {}) });
-  const choose = (t: Topic) => (t.kind === "subclass" && me.subclasses?.some((s) => s.id === t.id) && !readOnly
+  const choose = (t: Topic) => (t.kind === "subclass" && me.subclasses?.some((s) => s.id === t.id) && !readOnly && (!companions[t.id] || companionValid)
     ? { label: `Choose ${me.subclasses.find((s) => s.id === t.id)!.name}`, run: () => chooseSubclass(t.id) }
     : null);
   const explain = explainWith({ scores: me.scores, skills: me.skills, bonuses: me.bonuses, level: me.level, choose });
@@ -444,7 +452,7 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
             {me.subclasses.map((s) => (
               <div class={`tx-opt tall${companions[s.id] ? " has-companion" : ""}`} key={s.id}>
                 {companions[s.id] && <CompanionField name={companionName} setName={setCompanionName} suggestions={companions[s.id]} disabled={readOnly} valid={companionValid} />}
-                <button type="button" class="tx-subclass" disabled={readOnly || !companionValid} onClick={() => chooseSubclass(s.id)}>{s.name}</button>
+                <button type="button" class="tx-subclass" disabled={readOnly || !!companions[s.id] && !companionValid} onClick={() => chooseSubclass(s.id)}>{s.name}</button>
                 {explain ? <InfoButton label={`About ${s.name}`} onClick={() => explain({ kind: "subclass", id: s.id, cls: me.class })} /> : null}
               </div>
             ))}
@@ -645,7 +653,7 @@ function CompanionField({ name, setName, suggestions, disabled, valid }: {
 function CompanionRename({ companion, readOnly, send }: { companion: NonNullable<Me["companion"]>; readOnly: boolean; send: PortalProps["send"] }) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(companion.name === companion.defaultName ? "" : companion.name);
-  const valid = !name.trim() || (/^[\p{L}\p{M} '-]+$/u.test(name) && /\p{L}/u.test(name) && Array.from(name.trim().replace(/\s+/g, " ").normalize()).length <= 16);
+  const valid = validCompanionName(name);
   return <div class="tx-block"><h3 class="tx-sect">{companion.name} · {companion.monster}</h3>
     {editing ? <><CompanionField name={name} setName={setName} suggestions={companion.suggestions} disabled={readOnly} valid={valid} />
       <button class="tx-btn" disabled={readOnly || !valid} onClick={() => { void send("nameCompanion", { name }); setEditing(false); }}>Save companion name</button>

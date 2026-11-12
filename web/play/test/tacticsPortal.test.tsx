@@ -457,6 +457,30 @@ describe("key ring", () => {
 });
 
 describe("subclass companion names", () => {
+  it("counts combining-mark names by grapheme and rejects controls in both name forms", () => {
+    const view = structuredClone(CLERIC);
+    view.me!.class = "ranger";
+    view.me!.subclass = null;
+    view.me!.subclasses = [{ id: "ranger.beastmaster", name: "Beastmaster" }];
+    show(view);
+    const input = screen.getByRole("textbox", { name: "Companion name" });
+    const choose = screen.getByRole<HTMLButtonElement>("button", { name: "Beastmaster" });
+    fireEvent.input(input, { target: { value: "क़".repeat(16) } });
+    expect(choose.disabled).toBe(false);
+    fireEvent.input(input, { target: { value: "क़".repeat(17) } });
+    expect(choose.disabled).toBe(true);
+    cleanup();
+    view.me!.subclass = "ranger.beastmaster";
+    view.me!.subclasses = null;
+    view.me!.companion = { monster: "hound", name: "Ash", defaultName: "Hunting Hound", suggestions: ["Ash"] };
+    show(view);
+    fireEvent.click(screen.getByRole("button", { name: "Rename companion" }));
+    fireEvent.input(screen.getByRole("textbox", { name: "Companion name" }), { target: { value: "क़".repeat(16) } });
+    expect(screen.getByRole<HTMLButtonElement>("button", { name: "Save companion name" }).disabled).toBe(false);
+    fireEvent.input(screen.getByRole("textbox", { name: "Companion name" }), { target: { value: "Ash\t" } });
+    expect(screen.getByRole<HTMLButtonElement>("button", { name: "Save companion name" }).disabled).toBe(true);
+  });
+
   it("chooses the subclass and suggested name in one command and rejects invalid names locally", () => {
     const view = structuredClone(CLERIC);
     view.me!.class = "ranger";

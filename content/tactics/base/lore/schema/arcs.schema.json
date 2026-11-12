@@ -10,7 +10,8 @@
         "id": { "$ref": "common.schema.json#/$defs/id" },
         "label": { "$ref": "common.schema.json#/$defs/text", "description": "The option as the party votes on it." },
         "summary": { "$ref": "common.schema.json#/$defs/text", "description": "What follows, for writers." },
-        "sets": { "$ref": "common.schema.json#/$defs/flags" }
+        "sets": { "$ref": "common.schema.json#/$defs/flags" },
+        "xp": { "type": "integer", "minimum": 0, "description": "One-time experience for completing this choice." }
       },
       "required": ["id", "label", "summary", "sets"],
       "additionalProperties": false
@@ -45,6 +46,7 @@
                 "encounter": { "$ref": "common.schema.json#/$defs/id", "description": "A rules encounter id." },
                 "requires": { "$ref": "common.schema.json#/$defs/flags", "description": "Flags that must all be set for this beat to happen." },
                 "sets": { "$ref": "common.schema.json#/$defs/flags" },
+                "xp": { "type": "integer", "minimum": 0, "description": "One-time experience for completing this beat." },
                 "choices": { "type": "array", "items": { "$ref": "#/$defs/choice" }, "minItems": 2 }
               },
               "required": ["id", "kind", "summary"],

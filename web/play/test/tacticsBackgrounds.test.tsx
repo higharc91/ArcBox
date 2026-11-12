@@ -8,6 +8,19 @@ afterEach(cleanup);
 const props = (data: unknown): CustomScreenProps => ({ data, send: vi.fn(), viewId: "v1", header: "", deadlineUtc: null }) as unknown as CustomScreenProps;
 
 describe("private backgrounds", () => {
+  it("defers a secret while the server's map is open so only one modal owns focus", () => {
+    const Screen = withBackgroundSecret(({ data }) => (data as { map?: unknown }).map
+      ? <div role="dialog" aria-label="Map">Map content</div> : <p>Game screen</p>);
+    const secret = { id: "soldier", background: "Soldier", text: "Private memory" };
+    const { rerender } = render(<Screen {...props({ backgroundSecret: secret, map: {} })} />);
+    expect(screen.getAllByRole("dialog")).toHaveLength(1);
+    expect(screen.getByRole("dialog", { name: "Map" })).toBeTruthy();
+    expect(screen.queryByText("Private memory")).toBeNull();
+    rerender(<Screen {...props({ backgroundSecret: secret })} />);
+    expect(screen.getAllByRole("dialog")).toHaveLength(1);
+    expect(screen.getByRole("dialog", { name: "Soldier · Yours alone" })).toBeTruthy();
+  });
+
   it("shows a focus-managed private secret only when it is present in this phone's packet", () => {
     const Screen = withBackgroundSecret(() => <p>Game screen</p>);
     const own = props({ backgroundSecret: { id: "soldier", background: "Soldier", text: "A secret for Kara." } });
