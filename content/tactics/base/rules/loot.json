@@ -42,5 +42,50 @@
         "count": 1
       }
     ]
+  },
+  {
+    "id": "equipment_quarterstaff",
+    "items": [
+      {
+        "item": "gear_quarterstaff_plus_one",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "equipment_longsword",
+    "items": [
+      {
+        "item": "gear_longsword_plus_one",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "equipment_shortbow",
+    "items": [
+      {
+        "item": "gear_shortbow_plus_one",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "equipment_leather",
+    "items": [
+      {
+        "item": "gear_leather_plus_one",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "id": "equipment_chain_shirt",
+    "items": [
+      {
+        "item": "gear_chain_shirt_plus_one",
+        "count": 1
+      }
+    ]
   }
 ]

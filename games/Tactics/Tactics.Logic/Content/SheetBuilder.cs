@@ -16,7 +16,8 @@ public sealed record CharacterRecord(string Name, string Race, string Class, str
     ImmutableArray<AbilityId> Picks, ImmutableArray<InjuryId> Injuries, string Weapon, string Armor, bool Shield,
     ImmutableArray<ItemStack> Bag,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionName = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? CompanionName = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? EquipmentClaimed = null);
 
 /// <summary>
 /// Builds the <see cref="UnitSheet"/>s a battle starts from: a character from its <see cref="CharacterRecord"/> (spec §3.1)
@@ -141,6 +142,7 @@ public static class SheetBuilder
             else
                 passives.Add(pick.Value);
 
+        if (weapon.Tags.Contains("plus_one")) passives.Add("equipment.weapon_plus_one");
         var trinket = c.Trinket is { } worn && rules.Trinkets.TryGetValue(worn, out var known) && known.ActiveFor(c) ? known : null;
         var maxHp = MaxHp(cls.HitDie, c.Level, Stats.Mod(finalScores[Stat.Con]))
                     + passives.Distinct().Sum(p => rules.Passives.GetValueOrDefault(p)?.Static?.MaxHp ?? 0)

@@ -36,6 +36,7 @@ public sealed partial class TacticsGame
                 || quantity.ValueKind != JsonValueKind.Number || !quantity.TryGetInt32(out count) || count <= 0) return;
             stack = giver.Character.Bag.FirstOrDefault(s => s.Item == def.Id);
             targetStack = to.Character.Bag.FirstOrDefault(s => s.Item == def.Id);
+            if (stack is not null && EquipmentRules.Reserved(giver.Character, def) && stack.Count - count < 1) return;
             if (stack is null || stack.Count < count || (long)(targetStack?.Count ?? 0) + count > int.MaxValue) return;
         }
         if (gold == 0 && item is null) return;
@@ -70,7 +71,7 @@ public sealed partial class TacticsGame
         var present = Party().Where(m => m.Here).Select(m => m.Member).ToHashSet(StringComparer.Ordinal);
         return new
         {
-            items = member.Character.Bag.Where(s => s.Count > 0).Select(s => new { id = s.Item.Value, name = Rules.Items[s.Item].Name, count = s.Count }),
+            items = member.Character.Bag.Where(s => s.Count > (EquipmentRules.Reserved(member.Character, Rules.Items[s.Item]) ? 1 : 0)).Select(s => new { id = s.Item.Value, name = Rules.Items[s.Item].Name, count = s.Count - (EquipmentRules.Reserved(member.Character, Rules.Items[s.Item]) ? 1 : 0) }),
             members = _doc.Members.Where(m => m.Key != profile.Value).Select(m => new GiftMemberView(m.Key, m.Value.Character.Name, !present.Contains(m.Key))),
         };
     }

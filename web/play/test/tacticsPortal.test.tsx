@@ -481,3 +481,20 @@ describe("subclass companion names", () => {
     expect(screen.getByRole<HTMLButtonElement>("button", { name: "Rename companion" }).disabled).toBe(true);
   });
 });
+
+describe("equipment", () => {
+  it("equips only owned options and is disabled for a leased campaign", () => {
+    const view = structuredClone(CLERIC);
+    view.me!.equipment = { weapon: "mace", armor: "chain_mail", shield: true, items: [
+      { id: "gear_mace", name: "Mace", slot: "weapon", can: true, equipped: true, detail: "1d6 bludgeoning" },
+      { id: "gear_quarterstaff_plus_one", name: "Quarterstaff +1", slot: "weapon", can: true, equipped: false, detail: "+1 to attacks and damage" },
+      { id: "gear_plate", name: "Plate", slot: "armor", can: false, equipped: false, detail: "Base AC 18" },
+    ] };
+    const send = show(view);
+    fireEvent.change(screen.getByRole("combobox", { name: /^Weapon/ }), { target: { value: "gear_quarterstaff_plus_one" } });
+    expect(lastCall(send)).toEqual(["equip", { slot: "weapon", item: "gear_quarterstaff_plus_one" }]);
+    expect(screen.getByRole<HTMLOptionElement>("option", { name: "Plate · not proficient" }).disabled).toBe(true);
+    cleanup(); show(view, true);
+    expect(screen.getAllByRole<HTMLSelectElement>("combobox").every(select => select.disabled)).toBe(true);
+  });
+});

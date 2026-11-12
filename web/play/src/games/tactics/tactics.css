@@ -1123,3 +1123,5 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 .tx-opt.has-companion { flex-wrap: wrap; }
 .tx-opt.has-companion > .tx-block { flex-basis: 100%; min-width: 0; padding: 12px; box-sizing: border-box; }
 .tx-companion-input { display: block; width: 100%; min-width: 0; box-sizing: border-box; min-height: 48px; font: inherit; }
+.tx-equipment-slot { display: block; margin-block: 12px; min-width: 0; }
+.tx-equipment-slot select { max-width: 100%; }

@@ -60,7 +60,8 @@
   ],
   "xp": 1200,
   "loot": [
-    "crystal_hoard"
+    "crystal_hoard",
+    "equipment_shortbow"
   ],
   "objectives": {
     "win": "defeat_all"

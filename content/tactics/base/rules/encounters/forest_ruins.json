@@ -35,7 +35,8 @@
   ],
   "xp": 2000,
   "loot": [
-    "bandit_cache"
+    "bandit_cache",
+    "equipment_quarterstaff"
   ],
   "objectives": {
     "win": "defeat_all"

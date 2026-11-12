@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import math
 import shutil
+import json
 from dataclasses import dataclass, field
 from typing import Callable
 
@@ -1831,6 +1832,10 @@ def build() -> None:
     atlases["frame"] = {"file": "frames.png", "cell": [FRAME, FRAME], "columns": len(frames), "gutter": 1}
     by_id, id_atlases = _ability_atlas(out)
     atlases.update(id_atlases)
+    for item in json.loads((PACK / "rules/items.json").read_text()):
+        if item.get("equipment"):
+            source = "common.attack" if item["equipment"].get("weapon") else "common.dodge"
+            by_id["item." + item["id"]] = dict(by_id[source])
     write_json({
         "sizes": {"ability": ICON, "item": ICON, "status": STATUS, "frame": FRAME},
         "atlases": atlases,

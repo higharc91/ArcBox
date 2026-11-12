@@ -52,7 +52,7 @@ public sealed record PhoneChoices(UnitId Unit, TurnEconomy Economy, ImmutableArr
         {
             bool Bare(TargetChoice t) => t.Target.Unit is null && t.Target.Tile == t.Aim && t.Affected.IsEmpty && t.Spread.IsDefaultOrEmpty;
             var def = rules is null ? null
-                : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? rules.Abilities.GetValueOrDefault(it.Use)
+                : a.Item is { } item && rules.Items.TryGetValue(item, out var it) ? it.Use is { } itemUse ? rules.Abilities.GetValueOrDefault(itemUse) : null
                 : rules.Abilities.GetValueOrDefault(a.Ability);
             var rolls = ImmutableArray.CreateBuilder<AimRoll>();
             PhonePreview Preview(UnitPreview p)

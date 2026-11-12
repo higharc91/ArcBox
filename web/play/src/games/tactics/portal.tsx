@@ -30,6 +30,7 @@ interface Me {
   subclasses: { id: string; name: string }[] | null; choices: Choice[];
   color?: string; skills?: string[]; saves?: string[]; bonuses?: Record<string, number> | null;
   trinket?: Trinket;
+  equipment?: { weapon: string; armor: string; shield: boolean; items: { id: string; name: string; slot: string; can: boolean; equipped: boolean; detail: string }[] };
   companion?: { monster: string; name: string; defaultName: string; suggestions: string[] };
 }
 interface Options {
@@ -432,6 +433,7 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
           </div>
         </div>
       ) : null}
+      {me.equipment && <Equipment equipment={me.equipment} readOnly={readOnly} send={send} />}
       {me.companion && <CompanionRename companion={me.companion} readOnly={readOnly} send={send} />}
       {me.increasesLeft >= 2 ? <Increase readOnly={readOnly} send={send} /> : null}
       {features.length && explain ? (
@@ -624,5 +626,23 @@ function CompanionRename({ companion, readOnly, send }: { companion: NonNullable
       <button class="tx-btn" disabled={readOnly || !valid} onClick={() => { void send("nameCompanion", { name }); setEditing(false); }}>Save companion name</button>
       <button class="tx-btn ghost" onClick={() => setEditing(false)}>Cancel</button></>
       : <button class="tx-btn ghost" disabled={readOnly} onClick={() => setEditing(true)}>Rename companion</button>}
+  </div>;
+}
+
+function Equipment({ equipment, readOnly, send }: { equipment: NonNullable<Me["equipment"]>; readOnly: boolean; send: PortalProps["send"] }) {
+  return <div class="tx-block"><h3 class="tx-sect">Equipment</h3>
+    <p class="tx-note">Equip gear you own between sessions. Tobin sells equipment once the forge is working. Equipped items stay in your bag and must be unequipped before trading the last copy.</p>
+    {(["weapon", "armor", "shield"] as const).map(slot => {
+      const items = equipment.items.filter(item => item.slot === slot);
+      const current = items.find(item => item.equipped)?.id ?? "";
+      return <label class="tx-equipment-slot" key={slot}>{slot === "weapon" ? "Weapon" : slot === "armor" ? "Armour" : "Shield"}
+        <select class="tx-companion-input" value={current} disabled={readOnly} onChange={e => void send("equip", { slot, item: e.currentTarget.value })}>
+          {slot !== "weapon" && <option value="">{slot === "armor" ? "No armour" : "No shield"}</option>}
+          {slot === "weapon" && !current && <option value="">{equipment.weapon.replaceAll("_", " ")}</option>}
+          {items.map(item => <option key={item.id} value={item.id} disabled={!item.can}>{item.name}{!item.can ? " · not proficient" : ""}</option>)}
+        </select>
+        {items.find(item => item.equipped)?.detail && <small class="tx-note">{items.find(item => item.equipped)!.detail}</small>}
+      </label>;
+    })}
   </div>;
 }

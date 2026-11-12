@@ -158,6 +158,20 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 id, trinket.Name, trinket.Text, trinket.Rarity, @class = trinket.Class,
                 className = rules.Classes[trinket.Class].Name, active = trinket.ActiveFor(c),
             }, ArcJson.Options);
+        if (rules.Items.Values.Any(i => i.Equipment is not null))
+        {
+            var inventory = EquipmentRules.ClaimStarting(c, rules);
+            view["equipment"] = JsonSerializer.SerializeToNode(new
+            {
+                weapon = c.Weapon, armor = c.Armor, shield = c.Shield,
+                items = inventory.Bag.Where(s => s.Count > 0 && rules.Items[s.Item].Equipment is not null).Select(s =>
+                {
+                    var item = rules.Items[s.Item]; var gear = item.Equipment!;
+                    return new { id = item.Id.Value, item.Name, slot = gear.Weapon is not null ? "weapon" : gear.Armor is not null ? "armor" : "shield",
+                        can = EquipmentRules.Proficient(c, gear, rules), equipped = EquipmentRules.Reserved(c, item), detail = EquipmentRules.Describe(item, rules) };
+                }),
+            }, ArcJson.Options);
+        }
         if (CompanionNames.Monster(c, rules) is { } monster)
             view["companion"] = JsonSerializer.SerializeToNode(new
             {
@@ -253,6 +267,10 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                     if (normalized.Problem is not null) return new(null, normalized.Problem);
                     result = (mine.Character with { CompanionName = normalized.Name }, null);
                     break;
+                case "equip" when mine is not null:
+                    if (doc.Battle is not null) return new(null, "Change equipment outside a battle.");
+                    result = EquipmentRules.Equip(mine.Character, Str(data, "slot"), Str(data, "item"), rules);
+                    break;
                 case "spendIncrease" when mine is not null:
                     var stats = data.TryGetProperty("stats", out var st) && st.ValueKind == JsonValueKind.Array
                         ? st.EnumerateArray().Select(e => e.ValueKind == JsonValueKind.String ? ParseStat(e.GetString()!) : null).ToList()
@@ -270,7 +288,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 : type == "createCharacter"
                     // Every remake keeps the existing inventory, injuries and purse. Starting kits are granted only
                     // on first creation, so selling a kit then remaking cannot refill it. Only post-battle remakes use the free one.
-                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag, Trinket = mine.Character.Trinket }, Remade = mine.Remade || mine.HasFought }
+                    ? mine with { Character = character with { Injuries = mine.Character.Injuries, Bag = mine.Character.Bag, Trinket = mine.Character.Trinket, EquipmentClaimed = mine.Character.EquipmentClaimed }, Remade = mine.Remade || mine.HasFought }
                     : mine with { Character = character };
             if (color is not null)
                 record = record with { Color = color };

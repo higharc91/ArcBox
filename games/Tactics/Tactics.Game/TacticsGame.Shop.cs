@@ -108,6 +108,8 @@ public sealed partial class TacticsGame
         if (buy && (!stock.Stock.ContainsKey(itemId) || available != -1 && available < count)) { Toast(player.Id, "Out of stock"); return; }
         if (!buy && (Str(input.Data, "member") != profile.Value || stack is null || stack.Count < count)) { Toast(player.Id, "You may only sell items in your own bag."); return; }
         if (!buy && !ShopRules.Accepts(item, shop)) { Toast(player.Id, "The keeper does not buy that item."); return; }
+        if (!buy && EquipmentRules.Reserved(member.Character, item) && stack!.Count - count < 1)
+        { Toast(player.Id, "Unequip that item before selling it."); return; }
         var total = (long)(buy ? ShopRules.Buy(item, shop, Haggled) : ShopRules.Sell(item, shop, Haggled)) * count;
         if (total > int.MaxValue || !buy && (long)member.Gold + total > int.MaxValue) { Toast(player.Id, "That trade exceeds the gold limit."); return; }
         if (buy && member.Gold < total) { Toast(player.Id, "Not enough gold"); return; }
@@ -142,9 +144,9 @@ public sealed partial class TacticsGame
             gold = member?.Gold ?? 0,
             items = shop.Stock.Select(s => new { item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Buy(Rules.Items[s.Item], shop, haggled),
                 count = stock.Stock[s.Item.Value], can = member is not null && _online.Contains(player.Id) && stock.Stock[s.Item.Value] != 0 && member.Gold >= ShopRules.Buy(Rules.Items[s.Item], shop, haggled),
-                detail = Tooltips.For(Rules.Abilities[Rules.Items[s.Item].Use], _doc.PartyLevel, Rules) }),
-            sell = member is null ? [] : member.Character.Bag.Where(s => ShopRules.Accepts(Rules.Items[s.Item], shop))
-                .Select(s => new { member = profile.Value, item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Sell(Rules.Items[s.Item], shop, haggled), count = s.Count }).ToArray(),
+                detail = Rules.Items[s.Item].Use is { } use ? Tooltips.For(Rules.Abilities[use], _doc.PartyLevel, Rules) : EquipmentRules.Describe(Rules.Items[s.Item], Rules) }),
+            sell = member is null ? [] : member.Character.Bag.Where(s => ShopRules.Accepts(Rules.Items[s.Item], shop) && (!EquipmentRules.Reserved(member.Character, Rules.Items[s.Item]) || s.Count > 1))
+                .Select(s => new { member = profile.Value, item = s.Item.Value, name = Rules.Items[s.Item].Name, price = ShopRules.Sell(Rules.Items[s.Item], shop, haggled), count = s.Count - (EquipmentRules.Reserved(member.Character, Rules.Items[s.Item]) ? 1 : 0) }).ToArray(),
             you = new { member = member is null ? null : profile.Value, canBuy = member is not null && _online.Contains(player.Id) },
             leader = profile.Value == _lead,
             vip = IsVip(player),

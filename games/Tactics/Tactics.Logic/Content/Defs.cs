@@ -405,10 +405,13 @@ public sealed record MonsterDef(string Id, string Name, string Cr, int Xp, Immut
 /// A consumable item (<c>items.json</c>): using it runs the ability <see cref="Use"/>. <see cref="Tags"/> such as
 /// <c>"healing"</c> guide the AI. <see cref="Replaces"/> lets a later pack override an id.
 /// </summary>
-public sealed record ItemDef(ItemId Id, string Name, AbilityId Use,
+public sealed record EquipmentDef(string? Weapon = null, string? Armor = null, bool Shield = false);
+
+public sealed record ItemDef(ItemId Id, string Name, AbilityId? Use,
     [property: JsonConverter(typeof(OrdinalJsonConverter))] ImmutableSortedSet<string> Tags,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ItemId? Replaces = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Price = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EquipmentDef? Equipment = null);
 
 /// <summary>
 /// A suit of armour (<c>armor.json</c>): its <see cref="Kind"/> caps the DEX bonus (light: none, medium: +2, heavy: DEX

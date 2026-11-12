@@ -71,6 +71,288 @@
           "price": 25
         }
       ]
+    },
+    {
+      "id": "af_market_smith",
+      "name": "Tobin's Forge",
+      "keeper": {
+        "person": 12
+      },
+      "greeting": "The charcoal burns clean. Take a look at the rack.",
+      "farewell": "Keep an edge on it.",
+      "stock": [
+        {
+          "item": "gear_club",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_dagger",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_greatclub",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_handaxe",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_javelin",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_light_hammer",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_mace",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_quarterstaff",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_sickle",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_spear",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_dart",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_light_crossbow",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_shortbow",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_sling",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_battleaxe",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_flail",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_glaive",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_greataxe",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_greatsword",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_halberd",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_lance",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_longsword",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_maul",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_morningstar",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_pike",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_rapier",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_scimitar",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_shortsword",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_trident",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_warhammer",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_war_pick",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_whip",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_hand_crossbow",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_heavy_crossbow",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_longbow",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_longsword_plus_one",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_quarterstaff_plus_one",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_shortbow_plus_one",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_padded",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_leather",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_studded_leather",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_hide",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_chain_shirt",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_scale_mail",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_breastplate",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_half_plate",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_ring_mail",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_chain_mail",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_splint",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_plate",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_leather_plus_one",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_chain_shirt_plus_one",
+          "count": 1,
+          "restock": "never"
+        },
+        {
+          "item": "gear_shield",
+          "count": 1,
+          "restock": "never"
+        }
+      ],
+      "buys": [
+        "equipment"
+      ],
+      "requires": [
+        "sq_forge_done"
+      ]
     }
   ]
 }

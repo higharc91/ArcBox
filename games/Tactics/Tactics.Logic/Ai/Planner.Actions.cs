@@ -36,7 +36,7 @@ internal sealed partial class Planner
         if (_options.AllowItems)
             foreach (var stack in _me.Bag.Where(b => b.Count > 0).DistinctBy(b => b.Item).OrderBy(b => b.Item))
                 if (_rules.Items.TryGetValue(stack.Item, out var item) && (!_companion || Companion.MayUse(item, _me))
-                    && _rules.Abilities.TryGetValue(item.Use, out var ability) && UsableOf(ability, Battle.UseItem, item.Id) is { } u)
+                    && item.Use is { } useAbility && _rules.Abilities.TryGetValue(useAbility, out var ability) && UsableOf(ability, Battle.UseItem, item.Id) is { } u)
                     usables.Add(u);
         return usables.ToImmutable();
     }
