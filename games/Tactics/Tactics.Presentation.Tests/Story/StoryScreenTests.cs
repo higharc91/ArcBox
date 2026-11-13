@@ -132,7 +132,7 @@ public sealed class StoryScreenTests
     public void Every_line_in_the_lore_fits_the_caption()
     {
         var lines = AllLines().ToArray();
-        Assert.Equal(945, lines.Length);
+        Assert.Equal(981, lines.Length);
         foreach (var (_, line) in lines)
         {
             var caption = Screen(Showing(1, LineOf(line))).Caption!;
