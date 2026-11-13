@@ -185,7 +185,7 @@ public sealed record FallCue(double At, double Length, UnitId Unit, Tile Tile, i
 public sealed record ShakeCue(double At, double Length) : Cue(At, Length);
 
 /// <summary>A dialogue line.</summary>
-public sealed record LineCue(double At, string Speaker, string Line) : Cue(At, 0);
+public sealed record LineCue(double At, string Speaker, string Line, string? Voice = null) : Cue(At, 0);
 
 /// <summary>A moment worth a screenshot with <c>--shots</c>.</summary>
 public sealed record MomentCue(double At, string Label) : Cue(At, 0);
@@ -555,7 +555,7 @@ public sealed record BeatScript(int Seq, ImmutableArray<Cue> Cues, double Length
                     Moment($"trigger-{fired.Id}");
                     break;
                 case Said said:
-                    _cues.Add(new LineCue(_t, said.Speaker, said.Line));
+                    _cues.Add(new LineCue(_t, said.Speaker, said.Line, said.Voice));
                     _t += BeatTiming.Said;
                     break;
                 case PhaseEntered phase:

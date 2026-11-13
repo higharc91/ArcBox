@@ -19,9 +19,9 @@ public sealed class RestTests
         return Again(doc);
     }
 
-    internal static Session Again(TacticsDocument doc, int die = 20, RulesPack? rules = null)
+    internal static Session Again(TacticsDocument doc, int die = 20, RulesPack? rules = null, LoreBook? lore = null)
     {
-        var game = new TacticsGame(rules ?? CampRules.Value, battleList: true) { CampDie = () => die };
+        var game = new TacticsGame(rules ?? CampRules.Value, lore: lore, battleList: true) { CampDie = () => die };
         var s = new Session(document: doc.ToJson(), game: game);
         s.Harness.Resume(s.Lease);
         for (var i = 0; i < 4; i++) s.Harness.SetConnected(i, true);
@@ -235,6 +235,40 @@ public sealed class RestTests
         Assert.Equal(1, next.Game.Document.World!.RestSeq);
         Assert.False(next.Game.Document.World.RestReady);
         Assert.All(next.Game.Document.Members.Values, m => Assert.Equal([new InjuryId("cracked_ribs"), new InjuryId("shaken")], m.Character.Injuries));
+    }
+
+    private static StoryLineView SleepBark(RulesPack? rules = null)
+    {
+        var s = Again(AtCamp().Game.Document, rules: rules, lore: LoreBook.Load(ContentBase()));
+        s.Send(0, "interact", new { target = "fire" }); Vote(s);
+        for (var i = 0; i < 4; i++) s.Send(i, "campJob", new { job = "rest" });
+        StoryVoteTests.Until(s, () => s.Game.Document.World!.Camp!.Stage == "sleep", "the sleep transition");
+        return s.Host.Explore!.Bark!.Line;
+    }
+
+    /// <summary>#206: as the party settles, someone at the fire says a camp line: a party member in their voice, or the narrator.</summary>
+    [Fact]
+    public void Camp_says_a_line_from_someone_at_the_fire()
+    {
+        var book = LoreBook.Load(ContentBase()).Barks;
+        var line = SleepBark();
+        var voiced = line.Id.Split('#') is [var id, "low" or "high"] ? id : null;
+        var lines = voiced is not null
+            ? PlayerVoices.Sets.SelectMany(set => book.ForVoice(set, "camp")!.Lines)
+            : book.ForBattle("narrator", "camp")!.Lines;
+        Assert.Contains(lines, l => l.Text == line.Text && l.Id == (voiced ?? line.Id));
+        Assert.Equal(line, SleepBark());        // the rest count picks the speaker and the line: the same again
+    }
+
+    /// <summary>#206: a person with camp lines standing by the fire is there, and speaks first on the first rest.</summary>
+    [Fact]
+    public void Someone_standing_at_the_fire_says_their_camp_line()
+    {
+        var rules = Vault.Load(["""{ "id":"fire", "kind":"campfire", "at":[3,1] }"""],
+            ["""{ "preset":"innkeeper", "at":[4,2], "face":"sw", "id":"bree_tallow", "character":"bree_tallow" }"""]);
+        var line = SleepBark(rules);
+        Assert.Equal("bree_tallow", line.Speaker);
+        Assert.Contains(LoreBook.Load(ContentBase()).Barks.ForBattle("bree_tallow", "camp")!.Lines, l => l.Id == line.Id && l.Text == line.Text);
     }
 
     [Fact]

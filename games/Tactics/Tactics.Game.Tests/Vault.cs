@@ -63,8 +63,8 @@ internal static class Vault
     /// <summary>The base pack with the vault on it.</summary>
     public static readonly Lazy<RulesPack> Rules = new(() => Load(Things));
 
-    /// <summary>The base pack with a vault holding <paramref name="things"/>.</summary>
-    public static RulesPack Load(string[] things)
+    /// <summary>The base pack with a vault holding <paramref name="things"/>, and <paramref name="people"/> (region person JSON) standing in it.</summary>
+    public static RulesPack Load(string[] things, string[]? people = null)
     {
         var dir = Directory.CreateTempSubdirectory("tactics-vault-");
         try
@@ -75,7 +75,10 @@ internal static class Vault
                     if (y >= Rows.Length || x >= Rows[y].Length || Rows[y][x] == '#')
                         bytes[(x + y * 32) * 3 + 2] = (byte)TileFlags.Impassable;
             var region = new RegionDef(Id, "The Vault", 1, [32, 32], ["grass/lush"], [new RegionChunk(0, 0, Convert.ToBase64String(bytes))], [], [],
-                new RegionSpawns(Start, new Tile(2, 1)), []);
+                new RegionSpawns(Start, new Tile(2, 1)), []) with
+            {
+                People = [.. (people ?? []).Select(p => JsonSerializer.Deserialize<RegionPerson>(p, ArcJson.Options)!)],
+            };
             var utf8 = new UTF8Encoding(false);
             Directory.CreateDirectory(Path.Combine(dir.FullName, "world"));
             Directory.CreateDirectory(Path.Combine(dir.FullName, "interactables"));

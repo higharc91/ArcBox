@@ -196,6 +196,38 @@ public sealed class CharacterScreenTests
         Assert.Equal("#7ccbff", TacticsDocument.Read(remade).For(Ana)!.Color);
     }
 
+    /// <summary>#206: a character barks in a voice the player picks, at creation or later on the sheet; a remake keeps it.</summary>
+    [Fact]
+    public void A_character_picks_a_voice_and_keeps_it()
+    {
+        var fresh = Portal.NewDocument(Info);
+        var voices = View(fresh, Ana)["voices"]!.AsArray();
+        Assert.Equal(12, voices.Count);
+        Assert.Contains(voices, v => v!["id"]!.GetValue<string>() == "wry.high" && v["name"]!.GetValue<string>() == "Wry, higher");
+
+        // Without a pick, the character speaks in the default for their name.
+        Assert.Equal(PlayerVoices.Default("Ana"), View(Created(Ana), Ana)["me"]!["voice"]!.GetValue<string>());
+
+        var picked = Portal.Handle(Info, fresh, Ana, "createCharacter", Json(new
+        {
+            race = "dwarf", @class = "cleric", background = "acolyte", scores = new { str = 8, dex = 8, con = 15, @int = 8, wis = 15, cha = 15 },
+            voice = "grim.low",
+        }));
+        Assert.Null(picked.Error);
+        Assert.Equal("grim.low", TacticsDocument.Read(picked.Document!.Value).For(Ana)!.Character.Voice);
+        Assert.Equal("Pick a voice.", Portal.Handle(Info, fresh, Ana, "createCharacter", Json(new
+        {
+            race = "dwarf", @class = "cleric", background = "acolyte", scores = new { str = 8, dex = 8, con = 15, @int = 8, wis = 15, cha = 15 },
+            voice = "operatic.high",
+        })).Error);
+
+        var changed = Portal.Handle(Info, picked.Document!.Value, Ana, "setVoice", Json(new { voice = "wry.high" }));
+        Assert.Null(changed.Error);
+        Assert.Equal("wry.high", View(changed.Document!.Value, Ana)["me"]!["voice"]!.GetValue<string>());
+        Assert.Equal("Pick a voice.", Portal.Handle(Info, picked.Document!.Value, Ana, "setVoice", Json(new { voice = "wry" })).Error);
+        Assert.Equal("wry.high", TacticsDocument.Read(Created(Ana, doc: changed.Document)).For(Ana)!.Character.Voice);
+    }
+
     [Fact]
     public void Creation_offers_the_palette_the_grounds_and_the_colour_it_starts_on()
     {
