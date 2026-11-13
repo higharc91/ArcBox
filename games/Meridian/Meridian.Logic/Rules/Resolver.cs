@@ -28,6 +28,7 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case UseCompartment: UseRoom(); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
+        AfterStep();
     }
 
     /// <summary>The legal answers to <paramref name="waiting"/>, not counting Timeout.</summary>

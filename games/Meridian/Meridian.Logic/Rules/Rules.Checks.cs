@@ -30,7 +30,7 @@ internal sealed partial class Resolver
 
         if (roll.Reason == RollReason.Breach)
         {
-            BreachRolled(roll.From, dice.Total);
+            BreachRolled(roll, dice.Total);
             return;
         }
 
@@ -44,7 +44,7 @@ internal sealed partial class Resolver
     }
 
     /// <summary>Settles the Breach roll (plan Task 8).</summary>
-    partial void BreachRolled(SeatId seat, int total);
+    partial void BreachRolled(RollPending roll, int total);
 
     /// <summary>
     /// An Incident goes to its discard as soon as it resolves, before its effects: an effect may draw again, and the
