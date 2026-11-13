@@ -4,6 +4,10 @@
     <Project Path="games/Counter/Counter.Logic.Tests/Counter.Logic.Tests.csproj" />
     <Project Path="games/Counter/Counter.Logic/Counter.Logic.csproj" />
   </Folder>
+  <Folder Name="/games/Meridian/">
+    <Project Path="games/Meridian/Meridian.Logic.Tests/Meridian.Logic.Tests.csproj" />
+    <Project Path="games/Meridian/Meridian.Logic/Meridian.Logic.csproj" />
+  </Folder>
   <Folder Name="/games/Redline/">
     <Project Path="games/Redline/Redline.Logic.Tests/Redline.Logic.Tests.csproj" />
     <Project Path="games/Redline/Redline.Logic/Redline.Logic.csproj" />
