@@ -50,7 +50,43 @@ public static class Reach
         }
     }
 
-    /// <summary>Distances with no budget: how far everything is. Bots use it to head for the frontier.</summary>
+    /// <summary>Distances with no budget: how far everything is.</summary>
     public static IReadOnlyDictionary<CompartmentId, int> Distances(RulesPack pack, ShipState ship, CompartmentId at)
         => From(pack, ship, at, int.MaxValue / 2);
+
+    /// <summary>
+    /// Cheapest cost and the previous compartment on the cheapest path, for everything reachable with no budget. One
+    /// search gives a bot its whole route, instead of a search per candidate move.
+    /// </summary>
+    public static IReadOnlyDictionary<CompartmentId, (int Cost, CompartmentId? Via)> Paths(RulesPack pack, ShipState ship, CompartmentId at)
+    {
+        var best = new Dictionary<CompartmentId, (int Cost, CompartmentId? Via)> { [at] = (0, null) };
+        var done = new HashSet<CompartmentId>();
+        while (true)
+        {
+            CompartmentId? next = null;
+            var cost = int.MaxValue;
+            foreach (var (id, entry) in best)
+            {
+                if (!done.Contains(id) && (entry.Cost < cost || (entry.Cost == cost && next is { } n && id.CompareTo(n) < 0)))
+                {
+                    (next, cost) = (id, entry.Cost);
+                }
+            }
+            if (next is not { } current)
+            {
+                return best;
+            }
+            done.Add(current);
+            var here = ship.Get(current);
+            var step = cost + StepCost(pack, here);
+            foreach (var neighbour in ship.Adjacent(here).Select(c => c.Id).Concat(ship.Linked(current)))
+            {
+                if (!best.TryGetValue(neighbour, out var known) || step < known.Cost)
+                {
+                    best[neighbour] = (step, current);
+                }
+            }
+        }
+    }
 }
