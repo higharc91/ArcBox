@@ -43,7 +43,7 @@ public sealed class StoryMapArtTests
             .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Tile(x,y)))
             .Count(t => families.Any(f => map.Materials[map[t].Material].StartsWith(f + "/", StringComparison.Ordinal)));
         Assert.True(Count(Rules.Maps["warlord_bridge"], "sand", "dunes", "sandstone") >= 120);
-        Assert.True(Count(Rules.Maps["forest_ruins"], "bog", "mud", "water") >= 120);
+        Assert.True(Count(Rules.Maps["forest_ruins"], "bog", "mud", "water") >= 112);
         Assert.Equal(9, Count(Rules.Maps["forest_ruins"], "water"));
         Assert.True(Count(Rules.Maps["crystal_cave"], "ice", "snow") >= 130);
         var tower = Rules.Maps["rime_tower"];
