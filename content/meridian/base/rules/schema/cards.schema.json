@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cards.schema.json",
+  "title": "Meridian cards (rules/cards/*.json). The file decides the kind.",
+  "type": "object",
+  "required": ["cards"],
+  "properties": {
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "text"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "title": { "type": "string" },
+          "text": { "type": "string" },
+          "check": { "$ref": "common.schema.json#/$defs/check" },
+          "choice": {
+            "type": "object", "required": ["options"],
+            "properties": {
+              "options": {
+                "type": "array", "minItems": 2, "maxItems": 4,
+                "items": {
+                  "type": "object", "required": ["id", "label", "text"],
+                  "properties": {
+                    "id": { "$ref": "common.schema.json#/$defs/id" },
+                    "label": { "type": "string" },
+                    "text": { "type": "string" },
+                    "effects": { "$ref": "common.schema.json#/$defs/effects" },
+                    "check": { "$ref": "common.schema.json#/$defs/check" }
+                  }
+                }
+              }
+            }
+          },
+          "item": {
+            "type": "object",
+            "properties": {
+              "passive": { "$ref": "common.schema.json#/$defs/effects" },
+              "use": {
+                "type": "object", "required": ["label", "effects"],
+                "properties": { "label": { "type": "string" }, "effects": { "$ref": "common.schema.json#/$defs/effects" }, "single": { "type": "boolean" } }
+              }
+            }
+          }
+        },
+        "oneOf": [ { "required": ["check"] }, { "required": ["choice"] }, { "required": ["item"] } ]
+      }
+    }
+  }
+}
