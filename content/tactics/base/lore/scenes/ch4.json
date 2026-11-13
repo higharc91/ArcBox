@@ -271,6 +271,132 @@
       ]
     },
     {
+      "id": "ch4_lark_stranger",
+      "beat": "ch4_pilgrim_road",
+      "title": "A Song for the Dead",
+      "cast": [
+        "narrator",
+        "lark",
+        "hooded_stranger"
+      ],
+      "start": "shrine",
+      "nodes": [
+        {
+          "id": "shrine",
+          "lines": [
+            {
+              "id": "ch4_lark_stranger_shrine_1",
+              "speaker": "narrator",
+              "text": "At a frozen shrine halfway up the pass, someone is singing to the dead. Lark sits cross-legged in the snow, and the risen pilgrims stand quite still to listen.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_lark_stranger_shrine_2",
+              "speaker": "lark",
+              "text": "They don't remember their own names, but they remember the tune. Songs don't burn. I did tell you.",
+              "mood": "sad",
+              "direction": "soft, still half singing"
+            },
+            {
+              "id": "ch4_lark_stranger_shrine_3",
+              "speaker": "narrator",
+              "text": "Then Lark looks past you, and the song stops.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_lark_stranger_shrine_4",
+              "speaker": "lark",
+              "text": "There you are. Twenty years I've followed you across this Vale, and you've never once let me catch up.",
+              "mood": "angry",
+              "direction": "sharp, all the playfulness gone"
+            },
+            {
+              "id": "ch4_lark_stranger_shrine_5",
+              "speaker": "narrator",
+              "text": "The Hooded Stranger stands at the edge of the shrine. Snow settles on their hood and does not melt.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "ask_lark",
+              "label": "Lark, what is this?",
+              "to": "margin"
+            },
+            {
+              "id": "ask_stranger",
+              "label": "Lark deserves an answer. Who are you?",
+              "to": "answer"
+            }
+          ]
+        },
+        {
+          "id": "margin",
+          "lines": [
+            {
+              "id": "ch4_lark_stranger_margin_1",
+              "speaker": "lark",
+              "text": "My teacher's teacher kept a Warden songbook from before the Fall. Beside the Song of the Seven, someone drew a face in the margin. That face.",
+              "mood": "idle",
+              "direction": "quiet and steady"
+            },
+            {
+              "id": "ch4_lark_stranger_margin_2",
+              "speaker": "lark",
+              "text": "Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+              "mood": "sad"
+            }
+          ],
+          "next": "answer"
+        },
+        {
+          "id": "answer",
+          "lines": [
+            {
+              "id": "ch4_lark_stranger_answer_1",
+              "speaker": "hooded_stranger",
+              "text": "The margin was unkind. I was never that thin.",
+              "mood": "idle",
+              "direction": "dry, faintly amused"
+            },
+            {
+              "id": "ch4_lark_stranger_answer_2",
+              "speaker": "hooded_stranger",
+              "text": "You want the last verse, songkeeper. So do I. Go to the Keep and ask the one who never forgot. I cannot sing it for you.",
+              "mood": "idle",
+              "direction": "quiet, ageless"
+            },
+            {
+              "id": "ch4_lark_stranger_answer_3",
+              "speaker": "lark",
+              "text": "Can't, or won't?",
+              "mood": "angry"
+            },
+            {
+              "id": "ch4_lark_stranger_answer_4",
+              "speaker": "hooded_stranger",
+              "text": "Yes.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_lark_stranger_answer_5",
+              "speaker": "narrator",
+              "text": "The wind throws snow across the shrine. When it clears, the Stranger is gone, and their footprints with them.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_lark_stranger_answer_6",
+              "speaker": "lark",
+              "text": "I'm coming with you to the Keep. If anyone hears that verse sung at last, it's going to be me.",
+              "mood": "idle",
+              "direction": "determined, a little shaky"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
       "id": "ch4_greyhold",
       "beat": "ch4_greyhold",
       "title": "Greyhold",

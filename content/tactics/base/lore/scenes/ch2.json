@@ -1174,6 +1174,93 @@
       ]
     },
     {
+      "id": "ch2_lark_inn",
+      "beat": "ch2_bree_journal",
+      "title": "A Tune in the Corner",
+      "cast": [
+        "narrator",
+        "lark"
+      ],
+      "start": "corner",
+      "nodes": [
+        {
+          "id": "corner",
+          "lines": [
+            {
+              "id": "ch2_lark_inn_corner_1",
+              "speaker": "narrator",
+              "text": "When Bree goes back to the bar, a tune drifts over from the corner table. Lark has been listening the whole time.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch2_lark_inn_corner_2",
+              "speaker": "lark",
+              "text": "She's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.",
+              "mood": "sad",
+              "direction": "gentle, half to themself"
+            },
+            {
+              "id": "ch2_lark_inn_corner_3",
+              "speaker": "lark",
+              "text": "So. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.",
+              "mood": "idle"
+            }
+          ],
+          "options": [
+            {
+              "id": "verse",
+              "label": "Did you find your last verse in Mirewood?",
+              "to": "verse"
+            },
+            {
+              "id": "following",
+              "label": "You said you were following someone. Who?",
+              "to": "following"
+            }
+          ]
+        },
+        {
+          "id": "verse",
+          "lines": [
+            {
+              "id": "ch2_lark_inn_verse_1",
+              "speaker": "lark",
+              "text": "Ysolde offered me a verse for a memory. I said no. I'm told that makes me the only person who's ever refused a bargain in Mirewood.",
+              "mood": "happy",
+              "direction": "proud and a little shaken"
+            },
+            {
+              "id": "ch2_lark_inn_verse_2",
+              "speaker": "lark",
+              "text": "It wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "following",
+          "lines": [
+            {
+              "id": "ch2_lark_inn_following_1",
+              "speaker": "lark",
+              "text": "Not here. Ask me again somewhere colder. Some things you only say where your breath shows.",
+              "mood": "idle",
+              "direction": "lightly deflecting"
+            },
+            {
+              "id": "ch2_lark_inn_following_2",
+              "speaker": "lark",
+              "text": "But watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.",
+              "mood": "idle",
+              "direction": "low, serious for once"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
       "id": "ch2_corvin",
       "beat": "ch2_corvin_page",
       "title": "The Page in Corvin's Hand",
