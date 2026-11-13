@@ -24,6 +24,7 @@ A salvage crew boards a silent starship. They explore it one compartment at a ti
 - **Every twist archetype in v1:** revealed traitor, hidden traitor, co-op against the ship, timed escape, free-for-all.
 - **10–12 scenarios** in the first version. This spec plans 12.
 - **The game must resume after a server restart** (decided 2026-11-13). This needs one platform addition (§5.6).
+- **Eight selectable crew**, and a **60-second inactivity timer** per turn as the starting point.
 
 ### What we're assuming
 - **All content is original.** The mechanics are the genre's; no tile, card, character, scenario, name or rules text is taken from any published game.
@@ -445,6 +446,9 @@ M5 and M6 don't depend on each other or on M7 and can run alongside it. M6 is re
 | A hidden-traitor bot plays obviously | It only covers a disconnection (§6). If playtests show it gives the role away, a hidden-role disconnect can instead pause until the VIP chooses to continue |
 | The Tactics art pipeline's fantasy style doesn't carry to a starship | A style sheet and a handful of tiles are made first in M5, before the full set |
 
-## 12. Open questions
-1. **Crew count.** Eight crew is assumed. More costs art and balance; fewer gives a full room less choice.
-2. **Turn timer.** 60 seconds of inactivity is a guess for a party setting. It is the first number to revisit after a playtest.
+## 12. Decisions (2026-11-13)
+There are no open questions. Settled in review:
+
+1. **Restart support.** Required; see §5.6.
+2. **Crew count.** Eight selectable crew.
+3. **Turn timer.** 60 seconds of inactivity ends a turn. It is still the first number to revisit after a playtest.
