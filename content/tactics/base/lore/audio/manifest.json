@@ -423,6 +423,12 @@
     "bark_halden_varrow_town_7": {
       "main": "bark_halden_varrow_town_7.31cb3fbd.ogg"
     },
+    "bark_halden_varrow_town_force": {
+      "main": "bark_halden_varrow_town_force.d2313b43.ogg"
+    },
+    "bark_halden_varrow_town_parley": {
+      "main": "bark_halden_varrow_town_parley.727c209b.ogg"
+    },
     "bark_halvard_battle_start_1": {
       "main": "bark_halvard_battle_start_1.dc7397a4.ogg"
     },
@@ -3903,6 +3909,12 @@
     "sq_tobin_fell_008": {
       "main": "sq_tobin_fell_008.463aa699.ogg"
     },
+    "talk_halden_varrow_ford_ember": {
+      "main": "talk_halden_varrow_ford_ember.28892707.ogg"
+    },
+    "talk_halden_varrow_ford_force": {
+      "main": "talk_halden_varrow_ford_force.eb46dd8a.ogg"
+    },
     "talk_lark_bye_1": {
       "main": "talk_lark_bye_1.91b7c8f4.ogg"
     },
@@ -3972,8 +3984,20 @@
     "town_farmer_3": {
       "main": "town_farmer_3.4602ed8a.ogg"
     },
+    "town_farmer_confessed": {
+      "main": "town_farmer_confessed.1410ddd6.ogg"
+    },
+    "town_farmer_ember": {
+      "main": "town_farmer_ember.c77cebac.ogg"
+    },
+    "town_farmer_force": {
+      "main": "town_farmer_force.ff5535b4.ogg"
+    },
     "town_farmer_ford_open": {
       "main": "town_farmer_ford_open.5c265c35.ogg"
+    },
+    "town_farmer_parley": {
+      "main": "town_farmer_parley.48ab6991.ogg"
     },
     "town_farmhand_1": {
       "main": "town_farmhand_1.ce64d693.ogg"
