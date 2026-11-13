@@ -32,4 +32,16 @@ public sealed record MeridianRules
 
     /// <summary>Inactivity that ends a turn; restarts whenever the player acts (the adapter's clock).</summary>
     public TimeSpan TurnInactivity { get; init; } = TimeSpan.FromSeconds(60);
+
+    // The adapter's other deadlines (M2 plan, Global constraints).
+    public TimeSpan RollWait { get; init; } = TimeSpan.FromSeconds(20);
+    public TimeSpan ChoiceWait { get; init; } = TimeSpan.FromSeconds(30);
+    public TimeSpan TradeWait { get; init; } = TimeSpan.FromSeconds(20);
+    public TimeSpan BoardingTime { get; init; } = TimeSpan.FromSeconds(45);
+
+    /// <summary>How long a disconnected seat that owes a decision is waited for before a bot plays it.</summary>
+    public TimeSpan DisconnectGrace { get; init; } = TimeSpan.FromSeconds(20);
+
+    /// <summary>The pause between a bot's commands, so its turn is watchable.</summary>
+    public TimeSpan BotStep { get; init; } = TimeSpan.FromSeconds(0.8);
 }
