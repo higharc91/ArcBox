@@ -358,12 +358,13 @@ public sealed class AshenFordDraftTests
         var draft = Draft.Value;
         var story = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase);
         Assert.Empty(story.Problems);
-        Assert.Equal(["ch1_force", "ch1_parley"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
-        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_force").Select(l => l.Beat));
-        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_river_crossing", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_parley").Select(l => l.Beat));
+        // The ember vote ends the chapter, so each ford branch splits three ways at its last beat (#211).
+        Assert.Equal(["ch1_force/ch1_bargain_ember", "ch1_force/ch1_guard_ember", "ch1_force/ch1_take_ember", "ch1_parley/ch1_bargain_ember", "ch1_parley/ch1_guard_ember", "ch1_parley/ch1_take_ember"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_force/ch1_take_ember").Select(l => l.Beat));
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_river_crossing", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_parley/ch1_take_ember").Select(l => l.Beat));
 
         // Parley's fade puts the party at the camp, and its fight comes next.
-        Assert.Equal(draft.Spot("ch1_skarrow_song"), story.Legs.Single(l => l.Branch == "ch1_parley" && l.Beat == "ch1_river_crossing").From);
+        Assert.Equal(draft.Spot("ch1_skarrow_song"), story.Legs.Single(l => l.Branch == "ch1_parley/ch1_take_ember" && l.Beat == "ch1_river_crossing").From);
         Assert.Equal(2, story.Retries.Length);
     }
 
@@ -373,8 +374,8 @@ public sealed class AshenFordDraftTests
         var draft = Draft.Value;
         var legs = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase).Legs;
 
-        Assert.Equal(0, legs.Single(l => l.Branch == "ch1_force" && l.Beat == "ch1_ford_assault").Seconds);
-        Assert.True(legs.Single(l => l.Branch == "ch1_parley" && l.Beat == "ch1_river_crossing").Seconds > 0);
+        Assert.Equal(0, legs.Single(l => l.Branch == "ch1_force/ch1_take_ember" && l.Beat == "ch1_ford_assault").Seconds);
+        Assert.True(legs.Single(l => l.Branch == "ch1_parley/ch1_take_ember" && l.Beat == "ch1_river_crossing").Seconds > 0);
     }
 
     [Fact]
@@ -411,7 +412,7 @@ public sealed class AshenFordDraftTests
 
         var legs = StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase).Legs;
 
-        Assert.Equal(0, legs.Single(l => l.Branch == "ch1_parley" && l.Beat == "ch1_river_crossing").Seconds);
+        Assert.Equal(0, legs.Single(l => l.Branch == "ch1_parley/ch1_take_ember" && l.Beat == "ch1_river_crossing").Seconds);
     }
 
     private static void Pit(RegionSource source, params Tile[] tiles)
@@ -1096,7 +1097,7 @@ public sealed class AshenFordDraftTests
 
         var story = StoryOrder.Check(region, draft.Pack, ContentPaths.ContentBase);
         Assert.Empty(story.Problems);
-        Assert.Equal(["ch1_force", "ch1_parley"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
+        Assert.Equal(["ch1_force/ch1_bargain_ember", "ch1_force/ch1_guard_ember", "ch1_force/ch1_take_ember", "ch1_parley/ch1_bargain_ember", "ch1_parley/ch1_guard_ember", "ch1_parley/ch1_take_ember"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
         Assert.All(story.Legs, leg => Assert.NotNull(leg.Seconds));
         Assert.All(story.Retries, leg => Assert.NotNull(leg.Seconds));
     }

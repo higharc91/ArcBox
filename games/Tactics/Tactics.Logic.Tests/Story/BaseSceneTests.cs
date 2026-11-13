@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(1045, lines.Count);
+        Assert.Equal(1057, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);
@@ -124,7 +124,7 @@ public sealed class BaseSceneTests
     public void Every_beat_has_a_scene_on_each_branch()
     {
         var branches = Campaign.Branches(Book).ToList();
-        Assert.Equal(2 * 3 * 2 * 2 * 2 * 3, branches.Count);
+        Assert.Equal(2 * 3 * 2 * 2 * 2 * 3 * 3, branches.Count);  // the last factor is Chapter I's ember vote (#211)
         var silent = new SortedSet<string>(StringComparer.Ordinal);
         foreach (var branch in branches)
             foreach (var step in branch)
