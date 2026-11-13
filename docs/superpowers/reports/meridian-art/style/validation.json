@@ -1,7 +1,7 @@
 {
   "command": "bash tools/check-all.sh --full",
-  "commandStartHead": "f7fbba7d",
-  "assetCodeHead": "558abe07fca5885123d8501e10e2489d2348f4fd",
+  "commandStartHead": "53960104dc0aded30a5a2bef93ec3c889d623e06",
+  "assetCodeHead": "12e8e290fbe144b24158513729a53712e5c32c03",
   "mainBase": "cf156c468557266db94ede7ee388f2f5cff41469",
   "exitCode": 1,
   "dotnet": {
@@ -58,5 +58,12 @@
   ],
   "generationCreditsSpent": 0,
   "ownerStyleApproval": "pending",
-  "issue331": "open; no merge or closure claimed"
+  "issue331": "open; no merge or closure claimed",
+  "commandStartNote": "Started with the refined asset sources uncommitted; those same sources were committed in 12e8e290 during the run. Subsequent edits only update documentation/evidence.",
+  "revision": "detail refinement after owner feedback",
+  "nativeCapturePixelIdenticalToMock": true,
+  "sourceSha256": {
+    "tools/meridian-assets/build.py": "ea888c8718e137d4c645fda7eb72bf52c51e1f20835cc55096fe3bfac9fd8230",
+    "tools/meridian-assets/test_build.py": "161a3edec2bb7212cb73ad43ac8f1fea228a8164bd938bdd380c2823c6586b3f"
+  }
 }
