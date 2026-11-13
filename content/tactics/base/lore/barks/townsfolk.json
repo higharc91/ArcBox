@@ -63,7 +63,7 @@
           "mood": "sad",
           "direction": "plain, weathered and quietly worried",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
           ]
         },
         {
@@ -135,7 +135,7 @@
           "mood": "idle",
           "direction": "young, tired, dry working voice",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
           ]
         },
         {
@@ -200,7 +200,17 @@
           "mood": "idle",
           "direction": "low, unhurried, superstitious river voice",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
+          ]
+        },
+        {
+          "id": "town_fisher_guarded",
+          "text": "Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+          "speaker": "townsfolk_fisher",
+          "mood": "idle",
+          "direction": "low, unhurried, superstitious river voice",
+          "requires": [
+            "ch1_ember_guarded"
           ]
         }
       ]
@@ -264,7 +274,7 @@
           "mood": "idle",
           "direction": "brisk market patter with worry beneath it",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
           ]
         },
         {
@@ -280,6 +290,16 @@
           "speaker": "townsfolk_merchant",
           "mood": "happy",
           "direction": "brisk market patter with worry beneath it"
+        },
+        {
+          "id": "town_merchant_bargained",
+          "text": "Shards for a copper. A copper! Ash Market's practically giving them away. Makes me nervous.",
+          "speaker": "townsfolk_merchant",
+          "mood": "surprised",
+          "direction": "brisk market patter with worry beneath it",
+          "requires": [
+            "ch1_ember_bargained"
+          ]
         }
       ]
     },
@@ -339,7 +359,7 @@
           "mood": "idle",
           "direction": "restrained, ashamed but loyal military voice",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
           ]
         },
         {
@@ -348,6 +368,16 @@
           "speaker": "townsfolk_guard",
           "mood": "idle",
           "direction": "restrained, ashamed but loyal military voice"
+        },
+        {
+          "id": "town_guard_guarded",
+          "text": "Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+          "speaker": "townsfolk_guard",
+          "mood": "sad",
+          "direction": "restrained, ashamed but loyal military voice",
+          "requires": [
+            "ch1_ember_guarded"
+          ]
         }
       ]
     },
@@ -404,7 +434,7 @@
           "mood": "idle",
           "direction": "practical, warm, quick but clear",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
           ]
         },
         {
@@ -415,6 +445,16 @@
           "direction": "practical, warm, quick but clear",
           "requires": [
             "ch1_halden_confessed"
+          ]
+        },
+        {
+          "id": "town_barmaid_bargained",
+          "text": "Every hearth in town has a new shard. Bree won't buy one. Says she's forgotten enough.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "idle",
+          "direction": "practical, warm, quick but clear",
+          "requires": [
+            "ch1_ember_bargained"
           ]
         }
       ]
@@ -472,7 +512,7 @@
           "mood": "surprised",
           "direction": "bright, pitched up, innocent without baby talk",
           "requires": [
-            "ch1_ember_found"
+            "ch1_ember_taken"
           ]
         }
       ]

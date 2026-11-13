@@ -902,38 +902,41 @@
               "speaker": "narrator",
               "mood": "idle",
               "text": "The Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges."
-            },
-            {
-              "id": "ch2_bree_open_2",
-              "speaker": "bree_tallow",
-              "mood": "idle",
-              "text": "Sit. Eat. Then you can tell me how bad it is. Mirewood, of all places. Were the stories true?",
-              "direction": "brisk and kind, wiping down a table"
             }
           ],
           "options": [
             {
-              "id": "paid",
-              "label": "One of us paid with a memory.",
-              "to": "paid",
+              "id": "taken",
+              "label": "It's colder in here than it used to be.",
+              "to": "taken",
               "requires": [
-                "ch2_paid_memory"
+                "ch1_ember_taken"
               ]
             },
             {
-              "id": "tricked",
-              "label": "We tricked the Court.",
-              "to": "tricked",
+              "id": "guarded",
+              "label": "Are Dagna's guards still on the pier?",
+              "to": "guarded",
               "requires": [
-                "ch2_court_tricked"
+                "ch1_ember_guarded"
               ]
             },
             {
-              "id": "left",
-              "label": "We left the ember with them.",
-              "to": "left",
+              "id": "bargained",
+              "label": "Rook's shards are in every hearth now.",
+              "to": "bargained",
               "requires": [
-                "ch2_ember_left"
+                "ch1_ember_bargained"
+              ]
+            },
+            {
+              "id": "home",
+              "label": "It's good to be home.",
+              "to": "mirewood",
+              "unless": [
+                "ch1_ember_taken",
+                "ch1_ember_guarded",
+                "ch1_ember_bargained"
               ]
             }
           ]
@@ -1170,6 +1173,104 @@
             }
           ],
           "end": true
+        },
+        {
+          "id": "taken",
+          "lines": [
+            {
+              "id": "ch2_bree_taken_1",
+              "speaker": "bree_tallow",
+              "text": "Colder everywhere. The dockside fields froze the night you left with it. Folk are blaming the weather. I'm not.",
+              "mood": "sad",
+              "direction": "brisk, tired"
+            },
+            {
+              "id": "ch2_bree_taken_2",
+              "speaker": "bree_tallow",
+              "text": "I'm not saying you were wrong. I'm saying somebody's paying for it, and it's not the ones who decided.",
+              "mood": "idle",
+              "direction": "plain, kind but firm"
+            }
+          ],
+          "next": "mirewood"
+        },
+        {
+          "id": "guarded",
+          "lines": [
+            {
+              "id": "ch2_bree_guarded_1",
+              "speaker": "bree_tallow",
+              "text": "Still there. I send them soup at midnight. One of them cried, last week. Said the glow reminds him of his mother's kitchen.",
+              "mood": "sad",
+              "direction": "soft, brisk"
+            },
+            {
+              "id": "ch2_bree_guarded_2",
+              "speaker": "bree_tallow",
+              "text": "Town's warmer for it. For now. Everyone knows it won't last, so nobody says so.",
+              "mood": "idle",
+              "direction": "plain"
+            }
+          ],
+          "next": "mirewood"
+        },
+        {
+          "id": "bargained",
+          "lines": [
+            {
+              "id": "ch2_bree_bargained_1",
+              "speaker": "bree_tallow",
+              "text": "A copper apiece. Everyone's warm and cheerful, and half of them can't remember what they had for breakfast.",
+              "mood": "angry",
+              "direction": "brisk, uneasy"
+            },
+            {
+              "id": "ch2_bree_bargained_2",
+              "speaker": "bree_tallow",
+              "text": "I won't buy one. I've lost enough to Gran's old shard. I'll not hurry the rest along.",
+              "mood": "sad",
+              "direction": "quiet, stubborn"
+            }
+          ],
+          "next": "mirewood"
+        },
+        {
+          "id": "mirewood",
+          "lines": [
+            {
+              "id": "ch2_bree_open_2",
+              "speaker": "bree_tallow",
+              "mood": "idle",
+              "text": "Sit. Eat. Then you can tell me how bad it is. Mirewood, of all places. Were the stories true?",
+              "direction": "brisk and kind, wiping down a table"
+            }
+          ],
+          "options": [
+            {
+              "id": "paid",
+              "label": "One of us paid with a memory.",
+              "to": "paid",
+              "requires": [
+                "ch2_paid_memory"
+              ]
+            },
+            {
+              "id": "tricked",
+              "label": "We tricked the Court.",
+              "to": "tricked",
+              "requires": [
+                "ch2_court_tricked"
+              ]
+            },
+            {
+              "id": "left",
+              "label": "We left the ember with them.",
+              "to": "left",
+              "requires": [
+                "ch2_ember_left"
+              ]
+            }
+          ]
         }
       ]
     },

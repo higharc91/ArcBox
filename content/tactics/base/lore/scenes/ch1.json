@@ -2908,7 +2908,8 @@
       "title": "Four More",
       "cast": [
         "narrator",
-        "hooded_stranger"
+        "hooded_stranger",
+        "rook"
       ],
       "start": "open",
       "nodes": [
@@ -3017,12 +3018,95 @@
               "text": "She'll keep better near her sisters than in the mud. Leave her here, and the Ash Market will have her in chips by spring.",
               "mood": "sad",
               "direction": "quiet, faintly sad"
+            }
+          ],
+          "next": "choose"
+        },
+        {
+          "id": "choose",
+          "lines": [
+            {
+              "id": "ch1_four_more_choose_1",
+              "speaker": "narrator",
+              "text": "The lantern on the pier gutters. When it steadies, the Stranger is gone, and Rook is leaning on the rail where they stood.",
+              "mood": "idle"
             },
+            {
+              "id": "ch1_four_more_choose_2",
+              "speaker": "rook",
+              "text": "So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.",
+              "mood": "idle",
+              "direction": "easy, every sentence an offer"
+            }
+          ],
+          "vote": true,
+          "options": [
+            {
+              "id": "take",
+              "label": "We take the ember with us.",
+              "choice": "ch1_take_ember",
+              "to": "take"
+            },
+            {
+              "id": "guard",
+              "label": "Leave it here, under Dagna's guard.",
+              "choice": "ch1_guard_ember",
+              "to": "guard"
+            },
+            {
+              "id": "bargain",
+              "label": "Let Rook ration it to the town.",
+              "choice": "ch1_bargain_ember",
+              "to": "bargain"
+            }
+          ]
+        },
+        {
+          "id": "take",
+          "lines": [
             {
               "id": "ch1_four_more_where_3",
               "speaker": "narrator",
               "mood": "idle",
               "text": "The lantern on the pier gutters. When it steadies you are alone, and the ford's ember sits warm in your pack."
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "guard",
+          "lines": [
+            {
+              "id": "ch1_four_more_guard_1",
+              "speaker": "rook",
+              "text": "Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.",
+              "mood": "idle",
+              "direction": "dry, unbothered"
+            },
+            {
+              "id": "ch1_four_more_guard_2",
+              "speaker": "narrator",
+              "text": "Before dawn, two of Dagna's guards stand on the third pier with lanterns. The ember stays in the riverbed, keeping Emberwick warm a while longer.",
+              "mood": "idle"
+            }
+          ],
+          "end": true
+        },
+        {
+          "id": "bargain",
+          "lines": [
+            {
+              "id": "ch1_four_more_bargain_1",
+              "speaker": "rook",
+              "text": "Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+              "mood": "happy",
+              "direction": "pleased, smooth"
+            },
+            {
+              "id": "ch1_four_more_bargain_2",
+              "speaker": "narrator",
+              "text": "By the next market day, ember shards are selling for a copper apiece. Every hearth in Emberwick burns a little brighter.",
+              "mood": "idle"
             }
           ],
           "end": true

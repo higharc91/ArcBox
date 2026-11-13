@@ -40,7 +40,7 @@
     {
       "node": "ford_ember",
       "requires": [
-        "ch1_ember_found"
+        "ch1_ember_taken"
       ],
       "unless": []
     },
