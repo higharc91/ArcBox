@@ -359,7 +359,7 @@ public sealed class AshenFordDraftTests
         var story = StoryOrder.Check(draft.Region, draft.Pack, ContentPaths.ContentBase);
         Assert.Empty(story.Problems);
         Assert.Equal(["ch1_force", "ch1_parley"], story.Legs.Select(l => l.Branch).Distinct().Order(StringComparer.Ordinal));
-        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_force").Select(l => l.Beat));
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_force").Select(l => l.Beat));
         Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_river_crossing", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], story.Legs.Where(l => l.Branch == "ch1_parley").Select(l => l.Beat));
 
         // Parley's fade puts the party at the camp, and its fight comes next.
