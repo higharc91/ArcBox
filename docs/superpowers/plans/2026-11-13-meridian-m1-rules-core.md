@@ -1,4 +1,4 @@
-> Status: draft plan, awaiting review; no task has started. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: complete (2026-11-13). Tasks 1–11 are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (#320–#330); see [Implementation notes](#implementation-notes) for where the code differs from this plan. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M1 Rules Core Implementation Plan
 
@@ -19,6 +19,23 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 - `Meridian.Game` (the `IGame` adapter, phases, timers, views), the phone module and the dev board: stage M2.
 - Scenarios, roles, audiences, combat, death and echoes: stage M3. M1 stops at a `BreachFired` event.
 - The TV scene, art, the `ISnapshotGame` platform change and the full card set: stages M4–M7.
+
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **Collections in the state are `EqArray<T>`**, not `ImmutableArray<T>`. `ImmutableArray` compares by reference, so a record holding one isn't equal to itself after a JSON round trip. `EqArray<T>` (`Core/EqArray.cs`) has structural equality, collection-expression support and a JSON converter. Trait markers are a `TraitSteps` record of four ints rather than a dictionary, for the same reason.
+- **`GameState` has two more fields:** `First` (the seat that went first, so rounds count from it) and `Turn` (what the active seat has already done this turn).
+- **Effects:** `Gain` takes a trait group, like `Lose`, and goes to the lowest trait in it. There is one more effect, `moves` (add or remove movement this turn). A choice option may carry its own check, rolled after its effects. A terminal effect (`draw`, `endTurn`) must be the last in its list, which the validator enforces.
+- **Heal rooms** restore one step at a time to the lowest trait in the group that is below its starting step, never above it.
+- **Entering a new compartment** costs the same as walking: 1 plus the exit cost of the compartment left. `Open` needs that much movement.
+- **Drop shafts** (`dropTo`) link one way to the target deck's first compartment, its lift landing.
+- **Decks are bounded:** `MeridianRules.DeckRadius` = 6, so each deck is 13×13 cells. A hatch facing the edge is sealed.
+- **Trades** aren't listed by `Rules.Legal`, because their combinations multiply. `Step` checks them with their own predicate, and `Rules.TradeOffers` gives a sample for bots and tests.
+- **No event has a property named `Kind`**, because `kind` is the JSON discriminator. Card events use `Deck`. A test guards this.
+- **A new rule: a ship with nowhere left to grow fires the Breach** (spec §2.6). Without it, sealing the last frontier hatch would leave Explore with no way to end.
+- **The Breach threshold is 6, not 5**, from Task 11's [report](../reports/2026-11-meridian-breach-timing.md).
+- **The bot sweep is split:** 100 seeds per player count in the fast lane, and the full 1,000 in the `Integration` category.
 
 ## Global constraints
 
