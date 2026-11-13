@@ -17,11 +17,12 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
     {
         switch (command)
         {
-            case EndTurn: EndTurnNow(); break;
+            case EndTurn: FinishTurn(); break;
             case Timeout: TimeoutNow(); break;
             case MoveTo m: Move(m); break;
             case Open o: OpenHatch(o); break;
             case Orient o: OrientTile(o.Rotation); break;
+            case Roll: RollDice(); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
     }
@@ -33,6 +34,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
         {
             case OrientPending o:
                 legal.AddRange(o.Rotations.Select(r => new Orient(o.From, r)));
+                break;
+            case RollPending r:
+                legal.Add(new Roll(r.From));
                 break;
         }
     }
@@ -50,15 +54,18 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
         switch (State.Waiting)
         {
             case null:
-                EndTurnNow();
+                FinishTurn();
                 break;
             case OrientPending o:
                 OrientTile(Placement.DefaultRotation(State.Ship, Pack.Tile(o.Tile), o.At, o.Toward, R.DeckRadius));
                 break;
+            case RollPending:
+                RollDice();
+                break;
         }
     }
 
-    private void EndTurnNow()
+    private void FinishTurn()
     {
         var ending = State.ActiveSeat;
         Events.Add(new TurnEnded(ending));

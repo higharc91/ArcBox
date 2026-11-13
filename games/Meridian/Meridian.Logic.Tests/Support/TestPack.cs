@@ -98,6 +98,21 @@ internal static class TestPack
                     { "min": 0, "max": 1, "text": "You flinch.", "effects": [ { "kind": "lose", "traits": "mental", "steps": 1 } ] },
                     { "min": 2, "max": 3, "text": "Nothing happens." },
                     { "min": 4, "max": null, "text": "You steady yourself.", "effects": [ { "kind": "gain", "traits": "nerve", "steps": 1 } ] }
+                  ] } },
+                { "id": "jammed_panel", "title": "Jammed Panel", "text": "A panel sparks as you pass.",
+                  "check": { "trait": "tech", "bands": [
+                    { "min": 0, "max": 1, "text": "It bites back.", "effects": [ { "kind": "lose", "traits": "physical", "steps": 2 }, { "kind": "endTurn" } ] },
+                    { "min": 2, "max": null, "text": "Something falls out.", "effects": [ { "kind": "draw", "card": "salvage" } ] }
+                  ] } },
+                { "id": "strange_signal", "title": "Strange Signal", "text": "A voice on an empty channel.",
+                  "choice": { "options": [
+                    { "id": "follow", "label": "Follow it", "text": "You go looking.",
+                      "effects": [ { "kind": "moves", "delta": 1 } ],
+                      "check": { "trait": "nerve", "bands": [
+                        { "min": 0, "max": 2, "text": "It was nothing.", "effects": [ { "kind": "lose", "traits": "nerve", "steps": 1 } ] },
+                        { "min": 3, "max": null, "text": "You find the source.", "effects": [ { "kind": "moveTo", "tile": "central_lift" } ] }
+                      ] } },
+                    { "id": "ignore", "label": "Ignore it", "text": "You keep moving.", "effects": [ { "kind": "gain", "traits": "mental", "steps": 1 } ] }
                   ] } }
               ]
             }

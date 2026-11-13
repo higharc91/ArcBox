@@ -34,9 +34,10 @@ public sealed class SetupTests
     {
         var state = Rules.NewGame(Pack, Seats, 1);
         Assert.Equal(Pack.Tiles.Sum(t => t.Copies), state.TilePile.Count);
-        Assert.Single(state.Incidents.Draw);
-        Assert.Single(state.Salvage.Draw);
-        Assert.Single(state.Anomalies.Draw);
+        foreach (var kind in Enum.GetValues<CardKind>())
+        {
+            Assert.Equal(Pack.CardsOf(kind).Select(c => c.Id).Order(), state.Pile(kind).Draw.Order());
+        }
     }
 
     [Fact]

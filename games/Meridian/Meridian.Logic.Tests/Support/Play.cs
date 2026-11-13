@@ -60,4 +60,42 @@ internal sealed class Play
     public Compartment Placed(string tile) => State.Ship.Compartments.Last(c => c.Tile == new TileId(tile));
 
     public static CompartmentId C(int n) => CompartmentId.Numbered(n);
+
+    /// <summary>Opens a check on a card for a seat, as drawing it would.</summary>
+    public Play Check(SeatId seat, string card, string? option = null)
+    {
+        var resolver = new Resolver(Pack, State);
+        resolver.StartCheck(seat, new CardId(card), option);
+        State = resolver.State;
+        return this;
+    }
+
+    /// <summary>Sets the state's generator so the next roll of <paramref name="dice"/> dice totals as wanted.</summary>
+    public Play Rig(int dice, Func<int, bool> total)
+    {
+        for (ulong seed = 1; seed < 10_000; seed++)
+        {
+            if (total(SignalDice.Roll(Rng.Seeded(seed), dice, Pack.Rules).Roll.Total))
+            {
+                State = State with { Rng = Rng.Seeded(seed) };
+                return this;
+            }
+        }
+        throw new InvalidOperationException("No seed gives that total.");
+    }
+
+    public Play Steps(SeatId seat, TraitSteps steps)
+    {
+        State = State.WithCrew(State.CrewOf(seat) with { Steps = steps });
+        return this;
+    }
+
+    public Play Give(SeatId seat, params string[] cards)
+    {
+        var crew = State.CrewOf(seat);
+        State = State.WithCrew(crew with { Items = crew.Items.AddRange(cards.Select(c => new CardId(c))) });
+        return this;
+    }
+
+    public int Dice => ((RollPending)State.Waiting!).Dice;
 }
