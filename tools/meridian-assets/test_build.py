@@ -20,6 +20,15 @@ class ContractTests(unittest.TestCase):
             after = {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
             self.assertEqual(before, after)
 
+    def test_existing_hash_named_file_cannot_be_overwritten(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            item = build.immutable(root, 'tiles', 'sample', build.room('bridge'))
+            path = root/'tiles'/item['file']
+            path.write_bytes(b'changed bytes under an existing name')
+            with self.assertRaises(ValueError):
+                build.immutable(root, 'tiles', 'sample', build.room('bridge'))
+
     def test_room_edges_leave_sixteen_pixel_gaps_in_every_rotation(self):
         for key in build.SAMPLES:
             image = build.room(key)
@@ -75,6 +84,12 @@ class ContractTests(unittest.TestCase):
                         digest = hashlib.sha256(p.read_bytes()).hexdigest()
                         self.assertEqual(value['sha256'], digest)
                         self.assertIn(digest[:12], p.name)
+                        if 'edgeBounds' in value:
+                            with Image.open(p) as image:
+                                alpha = np.array(image)[:, :, 3]
+                            x0, y0, x1, y1 = value['edgeBounds']
+                            alpha[y0:y1, x0:x1] = 0
+                            self.assertFalse(alpha.any())
                         count += 1
                     for child in value.values():
                         visit(child, folder)

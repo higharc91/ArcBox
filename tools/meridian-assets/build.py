@@ -152,7 +152,7 @@ def build(root=ROOT):
                       'frameSize': [64, 64], 'doorway': [24, 39], 'rotationDegrees': [0, 90, 180, 270]}
     for state in STATES:
         hatches[state] = {**immutable(pack, 'hatches', state, hatch(state)), 'frameSize': [64, 64],
-                          'edge': 'north', 'edgeBounds': [24, 0, 40, 8]}
+                          'edge': 'north', 'edgeBounds': [23, 0, 41, 8]}
     strip = Image.new('RGBA', (96, 24))
     for i in range(4):
         strip.alpha_composite(crew(i+1), (i*24, 0))
