@@ -397,7 +397,9 @@
         },
         {
           "id": "why_pass",
-          "sets": ["ch1_halden_suspected"],
+          "sets": [
+            "ch1_halden_suspected"
+          ],
           "lines": [
             {
               "id": "ch1_ford_why_pass_1",
@@ -836,7 +838,9 @@
         },
         {
           "id": "haggle_pass",
-          "sets": ["ch1_grain_split_delayed"],
+          "sets": [
+            "ch1_grain_split_delayed"
+          ],
           "lines": [
             {
               "id": "ch1_parley_haggle_pass_1",
@@ -868,7 +872,9 @@
         },
         {
           "id": "young_pass",
-          "sets": ["ch1_vorga_warned"],
+          "sets": [
+            "ch1_vorga_warned"
+          ],
           "lines": [
             {
               "id": "ch1_parley_young_pass_1",
@@ -1433,7 +1439,9 @@
         },
         {
           "id": "track",
-          "sets": ["ch1_maud_tracks_found"],
+          "sets": [
+            "ch1_maud_tracks_found"
+          ],
           "lines": [
             {
               "id": "ch1_maud_track_1",
@@ -1615,7 +1623,9 @@
         },
         {
           "id": "sums_pass",
-          "sets": ["ch1_halden_ledger_read"],
+          "sets": [
+            "ch1_halden_ledger_read"
+          ],
           "lines": [
             {
               "id": "ch1_granary_sums_pass_1",
@@ -1717,7 +1727,9 @@
         },
         {
           "id": "lend_pass",
-          "sets": ["ch1_celandine_favour"],
+          "sets": [
+            "ch1_celandine_favour"
+          ],
           "lines": [
             {
               "id": "ch1_granary_lend_pass_1",
@@ -1756,6 +1768,366 @@
               "speaker": "dagna_holt",
               "mood": "idle",
               "text": "Aye. Somebody has to count the sacks honestly."
+            }
+          ],
+          "end": true
+        }
+      ],
+      "requires": [
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "ch1_council_force",
+      "beat": "ch1_granary",
+      "title": "Two at the Door",
+      "requires": [
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "halden_varrow",
+        "bree_tallow",
+        "dagna_holt",
+        "mother_aubrine",
+        "celandine_marrowby"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_council_force_open_1",
+              "speaker": "narrator",
+              "text": "The council meets in the back room of the Last Coal to toast the open road. Nobody has touched the toast.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_council_force_open_2",
+              "speaker": "halden_varrow",
+              "text": "Friends. The road east is open, the carts are crossing, and Emberwick will eat this winter. To that, and to our heroes.",
+              "mood": "happy",
+              "direction": "practised civic warmth, a little too loud"
+            },
+            {
+              "id": "ch1_council_force_open_3",
+              "speaker": "narrator",
+              "text": "The door bangs. Bree Tallow comes in out of the cold with two small goblins wrapped in her own shawl.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_council_force_open_4",
+              "speaker": "bree_tallow",
+              "text": "Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.",
+              "mood": "angry",
+              "direction": "brisk, furious underneath"
+            },
+            {
+              "id": "ch1_council_force_open_5",
+              "speaker": "celandine_marrowby",
+              "text": "How dreadful. Someone will have to decide what to do with them. Not me, I hope.",
+              "mood": "idle",
+              "direction": "smooth, faintly bored"
+            },
+            {
+              "id": "ch1_council_force_open_6",
+              "speaker": "mother_aubrine",
+              "text": "The chapel will take them. But our barley went to the town a month ago. I have nothing to feed them on.",
+              "mood": "sad",
+              "direction": "measured, ashamed"
+            },
+            {
+              "id": "ch1_council_force_open_7",
+              "speaker": "halden_varrow",
+              "text": "Then the granary can spare a sack. A small one. We must think of the spring.",
+              "mood": "idle",
+              "direction": "careful, evasive"
+            }
+          ],
+          "options": [
+            {
+              "id": "sums",
+              "label": "You've already done the spring's sums, haven't you?",
+              "check": {
+                "skill": "insight",
+                "dc": 14,
+                "pass": "sums_pass",
+                "fail": "sums_fail"
+              }
+            },
+            {
+              "id": "children",
+              "label": "Let me see the children.",
+              "to": "children"
+            },
+            {
+              "id": "soldier",
+              "label": "Captain. Tell them who loosed first, that morning at the bridge.",
+              "to": "soldier",
+              "tags": {
+                "background": [
+                  "soldier"
+                ]
+              }
+            },
+            {
+              "id": "acolyte",
+              "label": "Mother, the chapel teaches mercy. Teach it to the council.",
+              "to": "acolyte",
+              "tags": {
+                "background": [
+                  "acolyte"
+                ]
+              }
+            },
+            {
+              "id": "noble",
+              "label": "Lady Marrowby, the town will remember who opened their stores first.",
+              "to": "noble",
+              "tags": {
+                "background": [
+                  "noble"
+                ]
+              }
+            },
+            {
+              "id": "press",
+              "label": "Why were the granaries locked before the goblins ever came down?",
+              "to": "press"
+            }
+          ]
+        },
+        {
+          "id": "children",
+          "lines": [
+            {
+              "id": "ch1_council_force_children_1",
+              "speaker": "narrator",
+              "text": "The bigger one pushes the smaller behind her and shows you her teeth. She's shaking too hard to make it frightening.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_council_force_children_2",
+              "speaker": "bree_tallow",
+              "text": "She bit me twice on the way here. I'd call that healthy.",
+              "mood": "happy",
+              "direction": "dry, fond"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "sums_pass",
+          "sets": [
+            "ch1_halden_ledger_read"
+          ],
+          "lines": [
+            {
+              "id": "ch1_council_force_sums_pass_1",
+              "speaker": "narrator",
+              "text": "Halden doesn't reach for the ledger in front of him. He doesn't need to. He has carried those numbers for years.",
+              "mood": "idle"
+            }
+          ],
+          "next": "confess"
+        },
+        {
+          "id": "sums_fail",
+          "lines": [
+            {
+              "id": "ch1_council_force_sums_fail_1",
+              "speaker": "halden_varrow",
+              "text": "A mayor does a great many sums, friend, and none of them are cheerful. That's all.",
+              "mood": "idle",
+              "direction": "tired, deflecting"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "soldier",
+          "lines": [
+            {
+              "id": "ch1_council_force_soldier_1",
+              "speaker": "dagna_holt",
+              "text": "Coll. My own lad. He loosed at their little ones foraging on the bank, the morning they came down. They answered.",
+              "mood": "sad",
+              "direction": "flat, each word costing her"
+            },
+            {
+              "id": "ch1_council_force_soldier_2",
+              "speaker": "dagna_holt",
+              "text": "And then I brought spears to the ford and finished what he started. Gods help me.",
+              "mood": "sad",
+              "direction": "flat, low"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "acolyte",
+          "lines": [
+            {
+              "id": "ch1_council_force_acolyte_1",
+              "speaker": "mother_aubrine",
+              "text": "You always did find the sharp end of a sermon. Very well. Mercy, then, and in public.",
+              "mood": "idle",
+              "direction": "rueful, firm"
+            },
+            {
+              "id": "ch1_council_force_acolyte_2",
+              "speaker": "mother_aubrine",
+              "text": "Halden. Whatever is in those granaries, these two eat from it tonight, and you'll tell us why it was locked.",
+              "mood": "angry",
+              "direction": "quiet, unbending"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "noble",
+          "lines": [
+            {
+              "id": "ch1_council_force_noble_1",
+              "speaker": "celandine_marrowby",
+              "text": "Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.",
+              "mood": "happy",
+              "direction": "amused, gracious"
+            },
+            {
+              "id": "ch1_council_force_noble_2",
+              "speaker": "celandine_marrowby",
+              "text": "Though I would like to know why the town's own granaries were shut so early. The mayor never did say.",
+              "mood": "idle",
+              "direction": "silk over steel"
+            }
+          ],
+          "next": "press"
+        },
+        {
+          "id": "press",
+          "lines": [
+            {
+              "id": "ch1_council_force_press_1",
+              "speaker": "dagna_holt",
+              "text": "Halden. You locked those gates in spring, before a single goblin came down from the hills. I want to know why. Now.",
+              "mood": "angry",
+              "direction": "low, flat, done waiting"
+            }
+          ],
+          "next": "confess"
+        },
+        {
+          "id": "confess",
+          "sets": [
+            "ch1_halden_confessed"
+          ],
+          "lines": [
+            {
+              "id": "ch1_council_force_confess_1",
+              "speaker": "halden_varrow",
+              "text": "Because the ground is cooling. The ember under the ford is going out, and I have known it for six years.",
+              "mood": "sad",
+              "direction": "the words falling out of him"
+            },
+            {
+              "id": "ch1_council_force_confess_2",
+              "speaker": "halden_varrow",
+              "text": "Every winter the warm fields give a little less. I measured it. I said nothing, because half the town would have packed and gone.",
+              "mood": "sad",
+              "direction": "tired, honest at last"
+            },
+            {
+              "id": "ch1_council_force_confess_3",
+              "speaker": "halden_varrow",
+              "text": "So I locked the grain and let the hills go hungry, and when they came down for it we called them thieves. And then we sent spears.",
+              "mood": "sad",
+              "direction": "broken"
+            },
+            {
+              "id": "ch1_council_force_confess_4",
+              "speaker": "dagna_holt",
+              "text": "Six years. I buried two of mine at that bridge, and you knew why they were there.",
+              "mood": "angry",
+              "direction": "low, flat, shaking"
+            },
+            {
+              "id": "ch1_council_force_confess_5",
+              "speaker": "mother_aubrine",
+              "text": "We killed an old woman over grain you were hoarding against a cold you never told us about. Gods forgive us all. Starting with you.",
+              "mood": "angry",
+              "direction": "measured, grieving fury"
+            },
+            {
+              "id": "ch1_council_force_confess_6",
+              "speaker": "celandine_marrowby",
+              "text": "Well. That does rather change the interest.",
+              "mood": "idle",
+              "direction": "cool, delighted"
+            }
+          ],
+          "options": [
+            {
+              "id": "feed",
+              "label": "Open the granaries. Feed the children, and the town's own hungry.",
+              "to": "feed"
+            },
+            {
+              "id": "hill",
+              "label": "Send food up to whatever's left of the clan.",
+              "to": "hill"
+            }
+          ]
+        },
+        {
+          "id": "feed",
+          "lines": [
+            {
+              "id": "ch1_council_force_feed_1",
+              "speaker": "halden_varrow",
+              "text": "Yes. From tomorrow, in the open, with witnesses. I am done hiding the count.",
+              "mood": "sad",
+              "direction": "quiet resolve"
+            },
+            {
+              "id": "ch1_council_force_feed_2",
+              "speaker": "bree_tallow",
+              "text": "I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+              "mood": "happy",
+              "direction": "brisk, warm"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "hill",
+          "lines": [
+            {
+              "id": "ch1_council_force_hill_1",
+              "speaker": "dagna_holt",
+              "text": "Then I'll carry it up myself. If anyone's left up there, they can see the face of the one who led the spears.",
+              "mood": "sad",
+              "direction": "flat, deliberate"
+            },
+            {
+              "id": "ch1_council_force_hill_2",
+              "speaker": "halden_varrow",
+              "text": "The granaries open tomorrow. A sack in four goes up the hill, to whoever will take it.",
+              "mood": "sad",
+              "direction": "quiet resolve"
+            }
+          ],
+          "next": "close"
+        },
+        {
+          "id": "close",
+          "lines": [
+            {
+              "id": "ch1_council_force_close_1",
+              "speaker": "narrator",
+              "text": "Nobody drinks the toast. When the council goes home, the two small goblins are asleep by Bree's fire, and the room is very quiet.",
+              "mood": "idle"
             }
           ],
           "end": true
@@ -1951,7 +2323,9 @@
         },
         {
           "id": "crumb",
-          "sets": ["ch1_skarrow_song_clue"],
+          "sets": [
+            "ch1_skarrow_song_clue"
+          ],
           "lines": [
             {
               "id": "ch1_song_crumb_1",
@@ -1966,6 +2340,185 @@
               "mood": "happy",
               "text": "The rest when you are family. Not before. Now eat. You are too thin for valley people.",
               "direction": "a dry cackle"
+            }
+          ],
+          "end": true
+        }
+      ],
+      "requires": [
+        "ch1_skarrow_spared"
+      ]
+    },
+    {
+      "id": "ch1_burial",
+      "beat": "ch1_skarrow_song",
+      "title": "Where She Can See the Ford",
+      "requires": [
+        "ch1_skarrow_slain"
+      ],
+      "cast": [
+        "narrator",
+        "dagna_holt"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch1_burial_open_1",
+              "speaker": "narrator",
+              "text": "Night in the hills. The clan's camp is empty: cold fire pits, a dropped doll, tent poles with nothing hung on them.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_burial_open_2",
+              "speaker": "narrator",
+              "text": "Dagna carries Mother Skarrow up the path herself, wrapped in a guard's cloak. She won't let anyone else take a turn.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_burial_open_3",
+              "speaker": "dagna_holt",
+              "text": "They took their small ones and ran. They left her for us. I suppose that's what we earned.",
+              "mood": "sad",
+              "direction": "flat, exhausted"
+            },
+            {
+              "id": "ch1_burial_open_4",
+              "speaker": "dagna_holt",
+              "text": "Dig, then. Somewhere she can see the ford. She spent her last morning watching it.",
+              "mood": "sad",
+              "direction": "low, flat"
+            }
+          ],
+          "options": [
+            {
+              "id": "words",
+              "label": "Someone should say words over her.",
+              "to": "words"
+            },
+            {
+              "id": "song",
+              "label": "She meant to teach someone a song. Does anyone know it?",
+              "to": "song"
+            },
+            {
+              "id": "dagna",
+              "label": "Captain, are you all right?",
+              "to": "dagna"
+            },
+            {
+              "id": "hill",
+              "label": "I'll speak the hill tongue's farewell for a chief.",
+              "to": "hill",
+              "tags": {
+                "race": [
+                  "half_orc"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "words",
+          "lines": [
+            {
+              "id": "ch1_burial_words_1",
+              "speaker": "dagna_holt",
+              "text": "Not me. I'm the one who said now.",
+              "mood": "sad",
+              "direction": "flat, quiet"
+            },
+            {
+              "id": "ch1_burial_words_2",
+              "speaker": "narrator",
+              "text": "In the end the words are short ones. Her name. Forty winters. A clan that ate, for as long as she could make it eat.",
+              "mood": "idle"
+            }
+          ],
+          "next": "done"
+        },
+        {
+          "id": "song",
+          "lines": [
+            {
+              "id": "ch1_burial_song_1",
+              "speaker": "narrator",
+              "text": "Nobody knows it. The wind goes through the empty tents, and for a moment it almost sounds like humming.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_burial_song_2",
+              "speaker": "dagna_holt",
+              "text": "Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.",
+              "mood": "sad",
+              "direction": "low, remembering"
+            }
+          ],
+          "next": "done"
+        },
+        {
+          "id": "dagna",
+          "lines": [
+            {
+              "id": "ch1_burial_dagna_1",
+              "speaker": "dagna_holt",
+              "text": "No. I don't think I am.",
+              "mood": "sad",
+              "direction": "flat, honest"
+            },
+            {
+              "id": "ch1_burial_dagna_2",
+              "speaker": "dagna_holt",
+              "text": "Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.",
+              "mood": "sad",
+              "direction": "low, bitter"
+            },
+            {
+              "id": "ch1_burial_dagna_3",
+              "speaker": "dagna_holt",
+              "text": "Pick up a shovel. Talking won't dig it.",
+              "mood": "idle",
+              "direction": "clipped, back to work"
+            }
+          ],
+          "next": "done"
+        },
+        {
+          "id": "hill",
+          "lines": [
+            {
+              "id": "ch1_burial_hill_1",
+              "speaker": "narrator",
+              "text": "You speak the old farewell, the one for chiefs. Somewhere in the dark above the camp, someone answers it.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_burial_hill_2",
+              "speaker": "dagna_holt",
+              "text": "They're still up there, watching. Good. Let them see we buried her properly.",
+              "mood": "sad",
+              "direction": "low, steady"
+            }
+          ],
+          "next": "done"
+        },
+        {
+          "id": "done",
+          "lines": [
+            {
+              "id": "ch1_burial_done_1",
+              "speaker": "narrator",
+              "text": "The cairn is small. Dagna sets a guard's spear on top of it, point down, the way soldiers mark an enemy they respected.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch1_burial_done_2",
+              "speaker": "dagna_holt",
+              "text": "I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+              "mood": "sad",
+              "direction": "quiet, resolved"
             }
           ],
           "end": true

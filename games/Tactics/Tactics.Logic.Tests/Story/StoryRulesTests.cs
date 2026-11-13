@@ -79,7 +79,7 @@ public sealed class StoryRulesTests
     {
         var beats = Branch(Ford, "ch1_force");
 
-        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_the_ember"], beats);
+        Assert.Equal(["ch1_mayors_request", "ch1_the_ford_choice", "ch1_ford_assault", "ch1_old_maud", "ch1_granary", "ch1_skarrow_song", "ch1_the_ember"], beats);
     }
 
     [Fact]

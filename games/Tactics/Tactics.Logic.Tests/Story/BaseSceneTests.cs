@@ -15,15 +15,15 @@ public sealed class BaseSceneTests
     private static int ChapterOf(SceneDef scene) => Book.Arcs.Single(a => a.Beats.Any(b => b.Id == scene.Beat)).Chapter;
 
     [Fact]
-    public void Chapter_1_has_8_beats_and_13_scenes()
+    public void Chapter_1_has_8_beats_and_15_scenes()
     {
         var arc = Book.Arcs.Single(a => a.Chapter == 1 && !a.SideAdventure);
 
         Assert.Equal(8, arc.Beats.Length);
-        Assert.Equal(13, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
+        Assert.Equal(15, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
         Assert.Equal(["ch1_ford", "ch1_parley"], Book.ScenesOf("ch1_the_ford_choice").Select(s => s.Id));
         Assert.Equal([1, 2, 3, 4, 5], Book.Scenes.Where(s => s.Beat is not null).Select(ChapterOf).Distinct());
-        Assert.Equal(77, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
+        Assert.Equal(79, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
         Assert.Equal(5, Book.Scenes.Count(s => s.Camp));
     }
 
@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(1001, lines.Count);
+        Assert.Equal(1045, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);

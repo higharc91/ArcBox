@@ -88,7 +88,8 @@
           "mood": "idle",
           "direction": "young, tired, dry working voice",
           "requires": [
-            "ch1_halden_confessed"
+            "ch1_halden_confessed",
+            "ch1_skarrow_spared"
           ]
         },
         {
