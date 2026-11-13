@@ -15486,5 +15486,25 @@
       "job": "job_TtSD572rwKbvrSCLfzfB1ChW",
       "issue": 81
     }
+  ],
+  "storyVoiceImports": [
+    {
+      "issue": 339,
+      "batch": "story_2026_11_13_job09-aoede",
+      "job": "job_9dYTM2t3YLu4vMUA3wgQB1GC",
+      "asset": "asset_U8LG8WGH76Qqw7Zqz3mRZy8C",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "pitch": 0,
+      "filter": "",
+      "historicalBatchCreativeUnits": 3,
+      "newCreativeUnitsSpent": 0,
+      "sourceSha256": "36e2f8f12ed14a1841c107c79b5de1d9c15db19101212695bce9481ef80364e6",
+      "raw": "Aoede.19377c63",
+      "line": "ch3_guest_right_arrive_3",
+      "file": "ch3_guest_right_arrive_3.b3a9b0f4.ogg",
+      "cuts": "tools/tactics-lore/voice-runs/2026-11-13-story/job09-aoede-cuts.json",
+      "wordingCheck": "Unprompted local faster-whisper small.en; normalized words match exact caption."
+    }
   ]
 }

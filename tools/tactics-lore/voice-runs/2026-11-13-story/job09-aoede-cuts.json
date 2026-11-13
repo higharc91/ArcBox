@@ -1,0 +1,63 @@
+{
+  "job": "job_9dYTM2t3YLu4vMUA3wgQB1GC",
+  "asset": "asset_U8LG8WGH76Qqw7Zqz3mRZy8C",
+  "source": "job09-aoede.wav",
+  "sourceSha256": "36e2f8f12ed14a1841c107c79b5de1d9c15db19101212695bce9481ef80364e6",
+  "rate": 24000,
+  "historicalBatchCreativeUnits": 3,
+  "newCreativeUnitsSpent": 0,
+  "method": "Lossless PCM cuts at midpoints of the two inter-line silences. Unprompted small.en ASR identifies words and verifies no word crosses a cut. Punctuation/case ignored for lexical matching.",
+  "segments": [
+    {
+      "raw": "Aoede.2b44e5a2",
+      "line": "bark_lark_town_force",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+      "renderText": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+      "delivery": null,
+      "startSample": 0,
+      "endSample": 134397,
+      "start": 0.0,
+      "end": 5.599875,
+      "duration": 5.599875,
+      "recognized": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+      "normalizedWordsMatch": true,
+      "wavSha256": "5a5b4890eb5aa746684123c170e6996fd561e8666adfcb63266b4255932e385f"
+    },
+    {
+      "raw": "Aoede.66326234",
+      "line": "bark_lark_town_parley",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+      "renderText": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+      "delivery": null,
+      "startSample": 134397,
+      "endSample": 266941,
+      "start": 5.599875,
+      "end": 11.122541666666667,
+      "duration": 5.522666666666667,
+      "recognized": "A truce at the ford? I'll need a whole new verse. Possibly three.",
+      "normalizedWordsMatch": true,
+      "wavSha256": "6cbad42fa5c9658eed26245431b67506cc5234a2aa423e29122bf7768ad03522"
+    },
+    {
+      "raw": "Aoede.19377c63",
+      "line": "ch3_guest_right_arrive_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+      "renderText": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+      "delivery": null,
+      "startSample": 266941,
+      "endSample": 462720,
+      "start": 11.122541666666667,
+      "end": 19.28,
+      "duration": 8.157458333333333,
+      "recognized": "Look who crossed the desert. The heroes of the ford as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+      "normalizedWordsMatch": true,
+      "wavSha256": "0278fed4c11ef769064d3d49d2bd35b89543dd6ce9b6e9b1bb1ce8bbce7fafc7"
+    }
+  ]
+}

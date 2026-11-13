@@ -38,6 +38,23 @@ public sealed class StoryTrackTests
     }
 
     [Fact]
+    public void All_Larks_story_lines_play_recordings_including_the_desert_greeting()
+    {
+        var lines = AllLines().Where(l => l.Line.Speaker == "lark").Select(l => l.Line).ToArray();
+        Assert.Contains(lines, line => line.Id == "ch3_guest_right_arrive_3");
+        foreach (var line in lines)
+        {
+            var clip = Clips.ForLine(line.Id);
+            Assert.NotNull(clip);
+            Assert.True(Lore.ClipSeconds(line.Id) > .3, line.Id);
+            var tick = Running().Receive(Showing(2, LineOf(line)), T0);
+            Assert.Equal(clip.Path, tick.Say!.Clip);
+            Assert.Equal(line.Text, tick.Say.Text);
+            Assert.Equal(line.Id, tick.Screen!.Caption!.Line);
+        }
+    }
+
+    [Fact]
     public void Every_chapter_1_line_finds_its_clip()
     {
         var lines = AllLines().Where(l => !l.Scene.Camp).Where(l => l.Scene.Id.StartsWith("ch1_", StringComparison.Ordinal)).Select(l => l.Line).ToArray();
