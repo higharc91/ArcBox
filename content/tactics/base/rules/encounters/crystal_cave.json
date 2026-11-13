@@ -13,7 +13,7 @@
       "zone": "spider_nest",
       "count": 1,
       "level": 7,
-      "variant": "red",
+      "variant": "phase",
       "tag": "rime_nest_spider",
       "id": "giant_spider.1"
     },
@@ -22,7 +22,7 @@
       "zone": "spider_nest",
       "count": 1,
       "level": 7,
-      "variant": "red",
+      "variant": "phase",
       "tag": "rime_nest_spider",
       "id": "giant_spider.2"
     },
@@ -31,7 +31,7 @@
       "zone": "spider_nest",
       "count": 1,
       "level": 7,
-      "variant": "red",
+      "variant": "phase",
       "tag": "rime_nest_spider",
       "id": "giant_spider.3"
     },
@@ -40,7 +40,7 @@
       "zone": "spider_nest",
       "count": 1,
       "level": 7,
-      "variant": "red",
+      "variant": "phase",
       "tag": "rime_nest_spider",
       "id": "giant_spider.4"
     },

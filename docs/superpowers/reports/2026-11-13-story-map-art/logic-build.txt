@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ArcBox.Sdk -> /workspace/ArcBox-art-maps/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Tactics.Logic -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  ArcBox.Sdk.Testing -> /workspace/ArcBox-art-maps/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Tactics.Sim -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Sim/bin/Release/net10.0/Tactics.Sim.dll
+  Tactics.Logic.Tests -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:12.45

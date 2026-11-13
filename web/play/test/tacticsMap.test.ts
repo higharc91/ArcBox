@@ -10,6 +10,15 @@ describe("tactics map decoding", () => {
     expect(map).toEqual({ w: 2, h: 1, heights: [0, 2], tileMaterial: [0, 1], flags: [0, 4], materials: ["grass/lush", "rock/grey"] });
   });
 
+  it("keeps the later-chapter map materials visible on the phone", () => {
+    const materials = ["bog/murk", "mud/swamp", "dunes/gold", "sandstone/ochre", "flagstone/grey", "ice/clear"];
+    const map = decodeMap({ size: [6, 1], materials,
+      tiles: btoa(String.fromCharCode(...materials.flatMap((_, i) => [0, i, 0]))) });
+    const colours = materials.map((_, i) => tileStyle(map, i).background);
+    expect(colours).not.toContain("#3a3a3a"); // unknown-material fallback hides the biome
+    expect(new Set(colours).size).toBe(materials.length);
+  });
+
   it("colours tiles by material family, and impassable ones dark", () => {
     const map = decodeMap(file);
     expect(tileStyle(map, 0).background).toBe("#2f5d2f");

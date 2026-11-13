@@ -38,5 +38,6 @@
     "saves": ["con", "int", "wis"], "abilities": ["lich.soul_bolt", "lich.paralyzing_touch"], "passives": [],
     "resist": ["cold", "lightning"], "immune": ["necrotic", "poison"], "skills": ["arcana", "history", "insight", "perception"],
     "tags": ["undead", "boss", "caster"], "aiProfile": "boss", "sprite": "characters.lich",
-    "phases": [ { "hpBelow": 50, "abilities": ["lich.death_wave"], "passives": [], "aiProfile": "boss_cruel" } ] }
+    "phases": [ { "hpBelow": 50, "abilities": ["lich.death_wave"], "passives": [], "aiProfile": "boss_cruel" } ] },
+  {"id": "crypt_warden", "name": "Bone Warden", "cr": "4", "xp": 1100, "level": 5, "castingStat": "int", "scores": {"str": 9, "dex": 14, "con": 14, "int": 18, "wis": 12, "cha": 11}, "hp": 52, "ac": 14, "armor": "Light", "weapon": {"id": "staff", "damage": "1d6", "damageType": "bludgeoning", "stat": "str", "finesse": false, "ranged": false, "range": 1, "reach": false, "tags": ["simple"]}, "saves": ["int", "wis"], "abilities": ["necromancer.shadow_bolt", "necromancer.grave_chill"], "passives": [], "resist": ["necrotic"], "skills": ["arcana", "history"], "tags": ["humanoid", "undead", "caster"], "aiProfile": "caster", "sprite": "characters.lich"}
 ]

@@ -58,6 +58,7 @@ public static class MusicChoice
         ["forest_ruins"] = "amb_forest",
         ["crypt_hall"] = "amb_dungeon",
         ["crystal_cave"] = "amb_dungeon",
+        ["rime_tower"] = "amb_plains_wind", // the new exposed watchtower map
         ["warlord_bridge"] = "amb_plains_wind",
         ["keep_gate"] = "amb_plains_wind",
         ["hall_of_the_flame"] = "amb_lava",

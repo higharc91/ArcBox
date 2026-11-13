@@ -7,7 +7,7 @@ namespace Tactics.Presentation.Tests.Board;
 /// <summary>The real base pack, for tests that check the board against the content it draws.</summary>
 internal static class Pack
 {
-    public static readonly string[] Maps = ["river_crossing", "forest_ruins", "crypt_hall", "warlord_bridge", "crystal_cave", "keep_gate", "hall_of_the_flame"];
+    public static readonly string[] Maps = ["river_crossing", "forest_ruins", "crypt_hall", "warlord_bridge", "crystal_cave", "rime_tower", "keep_gate", "hall_of_the_flame"];
 
     private static readonly Lazy<string> RootDir = new(() =>
     {
