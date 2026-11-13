@@ -236,6 +236,10 @@ export interface WalkMember {
 
 /** The walk screen. It holds nothing that changes as the party walks: a new view would drop what the pad is sending. */
 export interface WalkData {
+  /** The leader's choice of who to hand the lead to, while the party stands still (#154); absent otherwise. */
+  passTo?: { id: string; name: string }[];
+  /** A follower's things in reach to suggest to the leader (#154): `point` with `{ target: id }`; absent for the leader. */
+  pointAt?: { id: string; label: string }[];
   canGive?: boolean;
   give?: Omit<import("./give").GiveData, "gold">;
   danger?: string;

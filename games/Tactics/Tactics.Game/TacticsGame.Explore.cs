@@ -119,7 +119,7 @@ public sealed partial class TacticsGame
     /// rather than read as a command the battle doesn't know.
     /// </summary>
     private static bool IsWorldAction(string action)
-        => action is "help" or "groupRoll" or "giveOpen" or "giveClose" or "give" or "walk" or "travel" or "mapOpen" or "mapClose" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService" or "chooseSubclass" or "spendIncrease" or "setPicks";
+        => action is "help" or "groupRoll" or "giveOpen" or "giveClose" or "give" or "walk" or "travel" or "mapOpen" or "mapClose" or "battles" or "backToWalk" or "endSession" or "interact" or "search" or "skip" or "vote" or "pickRoller" or "campJob" or "campNext" or "restPropose" or "shopService" or "chooseSubclass" or "spendIncrease" or "setPicks" or "passLead" or "point";
 
     // ---- Fights in the world (overworld 5c) ----------------------------------------------------------------------------
 
@@ -258,6 +258,51 @@ public sealed partial class TacticsGame
     }
 
     /// <summary>Says on the TV who leads now (5b review item 5). Only the TV: the phones already show it, and a note would mint them a view.</summary>
+    /// <summary>
+    /// The leader hands the lead to <c>data.to</c> (a member who can lead), stopping the party first (#154). It sticks: the new leader is
+    /// the session's leader from then on, so nobody takes it back, and the next session's rotation carries on from them.
+    /// </summary>
+    private void PassLead(Player player, JsonElement? data)
+    {
+        if (player.Profile?.Value != _lead || _doc.World is null
+            || data is not { ValueKind: JsonValueKind.Object } d || !d.TryGetProperty("to", out var to) || to.ValueKind != JsonValueKind.String
+            || to.GetString() is not { } next || next == _lead || !CanLead(next))
+            return;
+        if (_dir is not null)
+            Halt();
+        _sessionLead = next;
+        _doc = _doc with { World = _doc.World! with { LastLeader = next } };
+        // As ReconsiderLeader changes hands, without waiting on the takeback: nobody is standing in, so nothing is owed back.
+        _lead = next;
+        (_questLogLeader, _mapOpen, _travelNote) = (null, null, null);
+        (_heardAt, _settledAt) = (_ctx.Now, _ctx.Now);
+        if (Leader is { } leader)
+            SayLeader(leader.Name);
+        LeadClock();
+        SaveWorld();
+    }
+
+    /// <summary>When each follower last pointed something out: once every few seconds, so the TV isn't flooded.</summary>
+    private readonly Dictionary<string, DateTimeOffset> _pointedAt = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// A follower points out something in reach (<c>data.target</c>, one of the leader's targets) for the leader to try (#154). It shows on
+    /// the TV as a line; the leader still decides.
+    /// </summary>
+    private void Point(Player player, JsonElement? data)
+    {
+        if (player.Profile?.Value is not { } member || member == _lead || !_online.Contains(player.Id)
+            || _pointedAt.TryGetValue(member, out var last) && _ctx.Now - last < PointEvery
+            || data is not { ValueKind: JsonValueKind.Object } d || !d.TryGetProperty("target", out var t) || t.ValueKind != JsonValueKind.String
+            || TradeTargets().FirstOrDefault(x => x.Def.Id == t.GetString()) is not { Label: { } label })
+            return;
+        _pointedAt[member] = _ctx.Now;
+        Say($"{player.Name} suggests: {label}.");
+    }
+
+    /// <summary>How often one follower can point something out.</summary>
+    internal static readonly TimeSpan PointEvery = TimeSpan.FromSeconds(5);
+
     private void SayLeader(string name)
     {
         Unnote(_leadNote);

@@ -50,6 +50,20 @@
     "interact": "Trade with The Last Coal",
     "canGive": true,
     "restReady": true,
+    "passTo": [
+      {
+        "id": "pr_member2",
+        "name": "Player2"
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3"
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4"
+      }
+    ],
     "gold": 100,
     "targets": [
       {

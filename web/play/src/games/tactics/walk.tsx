@@ -429,6 +429,34 @@ function Party({ party }: { party: WalkMember[] }) {
 /** A class's name as the art knows it. */
 const classId = (name: string) => name.toLowerCase().replaceAll(" ", "_");
 
+/** The leader hands the lead on (#154): it stays with whoever takes it. */
+function PassLead({ heirs, send }: { heirs: { id: string; name: string }[]; send: CustomScreenProps["send"] }) {
+  return (
+    <details class="tx-walk-pass" onKeyDown={(e) => { if (e.key === "Escape") e.currentTarget.open = false; }}>
+      <summary>Pass the lead</summary>
+      <div class="tx-opts" role="group" aria-label="Pass the lead to">
+        {heirs.map((h) => (
+          <div class="tx-opt" key={h.id}>
+            <button type="button" class="tx-opt-pick" onClick={() => void send("passLead", { to: h.id })}>{h.name}</button>
+          </div>
+        ))}
+      </div>
+    </details>
+  );
+}
+
+/** A follower points out something in reach; it shows on the TV for the leader to try (#154). */
+function PointOut({ targets, send }: { targets: { id: string; label: string }[]; send: CustomScreenProps["send"] }) {
+  return (
+    <div class="tx-walk-point" role="group" aria-label="Suggest to the leader">
+      <span class="tx-eyebrow">Suggest</span>
+      {targets.map((t) => (
+        <button type="button" class="tx-btn ghost" key={t.id} onClick={() => void send("point", { target: t.id })}>{t.label}</button>
+      ))}
+    </div>
+  );
+}
+
 /**
  * Out in the world. The leader has the pad; everyone else sees who leads, what the party is out to do, their character and
  * the party. Every phone here keeps pinging, not only the leader's, because that's how a phone the server stopped hearing
@@ -527,6 +555,8 @@ export function Walk({ data, send, stream, viewId }: CustomScreenProps) {
         {d.leader || d.leaderName
           ? <p class="tx-walk-hint">{d.leader ? "Hold a direction to walk. Follow the party on the TV map." : `${d.leaderName} steers. Follow the party on the TV map.`}</p>
           : null}
+        {d.leader && d.passTo?.length ? <PassLead heirs={d.passTo} send={send} /> : null}
+        {!d.leader && d.pointAt?.length ? <PointOut targets={d.pointAt} send={send} /> : null}
         {d.journal ? <WalkJournal journal={d.journal} pinned={d.pinned} notice={d.questNotice} send={send} stop={() => sender.release()} /> : null}
         {(d.canGive || d.give) && <Give data={d.give} gold={d.gold ?? 0} send={send} viewId={viewId} stop={() => sender.release()} />}
         <div class="tx-walk-goal">

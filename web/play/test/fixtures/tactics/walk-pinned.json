@@ -85,6 +85,20 @@
       "name": "Where the Grain Went",
       "objective": "Speak to Celandine or Halden"
     },
+    "passTo": [
+      {
+        "id": "pr_member2",
+        "name": "Player2"
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3"
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4"
+      }
+    ],
     "gold": 0,
     "targets": [
       {
