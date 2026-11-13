@@ -7,9 +7,20 @@
       "#339"
     ],
     "voice": "Callirrhoe",
-    "pitchAtImport": -2,
-    "text": "The only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.\n<long pause>\nHis Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.\n<long pause>\nYes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.\n<long pause>\nYoung, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.\n<long pause>\nTerrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.\n<long pause>\nHe knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.\n<long pause>\nThe lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.\n<long pause>\nHe knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.\n<long pause>\nWhatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.\n<long pause>\nHe says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.\n<long pause>\nA Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.\n<long pause>\nTheir leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.\n<long pause>\nNo. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.\n<long pause>\nAnything else, before the tea runs out?\n<long pause>\nNothing in the Sunscar would dare touch you tonight. Tomorrow is another song.\n<long pause>\nThat's the verse before the last. I've been looking for it for twenty years.\n<long pause>\nSeven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.\n<long pause>\nOf course not. I'd keep it too, if it were mine.\n<long pause>\nThen someone else will want very badly to hear that dream. Be careful who you tell it to.\n<long pause>\nBig promise. Goblins remember promises. So do songs.\n<long pause>\nHonest. I think she'll like that better than a promise.\n<long pause>\nEvery Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
+    "pitchAtImport": {
+      "lark": -2
+    },
+    "text": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.\n<long pause>\nThe only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.\n<long pause>\nHis Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.\n<long pause>\nYes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.\n<long pause>\nYoung, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.\n<long pause>\nTerrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.\n<long pause>\nHe knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.\n<long pause>\nThe lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.\n<long pause>\nHe knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.\n<long pause>\nWhatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.\n<long pause>\nHe says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.\n<long pause>\nA Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.\n<long pause>\nTheir leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.\n<long pause>\nNo. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.\n<long pause>\nAnything else, before the tea runs out?\n<long pause>\nNothing in the Sunscar would dare touch you tonight. Tomorrow is another song.\n<long pause>\nThat's the verse before the last. I've been looking for it for twenty years.\n<long pause>\nSeven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.\n<long pause>\nOf course not. I'd keep it too, if it were mine.\n<long pause>\nThen someone else will want very badly to hear that dream. Be careful who you tell it to.\n<long pause>\nBig promise. Goblins remember promises. So do songs.",
     "segments": [
+      {
+        "raw": "Callirrhoe.e0d65914",
+        "line": "ch3_guest_right_law_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
+        "renderText": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
+        "delivery": null
+      },
       {
         "raw": "Callirrhoe.e1cf2783",
         "line": "ch3_guest_right_news_2",
@@ -188,24 +199,6 @@
         "preset": "Callirrhoe",
         "text": "Big promise. Goblins remember promises. So do songs.",
         "renderText": "Big promise. Goblins remember promises. So do songs.",
-        "delivery": null
-      },
-      {
-        "raw": "Callirrhoe.e5abc0b3",
-        "line": "ch3_skarrow_messenger_honest_1",
-        "speaker": "lark",
-        "preset": "Callirrhoe",
-        "text": "Honest. I think she'll like that better than a promise.",
-        "renderText": "Honest. I think she'll like that better than a promise.",
-        "delivery": null
-      },
-      {
-        "raw": "Callirrhoe.ab6c58ba",
-        "line": "ch3_crypt_door_stair_3",
-        "speaker": "lark",
-        "preset": "Callirrhoe",
-        "text": "Every Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
-        "renderText": "Every Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
         "delivery": null
       }
     ]

@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(981, lines.Count);
+        Assert.Equal(982, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);

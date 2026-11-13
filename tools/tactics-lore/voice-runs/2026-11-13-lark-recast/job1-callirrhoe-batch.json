@@ -7,8 +7,10 @@
       "#339"
     ],
     "voice": "Callirrhoe",
-    "pitchAtImport": -2,
-    "text": "Ah, a battle! Do try to do something worth a verse.\n<long pause>\nGather round, gather round, and mind the pointy end.\n<long pause>\nEvery good song has a fight in the middle. Here's ours.\n<long pause>\nHa! That'll rhyme with something.\n<long pause>\nHm. We'll leave that out of the ballad.\n<long pause>\nOh, that's the second verse, right there!\n<long pause>\nAnd here the singer pauses, out of respect.\n<long pause>\nNo, no, no. That's not how this one goes!\n<long pause>\nOh, this is the sad part, isn't it. I hate the sad part.\n<long pause>\nBless you. You'll get a chorus all your own.\n<long pause>\nSomeone's growing into their legend.\n<long pause>\nAnd they lived, and the song went on. For now.\n<long pause>\nThere's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.\n<long pause>\nSleep now, sleep now, the river is wide, and the fire keeps watch on the other side.\n<long pause>\nSongs don't burn. That's why I keep them.\n<long pause>\nHum along if you know it. Nobody ever knows it.\n<long pause>\nYou'll want to tell this one well, when you're old. I'd start practising.\n<long pause>\nShe's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.\n<long pause>\nSo. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.\n<long pause>\nYsolde offered me a verse for a memory. I said no. I'm told that makes me the only person who's ever refused a bargain in Mirewood.\n<long pause>\nIt wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.\n<long pause>\nNot here. Ask me again somewhere colder. Some things you only say where your breath shows.\n<long pause>\nBut watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.\n<long pause>\nQuickly, before she's offended. Drink half the water. Pour the rest on the sand, for the farms that burned.\n<long pause>\nThat's the point. You give the sand something you can't spare. Then they give you everything they have.\n<long pause>\nEvery note. Well, you mangled the second verse, but only a little.\n<long pause>\nWhile you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.\n<long pause>\nBreak the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
+    "pitchAtImport": {
+      "lark": -2
+    },
+    "text": "Ah, a battle! Do try to do something worth a verse.\n<long pause>\nGather round, gather round, and mind the pointy end.\n<long pause>\nEvery good song has a fight in the middle. Here's ours.\n<long pause>\nHa! That'll rhyme with something.\n<long pause>\nHm. We'll leave that out of the ballad.\n<long pause>\nOh, that's the second verse, right there!\n<long pause>\nAnd here the singer pauses, out of respect.\n<long pause>\nNo, no, no. That's not how this one goes!\n<long pause>\nOh, this is the sad part, isn't it. I hate the sad part.\n<long pause>\nBless you. You'll get a chorus all your own.\n<long pause>\nSomeone's growing into their legend.\n<long pause>\nAnd they lived, and the song went on. For now.\n<long pause>\nThere's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.\n<long pause>\nSleep now, sleep now, the river is wide, and the fire keeps watch on the other side.\n<long pause>\nSongs don't burn. That's why I keep them.\n<long pause>\nHum along if you know it. Nobody ever knows it.\n<long pause>\nYou'll want to tell this one well, when you're old. I'd start practising.\n<long pause>\nLark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.\n<long pause>\nShe's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.\n<long pause>\nSo. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.\n<long pause>\nYsolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.\n<long pause>\nIt wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.\n<long pause>\nNot here. Ask me again somewhere colder. Some things you only say where your breath shows.\n<long pause>\nBut watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.\n<long pause>\nQuickly, before she's offended. Drink half the water. Pour the rest on the sand, for the farms that burned.\n<long pause>\nThat's the point. You give the sand something you can't spare. Then they give you everything they have.\n<long pause>\nEvery note. Well, you mangled the second verse, but only a little.\n<long pause>\nWhile you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
     "segments": [
       {
         "raw": "Callirrhoe.5fddfefa",
@@ -164,8 +166,17 @@
         "delivery": null
       },
       {
-        "raw": "Callirrhoe.7ad6da46",
+        "raw": "Callirrhoe.cdf90c18",
         "line": "ch2_lark_inn_corner_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Lark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.",
+        "renderText": "Lark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.7ad6da46",
+        "line": "ch2_lark_inn_corner_3",
         "speaker": "lark",
         "preset": "Callirrhoe",
         "text": "She's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.",
@@ -174,7 +185,7 @@
       },
       {
         "raw": "Callirrhoe.f12cc394",
-        "line": "ch2_lark_inn_corner_3",
+        "line": "ch2_lark_inn_corner_4",
         "speaker": "lark",
         "preset": "Callirrhoe",
         "text": "So. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.",
@@ -182,12 +193,12 @@
         "delivery": null
       },
       {
-        "raw": "Callirrhoe.97b47be8",
+        "raw": "Callirrhoe.7ca32ff7",
         "line": "ch2_lark_inn_verse_1",
         "speaker": "lark",
         "preset": "Callirrhoe",
-        "text": "Ysolde offered me a verse for a memory. I said no. I'm told that makes me the only person who's ever refused a bargain in Mirewood.",
-        "renderText": "Ysolde offered me a verse for a memory. I said no. I'm told that makes me the only person who's ever refused a bargain in Mirewood.",
+        "text": "Ysolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.",
+        "renderText": "Ysolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.",
         "delivery": null
       },
       {
@@ -251,15 +262,6 @@
         "preset": "Callirrhoe",
         "text": "While you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
         "renderText": "While you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
-        "delivery": null
-      },
-      {
-        "raw": "Callirrhoe.e0d65914",
-        "line": "ch3_guest_right_law_3",
-        "speaker": "lark",
-        "preset": "Callirrhoe",
-        "text": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
-        "renderText": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
         "delivery": null
       }
     ]

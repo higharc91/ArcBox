@@ -1,15 +1,35 @@
 {
   "request": {
-    "id": "lark_recast_2026_11_13_job4-callirrhoe",
+    "id": "lark_recast_2026_11_13_job4-callirrhoe-algieba",
     "issues": [
       "#218",
       "#207",
       "#339"
     ],
-    "voice": "Callirrhoe",
-    "pitchAtImport": -2,
-    "text": "Can't, or won't?\n<long pause>\nI'm coming with you to the Keep. If anyone hears that verse sung at last, it's going to be me.\n<long pause>\nPay it back, children, or pay what you've known.\n<long pause>\nTwenty years. And it was sitting in a tower all along, waiting for someone to ask.\n<long pause>\nWhatever you choose up there, every square in the Vale will know what the choice was. I'll make sure of it.\n<long pause>\nAh, an audience! Stand there and look grave, and I'll sing you something the Wardens wrote before your grandmothers were born.\n<long pause>\nLook at you. Still holding a lute like it owes you money.\n<long pause>\nI left because the songs were moving, and a songkeeper has to move with them. I should have said goodbye. We're terrible at endings. We always think there's another verse.\n<long pause>\nStay close this time. If the songs are right, the Vale is about to need someone who can tell the whole of it.\n<long pause>\nSeven went over the Greywall high, and seven came home with a fire in the sky. The Wardens kept it and the Wardens sang, and the whole Vale warmed where the hearth-bells rang.\n<long pause>\nThat's the Wardens' Song of the Seven. Seven went, seven came home, a gift and a hearth and everyone happy.\n<long pause>\nThere's a last verse, too. Nobody has sung it in two hundred years. When a song loses its last verse on purpose, it's usually because the last verse was true.\n<long pause>\nSongs gather where things are about to happen. A starving town, a goblin on a bridge, an ember going cold under the river. This is the best stage in the Vale.\n<long pause>\nAnd someone I've been following came this way. Never mind who. That's a song for later, somewhere colder.\n<long pause>\nAnything else? I take requests. I don't take criticism.\n<long pause>\nGo on, then. Do something worth a verse.\n<long pause>\nThe bridge ballad's a sad one now. They always are, when you write them honestly.\n<long pause>\nA truce at the ford! I'll need a whole new verse. Possibly three.",
+    "multiSpeakerConfig": [
+      {
+        "speaker": "Lark",
+        "speakerVoice": "Callirrhoe"
+      },
+      {
+        "speaker": "Narrator",
+        "speakerVoice": "Algieba"
+      }
+    ],
+    "pitchAtImport": {
+      "lark": -2
+    },
+    "text": "Lark: Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.\n<long pause>\nLark: Can't, or won't?\n<long pause>\nLark: I'm coming with you to the Keep. If anyone hears that verse sung at last, it's going to be me.\n<long pause>\nLark: Pay it back, children, or pay what you've known.\n<long pause>\nLark: Twenty years. And it was sitting in a tower all along, waiting for someone to ask.\n<long pause>\nLark: Whatever you choose up there, every square in the Vale will know what the choice was. I'll make sure of it.\n<long pause>\nLark: Ah, an audience! Stand there and look grave, and I'll sing you something the Wardens wrote before your grandmothers were born.\n<long pause>\nLark: Look at you. Still holding a lute like it owes you money.\n<long pause>\nLark: I left because the songs were moving, and a songkeeper has to move with them. I should have said goodbye. We're terrible at endings. We always think there's another verse.\n<long pause>\nLark: Stay close this time. If the songs are right, the Vale is about to need someone who can tell the whole of it.\n<long pause>\nLark: Seven went over the Greywall high, and seven came home with a fire in the sky. The Wardens kept it and the Wardens sang, and the whole Vale warmed where the hearth-bells rang.\n<long pause>\nLark: That's the Wardens' Song of the Seven. Seven went, seven came home, a gift and a hearth and everyone happy.\n<long pause>\nLark: There's a last verse, too. Nobody has sung it in two hundred years. When a song loses its last verse on purpose, it's usually because the last verse was true.\n<long pause>\nLark: Songs gather where things are about to happen. A starving town, a goblin on a bridge, an ember going cold under the river. This is the best stage in the Vale.\n<long pause>\nLark: And someone I've been following came this way. Never mind who. That's a song for later, somewhere colder.\n<long pause>\nLark: Anything else? I take requests. I don't take criticism.\n<long pause>\nLark: Go on, then. Do something worth a verse.\n<long pause>\nLark: The bridge ballad's a sad one now. They always are, when you write them honestly.\n<long pause>\nLark: A truce at the ford! I'll need a whole new verse. Possibly three.\n<long pause>\nNarrator: When Bree goes back to the bar, a tune drifts over from the corner table, where a travelling minstrel has been listening the whole time.",
     "segments": [
+      {
+        "raw": "Callirrhoe.2a2bf363",
+        "line": "ch4_lark_stranger_margin_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+        "renderText": "Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+        "delivery": null
+      },
       {
         "raw": "Callirrhoe.cfaabfee",
         "line": "ch4_lark_stranger_answer_3",
@@ -170,6 +190,15 @@
         "preset": "Callirrhoe",
         "text": "A truce at the ford! I'll need a whole new verse. Possibly three.",
         "renderText": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.5d003a96",
+        "line": "ch2_lark_inn_corner_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "When Bree goes back to the bar, a tune drifts over from the corner table, where a travelling minstrel has been listening the whole time.",
+        "renderText": "When Bree goes back to the bar, a tune drifts over from the corner table, where a travelling minstrel has been listening the whole time.",
         "delivery": null
       }
     ]
