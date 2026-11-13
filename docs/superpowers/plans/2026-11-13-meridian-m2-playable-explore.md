@@ -1,4 +1,4 @@
-> Status: draft plan, awaiting review; no task has started. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: approved 2026-11-13; in progress on branch `ccr-de425e76-4vxzw2`. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M2 Playable Explore Implementation Plan
 
