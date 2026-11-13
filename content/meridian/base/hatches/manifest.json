@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "status": "sample-awaiting-owner-review",
+  "issue": 331,
+  "rulesReference": "PR #316 at af068bb1d23b5e295457adc4bf2ce1108ad6686d; not yet on main",
+  "states": {
+    "open": {
+      "file": "open.e7c1970b0975.png",
+      "sha256": "e7c1970b0975ef9d2288f7c3d7f82d0017befa29d20c82c880c65110598d8299",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    },
+    "closed": {
+      "file": "closed.f20fc87c6603.png",
+      "sha256": "f20fc87c66030df686bf08c520feb1d2ff3f0dfe9d8f51f040fd1b122990e083",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    },
+    "sealed": {
+      "file": "sealed.78098a4b9f0e.png",
+      "sha256": "78098a4b9f0e3e13f544b75411033b54840b64f80fd1550b43ff3c73d67ec52a",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    },
+    "none": {
+      "file": "none.5eeef845f8ae.png",
+      "sha256": "5eeef845f8ae12b1ff72b28f610c5d91d2eb1d15b9346a4b49efd810ab2ad345",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    }
+  }
+}

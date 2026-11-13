@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "status": "sample-awaiting-owner-review",
+  "issue": 331,
+  "rulesReference": "PR #316 at af068bb1d23b5e295457adc4bf2ce1108ad6686d; not yet on main",
+  "tiles": {
+    "bridge": {
+      "file": "bridge.643961f96cc4.png",
+      "sha256": "643961f96cc4bf1e381e7121dee985e5b2561448248d9eb24f048b2daba37e4c",
+      "deck": "command",
+      "frameSize": [
+        64,
+        64
+      ],
+      "doorway": [
+        24,
+        39
+      ],
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "med_bay": {
+      "file": "med_bay.5661eec2c20b.png",
+      "sha256": "5661eec2c20b2effe132c31b92d4afcfd2d46e65353b27a9ef164d496c853640",
+      "deck": "habitat",
+      "frameSize": [
+        64,
+        64
+      ],
+      "doorway": [
+        24,
+        39
+      ],
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "reactor_core": {
+      "file": "reactor_core.3fde76e50072.png",
+      "sha256": "3fde76e500724659bbd85067ace605f281cc98c49e447aa8163d03b00d9724a5",
+      "deck": "engineering",
+      "frameSize": [
+        64,
+        64
+      ],
+      "doorway": [
+        24,
+        39
+      ],
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "airlock": {
+      "file": "airlock.5a8c019825e3.png",
+      "sha256": "5a8c019825e36e403ca1198bfea767fc31aedc903a451cb7a6b5f125a7920b04",
+      "deck": "habitat",
+      "frameSize": [
+        64,
+        64
+      ],
+      "doorway": [
+        24,
+        39
+      ],
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ]
+    }
+  }
+}

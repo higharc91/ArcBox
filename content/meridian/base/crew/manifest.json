@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "status": "sample-awaiting-owner-review",
+  "issue": 331,
+  "rulesReference": "PR #316 at af068bb1d23b5e295457adc4bf2ce1108ad6686d; not yet on main",
+  "crew": {
+    "ines_okafor": {
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "idle": {
+        "file": "ines-okafor-idle.a1ca1b3a07f0.png",
+        "sha256": "a1ca1b3a07f0044a0209fe85aa738e6703506cb4f0a69108f71dd46e3fcd95b2",
+        "frames": 1,
+        "fps": 0
+      },
+      "walk": {
+        "file": "ines-okafor-walk.1f9f5985b6f3.png",
+        "sha256": "1f9f5985b6f3fd1264e74d5126500ba6a435c1497be777fb3535a1c3c4e2e9a9",
+        "frames": 4,
+        "fps": 6
+      }
+    }
+  }
+}
