@@ -1,0 +1,17 @@
+  Determining projects to restore...
+  Restored /workspace/ArcBox-art-maps/games/Tactics/Tactics.Presentation/Tactics.Presentation.csproj (in 197 ms).
+  Restored /workspace/ArcBox-art-maps/games/Tactics/Tactics.Game/Tactics.Game.csproj (in 135 ms).
+  Restored /workspace/ArcBox-art-maps/games/Tactics/Tactics.Presentation.Tests/Tactics.Presentation.Tests.csproj (in 405 ms).
+  3 of 6 projects are up-to-date for restore.
+  ArcBox.Sdk -> /workspace/ArcBox-art-maps/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Tactics.Logic -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Game/bin/Release/net10.0/Tactics.Game.dll
+  Tactics.Presentation -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Presentation/bin/Release/net10.0/Tactics.Presentation.dll
+  ArcBox.Sdk.Testing -> /workspace/ArcBox-art-maps/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Tactics.Presentation.Tests -> /workspace/ArcBox-art-maps/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:27.34

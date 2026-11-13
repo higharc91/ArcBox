@@ -1,0 +1,58 @@
+{
+  "codeHead": "082edbeb13c3ac750bee677c2dea9d034bd826b2",
+  "baseMain": "cf156c468557266db94ede7ee388f2f5cff41469",
+  "command": "bash tools/check-all.sh --full",
+  "exitCode": 1,
+  "dotnet": {
+    "total": 7755,
+    "passed": 7743,
+    "failed": 12,
+    "skipped": 0,
+    "buildWarnings": 0
+  },
+  "phonePassed": 602,
+  "phoneProductionBuild": true,
+  "phoneAnnotationWarnings": 2,
+  "nodePassed": 24,
+  "pythonPassed": 96,
+  "pythonGroups": [
+    61,
+    9,
+    26
+  ],
+  "loreAndDocsDrift": "pass",
+  "focusedPassed": 93,
+  "chromiumMapWidthCombinations": 8,
+  "chromiumViewports": [
+    [
+      320,
+      844
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "nativeMapsReviewed": 9,
+  "nativeCvdSimulationsReviewed": 10,
+  "phoneCvdSimulationsReviewed": 8,
+  "pairedSimBattles": 400,
+  "failures": [
+    "Tactics.Game.Tests.GriskBarkTests.Authored_events_add_one_cosmetic_line_without_changing_the_input(moment: \"battle_start\", text: \"Bear\u2019s awake! Dig or die!\")",
+    "Tactics.Game.Tests.GriskBarkTests.Authored_events_add_one_cosmetic_line_without_changing_the_input(moment: \"low_hp\", text: \"The market pays! I\u2019ll split it!\")",
+    "Tactics.Game.Tests.PhoneFixtureTests.The_bounty_presents_only_the_receiving_phones_class_trinket",
+    "Tactics.Logic.Tests.BaseSceneTests.Every_line_has_a_clip_length",
+    "Tactics.Logic.Tests.BaseSceneTests.Scenes_set_only_flags_the_arcs_set",
+    "Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip",
+    "Tactics.Presentation.Tests.Audio.VoiceClipsTests.Every_say_line_in_the_pack_has_a_clip_on_disk",
+    "Tactics.Presentation.Tests.Story.StoryDemoTests.The_demo_says_each_line_once_from_the_walk_up",
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Every_chapter_1_line_finds_its_clip",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Every_line_of_every_chapter_finds_its_clip"
+  ],
+  "newFailures": [],
+  "issueState": "open",
+  "mergeState": "draft; required full gate fails",
+  "baselineComparison": "Same 12 Tactics failures as unchanged main Tactics content in PR #305 full-check evidence and PR #314 validation.json."
+}

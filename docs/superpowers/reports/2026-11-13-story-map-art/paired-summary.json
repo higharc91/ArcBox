@@ -1,0 +1,37 @@
+{
+  "baseline": "cf156c468557266db94ede7ee388f2f5cff41469",
+  "battlesPerRevision": 200,
+  "party": [
+    "fighter",
+    "cleric",
+    "rogue",
+    "wizard"
+  ],
+  "partySize": 4,
+  "seeds": "1..100",
+  "scope": "Forest Ruins at 3 and Warlord Bridge at 5; surface-material changes may change individual actions. Not a human playtest or all-party balance claim.",
+  "rows": [
+    {
+      "encounter": "forest_ruins",
+      "before": {
+        "summary": "**Won:** 30 (30.0%). Lost: 70, of which 1 stopped at the round cap of 30. Fled: 0.",
+        "rounds": "**Rounds:** mean 12.6, median 12.0; 56.0% of battles within the 8\u201312 round target."
+      },
+      "after": {
+        "summary": "**Won:** 30 (30.0%). Lost: 70, of which 1 stopped at the round cap of 30. Fled: 0.",
+        "rounds": "**Rounds:** mean 12.6, median 12.0; 56.0% of battles within the 8\u201312 round target."
+      }
+    },
+    {
+      "encounter": "warlord_bridge",
+      "before": {
+        "summary": "**Won:** 100 (100.0%). Lost: 0, of which 0 stopped at the round cap of 30. Fled: 0.",
+        "rounds": "**Rounds:** mean 12.0, median 12.0; 100.0% of battles within the 8\u201312 round target."
+      },
+      "after": {
+        "summary": "**Won:** 100 (100.0%). Lost: 0, of which 0 stopped at the round cap of 30. Fled: 0.",
+        "rounds": "**Rounds:** mean 12.0, median 12.0; 100.0% of battles within the 8\u201312 round target."
+      }
+    }
+  ]
+}

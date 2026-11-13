@@ -1,0 +1,122 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "map": "forest_ruins",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 0water · swamp#1 Review hero · You20/20 HPWater"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "map": "warlord_bridge",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 2sand · desert#1 Review hero · You20/20 HP"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "map": "crystal_cave",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 2ice · clear#1 Review hero · You20/20 HP"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "map": "rime_tower",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 2flagstone · grey#1 Review hero · You20/20 HP"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "map": "forest_ruins",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 0water · swamp#1 Review hero · You20/20 HPWater"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "map": "warlord_bridge",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 2sand · desert#1 Review hero · You20/20 HP"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "map": "crystal_cave",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 2ice · clear#1 Review hero · You20/20 HP"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "map": "rime_tower",
+    "labelPlate": "rgb(11, 13, 28)",
+    "tiles": 168,
+    "enlargedMinCell": 44,
+    "overflow": false,
+    "errors": [],
+    "selectedTile": [
+      "Tile 0, 0 · height 2flagstone · grey#1 Review hero · You20/20 HP"
+    ],
+    "reducedMotion": true,
+    "scope": "Production BattleMap component and branch map JSON; review harness, not live multiplayer"
+  }
+]
