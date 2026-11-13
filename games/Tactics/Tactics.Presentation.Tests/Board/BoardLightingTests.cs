@@ -59,6 +59,7 @@ public sealed class BoardLightingTests
         ["hall_of_the_flame"] = "hall",
         ["forest_ruins"] = null,
         ["keep_gate"] = null,
+        ["rime_tower"] = null, // exposed watch floor: daylight, not the cave recipe
         ["river_crossing"] = Dusk,
         ["warlord_bridge"] = null,
         ["ashen_ford"] = Dusk,
