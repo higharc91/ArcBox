@@ -40,6 +40,11 @@ public sealed class TimerTests
         var rng = Rng.Seeded(3, 99);
         for (var i = 0; i < 2000 && game.Session.Phase == SessionPhase.Explore && waits.Count < 2; i++)
         {
+            if (!game.Session.Queue.IsEmpty)
+            {
+                game.Presented(game.Session.Queue[0].Seq);
+                continue;
+            }
             if (game.State.Waiting is { } w)
             {
                 waits[w.GetType()] = (Due(game)!.Value - game.H.Now).TotalSeconds;

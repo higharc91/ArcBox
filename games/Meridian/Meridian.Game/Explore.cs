@@ -20,14 +20,8 @@ public sealed partial class MeridianGame
 
         Session = Session with { Game = result.State };
         Record(result.Events);
-        if (result.State.Phase == Phase.Breach)
-        {
-            End();
-        }
-        else
-        {
-            Rearm(fresh: true);
-        }
+        Present(result.Events);   // the Breach is always presented, so the game ends once it has been shown (Pop)
+        Rearm(fresh: true);
         return true;
     }
 

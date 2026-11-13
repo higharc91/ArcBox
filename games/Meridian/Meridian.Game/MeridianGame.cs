@@ -52,7 +52,7 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             case SessionPhase.Boarding:
                 Board(seat, action, data);
                 break;
-            case SessionPhase.Explore when Intents.ToCommand(seat.Seat, action, data) is { } command:
+            case SessionPhase.Explore when Session.Queue.IsEmpty && Intents.ToCommand(seat.Seat, action, data) is { } command:
                 Apply(command);
                 break;
         }
@@ -72,6 +72,9 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             case ClockPurpose.Deadline:
                 Apply(new Meridian.Logic.Timeout(BotRunner.Actor(Session.Game!)));
                 break;
+            case ClockPurpose.Present:
+                Pop();
+                break;
         }
     }
 
@@ -82,10 +85,6 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             Session = Session.With(seat with { Connected = connected, Auto = connected ? false : seat.Auto });
             Rearm();
         }
-    }
-
-    public void OnHostSignal(string kind, PlayerInput payload)
-    {
     }
 
     public object HostView() => Projection.Host(this);

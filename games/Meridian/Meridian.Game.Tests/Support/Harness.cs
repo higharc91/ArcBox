@@ -47,6 +47,24 @@ internal sealed class Harness
 
     public void Advance(double seconds) => H.Advance(TimeSpan.FromSeconds(seconds));
 
+    /// <summary>Plays bots until something is being presented. Returns false if the game ended first.</summary>
+    public bool PlayUntilPresenting(ulong seed = 5)
+    {
+        var rng = Rng.Seeded(seed, 99);
+        for (var i = 0; i < 2000 && Session.Phase == SessionPhase.Explore; i++)
+        {
+            if (!Session.Queue.IsEmpty)
+            {
+                return true;
+            }
+            var seat = BotRunner.Actor(State);
+            Do(ExploreBot.Instance.Choose(Pack, State, seat, Rules.Legal(Pack, State, seat), ref rng));
+        }
+        return false;
+    }
+
+    public void Presented(int seq) => H.HostSignal(MeridianGame.PresentedSignal, new { seq });
+
     /// <summary>The index of the player the game is waiting on.</summary>
     public int Actor => Index(BotRunner.Actor(State));
 
@@ -67,6 +85,11 @@ internal sealed class Harness
         var taken = 0;
         while (taken < steps && Session.Phase == SessionPhase.Explore)
         {
+            if (!Session.Queue.IsEmpty)
+            {
+                Advance(Session.Queue[0].Seconds);   // no TV: each presentation ends on its fallback
+                continue;
+            }
             var seat = BotRunner.Actor(State);
             Do(ExploreBot.Instance.Choose(Pack, State, seat, Rules.Legal(Pack, State, seat), ref rng));
             taken++;

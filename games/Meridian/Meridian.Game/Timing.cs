@@ -45,6 +45,7 @@ public sealed partial class MeridianGame
         return Session.Phase switch
         {
             SessionPhase.Boarding => (ClockPurpose.Boarding, rules.BoardingTime),
+            SessionPhase.Explore when !Session.Queue.IsEmpty => (ClockPurpose.Present, TimeSpan.FromSeconds(Session.Queue[0].Seconds)),
             SessionPhase.Explore => (ClockPurpose.Deadline, Session.Game!.Waiting switch
             {
                 OrientPending => rules.RotationChoice,
