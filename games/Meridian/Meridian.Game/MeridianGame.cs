@@ -52,6 +52,9 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             case SessionPhase.Boarding:
                 Board(seat, action, data);
                 break;
+            case SessionPhase.Explore when Intents.ToCommand(seat.Seat, action, data) is { } command:
+                Apply(command);
+                break;
         }
     }
 
@@ -65,6 +68,9 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
         {
             case ClockPurpose.Boarding:
                 FinishBoarding();
+                break;
+            case ClockPurpose.Deadline:
+                Apply(new Meridian.Logic.Timeout(BotRunner.Actor(Session.Game!)));
                 break;
         }
     }

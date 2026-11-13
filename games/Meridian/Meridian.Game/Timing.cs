@@ -21,9 +21,14 @@ public sealed partial class MeridianGame
     /// Re-arms the one clock for whatever the game now waits on. Called after every change: it cancels the old timer and
     /// sets a new one under a new sequence number, so an old timer that already fired is ignored when it arrives.
     /// </summary>
-    private void Rearm()
+    /// <param name="fresh">
+    /// A new decision: give it its full time. Otherwise (a phone dropped, someone picked a crew member) a clock that keeps
+    /// its purpose keeps its deadline, so nobody can stretch someone else's turn.
+    /// </param>
+    private void Rearm(bool fresh = false)
     {
-        var (purpose, after) = NextClock();
+        var (purpose, full) = NextClock();
+        var after = !fresh && Session.Clock.Purpose == purpose && Deadline is { } due ? due - _ctx.Now : full;
         _ctx.CancelTimer(Timing.Key(Session.Clock.Seq));
         var clock = new Clock(Session.Clock.Seq + 1, purpose);
         Session = Session with { Clock = clock };
@@ -33,16 +38,22 @@ public sealed partial class MeridianGame
         }
     }
 
-    private (ClockPurpose Purpose, TimeSpan After) NextClock() => Session.Phase switch
+    /// <summary>What the game waits on now, and the full time for it.</summary>
+    private (ClockPurpose Purpose, TimeSpan Full) NextClock()
     {
-        SessionPhase.Boarding => (ClockPurpose.Boarding, Remaining(ClockPurpose.Boarding, _pack.Rules.BoardingTime)),
-        _ => (ClockPurpose.None, TimeSpan.Zero),
-    };
-
-    /// <summary>
-    /// A clock that keeps its purpose keeps its deadline: Boarding's 45 s doesn't restart every time someone picks, and
-    /// a disconnected seat's grace doesn't restart when another phone drops.
-    /// </summary>
-    private TimeSpan Remaining(ClockPurpose purpose, TimeSpan full)
-        => Session.Clock.Purpose == purpose && Deadline is { } due ? due - _ctx.Now : full;
+        var rules = _pack.Rules;
+        return Session.Phase switch
+        {
+            SessionPhase.Boarding => (ClockPurpose.Boarding, rules.BoardingTime),
+            SessionPhase.Explore => (ClockPurpose.Deadline, Session.Game!.Waiting switch
+            {
+                OrientPending => rules.RotationChoice,
+                RollPending => rules.RollWait,
+                ChoicePending => rules.ChoiceWait,
+                TradePending => rules.TradeWait,
+                _ => rules.TurnInactivity,
+            }),
+            _ => (ClockPurpose.None, TimeSpan.Zero),
+        };
+    }
 }

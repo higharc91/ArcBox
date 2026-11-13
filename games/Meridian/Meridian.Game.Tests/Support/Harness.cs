@@ -46,4 +46,31 @@ internal sealed class Harness
     }
 
     public void Advance(double seconds) => H.Advance(TimeSpan.FromSeconds(seconds));
+
+    /// <summary>The index of the player the game is waiting on.</summary>
+    public int Actor => Index(BotRunner.Actor(State));
+
+    /// <summary>Sends a command as the phone intent it stands for.</summary>
+    public void Do(Command command)
+    {
+        var (action, data) = Intents.FromCommand(command);
+        Send(Index(command.From), action, data);
+    }
+
+    /// <summary>
+    /// Plays the Explore bot's choice for whoever the game waits on, through the phones' own intents, until the game is
+    /// over or <paramref name="steps"/> run out. Returns the steps taken.
+    /// </summary>
+    public int PlayBots(int steps = 2000, ulong seed = 5)
+    {
+        var rng = Rng.Seeded(seed, 99);
+        var taken = 0;
+        while (taken < steps && Session.Phase == SessionPhase.Explore)
+        {
+            var seat = BotRunner.Actor(State);
+            Do(ExploreBot.Instance.Choose(Pack, State, seat, Rules.Legal(Pack, State, seat), ref rng));
+            taken++;
+        }
+        return taken;
+    }
 }

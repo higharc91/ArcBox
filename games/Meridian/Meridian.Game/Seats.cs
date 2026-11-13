@@ -42,6 +42,6 @@ public sealed partial class MeridianGame
         var seats = Session.Seats.Select(s => (s.Seat, s.Crew!.Value)).ToList();
         var game = Rules.NewGame(_pack, seats, Session.GameSeed);
         Session = Session with { Phase = SessionPhase.Explore, Game = game, BotRng = rng };
-        Rearm();
+        Rearm(fresh: true);
     }
 }
