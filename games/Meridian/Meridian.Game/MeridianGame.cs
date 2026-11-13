@@ -75,6 +75,12 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             case ClockPurpose.Present:
                 Pop();
                 break;
+            case ClockPurpose.Grace:
+                HandToBot();
+                break;
+            case ClockPurpose.Bot:
+                BotStep();
+                break;
         }
     }
 

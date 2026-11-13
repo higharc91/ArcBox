@@ -46,6 +46,8 @@ public sealed partial class MeridianGame
         {
             SessionPhase.Boarding => (ClockPurpose.Boarding, rules.BoardingTime),
             SessionPhase.Explore when !Session.Queue.IsEmpty => (ClockPurpose.Present, TimeSpan.FromSeconds(Session.Queue[0].Seconds)),
+            SessionPhase.Explore when Session.SeatOf(BotRunner.Actor(Session.Game!)) is { Auto: true } => (ClockPurpose.Bot, rules.BotStep),
+            SessionPhase.Explore when Session.SeatOf(BotRunner.Actor(Session.Game!)) is { Connected: false } => (ClockPurpose.Grace, rules.DisconnectGrace),
             SessionPhase.Explore => (ClockPurpose.Deadline, Session.Game!.Waiting switch
             {
                 OrientPending => rules.RotationChoice,
