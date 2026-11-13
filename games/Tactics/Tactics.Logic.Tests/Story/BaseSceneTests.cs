@@ -23,7 +23,7 @@ public sealed class BaseSceneTests
         Assert.Equal(13, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
         Assert.Equal(["ch1_ford", "ch1_parley"], Book.ScenesOf("ch1_the_ford_choice").Select(s => s.Id));
         Assert.Equal([1, 2, 3, 4, 5], Book.Scenes.Where(s => s.Beat is not null).Select(ChapterOf).Distinct());
-        Assert.Equal(75, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
+        Assert.Equal(77, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
         Assert.Equal(5, Book.Scenes.Count(s => s.Camp));
     }
 
@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(945, lines.Count);
+        Assert.Equal(982, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);
