@@ -1,0 +1,12 @@
+{
+  "base": "origin/claude/issue-218-lark",
+  "beforeManifestSha256": "2f357dedd41c42c66b66f869315d383eb310b95eb3e0d93ee2e49f3942821494",
+  "afterManifestSha256": "a20757b34e83c3100966888e24b8dcfbe5b9e248b897deb5663e4868dbabbf67",
+  "addedLines": [
+    "ch3_guest_right_arrive_3"
+  ],
+  "existingBindingsUnchanged": 1399,
+  "remainingMissingExactlyMainInventory": true,
+  "newCreativeUnitsSpent": 0,
+  "encodedFileSha256": "3d1abb1afec93a29a9fb198e0448136f342578fd203667ef34a2f389df31bb27"
+}

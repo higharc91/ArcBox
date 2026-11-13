@@ -1,0 +1,55 @@
+  Determining projects to restore...
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Game/Tactics.Game.csproj (in 301 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Logic/Tactics.Logic.csproj (in 702 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Logic.Tests/Tactics.Logic.Tests.csproj (in 724 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Game.Tests/Tactics.Game.Tests.csproj (in 300 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Sdk.Tests/ArcBox.Sdk.Tests.csproj (in 7 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Presentation.Tests/Tactics.Presentation.Tests.csproj (in 724 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Sdk.Testing/ArcBox.Sdk.Testing.csproj (in 2 ms).
+  Restored /workspace/ArcBox-art/games/Redline/Redline.Presentation/Redline.Presentation.csproj (in 4 ms).
+  Restored /workspace/ArcBox-art/games/Redline/Redline.Presentation.Tests/Redline.Presentation.Tests.csproj (in 3 ms).
+  Restored /workspace/ArcBox-art/games/Redline/Redline.Logic/Redline.Logic.csproj (in 2 ms).
+  Restored /workspace/ArcBox-art/games/Counter/Counter.Logic/Counter.Logic.csproj (in 9 ms).
+  Restored /workspace/ArcBox-art/games/Redline/Redline.Logic.Tests/Redline.Logic.Tests.csproj (in 12 ms).
+  Restored /workspace/ArcBox-art/games/Counter/Counter.Logic.Tests/Counter.Logic.Tests.csproj (in 10 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Sdk/ArcBox.Sdk.csproj (in 3 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Server/ArcBox.Server.csproj (in 217 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.WorldTools/Tactics.WorldTools.csproj (in 8 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.WorldTools.Tests/Tactics.WorldTools.Tests.csproj (in 4 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Sim/Tactics.Sim.csproj (in 5 ms).
+  Restored /workspace/ArcBox-art/games/Tactics/Tactics.Presentation/Tactics.Presentation.csproj (in 4 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Host.Core/ArcBox.Host.Core.csproj (in 304 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Host.Core.Tests/ArcBox.Host.Core.Tests.csproj (in 345 ms).
+  Restored /workspace/ArcBox-art/src/ArcBox.Server.Tests/ArcBox.Server.Tests.csproj (in 361 ms).
+  3 of 25 projects are up-to-date for restore.
+  ArcBox.Sdk -> /workspace/ArcBox-art/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Counter.Logic -> /workspace/ArcBox-art/games/Counter/Counter.Logic/bin/Release/net10.0/Counter.Logic.dll
+  ArcBox.Sdk.Testing -> /workspace/ArcBox-art/src/ArcBox.Sdk.Testing/bin/Release/net10.0/ArcBox.Sdk.Testing.dll
+  Counter.Logic.Tests -> /workspace/ArcBox-art/games/Counter/Counter.Logic.Tests/bin/Release/net10.0/Counter.Logic.Tests.dll
+  Redline.Logic -> /workspace/ArcBox-art/games/Redline/Redline.Logic/bin/Release/net10.0/Redline.Logic.dll
+  Redline.Logic.Tests -> /workspace/ArcBox-art/games/Redline/Redline.Logic.Tests/bin/Release/net10.0/Redline.Logic.Tests.dll
+  Redline.Presentation -> /workspace/ArcBox-art/games/Redline/Redline.Presentation/bin/Release/net10.0/Redline.Presentation.dll
+  Redline.Presentation.Tests -> /workspace/ArcBox-art/games/Redline/Redline.Presentation.Tests/bin/Release/net10.0/Redline.Presentation.Tests.dll
+  Redline.Sim -> /workspace/ArcBox-art/games/Redline/tools/Redline.Sim/bin/Release/net10.0/Redline.Sim.dll
+  Tactics.Logic -> /workspace/ArcBox-art/games/Tactics/Tactics.Logic/bin/Release/net10.0/Tactics.Logic.dll
+  Tactics.Game -> /workspace/ArcBox-art/games/Tactics/Tactics.Game/bin/Release/net10.0/Tactics.Game.dll
+  Tactics.Game.Tests -> /workspace/ArcBox-art/games/Tactics/Tactics.Game.Tests/bin/Release/net10.0/Tactics.Game.Tests.dll
+  Tactics.Sim -> /workspace/ArcBox-art/games/Tactics/Tactics.Sim/bin/Release/net10.0/Tactics.Sim.dll
+  Tactics.Logic.Tests -> /workspace/ArcBox-art/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll
+  Tactics.Presentation -> /workspace/ArcBox-art/games/Tactics/Tactics.Presentation/bin/Release/net10.0/Tactics.Presentation.dll
+  Tactics.Presentation.Tests -> /workspace/ArcBox-art/games/Tactics/Tactics.Presentation.Tests/bin/Release/net10.0/Tactics.Presentation.Tests.dll
+  Tactics.WorldTools -> /workspace/ArcBox-art/games/Tactics/Tactics.WorldTools/bin/Release/net10.0/Tactics.WorldTools.dll
+  Tactics.WorldTools.Tests -> /workspace/ArcBox-art/games/Tactics/Tactics.WorldTools.Tests/bin/Release/net10.0/Tactics.WorldTools.Tests.dll
+  ArcBox.Host.Core -> /workspace/ArcBox-art/src/ArcBox.Host.Core/bin/Release/net10.0/ArcBox.Host.Core.dll
+  ArcBox.Server -> /workspace/ArcBox-art/src/ArcBox.Server/bin/Release/net10.0/ArcBox.Server.dll
+  ArcBox.Host.Core.Tests -> /workspace/ArcBox-art/src/ArcBox.Host.Core.Tests/bin/Release/net10.0/ArcBox.Host.Core.Tests.dll
+  ArcBox.Host -> /workspace/ArcBox-art/src/ArcBox.Host/.godot/mono/temp/bin/Release/ArcBox.Host.dll
+  ArcBox.Sdk.Tests -> /workspace/ArcBox-art/src/ArcBox.Sdk.Tests/bin/Release/net10.0/ArcBox.Sdk.Tests.dll
+  ArcBox.Server.Tests -> /workspace/ArcBox-art/src/ArcBox.Server.Tests/bin/Release/net10.0/ArcBox.Server.Tests.dll
+  Tactics.World.Editor -> /workspace/ArcBox-art/tools/tactics-world/.godot/mono/temp/bin/Release/Tactics.World.Editor.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:01:45.90

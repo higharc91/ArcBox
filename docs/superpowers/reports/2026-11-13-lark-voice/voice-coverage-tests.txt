@@ -1,0 +1,17 @@
+Running tests from /workspace/ArcBox-art/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+failed Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip (234ms)
+  from /workspace/ArcBox-art/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64)
+  unvoiced line 'ch1_camp_warmth_1'
+    at Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip() in /workspace/ArcBox-art/games/Tactics/Tactics.Logic.Tests/Content/VoiceTests.cs:26
+    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+/workspace/ArcBox-art/games/Tactics/Tactics.Logic.Tests/bin/Release/net10.0/Tactics.Logic.Tests.dll (net10.0|x64) failed with 1 error(s) (3s 933ms)
+Exit code: 2
+
+Test run summary: Failed!
+  total: 10
+  failed: 1
+  succeeded: 9
+  skipped: 0
+  duration: 4s 235ms
+Test run completed with non-success exit code: 2 (see: https://aka.ms/testingplatform/exitcodes)

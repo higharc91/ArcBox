@@ -1,0 +1,29 @@
+Input #0, ogg, from 'content/tactics/base/lore/audio/ch3_guest_right_arrive_3.b3a9b0f4.ogg':
+  Duration: 00:00:07.40, start: 0.000000, bitrate: 66 kb/s
+  Stream #0:0: Audio: vorbis, 24000 Hz, mono, fltp, 50 kb/s
+      Metadata:
+        encoder         : Lavc libvorbis
+Stream mapping:
+  Stream #0:0 -> #0:0 (vorbis (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    encoder         : Lavf61.7.103
+  Stream #0:0: Audio: pcm_s16le, 192000 Hz, mono, s16, 3072 kb/s
+      Metadata:
+        encoder         : Lavc61.19.101 pcm_s16le
+[Parsed_loudnorm_0 @ 0x7f6a34002740]
+{
+	"input_i" : "-16.45",
+	"input_tp" : "-1.15",
+	"input_lra" : "1.30",
+	"input_thresh" : "-27.15",
+	"output_i" : "-16.05",
+	"output_tp" : "-1.50",
+	"output_lra" : "0.90",
+	"output_thresh" : "-26.71",
+	"normalization_type" : "dynamic",
+	"target_offset" : "0.05"
+}
+[out#0/null @ 0x55995c6d7980] video:0KiB audio:2758KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:00:07.44 bitrate=N/A speed=31.1x

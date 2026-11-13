@@ -1,0 +1,26 @@
+diff --git a/src/ArcBox.Host/Main.cs b/src/ArcBox.Host/Main.cs
+index 67d4ef87..99696adb 100644
+--- a/src/ArcBox.Host/Main.cs
++++ b/src/ArcBox.Host/Main.cs
+@@ -164,6 +164,21 @@ public partial class Main : Control
+             if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } previewPack)
+                 pack = System.IO.Path.GetFullPath(previewPack);
+             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
++            if (board == "lark-voice-review")
++            {
++                var lore = global::Tactics.Logic.LoreBook.Load(pack);
++                var now = DateTimeOffset.UtcNow;
++                var prior = global::Tactics.Presentation.Story.StoryDemo.Steps(lore, now).First(s => s.Label == "line").View;
++                var line = lore.Scenes.SelectMany(s => s.Lines).Single(l => l.Id == "ch3_guest_right_arrive_3");
++                var who = lore.Character(line.Speaker);
++                var said = new global::Tactics.Game.StoryLineView(line.Id, line.Speaker, who?.Name, who?.Preset, line.Mood, line.Text, who?.Role);
++                var greeting = prior with { Story = new global::Tactics.Game.StoryView(2, "ch3_guest_right", "Guest Right", global::Tactics.Game.TacticsGame.StoryStates.Lines,
++                    said, null, null, now.AddSeconds(1 + lore.ClipSeconds(line.Id)!.Value), prior.Story!.Campaign) };
++                AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
++                    [new global::Tactics.Presentation.World.ThingsDemoStep("join", 0, prior, [], false),
++                     new global::Tactics.Presentation.World.ThingsDemoStep("lark-greeting", 1, greeting, [(1, "lark-greeting"), (9, "lark-complete")], false)]));
++                return;
++            }
+             if (board == "mob-entries")
+                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                     global::Tactics.Presentation.World.MobEntryDemo.Steps(pack)));

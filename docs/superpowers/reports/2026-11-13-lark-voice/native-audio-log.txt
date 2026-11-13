@@ -1,0 +1,35 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+     at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1435)
+Render preset ultra
+NARRATOR no built-in TTS voices (on Linux, install speech-dispatcher); fallback narration is off
+NARRATOR Off
+Tactics demo: no server connection
+Tactics content:
+Tactics content: base at /workspace/ArcBox-art/content/tactics/base
+THINGS demo: 2 views, 2 shots
+THINGS demo step join at 0.73 s
+STORY 1 ch1_mayor_open_1 shown lines
+STORY marker ch1_mayors_request 33 59 -
+QUEST tracker none
+QUEST journal closed
+TACTICS world opening ashen_ford
+AUDIO Music town_emberwick
+AUDIO Sfx ambience amb_town
+TACTICS screen tactics-story
+TACTICS stage Walking
+THINGS demo step lark-greeting at 1.82 s
+AUDIO Voice clip ch3_guest_right_arrive_3.b3a9b0f4.ogg tactics.story: Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.
+STORY 2 ch3_guest_right_arrive_3 said lines
+SHOT /tmp/arcbox-sound/native-final/001-tactics.png
+SHOT /tmp/arcbox-sound/native-final/002-lark-greeting.png
+WORLD open on the main thread 7.3 ms
+TACTICS walk snapped to 33.5 61.5
+THINGS demo done
+SHOT /tmp/arcbox-sound/native-final/003-lark-complete.png
+WORLD closed
+TACTICS left: narrator cleared

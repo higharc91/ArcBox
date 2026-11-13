@@ -1,0 +1,15 @@
+{
+  "job": "job_9dYTM2t3YLu4vMUA3wgQB1GC",
+  "voice": "Aoede",
+  "model": "model_google-gemini-3-8-flash-tts",
+  "input": {
+    "modelId": "model_google-gemini-3-8-flash-tts",
+    "language": "en-US",
+    "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.\n<long pause>\nA truce at the ford! I'll need a whole new verse. Possibly three.\n<long pause>\nLook who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+    "voice": "Aoede"
+  },
+  "assets": [
+    "asset_U8LG8WGH76Qqw7Zqz3mRZy8C"
+  ],
+  "newCreativeUnitsSpent": 0
+}

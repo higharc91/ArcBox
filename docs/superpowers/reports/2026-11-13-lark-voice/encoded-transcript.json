@@ -1,0 +1,199 @@
+{
+  "source": "ch3_guest_right_arrive_3.b3a9b0f4.ogg",
+  "sourceSha256": "3d1abb1afec93a29a9fb198e0448136f342578fd203667ef34a2f389df31bb27",
+  "model": "Systran/faster-whisper-small.en",
+  "engine": "faster-whisper 1.2.1 / CTranslate2 CPU int8",
+  "initialPrompt": null,
+  "language": "en",
+  "beamSize": 5,
+  "temperature": 0,
+  "vadFilter": false,
+  "conditionOnPreviousText": false,
+  "wordTimestamps": true,
+  "duration": 7.35525,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.64,
+      "text": " Look who crossed the desert. The heroes of the ford as I live and sing. I was beginning",
+      "words": [
+        {
+          "start": 0.0,
+          "end": 0.24,
+          "word": " Look",
+          "probability": 0.8741106986999512
+        },
+        {
+          "start": 0.24,
+          "end": 0.48,
+          "word": " who",
+          "probability": 0.9465209245681763
+        },
+        {
+          "start": 0.48,
+          "end": 0.72,
+          "word": " crossed",
+          "probability": 0.9861926436424255
+        },
+        {
+          "start": 0.72,
+          "end": 0.96,
+          "word": " the",
+          "probability": 0.9969485402107239
+        },
+        {
+          "start": 0.96,
+          "end": 1.24,
+          "word": " desert.",
+          "probability": 0.9786416292190552
+        },
+        {
+          "start": 2.02,
+          "end": 2.1,
+          "word": " The",
+          "probability": 0.9835562705993652
+        },
+        {
+          "start": 2.1,
+          "end": 2.4,
+          "word": " heroes",
+          "probability": 0.8667583465576172
+        },
+        {
+          "start": 2.4,
+          "end": 2.74,
+          "word": " of",
+          "probability": 0.997490644454956
+        },
+        {
+          "start": 2.74,
+          "end": 2.9,
+          "word": " the",
+          "probability": 0.9229223132133484
+        },
+        {
+          "start": 2.9,
+          "end": 3.34,
+          "word": " ford",
+          "probability": 0.7646182477474213
+        },
+        {
+          "start": 3.34,
+          "end": 3.68,
+          "word": " as",
+          "probability": 0.33893629908561707
+        },
+        {
+          "start": 3.68,
+          "end": 3.8,
+          "word": " I",
+          "probability": 0.9210709929466248
+        },
+        {
+          "start": 3.8,
+          "end": 3.92,
+          "word": " live",
+          "probability": 0.9836167097091675
+        },
+        {
+          "start": 3.92,
+          "end": 4.08,
+          "word": " and",
+          "probability": 0.9184540510177612
+        },
+        {
+          "start": 4.08,
+          "end": 4.3,
+          "word": " sing.",
+          "probability": 0.9993377327919006
+        },
+        {
+          "start": 5.18,
+          "end": 5.34,
+          "word": " I",
+          "probability": 0.9884436726570129
+        },
+        {
+          "start": 5.34,
+          "end": 5.44,
+          "word": " was",
+          "probability": 0.9980291724205017
+        },
+        {
+          "start": 5.44,
+          "end": 5.64,
+          "word": " beginning",
+          "probability": 0.9940754175186157
+        }
+      ]
+    },
+    {
+      "start": 5.64,
+      "end": 7.16,
+      "text": " to think I'd have to give you a sad ending.",
+      "words": [
+        {
+          "start": 5.64,
+          "end": 5.82,
+          "word": " to",
+          "probability": 0.9990109205245972
+        },
+        {
+          "start": 5.82,
+          "end": 5.94,
+          "word": " think",
+          "probability": 0.9983708262443542
+        },
+        {
+          "start": 5.94,
+          "end": 6.1,
+          "word": " I'd",
+          "probability": 0.962573230266571
+        },
+        {
+          "start": 6.1,
+          "end": 6.16,
+          "word": " have",
+          "probability": 0.9974566102027893
+        },
+        {
+          "start": 6.16,
+          "end": 6.28,
+          "word": " to",
+          "probability": 0.9985538125038147
+        },
+        {
+          "start": 6.28,
+          "end": 6.38,
+          "word": " give",
+          "probability": 0.997164785861969
+        },
+        {
+          "start": 6.38,
+          "end": 6.5,
+          "word": " you",
+          "probability": 0.9961534142494202
+        },
+        {
+          "start": 6.5,
+          "end": 6.62,
+          "word": " a",
+          "probability": 0.9983479976654053
+        },
+        {
+          "start": 6.62,
+          "end": 6.84,
+          "word": " sad",
+          "probability": 0.9987537860870361
+        },
+        {
+          "start": 6.84,
+          "end": 7.16,
+          "word": " ending.",
+          "probability": 0.9993278980255127
+        }
+      ]
+    }
+  ],
+  "secondsToTranscribe": 5.535
+}

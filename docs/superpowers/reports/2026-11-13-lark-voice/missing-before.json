@@ -1,0 +1,160 @@
+[
+ {
+  "raw": "Leda.de64089c",
+  "preset": "Leda",
+  "text": "I can run that for you! One gold if you're nice. Two if you're not.",
+  "line": "bark_pip_ashdown_town_1",
+  "speaker": "pip_ashdown",
+  "renderText": "I can run that for you! One gold if you're nice. Two if you're not.",
+  "delivery": null,
+  "scene": false
+ },
+ {
+  "raw": "Algieba.331fb10b",
+  "preset": "Algieba",
+  "text": "The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently.",
+  "line": "ch1_camp_warmth_1",
+  "speaker": "narrator",
+  "renderText": "The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently.",
+  "delivery": null,
+  "scene": true
+ },
+ {
+  "raw": "Zephyr.06133aca",
+  "preset": "Zephyr",
+  "text": "He means the town chest, not my till. Still. Done.",
+  "line": "ch1_ford_pay_pass_2",
+  "speaker": "bree_tallow",
+  "renderText": "He means the town chest, not my till. Still. Done.",
+  "delivery": null,
+  "scene": true
+ },
+ {
+  "raw": "Gacrux.eb3cb437",
+  "preset": "Gacrux",
+  "text": "Twenty gold. My own. Now choose.",
+  "line": "ch1_ford_pay_fail_2",
+  "speaker": "dagna_holt",
+  "renderText": "Twenty gold. My own. Now choose.",
+  "delivery": {
+   "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+   "mood": "idle"
+  },
+  "scene": true
+ },
+ {
+  "raw": "Aoede.19377c63",
+  "preset": "Aoede",
+  "text": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+  "line": "ch3_guest_right_arrive_3",
+  "speaker": "lark",
+  "renderText": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+  "delivery": null,
+  "scene": true
+ },
+ {
+  "raw": "Algieba.81ef344b",
+  "preset": "Algieba",
+  "text": "Around the flame, the dragon lies coiled with its eyes shut. Firelight moves beneath its scales, but it has not yet woken.",
+  "line": "ch5_ritual_lead_wake_1",
+  "speaker": "narrator",
+  "renderText": "Around the flame, the dragon lies coiled with its eyes shut. Firelight moves beneath its scales, but it has not yet woken.",
+  "delivery": null,
+  "scene": true
+ },
+ {
+  "raw": "Algieba.6cc69430",
+  "preset": "Algieba",
+  "text": "Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+  "line": "ashmaw_death",
+  "speaker": "narrator",
+  "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger. Mood: idle.> Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+  "delivery": {
+   "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger.",
+   "mood": "idle"
+  },
+  "scene": false
+ },
+ {
+  "raw": "Gacrux.3eb07239",
+  "preset": "Gacrux",
+  "text": "A grey bear is taking goats from the pens, and a fisher's boy is missing. The cave mouth is below Maud's hut on the burned bank. Will you search for him and put an end to the bear?",
+  "line": "ashmaw_offer",
+  "speaker": "dagna_holt",
+  "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> A grey bear is taking goats from the pens, and a fisher's boy is missing. The cave mouth is below Maud's hut on the burned bank. Will you search for him and put an end to the bear?",
+  "delivery": {
+   "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+   "mood": "idle"
+  },
+  "scene": false
+ },
+ {
+  "raw": "Gacrux.eef0a02e",
+  "preset": "Gacrux",
+  "text": "The pens are quiet, and the boy is home with his father. That is enough good news for one day.",
+  "line": "ashmaw_done",
+  "speaker": "dagna_holt",
+  "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony. Mood: idle.> The pens are quiet, and the boy is home with his father. That is enough good news for one day.",
+  "delivery": {
+   "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Low, flat Northern soldier; restrained gratitude, no ceremony.",
+   "mood": "idle"
+  },
+  "scene": false
+ },
+ {
+  "raw": "Gacrux.75318dc5",
+  "preset": "Gacrux",
+  "text": "I heard a fisher's boy is missing. I'll keep my fire ready if he finds his way here. As for that old bear... hunger wakes before a creature does. Go gently, if you can.",
+  "line": "ashmaw_maud_waiting",
+  "speaker": "old_maud",
+  "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation. Mood: sad.> I heard a fisher's boy is missing. I'll keep my fire ready if he finds his way here. As for that old bear... hunger wakes before a creature does. Go gently, if you can.",
+  "delivery": {
+   "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; lucid concern under the cackle. No grand revelation.",
+   "mood": "sad"
+  },
+  "scene": false
+ },
+ {
+  "raw": "Gacrux.2ddee8ac",
+  "preset": "Gacrux",
+  "text": "The boy reached my fire, and I sent him home to his father. Poor old bear. A hundred winters, and the last was the coldest. Keep the claw; there is nothing else down there to carry home.",
+  "line": "ashmaw_maud_after",
+  "speaker": "old_maud",
+  "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; a small grief, without explaining its cause. Mood: sad.> The boy reached my fire, and I sent him home to his father. Poor old bear. A hundred winters, and the last was the coldest. Keep the claw; there is nothing else down there to carry home.",
+  "delivery": {
+   "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Ancient, papery, unhurried; a small grief, without explaining its cause.",
+   "mood": "sad"
+  },
+  "scene": false
+ },
+ {
+  "raw": "Schedar.66ac02b3",
+  "preset": "Schedar",
+  "text": "I had hoped you would turn back. I cannot yield the gate.",
+  "line": "say_keep_gate_1",
+  "speaker": "halvard",
+  "renderText": "I had hoped you would turn back. I cannot yield the gate.",
+  "delivery": null,
+  "scene": false
+ },
+ {
+  "raw": "Sulafat.6a62795e",
+  "preset": "Sulafat",
+  "text": "The circle is open. Bring your embers here and help me finish it!",
+  "line": "say_hall_of_the_flame_1",
+  "speaker": "maren_sorrel",
+  "renderText": "The circle is open. Bring your embers here and help me finish it!",
+  "delivery": null,
+  "scene": false
+ },
+ {
+  "raw": "Sulafat.b1c26b89",
+  "preset": "Sulafat",
+  "text": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+  "line": "say_hall_of_the_flame_2",
+  "speaker": "maren_sorrel",
+  "renderText": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+  "delivery": null,
+  "scene": false
+ }
+]

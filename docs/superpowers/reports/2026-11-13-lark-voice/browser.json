@@ -1,0 +1,40 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "overflow": false,
+    "pageErrors": [],
+    "captionMatches": true,
+    "portraitLoaded": true,
+    "skipActions": [
+      {
+        "action": "skip",
+        "args": {
+          "line": "ch3_guest_right_arrive_3"
+        }
+      }
+    ],
+    "skipButtonHeight": 44,
+    "reducedMotion": true,
+    "scope": "Vite production Dialogue component harness and actual branch pack; no live multiplayer or physical-device test"
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "overflow": false,
+    "pageErrors": [],
+    "captionMatches": true,
+    "portraitLoaded": true,
+    "skipActions": [
+      {
+        "action": "skip",
+        "args": {
+          "line": "ch3_guest_right_arrive_3"
+        }
+      }
+    ],
+    "skipButtonHeight": 44,
+    "reducedMotion": true,
+    "scope": "Vite production Dialogue component harness and actual branch pack; no live multiplayer or physical-device test"
+  }
+]
