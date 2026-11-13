@@ -13,7 +13,7 @@ Use [GitHub issues](https://github.com/higharc91/ArcBox/issues) for live task st
 | In-session leveling and Results wording | [#146](https://github.com/higharc91/ArcBox/issues/146); the Results label lives in the currently protected `screens.tsx` |
 | REDLINE hardware/audio acceptance | [#24](https://github.com/higharc91/ArcBox/issues/24); interruption fix merged in #229 |
 | Deferred engine findings and owner questions | [Historical progress audit](plans/2026-10-30-tactics-rules-engine.progress.md); its “Decisions for the user” section is retained unchanged |
-| Derelict: ISV Meridian (M1 rules core done; tracking [#319](https://github.com/higharc91/ArcBox/issues/319)) | [Design spec](specs/2026-11-13-meridian-design.md), [M1 rules-core plan](plans/2026-11-13-meridian-m1-rules-core.md), [Breach timing report](reports/2026-11-meridian-breach-timing.md) |
+| Derelict: ISV Meridian (M1 rules core done; tracking [#319](https://github.com/higharc91/ArcBox/issues/319)) | [Design spec](specs/2026-11-13-meridian-design.md), [M1 rules-core plan](plans/2026-11-13-meridian-m1-rules-core.md), [M2 playable-explore plan](plans/2026-11-13-meridian-m2-playable-explore.md) (draft), [Breach timing report](reports/2026-11-meridian-breach-timing.md) |
 | Platform architecture | [Platform spec](specs/2026-10-18-arcbox-platform-design.md); implementation status belongs on GitHub |
 | Screenshots and measurements | [Reports](reports/); evidence is specific to the stated build, machine and date |
 
