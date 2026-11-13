@@ -1,0 +1,46 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "page": 0,
+    "portraitsLoaded": 30,
+    "overflow": false,
+    "pageErrors": [],
+    "productionComponents": true,
+    "realPackFiles": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "page": 3,
+    "portraitsLoaded": 30,
+    "overflow": false,
+    "pageErrors": [],
+    "productionComponents": true,
+    "realPackFiles": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "page": 0,
+    "portraitsLoaded": 30,
+    "overflow": false,
+    "pageErrors": [],
+    "productionComponents": true,
+    "realPackFiles": true,
+    "reducedMotion": true
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "page": 3,
+    "portraitsLoaded": 30,
+    "overflow": false,
+    "pageErrors": [],
+    "productionComponents": true,
+    "realPackFiles": true,
+    "reducedMotion": true
+  }
+]

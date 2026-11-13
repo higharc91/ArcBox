@@ -507,6 +507,14 @@ courtyard). Interiors are the dungeon set's hall and crypt.
 manifest, drawn over a backdrop and scaled 2× to 40×40. Baked portraits ship for every preset; the game makes
 them for custom heroes the same way.
 
+The portrait manifest's `files` list inventories every shipped PNG, including retained historical sources.
+`presets` and `backdrops` remain the runtime bindings. `singleMood` explicitly lists presets whose authored
+portrait has one expression, with a reason in `singleMoodNotes`; both renderers already fall back to idle.
+Story speakers use the lore's `portrait` override before `preset`. Every other story speaker must have six
+pixel-distinct expressions. Cross-checks enforce inventory completeness, expression coverage and removal of
+stale single-mood flags when expressions are added. Keep the accepted PNG bytes and their current bindings
+when updating this catalogue; the full procedural portrait rebuild has the preservation drift documented above.
+
 ## UI kit
 
 `content/tactics/base/ui/` holds the HUD from the mockups: navy glass and gold. The manifest gives every rect,

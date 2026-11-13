@@ -6,6 +6,8 @@ import json
 import hashlib
 import re
 import unittest
+
+from PIL import Image
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -57,6 +59,43 @@ class ManifestCrosscheckTests(unittest.TestCase):
         self.assertEqual(set(), missing, f"Missing manifest files: {sorted(missing)}")
         self.assertEqual(set(), set(source) - shipped, "Stale source-asset allowlist")
         self.assertEqual(set(), shipped - referenced - set(source), "Unreferenced shipped assets")
+
+    def test_portrait_inventory_lists_every_shipped_png_without_exceptions(self):
+        folder = BASE / "portraits"
+        manifest = json.loads((folder / "manifest.json").read_text())
+        files = manifest["files"]
+        self.assertEqual(len(files), len(set(files)), "Duplicate portrait inventory entries")
+        self.assertEqual({p.relative_to(folder).as_posix() for p in folder.rglob("*.png")}, set(files))
+        bindings = set(manifest["backdrops"].values()) | {p for moods in manifest["presets"].values() for p in moods.values()}
+        self.assertLessEqual(bindings, set(files), "Portrait binding missing from its inventory")
+
+    def test_story_portraits_have_six_distinct_expressions_or_a_declared_single_mood(self):
+        folder = BASE / "portraits"
+        manifest = json.loads((folder / "manifest.json").read_text())
+        single = manifest["singleMood"]
+        self.assertEqual(len(single), len(set(single)), "Duplicate single-mood flags")
+        self.assertEqual(set(single), set(manifest["singleMoodNotes"]))
+
+        def pixels(file):
+            with Image.open(folder / file) as image:
+                rgba = image.convert("RGBA")
+                return rgba.size, hashlib.sha256(rgba.tobytes()).hexdigest()
+
+        for preset in single:
+            with self.subTest(single=preset):
+                self.assertTrue(manifest["singleMoodNotes"][preset].strip())
+                moods = manifest["presets"][preset]
+                self.assertIn("idle", moods)
+                self.assertEqual(1, len({pixels(file) for file in moods.values()}), "Remove the single-mood flag when authored expressions arrive")
+        for character in json.loads((BASE / "lore/characters.json").read_text())["characters"]:
+            with self.subTest(character=character["id"]):
+                preset = character.get("portrait") or character["preset"]
+                moods = manifest["presets"][preset]
+                self.assertIn("idle", moods)
+                if preset not in single:
+                    required = {"idle", "happy", "sad", "angry", "surprised", "hurt"}
+                    self.assertLessEqual(required, set(moods))
+                    self.assertEqual(6, len({pixels(moods[mood]) for mood in required}), "Dialogue expressions must differ in pixels, not merely file names or PNG encoding")
 
     def test_retained_mob_sources_are_unchanged_and_have_live_replacements(self):
         inventory = json.loads((Path(__file__).parent / "baseline/retained-mob-sources.json").read_text())

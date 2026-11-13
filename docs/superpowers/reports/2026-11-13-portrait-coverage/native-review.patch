@@ -1,0 +1,56 @@
+diff --git a/src/ArcBox.Host/Main.cs b/src/ArcBox.Host/Main.cs
+index 67d4ef87..6d53fe40 100644
+--- a/src/ArcBox.Host/Main.cs
++++ b/src/ArcBox.Host/Main.cs
+@@ -164,6 +164,51 @@ public partial class Main : Control
+             if (System.Environment.GetEnvironmentVariable("ARCBOX_TACTICS_ART_ROOT") is { Length: > 0 } previewPack)
+                 pack = System.IO.Path.GetFullPath(previewPack);
+             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
++            // Review-only portrait matrix; retained in the report patch and removed after capture.
++            if (board.StartsWith("portrait-review:", StringComparison.Ordinal))
++            {
++                var page = int.Parse(board.Split(':')[1]);
++                var unitArt = global::Tactics.Presentation.Board.UnitArt.Load(pack);
++                var hud = global::Tactics.Presentation.Hud.HudArt.Load(pack, unitArt);
++                var art = new Games.Tactics.StoryArt(pack, hud, unitArt);
++                var overlay = new CanvasLayer { Layer = 1000 };
++                AddChild(overlay);
++                var root = new Control { Size = new Vector2(1920, 1080) };
++                overlay.AddChild(root);
++                root.AddChild(new ColorRect { Color = new Color("151525"), Size = new Vector2(1920, 1080) });
++                var title = ArcTheme.Label($"Story portrait coverage · page {page + 1}/4 · existing art", ArcTheme.Bold, 32);
++                title.Position = new Vector2(48, 28); root.AddChild(title);
++                string[] moods = ["idle", "happy", "sad", "angry", "surprised", "hurt"];
++                for (var col = 0; col < moods.Length; col++)
++                {
++                    var heading = ArcTheme.Label(moods[col], ArcTheme.SemiBold, 26);
++                    heading.Position = new Vector2(500 + col * 220, 92); root.AddChild(heading);
++                }
++                using var cast = JsonDocument.Parse(System.IO.File.ReadAllText(System.IO.Path.Combine(pack, "lore", "characters.json")));
++                using var portraits = JsonDocument.Parse(System.IO.File.ReadAllText(System.IO.Path.Combine(pack, "portraits", "manifest.json")));
++                var singles = portraits.RootElement.GetProperty("singleMood").EnumerateArray().Select(x => x.GetString()).ToHashSet();
++                var row = 0;
++                foreach (var who in cast.RootElement.GetProperty("characters").EnumerateArray().Skip(page * 5).Take(5))
++                {
++                    var preset = who.TryGetProperty("portrait", out var faceKey) ? faceKey.GetString()! : who.GetProperty("preset").GetString()!;
++                    var label = ArcTheme.Label(who.GetProperty("name").GetString()!, ArcTheme.Bold, 28);
++                    label.Position = new Vector2(48, 160 + row * 170); root.AddChild(label);
++                    if (singles.Contains(preset))
++                    {
++                        var note = ArcTheme.Label("Declared single expression", ArcTheme.SemiBold, 22);
++                        note.Position = new Vector2(48, 200 + row * 170); root.AddChild(note);
++                    }
++                    for (var col = 0; col < moods.Length; col++)
++                    {
++                        var face = new Games.Tactics.StoryFace(art, new Vector2(120, 120))
++                        { Position = new Vector2(500 + col * 220, 142 + row * 170), Size = new Vector2(120, 120) };
++                        root.AddChild(face); face.Show(hud.Speaker(preset, moods[col], who.GetProperty("role").GetString()));
++                    }
++                    row++;
++                }
++                _shots?.Capture($"portrait-review-{page}");
++                return;
++            }
+             if (board == "mob-entries")
+                 AddChild(new Games.Tactics.ThingsDemoFeeder(view => OnHostView(new HostViewEvent("tactics", view)), _ => { }, _shots,
+                     global::Tactics.Presentation.World.MobEntryDemo.Steps(pack)));
