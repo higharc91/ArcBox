@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "preact/hooks";
 import { PLAYER_COLOURS } from "../games/meridian/DeckMap";
 import type { CompartmentCard, CrewMarker, Deck, Presented } from "../games/meridian/types";
+// The board draws rooms with the phone module's classes; the dev page never loads that module, so it brings the CSS.
+import "../games/meridian/meridian.css";
 
 /**
  * A browser stand-in for the TV's Meridian screen until the Godot scene (stage M4): all three decks side by side, the
@@ -60,7 +62,7 @@ export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal
         </div>
       ) : null}
       <div class="mer-board-decks">
-        {DECKS.map((d) => <BoardDeck key={d.id} label={d.label} rooms={view.compartments.filter((c) => c.at[0] === d.id)}
+        {DECKS.map((d) => <BoardDeck key={d.id} deck={d.id} label={d.label} rooms={view.compartments.filter((c) => c.at[0] === d.id)}
           crew={view.crew} lit={view.now?.compartment ?? null} />)}
       </div>
       <ul class="mer-log">{view.log.map((line, i) => <li key={i}>{line}</li>)}</ul>
@@ -68,13 +70,15 @@ export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal
   );
 }
 
-function BoardDeck({ label, rooms, crew, lit }: { label: string; rooms: CompartmentCard[]; crew: CrewMarker[]; lit: string | null }) {
+function BoardDeck({ deck, label, rooms, crew, lit }: {
+  deck: Deck; label: string; rooms: CompartmentCard[]; crew: CrewMarker[]; lit: string | null;
+}) {
   const xs = rooms.map((r) => r.at[1]), ys = rooms.map((r) => r.at[2]);
   const minX = Math.min(...xs, 0), maxX = Math.max(...xs, 0), minY = Math.min(...ys, 0);
   return (
     <section class="mer-board-deck" aria-label={label}>
       <h3>{label}</h3>
-      <div class="mer-grid" style={{ gridTemplateColumns: `repeat(${maxX - minX + 1}, 48px)` }}>
+      <div class={`mer-grid deck-${deck}`} style={{ gridTemplateColumns: `repeat(${maxX - minX + 1}, 48px)` }}>
         {rooms.map((r) => {
           const sealed = new Set(r.sealed ?? []);
           const cls = ["mer-room", r.id === lit ? "here" : "", ...r.hatches.map((h) => (sealed.has(h) ? `sealed-${h}` : `hatch-${h}`))];

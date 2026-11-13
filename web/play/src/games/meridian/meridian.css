@@ -1,6 +1,7 @@
 /* Derelict: ISV Meridian, phone screens. A placeholder look until the art issues (#331, #335) land. */
-.mer { --mer-ink: #e6eef2; --mer-muted: #8fa3ad; --mer-panel: #141c22; --mer-edge: #2f4552; --mer-warn: #e2534c;
-  --mer-cyan: #3ec7ff; --mer-anomaly: #b8e05a; color: var(--mer-ink); display: flex; flex-direction: column; gap: 12px; }
+.mer, .mer-board { --mer-ink: #e6eef2; --mer-muted: #8fa3ad; --mer-panel: #141c22; --mer-edge: #2f4552; --mer-warn: #e2534c;
+  --mer-cyan: #3ec7ff; --mer-anomaly: #b8e05a; color: var(--mer-ink); }
+.mer { display: flex; flex-direction: column; gap: 12px; }
 .mer h2, .mer h3 { margin: 0; }
 .mer button { min-height: 44px; font-size: 16px; }
 .mer-muted { color: var(--mer-muted); font-weight: normal; }
@@ -27,7 +28,9 @@
 .mer-room.hatch-s { border-bottom-color: var(--mer-deck); } .mer-room.hatch-w { border-left-color: var(--mer-deck); }
 .mer-room.sealed-n { border-top-color: var(--mer-warn); } .mer-room.sealed-e { border-right-color: var(--mer-warn); }
 .mer-room.sealed-s { border-bottom-color: var(--mer-warn); } .mer-room.sealed-w { border-left-color: var(--mer-warn); }
-.mer-name { line-height: 1.1; }
+/* A reachable room is a button; keep it the size of the others rather than the 16 px every other phone button gets. */
+.mer .mer-room, .mer-board .mer-room { font-size: 11px; min-height: 0; }
+.mer-name { line-height: 1.1; overflow-wrap: anywhere; }
 .mer-symbol { position: absolute; top: 2px; right: 4px; font-weight: bold; }
 .mer-symbol.anomaly { color: var(--mer-anomaly); }
 .mer-cost { position: absolute; bottom: 2px; right: 4px; color: var(--mer-deck); }

@@ -164,6 +164,20 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
       the TV. Checked here only in a browser on the PC, not on a phone.
 
+## Derelict: ISV Meridian (stage M2: Explore only)
+
+Until the TV scene (stage M4), the board is the dev page's: open `/dev.html?phones=0` on a laptop as the "TV", or run
+`node tools/meridian-playtest/bots.cjs --room=<CODE>` to fill seats with bot phones. The game ends at the Breach in M2.
+
+- [ ] Three real phones on the LAN join, select **Derelict: ISV Meridian** and start. Each picks a different crew member; a taken one is greyed out.
+- [ ] On your turn, the deck tabs show a count where you can go; tapping a compartment moves you, tapping **Open** reveals a new one.
+- [ ] A new compartment appears on the board, and every phone shows "On the main screen" until it has been shown.
+- [ ] A card's check rolls on your phone and the result is in the board's log.
+- [ ] Lock a phone during its own turn for 30 s: the board marks it **auto** and a bot plays it; unlocking takes the next decision back.
+- [ ] Reload a phone while it is choosing which way a new compartment goes: it comes back on the same choice.
+- [ ] Leave a turn untouched: it ends after 60 s.
+- [ ] Reach the Breach: every phone shows the ending, and the room is back in the lobby with the results.
+
 ## After
 
 - [ ] Save the server console log and the Godot log (`%APPDATA%\Godot\app_userdata\ArcBox\logs`) if anything failed.
