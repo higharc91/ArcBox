@@ -1,0 +1,227 @@
+{
+  "phase": "explore",
+  "banner": "Player2\u0027s turn",
+  "seats": [
+    {
+      "id": "p1",
+      "name": "Player1",
+      "crew": "Ines Okafor",
+      "colour": 0,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p2",
+      "name": "Player2",
+      "crew": "Tobe Raske",
+      "colour": 1,
+      "connected": true,
+      "auto": false,
+      "active": true
+    },
+    {
+      "id": "p3",
+      "name": "Player3",
+      "crew": "Sable Quist",
+      "colour": 2,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p4",
+      "name": "Player4",
+      "crew": "Dr. Anselm Varga",
+      "colour": 3,
+      "connected": true,
+      "auto": false,
+      "active": false
+    }
+  ],
+  "compartments": [
+    {
+      "id": "c1",
+      "tile": "airlock",
+      "at": [
+        "habitat",
+        0,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n"
+      ]
+    },
+    {
+      "id": "c2",
+      "tile": "docking_ring",
+      "at": [
+        "habitat",
+        0,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c3",
+      "tile": "central_lift",
+      "at": [
+        "habitat",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c4",
+      "tile": "command_landing",
+      "at": [
+        "command",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c5",
+      "tile": "engineering_landing",
+      "at": [
+        "engineering",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c6",
+      "tile": "quiet_room",
+      "at": [
+        "habitat",
+        1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c7",
+      "tile": "cryo_bay",
+      "at": [
+        "habitat",
+        1,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c8",
+      "tile": "maintenance_shaft",
+      "at": [
+        "habitat",
+        -1,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c9",
+      "tile": "junction",
+      "at": [
+        "habitat",
+        -2,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    }
+  ],
+  "crew": [
+    {
+      "id": "p1",
+      "name": "Player1",
+      "at": "c7",
+      "colour": 0
+    },
+    {
+      "id": "p2",
+      "name": "Player2",
+      "at": "c9",
+      "colour": 1
+    },
+    {
+      "id": "p3",
+      "name": "Player3",
+      "at": "c1",
+      "colour": 2
+    },
+    {
+      "id": "p4",
+      "name": "Player4",
+      "at": "c1",
+      "colour": 3
+    }
+  ],
+  "tilesLeft": 41,
+  "anomaliesDrawn": 1,
+  "round": 1,
+  "now": {
+    "seq": 6,
+    "kind": "reveal",
+    "seat": "p2",
+    "title": "Junction",
+    "text": "",
+    "seconds": 1.2,
+    "faces": [],
+    "compartment": "c9"
+  },
+  "log": [
+    "Player1 found the Quiet Room.",
+    "Player1 found the Cryo Bay.",
+    "Player1 drew Waterlogged Logbook.",
+    "Player1 rolled 1 of 6. The ship holds.",
+    "Player2 found the Maintenance Shaft.",
+    "Player2 found the Junction."
+  ]
+}

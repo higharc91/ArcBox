@@ -71,7 +71,35 @@ public sealed class PhoneFixtureTests
         Keep("trade", held.H.PlayerView(other));
 
         Assert.Equal(Names.Order(), screens.Keys);
-        Check(screens);
+        Check(screens, "meridian");
+    }
+
+    /// <summary>A real TV view mid-game, with an event being presented, for the dev board's tests.</summary>
+    [Fact]
+    public void The_host_view_matches_its_fixture()
+    {
+        var game = new Harness(players: 4, seed: 3).Board();
+        var rng = Rng.Seeded(3, 99);
+        for (var i = 0; i < 400 && game.Session.Phase == SessionPhase.Explore; i++)
+        {
+            if (!game.Session.Queue.IsEmpty)
+            {
+                if (game.Session.Queue[0].Kind == "reveal" && game.State.Ship.Compartments.Count >= 9)
+                {
+                    break;
+                }
+                game.Presented(game.Session.Queue[0].Seq);
+                continue;
+            }
+            var seat = BotRunner.Actor(game.State);
+            game.Do(ExploreBot.Instance.Choose(game.Pack, game.State, seat, Rules.Legal(game.Pack, game.State, seat), ref rng));
+        }
+        var view = (MeridianHostView)game.Game.HostView();
+        Assert.NotNull(view.Now);
+        Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
+        {
+            ["explore"] = JsonSerializer.SerializeToNode(view, ArcJson.Options)!,
+        }, "meridian-host");
     }
 
     private static string? Classify(Harness game, int p)
@@ -99,9 +127,9 @@ public sealed class PhoneFixtureTests
     private static JsonNode Node(ControllerView view)
         => JsonSerializer.SerializeToNode<ControllerView>(view with { ViewId = "v1" }, ArcJson.Options)!;
 
-    private static void Check(SortedDictionary<string, JsonNode> screens)
+    private static void Check(SortedDictionary<string, JsonNode> screens, string folder)
     {
-        var dir = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(BasePack.Root)!)!, "..", "web", "play", "test", "fixtures", "meridian");
+        var dir = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(BasePack.Root)!)!, "..", "web", "play", "test", "fixtures", folder);
         var update = Environment.GetEnvironmentVariable("UPDATE_FIXTURES") == "1";
         foreach (var (name, json) in screens)
         {
