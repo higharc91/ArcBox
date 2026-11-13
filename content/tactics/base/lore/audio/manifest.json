@@ -2841,6 +2841,9 @@
     "ch4_lark_stranger_answer_4": {
       "main": "ch4_lark_stranger_answer_4.475b1e9a.ogg"
     },
+    "ch4_lark_stranger_answer_5": {
+      "main": "ch4_lark_stranger_answer_5.720cc0c7.ogg"
+    },
     "ch4_lark_stranger_answer_6": {
       "main": "ch4_lark_stranger_answer_6.45c75127.ogg"
     },
@@ -2850,11 +2853,20 @@
     "ch4_lark_stranger_margin_2": {
       "main": "ch4_lark_stranger_margin_2.c53081d6.ogg"
     },
+    "ch4_lark_stranger_shrine_1": {
+      "main": "ch4_lark_stranger_shrine_1.26167a63.ogg"
+    },
     "ch4_lark_stranger_shrine_2": {
       "main": "ch4_lark_stranger_shrine_2.afe5a924.ogg"
     },
+    "ch4_lark_stranger_shrine_3": {
+      "main": "ch4_lark_stranger_shrine_3.73845c25.ogg"
+    },
     "ch4_lark_stranger_shrine_4": {
       "main": "ch4_lark_stranger_shrine_4.af9f8dff.ogg"
+    },
+    "ch4_lark_stranger_shrine_5": {
+      "main": "ch4_lark_stranger_shrine_5.06c7013c.ogg"
     },
     "ch4_pilgrim_road_dusk_1": {
       "main": "ch4_pilgrim_road_dusk_1.5a85cb83.ogg"
@@ -3468,6 +3480,9 @@
     "ch5_the_archive_open_3": {
       "main": "ch5_the_archive_open_3.c24812af.ogg"
     },
+    "ch5_the_archive_open_lark": {
+      "main": "ch5_the_archive_open_lark.b203f09b.ogg"
+    },
     "ch5_the_archive_pip_1": {
       "main": "ch5_the_archive_pip_1.8fc435b1.ogg"
     },
@@ -3506,6 +3521,9 @@
     },
     "ch5_the_archive_verse_2": {
       "main": "ch5_the_archive_verse_2.b6f87a71.ogg"
+    },
+    "ch5_the_archive_verse_lark_1": {
+      "main": "ch5_the_archive_verse_lark_1.63ff834b.ogg"
     },
     "ch5_the_archive_verse_lark_2": {
       "main": "ch5_the_archive_verse_lark_2.aeff4947.ogg"
@@ -3902,6 +3920,9 @@
     },
     "talk_lark_reunion_3": {
       "main": "talk_lark_reunion_3.4046a21a.ogg"
+    },
+    "talk_lark_song_1": {
+      "main": "talk_lark_song_1.052af895.ogg"
     },
     "talk_lark_song_2": {
       "main": "talk_lark_song_2.2e4ecb8f.ogg"
