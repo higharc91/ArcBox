@@ -1,0 +1,22 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "watch",
+  "data": {
+    "now": {
+      "seq": 4,
+      "kind": "roll",
+      "seat": "p3",
+      "title": "Breach roll",
+      "text": "1 dice: 0",
+      "seconds": 1.5,
+      "faces": [
+        0
+      ],
+      "compartment": null
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

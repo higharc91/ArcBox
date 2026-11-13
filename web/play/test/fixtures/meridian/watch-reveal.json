@@ -1,0 +1,20 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "watch",
+  "data": {
+    "now": {
+      "seq": 1,
+      "kind": "reveal",
+      "seat": "p3",
+      "title": "Mess Hall",
+      "text": "",
+      "seconds": 1.2,
+      "faces": [],
+      "compartment": "c6"
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

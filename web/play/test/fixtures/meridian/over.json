@@ -1,0 +1,11 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "over",
+  "data": {
+    "message": "The Breach fired in the Comms Array after 7 Anomalies. Scenarios arrive in stage M3."
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}
