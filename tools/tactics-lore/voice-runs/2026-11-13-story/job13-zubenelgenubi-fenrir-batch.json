@@ -1,0 +1,156 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job13-zubenelgenubi-fenrir",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Zubenelgenubi"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Fenrir"
+      }
+    ],
+    "text": "A: <brisk market patter with worry beneath it Mood: idle.> Blood on the planks and carts going over them. Trade's never been squeamish.\n<long pause>\nA: <brisk market patter with worry beneath it Mood: happy.> The clan wants salt, of all things. I never thought I'd have goblin custom.\n<long pause>\nA: <brisk market patter with worry beneath it Mood: idle.> People are buying blankets. Only blankets. Somebody knows something about this cold.\n<long pause>\nA: <brisk market patter with worry beneath it Mood: idle.> Prices are what they are. Don't blame the merchant for the weather.\n<long pause>\nA: <brisk market patter with worry beneath it Mood: happy.> Everything here is honest goods. Mostly honest. Ask me about the wool.\n<long pause>\nA: <brisk market patter with worry beneath it Mood: surprised.> Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.\n<long pause>\nB: <restrained, ashamed but loyal military voice Mood: sad.> We took the bridge back. The captain hasn't said a word since. Neither have I.\n<long pause>\nB: <restrained, ashamed but loyal military voice Mood: idle.> Captain made peace with them. Some of the lads don't like it. I like breathing.\n<long pause>\nB: <restrained, ashamed but loyal military voice Mood: idle.> Orders are to watch the docks now. Watch them for what, nobody says.\n<long pause>\nB: <restrained, ashamed but loyal military voice Mood: idle.> Long shift, cold boots. Same as every week.\n<long pause>\nB: <restrained, ashamed but loyal military voice Mood: sad.> Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+    "segments": [
+      {
+        "raw": "Zubenelgenubi.69523a31",
+        "line": "town_merchant_force",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "Blood on the planks and carts going over them. Trade's never been squeamish.",
+        "renderText": "<brisk market patter with worry beneath it Mood: idle.> Blood on the planks and carts going over them. Trade's never been squeamish.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zubenelgenubi.e629abbb",
+        "line": "town_merchant_parley",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "The clan wants salt, of all things. I never thought I'd have goblin custom.",
+        "renderText": "<brisk market patter with worry beneath it Mood: happy.> The clan wants salt, of all things. I never thought I'd have goblin custom.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Zubenelgenubi.3357d2b2",
+        "line": "town_merchant_ember",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "People are buying blankets. Only blankets. Somebody knows something about this cold.",
+        "renderText": "<brisk market patter with worry beneath it Mood: idle.> People are buying blankets. Only blankets. Somebody knows something about this cold.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zubenelgenubi.d8899f2c",
+        "line": "town_merchant_4",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "Prices are what they are. Don't blame the merchant for the weather.",
+        "renderText": "<brisk market patter with worry beneath it Mood: idle.> Prices are what they are. Don't blame the merchant for the weather.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zubenelgenubi.8114f73c",
+        "line": "town_merchant_5",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "Everything here is honest goods. Mostly honest. Ask me about the wool.",
+        "renderText": "<brisk market patter with worry beneath it Mood: happy.> Everything here is honest goods. Mostly honest. Ask me about the wool.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Zubenelgenubi.bc6fdd85",
+        "line": "town_merchant_bargained",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
+        "renderText": "<brisk market patter with worry beneath it Mood: surprised.> Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "surprised"
+        }
+      },
+      {
+        "raw": "Fenrir.1c12c38c",
+        "line": "town_guard_force",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "We took the bridge back. The captain hasn't said a word since. Neither have I.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: sad.> We took the bridge back. The captain hasn't said a word since. Neither have I.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Fenrir.aca85793",
+        "line": "town_guard_parley",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Captain made peace with them. Some of the lads don't like it. I like breathing.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Captain made peace with them. Some of the lads don't like it. I like breathing.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Fenrir.59aa03b1",
+        "line": "town_guard_ember",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Orders are to watch the docks now. Watch them for what, nobody says.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Orders are to watch the docks now. Watch them for what, nobody says.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Fenrir.459d9811",
+        "line": "town_guard_4",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Long shift, cold boots. Same as every week.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Long shift, cold boots. Same as every week.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Fenrir.7a2cdd45",
+        "line": "town_guard_guarded",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: sad.> Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "sad"
+        }
+      }
+    ]
+  }
+}

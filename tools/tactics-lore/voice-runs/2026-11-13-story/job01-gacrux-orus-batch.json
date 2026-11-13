@@ -1,0 +1,174 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job01-gacrux-orus",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Gacrux"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Orus"
+      }
+    ],
+    "text": "A: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> We held the bridge. I keep counting the ones who didn't come back across it.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Peace with the clan. I'll hold to it. Doesn't mean I have to like it.\n<long pause>\nA: <A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Spears at the ford, dearie. The river's seen it before. It never likes it.\n<long pause>\nA: <A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Goblins and valley folk at one fire. I lived to see it. Never thought I would.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Coll. My own lad. He loosed at their little ones foraging on the bank, the morning they came down. They answered.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> And then I brought spears to the ford and finished what he started. Gods help me.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Halden. You locked those gates in spring, before a single goblin came down from the hills. I want to know why. Now.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Six years. I buried two of mine at that bridge, and you knew why they were there.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Then I'll carry it up myself. If anyone's left up there, they can see the face of the one who led the spears.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They took their small ones and ran. They left her for us. I suppose that's what we earned.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Dig, then. Somewhere she can see the ford. She spent her last morning watching it.\n<long pause>\nB: Mended a dozen spears for the bridge. Don't ask how many came back to me.\n<long pause>\nB: Goblin smith came down asking about the forge. Knows his iron. Don't tell anyone I said so.",
+    "segments": [
+      {
+        "raw": "Gacrux.3cc9b8a2",
+        "line": "bark_dagna_holt_town_force",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "We held the bridge. I keep counting the ones who didn't come back across it.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> We held the bridge. I keep counting the ones who didn't come back across it.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.71f7f185",
+        "line": "bark_dagna_holt_town_parley",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Peace with the clan. I'll hold to it. Doesn't mean I have to like it.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Peace with the clan. I'll hold to it. Doesn't mean I have to like it.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.80e92bc4",
+        "line": "bark_old_maud_town_force",
+        "speaker": "old_maud",
+        "preset": "Gacrux",
+        "text": "Spears at the ford, dearie. The river's seen it before. It never likes it.",
+        "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Spears at the ford, dearie. The river's seen it before. It never likes it.",
+        "delivery": {
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.ec43bc90",
+        "line": "bark_old_maud_town_parley",
+        "speaker": "old_maud",
+        "preset": "Gacrux",
+        "text": "Goblins and valley folk at one fire. I lived to see it. Never thought I would.",
+        "renderText": "<A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue. Mood: idle.> Goblins and valley folk at one fire. I lived to see it. Never thought I would.",
+        "delivery": {
+          "direction": "A woman aged105. Ancient, dry, papery voice with age-cracked creak, light breathy quaver and frail breath support. Soft low-mid register. Unhurried short phrases with small natural pauses. Warm, wry rural English manner; perfectly lucid and self-possessed. Clearly very elderly, not a young actress speaking slowly, not the firm resonant guard captain. No cartoon witch or theatrical croak. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.a67d1d96",
+        "line": "ch1_council_force_soldier_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Coll. My own lad. He loosed at their little ones foraging on the bank, the morning they came down. They answered.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Coll. My own lad. He loosed at their little ones foraging on the bank, the morning they came down. They answered.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.ed9982f5",
+        "line": "ch1_council_force_soldier_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "And then I brought spears to the ford and finished what he started. Gods help me.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> And then I brought spears to the ford and finished what he started. Gods help me.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.c4875676",
+        "line": "ch1_council_force_press_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Halden. You locked those gates in spring, before a single goblin came down from the hills. I want to know why. Now.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Halden. You locked those gates in spring, before a single goblin came down from the hills. I want to know why. Now.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.20d95b21",
+        "line": "ch1_council_force_confess_4",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Six years. I buried two of mine at that bridge, and you knew why they were there.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Six years. I buried two of mine at that bridge, and you knew why they were there.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.d0cb1be9",
+        "line": "ch1_council_force_hill_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Then I'll carry it up myself. If anyone's left up there, they can see the face of the one who led the spears.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Then I'll carry it up myself. If anyone's left up there, they can see the face of the one who led the spears.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.332ea8f1",
+        "line": "ch1_burial_open_3",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "They took their small ones and ran. They left her for us. I suppose that's what we earned.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They took their small ones and ran. They left her for us. I suppose that's what we earned.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.0d9cdc66",
+        "line": "ch1_burial_open_4",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Dig, then. Somewhere she can see the ford. She spent her last morning watching it.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Dig, then. Somewhere she can see the ford. She spent her last morning watching it.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Orus.1d314d24",
+        "line": "bark_tobin_fell_town_force",
+        "speaker": "tobin_fell",
+        "preset": "Orus",
+        "text": "Mended a dozen spears for the bridge. Don't ask how many came back to me.",
+        "renderText": "Mended a dozen spears for the bridge. Don't ask how many came back to me.",
+        "delivery": null
+      },
+      {
+        "raw": "Orus.1b1ee1be",
+        "line": "bark_tobin_fell_town_parley",
+        "speaker": "tobin_fell",
+        "preset": "Orus",
+        "text": "Goblin smith came down asking about the forge. Knows his iron. Don't tell anyone I said so.",
+        "renderText": "Goblin smith came down asking about the forge. Knows his iron. Don't tell anyone I said so.",
+        "delivery": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job15-sadachbia-achird",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Sadachbia"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Achird"
+      }
+    ],
+    "text": "A: Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.\n<long pause>\nA: The clan keeps songs older than my oldest page. I've begged for a copy. Twice.\n<long pause>\nA: You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.\n<long pause>\nA: I've written down the bridge. All of it. Someone should, while we still remember it right.\n<long pause>\nA: Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.\n<long pause>\nB: <young, tired, dry working voice Mood: sad.> The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?\n<long pause>\nB: <young, tired, dry working voice Mood: idle.> Carried my first sack up the goblin path today. The little ones watched me the whole way.\n<long pause>\nB: <young, tired, dry working voice Mood: idle.> Ground under the docks went cold as a grave. Nobody's saying why.\n<long pause>\nB: <young, tired, dry working voice Mood: idle.> Hands are cold, but they still work. That's something.",
+    "segments": [
+      {
+        "raw": "Sadachbia.98a2d6d5",
+        "line": "bark_corvin_ashby_town_force",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.",
+        "renderText": "Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.b96a5d15",
+        "line": "bark_corvin_ashby_town_parley",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "The clan keeps songs older than my oldest page. I've begged for a copy. Twice.",
+        "renderText": "The clan keeps songs older than my oldest page. I've begged for a copy. Twice.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.aa8bfb43",
+        "line": "talk_corvin_ashby_ford_ember",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.",
+        "renderText": "You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.93aef6e5",
+        "line": "talk_corvin_ashby_ford_force",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "I've written down the bridge. All of it. Someone should, while we still remember it right.",
+        "renderText": "I've written down the bridge. All of it. Someone should, while we still remember it right.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.61c0c0e5",
+        "line": "talk_corvin_ashby_ford_parley",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.",
+        "renderText": "Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.",
+        "delivery": null
+      },
+      {
+        "raw": "Achird.7237fe1b",
+        "line": "town_farmhand_force",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?",
+        "renderText": "<young, tired, dry working voice Mood: sad.> The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Achird.d51bb439",
+        "line": "town_farmhand_parley",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "Carried my first sack up the goblin path today. The little ones watched me the whole way.",
+        "renderText": "<young, tired, dry working voice Mood: idle.> Carried my first sack up the goblin path today. The little ones watched me the whole way.",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Achird.fa8ce5a0",
+        "line": "town_farmhand_ember",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "Ground under the docks went cold as a grave. Nobody's saying why.",
+        "renderText": "<young, tired, dry working voice Mood: idle.> Ground under the docks went cold as a grave. Nobody's saying why.",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Achird.629eeeb2",
+        "line": "town_farmhand_4",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "Hands are cold, but they still work. That's something.",
+        "renderText": "<young, tired, dry working voice Mood: idle.> Hands are cold, but they still work. That's something.",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}
