@@ -49,13 +49,18 @@ public sealed class StoryTests
     internal static (Tile From, WalkDir Dir) StepIntoReach(string beat)
     {
         var spot = SpotOf(beat);
+        // Nothing else may answer an interact on either tile: a shop, a thing, or someone with a conversation (Lark, since #218).
+        bool Quiet(Tile at)
+            => !Rules.ShopsIn("ashen_ford").Any(shop => shop.Keeper.Person is { } person
+                    && Interactables.InReach(Ground, at, new InteractableDef(shop.Id, "stall", StageBattleTests.Region.People[person].At)))
+                && !Rules.InteractablesIn("ashen_ford").Any(thing => Interactables.InReach(Ground, at, thing))
+                && !StageBattleTests.Region.People.Any(person => person.Character is { } character
+                    && Lore.Conversations.Any(c => c.Character == character)
+                    && Interactables.InReach(Ground, at, new InteractableDef(character, "sign", person.At)));
         foreach (var from in StageBattleTests.Reached.Order())
-            if (!StoryRules.InReach(Ground, from, spot)
-                && !Rules.ShopsIn("ashen_ford").Any(shop => shop.Keeper.Person is { } person
-                    && Interactables.InReach(Ground, from, new InteractableDef(shop.Id, "stall", StageBattleTests.Region.People[person].At)))
-                && !Rules.InteractablesIn("ashen_ford").Any(thing => Interactables.InReach(Ground, from, thing)))
+            if (!StoryRules.InReach(Ground, from, spot) && Quiet(from))
                 foreach (var dir in Enum.GetValues<WalkDir>())
-                    if (WorldWalk.Next(Ground, from, dir, ClassDef.DefaultJump, null) is { } move && StoryRules.InReach(Ground, move.To, spot))
+                    if (WorldWalk.Next(Ground, from, dir, ClassDef.DefaultJump, null) is { } move && StoryRules.InReach(Ground, move.To, spot) && Quiet(move.To))
                         return (from, dir);
         throw new InvalidOperationException($"No step into reach of {beat}.");
     }
