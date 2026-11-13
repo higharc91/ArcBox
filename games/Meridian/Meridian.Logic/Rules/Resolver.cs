@@ -26,6 +26,8 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case Choose c: ChooseOption(c.Option); break;
             case UseItem u: Use(u.Item); break;
             case UseCompartment: UseRoom(); break;
+            case OfferTrade o: Offer(o); break;
+            case AnswerTrade a: Answer(a.Accept); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
         AfterStep();
@@ -44,6 +46,10 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
                 break;
             case ChoicePending c:
                 legal.AddRange(pack.Card(c.Card).Choice!.Options.Select(o => new Choose(c.From, o.Id)));
+                break;
+            case TradePending t:
+                legal.Add(new AnswerTrade(t.From, true));
+                legal.Add(new AnswerTrade(t.From, false));
                 break;
         }
     }
@@ -73,6 +79,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
                 break;
             case ChoicePending c:
                 ChooseOption(Pack.Card(c.Card).Choice!.Options[0].Id);
+                break;
+            case TradePending:
+                Answer(false);
                 break;
         }
     }

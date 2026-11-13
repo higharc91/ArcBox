@@ -84,6 +84,9 @@ public static class Rules
         return [.. legal];
     }
 
+    /// <summary>A sample of trades the active seat could offer now: give one, ask for one, or swap one for one.</summary>
+    public static IEnumerable<OfferTrade> TradeOffers(GameState state, SeatId seat) => Resolver.SampleTrades(state, seat);
+
     public static StepResult Step(RulesPack pack, GameState state, Command command)
     {
         if (Rejection(pack, state, command) is { } reason)
@@ -113,6 +116,10 @@ public static class Rules
         if (state.Waiting is null && command.From != state.ActiveSeat)
         {
             return "It isn't your turn.";
+        }
+        if (command is OfferTrade offer)
+        {
+            return state.Waiting is null ? Resolver.TradeRejection(state, offer) : "Not now.";
         }
         return Legal(pack, state, command.From).Contains(command) ? null : "That isn't allowed now.";
     }
