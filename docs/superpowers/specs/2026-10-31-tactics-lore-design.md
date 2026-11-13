@@ -174,23 +174,30 @@ only; nothing here needs an engine change to merge, and the engine can adopt it 
   chosen option's `sets` flags are set.
 - `encounter` names the rules encounter to start.
 
-**Barks.**
-- A player character's barks come from the voice set its player picked in the creator (`voices/<id>.json`). Store the
-  voice id on the character; it needs a Voice step in the creator.
-- NPCs and the narrator use `barks/<speaker>.json`.
+**Barks.** Built in #206: `BattleBarks` (battle), `TacticsGame.CampBarks` (camp and level-up), and `GriskBarks` for
+Grisk's own authored moments.
+- A player character barks in the voice set its player picked (`voices/<id>.json`), in a lower or higher register: the
+  character record's `voice` is `"<set>.<register>"` (`"wry.high"`, `PlayerVoices`). The creator and the character
+  sheet pick it; a character without one speaks in a voice fixed by their name.
+- NPCs and the narrator use `barks/<speaker>.json`. In battle a unit speaks for the speaker its sheet tag names
+  (`"mother_skarrow"`; Vorga is placed as the `"warlord"`).
 - Map engine events to bark events: `battle_start`, `turn_start`, `hit`, `miss`, `crit`, `kill`, `ally_down`
   (an ally is Downed), `low_hp`, `healed`, `revived`, `level_up`, `victory`, `defeat`, `camp`, `town`. An event
   with no lines says nothing.
 - **Perspective.** Bark events are from the speaker's side:
   - `hit`, `miss`, `crit` and `kill` are the speaker's own attack landing, missing, critting or killing;
   - `low_hp`, `healed` and `revived` happen to the speaker;
-  - `victory` and `defeat` are the speaker's side winning or losing. A villain's `defeat` is the party's win.
-- **Presence.** An NPC barks only when present: a unit in the battle, or in the cast of the scene that just played
-  for `town` and `camp`. Bark lines carry no flags, so presence is what keeps a dead or absent character quiet.
-- Pick by `weight` (default 1) from the battle RNG, so replays and resumed battles are identical.
-- Show the speaker's portrait in the line's `mood`. Speak the line through `/api/tts` with the voice's `theme`, or
-  play a pre-rendered file keyed by line id (§4).
-- Rate-limit barks in the UI (at most one every few seconds, never over a `say` line) so battles don't get chatty.
+  - `victory` and `defeat` are the speaker's side winning or losing. A villain's `defeat` is their last words.
+- **Presence.** An NPC barks only when present: a unit up in the battle; for `camp` and `level_up`, a placed person
+  within 8 tiles of the fire, the inn's keeper or the party; for `town`, the person talked to. Bark lines carry no
+  flags, so presence is what keeps a dead or absent character quiet. At camp the party's own voices and the narrator
+  are always there.
+- Pick the speaker and the line (by `weight`, default 1) from the beat counter, or the rest count and party level
+  at camp and level-up, never the battle RNG, so replays and resumed battles are identical and barks change nothing.
+- Show the speaker's portrait in the line's `mood`, and play the line's recording: `main` for NPCs, the register's cast
+  for a player voice (`<line id>#<register>` when a bark names it by id).
+- One bark a beat at most, never in a beat with a `say` line, and none for two beats after any spoken line, so
+  battles don't get chatty; the end of a battle always speaks.
 
 **Scenes** (`scenes/*.json`, schema `scenes.schema.json`). The dialogue for the arcs, written ahead of the runtime
 that plays it (sub-project 5), so voice, translation and review can start now.

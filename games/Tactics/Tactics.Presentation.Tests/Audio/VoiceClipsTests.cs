@@ -82,4 +82,29 @@ public sealed class VoiceClipsTests
 
         Assert.Null(Clips.Value.For(id, "somebody_else", says[0].Line));
     }
+
+    /// <summary>#206: every player voice line is recorded in both registers, found by voice and text in battle, by id at camp.</summary>
+    [Fact]
+    public void Every_player_voice_line_has_a_clip_in_both_registers()
+    {
+        var lines = 0;
+        foreach (var file in Directory.GetFiles(Path.Combine(Pack.Root, "lore", "voices"), "*.json"))
+        {
+            using var doc = JsonDocument.Parse(File.ReadAllText(file));
+            var set = doc.RootElement.GetProperty("id").GetString()!;
+            foreach (var line in doc.RootElement.GetProperty("events").EnumerateObject().SelectMany(e => e.Value.EnumerateArray()))
+            {
+                var (id, text) = (line.GetProperty("id").GetString()!, line.GetProperty("text").GetString()!);
+                foreach (var register in new[] { "low", "high" })
+                {
+                    var clip = Clips.Value.ForVoice($"{set}.{register}", text);
+                    Assert.True(clip is not null && File.Exists(Path.Combine(Pack.Root, clip.Path)), $"{set}.{register}: {text}");
+                    Assert.Equal(clip, Clips.Value.ForLine($"{id}#{register}"));
+                }
+                lines++;
+            }
+        }
+        Assert.True(lines >= 90, $"only {lines} player voice lines");
+        Assert.NotEqual(Clips.Value.ForVoice("wry.low", "Meant to do that."), Clips.Value.ForVoice("wry.high", "Meant to do that."));
+    }
 }

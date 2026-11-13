@@ -19,6 +19,7 @@ public sealed class VoiceClips
     private readonly Dictionary<(string Encounter, string Speaker, string Line), VoiceClip> _clips = [];
     private readonly Dictionary<(string Speaker, string Text), VoiceClip> _barks = [];
     private readonly Dictionary<string, VoiceClip> _lines = new(StringComparer.Ordinal);
+    private readonly Dictionary<(string Voice, string Text), VoiceClip> _voices = [];
 
     private VoiceClips()
     {
@@ -31,9 +32,16 @@ public sealed class VoiceClips
         using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(packRoot, "lore", "audio", "manifest.json")));
         var lines = manifest.RootElement.GetProperty("lines");
         foreach (var line in lines.EnumerateObject())
+        {
             if (line.Value.ValueKind == JsonValueKind.Object && line.Value.TryGetProperty(Cast, out var main) && main.GetString() is { Length: > 0 } file
                 && File.Exists(Path.Combine(packRoot, "lore", "audio", file)))
                 clips._lines[line.Name] = new VoiceClip(line.Name, $"lore/audio/{file}");
+            // Every other cast too, as "<id>#<cast>": a player voice's line is recorded low and high, and a camp bark names its register.
+            if (line.Value.ValueKind == JsonValueKind.Object)
+                foreach (var cast in line.Value.EnumerateObject().Where(c => c.Name != Cast))
+                    if (cast.Value.GetString() is { Length: > 0 } recorded && File.Exists(Path.Combine(packRoot, "lore", "audio", recorded)))
+                        clips._lines[$"{line.Name}#{cast.Name}"] = new VoiceClip(line.Name, $"lore/audio/{recorded}");
+        }
         foreach (var file in Directory.GetFiles(Path.Combine(packRoot, "rules", "encounters"), "*.json"))
         {
             using var encounter = JsonDocument.Parse(File.ReadAllText(file));
@@ -55,8 +63,26 @@ public sealed class VoiceClips
                 if (clips.ForLine(line.GetProperty("id").GetString()!) is { } clip)
                     clips._barks.TryAdd((speaker.GetString()!, line.GetProperty("text").GetString()!), clip);
         }
+        // Player voice sets are recorded in two casts, low and high: "<set>.<cast>" is a character's voice (PlayerVoices).
+        var voicesDir = Path.Combine(packRoot, "lore", "voices");
+        foreach (var file in Directory.Exists(voicesDir) ? Directory.GetFiles(voicesDir, "*.json") : [])
+        {
+            using var doc = JsonDocument.Parse(File.ReadAllText(file));
+            var set = doc.RootElement.GetProperty("id").GetString()!;
+            foreach (var line in doc.RootElement.GetProperty("events").EnumerateObject().SelectMany(e => e.Value.EnumerateArray()))
+            {
+                var id = line.GetProperty("id").GetString()!;
+                if (!lines.TryGetProperty(id, out var casts) || casts.ValueKind != JsonValueKind.Object) continue;
+                foreach (var cast in casts.EnumerateObject())
+                    if (cast.Value.GetString() is { Length: > 0 } recorded && File.Exists(Path.Combine(packRoot, "lore", "audio", recorded)))
+                        clips._voices.TryAdd(($"{set}.{cast.Name}", line.GetProperty("text").GetString()!), new VoiceClip(id, $"lore/audio/{recorded}"));
+            }
+        }
         return clips;
     }
+
+    /// <summary>The recording of a player voice (<c>"wry.high"</c>) saying <paramref name="text"/>, or null.</summary>
+    public VoiceClip? ForVoice(string voice, string text) => _voices.GetValueOrDefault((voice, text));
 
     /// <summary>The recording of <paramref name="speaker"/> saying <paramref name="line"/> in <paramref name="encounter"/>, or null: then the voice chain reads it.</summary>
     public VoiceClip? For(string encounter, string speaker, string line) => _clips.GetValueOrDefault((encounter, speaker, line)) ?? _barks.GetValueOrDefault((speaker, line));
