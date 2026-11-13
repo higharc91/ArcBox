@@ -1,4 +1,4 @@
-> Status: approved 2026-11-13; in progress on branch `ccr-de425e76-4vxzw2`. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: complete (2026-11-13). Tasks 1–10 are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (#347–#356); see [Implementation notes](#implementation-notes) for where the code differs from this plan. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M2 Playable Explore Implementation Plan
 
@@ -20,6 +20,20 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 - Scenarios, roles, combat and the endgame (M3). In M2 the Breach **ends the game** with a results message that says the scenario engine arrives in M3.
 - Snapshots and resume (M6). The manifest leaves `ResumesAfterRestart` off; a restart returns the room to the lobby, as for REDLINE.
 - Lobby theme art (#335). M2 uses the platform's default lobby look.
+
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **One clock, not one timer per kind.** At any moment the game waits on exactly one thing, so `MeridianSession.Clock` is a `(Seq, Purpose)` pair (`Boarding`, `Deadline`, `Grace`, `Bot`, `Present`) and the only timer key is `clock:{seq}`. Every change cancels the old timer and arms a new number, which is what makes a timer that fired just before a change harmless. A clock that keeps its purpose keeps its deadline unless the change was a new decision, so a phone dropping can't stretch someone else's turn.
+- **`MeridianSession`** also holds `GameSeed`, `NextPresent` (presentation numbering) and `Ending`. Seats carry `Connected` and `Auto`.
+- **`MeridianGame.Load(MeridianSession)`** (internal) replaces the session and re-arms the clock. It is the restore half of stage M6's snapshots; tests use it to set up positions.
+- **The Breach is presented before the game ends**: the game ends when the Breach leaves the presentation queue.
+- **The TV's compartment cards carry no names**, and leave out empty `sealed` and `symbol`. That keeps a full ship under the 8 KB budget (it was 8.7 KB with names); the TV looks names up in its content pack by tile id. Phone maps keep the names.
+- **`sheet` carries the player's compartment** (`at`), and the phone's deck tabs show how many places on each deck the player can move to or open, because the map shows one deck at a time and the lift reaches the others.
+- **A host-view fixture** (`web/play/test/fixtures/meridian-host/explore.json`) feeds the dev board's tests, beside the phone fixtures.
+- **Test support:** `TestClient.TakeLatest` (the newest message of a kind, as a real phone only cares about its current view) and `ArcServerFactory(withTactics, withMeridian)`. The hub test paces its sends under the hub's rate limit (about 20 messages a second per connection, on the real clock).
+- **The dev board imports the phone module's CSS**, because the dev page's main frame never loads the module.
 
 ## Global constraints
 
