@@ -1,0 +1,45 @@
+/* Derelict: ISV Meridian, phone screens. A placeholder look until the art issues (#331, #335) land. */
+.mer { --mer-ink: #e6eef2; --mer-muted: #8fa3ad; --mer-panel: #141c22; --mer-edge: #2f4552; --mer-warn: #e2534c;
+  --mer-cyan: #3ec7ff; --mer-anomaly: #b8e05a; color: var(--mer-ink); display: flex; flex-direction: column; gap: 12px; }
+.mer h2, .mer h3 { margin: 0; }
+.mer button { min-height: 44px; font-size: 16px; }
+.mer-muted { color: var(--mer-muted); font-weight: normal; }
+.mer-crew-card { background: var(--mer-panel); border: 1px solid var(--mer-edge); border-radius: 8px; padding: 10px; }
+.mer-crew-card.mine { border-color: var(--mer-cyan); }
+.mer-crew-card.taken { opacity: 0.5; }
+.mer-tracks { display: grid; gap: 4px; margin: 8px 0; }
+.mer-track { display: grid; grid-template-columns: 7em 1fr; align-items: center; }
+.mer-track dt, .mer-track dd { margin: 0; }
+.mer-track dd { display: flex; gap: 4px; }
+.mer-track dd span { width: 1.6em; text-align: center; color: var(--mer-muted); }
+.mer-track dd span.mark { color: var(--mer-ink); outline: 2px solid var(--mer-cyan); border-radius: 4px; }
+.mer-decks, .mer-tabs, .mer-options { display: flex; gap: 6px; }
+.mer-decks button.on, .mer-tabs button.on { outline: 2px solid var(--mer-cyan); }
+.mer-grid { display: grid; gap: 4px; }
+.mer-grid.deck-command { --mer-deck: #6aa5d8; }
+.mer-grid.deck-habitat { --mer-deck: #d8b36a; }
+.mer-grid.deck-engineering { --mer-deck: #d8746a; }
+.mer-room { position: relative; aspect-ratio: 1; min-width: 44px; background: var(--mer-panel); border: 3px solid #0a0e11;
+  border-radius: 4px; color: var(--mer-ink); font-size: 11px; padding: 2px; display: flex; flex-direction: column; text-align: left; }
+.mer-room.here { box-shadow: inset 0 0 0 2px var(--mer-deck); }
+.mer-room.reach { border-color: var(--mer-deck); cursor: pointer; }
+.mer-room.hatch-n { border-top-color: var(--mer-deck); } .mer-room.hatch-e { border-right-color: var(--mer-deck); }
+.mer-room.hatch-s { border-bottom-color: var(--mer-deck); } .mer-room.hatch-w { border-left-color: var(--mer-deck); }
+.mer-room.sealed-n { border-top-color: var(--mer-warn); } .mer-room.sealed-e { border-right-color: var(--mer-warn); }
+.mer-room.sealed-s { border-bottom-color: var(--mer-warn); } .mer-room.sealed-w { border-left-color: var(--mer-warn); }
+.mer-name { line-height: 1.1; }
+.mer-symbol { position: absolute; top: 2px; right: 4px; font-weight: bold; }
+.mer-symbol.anomaly { color: var(--mer-anomaly); }
+.mer-cost { position: absolute; bottom: 2px; right: 4px; color: var(--mer-deck); }
+.mer-crew { margin-top: auto; display: flex; gap: 2px; flex-wrap: wrap; }
+.mer-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.mer-open { aspect-ratio: 1; min-width: 44px; border: 2px dashed var(--mer-deck, #8fa3ad); background: transparent; color: var(--mer-ink); }
+.mer-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.mer-items li.anomaly b { color: var(--mer-anomaly); }
+.mer-trade-offer { display: grid; gap: 6px; background: var(--mer-panel); padding: 8px; border-radius: 8px; }
+.mer-bands { margin: 0; padding-left: 0; list-style: none; }
+.mer-need { color: var(--mer-warn); font-weight: bold; }
+.mer-faces { display: flex; gap: 6px; font-size: 24px; }
+.mer-faces span { width: 1.6em; text-align: center; border: 2px solid var(--mer-edge); border-radius: 6px; }
+.mer-end { margin-top: 8px; }
+.mer-badge { color: var(--mer-cyan); font-weight: bold; }

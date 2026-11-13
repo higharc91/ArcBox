@@ -153,7 +153,7 @@ internal static class Projection
     {
         var crew = state.CrewOf(me);
         var waiting = state.Waiting is { } w ? game.Session.SeatOf(w.From).Name : null;
-        return new SheetScreen(Card(game.Pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true),
+        return new SheetScreen(Card(game.Pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true), crew.At.Value,
                                Items(game.Pack, crew, NoItems), Map(game, state), game.Session.SeatOf(state.ActiveSeat).Name, waiting);
     }
 

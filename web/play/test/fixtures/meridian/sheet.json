@@ -68,6 +68,7 @@
       "taken": false,
       "mine": true
     },
+    "at": "c1",
     "items": [],
     "map": {
       "compartments": [

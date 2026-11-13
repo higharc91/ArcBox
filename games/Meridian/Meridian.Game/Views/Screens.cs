@@ -56,7 +56,7 @@ public sealed record RollScreen(string Reason, Trait? Trait, int Dice, string Ti
 public sealed record TradeScreen(string From, EqArray<ItemCard> Give, EqArray<ItemCard> Take);
 
 /// <summary><c>sheet</c>: everyone who isn't acting. Tabs are phone-side, so browsing never changes the view.</summary>
-public sealed record SheetScreen(CrewCard Me, EqArray<ItemCard> Items, MapData Map, string Active, string? Waiting);
+public sealed record SheetScreen(CrewCard Me, string At, EqArray<ItemCard> Items, MapData Map, string Active, string? Waiting);
 
 /// <summary><c>watch</c>: the main screen is presenting something.</summary>
 public sealed record WatchScreen(Presented Now);
