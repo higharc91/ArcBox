@@ -99,10 +99,10 @@ Players take turns in a fixed order, starting with a random player.
 - Items are public: everyone can see who carries what. A scenario may hide specific tokens (§4.4).
 
 ### 2.6 The Breach
-- After each Anomaly is drawn, the drawer makes a **Breach roll**: as many dice as **Anomalies drawn so far this game**. On a total of **5 or more**, the Breach fires.
+- After each Anomaly is drawn, the drawer makes a **Breach roll**: as many dice as **Anomalies drawn so far this game**. On a total of **6 or more**, the Breach fires (5 until the M1 simulation; see [the Breach timing report](../reports/2026-11-meridian-breach-timing.md)).
 - The ninth Anomaly fires the Breach without a roll.
 - **A ship with nowhere left to grow fires the Breach** (added 2026-11-13, during M1). If no open hatch faces empty space on a deck that still has a tile in the pile, no more Anomalies can be drawn and Explore could never end. The Breach then fires with no Anomaly and no compartment recorded, so the scenario is chosen from every runnable one.
-- With the shipped dice the Breach is expected around the fifth or sixth Anomaly. The simulator's target is a Breach between 35% and 55% of the way through a game's turns.
+- With the shipped dice and tiles, bots fire the Breach at a median of the sixth Anomaly, with about 53% of the tiles placed. The simulator's target is a Breach between 35% and 55% of the way through a game's turns.
 - **Choosing the scenario.** A table keyed by (Anomaly card, compartment it was drawn in) gives a short list of scenario ids. The game removes any that can't run (player count, or a compartment it needs can no longer appear) and picks one from the rest at random. If the list is empty it picks from every runnable scenario.
 - **Choosing roles.** The scenario says who gets which role, by a rule such as "the player who drew the Anomaly", "the lowest Nerve other than the drawer", "one player at random, in secret", "nobody" or "everybody".
 - Then the Breach sequence plays (§3.1) and the endgame starts with the player the scenario names.

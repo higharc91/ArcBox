@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Meridian.Logic\Meridian.Logic.csproj" />
+    <ProjectReference Include="..\Meridian.Sim\Meridian.Sim.csproj" />
     <ProjectReference Include="..\..\..\src\ArcBox.Sdk.Testing\ArcBox.Sdk.Testing.csproj" />
   </ItemGroup>
 </Project>

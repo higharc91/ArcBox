@@ -12,8 +12,11 @@ public sealed record MeridianRules
     /// <summary>Steps on every trait track (spec §2.1).</summary>
     public int TrackSteps { get; init; } = 8;
 
-    /// <summary>A Breach roll at or above this fires the Breach (spec §2.6).</summary>
-    public int BreachThreshold { get; init; } = 5;
+    /// <summary>
+    /// A Breach roll at or above this fires the Breach (spec §2.6). 6 from the M1 simulation
+    /// (docs/superpowers/reports/2026-11-meridian-breach-timing.md); retune after the first playtest.
+    /// </summary>
+    public int BreachThreshold { get; init; } = 6;
 
     /// <summary>Drawing this Anomaly fires the Breach without a roll (spec §2.6).</summary>
     public int ForcedBreachAnomaly { get; init; } = 9;

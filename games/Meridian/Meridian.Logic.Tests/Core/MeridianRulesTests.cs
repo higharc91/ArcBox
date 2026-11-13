@@ -8,7 +8,7 @@ public sealed class MeridianRulesTests
         var rules = new MeridianRules();
         Assert.Equal([0, 0, 1, 1, 1, 2], rules.DieFaces);
         Assert.Equal(8, rules.TrackSteps);
-        Assert.Equal(5, rules.BreachThreshold);
+        Assert.Equal(6, rules.BreachThreshold);
         Assert.Equal(9, rules.ForcedBreachAnomaly);
         Assert.Equal(3, rules.MinPlayers);
         Assert.Equal(6, rules.MaxPlayers);

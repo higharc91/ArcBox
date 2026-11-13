@@ -22,8 +22,9 @@ public sealed class BreachTests
     public void Below_the_threshold_play_continues()
     {
         var game = Drawing(0);
-        game.Do(new Roll(Play.S1));   // one die can't reach 5
-        Assert.Contains(new BreachHeld(Play.S1, game.Events.OfType<Rolled>().Single().Dice.Total, 5), game.Events);
+        game.Do(new Roll(Play.S1));   // one die can't reach the threshold
+        var needed = game.Pack.Rules.BreachThreshold;
+        Assert.Contains(new BreachHeld(Play.S1, game.Events.OfType<Rolled>().Single().Dice.Total, needed), game.Events);
         Assert.Equal(Phase.Explore, game.State.Phase);
         Assert.Contains(new EndTurn(Play.S1), game.Legal(Play.S1));
     }
@@ -32,14 +33,15 @@ public sealed class BreachTests
     public void At_the_threshold_the_breach_fires_and_records_who_what_and_where()
     {
         var game = Drawing(5).Put(Play.S1, Play.C(2));
-        game.Rig(6, t => t >= 5).Do(new Roll(Play.S1));
+        var needed = game.Pack.Rules.BreachThreshold;
+        game.Rig(6, t => t >= needed).Do(new Roll(Play.S1));
         Assert.Equal(Phase.Breach, game.State.Phase);
         var breach = game.State.Breach!;
         Assert.Equal(Play.S1, breach.Seat);
         Assert.Equal(new CardId("humming_shard"), breach.Anomaly);
         Assert.Equal(Play.C(2), breach.Compartment);
         Assert.False(breach.Forced);
-        Assert.True(breach.Roll >= 5);
+        Assert.True(breach.Roll >= needed);
         Assert.Equal(new BreachFired(breach), game.Events[^1]);
     }
 
