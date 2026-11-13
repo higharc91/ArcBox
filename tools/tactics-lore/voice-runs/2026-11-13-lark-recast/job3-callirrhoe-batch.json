@@ -1,0 +1,213 @@
+{
+  "request": {
+    "id": "lark_recast_2026_11_13_job3-callirrhoe",
+    "issues": [
+      "#218",
+      "#207",
+      "#339"
+    ],
+    "voice": "Callirrhoe",
+    "pitchAtImport": -2,
+    "text": "Lovely. I'll put that in the chorus.\n<long pause>\nSomebody woke them before we got here. And somebody is still here.\n<long pause>\nAh. Well. They know we're here, then.\n<long pause>\nNothing has touched these. No fire at all. Do you know how rare that is in this Vale?\n<long pause>\nEvery hearth. Every forge. Every ember-lamp in every window, for three hundred years.\n<long pause>\nThat's why the songs are all that's left. Nobody ever needed a fire to remember a tune.\n<long pause>\nYour archivist begged for records the fire never touched. Well, here they are. He won't thank you for them.\n<long pause>\nYou knew. You chose. Ysolde told you the price to your face, which makes her the most honest thing in this whole Vale.\n<long pause>\nSomebody's. Somebody who was never asked either. It turns out we've all been paying with other people's memories.\n<long pause>\nNo. They lit the lamps and warmed their hands, and nobody ever told them there was a bill.\n<long pause>\nMarrowby. Celandine Marrowby. She's older than anyone in Emberwick, and remembers less than any of them.\n<long pause>\nA hundred years of ember-lamps in every hall she owns. She's burned that night away. She doesn't know what she did.\n<long pause>\nThen you've a choice to make. Truth is heavy. Gold's heavier, if you're the one carrying it.\n<long pause>\nMother Aubrine will need you to say that gently. And then she'll need you to say it again.\n<long pause>\nThe gods might well agree. The Wardens don't seem to have asked them.\n<long pause>\nYou and Corvin found it twice and lost it twice. This time it's on a page no fire has ever touched.\n<long pause>\nThen hold on to it. You may be the only one of us who'll notice when something goes missing.\n<long pause>\nI'm going to write a song about this. Nobody is going to want to hear it.\n<long pause>\nThey don't remember their own names, but they remember the tune. Songs don't burn. I did tell you.\n<long pause>\nThere you are. Twenty years I've followed you across this Vale, and you've never once let me catch up.\n<long pause>\nMy teacher's teacher kept a Warden songbook from before the Fall. Beside the Song of the Seven, someone drew a face in the margin. That face.\n<long pause>\nEvery place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+    "segments": [
+      {
+        "raw": "Callirrhoe.fb19ce01",
+        "line": "ch3_crypt_door_stone_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Lovely. I'll put that in the chorus.",
+        "renderText": "Lovely. I'll put that in the chorus.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.6c9018a9",
+        "line": "ch3_crypt_door_quiet_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Somebody woke them before we got here. And somebody is still here.",
+        "renderText": "Somebody woke them before we got here. And somebody is still here.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.7da7b822",
+        "line": "ch3_crypt_door_loud_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Ah. Well. They know we're here, then.",
+        "renderText": "Ah. Well. They know we're here, then.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.44d03b0d",
+        "line": "ch3_crypt_records_quiet_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Nothing has touched these. No fire at all. Do you know how rare that is in this Vale?",
+        "renderText": "Nothing has touched these. No fire at all. Do you know how rare that is in this Vale?",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.d2ac7ff2",
+        "line": "ch3_crypt_records_ledger_4",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Every hearth. Every forge. Every ember-lamp in every window, for three hundred years.",
+        "renderText": "Every hearth. Every forge. Every ember-lamp in every window, for three hundred years.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.2bb82b79",
+        "line": "ch3_crypt_records_ledger_5",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "That's why the songs are all that's left. Nobody ever needed a fire to remember a tune.",
+        "renderText": "That's why the songs are all that's left. Nobody ever needed a fire to remember a tune.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.ac237368",
+        "line": "ch3_crypt_records_ledger_6",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Your archivist begged for records the fire never touched. Well, here they are. He won't thank you for them.",
+        "renderText": "Your archivist begged for records the fire never touched. Well, here they are. He won't thank you for them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.5357a65c",
+        "line": "ch3_crypt_records_paid_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "You knew. You chose. Ysolde told you the price to your face, which makes her the most honest thing in this whole Vale.",
+        "renderText": "You knew. You chose. Ysolde told you the price to your face, which makes her the most honest thing in this whole Vale.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.c09a5ec7",
+        "line": "ch3_crypt_records_tricked_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Somebody's. Somebody who was never asked either. It turns out we've all been paying with other people's memories.",
+        "renderText": "Somebody's. Somebody who was never asked either. It turns out we've all been paying with other people's memories.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.d369717f",
+        "line": "ch3_crypt_records_left_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "No. They lit the lamps and warmed their hands, and nobody ever told them there was a bill.",
+        "renderText": "No. They lit the lamps and warmed their hands, and nobody ever told them there was a bill.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.9280b713",
+        "line": "ch3_crypt_records_last_page_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Marrowby. Celandine Marrowby. She's older than anyone in Emberwick, and remembers less than any of them.",
+        "renderText": "Marrowby. Celandine Marrowby. She's older than anyone in Emberwick, and remembers less than any of them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.bcba4813",
+        "line": "ch3_crypt_records_last_page_4",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "A hundred years of ember-lamps in every hall she owns. She's burned that night away. She doesn't know what she did.",
+        "renderText": "A hundred years of ember-lamps in every hall she owns. She's burned that night away. She doesn't know what she did.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.dacb6402",
+        "line": "ch3_crypt_records_family_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Then you've a choice to make. Truth is heavy. Gold's heavier, if you're the one carrying it.",
+        "renderText": "Then you've a choice to make. Truth is heavy. Gold's heavier, if you're the one carrying it.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.062befc4",
+        "line": "ch3_crypt_records_scripture_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Mother Aubrine will need you to say that gently. And then she'll need you to say it again.",
+        "renderText": "Mother Aubrine will need you to say that gently. And then she'll need you to say it again.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.c2e655b5",
+        "line": "ch3_crypt_records_gods_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "The gods might well agree. The Wardens don't seem to have asked them.",
+        "renderText": "The gods might well agree. The Wardens don't seem to have asked them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.41632189",
+        "line": "ch3_crypt_records_pages_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "You and Corvin found it twice and lost it twice. This time it's on a page no fire has ever touched.",
+        "renderText": "You and Corvin found it twice and lost it twice. This time it's on a page no fire has ever touched.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.6d8bf16a",
+        "line": "ch3_crypt_records_never_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Then hold on to it. You may be the only one of us who'll notice when something goes missing.",
+        "renderText": "Then hold on to it. You may be the only one of us who'll notice when something goes missing.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.d48266c9",
+        "line": "ch3_crypt_records_after_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "I'm going to write a song about this. Nobody is going to want to hear it.",
+        "renderText": "I'm going to write a song about this. Nobody is going to want to hear it.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.b33043ce",
+        "line": "ch4_lark_stranger_shrine_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "They don't remember their own names, but they remember the tune. Songs don't burn. I did tell you.",
+        "renderText": "They don't remember their own names, but they remember the tune. Songs don't burn. I did tell you.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.132c0436",
+        "line": "ch4_lark_stranger_shrine_4",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "There you are. Twenty years I've followed you across this Vale, and you've never once let me catch up.",
+        "renderText": "There you are. Twenty years I've followed you across this Vale, and you've never once let me catch up.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.c9cd4553",
+        "line": "ch4_lark_stranger_margin_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "My teacher's teacher kept a Warden songbook from before the Fall. Beside the Song of the Seven, someone drew a face in the margin. That face.",
+        "renderText": "My teacher's teacher kept a Warden songbook from before the Fall. Beside the Song of the Seven, someone drew a face in the margin. That face.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.2a2bf363",
+        "line": "ch4_lark_stranger_margin_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+        "renderText": "Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+        "delivery": null
+      }
+    ]
+  }
+}

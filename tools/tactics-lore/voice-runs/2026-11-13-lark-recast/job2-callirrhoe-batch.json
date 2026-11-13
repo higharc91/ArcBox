@@ -1,0 +1,213 @@
+{
+  "request": {
+    "id": "lark_recast_2026_11_13_job2-callirrhoe",
+    "issues": [
+      "#218",
+      "#207",
+      "#339"
+    ],
+    "voice": "Callirrhoe",
+    "pitchAtImport": -2,
+    "text": "The only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.\n<long pause>\nHis Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.\n<long pause>\nYes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.\n<long pause>\nYoung, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.\n<long pause>\nTerrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.\n<long pause>\nHe knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.\n<long pause>\nThe lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.\n<long pause>\nHe knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.\n<long pause>\nWhatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.\n<long pause>\nHe says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.\n<long pause>\nA Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.\n<long pause>\nTheir leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.\n<long pause>\nNo. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.\n<long pause>\nAnything else, before the tea runs out?\n<long pause>\nNothing in the Sunscar would dare touch you tonight. Tomorrow is another song.\n<long pause>\nThat's the verse before the last. I've been looking for it for twenty years.\n<long pause>\nSeven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.\n<long pause>\nOf course not. I'd keep it too, if it were mine.\n<long pause>\nThen someone else will want very badly to hear that dream. Be careful who you tell it to.\n<long pause>\nBig promise. Goblins remember promises. So do songs.\n<long pause>\nHonest. I think she'll like that better than a promise.\n<long pause>\nEvery Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
+    "segments": [
+      {
+        "raw": "Callirrhoe.e1cf2783",
+        "line": "ch3_guest_right_news_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "The only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.",
+        "renderText": "The only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.42b724af",
+        "line": "ch3_guest_right_news_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "His Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.",
+        "renderText": "His Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.fee24b6f",
+        "line": "ch3_guest_right_news_5",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Yes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.",
+        "renderText": "Yes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.056c2001",
+        "line": "ch3_guest_right_vorga_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Young, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.",
+        "renderText": "Young, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.bac3857d",
+        "line": "ch3_guest_right_vorga_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Terrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.",
+        "renderText": "Terrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.786d404a",
+        "line": "ch3_guest_right_v_spared_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "He knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.",
+        "renderText": "He knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.6b0d258f",
+        "line": "ch3_guest_right_v_spared_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "The lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.",
+        "renderText": "The lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.e0233497",
+        "line": "ch3_guest_right_v_slain_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "He knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.",
+        "renderText": "He knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.940be8cc",
+        "line": "ch3_guest_right_v_slain_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Whatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.",
+        "renderText": "Whatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.a16ffd89",
+        "line": "ch3_guest_right_message_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "He says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.",
+        "renderText": "He says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.bb3dfedc",
+        "line": "ch3_guest_right_others_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "A Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.",
+        "renderText": "A Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.3aee9b6a",
+        "line": "ch3_guest_right_others_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Their leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.",
+        "renderText": "Their leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.9eb270c6",
+        "line": "ch3_guest_right_clans_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "No. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.",
+        "renderText": "No. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.514aedb2",
+        "line": "ch3_guest_right_more_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Anything else, before the tea runs out?",
+        "renderText": "Anything else, before the tea runs out?",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.94237765",
+        "line": "ch3_guest_right_night_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Nothing in the Sunscar would dare touch you tonight. Tomorrow is another song.",
+        "renderText": "Nothing in the Sunscar would dare touch you tonight. Tomorrow is another song.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.627c77b1",
+        "line": "ch3_skarrow_messenger_song_5",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "That's the verse before the last. I've been looking for it for twenty years.",
+        "renderText": "That's the verse before the last. I've been looking for it for twenty years.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.e0ade4b1",
+        "line": "ch3_skarrow_messenger_song_6",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Seven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.",
+        "renderText": "Seven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.e23c39e8",
+        "line": "ch3_skarrow_messenger_more_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Of course not. I'd keep it too, if it were mine.",
+        "renderText": "Of course not. I'd keep it too, if it were mine.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.2d0767be",
+        "line": "ch3_skarrow_messenger_dream_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Then someone else will want very badly to hear that dream. Be careful who you tell it to.",
+        "renderText": "Then someone else will want very badly to hear that dream. Be careful who you tell it to.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.c5c79cb7",
+        "line": "ch3_skarrow_messenger_promise_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Big promise. Goblins remember promises. So do songs.",
+        "renderText": "Big promise. Goblins remember promises. So do songs.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.e5abc0b3",
+        "line": "ch3_skarrow_messenger_honest_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Honest. I think she'll like that better than a promise.",
+        "renderText": "Honest. I think she'll like that better than a promise.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.ab6c58ba",
+        "line": "ch3_crypt_door_stair_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Every Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
+        "renderText": "Every Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
+        "delivery": null
+      }
+    ]
+  }
+}

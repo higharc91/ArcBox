@@ -85,8 +85,9 @@
       "note": "shares scholarly.low; pitch and echo keep them apart"
     },
     "lark": {
-      "preset": "Aoede",
-      "note": "androgynous, musical"
+      "preset": "Callirrhoe",
+      "pitch": -2,
+      "note": "androgynous, musical; recast 2026-11-13 from Aoede (rejected: read as a generic thirties woman). Approved audition: Callirrhoe -2, median 190 Hz"
     },
     "bree_tallow": {
       "preset": "Zephyr",
