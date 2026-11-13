@@ -17,7 +17,7 @@ from arcpix.palette import ramp
 
 BASES = {'hull': '#657482', 'floor': '#414e60', 'warning': '#cf9b48', 'red': '#b94e61',
          'coolant': '#4eaaa8', 'anomaly': '#91a660', 'command': '#68a5c8',
-         'habitat': '#a98cb8', 'engineering': '#c39759', 'skin': '#b67d59', 'suit': '#697b74'}
+         'habitat': '#a98cb8', 'engineering': '#c39759', 'skin': '#b67d59', 'suit': '#697b74', 'linen': '#b8c3b6'}
 PALETTE = {name: ramp(value, shift=.055, spread=.85) for name, value in BASES.items()}
 PLAYERS = ['#ff8a3d', '#3ec7ff', '#c08cff', '#5fe08a', '#ffd447', '#ff7fb6']
 SAMPLES = {'bridge': 'command', 'med_bay': 'habitat', 'reactor_core': 'engineering', 'airlock': 'habitat'}
@@ -36,45 +36,114 @@ def room(key):
     c.rect(2, 2, 61, 61, 'hull', 4)
     c.rect(4, 4, 59, 59, 'hull', 0)
     c.rect(7, 7, 56, 56, 'floor', 3)
-    for y in range(8, 56, 12):
-        for x in range(8, 56, 12):
-            c.rect(x, y, x+10, y+10, 'floor', 2)
-            c.rect(x+2, y+2, x+8, y+8, 'floor', 3)
+    # Quiet large panels keep small equipment silhouettes legible at 2x.
+    for y in [8, 32]:
+        for x in [8, 32]:
+            c.rect(x, y, x+22, y+22, 'floor', 2)
+            c.line(x+2, y+2, x+20, y+2, 'floor', 3)
+            c.px(x+2, y+20, 'hull', 2)
+            c.px(x+20, y+20, 'hull', 2)
+    # Matching corner couplers, illuminated from overhead rather than a compass direction.
+    for x, y in [(5, 5), (53, 5), (5, 53), (53, 53)]:
+        c.rect(x, y, x+5, y+5, 'hull', 1)
+        c.rect(x+1, y+1, x+4, y+4, 'hull', 3)
+        c.rect(x+2, y+2, x+3, y+3, 'hull', 4)
     deck = SAMPLES[key]
     for i in range(['command', 'habitat', 'engineering'].index(deck)+1):
-        c.rect(9+i*4, 49, 10+i*4, 54, deck, 4)
+        c.rect(11+i*4, 51, 12+i*4, 54, deck, 4)
     if key == 'bridge':
-        c.rect(12, 11, 51, 23, 'hull', 0)
-        c.rect(14, 13, 49, 21, 'hull', 3)
-        for x in [16, 28, 40]:
-            c.rect(x, 14, x+7, 19, 'command', 1)
-            c.rect(x+1, 15, x+6, 17, 'command', 5)
-        for x in [20, 40]:
-            c.rect(x, 29, x+5, 35, 'hull', 0)
-            c.rect(x+1, 30, x+4, 33, 'suit', 3)
-        c.rect(28, 40, 35, 43, 'command', 4)
+        # Wraparound station: inset glass, clustered telemetry and discrete controls.
+        c.polygon([(11,12),(52,12),(52,29),(44,29),(44,23),(19,23),(19,29),(11,29)], 'hull', 0)
+        c.rect(12,13,51,21,'hull',3)
+        for x in [14,27,40]:
+            c.rect(x,14,x+9,19,'command',0)
+            c.line(x+1,15,x+7,15,'command',4)
+            c.line(x+1,17,x+3,17,'command',3)
+            c.line(x+5,18,x+8,18,'command',5)
+            c.px(x+9,21,'warning',4)
+        for x in [12,45]:
+            c.rect(x,22,x+5,27,'hull',3)
+            c.rect(x+1,23,x+4,24,'command',2)
+            c.line(x+1,26,x+3,26,'linen',3)
+        # Chair has a back, armrests, seat and a visible pedestal.
+        c.ellipse(32,37,5,3,'hull',0)
+        c.rect(31,32,32,39,'hull',3)
+        c.rect(27,27,36,34,'hull',0)
+        c.rect(28,28,35,32,'suit',3)
+        c.rect(29,27,34,28,'suit',4)
+        c.rect(26,30,27,34,'hull',4)
+        c.rect(36,30,37,34,'hull',4)
+        # Low navigation table with a deliberately sparse route diagram.
+        c.rect(26,43,39,49,'hull',0)
+        c.rect(27,44,38,48,'command',1)
+        c.line(29,47,32,45,'command',4)
+        c.line(32,45,36,46,'command',4)
+        c.px(36,46,'linen',5)
     elif key == 'med_bay':
-        for x in [12, 42]:
-            c.rect(x, 13, x+10, 44, 'hull', 0)
-            c.rect(x+1, 15, x+9, 42, 'hull', 4)
-            c.rect(x+2, 18, x+8, 23, 'coolant', 3)
-            c.rect(x+2, 28, x+8, 38, 'suit', 2)
-        c.rect(28, 12, 35, 21, 'hull', 1)
-        c.rect(31, 13, 32, 20, 'red', 4)
-        c.rect(28, 16, 35, 17, 'red', 4)
+        for x in [12,42]:
+            c.rect(x+1,15,x+9,45,'hull',0)
+            c.rect(x,18,x+10,41,'hull',3)
+            c.rect(x+2,16,x+8,42,'linen',3)
+            c.rect(x+3,17,x+7,21,'linen',5)
+            c.line(x+3,22,x+7,22,'linen',2)
+            c.rect(x+2,26,x+8,37,'coolant',2)
+            c.line(x+3,27,x+7,27,'coolant',4)
+            c.line(x+3,36,x+7,36,'coolant',1)
+            for y in [24,39]:
+                c.line(x,y,x,y+2,'hull',5)
+                c.line(x+10,y,x+10,y+2,'hull',5)
+            # Bedside monitor, its support and a waveform rather than a bright slab.
+            mx = x+11 if x == 12 else x-5
+            c.rect(mx+1,21,mx+2,30,'hull',2)
+            c.rect(mx,15,mx+4,21,'hull',0)
+            c.rect(mx+1,16,mx+3,19,'coolant',1)
+            c.line(mx+1,18,mx+2,17,'coolant',5)
+        c.rect(28,10,35,19,'hull',0)
+        c.rect(29,11,34,18,'linen',3)
+        c.line(31,12,31,16,'red',3)
+        c.line(29,14,33,14,'red',3)
+        c.rect(29,42,35,48,'hull',1)
+        c.rect(30,43,34,44,'linen',3)
+        c.line(30,46,34,46,'hull',4)
     elif key == 'reactor_core':
-        for radius, slot, shade in [(19, 'hull', 0), (17, 'hull', 4), (14, 'coolant', 1),
-                                    (11, 'coolant', 4), (8, 'hull', 0), (5, 'anomaly', 4)]:
-            c.ellipse(32, 31, radius, radius, slot, shade)
-        for x, y in [(12, 12), (45, 12), (12, 45), (45, 45)]:
-            c.rect(x, y, x+6, y+5, 'warning', 3)
-            c.rect(x+2, y+1, x+4, y+4, 'hull', 0)
+        # Pipes terminate in paired valve housings around a segmented containment ring.
+        for x in [13,48]:
+            c.rect(x,13,x+2,48,'hull',0)
+            c.line(x+1,14,x+1,47,'coolant',3)
+            for y in [15,44]:
+                c.rect(x-2,y,x+4,y+4,'hull',2)
+                c.line(x-1,y+2,x+3,y+2,'warning',4)
+        for radius,slot,shade in [(18,'hull',0),(16,'hull',4),(14,'hull',1),
+                                  (12,'coolant',3),(10,'coolant',1),(8,'hull',0),
+                                  (6,'anomaly',2),(3,'anomaly',5)]:
+            c.ellipse(32,31,radius,radius,slot,shade)
+        for x,y,w,h in [(29,12,6,7),(29,44,6,7),(13,28,7,6),(45,28,7,6)]:
+            c.rect(x,y,x+w-1,y+h-1,'hull',0)
+            c.rect(x+1,y+1,x+w-2,y+h-2,'hull',3)
+            c.rect(x+2,y+2,x+w-3,y+h-3,'warning',4)
+        c.line(30,29,33,29,'anomaly',4)
+        c.line(34,30,34,33,'anomaly',4)
     else:
-        for radius, slot, shade in [(20, 'hull', 0), (18, 'warning', 3), (15, 'hull', 1),
-                                    (12, 'hull', 4), (9, 'floor', 1)]:
-            c.ellipse(32, 31, radius, radius, slot, shade)
-        c.rect(29, 23, 34, 39, 'hull', 3)
-        c.rect(30, 25, 33, 37, 'coolant', 4)
+        # Rectangular pressure vestibule distinguishes the airlock from the reactor.
+        c.polygon([(19,12),(44,12),(50,18),(50,44),(44,50),(19,50),(13,44),(13,18)],'hull',0)
+        c.rect(17,17,46,45,'hull',3)
+        c.rect(20,19,43,43,'hull',1)
+        c.rect(22,20,41,42,'hull',4)
+        c.line(31,20,31,42,'hull',0)
+        c.line(32,20,32,42,'hull',2)
+        for x in [24,35]:
+            c.rect(x,24,x+4,31,'hull',0)
+            c.rect(x+1,25,x+3,30,'coolant',2)
+            c.line(x+1,25,x+3,25,'coolant',4)
+            c.rect(x+1,35,x+3,37,'hull',1)
+            c.px(x+2,36,'linen',4)
+        for y in [13,47]:
+            for x in [22,28,34,40]:
+                c.line(x,y,x+2,y+2,'warning',4)
+        for x in [14,46]:
+            for y in [22,37]:
+                c.rect(x,y,x+2,y+4,'hull',0)
+                c.line(x+1,y+1,x+1,y+3,'hull',5)
     # Exactly sixteen open edge pixels, including every outside wall layer.
     for i in range(24, 40):
         for j in range(7):
@@ -88,6 +157,7 @@ def hatch(state):
     if state == 'none':
         c.rect(24, 0, 39, 6, 'hull', 1)
         c.rect(24, 2, 39, 3, 'hull', 4)
+        c.line(24, 5, 39, 5, 'hull', 2)
     else:
         for x in [23, 38]:
             c.rect(x, 0, x+2, 7, 'hull', 0)
@@ -98,7 +168,12 @@ def hatch(state):
                 c.rect(26, 1, 30, 5, 'hull', 4)
                 c.rect(33, 1, 37, 5, 'hull', 4)
                 c.rect(31, 0, 32, 6, 'hull', 0)
+                c.line(27, 2, 29, 2, 'hull', 5)
+                c.line(34, 2, 36, 2, 'hull', 5)
+                c.px(29, 4, 'hull', 1)
+                c.px(34, 4, 'hull', 1)
             else:
+                c.rect(26, 1, 37, 5, 'red', 1)
                 c.thick_line(26, 0, 37, 6, 2, 'warning', 4)
                 c.thick_line(37, 0, 26, 6, 2, 'warning', 4)
     return c.render(PALETTE)
@@ -107,19 +182,30 @@ def hatch(state):
 def crew(frame=0):
     c = canvas(24, 24)
     left, right = [(0, 0), (-1, 1), (0, 0), (1, -1), (0, 0)][frame]
-    c.rect(7, 15+left, 10, 19+left, 'suit', 1)
-    c.rect(13, 15+right, 16, 19+right, 'suit', 1)
-    c.rect(6, 19+left, 10, 20+left, 'hull', 0)
-    c.rect(13, 19+right, 17, 20+right, 'hull', 0)
-    c.rect(6, 9, 17, 16, 'suit', 2)
-    c.rect(8, 9, 15, 15, 'suit', 4)
-    c.rect(4, 10, 6, 17-left, 'hull', 2)
-    c.rect(17, 10, 19, 17-right, 'hull', 2)
-    c.rect(9, 3, 14, 9, 'skin', 3)
-    c.rect(7, 2, 16, 7, 'hull', 1)
-    c.rect(8, 1, 15, 4, 'hull', 4)
-    c.rect(9, 5, 14, 6, 'coolant', 4)
-    c.rect(9, 11, 14, 12, 'warning', 4)
+    # Articulated boots, tapered torso, separate gloves and a compact helmet.
+    for x, offset in [(8,left),(13,right)]:
+        c.rect(x,15+offset,x+2,19+offset,'suit',1)
+        c.line(x,16+offset,x+1,17+offset,'suit',3)
+        c.rect(x-1,19+offset,x+2,20+offset,'hull',0)
+        c.line(x-1,19+offset,x+1,19+offset,'hull',3)
+    c.rect(7,8,16,13,'suit',1)
+    c.rect(8,9,15,15,'suit',3)
+    c.rect(9,10,14,13,'suit',4)
+    c.rect(8,15,15,16,'hull',0)
+    c.rect(10,15,11,16,'warning',4)
+    for x, offset in [(5,-left),(17,-right)]:
+        c.rect(x,10,x+1,14+offset,'suit',2)
+        c.px(x,10,'suit',4)
+        c.rect(x,15+offset,x+1,16+offset,'hull',2)
+    c.rect(8,2,15,7,'hull',1)
+    c.rect(9,1,14,2,'hull',4)
+    c.rect(8,3,8,5,'hull',3)
+    c.rect(10,3,14,6,'coolant',1)
+    c.line(10,3,13,3,'coolant',4)
+    c.rect(10,7,13,8,'skin',3)
+    c.px(15,6,'warning',4)
+    c.rect(10,10,13,11,'linen',4)
+    c.rect(14,12,15,13,'warning',3)
     c.outline()
     return c.render(PALETTE)
 
@@ -217,7 +303,7 @@ figcaption{margin-bottom:12px;text-transform:capitalize}.tile{position:relative;
 @keyframes walk{to{background-position:-192px 0}}@media(prefers-reduced-motion:reduce){.walker{animation:none}}body.paused .walker{animation-play-state:paused}
 </style><body><h1>DERELICT: ISV MERIDIAN</h1><p>Industrial salvage. Cold metal, lived-in spaces, overhead light.</p>
 <p><strong>Style proposal · #331 · awaiting owner approval.</strong> Original deterministic samples, 0 generation credits. Room keys match the unmerged M1 rules in PR #316. These are four samples, not the full 50-tile set.</p>
-<p>Each card shows a 64px source at 1×, then 2× TV scale. Hatch overlays are independent and rotate in 90° steps. Decks carry I / II / III marks as well as distinct accents.</p><h2>Compartment and hatch samples</h2><div class="grid">'''+''.join(cards)+'''</div><h2>Crew source frames · 1×</h2><div class="crew">'''+f'<img alt="Compartment at 1x" src="{base}tiles/{tiles["med_bay"]["file"]}" width="64" height="64"><img alt="Ines standing at 1x" src="{base}crew/{person["idle"]["file"]}" width="24" height="24"><img alt="Four walking frames at 1x" src="{base}crew/{person["walk"]["file"]}" width="96" height="24">'+'''</div><h2>Standing and walking at TV scale</h2><div class="crew">'''+f'<img alt="Habitat compartment at 2x" src="{base}tiles/{tiles["med_bay"]["file"]}" width="128" height="128"><img alt="Ines standing at 2x" src="{base}crew/{person["idle"]["file"]}" width="48" height="48"><div role="img" aria-label="Ines walking at 2x" class="walker" style="background-image:url({base}crew/{person["walk"]["file"]})"></div>'+'''<button id="motion">Pause walk</button></div><p>24×24 frames, feet anchor (12,22), 6fps. Reduced-motion preference shows a still frame.</p><h2>Partly explored deck · 1920×1080</h2><p>1:1 native pixels. Scroll inside this panel on smaller screens. This is a concept mock, not the implemented game or a physical-TV test.</p><div class="pan" tabindex="0" aria-label="Full resolution TV mock; scroll to inspect"><img src="deck-mock-1080.png" width="1920" height="1080" alt="Habitat exploration mock with two crew, separate Command and Engineering samples, hatch legend and deck labels"></div>
+<p>Each card shows a 64px source at 1×, then 2× TV scale. Hatch overlays are independent and rotate in 90° steps. Decks carry I / II / III marks as well as distinct accents.</p><p>Refinement: quieter floor panels, fitted consoles, medical linens and monitors, containment braces and pressure-door hardware. <a href="detail-comparison.png">Before / after detail sheet (4×)</a>.</p><h2>Compartment and hatch samples</h2><div class="grid">'''+''.join(cards)+'''</div><h2>Crew source frames · 1×</h2><div class="crew">'''+f'<img alt="Compartment at 1x" src="{base}tiles/{tiles["med_bay"]["file"]}" width="64" height="64"><img alt="Ines standing at 1x" src="{base}crew/{person["idle"]["file"]}" width="24" height="24"><img alt="Four walking frames at 1x" src="{base}crew/{person["walk"]["file"]}" width="96" height="24">'+'''</div><h2>Standing and walking at TV scale</h2><div class="crew">'''+f'<img alt="Habitat compartment at 2x" src="{base}tiles/{tiles["med_bay"]["file"]}" width="128" height="128"><img alt="Ines standing at 2x" src="{base}crew/{person["idle"]["file"]}" width="48" height="48"><div role="img" aria-label="Ines walking at 2x" class="walker" style="background-image:url({base}crew/{person["walk"]["file"]})"></div>'+'''<button id="motion">Pause walk</button></div><p>24×24 frames, feet anchor (12,22), 6fps. Reduced-motion preference shows a still frame.</p><h2>Partly explored deck · 1920×1080</h2><p>1:1 native pixels. Scroll inside this panel on smaller screens. This is a concept mock, not the implemented game or a physical-TV test.</p><div class="pan" tabindex="0" aria-label="Full resolution TV mock; scroll to inspect"><img src="deck-mock-1080.png" width="1920" height="1080" alt="Habitat exploration mock with two crew, separate Command and Engineering samples, hatch legend and deck labels"></div>
 <p><a href="https://github.com/higharc91/ArcBox/issues/331">Review issue #331</a> · <a href="../../../../../tools/meridian-assets/STYLE.md">Style and file contract</a> · <a href="palette.json">Exact palette ramps</a></p><script>const b=document.querySelector('#motion');b.onclick=()=>{document.body.classList.toggle('paused');b.textContent=document.body.classList.contains('paused')?'Play walk':'Pause walk'};</script></body></html>'''
     (review/'index.html').write_text(html)
     return pack, review

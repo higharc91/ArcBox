@@ -14,14 +14,14 @@
         22
       ],
       "idle": {
-        "file": "ines-okafor-idle.325eb04bccbc.png",
-        "sha256": "325eb04bccbc160ca47d34f1944723589ecc541882204061e750b9f607b5263f",
+        "file": "ines-okafor-idle.a1ca1b3a07f0.png",
+        "sha256": "a1ca1b3a07f0044a0209fe85aa738e6703506cb4f0a69108f71dd46e3fcd95b2",
         "frames": 1,
         "fps": 0
       },
       "walk": {
-        "file": "ines-okafor-walk.e9eaa4d39c8b.png",
-        "sha256": "e9eaa4d39c8b8d083972086fa168194faa79669706f8618984dc4d86e2bd84d1",
+        "file": "ines-okafor-walk.1f9f5985b6f3.png",
+        "sha256": "1f9f5985b6f3fd1264e74d5126500ba6a435c1497be777fb3535a1c3c4e2e9a9",
         "frames": 4,
         "fps": 6
       }

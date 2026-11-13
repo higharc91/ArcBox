@@ -20,8 +20,8 @@
       ]
     },
     "closed": {
-      "file": "closed.1f39489491df.png",
-      "sha256": "1f39489491dfe2db995ae6009d8a68c2967898dad21ad5e6a241aebb80e4c763",
+      "file": "closed.f20fc87c6603.png",
+      "sha256": "f20fc87c66030df686bf08c520feb1d2ff3f0dfe9d8f51f040fd1b122990e083",
       "frameSize": [
         64,
         64
@@ -35,8 +35,8 @@
       ]
     },
     "sealed": {
-      "file": "sealed.a6ac27d481f4.png",
-      "sha256": "a6ac27d481f49dc5f521b60d835b6e00a973ca0b38a1d7c94efe37f0b59d1c2c",
+      "file": "sealed.78098a4b9f0e.png",
+      "sha256": "78098a4b9f0e3e13f544b75411033b54840b64f80fd1550b43ff3c73d67ec52a",
       "frameSize": [
         64,
         64
@@ -50,8 +50,8 @@
       ]
     },
     "none": {
-      "file": "none.5e0029512cc7.png",
-      "sha256": "5e0029512cc7e524cf63a0250584168a9f5794a42177a7c4404f19eeefd26db1",
+      "file": "none.5eeef845f8ae.png",
+      "sha256": "5eeef845f8ae12b1ff72b28f610c5d91d2eb1d15b9346a4b49efd810ab2ad345",
       "frameSize": [
         64,
         64
