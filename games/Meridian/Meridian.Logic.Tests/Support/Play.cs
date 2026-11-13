@@ -98,4 +98,30 @@ internal sealed class Play
     }
 
     public int Dice => ((RollPending)State.Waiting!).Dice;
+
+    /// <summary>Draws a card for the active seat, as a revealed symbol tile would.</summary>
+    public Play Draw(CardKind kind)
+    {
+        var resolver = new Resolver(Pack, State);
+        resolver.Draw(kind);
+        State = resolver.State;
+        Events.AddRange(resolver.Events);
+        return this;
+    }
+
+    /// <summary>Sets a pile's draw order (first is drawn first) and discard.</summary>
+    public Play Pile(CardKind kind, string[] draw, params string[] discard)
+    {
+        State = State.WithPile(kind, new CardPile(draw.Select(c => new CardId(c)).ToEqArray(),
+                                                  discard.Select(c => new CardId(c)).ToEqArray()));
+        return this;
+    }
+
+    /// <summary>Places a tile on the ship and returns its compartment.</summary>
+    public Compartment Build(string tile, Cell at, int rotation = 0)
+    {
+        var (ship, placed) = Placement.Place(State.Ship, Pack.Tile(new TileId(tile)), at, rotation, Pack.Rules.DeckRadius);
+        State = State with { Ship = ship };
+        return placed;
+    }
 }

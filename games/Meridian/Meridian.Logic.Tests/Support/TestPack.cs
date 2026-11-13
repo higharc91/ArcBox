@@ -121,7 +121,11 @@ internal static class TestPack
             {
               "cards": [
                 { "id": "pry_bar", "title": "Pry Bar", "text": "Heavy and honest.",
-                  "item": { "passive": [ { "kind": "extraDice", "trait": "brawn", "dice": 1 } ] } }
+                  "item": { "passive": [ { "kind": "extraDice", "trait": "brawn", "dice": 1 } ] } },
+                { "id": "stim_pack", "title": "Stim Pack", "text": "One dose.",
+                  "item": { "use": { "label": "Inject", "single": true, "effects": [ { "kind": "gain", "traits": "physical", "steps": 2 } ] } } },
+                { "id": "torch", "title": "Hand Torch", "text": "Still charged.",
+                  "item": { "use": { "label": "Light the way", "effects": [ { "kind": "moves", "delta": 1 } ] } } }
               ]
             }
             """)!,

@@ -49,7 +49,7 @@ public sealed class RevealTests
                      game.Legal(Play.S1));
         game.Do(new Orient(Play.S1, 2));
         Assert.Equal(2, game.Placed("quarters").Rotation);
-        Assert.Null(game.State.Waiting);
+        Assert.IsNotType<OrientPending>(game.State.Waiting);   // Quarters has an Incident symbol, so it draws next
     }
 
     [Fact]

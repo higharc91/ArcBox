@@ -23,6 +23,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case Open o: OpenHatch(o); break;
             case Orient o: OrientTile(o.Rotation); break;
             case Roll: RollDice(); break;
+            case Choose c: ChooseOption(c.Option); break;
+            case UseItem u: Use(u.Item); break;
+            case UseCompartment: UseRoom(); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
     }
@@ -38,6 +41,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case RollPending r:
                 legal.Add(new Roll(r.From));
                 break;
+            case ChoicePending c:
+                legal.AddRange(pack.Card(c.Card).Choice!.Options.Select(o => new Choose(c.From, o.Id)));
+                break;
         }
     }
 
@@ -46,6 +52,8 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
     {
         LegalMoves(pack, state, seat, legal);
         LegalOpens(pack, state, seat, legal);
+        LegalItems(pack, state, seat, legal);
+        LegalRoom(pack, state, seat, legal);
     }
 
     /// <summary>Timeout resolves whatever the seat owes (plan, Task 4): with nothing owed, it ends the turn.</summary>
@@ -61,6 +69,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
                 break;
             case RollPending:
                 RollDice();
+                break;
+            case ChoicePending c:
+                ChooseOption(Pack.Card(c.Card).Choice!.Options[0].Id);
                 break;
         }
     }
