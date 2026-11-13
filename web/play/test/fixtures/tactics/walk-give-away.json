@@ -73,6 +73,16 @@
         }
       ]
     },
+    "passTo": [
+      {
+        "id": "pr_member2",
+        "name": "Player2"
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3"
+      }
+    ],
     "gold": 100,
     "targets": [
       {
