@@ -58,7 +58,8 @@ Every number in this section lives in one `MeridianRules` record. Nothing else m
 ### 2.2 Dice
 - All rolls use **signal dice**: six-sided, faces `0, 0, 1, 1, 1, 2` (mean 0.83).
 - A **check** names a trait. The player rolls as many dice as the trait's value and totals them. The card or rule gives the outcome for each band of totals.
-- The server rolls with `ctx.Random`. The phone's "roll" gesture is ceremony and never affects the result.
+- The server rolls. The phone's "roll" gesture is ceremony and never affects the result.
+- All of the game's randomness comes from one generator that is **part of the game state** (§5.2), seeded once from `ctx.Random` when the game starts.
 
 ### 2.3 The ship
 - The ship has three **decks**: **Command** (upper), **Habitat** (middle) and **Engineering** (lower). Each deck is its own square grid.
@@ -101,7 +102,7 @@ Players take turns in a fixed order, starting with a random player.
 - After each Anomaly is drawn, the drawer makes a **Breach roll**: as many dice as **Anomalies drawn so far this game**. On a total of **5 or more**, the Breach fires.
 - The ninth Anomaly fires the Breach without a roll.
 - With the shipped dice the Breach is expected around the fifth or sixth Anomaly. The simulator's target is a Breach between 35% and 55% of the way through a game's turns.
-- **Choosing the scenario.** A table keyed by (Anomaly card, compartment it was drawn in) gives a short list of scenario ids. The game removes any that can't run (player count, or a compartment it needs can no longer appear) and picks one from the rest with `ctx.Random`. If the list is empty it picks from every runnable scenario.
+- **Choosing the scenario.** A table keyed by (Anomaly card, compartment it was drawn in) gives a short list of scenario ids. The game removes any that can't run (player count, or a compartment it needs can no longer appear) and picks one from the rest at random. If the list is empty it picks from every runnable scenario.
 - **Choosing roles.** The scenario says who gets which role, by a rule such as "the player who drew the Anomaly", "the lowest Nerve other than the drawer", "one player at random, in secret", "nobody" or "everybody".
 - Then the Breach sequence plays (§3.1) and the endgame starts with the player the scenario names.
 
@@ -202,10 +203,10 @@ public interface IScenario
     bool CanRun(GameState state, BreachContext breach);
 
     /// <summary>Assigns roles and places the scenario's tokens, counters and objectives.</summary>
-    GameState Setup(GameState state, BreachContext breach, Random random);
+    GameState Setup(GameState state, BreachContext breach);
 
     /// <summary>Reacts to what just happened: a turn began, someone entered a compartment, a check resolved, an actor died, a round ended.</summary>
-    GameState On(GameState state, GameEvent e, Random random);
+    GameState On(GameState state, GameEvent e);
 
     /// <summary>The extra actions an actor may take now; the phone offers them and <see cref="On"/> resolves them.</summary>
     IReadOnlyList<ScenarioAction> ActionsFor(GameState state, ActorId actor);
@@ -218,7 +219,7 @@ public interface IScenario
 }
 ```
 
-- `GameState` is an immutable record and every method is pure, as in the Tactics rules engine. That gives deterministic tests, a simulator that can fork a state, and a state that serializes for a restart (§5.6).
+- `GameState` is an immutable record and every method is pure, as in the Tactics rules engine. A scenario draws random numbers from the generator in the state and returns the state with the advanced generator. That gives deterministic tests, a simulator that can fork a state, and a state that serializes for a restart (§5.6).
 - A scenario keeps its own data in the state's **scenario board** (§4.3), never in fields on the class. One instance of each scenario class serves every room.
 - `Bot` is part of the contract on purpose. A scenario without a bot can't be simulated, and can't be played if a phone drops.
 
@@ -285,16 +286,17 @@ This is the Tactics layout (`Logic` / `Game` / `Presentation`), for the same rea
 ```csharp
 public static class Rules
 {
-    /// <summary>The only way state changes. Pure: the same state, command and random stream give the same result.</summary>
-    public static StepResult Step(GameState state, Command command, Random random);
+    /// <summary>The only way state changes. Pure: the same state and command always give the same result.</summary>
+    public static StepResult Step(RulesPack pack, GameState state, Command command);
 }
 
-public sealed record StepResult(GameState State, IReadOnlyList<GameEvent> Events, IReadOnlyList<Pending> Waiting);
+public sealed record StepResult(GameState State, IReadOnlyList<GameEvent> Events);
 ```
 
 - A `Command` is a player's intent (`MoveTo`, `Open`, `Orient`, `Roll`, `Allocate`, `Attack`, `ScenarioAct`, `EndTurn`) or a clock event (`Timeout`).
 - `Events` are what happened, in order. `Meridian.Game` turns them into presentation events and narration.
-- `Waiting` says who the game now needs an answer from, and by when. `Meridian.Game` sets a timer for each and builds each player's screen from it.
+- The state's `Waiting` says who the game now needs an answer from. `Meridian.Game` sets a timer for it and builds that player's screen from it.
+- **The random generator is a value inside `GameState`** (PCG32, as in the Tactics rules), not a `System.Random` passed in. `System.Random` can't be saved, and a snapshot must continue with the same draws (§5.6). `System.Random` is banned in `Meridian.Logic` by the same analyzer Tactics uses.
 - The scenario's `On` and `Evaluate` are called inside `Step`, so the scenario is part of the same pure transition.
 
 ### 5.3 Views
@@ -337,7 +339,7 @@ public interface ISnapshotGame : IResumableGame
 - Meridian returns a snapshot only at the **start of each turn** and at phase changes, so a restart replays at most one turn and there is roughly one small write a minute.
 - On `Resume`, Meridian re-arms its timers and waits in a "Reconnecting…" state for phones, as the interface's contract asks.
 - The manifest sets `ResumesAfterRestart`. A room whose game is an `ISnapshotGame` but has no stored snapshot (the restart came before the first one was written) returns to the lobby with "Game interrupted", as REDLINE does.
-- **What a snapshot holds:** the whole `GameState` (ship, decks in their drawn order, crew, scenario board, roles), the phase, and the state of the game's random stream, so the resumed game draws the same cards it would have. It holds no timers and no connection state.
+- **What a snapshot holds:** the whole `GameState` (ship, decks in their drawn order, crew, scenario board, roles, and the random generator, so the resumed game draws the same cards it would have) and the adapter's phase. It holds no timers and no connection state.
 - **Secrets at rest.** A snapshot contains hidden roles and deck order. It is stored server-side only and is never sent to a client; the secrecy test (§4.4) also covers the views produced straight after a restore.
 - The change is to the platform, so it gets its own tests in `ArcBox.Server.Tests` with a small test game, alongside the existing durable-room tests.
 
@@ -356,7 +358,7 @@ One bot plays three jobs: a disconnected seat (§3.3), the scripted ship in co-o
 - **Explore policy** (shared): prefer unexplored hatches, weighted toward the deck with the most tiles left; use a compartment's healing when hurt; never trade.
 - **Role policies** (one per role per scenario, from `IScenario.Bot`): each scores the actions open to it against its objective and picks with a little noise.
 - **Hidden roles.** A bot playing a hidden traitor follows the crew policy and deviates only when its scenario's sabotage is unobserved by the scenario's own rules. It only has to be adequate: its job is to keep a game going for a minute while a phone reconnects, and to give the simulator a working opponent.
-- All bot randomness comes from the game's `Random`, so bot games are reproducible.
+- A bot draws from a generator of its own, seeded from the game's, so bot games are reproducible and a bot's decision never changes what the game deals.
 - Bots see exactly what their seat's audience sees. A bot never reads hidden state.
 
 ---
