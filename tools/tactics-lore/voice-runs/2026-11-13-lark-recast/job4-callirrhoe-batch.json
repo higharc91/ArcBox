@@ -175,22 +175,24 @@
         "delivery": null
       },
       {
-        "raw": "(set on claude/issue-207-town-reacts at import)",
+        "raw": "pending-207.bark_lark_town_force",
         "line": "bark_lark_town_force",
         "speaker": "lark",
         "preset": "Callirrhoe",
         "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
         "renderText": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
-        "delivery": null
+        "delivery": null,
+        "note": "raw id assigned on claude/issue-207-town-reacts at import"
       },
       {
-        "raw": "(set on claude/issue-207-town-reacts at import)",
+        "raw": "pending-207.bark_lark_town_parley",
         "line": "bark_lark_town_parley",
         "speaker": "lark",
         "preset": "Callirrhoe",
         "text": "A truce at the ford! I'll need a whole new verse. Possibly three.",
         "renderText": "A truce at the ford! I'll need a whole new verse. Possibly three.",
-        "delivery": null
+        "delivery": null,
+        "note": "raw id assigned on claude/issue-207-town-reacts at import"
       },
       {
         "raw": "Algieba.5d003a96",
