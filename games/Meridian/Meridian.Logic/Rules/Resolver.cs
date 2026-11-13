@@ -19,6 +19,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
         {
             case EndTurn: EndTurnNow(); break;
             case Timeout: TimeoutNow(); break;
+            case MoveTo m: Move(m); break;
+            case Open o: OpenHatch(o); break;
+            case Orient o: OrientTile(o.Rotation); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
     }
@@ -26,13 +29,19 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
     /// <summary>The legal answers to <paramref name="waiting"/>, not counting Timeout.</summary>
     public static void Answers(RulesPack pack, GameState state, Pending waiting, List<Command> legal)
     {
-        _ = (pack, state, waiting, legal);
+        switch (waiting)
+        {
+            case OrientPending o:
+                legal.AddRange(o.Rotations.Select(r => new Orient(o.From, r)));
+                break;
+        }
     }
 
     /// <summary>The active seat's free actions, not counting EndTurn and Timeout.</summary>
     public static void Actions(RulesPack pack, GameState state, SeatId seat, List<Command> legal)
     {
-        _ = (pack, state, seat, legal);
+        LegalMoves(pack, state, seat, legal);
+        LegalOpens(pack, state, seat, legal);
     }
 
     /// <summary>Timeout resolves whatever the seat owes (plan, Task 4): with nothing owed, it ends the turn.</summary>
@@ -42,6 +51,9 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
         {
             case null:
                 EndTurnNow();
+                break;
+            case OrientPending o:
+                OrientTile(Placement.DefaultRotation(State.Ship, Pack.Tile(o.Tile), o.At, o.Toward, R.DeckRadius));
                 break;
         }
     }
