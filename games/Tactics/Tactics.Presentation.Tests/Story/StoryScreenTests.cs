@@ -83,7 +83,7 @@ public sealed class StoryScreenTests
             Assert.True(File.Exists(Path.Combine(Pack.Root, face.Backdrop)), face.Backdrop);
             speakers++;
         }
-        Assert.Equal(945 - AllLines().Count(l => l.Line.Speaker == "narrator"), speakers);
+        Assert.Equal(981 - AllLines().Count(l => l.Line.Speaker == "narrator"), speakers);
     }
 
     [Fact]
