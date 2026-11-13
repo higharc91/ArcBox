@@ -31,6 +31,8 @@ export interface RollData {
 }
 export interface TradeData { from: string; give: ItemCard[]; take: ItemCard[] }
 export interface SheetData { me: CrewCard; at: string; items: ItemCard[]; map: MapData; active: string; waiting: string | null }
-export interface Presented { seq: number; kind: string; seat: string; title: string; text: string; seconds: number; faces: number[] }
+export interface Presented {
+  seq: number; kind: string; seat: string; title: string; text: string; seconds: number; faces: number[]; compartment: string | null;
+}
 export interface WatchData { now: Presented }
 export interface OverData { message: string }
