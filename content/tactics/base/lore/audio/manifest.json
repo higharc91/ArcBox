@@ -1059,6 +1059,24 @@
     "ch1_bridge_cost_song_2": {
       "main": "ch1_bridge_cost_song_2.2cb50e78.ogg"
     },
+    "ch1_burial_done_1": {
+      "main": "ch1_burial_done_1.0125534e.ogg"
+    },
+    "ch1_burial_hill_1": {
+      "main": "ch1_burial_hill_1.f8953670.ogg"
+    },
+    "ch1_burial_open_1": {
+      "main": "ch1_burial_open_1.467b1773.ogg"
+    },
+    "ch1_burial_open_2": {
+      "main": "ch1_burial_open_2.a858df90.ogg"
+    },
+    "ch1_burial_song_1": {
+      "main": "ch1_burial_song_1.62d4885c.ogg"
+    },
+    "ch1_burial_words_2": {
+      "main": "ch1_burial_words_2.90db182d.ogg"
+    },
     "ch1_camp_ashmaw_open_1": {
       "main": "ch1_camp_ashmaw_open_1.d68e304d.ogg"
     },
@@ -1151,6 +1169,45 @@
     },
     "ch1_camp_warmth_2": {
       "main": "ch1_camp_warmth_2.788b7405.ogg"
+    },
+    "ch1_council_force_children_1": {
+      "main": "ch1_council_force_children_1.1fd18c55.ogg"
+    },
+    "ch1_council_force_close_1": {
+      "main": "ch1_council_force_close_1.d08ad2eb.ogg"
+    },
+    "ch1_council_force_confess_1": {
+      "main": "ch1_council_force_confess_1.bd1d50c8.ogg"
+    },
+    "ch1_council_force_confess_2": {
+      "main": "ch1_council_force_confess_2.1992fdf9.ogg"
+    },
+    "ch1_council_force_confess_3": {
+      "main": "ch1_council_force_confess_3.ffe92197.ogg"
+    },
+    "ch1_council_force_feed_1": {
+      "main": "ch1_council_force_feed_1.191ea701.ogg"
+    },
+    "ch1_council_force_hill_2": {
+      "main": "ch1_council_force_hill_2.065a662f.ogg"
+    },
+    "ch1_council_force_open_1": {
+      "main": "ch1_council_force_open_1.d0556055.ogg"
+    },
+    "ch1_council_force_open_2": {
+      "main": "ch1_council_force_open_2.24aaf7f9.ogg"
+    },
+    "ch1_council_force_open_3": {
+      "main": "ch1_council_force_open_3.bec55849.ogg"
+    },
+    "ch1_council_force_open_7": {
+      "main": "ch1_council_force_open_7.9c409bee.ogg"
+    },
+    "ch1_council_force_sums_fail_1": {
+      "main": "ch1_council_force_sums_fail_1.86c9ba7d.ogg"
+    },
+    "ch1_council_force_sums_pass_1": {
+      "main": "ch1_council_force_sums_pass_1.9a272949.ogg"
     },
     "ch1_dawn_open_1": {
       "main": "ch1_dawn_open_1.57455db3.ogg"
