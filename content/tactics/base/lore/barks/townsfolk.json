@@ -293,7 +293,7 @@
         },
         {
           "id": "town_merchant_bargained",
-          "text": "Shards for a copper. A copper! Ash Market's practically giving them away. Makes me nervous.",
+          "text": "Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
           "speaker": "townsfolk_merchant",
           "mood": "surprised",
           "direction": "brisk market patter with worry beneath it",
