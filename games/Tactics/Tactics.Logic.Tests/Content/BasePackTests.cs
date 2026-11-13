@@ -51,7 +51,7 @@ public sealed class BasePackTests
         [
             "air_elemental", "ashmaw", "ashmaw_party", "bandit", "bandit_captain", "bandit_roamer",
             "bandit_roamer_gang", "bandit_roamer_lone", "bear", "black_knight", "boar", "boar_roamer",
-            "boar_roamer_lone", "boar_roamer_pair", "boar_roamer_sounder", "cult_leader", "cultist", "dark_elf",
+            "boar_roamer_lone", "boar_roamer_pair", "boar_roamer_sounder", "crypt_warden", "cult_leader", "cultist", "dark_elf",
             "dire_wolf", "dragon", "drake", "earth_elemental", "elder_bear", "fire_elemental",
             "giant_bat", "giant_spider", "goblin", "goblin_archer", "goblin_boss", "goblin_ford_shaman",
             "goblin_shaman", "golem", "halvard", "hobgoblin", "hollow_bat", "hollow_bat_lone",
@@ -64,7 +64,7 @@ public sealed class BasePackTests
         ];
         Assert.Equal(monsters, pack.Monsters.Keys);
         Assert.Equal(XpTable.Default.Thresholds, pack.Xp.Thresholds);
-        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "mob_hollow_bats", "mob_hollow_kobolds", "mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "river_crossing", "warlord_bridge"],
+        Assert.Equal(["crypt_hall", "crystal_cave", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "mob_hollow_bats", "mob_hollow_kobolds", "mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "rime_tower", "river_crossing", "warlord_bridge"],
             pack.Maps.Keys);
         Assert.Equal(["crypt_hall", "crystal_cave", "ford_assault", "forest_ruins", "hall_of_the_flame", "hollow_diggings", "hollow_lair", "hollow_nest", "hollow_throat", "keep_gate", "mob_hollow_bats", "mob_hollow_kobolds", "mob_kobold_scouts", "mob_pine_wolves", "mob_river_slimes", "mob_road_bandits", "mob_rooting_boars", "rime_tower",
             "river_crossing", "warlord_bridge"], pack.Encounters.Keys);

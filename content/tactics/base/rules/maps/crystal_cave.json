@@ -1,6 +1,6 @@
 { "id": "crystal_cave", "size": [14, 12],
   "tiles": "AgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgIAAgIAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAgAAAgAAAgAAAgIAAgIAAgAAAgAAAgAAAgAAAgAAAgAAAwAAAwAAAwAAAgAAAgAAAgAAAgIAAgIAAgQAAgQAAgQAAgAAAgAAAgAAAwAAAwAAAwAAAgAAAgAAAgEAAgEAAgEAAgQAAgQAAgQAAgEAAgEAAgAAAwAAAwAAAwAAAgAAAgAAAgEAAgEAAgEAAgQAAgQAAgQAAgEAAgEAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgQAAgQAAgQAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAgAAAAMQAAMQAAMQAgAAAgAAAgAAAgAAAgAAAgAA",
-  "materials": ["cave_floor/cool", "mine_gravel/brown", "wet_stone/glow", "void/deep", "mine_boards/oak"],
+  "materials": ["ice/clear", "snow/fresh", "wet_stone/glow", "void/deep", "mine_boards/oak"],
   "props": [
     { "id": "crystal_big", "at": [4, 3], "blocks": true, "cover": "three_quarters" },
     { "id": "minecart", "at": [7, 3], "blocks": true, "cover": "half" },
