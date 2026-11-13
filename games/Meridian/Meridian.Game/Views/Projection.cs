@@ -4,7 +4,10 @@ using Meridian.Logic;
 
 namespace Meridian.Game;
 
-/// <summary>Builds the TV's view and each phone's from the session (spec §5.3).</summary>
+/// <summary>
+/// Builds the TV's view and each phone's from the session (spec §5.3). In M2 nothing is secret; stage M3 adds audiences,
+/// so views are already built from one seat's perspective.
+/// </summary>
 internal static class Projection
 {
     public const string Module = MeridianGame.Id;
@@ -12,16 +15,17 @@ internal static class Projection
     public static MeridianHostView Host(MeridianGame game)
     {
         var s = game.Session;
-        var active = s.Game?.ActiveSeat;
-        var seats = s.Seats.Select((x, i) => new SeatCard(x.Player.Value, x.Name,
-            x.Crew is { } c ? game.Pack.CrewMember(c).Name : null, i, x.Connected, x.Auto, x.Seat == active)).ToEqArray();
         var banner = s.Phase switch
         {
             SessionPhase.Boarding => "Choose your crew",
             SessionPhase.Over => s.Ending ?? "",
-            _ => "Exploring the Meridian",
+            _ => $"{s.SeatOf(s.Game!.ActiveSeat).Name}'s turn",
         };
-        return new MeridianHostView(Name(s.Phase), banner, seats);
+        var map = s.Game is { } g ? Map(game, g, names: false) : new MapData([], []);
+        return new MeridianHostView(Name(s.Phase), banner, Seats(game), map.Compartments, map.Crew,
+                                    s.Game?.TilePile.Count ?? game.Pack.Tiles.Sum(t => t.Copies),
+                                    s.Game?.AnomaliesDrawn ?? 0, s.Game?.Round ?? 0,
+                                    s.Queue.IsEmpty ? null : s.Queue[0], s.Log);
     }
 
     public static ControllerView Player(MeridianGame game, PlayerId id)
@@ -31,11 +35,54 @@ internal static class Projection
         {
             return new WaitView("You're watching this game.");
         }
-        return s.Phase switch
+        switch (s.Phase)
         {
-            SessionPhase.Boarding => Screen("crewPick", CrewPick(game, seat), game.Deadline),
-            _ => new WaitView("On the main screen…"),
+            case SessionPhase.Boarding:
+                return Screen("crewPick", CrewPick(game, seat), game.Deadline);
+            case SessionPhase.Over:
+                return Screen("over", new OverScreen(s.Ending ?? ""), null);
+        }
+
+        var state = s.Game!;
+        if (!s.Queue.IsEmpty)
+        {
+            return Screen("watch", new WatchScreen(s.Queue[0]), null);
+        }
+        var me = seat.Seat;
+        return state.Waiting switch
+        {
+            OrientPending o when o.From == me => Screen("orient", Orient(game, state, o), game.Deadline),
+            RollPending r when r.From == me => Screen("roll", Roll(game, r), game.Deadline),
+            ChoicePending c when c.From == me => Screen("card", Card(game, c.Card), game.Deadline),
+            TradePending t when t.From == me => Screen("trade", Trade(game, state, t), game.Deadline),
+            null when state.ActiveSeat == me => Screen("turn", Turn(game, state, me), game.Deadline),
+            _ => Screen("sheet", Sheet(game, state, me), null),
         };
+    }
+
+    private static EqArray<SeatCard> Seats(MeridianGame game)
+    {
+        var s = game.Session;
+        var active = s.Phase == SessionPhase.Explore ? s.Game?.ActiveSeat : null;
+        return s.Seats.Select((x, i) => new SeatCard(x.Player.Value, x.Name,
+            x.Crew is { } c ? game.Pack.CrewMember(c).Name : null, i, x.Connected, x.Auto, x.Seat == active)).ToEqArray();
+    }
+
+    /// <param name="names">Phones need compartment names; the TV looks them up in its content pack.</param>
+    public static MapData Map(MeridianGame game, GameState state, bool names = true)
+    {
+        var ship = state.Ship;
+        var compartments = ship.Compartments.Select(c =>
+        {
+            var tile = game.Pack.Tile(c.Tile);
+            var sealedSides = c.Hatches.Where(h => ship.IsSealed(c.Id, h)).ToEqArray();
+            return new CompartmentCard(c.Id.Value, c.Tile.Value, names ? tile.Name : null, c.At, c.Rotation, c.Hatches,
+                                       sealedSides.IsEmpty ? null : sealedSides, tile.Symbol);
+        }).ToEqArray();
+        var seats = game.Session.Seats;
+        var crew = state.Crew.Select(c => new CrewMarker(c.Seat.Value, game.Session.SeatOf(c.Seat).Name, c.At.Value,
+                                                         seats.IndexOf(game.Session.SeatOf(c.Seat)))).ToEqArray();
+        return new MapData(compartments, crew);
     }
 
     private static CrewPickScreen CrewPick(MeridianGame game, SeatInfo me)
@@ -44,6 +91,81 @@ internal static class Projection
         var crew = game.Pack.Crew.Select(c => Card(c, TraitSteps.Starting(c.Tracks),
             taken: s.Seats.Any(x => x.Crew == c.Id && x.Player != me.Player), mine: me.Crew == c.Id)).ToEqArray();
         return new CrewPickScreen(crew, s.Seats.Count(x => x.Crew is not null), s.Seats.Count);
+    }
+
+    private static TurnScreen Turn(MeridianGame game, GameState state, SeatId me)
+    {
+        var pack = game.Pack;
+        var legal = Rules.Legal(pack, state, me);
+        var crew = state.CrewOf(me);
+        var reach = Reach.From(pack, state.Ship, crew.At, state.MovesLeft);
+        var usable = legal.OfType<UseItem>().Select(u => u.Item).ToHashSet();
+        var neighbours = state.Turn.Traded
+            ? EqArray<Neighbour>.Empty
+            : state.Crew.Where(c => c.Seat != me && c.At == crew.At)
+                .Select(c => new Neighbour(c.Seat.Value, game.Session.SeatOf(c.Seat).Name, Items(pack, c, NoItems))).ToEqArray();
+        return new TurnScreen(
+            Map(game, state), crew.At.Value, state.MovesLeft,
+            legal.OfType<MoveTo>().Select(m => new Reachable(m.To.Value, reach[m.To])).ToEqArray(),
+            legal.OfType<Open>().Select(o => new Openable(o.At.Value, o.Side)).ToEqArray(),
+            Items(pack, crew, usable),
+            legal.Contains(new UseCompartment(me)) ? pack.Tile(state.Ship.Get(crew.At).Tile).Name : null,
+            neighbours,
+            Card(pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true));
+    }
+
+    private static OrientScreen Orient(MeridianGame game, GameState state, OrientPending o)
+    {
+        var tile = game.Pack.Tile(o.Tile);
+        return new OrientScreen(tile.Name, o.At, o.Toward,
+            o.Rotations.Select(r => new RotationOption(r, tile.HatchesAt(r))).ToEqArray(), Map(game, state));
+    }
+
+    private static RollScreen Roll(MeridianGame game, RollPending r)
+    {
+        if (r.Reason == RollReason.Breach)
+        {
+            return new RollScreen("breach", null, r.Dice, "Breach roll",
+                                  "Every Anomaly aboard makes the next one more likely to wake something.", [],
+                                  game.Pack.Rules.BreachThreshold);
+        }
+        var card = game.Pack.Card(r.Card!.Value);
+        var check = r.Option is { } o ? card.Choice!.Options.First(x => x.Id == o).Check! : card.Check!;
+        return new RollScreen("check", r.Trait, r.Dice, card.Title, card.Text,
+                              check.Bands.Select(b => new BandCard(b.Min, b.Max, b.Text)).ToEqArray(), null);
+    }
+
+    private static CardScreen Card(MeridianGame game, CardId id)
+    {
+        var card = game.Pack.Card(id);
+        return new CardScreen(id, card.Kind, card.Title, card.Text,
+            card.Choice!.Options.Select(o => new OptionCard(o.Id, o.Label, o.Text, o.Check?.Trait)).ToEqArray());
+    }
+
+    private static TradeScreen Trade(MeridianGame game, GameState state, TradePending t)
+    {
+        ItemCard Item(CardId id) => ItemOf(game.Pack, id, usable: false);
+        return new TradeScreen(game.Session.SeatOf(t.Offerer).Name, t.Offer.Give.Select(Item).ToEqArray(),
+                               t.Offer.Take.Select(Item).ToEqArray());
+    }
+
+    private static SheetScreen Sheet(MeridianGame game, GameState state, SeatId me)
+    {
+        var crew = state.CrewOf(me);
+        var waiting = state.Waiting is { } w ? game.Session.SeatOf(w.From).Name : null;
+        return new SheetScreen(Card(game.Pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true),
+                               Items(game.Pack, crew, NoItems), Map(game, state), game.Session.SeatOf(state.ActiveSeat).Name, waiting);
+    }
+
+    private static readonly IReadOnlySet<CardId> NoItems = new HashSet<CardId>();
+
+    private static EqArray<ItemCard> Items(RulesPack pack, CrewState crew, IReadOnlySet<CardId> usable)
+        => crew.Items.Select(i => ItemOf(pack, i, usable.Contains(i))).ToEqArray();
+
+    private static ItemCard ItemOf(RulesPack pack, CardId id, bool usable)
+    {
+        var card = pack.Card(id);
+        return new ItemCard(id, card.Kind, card.Title, card.Text, card.Item?.Use?.Label, usable);
     }
 
     public static CrewCard Card(CrewDef def, TraitSteps steps, bool taken, bool mine)

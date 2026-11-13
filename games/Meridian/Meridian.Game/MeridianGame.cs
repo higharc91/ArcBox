@@ -23,6 +23,16 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
 
     internal RulesPack Pack => _pack;
 
+    /// <summary>
+    /// Replaces the session wholesale and re-arms the clock. Stage M6's restore after a restart builds on this; tests use
+    /// it to set up positions that are slow to reach by play.
+    /// </summary>
+    internal void Load(MeridianSession session)
+    {
+        Session = session;
+        Rearm(fresh: true);
+    }
+
     public void Start(IGameContext ctx, IReadOnlyList<Player> players)
     {
         _ctx = ctx;
