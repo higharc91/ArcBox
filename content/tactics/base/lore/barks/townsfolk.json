@@ -31,7 +31,49 @@
           "mood": "happy",
           "direction": "plain, weathered, a small cautious relief",
           "requires": [
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_farmer_force",
+          "text": "They say the old goblin woman died on the bridge. Road's open. Doesn't feel like winning.",
+          "speaker": "townsfolk_farmer",
+          "mood": "sad",
+          "direction": "plain, weathered and quietly worried",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_farmer_parley",
+          "text": "Goblins on the hill, grain going up the path. Odd neighbours. Better than dead ones.",
+          "speaker": "townsfolk_farmer",
+          "mood": "idle",
+          "direction": "plain, weathered and quietly worried",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_farmer_ember",
+          "text": "They found something under the river, they say. The field by the docks froze the same night.",
+          "speaker": "townsfolk_farmer",
+          "mood": "sad",
+          "direction": "plain, weathered and quietly worried",
+          "requires": [
             "ch1_ember_found"
+          ]
+        },
+        {
+          "id": "town_farmer_confessed",
+          "text": "Mayor knew the ground was cooling. Six years he knew. I'd have planted differently.",
+          "speaker": "townsfolk_farmer",
+          "mood": "angry",
+          "direction": "plain, weathered and quietly worried",
+          "requires": [
+            "ch1_halden_confessed"
           ]
         }
       ]
@@ -44,7 +86,10 @@
           "text": "Another sack carried uphill. Same empty bowl down here.",
           "speaker": "townsfolk_farmhand",
           "mood": "idle",
-          "direction": "young, tired, dry working voice"
+          "direction": "young, tired, dry working voice",
+          "requires": [
+            "ch1_halden_confessed"
+          ]
         },
         {
           "id": "town_farmhand_2",
@@ -56,6 +101,45 @@
         {
           "id": "town_farmhand_3",
           "text": "They pay by the day. Funny how the days keep getting longer.",
+          "speaker": "townsfolk_farmhand",
+          "mood": "idle",
+          "direction": "young, tired, dry working voice"
+        },
+        {
+          "id": "town_farmhand_force",
+          "text": "The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?",
+          "speaker": "townsfolk_farmhand",
+          "mood": "sad",
+          "direction": "young, tired, dry working voice",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_farmhand_parley",
+          "text": "Carried my first sack up the goblin path today. The little ones watched me the whole way.",
+          "speaker": "townsfolk_farmhand",
+          "mood": "idle",
+          "direction": "young, tired, dry working voice",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_farmhand_ember",
+          "text": "Ground under the docks went cold as a grave. Nobody's saying why.",
+          "speaker": "townsfolk_farmhand",
+          "mood": "idle",
+          "direction": "young, tired, dry working voice",
+          "requires": [
+            "ch1_ember_found"
+          ]
+        },
+        {
+          "id": "town_farmhand_4",
+          "text": "Hands are cold, but they still work. That's something.",
           "speaker": "townsfolk_farmhand",
           "mood": "idle",
           "direction": "young, tired, dry working voice"
@@ -85,6 +169,38 @@
           "speaker": "townsfolk_fisher",
           "mood": "idle",
           "direction": "low, unhurried, superstitious river voice"
+        },
+        {
+          "id": "town_fisher_force",
+          "text": "Things went downstream after the fight. The river's carried worse. Not much worse.",
+          "speaker": "townsfolk_fisher",
+          "mood": "sad",
+          "direction": "low, unhurried, superstitious river voice",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_fisher_parley",
+          "text": "Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.",
+          "speaker": "townsfolk_fisher",
+          "mood": "happy",
+          "direction": "low, unhurried, superstitious river voice",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_fisher_ember",
+          "text": "River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+          "speaker": "townsfolk_fisher",
+          "mood": "idle",
+          "direction": "low, unhurried, superstitious river voice",
+          "requires": [
+            "ch1_ember_found"
+          ]
         }
       ]
     },
@@ -96,20 +212,72 @@
           "text": "Road is shut, cart is empty. That is the price of it.",
           "speaker": "townsfolk_merchant",
           "mood": "idle",
-          "direction": "brisk market patter with worry beneath it"
+          "direction": "brisk market patter with worry beneath it",
+          "unless": [
+            "ch1_ford_settled"
+          ]
         },
         {
           "id": "town_merchant_2",
           "text": "Coin is welcome. A clear road would be better.",
           "speaker": "townsfolk_merchant",
           "mood": "idle",
-          "direction": "brisk market patter with worry beneath it"
+          "direction": "brisk market patter with worry beneath it",
+          "unless": [
+            "ch1_ford_settled"
+          ]
         },
         {
           "id": "town_merchant_3",
           "text": "Look all you like. I remember when people bought things too.",
           "speaker": "townsfolk_merchant",
           "mood": "idle",
+          "direction": "brisk market patter with worry beneath it"
+        },
+        {
+          "id": "town_merchant_force",
+          "text": "Blood on the planks and carts going over them. Trade's never been squeamish.",
+          "speaker": "townsfolk_merchant",
+          "mood": "idle",
+          "direction": "brisk market patter with worry beneath it",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_merchant_parley",
+          "text": "The clan wants salt, of all things. I never thought I'd have goblin custom.",
+          "speaker": "townsfolk_merchant",
+          "mood": "happy",
+          "direction": "brisk market patter with worry beneath it",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_merchant_ember",
+          "text": "People are buying blankets. Only blankets. Somebody knows something about this cold.",
+          "speaker": "townsfolk_merchant",
+          "mood": "idle",
+          "direction": "brisk market patter with worry beneath it",
+          "requires": [
+            "ch1_ember_found"
+          ]
+        },
+        {
+          "id": "town_merchant_4",
+          "text": "Prices are what they are. Don't blame the merchant for the weather.",
+          "speaker": "townsfolk_merchant",
+          "mood": "idle",
+          "direction": "brisk market patter with worry beneath it"
+        },
+        {
+          "id": "town_merchant_5",
+          "text": "Everything here is honest goods. Mostly honest. Ask me about the wool.",
+          "speaker": "townsfolk_merchant",
+          "mood": "happy",
           "direction": "brisk market patter with worry beneath it"
         }
       ]
@@ -134,6 +302,48 @@
         {
           "id": "town_guard_3",
           "text": "Bridge watch was a good posting once.",
+          "speaker": "townsfolk_guard",
+          "mood": "idle",
+          "direction": "restrained, ashamed but loyal military voice",
+          "unless": [
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_guard_force",
+          "text": "We took the bridge back. The captain hasn't said a word since. Neither have I.",
+          "speaker": "townsfolk_guard",
+          "mood": "sad",
+          "direction": "restrained, ashamed but loyal military voice",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_guard_parley",
+          "text": "Captain made peace with them. Some of the lads don't like it. I like breathing.",
+          "speaker": "townsfolk_guard",
+          "mood": "idle",
+          "direction": "restrained, ashamed but loyal military voice",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_guard_ember",
+          "text": "Orders are to watch the docks now. Watch them for what, nobody says.",
+          "speaker": "townsfolk_guard",
+          "mood": "idle",
+          "direction": "restrained, ashamed but loyal military voice",
+          "requires": [
+            "ch1_ember_found"
+          ]
+        },
+        {
+          "id": "town_guard_4",
+          "text": "Long shift, cold boots. Same as every week.",
           "speaker": "townsfolk_guard",
           "mood": "idle",
           "direction": "restrained, ashamed but loyal military voice"
@@ -163,6 +373,48 @@
           "speaker": "townsfolk_barmaid",
           "mood": "idle",
           "direction": "practical, warm, quick but clear"
+        },
+        {
+          "id": "town_barmaid_force",
+          "text": "Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "sad",
+          "direction": "practical, warm, quick but clear",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_barmaid_parley",
+          "text": "We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "happy",
+          "direction": "practical, warm, quick but clear",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_barmaid_ember",
+          "text": "Bree's hearth is the warmest room in town again. Funny how that's starting to matter.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "idle",
+          "direction": "practical, warm, quick but clear",
+          "requires": [
+            "ch1_ember_found"
+          ]
+        },
+        {
+          "id": "town_barmaid_confessed",
+          "text": "Folk keep coming in to shout about the mayor. Then they stay for the soup.",
+          "speaker": "townsfolk_barmaid",
+          "mood": "idle",
+          "direction": "practical, warm, quick but clear",
+          "requires": [
+            "ch1_halden_confessed"
+          ]
         }
       ]
     },
@@ -189,6 +441,38 @@
           "speaker": "townsfolk_child",
           "mood": "idle",
           "direction": "bright, pitched up, innocent without baby talk"
+        },
+        {
+          "id": "town_child_force",
+          "text": "Dad says the goblins aren't coming back. He didn't look happy about it.",
+          "speaker": "townsfolk_child",
+          "mood": "sad",
+          "direction": "bright, pitched up, innocent without baby talk",
+          "requires": [
+            "ch1_skarrow_slain",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_child_parley",
+          "text": "There's a goblin girl who can spit further than me. I'm going to beat her.",
+          "speaker": "townsfolk_child",
+          "mood": "happy",
+          "direction": "bright, pitched up, innocent without baby talk",
+          "requires": [
+            "ch1_skarrow_spared",
+            "ch1_ford_settled"
+          ]
+        },
+        {
+          "id": "town_child_ember",
+          "text": "Pip says the river had a heart and somebody took it out. Is that true?",
+          "speaker": "townsfolk_child",
+          "mood": "surprised",
+          "direction": "bright, pitched up, innocent without baby talk",
+          "requires": [
+            "ch1_ember_found"
+          ]
         }
       ]
     },

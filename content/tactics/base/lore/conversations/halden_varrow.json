@@ -38,6 +38,29 @@
       "unless": []
     },
     {
+      "node": "ford_ember",
+      "requires": [
+        "ch1_ember_found"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_force",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_parley",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
       "node": "offer",
       "requires": [],
       "unless": []
@@ -226,6 +249,45 @@
         }
       ],
       "end": true
+    },
+    {
+      "id": "ford_ember",
+      "lines": [
+        {
+          "id": "talk_halden_varrow_ford_ember",
+          "speaker": "halden_varrow",
+          "text": "The docks went cold the night you brought it up. If that thing kept Emberwick warm, I need to know what we do now.",
+          "mood": "sad",
+          "direction": "tired, honest civic baritone"
+        }
+      ],
+      "next": "offer"
+    },
+    {
+      "id": "ford_force",
+      "lines": [
+        {
+          "id": "talk_halden_varrow_ford_force",
+          "speaker": "halden_varrow",
+          "text": "The bridge is open. The road is open. I ought to be relieved, and I keep seeing her on the planks.",
+          "mood": "sad",
+          "direction": "tired, hollow"
+        }
+      ],
+      "next": "offer"
+    },
+    {
+      "id": "ford_parley",
+      "lines": [
+        {
+          "id": "talk_halden_varrow_ford_parley",
+          "speaker": "halden_varrow",
+          "text": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+          "mood": "happy",
+          "direction": "relieved, warm"
+        }
+      ],
+      "next": "offer"
     }
   ]
 }

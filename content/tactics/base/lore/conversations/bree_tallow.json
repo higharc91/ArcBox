@@ -8,6 +8,29 @@
   "start": "greet",
   "entries": [
     {
+      "node": "ford_ember",
+      "requires": [
+        "ch1_ember_found"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_force",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_parley",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
       "node": "greet",
       "requires": [],
       "unless": []
@@ -83,6 +106,45 @@
         }
       ],
       "end": true
+    },
+    {
+      "id": "ford_ember",
+      "lines": [
+        {
+          "id": "talk_bree_tallow_ford_ember",
+          "speaker": "bree_tallow",
+          "text": "My hearth's the warmest in town again. People keep asking me why. I keep telling them it's the stew.",
+          "mood": "idle",
+          "direction": "brisk, knowing"
+        }
+      ],
+      "next": "greet"
+    },
+    {
+      "id": "ford_force",
+      "lines": [
+        {
+          "id": "talk_bree_tallow_ford_force",
+          "speaker": "bree_tallow",
+          "text": "You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.",
+          "mood": "sad",
+          "direction": "brisk, gentle underneath"
+        }
+      ],
+      "next": "greet"
+    },
+    {
+      "id": "ford_parley",
+      "lines": [
+        {
+          "id": "talk_bree_tallow_ford_parley",
+          "speaker": "bree_tallow",
+          "text": "Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+          "mood": "happy",
+          "direction": "brisk and warm"
+        }
+      ],
+      "next": "greet"
     }
   ]
 }

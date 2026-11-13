@@ -188,6 +188,7 @@ class CheckTests(unittest.TestCase):
             # Removing the start action makes its former first-stage flag genuinely unreachable.
             edit("conversations/halden_varrow.json", lambda d: [o.pop("quest",None) for n in d["nodes"] for o in n.get("options",[]) if o.get("quest",{}).get("start")])
             edit("barks/mother_skarrow.json", lambda d: d["events"].pop("town"))
+            edit("pack.json", lambda d: d["files"].remove("conversations/mother_skarrow.json"))
             errors = check.check([lore])
         self.assertTrue(any("mother_skarrow" in e and "neither conversation nor barks" in e for e in errors), errors)
         self.assertTrue(any("missing_entry" in e for e in errors), errors)
@@ -316,6 +317,25 @@ class CheckTests(unittest.TestCase):
         self.assertIn("characters.aldric", keys)
         self.assertNotIn("rules.manifest", keys)
 
+
+
+class FordClaimTests(unittest.TestCase):
+    """#207: a town line about the road or bridge being shut or open must be gated on the ford."""
+
+    def claims(self, line):
+        errors = check.Errors()
+        check._ford_claim(line, "base/barks/townsfolk.json", "/presets/merchant/lines/0", errors)
+        return errors
+
+    def test_an_ungated_road_claim_is_flagged(self):
+        self.assertEqual(1, len(self.claims({"id": "a", "text": "Road is shut, cart is empty."})))
+        self.assertEqual(1, len(self.claims({"id": "b", "text": "Bridge is open. Now let us see if the seed gets through."})))
+
+    def test_gated_or_unrelated_lines_pass(self):
+        self.assertFalse(self.claims({"id": "c", "text": "Road is shut.", "unless": ["ch1_ford_settled"]}))
+        self.assertFalse(self.claims({"id": "d", "text": "Bridge is open.", "requires": ["ch1_ford_settled"]}))
+        self.assertFalse(self.claims({"id": "e", "text": "Bridge watch was a good posting once."}))
+        self.assertFalse(self.claims({"id": "f", "text": "Keep a light by your door tonight."}))
 
 if __name__ == "__main__":
     unittest.main()

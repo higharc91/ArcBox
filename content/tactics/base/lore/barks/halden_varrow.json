@@ -40,7 +40,30 @@
       {
         "id": "bark_halden_varrow_town_7",
         "text": "If anyone asks, things are well in hand. Are they? No. Don't answer that.",
-        "mood": "idle"
+        "mood": "idle",
+        "unless": [
+          "ch1_halden_confessed"
+        ]
+      },
+      {
+        "id": "bark_halden_varrow_town_force",
+        "text": "The bridge is ours again. I keep telling myself that's what I wanted.",
+        "mood": "sad",
+        "direction": "tired, hollow civic baritone",
+        "requires": [
+          "ch1_skarrow_slain",
+          "ch1_ford_settled"
+        ]
+      },
+      {
+        "id": "bark_halden_varrow_town_parley",
+        "text": "Goblins at the granary gate, and nobody dead. I'll take it. I'll take it gladly.",
+        "mood": "happy",
+        "direction": "relieved, warm",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_ford_settled"
+        ]
       }
     ]
   }

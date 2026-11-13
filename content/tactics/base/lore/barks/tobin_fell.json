@@ -41,6 +41,26 @@
         "id": "bark_tobin_fell_town_7",
         "text": "Shut the door. You're letting the heat out. What's left of it.",
         "mood": "angry"
+      },
+      {
+        "id": "bark_tobin_fell_town_force",
+        "text": "Mended a dozen spears for the bridge. Don't ask how many came back to me.",
+        "mood": "sad",
+        "direction": "gruff, slow",
+        "requires": [
+          "ch1_skarrow_slain",
+          "ch1_ford_settled"
+        ]
+      },
+      {
+        "id": "bark_tobin_fell_town_parley",
+        "text": "Goblin smith came down asking about the forge. Knows his iron. Don't tell anyone I said so.",
+        "mood": "idle",
+        "direction": "gruff, grudging respect",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_ford_settled"
+        ]
       }
     ]
   }

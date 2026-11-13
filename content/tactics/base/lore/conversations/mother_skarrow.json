@@ -1,0 +1,133 @@
+{
+  "id": "talk_mother_skarrow",
+  "character": "mother_skarrow",
+  "title": "Mother Skarrow's Fire",
+  "cast": [
+    "mother_skarrow"
+  ],
+  "start": "wary",
+  "entries": [
+    {
+      "node": "truce",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "node": "wary"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "wary",
+      "lines": [
+        {
+          "id": "talk_mother_skarrow_wary",
+          "speaker": "mother_skarrow",
+          "text": "Valley people. Say what you came to say, or go back down the hill.",
+          "mood": "idle",
+          "direction": "wary authority"
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "truce",
+      "lines": [
+        {
+          "id": "talk_mother_skarrow_truce",
+          "speaker": "mother_skarrow",
+          "text": "You came back up the hill. Not many valley people do that twice.",
+          "mood": "idle",
+          "direction": "wary, tired warmth"
+        }
+      ],
+      "options": [
+        {
+          "id": "clan",
+          "label": "How is the clan?",
+          "to": "clan"
+        },
+        {
+          "id": "vorga",
+          "label": "Where are the young ones who fought us?",
+          "to": "vorga"
+        },
+        {
+          "id": "bye",
+          "label": "We'll leave you to your fire.",
+          "to": "bye"
+        }
+      ]
+    },
+    {
+      "id": "clan",
+      "lines": [
+        {
+          "id": "talk_mother_skarrow_clan",
+          "speaker": "mother_skarrow",
+          "text": "Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.",
+          "mood": "sad",
+          "direction": "tired warmth"
+        }
+      ],
+      "next": "truce_more"
+    },
+    {
+      "id": "vorga",
+      "lines": [
+        {
+          "id": "talk_mother_skarrow_vorga",
+          "speaker": "mother_skarrow",
+          "text": "With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.",
+          "mood": "sad",
+          "direction": "measured, worried"
+        }
+      ],
+      "next": "truce_more"
+    },
+    {
+      "id": "truce_more",
+      "lines": [
+        {
+          "id": "talk_mother_skarrow_more",
+          "speaker": "mother_skarrow",
+          "text": "Anything else, valley people? The fire is small, and I am old.",
+          "mood": "idle",
+          "direction": "dry, wary authority"
+        }
+      ],
+      "options": [
+        {
+          "id": "clan",
+          "label": "How is the clan?",
+          "to": "clan"
+        },
+        {
+          "id": "vorga",
+          "label": "Where are the young ones who fought us?",
+          "to": "vorga"
+        },
+        {
+          "id": "bye",
+          "label": "We'll leave you to your fire.",
+          "to": "bye"
+        }
+      ]
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "talk_mother_skarrow_bye",
+          "speaker": "mother_skarrow",
+          "text": "Go well. Walk loud on the path, so the archers know it is you.",
+          "mood": "idle",
+          "direction": "dry, a little fond"
+        }
+      ],
+      "end": true
+    }
+  ]
+}

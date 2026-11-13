@@ -45,6 +45,26 @@
         "id": "bark_corvin_ashby_town_8",
         "text": "Mother Aubrine calls history a matter of faith. I call it a matter of paper.",
         "mood": "happy"
+      },
+      {
+        "id": "bark_corvin_ashby_town_force",
+        "text": "Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.",
+        "mood": "sad",
+        "direction": "quiet, troubled academic",
+        "requires": [
+          "ch1_skarrow_slain",
+          "ch1_ford_settled"
+        ]
+      },
+      {
+        "id": "bark_corvin_ashby_town_parley",
+        "text": "The clan keeps songs older than my oldest page. I've begged for a copy. Twice.",
+        "mood": "happy",
+        "direction": "eager, quick",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_ford_settled"
+        ]
       }
     ]
   }

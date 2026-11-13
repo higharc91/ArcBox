@@ -8,6 +8,29 @@
   "start": "greet",
   "entries": [
     {
+      "node": "ford_ember",
+      "requires": [
+        "ch1_ember_found"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_force",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_parley",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
       "node": "greet",
       "requires": [],
       "unless": []
@@ -83,6 +106,45 @@
         }
       ],
       "end": true
+    },
+    {
+      "id": "ford_ember",
+      "lines": [
+        {
+          "id": "talk_mother_aubrine_ford_ember",
+          "speaker": "mother_aubrine",
+          "text": "Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?",
+          "mood": "idle",
+          "direction": "measured, troubled"
+        }
+      ],
+      "next": "greet"
+    },
+    {
+      "id": "ford_force",
+      "lines": [
+        {
+          "id": "talk_mother_aubrine_ford_force",
+          "speaker": "mother_aubrine",
+          "text": "I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.",
+          "mood": "sad",
+          "direction": "measured, grieving"
+        }
+      ],
+      "next": "greet"
+    },
+    {
+      "id": "ford_parley",
+      "lines": [
+        {
+          "id": "talk_mother_aubrine_ford_parley",
+          "speaker": "mother_aubrine",
+          "text": "The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+          "mood": "happy",
+          "direction": "gentle, quietly amused"
+        }
+      ],
+      "next": "greet"
     }
   ]
 }

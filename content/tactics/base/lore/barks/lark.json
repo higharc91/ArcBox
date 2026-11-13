@@ -139,6 +139,26 @@
         "speaker": "lark",
         "mood": "happy",
         "direction": "humming first"
+      },
+      {
+        "id": "bark_lark_town_force",
+        "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+        "mood": "sad",
+        "direction": "soft, still musical",
+        "requires": [
+          "ch1_skarrow_slain",
+          "ch1_ford_settled"
+        ]
+      },
+      {
+        "id": "bark_lark_town_parley",
+        "text": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+        "mood": "happy",
+        "direction": "delighted",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_ford_settled"
+        ]
       }
     ]
   }

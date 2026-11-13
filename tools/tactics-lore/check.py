@@ -29,6 +29,17 @@ FILE_SCHEMA = {"world": "world", "timeline": "timeline", "factions": "factions",
 NARRATOR = "narrator"
 
 
+# A town line that says the road or bridge is shut or open is only true on one side of the ford (#207).
+FORD_STATE = re.compile(r"\b(road|bridge|ford|crossing)s?\b[^.!?]*\b(shut|closed|open|opened|reopened|blocked)\b|"
+                        r"\b(shut|closed|open|opened|reopened|blocked)\b[^.!?]*\b(road|bridge|ford|crossing)s?\b", re.I)
+
+
+def _ford_claim(line: dict, where: str, at: str, errors: "Errors") -> None:
+    if not line.get("requires") and not line.get("unless") and FORD_STATE.search(line.get("text", "")):
+        errors.add(where, at, f"'{line['id']}' says the road or bridge is shut or open, but plays on both sides of the ford: "
+                              "gate it with requires or unless (e.g. ch1_ford_settled)")
+
+
 class Errors(list):
     def add(self, where: str, pointer: str, message: str) -> None:
         self.append(f"{where}#{pointer}: {message}")
@@ -285,6 +296,7 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                                 errors.add(where, at, f"a townsfolk line needs '{field}'")
                         if line.get("speaker") != data["speaker"]:
                             errors.add(where, at, "line speaker differs from preset cast")
+                        _ford_claim(line, where, at, errors)
             if kind == "voices":
                 _define(defs["voice"], doc, where, "", "voice set", errors)
             if kind in ("barks", "voices"):
@@ -298,6 +310,8 @@ def check(lore_dirs: list[Path], content: Path = CONTENT) -> Errors:
                         line_ids[line["id"]] = where
                         if "mood" in line and line["mood"] not in moods:
                             errors.add(where, at, f"mood '{line['mood']}' has no portrait")
+                        if event in ("town", "camp"):
+                            _ford_claim(line, where, at, errors)
 
     townsfolk = next((d["presets"] for d, w in docs if w.endswith("/barks/townsfolk.json")), None)
     if townsfolk is not None:

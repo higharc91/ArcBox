@@ -8,6 +8,29 @@
   "start": "greet",
   "entries": [
     {
+      "node": "ford_ember",
+      "requires": [
+        "ch1_ember_found"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_force",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
+      "node": "ford_parley",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch1_ford_settled"
+      ],
+      "unless": []
+    },
+    {
       "node": "greet",
       "requires": [],
       "unless": []
@@ -125,6 +148,45 @@
         }
       ],
       "end": true
+    },
+    {
+      "id": "ford_ember",
+      "lines": [
+        {
+          "id": "talk_corvin_ashby_ford_ember",
+          "speaker": "corvin_ashby",
+          "text": "You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.",
+          "mood": "surprised",
+          "direction": "eager, then frightened of himself"
+        }
+      ],
+      "next": "greet"
+    },
+    {
+      "id": "ford_force",
+      "lines": [
+        {
+          "id": "talk_corvin_ashby_ford_force",
+          "speaker": "corvin_ashby",
+          "text": "I've written down the bridge. All of it. Someone should, while we still remember it right.",
+          "mood": "sad",
+          "direction": "quiet, careful"
+        }
+      ],
+      "next": "greet"
+    },
+    {
+      "id": "ford_parley",
+      "lines": [
+        {
+          "id": "talk_corvin_ashby_ford_parley",
+          "speaker": "corvin_ashby",
+          "text": "Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.",
+          "mood": "happy",
+          "direction": "eager, quick"
+        }
+      ],
+      "next": "greet"
     }
   ]
 }
