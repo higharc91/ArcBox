@@ -23,6 +23,7 @@ A salvage crew boards a silent starship. They explore it one compartment at a ti
 - If the traitor's phone drops in the endgame: **pause about 60 seconds, then a bot plays** until they return.
 - **Every twist archetype in v1:** revealed traitor, hidden traitor, co-op against the ship, timed escape, free-for-all.
 - **10–12 scenarios** in the first version. This spec plans 12.
+- **The game must resume after a server restart** (decided 2026-11-13). This needs one platform addition (§5.6).
 
 ### What we're assuming
 - **All content is original.** The mechanics are the genre's; no tile, card, character, scenario, name or rules text is taken from any published game.
@@ -37,7 +38,7 @@ A salvage crew boards a silent starship. They explore it one compartment at a ti
 4. Every scenario can be played start to finish by bots alone, and the simulator's balance targets hold (§7.3).
 5. A phone that disconnects never stalls the game: every wait has a deadline, and a bot can play any seat in any role.
 6. A step in the Explore phase changes the TV's view by less than one network packet (about 1,420 bytes) as a host patch.
-7. A server restart mid-game brings the room back in the same game at the start of the interrupted turn (§5.6; this needs the one platform change in this spec).
+7. A server restart mid-game brings the room back in the same game at the start of the interrupted turn (§5.6).
 8. Adding a thirteenth scenario touches only the scenario's own class, its content file, its tests and one registration line.
 
 ---
@@ -317,7 +318,7 @@ public sealed record StepResult(GameState State, IReadOnlyList<GameEvent> Events
 ### 5.6 Surviving a restart (the one platform change)
 The platform rebuilds a room after a restart, but stores no game state: `IResumableGame.Resume` is handed only the players and an optional campaign. Tactics resumes from its campaign document. Meridian has no campaign, so today it could not resume.
 
-**Proposed addition to `ArcBox.Sdk`:**
+Resume is a requirement, so this spec adds an opt-in interface to `ArcBox.Sdk`:
 
 ```csharp
 /// <summary>Opt-in for games that resume without a campaign. The room stores the latest snapshot with the room's row.</summary>
@@ -334,7 +335,10 @@ public interface ISnapshotGame : IResumableGame
 - The room writes the snapshot through the existing background writer, to a new `room_game_state` table keyed by room code, and deletes it when the game ends. Snapshots are limited to 256 KB.
 - Meridian returns a snapshot only at the **start of each turn** and at phase changes, so a restart replays at most one turn and there is roughly one small write a minute.
 - On `Resume`, Meridian re-arms its timers and waits in a "Reconnecting…" state for phones, as the interface's contract asks.
-- **If this change is declined,** the manifest leaves `ResumesAfterRestart` off and a restart returns the room to the lobby with "Game interrupted", exactly as REDLINE does. Nothing else in this spec depends on it.
+- The manifest sets `ResumesAfterRestart`. A room whose game is an `ISnapshotGame` but has no stored snapshot (the restart came before the first one was written) returns to the lobby with "Game interrupted", as REDLINE does.
+- **What a snapshot holds:** the whole `GameState` (ship, decks in their drawn order, crew, scenario board, roles), the phase, and the state of the game's random stream, so the resumed game draws the same cards it would have. It holds no timers and no connection state.
+- **Secrets at rest.** A snapshot contains hidden roles and deck order. It is stored server-side only and is never sent to a client; the secrecy test (§4.4) also covers the views produced straight after a restore.
+- The change is to the platform, so it gets its own tests in `ArcBox.Server.Tests` with a small test game, alongside the existing durable-room tests.
 
 ### 5.7 Registration
 - `ArcBox.Server`: a project reference and `builder.Services.AddMeridian()` (the game, its voice theme and its content).
@@ -396,14 +400,14 @@ Each stage ends with something that runs.
 | Stage | Delivers | Done when |
 |---|---|---|
 | **M1 — Rules core** | `Meridian.Logic`: state, tiles, movement, cards, checks, Breach roll, the Explore bot; first tile and card content | Bots explore a ship to the Breach in tests, deterministically |
-| **M2 — Playable Explore** | `Meridian.Game`, the phone module's Explore screens, the dev board, registration | Three dev phones explore a ship on `/dev.html` |
+| **M2 — Playable Explore** | `Meridian.Game`, the phone module's Explore screens, the dev board, registration. `GameState` round-trips through JSON from this stage on, checked by a test | Three dev phones explore a ship on `/dev.html` |
 | **M3 — Breach engine** | The scenario contract, primitives, audiences, combat, death; the five **S1** scenarios with bots; `Meridian.Sim` | Every S1 scenario is bot-played to an ending and passes the secrecy test |
 | **M4 — TV scene** | The Godot scene with placeholder tiles, the Breach sequence, narration, host signals | A full game on the TV with real phones: the first playable game night |
 | **M5 — Art and audio** | Ship tiles, crew, monsters, effects, sound | The placeholder tiles are gone |
 | **M6 — Restart** | `ISnapshotGame` in the platform, and Meridian's snapshots | Success criterion 7 |
 | **M7 — Scenarios 6–12** | The remaining seven scenarios, tuning, the playtest checklist | All success criteria pass |
 
-M5 and M6 don't depend on each other or on M7 and can run alongside it.
+M5 and M6 don't depend on each other or on M7 and can run alongside it. M6 is required for v1, not optional: the state is kept serializable from M2 so that M6 is a platform change plus wiring, not a rewrite.
 
 ---
 
@@ -442,6 +446,5 @@ M5 and M6 don't depend on each other or on M7 and can run alongside it.
 | The Tactics art pipeline's fantasy style doesn't carry to a starship | A style sheet and a handful of tiles are made first in M5, before the full set |
 
 ## 12. Open questions
-1. **Restart support (§5.6).** Is the `ISnapshotGame` platform addition acceptable, or should v1 ship without resume?
-2. **Crew count.** Eight crew is assumed. More costs art and balance; fewer gives a full room less choice.
-3. **Turn timer.** 60 seconds of inactivity is a guess for a party setting. It is the first number to revisit after a playtest.
+1. **Crew count.** Eight crew is assumed. More costs art and balance; fewer gives a full room less choice.
+2. **Turn timer.** 60 seconds of inactivity is a guess for a party setting. It is the first number to revisit after a playtest.
