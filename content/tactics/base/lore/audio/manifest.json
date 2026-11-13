@@ -62,7 +62,8 @@
       "preset": "Enceladus"
     },
     "lark": {
-      "preset": "Aoede"
+      "preset": "Callirrhoe",
+      "pitch": -2
     },
     "maren_sorrel": {
       "preset": "Sulafat"
@@ -532,64 +533,64 @@
       "main": "bark_ivo_rime_victory_1.c66f2742.ogg"
     },
     "bark_lark_ally_down_1": {
-      "main": "bark_lark_ally_down_1.d3cbf4ba.ogg"
+      "main": "bark_lark_ally_down_1.476d5bb1.ogg"
     },
     "bark_lark_battle_start_1": {
-      "main": "bark_lark_battle_start_1.faa997b5.ogg"
+      "main": "bark_lark_battle_start_1.2711a761.ogg"
     },
     "bark_lark_battle_start_2": {
-      "main": "bark_lark_battle_start_2.e9da2cd5.ogg"
+      "main": "bark_lark_battle_start_2.416a899a.ogg"
     },
     "bark_lark_battle_start_3": {
-      "main": "bark_lark_battle_start_3.d01b2329.ogg"
+      "main": "bark_lark_battle_start_3.e293b970.ogg"
     },
     "bark_lark_camp_1": {
-      "main": "bark_lark_camp_1.8c84394e.ogg"
+      "main": "bark_lark_camp_1.4e358ac6.ogg"
     },
     "bark_lark_camp_2": {
-      "main": "bark_lark_camp_2.0dd7c203.ogg"
+      "main": "bark_lark_camp_2.d5f4ab6d.ogg"
     },
     "bark_lark_camp_3": {
-      "main": "bark_lark_camp_3.47f3b804.ogg"
+      "main": "bark_lark_camp_3.e4721710.ogg"
     },
     "bark_lark_camp_4": {
-      "main": "bark_lark_camp_4.75d76d50.ogg"
+      "main": "bark_lark_camp_4.ed0daac8.ogg"
     },
     "bark_lark_camp_5": {
-      "main": "bark_lark_camp_5.3c8f2e26.ogg"
+      "main": "bark_lark_camp_5.215f8dbb.ogg"
     },
     "bark_lark_crit_1": {
-      "main": "bark_lark_crit_1.dadb5dbc.ogg"
+      "main": "bark_lark_crit_1.6c3defc7.ogg"
     },
     "bark_lark_healed_1": {
-      "main": "bark_lark_healed_1.65dfe94c.ogg"
+      "main": "bark_lark_healed_1.eccfc378.ogg"
     },
     "bark_lark_hit_1": {
-      "main": "bark_lark_hit_1.5de804e9.ogg"
+      "main": "bark_lark_hit_1.6d0a1d86.ogg"
     },
     "bark_lark_kill_1": {
-      "main": "bark_lark_kill_1.64d7b9e2.ogg"
+      "main": "bark_lark_kill_1.c3ecf9ec.ogg"
     },
     "bark_lark_level_up_1": {
-      "main": "bark_lark_level_up_1.cc70c2db.ogg"
+      "main": "bark_lark_level_up_1.f97bade4.ogg"
     },
     "bark_lark_low_hp_1": {
-      "main": "bark_lark_low_hp_1.212d0648.ogg"
+      "main": "bark_lark_low_hp_1.ec3de73e.ogg"
     },
     "bark_lark_miss_1": {
-      "main": "bark_lark_miss_1.27e4a469.ogg"
+      "main": "bark_lark_miss_1.daef8d60.ogg"
     },
     "bark_lark_town_1": {
-      "main": "bark_lark_town_1.8c84394e.ogg"
+      "main": "bark_lark_town_1.4e358ac6.ogg"
     },
     "bark_lark_town_2": {
-      "main": "bark_lark_town_2.47f3b804.ogg"
+      "main": "bark_lark_town_2.e4721710.ogg"
     },
     "bark_lark_town_3": {
-      "main": "bark_lark_town_3.75d76d50.ogg"
+      "main": "bark_lark_town_3.ed0daac8.ogg"
     },
     "bark_lark_victory_1": {
-      "main": "bark_lark_victory_1.14825b09.ogg"
+      "main": "bark_lark_victory_1.dfbcf297.ogg"
     },
     "bark_maren_sorrel_ally_down_1": {
       "main": "bark_maren_sorrel_ally_down_1.3f8fd1c4.ogg"
@@ -1993,25 +1994,28 @@
       "main": "ch2_journal_path_1.884f0e5f.ogg"
     },
     "ch2_lark_inn_corner_1": {
-      "main": "ch2_lark_inn_corner_1.fb339f4e.ogg"
+      "main": "ch2_lark_inn_corner_1.80e54a95.ogg"
     },
     "ch2_lark_inn_corner_2": {
-      "main": "ch2_lark_inn_corner_2.97df656c.ogg"
+      "main": "ch2_lark_inn_corner_2.c71a600d.ogg"
     },
     "ch2_lark_inn_corner_3": {
-      "main": "ch2_lark_inn_corner_3.1af86126.ogg"
+      "main": "ch2_lark_inn_corner_3.ccd87781.ogg"
+    },
+    "ch2_lark_inn_corner_4": {
+      "main": "ch2_lark_inn_corner_4.a624837e.ogg"
     },
     "ch2_lark_inn_following_1": {
-      "main": "ch2_lark_inn_following_1.6ee3ef67.ogg"
+      "main": "ch2_lark_inn_following_1.f689112c.ogg"
     },
     "ch2_lark_inn_following_2": {
-      "main": "ch2_lark_inn_following_2.106bd54d.ogg"
+      "main": "ch2_lark_inn_following_2.dadf6e51.ogg"
     },
     "ch2_lark_inn_verse_1": {
-      "main": "ch2_lark_inn_verse_1.5065334d.ogg"
+      "main": "ch2_lark_inn_verse_1.bcb3272d.ogg"
     },
     "ch2_lark_inn_verse_2": {
-      "main": "ch2_lark_inn_verse_2.4930ef72.ogg"
+      "main": "ch2_lark_inn_verse_2.98e41a40.ogg"
     },
     "ch2_reeds_dwarf_1": {
       "main": "ch2_reeds_dwarf_1.bef2adde.ogg"
@@ -2170,13 +2174,13 @@
       "main": "ch3_crypt_door_loud_1.9d70f4ba.ogg"
     },
     "ch3_crypt_door_loud_2": {
-      "main": "ch3_crypt_door_loud_2.7bc0b852.ogg"
+      "main": "ch3_crypt_door_loud_2.e8d30938.ogg"
     },
     "ch3_crypt_door_quiet_1": {
       "main": "ch3_crypt_door_quiet_1.5b1f7ee1.ogg"
     },
     "ch3_crypt_door_quiet_2": {
-      "main": "ch3_crypt_door_quiet_2.260ae8a4.ogg"
+      "main": "ch3_crypt_door_quiet_2.3337ff37.ogg"
     },
     "ch3_crypt_door_stair_1": {
       "main": "ch3_crypt_door_stair_1.868d46e7.ogg"
@@ -2185,28 +2189,28 @@
       "main": "ch3_crypt_door_stair_2.824b9f10.ogg"
     },
     "ch3_crypt_door_stair_3": {
-      "main": "ch3_crypt_door_stair_3.0c947dd3.ogg"
+      "main": "ch3_crypt_door_stair_3.6407c971.ogg"
     },
     "ch3_crypt_door_stone_1": {
       "main": "ch3_crypt_door_stone_1.2fea08a1.ogg"
     },
     "ch3_crypt_door_stone_2": {
-      "main": "ch3_crypt_door_stone_2.aa6607b8.ogg"
+      "main": "ch3_crypt_door_stone_2.29e7d673.ogg"
     },
     "ch3_crypt_records_after_1": {
-      "main": "ch3_crypt_records_after_1.dfe34bcc.ogg"
+      "main": "ch3_crypt_records_after_1.a9b15161.ogg"
     },
     "ch3_crypt_records_dust_1": {
       "main": "ch3_crypt_records_dust_1.f728a39b.ogg"
     },
     "ch3_crypt_records_family_1": {
-      "main": "ch3_crypt_records_family_1.90c12d82.ogg"
+      "main": "ch3_crypt_records_family_1.00650465.ogg"
     },
     "ch3_crypt_records_found_1": {
       "main": "ch3_crypt_records_found_1.55cb9d59.ogg"
     },
     "ch3_crypt_records_gods_1": {
-      "main": "ch3_crypt_records_gods_1.a6d626d8.ogg"
+      "main": "ch3_crypt_records_gods_1.f2c491ba.ogg"
     },
     "ch3_crypt_records_knew_1": {
       "main": "ch3_crypt_records_knew_1.744336a2.ogg"
@@ -2221,10 +2225,10 @@
       "main": "ch3_crypt_records_last_page_2.3ec9df78.ogg"
     },
     "ch3_crypt_records_last_page_3": {
-      "main": "ch3_crypt_records_last_page_3.ad885a17.ogg"
+      "main": "ch3_crypt_records_last_page_3.a272b23f.ogg"
     },
     "ch3_crypt_records_last_page_4": {
-      "main": "ch3_crypt_records_last_page_4.cc9d094c.ogg"
+      "main": "ch3_crypt_records_last_page_4.96c6e210.ogg"
     },
     "ch3_crypt_records_last_page_5": {
       "main": "ch3_crypt_records_last_page_5.d9388d4e.ogg"
@@ -2239,25 +2243,25 @@
       "main": "ch3_crypt_records_ledger_3.314f51e3.ogg"
     },
     "ch3_crypt_records_ledger_4": {
-      "main": "ch3_crypt_records_ledger_4.a7e4d29c.ogg"
+      "main": "ch3_crypt_records_ledger_4.a20e36e6.ogg"
     },
     "ch3_crypt_records_ledger_5": {
-      "main": "ch3_crypt_records_ledger_5.393e18c7.ogg"
+      "main": "ch3_crypt_records_ledger_5.dcd54464.ogg"
     },
     "ch3_crypt_records_ledger_6": {
-      "main": "ch3_crypt_records_ledger_6.32b5dd42.ogg"
+      "main": "ch3_crypt_records_ledger_6.9914551e.ogg"
     },
     "ch3_crypt_records_left_1": {
-      "main": "ch3_crypt_records_left_1.be8508a1.ogg"
+      "main": "ch3_crypt_records_left_1.e801eda5.ogg"
     },
     "ch3_crypt_records_never_1": {
-      "main": "ch3_crypt_records_never_1.5cdf0eb1.ogg"
+      "main": "ch3_crypt_records_never_1.28e273ae.ogg"
     },
     "ch3_crypt_records_pages_1": {
-      "main": "ch3_crypt_records_pages_1.02c9312a.ogg"
+      "main": "ch3_crypt_records_pages_1.51989e9c.ogg"
     },
     "ch3_crypt_records_paid_1": {
-      "main": "ch3_crypt_records_paid_1.75cced84.ogg"
+      "main": "ch3_crypt_records_paid_1.ae28eea4.ogg"
     },
     "ch3_crypt_records_quiet_1": {
       "main": "ch3_crypt_records_quiet_1.849be0d8.ogg"
@@ -2266,10 +2270,10 @@
       "main": "ch3_crypt_records_quiet_2.72cd7c88.ogg"
     },
     "ch3_crypt_records_quiet_3": {
-      "main": "ch3_crypt_records_quiet_3.527fe3af.ogg"
+      "main": "ch3_crypt_records_quiet_3.922f51e0.ogg"
     },
     "ch3_crypt_records_scripture_1": {
-      "main": "ch3_crypt_records_scripture_1.2c88bc0a.ogg"
+      "main": "ch3_crypt_records_scripture_1.327127d7.ogg"
     },
     "ch3_crypt_records_stair_1": {
       "main": "ch3_crypt_records_stair_1.f3e641b5.ogg"
@@ -2278,7 +2282,7 @@
       "main": "ch3_crypt_records_stair_2.dbe4ff14.ogg"
     },
     "ch3_crypt_records_tricked_1": {
-      "main": "ch3_crypt_records_tricked_1.9561575a.ogg"
+      "main": "ch3_crypt_records_tricked_1.03bb095b.ogg"
     },
     "ch3_crypt_records_why_now_1": {
       "main": "ch3_crypt_records_why_now_1.f26ac058.ogg"
@@ -2290,85 +2294,85 @@
       "main": "ch3_guest_right_arrive_2.c5ee6fe4.ogg"
     },
     "ch3_guest_right_arrive_3": {
-      "main": "ch3_guest_right_arrive_3.b3a9b0f4.ogg"
+      "main": "ch3_guest_right_arrive_3.12ab5a09.ogg"
     },
     "ch3_guest_right_arrive_4": {
-      "main": "ch3_guest_right_arrive_4.b2d66ed1.ogg"
+      "main": "ch3_guest_right_arrive_4.e8c922e6.ogg"
     },
     "ch3_guest_right_clans_1": {
-      "main": "ch3_guest_right_clans_1.b1c638e8.ogg"
+      "main": "ch3_guest_right_clans_1.1b48dae0.ogg"
     },
     "ch3_guest_right_law_1": {
       "main": "ch3_guest_right_law_1.d65b0308.ogg"
     },
     "ch3_guest_right_law_2": {
-      "main": "ch3_guest_right_law_2.c478a2e3.ogg"
+      "main": "ch3_guest_right_law_2.f7c050d5.ogg"
     },
     "ch3_guest_right_law_3": {
-      "main": "ch3_guest_right_law_3.c6144870.ogg"
+      "main": "ch3_guest_right_law_3.29fe183d.ogg"
     },
     "ch3_guest_right_message_1": {
       "main": "ch3_guest_right_message_1.4cd597df.ogg"
     },
     "ch3_guest_right_message_2": {
-      "main": "ch3_guest_right_message_2.603143a5.ogg"
+      "main": "ch3_guest_right_message_2.40cfd93a.ogg"
     },
     "ch3_guest_right_more_1": {
-      "main": "ch3_guest_right_more_1.076828b5.ogg"
+      "main": "ch3_guest_right_more_1.e5bd2326.ogg"
     },
     "ch3_guest_right_news_1": {
       "main": "ch3_guest_right_news_1.a0191bc7.ogg"
     },
     "ch3_guest_right_news_2": {
-      "main": "ch3_guest_right_news_2.acc81481.ogg"
+      "main": "ch3_guest_right_news_2.b9c36496.ogg"
     },
     "ch3_guest_right_news_3": {
-      "main": "ch3_guest_right_news_3.6cfb8489.ogg"
+      "main": "ch3_guest_right_news_3.18ad92cc.ogg"
     },
     "ch3_guest_right_news_4": {
       "main": "ch3_guest_right_news_4.2ed101a0.ogg"
     },
     "ch3_guest_right_news_5": {
-      "main": "ch3_guest_right_news_5.9d34248a.ogg"
+      "main": "ch3_guest_right_news_5.39339ee8.ogg"
     },
     "ch3_guest_right_night_1": {
       "main": "ch3_guest_right_night_1.24c7529a.ogg"
     },
     "ch3_guest_right_night_2": {
-      "main": "ch3_guest_right_night_2.f174e960.ogg"
+      "main": "ch3_guest_right_night_2.dbeb8946.ogg"
     },
     "ch3_guest_right_others_1": {
-      "main": "ch3_guest_right_others_1.8bdf633c.ogg"
+      "main": "ch3_guest_right_others_1.962253a7.ogg"
     },
     "ch3_guest_right_others_2": {
-      "main": "ch3_guest_right_others_2.c45e2ace.ogg"
+      "main": "ch3_guest_right_others_2.d333c27c.ogg"
     },
     "ch3_guest_right_sing_1": {
       "main": "ch3_guest_right_sing_1.3a9c27fd.ogg"
     },
     "ch3_guest_right_sing_2": {
-      "main": "ch3_guest_right_sing_2.ba0ccc28.ogg"
+      "main": "ch3_guest_right_sing_2.1d505495.ogg"
     },
     "ch3_guest_right_v_slain_1": {
-      "main": "ch3_guest_right_v_slain_1.c5a1f7db.ogg"
+      "main": "ch3_guest_right_v_slain_1.0f61c752.ogg"
     },
     "ch3_guest_right_v_slain_2": {
-      "main": "ch3_guest_right_v_slain_2.9d21e90e.ogg"
+      "main": "ch3_guest_right_v_slain_2.c8c7af52.ogg"
     },
     "ch3_guest_right_v_spared_1": {
-      "main": "ch3_guest_right_v_spared_1.98963fc7.ogg"
+      "main": "ch3_guest_right_v_spared_1.776f1ee1.ogg"
     },
     "ch3_guest_right_v_spared_2": {
-      "main": "ch3_guest_right_v_spared_2.1fb8570e.ogg"
+      "main": "ch3_guest_right_v_spared_2.28043b41.ogg"
     },
     "ch3_guest_right_vorga_1": {
-      "main": "ch3_guest_right_vorga_1.48942c8c.ogg"
+      "main": "ch3_guest_right_vorga_1.d9944092.ogg"
     },
     "ch3_guest_right_vorga_2": {
-      "main": "ch3_guest_right_vorga_2.40b58a17.ogg"
+      "main": "ch3_guest_right_vorga_2.9dbe0a70.ogg"
     },
     "ch3_guest_right_why_1": {
-      "main": "ch3_guest_right_why_1.5012745a.ogg"
+      "main": "ch3_guest_right_why_1.944fb870.ogg"
     },
     "ch3_guest_right_why_2": {
       "main": "ch3_guest_right_why_2.b3fbca98.ogg"
@@ -2473,7 +2477,7 @@
       "main": "ch3_maren_parley_winter_1.4fe6371f.ogg"
     },
     "ch3_skarrow_messenger_dream_1": {
-      "main": "ch3_skarrow_messenger_dream_1.626aea47.ogg"
+      "main": "ch3_skarrow_messenger_dream_1.06216321.ogg"
     },
     "ch3_skarrow_messenger_end_1": {
       "main": "ch3_skarrow_messenger_end_1.5dda0fc3.ogg"
@@ -2488,16 +2492,16 @@
       "main": "ch3_skarrow_messenger_grandson_3.a4c27e64.ogg"
     },
     "ch3_skarrow_messenger_honest_1": {
-      "main": "ch3_skarrow_messenger_honest_1.2a4ecfbe.ogg"
+      "main": "ch3_skarrow_messenger_honest_1.25dd1e9e.ogg"
     },
     "ch3_skarrow_messenger_more_1": {
       "main": "ch3_skarrow_messenger_more_1.5b9d1aba.ogg"
     },
     "ch3_skarrow_messenger_more_2": {
-      "main": "ch3_skarrow_messenger_more_2.02f16f2a.ogg"
+      "main": "ch3_skarrow_messenger_more_2.1d150213.ogg"
     },
     "ch3_skarrow_messenger_promise_1": {
-      "main": "ch3_skarrow_messenger_promise_1.9f7ef439.ogg"
+      "main": "ch3_skarrow_messenger_promise_1.fc1922d0.ogg"
     },
     "ch3_skarrow_messenger_runner_1": {
       "main": "ch3_skarrow_messenger_runner_1.9fcc21d6.ogg"
@@ -2521,10 +2525,10 @@
       "main": "ch3_skarrow_messenger_song_4.6f5979c9.ogg"
     },
     "ch3_skarrow_messenger_song_5": {
-      "main": "ch3_skarrow_messenger_song_5.5ad92531.ogg"
+      "main": "ch3_skarrow_messenger_song_5.aca81f9f.ogg"
     },
     "ch3_skarrow_messenger_song_6": {
-      "main": "ch3_skarrow_messenger_song_6.e4e21962.ogg"
+      "main": "ch3_skarrow_messenger_song_6.5267d454.ogg"
     },
     "ch3_vorga_shallows_slain_kill_1": {
       "main": "ch3_vorga_shallows_slain_kill_1.0ca7d09d.ogg"
@@ -2839,7 +2843,7 @@
       "main": "ch4_lark_stranger_answer_2.ad8f87d0.ogg"
     },
     "ch4_lark_stranger_answer_3": {
-      "main": "ch4_lark_stranger_answer_3.06896f90.ogg"
+      "main": "ch4_lark_stranger_answer_3.7fb79a5a.ogg"
     },
     "ch4_lark_stranger_answer_4": {
       "main": "ch4_lark_stranger_answer_4.475b1e9a.ogg"
@@ -2848,25 +2852,25 @@
       "main": "ch4_lark_stranger_answer_5.720cc0c7.ogg"
     },
     "ch4_lark_stranger_answer_6": {
-      "main": "ch4_lark_stranger_answer_6.45c75127.ogg"
+      "main": "ch4_lark_stranger_answer_6.1b0a4e3c.ogg"
     },
     "ch4_lark_stranger_margin_1": {
-      "main": "ch4_lark_stranger_margin_1.069c4618.ogg"
+      "main": "ch4_lark_stranger_margin_1.a1ed360a.ogg"
     },
     "ch4_lark_stranger_margin_2": {
-      "main": "ch4_lark_stranger_margin_2.c53081d6.ogg"
+      "main": "ch4_lark_stranger_margin_2.4d4d7eeb.ogg"
     },
     "ch4_lark_stranger_shrine_1": {
       "main": "ch4_lark_stranger_shrine_1.26167a63.ogg"
     },
     "ch4_lark_stranger_shrine_2": {
-      "main": "ch4_lark_stranger_shrine_2.afe5a924.ogg"
+      "main": "ch4_lark_stranger_shrine_2.cb2aa34d.ogg"
     },
     "ch4_lark_stranger_shrine_3": {
       "main": "ch4_lark_stranger_shrine_3.73845c25.ogg"
     },
     "ch4_lark_stranger_shrine_4": {
-      "main": "ch4_lark_stranger_shrine_4.af9f8dff.ogg"
+      "main": "ch4_lark_stranger_shrine_4.7a6d65f2.ogg"
     },
     "ch4_lark_stranger_shrine_5": {
       "main": "ch4_lark_stranger_shrine_5.06c7013c.ogg"
@@ -3529,13 +3533,13 @@
       "main": "ch5_the_archive_verse_lark_1.63ff834b.ogg"
     },
     "ch5_the_archive_verse_lark_2": {
-      "main": "ch5_the_archive_verse_lark_2.aeff4947.ogg"
+      "main": "ch5_the_archive_verse_lark_2.3d93f26a.ogg"
     },
     "ch5_the_archive_verse_lark_3": {
-      "main": "ch5_the_archive_verse_lark_3.61fd2428.ogg"
+      "main": "ch5_the_archive_verse_lark_3.c67b89f2.ogg"
     },
     "ch5_the_archive_verse_lark_4": {
-      "main": "ch5_the_archive_verse_lark_4.eaf99f76.ogg"
+      "main": "ch5_the_archive_verse_lark_4.07005d6f.ogg"
     },
     "ch5_the_gate_choose_1": {
       "main": "ch5_the_gate_choose_1.df6b1284.ogg"
@@ -3907,40 +3911,40 @@
       "main": "sq_tobin_fell_008.463aa699.ogg"
     },
     "talk_lark_bye_1": {
-      "main": "talk_lark_bye_1.91b7c8f4.ogg"
+      "main": "talk_lark_bye_1.0f5930e0.ogg"
     },
     "talk_lark_greet_1": {
-      "main": "talk_lark_greet_1.30f0635f.ogg"
+      "main": "talk_lark_greet_1.dcc04574.ogg"
     },
     "talk_lark_more_1": {
-      "main": "talk_lark_more_1.56ff507e.ogg"
+      "main": "talk_lark_more_1.dedcb4d3.ogg"
     },
     "talk_lark_reunion_1": {
-      "main": "talk_lark_reunion_1.aabfb10e.ogg"
+      "main": "talk_lark_reunion_1.b8555f12.ogg"
     },
     "talk_lark_reunion_2": {
-      "main": "talk_lark_reunion_2.209ae3ba.ogg"
+      "main": "talk_lark_reunion_2.79fb5ade.ogg"
     },
     "talk_lark_reunion_3": {
-      "main": "talk_lark_reunion_3.4046a21a.ogg"
+      "main": "talk_lark_reunion_3.9c2c261f.ogg"
     },
     "talk_lark_song_1": {
       "main": "talk_lark_song_1.052af895.ogg"
     },
     "talk_lark_song_2": {
-      "main": "talk_lark_song_2.2e4ecb8f.ogg"
+      "main": "talk_lark_song_2.ab30af39.ogg"
     },
     "talk_lark_song_3": {
-      "main": "talk_lark_song_3.e16d6a0a.ogg"
+      "main": "talk_lark_song_3.2ac195e1.ogg"
     },
     "talk_lark_song_4": {
-      "main": "talk_lark_song_4.57c353cf.ogg"
+      "main": "talk_lark_song_4.fb1ccc59.ogg"
     },
     "talk_lark_why_1": {
-      "main": "talk_lark_why_1.f1f07da0.ogg"
+      "main": "talk_lark_why_1.186d95aa.ogg"
     },
     "talk_lark_why_2": {
-      "main": "talk_lark_why_2.26a566d7.ogg"
+      "main": "talk_lark_why_2.52fe180f.ogg"
     },
     "thing.af_market_cellar_ledger.words.0": {
       "main": "thing.af_market_cellar_ledger.words.0.3af6f197.ogg"
