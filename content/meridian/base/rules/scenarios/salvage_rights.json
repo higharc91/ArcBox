@@ -1,0 +1,20 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "salvage_rights",
+  "title": "Salvage Rights",
+  "roundLimit": 10,
+  "roles": [
+    {
+      "id": "salvager",
+      "side": "salvager",
+      "name": "Salvager",
+      "briefing": "The contract was always clear: whoever carries the find off the ship owns it. The Anomaly is the find, and now everybody wants it. Whoever holds the Prize is slowed by it. End your turn in the Airlock carrying it and it's yours alone. Beat the carrier in a fight and it's yours instead. If the carrier falls, the Prize falls with them. Trust nobody. There's no crew any more, only claimants.",
+      "objectives": [
+        "End your turn in the Airlock carrying the Prize."
+      ]
+    }
+  ],
+  "numbers": {
+    "slow": 2
+  }
+}
