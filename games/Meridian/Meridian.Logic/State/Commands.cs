@@ -25,6 +25,7 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(Lend), "lend")]
 [JsonDerivedType(typeof(Begin), "begin")]
 [JsonDerivedType(typeof(ScenarioAct), "scenarioAct")]
+[JsonDerivedType(typeof(CastVote), "castVote")]
 public abstract record Command(SeatId From);
 
 public sealed record MoveTo(SeatId From, CompartmentId To) : Command(From);
@@ -58,3 +59,5 @@ public sealed record Begin(SeatId From) : Command(From);
 
 /// <summary>A scenario's own action (spec §4.3), by its id, with an optional target.</summary>
 public sealed record ScenarioAct(SeatId From, string Action, string? Data = null) : Command(From);
+
+public sealed record CastVote(SeatId From, string Choice) : Command(From);

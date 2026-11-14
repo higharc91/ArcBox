@@ -20,7 +20,7 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
         {
             case Begin: BeginEndgame(); break;
             case EndTurn: FinishTurn(); break;
-            case Timeout: TimeoutNow(); break;
+            case Timeout t: TimeoutNow(t.From); break;
             case MoveTo m: Move(m); break;
             case Open o: OpenHatch(o); break;
             case Orient o: OrientTile(o.Rotation); break;
@@ -35,6 +35,8 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case MonsterMove m: MoveMonster(m); break;
             case MonsterAttack m: MonsterAttacks(m); break;
             case Lend l: LendDie(l); break;
+            case ScenarioAct a: Act(a); break;
+            case CastVote v: Vote(v.From, v.Choice); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
         AfterStep();
@@ -76,13 +78,17 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             LegalRoom(pack, state, seat, legal);
         }
         LegalCombat(pack, state, seat, legal);
+        LegalScenario(pack, state, seat, legal);
     }
 
     /// <summary>Timeout resolves whatever the seat owes (plan, Task 4): with nothing owed, it ends the turn.</summary>
-    private void TimeoutNow()
+    private void TimeoutNow(SeatId? seat = null)
     {
         switch (State.Waiting)
         {
+            case VotePending v:
+                Vote(seat is { } s && v.Owed.Contains(s) ? s : v.From, choice: null);   // a timed-out voter abstains
+                break;
             case null:
                 FinishTurn();
                 break;

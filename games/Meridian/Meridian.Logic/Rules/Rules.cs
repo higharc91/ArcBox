@@ -72,6 +72,16 @@ public static class Rules
         }
 
         var legal = new List<Command>();
+        if (state.Waiting is VotePending vote)
+        {
+            // A vote is owed by every seat still to cast, at once.
+            if (vote.Owed.Contains(seat))
+            {
+                legal.AddRange(vote.Options.Select(o => new CastVote(seat, o)));
+                legal.Add(new Timeout(seat));
+            }
+            return [.. legal];
+        }
         if (state.Waiting is { } waiting)
         {
             if (waiting.From == seat)
@@ -117,6 +127,10 @@ public static class Rules
         if (state.IndexOf(command.From) < 0)
         {
             return "That seat isn't in this game.";
+        }
+        if (state.Waiting is VotePending vote)
+        {
+            return vote.Owed.Contains(command.From) && Legal(pack, state, command.From).Contains(command) ? null : "Not now.";
         }
         if (state.Waiting is { } waiting && waiting.From != command.From)
         {

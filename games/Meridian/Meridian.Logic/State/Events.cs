@@ -38,6 +38,10 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(ScenarioChosen), "scenarioChosen")]
 [JsonDerivedType(typeof(RoundClosed), "roundClosed")]
 [JsonDerivedType(typeof(GameOver), "gameOver")]
+[JsonDerivedType(typeof(ScenarioActed), "scenarioActed")]
+[JsonDerivedType(typeof(VoteCalled), "voteCalled")]
+[JsonDerivedType(typeof(BallotCast), "ballotCast")]
+[JsonDerivedType(typeof(VoteResolved), "voteResolved")]
 public abstract record GameEvent;
 
 /// <summary>A command that wasn't legal. The state is unchanged; player input never throws.</summary>
@@ -77,3 +81,16 @@ public sealed record ScenarioChosen(string Scenario, string Title) : GameEvent;
 public sealed record RoundClosed(int Round) : GameEvent;
 
 public sealed record GameOver(Outcome Outcome) : GameEvent;
+public sealed record ScenarioActed(SeatId Seat, string Action, string? Data, string Text) : GameEvent;
+public sealed record VoteCalled(SeatId By, string Purpose, EqArray<SeatId> Voters) : GameEvent;
+
+/// <summary>Someone voted: says who, never what, so phones can show progress without revealing a ballot.</summary>
+public sealed record BallotCast(SeatId Voter) : GameEvent;
+
+/// <summary>
+/// The vote's result: the choice with the most votes, or null on a tie or when nobody voted. The tally (choice to count)
+/// is public once it resolves; individual ballots stay secret.
+/// </summary>
+public sealed record VoteResolved(string Purpose, string? Result, EqArray<VoteCount> Tally) : GameEvent;
+
+public sealed record VoteCount(string Choice, int Votes);

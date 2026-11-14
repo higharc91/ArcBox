@@ -9,6 +9,7 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(ChoicePending), "choice")]
 [JsonDerivedType(typeof(TradePending), "trade")]
 [JsonDerivedType(typeof(AllocatePending), "allocate")]
+[JsonDerivedType(typeof(VotePending), "vote")]
 public abstract record Pending(SeatId From);
 
 /// <summary>Choose which way round a new compartment goes. <see cref="Toward"/> is its side facing the mover.</summary>
@@ -41,3 +42,13 @@ public sealed record TradeOffer(EqArray<CardId> Give, EqArray<CardId> Take);
 /// who dealt the damage, for the awards; null for a hazard.
 /// </summary>
 public sealed record AllocatePending(SeatId From, TraitGroup Group, int Steps, SeatId? By = null) : Pending(From);
+
+/// <summary>One seat's secret ballot. Each ballot's audience is its voter until the vote resolves.</summary>
+public sealed record Ballot(SeatId Voter, string Choice);
+
+/// <summary>
+/// A secret vote (spec §4.3): the first wait owed by several seats. Any seat in <see cref="Owed"/> may cast, in any order;
+/// <see cref="Pending.From"/> is the first still owed, for code that needs one seat. It resolves when the last is in.
+/// </summary>
+public sealed record VotePending(SeatId From, string Purpose, EqArray<SeatId> Owed, EqArray<string> Options,
+                                 EqArray<Ballot> Cast = default) : Pending(From);

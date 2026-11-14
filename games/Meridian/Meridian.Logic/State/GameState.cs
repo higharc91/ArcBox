@@ -63,7 +63,7 @@ public sealed record CardPile(EqArray<CardId> Draw, EqArray<CardId> Discard = de
 /// <param name="MonstersMoved">Monsters the active seat has moved this turn (or that can't, being stunned or staggered).</param>
 public sealed record TurnFlags(bool UsedItem = false, bool UsedCompartment = false, bool Traded = false, bool Attacked = false,
                                EqArray<string> MonstersMoved = default, EqArray<string> MonstersAttacked = default,
-                               bool Lent = false);
+                               bool Lent = false, bool Acted = false);
 
 /// <summary>
 /// Who fired the Breach, with what and where. <see cref="Anomaly"/> and <see cref="Compartment"/> are null when the ship

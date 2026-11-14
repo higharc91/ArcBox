@@ -31,9 +31,9 @@ internal sealed partial class Resolver
             State = State with { MovesLeft = 0 };
         }
         Events.Add(new Died(seat));
-        if (State.Waiting?.From == seat)
+        if (State.Waiting is VotePending vote ? vote.Owed.Contains(seat) : State.Waiting?.From == seat)
         {
-            TimeoutNow();
+            TimeoutNow(seat);
         }
     }
 
