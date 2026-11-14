@@ -1,0 +1,126 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job14-algenib-autonoe",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Algenib"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Autonoe"
+      }
+    ],
+    "text": "A: <low, unhurried, superstitious river voice Mood: sad.> Things went downstream after the fight. The river's carried worse. Not much worse.\n<long pause>\nA: <low, unhurried, superstitious river voice Mood: happy.> Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.\n<long pause>\nA: <low, unhurried, superstitious river voice Mood: idle.> River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.\n<long pause>\nA: <low, unhurried, superstitious river voice Mood: idle.> Two guards on the third pier all night, watching the water. Never seen the river so well minded.\n<long pause>\nB: Such a mess on the bridge. Still, the road is open, and roads are so very good for business.\n<long pause>\nB: Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.\n<long pause>\nB: How dreadful. Someone will have to decide what to do with them. Not me, I hope.\n<long pause>\nB: Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.\n<long pause>\nB: Though I would like to know why the town's own granaries were shut so early. The mayor never did say.\n<long pause>\nB: Well. That does rather change the interest.",
+    "segments": [
+      {
+        "raw": "Algenib.865241df",
+        "line": "town_fisher_force",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "Things went downstream after the fight. The river's carried worse. Not much worse.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: sad.> Things went downstream after the fight. The river's carried worse. Not much worse.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Algenib.f83e308c",
+        "line": "town_fisher_parley",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: happy.> Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Algenib.6052e244",
+        "line": "town_fisher_ember",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: idle.> River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Algenib.8884f86a",
+        "line": "town_fisher_guarded",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: idle.> Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Autonoe.4e8f948d",
+        "line": "bark_celandine_marrowby_town_force",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Such a mess on the bridge. Still, the road is open, and roads are so very good for business.",
+        "renderText": "Such a mess on the bridge. Still, the road is open, and roads are so very good for business.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.586cbd63",
+        "line": "bark_celandine_marrowby_town_parley",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.",
+        "renderText": "Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.15ce9417",
+        "line": "ch1_council_force_open_5",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "How dreadful. Someone will have to decide what to do with them. Not me, I hope.",
+        "renderText": "How dreadful. Someone will have to decide what to do with them. Not me, I hope.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.5afa655d",
+        "line": "ch1_council_force_noble_1",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.",
+        "renderText": "Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.01d8fe4f",
+        "line": "ch1_council_force_noble_2",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Though I would like to know why the town's own granaries were shut so early. The mayor never did say.",
+        "renderText": "Though I would like to know why the town's own granaries were shut so early. The mayor never did say.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.f3301645",
+        "line": "ch1_council_force_confess_6",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Well. That does rather change the interest.",
+        "renderText": "Well. That does rather change the interest.",
+        "delivery": null
+      }
+    ]
+  }
+}

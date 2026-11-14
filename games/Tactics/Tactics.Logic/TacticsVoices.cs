@@ -62,7 +62,7 @@ public static class TacticsVoices
         new(Npc("halvard"), "Ser Halvard: deep and hollow inside the helm", Voice("Schedar"), Fallback: new FallbackVoice()),
         new(Npc("hooded_stranger"), "The Hooded Stranger: shares scholarly.low; pitch and echo keep them apart", Voice("Sadaltager"), Fallback: new FallbackVoice()),
         new(Npc("ivo_rime"), "Ivo Rime: soft-spoken, exhausted", Voice("Enceladus"), Fallback: new FallbackVoice()),
-        new(Npc("lark"), "Lark: androgynous, musical", Voice("Aoede"), Fallback: new FallbackVoice()),
+        new(Npc("lark"), "Lark: androgynous, musical; rendered clips pitch +3", Voice("Callirrhoe"), Fallback: new FallbackVoice(Pitch: 1.1892f)),
         new(Npc("maren_sorrel"), "Maren Sorrel: warm, persuasive alto", Voice("Sulafat"), Fallback: new FallbackVoice()),
         new(Npc("mother_aubrine"), "Mother Aubrine: clear mezzo, measured", Voice("Vindemiatrix"), Fallback: new FallbackVoice()),
         new(Npc("mother_skarrow"), "Mother Skarrow: cracked, rasping", Voice("Kore"), Fallback: new FallbackVoice()),

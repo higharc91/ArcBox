@@ -1,0 +1,282 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job12-zephyr-kore",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Zephyr"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Kore"
+      }
+    ],
+    "text": "A: I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.\n<long pause>\nA: Stew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.\n<long pause>\nA: Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.\n<long pause>\nA: She bit me twice on the way here. I'd call that healthy.\n<long pause>\nA: I'll take the little ones home tonight. Pip can teach them to steal bread properly.\n<long pause>\nA: Colder everywhere. The dockside fields froze the night you left with it. Folk are blaming the weather. I'm not.\n<long pause>\nA: I'm not saying you were wrong. I'm saying somebody's paying for it, and it's not the ones who decided.\n<long pause>\nA: Still there. I send them soup at midnight. One of them cried, last week. Said the glow reminds him of his mother's kitchen.\n<long pause>\nA: Town's warmer for it. For now. Everyone knows it won't last, so nobody says so.\n<long pause>\nA: Next to nothing, apiece. Everyone's warm and cheerful, and half of them can't remember what they had for breakfast.\n<long pause>\nA: I won't buy one. I've lost enough to Gran's old shard. I'll not hurry the rest along.\n<long pause>\nA: <practical, warm, quick but clear Mood: sad.> Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.\n<long pause>\nA: <practical, warm, quick but clear Mood: happy.> We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.\n<long pause>\nA: <practical, warm, quick but clear Mood: idle.> Bree's hearth is the warmest room in town again. Funny how that's starting to matter.\n<long pause>\nA: <practical, warm, quick but clear Mood: idle.> Folk keep coming in to shout about the mayor. Then they stay for the soup.\n<long pause>\nA: <practical, warm, quick but clear Mood: idle.> Every hearth in town has a new shard. Bree won't buy one. Says she's forgotten enough.\n<long pause>\nA: My hearth's the warmest in town again. People keep asking me why. I keep telling them it's the stew.\n<long pause>\nA: You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.\n<long pause>\nA: Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Valley people. Say what you came to say, or go back down the hill.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You came back up the hill. Not many valley people do that twice.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Anything else, valley people? The fire is small, and I am old.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Go well. Walk loud on the path, so the archers know it is you.",
+    "segments": [
+      {
+        "raw": "Zephyr.3688e97b",
+        "line": "bark_bree_tallow_town_force",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.",
+        "renderText": "I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.479dcff3",
+        "line": "bark_bree_tallow_town_parley",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Stew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.",
+        "renderText": "Stew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.60781c67",
+        "line": "ch1_council_force_open_4",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.",
+        "renderText": "Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.67bf2ab7",
+        "line": "ch1_council_force_children_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "She bit me twice on the way here. I'd call that healthy.",
+        "renderText": "She bit me twice on the way here. I'd call that healthy.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.dff502eb",
+        "line": "ch1_council_force_feed_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+        "renderText": "I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.73d49d24",
+        "line": "ch2_bree_taken_1",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Colder everywhere. The dockside fields froze the night you left with it. Folk are blaming the weather. I'm not.",
+        "renderText": "Colder everywhere. The dockside fields froze the night you left with it. Folk are blaming the weather. I'm not.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.cad07861",
+        "line": "ch2_bree_taken_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "I'm not saying you were wrong. I'm saying somebody's paying for it, and it's not the ones who decided.",
+        "renderText": "I'm not saying you were wrong. I'm saying somebody's paying for it, and it's not the ones who decided.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.0a93db6d",
+        "line": "ch2_bree_guarded_1",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Still there. I send them soup at midnight. One of them cried, last week. Said the glow reminds him of his mother's kitchen.",
+        "renderText": "Still there. I send them soup at midnight. One of them cried, last week. Said the glow reminds him of his mother's kitchen.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.5883dd3e",
+        "line": "ch2_bree_guarded_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Town's warmer for it. For now. Everyone knows it won't last, so nobody says so.",
+        "renderText": "Town's warmer for it. For now. Everyone knows it won't last, so nobody says so.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.6418164f",
+        "line": "ch2_bree_bargained_1",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Next to nothing, apiece. Everyone's warm and cheerful, and half of them can't remember what they had for breakfast.",
+        "renderText": "Next to nothing, apiece. Everyone's warm and cheerful, and half of them can't remember what they had for breakfast.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.562902bd",
+        "line": "ch2_bree_bargained_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "I won't buy one. I've lost enough to Gran's old shard. I'll not hurry the rest along.",
+        "renderText": "I won't buy one. I've lost enough to Gran's old shard. I'll not hurry the rest along.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.b645232a",
+        "line": "town_barmaid_force",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.",
+        "renderText": "<practical, warm, quick but clear Mood: sad.> Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Zephyr.8c356670",
+        "line": "town_barmaid_parley",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.",
+        "renderText": "<practical, warm, quick but clear Mood: happy.> We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Zephyr.a746ef89",
+        "line": "town_barmaid_ember",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Bree's hearth is the warmest room in town again. Funny how that's starting to matter.",
+        "renderText": "<practical, warm, quick but clear Mood: idle.> Bree's hearth is the warmest room in town again. Funny how that's starting to matter.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zephyr.adc77ee6",
+        "line": "town_barmaid_confessed",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Folk keep coming in to shout about the mayor. Then they stay for the soup.",
+        "renderText": "<practical, warm, quick but clear Mood: idle.> Folk keep coming in to shout about the mayor. Then they stay for the soup.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zephyr.f3344069",
+        "line": "town_barmaid_bargained",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Every hearth in town has a new shard. Bree won't buy one. Says she's forgotten enough.",
+        "renderText": "<practical, warm, quick but clear Mood: idle.> Every hearth in town has a new shard. Bree won't buy one. Says she's forgotten enough.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zephyr.45131f1a",
+        "line": "talk_bree_tallow_ford_ember",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "My hearth's the warmest in town again. People keep asking me why. I keep telling them it's the stew.",
+        "renderText": "My hearth's the warmest in town again. People keep asking me why. I keep telling them it's the stew.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.9dfc1381",
+        "line": "talk_bree_tallow_ford_force",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.",
+        "renderText": "You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.a4b72498",
+        "line": "talk_bree_tallow_ford_parley",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+        "renderText": "Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+        "delivery": null
+      },
+      {
+        "raw": "Kore.bf445bec",
+        "line": "talk_mother_skarrow_wary",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Valley people. Say what you came to say, or go back down the hill.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Valley people. Say what you came to say, or go back down the hill.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.9e4f6b37",
+        "line": "talk_mother_skarrow_truce",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "You came back up the hill. Not many valley people do that twice.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You came back up the hill. Not many valley people do that twice.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.08905b95",
+        "line": "talk_mother_skarrow_clan",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.f3c6f947",
+        "line": "talk_mother_skarrow_vorga",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.e99800f7",
+        "line": "talk_mother_skarrow_more",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Anything else, valley people? The fire is small, and I am old.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Anything else, valley people? The fire is small, and I am old.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.61bbb24b",
+        "line": "talk_mother_skarrow_bye",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Go well. Walk loud on the path, so the archers know it is you.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Go well. Walk loud on the path, so the archers know it is you.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

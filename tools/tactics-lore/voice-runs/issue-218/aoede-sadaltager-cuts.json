@@ -1,0 +1,429 @@
+{
+  "batch": "issue218_aoede_sadaltager_batch",
+  "source": "aoede-sadaltager-batch.wav",
+  "sourceSha256": "038285d1d94c460b32f1e9ba590826e3efa87cd8f799e8b696ca70cf399a5736",
+  "method": "pocketsphinx 5 forced alignment (bundled en-us model) against the request's own script; each clip is cut at the midpoints of the silences between consecutive lines",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations.",
+  "segments": [
+    {
+      "raw": "Aoede.98f3e488",
+      "line": "ch2_lark_inn_corner_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "So. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.",
+      "start": 0.0,
+      "end": 9.145,
+      "speech": [
+        0.24,
+        8.52
+      ],
+      "wordsPerSecond": 3.14,
+      "wavSha256": "c8a3c27a5cbc47ff5d8e726a8371ffcc9341434f00bf50fe1c718f93592f4c50"
+    },
+    {
+      "raw": "Aoede.67b36ef7",
+      "line": "ch2_lark_inn_verse_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Ysolde offered me a verse for a memory. I said no. I'm told that makes me the only person who's ever refused a bargain in Mirewood.",
+      "start": 9.145,
+      "end": 17.507,
+      "speech": [
+        9.77,
+        16.68
+      ],
+      "wordsPerSecond": 3.91,
+      "wavSha256": "feea4f57a55326b0e01d18baed96d30e0ffca4998999bbb2d8cf8f4e7dd54278"
+    },
+    {
+      "raw": "Aoede.21576467",
+      "line": "ch2_lark_inn_verse_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "It wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.",
+      "start": 17.507,
+      "end": 25.094,
+      "speech": [
+        17.9,
+        24.27
+      ],
+      "wordsPerSecond": 3.14,
+      "wavSha256": "2efe04612590c4f2f0dbe8666a75cef186398153d60607d43ed61374beb20ff0"
+    },
+    {
+      "raw": "Aoede.82fcd5f0",
+      "line": "ch2_lark_inn_following_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Not here. Ask me again somewhere colder. Some things you only say where your breath shows.",
+      "start": 25.094,
+      "end": 31.909,
+      "speech": [
+        25.92,
+        31.24
+      ],
+      "wordsPerSecond": 3.01,
+      "wavSha256": "3da4c4a3a4793b4fe0024b69e154f8251fb6aa34d89f2dfc386b8dc0ec870917"
+    },
+    {
+      "raw": "Aoede.2717d508",
+      "line": "ch2_lark_inn_following_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "But watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.",
+      "start": 31.909,
+      "end": 39.192,
+      "speech": [
+        32.57,
+        38.52
+      ],
+      "wordsPerSecond": 4.54,
+      "wavSha256": "54a4c47132c177f1c43563bb95f71c497834880b3b18643e3e2083dec00288ef"
+    },
+    {
+      "raw": "Aoede.1142bd34",
+      "line": "ch4_lark_stranger_shrine_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "They don't remember their own names, but they remember the tune. Songs don't burn. I did tell you.",
+      "start": 39.192,
+      "end": 46.114,
+      "speech": [
+        39.88,
+        45.61
+      ],
+      "wordsPerSecond": 3.14,
+      "wavSha256": "5c8af9d2d07aa6f7a7c4734c81e1a27b62a6f548dfa7c174bc554b891c61d270"
+    },
+    {
+      "raw": "Aoede.9853e985",
+      "line": "ch4_lark_stranger_shrine_4",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "There you are. Twenty years I've followed you across this Vale, and you've never once let me catch up.",
+      "start": 46.114,
+      "end": 52.641,
+      "speech": [
+        46.64,
+        52.12
+      ],
+      "wordsPerSecond": 3.47,
+      "wavSha256": "e4b00c44239c1477492694f679a5f10ded035702cdee1bdd68d142ac518a13c3"
+    },
+    {
+      "raw": "Aoede.a3cee7d4",
+      "line": "ch4_lark_stranger_margin_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "My teacher's teacher kept a Warden songbook from before the Fall. Beside the Song of the Seven, someone drew a face in the margin. That face.",
+      "start": 52.641,
+      "end": 61.775,
+      "speech": [
+        53.17,
+        61.48
+      ],
+      "wordsPerSecond": 3.13,
+      "wavSha256": "ebb8836df32d2039bffb04b63e64bf26db4edc549187d217ea06e4f8d2c581d6"
+    },
+    {
+      "raw": "Aoede.a55af0ae",
+      "line": "ch4_lark_stranger_margin_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Every place a song goes quiet, they've been there first. I thought if I followed long enough, I'd find the verse they were hiding.",
+      "start": 61.775,
+      "end": 69.573,
+      "speech": [
+        62.07,
+        69.03
+      ],
+      "wordsPerSecond": 3.45,
+      "wavSha256": "e89f1885f065063587e3b5850591c0605280ac69beda99a3199ee15a61e9ca7d"
+    },
+    {
+      "raw": "Aoede.18583c51",
+      "line": "ch4_lark_stranger_answer_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Can't, or won't?",
+      "start": 69.573,
+      "end": 72.02,
+      "speech": [
+        69.94,
+        71.54
+      ],
+      "wordsPerSecond": 1.89,
+      "wavSha256": "92e3ff85ecbdf86a156d52521336ed6ea1766e3e1d9c5ce65aace381a23c256c"
+    },
+    {
+      "raw": "Aoede.18a8bea8",
+      "line": "ch4_lark_stranger_answer_6",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "I'm coming with you to the Keep. If anyone hears that verse sung at last, it's going to be me.",
+      "start": 72.02,
+      "end": 78.94,
+      "speech": [
+        73.53,
+        77.87
+      ],
+      "wordsPerSecond": 4.61,
+      "wavSha256": "0a1040a0685a1722bf20e4e383bc72987739d0f4814ff10beb7db291d1b66648"
+    },
+    {
+      "raw": "Aoede.5a59592e",
+      "line": "ch5_the_archive_verse_lark_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Pay it back, children, or pay what you've known.",
+      "start": 78.94,
+      "end": 84.423,
+      "speech": [
+        80.01,
+        83.39
+      ],
+      "wordsPerSecond": 2.67,
+      "wavSha256": "c5a2683248ea08feead9fc446a1a9680bb67ad5521185f6fbcb58f574f202594"
+    },
+    {
+      "raw": "Aoede.02efd609",
+      "line": "ch5_the_archive_verse_lark_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Twenty years. And it was sitting in a tower all along, waiting for someone to ask.",
+      "start": 84.423,
+      "end": 92.517,
+      "speech": [
+        85.48,
+        91.11
+      ],
+      "wordsPerSecond": 2.84,
+      "wavSha256": "cde9f1d49a6ae8017d8f718a1df5b2601961fa416da3bb439d0088127f036663"
+    },
+    {
+      "raw": "Aoede.3642fa75",
+      "line": "ch5_the_archive_verse_lark_4",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Whatever you choose up there, every square in the Vale will know what the choice was. I'll make sure of it.",
+      "start": 92.517,
+      "end": 99.054,
+      "speech": [
+        93.0,
+        98.55
+      ],
+      "wordsPerSecond": 3.78,
+      "wavSha256": "a7da739998e857f9322182662f39c223719ad7272241c5d9c4f1edb85dadee65"
+    },
+    {
+      "raw": "Aoede.c4c17d89",
+      "line": "talk_lark_greet_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Ah, an audience! Stand there and look grave, and I'll sing you something the Wardens wrote before your grandmothers were born.",
+      "start": 99.054,
+      "end": 108.621,
+      "speech": [
+        100.59,
+        107.84
+      ],
+      "wordsPerSecond": 2.9,
+      "wavSha256": "5969fac4917fbf9381291a15fdc13ab023ea47e6628905ac06a109ff5bc1fa4f"
+    },
+    {
+      "raw": "Aoede.d2151753",
+      "line": "talk_lark_reunion_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Look at you. Still holding a lute like it owes you money.",
+      "start": 108.621,
+      "end": 113.241,
+      "speech": [
+        109.38,
+        112.22
+      ],
+      "wordsPerSecond": 4.22,
+      "wavSha256": "7aacc7155074172683aa51a6b737fcc3d8dedb7bb7a81643bd75679814611d44"
+    },
+    {
+      "raw": "Aoede.3d7da45b",
+      "line": "talk_lark_reunion_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "I left because the songs were moving, and a songkeeper has to move with them. I should have said goodbye. We're terrible at endings. We always think there's another verse.",
+      "start": 113.241,
+      "end": 124.8,
+      "speech": [
+        114.26,
+        124.35
+      ],
+      "wordsPerSecond": 2.97,
+      "wavSha256": "05b80de22318570fae0bc441c4c833d611e7a321abb67ac4545225d19b2c5799"
+    },
+    {
+      "raw": "Aoede.e23f1075",
+      "line": "talk_lark_reunion_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Stay close this time. If the songs are right, the Vale is about to need someone who can tell the whole of it.",
+      "start": 124.8,
+      "end": 130.31,
+      "speech": [
+        125.25,
+        130.02
+      ],
+      "wordsPerSecond": 4.82,
+      "wavSha256": "4d9c9b21f3a5c8992bbd8140900d1050b906f2b57135f309d14dedac7afb4702"
+    },
+    {
+      "raw": "Aoede.0199c026",
+      "line": "talk_lark_song_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Seven went over the Greywall high, and seven came home with a fire in the sky. The Wardens kept it and the Wardens sang, and the whole Vale warmed where the hearth-bells rang.",
+      "start": 130.31,
+      "end": 140.428,
+      "speech": [
+        130.6,
+        140.04
+      ],
+      "wordsPerSecond": 3.71,
+      "wavSha256": "ec3068530496fc20dd334b411da7d65254fab13219e9676d1c6b3e5be454ffb1"
+    },
+    {
+      "raw": "Aoede.58b6797a",
+      "line": "talk_lark_song_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "That's the Wardens' Song of the Seven. Seven went, seven came home, a gift and a hearth and everyone happy.",
+      "start": 140.428,
+      "end": 147.18,
+      "speech": [
+        140.82,
+        146.78
+      ],
+      "wordsPerSecond": 3.36,
+      "wavSha256": "f3d6f1ebb7fb544e836cfabda3e8032fd7ed217ed906bc325ec63ce754184e4e"
+    },
+    {
+      "raw": "Aoede.a8c5c899",
+      "line": "talk_lark_song_4",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "There's a last verse, too. Nobody has sung it in two hundred years. When a song loses its last verse on purpose, it's usually because the last verse was true.",
+      "start": 147.18,
+      "end": 156.183,
+      "speech": [
+        147.58,
+        155.82
+      ],
+      "wordsPerSecond": 3.64,
+      "wavSha256": "c5e9f9bb845bde6461ffe6b2d8e5a74014fc1e19f60008b52d61578d9e37833d"
+    },
+    {
+      "raw": "Aoede.a79a4220",
+      "line": "talk_lark_why_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Songs gather where things are about to happen. A starving town, a goblin on a bridge, an ember going cold under the river. This is the best stage in the Vale.",
+      "start": 156.183,
+      "end": 165.964,
+      "speech": [
+        156.54,
+        165.55
+      ],
+      "wordsPerSecond": 3.44,
+      "wavSha256": "ddfb3846968dfd4d8d529da7e70e73d557c602a8b99f150e828e320424bc923f"
+    },
+    {
+      "raw": "Aoede.55615520",
+      "line": "talk_lark_why_2",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "And someone I've been following came this way. Never mind who. That's a song for later, somewhere colder.",
+      "start": 165.964,
+      "end": 171.912,
+      "speech": [
+        166.38,
+        171.49
+      ],
+      "wordsPerSecond": 3.52,
+      "wavSha256": "62fffbcf6c26222a1d9d8b038b0c414509b2a548c6ae2c5ef3e9b56b4b15b927"
+    },
+    {
+      "raw": "Aoede.a1f43d49",
+      "line": "talk_lark_more_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Anything else? I take requests. I don't take criticism.",
+      "start": 171.912,
+      "end": 176.234,
+      "speech": [
+        172.32,
+        175.8
+      ],
+      "wordsPerSecond": 2.59,
+      "wavSha256": "725e24d1191e25bd0413dc6355b399a55ad5ee40ca06c071f35e89e53fde7344"
+    },
+    {
+      "raw": "Aoede.3b4a5569",
+      "line": "talk_lark_bye_1",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Go on, then. Do something worth a verse.",
+      "start": 176.234,
+      "end": 179.286,
+      "speech": [
+        176.66,
+        178.84
+      ],
+      "wordsPerSecond": 3.67,
+      "wavSha256": "bc390b52becfc5bd65a9e9cc775c04ab1df1245d89acadf99a81cd60d108b57d"
+    },
+    {
+      "raw": "Sadaltager.ff720ce1",
+      "line": "ch4_lark_stranger_answer_1",
+      "speaker": "hooded_stranger",
+      "preset": "Sadaltager",
+      "text": "The margin was unkind. I was never that thin.",
+      "start": 179.286,
+      "end": 183.969,
+      "speech": [
+        179.73,
+        182.71
+      ],
+      "wordsPerSecond": 3.02,
+      "wavSha256": "cb5531207bd1a8f831fc640a03170027adf7fda24624b82101c84532508fffce"
+    },
+    {
+      "raw": "Sadaltager.a983359a",
+      "line": "ch4_lark_stranger_answer_2",
+      "speaker": "hooded_stranger",
+      "preset": "Sadaltager",
+      "text": "You want the last verse, songkeeper. So do I. Go to the Keep and ask the one who never forgot. I cannot sing it for you.",
+      "start": 183.969,
+      "end": 195.811,
+      "speech": [
+        185.31,
+        195.36
+      ],
+      "wordsPerSecond": 2.59,
+      "wavSha256": "3d3929e6abecfeb6a91e653ace5057dc362c1eaf074ef6195816f62b799c3323"
+    },
+    {
+      "raw": "Sadaltager.8084baae",
+      "line": "ch4_lark_stranger_answer_4",
+      "speaker": "hooded_stranger",
+      "preset": "Sadaltager",
+      "text": "Yes.",
+      "start": 195.811,
+      "end": 196.92,
+      "speech": [
+        196.26,
+        196.63
+      ],
+      "wordsPerSecond": 2.72,
+      "wavSha256": "c82e8a1e2b5fdbf446ab1b60df9686bd47fa6a5e67961aaec62ac86ecec8ffc0"
+    }
+  ]
+}

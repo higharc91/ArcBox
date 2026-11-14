@@ -58,6 +58,7 @@
     "scenes/ashmaw.json",
     "conversations/dagna_holt.json",
     "barks/grisk.json",
-    "conversations/old_maud.json"
+    "conversations/old_maud.json",
+    "conversations/lark.json"
   ]
 }

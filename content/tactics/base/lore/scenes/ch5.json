@@ -319,6 +319,7 @@
       "cast": [
         "narrator",
         "oswin_hale",
+        "lark",
         "pip_ashdown"
       ],
       "start": "open",
@@ -336,6 +337,12 @@
               "id": "ch5_the_archive_open_2",
               "speaker": "narrator",
               "text": "At a desk beneath the only window sits a figure in a Keeper's robes, all bone and parchment, writing. He does not look up.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_open_lark",
+              "speaker": "narrator",
+              "text": "Lark climbs the last stair behind you, for once without a song.",
               "mood": "idle"
             },
             {
@@ -510,6 +517,11 @@
               }
             },
             {
+              "id": "lark_asks",
+              "label": "Lark has waited twenty years for this. Lark, ask him.",
+              "to": "verse"
+            },
+            {
               "id": "corvin",
               "label": "Corvin Ashby has read your letters all his life.",
               "to": "corvin",
@@ -616,10 +628,31 @@
               "direction": "spoken, not sung, but you can hear the tune under it"
             },
             {
-              "id": "ch5_the_archive_verse_3",
+              "id": "ch5_the_archive_verse_lark_1",
               "speaker": "narrator",
-              "text": "Two centuries lost, and now it's yours to sing. Lark would weep to hear it.",
+              "text": "Behind you, Lark's hand has stopped on the strings.",
               "mood": "idle"
+            },
+            {
+              "id": "ch5_the_archive_verse_lark_2",
+              "speaker": "lark",
+              "text": "Pay it back, children, or pay what you've known.",
+              "mood": "sad",
+              "direction": "barely above a whisper, singing it back"
+            },
+            {
+              "id": "ch5_the_archive_verse_lark_3",
+              "speaker": "lark",
+              "text": "Twenty years. And it was sitting in a tower all along, waiting for someone to ask.",
+              "mood": "sad",
+              "direction": "tearful, laughing at themself"
+            },
+            {
+              "id": "ch5_the_archive_verse_lark_4",
+              "speaker": "lark",
+              "text": "Whatever you choose up there, every square in the Vale will know what the choice was. I'll make sure of it.",
+              "mood": "idle",
+              "direction": "steadying, a promise"
             }
           ],
           "next": "ask"

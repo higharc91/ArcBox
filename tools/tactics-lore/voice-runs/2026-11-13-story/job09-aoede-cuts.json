@@ -1,0 +1,51 @@
+{
+  "batch": "story_2026_11_13_job09-aoede",
+  "source": "job09.wav",
+  "sourceSha256": "36e2f8f12ed14a1841c107c79b5de1d9c15db19101212695bce9481ef80364e6",
+  "durationSeconds": 19.28,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Aoede.2b44e5a2",
+      "line": "bark_lark_town_force",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+      "start": 0.0,
+      "end": 5.603,
+      "matchedWords": "11/15",
+      "wavSha256": "1befedfc90ed2feeb8d89c88fcb03452906f94ff6bbfcaafdc594dd953ad0fda"
+    },
+    {
+      "raw": "Aoede.66326234",
+      "line": "bark_lark_town_parley",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+      "start": 5.603,
+      "end": 11.071,
+      "matchedWords": "5/13",
+      "wavSha256": "a5593c53560d5622bdf10a123a163845bbb07d79ef76c91012960bbaa907f8de"
+    },
+    {
+      "raw": "Aoede.19377c63",
+      "line": "ch3_guest_right_arrive_3",
+      "speaker": "lark",
+      "preset": "Aoede",
+      "text": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+      "start": 11.07,
+      "end": 19.28,
+      "speech": [
+        11.76,
+        19.03
+      ],
+      "wordsPerSecond": 3.85,
+      "wavSha256": "be02c39c3032744f282a5a27fcef71cfe0f53470b90577400c12eb79045226ef",
+      "method": "the first pass matched only a few words of this line, so it was cut at the 11.07s boundary and force-aligned against its script; free recognition of 11.07-19.28s hears the whole line through its last word"
+    }
+  ],
+  "job": "job_9dYTM2t3YLu4vMUA3wgQB1GC",
+  "asset": "asset_U8LG8WGH76Qqw7Zqz3mRZy8C",
+  "cuCost": 3
+}

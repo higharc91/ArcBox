@@ -1,0 +1,378 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job03-algieba-charon",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Algieba"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Charon"
+      }
+    ],
+    "text": "A: The council meets in the back room of the Last Coal to toast the open road. Nobody has touched the toast.\n<long pause>\nA: The door bangs. Bree Tallow comes in out of the cold with two small goblins wrapped in her own shawl.\n<long pause>\nA: The bigger one pushes the smaller behind her and shows you her teeth. She's shaking too hard to make it frightening.\n<long pause>\nA: Halden doesn't reach for the ledger in front of him. He doesn't need to. He has carried those numbers for years.\n<long pause>\nA: Nobody drinks the toast. When the council goes home, the two small goblins are asleep by Bree's fire, and the room is very quiet.\n<long pause>\nA: Night in the hills. The clan's camp is empty: cold fire pits, a dropped doll, tent poles with nothing hung on them.\n<long pause>\nA: Dagna carries Mother Skarrow up the path herself, wrapped in a guard's cloak. She won't let anyone else take a turn.\n<long pause>\nA: In the end the words are short ones. Her name. Forty winters. A clan that ate, for as long as she could make it eat.\n<long pause>\nA: Nobody knows it. The wind goes through the empty tents, and for a moment it almost sounds like humming.\n<long pause>\nA: You speak the old farewell, the one for chiefs. Somewhere in the dark above the camp, someone answers it.\n<long pause>\nA: The cairn is small. Dagna sets a guard's spear on top of it, point down, the way soldiers mark an enemy they respected.\n<long pause>\nA: The lantern on the pier gutters. When it steadies, the Stranger is gone, and Rook is leaning on the rail where they stood.\n<long pause>\nA: Before dawn, two of Dagna's guards stand on the third pier with lanterns. The ember stays in the riverbed, keeping Emberwick warm a while longer.\n<long pause>\nA: By the next market day, ember shards are selling for a copper apiece. Every hearth in Emberwick burns a little brighter.\n<long pause>\nA: At a frozen shrine halfway up the pass, someone is singing to the dead. Lark sits cross-legged in the snow, and the risen pilgrims stand quite still to listen.\n<long pause>\nA: Then Lark looks past you, and the song stops.\n<long pause>\nA: The Hooded Stranger stands at the edge of the shrine. Snow settles on their hood and does not melt.\n<long pause>\nA: The wind throws snow across the shrine. When it clears, the Stranger is gone, and their footprints with them.\n<long pause>\nA: Lark climbs the last stair behind you, for once without a song.\n<long pause>\nA: Behind you, Lark's hand has stopped on the strings.\n<long pause>\nA: Lark sets one foot on the rim of the well and sings, low and clear, until the square goes quiet.\n<long pause>\nB: The bridge is ours again. I keep telling myself that's what I wanted.\n<long pause>\nB: Goblins at the granary gate, and nobody dead. I'll take it. I'll take it gladly.\n<long pause>\nB: Friends. The road east is open, the carts are crossing, and Emberwick will eat this winter. To that, and to our heroes.\n<long pause>\nB: Then the granary can spare a sack. A small one. We must think of the spring.\n<long pause>\nB: A mayor does a great many sums, friend, and none of them are cheerful. That's all.\n<long pause>\nB: Because the ground is cooling. The ember under the ford is going out, and I have known it for six years.\n<long pause>\nB: Every winter the warm fields give a little less. I measured it. I said nothing, because half the town would have packed and gone.\n<long pause>\nB: So I locked the grain and let the hills go hungry, and when they came down for it we called them thieves. And then we sent spears.\n<long pause>\nB: Yes. From tomorrow, in the open, with witnesses. I am done hiding the count.\n<long pause>\nB: The granaries open tomorrow. A sack in four goes up the hill, to whoever will take it.\n<long pause>\nB: <plain, weathered and quietly worried Mood: sad.> They say the old goblin woman died on the bridge. Road's open. Doesn't feel like winning.\n<long pause>\nB: <plain, weathered and quietly worried Mood: idle.> Goblins on the hill, grain going up the path. Odd neighbours. Better than dead ones.\n<long pause>\nB: <plain, weathered and quietly worried Mood: sad.> They found something under the river, they say. The field by the docks froze the same night.\n<long pause>\nB: <plain, weathered and quietly worried Mood: angry.> Mayor knew the ground was cooling. Six years he knew. I'd have planted differently.\n<long pause>\nB: The docks went cold the night you brought it up. If that thing kept Emberwick warm, I need to know what we do now.\n<long pause>\nB: The bridge is open. The road is open. I ought to be relieved, and I keep seeing her on the planks.\n<long pause>\nB: Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+    "segments": [
+      {
+        "raw": "Algieba.4cff5240",
+        "line": "ch1_council_force_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The council meets in the back room of the Last Coal to toast the open road. Nobody has touched the toast.",
+        "renderText": "The council meets in the back room of the Last Coal to toast the open road. Nobody has touched the toast.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.6e7f2143",
+        "line": "ch1_council_force_open_3",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The door bangs. Bree Tallow comes in out of the cold with two small goblins wrapped in her own shawl.",
+        "renderText": "The door bangs. Bree Tallow comes in out of the cold with two small goblins wrapped in her own shawl.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.effb9293",
+        "line": "ch1_council_force_children_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The bigger one pushes the smaller behind her and shows you her teeth. She's shaking too hard to make it frightening.",
+        "renderText": "The bigger one pushes the smaller behind her and shows you her teeth. She's shaking too hard to make it frightening.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.8c4f35a4",
+        "line": "ch1_council_force_sums_pass_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Halden doesn't reach for the ledger in front of him. He doesn't need to. He has carried those numbers for years.",
+        "renderText": "Halden doesn't reach for the ledger in front of him. He doesn't need to. He has carried those numbers for years.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.7902542d",
+        "line": "ch1_council_force_close_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Nobody drinks the toast. When the council goes home, the two small goblins are asleep by Bree's fire, and the room is very quiet.",
+        "renderText": "Nobody drinks the toast. When the council goes home, the two small goblins are asleep by Bree's fire, and the room is very quiet.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.13218db8",
+        "line": "ch1_burial_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Night in the hills. The clan's camp is empty: cold fire pits, a dropped doll, tent poles with nothing hung on them.",
+        "renderText": "Night in the hills. The clan's camp is empty: cold fire pits, a dropped doll, tent poles with nothing hung on them.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.5caeac59",
+        "line": "ch1_burial_open_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Dagna carries Mother Skarrow up the path herself, wrapped in a guard's cloak. She won't let anyone else take a turn.",
+        "renderText": "Dagna carries Mother Skarrow up the path herself, wrapped in a guard's cloak. She won't let anyone else take a turn.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.43cebdc3",
+        "line": "ch1_burial_words_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "In the end the words are short ones. Her name. Forty winters. A clan that ate, for as long as she could make it eat.",
+        "renderText": "In the end the words are short ones. Her name. Forty winters. A clan that ate, for as long as she could make it eat.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.d80dddc1",
+        "line": "ch1_burial_song_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Nobody knows it. The wind goes through the empty tents, and for a moment it almost sounds like humming.",
+        "renderText": "Nobody knows it. The wind goes through the empty tents, and for a moment it almost sounds like humming.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.f625932e",
+        "line": "ch1_burial_hill_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "You speak the old farewell, the one for chiefs. Somewhere in the dark above the camp, someone answers it.",
+        "renderText": "You speak the old farewell, the one for chiefs. Somewhere in the dark above the camp, someone answers it.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.5d11654f",
+        "line": "ch1_burial_done_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The cairn is small. Dagna sets a guard's spear on top of it, point down, the way soldiers mark an enemy they respected.",
+        "renderText": "The cairn is small. Dagna sets a guard's spear on top of it, point down, the way soldiers mark an enemy they respected.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.b29e0095",
+        "line": "ch1_four_more_choose_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The lantern on the pier gutters. When it steadies, the Stranger is gone, and Rook is leaning on the rail where they stood.",
+        "renderText": "The lantern on the pier gutters. When it steadies, the Stranger is gone, and Rook is leaning on the rail where they stood.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.3c35f7e4",
+        "line": "ch1_four_more_guard_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Before dawn, two of Dagna's guards stand on the third pier with lanterns. The ember stays in the riverbed, keeping Emberwick warm a while longer.",
+        "renderText": "Before dawn, two of Dagna's guards stand on the third pier with lanterns. The ember stays in the riverbed, keeping Emberwick warm a while longer.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.9ed7f0fd",
+        "line": "ch1_four_more_bargain_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "By the next market day, ember shards are selling for a copper apiece. Every hearth in Emberwick burns a little brighter.",
+        "renderText": "By the next market day, ember shards are selling for a copper apiece. Every hearth in Emberwick burns a little brighter.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.51eddf19",
+        "line": "ch4_lark_stranger_shrine_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "At a frozen shrine halfway up the pass, someone is singing to the dead. Lark sits cross-legged in the snow, and the risen pilgrims stand quite still to listen.",
+        "renderText": "At a frozen shrine halfway up the pass, someone is singing to the dead. Lark sits cross-legged in the snow, and the risen pilgrims stand quite still to listen.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.972db241",
+        "line": "ch4_lark_stranger_shrine_3",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Then Lark looks past you, and the song stops.",
+        "renderText": "Then Lark looks past you, and the song stops.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.b6816040",
+        "line": "ch4_lark_stranger_shrine_5",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The Hooded Stranger stands at the edge of the shrine. Snow settles on their hood and does not melt.",
+        "renderText": "The Hooded Stranger stands at the edge of the shrine. Snow settles on their hood and does not melt.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.d1442e14",
+        "line": "ch4_lark_stranger_answer_5",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The wind throws snow across the shrine. When it clears, the Stranger is gone, and their footprints with them.",
+        "renderText": "The wind throws snow across the shrine. When it clears, the Stranger is gone, and their footprints with them.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.5c24f46e",
+        "line": "ch5_the_archive_open_lark",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Lark climbs the last stair behind you, for once without a song.",
+        "renderText": "Lark climbs the last stair behind you, for once without a song.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.275db194",
+        "line": "ch5_the_archive_verse_lark_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Behind you, Lark's hand has stopped on the strings.",
+        "renderText": "Behind you, Lark's hand has stopped on the strings.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.800919dc",
+        "line": "talk_lark_song_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Lark sets one foot on the rim of the well and sings, low and clear, until the square goes quiet.",
+        "renderText": "Lark sets one foot on the rim of the well and sings, low and clear, until the square goes quiet.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.1da8dfc2",
+        "line": "bark_halden_varrow_town_force",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "The bridge is ours again. I keep telling myself that's what I wanted.",
+        "renderText": "The bridge is ours again. I keep telling myself that's what I wanted.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.0c9edb2f",
+        "line": "bark_halden_varrow_town_parley",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Goblins at the granary gate, and nobody dead. I'll take it. I'll take it gladly.",
+        "renderText": "Goblins at the granary gate, and nobody dead. I'll take it. I'll take it gladly.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.c7158c0d",
+        "line": "ch1_council_force_open_2",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Friends. The road east is open, the carts are crossing, and Emberwick will eat this winter. To that, and to our heroes.",
+        "renderText": "Friends. The road east is open, the carts are crossing, and Emberwick will eat this winter. To that, and to our heroes.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.b5332c71",
+        "line": "ch1_council_force_open_7",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Then the granary can spare a sack. A small one. We must think of the spring.",
+        "renderText": "Then the granary can spare a sack. A small one. We must think of the spring.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.a44fe52e",
+        "line": "ch1_council_force_sums_fail_1",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "A mayor does a great many sums, friend, and none of them are cheerful. That's all.",
+        "renderText": "A mayor does a great many sums, friend, and none of them are cheerful. That's all.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.7353ab0a",
+        "line": "ch1_council_force_confess_1",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Because the ground is cooling. The ember under the ford is going out, and I have known it for six years.",
+        "renderText": "Because the ground is cooling. The ember under the ford is going out, and I have known it for six years.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.f27c663f",
+        "line": "ch1_council_force_confess_2",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Every winter the warm fields give a little less. I measured it. I said nothing, because half the town would have packed and gone.",
+        "renderText": "Every winter the warm fields give a little less. I measured it. I said nothing, because half the town would have packed and gone.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.60ec8d51",
+        "line": "ch1_council_force_confess_3",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "So I locked the grain and let the hills go hungry, and when they came down for it we called them thieves. And then we sent spears.",
+        "renderText": "So I locked the grain and let the hills go hungry, and when they came down for it we called them thieves. And then we sent spears.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.6dd49bac",
+        "line": "ch1_council_force_feed_1",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Yes. From tomorrow, in the open, with witnesses. I am done hiding the count.",
+        "renderText": "Yes. From tomorrow, in the open, with witnesses. I am done hiding the count.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.6af6f98c",
+        "line": "ch1_council_force_hill_2",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "The granaries open tomorrow. A sack in four goes up the hill, to whoever will take it.",
+        "renderText": "The granaries open tomorrow. A sack in four goes up the hill, to whoever will take it.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.e24e6da1",
+        "line": "town_farmer_force",
+        "speaker": "townsfolk_farmer",
+        "preset": "Charon",
+        "text": "They say the old goblin woman died on the bridge. Road's open. Doesn't feel like winning.",
+        "renderText": "<plain, weathered and quietly worried Mood: sad.> They say the old goblin woman died on the bridge. Road's open. Doesn't feel like winning.",
+        "delivery": {
+          "direction": "plain, weathered and quietly worried",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Charon.8bc23608",
+        "line": "town_farmer_parley",
+        "speaker": "townsfolk_farmer",
+        "preset": "Charon",
+        "text": "Goblins on the hill, grain going up the path. Odd neighbours. Better than dead ones.",
+        "renderText": "<plain, weathered and quietly worried Mood: idle.> Goblins on the hill, grain going up the path. Odd neighbours. Better than dead ones.",
+        "delivery": {
+          "direction": "plain, weathered and quietly worried",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Charon.e29e7e83",
+        "line": "town_farmer_ember",
+        "speaker": "townsfolk_farmer",
+        "preset": "Charon",
+        "text": "They found something under the river, they say. The field by the docks froze the same night.",
+        "renderText": "<plain, weathered and quietly worried Mood: sad.> They found something under the river, they say. The field by the docks froze the same night.",
+        "delivery": {
+          "direction": "plain, weathered and quietly worried",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Charon.d3812632",
+        "line": "town_farmer_confessed",
+        "speaker": "townsfolk_farmer",
+        "preset": "Charon",
+        "text": "Mayor knew the ground was cooling. Six years he knew. I'd have planted differently.",
+        "renderText": "<plain, weathered and quietly worried Mood: angry.> Mayor knew the ground was cooling. Six years he knew. I'd have planted differently.",
+        "delivery": {
+          "direction": "plain, weathered and quietly worried",
+          "mood": "angry"
+        }
+      },
+      {
+        "raw": "Charon.00636b81",
+        "line": "talk_halden_varrow_ford_ember",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "The docks went cold the night you brought it up. If that thing kept Emberwick warm, I need to know what we do now.",
+        "renderText": "The docks went cold the night you brought it up. If that thing kept Emberwick warm, I need to know what we do now.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.83178018",
+        "line": "talk_halden_varrow_ford_force",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "The bridge is open. The road is open. I ought to be relieved, and I keep seeing her on the planks.",
+        "renderText": "The bridge is open. The road is open. I ought to be relieved, and I keep seeing her on the planks.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.f895aab9",
+        "line": "talk_halden_varrow_ford_parley",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+        "renderText": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+        "delivery": null
+      }
+    ]
+  }
+}

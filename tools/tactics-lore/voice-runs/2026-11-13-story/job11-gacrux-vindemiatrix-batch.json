@@ -1,0 +1,213 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job11-gacrux-vindemiatrix",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Gacrux"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Vindemiatrix"
+      }
+    ],
+    "text": "A: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Not me. I'm the one who said now.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> No. I don't think I am.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Pick up a shovel. Talking won't dig it.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They're still up there, watching. Good. Let them see we buried her properly.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> I'll not forget this. I don't want to. Some things a person ought to have to carry.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.\n<long pause>\nA: <Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.\n<long pause>\nB: I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.\n<long pause>\nB: Goblin children came to my door asking what the bell is for. I had no idea what to tell them.\n<long pause>\nB: The chapel will take them. But our barley went to the town a month ago. I have nothing to feed them on.\n<long pause>\nB: You always did find the sharp end of a sermon. Very well. Mercy, then, and in public.\n<long pause>\nB: Halden. Whatever is in those granaries, these two eat from it tonight, and you'll tell us why it was locked.\n<long pause>\nB: We killed an old woman over grain you were hoarding against a cold you never told us about. Gods forgive us all. Starting with you.\n<long pause>\nB: Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?\n<long pause>\nB: I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.\n<long pause>\nB: The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+    "segments": [
+      {
+        "raw": "Gacrux.da22dce0",
+        "line": "ch1_burial_words_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Not me. I'm the one who said now.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Not me. I'm the one who said now.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.b1c8afb4",
+        "line": "ch1_burial_song_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.dcac1f8f",
+        "line": "ch1_burial_dagna_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "No. I don't think I am.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> No. I don't think I am.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.61d005f1",
+        "line": "ch1_burial_dagna_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.40d6f34a",
+        "line": "ch1_burial_dagna_3",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Pick up a shovel. Talking won't dig it.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Pick up a shovel. Talking won't dig it.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.ce82b95d",
+        "line": "ch1_burial_hill_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "They're still up there, watching. Good. Let them see we buried her properly.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They're still up there, watching. Good. Let them see we buried her properly.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.cf67353b",
+        "line": "ch1_burial_done_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.6ac229d3",
+        "line": "talk_dagna_holt_ford_force",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.327e8e33",
+        "line": "talk_dagna_holt_ford_parley",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Vindemiatrix.09187c44",
+        "line": "bark_mother_aubrine_town_force",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.",
+        "renderText": "I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.31775e5b",
+        "line": "bark_mother_aubrine_town_parley",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "Goblin children came to my door asking what the bell is for. I had no idea what to tell them.",
+        "renderText": "Goblin children came to my door asking what the bell is for. I had no idea what to tell them.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.2567a810",
+        "line": "ch1_council_force_open_6",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "The chapel will take them. But our barley went to the town a month ago. I have nothing to feed them on.",
+        "renderText": "The chapel will take them. But our barley went to the town a month ago. I have nothing to feed them on.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.1e2eed10",
+        "line": "ch1_council_force_acolyte_1",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "You always did find the sharp end of a sermon. Very well. Mercy, then, and in public.",
+        "renderText": "You always did find the sharp end of a sermon. Very well. Mercy, then, and in public.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.5d4db57f",
+        "line": "ch1_council_force_acolyte_2",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "Halden. Whatever is in those granaries, these two eat from it tonight, and you'll tell us why it was locked.",
+        "renderText": "Halden. Whatever is in those granaries, these two eat from it tonight, and you'll tell us why it was locked.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.7fc92c7b",
+        "line": "ch1_council_force_confess_5",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "We killed an old woman over grain you were hoarding against a cold you never told us about. Gods forgive us all. Starting with you.",
+        "renderText": "We killed an old woman over grain you were hoarding against a cold you never told us about. Gods forgive us all. Starting with you.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.e5eaba11",
+        "line": "talk_mother_aubrine_ford_ember",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?",
+        "renderText": "Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.bec2b81b",
+        "line": "talk_mother_aubrine_ford_force",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.",
+        "renderText": "I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.fe5209cd",
+        "line": "talk_mother_aubrine_ford_parley",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+        "renderText": "The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+        "delivery": null
+      }
+    ]
+  }
+}
