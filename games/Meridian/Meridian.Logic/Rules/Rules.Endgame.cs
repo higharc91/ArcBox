@@ -88,6 +88,15 @@ internal sealed partial class Resolver
         {
             State = scenario.On(Pack, State, e, Events);
         }
+        // Scenarios are pure and can't kill: a hazard lowers a trait, and the death is dealt here.
+        foreach (var crew in State.Crew.ToList())
+        {
+            CheckDeath(crew.Seat);
+        }
+        if (State.Phase != Phase.Endgame)
+        {
+            return;
+        }
         if (scenario.Evaluate(Pack, State) is { } outcome)
         {
             Finish(outcome);

@@ -1,0 +1,80 @@
+{
+  "$schema": "schema/breach.schema.json",
+  "scenarios": [
+    "the_passenger"
+  ],
+  "table": [
+    {
+      "anomaly": "humming_shard",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "black_mirror",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "warm_egg",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "stopped_watch",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "unknown_chart",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "singing_wire",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "bone_key",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "sealed_vial",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "drowned_logbook",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "childs_drawing",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "cold_coin",
+      "scenarios": [
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "pocket_of_quiet",
+      "scenarios": [
+        "the_passenger"
+      ]
+    }
+  ]
+}

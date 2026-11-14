@@ -14,6 +14,9 @@ internal sealed class Play
 
     private Play(RulesPack pack, GameState state) => (Pack, State) = (pack, state);
 
+    /// <summary>A game already under way.</summary>
+    public static Play From(RulesPack pack, GameState state) => new(pack, state);
+
     /// <summary>Three seats (s1–s3, crew in pack order), with s1 to act first and nothing drawn yet.</summary>
     public static Play Game(RulesPack? pack = null, ulong seed = 1)
     {

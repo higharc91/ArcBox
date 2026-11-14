@@ -17,7 +17,8 @@ internal sealed class MemoryFiles : IFileSource
 
     public void Remove(string relative) => _files.Remove(relative);
 
-    public RulesPack Load(MeridianRules? rules = null) => PackLoader.Load(this, Root, rules);
+    /// <summary>Loads with no scenarios: tests that need one add stubs with <c>WithScenarios</c>.</summary>
+    public RulesPack Load(MeridianRules? rules = null) => PackLoader.Load(this, Root, rules, ScenarioSet.Empty);
 
     private static string Key(string path) => Path.GetRelativePath(Root, path).Replace('\\', '/');
 

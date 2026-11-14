@@ -25,9 +25,9 @@ public static class Visibility
                 ? vote with { Cast = vote.Cast.Where(b => b.Voter == viewer).ToEqArray() }
                 : state.Waiting,
         };
-        if (state.Board is not { } board)
+        if (state.Board is not { } board || state.Phase == Phase.Over)
         {
-            return seen;
+            return seen;   // the Debrief reveals everything (spec §3.1)
         }
         return seen.WithBoard(board with
         {
