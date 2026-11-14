@@ -42,6 +42,7 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(VoteCalled), "voteCalled")]
 [JsonDerivedType(typeof(BallotCast), "ballotCast")]
 [JsonDerivedType(typeof(VoteResolved), "voteResolved")]
+[JsonDerivedType(typeof(ScenarioNotice), "scenarioNotice")]
 public abstract record GameEvent;
 
 /// <summary>A command that wasn't legal. The state is unchanged; player input never throws.</summary>
@@ -94,3 +95,6 @@ public sealed record BallotCast(SeatId Voter) : GameEvent;
 public sealed record VoteResolved(string Purpose, string? Result, EqArray<VoteCount> Tally) : GameEvent;
 
 public sealed record VoteCount(string Choice, int Votes);
+
+/// <summary>Something everyone learns, with nobody's name on it (an anonymous sabotage, a hazard).</summary>
+public sealed record ScenarioNotice(string Text, CompartmentId? At = null) : GameEvent;

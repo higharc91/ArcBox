@@ -1,79 +1,92 @@
 {
   "$schema": "schema/breach.schema.json",
   "scenarios": [
-    "the_passenger"
+    "the_passenger",
+    "one_of_us_isnt"
   ],
   "table": [
     {
       "anomaly": "humming_shard",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "black_mirror",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "warm_egg",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "stopped_watch",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "unknown_chart",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "singing_wire",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "bone_key",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "sealed_vial",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "drowned_logbook",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "childs_drawing",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "cold_coin",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     },
     {
       "anomaly": "pocket_of_quiet",
       "scenarios": [
-        "the_passenger"
+        "the_passenger",
+        "one_of_us_isnt"
       ]
     }
   ]
