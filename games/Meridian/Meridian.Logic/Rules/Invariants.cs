@@ -53,7 +53,6 @@ public static class Invariants
             }
         }
 
-        var floor = state.Phase == Phase.Explore ? 1 : 0;
         foreach (var crew in state.Crew)
         {
             if (ship.Find(crew.At) is null)
@@ -62,7 +61,8 @@ public static class Invariants
             }
             foreach (var trait in Traits.All)
             {
-                if (crew.Steps[trait] < floor || crew.Steps[trait] > pack.Rules.TrackSteps)
+                // A living crew member never sits below step 1; the dead may be at 0 (spec §2.8).
+                if (crew.Steps[trait] < (crew.Alive ? 1 : 0) || crew.Steps[trait] > pack.Rules.TrackSteps)
                 {
                     errors.Add($"{crew.Seat}'s {trait} marker is off its track");
                 }
@@ -74,6 +74,7 @@ public static class Invariants
             .Concat(state.Salvage.Draw).Concat(state.Salvage.Discard)
             .Concat(state.Anomalies.Draw).Concat(state.Anomalies.Discard)
             .Concat(state.Crew.SelectMany(c => c.Items))
+            .Concat(state.Board?.Tokens.Select(t => t.Card).OfType<CardId>() ?? [])
             .Concat(state.Waiting switch
             {
                 RollPending { Reason: RollReason.Check, Card: { } c } => [c],
@@ -112,13 +113,47 @@ public static class Invariants
         {
             errors.Add("waiting on a seat that isn't in the game");
         }
-        if ((state.Phase == Phase.Breach) != (state.Breach is not null))
+        if ((state.Phase != Phase.Explore) != (state.Breach is not null))
         {
             errors.Add("the phase and the Breach record disagree");
         }
-        if (state.Phase == Phase.Breach && state.Waiting is not null)
+        if (state.Phase is Phase.Breach or Phase.Over && state.Waiting is not null)
         {
-            errors.Add("waiting on someone after the Breach");
+            errors.Add("waiting on someone while nobody can act");
+        }
+        if (state.Phase is Phase.Endgame or Phase.Over && state.Board is null)
+        {
+            errors.Add("an endgame with no scenario board");
+        }
+        if (state.Phase == Phase.Over && state.Board?.Outcome is null)
+        {
+            errors.Add("the game is over with no outcome");
+        }
+        if (state.Board is { } board)
+        {
+            if (board.Roles.Select(r => r.Seat).Distinct().Count() != board.Roles.Count || board.Roles.Any(r => state.IndexOf(r.Seat) < 0))
+            {
+                errors.Add("a role is dealt twice or to a seat that isn't in the game");
+            }
+            if (board.Tokens.Select(t => t.Id).Distinct().Count() != board.Tokens.Count)
+            {
+                errors.Add("two tokens share an id");
+            }
+            foreach (var token in board.Tokens)
+            {
+                if ((token.At is null) == (token.Carrier is null))
+                {
+                    errors.Add($"token {token.Id} must be in one compartment or carried by one seat");
+                }
+                if (token.At is { } at && ship.Find(at) is null)
+                {
+                    errors.Add($"token {token.Id} is in a compartment that doesn't exist");
+                }
+                if (token.Carrier is { } c && state.IndexOf(c) < 0 || token.Controller is { } k && state.IndexOf(k) < 0)
+                {
+                    errors.Add($"token {token.Id} names a seat that isn't in the game");
+                }
+            }
         }
         return errors;
     }

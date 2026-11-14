@@ -26,6 +26,7 @@ internal sealed partial class Resolver
         var roll = (RollPending)State.Waiting!;
         var (dice, rng) = SignalDice.Roll(State.Rng, roll.Dice, R);
         State = State with { Rng = rng, Waiting = null };
+        State = State.CountFor(roll.From, s => s with { Dice = s.Dice + dice.Faces.Count });
         Events.Add(new Rolled(roll.From, roll.Reason, roll.Trait, dice));
 
         if (roll.Reason == RollReason.Breach)

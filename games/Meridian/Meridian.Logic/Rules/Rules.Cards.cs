@@ -29,6 +29,7 @@ internal sealed partial class Resolver
 
         var card = pile.Draw[0];
         State = State.WithPile(kind, pile with { Draw = pile.Draw.RemoveAt(0) });
+        State = State.CountFor(seat, s => s with { Cards = s.Cards + 1 });
         Events.Add(new CardDrawn(seat, card, kind));
 
         var def = Pack.Card(card);

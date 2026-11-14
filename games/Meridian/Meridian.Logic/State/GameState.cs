@@ -8,8 +8,14 @@ public enum Phase
     /// <summary>Exploring; nobody can die (spec §2.1).</summary>
     [JsonStringEnumMemberName("explore")] Explore,
 
-    /// <summary>The Breach fired. M1 stops here; scenarios and the endgame are stage M3.</summary>
+    /// <summary>The Breach fired and the scenario is set up; phones read their briefings (spec §3.1).</summary>
     [JsonStringEnumMemberName("breach")] Breach,
+
+    /// <summary>The scenario is being played; death is possible.</summary>
+    [JsonStringEnumMemberName("endgame")] Endgame,
+
+    /// <summary>A side has won (see <see cref="ScenarioBoard.Outcome"/>).</summary>
+    [JsonStringEnumMemberName("over")] Over,
 }
 
 /// <summary>A crew member's four 1-based marker positions. A record of ints, so it compares by value for free.</summary>
@@ -38,8 +44,17 @@ public sealed record TraitSteps(int Brawn, int Agility, int Tech, int Nerve)
 }
 
 /// <param name="UsedRooms">Compartments whose once-per-crew rule this crew member has used.</param>
+/// <param name="Alive">False once dead; a dead crew member stays in the game as an echo (spec §2.8).</param>
+/// <param name="Escaped">Left the ship (Decaying Orbit's pods); out of the turn order but not dead.</param>
 public sealed record CrewState(SeatId Seat, CrewId Crew, CompartmentId At, TraitSteps Steps,
-                               EqArray<CardId> Items = default, EqArray<CompartmentId> UsedRooms = default);
+                               EqArray<CardId> Items = default, EqArray<CompartmentId> UsedRooms = default,
+                               bool Alive = true, bool Escaped = false, CrewStats? Stats = null)
+{
+    public CrewStats Counted => Stats ?? new CrewStats();
+
+    /// <summary>On the ship and alive: can be hurt, can act, counts for "everyone dead".</summary>
+    public bool Aboard => Alive && !Escaped;
+}
 
 public sealed record CardPile(EqArray<CardId> Draw, EqArray<CardId> Discard = default);
 
@@ -75,8 +90,17 @@ public sealed record GameState(
     CardPile Anomalies,
     int AnomaliesDrawn,
     Pending? Waiting,
-    BreachInfo? Breach)
+    BreachInfo? Breach,
+    ScenarioBoard? Board = null)
 {
+    /// <summary>A seat's role in the running scenario, or null before one is dealt (or for a seat with none).</summary>
+    public RoleCard? RoleOf(SeatId seat) => Board?.Roles.FirstOrDefault(r => r.Seat == seat);
+
+    public GameState WithBoard(ScenarioBoard board) => this with { Board = board };
+
+    public GameState CountFor(SeatId seat, Func<CrewStats, CrewStats> change)
+        => WithCrew(CrewOf(seat) with { Stats = change(CrewOf(seat).Counted) });
+
     public CrewState ActiveCrew => Crew[Active];
     public SeatId ActiveSeat => Crew[Active].Seat;
 

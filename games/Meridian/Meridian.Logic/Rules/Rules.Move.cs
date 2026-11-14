@@ -97,6 +97,7 @@ internal sealed partial class Resolver
         var (ship, placed) = Placement.Place(State.Ship, tile, at, rotation, R.DeckRadius);
         State = State with { Ship = ship, MovesLeft = State.MovesLeft - cost };
         State = State.WithCrew(crew with { At = placed.Id });
+        State = State.CountFor(seat, s => s with { Revealed = s.Revealed + 1 });
         Events.Add(new CompartmentRevealed(seat, placed));
         Events.Add(new Moved(seat, crew.At, placed.Id, cost));
 
