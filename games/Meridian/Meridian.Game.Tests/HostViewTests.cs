@@ -67,6 +67,58 @@ public sealed class HostViewTests
         Assert.True(worst < 1420, $"worst patch {worst} bytes");
     }
 
+    /// <summary>The endgame adds the scenario panel; the view and its patches keep their budgets in every scenario.</summary>
+    [Theory]
+    [InlineData(ThePassenger.Id)]
+    [InlineData(OneOfUsIsnt.Id)]
+    [InlineData(TillerSaysNo.Id)]
+    [InlineData(DecayingOrbit.Id)]
+    [InlineData(SalvageRights.Id)]
+    public void The_endgame_view_keeps_its_budgets(string scenario)
+    {
+        var game = new Harness(players: 6, seed: 2, scenario).Board();
+        var previous = Json(game.Game.HostView());
+        var (largest, worst, panels) = (0, 0, 0);
+        game.PlayUntil(() =>
+        {
+            var next = Json(game.Game.HostView());
+            largest = Math.Max(largest, Bytes(next));
+            panels += next.TryGetProperty("scenario", out _) ? 1 : 0;
+            if (game.Session.Phase == SessionPhase.Endgame && HostViewPatch.Diff(previous, next) is { } patch)
+            {
+                worst = Math.Max(worst, Encoding.UTF8.GetByteCount(patch.ToJsonString()));
+            }
+            previous = next;
+            return false;
+        }, steps: 6000);
+        Assert.True(panels > 0, "the scenario panel never appeared");
+        Assert.True(largest < 8 * 1024, $"{largest} bytes");
+        Assert.True(worst < 1420, $"worst patch {worst} bytes");
+    }
+
+    [Fact]
+    public void The_debrief_reveals_every_role_on_the_tv()
+    {
+        var game = new Harness(players: 4, seed: 1, OneOfUsIsnt.Id).Board();
+        game.PlayUntil(() => game.Session.Phase == SessionPhase.Debrief);
+        var view = (MeridianHostView)game.Game.HostView();
+        var reveal = view.Scenario!.Reveal!.Value;
+        Assert.Equal(4, reveal.Count);
+        Assert.Contains(reveal, r => r.Role == "The Mimic");
+        Assert.NotNull(view.Scenario.Outcome);
+    }
+
+    [Fact]
+    public void Before_the_debrief_the_tv_names_no_secret_role()
+    {
+        var game = new Harness(players: 4, seed: 1, OneOfUsIsnt.Id).Board();
+        game.PlayUntil(() => game.Session.Phase == SessionPhase.Endgame);
+        var view = (MeridianHostView)game.Game.HostView();
+        Assert.Equal("One of Us Isn't", view.Scenario!.Title);
+        Assert.Null(view.Scenario.Reveal);
+        Assert.Empty(view.Scenario.Objectives);   // every goal is its own seat's
+    }
+
     [Fact]
     public void Arrays_of_objects_are_keyed_by_id()
     {

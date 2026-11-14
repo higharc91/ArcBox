@@ -14,7 +14,17 @@ export interface MeridianHostView {
   phase: string; banner: string;
   seats: { id: string; name: string; crew: string | null; colour: number; connected: boolean; auto: boolean; active: boolean }[];
   compartments: CompartmentCard[]; crew: CrewMarker[]; tilesLeft: number; anomaliesDrawn: number; round: number;
-  now: Presented | null; log: string[];
+  now: Presented | null; log: string[]; scenario?: ScenarioPanel;
+}
+
+/** The running scenario, public parts only; `reveal` and `outcome` arrive at the Debrief. */
+export interface ScenarioPanel {
+  title: string; roundsLeft: number;
+  tokens: { id: string; kind: string; at?: string; carrier?: string; stunned?: boolean; state?: string }[];
+  counters: { id: string; value: number }[];
+  objectives: { id: string; text: string; state: "open" | "done" | "failed" }[];
+  reveal?: { id: string; role: string; won: boolean }[];
+  outcome?: string;
 }
 
 export const isMeridianHostView = (v: unknown): v is MeridianHostView =>
@@ -61,17 +71,35 @@ export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal
           {view.now.faces.length ? ` [${view.now.faces.join(" ")}]` : ""}
         </div>
       ) : null}
+      {view.scenario ? <Scenario panel={view.scenario} seats={view.seats} /> : null}
       <div class="mer-board-decks">
         {DECKS.map((d) => <BoardDeck key={d.id} deck={d.id} label={d.label} rooms={view.compartments.filter((c) => c.at[0] === d.id)}
-          crew={view.crew} lit={view.now?.compartment ?? null} />)}
+          crew={view.crew} tokens={view.scenario?.tokens.filter((t) => t.at) ?? []} lit={view.now?.compartment ?? null} />)}
       </div>
       <ul class="mer-log">{view.log.map((line, i) => <li key={i}>{line}</li>)}</ul>
     </div>
   );
 }
 
-function BoardDeck({ deck, label, rooms, crew, lit }: {
-  deck: Deck; label: string; rooms: CompartmentCard[]; crew: CrewMarker[]; lit: string | null;
+function Scenario({ panel, seats }: { panel: ScenarioPanel; seats: MeridianHostView["seats"] }) {
+  const name = (seat: string) => seats.find((s) => s.id === seat)?.name ?? seat;
+  const carried = panel.tokens.filter((t) => t.carrier);
+  return (
+    <section class="mer-scenario" aria-label="Scenario">
+      <h2>{panel.title}</h2>
+      {panel.outcome ? <p class="mer-outcome">{panel.outcome}</p> : <p>{panel.roundsLeft} {panel.roundsLeft === 1 ? "round" : "rounds"} left</p>}
+      {panel.counters.length ? <ul class="mer-counters">{panel.counters.map((c) => <li key={c.id}>{c.id} {c.value}</li>)}</ul> : null}
+      {carried.length ? <ul>{carried.map((t) => <li key={t.id}>{name(t.carrier!)} carries the {t.kind}</li>)}</ul> : null}
+      {panel.objectives.length ? <ul class="mer-objectives">{panel.objectives.map((o) => <li key={o.id} class={o.state}>{o.text}</li>)}</ul> : null}
+      {panel.reveal ? (
+        <ul class="mer-roles">{panel.reveal.map((r) => <li key={r.id}><b>{name(r.id)}</b> was {r.role}{r.won ? " · won" : ""}</li>)}</ul>
+      ) : null}
+    </section>
+  );
+}
+
+function BoardDeck({ deck, label, rooms, crew, tokens, lit }: {
+  deck: Deck; label: string; rooms: CompartmentCard[]; crew: CrewMarker[]; tokens: ScenarioPanel["tokens"]; lit: string | null;
 }) {
   const xs = rooms.map((r) => r.at[1]), ys = rooms.map((r) => r.at[2]);
   const minX = Math.min(...xs, 0), maxX = Math.max(...xs, 0), minY = Math.min(...ys, 0);
@@ -89,6 +117,9 @@ function BoardDeck({ deck, label, rooms, crew, lit }: {
               <span class="mer-crew">
                 {crew.filter((c) => c.at === r.id).map((c) => (
                   <span key={c.id} class="mer-dot" title={c.name} style={{ background: PLAYER_COLOURS[c.colour % 6] }} />
+                ))}
+                {tokens.filter((t) => t.at === r.id).map((t) => (
+                  <span key={t.id} class={`mer-token ${t.kind}${t.state ? ` ${t.state}` : ""}${t.stunned ? " stunned" : ""}`} title={t.id} />
                 ))}
               </span>
             </div>

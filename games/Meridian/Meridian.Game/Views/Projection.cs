@@ -19,13 +19,35 @@ internal static class Projection
         {
             SessionPhase.Boarding => "Choose your crew",
             SessionPhase.Over => s.Ending ?? "",
+            SessionPhase.Briefing => "Read your briefing",
+            SessionPhase.Debrief => "Debrief",
             _ => $"{s.SeatOf(s.Game!.ActiveSeat).Name}'s turn",
         };
-        var map = s.Game is { } g ? Map(game, g, names: false) : new MapData([], []);
+        // The TV is a viewer with no seat: everything it shows comes from what everyone may see.
+        var seen = s.Game is { } real ? Visibility.For(real, null) : null;
+        var map = seen is { } g ? Map(game, g, names: false) : new MapData([], []);
         return new MeridianHostView(Name(s.Phase), banner, Seats(game), map.Compartments, map.Crew,
-                                    s.Game?.TilePile.Count ?? game.Pack.Tiles.Sum(t => t.Copies),
-                                    s.Game?.AnomaliesDrawn ?? 0, s.Game?.Round ?? 0,
-                                    s.Queue.IsEmpty ? null : s.Queue[0], s.Log);
+                                    seen?.TilePile.Count ?? game.Pack.Tiles.Sum(t => t.Copies),
+                                    seen?.AnomaliesDrawn ?? 0, seen?.Round ?? 0,
+                                    s.Queue.IsEmpty ? null : s.Queue[0], s.Log,
+                                    seen is { Board: not null } ? Scenario(game, seen) : null);
+    }
+
+    private static ScenarioPanel Scenario(MeridianGame game, GameState seen)
+    {
+        var board = seen.Board!;
+        var def = game.Pack.ScenarioDef(board.Scenario);
+        var left = Math.Max(0, board.RoundLimit - Math.Max(0, seen.Round - board.StartRound));
+        var tokens = board.Tokens.Select(t => new TokenCard(t.Id, t.Kind, t.At?.Value, t.Carrier?.Value, t.Stunned, t.State)).ToEqArray();
+        var counters = board.Counters.Select(c => new CounterCard(c.Id, c.Value)).ToEqArray();
+        var objectives = board.Objectives.Select(o => new ObjectiveCard(o.Id, o.Text, o.State)).ToEqArray();
+        // Only once the game is decided does the TV name anyone's role (Visibility reveals everything at Phase.Over).
+        if (board.Outcome is { } outcome && seen.Phase == Phase.Over)
+        {
+            var reveal = board.Roles.Select(r => new RevealCard(r.Seat.Value, def.Role(r.Role).Name, outcome.Winners.Contains(r.Seat))).ToEqArray();
+            return new ScenarioPanel(def.Title, left, tokens, counters, objectives, reveal, outcome.Message);
+        }
+        return new ScenarioPanel(def.Title, left, tokens, counters, objectives);
     }
 
     public static ControllerView Player(MeridianGame game, PlayerId id)
@@ -74,7 +96,7 @@ internal static class Projection
     private static EqArray<SeatCard> Seats(MeridianGame game)
     {
         var s = game.Session;
-        var active = s.Phase == SessionPhase.Explore ? s.Game?.ActiveSeat : null;
+        var active = s.Phase is SessionPhase.Explore or SessionPhase.Endgame ? s.Game?.ActiveSeat : null;
         return s.Seats.Select((x, i) => new SeatCard(x.Player.Value, x.Name,
             x.Crew is { } c ? game.Pack.CrewMember(c).Name : null, i, x.Connected, x.Auto, x.Seat == active)).ToEqArray();
     }

@@ -123,9 +123,21 @@ public sealed class PhoneFixtureTests
         }
         var view = (MeridianHostView)game.Game.HostView();
         Assert.NotNull(view.Now);
+
+        // The endgame: The Passenger's brood on the board, between presentations.
+        var endgame = new Harness(players: 4, seed: 3, ThePassenger.Id).Board();
+        endgame.PlayUntil(() => endgame.Session is { Phase: SessionPhase.Endgame, Queue.IsEmpty: true } && endgame.State.Round > endgame.State.Board!.StartRound);
+        // The Debrief: One of Us Isn't, every role revealed.
+        var debrief = new Harness(players: 4, seed: 1, OneOfUsIsnt.Id).Board();
+        debrief.PlayUntil(() => debrief.Session.Phase == SessionPhase.Debrief);
+        Assert.Equal(SessionPhase.Endgame, endgame.Session.Phase);
+        Assert.Equal(SessionPhase.Debrief, debrief.Session.Phase);
+
         Check(new SortedDictionary<string, JsonNode>(StringComparer.Ordinal)
         {
             ["explore"] = JsonSerializer.SerializeToNode(view, ArcJson.Options)!,
+            ["endgame"] = JsonSerializer.SerializeToNode(endgame.Game.HostView(), ArcJson.Options)!,
+            ["debrief"] = JsonSerializer.SerializeToNode(debrief.Game.HostView(), ArcJson.Options)!,
         }, "meridian-host");
     }
 

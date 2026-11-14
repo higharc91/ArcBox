@@ -53,3 +53,10 @@
 .mer-debrief.won h2 { color: var(--mer-anomaly); }
 .mer-debrief.lost h2 { color: var(--mer-warn); }
 .mer-roles, .mer-awards { margin: 0; padding-left: 18px; }
+.mer-scenario { padding: 8px; border: 1px solid var(--mer-anomaly); border-radius: 8px; }
+.mer-scenario h2 { margin: 0 0 4px; }
+.mer-counters { display: flex; gap: 12px; list-style: none; padding: 0; }
+.mer-token { display: inline-block; width: 8px; height: 8px; transform: rotate(45deg); background: var(--mer-warn); margin: 1px; }
+.mer-token.repair.broken { background: var(--mer-anomaly); }
+.mer-token.stunned { opacity: 0.4; }
+.mer-objectives .done { text-decoration: line-through; }
