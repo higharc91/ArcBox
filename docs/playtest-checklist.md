@@ -164,10 +164,11 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
       the TV. Checked here only in a browser on the PC, not on a phone.
 
-## Derelict: ISV Meridian (stage M2: Explore only)
+## Derelict: ISV Meridian (stages M2–M3: Explore, the Breach and five scenarios)
 
 Until the TV scene (stage M4), the board is the dev page's: open `/dev.html?phones=0` on a laptop as the "TV", or run
-`node tools/meridian-playtest/bots.cjs --room=<CODE>` to fill seats with bot phones. The game ends at the Breach in M2.
+`node tools/meridian-playtest/bots.cjs --room=<CODE>` to fill seats with bot phones. To play one scenario, start a
+Development server with `--Meridian:Scenario=<id>` (ids in `content/meridian/base/rules/breach.json`).
 
 - [ ] Three real phones on the LAN join, select **Derelict: ISV Meridian** and start. Each picks a different crew member; a taken one is greyed out.
 - [ ] On your turn, the deck tabs show a count where you can go; tapping a compartment moves you, tapping **Open** reveals a new one.
@@ -176,7 +177,13 @@ Until the TV scene (stage M4), the board is the dev page's: open `/dev.html?phon
 - [ ] Lock a phone during its own turn for 30 s: the board marks it **auto** and a bot plays it; unlocking takes the next decision back.
 - [ ] Reload a phone while it is choosing which way a new compartment goes: it comes back on the same choice.
 - [ ] Leave a turn untouched: it ends after 60 s.
-- [ ] Reach the Breach: every phone shows the ending, and the room is back in the lobby with the results.
+- [ ] Reach the Breach: the board shows the scenario's title and rounds left; every phone shows a briefing.
+- [ ] Read a briefing: it fits the phone without scrolling past the Ready button, and the traitor's looks the same at a glance as everyone else's.
+- [ ] Play **One of Us Isn't** with people: the mimic's phone is the only one that knows; nothing on the board or the log gives them away before the Debrief.
+- [ ] Call a vote at the scanner: each phone picks in private, the board shows only that the vote happened, and nobody's choice is shown.
+- [ ] Drop a living player's phone in the endgame (lock it, or leave Wi-Fi): the game pauses for up to 60 s, the same whoever it is, then a bot plays them.
+- [ ] Die in **The Passenger**: your phone becomes an echo and can lend a die.
+- [ ] Read the Debrief: every role is revealed on the board and the phones, with the awards; the VIP's **Continue** returns the room to the lobby with the results.
 
 ## After
 

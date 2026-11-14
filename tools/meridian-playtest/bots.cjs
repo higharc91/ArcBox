@@ -1,5 +1,5 @@
-// Bot phones for Derelict: ISV Meridian. Joins a room as N players over the real hub and plays from crew pick to the
-// Breach, deciding only from what each phone's screen shows. Use it to watch the dev board (/dev.html) or a TV with no
+// Bot phones for Derelict: ISV Meridian. Joins a room as N players over the real hub and plays from crew pick through the
+// Breach, the briefings and the endgame to the Debrief, deciding only from what each phone's screen shows. Use it to watch the dev board (/dev.html) or a TV with no
 // phones, or to play alongside bots.
 //
 //   node tools/meridian-playtest/bots.cjs --room=<CODE> [--server=http://localhost:5080] [--players=3] [--start]
@@ -10,6 +10,11 @@
 //   --start         the first bot selects Meridian and starts the game (needs it to be the VIP: the first to join)
 //   --players=<n>   how many bot phones, default 3
 //   --pace=<ms>     pause between a bot's actions, default 400, so a person watching can follow
+//
+// To play one scenario, force it on a Development server (the setting is ignored elsewhere); every Breach then picks it:
+//
+//   dotnet run --project src/ArcBox.Server -- --Meridian:Scenario=the_passenger
+//   (or Meridian__Scenario=the_passenger in the environment; ids are in content/meridian/base/rules/breach.json)
 //
 // It exits 0 when the game ends (printing the results message), 1 on an error or after --timeout seconds (default 900).
 'use strict';
@@ -44,6 +49,17 @@ function decide(view, picked) {
       return ['pick', { crew: free.id }];
     }
     case 'turn':
+      // The endgame first: a scenario action, an attack, or a monster to command, each about half the time.
+      if (d.actions && d.actions.length && Math.random() < 0.5) {
+        const a = pick(d.actions);
+        return ['act', a.data ? { action: a.id, data: a.data } : { action: a.id }];
+      }
+      if (d.attacks && d.attacks.length && Math.random() < 0.5) return ['attack', { target: pick(d.attacks).id }];
+      if (d.monsters && d.monsters.length && Math.random() < 0.5) {
+        const m = pick(d.monsters);
+        if (m.targets.length) return ['monsterAttack', { monster: m.id, target: pick(m.targets).id }];
+        if (m.moves.length) return ['monsterMove', { monster: m.id, to: pick(m.moves) }];
+      }
       if (d.opens.length) { const o = pick(d.opens); return ['open', { at: o.at, side: o.side }]; }
       if (d.reach.length && Math.random() < 0.75) return ['moveTo', { to: pick(d.reach).id }];
       return ['endTurn'];
@@ -51,7 +67,12 @@ function decide(view, picked) {
     case 'roll': return ['roll'];
     case 'card': return ['choose', { option: d.options[0].id }];
     case 'trade': return ['answerTrade', { accept: false }];
-    default: return null;
+    case 'briefing': return d.ready ? null : ['ready'];
+    case 'allocate': return ['allocate', { first: Math.floor(Math.random() * (d.steps + 1)) }];
+    case 'vote': return d.cast ? null : ['vote', { choice: pick(d.options).id }];
+    case 'echo': return !d.lent && d.targets.length ? ['lend', { to: pick(d.targets).id }] : ['endTurn'];
+    case 'debrief': return d.vip ? ['continue'] : null;
+    default: return null;   // sheet, watch, over: nothing to send
   }
 }
 

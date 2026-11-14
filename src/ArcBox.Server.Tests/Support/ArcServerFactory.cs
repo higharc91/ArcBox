@@ -36,6 +36,9 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
     /// <param name="withMeridian">Also links the repository's <c>content/meridian</c>, so the real Meridian can be played.</param>
     public ArcServerFactory(bool withTactics, bool withMeridian = false) => (_withTactics, _withMeridian) = (withTactics, withMeridian);
 
+    /// <summary>The scenario every Meridian Breach picks (the Development-only <c>Meridian:Scenario</c> setting), or null.</summary>
+    public string? MeridianScenario { get; init; }
+
     /// <summary>The server's <c>Content:Root</c>: a private directory holding one pack, <c>ledger/base</c>.</summary>
     public string ContentRoot => _contentRoot.FullName;
 
@@ -49,6 +52,8 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Web:Root", "");
         // The tactics tests reach their fight through the battle list, which only this Development switch offers from the world.
         builder.UseSetting("Tactics:BattleList", "true");
+        if (MeridianScenario is { } scenario)
+            builder.UseSetting(ArcBox.Server.Games.Meridian.MeridianServiceCollectionExtensions.ScenarioSetting, scenario);
         // Like the settings above, read while Program registers services.
         SeedContent();
         builder.UseSetting("Content:Root", _contentRoot.FullName);
