@@ -18,3 +18,18 @@ public sealed class SimSmokeTests
         }
     }
 }
+
+public sealed class EndgameSimSmokeTests
+{
+    [Fact]
+    [Trait("Category", "Sim")]
+    public void Endgame_runs_every_scenario_to_an_outcome()
+    {
+        foreach (var id in BasePack.Pack.Breach.Scenarios)
+        {
+            var games = EndgameReport.Run(BasePack.Pack, id, games: 5, minPlayers: 3, maxPlayers: 6, seed: 1);
+            Assert.All(games, g => Assert.True(g.Ended, $"{id} {g.Players}p did not end"));
+            Assert.Contains($"| {id} | 4 | 5 |", EndgameReport.Format(games));
+        }
+    }
+}

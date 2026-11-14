@@ -8,16 +8,16 @@
       "id": "crew",
       "side": "crew",
       "name": "Crew",
-      "briefing": "The Anomaly woke something that wears a familiar face. One of you isn't who they were an hour ago, and you can't tell which. Four repair points across the ship are dead. Fix all four and the Meridian locks out whatever is wearing your friend. If a repair fails, someone undid it while nobody was looking. Twice, the scanner in the Sensor Suite or Command Landing can test one of you. Choose carefully.",
+      "briefing": "The Anomaly woke something that wears a familiar face. One of you isn't who they were an hour ago, and you can't tell which. A repair point for each of you is dead somewhere aboard. Fix them all and the Meridian locks out whatever is wearing your friend. If a repair fails, someone undid it while nobody was looking. Twice, the scanner in the Sensor Suite or Command Landing can test one of you. Choose carefully.",
       "objectives": [
-        "Repair all four points (Tech 4+), or name the mimic in a vote at the scanner."
+        "Repair every point (Tech 4+), or name the mimic in a vote at the scanner."
       ]
     },
     {
       "id": "mimic",
       "side": "mimic",
       "name": "The Mimic",
-      "briefing": "You are not one of them, but you look it. Four repair points would lock you out of the ship; keep them broken. Repair nothing. When you're alone with a repaired point, undo it quietly; nobody will know until the round ends, and by then you can be elsewhere. Twice they can drag everyone to the scanner and vote. Blend in, point at someone else, and outlast them.",
+      "briefing": "You are not one of them, but you look it. The repair points would lock you out of the ship; keep them broken. Repair nothing. When you're alone with a repaired point, undo it quietly; nobody will know until the round ends, and by then you can be elsewhere. Twice they can drag everyone to the scanner and vote. Blend in, point at someone else, and outlast them.",
       "objectives": [
         "Keep the points from all being repaired until the round limit, and avoid being named."
       ]
@@ -25,7 +25,7 @@
   ],
   "numbers": {
     "repair": 4,
-    "points": 4,
-    "votes": 2
+    "votes": 2,
+    "extraPoints": 0
   }
 }

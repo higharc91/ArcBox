@@ -5,9 +5,9 @@ using Meridian.Sim;
 
 // dotnet run --project games/Meridian/Meridian.Sim -- explore [--games N] [--players 3-6] [--seed S]
 //     [--threshold T] [--faces 0,0,1,1,1,2] [--content path]
-if (args.Length == 0 || args[0] != "explore")
+if (args.Length == 0 || args[0] is not ("explore" or "endgame"))
 {
-    Console.Error.WriteLine("Usage: Meridian.Sim explore [--games N] [--players 3-6] [--seed S] [--threshold T] [--faces a,b,...] [--content path]");
+    Console.Error.WriteLine("Usage: Meridian.Sim explore|endgame [--games N] [--players 3-6] [--seed S] [--threshold T] [--faces a,b,...] [--scenario id|all] [--content path]");
     return 2;
 }
 
@@ -36,6 +36,15 @@ var run = new ExploreOptions(
     MinPlayers: int.Parse(players[0], CultureInfo.InvariantCulture),
     MaxPlayers: int.Parse(players[^1], CultureInfo.InvariantCulture),
     Seed: ulong.Parse(options.GetValueOrDefault("seed") ?? "1", CultureInfo.InvariantCulture));
+
+if (args[0] == "endgame")
+{
+    var which = options.GetValueOrDefault("scenario") ?? "all";
+    var ids = which == "all" ? pack.Breach.Scenarios.Items.ToList() : [which];
+    var all = ids.SelectMany(id => EndgameReport.Run(pack, id, run.Games, run.MinPlayers, run.MaxPlayers, run.Seed)).ToList();
+    Console.Write(EndgameReport.Format(all));
+    return 0;
+}
 
 Console.Write(ExploreReport.Format(pack, ExploreReport.Run(pack, run)));
 return 0;

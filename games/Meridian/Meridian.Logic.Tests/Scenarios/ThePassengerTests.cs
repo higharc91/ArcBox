@@ -8,13 +8,13 @@ public sealed class ThePassengerTests
     private static SeatId Host(GameState s) => s.Board!.Roles.Single(r => r.Role == ThePassenger.Host).Seat;
 
     [Fact]
-    public void The_finder_hosts_it_and_commands_two_brood()
+    public void The_finder_hosts_it_and_commands_brood_scaled_to_the_crew()
     {
         var state = ScenarioRun.Begun(Id);
         var host = Host(state);
         Assert.Equal(state.Breach!.Seat, host);
         var brood = state.Board!.Tokens.Where(t => t.Kind == "brood").ToList();
-        Assert.Equal(2, brood.Count);
+        Assert.Equal(Math.Max(1, state.Crew.Count - 2), brood.Count);
         Assert.All(brood, b => Assert.Equal(host, b.Controller));
         Assert.All(state.Board.Roles, r => Assert.Equal(Audience.Everyone, r.Audience));   // a revealed traitor
         Assert.Equal(12, state.Board.RoundLimit);
@@ -46,7 +46,7 @@ public sealed class ThePassengerTests
     }
 
     [Fact]
-    public void A_new_brood_spawns_with_the_host_each_round_while_there_are_fewer_than_players()
+    public void A_new_brood_spawns_with_the_host_each_round_while_there_are_fewer_than_one_less_than_the_players()
     {
         var game = Begin();
         var before = game.State.Board!.Tokens.Count(t => t.Kind == "brood");

@@ -23,12 +23,12 @@ public sealed class OneOfUsIsntTests
     }
 
     [Fact]
-    public void One_secret_mimic_and_four_broken_points()
+    public void One_secret_mimic_and_a_broken_point_per_player()
     {
         var state = ScenarioRun.Begun(Id);
         Assert.Single(state.Board!.Roles, r => r.Role == OneOfUsIsnt.Mimic);
         Assert.All(state.Board.Roles, r => Assert.Equal(Audience.OfSeat(r.Seat), r.Audience));   // every card secret alike
-        Assert.Equal(4, Points(state).Count());
+        Assert.Equal(state.Crew.Count + 2 * Math.Max(0, state.Crew.Count - 4), Points(state).Count());
         Assert.All(Points(state), p => Assert.Equal("broken", p.State));
     }
 

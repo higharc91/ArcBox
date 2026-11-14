@@ -25,7 +25,9 @@ public sealed class ThePassenger : IScenario
             ? new RoleCard(c.Seat, Host, "passenger", Audience.Everyone)
             : new RoleCard(c.Seat, Crew, Crew, Audience.Everyone)).ToEqArray();
         var at = state.CrewOf(host).At;
-        var brood = Enumerable.Range(1, def.Number("startBrood")).Select(i => Brood(def, i, at, host)).ToEqArray();
+        // The brood scales with the crew it hunts: two fewer than the players, at least one (tuned in the M3 balance report).
+        var start = Math.Max(1, state.Crew.Count - def.Number("broodFewer"));
+        var brood = Enumerable.Range(1, start).Select(i => Brood(def, i, at, host)).ToEqArray();
         return state.WithBoard(new ScenarioBoard(Id, roles, brood,
             [new Counter("doses", 0, Audience.Everyone), new Counter("injected", 0, Audience.Everyone)],
             [new Objective(Host, def.Role(Host).Objectives[0], ObjectiveState.Open, Audience.OfSeat(host)),
@@ -39,7 +41,7 @@ public sealed class ThePassenger : IScenario
 
     private static SeatId HostOf(GameState state) => state.Board!.Roles.First(r => r.Role == Host).Seat;
 
-    /// <summary>At each round's end, a new brood joins the host while there are fewer brood than players.</summary>
+    /// <summary>At each round's end, a new brood joins the host while there are fewer than one less than the players.</summary>
     public GameState On(RulesPack pack, GameState state, GameEvent e, List<GameEvent> events)
     {
         if (e is not RoundClosed)
@@ -48,7 +50,7 @@ public sealed class ThePassenger : IScenario
         }
         var board = state.Board!;
         var count = board.Tokens.Count(t => t.Kind == "brood");
-        if (count >= state.Crew.Count)
+        if (count >= state.Crew.Count - 1)
         {
             return state;
         }

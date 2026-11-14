@@ -16,13 +16,14 @@ public sealed class TillerSaysNoTests
     }
 
     [Fact]
-    public void Three_banks_pulled_win_for_everyone()
+    public void Pulling_the_last_bank_wins_for_everyone()
     {
         var game = Begin();
         var seat = game.State.ActiveSeat;
-        game.State = game.State.WithBoard(game.State.Board!.WithCounter("banks", 2));
+        game.State = game.State.WithBoard(game.State.Board!.WithCounter("banks", TillerSaysNo.BanksNeeded(Pack, game.State) - 1));
         game.Put(seat, Core(game.State));
-        game.Rig(Rules.Value(Pack, game.Crew(seat), Trait.Tech), t => t >= 4).Do(new ScenarioAct(seat, "pullBank"));
+        var target = Pack.ScenarioDef(Id).Number("bankTarget");
+        game.Rig(Rules.Value(Pack, game.Crew(seat), Trait.Tech), t => t >= target).Do(new ScenarioAct(seat, "pullBank"));
         Assert.Equal(Phase.Over, game.State.Phase);
         Assert.Equal(game.State.Crew.Count, game.State.Board!.Outcome!.Winners.Count);
     }
@@ -97,7 +98,8 @@ public sealed class DecayingOrbitTests
         var other = game.State.Crew.First(c => c.Seat != seat).Seat;
         game.State = game.State.WithCrew(game.Crew(other) with { Escaped = true }).WithBoard(game.State.Board!.WithCounter("engines", 2));
         game.Put(seat, Place(game.State, "engine"));
-        game.Rig(Rules.Value(Pack, game.Crew(seat), Trait.Tech), t => t >= 5).Do(new ScenarioAct(seat, "restart"));
+        var target = Pack.ScenarioDef(Id).Number("restartTarget");
+        game.Rig(Rules.Value(Pack, game.Crew(seat), Trait.Tech), t => t >= target).Do(new ScenarioAct(seat, "restart"));
         Assert.Equal(game.State.Crew.Count, game.State.Board!.Outcome!.Winners.Count);
     }
 

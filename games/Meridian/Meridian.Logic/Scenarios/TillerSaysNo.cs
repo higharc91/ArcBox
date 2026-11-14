@@ -77,7 +77,7 @@ public sealed class TillerSaysNo : IScenario
 
     public Outcome? Evaluate(RulesPack pack, GameState state)
     {
-        if (state.Board!.Value("banks") >= pack.ScenarioDef(Id).Number("banksNeeded"))
+        if (state.Board!.Value("banks") >= BanksNeeded(pack, state))
         {
             return new Outcome(state.Crew.Select(c => c.Seat).ToEqArray(), "Tiller goes quiet. The Meridian is just a ship again.");
         }
@@ -85,6 +85,10 @@ public sealed class TillerSaysNo : IScenario
     }
 
     public Outcome AtLimit(RulesPack pack, GameState state) => new([], "Tiller says no. It will always say no.");
+
+    /// <summary>One bank per player, or the content's minimum if that's more (M3 balance report).</summary>
+    public static int BanksNeeded(RulesPack pack, GameState state)
+        => Math.Max(pack.ScenarioDef(Id).Number("banksNeeded"), state.Crew.Count);
 
     public IBotPolicy Bot(string role) => role == Crew
         ? new PolicyBot(ctx => BotMoves.Act(ctx, "pullBank") ?? BotMoves.Toward(ctx, Core(ctx.State)))

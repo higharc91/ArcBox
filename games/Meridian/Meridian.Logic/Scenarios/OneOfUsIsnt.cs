@@ -17,7 +17,14 @@ public sealed class OneOfUsIsnt : IScenario
     public ScenarioInfo Info { get; } = new(Id, "hidden-traitor", 3, 6);
 
     public bool CanRun(RulesPack pack, GameState state, BreachInfo breach)
-        => state.Ship.Compartments.Count > pack.Start.Place.Count + pack.ScenarioDef(Id).Number("points");
+        => state.Ship.Compartments.Count > pack.Start.Place.Count + Points(pack, state);
+
+    /// <summary>
+    /// One repair point per player, and two more for each player above four: more hands, more to repair (M3 balance
+    /// report). Plus the content's extra.
+    /// </summary>
+    private static int Points(RulesPack pack, GameState state)
+        => state.Crew.Count + 2 * Math.Max(0, state.Crew.Count - 4) + pack.ScenarioDef(Id).Number("extraPoints");
 
     public GameState Setup(RulesPack pack, GameState state, BreachInfo breach)
     {
@@ -29,7 +36,7 @@ public sealed class OneOfUsIsnt : IScenario
             ? new RoleCard(c.Seat, Mimic, Mimic, Audience.OfSeat(c.Seat))
             : new RoleCard(c.Seat, Crew, Crew, Audience.OfSeat(c.Seat))).ToEqArray();
         var places = state.Ship.Compartments.Skip(pack.Start.Place.Count).Select(c => c.Id).ToList();
-        (var picked, state) = Primitives.Pick(state, places, def.Number("points"));
+        (var picked, state) = Primitives.Pick(state, places, Points(pack, state));
         var points = picked.Select((at, i) => new Token($"point-{i + 1}", "repair", at, Audience.Everyone, State: "broken")).ToEqArray();
         var objectives = state.Crew.Select(c => new Objective($"goal-{c.Seat}",
             def.Role(c.Seat == mimic ? Mimic : Crew).Objectives[0], ObjectiveState.Open, Audience.OfSeat(c.Seat))).ToEqArray();

@@ -8,15 +8,15 @@
       "id": "crew",
       "side": "crew",
       "name": "Crew",
-      "briefing": "Tiller, the ship's computer, has decided you are a contamination. Its voice is calm. The vents are not. Every round it opens the compartment where most of you are standing, so don't bunch up. Its core is on the Bridge, or the Command Landing if the Bridge is still lost. Pull three memory banks and Tiller goes quiet. Nobody here is the enemy. Work together; Tiller is counting on you not to.",
+      "briefing": "Tiller, the ship's computer, has decided you are a contamination. Its voice is calm. The vents are not. Every round it opens the compartment where most of you are standing, so don't bunch up. Its core is on the Bridge, or the Command Landing if the Bridge is still lost. Pull a memory bank for each of you (at least three) and Tiller goes quiet. Nobody here is the enemy. Work together; Tiller is counting on you not to.",
       "objectives": [
-        "Pull three memory banks at Tiller's core (Tech 4+) before the round limit."
+        "Pull a memory bank for each crew member, at least three (Tech 5+), before the round limit."
       ]
     }
   ],
   "numbers": {
-    "bankTarget": 4,
+    "bankTarget": 5,
     "banksNeeded": 3,
-    "ventSave": 3
+    "ventSave": 4
   }
 }
