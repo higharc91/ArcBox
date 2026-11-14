@@ -6,6 +6,7 @@ using ArcBox.Server;
 using ArcBox.Server.Campaigns;
 using ArcBox.Server.Content;
 using ArcBox.Server.Games;
+using ArcBox.Server.Games.Meridian;
 using ArcBox.Server.Games.Redline;
 using ArcBox.Server.Games.Tactics;
 using ArcBox.Server.Hubs;
@@ -48,6 +49,7 @@ builder.Services.AddCampaigns();
 builder.Services.AddSpeech(builder.Configuration);
 builder.Services.AddRedline(builder.Configuration);
 builder.Services.AddTactics();
+builder.Services.AddMeridian();
 builder.Services.AddHostedService<RoomSweeper>();
 // Rooms live in memory and die with the process, so don't wait the default 30 s for stateful-reconnect clients.
 builder.Services.Configure<HostOptions>(o => o.ShutdownTimeout = TimeSpan.FromSeconds(5));

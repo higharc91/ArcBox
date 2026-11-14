@@ -1,0 +1,17 @@
+# Deterministic rules: time and entropy come only from the game state.
+P:System.DateTime.Now; Rules never read the clock; the adapter turns time into Timeout commands.
+P:System.DateTime.UtcNow; Rules never read the clock; the adapter turns time into Timeout commands.
+P:System.DateTime.Today; Rules never read the clock; the adapter turns time into Timeout commands.
+P:System.DateTimeOffset.Now; Rules never read the clock; the adapter turns time into Timeout commands.
+P:System.DateTimeOffset.UtcNow; Rules never read the clock; the adapter turns time into Timeout commands.
+T:System.Random; Use Meridian.Logic.Rng stored in GameState, so a snapshot continues with the same draws.
+M:System.Guid.NewGuid; IDs must be deterministic.
+T:System.IO.File; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.Directory; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.FileInfo; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.DirectoryInfo; File access belongs to the injected IFileSource adapter in ArcBox.Sdk.Content.
+T:System.IO.FileStream; Read content through IFileSource.
+T:System.IO.StreamReader; Read content through IFileSource.
+T:System.IO.StreamWriter; Rules never write files.
+T:System.Diagnostics.Stopwatch; Performance measurement belongs to callers and tests.
+T:System.Security.Cryptography.RandomNumberGenerator; Use the Rng stored in GameState.

@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "decaying_orbit",
+  "title": "Decaying Orbit",
+  "roundLimit": 7,
+  "roles": [
+    {
+      "id": "survivor",
+      "side": "survivor",
+      "name": "Survivor",
+      "briefing": "The Anomaly tore something loose and the Meridian is falling. You have seven rounds before it meets the atmosphere. The Escape Pod Bay (or the Airlock) holds pods for all but one of you. The Engine Room (or the Engineering Landing) might restart with three good tries, and then everyone aboard lives. Everyone wins or loses alone. Help, or take a pod.",
+      "objectives": [
+        "Be off the ship or on it when it climbs: take a pod, or restart the engines (Tech 6+, three times)."
+      ]
+    }
+  ],
+  "numbers": {
+    "orbit": 7,
+    "restartTarget": 6,
+    "enginesNeeded": 3
+  }
+}

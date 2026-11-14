@@ -1,0 +1,11 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "over",
+  "data": {
+    "message": "Salvage rights claimed. Nobody else gets a share."
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

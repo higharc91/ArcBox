@@ -1,0 +1,20 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "watch",
+  "data": {
+    "now": {
+      "seq": 3,
+      "kind": "card",
+      "seat": "p3",
+      "title": "Humming Shard",
+      "text": "It\u0027s warm, and it hums when you think about machines.",
+      "seconds": 1.6,
+      "faces": [],
+      "compartment": null
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

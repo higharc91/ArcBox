@@ -1,0 +1,25 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "echo",
+  "data": {
+    "targets": [
+      {
+        "id": "p1",
+        "label": "Player1"
+      },
+      {
+        "id": "p2",
+        "label": "Player2"
+      },
+      {
+        "id": "p3",
+        "label": "Player3"
+      }
+    ],
+    "lent": false
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:03:42.2999998\u002B00:00",
+  "header": null
+}

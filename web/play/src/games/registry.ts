@@ -8,6 +8,7 @@ type Loader = () => Promise<{ module: GameModule }>;
  * downloads the game its room selects. Add a game with one line here.
  */
 const loaders: Record<string, Loader> = {
+  meridian: () => import("./meridian"),
   redline: () => import("./redline"),
   tactics: () => import("./tactics"),
 };

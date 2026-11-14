@@ -141,6 +141,23 @@ public sealed class TestClient : IAsyncDisposable
         return _seen.Count(r => r.Method == method);
     }
 
+    /// <summary>
+    /// The last argument of the newest <paramref name="method"/> message that has arrived, or null if none has; older ones
+    /// of that method are taken too. For a test that only cares about the current view, as a real phone does.
+    /// </summary>
+    public JsonElement? TakeLatest(string method)
+    {
+        Unclaimed(method);
+        var i = _seen.FindLastIndex(r => r.Method == method);
+        if (i < 0)
+        {
+            return null;
+        }
+        var latest = _seen[i];
+        _seen.RemoveAll(r => r.Method == method);
+        return latest.Args.Length > 0 ? latest.Args[^1] : default;
+    }
+
     public async ValueTask DisposeAsync()
     {
         if (_disposed) return;

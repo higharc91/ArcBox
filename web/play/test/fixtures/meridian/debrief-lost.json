@@ -1,0 +1,51 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "debrief",
+  "data": {
+    "message": "The counter-agent took. The Passenger is gone.",
+    "won": false,
+    "roles": [
+      {
+        "seat": "p1",
+        "name": "Player1",
+        "role": "Crew",
+        "won": true
+      },
+      {
+        "seat": "p2",
+        "name": "Player2",
+        "role": "Crew",
+        "won": true
+      },
+      {
+        "seat": "p3",
+        "name": "Player3",
+        "role": "Crew",
+        "won": true
+      },
+      {
+        "seat": "p4",
+        "name": "Player4",
+        "role": "The Host",
+        "won": false
+      }
+    ],
+    "awards": [
+      {
+        "title": "Pathfinder: most compartments found",
+        "seat": "p4",
+        "name": "Player4"
+      },
+      {
+        "title": "Heavy hitter: most damage dealt",
+        "seat": "p4",
+        "name": "Player4"
+      }
+    ],
+    "vip": false
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:04:02.8999998\u002B00:00",
+  "header": null
+}

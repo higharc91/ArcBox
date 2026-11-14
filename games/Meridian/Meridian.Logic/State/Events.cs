@@ -1,0 +1,100 @@
+using System.Text.Json.Serialization;
+
+namespace Meridian.Logic;
+
+/// <summary>
+/// What happened, in order. The adapter turns these into presentation events and narration. No event may have a
+/// property named <c>Kind</c>: <c>kind</c> is the JSON discriminator.
+/// </summary>
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "kind")]
+[JsonDerivedType(typeof(Rejected), "rejected")]
+[JsonDerivedType(typeof(TurnStarted), "turnStarted")]
+[JsonDerivedType(typeof(TurnEnded), "turnEnded")]
+[JsonDerivedType(typeof(Moved), "moved")]
+[JsonDerivedType(typeof(HatchSealed), "hatchSealed")]
+[JsonDerivedType(typeof(OrientRequested), "orientRequested")]
+[JsonDerivedType(typeof(CompartmentRevealed), "compartmentRevealed")]
+[JsonDerivedType(typeof(CardDrawn), "cardDrawn")]
+[JsonDerivedType(typeof(DeckReshuffled), "deckReshuffled")]
+[JsonDerivedType(typeof(DeckEmpty), "deckEmpty")]
+[JsonDerivedType(typeof(Rolled), "rolled")]
+[JsonDerivedType(typeof(BandResolved), "bandResolved")]
+[JsonDerivedType(typeof(ChoiceMade), "choiceMade")]
+[JsonDerivedType(typeof(TraitChanged), "traitChanged")]
+[JsonDerivedType(typeof(MovesChanged), "movesChanged")]
+[JsonDerivedType(typeof(ItemGained), "itemGained")]
+[JsonDerivedType(typeof(ItemUsed), "itemUsed")]
+[JsonDerivedType(typeof(CompartmentUsed), "compartmentUsed")]
+[JsonDerivedType(typeof(TradeOffered), "tradeOffered")]
+[JsonDerivedType(typeof(TradeAnswered), "tradeAnswered")]
+[JsonDerivedType(typeof(BreachHeld), "breachHeld")]
+[JsonDerivedType(typeof(BreachFired), "breachFired")]
+[JsonDerivedType(typeof(Attacked), "attacked")]
+[JsonDerivedType(typeof(Died), "died")]
+[JsonDerivedType(typeof(ItemDropped), "itemDropped")]
+[JsonDerivedType(typeof(MonsterMoved), "monsterMoved")]
+[JsonDerivedType(typeof(MonsterRecovered), "monsterRecovered")]
+[JsonDerivedType(typeof(DieLent), "dieLent")]
+[JsonDerivedType(typeof(ScenarioChosen), "scenarioChosen")]
+[JsonDerivedType(typeof(RoundClosed), "roundClosed")]
+[JsonDerivedType(typeof(GameOver), "gameOver")]
+[JsonDerivedType(typeof(ScenarioActed), "scenarioActed")]
+[JsonDerivedType(typeof(VoteCalled), "voteCalled")]
+[JsonDerivedType(typeof(BallotCast), "ballotCast")]
+[JsonDerivedType(typeof(VoteResolved), "voteResolved")]
+[JsonDerivedType(typeof(ScenarioNotice), "scenarioNotice")]
+public abstract record GameEvent;
+
+/// <summary>A command that wasn't legal. The state is unchanged; player input never throws.</summary>
+public sealed record Rejected(Command Command, string Reason) : GameEvent;
+public sealed record TurnStarted(SeatId Seat, int Round, int Moves) : GameEvent;
+public sealed record TurnEnded(SeatId Seat) : GameEvent;
+public sealed record Moved(SeatId Seat, CompartmentId From, CompartmentId To, int Cost) : GameEvent;
+public sealed record HatchSealed(CompartmentId Compartment, Side Side) : GameEvent;
+public sealed record OrientRequested(SeatId Seat, TileId Tile, EqArray<int> Rotations) : GameEvent;
+public sealed record CompartmentRevealed(SeatId Seat, Compartment Compartment) : GameEvent;
+public sealed record CardDrawn(SeatId Seat, CardId Card, CardKind Deck) : GameEvent;
+public sealed record DeckReshuffled(CardKind Deck) : GameEvent;
+public sealed record DeckEmpty(CardKind Deck) : GameEvent;
+public sealed record Rolled(SeatId Seat, RollReason Reason, Trait? Trait, DiceRoll Dice) : GameEvent;
+public sealed record BandResolved(SeatId Seat, CardId Card, int Band, string Text) : GameEvent;
+public sealed record ChoiceMade(SeatId Seat, CardId Card, string Option, string Text) : GameEvent;
+public sealed record TraitChanged(SeatId Seat, Trait Trait, int FromStep, int ToStep) : GameEvent;
+public sealed record MovesChanged(SeatId Seat, int Moves) : GameEvent;
+public sealed record ItemGained(SeatId Seat, CardId Card) : GameEvent;
+public sealed record ItemUsed(SeatId Seat, CardId Card, bool Discarded) : GameEvent;
+public sealed record CompartmentUsed(SeatId Seat, CompartmentId Compartment) : GameEvent;
+public sealed record TradeOffered(SeatId From, SeatId To, TradeOffer Offer) : GameEvent;
+public sealed record TradeAnswered(SeatId From, SeatId To, bool Accepted) : GameEvent;
+public sealed record BreachHeld(SeatId Seat, int Total, int Needed) : GameEvent;
+public sealed record BreachFired(BreachInfo Breach) : GameEvent;
+
+/// <summary>A fight. <see cref="Result"/> is <c>hit</c>, <c>stunned</c> (a monster), <c>staggered</c> (the attacker) or <c>tie</c>.</summary>
+public sealed record Attacked(string Attacker, string Defender, DiceRoll AttackRoll, DiceRoll DefendRoll, string Result) : GameEvent;
+public sealed record Died(SeatId Seat) : GameEvent;
+public sealed record ItemDropped(SeatId Seat, CardId Card, CompartmentId At) : GameEvent;
+public sealed record MonsterMoved(string Monster, CompartmentId From, CompartmentId To) : GameEvent;
+public sealed record MonsterRecovered(string Monster) : GameEvent;
+public sealed record DieLent(SeatId From, SeatId To) : GameEvent;
+public sealed record ScenarioChosen(string Scenario, string Title) : GameEvent;
+
+/// <summary>An endgame round ended: hazards run now (spec §4.3), and the round limit is checked.</summary>
+public sealed record RoundClosed(int Round) : GameEvent;
+
+public sealed record GameOver(Outcome Outcome) : GameEvent;
+public sealed record ScenarioActed(SeatId Seat, string Action, string? Data, string Text) : GameEvent;
+public sealed record VoteCalled(SeatId By, string Purpose, EqArray<SeatId> Voters) : GameEvent;
+
+/// <summary>Someone voted: says who, never what, so phones can show progress without revealing a ballot.</summary>
+public sealed record BallotCast(SeatId Voter) : GameEvent;
+
+/// <summary>
+/// The vote's result: the choice with the most votes, or null on a tie or when nobody voted. The tally (choice to count)
+/// is public once it resolves; individual ballots stay secret.
+/// </summary>
+public sealed record VoteResolved(string Purpose, string? Result, EqArray<VoteCount> Tally) : GameEvent;
+
+public sealed record VoteCount(string Choice, int Votes);
+
+/// <summary>Something everyone learns, with nobody's name on it (an anonymous sabotage, a hazard).</summary>
+public sealed record ScenarioNotice(string Text, CompartmentId? At = null) : GameEvent;

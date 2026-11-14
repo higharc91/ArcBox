@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="Meridian.Logic" />
+    <Using Include="Meridian.Game" />
+    <Using Include="ArcBox.Sdk" />
+    <Using Include="Meridian.Logic.Tests" />
+    <!-- One copy of the shipped-pack loader and the JSON helper, shared with the rules tests. -->
+    <Compile Include="..\Meridian.Logic.Tests\Support\BasePack.cs" Link="Support\BasePack.cs" />
+    <Compile Include="..\Meridian.Logic.Tests\Support\Json.cs" Link="Support\Json.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Game\Meridian.Game.csproj" />
+    <ProjectReference Include="..\..\..\src\ArcBox.Sdk.Testing\ArcBox.Sdk.Testing.csproj" />
+  </ItemGroup>
+</Project>

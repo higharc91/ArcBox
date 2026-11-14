@@ -1,0 +1,17 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "roll",
+  "data": {
+    "reason": "breach",
+    "trait": null,
+    "dice": 1,
+    "title": "Breach roll",
+    "text": "Every Anomaly aboard makes the next one more likely to wake something.",
+    "bands": [],
+    "needed": 6
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:20\u002B00:00",
+  "header": null
+}

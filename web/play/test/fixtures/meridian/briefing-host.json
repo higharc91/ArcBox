@@ -1,0 +1,22 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "briefing",
+  "data": {
+    "title": "The Passenger",
+    "you": {
+      "role": "host",
+      "name": "The Host",
+      "briefing": "Something came aboard with the Anomaly, and it chose you. You can feel it behind your eyes, patient and hungry. Its brood answers you now. Keep the crew from the labs, and keep their needles away from you. Every round you survive, another of the brood crawls free. Hunt them down, or simply outlast them: the Meridian is yours if they fail in time.",
+      "objectives": [
+        "Kill every crew member, or hold out until the round limit."
+      ]
+    },
+    "ready": false,
+    "readyCount": 0,
+    "seats": 4
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:02:59.0399998\u002B00:00",
+  "header": null
+}

@@ -1,0 +1,210 @@
+{
+  "$schema": "../schema/cards.schema.json",
+  "cards": [
+    {
+      "id": "humming_shard",
+      "title": "Humming Shard",
+      "text": "It's warm, and it hums when you think about machines.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "tech",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "black_mirror",
+      "title": "Black Mirror",
+      "text": "It shows the room behind you, a second late.",
+      "item": {
+        "use": {
+          "label": "Look into it",
+          "effects": [
+            {
+              "kind": "gain",
+              "traits": "nerve",
+              "steps": 1
+            },
+            {
+              "kind": "lose",
+              "traits": "physical",
+              "steps": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "warm_egg",
+      "title": "Warm Egg",
+      "text": "Pale, leathery, the size of a fist. Sometimes it kicks.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "brawn",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "stopped_watch",
+      "title": "Stopped Watch",
+      "text": "Every hand points straight up.",
+      "item": {
+        "use": {
+          "label": "Wind it",
+          "effects": [
+            {
+              "kind": "moves",
+              "delta": 3
+            }
+          ],
+          "single": true
+        }
+      }
+    },
+    {
+      "id": "unknown_chart",
+      "title": "Unknown Star Chart",
+      "text": "None of these stars exist. Looking at it makes you calm.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "nerve",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "singing_wire",
+      "title": "Singing Wire",
+      "text": "A coil of wire that sings a note just before you fall.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "agility",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "bone_key",
+      "title": "Bone Key",
+      "text": "It fits no lock you've seen. It pulls towards the reactor.",
+      "item": {
+        "use": {
+          "label": "Follow its pull",
+          "effects": [
+            {
+              "kind": "moveTo",
+              "tile": "reactor_core"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sealed_vial",
+      "title": "Sealed Vial",
+      "text": "Silver liquid that moves against the tilt.",
+      "item": {
+        "use": {
+          "label": "Drink it",
+          "effects": [
+            {
+              "kind": "gain",
+              "traits": "physical",
+              "steps": 1
+            },
+            {
+              "kind": "gain",
+              "traits": "mental",
+              "steps": 1
+            }
+          ],
+          "single": true
+        }
+      }
+    },
+    {
+      "id": "drowned_logbook",
+      "title": "Waterlogged Logbook",
+      "text": "There is no water aboard. The pages are soaked.",
+      "item": {
+        "use": {
+          "label": "Read a page",
+          "effects": [
+            {
+              "kind": "gain",
+              "traits": "tech",
+              "steps": 1
+            },
+            {
+              "kind": "lose",
+              "traits": "nerve",
+              "steps": 1
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "childs_drawing",
+      "title": "Child's Drawing",
+      "text": "Crayon: the ship, and a figure waving from inside. There were no children aboard.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "nerve",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "cold_coin",
+      "title": "Cold Coin",
+      "text": "Heads on both sides. Different faces.",
+      "item": {
+        "use": {
+          "label": "Flip it",
+          "effects": [
+            {
+              "kind": "draw",
+              "card": "salvage"
+            }
+          ],
+          "single": true
+        }
+      }
+    },
+    {
+      "id": "pocket_of_quiet",
+      "title": "Pocket of Quiet",
+      "text": "A sealed bag. Inside, the alarms can't reach you.",
+      "item": {
+        "use": {
+          "label": "Open it",
+          "effects": [
+            {
+              "kind": "gain",
+              "traits": "mental",
+              "steps": 2
+            }
+          ],
+          "single": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "phase": "debrief",
+  "banner": "Debrief",
+  "seats": [
+    {
+      "id": "p1",
+      "name": "Player1",
+      "crew": "Ines Okafor",
+      "colour": 0,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p2",
+      "name": "Player2",
+      "crew": "Tobe Raske",
+      "colour": 1,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p3",
+      "name": "Player3",
+      "crew": "Sable Quist",
+      "colour": 2,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p4",
+      "name": "Player4",
+      "crew": "Dr. Anselm Varga",
+      "colour": 3,
+      "connected": true,
+      "auto": false,
+      "active": false
+    }
+  ],
+  "compartments": [
+    {
+      "id": "c1",
+      "tile": "airlock",
+      "at": [
+        "habitat",
+        0,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n"
+      ]
+    },
+    {
+      "id": "c2",
+      "tile": "docking_ring",
+      "at": [
+        "habitat",
+        0,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c3",
+      "tile": "central_lift",
+      "at": [
+        "habitat",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c4",
+      "tile": "command_landing",
+      "at": [
+        "command",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c5",
+      "tile": "engineering_landing",
+      "at": [
+        "engineering",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c6",
+      "tile": "mess_hall",
+      "at": [
+        "habitat",
+        1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "sealed": [
+        "n"
+      ]
+    },
+    {
+      "id": "c7",
+      "tile": "hydroponics",
+      "at": [
+        "habitat",
+        1,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c8",
+      "tile": "med_bay",
+      "at": [
+        "habitat",
+        -1,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c9",
+      "tile": "maintenance_shaft",
+      "at": [
+        "habitat",
+        -2,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c10",
+      "tile": "galley",
+      "at": [
+        "habitat",
+        2,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c11",
+      "tile": "storage_closet",
+      "at": [
+        "habitat",
+        1,
+        0
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c12",
+      "tile": "junction",
+      "at": [
+        "habitat",
+        2,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c13",
+      "tile": "chapel",
+      "at": [
+        "habitat",
+        3,
+        2
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c14",
+      "tile": "gymnasium",
+      "at": [
+        "habitat",
+        -3,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c15",
+      "tile": "sealed_alcove",
+      "at": [
+        "habitat",
+        3,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c16",
+      "tile": "isolation_ward",
+      "at": [
+        "habitat",
+        -1,
+        0
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c17",
+      "tile": "recreation_deck",
+      "at": [
+        "habitat",
+        2,
+        3
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c18",
+      "tile": "junction",
+      "at": [
+        "habitat",
+        2,
+        4
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c19",
+      "tile": "suit_lockers",
+      "at": [
+        "habitat",
+        -4,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c20",
+      "tile": "waste_reclamation",
+      "at": [
+        "engineering",
+        0,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "n",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c21",
+      "tile": "laundry",
+      "at": [
+        "habitat",
+        1,
+        4
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c22",
+      "tile": "quiet_room",
+      "at": [
+        "habitat",
+        -5,
+        1
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n",
+        "e"
+      ]
+    },
+    {
+      "id": "c23",
+      "tile": "crew_bunks",
+      "at": [
+        "habitat",
+        -5,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c24",
+      "tile": "archive",
+      "at": [
+        "habitat",
+        1,
+        3
+      ],
+      "rotation": 3,
+      "hatches": [
+        "n",
+        "e"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c25",
+      "tile": "containment_lab",
+      "at": [
+        "engineering",
+        -1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c26",
+      "tile": "service_corridor",
+      "at": [
+        "habitat",
+        2,
+        5
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "c27",
+      "tile": "cryo_bay",
+      "at": [
+        "habitat",
+        2,
+        6
+      ],
+      "rotation": 3,
+      "hatches": [
+        "n",
+        "e",
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c28",
+      "tile": "service_corridor",
+      "at": [
+        "habitat",
+        3,
+        6
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    }
+  ],
+  "crew": [
+    {
+      "id": "p1",
+      "name": "Player1",
+      "at": "c18",
+      "colour": 0
+    },
+    {
+      "id": "p2",
+      "name": "Player2",
+      "at": "c18",
+      "colour": 1
+    },
+    {
+      "id": "p3",
+      "name": "Player3",
+      "at": "c10",
+      "colour": 2
+    },
+    {
+      "id": "p4",
+      "name": "Player4",
+      "at": "c18",
+      "colour": 3
+    }
+  ],
+  "tilesLeft": 22,
+  "anomaliesDrawn": 6,
+  "round": 15,
+  "now": null,
+  "log": [
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp."
+  ],
+  "scenario": {
+    "title": "One of Us Isn\u0027t",
+    "roundsLeft": 0,
+    "tokens": [
+      {
+        "id": "point-1",
+        "kind": "repair",
+        "at": "c21",
+        "state": "broken"
+      },
+      {
+        "id": "point-2",
+        "kind": "repair",
+        "at": "c27",
+        "state": "fixed"
+      },
+      {
+        "id": "point-3",
+        "kind": "repair",
+        "at": "c26",
+        "state": "broken"
+      },
+      {
+        "id": "point-4",
+        "kind": "repair",
+        "at": "c16",
+        "state": "fixed"
+      }
+    ],
+    "counters": [
+      {
+        "id": "votes",
+        "value": 0
+      },
+      {
+        "id": "voteRound",
+        "value": -1
+      },
+      {
+        "id": "exposed",
+        "value": 0
+      },
+      {
+        "id": "suspect-p2",
+        "value": 4
+      },
+      {
+        "id": "suspect-p4",
+        "value": 5
+      },
+      {
+        "id": "suspect-p1",
+        "value": 3
+      },
+      {
+        "id": "suspect-p3",
+        "value": 2
+      }
+    ],
+    "objectives": [
+      {
+        "id": "goal-p1",
+        "text": "Repair every point (Tech 4\u002B), or name the mimic in a vote at the scanner.",
+        "state": "open"
+      },
+      {
+        "id": "goal-p2",
+        "text": "Keep the points from all being repaired until the round limit, and avoid being named.",
+        "state": "open"
+      },
+      {
+        "id": "goal-p3",
+        "text": "Repair every point (Tech 4\u002B), or name the mimic in a vote at the scanner.",
+        "state": "open"
+      },
+      {
+        "id": "goal-p4",
+        "text": "Repair every point (Tech 4\u002B), or name the mimic in a vote at the scanner.",
+        "state": "open"
+      }
+    ],
+    "reveal": [
+      {
+        "id": "p1",
+        "role": "Crew",
+        "won": false
+      },
+      {
+        "id": "p2",
+        "role": "The Mimic",
+        "won": true
+      },
+      {
+        "id": "p3",
+        "role": "Crew",
+        "won": false
+      },
+      {
+        "id": "p4",
+        "role": "Crew",
+        "won": false
+      }
+    ],
+    "outcome": "Time ran out. One of them was never one of them."
+  }
+}
