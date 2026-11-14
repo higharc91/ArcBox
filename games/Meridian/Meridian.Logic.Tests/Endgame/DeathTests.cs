@@ -4,7 +4,7 @@ public sealed class DeathTests
 {
     private static Play Endgame()
     {
-        var game = Play.Game();
+        var game = Play.Game(StubScenario.Pack((new StubScenario("stub"), 10)));
         game.State = EndgameStateTests.WithBoard(game);
         return game;
     }

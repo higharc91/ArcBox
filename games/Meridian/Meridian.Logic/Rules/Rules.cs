@@ -57,7 +57,16 @@ public static class Rules
     /// </summary>
     public static EqArray<Command> Legal(RulesPack pack, GameState state, SeatId seat)
     {
-        if (state.Phase is not (Phase.Explore or Phase.Endgame) || state.IndexOf(seat) < 0)
+        if (state.IndexOf(seat) < 0)
+        {
+            return [];
+        }
+        if (state.Phase == Phase.Breach)
+        {
+            // Briefings: the only command is the adapter's Begin, once the scenario is set up.
+            return state.Board is not null && seat == state.ActiveSeat ? [new Begin(seat)] : [];
+        }
+        if (state.Phase is not (Phase.Explore or Phase.Endgame))
         {
             return [];
         }
@@ -101,7 +110,7 @@ public static class Rules
 
     private static string? Rejection(RulesPack pack, GameState state, Command command)
     {
-        if (state.Phase is not (Phase.Explore or Phase.Endgame))
+        if (state.Phase is not (Phase.Explore or Phase.Endgame) && command is not Begin)
         {
             return "Nobody can act now.";
         }

@@ -12,6 +12,10 @@ public static class PackLoader
 {
     public const string TilesFile = "rules/tiles.json";
     public const string CrewFile = "rules/crew.json";
+    public const string BreachFile = "rules/breach.json";
+
+    /// <summary>The words a briefing may run to (spec §11: briefings must stay readable on a phone).</summary>
+    public const int BriefingWords = 120;
 
     public static readonly IReadOnlyList<(CardKind Kind, string File)> CardFiles =
     [
@@ -39,8 +43,9 @@ public static class PackLoader
                                     CheckBody? Check = null, ChoiceBody? Choice = null, ItemBody? Item = null);
     private sealed record CardFileJson(EqArray<CardEntry> Cards);
 
-    public static RulesPack Load(IFileSource files, string root, MeridianRules? rules = null)
+    public static RulesPack Load(IFileSource files, string root, MeridianRules? rules = null, ScenarioSet? scenarios = null)
     {
+        scenarios ??= ScenarioRegistry.Default;
         rules ??= new MeridianRules();
         var errors = new List<ContentError>();
 
@@ -55,15 +60,33 @@ public static class PackLoader
             }
         }
 
+        // The Breach table and scenario files are optional until a pack ships scenarios.
+        var breach = files.Exists(Path.Combine(root, BreachFile)) ? Read<BreachTable>(files, root, BreachFile, errors) : BreachTable.Empty;
+        var defs = new List<ScenarioDef>();
+        foreach (var id in breach?.Scenarios ?? [])
+        {
+            if (Read<ScenarioDef>(files, root, ScenarioFile(id), errors) is { } def)
+            {
+                defs.Add(def);
+            }
+        }
+
         if (errors.Count > 0 || tiles is null || crew is null)
         {
             throw new ContentException(errors);
         }
 
-        var pack = new RulesPack(rules, tiles.StartTiles.Items, tiles.Tiles.Items, tiles.Start, crew.Crew.Items, cards);
+        var pack = new RulesPack(rules, tiles.StartTiles.Items, tiles.Tiles.Items, tiles.Start, crew.Crew.Items, cards,
+                                 breach, defs, scenarios);
         errors.AddRange(Validation.Check(pack));
+        if (errors.Count == 0)
+        {
+            errors.AddRange(ScenarioRegistry.Check(pack));
+        }
         return errors.Count > 0 ? throw new ContentException(errors) : pack;
     }
+
+    public static string ScenarioFile(string id) => $"rules/scenarios/{id}.json";
 
     private static T? Read<T>(IFileSource files, string root, string relative, List<ContentError> errors) where T : class
     {

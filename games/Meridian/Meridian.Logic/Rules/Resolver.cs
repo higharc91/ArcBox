@@ -15,8 +15,10 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
 
     public void Apply(Command command)
     {
+        var from = Events.Count;
         switch (command)
         {
+            case Begin: BeginEndgame(); break;
             case EndTurn: FinishTurn(); break;
             case Timeout: TimeoutNow(); break;
             case MoveTo m: Move(m); break;
@@ -36,6 +38,7 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
         AfterStep();
+        EndgameAfterStep(from);
     }
 
     /// <summary>The legal answers to <paramref name="waiting"/>, not counting Timeout.</summary>

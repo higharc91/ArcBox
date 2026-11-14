@@ -15,6 +15,7 @@ public static partial class Validation
         CheckStart(pack, errors);
         CheckCrew(pack, errors);
         CheckCards(pack, errors);
+        CheckScenarios(pack, errors);
         return errors;
     }
 
@@ -248,6 +249,48 @@ public static partial class Validation
                     }
                     Effects(pack, use.Effects, file, $"{where} use", errors, passive: false);
                 }
+            }
+        }
+    }
+
+    private static void CheckScenarios(RulesPack pack, List<ContentError> errors)
+    {
+        var breach = pack.Breach;
+        foreach (var def in pack.ScenarioDefs)
+        {
+            var file = PackLoader.ScenarioFile(def.Id);
+            Id(def.Id, file, "id", errors);
+            if (def.RoundLimit < 1)
+            {
+                errors.Add(new(file, "roundLimit", "must be at least 1: every scenario has a round limit"));
+            }
+            if (def.Roles.IsEmpty || def.Roles.Select(r => r.Id).Distinct().Count() != def.Roles.Count)
+            {
+                errors.Add(new(file, "roles", "needs at least one role, each listed once"));
+            }
+            foreach (var role in def.Roles)
+            {
+                var words = role.Briefing.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+                if (words > PackLoader.BriefingWords)
+                {
+                    errors.Add(new(file, $"role {role.Id}", $"the briefing is {words} words; at most {PackLoader.BriefingWords}"));
+                }
+            }
+        }
+        foreach (var (entry, i) in breach.Table.Select((e, i) => (e, i)))
+        {
+            var where = $"table[{i}]";
+            if (!pack.Cards.Any(c => c.Id == entry.Anomaly && c.Kind == CardKind.Anomaly))
+            {
+                errors.Add(new(PackLoader.BreachFile, where, $"{entry.Anomaly} is not an Anomaly"));
+            }
+            if (entry.Tile is { } tile && !pack.HasTile(tile))
+            {
+                errors.Add(new(PackLoader.BreachFile, where, $"unknown tile {tile}"));
+            }
+            foreach (var id in entry.Scenarios.Where(s => !breach.Scenarios.Contains(s)))
+            {
+                errors.Add(new(PackLoader.BreachFile, where, $"names {id}, which isn't in the scenario list"));
             }
         }
     }

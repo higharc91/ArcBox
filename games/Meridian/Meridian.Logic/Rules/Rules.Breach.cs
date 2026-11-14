@@ -52,5 +52,6 @@ internal sealed partial class Resolver
     {
         State = State with { Phase = Phase.Breach, Breach = breach, Waiting = null };
         Events.Add(new BreachFired(breach));
+        ChooseScenario(breach);
     }
 }

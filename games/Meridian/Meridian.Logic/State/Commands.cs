@@ -23,6 +23,8 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(MonsterMove), "monsterMove")]
 [JsonDerivedType(typeof(MonsterAttack), "monsterAttack")]
 [JsonDerivedType(typeof(Lend), "lend")]
+[JsonDerivedType(typeof(Begin), "begin")]
+[JsonDerivedType(typeof(ScenarioAct), "scenarioAct")]
 public abstract record Command(SeatId From);
 
 public sealed record MoveTo(SeatId From, CompartmentId To) : Command(From);
@@ -50,3 +52,9 @@ public sealed record MonsterAttack(SeatId From, string Monster, SeatId Target) :
 
 /// <summary>An echo lends a living crew member an extra die on their next check (spec §2.8).</summary>
 public sealed record Lend(SeatId From, SeatId To) : Command(From);
+
+/// <summary>The adapter's command once every briefing is read: the endgame begins (spec §3.1).</summary>
+public sealed record Begin(SeatId From) : Command(From);
+
+/// <summary>A scenario's own action (spec §4.3), by its id, with an optional target.</summary>
+public sealed record ScenarioAct(SeatId From, string Action, string? Data = null) : Command(From);

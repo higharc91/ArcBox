@@ -35,6 +35,9 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(MonsterMoved), "monsterMoved")]
 [JsonDerivedType(typeof(MonsterRecovered), "monsterRecovered")]
 [JsonDerivedType(typeof(DieLent), "dieLent")]
+[JsonDerivedType(typeof(ScenarioChosen), "scenarioChosen")]
+[JsonDerivedType(typeof(RoundClosed), "roundClosed")]
+[JsonDerivedType(typeof(GameOver), "gameOver")]
 public abstract record GameEvent;
 
 /// <summary>A command that wasn't legal. The state is unchanged; player input never throws.</summary>
@@ -68,3 +71,9 @@ public sealed record ItemDropped(SeatId Seat, CardId Card, CompartmentId At) : G
 public sealed record MonsterMoved(string Monster, CompartmentId From, CompartmentId To) : GameEvent;
 public sealed record MonsterRecovered(string Monster) : GameEvent;
 public sealed record DieLent(SeatId From, SeatId To) : GameEvent;
+public sealed record ScenarioChosen(string Scenario, string Title) : GameEvent;
+
+/// <summary>An endgame round ended: hazards run now (spec §4.3), and the round limit is checked.</summary>
+public sealed record RoundClosed(int Round) : GameEvent;
+
+public sealed record GameOver(Outcome Outcome) : GameEvent;

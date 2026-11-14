@@ -6,7 +6,7 @@ public sealed class EndgameStateTests
     internal static GameState WithBoard(Play game)
     {
         var mimic = new RoleCard(Play.S2, "mimic", "mimic", Audience.OfSeat(Play.S2));
-        var board = new ScenarioBoard("test", [new RoleCard(Play.S1, "crew", "crew", Audience.Everyone), mimic],
+        var board = new ScenarioBoard("stub", [new RoleCard(Play.S1, "crew", "crew", Audience.Everyone), mimic],
             [new Token("brood1", "brood", Play.C(1), Audience.Everyone, Controller: Play.S2, Stats: new MonsterStats(4, 3, 2)),
              new Token("dropped1", "item", Play.C(2), Audience.Everyone, Card: new CardId("pry_bar"))],
             [new Counter("sabotage", 1, Audience.OfSeat(Play.S2)), new Counter("repairs", 2, Audience.Everyone)],
