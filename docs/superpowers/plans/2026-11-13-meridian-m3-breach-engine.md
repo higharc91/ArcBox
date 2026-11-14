@@ -1,4 +1,4 @@
-> Status: approved 2026-11-14; in progress on branch `ccr-de425e76-4vxzw2`. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: complete (2026-11-14). Tasks 1–14 are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (through #371); see [Implementation notes](#implementation-notes) for where the code differs from this plan. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M3 Breach Engine Implementation Plan
 
@@ -12,6 +12,22 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 - `Meridian.Game` grows the Breach sequence, the Endgame flow, the endgame disconnect pause and the Debrief. M2's single clock and session record carry over unchanged in shape.
 
 **Spec:** [2026-11-13-meridian-design.md](../specs/2026-11-13-meridian-design.md), §2.6–§2.9, §3, §4, §6, §7. **Earlier stages:** [M1](2026-11-13-meridian-m1-rules-core.md) and [M2](2026-11-13-meridian-m2-playable-explore.md), including their *Implementation notes*.
+
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **Scenarios hang off the pack.** `RulesPack.Scenarios` is a `ScenarioSet` (the classes) beside `ScenarioDefs` (the JSON) and the `BreachTable`; `ScenarioRegistry.Default` holds the five S1 classes, and `ScenarioRegistry.Check` fails a pack whose table names a scenario with no class, or a class whose roles its file doesn't define. `WithScenarios` and `WithForcedScenario` make test and Development copies. Logic tests load the base pack with `ScenarioSet.Empty` and add a `StubScenario` where they need one.
+- **`Begin` starts the endgame.** The Breach leaves the game in `Phase.Breach` with the board dealt; the session shows the briefings and sends `Begin` when every seat is Ready or `BriefingTime` runs out, so the rules never wait on a clock.
+- **A vote is one `VotePending` owed by several seats**, not one pending decision per seat. `Visibility` strips every ballot but the viewer's own; the vote resolves when the last ballot is in or `VoteWait` runs out.
+- **One of Us Isn't delays its sabotage notice** to the round's end, through a token only the mimic sees, and adds per-seat suspicion counters. An immediate notice named the mimic by turn order.
+- **Salvage Rights' Prize is an object, not an item.** Its card leaves the finder's items and rides on the prize token (`Token.Card`), so it can't be used up, traded or dropped like gear, and every card still exists once.
+- **Scenario numbers scale with players** in their JSON (`Number(...)`), from the balance report: the brood is players − 2 (capped at players − 1), One of Us has players + 2 × max(0, players − 4) points, Tiller has max(3, players) banks.
+- **Session phases** `Briefing`, `Endgame` and `Debrief` join M2's, and the one clock gains `Briefing`, `Pause` and `Debrief` purposes. A living seat that drops in the endgame gets one `EndgamePause` per disconnection, the same whoever it is, then a bot plays its role.
+- **The TV's scenario panel is optional** (`MeridianHostView.Scenario`, absent before the Breach) and is built from `Visibility.For(state, null)`. Its reveal (`RevealCard`, keyed by seat `id` for patches) and outcome appear only once the game is over. Tokens carry their `state` (a broken repair point, say).
+- **The secrecy test** searches serialized views for structural patterns (`"role":"…"`, a role's `"name"`, token and counter `"id"`s, objective texts), minus anything that reaches the viewer through an audience they are in. Dropping the role filter in `Visibility` fails it.
+- **Test support:** `ArcServerFactory.MeridianScenario` sets the Development `Meridian:Scenario` setting, so the hub test runs once per scenario.
+- **Open design question** ([balance report](../reports/2026-11-meridian-endgame-balance.md)): One of Us Isn't and Tiller Says No can only be lost at the round limit. That needs the owner's decision before the S2 scenarios.
 
 **Not in this plan:**
 - Scenarios 6–12 (stage M7). The contract and primitives must be able to express them; Task 3 checks that on paper against all twelve.
@@ -122,9 +138,9 @@ public sealed record Outcome(EqArray<SeatId> Winners, string Message);
 // GameState gains: ScenarioBoard? Board.
 ```
 
-- [ ] **Step 1: Write the failing tests.** Every new record round-trips through JSON with value equality; `Audience.Includes` for each kind, including the TV; the invariants accept a valid endgame state and catch a token in a compartment that doesn't exist, a role for an unknown seat, and a living crew member with a marker at step 0 (Review focus 7: a state with secret roles round-trips and plays on).
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): endgame state and audiences`.
+- [x] **Step 1: Write the failing tests.** Every new record round-trips through JSON with value equality; `Audience.Includes` for each kind, including the TV; the invariants accept a valid endgame state and catch a token in a compartment that doesn't exist, a role for an unknown seat, and a living crew member with a marker at step 0 (Review focus 7: a state with secret roles round-trips and plays on).
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): endgame state and audiences`.
 
 ### Task 2: Combat, damage, death and echoes
 
@@ -138,9 +154,9 @@ public sealed record Outcome(EqArray<SeatId> Winners, string Message);
 - **A death mid-wait** cancels the wait the dead seat owed and resolves it as a timeout would have (Review focus 2).
 - **A dead controller's monsters** still activate on that seat's turns (Review focus 3).
 
-- [ ] **Step 1: Write the failing tests.** Every combat outcome; allocation and its timeout; a stagger; stunned monsters skip one activation; death drops items; echo lending; Review focus 2 and 3.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): combat, damage, death and echoes`.
+- [x] **Step 1: Write the failing tests.** Every combat outcome; allocation and its timeout; a stagger; stunned monsters skip one activation; death drops items; echo lending; Review focus 2 and 3.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): combat, damage, death and echoes`.
 
 ### Task 3: The scenario contract, the Breach table and selection
 
@@ -167,9 +183,9 @@ public interface IScenario
 - **The registry** refuses a scenario that deals a role with no bot, or whose content file is missing or fails validation.
 - **On paper:** a test-only table lists all twelve scenarios of spec §4.5 against the primitives each needs. It fails if any needs a primitive that doesn't exist, so M7 can't discover a missing one late.
 
-- [ ] **Step 1: Write the failing tests.** Selection by table, filtering, fallback and the ship-full case; win order; registry refusals; the twelve-scenario coverage table.
-- [ ] **Step 2–4:** fail, implement, pass. Until Task 6, a stub scenario in the tests stands in.
-- [ ] **Step 5: Commit** `feat(meridian): scenario contract, Breach table and selection`.
+- [x] **Step 1: Write the failing tests.** Selection by table, filtering, fallback and the ship-full case; win order; registry refusals; the twelve-scenario coverage table.
+- [x] **Step 2–4:** fail, implement, pass. Until Task 6, a stub scenario in the tests stands in.
+- [x] **Step 5: Commit** `feat(meridian): scenario contract, Breach table and selection`.
 
 ### Task 4: Scenario actions, hazards and votes
 
@@ -180,9 +196,9 @@ public interface IScenario
 - **Votes** are the first wait owed by more than one seat. `VotePending(Owed, Ballots, Audience)` accepts a ballot from any seat still owed, stores it with that seat's own audience, and resolves when the last is in. `Rules.Legal` lists `CastVote` for every owed seat; `BotRunner.Actor` returns the first owed seat, for bots.
 - The phone's `turn` screen gains these actions from `Rules.Legal`, as M2 did for everything else.
 
-- [ ] **Step 1: Write the failing tests.** Actions appear only where and for whom they're allowed; a check-based action resolves through M1's check path; hazards run once per round in order; a vote takes ballots in any order, hides each until resolved, and resolves once.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): scenario actions, hazards and votes`.
+- [x] **Step 1: Write the failing tests.** Actions appear only where and for whom they're allowed; a check-based action resolves through M1's check path; hazards run once per round in order; a vote takes ballots in any order, hides each until resolved, and resolves once.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): scenario actions, hazards and votes`.
 
 ### Task 5: Visibility
 
@@ -192,9 +208,9 @@ public interface IScenario
 - **Bots** get `Visibility.For(state, seat)`, not the state; `IBotPolicy.Choose` gains no other way in. `BotRunner` is changed to pass the visible state.
 - **The structural test** (Review focus 1): reflection walks `GameState` and fails if a field carrying secret information has no audience. That catches a new secret field added later without a filter.
 
-- [ ] **Step 1: Write the failing tests.** Each removed thing for each viewer kind; the TV sees nothing secret; a seat sees its own secrets; the structural test.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): visibility by audience`.
+- [x] **Step 1: Write the failing tests.** Each removed thing for each viewer kind; the TV sees nothing secret; a seat sees its own secrets; the structural test.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): visibility by audience`.
 
 ### Task 6: The Passenger
 
@@ -202,9 +218,9 @@ public interface IScenario
 
 As in the table above. **Bots:** the host attacks the nearest crew member with brood and stays away from crew carrying a dose; crew synthesize, then converge on the host together.
 
-- [ ] **Step 1: Write the failing tests.** Setup; synthesize, inject and the win; brood spawning; the round limit; every crew member dead; Review focus 3 (a dead host's brood still act); bots play it to an outcome for seeds 1–200 at 3–6 players with invariants after every step.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): The Passenger`.
+- [x] **Step 1: Write the failing tests.** Setup; synthesize, inject and the win; brood spawning; the round limit; every crew member dead; Review focus 3 (a dead host's brood still act); bots play it to an outcome for seeds 1–200 at 3–6 players with invariants after every step.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): The Passenger`.
 
 ### Task 7: One of Us Isn't
 
@@ -212,9 +228,9 @@ As in the table above. **Bots:** the host attacks the nearest crew member with b
 
 As in the table above. **Bots:** crew repair the nearest point and call a vote when a repaired point has been sabotaged, naming the seat most often alone near it. The mimic plays the crew policy, sabotaging only when the rules say nobody saw it (spec §6), and votes like crew.
 
-- [ ] **Step 1: Write the failing tests.** Setup deals one mimic; repair and sabotage; sabotage only when alone; the two-vote limit; a correct and a wrong vote; Review focus 5 at the rules level (ballots are hidden until the vote resolves); bots play it to an outcome for seeds 1–200 at 3–6 players.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): One of Us Isn't`.
+- [x] **Step 1: Write the failing tests.** Setup deals one mimic; repair and sabotage; sabotage only when alone; the two-vote limit; a correct and a wrong vote; Review focus 5 at the rules level (ballots are hidden until the vote resolves); bots play it to an outcome for seeds 1–200 at 3–6 players.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): One of Us Isn't`.
 
 ### Task 8: Tiller Says No and Decaying Orbit
 
@@ -222,9 +238,9 @@ As in the table above. **Bots:** crew repair the nearest point and call a vote w
 
 As in the table above. **Bots:** Tiller's crew head for the core and pull banks, leaving a vented room; in Decaying Orbit a bot restarts the engines while the orbit counter allows, and boards a pod when it no longer does.
 
-- [ ] **Step 1: Write the failing tests.** Each rule in the table; Decaying Orbit can run from the start layout alone at every player count (Review focus 6); escaped seats leave the turn order but count as winners; bots play both to an outcome for seeds 1–200 at 3–6 players.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): Tiller Says No and Decaying Orbit`.
+- [x] **Step 1: Write the failing tests.** Each rule in the table; Decaying Orbit can run from the start layout alone at every player count (Review focus 6); escaped seats leave the turn order but count as winners; bots play both to an outcome for seeds 1–200 at 3–6 players.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): Tiller Says No and Decaying Orbit`.
 
 ### Task 9: Salvage Rights
 
@@ -232,9 +248,9 @@ As in the table above. **Bots:** Tiller's crew head for the core and pull banks,
 
 As in the table above. **Bots:** the carrier heads for the Airlock by the cheapest path; everyone else heads for the carrier and attacks.
 
-- [ ] **Step 1: Write the failing tests.** Taking the Prize by combat; the carrier's slowed movement; the Airlock win; the round limit; bots to an outcome for seeds 1–200 at 3–6 players.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): Salvage Rights`.
+- [x] **Step 1: Write the failing tests.** Taking the Prize by combat; the carrier's slowed movement; the Airlock win; the round limit; bots to an outcome for seeds 1–200 at 3–6 players.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): Salvage Rights`.
 
 ### Task 10: Endgame simulation and the balance report
 
@@ -244,9 +260,9 @@ As in the table above. **Bots:** the carrier heads for the Airlock by the cheape
 - The report compares these with spec §7.3's targets: crew wins 40–60%, a free-for-all seat at most 1.3× its fair share, round-limit endings under 10%, and a median game of 45–60 minutes. It also re-measures the Breach timing against the real target (35–55% of a whole game's turns), which M1 could only proxy.
 - Tune each scenario's numbers in its content file until its targets hold, or say plainly in the report which can't and why. Numbers from bots, not people.
 
-- [ ] **Step 1: A Sim-category smoke test.**
-- [ ] **Step 2: Implement; run; tune; write the report from the real output.**
-- [ ] **Step 3: Commit** `feat(meridian): endgame simulator and balance report`.
+- [x] **Step 1: A Sim-category smoke test.**
+- [x] **Step 2: Implement; run; tune; write the report from the real output.**
+- [x] **Step 3: Commit** `feat(meridian): endgame simulator and balance report`.
 
 ### Task 11: The adapter: Breach sequence, Endgame and Debrief
 
@@ -257,9 +273,9 @@ As in the table above. **Bots:** the carrier heads for the Airlock by the cheape
 - **Debrief:** the outcome, every role revealed, the full map and three awards from the crew stats (most compartments revealed, most damage dealt, last one standing). It ends after 20 s or when the VIP taps Continue; then `EndGame` with every seat scored 1 for a win and 0 otherwise, winners first (spec §2.9).
 - **The Development setting** `Meridian:Scenario` forces the scenario, through `AddMeridian()`.
 
-- [ ] **Step 1: Write the failing tests.** Briefing lengths are equal across roles in a hidden-traitor game; Ready and the 90 s fallback; the pause is the same for an innocent and for the traitor (Review focus 8), and a vote's disconnected voter is botted after it (Review focus 5); Debrief, Continue and the results.
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): Breach sequence, Endgame and Debrief in the adapter`.
+- [x] **Step 1: Write the failing tests.** Briefing lengths are equal across roles in a hidden-traitor game; Ready and the 90 s fallback; the pause is the same for an innocent and for the traitor (Review focus 8), and a vote's disconnected voter is botted after it (Review focus 5); Debrief, Continue and the results.
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): Breach sequence, Endgame and Debrief in the adapter`.
 
 ### Task 12: Phone screens for the endgame
 
@@ -269,10 +285,10 @@ As in the table above. **Bots:** the carrier heads for the Airlock by the cheape
 - `turn` gains attack targets and scenario actions; `sheet` gains a Briefing tab that keeps your objectives in reach for the rest of the game (spec §11).
 - Every phone screen is built from `Visibility.For(state, seat)`.
 
-- [ ] **Step 1: Generate fixtures** for every new screen and state with `UPDATE_FIXTURES=1`, and read each.
-- [ ] **Step 2: Write the Vitest tests**, as M2's: every fixture renders; every button sends exactly its absolute intent; the vote's choice stays on the phone until submitted.
-- [ ] **Step 3: Implement; `npm test` and `npm run build`.**
-- [ ] **Step 4: Commit** `feat(meridian): endgame phone screens`.
+- [x] **Step 1: Generate fixtures** for every new screen and state with `UPDATE_FIXTURES=1`, and read each.
+- [x] **Step 2: Write the Vitest tests**, as M2's: every fixture renders; every button sends exactly its absolute intent; the vote's choice stays on the phone until submitted.
+- [x] **Step 3: Implement; `npm test` and `npm run build`.**
+- [x] **Step 4: Commit** `feat(meridian): endgame phone screens`.
 
 ### Task 13: The TV view, the dev board and the secrecy test
 
@@ -282,9 +298,9 @@ As in the table above. **Bots:** the carrier heads for the Airlock by the cheape
 - **The secrecy test** (Review focus 1; spec success criterion 2): for each S1 scenario at 3–6 players, play whole games with bots. After every step, serialize the TV view and every phone view, and fail if any contains a role, objective id, token id, counter id or ballot belonging to an audience that excludes that viewer. Bots are checked the same way through what `BotRunner` hands them.
 - The view budgets still hold: the full host view under 8 KB with every compartment and the largest scenario's tokens; every step under one packet as a patch; every phone screen under 16 KB.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Step 2–4:** fail, implement, pass.
-- [ ] **Step 5: Commit** `feat(meridian): endgame TV view and the secrecy test`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Step 2–4:** fail, implement, pass.
+- [x] **Step 5: Commit** `feat(meridian): endgame TV view and the secrecy test`.
 
 ### Task 14: End to end
 
@@ -295,10 +311,10 @@ As in the table above. **Bots:** the carrier heads for the Airlock by the cheape
 - **Checklist:** read a briefing; play a hidden-traitor game with people; call a vote; drop a phone in the endgame and see the same pause whoever it is; read the Debrief.
 - Run `bash tools/check-all.sh --full`; expect only the Tactics failures already on `main`, unless they've been fixed by then.
 
-- [ ] **Step 1: Write the hub tests; make them pass.**
-- [ ] **Step 2: Update the bot script; run each scenario against a local server and the dev page.**
-- [ ] **Step 3: Run the full gate.**
-- [ ] **Step 4: Commit** `test(meridian): end-to-end games through the Breach`.
+- [x] **Step 1: Write the hub tests; make them pass.**
+- [x] **Step 2: Update the bot script; run each scenario against a local server and the dev page.**
+- [x] **Step 3: Run the full gate.**
+- [x] **Step 4: Commit** `test(meridian): end-to-end games through the Breach`.
 
 ---
 
