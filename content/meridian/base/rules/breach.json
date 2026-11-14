@@ -2,91 +2,117 @@
   "$schema": "schema/breach.schema.json",
   "scenarios": [
     "the_passenger",
-    "one_of_us_isnt"
+    "one_of_us_isnt",
+    "tiller_says_no",
+    "decaying_orbit"
   ],
   "table": [
     {
       "anomaly": "humming_shard",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "black_mirror",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "warm_egg",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "stopped_watch",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "unknown_chart",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "singing_wire",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "bone_key",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "sealed_vial",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "drowned_logbook",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "childs_drawing",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "cold_coin",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     },
     {
       "anomaly": "pocket_of_quiet",
       "scenarios": [
         "the_passenger",
-        "one_of_us_isnt"
+        "one_of_us_isnt",
+        "tiller_says_no",
+        "decaying_orbit"
       ]
     }
   ]

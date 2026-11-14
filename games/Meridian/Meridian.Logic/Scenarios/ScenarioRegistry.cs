@@ -18,7 +18,7 @@ public static class ScenarioRegistry
     public const string Fallback = "decaying_orbit";
 
     /// <summary>Every scenario that ships. Stage M3 adds the five S1 scenarios here, one task at a time.</summary>
-    public static ScenarioSet Default { get; } = new([new ThePassenger(), new OneOfUsIsnt()]);
+    public static ScenarioSet Default { get; } = new([new ThePassenger(), new OneOfUsIsnt(), new TillerSaysNo(), new DecayingOrbit()]);
 
     /// <summary>
     /// What's wrong between the code and the content: a listed scenario with no class, a class with no content, or a role
