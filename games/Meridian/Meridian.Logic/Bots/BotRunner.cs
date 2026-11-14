@@ -19,7 +19,8 @@ public static class BotRunner
         for (var i = 0; i < maxCommands && state.Phase == Phase.Explore; i++)
         {
             var seat = Actor(state);
-            var command = bot.Choose(pack, state, seat, Rules.Legal(pack, state, seat), ref rng);
+            // A bot sees only what its seat sees (spec §6): never the raw state.
+            var command = bot.Choose(pack, Visibility.For(state, seat), seat, Rules.Legal(pack, state, seat), ref rng);
             var result = Rules.Step(pack, state, command);
             state = result.State;
             yield return new BotStep(seat, command, result);

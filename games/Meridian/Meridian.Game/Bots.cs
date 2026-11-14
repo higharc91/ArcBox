@@ -23,7 +23,7 @@ public sealed partial class MeridianGame
         var game = Session.Game!;
         var seat = BotRunner.Actor(game);
         var rng = Session.BotRng;
-        var command = ExploreBot.Instance.Choose(_pack, game, seat, Rules.Legal(_pack, game, seat), ref rng);
+        var command = ExploreBot.Instance.Choose(_pack, Visibility.For(game, seat), seat, Rules.Legal(_pack, game, seat), ref rng);
         Session = Session with { BotRng = rng };
         if (!Apply(command))
         {

@@ -1,8 +1,8 @@
 namespace Meridian.Logic;
 
 /// <summary>
-/// Plays a seat: disconnected players (spec §3.3), the simulator, and later the scripted ship. A bot may only look at
-/// what its seat can see; in M1 everything is public, and stage M3's audiences will enforce it.
+/// Plays a seat: disconnected players (spec §3.3), the simulator, and scenarios' roles. It is handed
+/// <see cref="Visibility.For"/> of its seat, never the raw state, so it can't act on what its seat can't see.
 /// </summary>
 public interface IBotPolicy
 {
