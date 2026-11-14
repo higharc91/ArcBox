@@ -46,3 +46,10 @@
 .mer-faces span { width: 1.6em; text-align: center; border: 2px solid var(--mer-edge); border-radius: 6px; }
 .mer-end { margin-top: 8px; }
 .mer-badge { color: var(--mer-cyan); font-weight: bold; }
+.mer-actions, .mer-attacks, .mer-monster, .mer-objectives { display: grid; gap: 6px; }
+.mer-attacks button { border-color: var(--mer-warn); }
+.mer-monster { background: var(--mer-panel); padding: 8px; border-radius: 8px; }
+.mer-vote button.on { outline: 2px solid var(--mer-cyan); }
+.mer-debrief.won h2 { color: var(--mer-anomaly); }
+.mer-debrief.lost h2 { color: var(--mer-warn); }
+.mer-roles, .mer-awards { margin: 0; padding-left: 18px; }

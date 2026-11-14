@@ -30,8 +30,14 @@ public sealed record Neighbour(string Seat, string Name, EqArray<ItemCard> Items
 /// exactly what the rules accept. Sends <c>moveTo</c>, <c>open</c>, <c>useItem</c>, <c>useRoom</c>, <c>offerTrade</c>,
 /// <c>endTurn</c>.
 /// </summary>
+/// <remarks>
+/// In the endgame it also offers attacks, the scenario's actions and the seat's monsters (whose activation is part of
+/// the controller's turn), and carries the seat's briefing.
+/// </remarks>
 public sealed record TurnScreen(MapData Map, string At, int Moves, EqArray<Reachable> Reach, EqArray<Openable> Opens,
-                                EqArray<ItemCard> Items, string? Room, EqArray<Neighbour> Neighbours, CrewCard Me);
+                                EqArray<ItemCard> Items, string? Room, EqArray<Neighbour> Neighbours, CrewCard Me,
+                                EqArray<AttackTarget> Attacks = default, EqArray<ScenarioAction> Actions = default,
+                                EqArray<MonsterCard> Monsters = default, BriefingCard? Briefing = null);
 
 public sealed record RotationOption(int Rotation, EqArray<Side> Hatches);
 
@@ -56,10 +62,41 @@ public sealed record RollScreen(string Reason, Trait? Trait, int Dice, string Ti
 public sealed record TradeScreen(string From, EqArray<ItemCard> Give, EqArray<ItemCard> Take);
 
 /// <summary><c>sheet</c>: everyone who isn't acting. Tabs are phone-side, so browsing never changes the view.</summary>
-public sealed record SheetScreen(CrewCard Me, string At, EqArray<ItemCard> Items, MapData Map, string Active, string? Waiting);
+public sealed record SheetScreen(CrewCard Me, string At, EqArray<ItemCard> Items, MapData Map, string Active, string? Waiting,
+                                 BriefingCard? Briefing = null);
 
 /// <summary><c>watch</c>: the main screen is presenting something.</summary>
 public sealed record WatchScreen(Presented Now);
 
 /// <summary><c>over</c>: the game has ended.</summary>
 public sealed record OverScreen(string Message);
+
+// The endgame's screens (M3 plan, Task 12). Each is built from Visibility.For(state, seat): a phone sees what its seat sees.
+
+/// <summary>A seat's role and briefing. Every role's briefing has this same shape, so a glance tells nobody anything.</summary>
+public sealed record BriefingCard(string Role, string Name, string Briefing, EqArray<string> Objectives);
+
+/// <summary><c>briefing</c>: read it, then Ready. Sends <c>ready</c>.</summary>
+public sealed record BriefingScreen(string Title, BriefingCard You, bool Ready, int ReadyCount, int Seats);
+
+/// <summary><c>allocate</c>: split lost steps between two traits. Sends <c>allocate { first }</c>.</summary>
+public sealed record AllocateScreen(int Steps, EqArray<TrackCard> Tracks, string? By);
+
+public sealed record VoteOption(string Id, string Label);
+
+/// <summary><c>vote</c>: a secret ballot. Sends <c>vote { choice }</c>. <see cref="Cast"/> once this seat has voted.</summary>
+public sealed record VoteScreen(string Prompt, EqArray<VoteOption> Options, bool Cast, int Remaining);
+
+/// <summary><c>echo</c>: a dead crew member's turn. Sends <c>lend { to }</c> and <c>endTurn</c>.</summary>
+public sealed record EchoScreen(EqArray<VoteOption> Targets, bool Lent);
+
+public sealed record RoleReveal(string Seat, string Name, string Role, bool Won);
+public sealed record AwardCard(string Title, string Seat, string Name);
+
+/// <summary><c>debrief</c>: how it ended, every role revealed, the awards. The VIP sends <c>continue</c>.</summary>
+public sealed record DebriefScreen(string Message, bool Won, EqArray<RoleReveal> Roles, EqArray<AwardCard> Awards, bool Vip);
+
+public sealed record AttackTarget(string Id, string Name);
+
+/// <summary>A monster the seat commands, with where it can go and whom it can attack this turn.</summary>
+public sealed record MonsterCard(string Id, string Kind, string At, EqArray<string> Moves, EqArray<AttackTarget> Targets);

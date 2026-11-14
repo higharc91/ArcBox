@@ -1,0 +1,31 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "vote",
+  "data": {
+    "prompt": "Who is the mimic?",
+    "options": [
+      {
+        "id": "p1",
+        "label": "Player1"
+      },
+      {
+        "id": "p2",
+        "label": "Player2"
+      },
+      {
+        "id": "p3",
+        "label": "Player3"
+      },
+      {
+        "id": "p4",
+        "label": "Player4"
+      }
+    ],
+    "cast": true,
+    "remaining": 3
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:02:22.6799997\u002B00:00",
+  "header": null
+}

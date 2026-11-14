@@ -26,7 +26,7 @@ afterEach(cleanup);
 
 describe("meridian phone screens", () => {
   it("has a fixture for every screen state the game pins", () => {
-    expect(names.length).toBe(15);
+    expect(names.length).toBe(27);
   });
 
   it.each(names)("renders %s without the newer-app card", (name) => {
@@ -147,6 +147,65 @@ describe("meridian phone screens", () => {
     fireEvent.click(screen.getByRole("tab", { name: "Map" }));
     fireEvent.click(screen.getByRole("tab", { name: "Command" }));
     fireEvent.click(screen.getByRole("tab", { name: "Traits" }));
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("shows a briefing with Ready, and nothing to press once ready", () => {
+    const send = show("briefing-mimic");
+    fireEvent.click(screen.getByRole("button", { name: "Ready" }));
+    expect(send).toHaveBeenCalledWith({ action: "ready" });
+  });
+
+  it("splits damage between two traits", () => {
+    const send = show("allocate");
+    fireEvent.click(screen.getAllByRole("button", { name: /−/ })[0]);
+    expect(send).toHaveBeenCalledWith({ action: "allocate", data: { first: 0 } });
+  });
+
+  it("keeps a vote on the phone until it is cast", () => {
+    const send = show("vote");
+    const cast = screen.getByRole("button", { name: "Vote" }) as HTMLButtonElement;
+    expect(cast.disabled).toBe(true);
+    fireEvent.click(screen.getAllByRole("radio")[1]);
+    expect(send).not.toHaveBeenCalled();
+    fireEvent.click(cast);
+    expect(send).toHaveBeenCalledWith({ action: "vote", data: { choice: "p2" } });
+  });
+
+  it("says a vote is in once cast", () => {
+    show("vote-cast");
+    expect(screen.getByText(/Your vote is in/)).toBeTruthy();
+  });
+
+  it("lends a die as an echo", () => {
+    const send = show("echo");
+    fireEvent.click(screen.getAllByRole("button", { name: /^Lend / })[0]);
+    expect(send).toHaveBeenCalledWith({ action: "lend", data: { to: "p1" } });
+  });
+
+  it("commands monsters on the controller's turn", () => {
+    const send = show("turn-monsters");
+    fireEvent.click(screen.getAllByRole("button", { name: /^Move to the |^Move to / }).find((b) => b.closest(".mer-monster"))!);
+    expect(send).toHaveBeenCalledWith({ action: "monsterMove", data: expect.objectContaining({ monster: expect.stringMatching(/^brood-/) }) });
+  });
+
+  it("offers the scenario's actions and attacks in the endgame", () => {
+    const send = show("turn-endgame");
+    const button = screen.queryAllByRole("button").find((b) => b.closest(".mer-actions, .mer-attacks"));
+    expect(button).toBeTruthy();
+    fireEvent.click(button!);
+    expect(send.mock.calls[0][0].action).toMatch(/^(act|attack)$/);
+  });
+
+  it("lets only the VIP continue from the debrief", () => {
+    const send = show("debrief-won");
+    fireEvent.click(screen.getByRole("button", { name: "Continue" }));
+    expect(send).toHaveBeenCalledWith({ action: "continue" });
+  });
+
+  it("keeps the briefing on the sheet in the endgame", () => {
+    const send = show("sheet-endgame");
+    fireEvent.click(screen.getByRole("tab", { name: "Briefing" }));
     expect(send).not.toHaveBeenCalled();
   });
 });

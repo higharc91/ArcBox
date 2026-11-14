@@ -39,25 +39,34 @@ internal static class Projection
         {
             case SessionPhase.Boarding:
                 return Screen("crewPick", CrewPick(game, seat), game.Deadline);
-            case SessionPhase.Over or SessionPhase.Debrief:
+            case SessionPhase.Over:
                 return Screen("over", new OverScreen(s.Ending ?? ""), null);
-            case SessionPhase.Briefing:
-                return new WaitView("Read your briefing.");
+            case SessionPhase.Debrief:
+                return Screen("debrief", Debrief(game, seat), game.Deadline);
         }
 
-        var state = s.Game!;
+        // Everything below is built from what this seat may see, never the raw state.
+        var me = seat.Seat;
+        var real = s.Game!;
+        var state = Visibility.For(real, me);
+        if (s.Phase == SessionPhase.Briefing)
+        {
+            return Screen("briefing", Briefing(game, state, me), game.Deadline);
+        }
         if (!s.Queue.IsEmpty)
         {
             return Screen("watch", new WatchScreen(s.Queue[0]), null);
         }
-        var me = seat.Seat;
         return state.Waiting switch
         {
             OrientPending o when o.From == me => Screen("orient", Orient(game, state, o), game.Deadline),
             RollPending r when r.From == me => Screen("roll", Roll(game, r), game.Deadline),
             ChoicePending c when c.From == me => Screen("card", Card(game, c.Card), game.Deadline),
             TradePending t when t.From == me => Screen("trade", Trade(game, state, t), game.Deadline),
-            null when state.ActiveSeat == me => Screen("turn", Turn(game, state, me), game.Deadline),
+            AllocatePending a when a.From == me => Screen("allocate", Allocate(game, state, a), game.Deadline),
+            VotePending v when v.Owed.Contains(me) || v.Cast.Any(b => b.Voter == me) => Screen("vote", Vote(game, state, v, me), game.Deadline),
+            null when state.ActiveSeat == me && !state.ActiveCrew.Alive => Screen("echo", Echo(game, real, me), game.Deadline),
+            null when state.ActiveSeat == me => Screen("turn", Turn(game, real, state, me), game.Deadline),
             _ => Screen("sheet", Sheet(game, state, me), null),
         };
     }
@@ -95,10 +104,11 @@ internal static class Projection
         return new CrewPickScreen(crew, s.Seats.Count(x => x.Crew is not null), s.Seats.Count);
     }
 
-    private static TurnScreen Turn(MeridianGame game, GameState state, SeatId me)
+    /// <param name="real">The true state, for <see cref="Rules.Legal"/>, which only ever reveals this seat's own options.</param>
+    private static TurnScreen Turn(MeridianGame game, GameState real, GameState state, SeatId me)
     {
         var pack = game.Pack;
-        var legal = Rules.Legal(pack, state, me);
+        var legal = Rules.Legal(pack, real, me);
         var crew = state.CrewOf(me);
         var reach = Reach.From(pack, state.Ship, crew.At, state.MovesLeft);
         var usable = legal.OfType<UseItem>().Select(u => u.Item).ToHashSet();
@@ -106,6 +116,15 @@ internal static class Projection
             ? EqArray<Neighbour>.Empty
             : state.Crew.Where(c => c.Seat != me && c.At == crew.At)
                 .Select(c => new Neighbour(c.Seat.Value, game.Session.SeatOf(c.Seat).Name, Items(pack, c, NoItems))).ToEqArray();
+        var actions = state.Board is { } board
+            ? pack.Scenarios.Get(board.Scenario).ActionsFor(pack, real, me).Where(a => legal.Contains(new ScenarioAct(me, a.Id, a.Data))).ToEqArray()
+            : [];
+        var monsters = legal.OfType<MonsterMove>().Select(m => m.Monster).Concat(legal.OfType<MonsterAttack>().Select(m => m.Monster))
+            .Distinct().Order(StringComparer.Ordinal)
+            .Select(id => new MonsterCard(id, state.Board!.Tokens.First(t => t.Id == id).Kind, state.Board.Tokens.First(t => t.Id == id).At!.Value.Value,
+                legal.OfType<MonsterMove>().Where(m => m.Monster == id).Select(m => m.To.Value).ToEqArray(),
+                legal.OfType<MonsterAttack>().Where(m => m.Monster == id).Select(m => new AttackTarget(m.Target.Value, game.Session.SeatOf(m.Target).Name)).ToEqArray()))
+            .ToEqArray();
         return new TurnScreen(
             Map(game, state), crew.At.Value, state.MovesLeft,
             legal.OfType<MoveTo>().Select(m => new Reachable(m.To.Value, reach[m.To])).ToEqArray(),
@@ -113,7 +132,59 @@ internal static class Projection
             Items(pack, crew, usable),
             legal.Contains(new UseCompartment(me)) ? pack.Tile(state.Ship.Get(crew.At).Tile).Name : null,
             neighbours,
-            Card(pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true));
+            Card(pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true),
+            legal.OfType<Attack>().Select(a => new AttackTarget(a.Target, TargetName(game, state, a.Target))).ToEqArray(),
+            actions, monsters, BriefingOf(game, state, me));
+    }
+
+    private static string TargetName(MeridianGame game, GameState state, string target)
+        => state.IndexOf(new SeatId(target)) >= 0 ? game.Session.SeatOf(new SeatId(target)).Name
+            : state.Board?.Tokens.FirstOrDefault(t => t.Id == target)?.Kind ?? target;
+
+    /// <summary>This seat's role and briefing, from what it can see: its own card, which its audience always includes.</summary>
+    private static BriefingCard? BriefingOf(MeridianGame game, GameState state, SeatId me)
+    {
+        if (state.Board is not { } board || state.RoleOf(me) is not { } role || role.Role == Visibility.UnknownRole)
+        {
+            return null;
+        }
+        var def = game.Pack.ScenarioDef(board.Scenario).Role(role.Role);
+        return new BriefingCard(role.Role, def.Name, def.Briefing, def.Objectives);
+    }
+
+    private static BriefingScreen Briefing(MeridianGame game, GameState state, SeatId me)
+        => new(game.Pack.ScenarioDef(state.Board!.Scenario).Title, BriefingOf(game, state, me)!,
+               game.Session.Ready.Contains(me), game.Session.Ready.Count, game.Session.Seats.Count);
+
+    private static AllocateScreen Allocate(MeridianGame game, GameState state, AllocatePending a)
+    {
+        var crew = state.CrewOf(a.From);
+        var def = game.Pack.CrewMember(crew.Crew);
+        return new AllocateScreen(a.Steps,
+            a.Group.Members().Select(t => new TrackCard(t, def.Tracks[t].Values, crew.Steps[t])).ToEqArray(),
+            a.By is { } by ? game.Session.SeatOf(by).Name : null);
+    }
+
+    private static VoteScreen Vote(MeridianGame game, GameState state, VotePending v, SeatId me)
+        => new(v.Purpose == "mimic" ? "Who is the mimic?" : "Vote",
+               v.Options.Select(o => new VoteOption(o, state.IndexOf(new SeatId(o)) >= 0 ? game.Session.SeatOf(new SeatId(o)).Name : o)).ToEqArray(),
+               !v.Owed.Contains(me), v.Owed.Count);
+
+    private static EchoScreen Echo(MeridianGame game, GameState real, SeatId me)
+    {
+        var lends = Rules.Legal(game.Pack, real, me).OfType<Lend>().ToList();
+        return new EchoScreen(lends.Select(l => new VoteOption(l.To.Value, game.Session.SeatOf(l.To).Name)).ToEqArray(), real.Turn.Lent);
+    }
+
+    private static DebriefScreen Debrief(MeridianGame game, SeatInfo me)
+    {
+        var state = game.Session.Game!;
+        var board = state.Board!;
+        var outcome = board.Outcome!;
+        var roles = board.Roles.Select(r => new RoleReveal(r.Seat.Value, game.Session.SeatOf(r.Seat).Name,
+            game.Pack.ScenarioDef(board.Scenario).Role(r.Role).Name, outcome.Winners.Contains(r.Seat))).ToEqArray();
+        var awards = game.Awards().Select(a => new AwardCard(a.Title, a.Seat.Value, game.Session.SeatOf(a.Seat).Name)).ToEqArray();
+        return new DebriefScreen(outcome.Message, outcome.Winners.Contains(me.Seat), roles, awards, me.Vip);
     }
 
     private static OrientScreen Orient(MeridianGame game, GameState state, OrientPending o)
@@ -156,7 +227,8 @@ internal static class Projection
         var crew = state.CrewOf(me);
         var waiting = state.Waiting is { } w ? game.Session.SeatOf(w.From).Name : null;
         return new SheetScreen(Card(game.Pack.CrewMember(crew.Crew), crew.Steps, taken: false, mine: true), crew.At.Value,
-                               Items(game.Pack, crew, NoItems), Map(game, state), game.Session.SeatOf(state.ActiveSeat).Name, waiting);
+                               Items(game.Pack, crew, NoItems), Map(game, state), game.Session.SeatOf(state.ActiveSeat).Name, waiting,
+                               BriefingOf(game, state, me));
     }
 
     private static readonly IReadOnlySet<CardId> NoItems = new HashSet<CardId>();

@@ -1,0 +1,664 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "sheet",
+  "data": {
+    "me": {
+      "id": "tobe_raske",
+      "name": "Tobe Raske",
+      "role": "Rigger",
+      "tracks": [
+        {
+          "trait": "brawn",
+          "values": [
+            3,
+            4,
+            4,
+            5,
+            5,
+            6,
+            7,
+            7
+          ],
+          "step": 4
+        },
+        {
+          "trait": "agility",
+          "values": [
+            1,
+            1,
+            2,
+            3,
+            4,
+            4,
+            5,
+            6
+          ],
+          "step": 4
+        },
+        {
+          "trait": "tech",
+          "values": [
+            1,
+            1,
+            2,
+            3,
+            4,
+            5,
+            5,
+            6
+          ],
+          "step": 4
+        },
+        {
+          "trait": "nerve",
+          "values": [
+            1,
+            1,
+            2,
+            3,
+            4,
+            4,
+            5,
+            6
+          ],
+          "step": 4
+        }
+      ],
+      "taken": false,
+      "mine": true
+    },
+    "at": "c27",
+    "items": [
+      {
+        "id": "warm_egg",
+        "kind": "anomaly",
+        "title": "Warm Egg",
+        "text": "Pale, leathery, the size of a fist. Sometimes it kicks.",
+        "use": null,
+        "usable": false
+      },
+      {
+        "id": "med_kit",
+        "kind": "salvage",
+        "title": "Med Kit",
+        "text": "Gauze, sealant, and one good painkiller.",
+        "use": "Patch up",
+        "usable": false
+      },
+      {
+        "id": "mag_boots",
+        "kind": "salvage",
+        "title": "Mag Boots",
+        "text": "They hold you to the deck when the deck stops holding you.",
+        "use": null,
+        "usable": false
+      }
+    ],
+    "map": {
+      "compartments": [
+        {
+          "id": "c1",
+          "tile": "airlock",
+          "name": "Airlock",
+          "at": [
+            "habitat",
+            0,
+            2
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n"
+          ]
+        },
+        {
+          "id": "c2",
+          "tile": "docking_ring",
+          "name": "Docking Ring",
+          "at": [
+            "habitat",
+            0,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c3",
+          "tile": "central_lift",
+          "name": "Central Lift",
+          "at": [
+            "habitat",
+            0,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c4",
+          "tile": "command_landing",
+          "name": "Command Lift Landing",
+          "at": [
+            "command",
+            0,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c5",
+          "tile": "engineering_landing",
+          "name": "Engineering Lift Landing",
+          "at": [
+            "engineering",
+            0,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c6",
+          "tile": "mess_hall",
+          "name": "Mess Hall",
+          "at": [
+            "habitat",
+            1,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ],
+          "sealed": [
+            "s"
+          ]
+        },
+        {
+          "id": "c7",
+          "tile": "hydroponics",
+          "name": "Hydroponics",
+          "at": [
+            "habitat",
+            2,
+            1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c8",
+          "tile": "med_bay",
+          "name": "Med Bay",
+          "at": [
+            "habitat",
+            -1,
+            1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ]
+        },
+        {
+          "id": "c9",
+          "tile": "maintenance_shaft",
+          "name": "Maintenance Shaft",
+          "at": [
+            "habitat",
+            -2,
+            1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ]
+        },
+        {
+          "id": "c10",
+          "tile": "galley",
+          "name": "Galley",
+          "at": [
+            "habitat",
+            1,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c11",
+          "tile": "storage_closet",
+          "name": "Storage Closet",
+          "at": [
+            "habitat",
+            -1,
+            0
+          ],
+          "rotation": 3,
+          "hatches": [
+            "e"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c12",
+          "tile": "junction",
+          "name": "Junction",
+          "at": [
+            "habitat",
+            2,
+            2
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c13",
+          "tile": "chapel",
+          "name": "Chapel",
+          "at": [
+            "habitat",
+            1,
+            2
+          ],
+          "rotation": 3,
+          "hatches": [
+            "e"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c14",
+          "tile": "gymnasium",
+          "name": "Gymnasium",
+          "at": [
+            "habitat",
+            -3,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c15",
+          "tile": "sealed_alcove",
+          "name": "Sealed Alcove",
+          "at": [
+            "habitat",
+            2,
+            0
+          ],
+          "rotation": 1,
+          "hatches": [
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c16",
+          "tile": "waste_reclamation",
+          "name": "Waste Reclamation",
+          "at": [
+            "engineering",
+            0,
+            1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "n",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c17",
+          "tile": "isolation_ward",
+          "name": "Isolation Ward",
+          "at": [
+            "habitat",
+            3,
+            2
+          ],
+          "rotation": 1,
+          "hatches": [
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c18",
+          "tile": "recreation_deck",
+          "name": "Recreation Deck",
+          "at": [
+            "habitat",
+            -3,
+            2
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c19",
+          "tile": "containment_lab",
+          "name": "Containment Lab",
+          "at": [
+            "engineering",
+            -1,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c20",
+          "tile": "junction",
+          "name": "Junction",
+          "at": [
+            "habitat",
+            2,
+            3
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c21",
+          "tile": "suit_lockers",
+          "name": "Suit Lockers",
+          "at": [
+            "habitat",
+            -2,
+            2
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "w"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c22",
+          "tile": "cargo_hold",
+          "name": "Cargo Hold",
+          "at": [
+            "engineering",
+            -1,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ],
+          "sealed": [
+            "s"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c23",
+          "tile": "drone_bay",
+          "name": "Drone Bay",
+          "at": [
+            "engineering",
+            -1,
+            2
+          ],
+          "rotation": 1,
+          "hatches": [
+            "n",
+            "s",
+            "w"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c24",
+          "tile": "laundry",
+          "name": "Laundry",
+          "at": [
+            "habitat",
+            3,
+            3
+          ],
+          "rotation": 1,
+          "hatches": [
+            "w"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c25",
+          "tile": "quiet_room",
+          "name": "Quiet Room",
+          "at": [
+            "habitat",
+            -1,
+            2
+          ],
+          "rotation": 0,
+          "hatches": [
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c26",
+          "tile": "crew_bunks",
+          "name": "Crew Bunks",
+          "at": [
+            "habitat",
+            -1,
+            3
+          ],
+          "rotation": 2,
+          "hatches": [
+            "n",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c27",
+          "tile": "machine_shop",
+          "name": "Machine Shop",
+          "at": [
+            "engineering",
+            -1,
+            -1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c28",
+          "tile": "crawlspace",
+          "name": "Crawlspace",
+          "at": [
+            "engineering",
+            -1,
+            3
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "s"
+          ]
+        },
+        {
+          "id": "c29",
+          "tile": "vent_hub",
+          "name": "Vent Hub",
+          "at": [
+            "engineering",
+            -1,
+            4
+          ],
+          "rotation": 1,
+          "hatches": [
+            "n",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c30",
+          "tile": "archive",
+          "name": "Archive",
+          "at": [
+            "habitat",
+            2,
+            4
+          ],
+          "rotation": 2,
+          "hatches": [
+            "n",
+            "w"
+          ],
+          "symbol": "salvage"
+        },
+        {
+          "id": "c31",
+          "tile": "service_corridor",
+          "name": "Service Corridor",
+          "at": [
+            "habitat",
+            1,
+            4
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ]
+        },
+        {
+          "id": "c32",
+          "tile": "cryo_bay",
+          "name": "Cryo Bay",
+          "at": [
+            "habitat",
+            0,
+            4
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s"
+          ],
+          "symbol": "anomaly"
+        }
+      ],
+      "crew": [
+        {
+          "id": "p1",
+          "name": "Player1",
+          "at": "c26",
+          "colour": 0
+        },
+        {
+          "id": "p2",
+          "name": "Player2",
+          "at": "c27",
+          "colour": 1
+        },
+        {
+          "id": "p3",
+          "name": "Player3",
+          "at": "c3",
+          "colour": 2
+        },
+        {
+          "id": "p4",
+          "name": "Player4",
+          "at": "c32",
+          "colour": 3
+        }
+      ]
+    },
+    "active": "Player1",
+    "waiting": null,
+    "briefing": {
+      "role": "crew",
+      "name": "Crew",
+      "briefing": "One of you is carrying something. You saw it in their face when the Anomaly woke, and now the brood moves when they move. There\u0027s still a chance: a counter-agent can be synthesized in the Med Bay, Hydroponics or the Containment Lab. Make a dose, get close enough, and inject the host. Stay together. The brood is strong, but it can only stun, and only the host can be stopped.",
+      "objectives": [
+        "Synthesize a dose in a lab (Tech 5\u002B), then inject the host."
+      ]
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

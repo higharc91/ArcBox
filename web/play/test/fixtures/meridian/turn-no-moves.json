@@ -222,7 +222,11 @@
       ],
       "taken": false,
       "mine": true
-    }
+    },
+    "attacks": [],
+    "actions": [],
+    "monsters": [],
+    "briefing": null
   },
   "viewId": "v1",
   "deadlineUtc": "2026-01-01T00:01:00\u002B00:00",

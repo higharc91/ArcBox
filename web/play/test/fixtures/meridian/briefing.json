@@ -1,0 +1,22 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "briefing",
+  "data": {
+    "title": "The Passenger",
+    "you": {
+      "role": "crew",
+      "name": "Crew",
+      "briefing": "One of you is carrying something. You saw it in their face when the Anomaly woke, and now the brood moves when they move. There\u0027s still a chance: a counter-agent can be synthesized in the Med Bay, Hydroponics or the Containment Lab. Make a dose, get close enough, and inject the host. Stay together. The brood is strong, but it can only stun, and only the host can be stopped.",
+      "objectives": [
+        "Synthesize a dose in a lab (Tech 5\u002B), then inject the host."
+      ]
+    },
+    "ready": false,
+    "readyCount": 0,
+    "seats": 4
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:02:59.0399998\u002B00:00",
+  "header": null
+}

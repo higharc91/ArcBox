@@ -1,0 +1,22 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "briefing",
+  "data": {
+    "title": "One of Us Isn\u0027t",
+    "you": {
+      "role": "mimic",
+      "name": "The Mimic",
+      "briefing": "You are not one of them, but you look it. The repair points would lock you out of the ship; keep them broken. Repair nothing. When you\u0027re alone with a repaired point, undo it quietly; nobody will know until the round ends, and by then you can be elsewhere. Twice they can drag everyone to the scanner and vote. Blend in, point at someone else, and outlast them.",
+      "objectives": [
+        "Keep the points from all being repaired until the round limit, and avoid being named."
+      ]
+    },
+    "ready": false,
+    "readyCount": 0,
+    "seats": 4
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:02:59.0399998\u002B00:00",
+  "header": null
+}

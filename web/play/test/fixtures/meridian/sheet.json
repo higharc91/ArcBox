@@ -176,7 +176,8 @@
       ]
     },
     "active": "Player3",
-    "waiting": null
+    "waiting": null,
+    "briefing": null
   },
   "viewId": "v1",
   "deadlineUtc": null,

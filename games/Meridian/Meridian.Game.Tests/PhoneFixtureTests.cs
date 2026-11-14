@@ -14,7 +14,12 @@ public sealed class PhoneFixtureTests
     [
         "crewPick", "crewPick-taken", "turn", "turn-no-moves", "turn-with-items", "orient", "card", "roll-check",
         "roll-breach", "trade", "sheet", "watch-reveal", "watch-card", "watch-roll", "over",
+        // The endgame (M3 plan, Task 12).
+        "briefing", "briefing-host", "briefing-mimic", "turn-endgame", "turn-monsters", "allocate", "vote", "vote-cast",
+        "echo", "sheet-endgame", "debrief-won", "debrief-lost",
     ];
+
+    private static readonly string[] Endgame = Names[15..];
 
     [Fact]
     public void Every_screen_state_matches_its_fixture()
@@ -27,8 +32,8 @@ public sealed class PhoneFixtureTests
         boarding.Send(0, "pick", new { crew = boarding.Pack.Crew[0].Id.Value });
         Keep("crewPick-taken", boarding.H.PlayerView(1));
 
-        // Play seeded games until every state that play reaches has been seen.
-        for (var seed = 1; seed <= 40 && !Names.Where(n => n is not ("turn-with-items" or "trade")).All(screens.ContainsKey); seed++)
+        // Play seeded games until every Explore state that play reaches has been seen.
+        for (var seed = 1; seed <= 40 && !Names.Except(Endgame).Where(n => n is not ("turn-with-items" or "trade")).All(screens.ContainsKey); seed++)
         {
             var game = new Harness(players: 3, seed: seed).Board();
             var rng = Rng.Seeded((ulong)seed, 99);
@@ -54,6 +59,26 @@ public sealed class PhoneFixtureTests
                 }
                 var seat = BotRunner.Actor(game.State);
                 game.Do(ExploreBot.Instance.Choose(game.Pack, game.State, seat, Rules.Legal(game.Pack, game.State, seat), ref rng));
+            }
+        }
+
+        // The endgame's states, from whole games of the revealed and the hidden traitor.
+        foreach (var scenario in new[] { ThePassenger.Id, OneOfUsIsnt.Id })
+        {
+            for (var seed = 1; seed <= 40 && !Endgame.All(screens.ContainsKey); seed++)
+            {
+                var game = new Harness(players: 4, seed: seed, scenario: scenario).Board();
+                game.PlayUntil(() =>
+                {
+                    for (var p = 0; p < 4; p++)
+                    {
+                        if (ClassifyEndgame(game, p) is { } name)
+                        {
+                            Keep(name, game.H.PlayerView(p));
+                        }
+                    }
+                    return false;
+                }, steps: 6000, seed: (ulong)seed);
             }
         }
 
@@ -102,6 +127,30 @@ public sealed class PhoneFixtureTests
         {
             ["explore"] = JsonSerializer.SerializeToNode(view, ArcJson.Options)!,
         }, "meridian-host");
+    }
+
+    private static string? ClassifyEndgame(Harness game, int p)
+    {
+        if (game.H.PlayerView(p) is not CustomView view || game.Session.Phase is not (SessionPhase.Briefing or SessionPhase.Endgame or SessionPhase.Debrief))
+        {
+            return null;
+        }
+        return view.Screen switch
+        {
+            "briefing" => game.Data<BriefingScreen>(p).You.Role switch
+            {
+                ThePassenger.Host => "briefing-host",
+                OneOfUsIsnt.Mimic => "briefing-mimic",
+                _ => "briefing",
+            },
+            "turn" when !game.Data<TurnScreen>(p).Monsters.IsEmpty => "turn-monsters",
+            "turn" when !game.Data<TurnScreen>(p).Attacks.IsEmpty || !game.Data<TurnScreen>(p).Actions.IsEmpty => "turn-endgame",
+            "vote" => game.Data<VoteScreen>(p).Cast ? "vote-cast" : "vote",
+            "sheet" when game.Data<SheetScreen>(p).Briefing is not null => "sheet-endgame",
+            "allocate" or "echo" => view.Screen,
+            "debrief" => game.Data<DebriefScreen>(p).Won ? "debrief-won" : "debrief-lost",
+            _ => null,
+        };
     }
 
     private static string? Classify(Harness game, int p)
