@@ -86,7 +86,7 @@ public sealed class DisconnectTests
     }
 
     [Fact]
-    public void Everyone_dropped_still_reaches_the_breach()
+    public void Everyone_dropped_still_plays_to_the_end()
     {
         // M2 review focus 5: no phones, no TV, only timers.
         var game = new Harness(players: 4, seed: 3).Board();
@@ -94,7 +94,7 @@ public sealed class DisconnectTests
         {
             game.H.SetConnected(i, false);
         }
-        for (var t = 0; t < 4 * 3600 && game.Session.Phase == SessionPhase.Explore; t++)
+        for (var t = 0; t < 4 * 3600 && game.Session.Phase != SessionPhase.Over; t++)
         {
             game.Advance(1);
         }

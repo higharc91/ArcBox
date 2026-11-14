@@ -39,7 +39,9 @@ internal static class Intents
 
     /// <summary>Every field any intent uses. One bag rather than a record per action keeps parsing in one place.</summary>
     private sealed record Bag(string? To = null, string? At = null, Side? Side = null, int? Rotation = null, string? Option = null,
-                              string? Item = null, EqArray<string> Give = default, EqArray<string> Take = default, bool? Accept = null);
+                              string? Item = null, EqArray<string> Give = default, EqArray<string> Take = default, bool? Accept = null,
+                              string? Target = null, int? First = null, string? Monster = null, string? Action = null,
+                              string? Data = null, string? Choice = null);
 
     /// <summary>
     /// The command a phone's intent stands for, or null for an unknown action or missing data. Targets are absolute, so a
@@ -70,6 +72,13 @@ internal static class Intents
                 new TradeOffer(bag.Give.Select(c => new CardId(c)).ToEqArray(), bag.Take.Select(c => new CardId(c)).ToEqArray())),
             "answerTrade" when bag.Accept is { } a => new AnswerTrade(seat, a),
             "endTurn" => new EndTurn(seat),
+            "attack" when bag.Target is { } t => new Attack(seat, t),
+            "allocate" when bag.First is { } f => new Allocate(seat, f),
+            "monsterMove" when bag is { Monster: { } m, To: { } to } => new MonsterMove(seat, m, new CompartmentId(to)),
+            "monsterAttack" when bag is { Monster: { } m, Target: { } t } => new MonsterAttack(seat, m, new SeatId(t)),
+            "lend" when bag.To is { } to => new Lend(seat, new SeatId(to)),
+            "act" when bag.Action is { } a => new ScenarioAct(seat, a, bag.Data),
+            "vote" when bag.Choice is { } c => new CastVote(seat, c),
             _ => null,
         };
     }
@@ -87,6 +96,13 @@ internal static class Intents
         OfferTrade t => ("offerTrade", new { to = t.To.Value, give = t.Offer.Give.Select(c => c.Value), take = t.Offer.Take.Select(c => c.Value) }),
         AnswerTrade a => ("answerTrade", new { accept = a.Accept }),
         EndTurn => ("endTurn", null),
+        Attack a => ("attack", new { target = a.Target }),
+        Allocate a => ("allocate", new { first = a.First }),
+        MonsterMove m => ("monsterMove", new { monster = m.Monster, to = m.To.Value }),
+        MonsterAttack m => ("monsterAttack", new { monster = m.Monster, target = m.Target.Value }),
+        Lend l => ("lend", new { to = l.To.Value }),
+        ScenarioAct a => ("act", new { action = a.Action, data = a.Data }),
+        CastVote v => ("vote", new { choice = v.Choice }),
         _ => throw new ArgumentException($"{command.GetType().Name} has no phone intent.", nameof(command)),
     };
 }

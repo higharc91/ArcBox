@@ -43,6 +43,8 @@ public sealed class PhoneFixtureTests
                 }
                 if (game.Session.Phase != SessionPhase.Explore)
                 {
+                    game.PlayBots();   // play on through the endgame to the end screen
+                    Keep("over", game.H.PlayerView(0));
                     break;
                 }
                 if (!game.Session.Queue.IsEmpty)

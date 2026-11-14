@@ -12,9 +12,11 @@ internal sealed class Harness
     public GameState State => Session.Game!;
     public RulesPack Pack => Game.Pack;
 
-    public Harness(int players = 3, int seed = 1)
+    /// <param name="scenario">Forces the scenario every Breach picks, as the Development setting does.</param>
+    public Harness(int players = 3, int seed = 1, string? scenario = null)
     {
-        H = new GameHarness<MeridianGame>(new MeridianGame(new Lazy<RulesPack>(() => BasePack.Pack)), players, seed);
+        var pack = scenario is null ? BasePack.Pack : BasePack.Pack.WithForcedScenario(scenario);
+        H = new GameHarness<MeridianGame>(new MeridianGame(new Lazy<RulesPack>(() => pack)), players, seed);
         H.Start();
     }
 
@@ -76,23 +78,49 @@ internal sealed class Harness
     }
 
     /// <summary>
-    /// Plays the Explore bot's choice for whoever the game waits on, through the phones' own intents, until the game is
-    /// over or <paramref name="steps"/> run out. Returns the steps taken.
+    /// Plays the whole game through the phones' own intents, as bots: the Explore bot, then everyone Ready at the
+    /// briefings, the scenario's role bots, and the VIP's Continue at the Debrief. Each presentation ends on its fallback
+    /// (no TV), and a bot that would wait out a deadline lets the clock run. Stops when the game is over or
+    /// <paramref name="steps"/> run out; returns the steps taken.
     /// </summary>
-    public int PlayBots(int steps = 2000, ulong seed = 5)
+    public int PlayBots(int steps = 4000, ulong seed = 5) => PlayUntil(() => false, steps, seed);
+
+    /// <summary>Plays as <see cref="PlayBots"/> until <paramref name="stop"/> holds. Returns the steps taken.</summary>
+    public int PlayUntil(Func<bool> stop, int steps = 4000, ulong seed = 5)
     {
         var rng = Rng.Seeded(seed, 99);
         var taken = 0;
-        while (taken < steps && Session.Phase == SessionPhase.Explore)
+        while (taken < steps && !stop() && Session.Phase is not (SessionPhase.Over or SessionPhase.Boarding))
         {
+            taken++;
             if (!Session.Queue.IsEmpty)
             {
-                Advance(Session.Queue[0].Seconds);   // no TV: each presentation ends on its fallback
+                Advance(Session.Queue[0].Seconds);
                 continue;
             }
-            var seat = BotRunner.Actor(State);
-            Do(ExploreBot.Instance.Choose(Pack, State, seat, Rules.Legal(Pack, State, seat), ref rng));
-            taken++;
+            switch (Session.Phase)
+            {
+                case SessionPhase.Briefing:
+                    for (var i = 0; i < H.Players.Count; i++)
+                    {
+                        Send(i, "ready");
+                    }
+                    continue;
+                case SessionPhase.Debrief:
+                    Send(0, "continue");   // the harness's first player is the VIP
+                    continue;
+            }
+            var seat = State.Waiting is VotePending vote ? vote.Owed[0] : BotRunner.Actor(State);
+            IBotPolicy bot = State.Phase == Phase.Endgame && State.RoleOf(seat) is { } role
+                ? Pack.Scenarios.Get(State.Board!.Scenario).Bot(role.Role)
+                : ExploreBot.Instance;
+            var command = bot.Choose(Pack, Visibility.For(State, seat), seat, Rules.Legal(Pack, State, seat), ref rng);
+            if (command is Meridian.Logic.Timeout)
+            {
+                Advance(Math.Max(0.1, (Game.Deadline!.Value - H.Now).TotalSeconds));   // the phone sits idle
+                continue;
+            }
+            Do(command);
         }
         return taken;
     }

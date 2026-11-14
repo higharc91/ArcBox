@@ -40,7 +40,7 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
         var seed = (ulong)ctx.Random.NextInt64();
         Session = new MeridianSession(
             SessionPhase.Boarding,
-            players.Select(p => new SeatInfo(p.Id, p.Name)).ToEqArray(),
+            players.Select(p => new SeatInfo(p.Id, p.Name, Vip: p.IsVip)).ToEqArray(),
             seed,
             Game: null,
             BotRng: Rng.Seeded(seed, stream: 1013),
@@ -62,8 +62,15 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             case SessionPhase.Boarding:
                 Board(seat, action, data);
                 break;
-            case SessionPhase.Explore when Session.Queue.IsEmpty && Intents.ToCommand(seat.Seat, action, data) is { } command:
+            case SessionPhase.Explore or SessionPhase.Endgame when Session.Queue.IsEmpty
+                                                                  && Intents.ToCommand(seat.Seat, action, data) is { } command:
                 Apply(command);
+                break;
+            case SessionPhase.Briefing when action == "ready":
+                Ready(seat.Seat);
+                break;
+            case SessionPhase.Debrief when action == "continue" && seat.Vip:
+                FinishGame();
                 break;
         }
     }
@@ -80,7 +87,16 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
                 FinishBoarding();
                 break;
             case ClockPurpose.Deadline:
-                Apply(new Meridian.Logic.Timeout(BotRunner.Actor(Session.Game!)));
+                TimeOut();
+                break;
+            case ClockPurpose.Briefing:
+                BeginEndgame();
+                break;
+            case ClockPurpose.Pause:
+                PauseOver();
+                break;
+            case ClockPurpose.Debrief:
+                FinishGame();
                 break;
             case ClockPurpose.Present:
                 Pop();
@@ -98,7 +114,12 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
     {
         if (Session.Find(id) is { } seat)
         {
-            Session = Session.With(seat with { Connected = connected, Auto = connected ? false : seat.Auto });
+            Session = Session.With(seat with
+            {
+                Connected = connected,
+                Auto = connected ? false : seat.Auto,
+                PauseUsed = connected ? false : seat.PauseUsed,   // a new disconnection gets a new pause
+            });
             Rearm();
         }
     }

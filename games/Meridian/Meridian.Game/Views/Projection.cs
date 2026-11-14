@@ -39,8 +39,10 @@ internal static class Projection
         {
             case SessionPhase.Boarding:
                 return Screen("crewPick", CrewPick(game, seat), game.Deadline);
-            case SessionPhase.Over:
+            case SessionPhase.Over or SessionPhase.Debrief:
                 return Screen("over", new OverScreen(s.Ending ?? ""), null);
+            case SessionPhase.Briefing:
+                return new WaitView("Read your briefing.");
         }
 
         var state = s.Game!;

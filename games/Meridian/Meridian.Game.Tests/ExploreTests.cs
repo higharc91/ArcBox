@@ -76,15 +76,13 @@ public sealed class ExploreTests
     }
 
     [Fact]
-    public void The_breach_ends_the_game_with_a_message()
+    public void A_whole_game_ends_with_the_scenarios_outcome()
     {
-        // M2 review focus 8.
         var game = new Harness().Board();
         game.PlayBots();
         Assert.Equal(SessionPhase.Over, game.Session.Phase);
         var results = Assert.IsType<GameResults>(game.H.Results);
-        Assert.Contains("Breach", results.Message);
-        Assert.Contains("stage M3", results.Message);
+        Assert.Equal(game.State.Board!.Outcome!.Message, results.Message);
         Assert.Equal(3, results.Scores.Count);
         Assert.Empty(game.H.ActiveTimers);
     }

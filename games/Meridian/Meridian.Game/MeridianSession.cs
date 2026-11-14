@@ -9,12 +9,19 @@ public enum SessionPhase
 {
     [JsonStringEnumMemberName("boarding")] Boarding,
     [JsonStringEnumMemberName("explore")] Explore,
+    /// <summary>The Breach has been shown; phones read their briefings (spec §3.1).</summary>
+    [JsonStringEnumMemberName("briefing")] Briefing,
+    [JsonStringEnumMemberName("endgame")] Endgame,
+    /// <summary>A side has won; every role is revealed until the VIP continues.</summary>
+    [JsonStringEnumMemberName("debrief")] Debrief,
     [JsonStringEnumMemberName("over")] Over,
 }
 
 /// <summary>A player's seat. Its <see cref="Seat"/> id in the rules is the player id's string.</summary>
 /// <param name="Auto">A bot is playing this seat until the player reconnects (spec §3.3).</param>
-public sealed record SeatInfo(PlayerId Player, string Name, CrewId? Crew = null, bool Connected = true, bool Auto = false)
+/// <param name="PauseUsed">This disconnection's one endgame pause has run out; it resets when the player reconnects.</param>
+public sealed record SeatInfo(PlayerId Player, string Name, CrewId? Crew = null, bool Connected = true, bool Auto = false,
+                              bool Vip = false, bool PauseUsed = false)
 {
     [JsonIgnore]
     public SeatId Seat => new(Player.Value);
@@ -34,6 +41,10 @@ public enum ClockPurpose
     [JsonStringEnumMemberName("bot")] Bot,
     /// <summary>The TV is presenting the front of the queue; this is its fallback.</summary>
     [JsonStringEnumMemberName("present")] Present,
+    [JsonStringEnumMemberName("briefing")] Briefing,
+    /// <summary>The endgame's pause for a seat that dropped while owing a decision (spec §3.3).</summary>
+    [JsonStringEnumMemberName("pause")] Pause,
+    [JsonStringEnumMemberName("debrief")] Debrief,
 }
 
 /// <summary>
@@ -51,6 +62,7 @@ public sealed record Clock(int Seq, ClockPurpose Purpose);
 /// <param name="Game">Null during Boarding.</param>
 /// <param name="BotRng">The bots' own generator, never the game's.</param>
 /// <param name="Ending">The results message, once the game is over.</param>
+/// <param name="Ready">Seats that have read their briefing.</param>
 public sealed record MeridianSession(
     SessionPhase Phase,
     EqArray<SeatInfo> Seats,
@@ -61,7 +73,8 @@ public sealed record MeridianSession(
     EqArray<Presented> Queue,
     int NextPresent,
     EqArray<string> Log,
-    string? Ending = null)
+    string? Ending = null,
+    EqArray<SeatId> Ready = default)
 {
     public int IndexOf(PlayerId player)
     {

@@ -44,4 +44,16 @@ public sealed record MeridianRules
 
     /// <summary>The pause between a bot's commands, so its turn is watchable.</summary>
     public TimeSpan BotStep { get; init; } = TimeSpan.FromSeconds(0.8);
+
+    // The endgame's clocks (M3 plan, Task 11).
+    /// <summary>How long phones have to read their briefings before the endgame begins anyway (spec §3.1).</summary>
+    public TimeSpan BriefingTime { get; init; } = TimeSpan.FromSeconds(90);
+
+    /// <summary>A living seat that drops in the endgame is waited for this long, once per disconnection (spec §3.3).</summary>
+    public TimeSpan EndgamePause { get; init; } = TimeSpan.FromSeconds(60);
+
+    public TimeSpan VoteWait { get; init; } = TimeSpan.FromSeconds(30);
+    public TimeSpan EchoWait { get; init; } = TimeSpan.FromSeconds(15);
+    public TimeSpan AllocateWait { get; init; } = TimeSpan.FromSeconds(20);
+    public TimeSpan DebriefTime { get; init; } = TimeSpan.FromSeconds(20);
 }

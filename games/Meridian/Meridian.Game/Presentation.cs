@@ -54,10 +54,24 @@ public sealed partial class MeridianGame
     private void Pop()
     {
         Session = Session with { Queue = Session.Queue.RemoveAt(0) };
-        if (Session.Queue.IsEmpty && Session.Game!.Phase == Phase.Breach)
+        if (Session.Queue.IsEmpty)
         {
-            End();
-            return;
+            switch (Session.Game!.Phase)
+            {
+                case Phase.Breach when Session.Phase == SessionPhase.Explore:
+                    if (Session.Game.Board is null)
+                    {
+                        End();   // no scenario could be set up: end at the Breach, as stage M2 did
+                    }
+                    else
+                    {
+                        EnterBriefing();
+                    }
+                    return;
+                case Phase.Over when Session.Phase == SessionPhase.Endgame:
+                    EnterDebrief();
+                    return;
+            }
         }
         Rearm(fresh: true);
     }
@@ -77,6 +91,14 @@ public sealed partial class MeridianGame
                                   $"{r.Dice.Faces.Count} dice: {r.Dice.Total}", 1.5, Faces: r.Dice.Faces),
         BreachFired b => new Presented(seq, "breach", b.Breach.Seat, "The Breach", "Something aboard has woken.", 4,
                                        Compartment: b.Breach.Compartment?.Value),
+        ScenarioChosen c => new Presented(seq, "scenario", Session.Game!.ActiveSeat, c.Title, "Read your briefing.", 3),
+        Attacked a => new Presented(seq, "fight", Session.Game!.ActiveSeat, "A fight",
+                                    $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5),
+        Died d => new Presented(seq, "death", d.Seat, $"{Session.SeatOf(d.Seat).Name} is dead", "They stay as an echo.", 2),
+        ScenarioNotice n => new Presented(seq, "notice", Session.Game!.ActiveSeat, "", n.Text, 1.5, Compartment: n.At?.Value),
+        VoteResolved v => new Presented(seq, "vote", Session.Game!.ActiveSeat, "The vote",
+                                        v.Result is { } r ? $"{Session.SeatOf(new SeatId(r)).Name} is named." : "Nobody is named.", 2),
+        GameOver g => new Presented(seq, "over", Session.Game!.ActiveSeat, "It's over", g.Outcome.Message, 3),
         _ => null,
     };
 
