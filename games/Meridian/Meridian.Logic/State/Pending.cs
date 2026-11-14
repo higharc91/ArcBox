@@ -8,6 +8,7 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(RollPending), "roll")]
 [JsonDerivedType(typeof(ChoicePending), "choice")]
 [JsonDerivedType(typeof(TradePending), "trade")]
+[JsonDerivedType(typeof(AllocatePending), "allocate")]
 public abstract record Pending(SeatId From);
 
 /// <summary>Choose which way round a new compartment goes. <see cref="Toward"/> is its side facing the mover.</summary>
@@ -34,3 +35,9 @@ public sealed record TradePending(SeatId From, SeatId Offerer, TradeOffer Offer)
 
 /// <summary>Items the offerer gives, and items they ask for in return.</summary>
 public sealed record TradeOffer(EqArray<CardId> Give, EqArray<CardId> Take);
+
+/// <summary>
+/// Split lost steps between the two traits of <see cref="Group"/> (spec §2.7: the defender chooses). <see cref="By"/> is
+/// who dealt the damage, for the awards; null for a hazard.
+/// </summary>
+public sealed record AllocatePending(SeatId From, TraitGroup Group, int Steps, SeatId? By = null) : Pending(From);

@@ -73,6 +73,7 @@ internal sealed partial class Resolver
         {
             Events.Add(new TraitChanged(seat, trait, before[trait], now[trait]));
         }
+        CheckDeath(seat);
     }
 
     private void MoveToFirst(SeatId seat, TileId tile)

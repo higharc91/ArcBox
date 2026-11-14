@@ -57,7 +57,7 @@ public static class Rules
     /// </summary>
     public static EqArray<Command> Legal(RulesPack pack, GameState state, SeatId seat)
     {
-        if (state.Phase != Phase.Explore || state.IndexOf(seat) < 0)
+        if (state.Phase is not (Phase.Explore or Phase.Endgame) || state.IndexOf(seat) < 0)
         {
             return [];
         }
@@ -101,9 +101,9 @@ public static class Rules
 
     private static string? Rejection(RulesPack pack, GameState state, Command command)
     {
-        if (state.Phase != Phase.Explore)
+        if (state.Phase is not (Phase.Explore or Phase.Endgame))
         {
-            return "The Breach has fired; exploring is over.";
+            return "Nobody can act now.";
         }
         if (state.IndexOf(command.From) < 0)
         {

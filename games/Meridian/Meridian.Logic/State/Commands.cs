@@ -18,6 +18,11 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(AnswerTrade), "answerTrade")]
 [JsonDerivedType(typeof(EndTurn), "endTurn")]
 [JsonDerivedType(typeof(Timeout), "timeout")]
+[JsonDerivedType(typeof(Attack), "attack")]
+[JsonDerivedType(typeof(Allocate), "allocate")]
+[JsonDerivedType(typeof(MonsterMove), "monsterMove")]
+[JsonDerivedType(typeof(MonsterAttack), "monsterAttack")]
+[JsonDerivedType(typeof(Lend), "lend")]
 public abstract record Command(SeatId From);
 
 public sealed record MoveTo(SeatId From, CompartmentId To) : Command(From);
@@ -33,3 +38,15 @@ public sealed record EndTurn(SeatId From) : Command(From);
 
 /// <summary>The adapter's deadline for <see cref="From"/> passed: resolves whatever that seat owes (see Rules).</summary>
 public sealed record Timeout(SeatId From) : Command(From);
+
+/// <summary>Attack a crew member (by seat id) or a monster (by token id) in the same compartment (spec §2.7).</summary>
+public sealed record Attack(SeatId From, string Target) : Command(From);
+
+/// <summary>Answer an <see cref="AllocatePending"/>: <see cref="First"/> steps off the group's first trait, the rest off the second.</summary>
+public sealed record Allocate(SeatId From, int First) : Command(From);
+
+public sealed record MonsterMove(SeatId From, string Monster, CompartmentId To) : Command(From);
+public sealed record MonsterAttack(SeatId From, string Monster, SeatId Target) : Command(From);
+
+/// <summary>An echo lends a living crew member an extra die on their next check (spec §2.8).</summary>
+public sealed record Lend(SeatId From, SeatId To) : Command(From);

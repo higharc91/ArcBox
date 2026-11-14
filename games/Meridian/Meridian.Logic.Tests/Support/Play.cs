@@ -99,6 +99,32 @@ internal sealed class Play
 
     public int Dice => ((RollPending)State.Waiting!).Dice;
 
+    /// <summary>Sets the generator so a fight's two rolls (attacker's, then defender's) satisfy <paramref name="outcome"/>.</summary>
+    public Play RigFight(int attackDice, int defendDice, Func<int, int, bool> outcome)
+    {
+        for (ulong seed = 1; seed < 20_000; seed++)
+        {
+            var (a, rng) = SignalDice.Roll(Rng.Seeded(seed), attackDice, Pack.Rules);
+            var (d, _) = SignalDice.Roll(rng, defendDice, Pack.Rules);
+            if (outcome(a.Total, d.Total))
+            {
+                State = State with { Rng = Rng.Seeded(seed) };
+                return this;
+            }
+        }
+        throw new InvalidOperationException("No seed gives that fight.");
+    }
+
+    /// <summary>Runs an internal resolver step directly, for rules no command reaches on its own.</summary>
+    internal Play Resolve(Action<Resolver> act)
+    {
+        var resolver = new Resolver(Pack, State);
+        act(resolver);
+        State = resolver.State;
+        Events.AddRange(resolver.Events);
+        return this;
+    }
+
     /// <summary>Draws a card for the active seat, as a revealed symbol tile would.</summary>
     public Play Draw(CardKind kind)
     {

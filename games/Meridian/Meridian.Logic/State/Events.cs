@@ -29,6 +29,12 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(TradeAnswered), "tradeAnswered")]
 [JsonDerivedType(typeof(BreachHeld), "breachHeld")]
 [JsonDerivedType(typeof(BreachFired), "breachFired")]
+[JsonDerivedType(typeof(Attacked), "attacked")]
+[JsonDerivedType(typeof(Died), "died")]
+[JsonDerivedType(typeof(ItemDropped), "itemDropped")]
+[JsonDerivedType(typeof(MonsterMoved), "monsterMoved")]
+[JsonDerivedType(typeof(MonsterRecovered), "monsterRecovered")]
+[JsonDerivedType(typeof(DieLent), "dieLent")]
 public abstract record GameEvent;
 
 /// <summary>A command that wasn't legal. The state is unchanged; player input never throws.</summary>
@@ -54,3 +60,11 @@ public sealed record TradeOffered(SeatId From, SeatId To, TradeOffer Offer) : Ga
 public sealed record TradeAnswered(SeatId From, SeatId To, bool Accepted) : GameEvent;
 public sealed record BreachHeld(SeatId Seat, int Total, int Needed) : GameEvent;
 public sealed record BreachFired(BreachInfo Breach) : GameEvent;
+
+/// <summary>A fight. <see cref="Result"/> is <c>hit</c>, <c>stunned</c> (a monster), <c>staggered</c> (the attacker) or <c>tie</c>.</summary>
+public sealed record Attacked(string Attacker, string Defender, DiceRoll AttackRoll, DiceRoll DefendRoll, string Result) : GameEvent;
+public sealed record Died(SeatId Seat) : GameEvent;
+public sealed record ItemDropped(SeatId Seat, CardId Card, CompartmentId At) : GameEvent;
+public sealed record MonsterMoved(string Monster, CompartmentId From, CompartmentId To) : GameEvent;
+public sealed record MonsterRecovered(string Monster) : GameEvent;
+public sealed record DieLent(SeatId From, SeatId To) : GameEvent;

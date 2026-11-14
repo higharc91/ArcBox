@@ -28,6 +28,11 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case UseCompartment: UseRoom(); break;
             case OfferTrade o: Offer(o); break;
             case AnswerTrade a: Answer(a.Accept); break;
+            case Attack a: AttackTarget(a); break;
+            case Allocate a: AllocateDamage(a.First); break;
+            case MonsterMove m: MoveMonster(m); break;
+            case MonsterAttack m: MonsterAttacks(m); break;
+            case Lend l: LendDie(l); break;
             default: throw new InvalidOperationException($"No handler for {command.GetType().Name}.");
         }
         AfterStep();
@@ -51,16 +56,23 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
                 legal.Add(new AnswerTrade(t.From, true));
                 legal.Add(new AnswerTrade(t.From, false));
                 break;
+            case AllocatePending a:
+                legal.AddRange(Enumerable.Range(0, a.Steps + 1).Select(k => new Allocate(a.From, k)));
+                break;
         }
     }
 
     /// <summary>The active seat's free actions, not counting EndTurn and Timeout.</summary>
     public static void Actions(RulesPack pack, GameState state, SeatId seat, List<Command> legal)
     {
-        LegalMoves(pack, state, seat, legal);
-        LegalOpens(pack, state, seat, legal);
-        LegalItems(pack, state, seat, legal);
-        LegalRoom(pack, state, seat, legal);
+        if (state.CrewOf(seat).Aboard)
+        {
+            LegalMoves(pack, state, seat, legal);
+            LegalOpens(pack, state, seat, legal);
+            LegalItems(pack, state, seat, legal);
+            LegalRoom(pack, state, seat, legal);
+        }
+        LegalCombat(pack, state, seat, legal);
     }
 
     /// <summary>Timeout resolves whatever the seat owes (plan, Task 4): with nothing owed, it ends the turn.</summary>
@@ -83,17 +95,60 @@ internal sealed partial class Resolver(RulesPack pack, GameState state)
             case TradePending:
                 Answer(false);
                 break;
+            case AllocatePending a:
+                AllocateDamage(DefaultSplit(State, a));
+                break;
         }
     }
 
+    /// <summary>
+    /// Passes the turn to the next seat still in the turn order (escaped seats leave it; the dead stay, as echoes). A new
+    /// round starts on passing the seat that went first. The new seat's stunned monsters recover, missing this activation.
+    /// </summary>
     private void FinishTurn()
     {
         var ending = State.ActiveSeat;
         Events.Add(new TurnEnded(ending));
-        var next = (State.Active + 1) % State.Crew.Count;
-        var round = next == State.First ? State.Round + 1 : State.Round;
-        var moves = Rules.Value(Pack, State.Crew[next], Trait.Agility);
-        State = State with { Active = next, Round = round, MovesLeft = moves, Turn = new TurnFlags(), Waiting = null };
+        var next = State.Active;
+        var round = State.Round;
+        for (var i = 0; i < State.Crew.Count; i++)
+        {
+            next = (next + 1) % State.Crew.Count;
+            if (next == State.First)
+            {
+                round++;
+            }
+            if (!State.Crew[next].Escaped)
+            {
+                break;
+            }
+        }
+        var crew = State.Crew[next];
+        var moves = crew.Aboard ? Rules.Value(Pack, crew, Trait.Agility) : 0;
+        var turn = new TurnFlags();
+        if (State.Board is { } board)
+        {
+            foreach (var monster in board.Tokens.Where(t => t.Controller == crew.Seat && t.Stunned))
+            {
+                board = board.WithToken(monster with { Stunned = false });
+                turn = turn with
+                {
+                    MonstersMoved = turn.MonstersMoved.Add(monster.Id),
+                    MonstersAttacked = turn.MonstersAttacked.Add(monster.Id),
+                };
+                Events.Add(new MonsterRecovered(monster.Id));
+            }
+            State = State.WithBoard(board);
+        }
+        var newRound = round != State.Round;
+        State = State with { Active = next, Round = round, MovesLeft = moves, Turn = turn, Waiting = null };
+        if (newRound)
+        {
+            RoundEnded(round - 1);
+        }
         Events.Add(new TurnStarted(State.ActiveSeat, round, moves));
     }
+
+    /// <summary>Round-end hazards and scenario rules (M3 plan, Task 4).</summary>
+    partial void RoundEnded(int round);
 }

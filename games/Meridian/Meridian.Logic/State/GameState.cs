@@ -46,9 +46,10 @@ public sealed record TraitSteps(int Brawn, int Agility, int Tech, int Nerve)
 /// <param name="UsedRooms">Compartments whose once-per-crew rule this crew member has used.</param>
 /// <param name="Alive">False once dead; a dead crew member stays in the game as an echo (spec §2.8).</param>
 /// <param name="Escaped">Left the ship (Decaying Orbit's pods); out of the turn order but not dead.</param>
+/// <param name="Lent">Extra dice an echo lent for this crew member's next check (spec §2.8).</param>
 public sealed record CrewState(SeatId Seat, CrewId Crew, CompartmentId At, TraitSteps Steps,
                                EqArray<CardId> Items = default, EqArray<CompartmentId> UsedRooms = default,
-                               bool Alive = true, bool Escaped = false, CrewStats? Stats = null)
+                               bool Alive = true, bool Escaped = false, CrewStats? Stats = null, int Lent = 0)
 {
     public CrewStats Counted => Stats ?? new CrewStats();
 
@@ -59,7 +60,10 @@ public sealed record CrewState(SeatId Seat, CrewId Crew, CompartmentId At, Trait
 public sealed record CardPile(EqArray<CardId> Draw, EqArray<CardId> Discard = default);
 
 /// <summary>What the active seat has already done this turn (spec §2.4: each at most once).</summary>
-public sealed record TurnFlags(bool UsedItem = false, bool UsedCompartment = false, bool Traded = false);
+/// <param name="MonstersMoved">Monsters the active seat has moved this turn (or that can't, being stunned or staggered).</param>
+public sealed record TurnFlags(bool UsedItem = false, bool UsedCompartment = false, bool Traded = false, bool Attacked = false,
+                               EqArray<string> MonstersMoved = default, EqArray<string> MonstersAttacked = default,
+                               bool Lent = false);
 
 /// <summary>
 /// Who fired the Breach, with what and where. <see cref="Anomaly"/> and <see cref="Compartment"/> are null when the ship

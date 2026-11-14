@@ -6,6 +6,10 @@ internal sealed partial class Resolver
     /// <summary>After an Anomaly is held: roll as many dice as Anomalies drawn, or fire at once on the forced one.</summary>
     partial void AnomalyDrawn(SeatId seat, CardId card)
     {
+        if (State.Phase != Phase.Explore)
+        {
+            return;   // the Breach has already fired: an Anomaly found later is just an item
+        }
         if (State.AnomaliesDrawn >= R.ForcedBreachAnomaly)
         {
             Fire(new BreachInfo(seat, card, State.CrewOf(seat).At, Forced: true, Roll: null));

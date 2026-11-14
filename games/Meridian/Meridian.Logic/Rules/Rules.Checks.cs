@@ -11,8 +11,11 @@ internal sealed partial class Resolver
     {
         var check = CheckOf(card, option);
         var crew = State.CrewOf(seat);
-        var dice = Rules.Value(Pack, crew, check.Trait) + ExtraDiceFor(Pack, crew, check.Trait);
-        State = State with { Waiting = new RollPending(seat, RollReason.Check, check.Trait, dice, card, option) };
+        var dice = Rules.Value(Pack, crew, check.Trait) + ExtraDiceFor(Pack, crew, check.Trait) + crew.Lent;
+        State = State.WithCrew(crew with { Lent = 0 }) with
+        {
+            Waiting = new RollPending(seat, RollReason.Check, check.Trait, dice, card, option),
+        };
     }
 
     private CheckBody CheckOf(CardId card, string? option)
