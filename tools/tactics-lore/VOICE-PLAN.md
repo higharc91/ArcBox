@@ -20,7 +20,7 @@ Named characters keep their existing preset, pitch and filter across main scenes
 | oswin_hale | Rasalgethi | +0 | echo |
 | halvard | Schedar | -2 | helm |
 | hooded_stranger | Sadaltager | -2 | echo |
-| lark | Aoede | +0 | — |
+| lark | Callirrhoe | +3 (ch3_guest_right_arrive_3 −2, bark_lark_ally_down_1 0, via `linePitch`) | — |
 | bree_tallow | Zephyr | +0 | — |
 | maren_sorrel | Sulafat | +0 | — |
 | mother_aubrine | Vindemiatrix | +0 | — |

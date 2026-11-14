@@ -86,8 +86,9 @@
     },
     "lark": {
       "preset": "Callirrhoe",
-      "pitch": -2,
-      "note": "androgynous, musical; recast 2026-11-13 from Aoede (rejected: read as a generic thirties woman). Approved audition: Callirrhoe -2, median 190 Hz"
+      "pitch": 3,
+      "linePitch": { "ch3_guest_right_arrive_3": -2, "bark_lark_ally_down_1": 0 },
+      "note": "androgynous, musical; recast 2026-11-13 from Aoede (rejected: read as a generic thirties woman). Approved audition: Callirrhoe -2 at median 190 Hz, kept as ch3_guest_right_arrive_3's clip. Batch renders sit lower (raw ~158 Hz), so the cast pitch is +3 to match it (~190 Hz), approved 2026-11-14"
     },
     "bree_tallow": {
       "preset": "Zephyr",
