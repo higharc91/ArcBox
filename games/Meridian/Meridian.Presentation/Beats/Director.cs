@@ -38,6 +38,9 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
     /// <summary>The deck on screen. It changes only when a beat begins or between beats.</summary>
     public DeckId Deck { get; private set; } = DeckId.Habitat;
 
+    /// <summary>Where the current beat is on its timeline, in seconds (it holds while the voice is waited for).</summary>
+    public double Elapsed => Current is null ? 0 : _timeline;
+
     /// <summary>The current step and how far through it the beat is (0 to 1).</summary>
     public (BeatStep Step, double Progress)? Position
     {

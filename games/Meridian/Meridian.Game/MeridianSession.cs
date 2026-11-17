@@ -105,7 +105,13 @@ public sealed record MeridianSession(
 /// </summary>
 /// <param name="Deck">For a card, which deck it came from: Tiller reads an Incident in full, other cards by title only.</param>
 /// <param name="Target">For a fight, who was attacked (a seat or a monster token), so the TV shows them hurt.</param>
+/// <param name="Attacker">For a fight, who attacked: a stagger lands on them.</param>
+/// <param name="Outcome">For a fight, how it went: <c>hit</c>, <c>stunned</c>, <c>staggered</c> or <c>tie</c> (the TV's effect).</param>
+/// <param name="Card">For a card, its id: an Incident's board effect is chosen by it. The card is on screen anyway.</param>
 public sealed record Presented(int Seq, string Kind, SeatId Seat, string Title, string Text, double Seconds,
                                EqArray<int> Faces = default, string? Compartment = null,
                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CardKind? Deck = null,
-                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Target = null);
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Target = null,
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Attacker = null,
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Outcome = null,
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Card = null);

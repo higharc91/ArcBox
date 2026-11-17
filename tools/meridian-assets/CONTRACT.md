@@ -61,4 +61,22 @@ A single entry may say which deck it was drawn for with `"deck"`. Each deck is c
 "die": { "roll": { "file": "…", "frames": 4, "fps": 12, "frameSize": [24, 24] }, "face0": {…}, "face1": {…}, "face2": {…} }
 ```
 
+**Effects** hold a `full` and a `reduced` entry. A bare entry counts as `full`. With the TV's reduced effects on, only `reduced` plays: no flash and no shake. Where it's missing, nothing plays, never the full strip. A strip plays once and holds its last frame, except where it loops (the stun, the Breach's alarm). Effects are drawn upright, centred on their place, at the tiles' scale (64 px art at 64 px cells). The Breach's two are stretched to the screen in whole steps.
+
+| Effect | Plays |
+|---|---|
+| `reveal` | On a compartment as it drops in |
+| `hatchOpen`, `hatchSeal` | On a revealed compartment's open hatches, and on a welded compartment's sealed ones |
+| `hit`, `traitLoss` | On a crew member who is hit in a fight |
+| `hit`, `stun` (looping) | On a monster that is stunned |
+| `stagger`, `miss` | On an attacker who is staggered, and on the target of a tie |
+| `breachAlarm` (looping), `breachDistortion` | Over the screen during the Breach, under its words |
+| `echo` | On a crew member as they die |
+| `sparks`, `pressure` | On whoever draws Sparking Conduit or Jammed Bulkhead (sparks), or Hull Groan or Gravity Flicker (pressure) |
+| `traitGain`, `vent`, `rot` | Not yet: kept for the hazard scenarios and a public trait event |
+
+```json
+"hit": { "full": { "file": "…", "frames": 4, "fps": 12, "frameSize": [64, 64] }, "reduced": {…} }
+```
+
 **Strict and loose sets.** In `tiles`, `hatches`, `crew`, `portraits`, `cards` and `icons`, an id the game doesn't have is an error. In `tokens`, `ui`, `fx` and `audio`, an unknown id is only a warning: later scenarios and pieces can arrive ahead of the code.

@@ -95,7 +95,8 @@ public sealed partial class MeridianGame
         ScenarioChosen c => Announced(seq, c),
         RoundClosed r => RoundWarning(seq, r),
         Attacked a => new Presented(seq, "fight", Session.Game!.ActiveSeat, $"{Fighter(a.Attacker)} attacks {Fighter(a.Defender)}",
-                                    $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5, Target: a.Defender),
+                                    $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5, Target: a.Defender,
+                                    Attacker: a.Attacker, Outcome: a.Result),
         Died d => Read(seq, "death", d.Seat, $"{Session.SeatOf(d.Seat).Name} is dead", "They stay as an echo.", 2),
         ScenarioNotice n => Read(seq, "notice", Session.Game!.ActiveSeat, "", n.Text, 1.5) with { Compartment = n.At?.Value },
         VoteResolved v => Read(seq, "vote", Session.Game!.ActiveSeat, "The vote",
@@ -108,7 +109,7 @@ public sealed partial class MeridianGame
     {
         var card = _pack.Card(d.Card);
         return new Presented(seq, "card", d.Seat, card.Title, card.Text, ReadingSeconds(_pack.Rules, card.Title, card.Text),
-                             Deck: card.Kind);
+                             Deck: card.Kind, Card: d.Card.Value);
     }
 
     /// <summary>A presentation with text: it waits for whichever is longer, its own minimum or the time to read it aloud.</summary>

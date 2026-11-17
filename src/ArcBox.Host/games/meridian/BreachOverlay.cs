@@ -2,6 +2,7 @@ using ArcBox.Host.Shell;
 using Godot;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Breach;
+using Meridian.Presentation.Fx;
 using Meridian.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Meridian;
@@ -17,8 +18,10 @@ public partial class BreachOverlay : Node2D
     private Func<string, string> _roomName = id => id;
     private double _time;
 
-    public void Use(Director director, Func<string, string> roomName, ArtTextures textures)
-        => (_director, _roomName, _textures) = (director, roomName, textures);
+    public void Use(Director director, Func<string, string> roomName, ArtTextures textures, FxLayer fx)
+        => (_director, _roomName, _textures, _fx) = (director, roomName, textures, fx);
+
+    private FxLayer? _fx;
 
     private ArtTextures? _textures;
 
@@ -46,6 +49,14 @@ public partial class BreachOverlay : Node2D
         var size = GetViewportRect().Size;
         var pulse = 0.5f + 0.5f * Mathf.Sin((float)_time * 3f);
         DrawRect(new Rect2(Vector2.Zero, size), new Color(0.35f + 0.08f * pulse, 0.02f, 0.03f, (float)(0.88 * frame.Red)));
+        // The screen-wide effects (the alarm wash, the distortion), over the red and under the words, stretched to the
+        // screen at a whole-step scale.
+        if (_fx is not null && _textures is not null)
+        {
+            _fx.Draw(this, _director, _textures.Art, _textures.Get, cue => cue.Place == FxPlace.Screen
+                ? [(size / 2, Mathf.Max(1f, Mathf.Ceil(size.Y / 64f)))]
+                : []);
+        }
         if (frame.Stage == BreachStage.Lights)
         {
             return;

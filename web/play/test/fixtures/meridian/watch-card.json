@@ -12,7 +12,8 @@
       "seconds": 6.944444444444444,
       "faces": [],
       "compartment": null,
-      "deck": "anomaly"
+      "deck": "anomaly",
+      "card": "humming_shard"
     }
   },
   "viewId": "v1",

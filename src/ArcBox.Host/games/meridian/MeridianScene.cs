@@ -29,6 +29,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
 {
     // Made with the scene: the shell gives it content before it enters the tree (Main.ShowGame).
     private readonly BoardCanvas _board = new();
+    private readonly FxLayer _fx = new();
     private readonly CrewMotion _motion = new();
     private bool _cutCrew = true;   // the first look, and the first after a reconnect, places crew without walking
     private readonly HudCanvas _hud = new();
@@ -141,13 +142,16 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         });
         _director.Abandoned += beat => GD.Print($"MERIDIAN abandoned {beat.Seq} {beat.Kind}");
         AddChild(new Starfield());
-        _board.Use(_director, _motion);
+        // Reduced effects: the TV's setting, shared with Tactics (ARCBOX_FX_REDUCED=1 previews it).
+        _fx.Reduced = new ArcBox.Host.Core.SettingsStore(ProjectSettings.GlobalizePath("user://settings.json")).Load().ReducedBattleEffects == true
+                      || System.Environment.GetEnvironmentVariable("ARCBOX_FX_REDUCED") == "1";
+        _board.Use(_director, _motion, _fx);
         AddChild(_board);
 
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);   // the starfield is the background, not the shell's backdrop
         _hud.Use(_director, _textures);
         AddChild(_hud);
-        _breach.Use(_director, _board.RoomName, _textures);
+        _breach.Use(_director, _board.RoomName, _textures, _fx);
         AddChild(_breach);
         _debrief.Use(_director, _textures);
         AddChild(_debrief);

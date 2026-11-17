@@ -6,6 +6,7 @@ using Meridian.Presentation.Art;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Board;
 using Meridian.Presentation.Debrief;
+using Meridian.Presentation.Fx;
 using Side = Meridian.Logic.Side;
 
 namespace ArcBox.Host.Games.Meridian;
@@ -29,7 +30,9 @@ public partial class BoardCanvas : Node2D
     private double _ease = 1;
     private DeckId? _deck;
 
-    public void Use(Director director, CrewMotion motion) => (_director, _motion) = (director, motion);
+    public void Use(Director director, CrewMotion motion, FxLayer fx) => (_director, _motion, _fx) = (director, motion, fx);
+
+    private FxLayer? _fx;
 
     // Crew walk between compartments (M5 plan, Task 3): CrewMotion says where, which way and how each one looks.
     private CrewMotion? _motion;
@@ -64,11 +67,12 @@ public partial class BoardCanvas : Node2D
             _ease = Math.Min(1, _ease + delta / DeckLayout.EaseSeconds);
             var t = _ease * _ease * (3 - 2 * _ease);   // smoothstep
             _cam = (Lerp(_from.X, _to.X, t), Lerp(_from.Y, _to.Y, t), Lerp(_from.Cell, _to.Cell, t));
-            // Redraw only when something moves: a new view, the camera easing, or a reveal dropping in. A software
+            // Redraw only when something moves: a new view, the camera easing, a reveal dropping in, or an effect playing. A software
             // renderer (and a cheap TV box) can't afford hundreds of shapes and labels every frame for nothing.
             _clock += delta;
             var moving = _motion?.Poses.Any(p => p.State is not CrewLook.Idle and not CrewLook.Echo) == true;
-            if (!ReferenceEquals(view, _drawn) || easing || moving || _director.Current is { Kind: "reveal" } || _size != _drawnSize)
+            if (!ReferenceEquals(view, _drawn) || easing || moving || _director.Current is { Kind: "reveal" } || FxLayer.Playing(_director)
+                || _size != _drawnSize)
             {
                 (_drawn, _drawnSize) = (view, _size);
                 QueueRedraw();
@@ -170,6 +174,7 @@ public partial class BoardCanvas : Node2D
         // Tokens in compartments, then crew, so people are always on top.
         var byRoom = tiles.ToDictionary(t => t.Id);
         var figures = (_motion?.Poses ?? []).ToDictionary(p => p.Seat);
+        var tokenAt = new Dictionary<string, Vector2>(StringComparer.Ordinal);   // where each token is drawn, for its effects
         if (view.Scenario is { } panel)
         {
             foreach (var group in panel.Tokens.Where(t => t.At is not null && byRoom.ContainsKey(t.At)).GroupBy(t => t.At!))
@@ -186,6 +191,7 @@ public partial class BoardCanvas : Node2D
                     {
                         at = V(DeckLayout.ToScreen(pose.X, pose.Y, cam, area)) - new Vector2(size / 2, size / 2);
                     }
+                    tokenAt[token.Id] = at + new Vector2(size / 2, size / 2);
                     var art = pose is not null ? _art.MonsterFrames(token.Kind, pose.State, pose.Facing) : _art.Token(token.Kind, token.State);
                     if (names && art is not null && Texture(art.Path) is { } sprite)
                     {
@@ -212,14 +218,16 @@ public partial class BoardCanvas : Node2D
                 }
             }
         }
-        // Crew mid-walk are drawn where they are; crew at rest share their compartment in rows, as before.
-        var poses = (_motion?.Poses ?? []).ToDictionary(p => p.Seat);
+        // Crew mid-walk are drawn where they are; crew at rest share their compartment in rows, as before. Where each
+        // stands is worked out first, so the effects (drawn under the crew) can find them.
+        var poses = figures;
+        var placed = new List<(CrewMarker Marker, Vector2 At, float R, CrewPose? Pose)>();
         foreach (var marker in view.Crew)
         {
             if (poses.TryGetValue(marker.Id, out var walking) && walking.Walking && walking.Deck == deck)
             {
                 var r = names ? Math.Max(13f, cell * 0.15f) : Math.Max(3f, cell * 0.14f);
-                DrawCrew(view, marker, V(DeckLayout.ToScreen(walking.X, walking.Y, cam, area)), r, cell, names, walking);
+                placed.Add((marker, V(DeckLayout.ToScreen(walking.X, walking.Y, cam, area)), r, walking));
             }
         }
         foreach (var group in view.Crew.Where(m => byRoom.ContainsKey(m.At) && !(poses.TryGetValue(m.Id, out var p) && p.Walking))
@@ -239,7 +247,51 @@ public partial class BoardCanvas : Node2D
                 // With the name in the tile (two lines at most), crew stand in its lower third so they don't cover it.
                 var below = names && DeckLayout.NamesInside((int)Math.Round(cell)) ? cell * 0.3f : 0;
                 var at = c + new Vector2((i % 3 - 1) * r * 1.9f, (i / 3) * r * 1.9f - (members.Count > 3 ? r : 0) + below);
-                DrawCrew(view, m, at, r, cell, names, poses.GetValueOrDefault(m.Id));
+                placed.Add((m, at, r, poses.GetValueOrDefault(m.Id)));
+            }
+        }
+
+        // The effects, between the tokens and the crew (spec §5.5), only where names are drawn: the side decks are too
+        // small for them to read.
+        if (names && _fx is not null && _director is not null)
+        {
+            var scale = cell / 64f;   // the tiles' scale: 64 px art at 64 px cells
+            var actors = placed.ToDictionary(p => p.Marker.Id, p => p.At);
+            foreach (var (id, at) in tokenAt)
+            {
+                actors.TryAdd(id, at);
+            }
+            _fx.Draw(this, _director, _art, Texture, cue => cue.Place switch
+            {
+                FxPlace.Compartment when cue.Where is { } room && byRoom.TryGetValue(room, out var tile)
+                    => [(V(DeckLayout.ToScreen(tile.At, cam, area)), scale)],
+                FxPlace.Hatches when cue.Where is { } room && byRoom.TryGetValue(room, out var tile)
+                    => HatchPoints(tile, V(DeckLayout.ToScreen(tile.At, cam, area)), cell, cue.Fx == "hatchSeal" ? HatchState.Sealed : HatchState.Open)
+                       .Select(p => (p, scale)),
+                FxPlace.Actor when cue.Where is { } who && actors.TryGetValue(who, out var at) => [(at, scale)],
+                _ => [],
+            });
+        }
+        foreach (var (marker, at, r, pose) in placed)
+        {
+            DrawCrew(view, marker, at, r, cell, names, pose);
+        }
+    }
+
+    /// <summary>The middle of each of a compartment's edges with a hatch in <paramref name="state"/>.</summary>
+    private static IEnumerable<Vector2> HatchPoints(TileDraw tile, Vector2 c, float cell, HatchState state)
+    {
+        foreach (var side in Enum.GetValues<Side>())
+        {
+            if (tile.Hatch(side) == state)
+            {
+                yield return c + side switch
+                {
+                    Side.N => new Vector2(0, -cell / 2),
+                    Side.E => new Vector2(cell / 2, 0),
+                    Side.S => new Vector2(0, cell / 2),
+                    _ => new Vector2(-cell / 2, 0),
+                };
             }
         }
     }
