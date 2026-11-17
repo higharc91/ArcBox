@@ -901,7 +901,7 @@
               "id": "ch2_bree_open_1",
               "speaker": "narrator",
               "mood": "idle",
-              "text": "The Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges."
+              "text": "Back in Emberwick, at the Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges."
             },
             {
               "id": "ch2_bree_open_2",
@@ -1284,7 +1284,7 @@
               "id": "ch2_corvin_open_1",
               "speaker": "narrator",
               "mood": "idle",
-              "text": "Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby meets you at the door, very pale."
+              "text": "Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby, the town archivist, meets you at the door, very pale."
             },
             {
               "id": "ch2_corvin_open_2",
@@ -1422,6 +1422,12 @@
               "mood": "hurt",
               "text": "The Wardens must have known. They tended the flame three centuries. Somewhere there are records the fire never touched.",
               "direction": "quiet and fast, begging"
+            },
+            {
+              "id": "ch2_corvin_beg_crypt_1",
+              "speaker": "corvin_ashby",
+              "text": "There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it.",
+              "mood": "sad"
             },
             {
               "id": "ch2_corvin_beg_3",

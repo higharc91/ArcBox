@@ -1,0 +1,43 @@
+{
+  "batch": "issue340_2026_11_17_job08-laomedeia",
+  "source": "job08-laomedeia.wav",
+  "sourceSha256": "00ad7a1fb66c6d741613b53ce07429ea5d7845ada2701760a1499604d50f31d4",
+  "durationSeconds": 14.52,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Laomedeia.ec11b084",
+      "line": "town_child_force",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "Dad says the goblins aren't coming back. He didn't look happy about it.",
+      "start": 0.0,
+      "end": 4.844,
+      "matchedWords": "8/13",
+      "wavSha256": "575b61e9b6495014ebe124f3694bdd1cd285657e35a4849e690cd3c4cb21890e"
+    },
+    {
+      "raw": "Laomedeia.6ab094e4",
+      "line": "town_child_parley",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "There's a goblin girl who can spit further than me. I'm going to beat her.",
+      "start": 4.844,
+      "end": 9.415,
+      "matchedWords": "13/15",
+      "wavSha256": "b4d8aa149abb2aad468c7e6e8046fd7274e77b21f34d69e420808fdb2fd1a456"
+    },
+    {
+      "raw": "Laomedeia.248d3dca",
+      "line": "town_child_ember",
+      "speaker": "townsfolk_child",
+      "preset": "Laomedeia",
+      "text": "Pip says the river had a heart and somebody took it out. Is that true?",
+      "start": 9.415,
+      "end": 14.52,
+      "matchedWords": "7/15",
+      "wavSha256": "6db7532201ebea4f2b01878149407a72853cac0cd746a49897744085482147be"
+    }
+  ]
+}

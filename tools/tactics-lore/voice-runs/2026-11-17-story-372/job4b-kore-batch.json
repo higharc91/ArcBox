@@ -1,0 +1,29 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job4b-kore",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "voice": "Kore",
+    "text": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+    "segments": [
+      {
+        "raw": "Kore.0fc9fe8a",
+        "line": "ch1_bridge_cost_open_2",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        },
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      }
+    ],
+    "note": "split from job4-charon-kore: in two-voice jobs, pause tags and stage directions were sometimes spoken aloud"
+  }
+}

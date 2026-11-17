@@ -1,0 +1,54 @@
+{
+  "batch": "issue340_2026_11_17_job05-fenrir",
+  "source": "job05-fenrir.wav",
+  "sourceSha256": "77fe20cc6cb2817f3c032c3d157d4c5cbee2c2bc3117bd0089e9d177ccb6ab73",
+  "durationSeconds": 26.96,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Fenrir.1c12c38c",
+      "line": "town_guard_force",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "We took the bridge back. The captain hasn't said a word since. Neither have I.",
+      "start": 0.0,
+      "end": 6.765,
+      "matchedWords": "14/15",
+      "wavSha256": "e789448cf0532b26f6df730888a3e8c1ced5dbedcdec9d57c99185c08bf292a8"
+    },
+    {
+      "raw": "Fenrir.aca85793",
+      "line": "town_guard_parley",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Captain made peace with them. Some of the lads don't like it. I like breathing.",
+      "start": 6.765,
+      "end": 13.972,
+      "matchedWords": "7/15",
+      "wavSha256": "5532fa730ae3f69699ea55ff50c05cd9d14c72487ea7b384d22fad8e29b80382"
+    },
+    {
+      "raw": "Fenrir.59aa03b1",
+      "line": "town_guard_ember",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Orders are to watch the docks now. Watch them for what, nobody says.",
+      "start": 13.972,
+      "end": 21.273,
+      "matchedWords": "13/13",
+      "wavSha256": "2da0b0bb5effea7a9e2b102f72d29d2d4ddd5b901597e11c5f7902873f38a41f"
+    },
+    {
+      "raw": "Fenrir.459d9811",
+      "line": "town_guard_4",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Long shift, cold boots. Same as every week.",
+      "start": 21.273,
+      "end": 26.96,
+      "matchedWords": "8/8",
+      "wavSha256": "96ceb036d3a63f43ef88d88402b9302d51a09c38b81b6c99ebb23151074bd36a"
+    }
+  ]
+}
