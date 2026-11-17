@@ -26,3 +26,5 @@ This lands assets and review tooling. #316 is still a separate game-code PR. M5 
 ## Reproduce assets
 
 Use the established activation script when present. Run `compartments.py`, `crew.py`, then `cards.py` under `tools/meridian-assets/`; audit each against current #316/main rule files. The sample-only builder intentionally refuses to overwrite completed tiles/crew. Hash-named PNGs are immutable; these metadata corrections alter no image bytes.
+
+Current-content audits also pass against the actual rule files extracted from #316 at the head above: 48 tile IDs / 57 deck variants / 70 referenced room-hatch assets; eight crew / 768 canonical board frames / 32 portraits-cards / 296 assets; 32 cards / twenty icons / six glyphs / three frames / 29 assets. See `live-*-audit.json` and `live-rules.json` for exact content hashes and reference comparisons.
