@@ -15,7 +15,7 @@
         "speakerVoice": "Kore"
       }
     ],
-    "text": "A: Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.\n<long pause>\nA: Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+    "text": "A: Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years. <long pause>\nA: Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against. <long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
     "segments": [
       {
         "raw": "Charon.cf3284bb",
@@ -56,6 +56,7 @@
           "claude/issue-372-story-coherence"
         ]
       }
-    ]
+    ],
+    "pauseTags": "inline at the end of each turn: in two-voice jobs a <long pause> on its own line was sometimes spoken aloud (jobs 1-2)"
   }
 }

@@ -15,7 +15,7 @@
         "speakerVoice": "Sulafat"
       }
     ],
-    "text": "A: He means the town chest, not my till. Still. Done.\n<long pause>\nA: Mine's the only warm hearth left on the street since you took it. Folk keep crowding in. I tell them it's the stew.\n<long pause>\nA: <practical, warm, quick but clear Mood: idle.> Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter.\n<long pause>\nB: Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry?\n<long pause>\nB: The circle is open. Bring your embers here and help me finish it!\n<long pause>\nB: The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+    "text": "A: He means the town chest, not my till. Still. Done. <long pause>\nA: Mine's the only warm hearth left on the street since you took it. Folk keep crowding in. I tell them it's the stew. <long pause>\nA: <practical, warm, quick but clear Mood: idle.> Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter. <long pause>\nB: Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry? <long pause>\nB: The circle is open. Bring your embers here and help me finish it! <long pause>\nB: The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
     "segments": [
       {
         "raw": "Zephyr.06133aca",
@@ -92,6 +92,7 @@
           "claude/issue-372-story-coherence"
         ]
       }
-    ]
+    ],
+    "pauseTags": "inline at the end of each turn: in two-voice jobs a <long pause> on its own line was sometimes spoken aloud (jobs 1-2)"
   }
 }

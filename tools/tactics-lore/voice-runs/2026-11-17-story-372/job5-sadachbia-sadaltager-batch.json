@@ -15,7 +15,7 @@
         "speakerVoice": "Sadaltager"
       }
     ],
-    "text": "A: There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it.\n<long pause>\nB: Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
+    "text": "A: There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it. <long pause>\nB: Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
     "segments": [
       {
         "raw": "Sadachbia.e0850388",
@@ -41,6 +41,7 @@
           "claude/issue-372-story-coherence"
         ]
       }
-    ]
+    ],
+    "pauseTags": "inline at the end of each turn: in two-voice jobs a <long pause> on its own line was sometimes spoken aloud (jobs 1-2)"
   }
 }

@@ -188,10 +188,11 @@
       "speaker": "celandine_marrowby",
       "preset": "Autonoe",
       "text": "Though I would like to know why the mayor had my granaries shut so early. He never did say.",
-      "start": 150.281,
+      "start": 153.581,
       "end": 160.231,
       "matchedWords": "18/19",
-      "wavSha256": "0031ced759f31fff5f3bbc338dae4b826f9bca311d1c81ade1143cfd9d12c43c"
+      "wavSha256": "2f1f2e7b9d0db5434926f06d44147e47f28dd2bfc0031b0ff8f5f2b4692dce0f",
+      "trimmed": "a <long pause> tag spoken aloud cut off at the nearest silence"
     }
   ]
 }
