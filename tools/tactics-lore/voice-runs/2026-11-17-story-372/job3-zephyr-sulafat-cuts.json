@@ -1,0 +1,80 @@
+{
+  "batch": "story372_2026_11_17_job3-zephyr-sulafat",
+  "source": "job3.wav",
+  "sourceSha256": "bcd6cda125397c314aa252197a5608c2a14a8a15ea3b712931200afde5be8817",
+  "durationSeconds": 47.84,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Zephyr.06133aca",
+      "line": "ch1_ford_pay_pass_2",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "He means the town chest, not my till. Still. Done.",
+      "start": 0.0,
+      "end": 5.8,
+      "matchedWords": "6/10",
+      "wavSha256": "4ab5d0b3449287106bb1984982171bc97f6fd4ec90ea88c18e5a691c19893f24",
+      "recut": "re-cut by hand from the recognised words: the clip lost its last word to the next one, or carried a spoken <long pause> or a stage direction read aloud"
+    },
+    {
+      "raw": "Zephyr.25dd30be",
+      "line": "talk_bree_tallow_ford_ember",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Mine's the only warm hearth left on the street since you took it. Folk keep crowding in. I tell them it's the stew.",
+      "start": 6.4,
+      "end": 14.2,
+      "matchedWords": "16/23",
+      "wavSha256": "49c9b74d209dfc9ab94a2a70fbafa45583f6b9c6ddc5c06261403711d1637146",
+      "recut": "re-cut by hand from the recognised words: the clip lost its last word to the next one, or carried a spoken <long pause> or a stage direction read aloud"
+    },
+    {
+      "raw": "Zephyr.7e18a99b",
+      "line": "town_barmaid_ember",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter.",
+      "start": 19.367,
+      "end": 25.901,
+      "matchedWords": "11/18",
+      "wavSha256": "bc94efc24d67b27e1beb5d52949a37dc9f8ce08308b02dcb1a817c6e7a51cae7"
+    },
+    {
+      "raw": "Sulafat.b0c3984d",
+      "line": "ch5_last_vote_open_5",
+      "speaker": "maren_sorrel",
+      "preset": "Sulafat",
+      "text": "Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry?",
+      "start": 25.901,
+      "end": 34.792,
+      "matchedWords": "23/25",
+      "wavSha256": "a81cbb0813994e137cfbb9a28adcc46c2314cf788b375fa326c4f7eda520ef7e"
+    },
+    {
+      "raw": "Sulafat.6a62795e",
+      "line": "say_hall_of_the_flame_1",
+      "speaker": "maren_sorrel",
+      "preset": "Sulafat",
+      "text": "The circle is open. Bring your embers here and help me finish it!",
+      "start": 36.6,
+      "end": 40.73,
+      "matchedWords": "7/13",
+      "wavSha256": "73b60c2643439b8115596567d9770d8f4537b0310f981b36d66cf949848cb060",
+      "recut": "re-cut by hand from the recognised words: the clip lost its last word to the next one, or carried a spoken <long pause> or a stage direction read aloud"
+    },
+    {
+      "raw": "Sulafat.b1c26b89",
+      "line": "say_hall_of_the_flame_2",
+      "speaker": "maren_sorrel",
+      "preset": "Sulafat",
+      "text": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+      "start": 42.4,
+      "end": 47.84,
+      "matchedWords": "11/15",
+      "wavSha256": "98a64e22e6b3596c97852bf418d477ddb03430f2b18ead5712e15adec8ffed4d",
+      "recut": "re-cut by hand from the recognised words: the clip lost its last word to the next one, or carried a spoken <long pause> or a stage direction read aloud"
+    }
+  ]
+}

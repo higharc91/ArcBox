@@ -1137,7 +1137,7 @@
             {
               "id": "ch5_ritual_lead_wake_1",
               "speaker": "narrator",
-              "text": "Around the flame, the dragon lies coiled with its eyes shut. Firelight moves beneath its scales, but it has not yet woken.",
+              "text": "Around the flame lies a red dragon. It came for the heat a century ago, and has slept coiled around the heart ever since. As the chanting rises, one eye opens.",
               "mood": "surprised"
             }
           ],
@@ -1380,7 +1380,7 @@
             {
               "id": "ch5_last_vote_open_5",
               "speaker": "maren_sorrel",
-              "text": "Or light it. Let them be warm. Let them forget a little. Is a memory worth more than a child who isn't hungry?",
+              "text": "Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry?",
               "mood": "sad",
               "direction": "half lost, but the conviction still there"
             },

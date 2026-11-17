@@ -189,8 +189,14 @@
     "ashmaw_busy": {
       "main": "ashmaw_busy.9e9a9aeb.ogg"
     },
+    "ashmaw_death": {
+      "main": "ashmaw_death.a3228c85.ogg"
+    },
     "ashmaw_diggings_open": {
       "main": "ashmaw_diggings_open.65724d3b.ogg"
+    },
+    "ashmaw_done": {
+      "main": "ashmaw_done.2c9f1453.ogg"
     },
     "ashmaw_lair_open": {
       "main": "ashmaw_lair_open.1b0e7f47.ogg"
@@ -201,11 +207,20 @@
     "ashmaw_leave": {
       "main": "ashmaw_leave.3ad22d7f.ogg"
     },
+    "ashmaw_maud_after": {
+      "main": "ashmaw_maud_after.422b96fb.ogg"
+    },
+    "ashmaw_maud_waiting": {
+      "main": "ashmaw_maud_waiting.52f46b1b.ogg"
+    },
     "ashmaw_nest_open": {
       "main": "ashmaw_nest_open.1bb03c72.ogg"
     },
     "ashmaw_notices": {
       "main": "ashmaw_notices.c185352b.ogg"
+    },
+    "ashmaw_offer": {
+      "main": "ashmaw_offer.f4bf533c.ogg"
     },
     "ashmaw_presented": {
       "main": "ashmaw_presented.167e3765.ogg"
@@ -879,6 +894,9 @@
     "bark_pip_ashdown_camp_5": {
       "main": "bark_pip_ashdown_camp_5.6d263bac.ogg"
     },
+    "bark_pip_ashdown_town_1": {
+      "main": "bark_pip_ashdown_town_1.24265e16.ogg"
+    },
     "bark_pip_ashdown_town_2": {
       "main": "bark_pip_ashdown_town_2.d7b45627.ogg"
     },
@@ -1027,7 +1045,7 @@
       "main": "ch1_bridge_cost_open_1.d261d7f3.ogg"
     },
     "ch1_bridge_cost_open_2": {
-      "main": "ch1_bridge_cost_open_2.8b0254e2.ogg"
+      "main": "ch1_bridge_cost_open_2.2ce112b6.ogg"
     },
     "ch1_bridge_cost_open_3": {
       "main": "ch1_bridge_cost_open_3.5f8c3a70.ogg"
@@ -1060,7 +1078,7 @@
       "main": "ch1_camp_ashmaw_open_2.45a7989e.ogg"
     },
     "ch1_camp_ashmaw_pity_1": {
-      "main": "ch1_camp_ashmaw_pity_1.43a5f525.ogg"
+      "main": "ch1_camp_ashmaw_pity_1.02c8ec32.ogg"
     },
     "ch1_camp_ashmaw_pity_2": {
       "main": "ch1_camp_ashmaw_pity_2.0dd3698f.ogg"
@@ -1096,7 +1114,7 @@
       "main": "ch1_camp_hunger_2.750c194a.ogg"
     },
     "ch1_camp_maud_open_1": {
-      "main": "ch1_camp_maud_open_1.3d2d806f.ogg"
+      "main": "ch1_camp_maud_open_1.09cb5ca7.ogg"
     },
     "ch1_camp_maud_open_2": {
       "main": "ch1_camp_maud_open_2.509849d4.ogg"
@@ -1108,7 +1126,7 @@
       "main": "ch1_camp_maud_protect_2.73f2d65c.ogg"
     },
     "ch1_camp_maud_seek_1": {
-      "main": "ch1_camp_maud_seek_1.d94ca64d.ogg"
+      "main": "ch1_camp_maud_seek_1.ec30860a.ogg"
     },
     "ch1_camp_maud_seek_2": {
       "main": "ch1_camp_maud_seek_2.81e153a2.ogg"
@@ -1142,6 +1160,9 @@
     },
     "ch1_camp_truth_2": {
       "main": "ch1_camp_truth_2.f40316a9.ogg"
+    },
+    "ch1_camp_warmth_1": {
+      "main": "ch1_camp_warmth_1.c0cd196c.ogg"
     },
     "ch1_camp_warmth_2": {
       "main": "ch1_camp_warmth_2.788b7405.ogg"
@@ -1193,6 +1214,12 @@
     },
     "ch1_docks_open_4": {
       "main": "ch1_docks_open_4.f1cefa64.ogg"
+    },
+    "ch1_docks_open_hearth_1": {
+      "main": "ch1_docks_open_hearth_1.cc9b14a9.ogg"
+    },
+    "ch1_docks_open_hearth_2": {
+      "main": "ch1_docks_open_hearth_2.fa045f63.ogg"
     },
     "ch1_docks_rook_1": {
       "main": "ch1_docks_rook_1.b1f33729.ogg"
@@ -1260,8 +1287,14 @@
     "ch1_ford_pay_fail_1": {
       "main": "ch1_ford_pay_fail_1.b880a0c1.ogg"
     },
+    "ch1_ford_pay_fail_2": {
+      "main": "ch1_ford_pay_fail_2.6a573208.ogg"
+    },
     "ch1_ford_pay_pass_1": {
       "main": "ch1_ford_pay_pass_1.73d69836.ogg"
+    },
+    "ch1_ford_pay_pass_2": {
+      "main": "ch1_ford_pay_pass_2.d52f489e.ogg"
     },
     "ch1_ford_truth_1": {
       "main": "ch1_ford_truth_1.60a6b2de.ogg"
@@ -1308,6 +1341,9 @@
     "ch1_four_more_open_3": {
       "main": "ch1_four_more_open_3.4e18c8be.ogg"
     },
+    "ch1_four_more_open_goal_1": {
+      "main": "ch1_four_more_open_goal_1.e4a8adea.ogg"
+    },
     "ch1_four_more_outl_1": {
       "main": "ch1_four_more_outl_1.2dce8732.ogg"
     },
@@ -1336,7 +1372,7 @@
       "main": "ch1_granary_acolyte_2.dab0cb98.ogg"
     },
     "ch1_granary_confess_1": {
-      "main": "ch1_granary_confess_1.a24104c2.ogg"
+      "main": "ch1_granary_confess_1.a5110a30.ogg"
     },
     "ch1_granary_confess_2": {
       "main": "ch1_granary_confess_2.3d2a94cf.ogg"
@@ -1519,7 +1555,7 @@
       "main": "ch1_mayor_close_3.a49692f1.ogg"
     },
     "ch1_mayor_close_4": {
-      "main": "ch1_mayor_close_4.634425e4.ogg"
+      "main": "ch1_mayor_close_4.146f2afc.ogg"
     },
     "ch1_mayor_goblins_1": {
       "main": "ch1_mayor_goblins_1.6abdd4d0.ogg"
@@ -1777,7 +1813,7 @@
       "main": "ch2_bree_left_2.d48903f7.ogg"
     },
     "ch2_bree_open_1": {
-      "main": "ch2_bree_open_1.9447c3c6.ogg"
+      "main": "ch2_bree_open_1.dce02efb.ogg"
     },
     "ch2_bree_open_2": {
       "main": "ch2_bree_open_2.b49e03dc.ogg"
@@ -1821,6 +1857,9 @@
     "ch2_corvin_beg_4": {
       "main": "ch2_corvin_beg_4.066bf4c8.ogg"
     },
+    "ch2_corvin_beg_crypt_1": {
+      "main": "ch2_corvin_beg_crypt_1.d83ea601.ogg"
+    },
     "ch2_corvin_cost_1": {
       "main": "ch2_corvin_cost_1.de1f61eb.ogg"
     },
@@ -1834,7 +1873,7 @@
       "main": "ch2_corvin_dwarf_2.352e65c2.ogg"
     },
     "ch2_corvin_open_1": {
-      "main": "ch2_corvin_open_1.e83e66ca.ogg"
+      "main": "ch2_corvin_open_1.ff0f9d87.ogg"
     },
     "ch2_corvin_open_2": {
       "main": "ch2_corvin_open_2.612688a4.ogg"
@@ -2152,7 +2191,7 @@
       "main": "ch3_crypt_door_loud_2.7bc0b852.ogg"
     },
     "ch3_crypt_door_quiet_1": {
-      "main": "ch3_crypt_door_quiet_1.5b1f7ee1.ogg"
+      "main": "ch3_crypt_door_quiet_1.d080597a.ogg"
     },
     "ch3_crypt_door_quiet_2": {
       "main": "ch3_crypt_door_quiet_2.260ae8a4.ogg"
@@ -2647,7 +2686,7 @@
       "main": "ch4_greyhold_cage_1.d07bc53c.ogg"
     },
     "ch4_greyhold_cage_2": {
-      "main": "ch4_greyhold_cage_2.b8faf9a7.ogg"
+      "main": "ch4_greyhold_cage_2.58ffffbb.ogg"
     },
     "ch4_greyhold_cage_3": {
       "main": "ch4_greyhold_cage_3.f702e8f5.ogg"
@@ -2836,7 +2875,7 @@
       "main": "ch4_pilgrim_road_open_1.bb48b188.ogg"
     },
     "ch4_pilgrim_road_open_2": {
-      "main": "ch4_pilgrim_road_open_2.bb6d1523.ogg"
+      "main": "ch4_pilgrim_road_open_2.cade5a08.ogg"
     },
     "ch4_pilgrim_road_open_3": {
       "main": "ch4_pilgrim_road_open_3.3ed2775f.ogg"
@@ -2846,6 +2885,9 @@
     },
     "ch4_pilgrim_road_open_5": {
       "main": "ch4_pilgrim_road_open_5.20f3e973.ogg"
+    },
+    "ch4_pilgrim_road_open_ember_1": {
+      "main": "ch4_pilgrim_road_open_ember_1.cb2eb7cd.ogg"
     },
     "ch4_pilgrim_road_pass_1": {
       "main": "ch4_pilgrim_road_pass_1.39bbfde4.ogg"
@@ -3238,7 +3280,7 @@
       "main": "ch5_last_vote_open_4.a1389bd1.ogg"
     },
     "ch5_last_vote_open_5": {
-      "main": "ch5_last_vote_open_5.b3af1421.ogg"
+      "main": "ch5_last_vote_open_5.ea7078dc.ogg"
     },
     "ch5_last_vote_open_6": {
       "main": "ch5_last_vote_open_6.ab26ae88.ogg"
@@ -3359,6 +3401,9 @@
     },
     "ch5_ritual_lead_plea_3": {
       "main": "ch5_ritual_lead_plea_3.862d6ad3.ogg"
+    },
+    "ch5_ritual_lead_wake_1": {
+      "main": "ch5_ritual_lead_wake_1.188fc326.ogg"
     },
     "ch5_the_archive_ask_1": {
       "main": "ch5_the_archive_ask_1.23a347c2.ogg"
@@ -3603,6 +3648,12 @@
     "say_ford_assault_3": {
       "main": "say_ford_assault_3.e3ff1147.ogg"
     },
+    "say_hall_of_the_flame_1": {
+      "main": "say_hall_of_the_flame_1.7ae15314.ogg"
+    },
+    "say_hall_of_the_flame_2": {
+      "main": "say_hall_of_the_flame_2.96df960b.ogg"
+    },
     "say_hall_of_the_flame_3": {
       "main": "say_hall_of_the_flame_3.3ce7b06d.ogg"
     },
@@ -3611,6 +3662,9 @@
     },
     "say_hall_of_the_flame_5": {
       "main": "say_hall_of_the_flame_5.f75711dd.ogg"
+    },
+    "say_keep_gate_1": {
+      "main": "say_keep_gate_1.e32bacdd.ogg"
     },
     "say_keep_gate_2": {
       "main": "say_keep_gate_2.149e91db.ogg"
