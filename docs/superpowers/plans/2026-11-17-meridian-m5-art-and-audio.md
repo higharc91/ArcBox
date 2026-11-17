@@ -1,4 +1,4 @@
-> Status: approved 2026-11-17; in progress on branch `ccr-de425e76-4vxzw2` (tasks #392–#399). Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: engineering complete (2026-11-17). Tasks 1–7 are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (#392–#398). Task 8 (#399) stays open until every art set has landed and passed its review; see [Implementation notes](#implementation-notes) for where the code differs from this plan. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M5 Art and Audio Implementation Plan
 
@@ -17,6 +17,34 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 **Not in this plan:**
 - **Producing art or audio.** That's the `art` issues. Where this plan needs an asset to test with, it uses #357's approved samples, or generates a throwaway one in the test.
 - **Scenarios 6–12's monsters and tokens** (M7). Their sets land with them; the token layer already falls back to labelled glyphs.
+
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **No `NineSlice` class.** Godot's `StyleBoxTexture` draws 9-slices natively, so the geometry needs no code of ours. In its place, `Hud/UiKit` decides which piece each TV element wears and its fallbacks: a card panel takes its deck's frame, then `cardPanel`, then `panel`, then M4's flat panel. The plates never fall back to `panel`. The tests cover that resolution rather than slice geometry.
+- **UI pieces draw at a whole-step 2×** (`UiKit.PixelScale`). At 1:1 a pixel-art piece's 1 px edges were hairlines at 1080p. The TV draws the box at half size under a 2× transform, so edges and corners are art pixels multiplied, never resampled.
+- **Plates sit behind live text.** The Breach plate goes behind the Breach's words, and the Debrief plate is the text column's background.
+- **The TV lobby's title card is not done.** The lobby's game cards belong to the platform shell. They are text-only for every game, and the shell has no content pack before a game starts. Giving a game art there is a platform feature (a pack-read hook for the lobby), left for a follow-up. The phone lobby's theme and logo are done.
+- **`CrewLook`, not `CrewState`,** which Logic already uses.
+- **The host view gained public fields as consumers needed them:**
+  - `CrewMarker.Echo` and `Presented.Target` (Task 3);
+  - `Presented.Attacker`, `Outcome` and `Card` (Task 6): a stagger lands on the attacker, an effect shouldn't be parsed out of the text, and Incidents pick their effect by card id;
+  - `MeridianHostView.TurnEndsIn` and `ScenarioPanel.CrewWon` (Task 7).
+
+  Each is something the TV already shows. Fixtures and demo recordings were regenerated, and each diff was checked to hold only the new fields.
+- **`EffectPlan.For(beat)`** returns every cue with its span on the beat's timeline, in place of `For(beat, step)`. The scene asks which cues are playing at the beat's elapsed time (`Director.Elapsed`).
+- **Effects have `full` and `reduced` entries.** With reduced effects on, a missing reduced entry plays nothing, never the full strip.
+  - Effects draw on the main deck only; the side decks are too small.
+  - The Breach's two screen-wide effects draw in `BreachOverlay`, under its words.
+  - `traitGain`, `vent` and `rot` are in the contract but not yet cued. Trait changes aren't presented: a gain needs a public trait event, and venting and rot belong to M7's hazard scenarios. A hit's trait loss is cued, because the hit is public.
+- **The Breach's music is keyed on the scenario panel,** which exists only once the Breach has fired. Keyed on the phase alone, the music fell back to the ambience between the Breach beat and the briefing. `CrewWon` is decided on the server from the roles' `side`: a crew-side seat won or, with no crew side (Salvage Rights, Decaying Orbit), anyone did.
+- **`TurnEndsIn` only counts public decisions:** a turn, roll, rotation, allocation or vote. It never counts a private choice or a trade, whose countdown could hint at what's happening. The secrecy sweep checks it.
+- **The audio budget check was added in Task 7,** not Task 1. `ArtCheck` reads Ogg Vorbis headers for channels and length: mono or stereo, at most 5 s for a sound and 5 minutes for a track.
+- **Preview switches:**
+  - `ARCBOX_MERIDIAN_PACK` points the demo TV at another pack;
+  - `ARCBOX_FX_REDUCED=1` previews reduced effects. The setting itself is Tactics' `ReducedBattleEffects`, shared.
+- **Verified with a stand-in kit.** Tasks 5–7 were checked on the TV with a throwaway kit generated outside the repository: UI pieces, card frames, dice, every effect in both forms, and Ogg tones for every sound id. It was laid over the pack with `ARCBOX_MERIDIAN_PACK`. Demo runs logged the music sequence (explore → breach → endgame → debrief) and the sounds with `--audio-log`. A contact sheet is in the TV review.
 
 ## Global constraints
 
@@ -61,9 +89,9 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
   - A unit test runs it on the shipped pack (no errors), on #357's samples (no errors, partial coverage), and on fixtures with each kind of fault.
 - **`MeridianArt`** reads every set: frames, strips with their frame count and fps, 9-slice insets for UI pieces and card frames, and deck variants for tiles. Anything `ArtCheck` rejects is left out, so it draws as a placeholder (review focus 2).
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): ArtCheck, and every art set read`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): ArtCheck, and every art set read`.
 
 ### Task 2: Tiles, hatches and deck variants on the TV
 
@@ -78,9 +106,9 @@ Tests:
 - A mixed board (review focus 1).
 - A TV run with #357's samples, with screenshots of a board where some rooms have art and some don't.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): tile and hatch art on the TV`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): tile and hatch art on the TV`.
 
 ### Task 3: Crew that walk, face, fall and echo
 
@@ -100,9 +128,9 @@ Tests:
 - Hurt and down timing from beats.
 - Phone screens render with and without portraits.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): crew art that walks, faces and falls`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): crew art that walks, faces and falls`.
 
 ### Task 4: Monsters and tokens
 
@@ -113,9 +141,9 @@ Tests:
 
 Tests: the state choice per token kind, and the fallback to glyphs for an unknown kind.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): monster and token art`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): monster and token art`.
 
 ### Task 5: The TV UI kit, card frames, dice and the lobby
 
@@ -133,9 +161,9 @@ Tests: the state choice per token kind, and the fallback to glyphs for an unknow
 
 Tests: the 9-slice geometry at every panel size; each consumer falls back without its piece; the phone screens with and without art.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): the TV UI kit, card frames, dice and lobby theme`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): the TV UI kit, card frames, dice and lobby theme`.
 
 ### Task 6: Board effects
 
@@ -154,9 +182,9 @@ Tests: the 9-slice geometry at every panel size; each consumer falls back withou
 
 Tests: the effect per beat step, reduced variants for every kind, and none outlasting its beat (so the beat timing tests still hold).
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): board effects`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): board effects`.
 
 ### Task 7: Music and sound
 
@@ -174,9 +202,9 @@ Tests: the effect per beat step, reduced variants for every kind, and none outla
 
 Tests: the music for each phase and ending, the sound per beat step, the tick's timing, the secrecy sweep, and every chosen file present in the `audio` manifest (or skipped silently if it isn't).
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): music and sound`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): music and sound`.
 
 ### Task 8: Each art set as it lands
 
@@ -188,7 +216,7 @@ Tests: the music for each phase and ending, the sound per beat step, the tick's 
 - **Audio by ear:** a game night with the sound on (the playtest checklist gains a section: the music's levels, the duck under Tiller, the tick).
 
 - [ ] **Step 1: Per set, as each lands: check, screenshots, review.**
-- [ ] **Step 2: The full gate, and the checklist's sound section.**
+- [ ] **Step 2: The full gate, and the checklist's sound section.** (The checklist section is written; the game night with sound is still to come.)
 
 ---
 
