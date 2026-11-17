@@ -76,6 +76,12 @@ These are the samples from draft PR #357, laid over the repository's pack: four 
 
 To make a shot like this, run `ARCBOX_MERIDIAN_PACK=<a copy of content/meridian/base with an art branch's sets over it>` with `--meridian-demo`.
 
+## With a stand-in UI kit (M5, Task 5)
+
+The UI kit hadn't landed, so this run uses a stand-in kit made only to test the plumbing: deck-coloured card frames, a dice tray with die faces and a roll strip, seat slots, a log panel, and the Breach and Debrief plates. Every piece is a 9-slice, drawn at 2× so its 1 px edges stay crisp. The shots show the card panel (an Incident's frame), a roll, the Breach announcement on its plate, and the Debrief column. Pieces the kit doesn't have fall back to `panel`, then to the M4 look.
+
+![The stand-in UI kit](art-02-ui-kit.png)
+
 ## For the first game night
 
 These are things a person must judge that a screenshot can't:

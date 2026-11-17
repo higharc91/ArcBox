@@ -79,7 +79,10 @@ public partial class HudCanvas : Node2D
     private void DrawTop(HudModel hud, Areas areas, Vector2 size)
     {
         var top = areas.Hud;
-        DrawRect(new Rect2(0, 0, size.X, (float)top.H), new Color(0.03f, 0.03f, 0.05f, 0.9f));
+        if (_textures?.DrawBox(this, UiKit.For(_textures.Art, UiElement.Figures), new Rect2(0, 0, size.X, (float)top.H)) != true)
+        {
+            DrawRect(new Rect2(0, 0, size.X, (float)top.H), new Color(0.03f, 0.03f, 0.05f, 0.9f));
+        }
         DrawLine(new Vector2(0, (float)top.H), new Vector2(size.X, (float)top.H), new Color(1, 1, 1, 0.08f), 2);
 
         // The banner, the scenario's title and its open objectives.
@@ -101,7 +104,14 @@ public partial class HudCanvas : Node2D
             var width = 44 + ArcTheme.SemiBold.GetStringSize(name, HorizontalAlignment.Left, -1, 24).X
                         + (tags.Length > 0 ? ArcTheme.Bold.GetStringSize(tags, HorizontalAlignment.Left, -1, 22).X + 8 : 0) + 18;
             var chip = new Rect2(x - 6, y - 22, width, 44);
-            DrawRect(chip, seat.Active ? new Color(colour, 0.25f) : new Color(1, 1, 1, 0.04f));
+            if (_textures?.DrawBox(this, UiKit.For(_textures.Art, UiElement.SeatSlot), chip) != true)
+            {
+                DrawRect(chip, seat.Active ? new Color(colour, 0.25f) : new Color(1, 1, 1, 0.04f));
+            }
+            else if (seat.Active)
+            {
+                DrawRect(chip, new Color(colour, 0.25f));   // the active seat's tint over the slot art
+            }
             if (seat.Active)
             {
                 DrawRect(chip, colour, false, 3);
@@ -164,8 +174,13 @@ public partial class HudCanvas : Node2D
         var h = panel.Faces.Count > 0 ? 190f : (panel.Title.Length > 0 ? 100f : 50f) + lines * 46f + 24f;
         var y = (float)(main.Y + main.H) - h - 28 + slide * (h + 40);
         var accent = new Color(panel.Accent);
-        DrawRect(new Rect2(x, y, w, h), new Color(0.04f, 0.04f, 0.07f, 0.94f));
-        DrawRect(new Rect2(x, y, 10, h), accent);
+        // The panel's art: a card's deck frame, the dice tray, or the kit's panel; else M4's flat panel with its accent bar.
+        var element = panel.Faces.Count > 0 ? UiElement.DiceTray : UiElement.CardPanel;
+        if (_textures?.DrawBox(this, UiKit.For(_textures.Art, element, panel.Deck), new Rect2(x, y, w, h)) != true)
+        {
+            DrawRect(new Rect2(x, y, w, h), new Color(0.04f, 0.04f, 0.07f, 0.94f));
+            DrawRect(new Rect2(x, y, 10, h), accent);
+        }
         if (panel.Title.Length > 0)
         {
             DrawString(ArcTheme.Bold, new Vector2(x + 36, y + 56), panel.Title, HorizontalAlignment.Left, w - 60, 40, Colors.White);
@@ -178,8 +193,15 @@ public partial class HudCanvas : Node2D
             {
                 var face = landed ? panel.Faces[i] : (int)(_time * 12 + i * 2) % 3;
                 var box = new Rect2(x + 36 + i * 74, y + 84, 62, 62);
-                DrawRect(box, face > 0 ? new Color("ffd447") : new Color(0.3f, 0.3f, 0.36f));
-                DrawString(ArcTheme.Black, box.Position + new Vector2(0, 48), $"{face}", HorizontalAlignment.Center, 62, 42, new Color("101018"));
+                // The die's art (#335): the roll strip while tumbling, a face once landed; else the drawn die.
+                var art = _textures?.Art ?? global::Meridian.Presentation.Art.MeridianArt.None;
+                var drawn = landed ? _textures?.DrawFrame(this, UiKit.DieFace(art, face), box, 0)
+                                   : _textures?.DrawFrame(this, UiKit.DieRoll(art), box, _time + i * 0.13);
+                if (drawn != true)
+                {
+                    DrawRect(box, face > 0 ? new Color("ffd447") : new Color(0.3f, 0.3f, 0.36f));
+                    DrawString(ArcTheme.Black, box.Position + new Vector2(0, 48), $"{face}", HorizontalAlignment.Center, 62, 42, new Color("101018"));
+                }
             }
             if (landed)
             {
@@ -198,6 +220,12 @@ public partial class HudCanvas : Node2D
     private void DrawLog(HudModel hud, Areas areas)
     {
         var y = (float)(areas.Main.Y + areas.Main.H) - 24 - (hud.Log.Count - 1) * 30;
+        if (hud.Log.Count > 0 && _textures is { } textures)
+        {
+            // A panel behind the log only when the kit has one: M4 drew the log straight onto the board.
+            textures.DrawBox(this, UiKit.For(textures.Art, UiElement.Log),
+                             new Rect2(12, y - 34, (float)areas.Main.W * LogShare + 32, hud.Log.Count * 30 + 30));
+        }
         for (var i = 0; i < hud.Log.Count; i++)
         {
             var alpha = 0.45f + 0.55f * (i + 1) / hud.Log.Count;

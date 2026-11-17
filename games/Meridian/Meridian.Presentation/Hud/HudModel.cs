@@ -13,7 +13,7 @@ public sealed record HudStat(string Label, string Value);
 /// The panel over the board for the event being shown: a card or a line of text (<see cref="Faces"/> empty), or dice
 /// (<see cref="Faces"/> set). <see cref="Accent"/> is a hex colour: the card's deck, or the kind's.
 /// </summary>
-public sealed record HudPanel(string Kind, string Title, string Text, string Accent, EqArray<int> Faces);
+public sealed record HudPanel(string Kind, string Title, string Text, string Accent, EqArray<int> Faces, CardKind? Deck = null);
 
 /// <summary>
 /// Everything the TV's HUD draws (M4 plan, Task 7), projected from the host view and the beat being shown. It is a
@@ -83,7 +83,7 @@ public sealed record HudModel(
     private static HudPanel? PanelFor(Presented now) => now.Kind switch
     {
         "roll" or "fight" => new HudPanel(now.Kind, now.Title, now.Text, "#ffd447", now.Faces),
-        "card" => new HudPanel("card", now.Title, now.Text, now.Deck is { } deck ? BoardStyle.Symbol(deck).Colour : "#9a9aa8", []),
+        "card" => new HudPanel("card", now.Title, now.Text, now.Deck is { } deck ? BoardStyle.Symbol(deck).Colour : "#9a9aa8", [], now.Deck),
         "notice" or "vote" or "death" or "round" or "over" or "sealed" => new HudPanel(now.Kind, now.Title, now.Text, KindAccent(now.Kind), []),
         _ => null,   // a reveal has its callout; the Breach has its own sequence
     };

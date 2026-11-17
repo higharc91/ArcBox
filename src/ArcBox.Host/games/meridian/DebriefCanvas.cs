@@ -3,6 +3,7 @@ using Godot;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Board;
 using Meridian.Presentation.Debrief;
+using Meridian.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Meridian;
 
@@ -42,7 +43,11 @@ public partial class DebriefCanvas : Node2D
         var x = (float)text.X + 40;
         var w = (float)text.W - 70;
         var y = (float)text.Y + 60;
-        DrawRect(new Rect2((float)text.X, (float)text.Y, (float)text.W, (float)text.H), new Color(0.03f, 0.03f, 0.05f, 0.92f));
+        var column = new Rect2((float)text.X, (float)text.Y, (float)text.W, (float)text.H);
+        if (_textures?.DrawBox(this, UiKit.For(_textures.Art, UiElement.DebriefPlate), column) != true)
+        {
+            DrawRect(column, new Color(0.03f, 0.03f, 0.05f, 0.92f));
+        }
         DrawString(ArcTheme.Bold, new Vector2(x, y), debrief.Title.ToUpperInvariant(), HorizontalAlignment.Left, w, 26, new Color("c08cff"));
         y += 16;
         DrawMultilineString(ArcTheme.Bold, new Vector2(x, y + 38), debrief.Outcome, HorizontalAlignment.Left, w, 38, 3, Colors.White);

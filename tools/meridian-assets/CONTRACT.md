@@ -43,4 +43,22 @@ Run `tools/meridian-assets/check --art <your content/meridian/base>` before open
 
 A single entry may say which deck it was drawn for with `"deck"`. Each deck is checked against the tile's decks, and a deck without a variant draws the placeholder, never another deck's art.
 
+**The UI kit.** Every piece is drawn at 2× (one art pixel is two screen pixels at 1080p), so draw corners and edges at half their size on screen. A piece with `insets` is a 9-slice: the corners stay as drawn and the edges and middle stretch, so one piece fits any panel. A piece without `insets` stretches whole. Where a piece is missing, the TV falls back to `panel` and then to its own flat panel. The plates never fall back to `panel`.
+
+| Piece | Where it's drawn |
+|---|---|
+| `panel` | The figures bar across the top, and any panel without art of its own |
+| `seatSlot` | Each seat's chip in the strip (the active seat is tinted in its colour on top) |
+| `logPanel` | Behind the log, bottom left |
+| `cardPanel` | The card panel, when the card's deck has no frame in `cards`, and the notice, vote and death panels |
+| `diceTray` | The panel behind a roll or a fight |
+| `breachPlate` | Behind the Breach's words, the middle three quarters of the screen |
+| `debriefPlate` | The Debrief's text column |
+
+**The die** holds named entries rather than one file: `roll`, a tumbling strip (`frames`, `fps`), and `face0`, `face1` and `face2`, a still for each value a die can land on. Its faces read 0, 0, 1, 1, 1, 2. Never put the number on the die: drawing pips is fine.
+
+```json
+"die": { "roll": { "file": "…", "frames": 4, "fps": 12, "frameSize": [24, 24] }, "face0": {…}, "face1": {…}, "face2": {…} }
+```
+
 **Strict and loose sets.** In `tiles`, `hatches`, `crew`, `portraits`, `cards` and `icons`, an id the game doesn't have is an error. In `tokens`, `ui`, `fx` and `audio`, an unknown id is only a warning: later scenarios and pieces can arrive ahead of the code.

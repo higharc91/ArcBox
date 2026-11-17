@@ -2,6 +2,7 @@ using ArcBox.Host.Shell;
 using Godot;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Breach;
+using Meridian.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Meridian;
 
@@ -16,7 +17,12 @@ public partial class BreachOverlay : Node2D
     private Func<string, string> _roomName = id => id;
     private double _time;
 
-    public void Use(Director director, Func<string, string> roomName) => (_director, _roomName) = (director, roomName);
+    public void Use(Director director, Func<string, string> roomName, ArtTextures textures)
+        => (_director, _roomName, _textures) = (director, roomName, textures);
+
+    private ArtTextures? _textures;
+
+    public override void _Ready() => TextureFilter = TextureFilterEnum.Nearest;   // the plate stays crisp
 
     private bool _shown;
 
@@ -45,6 +51,9 @@ public partial class BreachOverlay : Node2D
             return;
         }
         var centre = size.X / 2;
+        // The plate (#335) behind the words, centred; the red wash alone where the kit has none.
+        var plate = new Rect2(size.X * 0.12f, size.Y * 0.14f, size.X * 0.76f, size.Y * 0.66f);
+        _textures?.DrawBox(this, UiKit.For(_textures.Art, UiElement.BreachPlate), plate);
         switch (frame.Stage)
         {
             case BreachStage.Breach:

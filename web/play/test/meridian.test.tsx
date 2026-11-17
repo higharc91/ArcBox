@@ -5,6 +5,7 @@ import { loadModule } from "../src/games/registry";
 import type { CrewPickData, TurnData } from "../src/games/meridian/types";
 import { forgetPack } from "../src/games/meridian/pack";
 import crewPickFixture from "./fixtures/meridian/crewPick.json";
+import sheetFixture from "./fixtures/meridian/sheet.json";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
 
 // Real views from a real session, written by games/Meridian/Meridian.Game.Tests/PhoneFixtureTests.cs.
@@ -240,5 +241,48 @@ describe("meridian portraits", () => {
     })));
     show("crewPick");
     await waitFor(() => expect(document.querySelector(".mer-portrait")?.getAttribute("src")).toBe("/content/meridian/base/abc/portraits/portrait.png"));
+  });
+});
+
+describe("meridian art on the phone", () => {
+  const servePack = (manifests: Record<string, unknown>) => vi.stubGlobal("fetch", vi.fn(async (url: string) => {
+    const path = url.endsWith("index.json") ? "index" : url.replace(/^\/content\/meridian\/base\/abc\//, "");
+    const body = path === "index" ? [{ packId: "base", hash: "abc" }] : manifests[path];
+    return { ok: body !== undefined, json: async () => body ?? null };
+  }));
+
+  it("frames a card with its deck's 9-slice and keeps the text live", async () => {
+    servePack({ "cards/manifest.json": { frames: { incident: { file: "incident.png", insets: [8, 10, 8, 10] } } } });
+    show("card");
+    await waitFor(() => expect(document.querySelector(".mer-card")?.getAttribute("data-frame")).toBe("incident"));
+    expect(document.querySelector(".mer-card h2")!.textContent).toBeTruthy();
+  });
+
+  it("draws a card plainly without a frame", async () => {
+    show("card");
+    await new Promise((r) => setTimeout(r, 10));
+    expect(document.querySelector(".mer-card")?.getAttribute("data-frame")).toBeNull();
+  });
+
+  it("puts an item's icon beside it when the pack has one", async () => {
+    const items = (sheetFixture as unknown as { data: { items: { id: string }[] } }).data.items;
+    if (items.length === 0) return;
+    servePack({ "icons/manifest.json": { icons: { [items[0].id]: { file: "icon.png" } } } });
+    show("sheet");
+    fireEvent.click(screen.getByRole("tab", { name: "Gear" }));
+    await waitFor(() => expect(document.querySelector(".mer-icon")).toBeTruthy());
+  });
+
+  it("has a lobby theme with the logo, or the name until the logo lands", async () => {
+    const mod = await loadModule("meridian");
+    expect(mod?.lobbyTheme?.className).toBe("mer-lobby");
+    const Banner = mod!.lobbyTheme!.Banner!;
+    render(<Banner screen="lobby" />);
+    expect(screen.getByText("DERELICT: ISV MERIDIAN")).toBeTruthy();
+    servePack({ "ui/manifest.json": { ui: { logo: { file: "logo.png" } } } });
+    forgetPack();
+    cleanup();
+    render(<Banner screen="lobby" />);
+    await waitFor(() => expect(document.querySelector(".mer-lobby-banner img")?.getAttribute("src")).toBe("/content/meridian/base/abc/ui/logo.png"));
   });
 });

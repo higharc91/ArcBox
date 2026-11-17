@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
 import { usePackBase, usePackJson } from "./pack";
+import { ItemIcon, useCardFrame } from "./art";
 import type { CustomScreenProps } from "../module";
 import { DeckMap } from "./DeckMap";
 import type {
@@ -30,6 +31,7 @@ function Items({ items, onUse }: { items: ItemCard[]; onUse?(id: string): void }
     <ul class="mer-items">
       {items.map((i) => (
         <li key={i.id} class={i.kind}>
+          <ItemIcon card={i.id} />
           <b>{i.title}</b> <span class="mer-muted">{i.text}</span>
           {i.use && onUse && i.usable ? <button type="button" onClick={() => onUse(i.id)}>{i.use}</button> : null}
         </li>
@@ -249,8 +251,9 @@ export function Orient({ data, send }: CustomScreenProps) {
 
 export function Card({ data, send }: CustomScreenProps) {
   const d = data as CardData;
+  const frame = useCardFrame(d.kind);   // the deck's frame (#334), drawn around live text
   return (
-    <div class={`mer mer-card ${d.kind}`}>
+    <div class={`mer mer-card ${d.kind}`} style={frame} data-frame={frame.borderImage ? d.kind : undefined}>
       <h2>{d.title}</h2>
       <p>{d.text}</p>
       {d.options.map((o) => (

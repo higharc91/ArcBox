@@ -147,7 +147,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);   // the starfield is the background, not the shell's backdrop
         _hud.Use(_director, _textures);
         AddChild(_hud);
-        _breach.Use(_director, _board.RoomName);
+        _breach.Use(_director, _board.RoomName, _textures);
         AddChild(_breach);
         _debrief.Use(_director, _textures);
         AddChild(_debrief);
