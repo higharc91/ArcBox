@@ -17,7 +17,12 @@
   "nineSliceCorners": "nine-slice-browser.json",
   "native": "native-check.json",
   "rulesHead": "00d4a52bb9c7e73a5ee72b117b91891e6c0cdd11",
-  "fullGate": "pending after separate baseline repairs; no merge authorized by these focused checks alone",
+  "fullGate": {
+    "report": "../integration/validation.json",
+    "frozenSource": "6e8a518e10a3282ff9452e3dbb76a0e34663ffbd",
+    "exitCode": 0,
+    "allGroupsPassed": true
+  },
   "runtimeIntegration": false,
   "physicalTvOrHumanRecognitionTest": false,
   "paidGenerationCU": 0,
@@ -63,6 +68,8 @@
       "fx",
       "audio"
     ],
-    "log": "game-contract-check.txt.gz"
+    "log": "game-contract-check.txt.gz",
+    "latestRecheckHead": "93d5b3353d6f4f4c1cb23eda5fda0bd06003efd3",
+    "latestCheckerErrors": 0
   }
 }

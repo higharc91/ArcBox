@@ -14,7 +14,7 @@ Actual Chromium at 320×844, 390×844 and 1920×1080 loads all 136 images and 32
 
 Native Godot displays all three complete 1920×1080 review screens with nearest filtering; pixel identity is checked by `check-card-native.py`. It produces actual Machado full-severity deuteranopia/protanopia transformations in linear sRGB and JPEG quality-55 / 4:2:0 stream proxies. These are screenshot checks, not a human recognition study, physical-TV test or Discord playtest. Existing unsupported V-Sync driver warnings occurred; no native script/runtime errors. Reduced motion is respected: these reading assets contain no animation.
 
-Full repository validation remains a merge requirement and will be recorded separately from these focused checks. Manually disabled CI remains disabled. This is an asset/review set; the M5 runtime card renderer and controller integration are not claimed.
+The complete combined full gate passes; see [final integration evidence](../integration/README.md) for source provenance and all totals. Manually disabled CI remains disabled. This is an asset/review set; the M5 runtime card renderer and controller integration are not claimed.
 
 ## Reproduce
 
@@ -31,3 +31,5 @@ python tools/meridian-assets/check-card-corners.py
 Use the style review's native-project.godot / native-display.gd on a real X display, with MERIDIAN_MOCK and MERIDIAN_SCREENSHOT paths, to capture cards-tv.png, choice-tv.png and icons-tv.png as native-cards.png, native-choice.png and native-icons.png. Then run `python tools/meridian-assets/check-card-native.py`.
 
 The M5 contract published in #331's later comment is also followed: card frames declare the canonical `insets` field, and `icons.incident`, `icons.salvage`, `icons.anomaly` each expose their 16px/24px entries. The `symbols` index aliases exactly those entries for convenient gallery access; the audit rejects alias drift. This metadata correction changes no PNG or review pixels. The exact #316 checker at 00d4a52b was built with zero warnings/errors and run against this asset directory: no errors/warnings; coverage 48/48 tiles, 4/4 hatch states, 8/8 crew, 8/8 portraits, 3/3 frames and 23/23 icon IDs. Tokens/UI/FX/audio remain separate future sets. Complete checker/build logs are retained.
+
+Final recheck: #316 advanced to `93d5b3353d6f4f4c1cb23eda5fda0bd06003efd3`; every relevant rule file remains byte-identical and the current freshly built checker accepts the complete art set with zero warnings/errors. See the integration report for exact current runtime consumer mappings still needed in that open game PR.
