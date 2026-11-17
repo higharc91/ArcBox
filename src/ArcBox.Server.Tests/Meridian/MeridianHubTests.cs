@@ -127,7 +127,7 @@ public sealed class MeridianHubTests
     }
 
     /// <summary>What a phone does with the screen in front of it, from the screen alone.</summary>
-    private static object? Decide(JsonElement view, Random random, HashSet<string> picked)
+    internal static object? Decide(JsonElement view, Random random, HashSet<string> picked)
     {
         if (view.GetProperty("kind").GetString() != "custom")
         {

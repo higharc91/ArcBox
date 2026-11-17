@@ -64,6 +64,12 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
     {
         var fresh = _fresh;
         _fresh = false;
+        if (fresh)
+        {
+            // A fresh look forgets what was signalled before: after a server restart the game resumes from a turn's
+            // start and numbers its events from there again, below what this TV signalled (M6 plan, Task 5).
+            _lastSignalled = 0;
+        }
         Shown = view;
         if (view.Now is not { } now)
         {

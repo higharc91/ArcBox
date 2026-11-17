@@ -25,6 +25,7 @@
 #   ARCBOX_GAME=meridian [ARCBOX_SCENARIO=<id>] GODOT=… tools/tv-e2e.sh             a Meridian game from crew pick to the Debrief, the TV
 #                                                                                   doing every presented signal (below)
 #   ARCBOX_GAME=meridian ARCBOX_RECONNECT=1 GODOT=… tools/tv-e2e.sh                 the TV is killed during the Breach and comes back
+#   ARCBOX_GAME=meridian ARCBOX_RESTART=1 GODOT=… tools/tv-e2e.sh                   the server restarts in the endgame (M6)
 #
 # What it does (REDLINE; Tactics is below):
 #   1. builds the phone app (web/play/dist), the server and the TV host (skip with --skip-build);
@@ -149,6 +150,10 @@
 #     in order from the first (MERIDIAN presented <seq>): no fallback answered one for it;
 #   - Tiller said the Breach, then the scenario's announcement (its title first), then the outcome the phones saw
 #     (AUDIO Voice meridian.tiller lines).
+# ARCBOX_RESTART=1 stops the server a little way into the endgame and starts it again on the same database (M6). The TV
+# must come back to its room, the phones rejoin their seats, and the same game (not "Game interrupted") reach the Debrief,
+# with the signal checks applied from the TV's return. Whether the TV saw "Reconnecting…" (MERIDIAN resuming) is logged:
+# when every phone is back first, the resume ends before the TV hears of it.
 # Run one at a time: a relaunched TV resumes from user://session.json, which every TV on the machine shares.
 # ARCBOX_RECONNECT=1 kills the TV once it shows the scenario's announcement and relaunches it, and then needs the relaunched TV
 # back in the same room, at the Debrief, without replaying the Breach (review focus 8): no BREACH stage and no announcement read
@@ -578,6 +583,26 @@ if [[ "$GAME" == "meridian" ]]; then
       meridian_fail "the Breach's announcement on the TV, to kill it during"
     fi
   fi
+  RESTARTED_AT=0
+  if [[ "$RESTART" == "1" ]]; then
+    # The second Board screen is the endgame's (the first is Explore's); let a turn or two play, then restart.
+    boards() { grep -c '^MERIDIAN screen Board$' "$OUT/tv.log" || true; }   # not Boarding
+    for _ in $(seq 1 3000); do
+      (( $(boards) >= 2 )) && break
+      kill -0 "$PHONES_PID" 2>/dev/null || break
+      sleep 0.5
+    done
+    if (( $(boards) >= 2 )); then
+      sleep 8
+      log "restart: stopping the server in the endgame"
+      stop_server_for_restart
+      RESTARTED_AT=$(wc -l < "$OUT/tv.log")
+      start_server "$OUT/server-restarted.log"
+      log "restart: the server is back (TV log line $RESTARTED_AT)"
+    else
+      meridian_fail "the endgame on the TV, to restart the server in"
+    fi
+  fi
   PHONES_STATUS=0
   wait "$PHONES_PID" || PHONES_STATUS=$?
   PHONES_PID=""
@@ -594,6 +619,16 @@ if [[ "$GAME" == "meridian" ]]; then
     END { if (pending != "") print pending }' "$OUT/tv.log")
   [[ -z "$ERRORS" ]] || { echo "$ERRORS"; meridian_fail "a TV log without errors"; }
   AFTER=$((KILLED_AT + 1))
+  if [[ "$RESTART" == "1" ]]; then
+    # From when the TV was back in its room: what came before was the old server's. The phones can all be back before the
+    # TV is, ending the resume before the TV hears of it, so seeing "Reconnecting…" is logged, not required.
+    BACK=$(awk -v from="$RESTARTED_AT" -v code="$CODE" 'NR > from && $0 == "ROOM " code { print NR; exit }' "$OUT/tv.log")
+    [[ -n "$BACK" ]] && log "restart: the TV is back in room $CODE (TV log line $BACK)" || meridian_fail "the TV back in room $CODE after the restart"
+    RESUMING=$(tail -n "+$((RESTARTED_AT + 1))" "$OUT/tv.log" | grep -m1 '^MERIDIAN resuming' || true)
+    log "restart: ${RESUMING:-the TV came back after every phone, so it never saw the game resuming}"
+    AFTER=$(( ${BACK:-$RESTARTED_AT} + 1 ))
+    [[ "$ENDED" != *interrupted* ]] || meridian_fail "the same game played on, not interrupted"
+  fi
   tail -n "+$AFTER" "$OUT/tv.log" | grep -q '^MERIDIAN screen Debrief' || meridian_fail "the TV at the Debrief"
 
   # Every presented event, signalled by the TV in order and none abandoned (with a reconnect: only after the TV came back).
@@ -607,7 +642,9 @@ if [[ "$GAME" == "meridian" ]]; then
   (( COUNT > 10 )) || meridian_fail "more than 10 presented signals from the TV"
   (( ABANDONED == 0 )) || meridian_fail "no beat abandoned: the server moved on without the TV $ABANDONED times"
   (( GAPS == 0 )) || meridian_fail "every presented event signalled by the TV, in order"
-  if [[ "$RECONNECT" == "1" ]]; then
+  if [[ "$RESTART" == "1" ]]; then
+    :   # the resume and the Debrief after it are checked above; Tiller replays the turn, so no voice order is checked
+  elif [[ "$RECONNECT" == "1" ]]; then
     # Back while the announcement may still be the event on screen: then it's shown briefly, as where the game is. What
     # must not happen is a replay: the BREACH stage again, or Tiller reading the announcement a second time.
     tail -n "+$AFTER" "$OUT/tv.log" | grep -q "^ROOM $CODE\$" || meridian_fail "the relaunched TV back in room $CODE"

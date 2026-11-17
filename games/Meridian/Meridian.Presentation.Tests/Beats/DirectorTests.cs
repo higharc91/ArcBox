@@ -127,6 +127,26 @@ public sealed class DirectorTests
     }
 
     [Fact]
+    public void After_a_server_restart_the_replayed_turn_is_shown_though_its_numbers_go_back()
+    {
+        // The game resumes from the turn's start and numbers its events from there: below what this TV signalled.
+        _director.Receive(View(null));
+        foreach (var seq in new[] { 30, 31, 32 })
+        {
+            _director.Receive(View(Now(seq)));
+            Run(3);
+        }
+        _director.ConnectionLost();
+        _director.Receive(View(Now(28)));
+        Assert.True(_director.Current!.Short);        // the first look after the drop: brief
+        Run(0.6);
+        _director.Receive(View(Now(29)));
+        Assert.False(_director.Current!.Short);       // then the replayed turn plays in full
+        Run(3);
+        Assert.Equal([30, 31, 32, 28, 29], _signals);
+    }
+
+    [Fact]
     public void A_tv_joining_a_running_game_doesnt_replay_what_it_finds()
     {
         _director.Receive(View(Now(12, "card", "Hull Groan", "Some text.", 6)));

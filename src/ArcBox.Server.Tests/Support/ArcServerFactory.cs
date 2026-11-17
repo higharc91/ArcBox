@@ -36,6 +36,9 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
     /// <param name="withMeridian">Also links the repository's <c>content/meridian</c>, so the real Meridian can be played.</param>
     public ArcServerFactory(bool withTactics, bool withMeridian = false) => (_withTactics, _withMeridian) = (withTactics, withMeridian);
 
+    /// <summary>The real Meridian on <paramref name="databaseFile"/>, so a second factory on the same file is a restart.</summary>
+    public ArcServerFactory(string databaseFile, bool withMeridian) => (_databaseFile, _withMeridian) = (databaseFile, withMeridian);
+
     /// <summary>The scenario every Meridian Breach picks (the Development-only <c>Meridian:Scenario</c> setting), or null.</summary>
     public string? MeridianScenario { get; init; }
 

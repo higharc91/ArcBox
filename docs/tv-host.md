@@ -213,6 +213,9 @@ godot --path src/ArcBox.Host -- --meridian-demo=one_of_us_isnt --shots=/tmp/meri
 - `MERIDIAN breach <Breach|Announcement|Phones>` for each Breach stage.
 - `MERIDIAN presented <seq> <kind>` for each signal.
 - `MERIDIAN abandoned <seq> <kind>` when the server moved on before the TV finished an event.
+- `MERIDIAN resuming <back> of <seats>` when the TV first sees a game resuming after a server restart (M6).
+
+After a server restart the game resumes from the start of the turn that was under way, and numbers its events from there again. A dropped connection makes the director's next view a fresh look, so it accepts those numbers even though they're below what it signalled before. `ARCBOX_GAME=meridian ARCBOX_RESTART=1 tools/tv-e2e.sh` checks this.
 
 ## Tactics scene
 

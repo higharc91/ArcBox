@@ -178,6 +178,11 @@ Development server with `--Meridian:Scenario=<id>` (ids in `content/meridian/bas
 - [ ] Slow TV: on a slow machine or a busy Wi-Fi, the game still moves on (each event has a fallback), and the TV catches up without showing an old event again.
 - [ ] One remote player watches over a Discord stream: the board and the panel read through the compression.
 
+**Surviving a restart (M6):**
+- [ ] Restart the server mid-game (stop it and start it again). The TV shows "Reconnecting… N of M phones back"; each phone comes back to its screen without rejoining by hand; the game resumes at the start of the turn that was under way, not "Game interrupted".
+- [ ] Restart it during the briefings: everyone gets their briefing back, and the endgame begins as before.
+- [ ] Restart it and leave one phone off: after a minute the game plays on, and that seat gets the usual pause, then a bot. Turning the phone back on takes the seat back.
+
 - [ ] Three real phones on the LAN join, select **Derelict: ISV Meridian** and start. Each picks a different crew member; a taken one is greyed out.
 - [ ] On your turn, the deck tabs show a count where you can go; tapping a compartment moves you, tapping **Open** reveals a new one.
 - [ ] A new compartment appears on the board, and every phone shows "On the main screen" until it has been shown.

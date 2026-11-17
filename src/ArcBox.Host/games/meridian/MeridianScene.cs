@@ -160,6 +160,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     private TvMode? _shotMode;
     private BreachStage? _shotStage;
     private bool _shotDebrief;
+    private bool _loggedResume;
 
     private void Shoot()
     {
@@ -167,6 +168,13 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         {
             return;   // with or without --shots: the screen and Breach lines below are logged for the end-to-end run
         }
+        // A restart's resume, for the end-to-end run: logged once each time it begins.
+        var resuming = view.Wait?.Kind == "resume";
+        if (resuming && !_loggedResume)
+        {
+            GD.Print($"MERIDIAN resuming {view.Wait!.Back ?? 0} of {view.Seats.Count}");
+        }
+        _loggedResume = resuming;
         var mode = TvScreen.Of(view).Mode;
         if (mode != _shotMode)
         {

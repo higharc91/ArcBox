@@ -17,6 +17,8 @@
 //   (or Meridian__Scenario=the_passenger in the environment; ids are in content/meridian/base/rules/breach.json)
 //
 // It exits 0 when the game ends (printing the results message), 1 on an error or after --timeout seconds (default 900).
+// The phones (and, with --host, the TV) come back by themselves after a dropped connection or a server restart:
+// each phone rejoins its seat, and the TV resumes its room.
 'use strict';
 const path = require('path');
 const { HubConnectionBuilder, LogLevel } = require(path.join(__dirname, '../../web/play/node_modules/@microsoft/signalr'));
@@ -33,7 +35,9 @@ const timeout = Number(arg('timeout', 900));
 const asHost = arg('host', false) === true;
 const start = asHost || arg('start', false) === true;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const connect = () => new HubConnectionBuilder().withUrl(`${server}/hub`).withAutomaticReconnect().configureLogging(LogLevel.Critical).build();
+// A server restart takes some seconds, and a phone doesn't give up: retry for about a minute (as the Tactics bots do).
+const RECONNECT_MS = [0, 1000, 2000, 2000, 2000, 3000, 3000, 5000, 5000, 5000, 10000, 10000, 10000];
+const connect = () => new HubConnectionBuilder().withUrl(`${server}/hub`).withAutomaticReconnect(RECONNECT_MS).configureLogging(LogLevel.Critical).build();
 
 /** What a phone does with the screen in front of it (the same policy as MeridianHubTests). */
 function decide(view, picked) {
@@ -90,7 +94,11 @@ async function main() {
       }
     });
     await host.start();
-    room = (await host.invoke('CreateRoom')).code;
+    const created = await host.invoke('CreateRoom');
+    room = created.code;
+    // Back from a server restart: the TV resumes its room, as the real TV does.
+    host.onreconnected(() => host.invoke('ResumeHost', created.code, created.hostToken)
+      .then(() => console.log('TV resumed the room'), (e) => console.log(`TV resume failed: ${e.message}`)));
   }
   if (!room) throw new Error('Pass --room=<CODE> or --host.');
   console.log(`ROOM ${room}`);
@@ -102,7 +110,10 @@ async function main() {
     bot.conn.on('ControllerView', (v) => { bot.view = v; });
     bot.conn.on('GameEnded', (r) => { bot.ended = r; });
     await bot.conn.start();
-    await bot.conn.invoke('Join', room, bot.name);
+    bot.seat = await bot.conn.invoke('Join', room, bot.name);
+    // Back after a dropped connection or a server restart: the same seat, as a phone rejoins it.
+    bot.conn.onreconnected(() => bot.conn.invoke('Rejoin', room, bot.seat.playerId, bot.seat.secret)
+      .then(() => console.log(`${bot.name} rejoined`), (e) => console.log(`${bot.name}: rejoin failed: ${e.message}`)));
     bots.push(bot);
   }
   if (start) {
