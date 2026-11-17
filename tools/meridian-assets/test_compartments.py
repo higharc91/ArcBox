@@ -36,10 +36,11 @@ class CompartmentTests(unittest.TestCase):
 
     def test_missing_room_variant_and_rules_drift_fail_the_audit(self):
         path=self.pack/'tiles/manifest.json'; original=path.read_bytes()
-        for mutation in ['room','variant','metadata']:
+        for mutation in ['room','variant','metadata','name']:
             value=json.loads(original)
             if mutation=='room': del value['tiles']['med_bay']
             elif mutation=='variant': del value['tiles']['service_corridor']['variants']['command']
+            elif mutation=='name': value['tiles']['med_bay']['name']='Wrong name'
             else: value['tiles']['maintenance_shaft']['rule']=None
             try:
                 path.write_text(json.dumps(value))

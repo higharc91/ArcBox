@@ -34,6 +34,8 @@ Native capture uses the retained style review's `native-project.godot` and `nati
 
 Real Chromium at 320×844, 390×844 and 1920×1080 loads all 464 images with no overflow/page/request errors. All 456 room views are exactly 1×/2×; deck filtering preserves all variants. Reduced-motion preferences show settled hatch states; normal motion advances, Pause stops it, and Still shows the rest frame. Retained screenshots show the viewport rather than a fractionally scaled huge page.
 
-Native Godot OpenGL captures all three 1080p concept boards. The existing unsupported V-Sync warning is retained; no script/runtime errors are expected. Capture, simulation and compressed-preview review results are recorded in `native-check.json`. These are native image-display checks; Meridian's actual Godot TV scene is still outside this art branch. No physical-TV, measured human recognition or gameplay integration test is claimed.
+Native Godot OpenGL captures all three 1080p concept boards. The existing unsupported V-Sync warning is retained; no script/runtime errors occurred. Capture, simulation and compressed-preview review results are recorded in `native-check.json`. These are native image-display checks; Meridian's actual Godot TV scene is still outside this art branch. No physical-TV, measured human recognition or gameplay integration test is claimed.
 
 The full repository gate is being run before final PR status is recorded. CI remains manually disabled. No gameplay, balance, existing Tactics art/voice, paid generation or separate combat-VFX workflow changes. Generation spend: 0 CU.
+
+Room names remain live UI text from the content data. The asset manifest retains the exact rule name, and the audit rejects name drift. No names are painted into the room PNGs; the focus-panel mock demonstrates a separate label. The existing M2 phone map on #316 already renders `room.name` and accessible move labels. Final Godot HUD labels belong to M4/UI integration.

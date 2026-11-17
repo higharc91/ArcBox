@@ -16,7 +16,7 @@ def audit(pack, reference):
     for key,rule in expected.items():
         entry=actual[key]
         if set(entry['variants'])!=set(rule['decks']): raise ValueError('deck variants differ: '+key)
-        if entry['hatches']!=rule['hatches'] or entry['symbol']!=rule.get('symbol') or entry['rule']!=rule.get('rule'):
+        if entry['name']!=rule['name'] or entry['hatches']!=rule['hatches'] or entry['symbol']!=rule.get('symbol') or entry['rule']!=rule.get('rule'):
             raise ValueError('rules metadata differs: '+key)
     count=0
     def visit(value,folder):
