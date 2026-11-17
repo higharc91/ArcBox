@@ -1,0 +1,21 @@
+{
+  "batch": "story372_2026_11_17_job4b-kore",
+  "source": "job4b.wav",
+  "sourceSha256": "5ea203dd1d09d2e4a9777de1cda67eec25629b899476aff675ca7f7a6a6b6291",
+  "durationSeconds": 10.0,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Kore.0fc9fe8a",
+      "line": "ch1_bridge_cost_open_2",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+      "start": 0.0,
+      "end": 10.0,
+      "matchedWords": "17/19",
+      "wavSha256": "18abbb49f56c1eebfa47dac71d468acc8bd17f09022f25e3eb71ce46157e6b42"
+    }
+  ]
+}

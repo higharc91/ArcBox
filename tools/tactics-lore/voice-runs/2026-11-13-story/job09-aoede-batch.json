@@ -1,0 +1,42 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job09-aoede",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "voice": "Aoede",
+    "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.\n<long pause>\nA truce at the ford! I'll need a whole new verse. Possibly three.\n<long pause>\nLook who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+    "segments": [
+      {
+        "raw": "Aoede.2b44e5a2",
+        "line": "bark_lark_town_force",
+        "speaker": "lark",
+        "preset": "Aoede",
+        "text": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+        "renderText": "The bridge ballad's a sad one now. They always are, when you write them honestly.",
+        "delivery": null
+      },
+      {
+        "raw": "Aoede.66326234",
+        "line": "bark_lark_town_parley",
+        "speaker": "lark",
+        "preset": "Aoede",
+        "text": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+        "renderText": "A truce at the ford! I'll need a whole new verse. Possibly three.",
+        "delivery": null
+      },
+      {
+        "raw": "Aoede.19377c63",
+        "line": "ch3_guest_right_arrive_3",
+        "speaker": "lark",
+        "preset": "Aoede",
+        "text": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+        "renderText": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
+        "delivery": null
+      }
+    ]
+  }
+}
