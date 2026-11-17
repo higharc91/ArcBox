@@ -365,7 +365,8 @@ public sealed class AshenFordDraftTests
 
         // Parley's fade puts the party at the camp, and its fight comes next.
         Assert.Equal(draft.Spot("ch1_skarrow_song"), story.Legs.Single(l => l.Branch == "ch1_parley/ch1_take_ember" && l.Beat == "ch1_river_crossing").From);
-        Assert.Equal(2, story.Retries.Length);
+        // One retry per ford branch's battle, copied into each of the ember vote's three sub-branches.
+        Assert.Equal(6, story.Retries.Length);
     }
 
     [Fact]
