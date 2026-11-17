@@ -190,8 +190,14 @@
     "ashmaw_busy": {
       "main": "ashmaw_busy.9e9a9aeb.ogg"
     },
+    "ashmaw_death": {
+      "main": "ashmaw_death.a3228c85.ogg"
+    },
     "ashmaw_diggings_open": {
       "main": "ashmaw_diggings_open.65724d3b.ogg"
+    },
+    "ashmaw_done": {
+      "main": "ashmaw_done.2c9f1453.ogg"
     },
     "ashmaw_lair_open": {
       "main": "ashmaw_lair_open.1b0e7f47.ogg"
@@ -202,11 +208,20 @@
     "ashmaw_leave": {
       "main": "ashmaw_leave.3ad22d7f.ogg"
     },
+    "ashmaw_maud_after": {
+      "main": "ashmaw_maud_after.422b96fb.ogg"
+    },
+    "ashmaw_maud_waiting": {
+      "main": "ashmaw_maud_waiting.52f46b1b.ogg"
+    },
     "ashmaw_nest_open": {
       "main": "ashmaw_nest_open.1bb03c72.ogg"
     },
     "ashmaw_notices": {
       "main": "ashmaw_notices.c185352b.ogg"
+    },
+    "ashmaw_offer": {
+      "main": "ashmaw_offer.f4bf533c.ogg"
     },
     "ashmaw_presented": {
       "main": "ashmaw_presented.167e3765.ogg"
@@ -892,6 +907,9 @@
     "bark_pip_ashdown_camp_5": {
       "main": "bark_pip_ashdown_camp_5.6d263bac.ogg"
     },
+    "bark_pip_ashdown_town_1": {
+      "main": "bark_pip_ashdown_town_1.24265e16.ogg"
+    },
     "bark_pip_ashdown_town_2": {
       "main": "bark_pip_ashdown_town_2.d7b45627.ogg"
     },
@@ -1174,6 +1192,9 @@
     "ch1_camp_truth_2": {
       "main": "ch1_camp_truth_2.f40316a9.ogg"
     },
+    "ch1_camp_warmth_1": {
+      "main": "ch1_camp_warmth_1.c0cd196c.ogg"
+    },
     "ch1_camp_warmth_2": {
       "main": "ch1_camp_warmth_2.788b7405.ogg"
     },
@@ -1330,8 +1351,14 @@
     "ch1_ford_pay_fail_1": {
       "main": "ch1_ford_pay_fail_1.b880a0c1.ogg"
     },
+    "ch1_ford_pay_fail_2": {
+      "main": "ch1_ford_pay_fail_2.6a573208.ogg"
+    },
     "ch1_ford_pay_pass_1": {
       "main": "ch1_ford_pay_pass_1.73d69836.ogg"
+    },
+    "ch1_ford_pay_pass_2": {
+      "main": "ch1_ford_pay_pass_2.d52f489e.ogg"
     },
     "ch1_ford_truth_1": {
       "main": "ch1_ford_truth_1.60a6b2de.ogg"
@@ -3532,6 +3559,9 @@
     "ch5_the_archive_history_6": {
       "main": "ch5_the_archive_history_6.3dba2a9c.ogg"
     },
+    "ch5_the_archive_leave_1": {
+      "main": "ch5_the_archive_leave_1.a41badd3.ogg"
+    },
     "ch5_the_archive_marrowby_1": {
       "main": "ch5_the_archive_marrowby_1.3ebd7093.ogg"
     },
@@ -3748,6 +3778,12 @@
     "say_ford_assault_3": {
       "main": "say_ford_assault_3.e3ff1147.ogg"
     },
+    "say_hall_of_the_flame_1": {
+      "main": "say_hall_of_the_flame_1.7ae15314.ogg"
+    },
+    "say_hall_of_the_flame_2": {
+      "main": "say_hall_of_the_flame_2.96df960b.ogg"
+    },
     "say_hall_of_the_flame_3": {
       "main": "say_hall_of_the_flame_3.3ce7b06d.ogg"
     },
@@ -3756,6 +3792,9 @@
     },
     "say_hall_of_the_flame_5": {
       "main": "say_hall_of_the_flame_5.f75711dd.ogg"
+    },
+    "say_keep_gate_1": {
+      "main": "say_keep_gate_1.e32bacdd.ogg"
     },
     "say_keep_gate_2": {
       "main": "say_keep_gate_2.149e91db.ogg"
@@ -3979,6 +4018,9 @@
     "sq_tobin_fell_008": {
       "main": "sq_tobin_fell_008.463aa699.ogg"
     },
+    "talk_bree_tallow_ford_ember": {
+      "main": "talk_bree_tallow_ford_ember.569f1935.ogg"
+    },
     "talk_halden_varrow_ford_ember": {
       "main": "talk_halden_varrow_ford_ember.28892707.ogg"
     },
@@ -4035,6 +4077,9 @@
     },
     "town_barmaid_3": {
       "main": "town_barmaid_3.eadaabc4.ogg"
+    },
+    "town_barmaid_ember": {
+      "main": "town_barmaid_ember.2d4f4b7c.ogg"
     },
     "town_child_1": {
       "main": "town_child_1.9ce7845d.ogg"
