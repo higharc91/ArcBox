@@ -1,0 +1,61 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job06-achird",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Achird",
+    "text": "<young, tired, dry working voice Mood: sad.> The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?\n<long pause>\n<young, tired, dry working voice Mood: idle.> Carried my first sack up the goblin path today. The little ones watched me the whole way.\n<long pause>\n<young, tired, dry working voice Mood: idle.> Ground under the docks went cold as a grave. Nobody's saying why.\n<long pause>\n<young, tired, dry working voice Mood: idle.> Hands are cold, but they still work. That's something.",
+    "segments": [
+      {
+        "raw": "Achird.7237fe1b",
+        "line": "town_farmhand_force",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?",
+        "renderText": "<young, tired, dry working voice Mood: sad.> The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Achird.d51bb439",
+        "line": "town_farmhand_parley",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "Carried my first sack up the goblin path today. The little ones watched me the whole way.",
+        "renderText": "<young, tired, dry working voice Mood: idle.> Carried my first sack up the goblin path today. The little ones watched me the whole way.",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Achird.fa8ce5a0",
+        "line": "town_farmhand_ember",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "Ground under the docks went cold as a grave. Nobody's saying why.",
+        "renderText": "<young, tired, dry working voice Mood: idle.> Ground under the docks went cold as a grave. Nobody's saying why.",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Achird.629eeeb2",
+        "line": "town_farmhand_4",
+        "speaker": "townsfolk_farmhand",
+        "preset": "Achird",
+        "text": "Hands are cold, but they still work. That's something.",
+        "renderText": "<young, tired, dry working voice Mood: idle.> Hands are cold, but they still work. That's something.",
+        "delivery": {
+          "direction": "young, tired, dry working voice",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

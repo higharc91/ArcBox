@@ -1,0 +1,58 @@
+{
+  "request": {
+    "id": "issue342_2026_11_17_job02-umbriel-algieba",
+    "issues": [
+      "#342",
+      "#211"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Umbriel"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Algieba"
+      }
+    ],
+    "text": "A: So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.\n<long pause>\nA: Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.\n<long pause>\nA: Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.\n<long pause>\nB: By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.",
+    "segments": [
+      {
+        "raw": "Umbriel.e5333759",
+        "line": "ch1_four_more_choose_2",
+        "speaker": "rook",
+        "preset": "Umbriel",
+        "text": "So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.",
+        "renderText": "So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.",
+        "delivery": null
+      },
+      {
+        "raw": "Umbriel.6ea44dfa",
+        "line": "ch1_four_more_guard_1",
+        "speaker": "rook",
+        "preset": "Umbriel",
+        "text": "Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.",
+        "renderText": "Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.",
+        "delivery": null
+      },
+      {
+        "raw": "Umbriel.eab2ecb2",
+        "line": "ch1_four_more_bargain_1",
+        "speaker": "rook",
+        "preset": "Umbriel",
+        "text": "Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+        "renderText": "Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+        "delivery": null
+      },
+      {
+        "raw": "Algieba.0cc846ac",
+        "line": "ch1_four_more_bargain_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.",
+        "renderText": "By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.",
+        "delivery": null
+      }
+    ]
+  }
+}

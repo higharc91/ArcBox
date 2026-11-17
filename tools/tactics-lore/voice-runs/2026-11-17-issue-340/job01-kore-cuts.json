@@ -1,0 +1,76 @@
+{
+  "batch": "issue340_2026_11_17_job01-kore",
+  "source": "job01-kore.wav",
+  "sourceSha256": "238443dd2bc4b45248e0143b14abfa22b5cb5c73a3a4b7d4324cf40f02ed0d49",
+  "durationSeconds": 46.92,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Kore.bf445bec",
+      "line": "talk_mother_skarrow_wary",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "Valley people. Say what you came to say, or go back down the hill.",
+      "start": 0.0,
+      "end": 6.327,
+      "matchedWords": "14/14",
+      "wavSha256": "a59828c61814867d341b06a2ae3ca67f7770a7c6e61de0baefadc23bf920ff06"
+    },
+    {
+      "raw": "Kore.9e4f6b37",
+      "line": "talk_mother_skarrow_truce",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "You came back up the hill. Not many valley people do that twice.",
+      "start": 6.327,
+      "end": 12.597,
+      "matchedWords": "10/13",
+      "wavSha256": "d14f24758884e54839155044c207c33c0cc53db416be1c5008cd8adb85ba75a0"
+    },
+    {
+      "raw": "Kore.08905b95",
+      "line": "talk_mother_skarrow_clan",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.",
+      "start": 12.597,
+      "end": 22.248,
+      "matchedWords": "19/19",
+      "wavSha256": "660cdf735ac95dda1708645aaa3df737fde110c3c6eaaa03809ea76117deb021"
+    },
+    {
+      "raw": "Kore.f3c6f947",
+      "line": "talk_mother_skarrow_vorga",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.",
+      "start": 22.248,
+      "end": 34.043,
+      "matchedWords": "18/25",
+      "wavSha256": "a1aba907cfb1da6dafbcebc7ef8e275c878fcd9cf7e373cbfecb78d98de65c22"
+    },
+    {
+      "raw": "Kore.e99800f7",
+      "line": "talk_mother_skarrow_more",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "Anything else, valley people? The fire is small, and I am old.",
+      "start": 34.043,
+      "end": 40.994,
+      "matchedWords": "10/12",
+      "wavSha256": "7b9b2ec8467efc4dff613f379e797a8bad010843e204b67e3f2a877226f4e0cb"
+    },
+    {
+      "raw": "Kore.61bbb24b",
+      "line": "talk_mother_skarrow_bye",
+      "speaker": "mother_skarrow",
+      "preset": "Kore",
+      "text": "Go well. Walk loud on the path, so the archers know it is you.",
+      "start": 40.994,
+      "end": 46.92,
+      "matchedWords": "12/14",
+      "wavSha256": "8332a75ec52f4c9615ab1536f3ecadd1c8ee20158aebe2e23543752dcf8367ba"
+    }
+  ]
+}

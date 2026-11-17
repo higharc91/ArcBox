@@ -1,0 +1,25 @@
+{
+  "request": {
+    "id": "issue342_2026_11_17_job03-algenib",
+    "issues": [
+      "#342",
+      "#211"
+    ],
+    "voice": "Algenib",
+    "text": "<low, unhurried, superstitious river voice Mood: idle.> Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+    "segments": [
+      {
+        "raw": "Algenib.8884f86a",
+        "line": "town_fisher_guarded",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: idle.> Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

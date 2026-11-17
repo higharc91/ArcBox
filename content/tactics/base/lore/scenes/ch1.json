@@ -283,7 +283,7 @@
               "id": "ch1_mayor_close_4",
               "speaker": "halden_varrow",
               "mood": "idle",
-              "text": "Here are 200 gold as an advance. Come down to the bridge end with me and see what we're up against."
+              "text": "Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against."
             }
           ],
           "end": true
@@ -999,7 +999,7 @@
               "id": "ch1_bridge_cost_open_2",
               "speaker": "mother_skarrow",
               "mood": "hurt",
-              "text": "Hm. Well fought. My grandson always said the valley would never share. I should have listened to him.",
+              "text": "Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
               "direction": "barely a whisper, a dry laugh in it"
             },
             {
@@ -1669,7 +1669,7 @@
               "id": "ch1_granary_confess_1",
               "speaker": "halden_varrow",
               "mood": "hurt",
-              "text": "Because the ground is cooling. The ember under the ford is going out. I've known for six years.",
+              "text": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.",
               "direction": "cornered: quiet and fast"
             },
             {
@@ -2563,6 +2563,18 @@
               "speaker": "narrator",
               "mood": "sad",
               "text": "The ford's ember. It is no bigger than a loaf, and cracked and chipped all over, as if something has been gnawing it."
+            },
+            {
+              "id": "ch1_docks_open_hearth_1",
+              "speaker": "narrator",
+              "text": "For three hundred years the Hearthflame burned in Ember Keep, and kept the whole Vale warm.",
+              "mood": "sad"
+            },
+            {
+              "id": "ch1_docks_open_hearth_2",
+              "speaker": "narrator",
+              "text": "A century ago the Keep fell in a single night. The flame broke into five embers, and they came down across the Vale like stars. This is one of them.",
+              "mood": "sad"
             }
           ],
           "sets": [
@@ -2934,6 +2946,12 @@
               "speaker": "hooded_stranger",
               "mood": "idle",
               "text": "She isn't the only one. There are four more. You'll want to reach them before the woman in grey does."
+            },
+            {
+              "id": "ch1_four_more_open_goal_1",
+              "speaker": "hooded_stranger",
+              "text": "Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
+              "mood": "idle"
             }
           ],
           "options": [

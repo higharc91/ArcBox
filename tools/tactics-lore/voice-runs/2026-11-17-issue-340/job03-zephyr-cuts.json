@@ -1,0 +1,87 @@
+{
+  "batch": "issue340_2026_11_17_job03-zephyr",
+  "source": "job03-zephyr.wav",
+  "sourceSha256": "d770002905569c9bcdc598fda4a87add85817faffe7ab4bf1501ac4327d87988",
+  "durationSeconds": 45.52,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Zephyr.3688e97b",
+      "line": "bark_bree_tallow_town_force",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.",
+      "start": 0.0,
+      "end": 6.988,
+      "matchedWords": "11/17",
+      "wavSha256": "7394dd8a182abe6c6b8f6775cb2e7ce1eff32fcdbfcb5f0a0c37692bf218e8fc"
+    },
+    {
+      "raw": "Zephyr.479dcff3",
+      "line": "bark_bree_tallow_town_parley",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Stew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.",
+      "start": 6.988,
+      "end": 13.391,
+      "matchedWords": "12/16",
+      "wavSha256": "4de41219ebadf5fdea79eff08a4880eacfeabddde09e1b8b0762ca40516a6b4c"
+    },
+    {
+      "raw": "Zephyr.b645232a",
+      "line": "town_barmaid_force",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.",
+      "start": 13.391,
+      "end": 20.407,
+      "matchedWords": "9/14",
+      "wavSha256": "34eed8dd697490f97b46b05876ac12e75fc36e2d1cfbb0da283903923154d73f"
+    },
+    {
+      "raw": "Zephyr.8c356670",
+      "line": "town_barmaid_parley",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.",
+      "start": 20.407,
+      "end": 26.689,
+      "matchedWords": "11/17",
+      "wavSha256": "3aeb17d528b0580fc1bbb1f04be36111d16ce42d12c5bfdde3b634300214b39c"
+    },
+    {
+      "raw": "Zephyr.adc77ee6",
+      "line": "town_barmaid_confessed",
+      "speaker": "townsfolk_barmaid",
+      "preset": "Zephyr",
+      "text": "Folk keep coming in to shout about the mayor. Then they stay for the soup.",
+      "start": 26.689,
+      "end": 31.52,
+      "matchedWords": "13/15",
+      "wavSha256": "abf790a9bb2f90d667ce849675b0f969589cd8af8003375d73f5b080de4f72ab"
+    },
+    {
+      "raw": "Zephyr.9dfc1381",
+      "line": "talk_bree_tallow_ford_force",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.",
+      "start": 31.52,
+      "end": 39.537,
+      "matchedWords": "12/20",
+      "wavSha256": "c9324f883659b0b9ae6c0edf77cc284f8238fca428a7817150e813f4171f755f"
+    },
+    {
+      "raw": "Zephyr.a4b72498",
+      "line": "talk_bree_tallow_ford_parley",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+      "start": 39.537,
+      "end": 45.52,
+      "matchedWords": "12/22",
+      "wavSha256": "ec169626b1aa98fe02c9527e4e7b8ec82d2c7b1292c5ded746c2b6ceadd6ffbb"
+    }
+  ]
+}

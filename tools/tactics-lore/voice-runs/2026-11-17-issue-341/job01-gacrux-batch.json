@@ -1,0 +1,97 @@
+{
+  "request": {
+    "id": "issue341_2026_11_17_job01-gacrux",
+    "issues": [
+      "#341",
+      "#210"
+    ],
+    "voice": "Gacrux",
+    "text": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Not me. I'm the one who said now.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> No. I don't think I am.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Pick up a shovel. Talking won't dig it.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They're still up there, watching. Good. Let them see we buried her properly.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+    "segments": [
+      {
+        "raw": "Gacrux.da22dce0",
+        "line": "ch1_burial_words_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Not me. I'm the one who said now.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Not me. I'm the one who said now.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.b1c8afb4",
+        "line": "ch1_burial_song_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.dcac1f8f",
+        "line": "ch1_burial_dagna_1",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "No. I don't think I am.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> No. I don't think I am.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.61d005f1",
+        "line": "ch1_burial_dagna_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.40d6f34a",
+        "line": "ch1_burial_dagna_3",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Pick up a shovel. Talking won't dig it.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Pick up a shovel. Talking won't dig it.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.ce82b95d",
+        "line": "ch1_burial_hill_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "They're still up there, watching. Good. Let them see we buried her properly.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> They're still up there, watching. Good. Let them see we buried her properly.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.cf67353b",
+        "line": "ch1_burial_done_2",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

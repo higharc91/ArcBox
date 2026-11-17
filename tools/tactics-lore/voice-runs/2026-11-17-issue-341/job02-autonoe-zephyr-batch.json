@@ -1,0 +1,76 @@
+{
+  "request": {
+    "id": "issue341_2026_11_17_job02-autonoe-zephyr",
+    "issues": [
+      "#341",
+      "#210"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Autonoe"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Zephyr"
+      }
+    ],
+    "text": "A: How dreadful. Someone will have to decide what to do with them. Not me, I hope.\n<long pause>\nA: Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.\n<long pause>\nA: Well. That does rather change the interest.\n<long pause>\nB: Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.\n<long pause>\nB: She bit me twice on the way here. I'd call that healthy.\n<long pause>\nB: I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+    "segments": [
+      {
+        "raw": "Autonoe.15ce9417",
+        "line": "ch1_council_force_open_5",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "How dreadful. Someone will have to decide what to do with them. Not me, I hope.",
+        "renderText": "How dreadful. Someone will have to decide what to do with them. Not me, I hope.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.5afa655d",
+        "line": "ch1_council_force_noble_1",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.",
+        "renderText": "Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.f3301645",
+        "line": "ch1_council_force_confess_6",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Well. That does rather change the interest.",
+        "renderText": "Well. That does rather change the interest.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.60781c67",
+        "line": "ch1_council_force_open_4",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.",
+        "renderText": "Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.67bf2ab7",
+        "line": "ch1_council_force_children_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "She bit me twice on the way here. I'd call that healthy.",
+        "renderText": "She bit me twice on the way here. I'd call that healthy.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.dff502eb",
+        "line": "ch1_council_force_feed_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+        "renderText": "I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+        "delivery": null
+      }
+    ]
+  }
+}

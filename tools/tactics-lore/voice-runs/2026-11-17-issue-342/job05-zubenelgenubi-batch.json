@@ -1,0 +1,25 @@
+{
+  "request": {
+    "id": "issue342_2026_11_17_job05-zubenelgenubi",
+    "issues": [
+      "#342",
+      "#211"
+    ],
+    "voice": "Zubenelgenubi",
+    "text": "<brisk market patter with worry beneath it Mood: surprised.> Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
+    "segments": [
+      {
+        "raw": "Zubenelgenubi.bc6fdd85",
+        "line": "town_merchant_bargained",
+        "speaker": "townsfolk_merchant",
+        "preset": "Zubenelgenubi",
+        "text": "Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
+        "renderText": "<brisk market patter with worry beneath it Mood: surprised.> Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
+        "delivery": {
+          "direction": "brisk market patter with worry beneath it",
+          "mood": "surprised"
+        }
+      }
+    ]
+  }
+}

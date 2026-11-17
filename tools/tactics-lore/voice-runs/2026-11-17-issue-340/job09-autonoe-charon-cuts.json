@@ -1,0 +1,43 @@
+{
+  "batch": "issue340_2026_11_17_job09-autonoe-charon",
+  "source": "job09-autonoe-charon.wav",
+  "sourceSha256": "0046d87845e250b6d09fade7377e0c6972d72723daca26f70a0c9fe5683a2997",
+  "durationSeconds": 24.88,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Autonoe.4e8f948d",
+      "line": "bark_celandine_marrowby_town_force",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Such a mess on the bridge. Still, the road is open, and roads are so very good for business.",
+      "start": 0.0,
+      "end": 8.027,
+      "matchedWords": "19/19",
+      "wavSha256": "e6ffa694e24e4f525c8b0e9fe480ab31909cd1fea511742c9005b5e83c86dded"
+    },
+    {
+      "raw": "Autonoe.586cbd63",
+      "line": "bark_celandine_marrowby_town_parley",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.",
+      "start": 8.027,
+      "end": 16.672,
+      "matchedWords": "12/15",
+      "wavSha256": "844a7bd97a9b543a2564f01e2a11bf35cdade2e4f398eaf3fd319d3f3e1ef775"
+    },
+    {
+      "raw": "Charon.f895aab9",
+      "line": "talk_halden_varrow_ford_parley",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+      "start": 16.672,
+      "end": 24.88,
+      "matchedWords": "13/19",
+      "wavSha256": "379f88ee96e3abebb25bab27c217e7f468471f83002aaaaaaea200c1c0da4e40"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "batch": "issue341_2026_11_17_job01-gacrux",
+  "source": "job01-gacrux.wav",
+  "sourceSha256": "f05466006a0c55449a2b93f913af0bbf8d0882d8b3b80222a43d16f4773674a1",
+  "durationSeconds": 50.44,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Gacrux.da22dce0",
+      "line": "ch1_burial_words_1",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "Not me. I'm the one who said now.",
+      "start": 0.0,
+      "end": 4.248,
+      "matchedWords": "6/8",
+      "wavSha256": "d3f2f7f55b3d2440662f111c68dc19801ada35a276a6b1de814e903b6005c22b"
+    },
+    {
+      "raw": "Gacrux.b1c8afb4",
+      "line": "ch1_burial_song_2",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "Seven went up, she said, at the end. That's all I heard. Seven went up where the wall meets the sky.",
+      "start": 4.248,
+      "end": 13.882,
+      "matchedWords": "10/21",
+      "wavSha256": "14266947609b2db5458dd527487e773c7e93f038fe6314f90bf68d316eb97261"
+    },
+    {
+      "raw": "Gacrux.dcac1f8f",
+      "line": "ch1_burial_dagna_1",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "No. I don't think I am.",
+      "start": 13.882,
+      "end": 17.761,
+      "matchedWords": "5/6",
+      "wavSha256": "156a82c179d42ad2473ef2198cf5247cc2fda81d2d5daf02ee81ea1eaa462843"
+    },
+    {
+      "raw": "Gacrux.61d005f1",
+      "line": "ch1_burial_dagna_2",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "Twelve years I've kept this town safe, and what I'll be remembered for is one morning on a bridge.",
+      "start": 17.761,
+      "end": 25.352,
+      "matchedWords": "12/19",
+      "wavSha256": "4280ad0d12345d773245febc9cb224d0a6a92b402b77f9fadceb888bc026df76"
+    },
+    {
+      "raw": "Gacrux.40d6f34a",
+      "line": "ch1_burial_dagna_3",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "Pick up a shovel. Talking won't dig it.",
+      "start": 25.352,
+      "end": 29.152,
+      "matchedWords": "4/8",
+      "wavSha256": "70385f7e0f5a589c4918206e1c0b37ea709c9d011b7e0b06949f3f930be79353",
+      "trimmed": "the next line's stage direction was read aloud after this line (single-voice job); cut at the silence after 'Talking won't dig it.'"
+    },
+    {
+      "raw": "Gacrux.ce82b95d",
+      "line": "ch1_burial_hill_2",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "They're still up there, watching. Good. Let them see we buried her properly.",
+      "start": 36.4,
+      "end": 43.49,
+      "matchedWords": "11/13",
+      "wavSha256": "56c26f27b960117963b41686de0b27a67ebfce13b1f62d6241eb9b15f5b80120"
+    },
+    {
+      "raw": "Gacrux.cf67353b",
+      "line": "ch1_burial_done_2",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "I'll not forget this. I don't want to. Some things a person ought to have to carry.",
+      "start": 43.49,
+      "end": 50.44,
+      "matchedWords": "12/17",
+      "wavSha256": "2356b940f667c625a1794bac3647f8c0347f9b51ae59c6c7984508d5b8bff854"
+    }
+  ]
+}

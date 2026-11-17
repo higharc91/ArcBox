@@ -1,0 +1,112 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job10-sadachbia-vindemiatrix",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Sadachbia"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Vindemiatrix"
+      }
+    ],
+    "text": "A: Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.\n<long pause>\nA: The clan keeps songs older than my oldest page. I've begged for a copy. Twice.\n<long pause>\nA: You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.\n<long pause>\nA: I've written down the bridge. All of it. Someone should, while we still remember it right.\n<long pause>\nA: Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.\n<long pause>\nB: I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.\n<long pause>\nB: Goblin children came to my door asking what the bell is for. I had no idea what to tell them.\n<long pause>\nB: Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?\n<long pause>\nB: I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.\n<long pause>\nB: The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+    "segments": [
+      {
+        "raw": "Sadachbia.98a2d6d5",
+        "line": "bark_corvin_ashby_town_force",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.",
+        "renderText": "Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.b96a5d15",
+        "line": "bark_corvin_ashby_town_parley",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "The clan keeps songs older than my oldest page. I've begged for a copy. Twice.",
+        "renderText": "The clan keeps songs older than my oldest page. I've begged for a copy. Twice.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.aa8bfb43",
+        "line": "talk_corvin_ashby_ford_ember",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.",
+        "renderText": "You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.93aef6e5",
+        "line": "talk_corvin_ashby_ford_force",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "I've written down the bridge. All of it. Someone should, while we still remember it right.",
+        "renderText": "I've written down the bridge. All of it. Someone should, while we still remember it right.",
+        "delivery": null
+      },
+      {
+        "raw": "Sadachbia.61c0c0e5",
+        "line": "talk_corvin_ashby_ford_parley",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.",
+        "renderText": "Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.09187c44",
+        "line": "bark_mother_aubrine_town_force",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.",
+        "renderText": "I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.31775e5b",
+        "line": "bark_mother_aubrine_town_parley",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "Goblin children came to my door asking what the bell is for. I had no idea what to tell them.",
+        "renderText": "Goblin children came to my door asking what the bell is for. I had no idea what to tell them.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.e5eaba11",
+        "line": "talk_mother_aubrine_ford_ember",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?",
+        "renderText": "Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.bec2b81b",
+        "line": "talk_mother_aubrine_ford_force",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.",
+        "renderText": "I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.",
+        "delivery": null
+      },
+      {
+        "raw": "Vindemiatrix.fe5209cd",
+        "line": "talk_mother_aubrine_ford_parley",
+        "speaker": "mother_aubrine",
+        "preset": "Vindemiatrix",
+        "text": "The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+        "renderText": "The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+        "delivery": null
+      }
+    ]
+  }
+}
