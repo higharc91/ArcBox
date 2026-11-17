@@ -1,0 +1,55 @@
+{
+  "batch": "issue342_2026_11_17_job02-umbriel-algieba",
+  "source": "job02-umbriel-algieba.wav",
+  "sourceSha256": "72c05daabb0ca0edc140b9f5e7dc21941910c6f01d02a7adfd8e65c4ea8b63da",
+  "durationSeconds": 42.44,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Umbriel.e5333759",
+      "line": "ch1_four_more_choose_2",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.",
+      "start": 0.0,
+      "end": 10.699,
+      "matchedWords": "11/25",
+      "wavSha256": "6262b5ccf9ded834c5c7825eeb76fc2f9feffecd9c14b245b1df1316e5e2a2e3"
+    },
+    {
+      "raw": "Umbriel.6ea44dfa",
+      "line": "ch1_four_more_guard_1",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.",
+      "start": 10.699,
+      "end": 19.333,
+      "matchedWords": "13/17",
+      "wavSha256": "3b32a66fe9f83c85bfdd7e5a617b2033f733a876f7df6c10778563dc639ceedc"
+    },
+    {
+      "raw": "Umbriel.eab2ecb2",
+      "line": "ch1_four_more_bargain_1",
+      "speaker": "rook",
+      "preset": "Umbriel",
+      "text": "Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+      "start": 21.933,
+      "end": 32.533,
+      "matchedWords": "16/23",
+      "wavSha256": "74d5d4326537dc8dfc33bc8a4a937d567b0d087f0306ce99178b9b7427d30d64",
+      "trimmed": "a <long pause> tag spoken aloud cut off at the nearest silence"
+    },
+    {
+      "raw": "Algieba.0cc846ac",
+      "line": "ch1_four_more_bargain_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.",
+      "start": 34.732,
+      "end": 42.44,
+      "matchedWords": "12/20",
+      "wavSha256": "ad79add17792481d682f5385bd63cca9022bf6f0d4d6ae42e8a5380083ec26ea"
+    }
+  ]
+}

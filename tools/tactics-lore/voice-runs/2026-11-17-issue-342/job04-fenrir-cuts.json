@@ -1,0 +1,21 @@
+{
+  "batch": "issue342_2026_11_17_job04-fenrir",
+  "source": "job04-fenrir.wav",
+  "sourceSha256": "6b4853a28b915d27267564f698cfa868bef2bffc2331cd2b874efbd3e98a252a",
+  "durationSeconds": 8.8,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Fenrir.7a2cdd45",
+      "line": "town_guard_guarded",
+      "speaker": "townsfolk_guard",
+      "preset": "Fenrir",
+      "text": "Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+      "start": 0.0,
+      "end": 8.8,
+      "matchedWords": "12/15",
+      "wavSha256": "a3ca831ce38a6c9f95444ddb821bcae53ce34a8f4f93552766ec00c177417646"
+    }
+  ]
+}

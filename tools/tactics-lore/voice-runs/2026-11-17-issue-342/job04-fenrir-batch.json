@@ -1,0 +1,25 @@
+{
+  "request": {
+    "id": "issue342_2026_11_17_job04-fenrir",
+    "issues": [
+      "#342",
+      "#211"
+    ],
+    "voice": "Fenrir",
+    "text": "<restrained, ashamed but loyal military voice Mood: sad.> Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+    "segments": [
+      {
+        "raw": "Fenrir.7a2cdd45",
+        "line": "town_guard_guarded",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: sad.> Pier duty. Stand by the river, don't touch the glow. Coldest posting in the Vale.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "sad"
+        }
+      }
+    ]
+  }
+}

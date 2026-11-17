@@ -1388,6 +1388,58 @@
       ]
     },
     {
+      "id": "ch5_ford_ember_guarded",
+      "beat": "ch5_the_last_vote",
+      "title": "The Ford's Ember",
+      "requires": [
+        "ch1_ember_guarded"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_ford_ember_guarded_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Far away, the river at the ford boils once and goes still. A light crosses the sky, and the ford's ember drops into the hall to join its sisters."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_ford_ember_bargained",
+      "beat": "ch5_the_last_vote",
+      "title": "What Rook Left",
+      "requires": [
+        "ch1_ember_bargained"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_ford_ember_bargained_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Far away, the river at the ford boils once. What Rook left of its ember crosses the sky, smaller than a fist, and drops into the hall to join its sisters."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
       "id": "ch5_last_vote",
       "beat": "ch5_the_last_vote",
       "title": "The Last Vote",

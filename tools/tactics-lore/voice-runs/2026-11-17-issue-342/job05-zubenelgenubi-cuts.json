@@ -1,0 +1,21 @@
+{
+  "batch": "issue342_2026_11_17_job05-zubenelgenubi",
+  "source": "job05-zubenelgenubi.wav",
+  "sourceSha256": "f4ffd093ea419720915dfb2b39d644c855b09eb8fa57922121b333288c5330d2",
+  "durationSeconds": 7.08,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Zubenelgenubi.bc6fdd85",
+      "line": "town_merchant_bargained",
+      "speaker": "townsfolk_merchant",
+      "preset": "Zubenelgenubi",
+      "text": "Shards for next to nothing. Next to nothing! Ash Market's practically giving them away. Makes me nervous.",
+      "start": 0.0,
+      "end": 7.08,
+      "matchedWords": "13/17",
+      "wavSha256": "c961a5b8d33470dc59d0d87cd1cbd0274bc5d477edd89512b98d21c31f5cb6e8"
+    }
+  ]
+}

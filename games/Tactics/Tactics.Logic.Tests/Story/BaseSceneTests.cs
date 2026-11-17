@@ -23,7 +23,7 @@ public sealed class BaseSceneTests
         Assert.Equal(15, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
         Assert.Equal(["ch1_ford", "ch1_parley"], Book.ScenesOf("ch1_the_ford_choice").Select(s => s.Id));
         Assert.Equal([1, 2, 3, 4, 5], Book.Scenes.Where(s => s.Beat is not null).Select(ChapterOf).Distinct());
-        Assert.Equal(80, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
+        Assert.Equal(82, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
         Assert.Equal(5, Book.Scenes.Count(s => s.Camp));
     }
 
@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(1052, lines.Count);
+        Assert.Equal(1066, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);
@@ -124,7 +124,7 @@ public sealed class BaseSceneTests
     public void Every_beat_has_a_scene_on_each_branch()
     {
         var branches = Campaign.Branches(Book).ToList();
-        Assert.Equal(2 * 3 * 2 * 2 * 2 * 3, branches.Count);
+        Assert.Equal(2 * 3 * 2 * 2 * 2 * 3 * 3, branches.Count);  // the last factor is Chapter I's ember vote (#211)
         var silent = new SortedSet<string>(StringComparer.Ordinal);
         foreach (var branch in branches)
             foreach (var step in branch)

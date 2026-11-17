@@ -7,7 +7,7 @@
       "title": "The Ashen Ford",
       "levels": [1, 2],
       "sceneFlags": ["ch1_halden_suspected", "ch1_grain_split_delayed", "ch1_vorga_warned", "ch1_maud_tracks_found", "ch1_halden_ledger_read", "ch1_celandine_favour", "ch1_skarrow_song_clue"],
-      "summary": "The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling.",
+      "summary": "The Skarrow goblins hold the ford bridge and Emberwick will starve without the road east. The party decides whether the goblins are enemies or neighbours, and learns that the warm ground under the town is cooling. The chapter ends with the party deciding who keeps the ford's ember.",
       "beats": [
         {
           "id": "ch1_mayors_request",
@@ -65,10 +65,15 @@
         },
         {
           "id": "ch1_the_ember",
-          "kind": "story",
+          "kind": "choice",
           "place": "river_docks",
-          "summary": "Under the docks, the party finds the ford's ember in the riverbed, dim as a coal. The Ash Market has been chipping shards off it. A Kindled preacher named Maren Sorrel arrives in town offering to save it. The Stranger tells the party there are four more, that the next lies in Mirewood, and that this one will keep better near its sisters. The party takes the ford's ember with them: from here on, the party carries every ember it takes.",
-          "sets": ["ch1_ember_found"]
+          "summary": "Under the docks, the party finds the ford's ember in the riverbed, dim as a coal. The Ash Market has been chipping shards off it. A Kindled preacher named Maren Sorrel arrives in town offering to save it. The Stranger tells the party there are four more, that the next lies in Mirewood, and that this one will keep better near its sisters. The party votes on the ember, the warmth Emberwick lives on: carry it to its sisters, leave it under Dagna's guard, or let Rook ration it to the town. From here on, the party carries every ember it takes.",
+          "sets": ["ch1_ember_found"],
+          "choices": [
+            { "id": "ch1_take_ember", "label": "We take it with us.", "summary": "The party carries the ember away. Its warmth goes with it: the dockside fields frost over that night.", "sets": ["ch1_ember_taken"] },
+            { "id": "ch1_guard_ember", "label": "Leave it here, under Dagna's guard.", "summary": "The ember stays in the riverbed for Emberwick's sake, with two of Dagna's guards freezing on the pier.", "sets": ["ch1_ember_guarded"] },
+            { "id": "ch1_bargain_ember", "label": "Let Rook ration it to the town.", "summary": "Rook chips the ember slowly and sells the shards cheap. The town keeps warm, and forgets a little faster.", "sets": ["ch1_ember_bargained"] }
+          ]
         }
       ]
     },

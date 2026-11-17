@@ -1519,6 +1519,24 @@
     "ch1_ford_why_pass_2": {
       "main": "ch1_ford_why_pass_2.9cb5a78c.ogg"
     },
+    "ch1_four_more_bargain_1": {
+      "main": "ch1_four_more_bargain_1.0f53691f.ogg"
+    },
+    "ch1_four_more_bargain_2": {
+      "main": "ch1_four_more_bargain_2.bd67fb4a.ogg"
+    },
+    "ch1_four_more_choose_1": {
+      "main": "ch1_four_more_choose_1.3e229555.ogg"
+    },
+    "ch1_four_more_choose_2": {
+      "main": "ch1_four_more_choose_2.8eed0c7b.ogg"
+    },
+    "ch1_four_more_guard_1": {
+      "main": "ch1_four_more_guard_1.43532ba4.ogg"
+    },
+    "ch1_four_more_guard_2": {
+      "main": "ch1_four_more_guard_2.649135c8.ogg"
+    },
     "ch1_four_more_open_1": {
       "main": "ch1_four_more_open_1.69b16b57.ogg"
     },
@@ -1541,7 +1559,7 @@
       "main": "ch1_four_more_where_2.f93db736.ogg"
     },
     "ch1_four_more_where_3": {
-      "main": "ch1_four_more_where_3.17166954.ogg"
+      "main": "ch1_four_more_where_3.1c94b58d.ogg"
     },
     "ch1_four_more_where_4": {
       "main": "ch1_four_more_where_4.7125d168.ogg"
@@ -1957,6 +1975,12 @@
     "ch1_young_ones_open_5": {
       "main": "ch1_young_ones_open_5.f5514a10.ogg"
     },
+    "ch2_bree_bargained_1": {
+      "main": "ch2_bree_bargained_1.9638fc4b.ogg"
+    },
+    "ch2_bree_bargained_2": {
+      "main": "ch2_bree_bargained_2.ab578d24.ogg"
+    },
     "ch2_bree_book_1": {
       "main": "ch2_bree_book_1.85eabeef.ogg"
     },
@@ -1983,6 +2007,12 @@
     },
     "ch2_bree_close_2": {
       "main": "ch2_bree_close_2.d7c830ea.ogg"
+    },
+    "ch2_bree_guarded_1": {
+      "main": "ch2_bree_guarded_1.bb3f5586.ogg"
+    },
+    "ch2_bree_guarded_2": {
+      "main": "ch2_bree_guarded_2.168441af.ogg"
     },
     "ch2_bree_halden_1": {
       "main": "ch2_bree_halden_1.077ee0da.ogg"
@@ -2025,6 +2055,12 @@
     },
     "ch2_bree_putout_2": {
       "main": "ch2_bree_putout_2.d5ee3f65.ogg"
+    },
+    "ch2_bree_taken_1": {
+      "main": "ch2_bree_taken_1.00481c66.ogg"
+    },
+    "ch2_bree_taken_2": {
+      "main": "ch2_bree_taken_2.59d1ffaf.ogg"
     },
     "ch2_bree_tricked_1": {
       "main": "ch2_bree_tricked_1.c9669480.ogg"
@@ -3499,6 +3535,12 @@
     "ch5_epilogue_returned_wall_2": {
       "main": "ch5_epilogue_returned_wall_2.e0e066ca.ogg"
     },
+    "ch5_ford_ember_bargained_open_1": {
+      "main": "ch5_ford_ember_bargained_open_1.b24b5e19.ogg"
+    },
+    "ch5_ford_ember_guarded_open_1": {
+      "main": "ch5_ford_ember_guarded_open_1.01169555.ogg"
+    },
     "ch5_last_vote_extinguish_1": {
       "main": "ch5_last_vote_extinguish_1.74d0936f.ogg"
     },
@@ -4264,6 +4306,9 @@
     "town_barmaid_3": {
       "main": "town_barmaid_3.eadaabc4.ogg"
     },
+    "town_barmaid_bargained": {
+      "main": "town_barmaid_bargained.4cbe09e7.ogg"
+    },
     "town_barmaid_confessed": {
       "main": "town_barmaid_confessed.bce858ea.ogg"
     },
@@ -4354,6 +4399,9 @@
     "town_fisher_force": {
       "main": "town_fisher_force.4c84bd73.ogg"
     },
+    "town_fisher_guarded": {
+      "main": "town_fisher_guarded.e3fdce1c.ogg"
+    },
     "town_fisher_parley": {
       "main": "town_fisher_parley.abbc8af3.ogg"
     },
@@ -4402,6 +4450,9 @@
     "town_guard_force": {
       "main": "town_guard_force.c8d6e45d.ogg"
     },
+    "town_guard_guarded": {
+      "main": "town_guard_guarded.46b88530.ogg"
+    },
     "town_guard_parley": {
       "main": "town_guard_parley.0486bad1.ogg"
     },
@@ -4419,6 +4470,9 @@
     },
     "town_merchant_5": {
       "main": "town_merchant_5.45d009a6.ogg"
+    },
+    "town_merchant_bargained": {
+      "main": "town_merchant_bargained.03e4ec1a.ogg"
     },
     "town_merchant_ember": {
       "main": "town_merchant_ember.a76f3c04.ogg"
