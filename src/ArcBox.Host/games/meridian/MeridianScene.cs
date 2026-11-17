@@ -112,7 +112,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             _rules = pack.Rules;
             var tiles = pack.StartTiles.Concat(pack.Tiles).GroupBy(t => t.Id.Value).ToDictionary(g => g.Key, g => g.First().Name);
             var crew = pack.Crew.GroupBy(c => c.Name).ToDictionary(g => g.Key, g => g.First().Id.Value);
-            var art = MeridianArt.Load(root);
+            var art = MeridianArt.Load(root, pack);
             foreach (var problem in art.Problems)
             {
                 GD.PushWarning($"Meridian art: {problem}; drawing a placeholder");

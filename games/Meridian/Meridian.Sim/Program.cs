@@ -5,9 +5,10 @@ using Meridian.Sim;
 
 // dotnet run --project games/Meridian/Meridian.Sim -- explore [--games N] [--players 3-6] [--seed S]
 //     [--threshold T] [--faces 0,0,1,1,1,2] [--content path]
-if (args.Length == 0 || args[0] is not ("explore" or "endgame"))
+// dotnet run --project games/Meridian/Meridian.Sim -- art [--content path] [--art path]   (tools/meridian-assets/check)
+if (args.Length == 0 || args[0] is not ("explore" or "endgame" or "art"))
 {
-    Console.Error.WriteLine("Usage: Meridian.Sim explore|endgame [--games N] [--players 3-6] [--seed S] [--threshold T] [--faces a,b,...] [--scenario id|all] [--content path]");
+    Console.Error.WriteLine("Usage: Meridian.Sim explore|endgame|art [--games N] [--players 3-6] [--seed S] [--threshold T] [--faces a,b,...] [--scenario id|all] [--content path] [--art path]");
     return 2;
 }
 
@@ -18,6 +19,15 @@ for (var i = 1; i + 1 < args.Length; i += 2)
 }
 
 var content = options.GetValueOrDefault("content") ?? FindContent();
+
+if (args[0] == "art")
+{
+    // The art contract's check (M5 plan, Task 1): the rules from --content, the art from --art (default: the same pack).
+    var artRules = PackLoader.Load(PhysicalFileSource.Instance, content);
+    var check = Meridian.Presentation.Art.ArtCheck.Run(options.GetValueOrDefault("art") ?? content, artRules);
+    Console.WriteLine(check.Report());
+    return check.Errors.Any() ? 1 : 0;
+}
 var pack = PackLoader.Load(PhysicalFileSource.Instance, content);
 var rules = pack.Rules;
 if (options.TryGetValue("threshold", out var threshold))

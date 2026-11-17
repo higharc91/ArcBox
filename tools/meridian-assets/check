@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# The Meridian art contract's check (#331; M5 plan, Task 1): every art set's manifest against the rules content and the
+# contract (ids, files, sha256, frame sizes, strips, 9-slice insets, deck variants), then each set's coverage.
+#
+#   tools/meridian-assets/check                     the repository's pack
+#   tools/meridian-assets/check --art <pack dir>    another folder's art (an art branch's content/meridian/base) against
+#                                                   this checkout's rules
+#
+# Exits 1 when anything is an error. An error leaves its entry out on the TV, which draws its placeholder instead.
+set -euo pipefail
+ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
+exec dotnet run --project "$ROOT/games/Meridian/Meridian.Sim" -c Release -- art --content "$ROOT/content/meridian/base" "$@"
