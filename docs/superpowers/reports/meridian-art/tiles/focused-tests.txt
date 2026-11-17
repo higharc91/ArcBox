@@ -1,3 +1,5 @@
+Verbose focused run before the final name-drift assertion. Final source was verified by the full gate: 21 Meridian checks passed in 19.185s; see full-check.txt.gz and validation.json.
+
 test_crew_frames_fit_the_feet_anchor_and_walk_moves_both_legs (test_build.ContractTests.test_crew_frames_fit_the_feet_anchor_and_walk_moves_both_legs) ... ok
 test_existing_hash_named_file_cannot_be_overwritten (test_build.ContractTests.test_existing_hash_named_file_cannot_be_overwritten) ... ok
 test_hatch_shapes_are_distinct_and_only_occupy_north_edge (test_build.ContractTests.test_hatch_shapes_are_distinct_and_only_occupy_north_edge) ... ok

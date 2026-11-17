@@ -36,6 +36,16 @@ Real Chromium at 320×844, 390×844 and 1920×1080 loads all 464 images with no 
 
 Native Godot OpenGL captures all three 1080p concept boards. The existing unsupported V-Sync warning is retained; no script/runtime errors occurred. Capture, simulation and compressed-preview review results are recorded in `native-check.json`. These are native image-display checks; Meridian's actual Godot TV scene is still outside this art branch. No physical-TV, measured human recognition or gameplay integration test is claimed.
 
-The full repository gate is being run before final PR status is recorded. CI remains manually disabled. No gameplay, balance, existing Tactics art/voice, paid generation or separate combat-VFX workflow changes. Generation spend: 0 CU.
+Full `bash tools/check-all.sh --full`: .NET 7,727/7,739 passed, 12 failures exactly matching the recorded main baseline, zero skipped and zero build warnings. Phone 601 tests and production build pass (two existing upstream SignalR annotation warnings); Node 24, Python 117 (61 assets + 9 audio + 21 Meridian + 26 lore), lore and documentation drift pass. Overall exit 1 blocks merge. Source/run provenance and the complete compressed log are retained in `validation.json` / `full-check.txt.gz`. CI remains manually disabled. No gameplay, balance, existing Tactics art/voice, paid generation or separate combat-VFX workflow changes. Generation spend: 0 CU.
 
 Room names remain live UI text from the content data. The asset manifest retains the exact rule name, and the audit rejects name drift. No names are painted into the room PNGs; the focus-panel mock demonstrates a separate label. The existing M2 phone map on #316 already renders `room.name` and accessible move labels. Final Godot HUD labels belong to M4/UI integration.
+
+## Review links
+
+[Six featured rooms](featured-tv.png) · [All variants](all-compartments-tv.png) · [Previous samples / larger TV features](room-tv-comparison.png) · [All hatch frames](motion-frames-tv.png) · [Opening](opening-preview.gif) · [Sealing](sealing-preview.gif)
+
+Actual-size 1080p room sheets, colour beside greyscale + crew: [1](tv-readability-1.png), [2](tv-readability-2.png), [3](tv-readability-3.png), [4](tv-readability-4.png).
+
+Native deck concept captures: [Command](native-command.png), [Habitat](native-habitat.png), [Engineering](native-engineering.png). Every native image was pixel-compared with its source. Both actual CVD simulations and all three JPEG stream proxies were visually inspected; room silhouettes, shape-coded symbols, labelled focus panel and numbered crew markers remain present. Accent hues converge, so these limited screenshot checks are not human recognition measurements.
+
+Final coverage was rechecked against current #316 head `16dc31eced20a4331393e2991304c596f6a946a0`; its tile JSON is byte-identical to the pinned reference. All 48 IDs / 57 deck variants pass the live-data audit.
