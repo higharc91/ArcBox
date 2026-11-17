@@ -1,4 +1,4 @@
-> Status: approved 2026-11-17; in progress on branch `ccr-de425e76-4vxzw2`. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: complete (2026-11-17). Tasks 1–11 are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (#373–#383); see [Implementation notes](#implementation-notes) for where the code differs from this plan. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M4 TV Scene Implementation Plan
 
@@ -127,9 +127,9 @@ docs/superpowers/reports/meridian-tv/            screenshots per phase, at 1280�
 - **Boundary test:** a reflection or Roslyn check over `ArcBox.Host`'s `Games.Meridian` namespace. It may use `Meridian.Game`'s view records, `Meridian.Presentation`, and from `Meridian.Logic` only the content records and `PackLoader`.
 - **The skeleton scene** shows the banner and the seat strip as text. It is enough for the shell to pick the game and draw something, which proves the wiring.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): presentation project and the TV scene skeleton`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): presentation project and the TV scene skeleton`.
 
 ### Task 2: What the TV needs from the server
 
@@ -160,9 +160,9 @@ Tests:
 - The host-view budgets with `Wait`, awards and a long announcement.
 - Regenerated fixtures, and the dev board's tests for the waiting banner.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): reading-time fallbacks, waiting banner, announcements and round warnings`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): reading-time fallbacks, waiting banner, announcements and round warnings`.
 
 ### Task 3: Deck layout and camera framing
 
@@ -188,9 +188,9 @@ Tests:
 
 Tests: review focus 5 (framing a deck holding only its landing) and review focus 6 (four rotations of every tile in the pack against `HatchesAt`).
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): deck layout and framing`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): deck layout and framing`.
 
 ### Task 4: Beats and the presented signal
 
@@ -219,9 +219,9 @@ Tests:
 - A repeated view is a no-op.
 - A view with `Now` null clears the queue.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): beats and the presented signal`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): beats and the presented signal`.
 
 ### Task 5: Tiller
 
@@ -248,9 +248,9 @@ Tests:
 - The voice is registered once and merges with configuration (as `VoiceThemeTests` does for REDLINE).
 - The speaking-time estimate matches Task 2's reading time.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): Tiller, the ship's computer`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): Tiller, the ship's computer`.
 
 ### Task 6: The board in Godot
 
@@ -278,9 +278,9 @@ Tests:
 - Review focus 6 for art: the rotated hatch overlay's bounds match the side.
 - A Godot run in Task 10 covers the drawing itself.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): the ship on the TV`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): the ship on the TV`.
 
 ### Task 7: HUD, card panel and dice tray
 
@@ -297,9 +297,9 @@ Tests:
 
 Tests: `HudModel` for each phase from the contract-test sessions, and that it carries nothing the host view doesn't (it is a projection, not a source).
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): the TV's HUD, card panel and dice tray`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): the TV's HUD, card panel and dice tray`.
 
 ### Task 8: The Breach sequence and the Debrief
 
@@ -325,9 +325,9 @@ Tests: `HudModel` for each phase from the contract-test sessions, and that it ca
 
 Tests: the sequence's steps and signal points against fake time; the Debrief model from each scenario's last host view.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): the Breach sequence and the Debrief on the TV`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): the Breach sequence and the Debrief on the TV`.
 
 ### Task 9: Wiring, and a demo mode
 
@@ -352,9 +352,9 @@ Tests: the sequence's steps and signal points against fake time; the Debrief mod
   - The demo feeder answers the scene's signals.
 - **`--shots`** works with the demo, so Task 10 can capture every phase.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): TV wiring and the demo mode`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): TV wiring and the demo mode`.
 
 ### Task 10: Screenshots and a readability review
 
@@ -364,8 +364,8 @@ Tests: the sequence's steps and signal points against fake time; the Debrief mod
 - **Measure:** frame times over the demo. No frame may exceed 100 ms on this software renderer (see Global constraints).
 - **Review:** an index page with the shots side by side, and notes against the readability rules (text sizes, colour plus initial). Fix what fails before committing.
 
-- [ ] **Step 1: Capture; review against the rules; fix.**
-- [ ] **Step 2: Commit** `docs(meridian): TV screenshots and readability review`.
+- [x] **Step 1: Capture; review against the rules; fix.**
+- [x] **Step 2: Commit** `docs(meridian): TV screenshots and readability review`.
 
 ### Task 11: End to end with the real TV
 
@@ -384,9 +384,9 @@ Tests: the sequence's steps and signal points against fake time; the Debrief mod
 - **Checklist:** the first real game night (a full game on the TV with real phones), the TV killed during the Breach, a slow-TV check, and one remote player watching over Discord (spec §7.2).
 - Run `bash tools/check-all.sh --full`. Expect only the Tactics failures already on `main`, unless they've been fixed by then.
 
-- [ ] **Step 1: Extend the script; run every scenario, and the reconnect run.**
-- [ ] **Step 2: Update the docs and checklist; run the full gate.**
-- [ ] **Step 3: Commit** `test(meridian): the TV end to end`.
+- [x] **Step 1: Extend the script; run every scenario, and the reconnect run.**
+- [x] **Step 2: Update the docs and checklist; run the full gate.**
+- [x] **Step 3: Commit** `test(meridian): the TV end to end`.
 
 ---
 
