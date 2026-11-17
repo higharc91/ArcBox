@@ -19,7 +19,7 @@ public abstract class ChapterOne
 
     /// <summary>The scenes each branch plays, in order, and the battle between them.</summary>
     protected static readonly string[] ByForce =
-        ["ch1_mayor", "ch1_ford", "ch1_dawn", "fight:ch1_ford_assault", "ch1_bridge_cost", TacticsGame.LootVoteId, "ch1_maud", "ch1_docks", "ch1_kindler", "ch1_four_more"];
+        ["ch1_mayor", "ch1_ford", "ch1_dawn", "fight:ch1_ford_assault", "ch1_bridge_cost", TacticsGame.LootVoteId, "ch1_maud", "ch1_council_force", "ch1_burial", "ch1_docks", "ch1_kindler", "ch1_four_more"];
 
     protected static readonly string[] ByParley =
     [
@@ -494,7 +494,7 @@ public sealed class ChapterOneSkippedAssaultTests : ChapterOne
     public void Chapter_1_plays_by_force_with_the_assault_done()
     {
         var play = Played(new Play(branch: "force", seed: new TacticsSeed([], ["ch1_ford_assault"])),
-            ["ch1_mayor", "ch1_ford", "ch1_maud", "ch1_docks", "ch1_kindler", "ch1_four_more"]);
+            ["ch1_mayor", "ch1_ford", "ch1_maud", "ch1_council_force", "ch1_burial", "ch1_docks", "ch1_kindler", "ch1_four_more"]);
 
         Assert.Empty(play.Fights);
         Assert.Contains("ch1_skarrow_slain", play.World.Flags);
