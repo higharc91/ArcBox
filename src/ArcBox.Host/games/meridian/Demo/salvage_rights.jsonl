@@ -105,7 +105,7 @@
 {"phase":"briefing","banner":"Read your briefing","seats":{"$keyed":"id","$set":{"p3":{"active":false}}},"now":null,"ready":0}
 {"phase":"endgame","banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":true}}},"$delete":["ready"]}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c25"}}}}
-{"now":{"seq":44,"kind":"fight","seat":"p3","title":"A fight","text":"4 against 3: hit.","seconds":1.5,"faces":[],"compartment":null},"scenario":{"tokens":[{"id":"prize","kind":"prize","carrier":"p3"}]}}
+{"now":{"seq":44,"kind":"fight","seat":"p3","title":"Player3 attacks Player2","text":"4 against 3: hit.","seconds":1.5,"faces":[],"compartment":null},"scenario":{"tokens":[{"id":"prize","kind":"prize","carrier":"p3"}]}}
 {"now":null}
 {}
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":5,"scenario":{"roundsLeft":9}}
@@ -113,21 +113,21 @@
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c10"}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
-{"now":{"seq":45,"kind":"fight","seat":"p2","title":"A fight","text":"3 against 2: hit.","seconds":1.5,"faces":[],"compartment":null},"scenario":{"tokens":[{"id":"prize","kind":"prize","carrier":"p2"}]}}
+{"now":{"seq":45,"kind":"fight","seat":"p2","title":"Player2 attacks Player3","text":"3 against 2: hit.","seconds":1.5,"faces":[],"compartment":null},"scenario":{"tokens":[{"id":"prize","kind":"prize","carrier":"p2"}]}}
 {"now":null}
 {}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c2"}}}}
 {"log":["Player4 found the Service Corridor.","Player4 found the Gymnasium.","Player4 drew Someone Was Here.","Player4: Whoever it was, you\u0027re ready.","Player2 found the Sealed Alcove.","Player2 drew Stopped Watch.","The Breach.","Player2 used Med Kit."]}
 {"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c2"}}}}
-{"now":{"seq":46,"kind":"fight","seat":"p3","title":"A fight","text":"2 against 2: tie.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":46,"kind":"fight","seat":"p3","title":"Player3 attacks Player2","text":"2 against 2: tie.","seconds":1.5,"faces":[],"compartment":null}}
 {"now":null}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":6,"scenario":{"roundsLeft":8}}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c6"}}}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c2"}}}}
-{"now":{"seq":47,"kind":"fight","seat":"p1","title":"A fight","text":"4 against 4: tie.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":47,"kind":"fight","seat":"p1","title":"Player1 attacks Player2","text":"4 against 4: tie.","seconds":1.5,"faces":[],"compartment":null}}
 {"now":null}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c3"}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}

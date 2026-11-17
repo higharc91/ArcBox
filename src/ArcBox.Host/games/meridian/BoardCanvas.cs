@@ -56,12 +56,22 @@ public partial class BoardCanvas : Node2D
             {
                 (_from, _to, _ease) = (_cam, target, 0);
             }
+            var easing = _ease < 1;
             _ease = Math.Min(1, _ease + delta / DeckLayout.EaseSeconds);
             var t = _ease * _ease * (3 - 2 * _ease);   // smoothstep
             _cam = (Lerp(_from.X, _to.X, t), Lerp(_from.Y, _to.Y, t), Lerp(_from.Cell, _to.Cell, t));
+            // Redraw only when something moves: a new view, the camera easing, or a reveal dropping in. A software
+            // renderer (and a cheap TV box) can't afford hundreds of shapes and labels every frame for nothing.
+            if (!ReferenceEquals(view, _drawn) || easing || _director.Current is { Kind: "reveal" } || _size != _drawnSize)
+            {
+                (_drawn, _drawnSize) = (view, _size);
+                QueueRedraw();
+            }
         }
-        QueueRedraw();
     }
+
+    private MeridianHostView? _drawn;
+    private TvSize _drawnSize;
 
     private static double Lerp(double a, double b, double t) => a + (b - a) * t;
 
@@ -182,8 +192,12 @@ public partial class BoardCanvas : Node2D
                 var m = members[i];
                 // Big enough for the initial at a readable size; up to six share a compartment in two rows of three.
                 var r = names ? Math.Max(13f, cell * 0.15f) : Math.Max(3f, cell * 0.14f);
-                // With the name in the tile, crew stand in its lower half so they don't cover it.
-                var below = names && DeckLayout.NamesInside((int)Math.Round(cell)) ? cell * 0.24f : 0;
+                if (members.Count > 3)
+                {
+                    r *= 0.8f;   // two rows must still fit the tile
+                }
+                // With the name in the tile (two lines at most), crew stand in its lower third so they don't cover it.
+                var below = names && DeckLayout.NamesInside((int)Math.Round(cell)) ? cell * 0.3f : 0;
                 var at = c + new Vector2((i % 3 - 1) * r * 1.9f, (i / 3) * r * 1.9f - (members.Count > 3 ? r : 0) + below);
                 DrawCrew(view, m, at, r, cell, names);
             }
@@ -240,7 +254,7 @@ public partial class BoardCanvas : Node2D
         {
             var glyph = BoardStyle.Symbol(symbol);
             var r = Math.Max(3f, cell * 0.09f);
-            var at = c + new Vector2(half - r * 1.6f, -half + r * 1.6f);
+            var at = c + new Vector2(half - r * 1.6f, half - r * 1.6f);   // bottom right, clear of the name
             DrawCircle(at, r, new Color(glyph.Colour, alpha));
             if (names)
             {
@@ -249,9 +263,18 @@ public partial class BoardCanvas : Node2D
         }
         if (names && DeckLayout.NamesInside((int)Math.Round(cell)))
         {
+            // The label minimum, unless a single word is wider than the tile (Containment): then a little smaller, never
+            // below 18 px, rather than cut letters off.
+            var name = _tileName(tile.Tile);
+            var room = cell - 10;
             var size = (int)Math.Max(DeckLayout.LabelPx, cell * 0.17f);
-            DrawMultilineString(ArcTheme.SemiBold, c + new Vector2(-half * 0.86f, -half * 0.36f), _tileName(tile.Tile),
-                                HorizontalAlignment.Center, cell * 0.86f, size, 2, new Color(1, 1, 1, 0.92f * alpha));
+            var widest = name.Split(' ').Max(word => ArcTheme.SemiBold.GetStringSize(word, HorizontalAlignment.Left, -1, size).X);
+            if (widest > room)
+            {
+                size = Math.Max(18, (int)(size * room / widest));
+            }
+            DrawMultilineString(ArcTheme.SemiBold, c + new Vector2(-room / 2, -half * 0.36f), name,
+                                HorizontalAlignment.Center, room, size, 2, new Color(1, 1, 1, 0.92f * alpha));
         }
         if (tile.Lit)
         {

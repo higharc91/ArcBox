@@ -19,11 +19,18 @@ public partial class Starfield : Node2D
         }
     }
 
+    private double _sinceDraw = 1;
+
     public override void _Process(double delta)
     {
         _time += delta;
         _size = GetViewportRect().Size;
-        QueueRedraw();
+        _sinceDraw += delta;
+        if (_sinceDraw >= 0.1)   // a slow drift needs no more than ten frames a second
+        {
+            _sinceDraw = 0;
+            QueueRedraw();
+        }
     }
 
     public override void _Draw()

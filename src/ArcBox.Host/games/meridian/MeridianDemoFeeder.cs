@@ -47,8 +47,17 @@ public partial class MeridianDemoFeeder : Node
         }
     }
 
+    // Frame times, after the first few seconds (shader warm-up), for the M4 plan's frame budget (Task 10).
+    private readonly List<double> _frames = [];
+    private double _clock;
+
     public override void _Process(double delta)
     {
+        _clock += delta;
+        if (_clock > 3 && _next < _views.Count)
+        {
+            _frames.Add(delta);
+        }
         if (_next >= _views.Count)
         {
             return;
@@ -73,6 +82,12 @@ public partial class MeridianDemoFeeder : Node
         if (_next == _views.Count)
         {
             GD.Print("DEMO meridian: the end");
+            if (_frames.Count > 0)
+            {
+                var sorted = _frames.Order().ToList();
+                GD.Print(FormattableString.Invariant(
+                    $"DEMO frames {sorted.Count}: worst {sorted[^1] * 1000:0} ms, p95 {sorted[(int)(sorted.Count * 0.95)] * 1000:0} ms, median {sorted[sorted.Count / 2] * 1000:0} ms"));
+            }
         }
     }
 }

@@ -16,7 +16,16 @@ public partial class DebriefCanvas : Node2D
 
     public void Use(Director director) => _director = director;
 
-    public override void _Process(double delta) => QueueRedraw();
+    private object? _drawn;
+
+    public override void _Process(double delta)
+    {
+        if (!ReferenceEquals(_director?.Shown, _drawn))
+        {
+            _drawn = _director?.Shown;
+            QueueRedraw();
+        }
+    }
 
     public override void _Draw()
     {

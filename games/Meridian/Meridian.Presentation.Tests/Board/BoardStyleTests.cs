@@ -42,7 +42,7 @@ public sealed class BoardStyleTests
     [Fact]
     public void Every_token_kind_the_scenarios_use_has_a_glyph_and_an_unknown_one_still_draws()
     {
-        foreach (var kind in new[] { "brood", "repair", "core", "engine", "pods", "prize" })
+        foreach (var kind in new[] { "brood", "repair", "core", "engine", "pods", "prize", "item" })
         {
             Assert.False(string.IsNullOrEmpty(BoardStyle.Token(kind).Label));
         }

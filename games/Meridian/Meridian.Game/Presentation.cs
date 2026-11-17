@@ -94,7 +94,7 @@ public sealed partial class MeridianGame
                                        Compartment: b.Breach.Compartment?.Value),
         ScenarioChosen c => Announced(seq, c),
         RoundClosed r => RoundWarning(seq, r),
-        Attacked a => new Presented(seq, "fight", Session.Game!.ActiveSeat, "A fight",
+        Attacked a => new Presented(seq, "fight", Session.Game!.ActiveSeat, $"{Fighter(a.Attacker)} attacks {Fighter(a.Defender)}",
                                     $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5),
         Died d => Read(seq, "death", d.Seat, $"{Session.SeatOf(d.Seat).Name} is dead", "They stay as an echo.", 2),
         ScenarioNotice n => Read(seq, "notice", Session.Game!.ActiveSeat, "", n.Text, 1.5) with { Compartment = n.At?.Value },
@@ -153,4 +153,18 @@ public sealed partial class MeridianGame
     }
 
     private static string Name(Trait? trait) => trait is { } t ? t.ToString() : "";
+
+    /// <summary>
+    /// Who fought, for the TV: a seat by its player's name, a monster by its kind (brood-2 is "Brood"). A fight happens in
+    /// plain view of the table, so naming its sides gives nothing away.
+    /// </summary>
+    private string Fighter(string id)
+    {
+        if (Session.Seats.FirstOrDefault(s => s.Seat.Value == id) is { } seat)
+        {
+            return seat.Name;
+        }
+        var kind = Session.Game?.Board?.Tokens.FirstOrDefault(t => t.Id == id)?.Kind ?? id;
+        return kind.Length == 0 ? id : char.ToUpperInvariant(kind[0]) + kind[1..];
+    }
 }

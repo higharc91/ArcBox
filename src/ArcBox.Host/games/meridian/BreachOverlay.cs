@@ -18,10 +18,17 @@ public partial class BreachOverlay : Node2D
 
     public void Use(Director director, Func<string, string> roomName) => (_director, _roomName) = (director, roomName);
 
+    private bool _shown;
+
     public override void _Process(double delta)
     {
         _time += delta;
-        QueueRedraw();
+        var shown = _director?.Shown is { } view && BreachSequence.Of(view, _director.Current, _director.Position) is not null;
+        if (shown || _shown)
+        {
+            QueueRedraw();   // it pulses while on screen; one more frame clears it
+        }
+        _shown = shown;
     }
 
     public override void _Draw()

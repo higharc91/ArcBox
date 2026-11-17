@@ -31,8 +31,21 @@ public partial class HudCanvas : Node2D
             (_waitFor, _waited) = (wait, 0);
         }
         _waited += delta;
-        QueueRedraw();
+        // Redraw when what the HUD says changes (the model is a record: equality is by value), or while a panel slides
+        // or dice tumble.
+        if (_director?.Shown is { } view)
+        {
+            var hud = HudModel.Of(view, _director.Current, _waited);
+            if (!hud.Equals(_drawn) || _director.Current is { Short: false } || !ReferenceEquals(view, _drawnView))
+            {
+                (_drawn, _drawnView) = (hud, view);
+                QueueRedraw();
+            }
+        }
     }
+
+    private HudModel? _drawn;
+    private object? _drawnView;
 
     public override void _Draw()
     {
@@ -133,7 +146,9 @@ public partial class HudCanvas : Node2D
         var main = areas.Main;
         var x = (float)(main.X + main.W * LogShare) + 24;
         var w = (float)(main.X + main.W) - x - 28;
-        var h = panel.Faces.Count > 0 ? 190f : 230f;
+        // Dice need their row; text takes the lines it needs, up to four.
+        var lines = Math.Clamp((int)Math.Ceiling(ArcTheme.SemiBold.GetStringSize(panel.Text, HorizontalAlignment.Left, -1, 30).X / (w - 60)), 1, 4);
+        var h = panel.Faces.Count > 0 ? 190f : (panel.Title.Length > 0 ? 100f : 50f) + lines * 46f + 24f;
         var y = (float)(main.Y + main.H) - h - 28 + slide * (h + 40);
         var accent = new Color(panel.Accent);
         DrawRect(new Rect2(x, y, w, h), new Color(0.04f, 0.04f, 0.07f, 0.94f));

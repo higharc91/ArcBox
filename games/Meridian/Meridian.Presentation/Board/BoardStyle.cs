@@ -42,6 +42,7 @@ public static class BoardStyle
         "engine" => new Glyph("E", "#ff7a3d"),
         "pods" => new Glyph("P", "#5fe08a"),
         "prize" => new Glyph("★", "#ffd447"),
+        "item" => new Glyph("+", "#5fe08a"),   // gear a dead crew member dropped, for anyone to pick up
         _ => new Glyph(kind.Length > 0 ? kind[..1].ToUpperInvariant() : "?", "#9a9aa8"),
     };
 
