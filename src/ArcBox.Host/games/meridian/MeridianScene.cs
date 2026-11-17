@@ -1,4 +1,6 @@
 using System.Text.Json;
+using ArcBox.Host.Audio;
+using ArcBox.Host.Core.Audio;
 using ArcBox.Host.Shell;
 using ArcBox.Sdk;
 using ArcBox.Sdk.Content;
@@ -7,6 +9,7 @@ using Meridian.Game;
 using Meridian.Logic;
 using Meridian.Presentation;
 using Meridian.Presentation.Art;
+using Meridian.Presentation.Audio;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Breach;
 using Meridian.Presentation.Debrief;
@@ -17,7 +20,11 @@ namespace ArcBox.Host.Games.Meridian;
 /// Derelict: ISV Meridian's TV scene (spec §5.5). It only animates: every rule and outcome is decided by the game, and
 /// every decision about what to show is made by <c>Meridian.Presentation</c>, which this scene draws (M4 plan).
 /// </summary>
-public partial class MeridianScene : Control, IGameScene, ISignalingScene, IContentScene
+/// <remarks>
+/// Not an <c>IPreloadScene</c>: the scene builds in a frame, and keeping a finished one for a rematch would mean resetting
+/// every piece of per-game state (the director, the camera, the shot marks) for no gain anyone would notice.
+/// </remarks>
+public partial class MeridianScene : Control, IGameScene, ISignalingScene, IContentScene, IAudioScene, IConnectionScene
 {
     // Made with the scene: the shell gives it content before it enters the tree (Main.ShowGame).
     private readonly BoardCanvas _board = new();
@@ -31,6 +38,67 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     public Action<string, object> Signal { private get; set; } = (_, _) => { };
 
     public void SetShots(Screenshotter? shots) => _shots = shots;
+
+    // ---- Tiller (M4 plan, Task 5): every line from the host view, so nothing secret is ever spoken.
+    private Narrator? _narrator;
+    private int _spokenSeq;
+    private (int Seq, string Text)? _speaking;
+    private HostWait? _spokenWait;
+
+    public void SetNarrator(Narrator narrator)
+    {
+        if (_narrator is not null)
+        {
+            _narrator.LineFinished -= OnLineFinished;
+        }
+        _narrator = narrator;
+        _narrator.LineFinished += OnLineFinished;
+    }
+
+    public override void _ExitTree()
+    {
+        if (_narrator is not null)
+        {
+            _narrator.LineFinished -= OnLineFinished;
+        }
+    }
+
+    /// <summary>The narrator finished a line: if it was the one for the beat on screen, the beat may move on.</summary>
+    private void OnLineFinished(string text)
+    {
+        if (_speaking is { } line && line.Text == text.Trim())
+        {
+            _director.SpeechFinished(line.Seq);
+            _speaking = null;
+        }
+    }
+
+    private void Speak()
+    {
+        if (_director.Current is { Speaks: true, Short: false } beat && beat.Seq != _spokenSeq && TillerLines.For(beat.Now) is { } line)
+        {
+            _spokenSeq = beat.Seq;
+            if (_narrator is null)
+            {
+                return;   // no narrator: the beat waits its estimate, then moves on
+            }
+            _speaking = (beat.Seq, line.Text.Trim());
+            _narrator.Say(line.Text, MeridianVoices.Tiller, line.Urgency == LineUrgency.CutIn ? NarrationPriority.Question : NarrationPriority.Commentary);
+        }
+        var wait = _director.Shown?.Wait;
+        if (wait is { Kind: "pause" } && _spokenWait is null && TillerLines.ForWait(wait) is { } paused)
+        {
+            _narrator?.Say(paused.Text, MeridianVoices.Tiller, NarrationPriority.Commentary);
+        }
+        _spokenWait = wait;
+    }
+
+    /// <summary>The connection dropped: the next view is a fresh look at the room, not news (review focus 2).</summary>
+    public void ConnectionLost()
+    {
+        _director.ConnectionLost();
+        _speaking = null;
+    }
 
     public void SetContentRoots(IReadOnlyDictionary<string, string> rootsByPackId)
     {
@@ -76,6 +144,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     public override void _Process(double delta)
     {
         _director.Tick(delta);
+        Speak();
         Shoot();
     }
 

@@ -135,6 +135,18 @@ public partial class Main : Control
             AddChild(new Games.Redline.Demo.RedlineDemoFeeder(view => OnHostView(new HostViewEvent("redline", view)), _args.RedlineDemoFrom, _args.RedlineDemoWinner));
             return;
         }
+        if (_args.MeridianDemo is { } recording)
+        {
+            // Dev only: a recorded Meridian game through the normal host-view path, no server; the pack comes from the repository.
+            GD.Print("Meridian demo: no server connection");
+            ShowGame("meridian");
+            var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "meridian", "base"));
+            (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
+            var feeder = new Games.Meridian.MeridianDemoFeeder(recording, view => OnHostView(new HostViewEvent("meridian", view)));
+            if (_scene is ISignalingScene signaling) signaling.Signal = feeder.Signal;
+            AddChild(feeder);
+            return;
+        }
         if (_args.FxDemo is { } demo)
         {
             if (_shots is not null && System.Environment.GetEnvironmentVariable("ARCBOX_FX_CAPTURE") == "0") _shots.CaptureEnabled = false;
