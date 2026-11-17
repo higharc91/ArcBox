@@ -16,7 +16,8 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
     private RulesPack _pack = null!;
 
     public GameManifest Manifest { get; } = new(Id, "Derelict: ISV Meridian",
-        "Explore a silent starship, one compartment at a time. Something aboard is waiting.", MinPlayers: 3, MaxPlayers: 6);
+        "Explore a silent starship, one compartment at a time. Something aboard is waiting.", MinPlayers: 3, MaxPlayers: 6,
+        ResumesAfterRestart: true);
 
     /// <summary>The adapter's whole state. Internal so tests can read it; nothing outside the class assigns it.</summary>
     internal MeridianSession Session { get; private set; } = null!;

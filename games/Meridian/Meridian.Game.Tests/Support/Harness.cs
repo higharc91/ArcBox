@@ -13,11 +13,27 @@ internal sealed class Harness
     public RulesPack Pack => Game.Pack;
 
     /// <param name="scenario">Forces the scenario every Breach picks, as the Development setting does.</param>
-    public Harness(int players = 3, int seed = 1, string? scenario = null)
+    public Harness(int players = 3, int seed = 1, string? scenario = null) : this(players, seed, scenario, start: true)
+    {
+    }
+
+    private Harness(int players, int seed, string? scenario, bool start)
     {
         var pack = scenario is null ? BasePack.Pack : BasePack.Pack.WithForcedScenario(scenario);
         H = new GameHarness<MeridianGame>(new MeridianGame(new Lazy<RulesPack>(() => pack)), players, seed);
-        H.Start();
+        if (start)
+        {
+            H.Start();
+        }
+    }
+
+    /// <summary>A game rebuilt from a snapshot, as a room does after a restart: Restore, then Resume, every seat offline.</summary>
+    public static Harness Restored(JsonElement snapshot, int players, int seed = 1, string? scenario = null)
+    {
+        var harness = new Harness(players, seed, scenario, start: false);
+        harness.Game.Restore(snapshot);
+        harness.H.Resume(null);
+        return harness;
     }
 
     public void Send(int player, string action, object? data = null)
