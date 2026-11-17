@@ -32,6 +32,8 @@ public sealed class TestClient : IAsyncDisposable
     private readonly HubConnection _connection;
     private readonly Channel<Received> _inbox = Channel.CreateUnbounded<Received>();
     private readonly List<Received> _seen = [];
+    // Every message ever received, kept for Transcript() whatever the test has claimed.
+    private readonly List<string> _all = [];
     private bool _disposed;
 
     private TestClient(HubConnection connection)
@@ -41,7 +43,12 @@ public sealed class TestClient : IAsyncDisposable
         {
             _connection.On(method, Enumerable.Repeat(typeof(JsonElement), arity).ToArray(), (args, _) =>
             {
-                _inbox.Writer.TryWrite(new Received(method, [.. args.Cast<JsonElement>()]));
+                var received = new Received(method, [.. args.Cast<JsonElement>()]);
+                lock (_all)
+                {
+                    _all.Add($"{method} {string.Join(' ', received.Args.Select(a => a.GetRawText()))}");
+                }
+                _inbox.Writer.TryWrite(received);
                 return Task.CompletedTask;
             }, null!);
         }
@@ -132,6 +139,15 @@ public sealed class TestClient : IAsyncDisposable
     /// How many <paramref name="method"/> messages have arrived and not been taken by a WaitFor. Messages on one
     /// connection arrive in order, so after waiting for a later message this counts everything sent before it.
     /// </summary>
+    /// <summary>Every server→client message this client has received, one per line, as raw JSON.</summary>
+    public string Transcript()
+    {
+        lock (_all)
+        {
+            return string.Join('\n', _all);
+        }
+    }
+
     public int Unclaimed(string method)
     {
         while (_inbox.Reader.TryRead(out var r))

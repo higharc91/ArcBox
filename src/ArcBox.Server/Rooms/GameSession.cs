@@ -39,8 +39,10 @@ public sealed class GameSession : IDisposable
         int seed,
         Action<Action> postToRoom,
         ILogger logger,
-        ICampaignLease? campaign = null)
+        ICampaignLease? campaign = null,
+        Action<JsonElement>? saveSnapshot = null)
     {
+        _saveSnapshot = saveSnapshot;
         _game = game;
         _campaign = campaign;
         _players = players;
@@ -51,6 +53,9 @@ public sealed class GameSession : IDisposable
         GameId = game.Manifest.Id;
         _context = new SessionGameContext(this, time, seed);
     }
+
+    // Where an ISnapshotGame's snapshots go (the room's GameStateStore); null keeps none.
+    private readonly Action<JsonElement>? _saveSnapshot;
 
     public string GameId { get; }
     public bool IsOver { get; private set; }
@@ -280,6 +285,11 @@ public sealed class GameSession : IDisposable
         try
         {
             action();
+            // An ISnapshotGame is asked after every guarded call; a throw here is a crash like any other.
+            if (!IsOver && _saveSnapshot is not null && _game is ISnapshotGame snapshots && snapshots.TakeSnapshot() is { } snapshot)
+            {
+                _saveSnapshot(snapshot);
+            }
         }
         catch (Exception ex)
         {

@@ -68,6 +68,7 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
             services.RemoveAllKeyed<TimeProvider>(RoomManager.ClockKey);
             services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, Time);
             services.AddArcGame<ThrowerGame>();
+            services.AddArcGame<TallyGame>();
             services.AddArcGame<LedgerGame>();
             services.AddArcGame(_ => new LedgerGame(LedgerGame.Plain));
             services.AddCampaignRules<LedgerRules>();

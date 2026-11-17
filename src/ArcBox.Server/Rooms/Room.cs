@@ -35,6 +35,7 @@ public sealed partial class Room
     private readonly CampaignService _campaigns;
     private readonly CampaignRulesRegistry _rules;
     private readonly RoomStore _store;
+    private readonly RoomServices _services;
     private readonly ContentPackRegistry _content;
     private readonly DateTimeOffset _createdUtc;
 
@@ -72,6 +73,7 @@ public sealed partial class Room
         _hostTokenHash = hostTokenHash;
         _createdUtc = createdUtc;
         _store = services.Store;
+        _services = services;
         _content = services.Content;
         _registry = services.Registry;
         _sender = services.Sender;
@@ -459,7 +461,7 @@ public sealed partial class Room
         // Ahead of the first HostView, so the TV can show its loading card before the game.
         SendContentRequired();
 
-        _session = new GameSession(game, Players(), _time, Random.Shared.Next(), Enqueue, _logger, lease);
+        _session = new GameSession(game, Players(), _time, Random.Shared.Next(), Enqueue, _logger, lease, SnapshotSink(game));
         _session.TimerFired += Publish;
 
         _status = RoomStatus.InGame;
@@ -666,6 +668,7 @@ public sealed partial class Room
 
     private void EndGame(GameResults results)
     {
+        _services.GameStates?.Delete(Code);   // an ended game is never resumed
         _session?.Dispose();
         _session = null;
         _status = RoomStatus.Lobby;

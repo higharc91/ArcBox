@@ -38,8 +38,10 @@ builder.Services.AddSingleton(sp => new RoomServices(
     sp.GetRequiredService<CampaignService>(),
     sp.GetRequiredService<CampaignRulesRegistry>(),
     sp.GetRequiredService<RoomStore>(),
-    sp.GetRequiredService<ContentPackRegistry>()));
+    sp.GetRequiredService<ContentPackRegistry>(),
+    sp.GetRequiredService<GameStateStore>()));
 builder.Services.AddSingleton<RoomStore>();
+builder.Services.AddSingleton<GameStateStore>();
 builder.Services.AddSingleton<RoomManager>();
 builder.Services.AddSingleton<IClientSender, HubClientSender>();
 builder.Services.AddSingleton<IGameRegistry, GameRegistry>();
