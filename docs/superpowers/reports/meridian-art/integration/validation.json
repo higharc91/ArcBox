@@ -1,0 +1,68 @@
+{
+  "frozenSource": "6e8a518e10a3282ff9452e3dbb76a0e34663ffbd",
+  "executionWorktree": "/workspace/ArcBox-art",
+  "command": "bash tools/check-all.sh --full via run-full-serial.sh",
+  "testModuleParallelism": 1,
+  "exitCode": 0,
+  "allGroupsPassed": true,
+  "dotnet": {
+    "passed": 7743,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "buildErrors": 0
+  },
+  "phone": {
+    "passed": 601,
+    "productionBuild": true,
+    "buildWarnings": 0
+  },
+  "node": {
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0
+  },
+  "python": {
+    "passed": 142,
+    "groups": {
+      "tacticsAssets": 61,
+      "audio": 9,
+      "meridian": 46,
+      "lore": 26
+    },
+    "meridianGroups": {
+      "style": 8,
+      "compartments": 13,
+      "crew": 14,
+      "cards": 11
+    }
+  },
+  "loreAndDocs": true,
+  "testsSkippedOrWeakened": false,
+  "ciRemainsManuallyDisabled": true,
+  "sourceTrees": {
+    "games": "b7e310520927d7d92f3c8be58da4c7641b271ee5",
+    "src": "908ba9779af2bc0762688d531c7ad56bfb2dc288",
+    "web": "7527b6300582c04bacdebe39a6553f5c49c8500f",
+    "tools": "eb2a4ff47dad48d9558a6bf24f26dc8949736e18",
+    "content": "b4ed6606d5d675b5f04cbf4bed585bdd33ecfac6",
+    ".github": "cf41138df44b67f757342ae3aaa04cdc1e3e0b14"
+  },
+  "fullLogSha256": "96d9d36e7c19872381eb6255ed38f6360d93cc13500e249d92b029243ff0e7e0",
+  "finalEvidenceCommitChangesDocsOnly": true,
+  "gameContractHead": "93d5b3353d6f4f4c1cb23eda5fda0bd06003efd3",
+  "gameCheckerErrors": 0,
+  "gameCheckerWarnings": 0,
+  "gameCheckerBuildWarnings": 0,
+  "reviewImageCommit": "17abf0b9b48a0c775cef98b1afbb7a1c852c3c04",
+  "reviewImageBytesUnchanged": true,
+  "nativeOrBrowserScreenshotsAreGameplayTests": false,
+  "paidGenerationCU": 0,
+  "runtimeConsumerFollowup": [
+    "crew facings/direction/pose and echo paths differ from current CrewFrames animation/side lookup",
+    "portrait neutral/hurt/echo/crewCard entries need explicit TV/phone selection; current consumers expect a flat file",
+    "supplemental oneWay shaft overlay and hatch clips need consumer selection"
+  ],
+  "gamePullRequest": 316,
+  "gamePullRequestMerged": false
+}

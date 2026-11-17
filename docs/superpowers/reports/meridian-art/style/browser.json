@@ -1,0 +1,49 @@
+[
+  {
+    "width": 320,
+    "images": 70,
+    "overflow": false,
+    "animation": "none",
+    "scales": [
+      1,
+      2
+    ],
+    "scaledImagesChecked": 64,
+    "errors": [],
+    "reducedMotion": true,
+    "pauseControlPresent": true
+  },
+  {
+    "width": 390,
+    "images": 70,
+    "overflow": false,
+    "animation": "none",
+    "scales": [
+      1,
+      2
+    ],
+    "scaledImagesChecked": 64,
+    "errors": [],
+    "reducedMotion": true,
+    "pauseControlPresent": true
+  },
+  {
+    "width": 1920,
+    "images": 70,
+    "overflow": false,
+    "animation": "none",
+    "scales": [
+      1,
+      2
+    ],
+    "scaledImagesChecked": 64,
+    "errors": [],
+    "reducedMotion": true,
+    "pauseControlPresent": true
+  },
+  {
+    "width": 1920,
+    "normalMotionStarts": true,
+    "pauseStopsAnimation": true
+  }
+]

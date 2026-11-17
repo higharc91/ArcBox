@@ -1,0 +1,1490 @@
+{
+  "version": 2,
+  "status": "awaiting-set-review",
+  "issue": 332,
+  "rulesReference": {
+    "pr": 316,
+    "head": "ff3175af859733bf8b02c0ff2afa43d0113e1c66",
+    "sha256": "e68456723e2d4f1d409e9deb638f97f83233e25acd40ae86db525e440873f1eb"
+  },
+  "styleApproval": "Owner approved refined #331 samples in conversation on 2026-11-17; continued quality refinement and appropriate animation requested.",
+  "tiles": {
+    "airlock": {
+      "name": "Airlock",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "airlock-habitat.e3200fdc0038.png",
+          "sha256": "e3200fdc00386a4a4f3b7d65fbbc166fcd7ef40c0c95ed3aaf30b2046921d596"
+        }
+      },
+      "hatches": [
+        "n"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "docking_ring": {
+      "name": "Docking Ring",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "docking_ring-habitat.84adc025ddd2.png",
+          "sha256": "84adc025ddd2dab689f15a86d4244bd9e436e2a7bea29a72764efaeac78e6d14"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "central_lift": {
+      "name": "Central Lift",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "central_lift-habitat.d331d4067fa6.png",
+          "sha256": "d331d4067fa6284dd743b01002ed1a87d2eed7f2d7fe7544d966fbbfd69667cd"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "command_landing": {
+      "name": "Command Lift Landing",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "command_landing-command.e5a7f83e0c51.png",
+          "sha256": "e5a7f83e0c51e10cdea7be46a44503c9399cdd6ac743244ef3eeead8b4666d53"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "engineering_landing": {
+      "name": "Engineering Lift Landing",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "engineering_landing-engineering.3e9457803215.png",
+          "sha256": "3e94578032151b71e6661e2628daf5c05146e499b8321745cc07a70d949b007d"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "bridge": {
+      "name": "Bridge",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "bridge-command.d30ec377007e.png",
+          "sha256": "d30ec377007e574f18daf5eeb258fef71df2988b570d674b5d81f27931fc28a9"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "captains_quarters": {
+      "name": "Captain's Quarters",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "captains_quarters-command.13f89ded359a.png",
+          "sha256": "13f89ded359a74a91d2ba93f18679f8a1887e1ed2b9c33238c71ccda914a6479"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "navigation": {
+      "name": "Navigation",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "navigation-command.b78b9b5cc0eb.png",
+          "sha256": "b78b9b5cc0eb5aa65a983435500563adf47150948fbe42b5e09edf7c008fbc74"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "comms_array": {
+      "name": "Comms Array",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "comms_array-command.126a60a70b6a.png",
+          "sha256": "126a60a70b6a43603361ac6b7155354b1797884d19751dbd327f67786294b387"
+        }
+      },
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "observation_dome": {
+      "name": "Observation Dome",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "observation_dome-command.98eb14468a05.png",
+          "sha256": "98eb14468a0595c7604fb955f4fa34f74c8a383350816308cc91c31b4fcb56c5"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "officers_mess": {
+      "name": "Officers' Mess",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "officers_mess-command.7ccc84fa93fe.png",
+          "sha256": "7ccc84fa93fefd3debe8a76f6b6112226db00d4435c5c179454ed8d424019376"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "chart_room": {
+      "name": "Chart Room",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "chart_room-command.f86f55247620.png",
+          "sha256": "f86f55247620e0c301c6232817353e0969d91b8679b8f2b643f81e39f634d4a7"
+        }
+      },
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "armory": {
+      "name": "Armory",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "armory-command.c8e33902a929.png",
+          "sha256": "c8e33902a92976ff30597cc843b419d4a622c0b3e6b0fe185c0afcaf911c0fc6"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "briefing_room": {
+      "name": "Briefing Room",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "briefing_room-command.673704476705.png",
+          "sha256": "673704476705d4ad474027947a80be57c539e6e8f18d5a6c443cefaf5c61c480"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "sensor_suite": {
+      "name": "Sensor Suite",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "sensor_suite-command.68af4e88b9a4.png",
+          "sha256": "68af4e88b9a42c133c50f9f6b7b8a32789d1dae7cdb977f9f651073d785b6518"
+        }
+      },
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "escape_pod_bay": {
+      "name": "Escape Pod Bay",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "escape_pod_bay-command.acafa08f8f0f.png",
+          "sha256": "acafa08f8f0fb8176400ee05a1ba8fd74246ece8f1f5521b60703bc0c353ead0"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "galley": {
+      "name": "Galley",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "galley-habitat.ff3b9394ed22.png",
+          "sha256": "ff3b9394ed22c619966f7af9d57d7fa416d1e4e3507a9dc4f643f3d7c3e593ce"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "mess_hall": {
+      "name": "Mess Hall",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "mess_hall-habitat.d839db6c224a.png",
+          "sha256": "d839db6c224afcc5ffb0ba4b9fbfeefea16ed8c3ef5ffa3db752422f7e2e7c8c"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "crew_bunks": {
+      "name": "Crew Bunks",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "crew_bunks-habitat.dd379240a929.png",
+          "sha256": "dd379240a92941e6bbdbfc934337f1790ccf4e92c9bc07144ee10229b43db156"
+        }
+      },
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "med_bay": {
+      "name": "Med Bay",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "med_bay-habitat.0fcffbea7487.png",
+          "sha256": "0fcffbea748726d31dbcaaf10d0ec66fa8de7af12a9caf88fa8b4c0f1e739d12"
+        }
+      },
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": null,
+      "rule": {
+        "kind": "heal",
+        "traits": "physical",
+        "steps": 1
+      },
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "quiet_room": {
+      "name": "Quiet Room",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "quiet_room-habitat.a0eff4dc54d5.png",
+          "sha256": "a0eff4dc54d5930d7cecc0d88513f2def589f8a6621a1a2a2e75f3ee51626ac2"
+        }
+      },
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": {
+        "kind": "heal",
+        "traits": "mental",
+        "steps": 1
+      },
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "hydroponics": {
+      "name": "Hydroponics",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "hydroponics-habitat.19552f6e01c4.png",
+          "sha256": "19552f6e01c4bb97c07c22a7f77bbe5129174e0ea969707bc97ef3681b147813"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "laundry": {
+      "name": "Laundry",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "laundry-habitat.ff5cdb587aee.png",
+          "sha256": "ff5cdb587aeede29dc00e3a53b72b0e2132f816bb33c7f390db434c3ad9c7814"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "gymnasium": {
+      "name": "Gymnasium",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "gymnasium-habitat.88a735409816.png",
+          "sha256": "88a73540981620bdfbba06866f15448d2ca7cc79f6e3e4e7afa949d75880ea09"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "chapel": {
+      "name": "Chapel",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "chapel-habitat.99a7689c9b38.png",
+          "sha256": "99a7689c9b387afd13605589507a5b219ba599b782fb7a8654a4da84ef476c0c"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "cryo_bay": {
+      "name": "Cryo Bay",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "cryo_bay-habitat.fcef7b90261a.png",
+          "sha256": "fcef7b90261a5e984347a9e3ea89647ce862e1c9f17d182e914b6b019ee9fc59"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "suit_lockers": {
+      "name": "Suit Lockers",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "suit_lockers-habitat.f3bb66bbe084.png",
+          "sha256": "f3bb66bbe084e8bb9cd5747b259672c7e58cf0168adcda1df5025f3b30a45bae"
+        }
+      },
+      "hatches": [
+        "e",
+        "w"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "recreation_deck": {
+      "name": "Recreation Deck",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "recreation_deck-habitat.303e62203c8d.png",
+          "sha256": "303e62203c8dc23fd07b9e511158ff0f3eda7260188e7e9e735ae74ccdb3e381"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "isolation_ward": {
+      "name": "Isolation Ward",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "isolation_ward-habitat.fb98b89b5072.png",
+          "sha256": "fb98b89b5072ba3cd0bdf49138e7d0bc084aacb9b2a2a69c1f96490f27d61d29"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "archive": {
+      "name": "Archive",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "archive-habitat.a1182471795e.png",
+          "sha256": "a1182471795e917661d8859c8252e951011176a6fb78dc00c75afe99bf7e7f3e"
+        }
+      },
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "reactor_core": {
+      "name": "Reactor Core",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "reactor_core-engineering.bbe6d7efae67.png",
+          "sha256": "bbe6d7efae67dc3cfdad0df6f249708ad36ecec55f8c149ad60de423678dc0ea"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "engine_room": {
+      "name": "Engine Room",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "engine_room-engineering.eeea8c9c7b09.png",
+          "sha256": "eeea8c9c7b09045b0215440292cb74d50d6a914478eb7914faba725cf965a1de"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "coolant_pumps": {
+      "name": "Coolant Pumps",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "coolant_pumps-engineering.c4c5e8096b61.png",
+          "sha256": "c4c5e8096b61dd61eb155928b2bcefc7d298c4b2984506e33c88f88ed66c5ecf"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "machine_shop": {
+      "name": "Machine Shop",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "machine_shop-engineering.9b9e10d30745.png",
+          "sha256": "9b9e10d307457ae821b1ae56dc0a01420a6fa6f928be25283ab1035e5f4c3cbd"
+        }
+      },
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "cargo_hold": {
+      "name": "Cargo Hold",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "cargo_hold-engineering.8119b11a5f16.png",
+          "sha256": "8119b11a5f16c3c2738f836e4a02fe8f51fa22f055e96be75e2fd08c5cb84e15"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "waste_reclamation": {
+      "name": "Waste Reclamation",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "waste_reclamation-engineering.ef3a69b877f9.png",
+          "sha256": "ef3a69b877f9ec0e2786093bbe72a6e985ff8bf492c941a94155134adaaef9c8"
+        }
+      },
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "power_relay": {
+      "name": "Power Relay",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "power_relay-engineering.68aed043b64b.png",
+          "sha256": "68aed043b64b8362a27bca7fff1184c2f009af68e27c9f4b84c23f19eeb0619d"
+        }
+      },
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "drone_bay": {
+      "name": "Drone Bay",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "drone_bay-engineering.ae6d69451498.png",
+          "sha256": "ae6d6945149864f11445167303c28e57e1cd53b0c69c7e35068c78295debea19"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "crawlspace": {
+      "name": "Crawlspace",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "crawlspace-engineering.0d429e27f859.png",
+          "sha256": "0d429e27f859265af8292089467731a64d5e5daa6442d60d4223acff1b513314"
+        }
+      },
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "fuel_tanks": {
+      "name": "Fuel Tanks",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "fuel_tanks-engineering.ea3ee8b0c4ff.png",
+          "sha256": "ea3ee8b0c4ffc19bb2866ce79d04758e242a9dd0543348f37026a0e83b71d9c0"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "chiefs_office": {
+      "name": "Chief Engineer's Office",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "chiefs_office-engineering.e9672482b998.png",
+          "sha256": "e9672482b998ceb5461f423383160885b838b4824864569e2b7b349db26cb850"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "containment_lab": {
+      "name": "Containment Lab",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "engineering": {
+          "file": "containment_lab-engineering.1d3110f3dbb9.png",
+          "sha256": "1d3110f3dbb92d8554cb3615288eaf40c2e09f013a0d82e3c2f4365cd2a5993a"
+        }
+      },
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "service_corridor": {
+      "name": "Service Corridor",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "service_corridor-command.bcdd85fcc6ae.png",
+          "sha256": "bcdd85fcc6aeab8732e3e2fbb523edde78322dfaf1f079fb1fb4e1e7e537c946"
+        },
+        "habitat": {
+          "file": "service_corridor-habitat.64ffcedf68fb.png",
+          "sha256": "64ffcedf68fb60394906a759671f24c97e28380d1e52e38dd5f56570d925141b"
+        },
+        "engineering": {
+          "file": "service_corridor-engineering.fb25ff99bdc1.png",
+          "sha256": "fb25ff99bdc1aa26a08bd0ce5f466e36bc91b2a4ce0a5ff68795fc8882e7f68b"
+        }
+      },
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "junction": {
+      "name": "Junction",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "junction-command.276c536f0779.png",
+          "sha256": "276c536f07796a8b6909499c4c8e5b134b0f3967457b5eb2e2b3638857d56fed"
+        },
+        "habitat": {
+          "file": "junction-habitat.b0791494e686.png",
+          "sha256": "b0791494e686fc24d754abd3ced7e7fb5323b771aed446d0532865710f820635"
+        },
+        "engineering": {
+          "file": "junction-engineering.09221aea5884.png",
+          "sha256": "09221aea58844c6d3a81b7eafda0473f8d6ed21af3cee4a21c3778166ffe088d"
+        }
+      },
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": null,
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "maintenance_shaft": {
+      "name": "Maintenance Shaft",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "maintenance_shaft-command.5674b2460f06.png",
+          "sha256": "5674b2460f060bd2f2ccedc4a6ad148d844c93a00716035cd77ab5ecce1200dc"
+        },
+        "habitat": {
+          "file": "maintenance_shaft-habitat.2f9dd568bfe2.png",
+          "sha256": "2f9dd568bfe2225e218d35139bc6fa1e63fc9ec925834d8b030f5543cd7ed01d"
+        }
+      },
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": null,
+      "rule": {
+        "kind": "dropTo",
+        "deck": "engineering"
+      },
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "storage_closet": {
+      "name": "Storage Closet",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "habitat": {
+          "file": "storage_closet-habitat.dfd473b0c70f.png",
+          "sha256": "dfd473b0c70f6a68bd6b53f5436be6f757520abd1de728269950295cc70cebc6"
+        },
+        "engineering": {
+          "file": "storage_closet-engineering.4ea2cf2f9b5d.png",
+          "sha256": "4ea2cf2f9b5d1a4073024098e1d3e0a5c3a2b67033c61dde70d4b8c9d1dd4b73"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "vent_hub": {
+      "name": "Vent Hub",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "vent_hub-command.931be94a3934.png",
+          "sha256": "931be94a3934bdda3198217c105028d92be7579d6ab739387f25de614fd31f3e"
+        },
+        "engineering": {
+          "file": "vent_hub-engineering.9211b1bf9c22.png",
+          "sha256": "9211b1bf9c2214e3f29a1d0dcbb8b7200d992417226aee82ab9abc5c4110cdb2"
+        }
+      },
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    },
+    "sealed_alcove": {
+      "name": "Sealed Alcove",
+      "frameSize": [
+        64,
+        64
+      ],
+      "variants": {
+        "command": {
+          "file": "sealed_alcove-command.d0606b5d4e74.png",
+          "sha256": "d0606b5d4e7412e41e574d5c52d24f834e7474a22e71dc5f61201a8178051f98"
+        },
+        "habitat": {
+          "file": "sealed_alcove-habitat.b6292decc47a.png",
+          "sha256": "b6292decc47a73e75ad2c3c8b4a6794293771d55342dd1c576eccf18d4bed856"
+        },
+        "engineering": {
+          "file": "sealed_alcove-engineering.efa2fc754b73.png",
+          "sha256": "efa2fc754b731fdf70d0580e70508c20c8421b69be3dce3df6bb825c45b56a81"
+        }
+      },
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly",
+      "rule": null,
+      "rotationDegrees": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "doorway": [
+        24,
+        39
+      ]
+    }
+  },
+  "backgrounds": {
+    "command": {
+      "file": "background-command.d0c08d35ab42.png",
+      "sha256": "d0c08d35ab42a52c38e2c2dc50b774417d8629a01be5d8b5edfbdede281fcf5d"
+    },
+    "habitat": {
+      "file": "background-habitat.fba1ed1b10ca.png",
+      "sha256": "fba1ed1b10ca8638a7db21392c32145aa3131892d72b6538cd2795d8ed623b67"
+    },
+    "engineering": {
+      "file": "background-engineering.f73f514100c8.png",
+      "sha256": "f73f514100c8d7c98aae871f9e4057d649c73d64263d1e9a9a13e54333f6cacb"
+    }
+  },
+  "unexplored": {
+    "file": "unexplored.87e4cd665715.png",
+    "sha256": "87e4cd6657151af5d0d8fe73d83a676255272dbe6435806323910ee850610fd8"
+  }
+}

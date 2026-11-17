@@ -1,0 +1,41 @@
+[
+  {
+    "deck": "command",
+    "nativePixelsMatch": true,
+    "size": [
+      1920,
+      1080
+    ],
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55, 4:2:0; not a Discord/human playtest"
+  },
+  {
+    "deck": "habitat",
+    "nativePixelsMatch": true,
+    "size": [
+      1920,
+      1080
+    ],
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55, 4:2:0; not a Discord/human playtest"
+  },
+  {
+    "deck": "engineering",
+    "nativePixelsMatch": true,
+    "size": [
+      1920,
+      1080
+    ],
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55, 4:2:0; not a Discord/human playtest"
+  }
+]

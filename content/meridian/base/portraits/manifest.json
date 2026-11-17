@@ -1,0 +1,364 @@
+{
+  "version": 2,
+  "issue": 333,
+  "status": "awaiting-set-review",
+  "rulesReference": {
+    "pr": 316,
+    "head": "1d770a7312e28d99c62fcfb7ebcd5bf398a758e9",
+    "sha256": "0fb6d8b91244a7f880018a0cfa223abc559fa2c4ec82bfe59838f1648859d7f2"
+  },
+  "portraits": {
+    "ines_okafor": {
+      "name": "Ines Okafor",
+      "role": "Salvage Chief",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "ines_okafor-neutral.fa580f82b71a.png",
+        "sha256": "fa580f82b71a9b3d59cd385c39a1687bd8ff4bda9cbb7f159e1983f7197594f8",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "ines_okafor-hurt.cf67eebcf4ea.png",
+        "sha256": "cf67eebcf4ea4d9363d65924939e4b2a5743b56759aa01ab95386715c760c6ef",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "ines_okafor-echo.758926aff177.png",
+        "sha256": "758926aff177ab0fd568072cfc022b05ae811075753eafdcea9af9cde04eb7bc",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "ines_okafor-crew-card.afc39caf290c.png",
+        "sha256": "afc39caf290cec6515f52eacd9b2e9091009458289c2ac0563012a9d34943462",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "tobe_raske": {
+      "name": "Tobe Raske",
+      "role": "Rigger",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "tobe_raske-neutral.c6f8df2c3b6f.png",
+        "sha256": "c6f8df2c3b6fc61b1b1652d7fa892cf77d8902e7ae910b711baf3aa97e5912fa",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "tobe_raske-hurt.a37a6eb4cecf.png",
+        "sha256": "a37a6eb4cecfcf2db864651f56ad9fb0a2565ecaca1bcf2e6ecd7e1328c61a19",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "tobe_raske-echo.2547cbd3ebd4.png",
+        "sha256": "2547cbd3ebd47357c3ebdf61bc1d3630a082ca664bdfa2ad5c200cc70224eedb",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "tobe_raske-crew-card.fe075d09b218.png",
+        "sha256": "fe075d09b218c1d24bd439c3d7b75b87b9d734dd056f4dbada8438a41f500dc3",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "sable_quist": {
+      "name": "Sable Quist",
+      "role": "Pilot",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "sable_quist-neutral.18ed862d5636.png",
+        "sha256": "18ed862d56369633f73fa701a52c9ddb9b0f93ba868c60de7f624d07b6f4d2c7",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "sable_quist-hurt.b29865815281.png",
+        "sha256": "b298658152813bfa9d23454bec020114c41a8b37111b508c7d90455e944975d2",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "sable_quist-echo.ebba68522a1b.png",
+        "sha256": "ebba68522a1bebbd319fb7a3aa558e11bbde0907a3a95cbb27a5ed483cdead91",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "sable_quist-crew-card.d7d0bd4f06df.png",
+        "sha256": "d7d0bd4f06dfd7e404ee346606296863b73efbe41a4a47ca98da41d36d53ae0f",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "anselm_varga": {
+      "name": "Dr. Anselm Varga",
+      "role": "Medic",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "anselm_varga-neutral.27be601d0060.png",
+        "sha256": "27be601d0060861c390c372c5bb3c65c8294fdbe445d7899b6336c36b603b09a",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "anselm_varga-hurt.17e78e5329d8.png",
+        "sha256": "17e78e5329d8a9a90c7d970dd30b6721dfc8c70ddb1cb9a69df9205213f1da7c",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "anselm_varga-echo.33d332cb25b7.png",
+        "sha256": "33d332cb25b72e41362af5bb952b295c56eea89db8bdef6d8c08734fbaba0959",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "anselm_varga-crew-card.a8c918e08007.png",
+        "sha256": "a8c918e08007d43e92319a159f3413843e2597b6fc4403f7521cac3a6b986aef",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "pell_ostrander": {
+      "name": "Pell Ostrander",
+      "role": "Systems Tech",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "pell_ostrander-neutral.11ea06133c1f.png",
+        "sha256": "11ea06133c1f626a8de273b6654497eba0c469740da0e57bb34963d2a30bc888",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "pell_ostrander-hurt.bea6b8d7f162.png",
+        "sha256": "bea6b8d7f162c4ba7c4d01761616008d6b8d90d9e8ef8a3c6efe4332637f10e7",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "pell_ostrander-echo.965465da9b22.png",
+        "sha256": "965465da9b22320ba14f0375f974222a4aeb5c4dc751e85d5607a61267542d2c",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "pell_ostrander-crew-card.a026c91de25d.png",
+        "sha256": "a026c91de25dc436b9139149413ac98014ee622b2d84d9785960922100e3f993",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "juno_achterberg": {
+      "name": "Juno Achterberg",
+      "role": "Cargo Hauler",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "juno_achterberg-neutral.8f107caf1765.png",
+        "sha256": "8f107caf1765a9f341982511e3a5ff913bd8a3b8731d10a494167c981e7994fc",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "juno_achterberg-hurt.b0d176be6b9f.png",
+        "sha256": "b0d176be6b9f67185d82e056d156143a37587206d6587f0457d61f725fe25a58",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "juno_achterberg-echo.a9ca0cb18a9a.png",
+        "sha256": "a9ca0cb18a9a27bd445e4a3b12a49008f3a31f9100d20a49f363edbec60fd7ee",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "juno_achterberg-crew-card.ba8a63ad29d5.png",
+        "sha256": "ba8a63ad29d5ddf27d58db0592e5e4136ebd9e6bcfa965db2b794433c49320a5",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "kit_sato": {
+      "name": "Kit Sato",
+      "role": "Scout",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "kit_sato-neutral.8c8d0bbdd303.png",
+        "sha256": "8c8d0bbdd3033617ddfa99f2e714491eee64249d14b60776abdb0471398ebebb",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "kit_sato-hurt.b30ae126f2c3.png",
+        "sha256": "b30ae126f2c3f943fb7b95721ad0303d0fb01dc1d3afbc42ac0867da0a0c25c3",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "kit_sato-echo.1d4c5e3687be.png",
+        "sha256": "1d4c5e3687be1a6769d1fc6c96c68ba5c51b4c4ad9eb34345836f9f4e9d5a2ce",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "kit_sato-crew-card.f2aa6e1f0f81.png",
+        "sha256": "f2aa6e1f0f818953bb3abbebd9923214168992ac9689ff3b348b7966471d6699",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    },
+    "rhee_callender": {
+      "name": "Rhee Callender",
+      "role": "Signals Officer",
+      "bustSize": [
+        96,
+        112
+      ],
+      "crewCardSize": [
+        96,
+        160
+      ],
+      "neutral": {
+        "file": "rhee_callender-neutral.12629a1da915.png",
+        "sha256": "12629a1da9151898c97d5cf822c31a54b79668d23bd33f5809de3f40292a0c1c",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "hurt": {
+        "file": "rhee_callender-hurt.d32e5da09c64.png",
+        "sha256": "d32e5da09c646ae7619aec53d79145ad3e9b5dae3e0c79cf33bf62c8c467e967",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "echo": {
+        "file": "rhee_callender-echo.621565cd86b3.png",
+        "sha256": "621565cd86b38e7be0aa9caf75c177ec62674b497bac50bfabdc5076ff6f613c",
+        "frameSize": [
+          96,
+          112
+        ]
+      },
+      "crewCard": {
+        "file": "rhee_callender-crew-card.c0629cd9b419.png",
+        "sha256": "c0629cd9b419f3262f25f14fddc56146990c1648d1031b3b2da92c538c316326",
+        "frameSize": [
+          96,
+          160
+        ]
+      }
+    }
+  }
+}
