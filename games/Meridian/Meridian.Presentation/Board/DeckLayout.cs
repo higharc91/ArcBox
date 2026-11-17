@@ -122,6 +122,10 @@ public static class DeckLayout
     /// <summary>The smallest label on the TV, in 1080p pixels.</summary>
     public const int LabelPx = 22;
 
+    /// <summary>A fractional cell position on screen (a crew member mid-walk), for a camera over <paramref name="area"/>.</summary>
+    public static Px ToScreen(double x, double y, Camera camera, Box area)
+        => new(area.X + area.W / 2 + (x - camera.CenterX) * camera.Cell, area.Y + area.H / 2 + (y - camera.CenterY) * camera.Cell);
+
     /// <summary>The centre of <paramref name="cell"/> on screen, for a camera over <paramref name="area"/>.</summary>
     public static Px ToScreen(Cell cell, Camera camera, Box area)
         => new(area.X + area.W / 2 + (cell.X - camera.CenterX) * camera.Cell,

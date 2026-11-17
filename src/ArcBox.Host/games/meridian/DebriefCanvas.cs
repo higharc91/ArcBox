@@ -14,7 +14,11 @@ public partial class DebriefCanvas : Node2D
 {
     private Director? _director;
 
-    public void Use(Director director) => _director = director;
+    public void Use(Director director, ArtTextures textures) => (_director, _textures) = (director, textures);
+
+    private ArtTextures? _textures;
+
+    public override void _Ready() => TextureFilter = TextureFilterEnum.Nearest;
 
     private object? _drawn;
 
@@ -47,7 +51,15 @@ public partial class DebriefCanvas : Node2D
         {
             var colour = ArcTheme.PlayerColour(row.Colour);
             DrawCircle(new Vector2(x + 18, y - 9), 18, colour);
-            DrawString(ArcTheme.Black, new Vector2(x, y), row.Mark, HorizontalAlignment.Center, 36, row.Mark.Length > 1 ? 16 : 22, new Color("101018"));
+            var crewName = view.Seats.FirstOrDefault(s => s.Id == row.Seat)?.Crew;
+            if (_textures?.Portrait(crewName) is { } portrait)
+            {
+                DrawTextureRect(portrait, new Rect2(x + 2, y - 25, 32, 32), false);
+            }
+            else
+            {
+                DrawString(ArcTheme.Black, new Vector2(x, y), row.Mark, HorizontalAlignment.Center, 36, row.Mark.Length > 1 ? 16 : 22, new Color("101018"));
+            }
             DrawString(ArcTheme.SemiBold, new Vector2(x + 50, y), $"{row.Name} was {row.Role}", HorizontalAlignment.Left, w - 150, 28, Colors.White);
             if (row.Won)
             {

@@ -95,7 +95,7 @@ public sealed partial class MeridianGame
         ScenarioChosen c => Announced(seq, c),
         RoundClosed r => RoundWarning(seq, r),
         Attacked a => new Presented(seq, "fight", Session.Game!.ActiveSeat, $"{Fighter(a.Attacker)} attacks {Fighter(a.Defender)}",
-                                    $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5),
+                                    $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5, Target: a.Defender),
         Died d => Read(seq, "death", d.Seat, $"{Session.SeatOf(d.Seat).Name} is dead", "They stay as an echo.", 2),
         ScenarioNotice n => Read(seq, "notice", Session.Game!.ActiveSeat, "", n.Text, 1.5) with { Compartment = n.At?.Value },
         VoteResolved v => Read(seq, "vote", Session.Game!.ActiveSeat, "The vote",

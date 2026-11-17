@@ -11,6 +11,7 @@ using Meridian.Presentation;
 using Meridian.Presentation.Art;
 using Meridian.Presentation.Audio;
 using Meridian.Presentation.Beats;
+using Meridian.Presentation.Board;
 using Meridian.Presentation.Breach;
 using Meridian.Presentation.Debrief;
 
@@ -28,7 +29,10 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
 {
     // Made with the scene: the shell gives it content before it enters the tree (Main.ShowGame).
     private readonly BoardCanvas _board = new();
+    private readonly CrewMotion _motion = new();
+    private bool _cutCrew = true;   // the first look, and the first after a reconnect, places crew without walking
     private readonly HudCanvas _hud = new();
+    private readonly ArtTextures _textures = new();
     private readonly BreachOverlay _breach = new();
     private readonly DebriefCanvas _debrief = new();
     private Screenshotter? _shots;
@@ -98,6 +102,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     {
         _director.ConnectionLost();
         _speaking = null;
+        _cutCrew = true;
     }
 
     public void SetContentRoots(IReadOnlyDictionary<string, string> rootsByPackId)
@@ -118,6 +123,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
                 GD.PushWarning($"Meridian art: {problem}; drawing a placeholder");
             }
             _board.Use(id => tiles.GetValueOrDefault(id, id), name => crew.GetValueOrDefault(name), art);
+            _textures.Use(art, name => crew.GetValueOrDefault(name));
         }
         catch (ContentException e)
         {
@@ -135,21 +141,22 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         });
         _director.Abandoned += beat => GD.Print($"MERIDIAN abandoned {beat.Seq} {beat.Kind}");
         AddChild(new Starfield());
-        _board.Use(_director);
+        _board.Use(_director, _motion);
         AddChild(_board);
 
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);   // the starfield is the background, not the shell's backdrop
-        _hud.Use(_director);
+        _hud.Use(_director, _textures);
         AddChild(_hud);
         _breach.Use(_director, _board.RoomName);
         AddChild(_breach);
-        _debrief.Use(_director);
+        _debrief.Use(_director, _textures);
         AddChild(_debrief);
     }
 
     public override void _Process(double delta)
     {
         _director.Tick(delta);
+        _motion.Tick(delta);
         Speak();
         Shoot();
     }
@@ -219,5 +226,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             return;
         }
         _director.Receive(v);
+        _motion.Receive(v, _director.Current, _cutCrew);
+        _cutCrew = false;
     }
 }

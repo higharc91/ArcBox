@@ -1,8 +1,10 @@
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/preact";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/preact";
 import type { CustomView } from "../src/protocol";
 import { loadModule } from "../src/games/registry";
-import type { TurnData } from "../src/games/meridian/types";
+import type { CrewPickData, TurnData } from "../src/games/meridian/types";
+import { forgetPack } from "../src/games/meridian/pack";
+import crewPickFixture from "./fixtures/meridian/crewPick.json";
 import { ControllerScreen } from "../src/widgets/ControllerScreen";
 
 // Real views from a real session, written by games/Meridian/Meridian.Game.Tests/PhoneFixtureTests.cs.
@@ -12,6 +14,12 @@ const view = (name: string): CustomView => {
   if (!mod) throw new Error(`missing fixture meridian/${name}`);
   return structuredClone(mod.default) as CustomView;
 };
+// No test reaches the network: the content pack (portraits) answers "not found" unless a test serves one.
+beforeEach(() => {
+  forgetPack();
+  vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false, json: async () => null })));
+});
+
 const show = (name: string) => {
   const send = vi.fn();
   render(<ControllerScreen view={view(name)} send={send} me="Player1" game="meridian" />);
@@ -207,5 +215,30 @@ describe("meridian phone screens", () => {
     const send = show("sheet-endgame");
     fireEvent.click(screen.getByRole("tab", { name: "Briefing" }));
     expect(send).not.toHaveBeenCalled();
+  });
+});
+
+describe("meridian portraits", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    forgetPack();
+  });
+
+  it("draws a crew card without a portrait when the pack has none", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false, json: async () => null })));
+    show("crewPick");
+    await new Promise((r) => setTimeout(r, 10));
+    expect(document.querySelector(".mer-portrait")).toBeNull();
+  });
+
+  it("shows the pack's portrait on the crew card when it has one", async () => {
+    vi.stubGlobal("fetch", vi.fn(async (url: string) => ({
+      ok: true,
+      json: async () => url.endsWith("index.json")
+        ? [{ packId: "base", hash: "abc" }]
+        : { portraits: { [(crewPickFixture as unknown as { data: CrewPickData }).data.crew[0].id]: { file: "portrait.png" } } },
+    })));
+    show("crewPick");
+    await waitFor(() => expect(document.querySelector(".mer-portrait")?.getAttribute("src")).toBe("/content/meridian/base/abc/portraits/portrait.png"));
   });
 });

@@ -29,7 +29,11 @@ public partial class BoardCanvas : Node2D
     private double _ease = 1;
     private DeckId? _deck;
 
-    public void Use(Director director) => _director = director;
+    public void Use(Director director, CrewMotion motion) => (_director, _motion) = (director, motion);
+
+    // Crew walk between compartments (M5 plan, Task 3): CrewMotion says where, which way and how each one looks.
+    private CrewMotion? _motion;
+    private double _clock;
 
     /// <summary>The content pack's names and the art it has; until the pack arrives, ids and placeholders.</summary>
     public void Use(Func<string, string> tileName, Func<string, string?> crewIdByName, MeridianArt art)
@@ -62,7 +66,9 @@ public partial class BoardCanvas : Node2D
             _cam = (Lerp(_from.X, _to.X, t), Lerp(_from.Y, _to.Y, t), Lerp(_from.Cell, _to.Cell, t));
             // Redraw only when something moves: a new view, the camera easing, or a reveal dropping in. A software
             // renderer (and a cheap TV box) can't afford hundreds of shapes and labels every frame for nothing.
-            if (!ReferenceEquals(view, _drawn) || easing || _director.Current is { Kind: "reveal" } || _size != _drawnSize)
+            _clock += delta;
+            var moving = _motion?.Poses.Any(p => p.State is not CrewLook.Idle and not CrewLook.Echo) == true;
+            if (!ReferenceEquals(view, _drawn) || easing || moving || _director.Current is { Kind: "reveal" } || _size != _drawnSize)
             {
                 (_drawn, _drawnSize) = (view, _size);
                 QueueRedraw();
@@ -183,7 +189,18 @@ public partial class BoardCanvas : Node2D
                 }
             }
         }
-        foreach (var group in view.Crew.Where(m => byRoom.ContainsKey(m.At)).GroupBy(m => m.At))
+        // Crew mid-walk are drawn where they are; crew at rest share their compartment in rows, as before.
+        var poses = (_motion?.Poses ?? []).ToDictionary(p => p.Seat);
+        foreach (var marker in view.Crew)
+        {
+            if (poses.TryGetValue(marker.Id, out var walking) && walking.Walking && walking.Deck == deck)
+            {
+                var r = names ? Math.Max(13f, cell * 0.15f) : Math.Max(3f, cell * 0.14f);
+                DrawCrew(view, marker, V(DeckLayout.ToScreen(walking.X, walking.Y, cam, area)), r, cell, names, walking);
+            }
+        }
+        foreach (var group in view.Crew.Where(m => byRoom.ContainsKey(m.At) && !(poses.TryGetValue(m.Id, out var p) && p.Walking))
+                                       .GroupBy(m => m.At))
         {
             var c = V(DeckLayout.ToScreen(byRoom[group.Key].At, cam, area));
             var members = group.ToList();
@@ -199,7 +216,7 @@ public partial class BoardCanvas : Node2D
                 // With the name in the tile (two lines at most), crew stand in its lower third so they don't cover it.
                 var below = names && DeckLayout.NamesInside((int)Math.Round(cell)) ? cell * 0.3f : 0;
                 var at = c + new Vector2((i % 3 - 1) * r * 1.9f, (i / 3) * r * 1.9f - (members.Count > 3 ? r : 0) + below);
-                DrawCrew(view, m, at, r, cell, names);
+                DrawCrew(view, m, at, r, cell, names, poses.GetValueOrDefault(m.Id));
             }
         }
     }
@@ -322,24 +339,40 @@ public partial class BoardCanvas : Node2D
         DrawSetTransform(Vector2.Zero, 0, Vector2.One);
     }
 
-    private void DrawCrew(MeridianHostView view, CrewMarker marker, Vector2 at, float r, float cell, bool names)
+    private void DrawCrew(MeridianHostView view, CrewMarker marker, Vector2 at, float r, float cell, bool names, CrewPose? pose)
     {
         var colour = ArcTheme.PlayerColour(marker.Colour);
         var seat = view.Seats.FirstOrDefault(s => s.Id == marker.Id);
-        if (names && seat?.Crew is { } crewName && _crewId(crewName) is { } crewId && _art.Crew(crewId) is { } art
-            && Texture(art.Idle) is { } sprite)
+        var look = pose?.State ?? (marker.Echo ? CrewLook.Echo : CrewLook.Idle);
+        var echo = look == CrewLook.Echo ? 0.45f : 1f;   // an echo is there, but not alive
+        var mark = Mark(view, marker.Id);
+        if (names && seat?.Crew is { } crewName && _crewId(crewName) is { } crewId
+            && _art.CrewFrames(crewId, look, pose?.Facing ?? Side.S) is { } frames && Texture(frames.Path) is { } sprite)
         {
+            // The art's frame for this moment, at the tile's scale, anchored at the feet.
             var scale = cell / 64f;
-            var size = new Vector2(24, 24) * scale;
-            DrawTextureRect(sprite, new Rect2(at - new Vector2(art.AnchorX, art.AnchorY) * scale, size), false);
-            DrawCircle(at + new Vector2(0, r * 0.6f), r * 0.45f, colour);
+            var frame = frames.Fps > 0 ? (int)(_clock * frames.Fps) % frames.Frames : 0;
+            var anchor = frames.Anchor ?? [frames.FrameW / 2, frames.FrameH - 2];
+            var source = new Rect2(frame * frames.FrameW, 0, frames.FrameW, frames.FrameH);
+            var size = new Vector2(frames.FrameW, frames.FrameH) * scale;
+            DrawTextureRectRegion(sprite, new Rect2(at - new Vector2(anchor[0], anchor[1]) * scale, size), source, new Color(1, 1, 1, echo));
+            // The player's colour ring and mark stay on top of the art, so colour is never the only cue.
+            var tag = at + new Vector2(size.X * 0.45f, -size.Y * 0.2f);
+            var tr = Math.Max(10f, r * 0.7f);
+            DrawCircle(tag, tr + 1.5f, new Color("101018", echo));
+            DrawCircle(tag, tr, new Color(colour, echo));
+            DrawString(ArcTheme.Black, tag + new Vector2(-tr, tr * 0.45f), mark, HorizontalAlignment.Center, tr * 2,
+                       (int)(tr * (mark.Length > 1 ? 1.0f : 1.4f)), new Color("101018"));
             return;
         }
-        DrawCircle(at, r + Math.Max(1, r * 0.15f), new Color("101018"));
-        DrawCircle(at, r, colour);
+        DrawCircle(at, r + Math.Max(1, r * 0.15f), new Color("101018", echo));
+        DrawCircle(at, r, new Color(colour, echo));
+        if (look is CrewLook.Hurt)
+        {
+            DrawArc(at, r + 3, 0, Mathf.Tau, 24, new Color("ff3b3b"), 3);   // just hit
+        }
         if (names)
         {
-            var mark = Mark(view, marker.Id);
             DrawString(ArcTheme.Black, at + new Vector2(-r, r * 0.5f), mark, HorizontalAlignment.Center, r * 2,
                        (int)(r * (mark.Length > 1 ? 1.1f : 1.5f)), new Color("101018"));
         }

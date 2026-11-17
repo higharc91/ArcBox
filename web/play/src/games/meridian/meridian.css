@@ -62,3 +62,4 @@
 .mer-objectives .done { text-decoration: line-through; }
 .mer-wait { padding: 6px 10px; border-radius: 6px; background: var(--mer-warn); color: var(--mer-panel); font-weight: 700; }
 .mer-ready { color: var(--mer-cyan); }
+.mer-portrait { float: right; width: 72px; height: 72px; image-rendering: pixelated; border-radius: 8px; margin-left: 8px; }

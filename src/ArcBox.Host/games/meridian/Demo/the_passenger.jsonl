@@ -119,22 +119,22 @@
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c7"}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-1":{"at":"c7"}}}}}
-{"now":{"seq":48,"kind":"fight","seat":"p2","title":"Brood attacks Player1","text":"4 against 2: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":48,"kind":"fight","seat":"p2","title":"Brood attacks Player1","text":"4 against 2: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p1"}}
 {"now":null}
 {}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-2":{"at":"c7"}}}}}
-{"now":{"seq":49,"kind":"fight","seat":"p2","title":"Brood attacks Player1","text":"4 against 0: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":49,"kind":"fight","seat":"p2","title":"Brood attacks Player1","text":"4 against 0: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p1"}}
 {"now":null}
 {}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-3":{"at":"c7"}}}}}
-{"now":{"seq":50,"kind":"fight","seat":"p2","title":"Brood attacks Player1","text":"4 against 1: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":50,"kind":"fight","seat":"p2","title":"Brood attacks Player1","text":"4 against 1: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p1"}}
 {"now":null}
-{"now":{"seq":51,"kind":"death","seat":"p1","title":"Player1 is dead","text":"They stay as an echo.","seconds":5.462962962962963,"faces":[],"compartment":null},"scenario":{"tokens":[{"id":"brood-1","kind":"brood","at":"c7"},{"id":"brood-2","kind":"brood","at":"c7"},{"id":"brood-3","kind":"brood","at":"c7"},{"id":"drop-singing_wire","kind":"item","at":"c7"},{"id":"drop-warm_egg","kind":"item","at":"c7"}]}}
+{"crew":{"$keyed":"id","$set":{"p1":{"echo":true}}},"now":{"seq":51,"kind":"death","seat":"p1","title":"Player1 is dead","text":"They stay as an echo.","seconds":5.462962962962963,"faces":[],"compartment":null},"scenario":{"tokens":[{"id":"brood-1","kind":"brood","at":"c7"},{"id":"brood-2","kind":"brood","at":"c7"},{"id":"brood-3","kind":"brood","at":"c7"},{"id":"drop-singing_wire","kind":"item","at":"c7"},{"id":"drop-warm_egg","kind":"item","at":"c7"}]}}
 {"now":null}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c7"}}}}
 {"log":["Player4 drew Someone Was Here.","Player4: Whoever it was, you\u0027re ready.","Player2 found the Sealed Alcove.","Player2 drew Stopped Watch.","The Breach.","Player3 found the Archive.","Player3 drew Mag Boots.","Player2 used Stopped Watch."]}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c18"}}}}
-{"now":{"seq":52,"kind":"fight","seat":"p2","title":"Player2 attacks Player4","text":"5 against 2: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":52,"kind":"fight","seat":"p2","title":"Player2 attacks Player4","text":"5 against 2: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p4"}}
 {"now":null}
 {}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c11"}}}}
@@ -153,20 +153,20 @@
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-1":{"at":"c18"}}}}}
-{"now":{"seq":55,"kind":"fight","seat":"p2","title":"Brood attacks Player4","text":"2 against 1: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":55,"kind":"fight","seat":"p2","title":"Brood attacks Player4","text":"2 against 1: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p4"}}
 {"now":null}
 {}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-2":{"at":"c18"}}}}}
-{"now":{"seq":56,"kind":"fight","seat":"p2","title":"Brood attacks Player4","text":"3 against 1: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":56,"kind":"fight","seat":"p2","title":"Brood attacks Player4","text":"3 against 1: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p4"}}
 {"now":null}
 {}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-3":{"at":"c18"}}}}}
-{"now":{"seq":57,"kind":"fight","seat":"p2","title":"Brood attacks Player4","text":"2 against 2: tie.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":57,"kind":"fight","seat":"p2","title":"Brood attacks Player4","text":"2 against 2: tie.","seconds":1.5,"faces":[],"compartment":null,"target":"p4"}}
 {"now":null}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c18"}}}}
-{"now":{"seq":58,"kind":"fight","seat":"p2","title":"Player2 attacks Player4","text":"4 against 0: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":58,"kind":"fight","seat":"p2","title":"Player2 attacks Player4","text":"4 against 0: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p4"}}
 {"now":null}
-{"now":{"seq":59,"kind":"death","seat":"p4","title":"Player4 is dead","text":"They stay as an echo.","seconds":5.462962962962963,"faces":[],"compartment":null},"scenario":{"tokens":{"$keyed":"id","$set":{"drop-crowbar":{"id":"drop-crowbar","kind":"item","at":"c18"},"drop-calm_tabs":{"id":"drop-calm_tabs","kind":"item","at":"c18"}},"$order":["brood-1","brood-2","brood-3","drop-singing_wire","drop-warm_egg","drop-crowbar","drop-calm_tabs"]}}}
+{"crew":{"$keyed":"id","$set":{"p4":{"echo":true}}},"now":{"seq":59,"kind":"death","seat":"p4","title":"Player4 is dead","text":"They stay as an echo.","seconds":5.462962962962963,"faces":[],"compartment":null},"scenario":{"tokens":{"$keyed":"id","$set":{"drop-crowbar":{"id":"drop-crowbar","kind":"item","at":"c18"},"drop-calm_tabs":{"id":"drop-calm_tabs","kind":"item","at":"c18"}},"$order":["brood-1","brood-2","brood-3","drop-singing_wire","drop-warm_egg","drop-crowbar","drop-calm_tabs"]}}}
 {"now":null}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c7"}}}}
 {"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
@@ -174,22 +174,22 @@
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":7,"scenario":{"roundsLeft":9}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
-{"now":{"seq":60,"kind":"fight","seat":"p2","title":"Brood attacks Player3","text":"4 against 2: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":60,"kind":"fight","seat":"p2","title":"Brood attacks Player3","text":"4 against 2: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p3"}}
 {"now":null}
 {}
-{"now":{"seq":61,"kind":"fight","seat":"p2","title":"Brood attacks Player3","text":"4 against 2: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":61,"kind":"fight","seat":"p2","title":"Brood attacks Player3","text":"4 against 2: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p3"}}
 {"now":null}
 {}
-{"now":{"seq":62,"kind":"fight","seat":"p2","title":"Brood attacks Player3","text":"3 against 1: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":62,"kind":"fight","seat":"p2","title":"Brood attacks Player3","text":"3 against 1: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p3"}}
 {"now":null}
 {}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-1":{"at":"c11"}}}}}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-2":{"at":"c11"}}}}}
 {"scenario":{"tokens":{"$keyed":"id","$set":{"brood-3":{"at":"c11"}}}}}
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c18"}}}}
-{"now":{"seq":63,"kind":"fight","seat":"p2","title":"Player2 attacks Player3","text":"5 against 2: hit.","seconds":1.5,"faces":[],"compartment":null}}
+{"now":{"seq":63,"kind":"fight","seat":"p2","title":"Player2 attacks Player3","text":"5 against 2: hit.","seconds":1.5,"faces":[],"compartment":null,"target":"p3"}}
 {"now":null}
-{"now":{"seq":64,"kind":"death","seat":"p3","title":"Player3 is dead","text":"They stay as an echo.","seconds":5.462962962962963,"faces":[],"compartment":null},"scenario":{"tokens":{"$keyed":"id","$set":{"drop-childs_drawing":{"id":"drop-childs_drawing","kind":"item","at":"c18"},"drop-black_mirror":{"id":"drop-black_mirror","kind":"item","at":"c18"},"drop-mag_boots":{"id":"drop-mag_boots","kind":"item","at":"c18"}},"$order":["brood-1","brood-2","brood-3","drop-singing_wire","drop-warm_egg","drop-crowbar","drop-calm_tabs","drop-childs_drawing","drop-black_mirror","drop-mag_boots"]},"objectives":[{"id":"host","text":"Kill every crew member, or hold out until the round limit.","state":"open"},{"id":"crew","text":"Synthesize a dose in a lab (Tech 5\u002B), then inject the host.","state":"open"}],"reveal":[{"id":"p1","role":"Crew","won":false},{"id":"p2","role":"The Host","won":true},{"id":"p3","role":"Crew","won":false},{"id":"p4","role":"Crew","won":false}],"outcome":"Nobody is left to stop it. The Passenger flies the Meridian home.","awards":[{"id":"award-1","title":"Pathfinder: most compartments found","seat":"p4"},{"id":"award-2","title":"Heavy hitter: most damage dealt","seat":"p2"},{"id":"award-3","title":"Last one standing","seat":"p2"}]}}
+{"crew":{"$keyed":"id","$set":{"p3":{"echo":true}}},"now":{"seq":64,"kind":"death","seat":"p3","title":"Player3 is dead","text":"They stay as an echo.","seconds":5.462962962962963,"faces":[],"compartment":null},"scenario":{"tokens":{"$keyed":"id","$set":{"drop-childs_drawing":{"id":"drop-childs_drawing","kind":"item","at":"c18"},"drop-black_mirror":{"id":"drop-black_mirror","kind":"item","at":"c18"},"drop-mag_boots":{"id":"drop-mag_boots","kind":"item","at":"c18"}},"$order":["brood-1","brood-2","brood-3","drop-singing_wire","drop-warm_egg","drop-crowbar","drop-calm_tabs","drop-childs_drawing","drop-black_mirror","drop-mag_boots"]},"objectives":[{"id":"host","text":"Kill every crew member, or hold out until the round limit.","state":"open"},{"id":"crew","text":"Synthesize a dose in a lab (Tech 5\u002B), then inject the host.","state":"open"}],"reveal":[{"id":"p1","role":"Crew","won":false},{"id":"p2","role":"The Host","won":true},{"id":"p3","role":"Crew","won":false},{"id":"p4","role":"Crew","won":false}],"outcome":"Nobody is left to stop it. The Passenger flies the Meridian home.","awards":[{"id":"award-1","title":"Pathfinder: most compartments found","seat":"p4"},{"id":"award-2","title":"Heavy hitter: most damage dealt","seat":"p2"},{"id":"award-3","title":"Last one standing","seat":"p2"}]}}
 {"now":{"seq":65,"kind":"over","seat":"p2","title":"It\u0027s over","text":"Nobody is left to stop it. The Passenger flies the Meridian home.","seconds":7.685185185185185}}
 {"phase":"debrief","banner":"Debrief","seats":{"$keyed":"id","$set":{"p2":{"active":false}}},"now":null}
 {}

@@ -52,6 +52,28 @@ public sealed class MeridianArt
     /// <summary>A hatch overlay, drawn for the north edge. <see cref="HatchState.None"/> is a wall's overlay.</summary>
     public string? Hatch(HatchState state) => Entry($"hatches/{state.ToString().ToLowerInvariant()}")?.Path;
 
+    /// <summary>
+    /// A crew member's frames for how they look and which way they face: the facing's strip, else the animation's, else
+    /// <c>idle</c> (so a crew member without <c>hurt</c> art still draws), else none.
+    /// </summary>
+    public ArtEntry? CrewFrames(string crewId, CrewLook look, Side facing)
+    {
+        var animation = look switch
+        {
+            CrewLook.Walk => "walk",
+            CrewLook.Hurt => "hurt",
+            CrewLook.Down => "down",
+            CrewLook.Echo => "echo",
+            _ => "idle",
+        };
+        var side = facing.ToString().ToLowerInvariant();
+        return Entry($"crew/{crewId}/{animation}/{side}") ?? Entry($"crew/{crewId}/{animation}")
+               ?? Entry($"crew/{crewId}/idle/{side}") ?? Entry($"crew/{crewId}/idle");
+    }
+
+    /// <summary>A crew member's portrait, for the seat strip, the Debrief and the phones.</summary>
+    public ArtEntry? Portrait(string crewId) => Entry($"portraits/{crewId}");
+
     public CrewArt? Crew(string crewId)
     {
         if (Entry($"crew/{crewId}/idle") is not { } idle || Entry($"crew/{crewId}/walk") is not { } walk)

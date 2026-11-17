@@ -140,7 +140,7 @@ internal static class Projection
         }).ToEqArray();
         var seats = game.Session.Seats;
         var crew = state.Crew.Select(c => new CrewMarker(c.Seat.Value, game.Session.SeatOf(c.Seat).Name, c.At.Value,
-                                                         seats.IndexOf(game.Session.SeatOf(c.Seat)))).ToEqArray();
+                                                         seats.IndexOf(game.Session.SeatOf(c.Seat)), Echo: !c.Alive)).ToEqArray();
         return new MapData(compartments, crew);
     }
 

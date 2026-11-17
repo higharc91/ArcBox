@@ -19,7 +19,11 @@ public partial class HudCanvas : Node2D
     private object? _waitFor;
     private double _time;
 
-    public void Use(Director director) => _director = director;
+    public void Use(Director director, ArtTextures textures) => (_director, _textures) = (director, textures);
+
+    private ArtTextures? _textures;
+
+    public override void _Ready() => TextureFilter = TextureFilterEnum.Nearest;   // pixel-art portraits stay crisp
 
     public override void _Process(double delta)
     {
@@ -102,8 +106,17 @@ public partial class HudCanvas : Node2D
             {
                 DrawRect(chip, colour, false, 3);
             }
-            DrawCircle(new Vector2(x + 14, y), 15, colour);
-            DrawString(ArcTheme.Black, new Vector2(x - 1, y + 7), seat.Mark, HorizontalAlignment.Center, 30, seat.Mark.Length > 1 ? 16 : 20, new Color("101018"));
+            if (_textures?.Portrait(seat.Crew) is { } portrait)
+            {
+                // The crew member's portrait (#333) in a ring of the player's colour; the name beside it carries the seat.
+                DrawCircle(new Vector2(x + 14, y), 17, colour);
+                DrawTextureRect(portrait, new Rect2(x - 1, y - 15, 30, 30), false);
+            }
+            else
+            {
+                DrawCircle(new Vector2(x + 14, y), 15, colour);
+                DrawString(ArcTheme.Black, new Vector2(x - 1, y + 7), seat.Mark, HorizontalAlignment.Center, 30, seat.Mark.Length > 1 ? 16 : 20, new Color("101018"));
+            }
             DrawString(ArcTheme.SemiBold, new Vector2(x + 36, y + 8), name, HorizontalAlignment.Left, -1, 24, seat.Offline ? ArcTheme.Dim : Colors.White);
             if (tags.Length > 0)
             {

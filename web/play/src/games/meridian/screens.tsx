@@ -1,4 +1,5 @@
 import { useState } from "preact/hooks";
+import { usePackBase, usePackJson } from "./pack";
 import type { CustomScreenProps } from "../module";
 import { DeckMap } from "./DeckMap";
 import type {
@@ -37,6 +38,19 @@ function Items({ items, onUse }: { items: ItemCard[]; onUse?(id: string): void }
   );
 }
 
+interface PortraitManifest { portraits?: Record<string, { file: string }> }
+
+/**
+ * A crew member's portrait from the content pack (#333; M5 plan, Task 3), or nothing until (or unless) the pack has one:
+ * the card reads the same without it.
+ */
+export function Portrait({ crew }: { crew: string }) {
+  const base = usePackBase();
+  const manifest = usePackJson<PortraitManifest>("portraits/manifest.json");
+  const entry = manifest?.portraits?.[crew];
+  return base && entry ? <img class="mer-portrait" src={`${base}portraits/${entry.file}`} alt="" /> : null;
+}
+
 export function CrewPick({ data, send }: CustomScreenProps) {
   const d = data as CrewPickData;
   return (
@@ -45,6 +59,7 @@ export function CrewPick({ data, send }: CustomScreenProps) {
       <p class="mer-muted">{d.picked} of {d.seats} chosen</p>
       {d.crew.map((c) => (
         <section key={c.id} class={`mer-crew-card${c.mine ? " mine" : ""}${c.taken ? " taken" : ""}`}>
+          <Portrait crew={c.id} />
           <h3>{c.name} <span class="mer-muted">{c.role}</span></h3>
           <Tracks crew={c} />
           <button type="button" disabled={c.taken || c.mine} onClick={() => send("pick", { crew: c.id })}>
@@ -287,6 +302,7 @@ export function Sheet({ data }: CustomScreenProps) {
   return (
     <div class="mer mer-sheet">
       <p class="mer-muted">{d.waiting ? `Waiting on ${d.waiting}` : `${d.active}'s turn`}</p>
+      <Portrait crew={d.me.id} />
       <h2>{d.me.name} <span class="mer-muted">{d.me.role}</span></h2>
       <div class="mer-tabs" role="tablist">
         {tabs.map((t) => (

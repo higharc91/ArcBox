@@ -153,3 +153,36 @@ public sealed class ArtContractDocTests
         }
     }
 }
+
+public sealed class CrewFrameTests : IDisposable
+{
+    private readonly string _root = Directory.CreateTempSubdirectory("meridian-crew-art-").FullName;
+
+    public void Dispose() => Directory.Delete(_root, recursive: true);
+
+    private string Strip(string name, int frames)
+    {
+        var bytes = new byte[33];
+        new byte[] { 0x89, (byte)'P', (byte)'N', (byte)'G' }.CopyTo(bytes, 0);
+        System.Buffers.Binary.BinaryPrimitives.WriteInt32BigEndian(bytes.AsSpan(16), 24 * frames);
+        System.Buffers.Binary.BinaryPrimitives.WriteInt32BigEndian(bytes.AsSpan(20), 24);
+        bytes[32] = (byte)name.Length;
+        Directory.CreateDirectory(Path.Combine(_root, "crew"));
+        File.WriteAllBytes(Path.Combine(_root, "crew", name), bytes);
+        return $"\"file\": \"{name}\", \"frames\": {frames}";
+    }
+
+    [Fact]
+    public void A_facings_strip_is_preferred_and_a_missing_animation_falls_back_to_idle()
+    {
+        var idle = Strip("idle.png", 2);
+        var walkE = Strip("walk-e.png", 4);
+        var walk = Strip("walk.png", 4);
+        File.WriteAllText(Path.Combine(_root, "crew", "manifest.json"),
+            $$"""{ "crew": { "ines_okafor": { "anchor": [12, 22], "idle": { {{idle}} }, "walk": { "e": { {{walkE}} }, "any": { {{walk}} } } } } }""");
+        var art = MeridianArt.Load(_root, BasePack.Pack);
+        Assert.EndsWith("walk-e.png", art.CrewFrames("ines_okafor", CrewLook.Walk, Side.E)!.Path);
+        Assert.EndsWith("idle.png", art.CrewFrames("ines_okafor", CrewLook.Hurt, Side.N)!.Path);   // no hurt art: idle
+        Assert.Null(art.CrewFrames("kit_sato", CrewLook.Idle, Side.S));                            // no art: the disc
+    }
+}

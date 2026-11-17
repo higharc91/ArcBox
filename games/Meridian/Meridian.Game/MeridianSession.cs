@@ -104,6 +104,8 @@ public sealed record MeridianSession(
 /// Breach. <see cref="Seconds"/> is the fallback, used when the TV never says it has finished.
 /// </summary>
 /// <param name="Deck">For a card, which deck it came from: Tiller reads an Incident in full, other cards by title only.</param>
+/// <param name="Target">For a fight, who was attacked (a seat or a monster token), so the TV shows them hurt.</param>
 public sealed record Presented(int Seq, string Kind, SeatId Seat, string Title, string Text, double Seconds,
                                EqArray<int> Faces = default, string? Compartment = null,
-                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CardKind? Deck = null);
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CardKind? Deck = null,
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Target = null);

@@ -20,8 +20,9 @@ public sealed record CompartmentCard(
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EqArray<Side>? Sealed,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CardKind? Symbol);
 
-/// <summary>Where a crew member is. <see cref="Id"/> is the seat.</summary>
-public sealed record CrewMarker(string Id, string Name, string At, int Colour);
+/// <summary>Where a crew member is. <see cref="Id"/> is the seat. <see cref="Echo"/>: dead, and playing on as an echo.</summary>
+public sealed record CrewMarker(string Id, string Name, string At, int Colour,
+                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Echo = false);
 
 /// <summary>A scenario token everyone may see. A carried token has <see cref="Carrier"/> (a seat) and no <see cref="At"/>.</summary>
 public sealed record TokenCard(
