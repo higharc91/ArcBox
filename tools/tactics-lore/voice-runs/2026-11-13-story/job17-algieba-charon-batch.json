@@ -1,0 +1,42 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job17-algieba-charon",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Algieba"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Charon"
+      }
+    ],
+    "text": "A: By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.\n<long pause>\nB: Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+    "segments": [
+      {
+        "raw": "Algieba.0cc846ac",
+        "line": "ch1_four_more_bargain_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.",
+        "renderText": "By the next market day, ember shards are selling for almost nothing. Every hearth in Emberwick burns a little brighter.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.f895aab9",
+        "line": "talk_halden_varrow_ford_parley",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+        "renderText": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+        "delivery": null
+      }
+    ]
+  }
+}

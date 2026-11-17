@@ -158,7 +158,9 @@ def jobs() -> list[dict]:
             if not voices:
                 print(f"  no casting for speaker '{who}' (line {line_id})", file=sys.stderr)
         for name, v in voices:
-            preset, pitch, filt = v["preset"], v.get("pitch", 0), v.get("filter", "")
+            # linePitch overrides the cast pitch for named lines: an approved take rendered in a different register
+            # (a one-line audition reused as the line's clip) keeps the pitch it was approved at.
+            preset, pitch, filt = v["preset"], v.get("linePitch", {}).get(line_id, v.get("pitch", 0)), v.get("filter", "")
             # The raw TTS clip depends only on preset and text: speakers sharing a preset can share a render.
             style = directed.get(line_id)
             # A recast's approved delivery belongs to the speaker, including old battle barks

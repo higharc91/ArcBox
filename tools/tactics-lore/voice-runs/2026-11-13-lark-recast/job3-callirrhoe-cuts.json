@@ -1,0 +1,263 @@
+{
+  "batch": "lark_recast_2026_11_13_job3-callirrhoe",
+  "source": "job3.wav",
+  "sourceSha256": "fb12e749c842aeec3840bae09f1a7b3619b67076cb7c67645053b956c1e3337a",
+  "durationSeconds": 149.88,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Callirrhoe.e5abc0b3",
+      "line": "ch3_skarrow_messenger_honest_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Honest. I think she'll like that better than a promise.",
+      "start": 0.0,
+      "end": 3.716,
+      "matchedWords": "10/10",
+      "wavSha256": "0a2d03d162c4ac7cae44422c639ea431b0e0632bfcffee511b6156ad74e68ca0"
+    },
+    {
+      "raw": "Callirrhoe.ab6c58ba",
+      "line": "ch3_crypt_door_stair_3",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Every Warden song I know ends at a door like this. None of them say what's behind it. That ought to worry me more.",
+      "start": 3.716,
+      "end": 11.802,
+      "matchedWords": "17/24",
+      "wavSha256": "8028969bb81b1763672b435a8902e5c2b8c08156c6d2fc9b8252789700bd58b5"
+    },
+    {
+      "raw": "Callirrhoe.fb19ce01",
+      "line": "ch3_crypt_door_stone_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Lovely. I'll put that in the chorus.",
+      "start": 11.802,
+      "end": 14.804,
+      "matchedWords": "7/7",
+      "wavSha256": "656fde0e13b7dea74f56480b1d6f44bd4704c4e61eebe77c3ebcc9b493398e5e"
+    },
+    {
+      "raw": "Callirrhoe.6c9018a9",
+      "line": "ch3_crypt_door_quiet_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Somebody woke them before we got here. And somebody is still here.",
+      "start": 14.804,
+      "end": 19.451,
+      "matchedWords": "11/12",
+      "wavSha256": "9d9c55cbe23cad1b6ed9b88717c5babc9c52cca1f14291d35dfbbce8b018c4d0"
+    },
+    {
+      "raw": "Callirrhoe.7da7b822",
+      "line": "ch3_crypt_door_loud_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Ah. Well. They know we're here, then.",
+      "start": 19.451,
+      "end": 22.443,
+      "matchedWords": "6/7",
+      "wavSha256": "4d7a8dba3af6dd074a55b75b5e9d5800ba2672c257ff2b8e47b9741441a0a466"
+    },
+    {
+      "raw": "Callirrhoe.44d03b0d",
+      "line": "ch3_crypt_records_quiet_3",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Nothing has touched these. No fire at all. Do you know how rare that is in this Vale?",
+      "start": 22.443,
+      "end": 28.654,
+      "matchedWords": "14/18",
+      "wavSha256": "6e69bf9b7a3b7311bced940cb1e978a67c7ac8d0b06351b0fb0d094337834bcc"
+    },
+    {
+      "raw": "Callirrhoe.d2ac7ff2",
+      "line": "ch3_crypt_records_ledger_4",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Every hearth. Every forge. Every ember-lamp in every window, for three hundred years.",
+      "start": 28.654,
+      "end": 35.326,
+      "matchedWords": "10/14",
+      "wavSha256": "ea3289a41a03c01b1fff04688c1412d5027f39f85500f8ce4f19d519e45ad8f8"
+    },
+    {
+      "raw": "Callirrhoe.2bb82b79",
+      "line": "ch3_crypt_records_ledger_5",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "That's why the songs are all that's left. Nobody ever needed a fire to remember a tune.",
+      "start": 35.326,
+      "end": 41.269,
+      "matchedWords": "16/17",
+      "wavSha256": "9e9323d559ddf5fc4ed83cec8ead03a2c3bc4456e0f3a0215d20290e81a5daac"
+    },
+    {
+      "raw": "Callirrhoe.ac237368",
+      "line": "ch3_crypt_records_ledger_6",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Your archivist begged for records the fire never touched. Well, here they are. He won't thank you for them.",
+      "start": 41.269,
+      "end": 47.934,
+      "matchedWords": "17/19",
+      "wavSha256": "bc2632561363241c128c31056e7bab3dc5498006f25d016a6a168c8ed973aa02"
+    },
+    {
+      "raw": "Callirrhoe.5357a65c",
+      "line": "ch3_crypt_records_paid_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "You knew. You chose. Ysolde told you the price to your face, which makes her the most honest thing in this whole Vale.",
+      "start": 47.934,
+      "end": 55.619,
+      "matchedWords": "18/23",
+      "wavSha256": "1153e271f773b902f573e48b31bffcdec964c80e4abc714f68bfa169a887a458"
+    },
+    {
+      "raw": "Callirrhoe.c09a5ec7",
+      "line": "ch3_crypt_records_tricked_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Somebody's. Somebody who was never asked either. It turns out we've all been paying with other people's memories.",
+      "start": 55.619,
+      "end": 63.015,
+      "matchedWords": "18/18",
+      "wavSha256": "0b1e6373c447aa7b5e95f3716cdea5c1290d4499fdbe52e1d5bf09ee4e4a6230"
+    },
+    {
+      "raw": "Callirrhoe.d369717f",
+      "line": "ch3_crypt_records_left_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "No. They lit the lamps and warmed their hands, and nobody ever told them there was a bill.",
+      "start": 63.015,
+      "end": 68.933,
+      "matchedWords": "11/18",
+      "wavSha256": "76f76bbc188baf87f86cdb980ed50103c56af249f492a79c1bc21d31a7d4de45"
+    },
+    {
+      "raw": "Callirrhoe.9280b713",
+      "line": "ch3_crypt_records_last_page_3",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Marrowby. Celandine Marrowby. She's older than anyone in Emberwick, and remembers less than any of them.",
+      "start": 68.933,
+      "end": 76.093,
+      "matchedWords": "10/16",
+      "wavSha256": "64d6771910fef3efc78cd67a38c2cc4712593122a4038f0fc4a6255611181846"
+    },
+    {
+      "raw": "Callirrhoe.bcba4813",
+      "line": "ch3_crypt_records_last_page_4",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "A hundred years of ember-lamps in every hall she owns. She's burned that night away. She doesn't know what she did.",
+      "start": 76.093,
+      "end": 83.349,
+      "matchedWords": "16/22",
+      "wavSha256": "a6fa84c2f63f94d12d9eda24fff035a210f61bac9c9d0a4c439e28027f9202fc"
+    },
+    {
+      "raw": "Callirrhoe.dacb6402",
+      "line": "ch3_crypt_records_family_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Then you've a choice to make. Truth is heavy. Gold's heavier, if you're the one carrying it.",
+      "start": 83.349,
+      "end": 89.224,
+      "matchedWords": "11/17",
+      "wavSha256": "88b0524bdba1b2ee80aa0bb57d9d7871b5178049dee58a7f27500203df2c0d8e"
+    },
+    {
+      "raw": "Callirrhoe.062befc4",
+      "line": "ch3_crypt_records_scripture_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Mother Aubrine will need you to say that gently. And then she'll need you to say it again.",
+      "start": 89.224,
+      "end": 94.334,
+      "matchedWords": "14/18",
+      "wavSha256": "3af6ba8a22b134ed0f1484995a4518f12e403fba18b3867a6221701128faa327"
+    },
+    {
+      "raw": "Callirrhoe.c2e655b5",
+      "line": "ch3_crypt_records_gods_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "The gods might well agree. The Wardens don't seem to have asked them.",
+      "start": 94.334,
+      "end": 98.451,
+      "matchedWords": "9/13",
+      "wavSha256": "16429d63d3ba2e0cc5466b17fd47669949dee8602f8d70d700463147d592ab6b"
+    },
+    {
+      "raw": "Callirrhoe.41632189",
+      "line": "ch3_crypt_records_pages_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "You and Corvin found it twice and lost it twice. This time it's on a page no fire has ever touched.",
+      "start": 98.451,
+      "end": 104.661,
+      "matchedWords": "20/21",
+      "wavSha256": "b2140b2cc23c207fe304dad265b1925cc3b98434aef5950754a15fad149d1c89"
+    },
+    {
+      "raw": "Callirrhoe.6d8bf16a",
+      "line": "ch3_crypt_records_never_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Then hold on to it. You may be the only one of us who'll notice when something goes missing.",
+      "start": 104.661,
+      "end": 109.566,
+      "matchedWords": "16/19",
+      "wavSha256": "843dca0614fece2d7db22a20c91042ea153345298926c089e25a11572caa1958"
+    },
+    {
+      "raw": "Callirrhoe.d48266c9",
+      "line": "ch3_crypt_records_after_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "I'm going to write a song about this. Nobody is going to want to hear it.",
+      "start": 109.566,
+      "end": 113.714,
+      "matchedWords": "12/16",
+      "wavSha256": "b59b3a0b7950f7c74382ae056a832dbae8f457e4baa69a7daf7e0957a238f4d8"
+    },
+    {
+      "raw": "Callirrhoe.b33043ce",
+      "line": "ch4_lark_stranger_shrine_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "They don't remember their own names, but they remember the tune. Songs don't burn. I did tell you.",
+      "start": 113.714,
+      "end": 126.467,
+      "matchedWords": "17/18",
+      "wavSha256": "40420a379ebf22a80e7700827d0a4977159da0fd501296cc420d4da6ec876aac"
+    },
+    {
+      "raw": "Callirrhoe.132c0436",
+      "line": "ch4_lark_stranger_shrine_4",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "There you are. Twenty years I've followed you across this Vale, and you've never once let me catch up.",
+      "start": 126.467,
+      "end": 136.055,
+      "matchedWords": "11/19",
+      "wavSha256": "b4830ba086868dfe9d60553ba397337565e2cff0d52d378da17212a080f4a2ed"
+    },
+    {
+      "raw": "Callirrhoe.c9cd4553",
+      "line": "ch4_lark_stranger_margin_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "My teacher's teacher kept a Warden songbook from before the Fall. Beside the Song of the Seven, someone drew a face in the margin. That face.",
+      "start": 136.055,
+      "end": 149.88,
+      "matchedWords": "17/26",
+      "wavSha256": "c03ea69fa4d95622510ae5debf464fa5663ef191eb9a9c0b6eb25ed52b46c4a9"
+    }
+  ]
+}
