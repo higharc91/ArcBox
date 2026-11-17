@@ -29,6 +29,9 @@ public sealed class BeatTimingTests
                     var tv = beat.Seconds + (beat.Speaks ? beat.SpeakSeconds : 0);
                     var spare = beat.Speaks ? VoiceStart : 0.15 * now.Seconds;
                     Assert.True(tv + spare <= now.Seconds + 1e-9, $"{now.Kind} '{now.Title}': the TV takes {tv:0.00} s of {now.Seconds:0.00} s");
+                    // The worst case: the voice never reports finishing, so the beat waits its estimate and the grace.
+                    var silent = beat.Seconds + beat.SpeakSeconds + Beat.VoiceGrace;
+                    Assert.True(!beat.Speaks || silent + 0.25 <= now.Seconds + 1e-9, $"{now.Kind} '{now.Title}': a silent voice takes {silent:0.00} s of {now.Seconds:0.00} s");
                 }
                 return false;
             }, steps: 6000);

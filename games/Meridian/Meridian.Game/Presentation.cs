@@ -90,7 +90,7 @@ public sealed partial class MeridianGame
         Rolled r => new Presented(seq, "roll", r.Seat, r.Reason == RollReason.Breach ? "Breach roll" : $"{Name(r.Trait)} check",
                                   $"{r.Dice.Faces.Count} {(r.Dice.Faces.Count == 1 ? "die" : "dice")}: {r.Dice.Total}", 1.5, Faces: r.Dice.Faces),
         BreachFired b => new Presented(seq, "breach", b.Breach.Seat, "The Breach", "Something aboard has woken.",
-                                       Math.Max(4, ReadingSeconds(_pack.Rules, "The Breach", "Something aboard has woken.")),
+                                       Math.Max(6, ReadingSeconds(_pack.Rules, "The Breach", "Something aboard has woken.")),
                                        Compartment: b.Breach.Compartment?.Value),
         ScenarioChosen c => Announced(seq, c),
         RoundClosed r => RoundWarning(seq, r),

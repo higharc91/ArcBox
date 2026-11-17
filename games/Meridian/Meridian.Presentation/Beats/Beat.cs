@@ -20,8 +20,12 @@ public sealed record Beat(int Seq, string Kind, Presented Now, EqArray<BeatStep>
     /// <summary>A silent beat finishes within this share of its fallback, so the TV signals before the server gives up.</summary>
     public const double SilentShare = 0.85;
 
-    /// <summary>How long a voice may overrun its estimate before the beat moves on without it.</summary>
-    public const double VoiceGrace = 2.0;
+    /// <summary>
+    /// How long a voice may overrun its estimate before the beat moves on without it. Small enough that a silent voice (no
+    /// speech service, a muted TV) still finishes inside the server's fallback: the reading lead covers the beat's second
+    /// of panel and this grace, with half a second to spare (BeatTimingTests).
+    /// </summary>
+    public const double VoiceGrace = 1.0;
 
     /// <summary>The timeline, without waiting for the voice.</summary>
     public double Seconds => Steps.Sum(s => s.Seconds);
@@ -53,7 +57,14 @@ public sealed record Beat(int Seq, string Kind, Presented Now, EqArray<BeatStep>
         if (TillerLines.For(now) is { } line)
         {
             // Panel in, then the voice, then a moment to take it in, then out: a second in all (the rules' reading lead).
-            EqArray<BeatStep> spoken = [new BeatStep("in", 0.3, WaitsForVoice: true), new BeatStep("hold", 0.5), new BeatStep("out", 0.2)];
+            // The Breach and the scenario are the Breach sequence's (Task 8): the lights fail first, and the scenario's
+            // screen stays up into the briefing, so neither slides out.
+            EqArray<BeatStep> spoken = now.Kind switch
+            {
+                "breach" => [new BeatStep("lights", 0.8), new BeatStep("in", 0.3, WaitsForVoice: true), new BeatStep("hold", 0.4)],
+                "scenario" => [new BeatStep("in", 0.3, WaitsForVoice: true), new BeatStep("hold", 0.6)],
+                _ => [new BeatStep("in", 0.3, WaitsForVoice: true), new BeatStep("hold", 0.5), new BeatStep("out", 0.2)],
+            };
             return new Beat(now.Seq, now.Kind, now, spoken, true, TillerLines.Seconds(line, rules), false);
         }
         EqArray<BeatStep> steps = now.Kind switch

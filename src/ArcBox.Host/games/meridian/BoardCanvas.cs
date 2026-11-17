@@ -5,6 +5,7 @@ using Meridian.Logic;
 using Meridian.Presentation.Art;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Board;
+using Meridian.Presentation.Debrief;
 using Side = Meridian.Logic.Side;
 
 namespace ArcBox.Host.Games.Meridian;
@@ -68,6 +69,19 @@ public partial class BoardCanvas : Node2D
     {
         if (_director?.Shown is not { } view)
         {
+            return;
+        }
+        if (DebriefModel.Of(view) is not null)
+        {
+            // The Debrief: the whole ship, all three decks side by side, because nothing is secret any more.
+            var (_, command, habitat, engineering) = DebriefModel.Layout(_size);
+            foreach (var (d, box) in new[] { (DeckId.Command, command), (DeckId.Habitat, habitat), (DeckId.Engineering, engineering) })
+            {
+                var inner = box with { X = box.X + 12, W = box.W - 24, Y = box.Y + 50, H = box.H - 60 };
+                DrawString(ArcTheme.Bold, new Vector2((float)box.X + 16, (float)box.Y + 36), BoardStyle.DeckName(d).ToUpperInvariant(),
+                           HorizontalAlignment.Left, -1, 24, new Color(BoardStyle.DeckAccent(d)));
+                DrawDeck(view, d, inner, DeckLayout.FrameSide(view.Compartments, d, inner), null, null, names: false);
+            }
             return;
         }
         var areas = DeckLayout.Areas(_size);
@@ -312,6 +326,10 @@ public partial class BoardCanvas : Node2D
         }
         return "?";
     }
+
+    /// <summary>A compartment's name, from the content pack, for the Breach sequence.</summary>
+    public string RoomName(string compartment)
+        => _director?.Shown?.Compartments.FirstOrDefault(c => c.Id == compartment) is { } room ? _tileName(room.Tile) : compartment;
 
     private Texture2D? Texture(string path)
     {

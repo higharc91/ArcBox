@@ -8,6 +8,8 @@ using Meridian.Logic;
 using Meridian.Presentation;
 using Meridian.Presentation.Art;
 using Meridian.Presentation.Beats;
+using Meridian.Presentation.Breach;
+using Meridian.Presentation.Debrief;
 
 namespace ArcBox.Host.Games.Meridian;
 
@@ -20,6 +22,8 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     // Made with the scene: the shell gives it content before it enters the tree (Main.ShowGame).
     private readonly BoardCanvas _board = new();
     private readonly HudCanvas _hud = new();
+    private readonly BreachOverlay _breach = new();
+    private readonly DebriefCanvas _debrief = new();
     private Screenshotter? _shots;
     private Director _director = null!;
     private MeridianRules _rules = new();
@@ -63,6 +67,10 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);   // the starfield is the background, not the shell's backdrop
         _hud.Use(_director);
         AddChild(_hud);
+        _breach.Use(_director, _board.RoomName);
+        AddChild(_breach);
+        _debrief.Use(_director);
+        AddChild(_debrief);
     }
 
     public override void _Process(double delta)
@@ -75,6 +83,8 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     private readonly HashSet<string> _shotKinds = [];
     private int _shotSeq;
     private TvMode? _shotMode;
+    private BreachStage? _shotStage;
+    private bool _shotDebrief;
 
     private void Shoot()
     {
@@ -87,6 +97,21 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         {
             _shotMode = mode;
             _shots.Capture($"meridian-{mode.ToString().ToLowerInvariant()}");
+        }
+        // The Breach sequence's stages and the Debrief can pass quickly (bot phones are ready at once): one shot each.
+        var stage = BreachSequence.Of(view, _director.Current, _director.Position)?.Stage;
+        if (stage != _shotStage)
+        {
+            _shotStage = stage;
+            if (stage is { } s && s != BreachStage.Lights)
+            {
+                _shots.Capture($"meridian-breach-{s.ToString().ToLowerInvariant()}");
+            }
+        }
+        if (DebriefModel.Of(view) is not null && !_shotDebrief)
+        {
+            _shotDebrief = true;
+            _shots.Capture("meridian-debrief-reveal");
         }
         // The held moment of a spoken beat, otherwise half-way through the last step.
         if (_director.Current is { } beat && beat.Seq != _shotSeq && _director.Position is { Progress: >= 0.5 } at

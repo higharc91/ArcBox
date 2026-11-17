@@ -2,6 +2,7 @@ using ArcBox.Host.Shell;
 using Godot;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Board;
+using Meridian.Presentation.Debrief;
 using Meridian.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Meridian;
@@ -43,6 +44,10 @@ public partial class HudCanvas : Node2D
         var areas = DeckLayout.Areas(new TvSize((int)size.X, (int)size.Y));
         var hud = HudModel.Of(view, _director.Current, _waited);
         DrawTop(hud, areas, size);
+        if (DebriefModel.Of(view) is not null)
+        {
+            return;   // the Debrief has its own column
+        }
         DrawPanel(hud, areas);
         DrawLog(hud, areas);
         if (hud.Wait is { } wait)
