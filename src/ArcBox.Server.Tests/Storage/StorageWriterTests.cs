@@ -415,7 +415,8 @@ public class StorageWriterTests
 
         disk.Broken = false;
         var deadline = DateTime.UtcNow + Patience;
-        while (writer.WritesExecuted < 1 && DateTime.UtcNow < deadline)
+        // WritesExecuted increments before FlushAsync clears the failure flag; wait for complete recovery.
+        while ((writer.WritesExecuted < 1 || writer.Failing) && DateTime.UtcNow < deadline)
         {
             time.Advance(TimeSpan.FromMilliseconds(250));
             await Task.Delay(5, ct);

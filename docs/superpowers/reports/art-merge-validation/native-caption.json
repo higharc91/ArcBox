@@ -1,0 +1,14 @@
+{
+  "actualRowWidths": [
+    860.0,
+    913.0,
+    667.0
+  ],
+  "allRowsInsidePanel": true,
+  "availableTextWidth": 1162,
+  "fontSize": 30,
+  "kind": "native font/layout harness; not gameplay or a physical-TV test",
+  "panel": "[P: (36.0, 808.0), S: (1230.0, 236.0)]",
+  "rows": 3,
+  "wordingPreserved": true
+}

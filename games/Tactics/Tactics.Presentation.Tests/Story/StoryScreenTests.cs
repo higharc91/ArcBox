@@ -121,7 +121,7 @@ public sealed class StoryScreenTests
     public void A_long_line_wraps_on_words_into_three_rows()
     {
         var text = string.Join(" ", Enumerable.Repeat("Emberwick", 18));
-        var rows = Screen(Showing(1, Unvoiced(text: text))).Caption!.Rows;
+        var rows = Screen(Showing(1, Unvoiced(text: text, speaker: "old_ferryman"))).Caption!.Rows;
 
         Assert.Equal(3, rows.Length);
         Assert.All(rows, r => Assert.True(string.Concat(r.Select(run => run.Text)).Length <= StoryScreen.CaptionColumns));
@@ -138,9 +138,21 @@ public sealed class StoryScreenTests
             var caption = Screen(Showing(1, LineOf(line))).Caption!;
             var rows = caption.Rows.Select(r => string.Concat(r.Select(run => run.Text))).ToArray();
             Assert.True(rows.Length <= StoryScreen.CaptionRows, $"{line.Id} takes {rows.Length} rows");
-            Assert.All(rows, row => Assert.True(row.Length <= StoryScreen.CaptionColumns, $"{line.Id}: '{row}'"));
+            Assert.All(rows, row => Assert.True(row.Length <= StoryScreen.CaptionColumnsFor(caption.Narrator), $"{line.Id}: '{row}'"));
             Assert.Equal(Plain(line.Text), Plain(string.Join(" ", rows)));     // nothing lost, nothing added but the quotes
         }
+    }
+
+    [Fact]
+    public void Narration_uses_its_portrait_free_space_without_dropping_the_recorded_line()
+    {
+        var line = AllLines().Select(pair => pair.Item2).Single(l => l.Id == "ashmaw_death");
+        var caption = Screen(Showing(1, LineOf(line))).Caption!;
+        Assert.True(caption.Narrator);
+        Assert.Equal(72, StoryScreen.CaptionColumnsFor(caption.Narrator));
+        Assert.Equal(3, caption.Rows.Length);
+        Assert.Equal(Plain(line.Text), Plain(Words(caption)));
+        Assert.Equal(64, StoryScreen.CaptionColumnsFor(Screen(Showing(1, Unvoiced(text: "Spoken words.", speaker: "old_ferryman"))).Caption!.Narrator));
     }
 
     private static string Plain(string text) => text.Replace("“", "").Replace("”", "").Replace("’", "'").Replace("‘", "'");

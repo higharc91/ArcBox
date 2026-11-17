@@ -65,7 +65,7 @@
               "objective": null
             },
             {
-              "log": "Dagna sent us to the cave below Maud\u2019s hut on the burned east bank. Recommended level: 2.",
+              "log": "Dagna sent us to the cave below Maud\u0027s hut on the burned east bank. Recommended level: 2.",
               "done": true,
               "objective": null
             },
@@ -75,7 +75,7 @@
               "objective": "Bring the claw to Dagna"
             }
           ],
-          "result": "The boy is safe at Maud\u2019s. Dagna paid the bounty and set aside a class trinket for every companion, including those away.",
+          "result": "The boy reached Maud\u0027s fire and went home to his father. Dagna paid the bounty and set aside a class trinket for every companion, including those away.",
           "rewards": {
             "gold": 60,
             "xp": 300,

@@ -1,0 +1,43 @@
+{
+  "line": {
+    "id": "ashmaw_death",
+    "speaker": "narrator",
+    "text": "Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+    "mood": "idle",
+    "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger."
+  },
+  "rows": [
+    "Ashmaw lowers its head. The sliver of the ford\u2019s fallen ember in the",
+    "wall gutters once, then crumbles into grey dust. Nothing remains to sell",
+    "or carry. A heavy claw rests warm against the stone."
+  ],
+  "panel": {
+    "rect": [
+      112,
+      0,
+      48,
+      42
+    ],
+    "slice": [
+      13,
+      12,
+      13,
+      11
+    ],
+    "outset": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "padding": [
+      9,
+      8,
+      9,
+      8
+    ]
+  },
+  "fontSize": 30,
+  "columnBudget": 72,
+  "textWidth": 1162
+}
