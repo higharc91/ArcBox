@@ -1,0 +1,49 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job08-laomedeia",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Laomedeia",
+    "text": "<bright, pitched up, innocent without baby talk Mood: sad.> Dad says the goblins aren't coming back. He didn't look happy about it.\n<long pause>\n<bright, pitched up, innocent without baby talk Mood: happy.> There's a goblin girl who can spit further than me. I'm going to beat her.\n<long pause>\n<bright, pitched up, innocent without baby talk Mood: surprised.> Pip says the river had a heart and somebody took it out. Is that true?",
+    "segments": [
+      {
+        "raw": "Laomedeia.ec11b084",
+        "line": "town_child_force",
+        "speaker": "townsfolk_child",
+        "preset": "Laomedeia",
+        "text": "Dad says the goblins aren't coming back. He didn't look happy about it.",
+        "renderText": "<bright, pitched up, innocent without baby talk Mood: sad.> Dad says the goblins aren't coming back. He didn't look happy about it.",
+        "delivery": {
+          "direction": "bright, pitched up, innocent without baby talk",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Laomedeia.6ab094e4",
+        "line": "town_child_parley",
+        "speaker": "townsfolk_child",
+        "preset": "Laomedeia",
+        "text": "There's a goblin girl who can spit further than me. I'm going to beat her.",
+        "renderText": "<bright, pitched up, innocent without baby talk Mood: happy.> There's a goblin girl who can spit further than me. I'm going to beat her.",
+        "delivery": {
+          "direction": "bright, pitched up, innocent without baby talk",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Laomedeia.248d3dca",
+        "line": "town_child_ember",
+        "speaker": "townsfolk_child",
+        "preset": "Laomedeia",
+        "text": "Pip says the river had a heart and somebody took it out. Is that true?",
+        "renderText": "<bright, pitched up, innocent without baby talk Mood: surprised.> Pip says the river had a heart and somebody took it out. Is that true?",
+        "delivery": {
+          "direction": "bright, pitched up, innocent without baby talk",
+          "mood": "surprised"
+        }
+      }
+    ]
+  }
+}

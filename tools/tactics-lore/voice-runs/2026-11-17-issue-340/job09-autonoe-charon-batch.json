@@ -1,0 +1,49 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job09-autonoe-charon",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Autonoe"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Charon"
+      }
+    ],
+    "text": "A: Such a mess on the bridge. Still, the road is open, and roads are so very good for business.\n<long pause>\nA: Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.\n<long pause>\nB: Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+    "segments": [
+      {
+        "raw": "Autonoe.4e8f948d",
+        "line": "bark_celandine_marrowby_town_force",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Such a mess on the bridge. Still, the road is open, and roads are so very good for business.",
+        "renderText": "Such a mess on the bridge. Still, the road is open, and roads are so very good for business.",
+        "delivery": null
+      },
+      {
+        "raw": "Autonoe.586cbd63",
+        "line": "bark_celandine_marrowby_town_parley",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.",
+        "renderText": "Feeding goblins from the town's stores. How generous. I do hope someone is keeping accounts.",
+        "delivery": null
+      },
+      {
+        "raw": "Charon.f895aab9",
+        "line": "talk_halden_varrow_ford_parley",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+        "renderText": "Goblins at the gate and not one of them dead. The council is furious. I have never slept better.",
+        "delivery": null
+      }
+    ]
+  }
+}
