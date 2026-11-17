@@ -1,0 +1,97 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job3-zephyr-sulafat",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Zephyr"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Sulafat"
+      }
+    ],
+    "text": "A: He means the town chest, not my till. Still. Done.\n<long pause>\nA: Mine's the only warm hearth left on the street since you took it. Folk keep crowding in. I tell them it's the stew.\n<long pause>\nA: <practical, warm, quick but clear Mood: idle.> Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter.\n<long pause>\nB: Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry?\n<long pause>\nB: The circle is open. Bring your embers here and help me finish it!\n<long pause>\nB: The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+    "segments": [
+      {
+        "raw": "Zephyr.06133aca",
+        "line": "ch1_ford_pay_pass_2",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "He means the town chest, not my till. Still. Done.",
+        "renderText": "He means the town chest, not my till. Still. Done.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Zephyr.25dd30be",
+        "line": "talk_bree_tallow_ford_ember",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Mine's the only warm hearth left on the street since you took it. Folk keep crowding in. I tell them it's the stew.",
+        "renderText": "Mine's the only warm hearth left on the street since you took it. Folk keep crowding in. I tell them it's the stew.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-207-town-reacts"
+        ]
+      },
+      {
+        "raw": "Zephyr.7e18a99b",
+        "line": "town_barmaid_ember",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter.",
+        "renderText": "<practical, warm, quick but clear Mood: idle.> Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "idle"
+        },
+        "branches": [
+          "claude/issue-207-town-reacts"
+        ]
+      },
+      {
+        "raw": "Sulafat.b0c3984d",
+        "line": "ch5_last_vote_open_5",
+        "speaker": "maren_sorrel",
+        "preset": "Sulafat",
+        "text": "Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry?",
+        "renderText": "Light it… someone said that. I said that, I think. Let them be warm. Is a memory worth more than a child who isn't hungry?",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Sulafat.6a62795e",
+        "line": "say_hall_of_the_flame_1",
+        "speaker": "maren_sorrel",
+        "preset": "Sulafat",
+        "text": "The circle is open. Bring your embers here and help me finish it!",
+        "renderText": "The circle is open. Bring your embers here and help me finish it!",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Sulafat.b1c26b89",
+        "line": "say_hall_of_the_flame_2",
+        "speaker": "maren_sorrel",
+        "preset": "Sulafat",
+        "text": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+        "renderText": "The dragon came after the Fall for this heat. Now it wakes. Guard the hearth!",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      }
+    ]
+  }
+}

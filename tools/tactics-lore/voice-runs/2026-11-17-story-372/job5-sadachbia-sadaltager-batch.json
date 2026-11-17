@@ -1,0 +1,46 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job5-sadachbia-sadaltager",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Sadachbia"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Sadaltager"
+      }
+    ],
+    "text": "A: There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it.\n<long pause>\nB: Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
+    "segments": [
+      {
+        "raw": "Sadachbia.e0850388",
+        "line": "ch2_corvin_beg_crypt_1",
+        "speaker": "corvin_ashby",
+        "preset": "Sadachbia",
+        "text": "There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it.",
+        "renderText": "There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Sadaltager.e3c40c27",
+        "line": "ch1_four_more_open_goal_1",
+        "speaker": "hooded_stranger",
+        "preset": "Sadaltager",
+        "text": "Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
+        "renderText": "Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      }
+    ]
+  }
+}

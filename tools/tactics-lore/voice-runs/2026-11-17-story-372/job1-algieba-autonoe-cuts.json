@@ -1,0 +1,197 @@
+{
+  "batch": "story372_2026_11_17_job1-algieba-autonoe",
+  "source": "job1.wav",
+  "sourceSha256": "9388185513d4010231b3c36fe02a3e5c674a62194d4c1654450d4362e971eaf5",
+  "durationSeconds": 160.28,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Algieba.6cc69430",
+      "line": "ashmaw_death",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+      "start": 0.0,
+      "end": 15.161,
+      "matchedWords": "18/35",
+      "wavSha256": "338dc8d47e25a66d116150963dda908a14b6a85c7705fc39128fc92755fe26cd"
+    },
+    {
+      "raw": "Algieba.2a6df25f",
+      "line": "ch1_camp_maud_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Maud's kettle still whistles in the memory. 'It was thrown,' she said, and her old eyes saw more than anyone in town.",
+      "start": 15.161,
+      "end": 24.081,
+      "matchedWords": "13/22",
+      "wavSha256": "484a16b4dfab4aae113c5f4d9ec022e21cfc9b3bf92f40cce98af48228c4ce1f"
+    },
+    {
+      "raw": "Algieba.331fb10b",
+      "line": "ch1_camp_warmth_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently.",
+      "start": 24.081,
+      "end": 34.234,
+      "matchedWords": "19/22",
+      "wavSha256": "81ddf959c9b5ea4e05a8e6299eca39cf941df0b21a450686053a257209b44750"
+    },
+    {
+      "raw": "Algieba.905c25d9",
+      "line": "ch1_docks_open_hearth_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "For three hundred years the Hearthflame burned in Ember Keep, and kept the whole Vale warm.",
+      "start": 34.234,
+      "end": 40.314,
+      "matchedWords": "10/16",
+      "wavSha256": "cb501fff33decb2875668560dc497ece42f4a5d87972b9c0a9eca0d6c6f8dd8e"
+    },
+    {
+      "raw": "Algieba.793020a6",
+      "line": "ch1_docks_open_hearth_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "A century ago the Keep fell in a single night. The flame broke into five embers, and they came down across the Vale like stars. This is one of them.",
+      "start": 40.314,
+      "end": 51.763,
+      "matchedWords": "19/30",
+      "wavSha256": "39652e76e298816f53613c4dc4fcdcd120b5015ecec15c3ebb7b5a5f5b954b5c"
+    },
+    {
+      "raw": "Algieba.c838dc15",
+      "line": "ch1_four_more_where_3",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Rook watches you lift the ember out of the riverbed, shrugs, and walks off into the dark. It sits warm in your pack.",
+      "start": 51.763,
+      "end": 61.069,
+      "matchedWords": "16/23",
+      "wavSha256": "9a6b7d716ed3987b7530734f3cdff4183fbf7d82fd13ee8f85297574f318756b"
+    },
+    {
+      "raw": "Algieba.1d3d9cf7",
+      "line": "ch2_bree_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Back in Emberwick, at the Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges.",
+      "start": 61.069,
+      "end": 70.716,
+      "matchedWords": "13/26",
+      "wavSha256": "908bb3bef678b9ea26116e304400d312caf600e50cc1189c936ea421a7fa7819"
+    },
+    {
+      "raw": "Algieba.47bc74ce",
+      "line": "ch2_corvin_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby, the town archivist, meets you at the door, very pale.",
+      "start": 70.716,
+      "end": 79.461,
+      "matchedWords": "13/24",
+      "wavSha256": "11425c849608bb7afea99d9b9b175e97548af7427676223253369531f90191b6"
+    },
+    {
+      "raw": "Algieba.4fd83570",
+      "line": "ch3_crypt_door_quiet_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, a necromancer is chanting.",
+      "start": 79.461,
+      "end": 88.563,
+      "matchedWords": "11/23",
+      "wavSha256": "8e71f0a71c4a76145b7fcd544715dc23ef752f05dfd15a6d9c7bdd45b9abf62d"
+    },
+    {
+      "raw": "Algieba.9e01da49",
+      "line": "ch4_greyhold_cage_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "A mason's note, in the margin: We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.",
+      "start": 88.563,
+      "end": 97.88,
+      "matchedWords": "23/32",
+      "wavSha256": "b715f4f1fa865216a1a57a71db13773e0ec68ffc5aadbdb31eae9bddb53b8401"
+    },
+    {
+      "raw": "Algieba.4af4c978",
+      "line": "ch4_pilgrim_road_open_2",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Pip caught up with you at the foot of the pass, and walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.",
+      "start": 97.88,
+      "end": 105.423,
+      "matchedWords": "13/28",
+      "wavSha256": "f55d0e8ed1303d8784381daeea9b146d9aa6d7d277f20ec939a6bfd3b7c719fb"
+    },
+    {
+      "raw": "Algieba.49d5bec5",
+      "line": "ch4_pilgrim_road_open_ember_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "The fourth ember is somewhere up in Frostpeak Pass, where the mountain froze around it seventy years ago.",
+      "start": 105.423,
+      "end": 111.298,
+      "matchedWords": "9/18",
+      "wavSha256": "72fec765fdfcba09eb237a8e89a1649ef0e9a85d8690379da1d64defc8c434d2"
+    },
+    {
+      "raw": "Algieba.3facb131",
+      "line": "ch5_ford_ember_bargained_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Far away, the river at the ford boils once. What Rook left of its ember crosses the sky, smaller than a fist, and drops into the hall to join its sisters.",
+      "start": 111.298,
+      "end": 121.231,
+      "matchedWords": "20/31",
+      "wavSha256": "b869c6105303e276b6de9f72c7aa5b2dbd905fa12582aef47197ffac38937538"
+    },
+    {
+      "raw": "Algieba.ffdba83f",
+      "line": "ch5_ford_ember_guarded_open_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Far away, the river at the ford boils once and goes still. A light crosses the sky, and the ford's ember drops into the hall to join its sisters.",
+      "start": 121.231,
+      "end": 132.888,
+      "matchedWords": "14/29",
+      "wavSha256": "09af5c7a6e8bdc28744f217bae1983d7fb0d5219dc2cc19fd72487911b55141e"
+    },
+    {
+      "raw": "Algieba.842e7106",
+      "line": "ch5_ritual_lead_wake_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Around the flame lies a red dragon. It came for the heat a century ago, and has slept coiled around the heart ever since. As the chanting rises, one eye opens.",
+      "start": 132.888,
+      "end": 142.957,
+      "matchedWords": "14/31",
+      "wavSha256": "e66118781c5d6e4e51ef2ba89968657e64bda3a6c6910e5b79fd90432cabbb85"
+    },
+    {
+      "raw": "Algieba.fd80f22b",
+      "line": "ch5_the_archive_leave_1",
+      "speaker": "narrator",
+      "preset": "Algieba",
+      "text": "Oswin bends back over his ledger. Whatever else you came to ask, it will have to wait.",
+      "start": 142.957,
+      "end": 150.281,
+      "matchedWords": "7/17",
+      "wavSha256": "d3476d54872f6626474a5f2fff2e3cdacd59bf63c1f6d45fe49ad677f24926e1"
+    },
+    {
+      "raw": "Autonoe.a6a1e8e7",
+      "line": "ch1_council_force_noble_2",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Though I would like to know why the mayor had my granaries shut so early. He never did say.",
+      "start": 150.281,
+      "end": 160.231,
+      "matchedWords": "18/19",
+      "wavSha256": "0031ced759f31fff5f3bbc338dae4b826f9bca311d1c81ade1143cfd9d12c43c"
+    }
+  ]
+}

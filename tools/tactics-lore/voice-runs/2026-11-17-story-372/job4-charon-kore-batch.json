@@ -1,0 +1,61 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job4-charon-kore",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Charon"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Kore"
+      }
+    ],
+    "text": "A: Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.\n<long pause>\nA: Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.\n<long pause>\nB: <Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+    "segments": [
+      {
+        "raw": "Charon.cf3284bb",
+        "line": "ch1_granary_confess_1",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.",
+        "renderText": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Charon.1d49a6c2",
+        "line": "ch1_mayor_close_4",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.",
+        "renderText": "Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Kore.0fc9fe8a",
+        "line": "ch1_bridge_cost_open_2",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Hm. Well fought. My grandson Vorga always said the valley would never share. I should have listened to him.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        },
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      }
+    ]
+  }
+}
