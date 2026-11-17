@@ -175,6 +175,8 @@ public sealed class BaseLoreTests
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": null, "beats": [] }] }""", "the arc 'a' has no 'region'")]
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "beats": [] }] }""", "the arc 'a' has no 'region'")]
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": 7, "beats": [] }] }""", "the arc 'a' has a 'region' that isn't a string")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [], "sceneFlags": "flag" }] }""", "the arc 'a' has a 'sceneFlags' that isn't a list")]
+    [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": [], "sceneFlags": [null] }] }""", "the arc 'a' has something in 'sceneFlags' that isn't a string")]
     [InlineData("""{ "arcs": [{ "chapter": 1, "region": "r", "beats": [] }] }""", "an arc has no 'id'")]
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r" }] }""", "the arc 'a' has no 'beats' list")]
     [InlineData("""{ "arcs": [{ "id": "a", "chapter": 1, "region": "r", "beats": {} }] }""", "the arc 'a' has a 'beats' that isn't a list")]

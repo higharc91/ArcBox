@@ -14,9 +14,9 @@ public sealed class GriskBarkTests
     }
 
     [Theory]
-    [InlineData("battle_start", "Bear’s awake! Dig or die!")]
+    [InlineData("battle_start", "Bear's awake! Dig or die!")]
     [InlineData("hit", "That was my good side!")]
-    [InlineData("low_hp", "The market pays! I’ll split it!")]
+    [InlineData("low_hp", "The market pays! I'll split it!")]
     [InlineData("ally_down", "Up! I counted you in the wages!")]
     [InlineData("turn_start", "Dig faster!")]
     [InlineData("defeat", "Tell them… I kept the tally.")]
