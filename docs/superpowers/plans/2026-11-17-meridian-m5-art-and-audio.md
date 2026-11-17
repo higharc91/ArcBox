@@ -216,7 +216,7 @@ Tests: the music for each phase and ending, the sound per beat step, the tick's 
 - **Audio by ear:** a game night with the sound on (the playtest checklist gains a section: the music's levels, the duck under Tiller, the tick).
 
 - [ ] **Step 1: Per set, as each lands: check, screenshots, review.**
-- [ ] **Step 2: The full gate, and the checklist's sound section.** (The checklist section is written; the game night with sound is still to come.)
+- [ ] **Step 2: The full gate, and the checklist's sound section.** (The full gate passes apart from the 12 Tactics tests that also fail on `main`: 8,322 of 8,334 .NET tests. The checklist section is written; the game night with sound is still to come.)
 
 ---
 
