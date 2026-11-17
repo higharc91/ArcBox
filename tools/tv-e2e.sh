@@ -149,8 +149,10 @@
 #     in order from the first (MERIDIAN presented <seq>): no fallback answered one for it;
 #   - Tiller said the Breach, then the scenario's announcement (its title first), then the outcome the phones saw
 #     (AUDIO Voice meridian.tiller lines).
-# ARCBOX_RECONNECT=1 kills the TV once it shows the scenario's announcement and relaunches it, and then needs the relaunched TV to
-# reach the Debrief without showing the Breach again (review focus 8). The signal and voice checks then apply only to what the
+# Run one at a time: a relaunched TV resumes from user://session.json, which every TV on the machine shares.
+# ARCBOX_RECONNECT=1 kills the TV once it shows the scenario's announcement and relaunches it, and then needs the relaunched TV
+# back in the same room, at the Debrief, without replaying the Breach (review focus 8): no BREACH stage and no announcement read
+# again. If it's back while the announcement is still the event on screen, it shows it briefly, as where the game is. The signal and voice checks then apply only to what the
 # TV saw: the game finished the briefing on its fallbacks while the TV was down.
 #
 # Environment (all optional except GODOT when `godot` is not on PATH):
@@ -595,18 +597,26 @@ if [[ "$GAME" == "meridian" ]]; then
   tail -n "+$AFTER" "$OUT/tv.log" | grep -q '^MERIDIAN screen Debrief' || meridian_fail "the TV at the Debrief"
 
   # Every presented event, signalled by the TV in order and none abandoned (with a reconnect: only after the TV came back).
-  SIGNALS=$(tail -n "+$AFTER" "$OUT/tv.log" | grep -oE '^MERIDIAN presented [0-9]+' | awk '{ print $3 }')
+  # (|| true: under pipefail, a grep that finds nothing would end the run before it reports.)
+  SIGNALS=$(tail -n "+$AFTER" "$OUT/tv.log" | grep -oE '^MERIDIAN presented [0-9]+' | awk '{ print $3 }' || true)
   ABANDONED=$(tail -n "+$AFTER" "$OUT/tv.log" | grep -c '^MERIDIAN abandoned' || true)
   COUNT=$(echo "$SIGNALS" | grep -c . || true)
   GAPS=$(echo "$SIGNALS" | awk 'NR > 1 && $1 != prev + 1 { n++ } { prev = $1 } END { print n + 0 }')
-  FIRST=$(echo "$SIGNALS" | head -1)
+  FIRST=$(echo "$SIGNALS" | head -1 || true)
   log "signals: the TV presented $COUNT events (from ${FIRST:-none}), $GAPS gaps, $ABANDONED abandoned"
   (( COUNT > 10 )) || meridian_fail "more than 10 presented signals from the TV"
   (( ABANDONED == 0 )) || meridian_fail "no beat abandoned: the server moved on without the TV $ABANDONED times"
   (( GAPS == 0 )) || meridian_fail "every presented event signalled by the TV, in order"
   if [[ "$RECONNECT" == "1" ]]; then
-    if tail -n "+$AFTER" "$OUT/tv.log" | grep -qE '^MERIDIAN breach (Breach|Announcement)'; then
-      meridian_fail "a relaunched TV that doesn't show the Breach again"
+    # Back while the announcement may still be the event on screen: then it's shown briefly, as where the game is. What
+    # must not happen is a replay: the BREACH stage again, or Tiller reading the announcement a second time.
+    tail -n "+$AFTER" "$OUT/tv.log" | grep -q "^ROOM $CODE\$" || meridian_fail "the relaunched TV back in room $CODE"
+    if tail -n "+$AFTER" "$OUT/tv.log" | grep -q '^MERIDIAN breach Breach'; then
+      meridian_fail "a relaunched TV that doesn't replay the Breach"
+    fi
+    TITLE=$([[ -n "$SCENARIO" ]] && node -e 'console.log(require(process.argv[1]).title)' "$ROOT/content/meridian/base/rules/scenarios/$SCENARIO.json" || true)
+    if [[ -n "$TITLE" ]] && tail -n "+$AFTER" "$OUT/tv.log" | grep -qF "meridian.tiller: $TITLE."; then
+      meridian_fail "a relaunched TV that doesn't read the announcement again"
     fi
   else
     [[ "$FIRST" == "1" ]] || meridian_fail "the TV's signals to start at the first presented event"
