@@ -535,6 +535,11 @@
               "id": "pip",
               "label": "Pip, tell him about the hand.",
               "to": "pip"
+            },
+            {
+              "id": "done",
+              "label": "That's everything we came for.",
+              "to": "leave"
             }
           ]
         },
@@ -731,6 +736,18 @@
               "speaker": "narrator",
               "text": "Somewhere among the shelves, in a shadow the red light doesn't reach, someone sighs.",
               "mood": "surprised"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "ch5_the_archive_leave_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Oswin bends back over his ledger. Whatever else you came to ask, it will have to wait."
             }
           ],
           "end": true

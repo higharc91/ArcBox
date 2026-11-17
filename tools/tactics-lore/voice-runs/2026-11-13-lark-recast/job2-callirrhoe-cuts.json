@@ -1,0 +1,241 @@
+{
+  "batch": "lark_recast_2026_11_13_job2-callirrhoe",
+  "source": "job2.wav",
+  "sourceSha256": "35f6a16051d1360f907906b737db686dbca94676281bf09fdf3529283cae9af6",
+  "durationSeconds": 136.84,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Callirrhoe.e0d65914",
+      "line": "ch3_guest_right_law_3",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Break the peace inside this camp, and no Scarwalker will ever speak your names again. Not your children's, either.",
+      "start": 0.0,
+      "end": 7.03,
+      "matchedWords": "15/19",
+      "wavSha256": "cb676462c38002b44076df4d6cc93697dd745c54a4e7b8b58cefab2f96f6e370"
+    },
+    {
+      "raw": "Callirrhoe.e1cf2783",
+      "line": "ch3_guest_right_news_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "The only road to the crater crosses the canyon, and the only bridge belongs to a goblin called Vorga. He took it in spring.",
+      "start": 7.03,
+      "end": 15.607,
+      "matchedWords": "20/24",
+      "wavSha256": "625199bee2a6e6b141b87cf51f76de77cf19e1eacbb3daac5914cea184a6daf4"
+    },
+    {
+      "raw": "Callirrhoe.42b724af",
+      "line": "ch3_guest_right_news_3",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "His Host lets the Scarwalker caravans over to the wells, then keeps the water. A toll, he calls it. The elder has another word.",
+      "start": 15.607,
+      "end": 24.328,
+      "matchedWords": "17/24",
+      "wavSha256": "783caa6a6757b6a35beebfe7650a0a5d8338e083b228fb0ac5ebb575cffdf791"
+    },
+    {
+      "raw": "Callirrhoe.fee24b6f",
+      "line": "ch3_guest_right_news_5",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Yes, he's one of Vorga's. Yes, he's a guest. No, you can't. Let the poor thing finish his tea.",
+      "start": 24.328,
+      "end": 32.335,
+      "matchedWords": "11/19",
+      "wavSha256": "d6bf713ebc99cbde48c9f2221bc107338bcf5da84beb0ccb7f089660f905a95e"
+    },
+    {
+      "raw": "Callirrhoe.056c2001",
+      "line": "ch3_guest_right_vorga_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Young, loud, very fond of his own voice. He sends the Scarwalkers a song every new moon about how he's going to eat them.",
+      "start": 32.335,
+      "end": 40.106,
+      "matchedWords": "19/24",
+      "wavSha256": "a15c578a87a0e5b8ab4b0e047176c3497088e729f40c721927952f40eac66212"
+    },
+    {
+      "raw": "Callirrhoe.bac3857d",
+      "line": "ch3_guest_right_vorga_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Terrible song. Good rhythm, though. And under all the shouting, he's angrier than anyone I've ever met.",
+      "start": 40.106,
+      "end": 47.01,
+      "matchedWords": "14/17",
+      "wavSha256": "52c12a3f7541ceabbc2bd04358403989366b1c1ef46055b016f232ed17f8ce9e"
+    },
+    {
+      "raw": "Callirrhoe.786d404a",
+      "line": "ch3_guest_right_v_spared_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "He knows. He's telling the whole canyon she sold the clan for a few sacks of grain, and that you're holding the leash.",
+      "start": 47.01,
+      "end": 53.458,
+      "matchedWords": "17/23",
+      "wavSha256": "0659c2385a0e0cd0742ef96f7badf1ef28e3cab0184006d7350b5dc90d632048"
+    },
+    {
+      "raw": "Callirrhoe.6b0d258f",
+      "line": "ch3_guest_right_v_spared_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "The lads who fought you at the ford were his. The ones who made it home haven't stopped talking about you.",
+      "start": 53.458,
+      "end": 58.683,
+      "matchedWords": "12/21",
+      "wavSha256": "9e9420ee80258d35e44a2673f223af48e92254139d27f2731b35c3f37e02a8ee"
+    },
+    {
+      "raw": "Callirrhoe.e0233497",
+      "line": "ch3_guest_right_v_slain_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "He knows. He doesn't sing about the Scarwalkers any more. All the new verses are about you.",
+      "start": 58.683,
+      "end": 63.77,
+      "matchedWords": "8/17",
+      "wavSha256": "27b99c64d786e86ef07f2c2434fdf0bb2d0b5f37cde8e35a13052f3b159e0d11"
+    },
+    {
+      "raw": "Callirrhoe.940be8cc",
+      "line": "ch3_guest_right_v_slain_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Whatever he thought of her, she was his grandmother. Nobody else was allowed to kill her.",
+      "start": 63.77,
+      "end": 69.147,
+      "matchedWords": "13/16",
+      "wavSha256": "676889c08482c4ab45ad516a4efe6f928f0af31a27d4cdc91f5d62d971e24274"
+    },
+    {
+      "raw": "Callirrhoe.a16ffd89",
+      "line": "ch3_guest_right_message_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "He says Vorga will be delighted to meet you. He says to bring rope. He seems to think that's funny.",
+      "start": 69.147,
+      "end": 75.154,
+      "matchedWords": "17/20",
+      "wavSha256": "bc37e1339441511d871dea818b65b067ede7d140f4400c7487374f928dcd959b"
+    },
+    {
+      "raw": "Callirrhoe.bb3dfedc",
+      "line": "ch3_guest_right_others_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "A Kindled caravan, nine days ago, under a white cloth. The elder gave them water, because the law says she must.",
+      "start": 75.154,
+      "end": 82.108,
+      "matchedWords": "16/21",
+      "wavSha256": "5f39e60afff2b4ba8095be45128f55136bc9f85d1fcbb7551ffe75e4e3d4cac3"
+    },
+    {
+      "raw": "Callirrhoe.3aee9b6a",
+      "line": "ch3_guest_right_others_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Their leader asked after you by name. Lovely voice. Kind eyes. I didn't like how much I liked her.",
+      "start": 82.108,
+      "end": 89.49,
+      "matchedWords": "15/19",
+      "wavSha256": "365a1fdaac99b973b53ef9475dcc64c55423150ddceed9ebe7cbb3c053a89ec2"
+    },
+    {
+      "raw": "Callirrhoe.9eb270c6",
+      "line": "ch3_guest_right_clans_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "No. A clan has grandmothers. Vorga's Host is everyone who got tired of waiting for the grandmothers.",
+      "start": 89.49,
+      "end": 96.28,
+      "matchedWords": "12/17",
+      "wavSha256": "601b81d607f13e50d5d9588ff65044a495f84236827481094a4faa5bd900964d"
+    },
+    {
+      "raw": "Callirrhoe.514aedb2",
+      "line": "ch3_guest_right_more_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Anything else, before the tea runs out?",
+      "start": 96.28,
+      "end": 98.727,
+      "matchedWords": "5/7",
+      "wavSha256": "d704ea482fe01254551791c9c5209085a12972104a31adb2789aa1d849d58c3c"
+    },
+    {
+      "raw": "Callirrhoe.94237765",
+      "line": "ch3_guest_right_night_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Nothing in the Sunscar would dare touch you tonight. Tomorrow is another song.",
+      "start": 98.727,
+      "end": 103.698,
+      "matchedWords": "12/13",
+      "wavSha256": "2d502c248dfeed0c65462e12b3b5593395523ee511a93cd99667244da628bb88"
+    },
+    {
+      "raw": "Callirrhoe.627c77b1",
+      "line": "ch3_skarrow_messenger_song_5",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "That's the verse before the last. I've been looking for it for twenty years.",
+      "start": 103.698,
+      "end": 108.276,
+      "matchedWords": "10/14",
+      "wavSha256": "59eccfad0c0e8b94403b0ccb3bcb4ca25a089019bf4caa798c81711ed32e6c08"
+    },
+    {
+      "raw": "Callirrhoe.e0ade4b1",
+      "line": "ch3_skarrow_messenger_song_6",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Seven came home, my version goes. Hers says they came back running. Same seven, I'd wager, seen from different doorsteps.",
+      "start": 108.276,
+      "end": 117.751,
+      "matchedWords": "17/20",
+      "wavSha256": "4de51b5842e8272b4032b67ca6d548f6b611174a09313fa22a79ad22612d742f"
+    },
+    {
+      "raw": "Callirrhoe.e23c39e8",
+      "line": "ch3_skarrow_messenger_more_2",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Of course not. I'd keep it too, if it were mine.",
+      "start": 117.751,
+      "end": 123.014,
+      "matchedWords": "9/11",
+      "wavSha256": "f3558d2f2d66940e97739cca99c9889805051844b5f1a33b4515e60959071845"
+    },
+    {
+      "raw": "Callirrhoe.2d0767be",
+      "line": "ch3_skarrow_messenger_dream_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Then someone else will want very badly to hear that dream. Be careful who you tell it to.",
+      "start": 123.014,
+      "end": 130.488,
+      "matchedWords": "17/18",
+      "wavSha256": "5e4e68af05a3f7c260fbb779faca8f807673f10aeb9207a59a15301065de63aa"
+    },
+    {
+      "raw": "Callirrhoe.c5c79cb7",
+      "line": "ch3_skarrow_messenger_promise_1",
+      "speaker": "lark",
+      "preset": "Callirrhoe",
+      "text": "Big promise. Goblins remember promises. So do songs.",
+      "start": 130.488,
+      "end": 136.84,
+      "matchedWords": "6/8",
+      "wavSha256": "d7737e6b1ec5e96d2d615c4dc2d8ed4d6903deef9b3c65bc5cf54dc579ad6860"
+    }
+  ]
+}
