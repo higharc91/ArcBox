@@ -216,7 +216,7 @@
               "mood": "hurt"
             }
           ],
-          "next": "dusk"
+          "end": true
         },
         {
           "id": "where",
@@ -235,7 +235,7 @@
               "direction": "trying to grin"
             }
           ],
-          "next": "dusk"
+          "end": true
         },
         {
           "id": "keep",
@@ -245,25 +245,6 @@
               "speaker": "narrator",
               "text": "So she sings. The dead walk on ahead of you, slower now, as if they were keeping time.",
               "mood": "idle"
-            }
-          ],
-          "next": "dusk"
-        },
-        {
-          "id": "dusk",
-          "lines": [
-            {
-              "id": "ch4_pilgrim_road_dusk_1",
-              "speaker": "narrator",
-              "text": "Near dusk the road turns, and through the snow you see the dark doors of Greyhold, cut into the mountain.",
-              "mood": "idle"
-            },
-            {
-              "id": "ch4_pilgrim_road_dusk_2",
-              "speaker": "pip_ashdown",
-              "text": "Greyhold. The masons kept their books there. How do I know that?",
-              "mood": "surprised",
-              "direction": "suddenly old and slow, not a child's cadence at all, then catching herself"
             }
           ],
           "end": true
@@ -390,6 +371,37 @@
               "text": "I'm coming with you to the Keep. If anyone hears that verse sung at last, it's going to be me.",
               "mood": "idle",
               "direction": "determined, a little shaky"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch4_pilgrim_road_dusk",
+      "beat": "ch4_pilgrim_road",
+      "title": "Greyhold at Dusk",
+      "cast": [
+        "narrator",
+        "pip_ashdown"
+      ],
+      "start": "dusk",
+      "nodes": [
+        {
+          "id": "dusk",
+          "lines": [
+            {
+              "id": "ch4_pilgrim_road_dusk_1",
+              "speaker": "narrator",
+              "text": "Near dusk the road turns, and through the snow you see the dark doors of Greyhold, cut into the mountain.",
+              "mood": "idle"
+            },
+            {
+              "id": "ch4_pilgrim_road_dusk_2",
+              "speaker": "pip_ashdown",
+              "text": "Greyhold. The masons kept their books there. How do I know that?",
+              "mood": "surprised",
+              "direction": "suddenly old and slow, not a child's cadence at all, then catching herself"
             }
           ],
           "end": true
