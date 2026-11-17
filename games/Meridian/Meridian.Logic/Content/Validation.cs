@@ -268,6 +268,11 @@ public static partial class Validation
             {
                 errors.Add(new(file, "roles", "needs at least one role, each listed once"));
             }
+            var said = def.Announcement.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+            if (said == 0 || said > PackLoader.AnnouncementWords)
+            {
+                errors.Add(new(file, "announcement", $"is {said} words; it needs 1 to {PackLoader.AnnouncementWords}"));
+            }
             foreach (var role in def.Roles)
             {
                 var words = role.Briefing.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;

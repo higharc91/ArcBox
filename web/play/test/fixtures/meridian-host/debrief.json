@@ -607,6 +607,13 @@
         "won": false
       }
     ],
-    "outcome": "Time ran out. One of them was never one of them."
+    "outcome": "Time ran out. One of them was never one of them.",
+    "awards": [
+      {
+        "id": "award-1",
+        "title": "Pathfinder: most compartments found",
+        "seat": "p4"
+      }
+    ]
   }
 }

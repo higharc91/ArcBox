@@ -30,7 +30,7 @@ internal sealed class StubScenario(string id = "stub", int target = 99, Func<Gam
     public IBotPolicy Bot(string role) => ExploreBot.Instance;
 
     public static ScenarioDef Def(string id = "stub", int limit = 3)
-        => new(id, $"Stub {id}", limit, [new RoleDef("crew", "crew", "Crew", "Do the thing.")]);
+        => new(id, $"Stub {id}", limit, [new RoleDef("crew", "crew", "Crew", "Do the thing.")], Announcement: "A stub begins.");
 
     /// <summary>The test pack choosing from these stubs, with a Breach table entry for the test Anomaly.</summary>
     public static RulesPack Pack(params (StubScenario Scenario, int Limit)[] stubs)

@@ -56,4 +56,12 @@ public sealed record MeridianRules
     public TimeSpan EchoWait { get; init; } = TimeSpan.FromSeconds(15);
     public TimeSpan AllocateWait { get; init; } = TimeSpan.FromSeconds(20);
     public TimeSpan DebriefTime { get; init; } = TimeSpan.FromSeconds(20);
+
+    // Reading aloud (M4 plan, Task 2). A presentation that carries text waits at least as long as Tiller takes to say it,
+    // because its wait is the fallback for a missing TV and must outlast a present one.
+    /// <summary>Tiller's speaking rate: native pace for the voice, the rate REDLINE's question reader assumes.</summary>
+    public double ReadingWordsPerSecond { get; init; } = 2.7;
+
+    /// <summary>Added to every reading time: the TV's panel coming in, and the voice starting.</summary>
+    public TimeSpan ReadingLead { get; init; } = TimeSpan.FromSeconds(1.5);
 }

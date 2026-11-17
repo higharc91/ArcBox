@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/preact";
-import { MeridianBoard, isMeridianHostView, tileLabel, type MeridianHostView } from "../src/dev/MeridianBoard";
+import { MeridianBoard, isMeridianHostView, signalAfterMs, tileLabel, type MeridianHostView } from "../src/dev/MeridianBoard";
 import explore from "./fixtures/meridian-host/explore.json";
 import endgame from "./fixtures/meridian-host/endgame.json";
 import debrief from "./fixtures/meridian-host/debrief.json";
@@ -28,11 +28,13 @@ describe("meridian dev board", () => {
     expect(screen.getByText("Airlock")).toBeTruthy();
   });
 
-  it("signals each presented event once, just before its fallback", () => {
+  it("signals each presented event once, after a quick read and before its fallback", () => {
     vi.useFakeTimers();
     const signal = vi.fn();
+    const due = signalAfterMs(view().now!);
+    expect(due).toBeLessThan(view().now!.seconds * 1000);
     const { rerender } = render(<MeridianBoard view={view()} signal={signal} />);
-    vi.advanceTimersByTime(view().now!.seconds * 1000 - 250);
+    vi.advanceTimersByTime(due - 50);
     expect(signal).not.toHaveBeenCalled();
     vi.advanceTimersByTime(100);
     expect(signal).toHaveBeenCalledWith("presented", { seq: view().now!.seq });
@@ -73,6 +75,29 @@ describe("meridian dev board", () => {
     expect(panel.textContent).toContain(v.scenario!.outcome!);
     expect(panel.querySelectorAll(".mer-roles li").length).toBe(v.seats.length);
     expect(panel.textContent).toContain("The Mimic");
+  });
+
+  it("doesn't wait out a long card's reading time", () => {
+    const card = { ...view().now!, kind: "card", title: "Hull Groan", text: Array(40).fill("word").join(" "), seconds: 17 };
+    expect(signalAfterMs(card)).toBe(1200 + 80 * 42);
+  });
+
+  it("shows who the game is waiting for, and a vote's wait names nobody", () => {
+    const { rerender } = render(<MeridianBoard view={{ ...view(), wait: { kind: "grace", seat: "p1", name: "Ann", seconds: 20 } }} signal={() => {}} />);
+    expect(screen.getByRole("status", { name: "Waiting" }).textContent).toContain("Waiting for Ann… 20 s");
+    rerender(<MeridianBoard view={{ ...view(), wait: { kind: "pause", seconds: 60 } }} signal={() => {}} />);
+    expect(screen.getByRole("status", { name: "Waiting" }).textContent).toContain("Waiting for the vote…");
+  });
+
+  it("counts ready seats during the briefing", () => {
+    render(<MeridianBoard view={{ ...view(), now: null, ready: 2 }} signal={() => {}} />);
+    expect(screen.getByText(`2 of ${view().seats.length} ready`)).toBeTruthy();
+  });
+
+  it("lists the awards at the debrief", () => {
+    const v = structuredClone(debrief) as unknown as MeridianHostView;
+    render(<MeridianBoard view={v} signal={() => {}} />);
+    for (const a of v.scenario!.awards!) expect(screen.getByText(new RegExp(a.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")))).toBeTruthy();
   });
 
   it("labels tiles from their ids", () => expect(tileLabel("waste_reclamation")).toBe("Waste Reclamation"));

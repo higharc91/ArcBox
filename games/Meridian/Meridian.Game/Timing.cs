@@ -93,6 +93,6 @@ public sealed partial class MeridianGame
     }
 
     /// <summary>The seats the game waits on: every seat still to vote, or the one actor.</summary>
-    private IEnumerable<SeatId> Owed()
+    internal IEnumerable<SeatId> Owed()
         => Session.Game!.Waiting is VotePending vote ? vote.Owed : [BotRunner.Actor(Session.Game!)];
 }

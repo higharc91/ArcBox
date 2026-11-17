@@ -2,6 +2,7 @@
   "$schema": "../schema/scenario.schema.json",
   "id": "one_of_us_isnt",
   "title": "One of Us Isn't",
+  "announcement": "Crew manifest error. I count one more heartbeat than the manifest allows, and one of you is not who you say you are. Ship systems are failing at several points. Repair them. If you believe you know who is lying, call a vote from the scanner. I would trust nobody. I don't.",
   "roundLimit": 10,
   "roles": [
     {

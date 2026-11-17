@@ -2,6 +2,7 @@
   "$schema": "../schema/scenario.schema.json",
   "id": "the_passenger",
   "title": "The Passenger",
+  "announcement": "Biological contamination confirmed. One of you is carrying something that is not yours, and it has started to hatch. Synthesize a counter-agent in a medical or laboratory compartment, then inject the carrier before the brood takes the ship. Carrier, I am told you can hear me. Please stop.",
   "roundLimit": 12,
   "roles": [
     {

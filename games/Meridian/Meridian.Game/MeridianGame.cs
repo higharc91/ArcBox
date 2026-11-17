@@ -23,6 +23,9 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
 
     internal RulesPack Pack => _pack;
 
+    /// <summary>The game's clock, for views that count down to a deadline.</summary>
+    internal DateTimeOffset Now => _ctx.Now;
+
     /// <summary>
     /// Replaces the session wholesale and re-arms the clock. Stage M6's restore after a restart builds on this; tests use
     /// it to set up positions that are slow to reach by play.

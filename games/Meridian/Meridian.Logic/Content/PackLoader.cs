@@ -17,6 +17,9 @@ public static class PackLoader
     /// <summary>The words a briefing may run to (spec §11: briefings must stay readable on a phone).</summary>
     public const int BriefingWords = 120;
 
+    /// <summary>The words a scenario's public announcement may run to: it is read aloud during the Breach sequence.</summary>
+    public const int AnnouncementWords = 60;
+
     public static readonly IReadOnlyList<(CardKind Kind, string File)> CardFiles =
     [
         (CardKind.Incident, "rules/cards/incidents.json"),

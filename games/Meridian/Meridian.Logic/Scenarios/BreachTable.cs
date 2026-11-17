@@ -4,8 +4,12 @@ namespace Meridian.Logic;
 /// A scenario's text and numbers (<c>rules/scenarios/&lt;id&gt;.json</c>): its title, round limit, each role's briefing
 /// and objectives, and the named numbers its rules read (check targets, counts), so tuning never needs a recompile.
 /// </summary>
+/// <param name="Announcement">
+/// What Tiller announces to the room when the scenario begins (M4 plan, Task 2): public, at most
+/// <see cref="PackLoader.AnnouncementWords"/> words. It is shown on the TV and spoken aloud, so it must hold no secret.
+/// </param>
 public sealed record ScenarioDef(string Id, string Title, int RoundLimit, EqArray<RoleDef> Roles,
-                                 IReadOnlyDictionary<string, int>? Numbers = null)
+                                 IReadOnlyDictionary<string, int>? Numbers = null, string Announcement = "")
 {
     public RoleDef Role(string id) => Roles.First(r => r.Id == id);
     public int Number(string key) => Numbers is not null && Numbers.TryGetValue(key, out var n)

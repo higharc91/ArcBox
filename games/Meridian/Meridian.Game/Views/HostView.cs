@@ -38,6 +38,20 @@ public sealed record ObjectiveCard(string Id, string Text, ObjectiveState State)
 /// <summary>A role revealed at the Debrief. <see cref="Id"/> is the seat (keyed for patches).</summary>
 public sealed record RevealCard(string Id, string Role, bool Won);
 
+/// <summary>One of the Debrief's awards. <see cref="Id"/> keys it for patches; <see cref="Seat"/> is the winner's seat.</summary>
+public sealed record TvAward(string Id, string Title, string Seat);
+
+/// <summary>
+/// What the game is waiting on a disconnected seat for (spec §3.3): the Explore <c>grace</c> or the endgame <c>pause</c>,
+/// with the seconds left when the view was made. The pause is shown the same way for every seat, so it can't tell anyone
+/// who the traitor is. A vote names nobody: naming a waited-for voter would tell the room they haven't voted.
+/// </summary>
+public sealed record HostWait(
+    string Kind,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Seat,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Name,
+    int Seconds);
+
 /// <summary>
 /// The running scenario as the TV may show it: built from <c>Visibility.For(state, null)</c>, so it holds only what
 /// everyone may see. <see cref="Reveal"/> and <see cref="Outcome"/> appear at the Debrief, when nothing is secret.
@@ -49,7 +63,8 @@ public sealed record ScenarioPanel(
     EqArray<CounterCard> Counters,
     EqArray<ObjectiveCard> Objectives,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EqArray<RevealCard>? Reveal = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Outcome = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Outcome = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EqArray<TvAward>? Awards = null);
 
 /// <summary>
 /// What the TV shows: the public projection of the game (spec §5.3). Every array of objects has a string <c>id</c>, so the
@@ -68,4 +83,6 @@ public sealed record MeridianHostView(
     int Round,
     Presented? Now,
     EqArray<string> Log,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ScenarioPanel? Scenario = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ScenarioPanel? Scenario = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HostWait? Wait = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Ready = null);

@@ -2,6 +2,7 @@
   "$schema": "../schema/scenario.schema.json",
   "id": "decaying_orbit",
   "title": "Decaying Orbit",
+  "announcement": "Orbit decaying. The Meridian will meet the atmosphere in a few rounds, and there are fewer escape pods than crew. Board one, or restart the engines and save the ship for everyone. I am obliged to mention that the second option is harder.",
   "roundLimit": 7,
   "roles": [
     {

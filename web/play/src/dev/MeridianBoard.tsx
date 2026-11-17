@@ -15,6 +15,10 @@ export interface MeridianHostView {
   seats: { id: string; name: string; crew: string | null; colour: number; connected: boolean; auto: boolean; active: boolean }[];
   compartments: CompartmentCard[]; crew: CrewMarker[]; tilesLeft: number; anomaliesDrawn: number; round: number;
   now: Presented | null; log: string[]; scenario?: ScenarioPanel;
+  /** A disconnected seat the game is waiting for (spec §3.3); a vote names nobody. */
+  wait?: { kind: "grace" | "pause"; seat?: string; name?: string; seconds: number };
+  /** Seats ready, during the briefing only. */
+  ready?: number;
 }
 
 /** The running scenario, public parts only; `reveal` and `outcome` arrive at the Debrief. */
@@ -25,6 +29,7 @@ export interface ScenarioPanel {
   objectives: { id: string; text: string; state: "open" | "done" | "failed" }[];
   reveal?: { id: string; role: string; won: boolean }[];
   outcome?: string;
+  awards?: { id: string; title: string; seat: string }[];
 }
 
 export const isMeridianHostView = (v: unknown): v is MeridianHostView =>
@@ -40,6 +45,15 @@ export const tileLabel = (tile: string) => tile.split("_").map((w) => w[0].toUpp
 /** How long before an event's fallback runs out the board signals, so the game moves on a little sooner. */
 const EARLY_MS = 200;
 
+/**
+ * The dev board has no voice, so it doesn't wait out the reading time the fallback allows for Tiller (M4 plan, Task 2):
+ * a quick read, at most the fallback less a moment.
+ */
+export const signalAfterMs = (now: Presented) => {
+  const words = `${now.title} ${now.text}`.split(/\s+/).filter(Boolean).length;
+  return Math.max(300, Math.min(now.seconds * 1000 - EARLY_MS, 1200 + 80 * words));
+};
+
 export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal(kind: string, payload: unknown): void }) {
   const signalled = useRef(0);
   const seq = view.now?.seq ?? 0;
@@ -48,7 +62,7 @@ export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal
     const timer = setTimeout(() => {
       signalled.current = seq;
       signal("presented", { seq });
-    }, Math.max(300, view.now.seconds * 1000 - EARLY_MS));
+    }, signalAfterMs(view.now));
     return () => clearTimeout(timer);
   }, [seq]);
 
@@ -58,6 +72,12 @@ export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal
         <b>{view.banner}</b>
         <span>Round {view.round} · Anomalies {view.anomaliesDrawn} · Tiles left {view.tilesLeft}</span>
       </header>
+      {view.wait ? (
+        <div class="mer-wait" role="status" aria-label="Waiting">
+          {view.wait.name ? `Waiting for ${view.wait.name}…` : "Waiting for the vote…"} {view.wait.seconds} s
+        </div>
+      ) : null}
+      {view.ready !== undefined ? <div class="mer-ready">{view.ready} of {view.seats.length} ready</div> : null}
       <ol class="mer-seats">
         {view.seats.map((s) => (
           <li key={s.id} class={s.active ? "active" : ""} style={{ borderColor: PLAYER_COLOURS[s.colour % 6] }}>
@@ -91,6 +111,9 @@ function Scenario({ panel, seats }: { panel: ScenarioPanel; seats: MeridianHostV
       {panel.counters.length ? <ul class="mer-counters">{panel.counters.map((c) => <li key={c.id}>{c.id} {c.value}</li>)}</ul> : null}
       {carried.length ? <ul>{carried.map((t) => <li key={t.id}>{name(t.carrier!)} carries the {t.kind}</li>)}</ul> : null}
       {panel.objectives.length ? <ul class="mer-objectives">{panel.objectives.map((o) => <li key={o.id} class={o.state}>{o.text}</li>)}</ul> : null}
+      {panel.awards?.length ? (
+        <ul class="mer-awards">{panel.awards.map((a) => <li key={a.id}>{a.title}: <b>{name(a.seat)}</b></li>)}</ul>
+      ) : null}
       {panel.reveal ? (
         <ul class="mer-roles">{panel.reveal.map((r) => <li key={r.id}><b>{name(r.id)}</b> was {r.role}{r.won ? " · won" : ""}</li>)}</ul>
       ) : null}

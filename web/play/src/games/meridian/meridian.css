@@ -60,3 +60,5 @@
 .mer-token.repair.broken { background: var(--mer-anomaly); }
 .mer-token.stunned { opacity: 0.4; }
 .mer-objectives .done { text-decoration: line-through; }
+.mer-wait { padding: 6px 10px; border-radius: 6px; background: var(--mer-warn); color: var(--mer-panel); font-weight: 700; }
+.mer-ready { color: var(--mer-cyan); }

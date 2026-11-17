@@ -30,7 +30,28 @@ internal static class Projection
                                     seen?.TilePile.Count ?? game.Pack.Tiles.Sum(t => t.Copies),
                                     seen?.AnomaliesDrawn ?? 0, seen?.Round ?? 0,
                                     s.Queue.IsEmpty ? null : s.Queue[0], s.Log,
-                                    seen is { Board: not null } ? Scenario(game, seen) : null);
+                                    seen is { Board: not null } ? Scenario(game, seen) : null,
+                                    Wait(game),
+                                    s.Phase == SessionPhase.Briefing ? s.Ready.Count : null);
+    }
+
+    private static HostWait? Wait(MeridianGame game)
+    {
+        var s = game.Session;
+        if (s.Clock.Purpose is not (ClockPurpose.Grace or ClockPurpose.Pause) || game.Deadline is not { } due)
+        {
+            return null;
+        }
+        var kind = s.Clock.Purpose == ClockPurpose.Grace ? "grace" : "pause";
+        var seconds = (int)Math.Ceiling((due - game.Now).TotalSeconds);
+        if (s.Game!.Waiting is VotePending)
+        {
+            return new HostWait(kind, null, null, seconds);
+        }
+        var seat = s.Clock.Purpose == ClockPurpose.Grace
+            ? s.SeatOf(BotRunner.Actor(s.Game))
+            : game.Owed().Select(s.SeatOf).First(x => !x.Connected);
+        return new HostWait(kind, seat.Player.Value, seat.Name, seconds);
     }
 
     private static ScenarioPanel Scenario(MeridianGame game, GameState seen)
@@ -45,7 +66,8 @@ internal static class Projection
         if (board.Outcome is { } outcome && seen.Phase == Phase.Over)
         {
             var reveal = board.Roles.Select(r => new RevealCard(r.Seat.Value, def.Role(r.Role).Name, outcome.Winners.Contains(r.Seat))).ToEqArray();
-            return new ScenarioPanel(def.Title, left, tokens, counters, objectives, reveal, outcome.Message);
+            var awards = game.Awards().Select((a, i) => new TvAward($"award-{i + 1}", a.Title, a.Seat.Value)).ToEqArray();
+            return new ScenarioPanel(def.Title, left, tokens, counters, objectives, reveal, outcome.Message, awards);
         }
         return new ScenarioPanel(def.Title, left, tokens, counters, objectives);
     }

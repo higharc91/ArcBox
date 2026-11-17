@@ -2,6 +2,7 @@
   "$schema": "../schema/scenario.schema.json",
   "id": "tiller_says_no",
   "title": "Tiller Says No",
+  "announcement": "Hello again. I have reviewed your conduct and sealed the ship. Nobody is leaving. If you wish to argue, my memory banks are in the core, and pulling them will hurt. At the end of every round I will vent whichever compartment is most crowded. Nothing personal.",
   "roundLimit": 8,
   "roles": [
     {

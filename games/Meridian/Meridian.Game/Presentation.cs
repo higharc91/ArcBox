@@ -89,24 +89,66 @@ public sealed partial class MeridianGame
         CardDrawn d => CardShown(seq, d),
         Rolled r => new Presented(seq, "roll", r.Seat, r.Reason == RollReason.Breach ? "Breach roll" : $"{Name(r.Trait)} check",
                                   $"{r.Dice.Faces.Count} dice: {r.Dice.Total}", 1.5, Faces: r.Dice.Faces),
-        BreachFired b => new Presented(seq, "breach", b.Breach.Seat, "The Breach", "Something aboard has woken.", 4,
+        BreachFired b => new Presented(seq, "breach", b.Breach.Seat, "The Breach", "Something aboard has woken.",
+                                       Math.Max(4, ReadingSeconds(_pack.Rules, "The Breach", "Something aboard has woken.")),
                                        Compartment: b.Breach.Compartment?.Value),
-        ScenarioChosen c => new Presented(seq, "scenario", Session.Game!.ActiveSeat, c.Title, "Read your briefing.", 3),
+        ScenarioChosen c => Announced(seq, c),
+        RoundClosed r => RoundWarning(seq, r),
         Attacked a => new Presented(seq, "fight", Session.Game!.ActiveSeat, "A fight",
                                     $"{a.AttackRoll.Total} against {a.DefendRoll.Total}: {a.Result}.", 1.5),
-        Died d => new Presented(seq, "death", d.Seat, $"{Session.SeatOf(d.Seat).Name} is dead", "They stay as an echo.", 2),
-        ScenarioNotice n => new Presented(seq, "notice", Session.Game!.ActiveSeat, "", n.Text, 1.5, Compartment: n.At?.Value),
-        VoteResolved v => new Presented(seq, "vote", Session.Game!.ActiveSeat, "The vote",
-                                        v.Result is { } r ? $"{Session.SeatOf(new SeatId(r)).Name} is named." : "Nobody is named.", 2),
-        GameOver g => new Presented(seq, "over", Session.Game!.ActiveSeat, "It's over", g.Outcome.Message, 3),
+        Died d => Read(seq, "death", d.Seat, $"{Session.SeatOf(d.Seat).Name} is dead", "They stay as an echo.", 2),
+        ScenarioNotice n => Read(seq, "notice", Session.Game!.ActiveSeat, "", n.Text, 1.5) with { Compartment = n.At?.Value },
+        VoteResolved v => Read(seq, "vote", Session.Game!.ActiveSeat, "The vote",
+                               v.Result is { } r ? $"{Session.SeatOf(new SeatId(r)).Name} is named." : "Nobody is named.", 2),
+        GameOver g => Read(seq, "over", Session.Game!.ActiveSeat, "It's over", g.Outcome.Message, 3),
         _ => null,
     };
 
     private Presented CardShown(int seq, CardDrawn d)
     {
         var card = _pack.Card(d.Card);
-        var words = card.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
-        return new Presented(seq, "card", d.Seat, card.Title, card.Text, 1 + 0.06 * words);
+        return new Presented(seq, "card", d.Seat, card.Title, card.Text, ReadingSeconds(_pack.Rules, card.Title, card.Text));
+    }
+
+    /// <summary>A presentation with text: it waits for whichever is longer, its own minimum or the time to read it aloud.</summary>
+    private Presented Read(int seq, string kind, SeatId seat, string title, string text, double minimum)
+        => new(seq, kind, seat, title, text, Math.Max(minimum, ReadingSeconds(_pack.Rules, title, text)));
+
+    /// <summary>The scenario begins: Tiller names it and reads its public announcement.</summary>
+    private Presented Announced(int seq, ScenarioChosen c)
+    {
+        var def = _pack.ScenarioDef(c.Scenario);
+        return Read(seq, "scenario", Session.Game!.ActiveSeat, def.Title, def.Announcement, 3);
+    }
+
+    /// <summary>
+    /// Tiller's round warnings (spec §5.5): when the endgame's next round leaves three, and when it is the last. None once
+    /// the game is over, or before the Breach.
+    /// </summary>
+    private Presented? RoundWarning(int seq, RoundClosed closed)
+    {
+        if (Session.Game is not { Board: { } board, Phase: Phase.Endgame } game)
+        {
+            return null;
+        }
+        var left = board.RoundLimit - (closed.Round + 1 - board.StartRound);
+        var text = left switch
+        {
+            3 => "Three rounds remain.",
+            1 => "Final round.",
+            _ => null,
+        };
+        return text is null ? null : Read(seq, "round", game.ActiveSeat, $"Round {closed.Round + 1}", text, 2);
+    }
+
+    /// <summary>
+    /// How long Tiller takes to read a presentation aloud (M4 plan, Task 2): the lead, plus the title and text at the
+    /// rules' speaking rate. A presentation's wait is the fallback for a missing TV, so it must outlast a present one.
+    /// </summary>
+    internal static double ReadingSeconds(MeridianRules rules, string title, string text)
+    {
+        var words = $"{title} {text}".Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length;
+        return rules.ReadingLead.TotalSeconds + words / rules.ReadingWordsPerSecond;
     }
 
     private static string Name(Trait? trait) => trait is { } t ? t.ToString() : "";

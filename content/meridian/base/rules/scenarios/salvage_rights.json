@@ -2,6 +2,7 @@
   "$schema": "../schema/scenario.schema.json",
   "id": "salvage_rights",
   "title": "Salvage Rights",
+  "announcement": "Salvage claim registered. Under the law of the derelict, whoever carries the Prize out through the Airlock owns it. Its carrier will be slow. Everyone else will be armed. I take no position on what happens next.",
   "roundLimit": 10,
   "roles": [
     {

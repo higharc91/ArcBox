@@ -74,6 +74,19 @@ public sealed class ScenarioContractTests
         Assert.Contains(Validation.Check(wordy), e => e.Message.Contains("121 words"));
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(61)]
+    public void An_announcement_that_is_missing_or_over_60_words_is_refused(int words)
+    {
+        var pack = StubScenario.Pack((new StubScenario("alpha"), 3));
+        var bad = pack.WithScenarios(pack.Scenarios, defs: [StubScenario.Def("alpha") with
+        {
+            Announcement = string.Join(' ', Enumerable.Repeat("word", words)),
+        }]);
+        Assert.Contains(Validation.Check(bad), e => e.Where == "announcement" && e.Message.Contains($"{words} words"));
+    }
+
     /// <summary>
     /// On paper (M3 plan, Task 3): every scenario of spec §4.5, M7's included, against the primitives it needs. A scenario
     /// needing one that doesn't exist fails here, long before M7 tries to build it.
