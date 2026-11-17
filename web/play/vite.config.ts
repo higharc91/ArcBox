@@ -6,7 +6,19 @@ import { fileURLToPath } from "node:url";
 const here = (file: string) => fileURLToPath(new URL(file, import.meta.url));
 
 export default defineConfig({
-  plugins: [preact()],
+  plugins: [preact(), {
+    name: "signalr-function-annotations",
+    transform(code, id) {
+      if (!id.endsWith("/@microsoft/signalr/dist/esm/Utils.js")) return;
+      // SignalR 10 annotates two declarations as pure calls. Rollup already discards
+      // these invalid comments; clear only those comments, retaining source positions.
+      return {
+        code: code.replace(/\/\*#__PURE__\*\/ (?=function (?:getOsName|getRuntimeVersion)\()/g,
+          annotation => " ".repeat(annotation.length)),
+        map: null,
+      };
+    },
+  }],
   build: {
     outDir: "dist",
     emptyOutDir: true,

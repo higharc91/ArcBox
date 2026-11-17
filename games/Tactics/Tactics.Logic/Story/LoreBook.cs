@@ -23,7 +23,11 @@ public sealed record ArcBeat(string Id, string Kind, string? Place, string? Enco
 
 /// <summary>A chapter's story in one region: its beats, in the order they're offered.</summary>
 public sealed record Arc(string Id, int Chapter, string Region, string Title, ImmutableArray<ArcBeat> Beats,
-    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] bool SideAdventure = false);
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)] bool SideAdventure = false)
+{
+    /// <summary>Flags that scenes may set without advancing a beat, explicitly declared by the arc's content.</summary>
+    public ImmutableArray<string> SceneFlags { get; init; } = [];
+}
 
 /// <summary>
 /// The lore a game plays (lore spec §7), read from a pack's <c>lore/pack.json</c> and the files it lists: the arcs of <c>arcs.json</c>,
@@ -291,7 +295,7 @@ public sealed partial class LoreBook
         var where = $"the arc '{id}'";
         return new(id, Whole(e, "chapter", where), Required(e, "region", where), Optional(e, "title", where) ?? "",
             [.. List(e, "beats", where, required: true).Select(ReadBeat)],
-            e.TryGetProperty("sideAdventure", out var side) && side.GetBoolean());
+            e.TryGetProperty("sideAdventure", out var side) && side.GetBoolean()) { SceneFlags = Strings(e, "sceneFlags", where) };
     }
 
     private static ArcBeat ReadBeat(JsonElement e)
