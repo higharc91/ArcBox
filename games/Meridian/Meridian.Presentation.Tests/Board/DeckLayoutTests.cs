@@ -83,6 +83,24 @@ public sealed class DeckLayoutTests
     }
 
     [Fact]
+    public void A_side_deck_is_framed_on_what_has_been_explored()
+    {
+        var slot = new Box(1500, 150, 400, 420);
+        var few = new EqArray<CompartmentCard>([Room("a", DeckId.Command, 0, 0), Room("b", DeckId.Command, 0, 1)]);
+        Assert.Equal(64, DeckLayout.FrameSide(few, DeckId.Command, slot).Cell);
+        var wide = new EqArray<CompartmentCard>([Room("a", DeckId.Command, -6, 0), Room("b", DeckId.Command, 6, 0)]);
+        var cam = DeckLayout.FrameSide(wide, DeckId.Command, slot);
+        Assert.Equal(16, cam.Cell);
+        Assert.True(slot.Contains(DeckLayout.ToScreen(new Cell(DeckId.Command, -6, 0), cam, slot)));
+    }
+
+    [Theory]
+    [InlineData(64, false)]
+    [InlineData(128, true)]
+    public void Names_go_inside_tiles_only_when_they_fit_at_the_label_minimum(int cell, bool inside)
+        => Assert.Equal(inside, DeckLayout.NamesInside(cell));
+
+    [Fact]
     public void Framing_grows_in_steps_as_the_ship_does()
     {
         var rooms = new List<CompartmentCard> { Room("c0", DeckId.Habitat, 0, 0) };

@@ -97,14 +97,30 @@ public static class DeckLayout
         return new Camera((minX + maxX) / 2.0, (minY + maxY) / 2.0, cell);
     }
 
-    /// <summary>Frames a deck in a side-strip slot: the whole deck at the largest size that fits, on its explored centre.</summary>
-    public static Camera FrameSide(EqArray<CompartmentCard> rooms, DeckId deck, Box slot, int radius = DefaultRadius)
+    /// <summary>The cell sizes for the side strip: the main sizes and one smaller, for a large deck in a small slot.</summary>
+    public static readonly IReadOnlyList<int> SideCellSizes = [16, 32, 64];
+
+    /// <summary>
+    /// Frames a deck in a side-strip slot like the main area: its explored part at the largest size that fits, so a deck
+    /// with a few compartments is legible at a glance rather than a speck in a whole-deck frame.
+    /// </summary>
+    public static Camera FrameSide(EqArray<CompartmentCard> rooms, DeckId deck, Box slot)
     {
-        var full = 2 * radius + 1;
-        var cell = CellSizes.LastOrDefault(s => full * s <= slot.W && full * s <= slot.H, CellSizes[0] / 2);
         var (minX, maxX, minY, maxY) = Bounds(rooms, deck);
+        var spanX = maxX - minX + 1 + 2 * Margin;
+        var spanY = maxY - minY + 1 + 2 * Margin;
+        var cell = SideCellSizes.LastOrDefault(s => spanX * s <= slot.W && spanY * s <= slot.H, SideCellSizes[0]);
         return new Camera((minX + maxX) / 2.0, (minY + maxY) / 2.0, cell);
     }
+
+    /// <summary>
+    /// Whether compartment names fit inside their tiles at <paramref name="cell"/> px, at the 22 px label minimum
+    /// (M4 plan, Global constraints). Smaller, only the presented and the active seat's compartments get a name callout.
+    /// </summary>
+    public static bool NamesInside(int cell) => cell >= 128;
+
+    /// <summary>The smallest label on the TV, in 1080p pixels.</summary>
+    public const int LabelPx = 22;
 
     /// <summary>The centre of <paramref name="cell"/> on screen, for a camera over <paramref name="area"/>.</summary>
     public static Px ToScreen(Cell cell, Camera camera, Box area)

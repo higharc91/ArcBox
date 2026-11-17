@@ -10,7 +10,8 @@ namespace Meridian.Presentation.Tests;
 public sealed partial class BoundaryTests
 {
     /// <summary>Rules-side names the scene must never touch.</summary>
-    [GeneratedRegex(@"\b(Rules\.(Step|Legal)|Visibility|BotRunner|ExploreBot|PolicyBot|ScenarioRegistry|IScenario|GameState|Resolver|Command)\b")]
+    /// <remarks><c>Command</c> is a rules command, not the deck <c>DeckId.Command</c>.</remarks>
+    [GeneratedRegex(@"\b(Rules\.(Step|Legal)|Visibility|BotRunner|ExploreBot|PolicyBot|ScenarioRegistry|IScenario|GameState|Resolver|(?<!DeckId\.)Command)\b")]
     private static partial Regex Forbidden();
 
     public static string SceneDir => Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(BasePack.Root)!)!, "..",
@@ -35,5 +36,7 @@ public sealed partial class BoundaryTests
         Assert.Matches(Forbidden(), "var seen = Visibility.For(state, null);");
         Assert.DoesNotMatch(Forbidden(), "var view = json.Deserialize<MeridianHostView>(ArcJson.Options);");
         Assert.DoesNotMatch(Forbidden(), "var pack = PackLoader.Load(files, root);");
+        Assert.DoesNotMatch(Forbidden(), "var decks = new[] { DeckId.Command, DeckId.Habitat };");
+        Assert.Matches(Forbidden(), "Command next = new EndTurn(seat);");
     }
 }
