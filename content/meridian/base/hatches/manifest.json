@@ -70,6 +70,21 @@
       ]
     }
   },
+  "oneWay": {
+    "file": "one-way.f570d2cc0a27.png",
+    "sha256": "f570d2cc0a279d02e43df4be70e43f3c2c1bd84f5d6353f114b907c2d9bf7042",
+    "frameSize": [
+      64,
+      64
+    ],
+    "edge": "north",
+    "edgeBounds": [
+      23,
+      0,
+      41,
+      8
+    ]
+  },
   "animations": {
     "opening": {
       "full": {
@@ -135,20 +150,5 @@
         "reducedMotion": "show restState without animation"
       }
     }
-  },
-  "oneWay": {
-    "file": "one-way.f570d2cc0a27.png",
-    "sha256": "f570d2cc0a279d02e43df4be70e43f3c2c1bd84f5d6353f114b907c2d9bf7042",
-    "frameSize": [
-      64,
-      64
-    ],
-    "edge": "north",
-    "edgeBounds": [
-      23,
-      0,
-      41,
-      8
-    ]
   }
 }
