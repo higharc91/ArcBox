@@ -1,5 +1,9 @@
 # Art merge-gate repairs
 
+**Final result: PASS.** Complete full gate at frozen source `d505dd067a598138fbd62883d69be9d217adfbcc`: .NET 7,743/7,743, phone 601 plus production build, Node 24, Python 96, lore and documentation checks all pass. Zero build warnings/errors and zero skipped tests. CI stays manually disabled. [Machine-readable result](validation.json) · [Complete log](full-check.txt.gz). The final evidence commit changes documentation only; source-tree hashes are recorded.
+
+## Repair details and retained run history
+
 This separate fix keeps shipped gameplay, balance, recordings and authored copy intact while addressing the five failures blocking Meridian's art PRs.
 
 - `LoreBook` now retains the existing `sceneFlags` declarations from arcs.json, matching the Python lore checker. The strict scene-state test accepts only beat/choice flags or these explicit declarations. A negative regression injects an undeclared flag and must reject it; malformed declarations are rejected by the reader.
@@ -7,7 +11,7 @@ This separate fix keeps shipped gameplay, balance, recordings and authored copy 
 - Two Grisk expectations match the unchanged authored straight apostrophes. Assertions still require one exact cosmetic line, unchanged original events and deterministic output.
 - The bounty phone golden updates only narrative text to current main's resolved story and apostrophes. Gold, XP, class-specific trinket data and all other fields remain unchanged.
 
-Focused tests pass: BaseScene 12, StoryScreen 58 and Grisk; fixture verification, full gate and native font/layout proof are being completed before merge. Tests are neither skipped nor weakened; CI remains manually disabled.
+Focused BaseScene 12, StoryScreen 58, Grisk 8, storage 20 and caption contract 7 checks pass. The final full gate also verifies the bounty fixture without update mode. Native font/layout proof is retained. Tests are neither skipped nor weakened; CI remains manually disabled.
 
 The first full run exposed a pre-existing storage-test race at the final recovery assertion: the write counter increments before the recovery flag is cleared. That superseded run was stopped after diagnosis; its output is retained. The test now waits for both recovery signals before asserting, with the same deadline, retry bounds, exact write count and recovery assertion. Production storage code is unchanged. A complete full gate is restarted after focused storage verification; no final test is skipped.
 
@@ -15,7 +19,7 @@ The next gate caught an unnecessary computed property added to StoryCaption. The
 
 The complete default-parallel gate at source `87b8019fb54c4f6043e78ca02eb4a21c07875314` finished with **7,741 / 7,743 .NET tests passing**, zero skipped, and zero build warnings/errors. All five original failures and the strict caption-record equality checks pass. Two AI performance tests exceeded the unchanged 250ms p95 budget under concurrent modules (305.2ms overlapping hazards; 266.8ms conduction/surface choices). Phone 601 plus production build, Node 24, Python 96 (61 assets + 9 audio + 26 lore), lore and docs pass. The complete log is retained as `parallel-full.txt.gz`.
 
-`run-full-serial.sh` runs the unchanged full gate with a DOTNET passthrough that adds only `--max-parallel-test-modules 1` to test execution. It changes no source, filters, timing budgets or assertions and skips no tests. Serial validation is pending. The native font/layout screenshot was visually inspected; all three complete lines fit without reducing the existing font. No gameplay, human usability or physical-TV test is claimed.
+`run-full-serial.sh` runs the unchanged full gate with a DOTNET passthrough that adds only `--max-parallel-test-modules 1` to test execution. It changes no source, filters, timing budgets or assertions and skips no tests. This was an intermediate pending checkpoint; the completed passing result is recorded above. The native font/layout screenshot was visually inspected; all three complete lines fit without reducing the existing font. No gameplay, human usability or physical-TV test is claimed.
 
 The first serial execution session disappeared during the game module after Counter, Tactics Presentation/Logic, SDK, Redline Logic/Presentation and WorldTools passed. Its incomplete output is retained as `interrupted-serial.txt.gz`; it is not a passing gate. Orphaned binaries from this dedicated worktree were stopped before restarting with a detached launcher that writes an explicit exit-status file.
 
