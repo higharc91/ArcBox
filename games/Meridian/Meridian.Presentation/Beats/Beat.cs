@@ -1,3 +1,5 @@
+using Meridian.Presentation.Audio;
+
 namespace Meridian.Presentation.Beats;
 
 /// <summary>
@@ -20,12 +22,6 @@ public sealed record Beat(int Seq, string Kind, Presented Now, EqArray<BeatStep>
 
     /// <summary>How long a voice may overrun its estimate before the beat moves on without it.</summary>
     public const double VoiceGrace = 2.0;
-
-    /// <summary>The kinds Tiller reads aloud (M4 plan, Task 5 decides the words).</summary>
-    public static readonly IReadOnlySet<string> SpokenKinds = new HashSet<string>(StringComparer.Ordinal)
-    {
-        "card", "breach", "scenario", "notice", "vote", "over", "death", "round",
-    };
 
     /// <summary>The timeline, without waiting for the voice.</summary>
     public double Seconds => Steps.Sum(s => s.Seconds);
@@ -54,12 +50,11 @@ public sealed record Beat(int Seq, string Kind, Presented Now, EqArray<BeatStep>
         {
             return new Beat(now.Seq, now.Kind, now, [new BeatStep("show", 0.5)], false, 0, true);
         }
-        var speaks = SpokenKinds.Contains(now.Kind) && !string.IsNullOrWhiteSpace($"{now.Title}{now.Text}");
-        if (speaks)
+        if (TillerLines.For(now) is { } line)
         {
             // Panel in, then the voice, then a moment to take it in, then out: a second in all (the rules' reading lead).
             EqArray<BeatStep> spoken = [new BeatStep("in", 0.3, WaitsForVoice: true), new BeatStep("hold", 0.5), new BeatStep("out", 0.2)];
-            return new Beat(now.Seq, now.Kind, now, spoken, true, SpeakingSeconds(now, rules), false);
+            return new Beat(now.Seq, now.Kind, now, spoken, true, TillerLines.Seconds(line, rules), false);
         }
         EqArray<BeatStep> steps = now.Kind switch
         {
@@ -71,10 +66,6 @@ public sealed record Beat(int Seq, string Kind, Presented Now, EqArray<BeatStep>
         };
         return new Beat(now.Seq, now.Kind, now, Fit(steps, now.Seconds * SilentShare), false, 0, false);
     }
-
-    /// <summary>The voice's estimate: title and text at the rules' speaking rate.</summary>
-    public static double SpeakingSeconds(Presented now, MeridianRules rules)
-        => $"{now.Title} {now.Text}".Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length / rules.ReadingWordsPerSecond;
 
     private static EqArray<BeatStep> Fit(EqArray<BeatStep> steps, double limit)
     {

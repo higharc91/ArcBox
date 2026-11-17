@@ -1,5 +1,6 @@
 using ArcBox.Sdk.Content;
 using ArcBox.Server.Content;
+using ArcBox.Server.Speech;
 using Meridian.Game;
 using Microsoft.Extensions.Options;
 using MeridianPack = Meridian.Logic.RulesPack;
@@ -30,6 +31,7 @@ public static class MeridianServiceCollectionExtensions
             return string.IsNullOrWhiteSpace(forced) ? pack : pack.WithForcedScenario(forced);
         }));
         services.AddHostedService<MeridianWarmup>();
+        services.AddVoiceThemes(global::Meridian.Logic.MeridianVoices.All);
         services.AddArcGame(sp => new MeridianGame(sp.GetRequiredService<Lazy<MeridianPack>>()));
         return services;
     }

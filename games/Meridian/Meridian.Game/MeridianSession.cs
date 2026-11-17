@@ -99,5 +99,7 @@ public sealed record MeridianSession(
 /// An event the TV shows on its own before play moves on (spec §3.2): a reveal, a card, a roll, a sealed hatch or the
 /// Breach. <see cref="Seconds"/> is the fallback, used when the TV never says it has finished.
 /// </summary>
+/// <param name="Deck">For a card, which deck it came from: Tiller reads an Incident in full, other cards by title only.</param>
 public sealed record Presented(int Seq, string Kind, SeatId Seat, string Title, string Text, double Seconds,
-                               EqArray<int> Faces = default, string? Compartment = null);
+                               EqArray<int> Faces = default, string? Compartment = null,
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CardKind? Deck = null);

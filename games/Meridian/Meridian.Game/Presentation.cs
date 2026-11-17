@@ -107,7 +107,8 @@ public sealed partial class MeridianGame
     private Presented CardShown(int seq, CardDrawn d)
     {
         var card = _pack.Card(d.Card);
-        return new Presented(seq, "card", d.Seat, card.Title, card.Text, ReadingSeconds(_pack.Rules, card.Title, card.Text));
+        return new Presented(seq, "card", d.Seat, card.Title, card.Text, ReadingSeconds(_pack.Rules, card.Title, card.Text),
+                             Deck: card.Kind);
     }
 
     /// <summary>A presentation with text: it waits for whichever is longer, its own minimum or the time to read it aloud.</summary>

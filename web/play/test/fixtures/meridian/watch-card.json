@@ -11,7 +11,8 @@
       "text": "It\u0027s warm, and it hums when you think about machines.",
       "seconds": 6.944444444444444,
       "faces": [],
-      "compartment": null
+      "compartment": null,
+      "deck": "anomaly"
     }
   },
   "viewId": "v1",

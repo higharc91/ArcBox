@@ -2,6 +2,8 @@ using ArcBox.Sdk.Testing;
 using ArcBox.Server.Content;
 using ArcBox.Server.Games;
 using ArcBox.Server.Games.Meridian;
+using ArcBox.Server.Speech;
+using Microsoft.Extensions.Configuration;
 using ArcBox.Server.Tests.Speech.Support;
 using Meridian.Game;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,23 @@ public sealed class AddMeridianTests
         services.AddMeridian();
         services.AddSingleton<IGameRegistry, GameRegistry>();
         return services.BuildServiceProvider();
+    }
+
+    [Fact]
+    public void Tiller_is_a_voice_the_owner_can_retune()
+    {
+        var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["Speech:Voices:meridian.tiller:SpeakingRate"] = "0.9",
+        }).Build();
+        var services = new ServiceCollection();
+        services.AddLogging();
+        services.AddSpeech(config);
+        services.AddMeridian();
+        using var sp = services.BuildServiceProvider();
+        var tiller = sp.GetRequiredService<IVoiceThemeRegistry>().Find(global::Meridian.Logic.MeridianVoices.Tiller)!;
+        Assert.Equal(global::Meridian.Logic.MeridianVoices.All[0].Voice, tiller.Voice);
+        Assert.Equal(0.9, tiller.SpeakingRate);
     }
 
     [Fact]
