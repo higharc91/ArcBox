@@ -1,0 +1,32 @@
+{
+  "batch": "story372_2026_11_17_job4a-charon",
+  "source": "job4a.wav",
+  "sourceSha256": "2cbed48dd21d1d3625de62774c72bb9e9c4fee75f924cebb051bfd79dee4fe33",
+  "durationSeconds": 17.2,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Charon.cf3284bb",
+      "line": "ch1_granary_confess_1",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.",
+      "start": 0.0,
+      "end": 10.189,
+      "matchedWords": "14/23",
+      "wavSha256": "2b752a145193f54ff44b6cbca7f319314359cb148fe6c3eee17b54520a368a35"
+    },
+    {
+      "raw": "Charon.1d49a6c2",
+      "line": "ch1_mayor_close_4",
+      "speaker": "halden_varrow",
+      "preset": "Charon",
+      "text": "Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.",
+      "start": 10.189,
+      "end": 17.2,
+      "matchedWords": "12/21",
+      "wavSha256": "07590f900ac23743f91b30bbcdd1d4cd56d9bfa22aeafcf0514886cd48aeaf6e"
+    }
+  ]
+}

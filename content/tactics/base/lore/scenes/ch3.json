@@ -28,7 +28,7 @@
             {
               "id": "ch3_guest_right_arrive_3",
               "speaker": "lark",
-              "text": "Look who crossed the desert. I'm Lark, the songkeeper. I was beginning to think I'd have to give you a sad ending.",
+              "text": "Look who crossed the desert. The heroes of the ford, as I live and sing. I was beginning to think I'd have to give you a sad ending.",
               "mood": "happy",
               "direction": "delighted, half singing it"
             },
@@ -1485,7 +1485,7 @@
             {
               "id": "ch3_crypt_door_quiet_1",
               "speaker": "narrator",
-              "text": "The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, someone is chanting.",
+              "text": "The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, a necromancer is chanting.",
               "mood": "surprised"
             },
             {

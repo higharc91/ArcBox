@@ -1,0 +1,32 @@
+{
+  "batch": "story372_2026_11_17_job5-sadachbia-sadaltager",
+  "source": "job5.wav",
+  "sourceSha256": "c9808235ca821134a3d46b1594dc294ef6dca1055581b0f1c5f7e5f93bc82e13",
+  "durationSeconds": 16.52,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Sadachbia.e0850388",
+      "line": "ch2_corvin_beg_crypt_1",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "There's a Warden crypt in the Sunscar, sealed before the Fall. And they say the third ember came down in the crater beside it.",
+      "start": 0.0,
+      "end": 8.161,
+      "matchedWords": "17/24",
+      "wavSha256": "4493e7b7e7c70c17a25ed929234a4af5dedf8abca4fdd71372ad3853f6dac01f"
+    },
+    {
+      "raw": "Sadaltager.e3c40c27",
+      "line": "ch1_four_more_open_goal_1",
+      "speaker": "hooded_stranger",
+      "preset": "Sadaltager",
+      "text": "Gather them before she does. When you hold them all, you'll stand in Ember Keep with a choice to make, and I'd rather it were yours than hers.",
+      "start": 8.161,
+      "end": 16.52,
+      "matchedWords": "18/28",
+      "wavSha256": "7c401a1aa723b8f16081dcbb5ff8058d2b846c92bedcf99c4a066992c7aa125b"
+    }
+  ]
+}
