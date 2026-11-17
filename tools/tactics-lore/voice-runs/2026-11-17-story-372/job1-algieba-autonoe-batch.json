@@ -1,0 +1,229 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job1-algieba-autonoe",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Algieba"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Autonoe"
+      }
+    ],
+    "text": "A: <Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger. Mood: idle.> Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.\n<long pause>\nA: Maud's kettle still whistles in the memory. 'It was thrown,' she said, and her old eyes saw more than anyone in town.\n<long pause>\nA: The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently.\n<long pause>\nA: For three hundred years the Hearthflame burned in Ember Keep, and kept the whole Vale warm.\n<long pause>\nA: A century ago the Keep fell in a single night. The flame broke into five embers, and they came down across the Vale like stars. This is one of them.\n<long pause>\nA: Rook watches you lift the ember out of the riverbed, shrugs, and walks off into the dark. It sits warm in your pack.\n<long pause>\nA: Back in Emberwick, at the Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges.\n<long pause>\nA: Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby, the town archivist, meets you at the door, very pale.\n<long pause>\nA: The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, a necromancer is chanting.\n<long pause>\nA: A mason's note, in the margin: We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.\n<long pause>\nA: Pip caught up with you at the foot of the pass, and walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.\n<long pause>\nA: The fourth ember is somewhere up in Frostpeak Pass, where the mountain froze around it seventy years ago.\n<long pause>\nA: Far away, the river at the ford boils once. What Rook left of its ember crosses the sky, smaller than a fist, and drops into the hall to join its sisters.\n<long pause>\nA: Far away, the river at the ford boils once and goes still. A light crosses the sky, and the ford's ember drops into the hall to join its sisters.\n<long pause>\nA: Around the flame lies a red dragon. It came for the heat a century ago, and has slept coiled around the heart ever since. As the chanting rises, one eye opens.\n<long pause>\nA: Oswin bends back over his ledger. Whatever else you came to ask, it will have to wait.\n<long pause>\nB: Though I would like to know why the mayor had my granaries shut so early. He never did say.",
+    "segments": [
+      {
+        "raw": "Algieba.6cc69430",
+        "line": "ashmaw_death",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+        "renderText": "<Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger. Mood: idle.> Ashmaw lowers its head. The sliver of the ford's fallen ember in the wall gutters once, then crumbles into grey dust. Nothing remains to sell or carry. A heavy claw rests warm against the stone.",
+        "delivery": {
+          "direction": "Quiet, clear storyteller; intimate and grounded. Let the cave's silence linger.",
+          "mood": "idle"
+        },
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.2a6df25f",
+        "line": "ch1_camp_maud_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Maud's kettle still whistles in the memory. 'It was thrown,' she said, and her old eyes saw more than anyone in town.",
+        "renderText": "Maud's kettle still whistles in the memory. 'It was thrown,' she said, and her old eyes saw more than anyone in town.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.331fb10b",
+        "line": "ch1_camp_warmth_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently.",
+        "renderText": "The thought returns with the smell of woodsmoke: the warmth was lent, not given. You look into the coals a little differently.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.905c25d9",
+        "line": "ch1_docks_open_hearth_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "For three hundred years the Hearthflame burned in Ember Keep, and kept the whole Vale warm.",
+        "renderText": "For three hundred years the Hearthflame burned in Ember Keep, and kept the whole Vale warm.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.793020a6",
+        "line": "ch1_docks_open_hearth_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "A century ago the Keep fell in a single night. The flame broke into five embers, and they came down across the Vale like stars. This is one of them.",
+        "renderText": "A century ago the Keep fell in a single night. The flame broke into five embers, and they came down across the Vale like stars. This is one of them.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.c838dc15",
+        "line": "ch1_four_more_where_3",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Rook watches you lift the ember out of the riverbed, shrugs, and walks off into the dark. It sits warm in your pack.",
+        "renderText": "Rook watches you lift the ember out of the riverbed, shrugs, and walks off into the dark. It sits warm in your pack.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-211-ember-vote"
+        ]
+      },
+      {
+        "raw": "Algieba.1d3d9cf7",
+        "line": "ch2_bree_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Back in Emberwick, at the Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges.",
+        "renderText": "Back in Emberwick, at the Last Coal, late. The common room is empty, and the hearth burns low on its old shard, red at the edges.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.47bc74ce",
+        "line": "ch2_corvin_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby, the town archivist, meets you at the door, very pale.",
+        "renderText": "Emberwick's archive is two rooms above the chandler's, stacked to the rafters. Corvin Ashby, the town archivist, meets you at the door, very pale.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.4fd83570",
+        "line": "ch3_crypt_door_quiet_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, a necromancer is chanting.",
+        "renderText": "The door slides aside without a sound. Rows of bone Wardens stand at their posts, and on the dais, a necromancer is chanting.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.9e01da49",
+        "line": "ch4_greyhold_cage_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "A mason's note, in the margin: We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.",
+        "renderText": "A mason's note, in the margin: We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.4af4c978",
+        "line": "ch4_pilgrim_road_open_2",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Pip caught up with you at the foot of the pass, and walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.",
+        "renderText": "Pip caught up with you at the foot of the pass, and walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.49d5bec5",
+        "line": "ch4_pilgrim_road_open_ember_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "The fourth ember is somewhere up in Frostpeak Pass, where the mountain froze around it seventy years ago.",
+        "renderText": "The fourth ember is somewhere up in Frostpeak Pass, where the mountain froze around it seventy years ago.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.3facb131",
+        "line": "ch5_ford_ember_bargained_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Far away, the river at the ford boils once. What Rook left of its ember crosses the sky, smaller than a fist, and drops into the hall to join its sisters.",
+        "renderText": "Far away, the river at the ford boils once. What Rook left of its ember crosses the sky, smaller than a fist, and drops into the hall to join its sisters.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-211-ember-vote"
+        ]
+      },
+      {
+        "raw": "Algieba.ffdba83f",
+        "line": "ch5_ford_ember_guarded_open_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Far away, the river at the ford boils once and goes still. A light crosses the sky, and the ford's ember drops into the hall to join its sisters.",
+        "renderText": "Far away, the river at the ford boils once and goes still. A light crosses the sky, and the ford's ember drops into the hall to join its sisters.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-211-ember-vote"
+        ]
+      },
+      {
+        "raw": "Algieba.842e7106",
+        "line": "ch5_ritual_lead_wake_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Around the flame lies a red dragon. It came for the heat a century ago, and has slept coiled around the heart ever since. As the chanting rises, one eye opens.",
+        "renderText": "Around the flame lies a red dragon. It came for the heat a century ago, and has slept coiled around the heart ever since. As the chanting rises, one eye opens.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Algieba.fd80f22b",
+        "line": "ch5_the_archive_leave_1",
+        "speaker": "narrator",
+        "preset": "Algieba",
+        "text": "Oswin bends back over his ledger. Whatever else you came to ask, it will have to wait.",
+        "renderText": "Oswin bends back over his ledger. Whatever else you came to ask, it will have to wait.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-218-lark"
+        ]
+      },
+      {
+        "raw": "Autonoe.a6a1e8e7",
+        "line": "ch1_council_force_noble_2",
+        "speaker": "celandine_marrowby",
+        "preset": "Autonoe",
+        "text": "Though I would like to know why the mayor had my granaries shut so early. He never did say.",
+        "renderText": "Though I would like to know why the mayor had my granaries shut so early. He never did say.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-210-force-council"
+        ]
+      }
+    ]
+  }
+}

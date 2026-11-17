@@ -14,6 +14,12 @@
           "id": "open",
           "lines": [
             {
+              "id": "ch4_pilgrim_road_open_ember_1",
+              "speaker": "narrator",
+              "text": "The fourth ember is somewhere up in Frostpeak Pass, where the mountain froze around it seventy years ago.",
+              "mood": "idle"
+            },
+            {
               "id": "ch4_pilgrim_road_open_1",
               "speaker": "narrator",
               "text": "Snow, and silence, and the old Warden road climbing into the pass. Every mile there is a frozen shrine, and a candle nobody has lit in seventy years.",
@@ -22,7 +28,7 @@
             {
               "id": "ch4_pilgrim_road_open_2",
               "speaker": "narrator",
-              "text": "Pip walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.",
+              "text": "Pip caught up with you at the foot of the pass, and walks at the front. Nobody agreed that she could come. Nobody managed to stop her, either.",
               "mood": "idle"
             },
             {
@@ -551,7 +557,7 @@
             {
               "id": "ch4_greyhold_cage_2",
               "speaker": "narrator",
-              "text": "We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.",
+              "text": "A mason's note, in the margin: We were told to build a hearth. We have built a cage. Gods forgive us if the thing inside ever wakes and wants to go home.",
               "mood": "sad",
               "direction": "read as the mason's words, quiet and ashamed"
             },
