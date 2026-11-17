@@ -429,7 +429,7 @@
         },
         {
           "id": "town_barmaid_ember",
-          "text": "Bree's hearth is the warmest room in town again. Funny how that's starting to matter.",
+          "text": "Bree's old shard is the only warm hearth on the street now. Funny how that's starting to matter.",
           "speaker": "townsfolk_barmaid",
           "mood": "idle",
           "direction": "practical, warm, quick but clear",

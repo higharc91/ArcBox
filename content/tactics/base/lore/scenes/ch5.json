@@ -535,6 +535,11 @@
               "id": "pip",
               "label": "Pip, tell him about the hand.",
               "to": "pip"
+            },
+            {
+              "id": "done",
+              "label": "That's everything we came for.",
+              "to": "leave"
             }
           ]
         },
@@ -731,6 +736,18 @@
               "speaker": "narrator",
               "text": "Somewhere among the shelves, in a shadow the red light doesn't reach, someone sighs.",
               "mood": "surprised"
+            }
+          ],
+          "next": "ask"
+        },
+        {
+          "id": "leave",
+          "lines": [
+            {
+              "id": "ch5_the_archive_leave_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Oswin bends back over his ledger. Whatever else you came to ask, it will have to wait."
             }
           ],
           "end": true
@@ -1364,6 +1381,58 @@
               "speaker": "narrator",
               "text": "She sets it down with the others, and stays, faint and bright, to watch.",
               "mood": "sad"
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_ford_ember_guarded",
+      "beat": "ch5_the_last_vote",
+      "title": "The Ford's Ember",
+      "requires": [
+        "ch1_ember_guarded"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_ford_ember_guarded_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Far away, the river at the ford boils once and goes still. A light crosses the sky, and the ford's ember drops into the hall to join its sisters."
+            }
+          ],
+          "end": true
+        }
+      ]
+    },
+    {
+      "id": "ch5_ford_ember_bargained",
+      "beat": "ch5_the_last_vote",
+      "title": "What Rook Left",
+      "requires": [
+        "ch1_ember_bargained"
+      ],
+      "cast": [
+        "narrator"
+      ],
+      "start": "open",
+      "nodes": [
+        {
+          "id": "open",
+          "lines": [
+            {
+              "id": "ch5_ford_ember_bargained_open_1",
+              "speaker": "narrator",
+              "mood": "idle",
+              "text": "Far away, the river at the ford boils once. What Rook left of its ember crosses the sky, smaller than a fist, and drops into the hall to join its sisters."
             }
           ],
           "end": true

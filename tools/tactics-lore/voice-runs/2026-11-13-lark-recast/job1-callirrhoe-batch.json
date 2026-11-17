@@ -1,0 +1,269 @@
+{
+  "request": {
+    "id": "lark_recast_2026_11_13_job1-callirrhoe",
+    "issues": [
+      "#218",
+      "#207",
+      "#339"
+    ],
+    "voice": "Callirrhoe",
+    "pitchAtImport": {
+      "lark": -2
+    },
+    "text": "Ah, a battle! Do try to do something worth a verse.\n<long pause>\nGather round, gather round, and mind the pointy end.\n<long pause>\nEvery good song has a fight in the middle. Here's ours.\n<long pause>\nHa! That'll rhyme with something.\n<long pause>\nHm. We'll leave that out of the ballad.\n<long pause>\nOh, that's the second verse, right there!\n<long pause>\nAnd here the singer pauses, out of respect.\n<long pause>\nNo, no, no. That's not how this one goes!\n<long pause>\nOh, this is the sad part, isn't it. I hate the sad part.\n<long pause>\nBless you. You'll get a chorus all your own.\n<long pause>\nSomeone's growing into their legend.\n<long pause>\nAnd they lived, and the song went on. For now.\n<long pause>\nThere's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.\n<long pause>\nSleep now, sleep now, the river is wide, and the fire keeps watch on the other side.\n<long pause>\nSongs don't burn. That's why I keep them.\n<long pause>\nHum along if you know it. Nobody ever knows it.\n<long pause>\nYou'll want to tell this one well, when you're old. I'd start practising.\n<long pause>\nLark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.\n<long pause>\nShe's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.\n<long pause>\nSo. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.\n<long pause>\nYsolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.\n<long pause>\nIt wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.\n<long pause>\nNot here. Ask me again somewhere colder. Some things you only say where your breath shows.\n<long pause>\nBut watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.\n<long pause>\nQuickly, before she's offended. Drink half the water. Pour the rest on the sand, for the farms that burned.\n<long pause>\nThat's the point. You give the sand something you can't spare. Then they give you everything they have.\n<long pause>\nEvery note. Well, you mangled the second verse, but only a little.\n<long pause>\nWhile you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
+    "segments": [
+      {
+        "raw": "Callirrhoe.5fddfefa",
+        "line": "bark_lark_battle_start_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Ah, a battle! Do try to do something worth a verse.",
+        "renderText": "Ah, a battle! Do try to do something worth a verse.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.de944416",
+        "line": "bark_lark_battle_start_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Gather round, gather round, and mind the pointy end.",
+        "renderText": "Gather round, gather round, and mind the pointy end.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.3bde5f1b",
+        "line": "bark_lark_battle_start_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Every good song has a fight in the middle. Here's ours.",
+        "renderText": "Every good song has a fight in the middle. Here's ours.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.d086c0eb",
+        "line": "bark_lark_hit_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Ha! That'll rhyme with something.",
+        "renderText": "Ha! That'll rhyme with something.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.f92350d2",
+        "line": "bark_lark_miss_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Hm. We'll leave that out of the ballad.",
+        "renderText": "Hm. We'll leave that out of the ballad.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.e508c36a",
+        "line": "bark_lark_crit_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Oh, that's the second verse, right there!",
+        "renderText": "Oh, that's the second verse, right there!",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.a7f993ef",
+        "line": "bark_lark_kill_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "And here the singer pauses, out of respect.",
+        "renderText": "And here the singer pauses, out of respect.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.5d3e0941",
+        "line": "bark_lark_ally_down_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "No, no, no. That's not how this one goes!",
+        "renderText": "No, no, no. That's not how this one goes!",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.422ffd32",
+        "line": "bark_lark_low_hp_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Oh, this is the sad part, isn't it. I hate the sad part.",
+        "renderText": "Oh, this is the sad part, isn't it. I hate the sad part.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.dc98c044",
+        "line": "bark_lark_healed_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Bless you. You'll get a chorus all your own.",
+        "renderText": "Bless you. You'll get a chorus all your own.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.9018c1b7",
+        "line": "bark_lark_level_up_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Someone's growing into their legend.",
+        "renderText": "Someone's growing into their legend.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.264a3795",
+        "line": "bark_lark_victory_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "And they lived, and the song went on. For now.",
+        "renderText": "And they lived, and the song went on. For now.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.3caf7775",
+        "line": "bark_lark_camp_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "There's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.",
+        "renderText": "There's a last verse to the Song of the Seven. Nobody's sung it in two hundred years. I'll find it.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.2199af82",
+        "line": "bark_lark_camp_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Sleep now, sleep now, the river is wide, and the fire keeps watch on the other side.",
+        "renderText": "Sleep now, sleep now, the river is wide, and the fire keeps watch on the other side.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.269500cc",
+        "line": "bark_lark_camp_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Songs don't burn. That's why I keep them.",
+        "renderText": "Songs don't burn. That's why I keep them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.5b981176",
+        "line": "bark_lark_camp_4",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Hum along if you know it. Nobody ever knows it.",
+        "renderText": "Hum along if you know it. Nobody ever knows it.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.ad738270",
+        "line": "bark_lark_camp_5",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "You'll want to tell this one well, when you're old. I'd start practising.",
+        "renderText": "You'll want to tell this one well, when you're old. I'd start practising.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.cdf90c18",
+        "line": "ch2_lark_inn_corner_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Lark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.",
+        "renderText": "Lark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.7ad6da46",
+        "line": "ch2_lark_inn_corner_3",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "She's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.",
+        "renderText": "She's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.f12cc394",
+        "line": "ch2_lark_inn_corner_4",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "So. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.",
+        "renderText": "So. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.7ca32ff7",
+        "line": "ch2_lark_inn_verse_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Ysolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.",
+        "renderText": "Ysolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.dd23a0a2",
+        "line": "ch2_lark_inn_verse_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "It wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.",
+        "renderText": "It wasn't the last verse anyway. The fey don't have it either. Whoever kept that one never used the fire.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.d4cbfa14",
+        "line": "ch2_lark_inn_following_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Not here. Ask me again somewhere colder. Some things you only say where your breath shows.",
+        "renderText": "Not here. Ask me again somewhere colder. Some things you only say where your breath shows.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.71fb577e",
+        "line": "ch2_lark_inn_following_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "But watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.",
+        "renderText": "But watch the hooded one by the door. They've been a step ahead of you since the ford, and a step ahead of me for twenty years.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.0219a259",
+        "line": "ch3_guest_right_arrive_4",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Quickly, before she's offended. Drink half the water. Pour the rest on the sand, for the farms that burned.",
+        "renderText": "Quickly, before she's offended. Drink half the water. Pour the rest on the sand, for the farms that burned.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.a409a62f",
+        "line": "ch3_guest_right_why_1",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "That's the point. You give the sand something you can't spare. Then they give you everything they have.",
+        "renderText": "That's the point. You give the sand something you can't spare. Then they give you everything they have.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.36a23ba4",
+        "line": "ch3_guest_right_sing_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "Every note. Well, you mangled the second verse, but only a little.",
+        "renderText": "Every note. Well, you mangled the second verse, but only a little.",
+        "delivery": null
+      },
+      {
+        "raw": "Callirrhoe.3170bb52",
+        "line": "ch3_guest_right_law_2",
+        "speaker": "lark",
+        "preset": "Callirrhoe",
+        "text": "While you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
+        "renderText": "While you sleep under this cloth, every Scarwalker in the Sunscar will bleed for you.",
+        "delivery": null
+      }
+    ]
+  }
+}

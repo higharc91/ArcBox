@@ -1998,7 +1998,7 @@
             {
               "id": "ch1_council_force_noble_2",
               "speaker": "celandine_marrowby",
-              "text": "Though I would like to know why the town's own granaries were shut so early. The mayor never did say.",
+              "text": "Though I would like to know why the mayor had my granaries shut so early. He never did say.",
               "mood": "idle",
               "direction": "silk over steel"
             }
@@ -3068,7 +3068,7 @@
               "id": "ch1_four_more_where_3",
               "speaker": "narrator",
               "mood": "idle",
-              "text": "The lantern on the pier gutters. When it steadies you are alone, and the ford's ember sits warm in your pack."
+              "text": "Rook watches you lift the ember out of the riverbed, shrugs, and walks off into the dark. It sits warm in your pack."
             }
           ],
           "end": true
