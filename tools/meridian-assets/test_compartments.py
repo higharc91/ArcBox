@@ -47,6 +47,13 @@ class CompartmentTests(unittest.TestCase):
                 with self.assertRaises(ValueError): audit_compartments.audit(self.pack,art.REFERENCE)
             finally: path.write_bytes(original)
 
+        path=self.pack/'hatches/manifest.json'; original=path.read_bytes(); value=json.loads(original)
+        del value['oneWay']
+        try:
+            path.write_text(json.dumps(value))
+            with self.assertRaises(ValueError): audit_compartments.audit(self.pack,art.REFERENCE)
+        finally: path.write_bytes(original)
+
     def test_corrupt_asset_is_rejected(self):
         value=json.loads((self.pack/'tiles/manifest.json').read_text())['tiles']['bridge']['variants']['command']
         path=self.pack/'tiles'/value['file']; original=path.read_bytes()
@@ -102,6 +109,9 @@ class CompartmentTests(unittest.TestCase):
 
     def test_manifest_motion_is_one_shot_with_reduced_motion_rest_state(self):
         manifest=json.loads((self.pack/'hatches/manifest.json').read_text())
+        self.assertEqual({'open','closed','sealed','none'},set(manifest['states']))
+        self.assertEqual([64,64],manifest['oneWay']['frameSize'])
+        self.assertEqual('north',manifest['oneWay']['edge'])
         for kind,modes in manifest['animations'].items():
             self.assertEqual({'full','reduced'},set(modes))
             for clip in modes.values():

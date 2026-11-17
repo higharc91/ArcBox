@@ -452,7 +452,7 @@ def build(root=ROOT,reference=REFERENCE):
     backgrounds={deck:style.immutable(pack,'tiles','background-'+deck,background(deck)) for deck in DECKS}
     unknown=style.immutable(pack,'tiles','unexplored',background('habitat',True))
     states={state:{**style.immutable(pack,'hatches',state,style.hatch(state)), 'frameSize':[64,64], 'edge':'north','edgeBounds':[23,0,41,8]} for state in style.STATES}
-    states['one_way']={**style.immutable(pack,'hatches','one-way',one_way()),'frameSize':[64,64],'edge':'north','edgeBounds':[23,0,41,8]}
+    one_way_entry={**style.immutable(pack,'hatches','one-way',one_way()),'frameSize':[64,64],'edge':'north','edgeBounds':[23,0,41,8]}
     animations={}
     for kind in ['opening','sealing']:
         animations[kind]={}
@@ -462,7 +462,7 @@ def build(root=ROOT,reference=REFERENCE):
                 'frameSize':[64,64],'frames':len(frames),'fps':10,'seconds':len(frames)/10,'loop':False,'blend':'alpha',
                 'restState':'open' if kind=='opening' else 'sealed','reducedMotion':'show restState without animation'}
     style.write_json(pack/'tiles/manifest.json',{**common,'tiles':entries,'backgrounds':backgrounds,'unexplored':unknown})
-    style.write_json(pack/'hatches/manifest.json',{**common,'states':states,'animations':animations})
+    style.write_json(pack/'hatches/manifest.json',{**common,'states':states,'oneWay':one_way_entry,'animations':animations})
     review_page(review,pack,all_rules,entries,animations)
     return pack,review
 

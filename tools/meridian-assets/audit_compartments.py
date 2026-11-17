@@ -35,7 +35,10 @@ def audit(pack, reference):
             for child in value: visit(child,folder)
     visit(manifest,pack/'tiles')
     hatches=json.loads((pack/'hatches/manifest.json').read_text())
-    if set(hatches['states'])!={'open','closed','sealed','none','one_way'}: raise ValueError('missing hatch state')
+    if set(hatches['states'])!={'open','closed','sealed','none'}: raise ValueError('missing or unknown hatch state')
+    one_way=hatches.get('oneWay')
+    if not isinstance(one_way,dict) or not {'file','sha256','frameSize'}<=one_way.keys() or one_way['frameSize']!=[64,64]:
+        raise ValueError('missing one-way shaft overlay')
     visit(hatches,pack/'hatches')
     return {'tileIds':len(expected),'physicalTiles':sum(r.get('copies',1) for r in expected.values()),
             'variants':sum(len(v['variants']) for v in actual.values()),'referencedAssets':count}
