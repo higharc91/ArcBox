@@ -138,7 +138,7 @@ public sealed class StoryScreenTests
             var caption = Screen(Showing(1, LineOf(line))).Caption!;
             var rows = caption.Rows.Select(r => string.Concat(r.Select(run => run.Text))).ToArray();
             Assert.True(rows.Length <= StoryScreen.CaptionRows, $"{line.Id} takes {rows.Length} rows");
-            Assert.All(rows, row => Assert.True(row.Length <= caption.Columns, $"{line.Id}: '{row}'"));
+            Assert.All(rows, row => Assert.True(row.Length <= StoryScreen.CaptionColumnsFor(caption.Narrator), $"{line.Id}: '{row}'"));
             Assert.Equal(Plain(line.Text), Plain(string.Join(" ", rows)));     // nothing lost, nothing added but the quotes
         }
     }
@@ -149,10 +149,10 @@ public sealed class StoryScreenTests
         var line = AllLines().Select(pair => pair.Item2).Single(l => l.Id == "ashmaw_death");
         var caption = Screen(Showing(1, LineOf(line))).Caption!;
         Assert.True(caption.Narrator);
-        Assert.Equal(72, caption.Columns);
+        Assert.Equal(72, StoryScreen.CaptionColumnsFor(caption.Narrator));
         Assert.Equal(3, caption.Rows.Length);
         Assert.Equal(Plain(line.Text), Plain(Words(caption)));
-        Assert.Equal(64, Screen(Showing(1, Unvoiced(text: "Spoken words.", speaker: "old_ferryman"))).Caption!.Columns);
+        Assert.Equal(64, StoryScreen.CaptionColumnsFor(Screen(Showing(1, Unvoiced(text: "Spoken words.", speaker: "old_ferryman"))).Caption!.Narrator));
     }
 
     private static string Plain(string text) => text.Replace("“", "").Replace("”", "").Replace("’", "'").Replace("‘", "'");
