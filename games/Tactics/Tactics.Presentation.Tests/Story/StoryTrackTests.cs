@@ -42,7 +42,7 @@ public sealed class StoryTrackTests
     {
         var lines = AllLines().Where(l => !l.Scene.Camp).Where(l => l.Scene.Id.StartsWith("ch1_", StringComparison.Ordinal)).Select(l => l.Line).ToArray();
 
-        Assert.Equal(255, lines.Length);       // when this moves, check the new lines were rendered
+        Assert.Equal(261, lines.Length);       // when this moves, check the new lines were rendered
         Assert.All(lines, line =>
         {
             var clip = Clips.ForLine(line.Id);
