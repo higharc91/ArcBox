@@ -20,5 +20,10 @@
   "fullGate": "pending after separate baseline repairs; no merge authorized by these focused checks alone",
   "runtimeIntegration": false,
   "physicalTvOrHumanRecognitionTest": false,
-  "paidGenerationCU": 0
+  "paidGenerationCU": 0,
+  "meridianTests": {
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0
+  }
 }
