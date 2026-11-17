@@ -17,11 +17,9 @@ namespace ArcBox.Host.Games.Meridian;
 /// </summary>
 public partial class MeridianScene : Control, IGameScene, ISignalingScene, IContentScene
 {
-    private Label _banner = null!;
-    private Label _mode = null!;
-    private HBoxContainer _seats = null!;
     // Made with the scene: the shell gives it content before it enters the tree (Main.ShowGame).
     private readonly BoardCanvas _board = new();
+    private readonly HudCanvas _hud = new();
     private Screenshotter? _shots;
     private Director _director = null!;
     private MeridianRules _rules = new();
@@ -62,15 +60,9 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         _board.Use(_director);
         AddChild(_board);
 
-        // The starfield is the background (not the shell's broadcast backdrop), and the top bar keeps to the HUD band
-        // DeckLayout leaves for it. Task 7 replaces this bar with the HUD.
-        SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
-        _banner = ArcTheme.Label("", ArcTheme.Bold, 30);
-        _mode = ArcTheme.Meta("", 18);
-        _seats = ArcTheme.HBox(18);
-        var bar = ArcTheme.Margin(24, 10, 24, 0, ArcTheme.VBox(2, ArcTheme.HBox(16, _mode, _banner), _seats));
-        bar.SetAnchorsAndOffsetsPreset(LayoutPreset.TopWide);
-        AddChild(bar);
+        SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);   // the starfield is the background, not the shell's backdrop
+        _hud.Use(_director);
+        AddChild(_hud);
     }
 
     public override void _Process(double delta)
@@ -96,8 +88,10 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             _shotMode = mode;
             _shots.Capture($"meridian-{mode.ToString().ToLowerInvariant()}");
         }
+        // The held moment of a spoken beat, otherwise half-way through the last step.
         if (_director.Current is { } beat && beat.Seq != _shotSeq && _director.Position is { Progress: >= 0.5 } at
-            && ReferenceEquals(at.Step, beat.Steps[^1]) && (_shotKinds.Add(beat.Kind) || beat.Seq % 8 == 0))
+            && ReferenceEquals(at.Step, beat.Steps.FirstOrDefault(s => s.Name == "hold") ?? beat.Steps[^1])
+            && (_shotKinds.Add(beat.Kind) || beat.Seq % 8 == 0))
         {
             _shotSeq = beat.Seq;
             _shots.Capture($"meridian-{beat.Seq:000}-{beat.Kind}");
@@ -111,17 +105,5 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             return;
         }
         _director.Receive(v);
-        var screen = TvScreen.Of(v);
-        _banner.Text = screen.Banner;
-        _mode.Text = screen.Mode.ToString().ToUpperInvariant();
-        foreach (var child in _seats.GetChildren())
-        {
-            child.QueueFree();
-        }
-        foreach (var seat in screen.Seats)
-        {
-            var text = seat.Crew is { } crew ? $"{seat.Name} · {crew}" : seat.Name;
-            _seats.AddChild(ArcTheme.Label(seat.Active ? $"▶ {text}" : text, ArcTheme.Bold, 22, ArcTheme.PlayerColour(seat.Colour)));
-        }
     }
 }

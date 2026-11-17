@@ -88,7 +88,7 @@ public sealed partial class MeridianGame
                                        "Nothing is left that fits behind it.", 0.8, Compartment: h.Compartment.Value),
         CardDrawn d => CardShown(seq, d),
         Rolled r => new Presented(seq, "roll", r.Seat, r.Reason == RollReason.Breach ? "Breach roll" : $"{Name(r.Trait)} check",
-                                  $"{r.Dice.Faces.Count} dice: {r.Dice.Total}", 1.5, Faces: r.Dice.Faces),
+                                  $"{r.Dice.Faces.Count} {(r.Dice.Faces.Count == 1 ? "die" : "dice")}: {r.Dice.Total}", 1.5, Faces: r.Dice.Faces),
         BreachFired b => new Presented(seq, "breach", b.Breach.Seat, "The Breach", "Something aboard has woken.",
                                        Math.Max(4, ReadingSeconds(_pack.Rules, "The Breach", "Something aboard has woken.")),
                                        Compartment: b.Breach.Compartment?.Value),
