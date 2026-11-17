@@ -1,5 +1,7 @@
 # Meridian eight-crew assets / #333
 
+Current combined merge status: [integration report](../integration/README.md). The per-set gate results below are retained historical evidence.
+
 Original deterministic pixel art following the owner-approved Meridian style and the request for stronger TV-readable features and appropriate animation. The art branches are synchronized with main `22ce39b7` (new story/voice fixes); this crew change itself modifies no existing Tactics art, voices, gameplay or balance. No paid generation: 0 CU.
 
 ## Delivered

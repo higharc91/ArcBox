@@ -1,5 +1,7 @@
 # Meridian style samples — issue #331
 
+Current combined merge status: [integration report](../integration/README.md). The per-set gate results below are retained historical evidence.
+
 Original code-built art for the first Meridian review. No paid generation, new game rules or changes to existing Wardenflame art/audio. `index.html` is the interactive review page; serve the repository root with `python3 -m http.server 4182` and open `/docs/superpowers/reports/meridian-art/style/index.html`.
 
 ## Delivered

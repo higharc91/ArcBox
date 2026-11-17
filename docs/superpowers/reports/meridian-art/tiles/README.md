@@ -1,5 +1,7 @@
 # Meridian compartment set / #332
 
+Current combined merge status: [integration report](../integration/README.md). The per-set gate results below are retained historical evidence.
+
 The owner approved the refined #331 visual direction in conversation on 2026-11-17 and requested continued quality improvement and appropriate animation. A subsequent instruction emphasized larger room features for TV. This set keeps the 64px source / 128px TV-grid contract and enlarges the equipment silhouettes and connected highlights inside it.
 
 ## Delivered

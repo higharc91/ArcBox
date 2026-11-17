@@ -121,5 +121,6 @@
     "tools/meridian-assets/review-sheet.py": "ebaf1b56dbc58e6643fc4fa828707b3a69582fc0de3ae178cf8e28a33f6d952a",
     "tools/meridian-assets/test_build.py": "161a3edec2bb7212cb73ad43ac8f1fea228a8164bd938bdd380c2823c6586b3f",
     "tools/meridian-assets/test_compartments.py": "1896262062e6c859c16c9adcd0ca28a526c0d6dbfeb8a1999206440a26c2ebdf"
-  }
+  },
+  "integrationReport": "../integration/README.md"
 }

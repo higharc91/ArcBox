@@ -65,5 +65,6 @@
   "sourceSha256": {
     "tools/meridian-assets/build.py": "ea888c8718e137d4c645fda7eb72bf52c51e1f20835cc55096fe3bfac9fd8230",
     "tools/meridian-assets/test_build.py": "161a3edec2bb7212cb73ad43ac8f1fea228a8164bd938bdd380c2823c6586b3f"
-  }
+  },
+  "integrationReport": "../integration/README.md"
 }
