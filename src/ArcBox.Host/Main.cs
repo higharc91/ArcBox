@@ -141,6 +141,9 @@ public partial class Main : Control
             GD.Print("Meridian demo: no server connection");
             ShowGame("meridian");
             var pack = System.IO.Path.GetFullPath(System.IO.Path.Combine(ProjectSettings.GlobalizePath("res://"), "..", "..", "content", "meridian", "base"));
+            // An art review: a whole pack (rules and art) elsewhere, e.g. the repository's pack with an art branch's sets over it.
+            if (System.Environment.GetEnvironmentVariable("ARCBOX_MERIDIAN_PACK") is { Length: > 0 } reviewPack)
+                pack = System.IO.Path.GetFullPath(reviewPack);
             (_scene as IContentScene)?.SetContentRoots(new Dictionary<string, string> { ["base"] = pack });
             var feeder = new Games.Meridian.MeridianDemoFeeder(recording, view => OnHostView(new HostViewEvent("meridian", view)));
             if (_scene is ISignalingScene signaling) signaling.Signal = feeder.Signal;

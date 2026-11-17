@@ -68,6 +68,14 @@ The same layout, rendered at 1920×1080 and scaled by the engine.
 | ![Reveal at 720p](720-01-reveal-callout.png) | ![Card at 720p](720-02-card.png) |
 | ![Read your phone at 720p](720-03-read-your-phone.png) | ![Debrief at 720p](720-04-debrief.png) |
 
+## With the approved art samples (M5, Task 2)
+
+These are the samples from draft PR #357, laid over the repository's pack: four tiles (Bridge, Med Bay, Reactor Core and Airlock), all four hatch states, and Ines Okafor's sprite. Rooms with art and rooms without sit side by side at the same size. The hatch art is turned to every side, and the placeholders' symbol glyphs give way to the art's floor markings. A room's name keeps the 22 px minimum, on a dark band over art.
+
+![The start layout with sample art](art-01-samples-start.png)
+
+To make a shot like this, run `ARCBOX_MERIDIAN_PACK=<a copy of content/meridian/base with an art branch's sets over it>` with `--meridian-demo`.
+
 ## For the first game night
 
 These are things a person must judge that a screenshot can't:

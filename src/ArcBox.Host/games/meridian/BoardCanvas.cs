@@ -223,7 +223,9 @@ public partial class BoardCanvas : Node2D
     {
         var half = cell / 2;
         var box = new Rect2(c - new Vector2(half, half), new Vector2(cell, cell));
-        if (_art.Tile(tile.Tile) is { } art && Texture(art.Path) is { } tex)
+        var art = _art.Tile(tile.Tile, tile.At.Deck);   // the deck's variant, else the single art (M5 review focus 3)
+        var drawnArt = art is not null && Texture(art.Path) is not null;
+        if (art is not null && Texture(art.Path) is { } tex)
         {
             DrawSetTransform(c, Mathf.DegToRad(tile.Degrees), Vector2.One);
             DrawTextureRect(tex, new Rect2(-half, -half, cell, cell), false, new Color(1, 1, 1, alpha));
@@ -250,7 +252,7 @@ public partial class BoardCanvas : Node2D
             DrawHatch(c, cell, side, state, accent, alpha);
         }
 
-        if (tile.Symbol is { } symbol)
+        if (tile.Symbol is { } symbol && !drawnArt)   // the art carries its own floor marking (#332)
         {
             var glyph = BoardStyle.Symbol(symbol);
             var r = Math.Max(3f, cell * 0.09f);
@@ -272,6 +274,12 @@ public partial class BoardCanvas : Node2D
             if (widest > room)
             {
                 size = Math.Max(18, (int)(size * room / widest));
+            }
+            if (drawnArt)
+            {
+                // Over art, a dark band behind the name keeps it legible on a busy floor (M5 plan, Task 2).
+                var lines = ArcTheme.SemiBold.GetMultilineStringSize(name, HorizontalAlignment.Center, room, size, 2).Y;
+                DrawRect(new Rect2(c.X - half + 3, c.Y - half * 0.36f - size, cell - 6, lines + size * 0.3f), new Color(0.03f, 0.03f, 0.06f, 0.62f * alpha));
             }
             DrawMultilineString(ArcTheme.SemiBold, c + new Vector2(-room / 2, -half * 0.36f), name,
                                 HorizontalAlignment.Center, room, size, 2, new Color(1, 1, 1, 0.92f * alpha));
