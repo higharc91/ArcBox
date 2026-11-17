@@ -2,7 +2,7 @@
 
 This integrates the owner-approved style, TV-refined compartments, complete crew and first-wave cards. Per-set review records: #357, #384, #391; integration PR #402. All art is original deterministic arcpix/Pillow work, 0 CU. Existing Tactics art, recordings, gameplay and balance are preserved.
 
-**Merge status: full combined validation pending.** Earlier per-set reports retain their historical failed gates; those are not represented as current passing checks. The integration gate below must finish before merge.
+**Merge status: full combined validation pending.** Baseline repairs and warning-free phone builds landed in #403, main `8863818a7c30c8b27d09ffe84b8fa26fe8c9f864`; this branch includes that main. Earlier per-set reports retain their historical failed gates; those are not represented as current passing checks. The integration gate below must finish before merge.
 
 | Set | Delivered | Review |
 |---|---|---|
