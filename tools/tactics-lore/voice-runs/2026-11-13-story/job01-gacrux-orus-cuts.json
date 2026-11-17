@@ -4,7 +4,7 @@
   "sourceSha256": "3967e932d639955b9c5bc5a2197a915c7b86240754b2349812be781a238a660d",
   "durationSeconds": 125.4,
   "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
-  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval. Rendered during the 2026-11-13 Scenario outage and recovered on 2026-11-17.",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
   "segments": [
     {
       "raw": "Gacrux.3cc9b8a2",
@@ -162,8 +162,5 @@
       "wavSha256": "f1e3d25166091a93b52c2790e2d02eac92b5a9132536a71620755d1e78f9f4b7",
       "recut": "re-cut by hand from phrase-by-phrase recognition: the render spoke some <long pause> tags aloud and read Dagna's parley bark twice (first take kept)"
     }
-  ],
-  "job": "job_kaJ91CKg4fMGCp3hJrPuGTY4",
-  "asset": "asset_D6q49yrpq1tv62Ab6UGjtM34",
-  "cuCost": 45
+  ]
 }

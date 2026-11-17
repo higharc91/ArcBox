@@ -54,16 +54,14 @@
           "id": "ch1_granary",
           "kind": "story",
           "place": "emberwick_town",
-          "requires": ["ch1_skarrow_spared"],
-          "summary": "Feeding the clan means opening the granaries, and the town council balks. Pressed, Halden admits he has known for six years that the ember under the ford is fading, and the warm fields with it.",
+          "summary": "The town council meets over the granaries. On the parley path, feeding the clan means opening them; on the force path, Bree brings in goblin children found under the bridge. Either way Halden is pressed into admitting he has known for six years that the ember under the ford is fading, and the warm fields with it.",
           "sets": ["ch1_halden_confessed"]
         },
         {
           "id": "ch1_skarrow_song",
           "kind": "camp",
           "place": "skarrow_hills",
-          "requires": ["ch1_skarrow_spared"],
-          "summary": "At the clan's fire, Mother Skarrow sings the first verses of the clan's oldest song, about seven people who went over the Greywall and came back running. She won't sing the rest to strangers. Yet."
+          "summary": "Night in the hills. If the clan was spared, Mother Skarrow sings the first verses of its oldest song, about seven people who went over the Greywall and came back running. If she fell at the bridge, the party climbs to the empty camp with Dagna to bury her where she can see the ford."
         },
         {
           "id": "ch1_the_ember",

@@ -1,0 +1,76 @@
+{
+  "batch": "issue341_2026_11_17_job02-autonoe-zephyr",
+  "source": "job02-autonoe-zephyr.wav",
+  "sourceSha256": "95c02f4fa13c1423aff3972683fc64fb67f6a9425c9241a3730399d1125bf757",
+  "durationSeconds": 34.4,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Autonoe.15ce9417",
+      "line": "ch1_council_force_open_5",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "How dreadful. Someone will have to decide what to do with them. Not me, I hope.",
+      "start": 0.0,
+      "end": 5.331,
+      "matchedWords": "15/16",
+      "wavSha256": "b57b7c2a8a42021aa6368a2e7fae68c6666a730345824cb5bd75f2cd2be7a590"
+    },
+    {
+      "raw": "Autonoe.5afa655d",
+      "line": "ch1_council_force_noble_1",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Clever. You've been listening to me. Very well, my stores for the little ones. Lent at interest, naturally.",
+      "start": 5.331,
+      "end": 14.921,
+      "matchedWords": "13/18",
+      "wavSha256": "f9ae2a88420e5937d7b727ce6e6186ed28663b7c5a1ebe2b887eda9851a6b0e6"
+    },
+    {
+      "raw": "Autonoe.f3301645",
+      "line": "ch1_council_force_confess_6",
+      "speaker": "celandine_marrowby",
+      "preset": "Autonoe",
+      "text": "Well. That does rather change the interest.",
+      "start": 14.921,
+      "end": 18.297,
+      "matchedWords": "7/7",
+      "wavSha256": "77f1350a4c1bdea2f3e9ac2e0f779047113fd4bb0deded644ca4a89a9c883978"
+    },
+    {
+      "raw": "Zephyr.60781c67",
+      "line": "ch1_council_force_open_4",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "Found them under the bridge, behind the pilings. Too weak to run with the rest. Neither of them's bigger than Pip, Halden.",
+      "start": 18.297,
+      "end": 26.336,
+      "matchedWords": "13/22",
+      "wavSha256": "0cc83bc5b022afb9f56510305a2d59090da1cefe76c015c24d065418dc126c5e"
+    },
+    {
+      "raw": "Zephyr.67bf2ab7",
+      "line": "ch1_council_force_children_2",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "She bit me twice on the way here. I'd call that healthy.",
+      "start": 26.336,
+      "end": 29.781,
+      "matchedWords": "7/12",
+      "wavSha256": "42c3ac634da913aa231795d10122fd0b422481aad9d38ee766bb6f25f0d0a015"
+    },
+    {
+      "raw": "Zephyr.dff502eb",
+      "line": "ch1_council_force_feed_2",
+      "speaker": "bree_tallow",
+      "preset": "Zephyr",
+      "text": "I'll take the little ones home tonight. Pip can teach them to steal bread properly.",
+      "start": 29.781,
+      "end": 34.4,
+      "matchedWords": "7/15",
+      "wavSha256": "ed57807bc9596ed2979e0c403920f73453b539c9ad4d859173cfb4cb79bd9406"
+    }
+  ]
+}

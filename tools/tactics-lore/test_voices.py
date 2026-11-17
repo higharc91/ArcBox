@@ -56,7 +56,7 @@ class RecastPlanningTests(unittest.TestCase):
                 self.assertNotEqual(old["file"], new["file"])
             else:
                 self.assertEqual(old, new)
-        self.assertEqual(82, affected)  # 78, plus the four ford reactions (#207)
+        self.assertEqual(96, affected)  # 78, plus four ford reactions (#207) and fourteen council and burial lines (#210)
 
     def test_existing_player_and_npc_recording_identities_are_preserved(self):
         jobs = {j["id"]: j for j in voices.jobs()}

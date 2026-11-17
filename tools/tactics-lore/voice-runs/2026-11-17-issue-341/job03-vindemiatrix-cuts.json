@@ -1,0 +1,54 @@
+{
+  "batch": "issue341_2026_11_17_job03-vindemiatrix",
+  "source": "job03-vindemiatrix.wav",
+  "sourceSha256": "37ac5954e8432a38bdb4d4b6f81add7d7abc8e3941705382b3b396fac2fd036e",
+  "durationSeconds": 36.44,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Vindemiatrix.2567a810",
+      "line": "ch1_council_force_open_6",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "The chapel will take them. But our barley went to the town a month ago. I have nothing to feed them on.",
+      "start": 0.0,
+      "end": 6.918,
+      "matchedWords": "15/22",
+      "wavSha256": "0bb52b5c2ab7936da21467f4c5efde307d4556098e183cba9f5db4d07b869f3d"
+    },
+    {
+      "raw": "Vindemiatrix.1e2eed10",
+      "line": "ch1_council_force_acolyte_1",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "You always did find the sharp end of a sermon. Very well. Mercy, then, and in public.",
+      "start": 6.918,
+      "end": 16.539,
+      "matchedWords": "14/17",
+      "wavSha256": "abda23c4256ca883a603cad336e3ce73e4c2de11ba60940e9948154c83b85dc1"
+    },
+    {
+      "raw": "Vindemiatrix.5d4db57f",
+      "line": "ch1_council_force_acolyte_2",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Halden. Whatever is in those granaries, these two eat from it tonight, and you'll tell us why it was locked.",
+      "start": 16.539,
+      "end": 25.034,
+      "matchedWords": "14/20",
+      "wavSha256": "c22a800ade7990e1fa90b1b1ca8dec038092c51598a100fb4ceeba0df1d58d2d"
+    },
+    {
+      "raw": "Vindemiatrix.7fc92c7b",
+      "line": "ch1_council_force_confess_5",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "We killed an old woman over grain you were hoarding against a cold you never told us about. Gods forgive us all. Starting with you.",
+      "start": 25.034,
+      "end": 36.44,
+      "matchedWords": "23/25",
+      "wavSha256": "6444a5dfe349ea74e0535b076c9a37f8eeebb08731231ca91395ead4a6eea12c"
+    }
+  ]
+}
