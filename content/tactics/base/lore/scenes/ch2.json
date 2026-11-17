@@ -1189,18 +1189,25 @@
             {
               "id": "ch2_lark_inn_corner_1",
               "speaker": "narrator",
-              "text": "When Bree goes back to the bar, a tune drifts over from the corner table. Lark has been listening the whole time.",
+              "text": "When Bree goes back to the bar, a tune drifts over from the corner table, where a travelling minstrel has been listening the whole time.",
               "mood": "idle"
             },
             {
               "id": "ch2_lark_inn_corner_2",
+              "speaker": "lark",
+              "text": "Lark. Songkeeper. I keep the Warden songs, the only history the fire can't burn.",
+              "mood": "happy",
+              "direction": "a little bow, pleased to be asked"
+            },
+            {
+              "id": "ch2_lark_inn_corner_3",
               "speaker": "lark",
               "text": "She's writing him down so the fire can't have him. That's all a song is, really. Writing someone down where nothing can burn them.",
               "mood": "sad",
               "direction": "gentle, half to themself"
             },
             {
-              "id": "ch2_lark_inn_corner_3",
+              "id": "ch2_lark_inn_corner_4",
               "speaker": "lark",
               "text": "So. Mirewood. Did the Court sing for you? Half the Warden songs ended up in those reeds. I can hear my own verses in them.",
               "mood": "idle"
@@ -1214,7 +1221,7 @@
             },
             {
               "id": "following",
-              "label": "You said you were following someone. Who?",
+              "label": "Why are you really here?",
               "to": "following"
             }
           ]
@@ -1225,7 +1232,7 @@
             {
               "id": "ch2_lark_inn_verse_1",
               "speaker": "lark",
-              "text": "Ysolde offered me a verse for a memory. I said no. I'm told that makes me the only person who's ever refused a bargain in Mirewood.",
+              "text": "Ysolde offered me a verse for a memory. I said no. She wasn't pleased. The fey aren't used to hearing it.",
               "mood": "happy",
               "direction": "proud and a little shaken"
             },
