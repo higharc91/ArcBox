@@ -32,7 +32,20 @@ internal static class Projection
                                     s.Queue.IsEmpty ? null : s.Queue[0], s.Log,
                                     seen is { Board: not null } ? Scenario(game, seen) : null,
                                     Wait(game),
-                                    s.Phase == SessionPhase.Briefing ? s.Ready.Count : null);
+                                    s.Phase == SessionPhase.Briefing ? s.Ready.Count : null,
+                                    TurnEndsIn(game));
+    }
+
+    /// <summary>The seconds left on a public decision's deadline; null for anything else (see the host view).</summary>
+    private static int? TurnEndsIn(MeridianGame game)
+    {
+        var s = game.Session;
+        if (s.Clock.Purpose != ClockPurpose.Deadline || game.Deadline is not { } due
+            || s.Game?.Waiting is not (null or RollPending or OrientPending or AllocatePending or VotePending))
+        {
+            return null;
+        }
+        return Math.Max(0, (int)Math.Ceiling((due - game.Now).TotalSeconds));
     }
 
     private static HostWait? Wait(MeridianGame game)
@@ -71,7 +84,11 @@ internal static class Projection
         {
             var reveal = board.Roles.Select(r => new RevealCard(r.Seat.Value, def.Role(r.Role).Name, outcome.Winners.Contains(r.Seat))).ToEqArray();
             var awards = game.Awards().Select((a, i) => new TvAward($"award-{i + 1}", a.Title, a.Seat.Value)).ToEqArray();
-            return new ScenarioPanel(def.Title, left, tokens, counters, objectives, reveal, outcome.Message, awards);
+            // The crew won if a crew-side seat did; where there's no crew side (a free-for-all, each survivor for
+            // themselves), if anyone did.
+            var crew = board.Roles.Where(r => def.Role(r.Role).Side == "crew").ToList();
+            var crewWon = crew.Count > 0 ? crew.Any(r => outcome.Winners.Contains(r.Seat)) : outcome.Winners.Count > 0;
+            return new ScenarioPanel(def.Title, left, tokens, counters, objectives, reveal, outcome.Message, awards, crewWon);
         }
         return new ScenarioPanel(def.Title, left, tokens, counters, objectives);
     }

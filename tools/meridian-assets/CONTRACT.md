@@ -79,4 +79,6 @@ A single entry may say which deck it was drawn for with `"deck"`. Each deck is c
 "hit": { "full": { "file": "…", "frames": 4, "fps": 12, "frameSize": [64, 64] }, "reduced": {…} }
 ```
 
+**Audio** files are Ogg Vorbis, mono or stereo. A sound (`sfx.*`) runs at most 5 s, a track (`music.*`) at most 5 minutes. The check reads both from the file's headers; loudness (−16 LUFS) is measured by whoever makes the file. Tracks loop unless they say `"loop": false`. `music.breach` is a sting: give it `"loop": false`, and the TV runs it into `music.endgame` when it ends. Music goes on the TV's Music bus and sounds on its Sfx bus, and both dip under Tiller's voice.
+
 **Strict and loose sets.** In `tiles`, `hatches`, `crew`, `portraits`, `cards` and `icons`, an id the game doesn't have is an error. In `tokens`, `ui`, `fx` and `audio`, an unknown id is only a warning: later scenarios and pieces can arrive ahead of the code.

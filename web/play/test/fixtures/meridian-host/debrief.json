@@ -614,6 +614,7 @@
         "title": "Pathfinder: most compartments found",
         "seat": "p4"
       }
-    ]
+    ],
+    "crewWon": false
   }
 }

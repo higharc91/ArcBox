@@ -30,6 +30,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
     // Made with the scene: the shell gives it content before it enters the tree (Main.ShowGame).
     private readonly BoardCanvas _board = new();
     private readonly FxLayer _fx = new();
+    private readonly MeridianAudio _audio = new();
     private readonly CrewMotion _motion = new();
     private bool _cutCrew = true;   // the first look, and the first after a reconnect, places crew without walking
     private readonly HudCanvas _hud = new();
@@ -125,6 +126,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             }
             _board.Use(id => tiles.GetValueOrDefault(id, id), name => crew.GetValueOrDefault(name), art);
             _textures.Use(art, name => crew.GetValueOrDefault(name));
+            _audio.Use(art);
         }
         catch (ContentException e)
         {
@@ -155,6 +157,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         AddChild(_breach);
         _debrief.Use(_director, _textures);
         AddChild(_debrief);
+        AddChild(_audio);
     }
 
     public override void _Process(double delta)
@@ -162,6 +165,7 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
         _director.Tick(delta);
         _motion.Tick(delta);
         Speak();
+        _audio.Update(_director, _motion, delta);
         Shoot();
     }
 

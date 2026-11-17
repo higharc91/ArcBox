@@ -59,4 +59,21 @@ public sealed class DebriefTests
             Assert.True(game.State.IndexOf(seat) >= 0);
         }
     }
+
+    [Theory]
+    [InlineData(ThePassenger.Id)]
+    [InlineData(OneOfUsIsnt.Id)]
+    [InlineData(TillerSaysNo.Id)]
+    [InlineData(DecayingOrbit.Id)]
+    [InlineData(SalvageRights.Id)]
+    public void The_debrief_says_whether_the_crew_won_for_its_music(string scenario)
+    {
+        var game = AtDebrief(scenario);
+        var board = game.State.Board!;
+        var def = game.Pack.ScenarioDef(board.Scenario);
+        var crew = board.Roles.Where(r => def.Role(r.Role).Side == "crew").ToList();
+        // A crew-side seat won; with no crew side (a free-for-all, each survivor for themselves), anyone did.
+        var expected = crew.Count > 0 ? crew.Any(r => board.Outcome!.Winners.Contains(r.Seat)) : board.Outcome!.Winners.Count > 0;
+        Assert.Equal(expected, ((MeridianHostView)game.Game.HostView()).Scenario!.CrewWon);
+    }
 }

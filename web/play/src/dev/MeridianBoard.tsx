@@ -19,6 +19,8 @@ export interface MeridianHostView {
   wait?: { kind: "grace" | "pause" | "resume"; seat?: string; name?: string; seconds: number; back?: number };
   /** Seats ready, during the briefing only. */
   ready?: number;
+  /** Seconds left on a public decision (a turn, roll, rotation, allocation or vote), for the TV's last-ten-seconds tick. */
+  turnEndsIn?: number;
 }
 
 /** The running scenario, public parts only; `reveal` and `outcome` arrive at the Debrief. */
@@ -28,6 +30,8 @@ export interface ScenarioPanel {
   counters: { id: string; value: number }[];
   objectives: { id: string; text: string; state: "open" | "done" | "failed" }[];
   reveal?: { id: string; role: string; won: boolean }[];
+  /** At the Debrief: a crew-side seat won (or, with no crew side, anyone did), for the music. */
+  crewWon?: boolean;
   outcome?: string;
   awards?: { id: string; title: string; seat: string }[];
 }

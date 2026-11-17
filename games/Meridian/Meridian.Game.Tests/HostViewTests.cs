@@ -128,4 +128,18 @@ public sealed class HostViewTests
         Assert.Equal(3, view.Seats.Select(s => s.Id).Distinct().Count());
         Assert.Equal(3, view.Crew.Select(c => c.Id).Distinct().Count());
     }
+
+    [Fact]
+    public void A_turn_counts_down_for_the_tick_and_nothing_else_does()
+    {
+        var game = new Harness(players: 4).Board();
+        var view = (MeridianHostView)game.Game.HostView();
+        Assert.Null(game.State.Waiting);
+        Assert.Equal((int)game.Pack.Rules.TurnInactivity.TotalSeconds, view.TurnEndsIn);
+        game.Advance(12);
+        Assert.Equal((int)game.Pack.Rules.TurnInactivity.TotalSeconds - 12, ((MeridianHostView)game.Game.HostView()).TurnEndsIn);
+        // A presentation holds the turn: no countdown while the TV shows something.
+        game.PlayUntilPresenting();
+        Assert.Null(((MeridianHostView)game.Game.HostView()).TurnEndsIn);
+    }
 }

@@ -183,6 +183,14 @@ Development server with `--Meridian:Scenario=<id>` (ids in `content/meridian/bas
 - [ ] Restart it during the briefings: everyone gets their briefing back, and the endgame begins as before.
 - [ ] Restart it and leave one phone off: after a minute the game plays on, and that seat gets the usual pause, then a bot. Turning the phone back on takes the seat back.
 
+**Art and sound (M5).** Use whatever art sets have landed; anything missing draws its placeholder, side by side with the art.
+- [ ] Crew walk between compartments, face where they're going, and stand still when they arrive. A dying crew member falls and stays as a faded echo.
+- [ ] Panels, card frames and dice look crisp from the sofa, with no blurry edges, and every word on them is still live text.
+- [ ] Effects (a reveal's lights, a hit, a weld, the Breach's alarm) read, but never hide a room name for long. With **Reduced effects** on in the TV's battle settings, nothing flashes or shakes.
+- [ ] The music sits under everything else: an ambience while exploring; a sting at the Breach that runs into the endgame's loop, never back to the ambience; a win or loss cue at the Debrief.
+- [ ] Tiller's voice is clear over the music and the effects; both dip while he speaks and come back after.
+- [ ] A soft tick counts down the last ten seconds of a turn, and stops when someone acts. Nobody can tell from the sounds what a hidden player did.
+
 - [ ] Three real phones on the LAN join, select **Derelict: ISV Meridian** and start. Each picks a different crew member; a taken one is greyed out.
 - [ ] On your turn, the deck tabs show a count where you can go; tapping a compartment moves you, tapping **Open** reveals a new one.
 - [ ] A new compartment appears on the board, and every phone shows "On the main screen" until it has been shown.

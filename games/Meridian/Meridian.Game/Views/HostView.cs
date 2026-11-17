@@ -57,7 +57,8 @@ public sealed record HostWait(
 
 /// <summary>
 /// The running scenario as the TV may show it: built from <c>Visibility.For(state, null)</c>, so it holds only what
-/// everyone may see. <see cref="Reveal"/> and <see cref="Outcome"/> appear at the Debrief, when nothing is secret.
+/// everyone may see. <see cref="Reveal"/> and <see cref="Outcome"/> appear at the Debrief, when nothing is secret, with
+/// <see cref="CrewWon"/> for the Debrief's music: a crew-side seat won or, in a scenario with no crew side, anyone did.
 /// </summary>
 public sealed record ScenarioPanel(
     string Title,
@@ -67,7 +68,8 @@ public sealed record ScenarioPanel(
     EqArray<ObjectiveCard> Objectives,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EqArray<RevealCard>? Reveal = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Outcome = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EqArray<TvAward>? Awards = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] EqArray<TvAward>? Awards = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] bool? CrewWon = null);
 
 /// <summary>
 /// What the TV shows: the public projection of the game (spec §5.3). Every array of objects has a string <c>id</c>, so the
@@ -75,6 +77,8 @@ public sealed record ScenarioPanel(
 /// step under one network packet).
 /// </summary>
 /// <param name="Now">The event the TV should be presenting, or null.</param>
+/// <param name="TurnEndsIn">Seconds left, at view time, on a public decision's deadline (a turn, a roll, a rotation, an
+/// allocation or a vote), for the TV's last-ten-seconds tick. Never for a private choice or a trade.</param>
 public sealed record MeridianHostView(
     string Phase,
     string Banner,
@@ -88,4 +92,5 @@ public sealed record MeridianHostView(
     EqArray<string> Log,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ScenarioPanel? Scenario = null,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] HostWait? Wait = null,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Ready = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Ready = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? TurnEndsIn = null);

@@ -481,5 +481,6 @@
       }
     ],
     "objectives": []
-  }
+  },
+  "turnEndsIn": 60
 }

@@ -220,12 +220,72 @@ public sealed class ArtCheck
                 return;
             }
         }
+        if (set.Name == "audio")
+        {
+            // The audio budget (M5 plan): Ogg Vorbis, mono or stereo, a sound short and a track not endless. Loudness
+            // (-16 LUFS) is measured by whoever makes the file, not here.
+            if (Vorbis(bytes) is not var (channels, seconds))
+            {
+                Problem($"{file} isn't Ogg Vorbis");
+                return;
+            }
+            if (channels is < 1 or > 2)
+            {
+                Problem($"{file} has {channels} channels; mono or stereo only");
+                return;
+            }
+            var limit = id.StartsWith("music.", StringComparison.Ordinal) ? MusicSeconds : SoundSeconds;
+            if (seconds > limit)
+            {
+                Problem($"{file} runs {seconds:0.0} s; at most {limit:0} s for {(limit == MusicSeconds ? "a track" : "a sound")}");
+                return;
+            }
+        }
         if (set.NeedsInsets && insets is null)
         {
             Problem("needs 9-slice insets, so it can be drawn at any size");
             return;
         }
         _entries[key] = new ArtEntry(path, fw, fh, frames, fps, loop, insets, anchor);
+    }
+
+    /// <summary>The longest a sound (<c>sfx.*</c>) may run, in seconds.</summary>
+    public const double SoundSeconds = 5;
+
+    /// <summary>The longest a track (<c>music.*</c>) may run, in seconds.</summary>
+    public const double MusicSeconds = 300;
+
+    /// <summary>
+    /// An Ogg Vorbis file's channel count and length, from its headers alone: the identification packet on the first page
+    /// gives the channels and sample rate, and the last page's granule position is the stream's length in samples. Null
+    /// for anything else.
+    /// </summary>
+    public static (int Channels, double Seconds)? Vorbis(byte[] bytes)
+    {
+        // The first page: "OggS", 27 header bytes and its segment table, then the packet "\x01vorbis".
+        if (bytes.Length < 58 || bytes[0] != 'O' || bytes[1] != 'g' || bytes[2] != 'g' || bytes[3] != 'S')
+        {
+            return null;
+        }
+        var packet = 27 + bytes[26];
+        if (bytes.Length < packet + 16 || bytes[packet] != 1 || !bytes.AsSpan(packet + 1, 6).SequenceEqual("vorbis"u8))
+        {
+            return null;
+        }
+        int channels = bytes[packet + 11];
+        var rate = BinaryPrimitives.ReadInt32LittleEndian(bytes.AsSpan(packet + 12));
+        if (rate <= 0)
+        {
+            return null;
+        }
+        // The last page holds the final granule position.
+        var last = bytes.AsSpan().LastIndexOf("OggS"u8);
+        if (last < 0 || last + 14 > bytes.Length)
+        {
+            return null;
+        }
+        var samples = BinaryPrimitives.ReadInt64LittleEndian(bytes.AsSpan(last + 6));
+        return (channels, Math.Max(0, samples) / (double)rate);
     }
 
     /// <summary>A PNG's width and height from its header, or null.</summary>
