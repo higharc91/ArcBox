@@ -8,3 +8,5 @@ This separate fix keeps shipped gameplay, balance, recordings and authored copy 
 - The bounty phone golden updates only narrative text to current main's resolved story and apostrophes. Gold, XP, class-specific trinket data and all other fields remain unchanged.
 
 Focused tests pass: BaseScene 12, StoryScreen 58 and Grisk; fixture verification, full gate and native font/layout proof are being completed before merge. Tests are neither skipped nor weakened; CI remains manually disabled.
+
+The first full run exposed a pre-existing storage-test race at the final recovery assertion: the write counter increments before the recovery flag is cleared. That superseded run was stopped after diagnosis; its output is retained. The test now waits for both recovery signals before asserting, with the same deadline, retry bounds, exact write count and recovery assertion. Production storage code is unchanged. A complete full gate is restarted after focused storage verification; no final test is skipped.
