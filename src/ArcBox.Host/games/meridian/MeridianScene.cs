@@ -127,7 +127,13 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
 
     public override void _Ready()
     {
-        _director = new Director(_rules, seq => Signal(MeridianGame.PresentedSignal, new { seq }));
+        _director = new Director(_rules, seq =>
+        {
+            // The end-to-end run reads these lines (tools/tv-e2e.sh, ARCBOX_GAME=meridian).
+            GD.Print($"MERIDIAN presented {seq} {_director.LastSignalled?.Kind}");
+            Signal(MeridianGame.PresentedSignal, new { seq });
+        });
+        _director.Abandoned += beat => GD.Print($"MERIDIAN abandoned {beat.Seq} {beat.Kind}");
         AddChild(new Starfield());
         _board.Use(_director);
         AddChild(_board);
@@ -157,15 +163,16 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
 
     private void Shoot()
     {
-        if (_shots is null || _director.Shown is not { } view)
+        if (_director.Shown is not { } view)
         {
-            return;
+            return;   // with or without --shots: the screen and Breach lines below are logged for the end-to-end run
         }
         var mode = TvScreen.Of(view).Mode;
         if (mode != _shotMode)
         {
             _shotMode = mode;
-            _shots.Capture($"meridian-{mode.ToString().ToLowerInvariant()}");
+            GD.Print($"MERIDIAN screen {mode}");
+            _shots?.Capture($"meridian-{mode.ToString().ToLowerInvariant()}");
         }
         // The Breach sequence's stages and the Debrief can pass quickly (bot phones are ready at once): one shot each.
         var stage = BreachSequence.Of(view, _director.Current, _director.Position)?.Stage;
@@ -174,8 +181,13 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             _shotStage = stage;
             if (stage is { } s && s != BreachStage.Lights)
             {
-                _shots.Capture($"meridian-breach-{s.ToString().ToLowerInvariant()}");
+                GD.Print($"MERIDIAN breach {s}");
+                _shots?.Capture($"meridian-breach-{s.ToString().ToLowerInvariant()}");
             }
+        }
+        if (_shots is null)
+        {
+            return;
         }
         if (DebriefModel.Of(view) is not null && !_shotDebrief)
         {

@@ -20,6 +20,15 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
     private double _wall;       // time since the beat began
     private bool _voiceDone;
 
+    /// <summary>
+    /// A beat left unsignalled: a newer event replaced it, the queue emptied, or the connection dropped. Each one means the
+    /// server moved on without this TV, which the end-to-end run counts (M4 plan, Task 11).
+    /// </summary>
+    public event Action<Beat>? Abandoned;
+
+    /// <summary>The beat signalled last, for logging from the signal callback (by then <see cref="Current"/> is clear).</summary>
+    public Beat? LastSignalled { get; private set; }
+
     /// <summary>The beat being shown, or null between beats.</summary>
     public Beat? Current { get; private set; }
 
@@ -58,7 +67,8 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
         Shown = view;
         if (view.Now is not { } now)
         {
-            Current = null;   // nothing to present: whatever was playing was answered by the server's fallback
+            Abandon();        // nothing to present: whatever was playing was answered by the server's fallback
+            Current = null;
             Deck = DeckLayout.ActiveDeck(view, Deck);
             return;
         }
@@ -71,6 +81,7 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
             Current = null;   // already shown: never again
             return;
         }
+        Abandon();
         Current = Beat.For(now, rules, brief: fresh);
         _timeline = 0;
         _wall = 0;
@@ -82,7 +93,16 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
     public void ConnectionLost()
     {
         _fresh = true;
+        Abandon();
         Current = null;
+    }
+
+    private void Abandon()
+    {
+        if (Current is { } beat)
+        {
+            Abandoned?.Invoke(beat);
+        }
     }
 
     /// <summary>Tiller finished the line for <paramref name="seq"/>.</summary>
@@ -111,6 +131,7 @@ public sealed class Director(MeridianRules rules, Action<int> signal)
         if (_timeline >= beat.Seconds - 1e-9)
         {
             _lastSignalled = beat.Seq;
+            LastSignalled = beat;
             Current = null;
             signal(beat.Seq);
         }

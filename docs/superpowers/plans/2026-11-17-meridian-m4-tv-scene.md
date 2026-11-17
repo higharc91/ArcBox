@@ -14,6 +14,21 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 
 **Spec:** [2026-11-13-meridian-design.md](../specs/2026-11-13-meridian-design.md), §3.1 (the TV column), §3.2, §3.3, §5.3, §5.5, §7, §8. **Earlier stages:** [M1](2026-11-13-meridian-m1-rules-core.md), [M2](2026-11-13-meridian-m2-playable-explore.md) and [M3](2026-11-13-meridian-m3-breach-engine.md), including their *Implementation notes*. **Platform:** `docs/tv-host.md`, `src/ArcBox.Host/Shell/IGameScene.cs` and the interfaces beside it.
 
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **The reading lead is 2.5 s, not 1.5 s,** and **a voice's grace is 1 s, not 2 s.** `BeatTimingTests` requires every presented event of every S1 scenario to fit inside the server's fallback. A spoken beat gets a second spare for the voice to start, and must still fit when the voice is silent (no speech service, a muted TV). Neither held at the first numbers. At a 1.5 s lead the test fails. A live run showed the 2 s grace overrunning: the game moved on mid-beat and the Breach never reached its hold. The Breach's fallback is at least 6 s.
+- **Cells snap to whole steps** (32, 64, 128 or 256 px; native × 2ᵏ) rather than zooming smoothly. The art contract allows whole-multiple scaling only. The TV lays out in a logical 1920×1080 and the engine scales the window, so 720p shows the same layout smaller.
+- **Room names go inside tiles only at 128 px cells.** Smaller, the presented compartment and the active seat's compartment get a 22 px callout, because names inside 64 px tiles were about 9 px on screen. A word wider than its tile ("Containment") steps down to 18 px rather than lose letters: the one exception to the 22 px rule.
+- **Seats show a mark, not just an initial.** `BoardStyle.Marks` extends an initial until it's unique: Bot1 → B1, Sam and Sue → Sa and Su.
+- **`Presented` carries a card's deck** (`Deck`), so Tiller can read Incidents in full and other cards by title. **A fight names both sides** ("Brood attacks Player1").
+- **The scene is not an `IPreloadScene`.** Keeping a finished scene for a rematch would mean resetting every piece of per-game state. That risks stale-state bugs, for no gain in a 2D scene that builds in a frame.
+- **Signals and content were wired in Task 6,** not Task 9, so the board could be checked against live games.
+- **`Director.Abandoned`** reports a beat left unsignalled. The scene logs it, along with each signal, screen and Breach stage (`MERIDIAN …` lines), and `tools/tv-e2e.sh` reads those lines.
+- **Each layer redraws only when something changes.** It cut nothing measurable on software Vulkan, where the renderer's own per-frame cost dominates, but it's free and a slow TV box will feel it. See [the review](../reports/meridian-tv/README.md) for the frame times.
+- **Godot runs in this repository's containers:** Godot 4.7.2 .NET with `mesa-vulkan-drivers` (lavapipe) on Xvfb, `dotnet` on `PATH`.
+
 **Not in this plan:**
 - Final art and sound effects (M5). This plan draws placeholders, reads whatever art manifests exist, and plays no sound effects beyond Tiller's voice.
 - Restart resume (M6). A TV that reconnects to a running game is in scope (Task 4, Task 11); a server restart is not.

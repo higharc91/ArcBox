@@ -80,6 +80,25 @@ public sealed class DirectorTests
     }
 
     [Fact]
+    public void An_abandoned_beat_is_reported_once_and_a_finished_one_never()
+    {
+        var abandoned = new List<int>();
+        _director.Abandoned += beat => abandoned.Add(beat.Seq);
+        _director.Receive(View(null));
+        _director.Receive(View(Now(40)));
+        Run(3);                                   // signalled: not abandoned
+        _director.Receive(View(Now(41)));
+        Run(0.2);
+        _director.Receive(View(Now(42)));         // 41 replaced
+        Run(0.2);
+        _director.Receive(View(null));            // 42 cleared
+        _director.Receive(View(Now(43)));
+        _director.ConnectionLost();               // 43 dropped
+        Assert.Equal([41, 42, 43], abandoned);
+        Assert.Equal([40], _signals);
+    }
+
+    [Fact]
     public void An_empty_queue_mid_beat_clears_it_without_signalling()
     {
         _director.Receive(View(null));

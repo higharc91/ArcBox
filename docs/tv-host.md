@@ -57,6 +57,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
+| `--meridian-demo[=<scenario>]` | Dev only: play a recorded Meridian game into the TV without a server (default `the_passenger`; see [Meridian scene](#meridian-scene)). |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--world-demo[=<region>\|hilly\|wood\|tavern\|town[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` and `wood` are `DemoRegion`'s stress cases, `tavern` its one building, `town` a small square at the ford's dusk, and `swatches` a band of each ground material in the ford's light, for choosing them), walk a stand-in (four distinct heroes with `--perf`) the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
@@ -184,6 +185,34 @@ over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults,
 
 **Performance** must be measured on the target machine (RTX 5080, 2560×1440) with F3: this repository's sandbox renders
 with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
+
+## Meridian scene
+
+*Derelict: ISV Meridian* (stage M4; [plan](superpowers/plans/2026-11-17-meridian-m4-tv-scene.md)). The scene only draws. `Meridian.Presentation` decides everything about what to show, without Godot, so all of it has unit tests:
+
+- **What's on screen.** `TvScreen` picks the screen. `DeckLayout` and `TileDraw` place the ship. `HudModel`, `BreachSequence` and `DebriefModel` word everything else.
+- **Pacing.** The `Director` turns host views into beats. It signals `presented { seq }` once the TV has shown an event, never for one it skipped. Each beat fits inside the server's fallback, even when the voice is silent (`BeatTimingTests`).
+- **What's spoken.** `TillerLines` decides what Tiller (the `meridian.tiller` voice) says, from the host view alone. Nothing secret can be spoken (`TillerLinesTests` sweeps whole games).
+
+Layers, back to front: a starfield, the active deck with the other two in a side strip, the HUD, the Breach sequence and the Debrief. Placeholders use the art contract's metrics (#331): 64 px tiles at whole steps, 128 px at 1080p. `MeridianArt` swaps in any tile, hatch or crew art whose manifest and hash check out. Every layer redraws only when something changes.
+
+**Demo without a server.** `--meridian-demo=<scenario>` plays a recording from `games/meridian/Demo/` (written by `DemoRecordingTests` from seeded bot games) and waits for the scene's own signals. With `--shots` the scene captures:
+- each screen;
+- each Breach stage;
+- the Debrief;
+- part-way through the first beat of each kind, and every eighth event.
+
+The screenshots and readability review are in [the report](superpowers/reports/meridian-tv/README.md). For example:
+
+```
+godot --path src/ArcBox.Host -- --meridian-demo=one_of_us_isnt --shots=/tmp/meridian --res=1920x1080 --preset=low --audio-log
+```
+
+**Log lines.** The TV prints these with or without `--shots`; `ARCBOX_GAME=meridian tools/tv-e2e.sh` reads them.
+- `MERIDIAN screen <Boarding|Board|Breach|Debrief>` when the screen changes.
+- `MERIDIAN breach <Breach|Announcement|Phones>` for each Breach stage.
+- `MERIDIAN presented <seq> <kind>` for each signal.
+- `MERIDIAN abandoned <seq> <kind>` when the server moved on before the TV finished an event.
 
 ## Tactics scene
 

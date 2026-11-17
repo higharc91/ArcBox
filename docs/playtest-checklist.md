@@ -166,9 +166,17 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 
 ## Derelict: ISV Meridian (stages M2–M3: Explore, the Breach and five scenarios)
 
-Until the TV scene (stage M4), the board is the dev page's: open `/dev.html?phones=0` on a laptop as the "TV", or run
-`node tools/meridian-playtest/bots.cjs --room=<CODE>` to fill seats with bot phones. To play one scenario, start a
+The TV app shows the board (stage M4). Without a TV, use the dev page's board: open `/dev.html?phones=0` on a laptop.
+`node tools/meridian-playtest/bots.cjs --room=<CODE>` fills seats with bot phones. To play one scenario, start a
 Development server with `--Meridian:Scenario=<id>` (ids in `content/meridian/base/rules/breach.json`).
+
+**The first game night (M4):**
+- [ ] Three to six real phones and the TV play a whole game, from crew pick to the Debrief, and the room returns to the lobby.
+- [ ] Tiller reads each Incident card and the Breach's announcement aloud, and the panel stays up until he finishes. Nobody on the sofa misses a word.
+- [ ] From the sofa (about 3 m), the room names, the seat marks, the figures across the top and the card text all read without squinting. Check the side decks too.
+- [ ] Kill the TV app during the Breach sequence and start it again: the phones finish their briefings, and the TV comes back to the endgame without replaying the Breach.
+- [ ] Slow TV: on a slow machine or a busy Wi-Fi, the game still moves on (each event has a fallback), and the TV catches up without showing an old event again.
+- [ ] One remote player watches over a Discord stream: the board and the panel read through the compression.
 
 - [ ] Three real phones on the LAN join, select **Derelict: ISV Meridian** and start. Each picks a different crew member; a taken one is greyed out.
 - [ ] On your turn, the deck tabs show a count where you can go; tapping a compartment moves you, tapping **Open** reveals a new one.
