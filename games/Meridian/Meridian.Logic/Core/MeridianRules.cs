@@ -62,6 +62,9 @@ public sealed record MeridianRules
     /// <summary>Tiller's speaking rate: native pace for the voice, the rate REDLINE's question reader assumes.</summary>
     public double ReadingWordsPerSecond { get; init; } = 2.7;
 
-    /// <summary>Added to every reading time: the TV's panel coming in, and the voice starting.</summary>
-    public TimeSpan ReadingLead { get; init; } = TimeSpan.FromSeconds(1.5);
+    /// <summary>
+    /// Added to every reading time: the TV's panel coming in and going out (a second; M4 plan, Task 4), and a second and a
+    /// half for the voice to start, so a present TV always finishes inside the fallback.
+    /// </summary>
+    public TimeSpan ReadingLead { get; init; } = TimeSpan.FromSeconds(2.5);
 }
