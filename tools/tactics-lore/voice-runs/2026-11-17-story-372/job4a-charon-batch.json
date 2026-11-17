@@ -1,0 +1,38 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job4a-charon",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "voice": "Charon",
+    "text": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.\n<long pause>\nHere's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.",
+    "segments": [
+      {
+        "raw": "Charon.cf3284bb",
+        "line": "ch1_granary_confess_1",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.",
+        "renderText": "Because the ground is cooling. Our ember, the piece of the Hearthflame under the ford, is going out. I've known for six years.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      },
+      {
+        "raw": "Charon.1d49a6c2",
+        "line": "ch1_mayor_close_4",
+        "speaker": "halden_varrow",
+        "preset": "Charon",
+        "text": "Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.",
+        "renderText": "Here's two hundred gold as an advance. Come down to the bridge end with me and see what we're up against.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      }
+    ],
+    "note": "split from job4-charon-kore: in two-voice jobs, pause tags and stage directions were sometimes spoken aloud"
+  }
+}
