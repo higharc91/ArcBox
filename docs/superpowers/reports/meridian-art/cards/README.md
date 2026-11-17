@@ -29,3 +29,5 @@ python tools/meridian-assets/check-card-corners.py
 ```
 
 Use the style review's native-project.godot / native-display.gd on a real X display, with MERIDIAN_MOCK and MERIDIAN_SCREENSHOT paths, to capture cards-tv.png, choice-tv.png and icons-tv.png as native-cards.png, native-choice.png and native-icons.png. Then run `python tools/meridian-assets/check-card-native.py`.
+
+The M5 contract published in #331's later comment is also followed: card frames declare the canonical `insets` field, and `icons.incident`, `icons.salvage`, `icons.anomaly` each expose their 16px/24px entries. The `symbols` index aliases exactly those entries for convenient gallery access; the audit rejects alias drift. This metadata correction changes no PNG or review pixels. The current #316 checker will be run against this asset directory before merge.

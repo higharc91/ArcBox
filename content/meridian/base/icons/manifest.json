@@ -247,6 +247,60 @@
         24,
         24
       ]
+    },
+    "incident": {
+      "16": {
+        "file": "symbol-incident-16.1daa2ef3ddb5.png",
+        "sha256": "1daa2ef3ddb545cd98adcb17d067fb24a7ebc036dc30738a851fc1d012b50cbe",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "24": {
+        "file": "symbol-incident-24.1f629c9d34de.png",
+        "sha256": "1f629c9d34de372aa2cbe456a22fe23e3d77fb451c23925ae259799b2c39defc",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    },
+    "salvage": {
+      "16": {
+        "file": "symbol-salvage-16.3f782ac23a0e.png",
+        "sha256": "3f782ac23a0e09cf3d26206acd0025f77b3afaef72a31d14d02e783a84add0b0",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "24": {
+        "file": "symbol-salvage-24.238cdb919bca.png",
+        "sha256": "238cdb919bcaf141ef8e6d9f060fb98d7c5036da33a55f2c8dfe6e2cfccc3a5a",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    },
+    "anomaly": {
+      "16": {
+        "file": "symbol-anomaly-16.dd9a82522bd9.png",
+        "sha256": "dd9a82522bd97860701f2cde41b76a3a8c88e0bab8971e8ef957f4879cb1997d",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "24": {
+        "file": "symbol-anomaly-24.05f98714f981.png",
+        "sha256": "05f98714f981ee25d575b7d1cbdd3b0a919d4e37395c4c69ab9f4b08149ed267",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
     }
   }
 }

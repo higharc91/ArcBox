@@ -214,12 +214,12 @@ def build(root=ROOT,reference=REFERENCE):
     if set(items)!=RECIPES:raise ValueError('Authored icon coverage differs: missing='+str(sorted(set(items)-RECIPES))+', obsolete='+str(sorted(RECIPES-set(items))))
     pack=root/'content/meridian/base';review=root/'docs/superpowers/reports/meridian-art/cards';review.mkdir(parents=True,exist_ok=True)
     common={'version':1,'issue':334,'status':'awaiting-set-review','rulesReference':{'pr':316,'head':RULES_HEAD,'files':{name+'.json':hashlib.sha256((reference/(name+'.json')).read_bytes()).hexdigest() for name in KINDS.values()}}}
-    plates={k:{**style.immutable(pack,'cards','frame-'+k,frame(k)),'frameSize':[64,64],'slice':INSETS,'contentInset':[16,16,16,16],'center':'solid stretch','edges':'uniform stretch','cornerScale':'whole integer nearest'} for k in KINDS}
+    plates={k:{**style.immutable(pack,'cards','frame-'+k,frame(k)),'frameSize':[64,64],'insets':INSETS,'contentInset':[16,16,16,16],'center':'solid stretch','edges':'uniform stretch','cornerScale':'whole integer nearest'} for k in KINDS}
     symbols={k:{str(size):{**style.immutable(pack,'icons','symbol-'+k+'-'+str(size),glyph(k,size)),'frameSize':[size,size]} for size in [16,24]} for k in KINDS}
     icons={key:{**style.immutable(pack,'icons',key,icon(key)),'kind':kind,'frameSize':[24,24]} for key,kind in items.items()}
     entries={c['id']:{'kind':kind,'frameKind':kind,'icon':c['id'] if kind!='incident' else None} for kind,records in data.items() for c in records}
     style.write_json(pack/'cards/manifest.json',{**common,'frames':plates,'cards':entries})
-    style.write_json(pack/'icons/manifest.json',{**common,'symbols':symbols,'icons':icons})
+    style.write_json(pack/'icons/manifest.json',{**common,'symbols':symbols,'icons':{**icons,**symbols}})
     review_page(review,data,plates,symbols,icons)
     return pack,review
 

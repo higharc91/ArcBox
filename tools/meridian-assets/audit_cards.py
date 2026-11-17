@@ -11,7 +11,7 @@ def audit(pack,reference):
     expected={c['id']:kind for kind,records in data.items() for c in records}
     item_ids={key:kind for key,kind in expected.items() if kind!='incident'}
     frames=json.loads((pack/'cards/manifest.json').read_text());art=json.loads((pack/'icons/manifest.json').read_text())
-    if set(frames['cards'])!=set(expected) or set(art['icons'])!=set(item_ids):raise ValueError('Card or item icon ID coverage differs')
+    if set(frames['cards'])!=set(expected) or set(art['icons'])!=set(item_ids)|set(cards.KINDS):raise ValueError('Card or item icon ID coverage differs')
     if set(frames['frames'])!=set(cards.KINDS) or set(art['symbols'])!=set(cards.KINDS):raise ValueError('Missing card kind')
     count=0
     def check(entry,folder,size):
@@ -29,8 +29,9 @@ def audit(pack,reference):
             check(art['icons'][key],'icons',(24,24))
     for kind in cards.KINDS:
         plate=frames['frames'][kind]
-        if plate['slice']!=[12,12,12,12] or plate['contentInset']!=[16,16,16,16]:raise ValueError('Nine-slice metadata differs')
+        if plate['insets']!=[12,12,12,12] or plate['contentInset']!=[16,16,16,16]:raise ValueError('Nine-slice metadata differs')
         check(plate,'cards',(64,64))
+        if art['icons'][kind]!=art['symbols'][kind]:raise ValueError('Canonical kind symbols differ')
         if set(art['symbols'][kind])!={'16','24'}:raise ValueError('Missing symbol size')
         for size in [16,24]:check(art['symbols'][kind][str(size)],'icons',(size,size))
     return {'cards':len(expected),'salvageIcons':sum(k=='salvage' for k in item_ids.values()),'anomalyIcons':sum(k=='anomaly' for k in item_ids.values()),'frames':3,'symbols':6,'referencedAssets':count}

@@ -66,10 +66,11 @@ class CardTests(unittest.TestCase):
 
     def test_missing_icon_card_symbol_or_kind_mapping_is_rejected(self):
         path=self.pack/'icons/manifest.json';original=path.read_bytes()
-        for mutation in ['icon','symbol','kind']:
+        for mutation in ['icon','symbol','canonical-symbol','kind']:
             v=json.loads(original)
             if mutation=='icon':del v['icons']['crowbar']
             elif mutation=='symbol':del v['symbols']['incident']['16']
+            elif mutation=='canonical-symbol':del v['icons']['incident']
             else:v['icons']['crowbar']['kind']='anomaly'
             try:
                 path.write_text(json.dumps(v))
@@ -88,7 +89,7 @@ class CardTests(unittest.TestCase):
             with self.assertRaises(ValueError):audit_cards.audit(self.pack,cards.REFERENCE)
         finally:file.write_bytes(data)
         try:
-            entry['slice']=[2,2,2,2];path.write_text(json.dumps(v))
+            entry['insets']=[2,2,2,2];path.write_text(json.dumps(v))
             with self.assertRaises(ValueError):audit_cards.audit(self.pack,cards.REFERENCE)
         finally:path.write_bytes(original)
 
