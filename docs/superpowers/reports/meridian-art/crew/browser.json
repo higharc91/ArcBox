@@ -1,0 +1,83 @@
+[
+  {
+    "width": 320,
+    "images": 161,
+    "members": 8,
+    "overflow": false,
+    "animations": [
+      "none"
+    ],
+    "previewScales": [
+      2
+    ],
+    "pauseDisabled": true,
+    "replayDisabled": true,
+    "sourceStripScales": [
+      1
+    ],
+    "echoSwitchLoads": true,
+    "portraitTvScale": {
+      "count": 32,
+      "scales": [
+        2
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "images": 161,
+    "members": 8,
+    "overflow": false,
+    "animations": [
+      "none"
+    ],
+    "previewScales": [
+      2
+    ],
+    "pauseDisabled": true,
+    "replayDisabled": true,
+    "sourceStripScales": [
+      1
+    ],
+    "echoSwitchLoads": true,
+    "portraitTvScale": {
+      "count": 32,
+      "scales": [
+        2
+      ]
+    },
+    "errors": []
+  },
+  {
+    "width": 1920,
+    "images": 161,
+    "members": 8,
+    "overflow": false,
+    "animations": [
+      "none"
+    ],
+    "previewScales": [
+      2
+    ],
+    "pauseDisabled": true,
+    "replayDisabled": true,
+    "sourceStripScales": [
+      1
+    ],
+    "echoSwitchLoads": true,
+    "portraitTvScale": {
+      "count": 32,
+      "scales": [
+        2
+      ]
+    },
+    "errors": []
+  },
+  {
+    "normalMotionAdvances": true,
+    "pauseHoldsFrame": true,
+    "hurtReplayStartsAndSettles": true,
+    "stillStopsMotion": true
+  }
+]

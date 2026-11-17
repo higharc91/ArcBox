@@ -46,7 +46,7 @@ These four IDs (`bridge`, `med_bay`, `reactor_core`, `airlock`) and `ines_okafor
 | Compartment | 64×64; 2× = 128px at 1080p | Four central 16px edge gaps, coordinates 24..39 inclusive; transparent across all seven wall pixels. No shadow layer. |
 | Hatch overlay | Transparent 64×64 | Draw north, confined to y=0..7; rotate around tile centre by 0/90/180/270. Open = empty centre/jambs; closed = split leaves; sealed = welded X; none = continuous wall. These shapes, not just colours, distinguish states. |
 | Crew/tokens | 24×24; 2× = 48px on 64px grid | Top-down three-quarter; feet anchor (12,22). Standing is one frame; sample walk is a horizontal four-frame strip, 6fps. Full crew directions/poses belong to #333. |
-| Portrait | Contract reserved for #333 | Frame size and crop to be fixed in that approved set; never stretch the board sprite into a portrait. |
+| Portrait | 96×112 bust; 96×160 crew card | Independent original drawings. Busts: neutral, hurt, echo. Source 1× for phone review, whole 2× for TV review. |
 | Inline icon | 16×16 | Whole 2–3× multiples on phone. |
 | Item/card icon | 24×24 | Whole 2–3× multiples on phone. |
 | TV mock | 1920×1080 | Source scene drawn at 960×540 and enlarged 2× nearest neighbour. Room and crew sizes remain the required 128px/48px. |
@@ -68,3 +68,11 @@ Paid generation requires an issue-posted estimate and explicit owner approval fi
 The set reference is unmerged #316 at `ff3175af859733bf8b02c0ff2afa43d0113e1c66`; `reference/tiles.json` is an exact copy, not an alternate rules pack. Refresh and audit against current upstream rules before integration. Nested `tiles[id].variants[deck]` entries declare each deck's immutable file/hash; runtime chooses the current deck. `hatches.animations[kind][full|reduced]` declares horizontal frames, 10fps, one-shot duration and settled state. Reduced-motion uses the settled state with no animation; reduced-effects sealing omits sparks. These clips prepare assets for M4/M5; they do not claim the full board-FX set (#337).
 
 TV detail pass: main equipment uses broad silhouettes and connected highlights. The 11px card symbols use a warning triangle, handled case and hollow diamond, remaining distinct without hue. Each 1080p readability sheet contains 12 rooms at the actual 128px grid size beside greyscale/crew-occluded versions. Concept deck mocks retain the 128px grid and propose an additional 256px focused-room detail panel. That panel is a review concept, not shipped TV behavior.
+
+## Full crew set (#333)
+
+`python tools/meridian-assets/crew.py` builds all eight content IDs with four facings and living/echo versions of idle (3 frames / 3fps), walk (6 distinct phases / 8fps), hurt (2 / 6fps, one-shot) and down (1 static). Every 24×24 frame uses the same feet anchor (12,22) and a transparent bottom row. Distinct headgear, proportions and projecting role equipment supplement colour; no player ring is painted into a sprite. Echoes preserve the figure's coverage with stable translucent scan bands, without temporal flashing. Reduced motion selects frame 0.
+
+Busts and full-body crew cards are drawn independently of the board sprites, with matching face/headgear/role cues. Names and roles remain live content text. `crew[id].facings[direction][state]` and `crew[id].echo[direction][state]` hold the full strip metadata. Flat `idle` is a true single-frame compatibility image for current M4's whole-image draw; flat `walk` aliases the south walk strip. Those fields prevent the old idle renderer squeezing three poses into one person. Directional animation, echoes and portraits still need the M5 consumer integration.
+
+`python tools/meridian-assets/audit_crew.py --rules <current crew.json>` enforces exact content/state coverage, names/roles, frame layouts, immutable hashes and the static-idle compatibility contract. A source-only style build refuses to overwrite either completed tiles or crew; use `build.py --root <separate temporary root>` for historical sample regeneration. Full builders can run in order: `compartments.py`, then `crew.py`.

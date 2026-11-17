@@ -1,0 +1,41 @@
+[
+  {
+    "scene": "lineup",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  },
+  {
+    "scene": "portraits",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  },
+  {
+    "scene": "cards",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  }
+]

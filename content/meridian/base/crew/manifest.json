@@ -1,10 +1,16 @@
 {
-  "version": 1,
-  "status": "sample-awaiting-owner-review",
-  "issue": 331,
-  "rulesReference": "PR #316 at af068bb1d23b5e295457adc4bf2ce1108ad6686d; not yet on main",
+  "version": 2,
+  "issue": 333,
+  "status": "awaiting-set-review",
+  "rulesReference": {
+    "pr": 316,
+    "head": "1d770a7312e28d99c62fcfb7ebcd5bf398a758e9",
+    "sha256": "0fb6d8b91244a7f880018a0cfa223abc559fa2c4ec82bfe59838f1648859d7f2"
+  },
   "crew": {
     "ines_okafor": {
+      "name": "Ines Okafor",
+      "role": "Salvage Chief",
       "frameSize": [
         24,
         24
@@ -13,18 +19,4066 @@
         12,
         22
       ],
+      "silhouetteCue": "Compact helmet, broad command collar and square survey tablet",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "ines_okafor-south-idle.553524a06140.png",
+            "sha256": "553524a061407a243d9db555e6e948b23bc88c69288cb232fecab0b4f393817f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-south-walk.befe133eca51.png",
+            "sha256": "befe133eca512288247fe4b4c3f08399717788e8f5152a12d4114637372ce34e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-south-hurt.979bd5bdb76e.png",
+            "sha256": "979bd5bdb76e811a5303d58180ccc08348cecf2d476407251f338e34bb8cb19f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-south-down.109789636560.png",
+            "sha256": "109789636560ba4e8320fdca17c00b9d04f77dd71001603530e06b1435a88bd0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "ines_okafor-east-idle.1e6e22ce60dd.png",
+            "sha256": "1e6e22ce60ddf7473b49823f4db05fe7662fd4b564ae47f84385370805a47e43",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-east-walk.a78d018bcb43.png",
+            "sha256": "a78d018bcb43f55699a568cd1f56c24dc3f4f8faad1172b3ed6dce74003ee3a9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-east-hurt.2cc077ae8066.png",
+            "sha256": "2cc077ae8066e700429c2d67f3388ef5fb990756df3508ead66e084a35a4e685",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-east-down.ea9b8a961c19.png",
+            "sha256": "ea9b8a961c19bb047be8d76f339486c54424db61687b733a360a4897dee79ec6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "ines_okafor-north-idle.6679e0026d5e.png",
+            "sha256": "6679e0026d5e7c4009ac76fd3d9320f9f6055bdde0ba2c5280cb8ea0c2042900",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-north-walk.2b8ad13abc1d.png",
+            "sha256": "2b8ad13abc1d69becb532168dcc165e1dbfcc05304c4eb8e8d9d5c108f808d25",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-north-hurt.3d407f1c766b.png",
+            "sha256": "3d407f1c766b2607e02acc18244466656eb6620f842299416c5fcda5ece301c0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-north-down.8bce55ae667e.png",
+            "sha256": "8bce55ae667e01d49aec1d9824cb2625dd4e7cee74ae21df9a2b6e48f3c8b377",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "ines_okafor-west-idle.d4646465710d.png",
+            "sha256": "d4646465710d4ec602011f51ed3f3ac4570c493ea7a6cf323d275ad16ee065bb",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-west-walk.0eede17c7060.png",
+            "sha256": "0eede17c7060cddcc7ac772587876605ecd23da485e5d48ee2978cf3bed5a9cb",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-west-hurt.23e9384cc83b.png",
+            "sha256": "23e9384cc83b521a19c1813ebcaaf370ff75d4a47755be956f1e85aeb8c1952a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-west-down.45c640c6e20e.png",
+            "sha256": "45c640c6e20eec0d381637340e0f13e44e9a34b8cb7980b1b6a00343ab293237",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "ines_okafor-south-idle-echo.0c35fbcc6678.png",
+            "sha256": "0c35fbcc66781f929a6e68b26208dbbded2c65f3f2ae4dcf6d380c5f184f77ab",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-south-walk-echo.65dd16dde9e7.png",
+            "sha256": "65dd16dde9e73667140bd8a2a4bf519d796780c167590126c5824e587e3d9709",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-south-hurt-echo.79fc85ac1664.png",
+            "sha256": "79fc85ac166410461c224fa1a549ef198fade0f68cab8d2ab7ad658cb931202e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-south-down-echo.4dabc8e0b593.png",
+            "sha256": "4dabc8e0b593390863d157ce2213e5db812b545049aba0e173c06e4d5338bf29",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "ines_okafor-east-idle-echo.c46425e02b5b.png",
+            "sha256": "c46425e02b5b40e5843aba29af38e5005e0193148a4371a31c0b1c90c19c2d1a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-east-walk-echo.85dfc7a97590.png",
+            "sha256": "85dfc7a9759041ad44d0678a49194c08b377efc69c597ec404a0adc832d025a8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-east-hurt-echo.ef2c5ba73dca.png",
+            "sha256": "ef2c5ba73dca3cbc34f3878fb98a68c8221331b7de2a608d407c302df87e506f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-east-down-echo.904d6b950c60.png",
+            "sha256": "904d6b950c60a6d2325b1b4219e67b48791a1303d37ca9fe02792d705b8a83ec",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "ines_okafor-north-idle-echo.45d884d977b6.png",
+            "sha256": "45d884d977b683037248bae25e863ee523fb5b89dd15652a4ade409f9ee714b2",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-north-walk-echo.45a8056e06d8.png",
+            "sha256": "45a8056e06d84751282d9ca3e952dd420a6a3aecb6f11a4c53236da862bb0605",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-north-hurt-echo.2e0d125198aa.png",
+            "sha256": "2e0d125198aa90a0ffb58b0bc102902f54d6fadea4d47513ad883a75c97ab21d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-north-down-echo.b4458cb8e68e.png",
+            "sha256": "b4458cb8e68ea61fd48560cf2124bade2c4d5026ed8b7efa232f515ad50cb6b2",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "ines_okafor-west-idle-echo.5e4d9783dbb7.png",
+            "sha256": "5e4d9783dbb75dea84cbd9c87d3e61185aaf37bfd6ce59640f5bb5d004005d05",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "ines_okafor-west-walk-echo.5b1df2a0801e.png",
+            "sha256": "5b1df2a0801ee66d6361e7c6e4deb536cd81e56873a73cc71607a57745ac5f23",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "ines_okafor-west-hurt-echo.981635b7cacf.png",
+            "sha256": "981635b7cacfeec2d2320514449a87431c26566c9adfdade5c20cb8c8bdc9834",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "ines_okafor-west-down-echo.b859b90db801.png",
+            "sha256": "b859b90db801b9ae8468024a0c4fb59de8b8c0a677daf91c4975d2fef2da47c9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
       "idle": {
-        "file": "ines-okafor-idle.a1ca1b3a07f0.png",
-        "sha256": "a1ca1b3a07f0044a0209fe85aa738e6703506cb4f0a69108f71dd46e3fcd95b2",
+        "file": "ines_okafor-compat-idle.04006b8c6c00.png",
+        "sha256": "04006b8c6c00ae6c299d7a30bebda793e3417d4b868d2067698513a55bd2658f",
+        "frameSize": [
+          24,
+          24
+        ],
         "frames": 1,
-        "fps": 0
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
       },
       "walk": {
-        "file": "ines-okafor-walk.1f9f5985b6f3.png",
-        "sha256": "1f9f5985b6f3fd1264e74d5126500ba6a435c1497be777fb3535a1c3c4e2e9a9",
-        "frames": 4,
-        "fps": 6
-      }
+        "file": "ines_okafor-south-walk.befe133eca51.png",
+        "sha256": "befe133eca512288247fe4b4c3f08399717788e8f5152a12d4114637372ce34e",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "tobe_raske": {
+      "name": "Tobe Raske",
+      "role": "Rigger",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Round hardhat, rope coil and projecting rigging hook",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "tobe_raske-south-idle.eed5e6650bb1.png",
+            "sha256": "eed5e6650bb1f30a0293ba7aa3911b3eef4ec15e3be4aa0c72f375e5126bb781",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-south-walk.aba34ad22752.png",
+            "sha256": "aba34ad22752dc42161c9406457fe4d879238b6847a6173139a82cba0202d706",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-south-hurt.b690f5d8ad2e.png",
+            "sha256": "b690f5d8ad2e8339a18f8d1729657312a923e78cb488e1652426de702e78428f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-south-down.7f9f57a29135.png",
+            "sha256": "7f9f57a29135b58963a7795248b30db54043eaf39b30271bf09cd5646e8bebd1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "tobe_raske-east-idle.ee11d6548fa2.png",
+            "sha256": "ee11d6548fa2d56a95f07a34d4f444c8acd8dbeed9b7a32bcfbdf334d9f143fa",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-east-walk.de960f7c79b9.png",
+            "sha256": "de960f7c79b912d7b6e0439ff759d1739994a2ff16c9cf2bd8e6c6596bdf7efb",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-east-hurt.414507844ec3.png",
+            "sha256": "414507844ec3aab7a934a07b7692eec867be3a2f730efa9724b951995997f7c6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-east-down.71b439c9eaad.png",
+            "sha256": "71b439c9eaadd13bbed372d63fd04309e2e288bc19a31661b27ecef2827798e3",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "tobe_raske-north-idle.8419159d61b3.png",
+            "sha256": "8419159d61b376a1bbf1afb1e352ffe4f4e11ee724d8d96fbe13f0294545d644",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-north-walk.922fa0d0dfa8.png",
+            "sha256": "922fa0d0dfa819c7ff1fa2565d720b8690b87e297119dc7bf1330d9b9e448ed0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-north-hurt.f9e1f23487c0.png",
+            "sha256": "f9e1f23487c00145f2bf099a8a79b6fdf83369069d1a0eccf5642923fc54ecc0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-north-down.92c4bfdfe340.png",
+            "sha256": "92c4bfdfe34007b807dda0879d07822f9059e9b8be42c887816d187fda4fbfd1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "tobe_raske-west-idle.72a0b1d83cd7.png",
+            "sha256": "72a0b1d83cd77604a981057358e02286ef6eef887fb08f8a65312ec9cdffb9d6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-west-walk.e30aa28b418e.png",
+            "sha256": "e30aa28b418e21ab8b005d54673c9c174ffab622cf0f236d04769ad252c16d07",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-west-hurt.e7563d5e0be0.png",
+            "sha256": "e7563d5e0be023cc63fa9d7e535987312effc782cf40dcd49b7b05496f3e66c8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-west-down.203466847787.png",
+            "sha256": "20346684778749a934db4d1c6e9238fb1939e74e865911f18f35b03a29b21bd8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "tobe_raske-south-idle-echo.dac28f68ab22.png",
+            "sha256": "dac28f68ab22bcc2b394a8872a27af44e40c19afb361c79bb5c0f722aa4fc815",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-south-walk-echo.5cf88f36c5fb.png",
+            "sha256": "5cf88f36c5fbbbc6a60c1064a014814cac76303d88f78f99a821e186342fcdb0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-south-hurt-echo.39b827d088b9.png",
+            "sha256": "39b827d088b96ffc1c230d0e255e4f6e0762e5e08d89845eeb4ae76fdf4b5a02",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-south-down-echo.fb82ca391d16.png",
+            "sha256": "fb82ca391d16e649e2aaf3a88eefa4bb63309e82b1f1e5ae07fc6456846a782a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "tobe_raske-east-idle-echo.73b64eebd091.png",
+            "sha256": "73b64eebd091469b94609528f3f0690a2db1813e170c895185dde48e753691e9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-east-walk-echo.562b7e2ad4a2.png",
+            "sha256": "562b7e2ad4a24c12547212ee278805cd10973d3293ed2513e64f3cd7d5e4baa9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-east-hurt-echo.e5a783a403f9.png",
+            "sha256": "e5a783a403f9d87f7742c0db3428e1b701c48a1aab24a84c5ee58da98a68e2f1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-east-down-echo.cb4af74fd1d5.png",
+            "sha256": "cb4af74fd1d5d0067f86b170f5f7d20a237f59688b20a6d19a40c538e037be05",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "tobe_raske-north-idle-echo.423d0052c99c.png",
+            "sha256": "423d0052c99cad1b32defc77d286745e72bdebf731ee922fb766c115dfe2ca00",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-north-walk-echo.5eeda46ce9a2.png",
+            "sha256": "5eeda46ce9a22c316bf201e66d72f6df671730660aa8582308dc5d8cead2c658",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-north-hurt-echo.c914b5ac6a7d.png",
+            "sha256": "c914b5ac6a7daca3cacf46a44d4ee7e9dca9a8658e80f5f4fb219e2b2adeecbf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-north-down-echo.e8ef5b57de3e.png",
+            "sha256": "e8ef5b57de3e5808dfecf95cff948113d9b08041f018d132569552625f797e84",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "tobe_raske-west-idle-echo.5abcce7f6fbf.png",
+            "sha256": "5abcce7f6fbf4207ca9237644de3e63813ca8075fc29dded96ca72c7328c9b61",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "tobe_raske-west-walk-echo.d52a95901545.png",
+            "sha256": "d52a959015450d0b203d4cb5b236be569484af2472baeef5463d9fe4ee31a177",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "tobe_raske-west-hurt-echo.a4440468929f.png",
+            "sha256": "a4440468929fa64f76216736b54a5ca24414693771663a8e00f943d9a7e9d345",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "tobe_raske-west-down-echo.47c28e92f213.png",
+            "sha256": "47c28e92f21320f9c14c8c38dd4df2f204306c577492ad113b37ed3028be6ab8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "tobe_raske-compat-idle.5e2563ca8507.png",
+        "sha256": "5e2563ca8507ff5c24762f245faca8449a4cb88ad56f3d0b0db76779c0e6e768",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "tobe_raske-south-walk.aba34ad22752.png",
+        "sha256": "aba34ad22752dc42161c9406457fe4d879238b6847a6173139a82cba0202d706",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "sable_quist": {
+      "name": "Sable Quist",
+      "role": "Pilot",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Swept hair, flight collar, headset and asymmetric thigh holster",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "sable_quist-south-idle.85ddd370a999.png",
+            "sha256": "85ddd370a99977ab33df3bb7a18a8fe24d633852457c242ae14fd564542cbe9c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-south-walk.b2ab07e8622b.png",
+            "sha256": "b2ab07e8622b1ae12224de5af595de0a7c40a57dc8d55b14083b3afd4e07c130",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-south-hurt.2180c855d290.png",
+            "sha256": "2180c855d29043f5e8776a754ae3ffe0f33c5b813704f6a3457f9bf8989b2992",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-south-down.770fa083f191.png",
+            "sha256": "770fa083f1914b5a9f88a72944464f37aace29232f4a4022c8de8ba3d3fcf21f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "sable_quist-east-idle.7bcbc9cc8833.png",
+            "sha256": "7bcbc9cc8833b8589014c68c9ab5b28923278347e1798fce434c807973559a1b",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-east-walk.8b463fca96ed.png",
+            "sha256": "8b463fca96ed6bb8408f536783de299074ee7963b879faadc5e120eefbf21bbf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-east-hurt.5710291b2699.png",
+            "sha256": "5710291b2699dcdce1eb606d8d9e4af98a48f98c750b260f5dd8a8717d01c569",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-east-down.8dba03e90ec9.png",
+            "sha256": "8dba03e90ec9c7d8b6d00e8f86f218beae03348c80a960305a43f6d18064c451",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "sable_quist-north-idle.27301c633c53.png",
+            "sha256": "27301c633c532239403f00cb26e54fa2741080169011067bbfb32cbe98ede8e5",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-north-walk.fbcb8238f5fa.png",
+            "sha256": "fbcb8238f5fac2f2f0d0910c6543048dbf0f3b1a54a822257138d095054e1f8f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-north-hurt.cb4c78d15f7c.png",
+            "sha256": "cb4c78d15f7cfb2add1308a8c6d33ce3c111b516b7e3ff47950fd811069974cd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-north-down.d32f140b21a2.png",
+            "sha256": "d32f140b21a2b59a84d55ec8a524b1cf5b4221935f0af03fd53d346af4b3f08f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "sable_quist-west-idle.39dd8deb35f8.png",
+            "sha256": "39dd8deb35f8f5cd6231cdfb7d6cf51cf4579edfd9d1d4614a66ecf0a415eef1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-west-walk.b93507f0a65e.png",
+            "sha256": "b93507f0a65ec89404ce299ee0a68b36ddc764276fb4a62d4b47a7e36dbb03c6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-west-hurt.25ba60b8b392.png",
+            "sha256": "25ba60b8b3922d3acb9b3d8666beede00b8cea54a2990f2b33ee5b9e3e7ba1da",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-west-down.407a47d07bc6.png",
+            "sha256": "407a47d07bc63da51f0586b229a0ac0f1622c28a905499fde063012da0cb48bf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "sable_quist-south-idle-echo.a8ebe02c2705.png",
+            "sha256": "a8ebe02c2705844ce132774edda32e31c4a47484f32de2f225c42f66a5758244",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-south-walk-echo.ad96bc1b2166.png",
+            "sha256": "ad96bc1b2166150625a1e2c83578d16abbb91c12ab61020970ad75402bba75f0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-south-hurt-echo.2a20c384f7d1.png",
+            "sha256": "2a20c384f7d101bdf1ed928f9dcced0c89cc92e4840823ab030f956911f75247",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-south-down-echo.47462803b26b.png",
+            "sha256": "47462803b26b0aff6182d4c8d915c6ed8d31ed6a6fbf9e308e2dff64047f8a7d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "sable_quist-east-idle-echo.d9b384b80c59.png",
+            "sha256": "d9b384b80c594fcba54daa851290ea8daba489b86f43dbf525bde9dc6a9b3fd0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-east-walk-echo.be241102f2c8.png",
+            "sha256": "be241102f2c86fa32f1394b59e8ad91fb60de3735a7411c4cd8bc77644efb383",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-east-hurt-echo.8371d4dc1a1c.png",
+            "sha256": "8371d4dc1a1cdf04e142683d9bc9f3b8d381de1de088804564e789a8d8c8ea3e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-east-down-echo.4075d0024a5c.png",
+            "sha256": "4075d0024a5cb044ae105659661336f79d3c366baf9f00721838ac7b915fb9de",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "sable_quist-north-idle-echo.27634da01b72.png",
+            "sha256": "27634da01b7228819260b60d0cfeb55b6a1cfa825c274b6493119d9d26cf183b",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-north-walk-echo.7bb2143ee850.png",
+            "sha256": "7bb2143ee85013f93458ab478a4a7f88f0c655fa9ea5881fb1702b29db8efd28",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-north-hurt-echo.ede2eb05eaba.png",
+            "sha256": "ede2eb05eaba45cbe84116be190b06b0a90fe98dcf457fa6af3c4e7164bda876",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-north-down-echo.2b0c0bdb82eb.png",
+            "sha256": "2b0c0bdb82eb90597a040493ab3d01a1670693422086cf7731bf4f3bb8fd6bfd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "sable_quist-west-idle-echo.088d80684e1b.png",
+            "sha256": "088d80684e1b3a3f205991ea8062df09b4a59ef4d01dcd5b3d2cf9897e15b48f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "sable_quist-west-walk-echo.ed777a150f1c.png",
+            "sha256": "ed777a150f1c5a40fc6dcb7b308c23f69e3e384034ea372de5a8026981ce7081",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "sable_quist-west-hurt-echo.32a26eae5f39.png",
+            "sha256": "32a26eae5f393aac06864d222853f0380413d3ed3ec81e11d9eee35151814281",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "sable_quist-west-down-echo.b476ba6ae03a.png",
+            "sha256": "b476ba6ae03a311e92f871d635a87fa929036b05f7b3e0cf0660bc3ef9d7736d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "sable_quist-compat-idle.d1ccbc3c668e.png",
+        "sha256": "d1ccbc3c668e56c7cdbc091fdad9cd34783b91ff2c6122fa7c3513b66be177e9",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "sable_quist-south-walk.b2ab07e8622b.png",
+        "sha256": "b2ab07e8622b1ae12224de5af595de0a7c40a57dc8d55b14083b3afd4e07c130",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "anselm_varga": {
+      "name": "Dr. Anselm Varga",
+      "role": "Medic",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Long split medical coat, spectacles and large side medical case",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "anselm_varga-south-idle.a7080db5c152.png",
+            "sha256": "a7080db5c152f4b8e4e9e3ba6cba60b80cb2b295d32a89c4df8d268c6cb0e431",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-south-walk.e72da1aedaf3.png",
+            "sha256": "e72da1aedaf3430721f85ba9f26ed3eb8d02b0642a0285f9ad6069f2664c9f47",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-south-hurt.16de6335def0.png",
+            "sha256": "16de6335def0f14428f7c81e463f52f9bb4f64434004ae36c9362b8442afd421",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-south-down.8c0e20ffa075.png",
+            "sha256": "8c0e20ffa0756d069100d62002db9eb3919a6b474f72f4a1eb94a48e9a8c0c86",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "anselm_varga-east-idle.077ef4b29cd9.png",
+            "sha256": "077ef4b29cd99f03862d1c261d9f2296358c73f7174c3cc07ea44e8177314f63",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-east-walk.dbe78307dcf6.png",
+            "sha256": "dbe78307dcf6d29ad4ff50b4d885faa72c15ac18abb6d6f61d5ae2fb4b8ec720",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-east-hurt.3450cf60c2e5.png",
+            "sha256": "3450cf60c2e5091cb8ddea7d632f6a9b990131797c14bcafd59b9615ac87c641",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-east-down.5109b8dda2f9.png",
+            "sha256": "5109b8dda2f913484af1c3ffe5faa79025a81bcc7683bb76072bf55043df2778",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "anselm_varga-north-idle.30853ea2359f.png",
+            "sha256": "30853ea2359f0da3f3745611b3eaba218241710a5dccd4c19d7087af828ae128",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-north-walk.b714fbf8482b.png",
+            "sha256": "b714fbf8482b1039b25bd3d38f4c28e7f5fa8091800c12a4b7a9e8fea94a8c3d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-north-hurt.3bfcdf7c104d.png",
+            "sha256": "3bfcdf7c104d63f55c69fdec44259a2e769c83a6dc7057d7846932e6bf332a46",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-north-down.ae3416936f17.png",
+            "sha256": "ae3416936f175c72f8d66b4d4929646183406dfdd17f3a8b6316e7b877435f4a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "anselm_varga-west-idle.5b3d9d66c823.png",
+            "sha256": "5b3d9d66c823178f181152bff719fc7a46b598e7cf062789fad81ce554daa2f7",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-west-walk.843ad82f006e.png",
+            "sha256": "843ad82f006e10f57633d88e931f5c6b2daa1aaa9aac1f418e1dab1609692c42",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-west-hurt.b3ad78b9ff20.png",
+            "sha256": "b3ad78b9ff20616a8271a73c1f2ff094c81aa3085a8b86256f29414e2641cfcd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-west-down.7aca1481058d.png",
+            "sha256": "7aca1481058d7981424f29f2be23a9bff3d0190bc14bb45e22d3376020d6586a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "anselm_varga-south-idle-echo.61745fd466fc.png",
+            "sha256": "61745fd466fcefceac4d3c656ead93c89a5923bb7d1cfc2a8f562457d1aa41b3",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-south-walk-echo.c239eb0024ae.png",
+            "sha256": "c239eb0024ae3753f1f9c25b8886976bf0df2bd5d9077e653b41192ea0827e3c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-south-hurt-echo.5f7b57d564cf.png",
+            "sha256": "5f7b57d564cf0635f7b4a6349dda210e9fa5e7b21e3840f85f4db1d0abd4da51",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-south-down-echo.4ab30906ce80.png",
+            "sha256": "4ab30906ce80b12e233728954f5243666e1e5020a17e4c099b97b973dce6325b",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "anselm_varga-east-idle-echo.4eaa25042baf.png",
+            "sha256": "4eaa25042baf1923f310a5c08d3170c08fc03330d9f28552208183e6843c97bd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-east-walk-echo.1404e69dcc6d.png",
+            "sha256": "1404e69dcc6d2acdccf252a76e3c1db0ad804c05fc3d14c1a419cfb481cc7c83",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-east-hurt-echo.df301ebbe0d0.png",
+            "sha256": "df301ebbe0d0442344dbab2cf0a7ecffd51b858753fe2b75846dd46a22a73d10",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-east-down-echo.77cce1008915.png",
+            "sha256": "77cce1008915131dbfdfefb5afbf1ff9796a7aad7c76ea2b4fbd5a24d79584c4",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "anselm_varga-north-idle-echo.2bf190242da4.png",
+            "sha256": "2bf190242da4d55e810483886193eacc827c9e799d8caa6f41fca1552bb5aabf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-north-walk-echo.90ac2d7581b2.png",
+            "sha256": "90ac2d7581b20498ebcb140b60263ad3f11804ad1338e1cf8922f2173a47bdf4",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-north-hurt-echo.57f8ce0a1a5a.png",
+            "sha256": "57f8ce0a1a5ab7e125e4e489e1de9e759950d919b90e6d33bec4db13adf19d5c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-north-down-echo.6e45270dc0a8.png",
+            "sha256": "6e45270dc0a828748b2518704aaa663d77341ca53537ba23bd08454cd2df6acb",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "anselm_varga-west-idle-echo.84d38564abe6.png",
+            "sha256": "84d38564abe6eb7333d0e4d36dfaa98a32bcd7846e147d8d81d158616b07372e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "anselm_varga-west-walk-echo.5c51ec187bab.png",
+            "sha256": "5c51ec187babd047b2cb5ba6b556fdba0e08fc7b3f90b6550141f9469fec5fc1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "anselm_varga-west-hurt-echo.00a22a55ebee.png",
+            "sha256": "00a22a55ebee8d062e868e9850d05316a1371f4cef868220d8ff44d3b07576dd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "anselm_varga-west-down-echo.541f3a219fa4.png",
+            "sha256": "541f3a219fa4c07107892e7344d306a0de289eedcbd436925c195be0fb399046",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "anselm_varga-compat-idle.e83921a8e2fb.png",
+        "sha256": "e83921a8e2fba845f6aac299dcb7d9769a6f3f49b5999649aee28aac51320b47",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "anselm_varga-south-walk.e72da1aedaf3.png",
+        "sha256": "e72da1aedaf3430721f85ba9f26ed3eb8d02b0642a0285f9ad6069f2664c9f47",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "pell_ostrander": {
+      "name": "Pell Ostrander",
+      "role": "Systems Tech",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Square goggles, tall tool backpack and projecting probe",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "pell_ostrander-south-idle.3f8768442e89.png",
+            "sha256": "3f8768442e899fbdd8d54ab52f4c75539471a33374eef2bd63145c400261ec3a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-south-walk.88c7a03945f7.png",
+            "sha256": "88c7a03945f7c105ea4b1456ebe365d847ee5947abbb48ef22a141940b4ee354",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-south-hurt.55d492e32cf1.png",
+            "sha256": "55d492e32cf1bc4874624052357ac808c3befde318deaaeb19959c3914b3247a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-south-down.fd0b55c41cb5.png",
+            "sha256": "fd0b55c41cb5d80faa76dac639f4fbcd90ac7f3d628d0e8c9bced9bd0ed0149c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "pell_ostrander-east-idle.48472bb2d6d0.png",
+            "sha256": "48472bb2d6d0cfac94afcd526a69a6d1305401708f79ac8a71436c72f442cc60",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-east-walk.3690f69cb73c.png",
+            "sha256": "3690f69cb73cd533c39643e1cd3c333ad02119a86bdcce9dc0da352533e505ff",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-east-hurt.78048b4099a4.png",
+            "sha256": "78048b4099a41d58b7b8642046e2fe2795eea2163c85d63f4f8d9fe151a5f0ba",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-east-down.abfd33a916ce.png",
+            "sha256": "abfd33a916ce4e7c8685eb31a1b9c62617a4daba4d6b1e7fc886ec3b93ce69a3",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "pell_ostrander-north-idle.5ee340d68a29.png",
+            "sha256": "5ee340d68a29335321062ecd828db5da9a041be90f606c45487a37834f6581cf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-north-walk.89af8d06cd2d.png",
+            "sha256": "89af8d06cd2d87a7240789484aca21fa4bed5310c900f1d4d5c1491ebd8cbe42",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-north-hurt.2f190e1189c4.png",
+            "sha256": "2f190e1189c4e32ea0bb9970956ba7b7301c36d6513ce9cdf986eedd625cf58a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-north-down.fa7420c5499e.png",
+            "sha256": "fa7420c5499e1cf6f78fc3bdabb004c926d57302091900feeda852f95edd93cd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "pell_ostrander-west-idle.45d265b7201a.png",
+            "sha256": "45d265b7201ac8cc201bdf48f28887d032518057d391817906ad5d5c516688cc",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-west-walk.6b34bed86262.png",
+            "sha256": "6b34bed8626234aeb0113e90c4fcc42953bccee44d72ab4f3ce18a346b16a07e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-west-hurt.97466fbf6495.png",
+            "sha256": "97466fbf6495e34f9a80cb833d4b8eb9f4527dd7318e79fc3c522f5d24f8dd07",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-west-down.23b26a57e48f.png",
+            "sha256": "23b26a57e48fc6577c5e8127fe32d48742fe320fa04934b1ebf537827e7945cc",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "pell_ostrander-south-idle-echo.a30f956425ac.png",
+            "sha256": "a30f956425ac68e3505e43d0c3d2ba762610943aceb9b5a96b52678a42387693",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-south-walk-echo.6ef97ce0f9b0.png",
+            "sha256": "6ef97ce0f9b0e1b6501a2532e7484ba445919e6546a24da953ca5dec120e1bbf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-south-hurt-echo.241290271022.png",
+            "sha256": "241290271022bc1fc192af6bc0b2fa2fc54c686163202b8b60e22071f4d9fee1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-south-down-echo.900ab2537d0b.png",
+            "sha256": "900ab2537d0bcbed67518bdc2f5a7082e2118b68bdf47a7015b850e02ef8849d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "pell_ostrander-east-idle-echo.04fb9006a96f.png",
+            "sha256": "04fb9006a96f62468791ea23f36e07f5d9774cae2b7a4d2bd5ce8f9daf480d5a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-east-walk-echo.4f8fc5effcd7.png",
+            "sha256": "4f8fc5effcd7560aabdedaebe5b67d0ffb05d15e30d9ab01debb35a90b24cea5",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-east-hurt-echo.2514c24547c6.png",
+            "sha256": "2514c24547c6e4634f20508c41ba4f2e7f3d0f5a5124853adea8ea4f37bbcba8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-east-down-echo.cd9d2c982d62.png",
+            "sha256": "cd9d2c982d625bfe208eb3517a005dea35a532394351d2696da9c8e7345cd9c9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "pell_ostrander-north-idle-echo.a61f927a2c23.png",
+            "sha256": "a61f927a2c23e976ced774467a641661abf5137fb33c4aa39763610812ba60c6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-north-walk-echo.72d32db70945.png",
+            "sha256": "72d32db70945ac98cc0e5132a0279ed6c15d15f10fd0e30f3102830a95a706c4",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-north-hurt-echo.ab31cf0c466e.png",
+            "sha256": "ab31cf0c466e01a01df3163947d9d4e0265b3e294617e20ec4ef79f69f9fe098",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-north-down-echo.fbc17897841b.png",
+            "sha256": "fbc17897841b630aaea0bca4430e510abdc334cfa8eab68f3cf54d0eda2ba5d4",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "pell_ostrander-west-idle-echo.85e74d1f6452.png",
+            "sha256": "85e74d1f64529e7d8efd6816a789f84b7319ede2ad5f9d0187cfd8a8dcc3440e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "pell_ostrander-west-walk-echo.12f528fd2284.png",
+            "sha256": "12f528fd2284b47ccede3a23158c0039638368244a5549a0c0ba5eddde69b430",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "pell_ostrander-west-hurt-echo.f9b708453842.png",
+            "sha256": "f9b70845384201eee3094088c9332a992a27c32385f45e5167c3015fd3c91c38",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "pell_ostrander-west-down-echo.cdc6206b6c38.png",
+            "sha256": "cdc6206b6c38f48e04efceed3cc9347b61a51b20a64efdf4e45a96fa2410cbe0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "pell_ostrander-compat-idle.cae6d14a65d7.png",
+        "sha256": "cae6d14a65d716b2cb0abe6f2560266dd6f1cd32864e94a53dc52513fe312896",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "pell_ostrander-south-walk.88c7a03945f7.png",
+        "sha256": "88c7a03945f7c105ea4b1456ebe365d847ee5947abbb48ef22a141940b4ee354",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "juno_achterberg": {
+      "name": "Juno Achterberg",
+      "role": "Cargo Hauler",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Wide padded shoulders, load frame, cropped hair and heavy gauntlets",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "juno_achterberg-south-idle.a3e5a008528f.png",
+            "sha256": "a3e5a008528fe227ff4f58b5fd2339a6878a7548a329fa0d8584c9234fa68ab5",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-south-walk.97f44cf34a76.png",
+            "sha256": "97f44cf34a760fa5eed6e81169675b69e7166dc97fff08135984578cf949be1f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-south-hurt.aeb3cc0c5a4c.png",
+            "sha256": "aeb3cc0c5a4cee309602b12914089814a34fbb06bde41101d00daaee50387af6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-south-down.a0b616534336.png",
+            "sha256": "a0b61653433632e63ebc01de70a5ec52f3c822d5924c9cc15f91572687954bc6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "juno_achterberg-east-idle.1c74f42800c2.png",
+            "sha256": "1c74f42800c289547091bcdab673b021df803274f11ecf323cf36f4fc425f68c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-east-walk.de050169e952.png",
+            "sha256": "de050169e95221e8c67ada29db4e8a874aa8e1353192d286513d4fa7b4c3e3c0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-east-hurt.bd8a9ee1bcda.png",
+            "sha256": "bd8a9ee1bcdaac243d766f9e44bc66360f506d934169c57a170eac889821aa39",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-east-down.0a92a478ae00.png",
+            "sha256": "0a92a478ae00a813c5197b76f1618d8d2c597eba6e01e18087be134a21c211b5",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "juno_achterberg-north-idle.b835111d587c.png",
+            "sha256": "b835111d587ce872bc8f99afd0d6c6f4254e2bbd1d7c161dfec3085608f9f32a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-north-walk.2a87e3433f52.png",
+            "sha256": "2a87e3433f52126a387577b006a6407cc6cd69d66a7c9d94db9d719d0ffceb78",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-north-hurt.ea71efcce43d.png",
+            "sha256": "ea71efcce43dfffe06b0472c06636518487d0659da603bbab6e36a7b1255a2c1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-north-down.0b623d57151e.png",
+            "sha256": "0b623d57151e57647043dbd245b3b5940a07eeefe161121ee96cb656fa1373a0",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "juno_achterberg-west-idle.c1c2f5d98b80.png",
+            "sha256": "c1c2f5d98b804e6c183080d241f4d6dd8c93bbc379e97ca348d2e7c6a3436749",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-west-walk.c7920a63bc3c.png",
+            "sha256": "c7920a63bc3cb80c356fc180db72a39e5a54ce9a79192a5af726c8676f5f2e39",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-west-hurt.1771081649cd.png",
+            "sha256": "1771081649cd1be0abea0a998220e5e5231e71608f602ae770e632a415ccc28c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-west-down.5a45ff151e25.png",
+            "sha256": "5a45ff151e25816cf219a815dbd1181fe19623e6b91bec61baf5654fc5235d8d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "juno_achterberg-south-idle-echo.f1bd3f430d32.png",
+            "sha256": "f1bd3f430d32b827b7b7f141085a4d89e7c9e03f0a59c35f5b15f4c08162e36d",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-south-walk-echo.b7b2455e6025.png",
+            "sha256": "b7b2455e6025a1e892133064a3c6522718abb3181a7eec9701fd61d7fb3bfdae",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-south-hurt-echo.d3e4f4b80685.png",
+            "sha256": "d3e4f4b806854e05755391d69bceee6ab9ebf4aa65cc968fbd504410a621c585",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-south-down-echo.5f3ea6224b4d.png",
+            "sha256": "5f3ea6224b4d9ebd4e131ecef6b0c5109e2416ea2944934d6e8867fb6ee8d8c8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "juno_achterberg-east-idle-echo.63b803f8ebeb.png",
+            "sha256": "63b803f8ebeb88520c6addf3f54e030e1e7de33028e3d6e3fa7bc24fb0e57f5c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-east-walk-echo.93e99c5619f0.png",
+            "sha256": "93e99c5619f0fd40d9f6ea0720c94a6d1545d5ccd42bd9561798bb9a88bf3271",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-east-hurt-echo.19d08dc32693.png",
+            "sha256": "19d08dc32693a830c3f6ac88d7f53cc45c7277d6072ca4d7baf89d7238fb3db7",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-east-down-echo.b367109fd51f.png",
+            "sha256": "b367109fd51ff5be5ad8ac8d5be4719d56697f70f176eb03b60e0bc7b302c365",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "juno_achterberg-north-idle-echo.68de12b34397.png",
+            "sha256": "68de12b34397a3cafdf95fefd029503ec03d3f6a0f660735ddd25a078df3a771",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-north-walk-echo.64224a79eb5f.png",
+            "sha256": "64224a79eb5fff0cbf2c84c450664e318f07b178b14126be63e5f9590f8ed578",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-north-hurt-echo.49ce9779df02.png",
+            "sha256": "49ce9779df02b77fc8b34b7badb887a63700d6157b5e70fa6993f1f6dac18002",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-north-down-echo.a8fffca9caae.png",
+            "sha256": "a8fffca9caaece99ff56dc0bf24ba063f3d17f8eeb87de2aa923692e0277d228",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "juno_achterberg-west-idle-echo.4cb651db22aa.png",
+            "sha256": "4cb651db22aa4726e8397797ebcd15c3bfb932b62900e27eed923f5127ea15e8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "juno_achterberg-west-walk-echo.dcf39740bf11.png",
+            "sha256": "dcf39740bf116233b62b3f69052e488f8e689be7aa9c4cc697de6c10c05ae5c1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "juno_achterberg-west-hurt-echo.c6863db9a45c.png",
+            "sha256": "c6863db9a45cad850898824d5917e7a7e0ed35b21fbc3a0a8ac93f4854c72433",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "juno_achterberg-west-down-echo.6a608181455c.png",
+            "sha256": "6a608181455cd7dc59586da95165290d88bcbae4a2dfbd46d1e9da199723b9b5",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "juno_achterberg-compat-idle.0483010118ef.png",
+        "sha256": "0483010118ef9c7800071c4323e558e52875e77fc9eee190e85094ca387bc531",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "juno_achterberg-south-walk.97f44cf34a76.png",
+        "sha256": "97f44cf34a760fa5eed6e81169675b69e7166dc97fff08135984578cf949be1f",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "kit_sato": {
+      "name": "Kit Sato",
+      "role": "Scout",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Pointed hood, long asymmetric scarf and narrow stance",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "kit_sato-south-idle.2341f81a6311.png",
+            "sha256": "2341f81a6311a5a314b8fd75655b63cb5c3e6c4d1c9ddc78533fb355ada665a9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-south-walk.5589db735389.png",
+            "sha256": "5589db735389fc7cc6eeba640ff05367c9b784799845d48538e50220b32be7e7",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-south-hurt.f57eb25e89fd.png",
+            "sha256": "f57eb25e89fd8ef4b464285f3ecb332cd1e37af9ceff8d7c1ec36f7717c02baa",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-south-down.36986bde7d3f.png",
+            "sha256": "36986bde7d3f19a1403c399685a33ad872c70ac80d3db73087785dc27935d968",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "kit_sato-east-idle.8876f04e9119.png",
+            "sha256": "8876f04e9119023692185cfe911aa69f5389570ae5df436615ac49217c58a871",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-east-walk.f2ba4606a023.png",
+            "sha256": "f2ba4606a02306944a09b0be6a929688af919be3c02cc6cf374c843d699ddb0f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-east-hurt.fcaad0f97e30.png",
+            "sha256": "fcaad0f97e3096aceebc2088a44ead8e01ae3c43f53a685da5adc1dca3440c79",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-east-down.af9f59ce2d67.png",
+            "sha256": "af9f59ce2d67118ca6df1c618490eea6941384513e8eb9166c3b98846dcbd2eb",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "kit_sato-north-idle.67fe77786cd1.png",
+            "sha256": "67fe77786cd1626136194a5b487a44eb172b2e536ece2d2f27d7d2655979544f",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-north-walk.db8c1798cf81.png",
+            "sha256": "db8c1798cf8164da2f3ae73509e0ba81a1b42f840cbaabb7309d4aa4a4a7b262",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-north-hurt.15440345138e.png",
+            "sha256": "15440345138e2a47f8dcce9c7563ee0390b6c22ddef002a21b27abf2ee74dcc5",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-north-down.fbb1097c8b82.png",
+            "sha256": "fbb1097c8b825dc07982d8fba830fabbeb010a0e570504f53d3431918fbe9bd2",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "kit_sato-west-idle.8d030892ded3.png",
+            "sha256": "8d030892ded3a79ee25bd87ee3a66e2389d181dfd7e717267a58f9de02394719",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-west-walk.950f051d2518.png",
+            "sha256": "950f051d2518a42ed6680e6db76b0d715418420786905932b4144af56beaab31",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-west-hurt.6363b3c2a316.png",
+            "sha256": "6363b3c2a316c3d9b4c613f58bce1b09378ef302c894653c3204cbb43b69265b",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-west-down.d548e2219220.png",
+            "sha256": "d548e2219220c0904a3c8e6b523e45f4bf7cf945e1ce19b24a4fe89935be4711",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "kit_sato-south-idle-echo.89160c227b36.png",
+            "sha256": "89160c227b360c8444dc7faf6267e0297f865ed315a5e11678ef10fd655cafd3",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-south-walk-echo.3c106022111b.png",
+            "sha256": "3c106022111b40bc157c9578d2067d0faa32a44269ef1609f2d657dcdaa262cc",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-south-hurt-echo.17a34bca0e5b.png",
+            "sha256": "17a34bca0e5bd1ff19314a02ed2591206aeddb7d06685712d72b8e9aeaa38675",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-south-down-echo.78f309cf3d16.png",
+            "sha256": "78f309cf3d16d93ce7ebd5b33d237638e1d2c75dc79eda8086531ce05f4a1c61",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "kit_sato-east-idle-echo.30fb2a223d32.png",
+            "sha256": "30fb2a223d32960355a8fcf53c79e0f9abfe85e2371be0fefb5d2882e99c6d3a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-east-walk-echo.a67f4780601a.png",
+            "sha256": "a67f4780601af7168aff1f5ec6c42a58348f941a7c70d0e07af5d27766c9d31a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-east-hurt-echo.3448fdf4d38f.png",
+            "sha256": "3448fdf4d38f2d5ebd8c3e0ec64672d54e287a031d9b276648524f9d7ac02478",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-east-down-echo.d167594dcb75.png",
+            "sha256": "d167594dcb752e75c48f89c9085664bc3314016a15916b27e80a53ef448f3e09",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "kit_sato-north-idle-echo.970ffa1105b8.png",
+            "sha256": "970ffa1105b89f55ead0e1e9af86a1bbfb42ed25fa7a71e1dc2dba4713843d10",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-north-walk-echo.202d4a0ea178.png",
+            "sha256": "202d4a0ea178b632029bd780e502d0c0c3f4934657a15de2a7fdeb5bfd2782eb",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-north-hurt-echo.09274c12979b.png",
+            "sha256": "09274c12979b0ed8a7e7881d49cbe758df59fd3034441b70203025e322430ee3",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-north-down-echo.2512e7e8b68d.png",
+            "sha256": "2512e7e8b68d30455527cf9b86d25d107317708b146fdf09346ec4722de6f0d7",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "kit_sato-west-idle-echo.1dbdc80ea4f5.png",
+            "sha256": "1dbdc80ea4f548171761e7f87386200a2694d182b07fe7da4059944f345488df",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "kit_sato-west-walk-echo.ee2f7cab5d04.png",
+            "sha256": "ee2f7cab5d043123fbf6b479198a0fb9a4e3680dc13049fcb44c274adcdfc814",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "kit_sato-west-hurt-echo.f733067949fc.png",
+            "sha256": "f733067949fc5f640b87b250fff92901ee66f2526895250fbcb342f538c0a0f9",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "kit_sato-west-down-echo.833ba614f208.png",
+            "sha256": "833ba614f208121661d4fe7bdfc74e3a24d61b43c0f7a875bc2fcaf11697c599",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "kit_sato-compat-idle.9289854f1f8d.png",
+        "sha256": "9289854f1f8d056ee425c1b30896cb81e8212657c81d2a89c6f4f7d7a3a6db3d",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "kit_sato-south-walk.5589db735389.png",
+        "sha256": "5589db735389fc7cc6eeba640ff05367c9b784799845d48538e50220b32be7e7",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
+    },
+    "rhee_callender": {
+      "name": "Rhee Callender",
+      "role": "Signals Officer",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "silhouetteCue": "Twin radio aerials, broad earcups and chest receiver",
+      "facings": {
+        "south": {
+          "idle": {
+            "file": "rhee_callender-south-idle.320f6f460a9d.png",
+            "sha256": "320f6f460a9dda4301434a252064e5fae3f63efe767c893f00d22cbc9527acd6",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-south-walk.7ab231b1c9e7.png",
+            "sha256": "7ab231b1c9e71aba24acafb408559861cb79fa9803e7b01c352c9efe04243d19",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-south-hurt.e69dfb5ac81c.png",
+            "sha256": "e69dfb5ac81c6122e41d5d038f928f300c03532ea9bc8a27e629a708e5b9a254",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-south-down.aa8a23438997.png",
+            "sha256": "aa8a2343899788c1ab1029f80e7177b96ae221200921cd61c9b5407a5c0fe0d1",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "rhee_callender-east-idle.ac3962972379.png",
+            "sha256": "ac396297237905dd0bec399becb4e33c65079374609ca8779e29c13bbf6b504a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-east-walk.a2fc78ded401.png",
+            "sha256": "a2fc78ded401b170dad15635abac359b08b7835e58178f94357d21f5c4bba30e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-east-hurt.a3af778e2b1b.png",
+            "sha256": "a3af778e2b1b34f49bae3c7874a83e8d9d978f26700bdc0331e32944447a6785",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-east-down.57c14eb56b68.png",
+            "sha256": "57c14eb56b684340f8d317aef94470c40ebec32ee469798d6eac6bf834245769",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "rhee_callender-north-idle.7e88ea434cde.png",
+            "sha256": "7e88ea434cde517cedfde23640dd13500a829e7ff6630a06a6ee878c862a881c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-north-walk.b1eec519e42b.png",
+            "sha256": "b1eec519e42b96d0ba0cc2efebf27ca7c2ac89920ffe2686846fd6298d239584",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-north-hurt.00a63f255f88.png",
+            "sha256": "00a63f255f880d0c4ea85be2f07c5803626b0568c26173cba15db1b805c6a30c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-north-down.4d8d4d85913a.png",
+            "sha256": "4d8d4d85913a146dc03a2378b48c5c7d5b3c1a8a4ebe7fd45271ad714c68314b",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "rhee_callender-west-idle.2726a555e130.png",
+            "sha256": "2726a555e1300f2d7d988a268272ca60e7b5ffd90284738dc4fb2338400797b7",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-west-walk.39eda125136f.png",
+            "sha256": "39eda125136f56a64e213e06299aa0eabd46d6b994d96119e3724ec303f66135",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-west-hurt.e15db30e83b9.png",
+            "sha256": "e15db30e83b9b1cca3a2025cbc221d82232c807520a6ec03554754637271b6ff",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-west-down.8826bf03be48.png",
+            "sha256": "8826bf03be483320303ec7b4ed9ade84454a12c6d0799cc93df4ac660479adc8",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "echo": {
+        "south": {
+          "idle": {
+            "file": "rhee_callender-south-idle-echo.06bf9c41dd74.png",
+            "sha256": "06bf9c41dd74542f33b6ae776f21d32ccc8bd248d0cc74d183bd333290f6a417",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-south-walk-echo.667d7fde72e0.png",
+            "sha256": "667d7fde72e05e6ae5cee7097e6772e5ab1caa9082c735b01f538ec640638f0e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-south-hurt-echo.859efd4e505f.png",
+            "sha256": "859efd4e505fd26e519aa1902768ffaea478cfc94290191fe573ceab68e4472c",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-south-down-echo.3c1b77f811eb.png",
+            "sha256": "3c1b77f811ebfaaa5ec80b60b9454d3ccafc59af91fe93aaef97a7a9ffa989fa",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "east": {
+          "idle": {
+            "file": "rhee_callender-east-idle-echo.ad8bd3e8b34c.png",
+            "sha256": "ad8bd3e8b34c3cedc6eb6e6fd5e02acc3f680a8362c550c3554373ec9c2a35bf",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-east-walk-echo.331763d66303.png",
+            "sha256": "331763d66303b46e79d472da05b4590bdb669ad2b3d1921e65a1a79fd15fa713",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-east-hurt-echo.40cd90a2d90b.png",
+            "sha256": "40cd90a2d90b0e76225c4cf35515c8ed178def172900aaf86226b5c58194ad41",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-east-down-echo.5c9cfe1e26ec.png",
+            "sha256": "5c9cfe1e26ece8816326978008df6c36c27ebc6d22de51f95f2ae7a2684e8c27",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "north": {
+          "idle": {
+            "file": "rhee_callender-north-idle-echo.cd25b886d99e.png",
+            "sha256": "cd25b886d99e92c9578d30de2e9c2a4ebfaa55258dfd6ada910ff6da47fb761e",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-north-walk-echo.9c7b87bea528.png",
+            "sha256": "9c7b87bea52827052f743b80f8f39f9afe44cd98cc500536a87080d28bfca2bd",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-north-hurt-echo.59306aec3a8a.png",
+            "sha256": "59306aec3a8a6fb4d8f7143b1287619f0df7b6f2c991bef81e9cd9c1b87d6923",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-north-down-echo.f89b224b0c69.png",
+            "sha256": "f89b224b0c69e71be25bbe57869a4b4a6f198430fd8b0017e99bdd2dc99fc709",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        },
+        "west": {
+          "idle": {
+            "file": "rhee_callender-west-idle-echo.37ede1759150.png",
+            "sha256": "37ede175915012aa3f2bb933aa488695c4514218713e68bbd5d1f14c2b7325ce",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 3,
+            "fps": 3,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 1.0
+          },
+          "walk": {
+            "file": "rhee_callender-west-walk-echo.8d9950ec7ff0.png",
+            "sha256": "8d9950ec7ff06cae75734fdb17ca6633f9a2e2ada47dbcd35f488b11cb6bf271",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 6,
+            "fps": 8,
+            "loop": true,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.75
+          },
+          "hurt": {
+            "file": "rhee_callender-west-hurt-echo.885e04ef539c.png",
+            "sha256": "885e04ef539cd4495782325b220041eafca1beff4633efb12e8b3bab80673dc2",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 2,
+            "fps": 6,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": 0.3333333333333333
+          },
+          "down": {
+            "file": "rhee_callender-west-down-echo.aee680673b0b.png",
+            "sha256": "aee680673b0bc86df56a0e7d816e554da612ecfc499ed6aec4453ead0e9b877a",
+            "frameSize": [
+              24,
+              24
+            ],
+            "frames": 1,
+            "fps": 0,
+            "loop": false,
+            "blend": "alpha",
+            "reducedMotionFrame": 0,
+            "seconds": null
+          }
+        }
+      },
+      "idle": {
+        "file": "rhee_callender-compat-idle.1a68076c378c.png",
+        "sha256": "1a68076c378cfbd4803b53ef45ee2896212736d981e3d871484449327e32289d",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false,
+        "reducedMotionFrame": 0
+      },
+      "walk": {
+        "file": "rhee_callender-south-walk.7ab231b1c9e7.png",
+        "sha256": "7ab231b1c9e71aba24acafb408559861cb79fa9803e7b01c352c9efe04243d19",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 6,
+        "fps": 8,
+        "loop": true,
+        "blend": "alpha",
+        "reducedMotionFrame": 0,
+        "seconds": 0.75
+      },
+      "compatibility": "M4 flat idle is a single 24px pose; full directional animation is in facings/echo.",
+      "echoTreatment": "static translucent scan bands; no temporal flicker; same idle/walk cadence as living crew"
     }
   }
 }
