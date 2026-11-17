@@ -1,0 +1,25 @@
+{
+  "request": {
+    "id": "story372_2026_11_17_job6-leda",
+    "issues": [
+      "#372",
+      "#343"
+    ],
+    "voice": "Leda",
+    "text": "I can run that for you! One gold if you're nice. Two if you're not.",
+    "segments": [
+      {
+        "raw": "Leda.de64089c",
+        "line": "bark_pip_ashdown_town_1",
+        "speaker": "pip_ashdown",
+        "preset": "Leda",
+        "text": "I can run that for you! One gold if you're nice. Two if you're not.",
+        "renderText": "I can run that for you! One gold if you're nice. Two if you're not.",
+        "delivery": null,
+        "branches": [
+          "claude/issue-372-story-coherence"
+        ]
+      }
+    ]
+  }
+}
