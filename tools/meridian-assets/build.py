@@ -230,6 +230,9 @@ def immutable(pack, folder, name, image):
 
 def build(root=ROOT):
     pack = root/'content/meridian/base'
+    installed = pack/'tiles/manifest.json'
+    if installed.exists() and json.loads(installed.read_text()).get('issue') == 332:
+        raise ValueError('Complete compartment set installed: use compartments.py; build style-only samples with --root in a separate directory.')
     review = root/'docs/superpowers/reports/meridian-art/style'
     review.mkdir(parents=True, exist_ok=True)
     tiles, hatches = {}, {}

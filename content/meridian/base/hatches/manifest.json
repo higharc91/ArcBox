@@ -1,8 +1,13 @@
 {
-  "version": 1,
-  "status": "sample-awaiting-owner-review",
-  "issue": 331,
-  "rulesReference": "PR #316 at af068bb1d23b5e295457adc4bf2ce1108ad6686d; not yet on main",
+  "version": 2,
+  "status": "awaiting-set-review",
+  "issue": 332,
+  "rulesReference": {
+    "pr": 316,
+    "head": "ff3175af859733bf8b02c0ff2afa43d0113e1c66",
+    "sha256": "e68456723e2d4f1d409e9deb638f97f83233e25acd40ae86db525e440873f1eb"
+  },
+  "styleApproval": "Owner approved refined #331 samples in conversation on 2026-11-17; continued quality refinement and appropriate animation requested.",
   "states": {
     "open": {
       "file": "open.e7c1970b0975.png",
@@ -63,6 +68,87 @@
         41,
         8
       ]
+    },
+    "one_way": {
+      "file": "one-way.f570d2cc0a27.png",
+      "sha256": "f570d2cc0a279d02e43df4be70e43f3c2c1bd84f5d6353f114b907c2d9bf7042",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    }
+  },
+  "animations": {
+    "opening": {
+      "full": {
+        "file": "opening-full.1c2782386f51.png",
+        "sha256": "1c2782386f514e1fecc4285dcd0666311020de04f92dab87a98f19633caa5ea5",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 6,
+        "fps": 10,
+        "seconds": 0.6,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "open",
+        "reducedMotion": "show restState without animation"
+      },
+      "reduced": {
+        "file": "opening-reduced.1c2782386f51.png",
+        "sha256": "1c2782386f514e1fecc4285dcd0666311020de04f92dab87a98f19633caa5ea5",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 6,
+        "fps": 10,
+        "seconds": 0.6,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "open",
+        "reducedMotion": "show restState without animation"
+      }
+    },
+    "sealing": {
+      "full": {
+        "file": "sealing-full.1656d47a2aa6.png",
+        "sha256": "1656d47a2aa6b9cd6003eba2dd54fadfb2d104162e59cb4f114dbd9c4aa4de62",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 8,
+        "fps": 10,
+        "seconds": 0.8,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "sealed",
+        "reducedMotion": "show restState without animation"
+      },
+      "reduced": {
+        "file": "sealing-reduced.3301e92b430b.png",
+        "sha256": "3301e92b430bc42417930916665242a21a3fd8b0b425ffa1cb523ae454c76b36",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 8,
+        "fps": 10,
+        "seconds": 0.8,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "sealed",
+        "reducedMotion": "show restState without animation"
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 # Meridian pixel-art style and asset contract
 
-Status: **proposal awaiting owner approval for #331**. Do not start #332–#338's full sets before that approval. All samples are original code-built art; generation spend is 0 CU.
+Status: **refined visual direction approved by the owner on 2026-11-17** in conversation ("Looks good, continue on art assets"). The owner then requested larger, clearer room details for TV. Each follow-on set still gets its own review; no physical-TV readability approval is implied. All samples are original code-built art; generation spend is 0 CU.
 
 ## Look and light
 
@@ -60,3 +60,11 @@ Review: `docs/superpowers/reports/meridian-art/style/index.html`. It shows every
 Review real Chromium at 320×844 and 390×844 and a native Godot display of the mock. Retain actual protanopia/deuteranopia simulations; they are limited screenshot checks, not human couch/stream readability approval. Ask the owner to judge the look and readability before full production. No human or physical-TV test is implied.
 
 Paid generation requires an issue-posted estimate and explicit owner approval first, as #331 specifies. None is used in this delivery.
+
+## Full compartment set (#332)
+
+`python tools/meridian-assets/compartments.py` builds all 48 unique IDs (50 physical tiles) and 57 deck variants, all hatch states, one-way shaft cue, backgrounds, one-shot opening/sealing clips and review evidence. `python tools/meridian-assets/audit_compartments.py --rules <live tiles.json>` fails on any missing ID, deck variant, metadata or hash. The default audit uses checked-out live rules when available, otherwise the explicit pinned reference. The sample-only builder refuses to overwrite a completed full-set manifest.
+
+The set reference is unmerged #316 at `ff3175af859733bf8b02c0ff2afa43d0113e1c66`; `reference/tiles.json` is an exact copy, not an alternate rules pack. Refresh and audit against current upstream rules before integration. Nested `tiles[id].variants[deck]` entries declare each deck's immutable file/hash; runtime chooses the current deck. `hatches.animations[kind][full|reduced]` declares horizontal frames, 10fps, one-shot duration and settled state. Reduced-motion uses the settled state with no animation; reduced-effects sealing omits sparks. These clips prepare assets for M4/M5; they do not claim the full board-FX set (#337).
+
+TV detail pass: main equipment uses broad silhouettes and connected highlights. The 11px card symbols use a warning triangle, handled case and hollow diamond, remaining distinct without hue. Each 1080p readability sheet contains 12 rooms at the actual 128px grid size beside greyscale/crew-occluded versions. Concept deck mocks retain the 128px grid and propose an additional 256px focused-room detail panel. That panel is a review concept, not shipped TV behavior.
