@@ -38,7 +38,29 @@ public class MigrationsTests
 
         Assert.Equal(Migrations.Scripts.Count, Scalar(connection, "PRAGMA user_version"));
         var tables = Strings(connection, "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
-        Assert.Equal(["campaign_snapshots", "campaigns", "profile_keys", "profiles", "rooms"], tables);
+        Assert.Equal(["campaign_snapshots", "campaigns", "profile_keys", "profiles", "room_game_state", "rooms"], tables);
+    }
+
+    [Fact]
+    public void A_version_1_database_gains_the_game_state_table_and_keeps_its_rooms()
+    {
+        using var connection = OpenMemory();
+        using (var v1 = connection.CreateCommand())
+        {
+            v1.CommandText = Migrations.Scripts[0] + "\nPRAGMA user_version = 1;";
+            v1.ExecuteNonQuery();
+        }
+        using (var insert = connection.CreateCommand())
+        {
+            insert.CommandText = "INSERT INTO rooms (code, host_token_hash, slots_json, next_slot_id, created_utc, updated_utc) VALUES ('ABCD', 'h', '[]', 1, 't', 't')";
+            insert.ExecuteNonQuery();
+        }
+
+        Migrations.Apply(connection);
+
+        Assert.Equal(Migrations.Scripts.Count, Scalar(connection, "PRAGMA user_version"));
+        Assert.Equal(1, Scalar(connection, "SELECT COUNT(*) FROM rooms"));
+        Assert.Equal(0, Scalar(connection, "SELECT COUNT(*) FROM room_game_state"));
     }
 
     [Fact]
@@ -77,6 +99,7 @@ public class MigrationsTests
     [InlineData("rooms", "code,host_token_hash,slots_json,next_slot_id,selected_game,campaign_id,game_running,created_utc,updated_utc")]
     [InlineData("campaigns", "id,code,game_id,name,owner,members_json,document,version,updated_utc")]
     [InlineData("campaign_snapshots", "id,campaign_id,version,label,document,created_utc")]
+    [InlineData("room_game_state", "code,game_id,snapshot,saved_utc")]
     public void Tables_have_the_columns_from_the_spec(string table, string columns)
     {
         using var connection = OpenMemory();
