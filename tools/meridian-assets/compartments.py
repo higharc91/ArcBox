@@ -560,7 +560,7 @@ def readability_sheets(review,all_rules):
             x=16+(i%4)*236; y=50+(i//4)*160
             board.alpha_composite(im,(x,y))
             covered=im.copy();covered.alpha_composite(style.crew(),(20,20))
-            grey=ImageOps.grayscale(covered).convert('RGBA')
+            grey=ImageOps.grayscale(covered).convert('RGBA'); grey.putalpha(covered.getchannel('A'))
             board.alpha_composite(grey,(x+88,y))
             d.text((x,y+74),rule['name'][:27],font=font,fill=style.PAPER)
             d.text((x,y+91),'COLOUR / GREY + CREW',font=font,fill=style.PAPER)
