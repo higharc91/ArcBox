@@ -169,6 +169,7 @@ public partial class BoardCanvas : Node2D
 
         // Tokens in compartments, then crew, so people are always on top.
         var byRoom = tiles.ToDictionary(t => t.Id);
+        var figures = (_motion?.Poses ?? []).ToDictionary(p => p.Seat);
         if (view.Scenario is { } panel)
         {
             foreach (var group in panel.Tokens.Where(t => t.At is not null && byRoom.ContainsKey(t.At)).GroupBy(t => t.At!))
@@ -177,11 +178,33 @@ public partial class BoardCanvas : Node2D
                 var i = 0;
                 foreach (var token in group)
                 {
-                    var glyph = BoardStyle.Token(token.Kind, token.State);
                     var size = names ? Math.Max(18f, cell * 0.22f) : Math.Max(4f, cell * 0.2f);
                     var at = c + new Vector2(-cell * 0.36f + i++ * (size + 3), cell * 0.18f);
+                    // A monster walks like crew (M5 plan, Task 4): drawn where it is, mid-walk.
+                    var pose = CrewMotion.MonsterKinds.Contains(token.Kind) ? figures.GetValueOrDefault(token.Id) : null;
+                    if (pose is { Walking: true })
+                    {
+                        at = V(DeckLayout.ToScreen(pose.X, pose.Y, cam, area)) - new Vector2(size / 2, size / 2);
+                    }
+                    var art = pose is not null ? _art.MonsterFrames(token.Kind, pose.State, pose.Facing) : _art.Token(token.Kind, token.State);
+                    if (names && art is not null && Texture(art.Path) is { } sprite)
+                    {
+                        var scale = cell / 64f;
+                        var frame = art.Fps > 0 ? (int)(_clock * art.Fps) % art.Frames : 0;
+                        var drawn = new Vector2(art.FrameW, art.FrameH) * scale;
+                        var foot = pose is not null ? at + new Vector2(size / 2, size) : at + new Vector2(size / 2, size / 2);
+                        var topLeft = pose is not null ? foot - new Vector2(drawn.X / 2, drawn.Y) : foot - drawn / 2;
+                        DrawTextureRectRegion(sprite, new Rect2(topLeft, drawn), new Rect2(frame * art.FrameW, 0, art.FrameW, art.FrameH),
+                                              new Color(1, 1, 1, token.Stunned && pose is null ? 0.4f : 1f));
+                        continue;
+                    }
+                    var glyph = BoardStyle.Token(token.Kind, token.State);
                     var colour = new Color(glyph.Colour, token.Stunned ? 0.4f : 1f);
                     DrawRect(new Rect2(at, new Vector2(size, size)), colour);
+                    if (pose is { State: CrewLook.Hurt })
+                    {
+                        DrawRect(new Rect2(at - new Vector2(2, 2), new Vector2(size + 4, size + 4)), new Color("ffffff"), false, 2);
+                    }
                     if (names)
                     {
                         DrawString(ArcTheme.Black, at + new Vector2(0, size * 0.82f), glyph.Label, HorizontalAlignment.Center, size, (int)(size * 0.8f), new Color("101018"));

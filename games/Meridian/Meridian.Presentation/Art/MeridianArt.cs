@@ -71,6 +71,27 @@ public sealed class MeridianArt
                ?? Entry($"crew/{crewId}/idle/{side}") ?? Entry($"crew/{crewId}/idle");
     }
 
+    /// <summary>
+    /// A token's art (#336): its state's entry (a repair point <c>broken</c> or <c>fixed</c>), else its kind's, else none (its
+    /// glyph). A monster's frames for how it looks and faces: as crew, with <c>stun</c> for stunned.
+    /// </summary>
+    public ArtEntry? Token(string kind, string? state = null)
+        => (state is not null ? Entry($"tokens/{kind}/{state}") : null) ?? Entry($"tokens/{kind}") ?? Entry($"tokens/{kind}/idle");
+
+    public ArtEntry? MonsterFrames(string kind, CrewLook look, Side facing)
+    {
+        var animation = look switch
+        {
+            CrewLook.Walk => "walk",
+            CrewLook.Hurt => "hurt",
+            CrewLook.Stunned => "stun",
+            _ => "idle",
+        };
+        var side = facing.ToString().ToLowerInvariant();
+        return Entry($"tokens/{kind}/{animation}/{side}") ?? Entry($"tokens/{kind}/{animation}")
+               ?? Entry($"tokens/{kind}/idle/{side}") ?? Token(kind);
+    }
+
     /// <summary>A crew member's portrait, for the seat strip, the Debrief and the phones.</summary>
     public ArtEntry? Portrait(string crewId) => Entry($"portraits/{crewId}");
 

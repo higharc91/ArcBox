@@ -106,3 +106,37 @@ public sealed class CrewMotionTests
         Assert.True(walks > 10, $"{walks} walks");
     }
 }
+
+public sealed class MonsterMotionTests
+{
+    private static CompartmentCard Room(string id, int x, int y, params Side[] hatches)
+        => new(id, "storage_bay", null, new Cell(DeckId.Habitat, x, y), 0, [.. hatches], null, null);
+
+    private static MeridianHostView View(string broodAt, bool stunned = false, bool brood = true)
+        => new("endgame", "", [new SeatCard("p1", "Ann", null, 0, true, false, true)],
+               [Room("a", 0, 0, Side.E), Room("b", 1, 0, Side.W)], [new CrewMarker("p1", "Ann", "a", 0)], 0, 0, 3, null, [],
+               new ScenarioPanel("The Passenger", 10, brood ? [new TokenCard("brood-1", "brood", broodAt, null, stunned)] : [], [], []));
+
+    [Fact]
+    public void A_monster_walks_like_crew_and_a_stunned_one_shows_it()
+    {
+        var motion = new CrewMotion();
+        motion.Receive(View("a"), null);
+        motion.Receive(View("b"), null);
+        motion.Tick(0.1);
+        var brood = motion.Poses.Single(p => p.Seat == "brood-1");
+        Assert.Equal((CrewLook.Walk, Side.E), (brood.State, brood.Facing));
+        motion.Tick(2);
+        motion.Receive(View("b", stunned: true), null);
+        Assert.Equal(CrewLook.Stunned, motion.Poses.Single(p => p.Seat == "brood-1").State);
+    }
+
+    [Fact]
+    public void A_monster_that_leaves_the_board_is_forgotten()
+    {
+        var motion = new CrewMotion();
+        motion.Receive(View("a"), null);
+        motion.Receive(View("a", brood: false), null);
+        Assert.DoesNotContain(motion.Poses, p => p.Seat == "brood-1");
+    }
+}

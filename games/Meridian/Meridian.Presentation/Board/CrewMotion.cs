@@ -13,11 +13,13 @@ public enum CrewLook
     Down,
     /// <summary>Dead, and playing on as an echo.</summary>
     Echo,
+    /// <summary>A stunned monster (M5 plan, Task 4).</summary>
+    Stunned,
 }
 
 /// <summary>
-/// Where a crew member is drawn this frame: on <see cref="Deck"/>, at a fractional cell (<see cref="X"/>, <see cref="Y"/>),
-/// facing the way they last moved.
+/// Where a figure (a crew member, or a monster) is drawn this frame: on <see cref="Deck"/>, at a fractional cell
+/// (<see cref="X"/>, <see cref="Y"/>), facing the way it last moved. <see cref="Seat"/> is a seat, or a monster's token id.
 /// </summary>
 public sealed record CrewPose(string Seat, DeckId Deck, double X, double Y, Side Facing, CrewLook State, string At)
 {
@@ -45,7 +47,11 @@ public sealed class CrewMotion
         public Side Facing = Side.S;
         public readonly Queue<Cell> Path = new();
         public bool Echo;
+        public bool Stunned;
     }
+
+    /// <summary>The token kinds that walk like crew: the scenarios' monsters.</summary>
+    public static readonly IReadOnlySet<string> MonsterKinds = new HashSet<string>(StringComparer.Ordinal) { "brood" };
 
     private readonly Dictionary<string, Walker> _walkers = new(StringComparer.Ordinal);
     private Beat? _beat;
@@ -56,27 +62,38 @@ public sealed class CrewMotion
     {
         _beat = beat;
         var rooms = view.Compartments.ToDictionary(c => c.Id);
-        foreach (var marker in view.Crew)
+        // Crew, and the monsters on the board: everything that walks.
+        var figures = view.Crew.Select(m => (m.Id, m.At, m.Echo, Stunned: false))
+            .Concat((view.Scenario?.Tokens ?? []).Where(t => MonsterKinds.Contains(t.Kind) && t.At is not null)
+                                                  .Select(t => (t.Id, At: t.At!, Echo: false, t.Stunned)))
+            .ToList();
+        foreach (var gone in _walkers.Keys.Except(figures.Select(f => f.Id)).ToList())
         {
-            if (!rooms.TryGetValue(marker.At, out var room))
+            _walkers.Remove(gone);   // a monster that left the board
+        }
+        foreach (var figure in figures)
+        {
+            var allCut = cut;
+            if (!rooms.TryGetValue(figure.At, out var room))
             {
                 continue;
             }
-            if (!_walkers.TryGetValue(marker.Id, out var walker))
+            if (!_walkers.TryGetValue(figure.Id, out var walker))
             {
-                walker = new Walker(marker.Id);
-                _walkers[marker.Id] = walker;
-                cut = true;
+                walker = new Walker(figure.Id);
+                _walkers[figure.Id] = walker;
+                allCut = true;
             }
-            walker.Echo = marker.Echo;
-            if (walker.At == marker.At && !cut)
+            walker.Echo = figure.Echo;
+            walker.Stunned = figure.Stunned;
+            if (walker.At == figure.At && !allCut)
             {
                 continue;
             }
             var from = rooms.TryGetValue(walker.At, out var was) ? was.At : (Cell?)null;
-            walker.At = marker.At;
+            walker.At = figure.At;
             walker.Path.Clear();
-            var path = !cut && from is { } start ? Route(view, start, room.At) : null;
+            var path = !allCut && from is { } start ? Route(view, start, room.At) : null;
             if (path is null || path.Count > LongestWalk)
             {
                 (walker.Deck, walker.X, walker.Y) = (room.At.Deck, room.At.X, room.At.Y);   // a cut
@@ -134,6 +151,10 @@ public sealed class CrewMotion
         if (_beat is { Kind: "fight", Short: false } fight && fight.Now.Target == walker.Seat)
         {
             return CrewLook.Hurt;
+        }
+        if (walker.Stunned && walker.Path.Count == 0)
+        {
+            return CrewLook.Stunned;
         }
         return walker.Path.Count > 0 ? CrewLook.Walk : CrewLook.Idle;
     }

@@ -186,3 +186,42 @@ public sealed class CrewFrameTests : IDisposable
         Assert.Null(art.CrewFrames("kit_sato", CrewLook.Idle, Side.S));                            // no art: the disc
     }
 }
+
+public sealed class TokenArtTests : IDisposable
+{
+    private readonly string _root = Directory.CreateTempSubdirectory("meridian-token-art-").FullName;
+
+    public void Dispose() => Directory.Delete(_root, recursive: true);
+
+    private string Png(string name, int w, int h)
+    {
+        var bytes = new byte[33];
+        new byte[] { 0x89, (byte)'P', (byte)'N', (byte)'G' }.CopyTo(bytes, 0);
+        System.Buffers.Binary.BinaryPrimitives.WriteInt32BigEndian(bytes.AsSpan(16), w);
+        System.Buffers.Binary.BinaryPrimitives.WriteInt32BigEndian(bytes.AsSpan(20), h);
+        bytes[32] = (byte)name.Length;
+        Directory.CreateDirectory(Path.Combine(_root, "tokens"));
+        File.WriteAllBytes(Path.Combine(_root, "tokens", name), bytes);
+        return $"\"file\": \"{name}\"";
+    }
+
+    [Fact]
+    public void A_tokens_state_picks_its_art_and_an_unknown_kind_keeps_its_glyph()
+    {
+        var broken = Png("repair-broken.png", 24, 24);
+        var fixedArt = Png("repair-fixed.png", 24, 24);
+        var stun = Png("brood-stun.png", 48, 24);
+        var idle = Png("brood-idle.png", 24, 24);
+        File.WriteAllText(Path.Combine(_root, "tokens", "manifest.json"), $$"""
+            { "tokens": {
+                "repair": { "broken": { {{broken}} }, "fixed": { {{fixedArt}} } },
+                "brood": { "idle": { {{idle}} }, "stun": { {{stun}}, "frames": 2, "fps": 4 } } } }
+            """);
+        var art = MeridianArt.Load(_root, BasePack.Pack);
+        Assert.EndsWith("repair-fixed.png", art.Token("repair", "fixed")!.Path);
+        Assert.EndsWith("repair-broken.png", art.Token("repair", "broken")!.Path);
+        Assert.EndsWith("brood-stun.png", art.MonsterFrames("brood", CrewLook.Stunned, Side.N)!.Path);
+        Assert.EndsWith("brood-idle.png", art.MonsterFrames("brood", CrewLook.Walk, Side.E)!.Path);   // no walk art: idle
+        Assert.Null(art.Token("hazard"));                                                            // its glyph
+    }
+}
