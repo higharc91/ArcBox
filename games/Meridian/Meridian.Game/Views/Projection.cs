@@ -15,7 +15,7 @@ internal static class Projection
     public static MeridianHostView Host(MeridianGame game)
     {
         var s = game.Session;
-        var banner = s.Phase switch
+        var banner = s.Resuming ? "Reconnecting…" : s.Phase switch
         {
             SessionPhase.Boarding => "Choose your crew",
             SessionPhase.Over => s.Ending ?? "",
@@ -38,12 +38,16 @@ internal static class Projection
     private static HostWait? Wait(MeridianGame game)
     {
         var s = game.Session;
-        if (s.Clock.Purpose is not (ClockPurpose.Grace or ClockPurpose.Pause) || game.Deadline is not { } due)
+        if (s.Clock.Purpose is not (ClockPurpose.Grace or ClockPurpose.Pause or ClockPurpose.Resume) || game.Deadline is not { } due)
         {
             return null;
         }
-        var kind = s.Clock.Purpose == ClockPurpose.Grace ? "grace" : "pause";
         var seconds = (int)Math.Ceiling((due - game.Now).TotalSeconds);
+        if (s.Clock.Purpose == ClockPurpose.Resume)
+        {
+            return new HostWait("resume", null, null, seconds, s.Seats.Count(x => x.Connected));
+        }
+        var kind = s.Clock.Purpose == ClockPurpose.Grace ? "grace" : "pause";
         if (s.Game!.Waiting is VotePending)
         {
             return new HostWait(kind, null, null, seconds);

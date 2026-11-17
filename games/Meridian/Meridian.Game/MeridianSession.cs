@@ -45,6 +45,8 @@ public enum ClockPurpose
     /// <summary>The endgame's pause for a seat that dropped while owing a decision (spec §3.3).</summary>
     [JsonStringEnumMemberName("pause")] Pause,
     [JsonStringEnumMemberName("debrief")] Debrief,
+    /// <summary>After a restart: waiting for phones to come back, with no bots and no other deadline (M6 plan, Task 4).</summary>
+    [JsonStringEnumMemberName("resume")] Resume,
 }
 
 /// <summary>
@@ -63,6 +65,7 @@ public sealed record Clock(int Seq, ClockPurpose Purpose);
 /// <param name="BotRng">The bots' own generator, never the game's.</param>
 /// <param name="Ending">The results message, once the game is over.</param>
 /// <param name="Ready">Seats that have read their briefing.</param>
+/// <param name="Resuming">Back from a restart and waiting for phones (M6 plan, Task 4). Never in a snapshot.</param>
 public sealed record MeridianSession(
     SessionPhase Phase,
     EqArray<SeatInfo> Seats,
@@ -74,7 +77,8 @@ public sealed record MeridianSession(
     int NextPresent,
     EqArray<string> Log,
     string? Ending = null,
-    EqArray<SeatId> Ready = default)
+    EqArray<SeatId> Ready = default,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Resuming = false)
 {
     public int IndexOf(PlayerId player)
     {

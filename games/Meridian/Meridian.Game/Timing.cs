@@ -42,6 +42,10 @@ public sealed partial class MeridianGame
     private (ClockPurpose Purpose, TimeSpan Full) NextClock()
     {
         var rules = _pack.Rules;
+        if (Session.Resuming && Session.Phase != SessionPhase.Over)
+        {
+            return (ClockPurpose.Resume, rules.ResumeWait);   // nothing else counts down while phones come back
+        }
         return Session.Phase switch
         {
             SessionPhase.Boarding => (ClockPurpose.Boarding, rules.BoardingTime),

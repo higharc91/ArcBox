@@ -16,7 +16,7 @@ export interface MeridianHostView {
   compartments: CompartmentCard[]; crew: CrewMarker[]; tilesLeft: number; anomaliesDrawn: number; round: number;
   now: Presented | null; log: string[]; scenario?: ScenarioPanel;
   /** A disconnected seat the game is waiting for (spec §3.3); a vote names nobody. */
-  wait?: { kind: "grace" | "pause"; seat?: string; name?: string; seconds: number };
+  wait?: { kind: "grace" | "pause" | "resume"; seat?: string; name?: string; seconds: number; back?: number };
   /** Seats ready, during the briefing only. */
   ready?: number;
 }
@@ -74,7 +74,9 @@ export function MeridianBoard({ view, signal }: { view: MeridianHostView; signal
       </header>
       {view.wait ? (
         <div class="mer-wait" role="status" aria-label="Waiting">
-          {view.wait.name ? `Waiting for ${view.wait.name}…` : "Waiting for the vote…"} {view.wait.seconds} s
+          {view.wait.kind === "resume"
+            ? `Reconnecting… ${view.wait.back ?? 0} of ${view.seats.length} phones back`
+            : view.wait.name ? `Waiting for ${view.wait.name}…` : "Waiting for the vote…"} {view.wait.seconds} s
         </div>
       ) : null}
       {view.ready !== undefined ? <div class="mer-ready">{view.ready} of {view.seats.length} ready</div> : null}

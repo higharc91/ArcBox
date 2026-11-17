@@ -34,7 +34,7 @@ public sealed partial class MeridianGame : ISnapshotGame
     /// </summary>
     public JsonElement? TakeSnapshot()
     {
-        if (Session is null || Session.Phase == SessionPhase.Over)
+        if (Session is null || Session.Phase == SessionPhase.Over || Session.Resuming)
         {
             return null;
         }
@@ -77,9 +77,19 @@ public sealed partial class MeridianGame : ISnapshotGame
         _ctx = ctx;
         _pack = pack.Value;
         var seats = restored.Seats.Select(s => s with { Connected = false, Auto = false, PauseUsed = false }).ToEqArray();
-        Session = restored with { Seats = seats, Clock = new Clock(restored.Clock.Seq, ClockPurpose.None) };
+        Session = restored with { Seats = seats, Clock = new Clock(restored.Clock.Seq, ClockPurpose.None), Resuming = true };
         _snapshotAt = CurrentMoment;   // this is the moment the snapshot was taken at: nothing new to save yet
         _restored = null;
+        Rearm(fresh: true);
+    }
+
+    /// <summary>
+    /// Phones are back, or the wait for them is over: play on. A fresh decision gets its full time, and a seat still
+    /// missing gets the usual grace or pause, then a bot.
+    /// </summary>
+    private void EndResuming()
+    {
+        Session = Session with { Resuming = false };
         Rearm(fresh: true);
     }
 }

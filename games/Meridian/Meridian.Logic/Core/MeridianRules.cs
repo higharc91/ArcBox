@@ -57,6 +57,12 @@ public sealed record MeridianRules
     public TimeSpan AllocateWait { get; init; } = TimeSpan.FromSeconds(20);
     public TimeSpan DebriefTime { get; init; } = TimeSpan.FromSeconds(20);
 
+    /// <summary>
+    /// After a server restart, how long the game waits for phones to come back before the usual disconnect rules (grace,
+    /// pause, then a bot) apply (M6 plan, Task 4). Nothing else counts down meanwhile.
+    /// </summary>
+    public TimeSpan ResumeWait { get; init; } = TimeSpan.FromSeconds(60);
+
     // Reading aloud (M4 plan, Task 2). A presentation that carries text waits at least as long as Tiller takes to say it,
     // because its wait is the fallback for a missing TV and must outlast a present one.
     /// <summary>Tiller's speaking rate: native pace for the voice, the rate REDLINE's question reader assumes.</summary>

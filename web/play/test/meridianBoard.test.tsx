@@ -89,6 +89,11 @@ describe("meridian dev board", () => {
     expect(screen.getByRole("status", { name: "Waiting" }).textContent).toContain("Waiting for the vote…");
   });
 
+  it("counts the phones back after a restart, naming none", () => {
+    render(<MeridianBoard view={{ ...view(), now: null, wait: { kind: "resume", seconds: 42, back: 2 } }} signal={() => {}} />);
+    expect(screen.getByRole("status", { name: "Waiting" }).textContent).toContain(`Reconnecting… 2 of ${view().seats.length} phones back 42 s`);
+  });
+
   it("counts ready seats during the briefing", () => {
     render(<MeridianBoard view={{ ...view(), now: null, ready: 2 }} signal={() => {}} />);
     expect(screen.getByText(`2 of ${view().seats.length} ready`)).toBeTruthy();

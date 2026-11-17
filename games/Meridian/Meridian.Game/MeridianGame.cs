@@ -108,6 +108,9 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
             case ClockPurpose.Grace:
                 HandToBot();
                 break;
+            case ClockPurpose.Resume:
+                EndResuming();
+                break;
             case ClockPurpose.Bot:
                 BotStep();
                 break;
@@ -124,6 +127,11 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
                 Auto = connected ? false : seat.Auto,
                 PauseUsed = connected ? false : seat.PauseUsed,   // a new disconnection gets a new pause
             });
+            if (Session.Resuming && Session.Seats.All(s => s.Connected))
+            {
+                EndResuming();   // everyone is back
+                return;
+            }
             Rearm();
         }
     }

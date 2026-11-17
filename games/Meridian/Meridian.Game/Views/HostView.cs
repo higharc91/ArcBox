@@ -43,14 +43,16 @@ public sealed record TvAward(string Id, string Title, string Seat);
 
 /// <summary>
 /// What the game is waiting on a disconnected seat for (spec §3.3): the Explore <c>grace</c> or the endgame <c>pause</c>,
-/// with the seconds left when the view was made. The pause is shown the same way for every seat, so it can't tell anyone
+/// with the seconds left when the view was made. After a restart, <c>resume</c>: phones coming back, with how many are
+/// <see cref="Back"/> and never which (M6 plan, Task 4). The pause is shown the same way for every seat, so it can't tell anyone
 /// who the traitor is. A vote names nobody: naming a waited-for voter would tell the room they haven't voted.
 /// </summary>
 public sealed record HostWait(
     string Kind,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Seat,
     [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Name,
-    int Seconds);
+    int Seconds,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] int? Back = null);
 
 /// <summary>
 /// The running scenario as the TV may show it: built from <c>Visibility.For(state, null)</c>, so it holds only what

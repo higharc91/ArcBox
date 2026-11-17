@@ -42,7 +42,7 @@ public sealed class SecrecyTests
     }
 
     /// <summary>Checks every viewer; returns whether there was a scenario to keep secret.</summary>
-    private static bool Check(Harness game)
+    internal static bool Check(Harness game)
     {
         if (game.Session.Game is not { Board: { } board } real || real.Phase == Phase.Over)
         {

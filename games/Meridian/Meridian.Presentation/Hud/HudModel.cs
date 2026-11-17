@@ -41,7 +41,7 @@ public sealed record HudModel(
         var log = view.Log.Skip(Math.Max(0, view.Log.Count - LogLines)).ToEqArray();
         return new HudModel(seats, view.Banner, stats, view.Scenario?.Title,
                             view.Scenario?.Objectives.Where(o => o.State == ObjectiveState.Open).Select(o => o.Text).ToEqArray() ?? [],
-                            beat is { Short: false } ? PanelFor(beat.Now) : null, log, WaitText(view.Wait, waited));
+                            beat is { Short: false } ? PanelFor(beat.Now) : null, log, WaitText(view.Wait, waited, view.Seats.Count));
     }
 
     private static EqArray<HudStat> ExploreStats(MeridianHostView view)
@@ -96,14 +96,21 @@ public sealed record HudModel(
         _ => "#c08cff",
     };
 
-    /// <summary>The waiting banner, counting down from what the view said. A vote's wait names nobody.</summary>
-    public static string? WaitText(HostWait? wait, double waited)
+    /// <summary>
+    /// The waiting banner, counting down from what the view said. A vote's wait names nobody; after a restart it counts
+    /// the phones back, never naming them.
+    /// </summary>
+    public static string? WaitText(HostWait? wait, double waited, int seats = 0)
     {
         if (wait is null)
         {
             return null;
         }
         var left = Math.Max(0, (int)Math.Ceiling(wait.Seconds - waited));
+        if (wait.Kind == "resume")
+        {
+            return $"Reconnecting… {wait.Back ?? 0} of {seats} phones back · {left} s";
+        }
         return wait.Name is { } name ? $"Waiting for {name}… {left} s" : $"Waiting for the vote… {left} s";
     }
 
