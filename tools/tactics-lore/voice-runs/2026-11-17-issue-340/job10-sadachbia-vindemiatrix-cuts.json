@@ -1,0 +1,121 @@
+{
+  "batch": "issue340_2026_11_17_job10-sadachbia-vindemiatrix",
+  "source": "job10-sadachbia-vindemiatrix.wav",
+  "sourceSha256": "eab3a57408c9a56486767c0dd985ca7bd774b4a8b3d09befe6e7b32a95c82e96",
+  "durationSeconds": 71.8,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Sadachbia.98a2d6d5",
+      "line": "bark_corvin_ashby_town_force",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "Forty years of goblin trade in the ledgers, and we ended it in a morning. I'm writing that down.",
+      "start": 0.0,
+      "end": 7.814,
+      "matchedWords": "11/19",
+      "wavSha256": "5b48d202137011a9999098acbeeecd978032ee3ecebdb73c21262997e363bd2a"
+    },
+    {
+      "raw": "Sadachbia.b96a5d15",
+      "line": "bark_corvin_ashby_town_parley",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "The clan keeps songs older than my oldest page. I've begged for a copy. Twice.",
+      "start": 7.814,
+      "end": 14.301,
+      "matchedWords": "11/15",
+      "wavSha256": "e4520493c1b7293179b5b2dc573d15882c87e39b226e4b8d576282f4aaac92cf"
+    },
+    {
+      "raw": "Sadachbia.aa8bfb43",
+      "line": "talk_corvin_ashby_ford_ember",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "You found it. The ember. May I... no. No, don't hand it to me. I'd only want to know what it costs.",
+      "start": 14.301,
+      "end": 22.564,
+      "matchedWords": "15/22",
+      "wavSha256": "e4efc704d15cb9b28552ae0c2f8c46b21a84ace07d814c0ea383bb8e2d8f3576"
+    },
+    {
+      "raw": "Sadachbia.93aef6e5",
+      "line": "talk_corvin_ashby_ford_force",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "I've written down the bridge. All of it. Someone should, while we still remember it right.",
+      "start": 22.564,
+      "end": 28.089,
+      "matchedWords": "13/16",
+      "wavSha256": "c80b37dd38ddaa6b0a29ac7e7bf0ce59c2f19ca618e505ab54512b9a092ea7e3"
+    },
+    {
+      "raw": "Sadachbia.61c0c0e5",
+      "line": "talk_corvin_ashby_ford_parley",
+      "speaker": "corvin_ashby",
+      "preset": "Sadachbia",
+      "text": "Mother Skarrow's people remember things my ledgers don't. If you go up the hill again, ask them about the seven. Please.",
+      "start": 28.089,
+      "end": 34.953,
+      "matchedWords": "15/21",
+      "wavSha256": "d5f599f652e761f058db5330f78047c4b1df0d45e0bfd02f5da5dd011b6f0262"
+    },
+    {
+      "raw": "Vindemiatrix.09187c44",
+      "line": "bark_mother_aubrine_town_force",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.",
+      "start": 34.953,
+      "end": 42.408,
+      "matchedWords": "20/22",
+      "wavSha256": "e67170018c5ab32a0a5ae16e1a9857087ed9da694f765f97a8ad85432ff60400"
+    },
+    {
+      "raw": "Vindemiatrix.31775e5b",
+      "line": "bark_mother_aubrine_town_parley",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Goblin children came to my door asking what the bell is for. I had no idea what to tell them.",
+      "start": 42.408,
+      "end": 48.748,
+      "matchedWords": "18/20",
+      "wavSha256": "27df5d29d1464daa3f44bc5beffc6b542e9f8b8c09e33254daf68b66ccee5df1"
+    },
+    {
+      "raw": "Vindemiatrix.e5eaba11",
+      "line": "talk_mother_aubrine_ford_ember",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "Something under the river kept us warm, and now you carry it. Tell me plainly. Is it the gods' gift, or someone's theft?",
+      "start": 48.748,
+      "end": 58.413,
+      "matchedWords": "17/23",
+      "wavSha256": "23ee2f527f01dc64997f884fbe043be07a488d3ad854c706715c4402e06bc631"
+    },
+    {
+      "raw": "Vindemiatrix.bec2b81b",
+      "line": "talk_mother_aubrine_ford_force",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "I prayed for the dead at the ford this morning. All of them. Forgive me if I prayed for you as well.",
+      "start": 58.413,
+      "end": 64.905,
+      "matchedWords": "18/22",
+      "wavSha256": "9f4fefcf36c55c089d4dff2960856719ea3f7a84c96e5d8350bb57b1da6b7861"
+    },
+    {
+      "raw": "Vindemiatrix.fe5209cd",
+      "line": "talk_mother_aubrine_ford_parley",
+      "speaker": "mother_aubrine",
+      "preset": "Vindemiatrix",
+      "text": "The clan's children came to my door asking about the bell. I told them it rings for supper. Now it does.",
+      "start": 64.91,
+      "end": 71.8,
+      "matchedWords": "16/21",
+      "wavSha256": "9176c9877157f4999a8698daa6782ebdbaf5f4469dc342f0ef3e8199a7c270bc",
+      "recut": "extended to the end of the render: the cutter stopped before the last words ('it does')"
+    }
+  ]
+}

@@ -277,6 +277,12 @@
     "bark_bree_tallow_town_5": {
       "main": "bark_bree_tallow_town_5.9eb68d0f.ogg"
     },
+    "bark_bree_tallow_town_force": {
+      "main": "bark_bree_tallow_town_force.641c3eb8.ogg"
+    },
+    "bark_bree_tallow_town_parley": {
+      "main": "bark_bree_tallow_town_parley.ec6fbc22.ogg"
+    },
     "bark_bree_tallow_victory_1": {
       "main": "bark_bree_tallow_victory_1.88f9c1cb.ogg"
     },
@@ -301,6 +307,12 @@
     "bark_celandine_marrowby_town_7": {
       "main": "bark_celandine_marrowby_town_7.894233d4.ogg"
     },
+    "bark_celandine_marrowby_town_force": {
+      "main": "bark_celandine_marrowby_town_force.06b55310.ogg"
+    },
+    "bark_celandine_marrowby_town_parley": {
+      "main": "bark_celandine_marrowby_town_parley.804a502a.ogg"
+    },
     "bark_corvin_ashby_town_1": {
       "main": "bark_corvin_ashby_town_1.43f67d33.ogg"
     },
@@ -324,6 +336,12 @@
     },
     "bark_corvin_ashby_town_8": {
       "main": "bark_corvin_ashby_town_8.b3f5e0db.ogg"
+    },
+    "bark_corvin_ashby_town_force": {
+      "main": "bark_corvin_ashby_town_force.911adc08.ogg"
+    },
+    "bark_corvin_ashby_town_parley": {
+      "main": "bark_corvin_ashby_town_parley.7e1da64b.ogg"
     },
     "bark_dagna_holt_ally_down_1": {
       "main": "bark_dagna_holt_ally_down_1.9f48f15b.ogg"
@@ -687,6 +705,12 @@
     },
     "bark_mother_aubrine_town_7": {
       "main": "bark_mother_aubrine_town_7.54ef4883.ogg"
+    },
+    "bark_mother_aubrine_town_force": {
+      "main": "bark_mother_aubrine_town_force.2c53faa8.ogg"
+    },
+    "bark_mother_aubrine_town_parley": {
+      "main": "bark_mother_aubrine_town_parley.71216c03.ogg"
     },
     "bark_mother_skarrow_ally_down_1": {
       "main": "bark_mother_skarrow_ally_down_1.0aaf554c.ogg"
@@ -4000,11 +4024,35 @@
     "talk_bree_tallow_ford_ember": {
       "main": "talk_bree_tallow_ford_ember.569f1935.ogg"
     },
+    "talk_bree_tallow_ford_force": {
+      "main": "talk_bree_tallow_ford_force.1ea8a8e1.ogg"
+    },
+    "talk_bree_tallow_ford_parley": {
+      "main": "talk_bree_tallow_ford_parley.91500ee5.ogg"
+    },
+    "talk_corvin_ashby_ford_ember": {
+      "main": "talk_corvin_ashby_ford_ember.7ed1b241.ogg"
+    },
+    "talk_corvin_ashby_ford_force": {
+      "main": "talk_corvin_ashby_ford_force.34aef86d.ogg"
+    },
+    "talk_corvin_ashby_ford_parley": {
+      "main": "talk_corvin_ashby_ford_parley.09975c00.ogg"
+    },
+    "talk_dagna_holt_ford_force": {
+      "main": "talk_dagna_holt_ford_force.6c4a4ef6.ogg"
+    },
+    "talk_dagna_holt_ford_parley": {
+      "main": "talk_dagna_holt_ford_parley.66e763e3.ogg"
+    },
     "talk_halden_varrow_ford_ember": {
       "main": "talk_halden_varrow_ford_ember.28892707.ogg"
     },
     "talk_halden_varrow_ford_force": {
       "main": "talk_halden_varrow_ford_force.eb46dd8a.ogg"
+    },
+    "talk_halden_varrow_ford_parley": {
+      "main": "talk_halden_varrow_ford_parley.9c79f14c.ogg"
     },
     "talk_lark_bye_1": {
       "main": "talk_lark_bye_1.6ab9de82.ogg"
@@ -4042,6 +4090,33 @@
     "talk_lark_why_2": {
       "main": "talk_lark_why_2.db7b68a1.ogg"
     },
+    "talk_mother_aubrine_ford_ember": {
+      "main": "talk_mother_aubrine_ford_ember.da36a121.ogg"
+    },
+    "talk_mother_aubrine_ford_force": {
+      "main": "talk_mother_aubrine_ford_force.5f2e9c83.ogg"
+    },
+    "talk_mother_aubrine_ford_parley": {
+      "main": "talk_mother_aubrine_ford_parley.eda81afb.ogg"
+    },
+    "talk_mother_skarrow_bye": {
+      "main": "talk_mother_skarrow_bye.566cba4e.ogg"
+    },
+    "talk_mother_skarrow_clan": {
+      "main": "talk_mother_skarrow_clan.f163c083.ogg"
+    },
+    "talk_mother_skarrow_more": {
+      "main": "talk_mother_skarrow_more.5fc2fcca.ogg"
+    },
+    "talk_mother_skarrow_truce": {
+      "main": "talk_mother_skarrow_truce.0c165673.ogg"
+    },
+    "talk_mother_skarrow_vorga": {
+      "main": "talk_mother_skarrow_vorga.d5e461c1.ogg"
+    },
+    "talk_mother_skarrow_wary": {
+      "main": "talk_mother_skarrow_wary.fe5e237c.ogg"
+    },
     "thing.af_market_cellar_ledger.words.0": {
       "main": "thing.af_market_cellar_ledger.words.0.3af6f197.ogg"
     },
@@ -4057,8 +4132,17 @@
     "town_barmaid_3": {
       "main": "town_barmaid_3.eadaabc4.ogg"
     },
+    "town_barmaid_confessed": {
+      "main": "town_barmaid_confessed.bce858ea.ogg"
+    },
     "town_barmaid_ember": {
       "main": "town_barmaid_ember.2d4f4b7c.ogg"
+    },
+    "town_barmaid_force": {
+      "main": "town_barmaid_force.09c611dd.ogg"
+    },
+    "town_barmaid_parley": {
+      "main": "town_barmaid_parley.ecadebb8.ogg"
     },
     "town_child_1": {
       "main": "town_child_1.9ce7845d.ogg"
@@ -4068,6 +4152,15 @@
     },
     "town_child_3": {
       "main": "town_child_3.e6998aad.ogg"
+    },
+    "town_child_ember": {
+      "main": "town_child_ember.8b4b5de1.ogg"
+    },
+    "town_child_force": {
+      "main": "town_child_force.6c5212ac.ogg"
+    },
+    "town_child_parley": {
+      "main": "town_child_parley.43afac35.ogg"
     },
     "town_farmer_1": {
       "main": "town_farmer_1.b6a1bc49.ogg"
@@ -4102,6 +4195,18 @@
     "town_farmhand_3": {
       "main": "town_farmhand_3.78410f57.ogg"
     },
+    "town_farmhand_4": {
+      "main": "town_farmhand_4.791f5949.ogg"
+    },
+    "town_farmhand_ember": {
+      "main": "town_farmhand_ember.4dd1a5e3.ogg"
+    },
+    "town_farmhand_force": {
+      "main": "town_farmhand_force.de9d6027.ogg"
+    },
+    "town_farmhand_parley": {
+      "main": "town_farmhand_parley.8af39fe9.ogg"
+    },
     "town_fisher_1": {
       "main": "town_fisher_1.58db0875.ogg"
     },
@@ -4110,6 +4215,15 @@
     },
     "town_fisher_3": {
       "main": "town_fisher_3.e3b6c06c.ogg"
+    },
+    "town_fisher_ember": {
+      "main": "town_fisher_ember.cd3d6a64.ogg"
+    },
+    "town_fisher_force": {
+      "main": "town_fisher_force.4c84bd73.ogg"
+    },
+    "town_fisher_parley": {
+      "main": "town_fisher_parley.abbc8af3.ogg"
     },
     "town_goblin_archer_1": {
       "main": "town_goblin_archer_1.ce727baa.ogg"
@@ -4147,6 +4261,18 @@
     "town_guard_3": {
       "main": "town_guard_3.8844e25a.ogg"
     },
+    "town_guard_4": {
+      "main": "town_guard_4.916f18a6.ogg"
+    },
+    "town_guard_ember": {
+      "main": "town_guard_ember.e356c38e.ogg"
+    },
+    "town_guard_force": {
+      "main": "town_guard_force.c8d6e45d.ogg"
+    },
+    "town_guard_parley": {
+      "main": "town_guard_parley.0486bad1.ogg"
+    },
     "town_merchant_1": {
       "main": "town_merchant_1.29d3285f.ogg"
     },
@@ -4155,6 +4281,21 @@
     },
     "town_merchant_3": {
       "main": "town_merchant_3.7f14b3d7.ogg"
+    },
+    "town_merchant_4": {
+      "main": "town_merchant_4.6240deda.ogg"
+    },
+    "town_merchant_5": {
+      "main": "town_merchant_5.45d009a6.ogg"
+    },
+    "town_merchant_ember": {
+      "main": "town_merchant_ember.a76f3c04.ogg"
+    },
+    "town_merchant_force": {
+      "main": "town_merchant_force.c7e4a567.ogg"
+    },
+    "town_merchant_parley": {
+      "main": "town_merchant_parley.5ed0d621.ogg"
     },
     "voice_earnest_ally_down_1": {
       "high": "voice_earnest_ally_down_1.df179278.ogg",
