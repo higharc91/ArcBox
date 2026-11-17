@@ -1,4 +1,4 @@
-> Status: approved 2026-11-17; in progress on branch `ccr-de425e76-4vxzw2` (tasks #386–#390). Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: complete (2026-11-17). Tasks 1–5 are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (#386–#390); see [Implementation notes](#implementation-notes) for where the code differs from this plan. Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M6 Restart Implementation Plan
 
@@ -12,6 +12,18 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 - **Resuming** is a short state of its own. Every seat comes back disconnected. The game holds its clock and waits up to `ResumeWait` (60 s) for phones, with no bots taking over, then plays on with the usual disconnect rules.
 
 **Spec:** [2026-11-13-meridian-design.md](../specs/2026-11-13-meridian-design.md), §3.3, §5.6, §7, §8. **Earlier stages:** [M1](2026-11-13-meridian-m1-rules-core.md), [M2](2026-11-13-meridian-m2-playable-explore.md), [M3](2026-11-13-meridian-m3-breach-engine.md) and [M4](2026-11-17-meridian-m4-tv-scene.md), including their *Implementation notes*. **Platform:** `src/ArcBox.Server/Rooms/Room.Durable.cs` (durable rooms), `GameSession.cs` (guarded calls), `Storage/` (the writer and migrations).
+
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **`ISnapshotGame` doesn't extend `IGame`,** just as `IResumableGame` doesn't, so a game lists both.
+- **`RoomServices` takes the `GameStateStore` as an optional last parameter.** The test fixtures that build rooms directly keep working; their rooms never snapshot.
+- **A refused snapshot is deleted** as well as logged, so the next restart doesn't try it again.
+- **`MeridianSession.Resuming`** is written only when true, and no snapshot is taken while resuming.
+- **The TV's director forgets its history on a fresh look.** After a restart the game numbers its events from the turn's start again, below what the TV signalled. Without the reset, the TV skipped the whole replayed turn as stale, and each event waited out its fallback.
+- **Seeing "Reconnecting…" isn't required end to end.** When every phone is back before the TV, the resume ends before the TV hears of it, so `tools/tv-e2e.sh` logs it rather than requiring it. The Tactics restart run handles the same race the same way. The hub tests do check the banner, because there the TV resumes first.
+- **Test support:** `Harness.Restored` (Restore then Resume, as a room does), `TallyGame` (the platform's test snapshot game), `TestClient.Transcript`, and `ArcServerFactory(databaseFile, withMeridian)`.
 
 **Not in this plan:**
 - Art and audio (M5), and scenarios 6–12 (M7).
@@ -81,9 +93,9 @@ Situations a main-path test would not reach. Each gets a pinned test in the task
 
 Tests: save/load/delete; the newest wins; an oversized snapshot isn't stored; a migration test from a version-1 database.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(platform): ISnapshotGame and the room_game_state table`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(platform): ISnapshotGame and the room_game_state table`.
 
 ### Task 2: The room snapshots, restores and forgets
 
@@ -104,9 +116,9 @@ Tests:
 - After the game ends, a restart doesn't resume.
 - No hub message to the TV or a phone ever contains the snapshot's bytes.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(platform): rooms resume games from their snapshots`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(platform): rooms resume games from their snapshots`.
 
 ### Task 3: Meridian's snapshot
 
@@ -122,9 +134,9 @@ Tests:
 - One snapshot per turn over a whole bot game, and none between.
 - Old and corrupt envelopes throw.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): snapshots at each turn and phase`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): snapshots at each turn and phase`.
 
 ### Task 4: Resuming
 
@@ -148,9 +160,9 @@ Tests:
 - A bot seat is taken back.
 - The dev board shows the banner.
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** confirm they fail, implement, confirm they pass.
-- [ ] **Step 5: Commit** `feat(meridian): resuming after a restart`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** confirm they fail, implement, confirm they pass.
+- [x] **Step 5: Commit** `feat(meridian): resuming after a restart`.
 
 ### Task 5: End to end
 
@@ -175,10 +187,10 @@ Tests:
 - **Checklist:** restart the server mid-game with real phones; restart it during a briefing.
 - Run `bash tools/check-all.sh --full`. Expect only the Tactics failures already on `main`.
 
-- [ ] **Step 1: Write the hub test; make it pass.**
-- [ ] **Step 2: Bot phones and the TV run, every scenario.**
-- [ ] **Step 3: Docs, checklist and the full gate.**
-- [ ] **Step 4: Commit** `test(meridian): a game survives a server restart`.
+- [x] **Step 1: Write the hub test; make it pass.**
+- [x] **Step 2: Bot phones and the TV run, every scenario.**
+- [x] **Step 3: Docs, checklist and the full gate.**
+- [x] **Step 4: Commit** `test(meridian): a game survives a server restart`.
 
 ---
 
