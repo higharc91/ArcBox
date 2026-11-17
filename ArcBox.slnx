@@ -9,6 +9,8 @@
     <Project Path="games/Meridian/Meridian.Game/Meridian.Game.csproj" />
     <Project Path="games/Meridian/Meridian.Logic.Tests/Meridian.Logic.Tests.csproj" />
     <Project Path="games/Meridian/Meridian.Logic/Meridian.Logic.csproj" />
+    <Project Path="games/Meridian/Meridian.Presentation.Tests/Meridian.Presentation.Tests.csproj" />
+    <Project Path="games/Meridian/Meridian.Presentation/Meridian.Presentation.csproj" />
     <Project Path="games/Meridian/Meridian.Sim/Meridian.Sim.csproj" />
   </Folder>
   <Folder Name="/games/Redline/">

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Meridian.Game.Tests" />
+    <InternalsVisibleTo Include="Meridian.Presentation.Tests" />
     <Using Include="Meridian.Logic" />
   </ItemGroup>
 </Project>

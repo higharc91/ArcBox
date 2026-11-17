@@ -6,6 +6,7 @@ public static class GameSceneMap
     private static readonly Dictionary<string, string> Paths = new(StringComparer.Ordinal)
     {
         ["counter"] = "res://games/counter/CounterScene.tscn",
+        ["meridian"] = "res://games/meridian/MeridianScene.tscn",
         ["redline"] = "res://games/redline/RedlineScene.tscn",
         ["tactics"] = "res://games/tactics/TacticsScene.tscn",
     };

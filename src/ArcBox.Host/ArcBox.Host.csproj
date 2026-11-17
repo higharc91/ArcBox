@@ -12,6 +12,7 @@
     <ProjectReference Include="..\ArcBox.Host.Core\ArcBox.Host.Core.csproj" />
     <ProjectReference Include="..\ArcBox.Sdk\ArcBox.Sdk.csproj" />
     <ProjectReference Include="..\..\games\Counter\Counter.Logic\Counter.Logic.csproj" />
+    <ProjectReference Include="..\..\games\Meridian\Meridian.Presentation\Meridian.Presentation.csproj" />
     <ProjectReference Include="..\..\games\Redline\Redline.Logic\Redline.Logic.csproj" />
     <ProjectReference Include="..\..\games\Redline\Redline.Presentation\Redline.Presentation.csproj" />
     <ProjectReference Include="..\..\games\Tactics\Tactics.Presentation\Tactics.Presentation.csproj" />

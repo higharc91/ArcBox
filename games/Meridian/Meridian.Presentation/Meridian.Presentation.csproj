@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(ArcSdkTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Game\Meridian.Game.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Meridian.Logic" />
+    <Using Include="Meridian.Game" />
+  </ItemGroup>
+</Project>
