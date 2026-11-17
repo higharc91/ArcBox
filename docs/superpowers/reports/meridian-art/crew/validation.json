@@ -1,0 +1,145 @@
+{
+  "command": "bash tools/check-all.sh --full",
+  "testedSourceHead": "21ecbda23146feeb71d3abc116f9f2e5118d5ac5",
+  "mainBase": "22ce39b7465e29024396aaf21563156c5edc5064",
+  "sourceChangesDuringRun": "none; later edits record evidence only",
+  "parentStyleHead": "f7a9658e54c22bd4c6d995f1cf158205c720d8c0",
+  "parentCompartmentsHead": "3d83cc71378e14d40b37d6b697b88bab745916c5",
+  "exitCode": 1,
+  "dotnet": {
+    "total": 7739,
+    "passed": 7734,
+    "failed": 5,
+    "skipped": 0,
+    "buildWarnings": 0
+  },
+  "phoneTests": 601,
+  "phoneProductionBuild": "pass",
+  "phoneUpstreamAnnotationWarnings": 2,
+  "nodeTests": 24,
+  "pythonTests": 131,
+  "pythonGroups": [
+    61,
+    9,
+    35,
+    26
+  ],
+  "meridianTests": 35,
+  "meridianGroups": {
+    "style": 8,
+    "compartments": 13,
+    "crew": 14
+  },
+  "loreAndDocumentationDrift": "pass",
+  "failures": [
+    "Tactics.Game.Tests.GriskBarkTests.Authored_events_add_one_cosmetic_line_without_changing_the_input(moment: \"battle_start\", text: \"Bear\u2019s awake! Dig or die!\")",
+    "Tactics.Game.Tests.GriskBarkTests.Authored_events_add_one_cosmetic_line_without_changing_the_input(moment: \"low_hp\", text: \"The market pays! I\u2019ll split it!\")",
+    "Tactics.Game.Tests.PhoneFixtureTests.The_bounty_presents_only_the_receiving_phones_class_trinket",
+    "Tactics.Logic.Tests.BaseSceneTests.Scenes_set_only_flags_the_arcs_set",
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption"
+  ],
+  "newFailuresAgainstPriorBaseline": [],
+  "clearedFailuresSincePreviousMain": [
+    "Tactics.Logic.Tests.BaseSceneTests.Every_line_has_a_clip_length",
+    "Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip",
+    "Tactics.Presentation.Tests.Audio.VoiceClipsTests.Every_say_line_in_the_pack_has_a_clip_on_disk",
+    "Tactics.Presentation.Tests.Story.StoryDemoTests.The_demo_says_each_line_once_from_the_walk_up",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Every_chapter_1_line_finds_its_clip",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Every_line_of_every_chapter_finds_its_clip"
+  ],
+  "baselineProof": "C# source/projects/solution, Tactics content and phone production files are byte-identical to main 22ce39b7; all five failures are cases from the earlier recorded baseline. No failing tests were skipped or weakened.",
+  "coverage": {
+    "crewIds": 8,
+    "facings": 4,
+    "livingAndEchoBoardFrames": 768,
+    "portraitsAndCards": 32,
+    "uniqueAssets": 296
+  },
+  "rulesPinnedHead": "1d770a7312e28d99c62fcfb7ebcd5bf398a758e9",
+  "rulesRecheckedHead": "809969e9f1f0e903179997c18d55adb41b640c9b",
+  "latestCrewJsonByteIdentical": true,
+  "chromiumWidths": [
+    320,
+    390,
+    1920
+  ],
+  "loadedReviewImages": 161,
+  "boardPreviewScale": 2,
+  "sourceStripScale": 1,
+  "portraitScales": [
+    1,
+    2
+  ],
+  "normalMotionPauseReplayStillReducedMotion": "pass",
+  "allDirectionalEchoPreviews": "pass",
+  "nativeScreens": [
+    {
+      "scene": "lineup",
+      "size": [
+        1920,
+        1080
+      ],
+      "nativePixelsMatch": true,
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+    },
+    {
+      "scene": "portraits",
+      "size": [
+        1920,
+        1080
+      ],
+      "nativePixelsMatch": true,
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+    },
+    {
+      "scene": "cards",
+      "size": [
+        1920,
+        1080
+      ],
+      "nativePixelsMatch": true,
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+    }
+  ],
+  "nativeDriverWarning": "unsupported V-Sync; no script/runtime errors",
+  "visualReview": [
+    "all eight at actual 48px TV size on 128px rooms, colour/greyscale/echo",
+    "four facings and six walk phases",
+    "neutral/hurt portraits and full-body cards",
+    "all six actual CVD transformations",
+    "all three JPEG compressed-image proxies"
+  ],
+  "physicalTvHumanRecognitionOrDiscordTest": false,
+  "runtimeIntegration": "M4-compatible single idle image supplied; full directional motion/echo/portrait and deck-variant tile consumers remain M5 work",
+  "generationCreditsSpent": 0,
+  "ownerReview": "completed crew set awaits owner review on #333; style and compartment direction already approved",
+  "mergeState": "draft; no merge/closure because full gate fails",
+  "sourceSha256": {
+    "tools/meridian-assets/audit_compartments.py": "97b57ac72e23c7e36106ecb0a07e33c00856fd3b09c1ec8bf89f001172f9f40b",
+    "tools/meridian-assets/audit_crew.py": "cf7f8597058050b14be34385bd47bf55d7f02e9ea23f7756f6a942b2655b64ad",
+    "tools/meridian-assets/build.py": "f7f0049137a8a2c5fba1fbab48c6bbfe3f90aa813d5a1a78f5dafadcda292f39",
+    "tools/meridian-assets/check-browser.cjs": "4f725ca19bd19316d9e5dac8a335574736612f1801de41230c118fd35833959d",
+    "tools/meridian-assets/check-crew-browser.cjs": "5108997396c8c751aa893e6b5abc5110a79370a30a67658b178fce6b51b975e7",
+    "tools/meridian-assets/check-crew-native.py": "47aacec52f25288a1a5e14ab066874236104108f14eb922e5f677aac807ff0e8",
+    "tools/meridian-assets/check-native.py": "b5e3c00a228eb8675d79eca8a24c6189fd6166adbf8ecd5d0e6455a8169d502c",
+    "tools/meridian-assets/compartments.py": "adddc3b3eaa521767408c111a8662f3562f8b05243f4faceb605e69b422c3faa",
+    "tools/meridian-assets/crew.py": "1cce713cfa8fafeebc22ba68df00271bb4a16b27d6cc274bab83d1c37a55db3a",
+    "tools/meridian-assets/review-sheet.py": "ebaf1b56dbc58e6643fc4fa828707b3a69582fc0de3ae178cf8e28a33f6d952a",
+    "tools/meridian-assets/test_build.py": "161a3edec2bb7212cb73ad43ac8f1fea228a8164bd938bdd380c2823c6586b3f",
+    "tools/meridian-assets/test_compartments.py": "1896262062e6c859c16c9adcd0ca28a526c0d6dbfeb8a1999206440a26c2ebdf",
+    "tools/meridian-assets/test_crew.py": "eb6573f8f00eb0bc49abaa0399bc4638c8c899f25b51d12a6b743653a9015b63"
+  }
+}

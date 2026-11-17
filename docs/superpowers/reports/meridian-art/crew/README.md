@@ -36,7 +36,7 @@ Real Chromium at 320×844, 390×844 and 1920×1080 loads all 161 images without 
 
 Native Godot OpenGL captures the crew line-up, portraits and crew-card review screens at 1920×1080. `check-crew-native.py` verifies pixel identity and produces actual full-severity Machado deuteranopia/protanopia transformations in linear sRGB plus JPEG quality-55/4:2:0 stream proxies. Review these as limited screenshot evidence, not a physical-TV/human recognition test or an actual compressed Discord playtest. The existing unsupported V-Sync driver warning is retained; no native script/runtime error occurred.
 
-The full repository gate is being run and its final result will be recorded here. No tests are skipped or weakened; manually disabled CI stays disabled.
+Full `bash tools/check-all.sh --full` at frozen source `21ecbda2`: .NET 7,734/7,739 passed, five inherited failures, zero skipped and zero build warnings. Phone 601 tests and production build pass (two existing upstream SignalR annotation warnings); Node 24, Python 131 (61 assets + 9 audio + 35 Meridian + 26 lore), lore and docs drift pass. Overall exit 1 blocks merge. The seven former missing-recording failures cleared after syncing main 22ce39b7. The five remaining cases (flags, caption length, two bark punctuation expectations, one phone fixture) are retained by exact name in `validation.json` and the complete compressed log. No tests are skipped or weakened; manually disabled CI stays disabled.
 
 ## Reproduce
 
@@ -55,3 +55,7 @@ Native screenshots use the existing style review's `native-project.godot` / `nat
 ## Integration limits
 
 This is the asset/review set, not an implemented crew-pick or animation state machine. The current #316 M4 reader draws the full idle image, so the flat `idle` field intentionally points to one 24×24 pose; `facings`/`echo` carry the complete animation strips for M5. Flat `walk` remains compatible with its existing fields. M5 also needs to select #384's `tiles[id].variants[deck]`; the current M4 tile reader predates that version-2 layout. No runtime TV integration or real gameplay playtest is claimed by the native image-display checks.
+
+Final content check: #316 advanced to `809969e9`; its crew JSON is byte-identical to the pinned reference and all eight IDs / 768 frames / 32 portraits/cards / 296 referenced assets pass the live-data audit. The M4 art reader/renderer inspected for idle compatibility is unchanged from 1d770a73. All three native images, six actual CVD simulations and three JPEG proxies were visually reviewed; geometry/equipment cues remain present when hues converge. No human recognition rate is claimed.
+
+Final source stayed unchanged during the full gate; the later commit records documentation/evidence only. `validation.json` includes source digests and run provenance. `screenshot-hashes.json` hashes the retained review images.
