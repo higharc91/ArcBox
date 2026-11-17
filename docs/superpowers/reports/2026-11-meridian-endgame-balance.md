@@ -68,7 +68,7 @@ In **One of Us Isn't** and **Tiller Says No** the crew almost never lose any oth
 1. **Tiller escalates:** each round it vents one more compartment, or a vent that catches someone already hurt kills.
 2. **The mimic strikes:** its bot attacks a crew member it finds alone (the scenario already allows it), and a crew reduced to one survivor loses.
 
-Until one is chosen, these two scenarios work and end, but read as a race against the clock rather than against an opponent.
+**Decision (owner, 2026-11-17): keep them as designed.** In both scenarios the round limit is the pressure: the crew finish in time or lose. Neither option is taken. The "under 10% decided by the limit" target doesn't apply to these two. Revisit after the first game night if they play as a race with no opponent.
 
 ## Other findings
 

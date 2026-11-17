@@ -27,7 +27,7 @@ Where the built code differs from the tasks below. The code and its tests are th
 - **The TV's scenario panel is optional** (`MeridianHostView.Scenario`, absent before the Breach) and is built from `Visibility.For(state, null)`. Its reveal (`RevealCard`, keyed by seat `id` for patches) and outcome appear only once the game is over. Tokens carry their `state` (a broken repair point, say).
 - **The secrecy test** searches serialized views for structural patterns (`"role":"…"`, a role's `"name"`, token and counter `"id"`s, objective texts), minus anything that reaches the viewer through an audience they are in. Dropping the role filter in `Visibility` fails it.
 - **Test support:** `ArcServerFactory.MeridianScenario` sets the Development `Meridian:Scenario` setting, so the hub test runs once per scenario.
-- **Open design question** ([balance report](../reports/2026-11-meridian-endgame-balance.md)): One of Us Isn't and Tiller Says No can only be lost at the round limit. That needs the owner's decision before the S2 scenarios.
+- **Decided (2026-11-17)** ([balance report](../reports/2026-11-meridian-endgame-balance.md)): One of Us Isn't and Tiller Says No can only be lost at the round limit, and stay that way. The limit is their pressure.
 
 **Not in this plan:**
 - Scenarios 6–12 (stage M7). The contract and primitives must be able to express them; Task 3 checks that on paper against all twelve.
