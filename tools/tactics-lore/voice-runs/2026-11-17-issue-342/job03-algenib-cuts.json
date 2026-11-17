@@ -1,0 +1,21 @@
+{
+  "batch": "issue342_2026_11_17_job03-algenib",
+  "source": "job03-algenib.wav",
+  "sourceSha256": "eac80b24ad0d4222cba320fca464cb025908a4889823411b9761667c0b27ccf2",
+  "durationSeconds": 8.72,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Algenib.8884f86a",
+      "line": "town_fisher_guarded",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Two guards on the third pier all night, watching the water. Never seen the river so well minded.",
+      "start": 0.0,
+      "end": 8.72,
+      "matchedWords": "10/18",
+      "wavSha256": "4ed663c7bf2d21a1ab2545a6e0086c359bc8b61ea3556b7daa0a838e61b4cde9"
+    }
+  ]
+}
