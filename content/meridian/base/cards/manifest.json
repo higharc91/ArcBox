@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "issue": 334,
+  "status": "awaiting-set-review",
+  "rulesReference": {
+    "pr": 316,
+    "head": "00d4a52bb9c7e73a5ee72b117b91891e6c0cdd11",
+    "files": {
+      "incidents.json": "929fcfcb7e2c2b3f065a9850c7154d97763177b1010bc99e2cbdb0d52f44dcf6",
+      "salvage.json": "cbcfa8cdf14b2813cd317438ba3ac037653acf85066e2afc3963f75c47be5208",
+      "anomalies.json": "795919aaba35fc37bffa58a29bdac16fe59b5793d8bff0b4ba7cd3d842dfd225"
+    }
+  },
+  "frames": {
+    "incident": {
+      "file": "frame-incident.ac31d0709e1d.png",
+      "sha256": "ac31d0709e1d3b853ff4567d29257ce1f6ddce4f333aa53dbd0d3672098eff52",
+      "frameSize": [
+        64,
+        64
+      ],
+      "slice": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "center": "solid stretch",
+      "edges": "uniform stretch",
+      "cornerScale": "whole integer nearest"
+    },
+    "salvage": {
+      "file": "frame-salvage.35be66ca6326.png",
+      "sha256": "35be66ca6326cb3ab73017d622e0774f6ea5b1400e89b9cee842b982c97e735a",
+      "frameSize": [
+        64,
+        64
+      ],
+      "slice": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "center": "solid stretch",
+      "edges": "uniform stretch",
+      "cornerScale": "whole integer nearest"
+    },
+    "anomaly": {
+      "file": "frame-anomaly.ba2fdd1e52df.png",
+      "sha256": "ba2fdd1e52df1f6af77ae209df3db27d4c7eebee0a73f785c30e253fe0b13de1",
+      "frameSize": [
+        64,
+        64
+      ],
+      "slice": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "center": "solid stretch",
+      "edges": "uniform stretch",
+      "cornerScale": "whole integer nearest"
+    }
+  },
+  "cards": {
+    "cold_spot": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "loose_grating": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "jammed_bulkhead": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "garbled_log": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "sparking_conduit": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "tool_cache": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "someone_was_here": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "hull_groan": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "gravity_flicker": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "old_photo": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "drifting_body": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "open_channel": {
+      "kind": "incident",
+      "frameKind": "incident",
+      "icon": null
+    },
+    "crowbar": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "crowbar"
+    },
+    "med_kit": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "med_kit"
+    },
+    "calm_tabs": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "calm_tabs"
+    },
+    "mag_boots": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "mag_boots"
+    },
+    "diagnostic_slate": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "diagnostic_slate"
+    },
+    "flare_gun": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "flare_gun"
+    },
+    "adrenal_stim": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "adrenal_stim"
+    },
+    "hand_lamp": {
+      "kind": "salvage",
+      "frameKind": "salvage",
+      "icon": "hand_lamp"
+    },
+    "humming_shard": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "humming_shard"
+    },
+    "black_mirror": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "black_mirror"
+    },
+    "warm_egg": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "warm_egg"
+    },
+    "stopped_watch": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "stopped_watch"
+    },
+    "unknown_chart": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "unknown_chart"
+    },
+    "singing_wire": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "singing_wire"
+    },
+    "bone_key": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "bone_key"
+    },
+    "sealed_vial": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "sealed_vial"
+    },
+    "drowned_logbook": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "drowned_logbook"
+    },
+    "childs_drawing": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "childs_drawing"
+    },
+    "cold_coin": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "cold_coin"
+    },
+    "pocket_of_quiet": {
+      "kind": "anomaly",
+      "frameKind": "anomaly",
+      "icon": "pocket_of_quiet"
+    }
+  }
+}

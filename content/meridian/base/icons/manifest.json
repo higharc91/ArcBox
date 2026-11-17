@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "issue": 334,
+  "status": "awaiting-set-review",
+  "rulesReference": {
+    "pr": 316,
+    "head": "00d4a52bb9c7e73a5ee72b117b91891e6c0cdd11",
+    "files": {
+      "incidents.json": "929fcfcb7e2c2b3f065a9850c7154d97763177b1010bc99e2cbdb0d52f44dcf6",
+      "salvage.json": "cbcfa8cdf14b2813cd317438ba3ac037653acf85066e2afc3963f75c47be5208",
+      "anomalies.json": "795919aaba35fc37bffa58a29bdac16fe59b5793d8bff0b4ba7cd3d842dfd225"
+    }
+  },
+  "symbols": {
+    "incident": {
+      "16": {
+        "file": "symbol-incident-16.1daa2ef3ddb5.png",
+        "sha256": "1daa2ef3ddb545cd98adcb17d067fb24a7ebc036dc30738a851fc1d012b50cbe",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "24": {
+        "file": "symbol-incident-24.1f629c9d34de.png",
+        "sha256": "1f629c9d34de372aa2cbe456a22fe23e3d77fb451c23925ae259799b2c39defc",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    },
+    "salvage": {
+      "16": {
+        "file": "symbol-salvage-16.3f782ac23a0e.png",
+        "sha256": "3f782ac23a0e09cf3d26206acd0025f77b3afaef72a31d14d02e783a84add0b0",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "24": {
+        "file": "symbol-salvage-24.238cdb919bca.png",
+        "sha256": "238cdb919bcaf141ef8e6d9f060fb98d7c5036da33a55f2c8dfe6e2cfccc3a5a",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    },
+    "anomaly": {
+      "16": {
+        "file": "symbol-anomaly-16.dd9a82522bd9.png",
+        "sha256": "dd9a82522bd97860701f2cde41b76a3a8c88e0bab8971e8ef957f4879cb1997d",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "24": {
+        "file": "symbol-anomaly-24.05f98714f981.png",
+        "sha256": "05f98714f981ee25d575b7d1cbdd3b0a919d4e37395c4c69ab9f4b08149ed267",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    }
+  },
+  "icons": {
+    "crowbar": {
+      "file": "crowbar.0ecba72389f6.png",
+      "sha256": "0ecba72389f68b6e89d5062e12c91807cb4f8f0d6e7272d61c90b631824d039b",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "med_kit": {
+      "file": "med_kit.3555af3064a3.png",
+      "sha256": "3555af3064a3fb77bd204fb141a14a4ac19fa989bf90b3cbc6aacfed25f5b9eb",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "calm_tabs": {
+      "file": "calm_tabs.43500ca60083.png",
+      "sha256": "43500ca600834637bd64c6f7efc5071d0af91ddb7e6de72411e54e48a1ce8a7b",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "mag_boots": {
+      "file": "mag_boots.17da374e6394.png",
+      "sha256": "17da374e639434d58b1b5d9a41f939f03b2c5306a87faefe3ee9050f582e4a87",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "diagnostic_slate": {
+      "file": "diagnostic_slate.71ba46c3aa51.png",
+      "sha256": "71ba46c3aa51443c3a2acebf681fb21be44c5be5eb8733ea52d0942a8ddbc01f",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "flare_gun": {
+      "file": "flare_gun.97ca293d26e4.png",
+      "sha256": "97ca293d26e464ea8b8f0cfb3282ed110ed33b966960a553ad368c02ed89b3b7",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "adrenal_stim": {
+      "file": "adrenal_stim.04b5703ea2bd.png",
+      "sha256": "04b5703ea2bd63a645298e774f71b34c3336721b30ccd419d04b7bf1173cd56d",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "hand_lamp": {
+      "file": "hand_lamp.bb7f028828b6.png",
+      "sha256": "bb7f028828b6624855022be5caad6e0737f376da0e6f1cc72752c51314e85c5d",
+      "kind": "salvage",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "humming_shard": {
+      "file": "humming_shard.94d2e54b916b.png",
+      "sha256": "94d2e54b916bb732daf72b62a945f90f58d37a37751b0f8348f1f0f5a3648fb5",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "black_mirror": {
+      "file": "black_mirror.8ea889e261b9.png",
+      "sha256": "8ea889e261b9d955cd9196f15fb7479b6aa9e1aa0e1e17a909bb6bce64f79323",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "warm_egg": {
+      "file": "warm_egg.6aea6830b890.png",
+      "sha256": "6aea6830b890eef20a01402e936b84df43eb4ae647be8dafd507145118ad6884",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "stopped_watch": {
+      "file": "stopped_watch.7d3a6cc98038.png",
+      "sha256": "7d3a6cc9803887041723a8f989138708408c59ad8c17c6afdad0fbd637a46c70",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "unknown_chart": {
+      "file": "unknown_chart.119fe4910e80.png",
+      "sha256": "119fe4910e80f1c60165bec580c852f10801d62de2333545e8804be005a36e96",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "singing_wire": {
+      "file": "singing_wire.6b2dc2079608.png",
+      "sha256": "6b2dc207960881320b6a3a7c78f87c385ffa562e350e3569f3db7dad53b73e65",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "bone_key": {
+      "file": "bone_key.bc7d6642c6d5.png",
+      "sha256": "bc7d6642c6d5fe6a47990fbb6d1d30a04cd599268cda0e8d60553587f94db6ce",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "sealed_vial": {
+      "file": "sealed_vial.67b913af353a.png",
+      "sha256": "67b913af353a10787630d7a68f48c5bebfac3c0e0bc32e94007f0bf506ade6f1",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "drowned_logbook": {
+      "file": "drowned_logbook.e9f6f8efb3e0.png",
+      "sha256": "e9f6f8efb3e03c8e86f336fa21a8d86eed0ad813434264932436aea75c77a81c",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "childs_drawing": {
+      "file": "childs_drawing.bb1ad2d24eaf.png",
+      "sha256": "bb1ad2d24eaff7f1a1dccfbae60bf290fc2a31130a80a55b0da9201b0f8f03ed",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "cold_coin": {
+      "file": "cold_coin.b99c8ba6d058.png",
+      "sha256": "b99c8ba6d058d63c2bc23650eae3a2136e0d9dfbb41fe459b1e73c9fbb3eaebe",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    },
+    "pocket_of_quiet": {
+      "file": "pocket_of_quiet.fcff5989acf2.png",
+      "sha256": "fcff5989acf2090e61d12499d7b6f4889682a66ca7f0736d9ffa2d93d659125b",
+      "kind": "anomaly",
+      "frameSize": [
+        24,
+        24
+      ]
+    }
+  }
+}
