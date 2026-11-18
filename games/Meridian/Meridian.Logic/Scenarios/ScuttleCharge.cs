@@ -51,7 +51,7 @@ public sealed class ScuttleCharge : IScenario
             return state;
         }
         var armed = Charges(state).Count();
-        // Search marks only matter for three rounds; older ones go, which keeps the TV's view inside its budget.
+        // Search marks only matter for three rounds; older ones go, so the crew's views don't grow all game.
         var board = state.Board! with
         {
             Counters = state.Board!.Counters.Where(c => !c.Id.StartsWith("searched-", StringComparison.Ordinal) || state.Round - c.Value < 3).ToEqArray(),
@@ -98,7 +98,8 @@ public sealed class ScuttleCharge : IScenario
             case "search":
             {
                 var (next, total) = Primitives.Check(pack, state, act.From, Trait.Nerve, events);
-                next = next.WithBoard(next.Board!.WithCounter($"searched-{at}", next.Round, Audience.Everyone));
+                // Search marks help the crew's bots remember where they've looked. They're the crew's, kept off the TV.
+                next = next.WithBoard(next.Board!.WithCounter($"searched-{at}", next.Round, Audience.OfSide(Crew)));
                 // A search sweeps the compartment and, with reach, its neighbours.
                 var swept = Primitives.Steps(next, at).Where(x => x.Value <= def.Number("searchReach")).Select(x => x.Key).ToHashSet();
                 var hidden = Charges(next).Where(c => swept.Contains(c.At!.Value) && c.Audience != Audience.Everyone).ToList();

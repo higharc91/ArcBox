@@ -539,10 +539,6 @@
         "value": 0
       },
       {
-        "id": "voteRound",
-        "value": -1
-      },
-      {
         "id": "exposed",
         "value": 0
       },
@@ -563,28 +559,7 @@
         "value": 2
       }
     ],
-    "objectives": [
-      {
-        "id": "goal-p1",
-        "text": "Repair every point (Tech 4\u002B), or name the mimic in a vote at the scanner.",
-        "state": "open"
-      },
-      {
-        "id": "goal-p2",
-        "text": "Keep the points from all being repaired until the round limit, and avoid being named.",
-        "state": "open"
-      },
-      {
-        "id": "goal-p3",
-        "text": "Repair every point (Tech 4\u002B), or name the mimic in a vote at the scanner.",
-        "state": "open"
-      },
-      {
-        "id": "goal-p4",
-        "text": "Repair every point (Tech 4\u002B), or name the mimic in a vote at the scanner.",
-        "state": "open"
-      }
-    ],
+    "objectives": [],
     "reveal": [
       {
         "id": "p1",

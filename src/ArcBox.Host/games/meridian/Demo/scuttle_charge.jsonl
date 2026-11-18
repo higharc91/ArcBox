@@ -99,21 +99,21 @@
 {"compartments":{"$keyed":"id","$set":{"c25":{"id":"c25","tile":"sealed_alcove","at":["habitat",2,0],"rotation":1,"hatches":["w"],"symbol":"anomaly"}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25"]},"crew":{"$keyed":"id","$set":{"p2":{"at":"c25"}}},"tilesLeft":25,"anomaliesDrawn":5,"now":{"seq":39,"kind":"reveal","seat":"p2","title":"Sealed Alcove","text":"","seconds":1.2,"faces":[],"compartment":"c25"},"log":["Player3 rolled 1 of 6. The ship holds.","Player4 found the Med Bay.","Player4 found the Service Corridor.","Player4 found the Gymnasium.","Player4 drew Someone Was Here.","Player4: Whoever it was, you\u0027re ready.","Player2 found the Sealed Alcove.","Player2 drew Stopped Watch."],"$delete":["turnEndsIn"]}
 {"now":{"seq":40,"kind":"card","title":"Stopped Watch","text":"Every hand points straight up.","seconds":5.092592592592593,"compartment":null,"deck":"anomaly","card":"stopped_watch"}}
 {"now":null,"turnEndsIn":20}
-{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}},"now":{"seq":41,"kind":"roll","seat":"p2","title":"Breach roll","text":"5 dice: 6","seconds":1.5,"faces":[1,0,2,1,2],"compartment":null},"log":["Player4 found the Med Bay.","Player4 found the Service Corridor.","Player4 found the Gymnasium.","Player4 drew Someone Was Here.","Player4: Whoever it was, you\u0027re ready.","Player2 found the Sealed Alcove.","Player2 drew Stopped Watch.","The Breach."],"scenario":{"title":"Scuttle Charge","roundsLeft":10,"tokens":[],"counters":[{"id":"armed","value":0},{"id":"disarmed","value":0},{"id":"scuttled","value":0}],"objectives":[]},"$delete":["turnEndsIn"]}
+{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}},"now":{"seq":41,"kind":"roll","seat":"p2","title":"Breach roll","text":"5 dice: 6","seconds":1.5,"faces":[1,0,2,1,2],"compartment":null},"log":["Player4 found the Med Bay.","Player4 found the Service Corridor.","Player4 found the Gymnasium.","Player4 drew Someone Was Here.","Player4: Whoever it was, you\u0027re ready.","Player2 found the Sealed Alcove.","Player2 drew Stopped Watch.","The Breach."],"scenario":{"title":"Scuttle Charge","roundsLeft":10,"tokens":[],"counters":[{"id":"armed","value":0},{"id":"disarmed","value":0}],"objectives":[]},"$delete":["turnEndsIn"]}
 {"now":{"seq":42,"kind":"breach","title":"The Breach","text":"Something aboard has woken.","seconds":6,"faces":[],"compartment":"c25"}}
 {"now":{"seq":43,"kind":"scenario","seat":"p3","title":"Scuttle Charge","text":"Insurance fraud detected. Somebody aboard has been paid to make the Meridian a total loss, and I cannot tell who. Explosive charges may be planted out of sight. Search the compartments, disarm what you find, and keep the ship in one piece until help arrives.","seconds":19.907407407407405,"compartment":null}}
 {"phase":"briefing","banner":"Read your briefing","seats":{"$keyed":"id","$set":{"p3":{"active":false}}},"now":null,"ready":0}
 {"phase":"endgame","banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":true}}},"turnEndsIn":60,"$delete":["ready"]}
-{"now":{"seq":44,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 5","seconds":1.5,"faces":[2,1,1,0,1],"compartment":null},"scenario":{"counters":[{"id":"armed","value":0},{"id":"disarmed","value":0},{"id":"scuttled","value":0},{"id":"searched-c21","value":4}]},"$delete":["turnEndsIn"]}
+{"now":{"seq":44,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 5","seconds":1.5,"faces":[2,1,1,0,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c3"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":5,"scenario":{"roundsLeft":9}}
-{"now":{"seq":45,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[0,1,1,1,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c24":{"id":"searched-c24","value":5}},"$order":["armed","disarmed","scuttled","searched-c21","searched-c24"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":45,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[0,1,1,1,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c18"}}}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
-{"now":{"seq":46,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[0,1,1,0,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c3":{"id":"searched-c3","value":5}},"$order":["armed","disarmed","scuttled","searched-c21","searched-c24","searched-c3"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":46,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[0,1,1,0,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c5"}}}}
 {"compartments":{"$keyed":"id","$set":{"c26":{"id":"c26","tile":"crawlspace","at":["engineering",0,1],"rotation":0,"hatches":["n","s"]}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25","c26"]},"crew":{"$keyed":"id","$set":{"p1":{"at":"c26"}}},"tilesLeft":24,"now":{"seq":47,"kind":"reveal","seat":"p1","title":"Crawlspace","text":"","seconds":1.2,"faces":[],"compartment":"c26"},"log":["Player4 found the Service Corridor.","Player4 found the Gymnasium.","Player4 drew Someone Was Here.","Player4: Whoever it was, you\u0027re ready.","Player2 found the Sealed Alcove.","Player2 drew Stopped Watch.","The Breach.","Player1 found the Crawlspace."],"$delete":["turnEndsIn"]}
@@ -128,7 +128,7 @@
 {"now":{"seq":49,"kind":"card","title":"Mag Boots","text":"They hold you to the deck when the deck stops holding you.","seconds":7.685185185185185,"compartment":null,"deck":"salvage","card":"mag_boots"}}
 {"now":null,"turnEndsIn":60}
 {"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
-{"now":{"seq":50,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[1,1,1,0,0],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c5":{"id":"searched-c5","value":5}},"$order":["armed","disarmed","scuttled","searched-c21","searched-c24","searched-c3","searched-c5"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":50,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[1,1,1,0,0],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
 {"compartments":{"$keyed":"id","$set":{"c28":{"id":"c28","tile":"cargo_hold","at":["engineering",0,2],"rotation":0,"hatches":["n","e","s","w"],"symbol":"salvage"}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25","c26","c27","c28"]},"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}},"tilesLeft":22,"now":{"seq":51,"kind":"reveal","seat":"p3","title":"Cargo Hold","text":"","seconds":1.2,"faces":[],"compartment":"c28"},"log":["Player2 drew Stopped Watch.","The Breach.","Player1 found the Crawlspace.","Player2 used Stopped Watch.","Player2 found the Archive.","Player2 drew Mag Boots.","Player3 found the Cargo Hold.","Player3 drew Hand Lamp."],"$delete":["turnEndsIn"]}
@@ -138,11 +138,11 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":6,"now":{"seq":53,"kind":"notice","seat":"p4","title":"","text":"One charge is armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":8,"counters":{"$keyed":"id","$set":{"armed":{"value":1}}}},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
-{"now":{"seq":54,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[0,1,1,1,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c18":{"id":"searched-c18","value":6}},"$order":["armed","disarmed","scuttled","searched-c21","searched-c24","searched-c3","searched-c5","searched-c18"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":54,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[0,1,1,1,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c6"}}}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
-{"now":{"seq":55,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[1,0,1,1,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c26":{"id":"searched-c26","value":6}},"$order":["armed","disarmed","scuttled","searched-c21","searched-c24","searched-c3","searched-c5","searched-c18","searched-c26"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":55,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[1,0,1,1,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c26"}}}}
@@ -152,15 +152,15 @@
 {"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
 {"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
-{"now":{"seq":56,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[1,1,1,0,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c28":{"id":"searched-c28","value":6}},"$order":["armed","disarmed","scuttled","searched-c21","searched-c24","searched-c3","searched-c5","searched-c18","searched-c26","searched-c28"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":56,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[1,1,1,0,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
 {"log":["Player1 found the Crawlspace.","Player2 used Stopped Watch.","Player2 found the Archive.","Player2 drew Mag Boots.","Player3 found the Cargo Hold.","Player3 drew Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp."]}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c3"}}}}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":7,"now":{"seq":57,"kind":"notice","seat":"p4","title":"","text":"2 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":7,"counters":{"$keyed":"id","$set":{"armed":{"value":2}},"$order":["armed","disarmed","scuttled","searched-c24","searched-c3","searched-c5","searched-c18","searched-c26","searched-c28"]}},"$delete":["turnEndsIn"]}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":7,"now":{"seq":57,"kind":"notice","seat":"p4","title":"","text":"2 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":7,"counters":{"$keyed":"id","$set":{"armed":{"value":2}}}},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
-{"now":{"seq":58,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 2","seconds":1.5,"faces":[0,0,1,0,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c6":{"id":"searched-c6","value":7}},"$order":["armed","disarmed","scuttled","searched-c24","searched-c3","searched-c5","searched-c18","searched-c26","searched-c28","searched-c6"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":58,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 2","seconds":1.5,"faces":[0,0,1,0,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c3"}}}}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c12"}}}}
@@ -169,41 +169,160 @@
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c3"}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
 {}
-{"crew":{"$keyed":"id","$set":{"p2":{"at":"c12"}}}}
-{"crew":{"$keyed":"id","$set":{"p2":{"at":"c3"}}}}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c26"}}}}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
 {"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c12"}}}}
-{"now":{"seq":59,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[1,1,0,1,1],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c12":{"id":"searched-c12","value":7}},"$order":["armed","disarmed","scuttled","searched-c24","searched-c3","searched-c5","searched-c18","searched-c26","searched-c28","searched-c6","searched-c12"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":59,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[1,1,0,1,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c19"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c12"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c19"}}}}
 {"log":["Player2 used Stopped Watch.","Player2 found the Archive.","Player2 drew Mag Boots.","Player3 found the Cargo Hold.","Player3 drew Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp."]}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":8,"now":{"seq":60,"kind":"notice","seat":"p4","title":"","text":"3 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":6,"counters":{"$keyed":"id","$set":{"armed":{"value":3}},"$order":["armed","disarmed","scuttled","searched-c18","searched-c26","searched-c28","searched-c6","searched-c12"]}},"$delete":["turnEndsIn"]}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":8,"now":{"seq":60,"kind":"notice","seat":"p4","title":"","text":"3 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":6,"counters":{"$keyed":"id","$set":{"armed":{"value":3}}}},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c19"}}}}
-{"now":{"seq":61,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[0,0,1,0,2],"compartment":null},"scenario":{"counters":{"$keyed":"id","$set":{"searched-c19":{"id":"searched-c19","value":8}},"$order":["armed","disarmed","scuttled","searched-c18","searched-c26","searched-c28","searched-c6","searched-c12","searched-c19"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":61,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[0,0,1,0,2],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c12"}}}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
-{"now":{"seq":62,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[1,0,0,1,1],"compartment":null},"scenario":{"tokens":[{"id":"charge-3","kind":"charge","at":"c5"}],"counters":{"$keyed":"id","$set":{"searched-c3":{"id":"searched-c3","value":8}},"$order":["armed","disarmed","scuttled","searched-c18","searched-c26","searched-c28","searched-c6","searched-c12","searched-c19","searched-c3"]}},"$delete":["turnEndsIn"]}
+{"now":{"seq":62,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[1,0,0,1,1],"compartment":null},"scenario":{"tokens":[{"id":"charge-3","kind":"charge","at":"c5"}]},"$delete":["turnEndsIn"]}
 {"now":{"seq":63,"kind":"notice","title":"","text":"A charge, wired under the deck plates of the Engineering Lift Landing.","seconds":6.944444444444444,"faces":[],"compartment":"c5","fx":"sparks"}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p1":{"at":"c5"}}}}
-{"crew":{"$keyed":"id","$set":{"p1":{"at":"c3"}}}}
-{"crew":{"$keyed":"id","$set":{"p1":{"at":"c5"}}}}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c2"}}}}
 {"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
-{}
-{"crew":{"$keyed":"id","$set":{"p2":{"at":"c2"}}}}
-{"crew":{"$keyed":"id","$set":{"p2":{"at":"c4"}}}}
+{"now":{"seq":64,"kind":"roll","seat":"p2","title":"Nerve check","text":"3 dice: 1","seconds":1.5,"faces":[0,0,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c26"}}}}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
 {"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
-{"now":{"seq":64,"kind":"roll","seat":"p3","title":"Tech check","text":"3 dice: 1","seconds":1.5,"faces":[0,0,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":{"seq":65,"kind":"roll","seat":"p3","title":"Tech check","text":"3 dice: 2","seconds":1.5,"faces":[0,2,0],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c3"}}}}
 {"log":["Player2 found the Archive.","Player2 drew Mag Boots.","Player3 found the Cargo Hold.","Player3 drew Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp."]}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":9,"now":{"seq":65,"kind":"notice","seat":"p4","title":"","text":"4 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":5,"tokens":[{"id":"charge-1","kind":"charge","at":"c25"},{"id":"charge-2","kind":"charge","at":"c27"},{"id":"charge-3","kind":"charge","at":"c5"},{"id":"charge-4","kind":"charge","at":"c3"}],"counters":{"$keyed":"id","$set":{"kit":{"id":"kit","value":1},"armed":{"value":4},"scuttled":{"value":1}},"$order":["kit","armed","disarmed","scuttled","searched-c6","searched-c12","searched-c19","searched-c3"]},"objectives":[{"id":"goal-p1","text":"Search (Nerve 3\u002B) and disarm (Tech 4\u002B) the charges, and keep the ship whole until the round limit.","state":"open"},{"id":"goal-p2","text":"Have four charges armed at a round\u0027s end.","state":"open"},{"id":"goal-p3","text":"Search (Nerve 3\u002B) and disarm (Tech 4\u002B) the charges, and keep the ship whole until the round limit.","state":"open"},{"id":"goal-p4","text":"Search (Nerve 3\u002B) and disarm (Tech 4\u002B) the charges, and keep the ship whole until the round limit.","state":"open"}],"reveal":[{"id":"p1","role":"Crew","won":false},{"id":"p2","role":"The Saboteur","won":true},{"id":"p3","role":"Crew","won":false},{"id":"p4","role":"Crew","won":false}],"outcome":"The charges go off together. The Meridian breaks in half, as someone was paid to see.","awards":[{"id":"award-1","title":"Pathfinder: most compartments found","seat":"p4"}],"crewWon":false},"$delete":["turnEndsIn"]}
-{"now":{"seq":66,"kind":"over","title":"It\u0027s over","text":"The charges go off together. The Meridian breaks in half, as someone was paid to see.","seconds":9.166666666666666}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":9,"scenario":{"roundsLeft":5}}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c5"}}}}
+{"now":{"seq":66,"kind":"roll","seat":"p4","title":"Tech check","text":"4 dice: 4","seconds":1.5,"faces":[0,2,1,1],"compartment":null},"scenario":{"tokens":[],"counters":{"$keyed":"id","$set":{"disarmed":{"value":1}}}},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c26"}}}}
+{"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
+{"now":{"seq":67,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 3","seconds":1.5,"faces":[0,0,0,1,2],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c5"}}}}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c26"}}}}
+{"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
+{"now":{"seq":68,"kind":"roll","seat":"p2","title":"Nerve check","text":"3 dice: 2","seconds":1.5,"faces":[1,1,0],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"compartments":{"$keyed":"id","$set":{"c29":{"id":"c29","tile":"chiefs_office","at":["engineering",-1,0],"rotation":3,"hatches":["e"],"symbol":"incident"}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25","c26","c27","c28","c29"]},"crew":{"$keyed":"id","$set":{"p2":{"at":"c29"}}},"tilesLeft":21,"now":{"seq":69,"kind":"reveal","seat":"p2","title":"Chief Engineer\u0027s Office","text":"","seconds":1.2,"faces":[],"compartment":"c29"},"log":["Player3 found the Cargo Hold.","Player3 drew Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player2 found the Chief Engineer\u0027s Office.","Player2 drew Cold Spot."],"$delete":["turnEndsIn"]}
+{"now":{"seq":70,"kind":"card","title":"Cold Spot","text":"A patch of air so cold your breath freezes on your visor.","seconds":7.685185185185185,"compartment":null,"deck":"incident","card":"cold_spot"}}
+{"now":null,"turnEndsIn":20}
+{"now":{"seq":71,"kind":"roll","seat":"p2","title":"Nerve check","text":"3 dice: 3","seconds":1.5,"faces":[1,1,1],"compartment":null},"log":["Player3 drew Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player2 found the Chief Engineer\u0027s Office.","Player2 drew Cold Spot.","Player2: You push through it."],"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
+{"now":{"seq":72,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 5","seconds":1.5,"faces":[1,1,1,1,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
+{"log":["Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player2 found the Chief Engineer\u0027s Office.","Player2 drew Cold Spot.","Player2: You push through it.","Player3 used Hand Lamp."]}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":10,"now":{"seq":73,"kind":"notice","seat":"p4","title":"","text":"2 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":4,"counters":{"$keyed":"id","$set":{"armed":{"value":2}}}},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c28"}}}}
+{"now":{"seq":74,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 5","seconds":1.5,"faces":[0,1,1,1,2],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c26"}}}}
+{"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c29"}}}}
+{"now":{"seq":75,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 5","seconds":1.5,"faces":[1,1,1,0,2],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
+{"now":{"seq":76,"kind":"roll","seat":"p2","title":"Nerve check","text":"3 dice: 2","seconds":1.5,"faces":[1,1,0],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
+{"tilesLeft":20,"turnEndsIn":8}
+{"compartments":{"$keyed":"id","$set":{"c30":{"id":"c30","tile":"engine_room","at":["engineering",1,0],"rotation":0,"hatches":["e","s","w"],"symbol":"incident"}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25","c26","c27","c28","c29","c30"]},"crew":{"$keyed":"id","$set":{"p2":{"at":"c30"}}},"now":{"seq":77,"kind":"reveal","seat":"p2","title":"Engine Room","text":"","seconds":1.2,"faces":[],"compartment":"c30"},"log":["Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player2 found the Chief Engineer\u0027s Office.","Player2 drew Cold Spot.","Player2: You push through it.","Player3 used Hand Lamp.","Player2 found the Engine Room.","Player2 drew Sparking Conduit."],"$delete":["turnEndsIn"]}
+{"now":{"seq":78,"kind":"card","title":"Sparking Conduit","text":"Exposed wiring arcs across the passage at chest height.","seconds":6.5740740740740735,"compartment":null,"deck":"incident","card":"sparking_conduit"}}
+{"now":null,"turnEndsIn":20}
+{"now":{"seq":79,"kind":"roll","seat":"p2","title":"Agility check","text":"4 dice: 5","seconds":1.5,"faces":[1,2,1,1],"compartment":null},"log":["Player3 used Hand Lamp.","Player2 found the Chief Engineer\u0027s Office.","Player2 drew Cold Spot.","Player2: You push through it.","Player3 used Hand Lamp.","Player2 found the Engine Room.","Player2 drew Sparking Conduit.","Player2: You time it and slip under."],"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c30"}}}}
+{"now":{"seq":80,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 5","seconds":1.5,"faces":[1,1,2,1,0],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
+{"log":["Player2 found the Chief Engineer\u0027s Office.","Player2 drew Cold Spot.","Player2: You push through it.","Player3 used Hand Lamp.","Player2 found the Engine Room.","Player2 drew Sparking Conduit.","Player2: You time it and slip under.","Player3 used Hand Lamp."]}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c26"}}}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":11,"now":{"seq":81,"kind":"round","seat":"p4","title":"Round 11","text":"Three rounds remain.","seconds":4.351851851851851,"faces":[],"compartment":null},"scenario":{"roundsLeft":3},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c3"}}}}
+{"now":{"seq":82,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[0,0,1,2,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c26"}}}}
+{"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
+{}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
+{"compartments":{"$keyed":"id","$set":{"c31":{"id":"c31","tile":"fuel_tanks","at":["engineering",0,-1],"rotation":0,"hatches":["s"],"symbol":"anomaly"}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25","c26","c27","c28","c29","c30","c31"]},"crew":{"$keyed":"id","$set":{"p2":{"at":"c31"}}},"tilesLeft":19,"anomaliesDrawn":6,"now":{"seq":83,"kind":"reveal","seat":"p2","title":"Fuel Tanks","text":"","seconds":1.2,"faces":[],"compartment":"c31"},"log":["Player2: You push through it.","Player3 used Hand Lamp.","Player2 found the Engine Room.","Player2 drew Sparking Conduit.","Player2: You time it and slip under.","Player3 used Hand Lamp.","Player2 found the Fuel Tanks.","Player2 drew Humming Shard."],"$delete":["turnEndsIn"]}
+{"now":{"seq":84,"kind":"card","title":"Humming Shard","text":"It\u0027s warm, and it hums when you think about machines.","seconds":6.944444444444444,"compartment":null,"deck":"anomaly","card":"humming_shard"}}
+{"now":null,"turnEndsIn":60}
+{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c31"}}}}
+{"now":{"seq":85,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 6","seconds":1.5,"faces":[2,1,1,1,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c3"}}}}
+{"log":["Player3 used Hand Lamp.","Player2 found the Engine Room.","Player2 drew Sparking Conduit.","Player2: You time it and slip under.","Player3 used Hand Lamp.","Player2 found the Fuel Tanks.","Player2 drew Humming Shard.","Player3 used Hand Lamp."]}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c12"}}}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":12,"now":{"seq":86,"kind":"notice","seat":"p4","title":"","text":"3 charges are armed somewhere aboard.","seconds":4.722222222222221,"faces":[],"compartment":null},"scenario":{"roundsLeft":2,"counters":{"$keyed":"id","$set":{"armed":{"value":3}}}},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c12"}}}}
+{"now":{"seq":87,"kind":"roll","seat":"p4","title":"Nerve check","text":"5 dice: 7","seconds":1.5,"faces":[1,2,1,2,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c19"}}}}
+{"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
+{"now":{"seq":88,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 1","seconds":1.5,"faces":[1,0,0,0,0],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c31"}}}}
+{"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
+{"now":{"seq":89,"kind":"roll","seat":"p2","title":"Nerve check","text":"3 dice: 4","seconds":1.5,"faces":[1,2,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c30"}}}}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
+{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c19"}}}}
+{"now":{"seq":90,"kind":"roll","seat":"p3","title":"Nerve check","text":"5 dice: 4","seconds":1.5,"faces":[2,1,0,0,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c2"}}}}
+{"log":["Player2 found the Engine Room.","Player2 drew Sparking Conduit.","Player2: You time it and slip under.","Player3 used Hand Lamp.","Player2 found the Fuel Tanks.","Player2 drew Humming Shard.","Player3 used Hand Lamp.","Player3 used Hand Lamp."]}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c3"}}}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":13,"now":{"seq":91,"kind":"round","seat":"p4","title":"Round 13","text":"Final round.","seconds":3.9814814814814814,"faces":[],"compartment":null},"scenario":{"roundsLeft":1},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p4":{"at":"c3"}}}}
+{"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c5"}}}}
+{"now":{"seq":92,"kind":"roll","seat":"p1","title":"Nerve check","text":"5 dice: 2","seconds":1.5,"faces":[0,0,0,0,2],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c29"}}}}
+{"crew":{"$keyed":"id","$set":{"p1":{"at":"c5"}}}}
+{"banner":"Player2\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":false},"p2":{"active":true}}}}
+{"now":{"seq":93,"kind":"roll","seat":"p2","title":"Nerve check","text":"3 dice: 4","seconds":1.5,"faces":[1,1,2],"compartment":null},"scenario":{"tokens":[{"id":"charge-3","kind":"charge","at":"c30"}]},"$delete":["turnEndsIn"]}
+{"now":{"seq":94,"kind":"notice","title":"","text":"A charge, wired under the deck plates of the Engine Room.","seconds":6.5740740740740735,"faces":[],"compartment":"c30","fx":"sparks"}}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c30"}}}}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c5"}}}}
+{"crew":{"$keyed":"id","$set":{"p2":{"at":"c30"}}}}
+{"banner":"Player3\u0027s turn","seats":{"$keyed":"id","$set":{"p2":{"active":false},"p3":{"active":true}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c30"}}}}
+{"now":{"seq":95,"kind":"roll","seat":"p3","title":"Tech check","text":"3 dice: 3","seconds":1.5,"faces":[0,2,1],"compartment":null},"$delete":["turnEndsIn"]}
+{"now":null,"turnEndsIn":60}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c29"}}}}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c5"}}}}
+{"log":["Player2 drew Sparking Conduit.","Player2: You time it and slip under.","Player3 used Hand Lamp.","Player2 found the Fuel Tanks.","Player2 drew Humming Shard.","Player3 used Hand Lamp.","Player3 used Hand Lamp.","Player3 used Hand Lamp."]}
+{"crew":{"$keyed":"id","$set":{"p3":{"at":"c30"}}}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":14,"now":{"seq":96,"kind":"over","seat":"p4","title":"It\u0027s over","text":"Time ran out for the saboteur. The Meridian holds together.","seconds":6.944444444444444,"faces":[],"compartment":null},"scenario":{"roundsLeft":0,"tokens":[{"id":"charge-1","kind":"charge","at":"c25"},{"id":"charge-2","kind":"charge","at":"c27"},{"id":"charge-3","kind":"charge","at":"c30"}],"reveal":[{"id":"p1","role":"Crew","won":true},{"id":"p2","role":"The Saboteur","won":false},{"id":"p3","role":"Crew","won":true},{"id":"p4","role":"Crew","won":true}],"outcome":"Time ran out for the saboteur. The Meridian holds together.","awards":[{"id":"award-1","title":"Pathfinder: most compartments found","seat":"p2"}],"crewWon":true},"$delete":["turnEndsIn"]}
 {"phase":"debrief","banner":"Debrief","seats":{"$keyed":"id","$set":{"p4":{"active":false}}},"now":null}
 {}

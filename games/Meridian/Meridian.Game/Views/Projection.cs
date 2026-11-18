@@ -77,8 +77,14 @@ internal static class Projection
         var def = game.Pack.ScenarioDef(board.Scenario);
         var left = Math.Max(0, board.RoundLimit - Math.Max(0, seen.Round - board.StartRound));
         var tokens = board.Tokens.Select(t => new TokenCard(t.Id, t.Kind, t.At?.Value, t.Carrier?.Value, t.Stunned, t.State)).ToEqArray();
-        var counters = board.Counters.Select(c => new CounterCard(c.Id, c.Value)).ToEqArray();
-        var objectives = board.Objectives.Select(o => new ObjectiveCard(o.Id, o.Text, o.State)).ToEqArray();
+        // A counter its content labels null is bookkeeping, kept off the TV: it isn't sent there at all.
+        var hidden = def.Counters ?? new Dictionary<string, string?>();
+        bool Shown(string id) => !(hidden.TryGetValue(id, out var label) && label is null)
+                                 && !hidden.Any(h => h.Value is null && h.Key.EndsWith('-') && id.StartsWith(h.Key, StringComparison.Ordinal));
+        var counters = board.Counters.Where(c => Shown(c.Id)).Select(c => new CounterCard(c.Id, c.Value)).ToEqArray();
+        // Only objectives meant for everyone: at the Debrief the reveal opens the rest, but the TV never showed them and the
+        // Debrief doesn't, so they'd only swell the view (M7: six seat-private objectives made a 1.9 KB patch).
+        var objectives = board.Objectives.Where(o => o.Audience == Audience.Everyone).Select(o => new ObjectiveCard(o.Id, o.Text, o.State)).ToEqArray();
         // Only once the game is decided does the TV name anyone's role (Visibility reveals everything at Phase.Over).
         if (board.Outcome is { } outcome && seen.Phase == Phase.Over)
         {
