@@ -30,7 +30,7 @@ public sealed class ColdSleepTests
         var before = Sleepers(game.State).Count();
         var powered = Relays(game.State).Count(r => r.State == "powered");
         EndRound(game);
-        Assert.Equal(before + powered, Sleepers(game.State).Count());
+        Assert.Equal(Math.Min(before + powered, Pack.ScenarioDef(Id).Number("maxAwake")), Sleepers(game.State).Count());   // up to the cap
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public sealed class ColdSleepTests
         var before = Sleepers(game.State).Count();
         var powered = Relays(game.State).Count(r => r.State == "powered");
         EndRound(game);
-        Assert.Equal(before + powered, Sleepers(game.State).Count());
+        Assert.Equal(Math.Min(before + powered, Pack.ScenarioDef(Id).Number("maxAwake")), Sleepers(game.State).Count());   // up to the cap
     }
 
     [Fact]

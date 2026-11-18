@@ -36,7 +36,7 @@ public sealed class ColdSleep : IScenario
             ? new RoleCard(c.Seat, Waker, Waker, Audience.Everyone)
             : new RoleCard(c.Seat, Crew, Crew, Audience.Everyone)).ToEqArray();
         state = state.WithBoard(new ScenarioBoard(Id, roles, relays,
-            [new Counter("overrun", 0, Audience.Everyone), new Counter("inAirlock", 0, Audience.Everyone)],
+            [new Counter("overrun", 0, Audience.Everyone), new Counter("inAirlock", 0, Audience.Everyone), new Counter("cleared", 0, Audience.Everyone)],
             [new Objective(Waker, def.Role(Waker).Objectives[0], ObjectiveState.Open, Audience.OfSeat(waker)),
              new Objective(Crew, def.Role(Crew).Objectives[0], ObjectiveState.Open, Audience.OfSide(Crew))],
             def.RoundLimit, state.Round));
@@ -79,6 +79,11 @@ public sealed class ColdSleep : IScenario
         }
         var inAirlock = Sleepers(state).Count(s => s.At == Airlock(state));
         var board = state.Board!.WithCounter("inAirlock", inAirlock);
+        // The crew's win is judged here, at the round's end: the power cut and nobody left awake.
+        if (PowerCut(state) && !Sleepers(state).Any())
+        {
+            board = board.WithCounter("cleared", 1);
+        }
         state = state.WithBoard(inAirlock >= Overrun(state) ? board.WithCounter("overrun", 1) : board);
         var waker = WakerOf(state);
         var waking = Math.Min(Relays(state).Count(r => r.State == "powered"), def.Number("maxAwake") - Sleepers(state).Count());
@@ -120,7 +125,7 @@ public sealed class ColdSleep : IScenario
     {
         var board = state.Board!;
         var crew = board.Roles.Where(r => r.Role == Crew).Select(r => r.Seat).ToEqArray();
-        if (PowerCut(state) && !Sleepers(state).Any())
+        if (board.Value("cleared") > 0)
         {
             return new Outcome(crew, "The Cryo Bay goes dark, and everyone in it sleeps again.");
         }

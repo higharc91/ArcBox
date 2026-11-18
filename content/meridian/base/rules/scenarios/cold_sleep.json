@@ -27,8 +27,8 @@
   "numbers": {
     "relays": 2,
     "reroute": 3,
-    "startSleepers": 0,
-    "maxAwake": 3,
+    "startSleepers": 1,
+    "maxAwake": 2,
     "sleeperBrawn": 3,
     "sleeperAgility": 1,
     "sleeperNerve": 1
@@ -54,6 +54,7 @@
   },
   "counters": {
     "overrun": null,
-    "inAirlock": "Sleepers in the Airlock"
+    "inAirlock": "Sleepers in the Airlock",
+    "cleared": null
   }
 }
