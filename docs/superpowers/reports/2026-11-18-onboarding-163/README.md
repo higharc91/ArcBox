@@ -6,7 +6,7 @@ A fresh profile now gets a three-card, inline quick start on its first player-co
 
 The four economy chips open touch/keyboard-accessible explanations even after a resource is spent. The hero HP and aiming views explain the actual Downed countdown; noninteractive unit-selection labels remain safe inside their existing buttons. Existing sheet focus trapping, Escape and focus restoration are retained. The Downed sheet resets inherited HP typography so it remains left aligned and readable.
 
-All twelve class cards in both quick class selection and the character creator have a playstyle sentence and learning curve; Fighter, Barbarian and Ranger carry a new-player recommendation. Accessible class names remain concise, with guidance attached as a description. Twenty common/early abilities have plain-language introductions, while exact server rules remain expandable in the aiming view; costs, targets, previews and sent commands are unchanged. Unknown classes/abilities keep their existing fallback.
+All twelve class cards in both quick class selection and the character creator have a playstyle sentence and an Easy / Moderate / Difficult rating; Fighter, Barbarian and Ranger carry a new-player recommendation. Accessible class names remain concise, with guidance attached as a description. Twenty common/early abilities have plain-language introductions, while exact server rules remain expandable in the aiming view; costs, targets, previews and sent commands are unchanged. Unknown classes/abilities keep their existing fallback.
 
 Primer history is local to this phone and scoped by the public profile ID supplied by the existing lobby, not a profile credential. New characters on the same profile do not retrigger it; another profile does. Legacy/dev views fall back to unit identity. Blocked/full storage falls back to page memory. Waiting/summon turns do not consume the primer.
 
@@ -25,3 +25,7 @@ The issue's final acceptance criterion—an actual person new to D&D completing 
 ## Repeat the visual check
 
 Install the repository phone dependencies, start `npm --prefix web/play run dev -- --host 0.0.0.0 --port 5173`, and run `review.cjs` with Playwright available to Node. It loads `web/play/test/review/onboarding.html`, a non-production fixture harness. `CHROMIUM_PATH` optionally selects a browser; `ARCBOX_PHONE_REVIEW_URL` optionally selects the Vite origin. The harness and test driver send no live server commands. Production builds retain only the existing index/dev/title entry points.
+
+## Difficulty wording follow-up
+
+Class cards now say **Difficulty: Easy**, **Difficulty: Moderate** or **Difficulty: Difficult** in both selectors. The mapping preserves the original relative ratings. After this copy change, all **9 onboarding tests** and the production build pass; Chromium verifies all twelve displayed ratings at 320/390 px and all six images in the refreshed gallery. [Rating/browser receipt](difficulty-validation.json) · [Focused tests](checks/difficulty-tests.txt) · [Build](checks/difficulty-build.txt). The 610-test full phone run above is the preceding implementation checkpoint.

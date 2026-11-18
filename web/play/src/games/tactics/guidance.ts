@@ -1,17 +1,17 @@
 /** Phone-side reading aids, not rules: exact costs, targets and outcomes still come from the server. */
-export const CLASS_GUIDANCE: Record<string, { style: string; complexity: string; beginner?: boolean }> = {
-  fighter: { style: "Stand beside enemies, protect friends and fight with weapons.", complexity: "Straightforward", beginner: true },
-  barbarian: { style: "Rush into close combat and use Rage to fight through danger.", complexity: "Straightforward", beginner: true },
-  ranger: { style: "Fight from a distance and use nature skills to support the party.", complexity: "Some choices", beginner: true },
-  rogue: { style: "Find a good opening, strike hard and slip away from enemies.", complexity: "Some choices" },
-  cleric: { style: "Heal friends and use divine magic to protect or attack.", complexity: "Some choices" },
-  paladin: { style: "Fight on the front line with weapons, healing and divine power.", complexity: "Some choices" },
-  monk: { style: "Move quickly, land close-range strikes and spend Ki for special moves.", complexity: "Some choices" },
-  bard: { style: "Support friends, disrupt enemies and choose the right spell for the moment.", complexity: "Many choices" },
-  druid: { style: "Control the battlefield with nature magic and animal forms.", complexity: "Many choices" },
-  sorcerer: { style: "Cast powerful spells and spend Sorcery to change how they work.", complexity: "Many choices" },
-  warlock: { style: "Use a pact's magic to attack enemies and create unusual advantages.", complexity: "Some choices" },
-  wizard: { style: "Choose from many spells to damage enemies or control where they can go.", complexity: "Many choices" },
+export const CLASS_GUIDANCE: Record<string, { style: string; complexity: "Easy" | "Moderate" | "Difficult"; beginner?: boolean }> = {
+  fighter: { style: "Stand beside enemies, protect friends and fight with weapons.", complexity: "Easy", beginner: true },
+  barbarian: { style: "Rush into close combat and use Rage to fight through danger.", complexity: "Easy", beginner: true },
+  ranger: { style: "Fight from a distance and use nature skills to support the party.", complexity: "Moderate", beginner: true },
+  rogue: { style: "Find a good opening, strike hard and slip away from enemies.", complexity: "Moderate" },
+  cleric: { style: "Heal friends and use divine magic to protect or attack.", complexity: "Moderate" },
+  paladin: { style: "Fight on the front line with weapons, healing and divine power.", complexity: "Moderate" },
+  monk: { style: "Move quickly, land close-range strikes and spend Ki for special moves.", complexity: "Moderate" },
+  bard: { style: "Support friends, disrupt enemies and choose the right spell for the moment.", complexity: "Difficult" },
+  druid: { style: "Control the battlefield with nature magic and animal forms.", complexity: "Difficult" },
+  sorcerer: { style: "Cast powerful spells and spend Sorcery to change how they work.", complexity: "Difficult" },
+  warlock: { style: "Use a pact's magic to attack enemies and create unusual advantages.", complexity: "Moderate" },
+  wizard: { style: "Choose from many spells to damage enemies or control where they can go.", complexity: "Difficult" },
 };
 
 export const RULE_HELP = {

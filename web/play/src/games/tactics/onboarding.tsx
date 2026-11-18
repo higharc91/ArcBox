@@ -8,7 +8,7 @@ export const classGuideId = (id: string) => CLASS_GUIDANCE[id] ? `tx-class-guide
 
 export function ClassGuidance({ id }: { id: string }) {
   const guide = CLASS_GUIDANCE[id];
-  return guide ? <span class="tx-class-guide" id={classGuideId(id)}><span>{guide.style}</span><small>Learning curve: {guide.complexity}</small>
+  return guide ? <span class="tx-class-guide" id={classGuideId(id)}><span>{guide.style}</span><small>Difficulty: {guide.complexity}</small>
     {guide.beginner ? <strong>Good for new players</strong> : null}</span> : null;
 }
 

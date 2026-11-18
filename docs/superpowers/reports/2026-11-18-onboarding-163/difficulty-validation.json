@@ -1,0 +1,32 @@
+{
+  "ratings": [
+    "Difficulty: Easy",
+    "Difficulty: Difficult",
+    "Difficulty: Moderate",
+    "Difficulty: Difficult",
+    "Difficulty: Easy",
+    "Difficulty: Moderate",
+    "Difficulty: Moderate",
+    "Difficulty: Moderate",
+    "Difficulty: Moderate",
+    "Difficulty: Difficult",
+    "Difficulty: Moderate",
+    "Difficulty: Difficult"
+  ],
+  "widths": [
+    {
+      "width": 320,
+      "document": 320
+    },
+    {
+      "width": 390,
+      "document": 390
+    }
+  ],
+  "gallery": {
+    "images": 6,
+    "width": 390,
+    "document": 390
+  },
+  "passed": true
+}

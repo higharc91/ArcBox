@@ -88,11 +88,11 @@ describe("first battle guidance", () => {
     expect(screen.queryByRole("button", { name: "Explain Downed" })).toBeNull();
   });
 
-  it("gives every shipped class a playstyle and learning curve without changing the class pick", () => {
+  it("gives every shipped class a playstyle and difficulty rating without changing the class pick", () => {
     const send = vi.fn(); render(<PickClass data={pickFixture.data} send={send} stream={send} viewId="classes" />);
     for (const cls of pickFixture.data.classes) {
       const card = screen.getByRole("button", { name: new RegExp(cls.name) });
-      expect(card.textContent).toContain("Learning curve:");
+      expect(card.textContent).toMatch(/Difficulty: (Easy|Moderate|Difficult)/);
       expect(card.querySelector(".tx-class-guide > span")?.textContent).toMatch(/\.$/);
     }
     const fighter = screen.getByRole("button", { name: /Fighter/ });
@@ -100,7 +100,7 @@ describe("first battle guidance", () => {
     fireEvent.click(fighter);
     expect(send).toHaveBeenCalledExactlyOnceWith("pickClass", { class: "fighter" });
     cleanup(); render(<ClassGuidance id="future-class" />);
-    expect(document.body.textContent).not.toContain("Learning curve");
+    expect(document.body.textContent).not.toContain("Difficulty:");
   });
 
   it("makes plain-language summaries additive: exact server rules and costs remain in the aiming view", () => {
