@@ -121,10 +121,10 @@ function MiniMap({ me, units, cursor, reach, risks, spread, aims, zones, onPick,
 function DPad({ cursor, onMove, map }: { cursor: Tile; onMove(t: Tile): void; map: MapData | null }) {
   const go = (dx: number, dy: number) => onMove([Math.max(0, Math.min(map ? map.w - 1 : Infinity, cursor[0] + dx)),
     Math.max(0, Math.min(map ? map.h - 1 : Infinity, cursor[1] + dy))]);
-  return <div class="tx-dpad">
+  return <div class="tx-dpad" role="group" aria-label="Move cursor">
+    <span class="tx-dpad-label" aria-hidden="true">Cursor</span>
     <button type="button" class="up" aria-label="Up" onClick={() => go(0, -1)}><LineIcon name="up" /></button>
     <button type="button" class="left" aria-label="Left" onClick={() => go(-1, 0)}><LineIcon name="up" rotate={-90} /></button>
-    <span class="hub" aria-hidden="true">Cursor</span>
     <button type="button" class="right" aria-label="Right" onClick={() => go(1, 0)}><LineIcon name="up" rotate={90} /></button>
     <button type="button" class="down" aria-label="Down" onClick={() => go(0, 1)}><LineIcon name="up" rotate={180} /></button>
   </div>;

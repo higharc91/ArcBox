@@ -29,3 +29,9 @@ Install the repository phone dependencies, start `npm --prefix web/play run dev 
 ## Difficulty wording follow-up
 
 Class cards now say **Difficulty: Easy**, **Difficulty: Moderate** or **Difficulty: Difficult** in both selectors. The mapping preserves the original relative ratings. After this copy change, all **9 onboarding tests** and the production build pass; Chromium verifies all twelve displayed ratings at 320/390 px and all six images in the refreshed gallery. [Rating/browser receipt](difficulty-validation.json) · [Focused tests](checks/difficulty-tests.txt) · [Build](checks/difficulty-build.txt). The 610-test full phone run above is the preceding implementation checkpoint.
+
+## Cursor-label spacing follow-up
+
+“Cursor” now has its own full-width row above the direction pad with 8px bottom padding, rather than overflowing the 44px centre cell. The four arrow targets remain 44×44px. [Normal controls](cursor-controls-390.png) · [Enlarged map with 2× caption text](cursor-large-text-320.png).
+
+All **37 battle-map and turn tests** and the production build pass. A real Chromium geometry check verifies that the caption text clears every arrow by at least 7px at 320/360/390/430px, in both map modes at regular and doubled caption size. Left/right browsing still selects the expected tiles without sending game commands. [Receipt](cursor-validation.json) · [Repeatable check](cursor-review.cjs) · [Tests](checks/cursor-tests.txt) · [Build](checks/cursor-build.txt).
