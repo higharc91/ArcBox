@@ -1,6 +1,6 @@
 # Meridian: endgame balance (M3 and M7 simulation)
 
-- **Date:** 2026-11-18. M3's first five scenarios were tuned on 2026-11-14 ([#367](https://github.com/higharc91/ArcBox/issues/367)). M7's seven, and the table below for all twelve, come from plan Task 10, issue [#417](https://github.com/higharc91/ArcBox/issues/417).
+- **Date:** 2026-11-18, after the owner's decisions on the first M7 run. M3's first five scenarios were tuned on 2026-11-14 ([#367](https://github.com/higharc91/ArcBox/issues/367)). M7's seven, and the table below for all twelve, come from plan Task 10, issue [#417](https://github.com/higharc91/ArcBox/issues/417).
 - **Build:** branch `ccr-de425e76-4vxzw2`, the commit that adds this report.
 - **Players:** bots in every seat: the Explore bot until the Breach, then each scenario's role bots. **These are bot numbers, not people.** They catch a broken or lopsided scenario; they don't replace a playtest.
 - **Targets** (spec §7.3):
@@ -29,60 +29,62 @@ Each row is 1,000 games (seeds 1–1000) with the scenario forced.
 
 ## Final results
 
+After the owner's decisions (below): the Breach threshold is 7, and each holding side has a second way to win.
+
 | Scenario | Players | Games | Ended | Win rate | Round limit decided | Breach at (share of turns, median) | Endgame turns (median) | Deaths per game | Est. minutes (median) |
 |---|---|---|---|---|---|---|---|---|---|
-| captain_on_deck | 3 | 1000 | 100% | crew 49% | 51% | 45% | 29 | 0.0 | 37 |
-| captain_on_deck | 4 | 1000 | 100% | crew 51% | 49% | 38% | 37 | 0.1 | 44 |
-| captain_on_deck | 5 | 1000 | 100% | crew 57% | 43% | 36% | 36 | 0.1 | 50 |
-| captain_on_deck | 6 | 1000 | 100% | crew 74% | 26% | 45% | 25 | 0.0 | 39 |
-| cold_sleep | 3 | 1000 | 100% | crew 26% | 46% | 39% | 34 | 0.1 | 43 |
-| cold_sleep | 4 | 1000 | 100% | crew 41% | 59% | 33% | 48 | 0.3 | 54 |
-| cold_sleep | 5 | 1000 | 100% | crew 53% | 47% | 33% | 42 | 0.1 | 54 |
-| cold_sleep | 6 | 1000 | 100% | crew 62% | 38% | 38% | 32 | 0.0 | 46 |
-| company_asset | 3 | 1000 | 100% | crew 54% | 15% | 48% | 20 | 0.9 | 32 |
-| company_asset | 4 | 1000 | 100% | crew 53% | 28% | 35% | 35 | 1.4 | 46 |
-| company_asset | 5 | 1000 | 100% | crew 47% | 20% | 32% | 41 | 2.5 | 52 |
-| company_asset | 6 | 1000 | 100% | crew 42% | 34% | 27% | 58 | 3.0 | 68 |
-| decaying_orbit | 3 | 1000 | 100% | survive 65% | 0% | 49% | 20 | 1.0 | 32 |
-| decaying_orbit | 4 | 1000 | 100% | survive 74% | 0% | 43% | 26 | 1.0 | 37 |
-| decaying_orbit | 5 | 1000 | 100% | survive 81% | 0% | 40% | 31 | 0.9 | 42 |
-| decaying_orbit | 6 | 1000 | 100% | survive 83% | 0% | 37% | 37 | 1.0 | 48 |
-| hull_rot | 3 | 1000 | 100% | crew 35% | 29% | 43% | 25 | 0.2 | 37 |
-| hull_rot | 4 | 1000 | 100% | crew 48% | 30% | 38% | 30 | 0.3 | 43 |
-| hull_rot | 5 | 1000 | 100% | crew 76% | 17% | 42% | 26 | 0.2 | 39 |
-| hull_rot | 6 | 1000 | 100% | crew 84% | 10% | 43% | 26 | 0.2 | 39 |
-| last_clean_sample | 3 | 1000 | 100% | 52% claimed; top turn position 1.10x fair | 0% | 55% | 17 | 1.4 | 28 |
-| last_clean_sample | 4 | 1000 | 100% | 64% claimed; top turn position 1.07x fair | 0% | 50% | 20 | 1.5 | 32 |
-| last_clean_sample | 5 | 1000 | 100% | 77% claimed; top turn position 1.09x fair | 0% | 47% | 22 | 1.2 | 34 |
-| last_clean_sample | 6 | 1000 | 100% | 68% claimed; top turn position 1.12x fair | 0% | 43% | 28 | 2.0 | 41 |
-| one_of_us_isnt | 3 | 1000 | 100% | crew 42% | 58% | 42% | 29 | 0.0 | 38 |
-| one_of_us_isnt | 4 | 1000 | 100% | crew 58% | 43% | 38% | 34 | 0.0 | 44 |
-| one_of_us_isnt | 5 | 1000 | 100% | crew 74% | 26% | 37% | 34 | 0.0 | 46 |
-| one_of_us_isnt | 6 | 1000 | 100% | crew 68% | 32% | 33% | 43 | 0.0 | 56 |
-| salvage_rights | 3 | 1000 | 100% | 96% claimed; top turn position 1.15x fair | 4% | 63% | 10 | 0.0 | 24 |
-| salvage_rights | 4 | 1000 | 100% | 98% claimed; top turn position 1.17x fair | 2% | 59% | 13 | 0.0 | 27 |
-| salvage_rights | 5 | 1000 | 100% | 99% claimed; top turn position 1.15x fair | 2% | 56% | 15 | 0.0 | 29 |
-| salvage_rights | 6 | 1000 | 100% | 99% claimed; top turn position 1.30x fair | 1% | 54% | 17 | 0.0 | 32 |
-| scuttle_charge | 3 | 1000 | 100% | crew 30% | 30% | 47% | 19 | 0.0 | 33 |
-| scuttle_charge | 4 | 1000 | 100% | crew 53% | 53% | 38% | 38 | 0.0 | 46 |
-| scuttle_charge | 5 | 1000 | 100% | crew 45% | 45% | 37% | 33 | 0.0 | 46 |
-| scuttle_charge | 6 | 1000 | 100% | crew 54% | 54% | 31% | 56 | 0.0 | 64 |
-| the_passenger | 3 | 1000 | 100% | crew 33% | 8% | 52% | 17 | 1.4 | 30 |
-| the_passenger | 4 | 1000 | 100% | crew 43% | 3% | 50% | 20 | 1.9 | 33 |
-| the_passenger | 5 | 1000 | 100% | crew 57% | 1% | 49% | 20 | 2.2 | 33 |
-| the_passenger | 6 | 1000 | 100% | crew 57% | 1% | 45% | 24 | 2.7 | 38 |
-| tiller_says_no | 3 | 1000 | 100% | crew 58% | 42% | 49% | 21 | 0.1 | 32 |
-| tiller_says_no | 4 | 1000 | 100% | crew 65% | 35% | 43% | 26 | 0.1 | 38 |
-| tiller_says_no | 5 | 1000 | 100% | crew 84% | 16% | 42% | 27 | 0.0 | 40 |
-| tiller_says_no | 6 | 1000 | 100% | crew 72% | 28% | 35% | 38 | 0.1 | 50 |
-| vent_cycle | 3 | 1000 | 100% | survive 67% | 0% | 54% | 15 | 1.0 | 28 |
-| vent_cycle | 4 | 1000 | 100% | survive 75% | 0% | 50% | 18 | 1.0 | 31 |
-| vent_cycle | 5 | 1000 | 100% | survive 80% | 0% | 47% | 21 | 1.0 | 34 |
-| vent_cycle | 6 | 1000 | 100% | survive 83% | 0% | 45% | 24 | 1.0 | 38 |
+| captain_on_deck | 3 | 1000 | 100% | crew 49% | 47% | 49% | 26 | 0.0 | 38 |
+| captain_on_deck | 4 | 1000 | 100% | crew 53% | 47% | 43% | 34 | 0.1 | 46 |
+| captain_on_deck | 5 | 1000 | 100% | crew 57% | 43% | 40% | 36 | 0.1 | 51 |
+| captain_on_deck | 6 | 1000 | 100% | crew 72% | 28% | 47% | 27 | 0.1 | 43 |
+| cold_sleep | 3 | 1000 | 100% | crew 25% | 44% | 44% | 33 | 0.1 | 45 |
+| cold_sleep | 4 | 1000 | 100% | crew 42% | 58% | 36% | 48 | 0.3 | 57 |
+| cold_sleep | 5 | 1000 | 100% | crew 54% | 46% | 35% | 39 | 0.1 | 55 |
+| cold_sleep | 6 | 1000 | 100% | crew 63% | 37% | 40% | 33 | 0.0 | 49 |
+| company_asset | 3 | 1000 | 100% | crew 63% | 10% | 58% | 16 | 0.8 | 32 |
+| company_asset | 4 | 1000 | 100% | crew 59% | 23% | 42% | 31 | 1.3 | 44 |
+| company_asset | 5 | 1000 | 100% | crew 51% | 17% | 38% | 38 | 2.4 | 52 |
+| company_asset | 6 | 1000 | 100% | crew 49% | 30% | 32% | 53 | 2.8 | 66 |
+| decaying_orbit | 3 | 1000 | 100% | survive 64% | 0% | 53% | 20 | 1.1 | 34 |
+| decaying_orbit | 4 | 1000 | 100% | survive 72% | 0% | 47% | 26 | 1.1 | 40 |
+| decaying_orbit | 5 | 1000 | 100% | survive 79% | 0% | 44% | 31 | 1.0 | 44 |
+| decaying_orbit | 6 | 1000 | 100% | survive 81% | 0% | 39% | 38 | 1.1 | 51 |
+| hull_rot | 3 | 1000 | 100% | crew 34% | 32% | 46% | 25 | 0.2 | 39 |
+| hull_rot | 4 | 1000 | 100% | crew 49% | 31% | 41% | 30 | 0.2 | 45 |
+| hull_rot | 5 | 1000 | 100% | crew 77% | 18% | 44% | 28 | 0.2 | 43 |
+| hull_rot | 6 | 1000 | 100% | crew 83% | 12% | 45% | 28 | 0.2 | 44 |
+| last_clean_sample | 3 | 1000 | 100% | 53% claimed; top turn position 1.15x fair | 0% | 59% | 17 | 1.4 | 30 |
+| last_clean_sample | 4 | 1000 | 100% | 65% claimed; top turn position 1.10x fair | 0% | 55% | 20 | 1.4 | 34 |
+| last_clean_sample | 5 | 1000 | 100% | 75% claimed; top turn position 1.28x fair | 0% | 51% | 22 | 1.2 | 37 |
+| last_clean_sample | 6 | 1000 | 100% | 67% claimed; top turn position 1.04x fair | 0% | 46% | 28 | 2.0 | 43 |
+| one_of_us_isnt | 3 | 1000 | 100% | crew 46% | 44% | 48% | 26 | 0.1 | 38 |
+| one_of_us_isnt | 4 | 1000 | 100% | crew 59% | 40% | 43% | 31 | 0.1 | 44 |
+| one_of_us_isnt | 5 | 1000 | 100% | crew 73% | 27% | 41% | 34 | 0.1 | 48 |
+| one_of_us_isnt | 6 | 1000 | 100% | crew 69% | 32% | 36% | 42 | 0.1 | 56 |
+| salvage_rights | 3 | 1000 | 100% | 96% claimed; top turn position 1.20x fair | 4% | 68% | 10 | 0.0 | 26 |
+| salvage_rights | 4 | 1000 | 100% | 97% claimed; top turn position 1.18x fair | 3% | 62% | 13 | 0.0 | 29 |
+| salvage_rights | 5 | 1000 | 100% | 98% claimed; top turn position 1.23x fair | 2% | 59% | 15 | 0.0 | 31 |
+| salvage_rights | 6 | 1000 | 100% | 99% claimed; top turn position 1.22x fair | 1% | 57% | 17 | 0.0 | 34 |
+| scuttle_charge | 3 | 1000 | 100% | crew 32% | 2% | 56% | 17 | 0.0 | 32 |
+| scuttle_charge | 4 | 1000 | 100% | crew 51% | 2% | 50% | 22 | 0.0 | 37 |
+| scuttle_charge | 5 | 1000 | 100% | crew 47% | 1% | 49% | 23 | 0.0 | 38 |
+| scuttle_charge | 6 | 1000 | 100% | crew 53% | 0% | 46% | 27 | 0.0 | 43 |
+| the_passenger | 3 | 1000 | 100% | crew 38% | 6% | 57% | 15 | 1.3 | 31 |
+| the_passenger | 4 | 1000 | 100% | crew 42% | 3% | 53% | 20 | 1.9 | 35 |
+| the_passenger | 5 | 1000 | 100% | crew 57% | 1% | 52% | 20 | 2.2 | 36 |
+| the_passenger | 6 | 1000 | 100% | crew 59% | 1% | 49% | 24 | 2.6 | 39 |
+| tiller_says_no | 3 | 1000 | 100% | crew 51% | 48% | 53% | 23 | 0.7 | 34 |
+| tiller_says_no | 4 | 1000 | 100% | crew 51% | 49% | 46% | 30 | 1.2 | 42 |
+| tiller_says_no | 5 | 1000 | 100% | crew 69% | 31% | 44% | 30 | 1.4 | 45 |
+| tiller_says_no | 6 | 1000 | 100% | crew 51% | 49% | 37% | 44 | 2.2 | 55 |
+| vent_cycle | 3 | 1000 | 100% | survive 67% | 0% | 59% | 15 | 1.0 | 30 |
+| vent_cycle | 4 | 1000 | 100% | survive 75% | 0% | 55% | 18 | 1.0 | 33 |
+| vent_cycle | 5 | 1000 | 100% | survive 80% | 0% | 53% | 20 | 1.0 | 36 |
+| vent_cycle | 6 | 1000 | 100% | survive 83% | 0% | 51% | 23 | 1.0 | 38 |
 
 ## What was tuned in M7
 
-These are content numbers, plus two levers the content reads. Each "before" is the first 300-game run.
+These are content numbers, plus two levers the content reads. Each "before" is that scenario's first 300-game run.
 
 - **Company Asset:**
   - The transmit target is one lower with three aboard (`easierAtThree`).
@@ -99,10 +101,27 @@ These are content numbers, plus two levers the content reads. Each "before" is t
   - Search reach and bot fixes:
     - A search sweeps the compartment and its neighbours.
     - The crew bots stay in company: whoever is alone is who can plant.
-    - The kit is the target plus one spare, so at 3 players the saboteur can still win.
+    - The kit is the target plus one spare.
   - Then: five charges needed with 3–4 aboard, four with 5–6.
   - Before: the crew won 0–6%.
-- **Vent Cycle, Hull Rot, The Last Clean Sample:** untouched. Their first runs met the targets that apply, or see below.
+- **Tiller Says No:**
+  - The vent save is 3+ (was 4+). Lethal vents (below) had dropped the crew to 35–51%.
+
+## The owner's decisions (2026-11-18), and what they did
+
+1. **A second way to win for each holding side**:
+   - One of Us Isn't: the mimic strikes, and wins when one crew member is left.
+   - Tiller Says No and Captain on Deck: vents kill someone already hurt who fails the save.
+   - Captain on Deck: the captain also wins when one crew member is left.
+   - Scuttle Charge: the crew win once the saboteur can't reach the target.
+   - Cold Sleep and Hull Rot already had one.
+
+   Effect on the share decided by the round limit:
+   - **Scuttle Charge fell from 30–54% to 0–2%.** Its crew now win by finding and disarming charges.
+   - **One of Us Isn't went from 26–58% to 27–44%, and Captain on Deck from 26–51% to 28–47%.** The new paths fire only sometimes: striking is public, and deaths stay rare.
+   - **Tiller Says No rose, from 16–42% to 31–49%.** Lethal vents thin the crew, and fewer hands pull fewer banks before time runs out. It's still a race against Tiller, now with real danger in it.
+2. **Vent Cycle's suits are scattered,** each at least three steps from the Airlock. **Survival is unchanged at (n − 1)/n.** The bots still fetch a suit in time, whatever the cycle (two rounds or three) or the distance (three steps or four). With one suit fewer than the players, exactly one seat dies. That's the scenario's design, not a number: who goes without. A race needs fewer suits or a hazard in the way. That's a design change to make only if the game night finds it flat.
+3. **The Breach threshold is 7.** A game gains about 3–5 minutes, and 13 of 48 rows now estimate 45–60 minutes (was 12). The cost is Breach timing: ten rows now fall outside the 35–55% target. Nine fire late (up to 68%): Salvage Rights at every count, and the 3-player rows of four more. Company Asset at 6 players fires early (32%). Most games still estimate 30–45 minutes, so the length lever is in the endgames, not Explore. People play slower than bots, so the game night should settle it.
 
 ## What was tuned in M3
 
@@ -118,25 +137,22 @@ The first pass (300 games each, before tuning) is at the end. Changes, all in th
 
 | Target | Holds for | Doesn't hold for |
 |---|---|---|
-| Crew wins 40–60% | Company Asset at every count; Captain on Deck at 3–5; The Passenger and Scuttle Charge at 4–6; Cold Sleep at 4–5; One of Us Isn't at 3–4; Hull Rot at 4; Tiller at 3 | 3 players in most scenarios (Cold Sleep crew 26%, Scuttle Charge 30%, The Passenger 33%, Hull Rot 35%). Captain on Deck at 6 (74%); Hull Rot at 5–6 (76–84%); One of Us Isn't at 5–6; Tiller at 4–6 |
-| Free-for-all turn position ≤ 1.3× fair | Salvage Rights (1.15–1.30×) and The Last Clean Sample (1.07–1.12×) at every count | — |
-| Round limit decides < 10% | The Passenger, Salvage Rights, The Last Clean Sample, Decaying Orbit, Vent Cycle; Hull Rot at 6 | Every scenario whose other side wins at the limit by design: see below |
-| Breach at 35–55% of turns | Most rows | Salvage Rights at 3–5 players and the shortest endgames (their endgames end fast) |
-| Median game 45–60 minutes | 12 of 48 rows | 34 rows estimate 24–44 minutes (see below); two run over: Scuttle Charge (64) and Company Asset (68) at 6 players |
+| Crew wins 40–60% | Company Asset at 4–6; Captain on Deck at 3–5; Cold Sleep at 4–5; Hull Rot at 4; One of Us Isn't at 3–4; Scuttle Charge, The Passenger at 4–6; Tiller at 3, 4 and 6 | 3 players in five scenarios (Cold Sleep 25%, Scuttle Charge 32%, Hull Rot 34%, The Passenger 38%; Company Asset 63%). Captain on Deck at 6 (72%); Cold Sleep at 6 (63%); Hull Rot at 5–6 (77–83%); One of Us Isn't at 5–6 (69–73%); Tiller at 5 (69%) |
+| Free-for-all turn position ≤ 1.3× fair | Salvage Rights (1.18–1.23×) and The Last Clean Sample (1.04–1.28×) at every count | — |
+| Round limit decides < 10% | The Passenger, Salvage Rights, The Last Clean Sample, Decaying Orbit, Vent Cycle, Scuttle Charge | Captain on Deck, Cold Sleep, One of Us Isn't and Tiller (27–58%); Company Asset (10–30%); Hull Rot (12–32%): see below |
+| Breach at 35–55% of turns | 38 of 48 rows | 10 rows: Salvage Rights at every count; Company Asset, The Last Clean Sample, Scuttle Charge, The Passenger and Vent Cycle at 3 (56–59%); Company Asset at 6 (32%) |
+| Median game 45–60 minutes | 13 of 48 rows | 34 rows estimate 26–44 minutes; Company Asset at 6 runs 66 |
 
 ## Structural findings
 
-**1. The round limit is a side's win condition in six scenarios.** In One of Us Isn't and Tiller Says No (owner's decision, below), Captain on Deck, Cold Sleep and Scuttle Charge, one side wins by holding out. Hull Rot's ship wins the same way when the rot doesn't reach the Airlock. The plan approved each of these, and the limit is their pressure. So the "under 10% decided by the limit" target can't hold for them at any balanced win rate. Scuttle Charge's crew win *only* at the limit, which mirrors One of Us Isn't. The same decision should cover all six: the target doesn't apply where the limit is a win condition.
+**1. The round limit still decides most games in four scenarios,** after the second ways to win: Captain on Deck, Cold Sleep, One of Us Isn't and Tiller Says No. The new paths fire, but the bots rarely press them. In One of Us Isn't, striking unmasks the mimic. In Cold Sleep, the waker's overrun is real but the crew's clearing is slow. People may press harder than bots, so the game night should judge whether these play as races with real danger. If they still drift to the limit, the next lever is per scenario. Raise the hazard rate:
+- Tiller vents two compartments late in the game;
+- the waker wakes faster near the limit;
+- the captain gains Authority faster.
 
-**2. Three players is a thin crew.** At 3 players, several scenarios fall below 40% (Cold Sleep, Scuttle Charge, The Passenger, Hull Rot). With three seats the "crew" is two people against one opponent and the ship. Each scenario now has a 3-player lever in content. Pushing them further would trade away the 4–6 player rows, so I'd rather see a 3-player playtest first.
+**2. Three players is a thin crew.** At 3 players, five scenarios sit outside 40–60%: four low (Cold Sleep 25%, Scuttle Charge 32%, Hull Rot 34%, The Passenger 38%) and Company Asset high (63%). With three seats, the "crew" is two people against one opponent and the ship. Each scenario has a 3-player content lever, but pushing them further trades away the 4–6 player rows, so a 3-player playtest should come first.
 
-**3. Vent Cycle's race is thin.** Survival is exactly (n − 1)/n: the seat without a suit dies, and everyone else always escapes. If the Suit Lockers aren't placed, the suits fall back to the Docking Ring, which sits next to the Airlock, so getting out costs almost nothing. It meets the targets that apply (the round limit decides 0%). Whether it plays as a race needs a decision: scatter the suits on placed compartments far from the Airlock, or shorten the cycle (a one-round cycle gives 38–48% survival, but short games). **Owner's call.**
-
-**4. Games run short,** by the length estimate: 34 of 48 rows estimate under 45 minutes against a 45–60-minute target. Spec §7.3 measures the *whole game*, and most scenarios already run 20–40 endgame turns. So the lever is the **Explore phase**: the Breach fires early (often at 35–45% of turns) and Explore turns are cheap. **Proposed, not applied:**
-- raise the Breach threshold from 6 to 7, which lengthens Explore by roughly a round; or
-- add a tile per deck.
-
-Either moves every scenario at once, and the Breach-timing target (35–55%) bounds how far. Bots also play faster than people, so this is the number most likely to move in a playtest. **Owner's call:** apply one now, or wait for the first game night.
+**3. More hands make some scenarios easy:** Hull Rot reaches 83% at 6 players, and Captain on Deck 72%. A spread or Authority that scales with the players is the obvious next lever if a playtest agrees.
 
 ### M3's finding: One of Us Isn't and Tiller Says No can only be lost at the round limit
 
@@ -145,12 +161,11 @@ In **One of Us Isn't** and **Tiller Says No** the crew almost never lose any oth
 1. **Tiller escalates:** each round it vents one more compartment, or a vent that catches someone already hurt kills.
 2. **The mimic strikes:** its bot attacks a crew member it finds alone (the scenario already allows it), and a crew reduced to one survivor loses.
 
-**Decision (owner, 2026-11-17): keep them as designed.** In both scenarios the round limit is the pressure: the crew finish in time or lose. Neither option is taken. The "under 10% decided by the limit" target doesn't apply to these two. Revisit after the first game night if they play as a race with no opponent.
+**Decision (owner, 2026-11-17): keep them as designed.** *Superseded on 2026-11-18: after the M7 run, the owner chose a second way to win for every holding side (see "The owner's decisions" above). Options 1 and 2 were taken in that form: lethal vents, and the mimic striking.* In both scenarios the round limit is the pressure: the crew finish in time or lose. Neither option is taken. The "under 10% decided by the limit" target doesn't apply to these two. Revisit after the first game night if they play as a race with no opponent.
 
 ## Other findings
 
-- **The Last Clean Sample** is the fairest free-for-all: the top turn position takes 1.07–1.12× its fair share. Someone is cured in 52–77% of games. The rest end with everyone dead, which is the scenario's threat working.
-- **Hull Rot gets easier with more hands:** 35% at 3 players, 84% at 6. Each extra crew member burns rot and holds the Airlock. A spread that scales with the players would flatten it. It's the obvious next lever if a playtest agrees.
+- **The Last Clean Sample** is a fair free-for-all: the top turn position takes 1.04–1.28× its fair share. Someone is cured in 53–75% of games. The rest end with everyone dead, which is the scenario's threat working.
 - **Hidden-traitor bots only have to be adequate** (spec §6), and the simulator shows why that matters. Until the crew bots stayed in company, Scuttle Charge's saboteur won almost every game. People do that naturally; the numbers here assume they will.
 - **Decaying Orbit has no win-rate target** (every seat is for itself). Survival of 65–83% leaves the escape-or-help choice with real stakes.
 
