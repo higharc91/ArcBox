@@ -88,7 +88,18 @@ internal sealed partial class Resolver
         {
             State = scenario.On(Pack, State, e, Events);
         }
-        // Scenarios are pure and can't kill: a hazard lowers a trait, and the death is dealt here.
+        // Scenarios are pure and can't kill: a hazard lowers a trait, and the death is dealt here. The deaths dealt here are
+        // news to the scenario too (M7: a carried token must drop where its carrier fell, whatever killed them), so they're
+        // passed on; then one more check, for anything the scenario's reaction lowered.
+        var dealt = Events.Count;
+        foreach (var crew in State.Crew.ToList())
+        {
+            CheckDeath(crew.Seat);
+        }
+        foreach (var e in Events.Skip(dealt).ToList())
+        {
+            State = scenario.On(Pack, State, e, Events);
+        }
         foreach (var crew in State.Crew.ToList())
         {
             CheckDeath(crew.Seat);
