@@ -7,7 +7,8 @@
     "decaying_orbit",
     "salvage_rights",
     "company_asset",
-    "captain_on_deck"
+    "captain_on_deck",
+    "cold_sleep"
   ],
   "table": [
     {

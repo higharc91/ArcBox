@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "cold_sleep",
+  "title": "Cold Sleep",
+  "announcement": "Cryogenic revival sequence initiated. I did not initiate it. The sleepers are waking, one pod for every relay still feeding the Cryo Bay, and they are walking toward the Airlock. Reroute the power relays, and put back to sleep whoever is already up.",
+  "roundLimit": 12,
+  "roles": [
+    {
+      "id": "waker",
+      "side": "waker",
+      "name": "The Waker",
+      "briefing": "The Anomaly showed you the Cryo Bay, and you opened it. The sleepers answer to you now, and they want out. Each round, one more wakes for every power relay still feeding the bay. Send them to the Airlock: when enough of them stand there at a round's end, the ship is theirs. The crew will try to reroute the relays and knock the sleepers down. Stop them, or simply outlast them.",
+      "objectives": [
+        "Fill the Airlock with sleepers at a round's end (one fewer than the players, at least two), or hold out until the round limit."
+      ]
+    },
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "Someone opened the Cryo Bay, and the sleepers are walking for the Airlock. Each round, another wakes for every power relay still feeding the bay. Reroute every relay (Tech 4+). Once the power is cut, any sleeper still stunned at a round's end sinks back into the cold. Cut the power and leave none awake to win. Keep enough of you at the Airlock to hold it.",
+      "objectives": [
+        "Reroute every relay (Tech 4+), then leave no sleeper awake at a round's end."
+      ]
+    }
+  ],
+  "numbers": {
+    "relays": 3,
+    "reroute": 4,
+    "startSleepers": 1,
+    "maxAwake": 6,
+    "sleeperBrawn": 3,
+    "sleeperAgility": 2,
+    "sleeperNerve": 1
+  },
+  "tokens": {
+    "sleeper": {
+      "label": "Z",
+      "colour": "#9fd8ff",
+      "name": "Sleeper",
+      "monster": true
+    },
+    "relay": {
+      "label": "P",
+      "colour": "#ffd447",
+      "name": "Power relay",
+      "states": {
+        "rerouted": {
+          "label": "✓",
+          "colour": "#5fe08a"
+        }
+      }
+    }
+  },
+  "counters": {
+    "overrun": null,
+    "inAirlock": "Sleepers in the Airlock"
+  }
+}

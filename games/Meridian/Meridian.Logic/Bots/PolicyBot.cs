@@ -137,4 +137,19 @@ public static class BotMoves
         }
         return null;
     }
+
+    /// <summary>
+    /// For a seat commanding monsters: move one of them closer to <paramref name="goal"/> (Cold Sleep's sleepers to the
+    /// Airlock), the one with farthest to go first. Monsters already there stay. Null when none can get closer.
+    /// </summary>
+    public static Command? MonstersTo(BotContext ctx, CompartmentId goal)
+    {
+        var steps = Primitives.Steps(ctx.State, goal);
+        int Away(CompartmentId at) => steps.TryGetValue(at, out var s) ? s : int.MaxValue;
+        return ctx.Legal.OfType<MonsterMove>()
+            .Select(m => (Move: m, From: Away(ctx.Board.Tokens.First(t => t.Id == m.Monster).At!.Value), To: Away(m.To)))
+            .Where(x => x.To < x.From)
+            .OrderByDescending(x => x.From).ThenBy(x => x.To).ThenBy(x => x.Move.Monster, StringComparer.Ordinal).ThenBy(x => x.Move.To)
+            .Select(x => (Command?)x.Move).FirstOrDefault();
+    }
 }
