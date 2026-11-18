@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "vent_cycle",
+  "title": "Vent Cycle",
+  "announcement": "Emergency pressure release scheduled. Engineering vents first, then Habitat, then Command, every few rounds. There are pressure suits for all but one of you. Suit up and cycle out through the Airlock. I will not be able to hold the last deck.",
+  "roundLimit": 12,
+  "roles": [
+    {
+      "id": "survivor",
+      "side": "survivor",
+      "name": "Survivor",
+      "briefing": "The Meridian is venting its decks one at a time: Engineering, then Habitat, then Command, every three rounds. Anyone still aboard when Command goes is lost. There are suits for all but one of you, waiting in the Suit Lockers or the Docking Ring. Suit up and cycle out through the Airlock. On a vented deck, ending a turn without a suit hurts. A suit can be taken in a fight.",
+      "objectives": [
+        "Get a suit and cycle out through the Airlock before the last deck vents."
+      ]
+    }
+  ],
+  "numbers": {
+    "cycle": 3
+  },
+  "tokens": {
+    "suit": {
+      "label": "S",
+      "colour": "#e0e0e0",
+      "name": "Pressure suit"
+    }
+  },
+  "counters": {
+    "vented": "Decks vented",
+    "nextVent": "Rounds to the next vent",
+    "escaped": "Escaped"
+  }
+}

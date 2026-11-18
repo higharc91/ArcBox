@@ -10,7 +10,8 @@
     "captain_on_deck",
     "cold_sleep",
     "scuttle_charge",
-    "hull_rot"
+    "hull_rot",
+    "vent_cycle"
   ],
   "table": [
     {
