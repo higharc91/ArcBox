@@ -1,0 +1,44 @@
+{
+  "checkedSource": "c2831f1e903d79c598580ff2c817428bdc71e03b",
+  "sourceTrees": {
+    "tools/meridian-assets": "17f409fc16e231e43197cca25f674e5a8ab8b38c",
+    "content/meridian/base/ui": "1327f98c80fa5e3f57f65b8feb6506ea8759d44d",
+    "src": "908ba9779af2bc0762688d531c7ad56bfb2dc288",
+    "games": "b7e310520927d7d92f3c8be58da4c7641b271ee5",
+    "web/play": "bdfe43cb4adaa9e62d7270afcb6d6a21b65cb737",
+    "tools/check-all.sh": "d25bc8e82d2dff347aaf7f013d3098aef74a8e69"
+  },
+  "command": "bash tools/check-all.sh --full",
+  "launcher": "docs/superpowers/reports/art-merge-validation/run-full-serial.sh",
+  "testModulesRunSerially": true,
+  "assertionsAndTimingBudgetsUnchanged": true,
+  "groupsPassed": 5,
+  "dotnet": 7743,
+  "phone": 601,
+  "node": 24,
+  "python": 150,
+  "pythonGroups": [
+    61,
+    9,
+    54,
+    26
+  ],
+  "total": 8518,
+  "skipped": 0,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "uiFocusedTestsIncluded": 8,
+  "browserWidths": [
+    320,
+    390,
+    1920
+  ],
+  "nativeReviewCaptures": 5,
+  "actualRenderedCornersVerified": 164,
+  "gameCheckerHead": "3b272cb6c0f3b7cb3a53efa35a0d34e9f4dd330d",
+  "uiCoverage": "13/13",
+  "humanOrPhysicalTvTest": false,
+  "fullLogSha256": "f91c7dce4d6f5177ea38049b26c718b14395fd6cd3521f3aca355c1dd80bb6d2",
+  "issue335": "Open for requested owner visual OK; review posted in issue comment 6981212105",
+  "integration": "Full mock layouts and supplemental theme selectors require game-consumer adoption; TV-lobby hook is #405"
+}
