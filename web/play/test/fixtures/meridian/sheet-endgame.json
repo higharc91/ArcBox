@@ -4,21 +4,21 @@
   "screen": "sheet",
   "data": {
     "me": {
-      "id": "tobe_raske",
-      "name": "Tobe Raske",
-      "role": "Rigger",
+      "id": "ines_okafor",
+      "name": "Ines Okafor",
+      "role": "Salvage Chief",
       "tracks": [
         {
           "trait": "brawn",
           "values": [
+            1,
+            1,
+            2,
             3,
             4,
             4,
             5,
-            5,
-            6,
-            7,
-            7
+            6
           ],
           "step": 4
         },
@@ -40,27 +40,27 @@
           "trait": "tech",
           "values": [
             1,
-            1,
             2,
+            2,
+            3,
             3,
             4,
             5,
-            5,
-            6
+            5
           ],
-          "step": 4
+          "step": 5
         },
         {
           "trait": "nerve",
           "values": [
-            1,
-            1,
-            2,
             3,
             4,
             4,
             5,
-            6
+            5,
+            6,
+            7,
+            7
           ],
           "step": 4
         }
@@ -68,30 +68,22 @@
       "taken": false,
       "mine": true
     },
-    "at": "c27",
+    "at": "c39",
     "items": [
       {
-        "id": "warm_egg",
+        "id": "crowbar",
+        "kind": "salvage",
+        "title": "Crowbar",
+        "text": "Heavy, honest and older than the ship.",
+        "use": null,
+        "usable": false
+      },
+      {
+        "id": "stopped_watch",
         "kind": "anomaly",
-        "title": "Warm Egg",
-        "text": "Pale, leathery, the size of a fist. Sometimes it kicks.",
-        "use": null,
-        "usable": false
-      },
-      {
-        "id": "med_kit",
-        "kind": "salvage",
-        "title": "Med Kit",
-        "text": "Gauze, sealant, and one good painkiller.",
-        "use": "Patch up",
-        "usable": false
-      },
-      {
-        "id": "mag_boots",
-        "kind": "salvage",
-        "title": "Mag Boots",
-        "text": "They hold you to the deck when the deck stops holding you.",
-        "use": null,
+        "title": "Stopped Watch",
+        "text": "Every hand points straight up.",
+        "use": "Wind it",
         "usable": false
       }
     ],
@@ -618,36 +610,170 @@
             "s"
           ],
           "symbol": "anomaly"
+        },
+        {
+          "id": "c33",
+          "tile": "service_corridor",
+          "name": "Service Corridor",
+          "at": [
+            "habitat",
+            -2,
+            3
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ]
+        },
+        {
+          "id": "c34",
+          "tile": "engine_room",
+          "name": "Engine Room",
+          "at": [
+            "engineering",
+            0,
+            -1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c35",
+          "tile": "comms_array",
+          "name": "Comms Array",
+          "at": [
+            "command",
+            1,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c36",
+          "tile": "coolant_pumps",
+          "name": "Coolant Pumps",
+          "at": [
+            "engineering",
+            1,
+            -1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "sealed": [
+            "s"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c37",
+          "tile": "navigation",
+          "name": "Navigation",
+          "at": [
+            "command",
+            1,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c38",
+          "tile": "chiefs_office",
+          "name": "Chief Engineer\u0027s Office",
+          "at": [
+            "engineering",
+            1,
+            0
+          ],
+          "rotation": 1,
+          "hatches": [
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c39",
+          "tile": "reactor_core",
+          "name": "Reactor Core",
+          "at": [
+            "engineering",
+            -2,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c40",
+          "tile": "power_relay",
+          "name": "Power Relay",
+          "at": [
+            "engineering",
+            2,
+            -1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ],
+          "symbol": "anomaly"
         }
       ],
       "crew": [
         {
           "id": "p1",
           "name": "Player1",
-          "at": "c26",
+          "at": "c39",
           "colour": 0
         },
         {
           "id": "p2",
           "name": "Player2",
-          "at": "c27",
+          "at": "c40",
           "colour": 1
         },
         {
           "id": "p3",
           "name": "Player3",
-          "at": "c3",
+          "at": "c37",
           "colour": 2
         },
         {
           "id": "p4",
           "name": "Player4",
-          "at": "c32",
+          "at": "c6",
           "colour": 3
         }
       ]
     },
-    "active": "Player1",
+    "active": "Player3",
     "waiting": null,
     "briefing": {
       "role": "crew",

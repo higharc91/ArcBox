@@ -72,22 +72,28 @@ public sealed class ResumeTests
     [Fact]
     public void A_seat_a_bot_took_over_is_taken_back_by_its_phone()
     {
-        // Review focus 7.
+        // Review focus 7. The seat left offline is the one whose turn it is on the restore, so a bot must take it over
+        // whatever course the game takes (a later seat's turn may never come).
         var (_, snapshot) = PlayAndSnapshot(ThePassenger.Id, 4, g => g.Session.Phase == SessionPhase.Endgame && g.Session.Queue.IsEmpty);
         var game = Harness.Restored(snapshot, 4, seed: 2, ThePassenger.Id);
-        game.H.SetConnected(0, true);
-        game.H.SetConnected(1, true);
-        game.H.SetConnected(2, true);
-        game.Advance(60);                                               // seat 3 never came back
-        Assert.False(game.Session.Resuming);
-        for (var i = 0; i < 400 && !game.Session.Seats[3].Auto; i++)
+        var away = game.Actor;
+        for (var p = 0; p < 4; p++)
         {
-            game.PlayUntil(() => game.Session.Seats[3].Auto, steps: 50);
+            if (p != away)
+            {
+                game.H.SetConnected(p, true);
+            }
+        }
+        game.Advance(60);                                               // that seat never came back
+        Assert.False(game.Session.Resuming);
+        for (var i = 0; i < 400 && !game.Session.Seats[away].Auto && game.Session.Phase != SessionPhase.Over; i++)
+        {
+            game.PlayUntil(() => game.Session.Seats[away].Auto, steps: 50);
             game.Advance(5);
         }
-        Assert.True(game.Session.Seats[3].Auto);
-        game.H.SetConnected(3, true);
-        Assert.False(game.Session.Seats[3].Auto);
+        Assert.True(game.Session.Seats[away].Auto);
+        game.H.SetConnected(away, true);
+        Assert.False(game.Session.Seats[away].Auto);
     }
 
     [Fact]

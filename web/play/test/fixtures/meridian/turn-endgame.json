@@ -526,19 +526,153 @@
             "s"
           ],
           "symbol": "anomaly"
+        },
+        {
+          "id": "c33",
+          "tile": "service_corridor",
+          "name": "Service Corridor",
+          "at": [
+            "habitat",
+            -2,
+            3
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ]
+        },
+        {
+          "id": "c34",
+          "tile": "engine_room",
+          "name": "Engine Room",
+          "at": [
+            "engineering",
+            0,
+            -1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c35",
+          "tile": "comms_array",
+          "name": "Comms Array",
+          "at": [
+            "command",
+            1,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c36",
+          "tile": "coolant_pumps",
+          "name": "Coolant Pumps",
+          "at": [
+            "engineering",
+            1,
+            -1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "sealed": [
+            "s"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c37",
+          "tile": "navigation",
+          "name": "Navigation",
+          "at": [
+            "command",
+            1,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c38",
+          "tile": "chiefs_office",
+          "name": "Chief Engineer\u0027s Office",
+          "at": [
+            "engineering",
+            1,
+            0
+          ],
+          "rotation": 1,
+          "hatches": [
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c39",
+          "tile": "reactor_core",
+          "name": "Reactor Core",
+          "at": [
+            "engineering",
+            -2,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c40",
+          "tile": "power_relay",
+          "name": "Power Relay",
+          "at": [
+            "engineering",
+            2,
+            -1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ],
+          "symbol": "anomaly"
         }
       ],
       "crew": [
         {
           "id": "p1",
           "name": "Player1",
-          "at": "c18",
+          "at": "c39",
           "colour": 0
         },
         {
           "id": "p2",
           "name": "Player2",
-          "at": "c16",
+          "at": "c40",
           "colour": 1
         },
         {
@@ -550,71 +684,14 @@
         {
           "id": "p4",
           "name": "Player4",
-          "at": "c32",
+          "at": "c6",
           "colour": 3
         }
       ]
     },
     "at": "c8",
-    "moves": 3,
-    "reach": [
-      {
-        "id": "c1",
-        "cost": 2
-      },
-      {
-        "id": "c2",
-        "cost": 1
-      },
-      {
-        "id": "c3",
-        "cost": 2
-      },
-      {
-        "id": "c4",
-        "cost": 3
-      },
-      {
-        "id": "c5",
-        "cost": 2
-      },
-      {
-        "id": "c6",
-        "cost": 2
-      },
-      {
-        "id": "c7",
-        "cost": 3
-      },
-      {
-        "id": "c9",
-        "cost": 1
-      },
-      {
-        "id": "c10",
-        "cost": 3
-      },
-      {
-        "id": "c11",
-        "cost": 3
-      },
-      {
-        "id": "c14",
-        "cost": 2
-      },
-      {
-        "id": "c16",
-        "cost": 3
-      },
-      {
-        "id": "c18",
-        "cost": 3
-      },
-      {
-        "id": "c22",
-        "cost": 3
-      }
-    ],
+    "moves": 0,
+    "reach": [],
     "opens": [],
     "items": [
       {
@@ -648,6 +725,14 @@
         "text": "Six flares. The dark is smaller with one in your hand.",
         "use": null,
         "usable": false
+      },
+      {
+        "id": "pocket_of_quiet",
+        "kind": "anomaly",
+        "title": "Pocket of Quiet",
+        "text": "A sealed bag. Inside, the alarms can\u0027t reach you.",
+        "use": "Open it",
+        "usable": true
       }
     ],
     "room": null,
@@ -669,7 +754,7 @@
             5,
             6
           ],
-          "step": 4
+          "step": 5
         },
         {
           "trait": "agility",
@@ -736,6 +821,6 @@
     }
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:04:34.0851842\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:05:44.5370357\u002B00:00",
   "header": null
 }

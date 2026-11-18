@@ -7,9 +7,9 @@
     "you": {
       "role": "mimic",
       "name": "The Mimic",
-      "briefing": "You are not one of them, but you look it. The repair points would lock you out of the ship; keep them broken. Repair nothing. When you\u0027re alone with a repaired point, undo it quietly; nobody will know until the round ends, and by then you can be elsewhere. Twice they can drag everyone to the scanner and vote. Blend in, point at someone else, and outlast them.",
+      "briefing": "You are not one of them, but you look it. The repair points would lock you out of the ship; keep them broken. Repair nothing. When you\u0027re alone with a repaired point, undo it quietly; nobody will know until the round ends, and by then you can be elsewhere. Twice they can drag everyone to the scanner and vote. Blend in, point at someone else, and outlast them. Alone with just one of them, you can strike, but a fight is seen by all. Leave only one standing and you win.",
       "objectives": [
-        "Keep the points from all being repaired until the round limit, and avoid being named."
+        "Keep the points from all being repaired until the round limit, or leave only one of them standing. Avoid being named."
       ]
     },
     "ready": false,
@@ -17,6 +17,6 @@
     "seats": 4
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:05:06.3074064\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:06:16.7592579\u002B00:00",
   "header": null
 }

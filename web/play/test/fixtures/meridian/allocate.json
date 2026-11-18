@@ -3,7 +3,7 @@
   "module": "meridian",
   "screen": "allocate",
   "data": {
-    "steps": 1,
+    "steps": 3,
     "tracks": [
       {
         "trait": "brawn",
@@ -13,7 +13,7 @@
           2,
           3,
           4,
-          5,
+          4,
           5,
           6
         ],
@@ -22,21 +22,21 @@
       {
         "trait": "agility",
         "values": [
+          1,
+          1,
+          2,
           3,
           4,
           4,
           5,
-          5,
-          6,
-          7,
-          7
+          6
         ],
         "step": 4
       }
     ],
-    "by": "Player4"
+    "by": "Player2"
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:04:12.0851842\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:05:13.5370357\u002B00:00",
   "header": null
 }

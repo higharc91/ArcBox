@@ -3,49 +3,49 @@
   "module": "meridian",
   "screen": "debrief",
   "data": {
-    "message": "The counter-agent took. The Passenger is gone.",
+    "message": "Nobody is left to stop it. The Passenger flies the Meridian home.",
     "won": true,
     "roles": [
       {
         "seat": "p1",
         "name": "Player1",
         "role": "Crew",
-        "won": true
+        "won": false
       },
       {
         "seat": "p2",
         "name": "Player2",
-        "role": "Crew",
+        "role": "The Host",
         "won": true
       },
       {
         "seat": "p3",
         "name": "Player3",
         "role": "Crew",
-        "won": true
+        "won": false
       },
       {
         "seat": "p4",
         "name": "Player4",
-        "role": "The Host",
+        "role": "Crew",
         "won": false
       }
     ],
     "awards": [
       {
-        "title": "Pathfinder: most compartments found",
-        "seat": "p4",
-        "name": "Player4"
+        "title": "Heavy hitter: most damage dealt",
+        "seat": "p2",
+        "name": "Player2"
       },
       {
-        "title": "Heavy hitter: most damage dealt",
-        "seat": "p4",
-        "name": "Player4"
+        "title": "Last one standing",
+        "seat": "p2",
+        "name": "Player2"
       }
     ],
-    "vip": true
+    "vip": false
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:06:16.4333323\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:09:32.1111095\u002B00:00",
   "header": null
 }

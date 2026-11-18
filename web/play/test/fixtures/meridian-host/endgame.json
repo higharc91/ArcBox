@@ -114,6 +114,9 @@
         "e",
         "s",
         "w"
+      ],
+      "sealed": [
+        "s"
       ]
     },
     {
@@ -268,6 +271,9 @@
         "e",
         "s",
         "w"
+      ],
+      "sealed": [
+        "s"
       ]
     },
     {
@@ -400,55 +406,345 @@
       "tile": "service_corridor",
       "at": [
         "habitat",
-        3,
-        0
+        -2,
+        3
       ],
       "rotation": 1,
       "hatches": [
         "e",
         "w"
       ]
+    },
+    {
+      "id": "c25",
+      "tile": "med_bay",
+      "at": [
+        "habitat",
+        -3,
+        3
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c26",
+      "tile": "isolation_ward",
+      "at": [
+        "habitat",
+        -4,
+        3
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c27",
+      "tile": "fuel_tanks",
+      "at": [
+        "engineering",
+        -1,
+        0
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c28",
+      "tile": "coolant_pumps",
+      "at": [
+        "engineering",
+        1,
+        0
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c29",
+      "tile": "comms_array",
+      "at": [
+        "command",
+        1,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c30",
+      "tile": "machine_shop",
+      "at": [
+        "engineering",
+        1,
+        1
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c31",
+      "tile": "engine_room",
+      "at": [
+        "engineering",
+        0,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c32",
+      "tile": "navigation",
+      "at": [
+        "command",
+        1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c33",
+      "tile": "officers_mess",
+      "at": [
+        "command",
+        -1,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c34",
+      "tile": "chart_room",
+      "at": [
+        "command",
+        -1,
+        1
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c35",
+      "tile": "crawlspace",
+      "at": [
+        "engineering",
+        0,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "c36",
+      "tile": "chiefs_office",
+      "at": [
+        "engineering",
+        0,
+        3
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c37",
+      "tile": "armory",
+      "at": [
+        "command",
+        2,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c38",
+      "tile": "vent_hub",
+      "at": [
+        "command",
+        -2,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c39",
+      "tile": "waste_reclamation",
+      "at": [
+        "engineering",
+        0,
+        -1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c40",
+      "tile": "drone_bay",
+      "at": [
+        "engineering",
+        -1,
+        -1
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n",
+        "e",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c41",
+      "tile": "cargo_hold",
+      "at": [
+        "engineering",
+        -1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "sealed": [
+        "n"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c42",
+      "tile": "observation_dome",
+      "at": [
+        "command",
+        1,
+        2
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c43",
+      "tile": "bridge",
+      "at": [
+        "command",
+        -2,
+        2
+      ],
+      "rotation": 1,
+      "hatches": [
+        "n",
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly"
     }
   ],
   "crew": [
     {
       "id": "p1",
       "name": "Player1",
-      "at": "c23",
+      "at": "c43",
       "colour": 0
     },
     {
       "id": "p2",
       "name": "Player2",
-      "at": "c9",
+      "at": "c18",
       "colour": 1
     },
     {
       "id": "p3",
       "name": "Player3",
-      "at": "c24",
+      "at": "c3",
       "colour": 2
     },
     {
       "id": "p4",
       "name": "Player4",
-      "at": "c18",
+      "at": "c4",
       "colour": 3
     }
   ],
-  "tilesLeft": 26,
-  "anomaliesDrawn": 4,
-  "round": 5,
+  "tilesLeft": 7,
+  "anomaliesDrawn": 8,
+  "round": 10,
   "now": null,
   "log": [
-    "Player3 drew Hull Groan.",
-    "Player3: You brace and ride it out.",
-    "Player4 found the Storage Closet.",
-    "Player4 drew Mag Boots.",
-    "Player1 found the Sealed Alcove.",
-    "Player1 drew Cold Coin.",
+    "Player4 found the Observation Dome.",
+    "Player4 drew Someone Was Here.",
+    "Player4: You keep moving.",
+    "Player1 used Hand Lamp.",
+    "Player1 found the Bridge.",
+    "Player1 drew Humming Shard.",
     "The Breach.",
-    "Player3 found the Service Corridor."
+    "Player2 used Adrenal Stim."
   ],
   "scenario": {
     "title": "The Passenger",
@@ -457,23 +753,23 @@
       {
         "id": "brood-1",
         "kind": "brood",
-        "at": "c23"
+        "at": "c43"
       },
       {
         "id": "brood-2",
         "kind": "brood",
-        "at": "c23"
+        "at": "c43"
       },
       {
         "id": "brood-3",
         "kind": "brood",
-        "at": "c23"
+        "at": "c43"
       }
     ],
     "counters": [
       {
         "id": "doses",
-        "value": 0
+        "value": 1
       },
       {
         "id": "injected",

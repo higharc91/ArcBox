@@ -130,7 +130,9 @@ describe("meridian phone screens", () => {
 
   it("shows what the Breach roll needs", () => {
     show("roll-breach");
-    expect(screen.getByText(/6 or more/)).toBeTruthy();
+    // The threshold comes from the rules (7 since the M7 balance report), so read it from the fixture.
+    const needed = (view("roll-breach").data as { needed: number }).needed;
+    expect(screen.getByText(new RegExp(`${needed} or more`))).toBeTruthy();
   });
 
   it("answers a trade", () => {
@@ -188,8 +190,9 @@ describe("meridian phone screens", () => {
 
   it("lends a die as an echo", () => {
     const send = show("echo");
+    const first = (view("echo").data as { targets: { id: string }[] }).targets[0].id;
     fireEvent.click(screen.getAllByRole("button", { name: /^Lend / })[0]);
-    expect(send).toHaveBeenCalledWith({ action: "lend", data: { to: "p1" } });
+    expect(send).toHaveBeenCalledWith({ action: "lend", data: { to: first } });
   });
 
   it("commands monsters on the controller's turn", () => {
@@ -207,9 +210,16 @@ describe("meridian phone screens", () => {
   });
 
   it("lets only the VIP continue from the debrief", () => {
-    const send = show("debrief-won");
+    // Whichever Debrief fixture is the VIP's view (the bot game decides who won), and one that isn't.
+    const vip = ["debrief-won", "debrief-lost"].find((n) => (view(n).data as { vip: boolean }).vip)!;
+    const other = ["debrief-won", "debrief-lost"].find((n) => n !== vip)!;
+    expect((view(other).data as { vip: boolean }).vip).toBe(false);
+    const send = show(vip);
     fireEvent.click(screen.getByRole("button", { name: "Continue" }));
     expect(send).toHaveBeenCalledWith({ action: "continue" });
+    cleanup();
+    show(other);
+    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
   });
 
   it("keeps the briefing on the sheet in the endgame", () => {

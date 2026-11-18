@@ -526,121 +526,262 @@
             "s"
           ],
           "symbol": "anomaly"
+        },
+        {
+          "id": "c33",
+          "tile": "service_corridor",
+          "name": "Service Corridor",
+          "at": [
+            "habitat",
+            -2,
+            3
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ]
+        },
+        {
+          "id": "c34",
+          "tile": "engine_room",
+          "name": "Engine Room",
+          "at": [
+            "engineering",
+            0,
+            -1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c35",
+          "tile": "comms_array",
+          "name": "Comms Array",
+          "at": [
+            "command",
+            1,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c36",
+          "tile": "coolant_pumps",
+          "name": "Coolant Pumps",
+          "at": [
+            "engineering",
+            1,
+            -1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ],
+          "sealed": [
+            "s"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c37",
+          "tile": "navigation",
+          "name": "Navigation",
+          "at": [
+            "command",
+            1,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c38",
+          "tile": "chiefs_office",
+          "name": "Chief Engineer\u0027s Office",
+          "at": [
+            "engineering",
+            1,
+            0
+          ],
+          "rotation": 1,
+          "hatches": [
+            "w"
+          ],
+          "symbol": "incident"
+        },
+        {
+          "id": "c39",
+          "tile": "reactor_core",
+          "name": "Reactor Core",
+          "at": [
+            "engineering",
+            -2,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ],
+          "symbol": "anomaly"
+        },
+        {
+          "id": "c40",
+          "tile": "power_relay",
+          "name": "Power Relay",
+          "at": [
+            "engineering",
+            2,
+            -1
+          ],
+          "rotation": 1,
+          "hatches": [
+            "e",
+            "w"
+          ],
+          "symbol": "anomaly"
         }
       ],
       "crew": [
         {
           "id": "p1",
           "name": "Player1",
-          "at": "c18",
+          "at": "c40",
           "colour": 0
         },
         {
           "id": "p2",
           "name": "Player2",
-          "at": "c16",
+          "at": "c40",
           "colour": 1
         },
         {
           "id": "p3",
           "name": "Player3",
-          "at": "c16",
+          "at": "c2",
           "colour": 2
         },
         {
           "id": "p4",
           "name": "Player4",
-          "at": "c32",
+          "at": "c10",
           "colour": 3
         }
       ]
     },
-    "at": "c32",
+    "at": "c40",
     "moves": 3,
     "reach": [
       {
-        "id": "c20",
+        "id": "c5",
         "cost": 3
       },
       {
-        "id": "c30",
+        "id": "c27",
+        "cost": 3
+      },
+      {
+        "id": "c34",
         "cost": 2
       },
       {
-        "id": "c31",
+        "id": "c36",
         "cost": 1
       }
     ],
     "opens": [
       {
-        "at": "c32",
-        "side": "n"
-      },
-      {
-        "at": "c32",
-        "side": "s"
+        "at": "c40",
+        "side": "e"
       }
     ],
     "items": [
       {
-        "id": "humming_shard",
+        "id": "warm_egg",
         "kind": "anomaly",
-        "title": "Humming Shard",
-        "text": "It\u0027s warm, and it hums when you think about machines.",
+        "title": "Warm Egg",
+        "text": "Pale, leathery, the size of a fist. Sometimes it kicks.",
         "use": null,
         "usable": false
       },
       {
-        "id": "childs_drawing",
-        "kind": "anomaly",
-        "title": "Child\u0027s Drawing",
-        "text": "Crayon: the ship, and a figure waving from inside. There were no children aboard.",
-        "use": null,
-        "usable": false
-      },
-      {
-        "id": "singing_wire",
-        "kind": "anomaly",
-        "title": "Singing Wire",
-        "text": "A coil of wire that sings a note just before you fall.",
-        "use": null,
-        "usable": false
-      },
-      {
-        "id": "diagnostic_slate",
+        "id": "med_kit",
         "kind": "salvage",
-        "title": "Diagnostic Slate",
-        "text": "Talks to any system that will still talk.",
+        "title": "Med Kit",
+        "text": "Gauze, sealant, and one good painkiller.",
+        "use": "Patch up",
+        "usable": true
+      },
+      {
+        "id": "mag_boots",
+        "kind": "salvage",
+        "title": "Mag Boots",
+        "text": "They hold you to the deck when the deck stops holding you.",
         "use": null,
         "usable": false
       },
       {
-        "id": "bone_key",
+        "id": "unknown_chart",
         "kind": "anomaly",
-        "title": "Bone Key",
-        "text": "It fits no lock you\u0027ve seen. It pulls towards the reactor.",
-        "use": "Follow its pull",
-        "usable": true
+        "title": "Unknown Star Chart",
+        "text": "None of these stars exist. Looking at it makes you calm.",
+        "use": null,
+        "usable": false
       }
     ],
     "room": null,
-    "neighbours": [],
+    "neighbours": [
+      {
+        "seat": "p1",
+        "name": "Player1",
+        "items": [
+          {
+            "id": "crowbar",
+            "kind": "salvage",
+            "title": "Crowbar",
+            "text": "Heavy, honest and older than the ship.",
+            "use": null,
+            "usable": false
+          }
+        ]
+      }
+    ],
     "me": {
-      "id": "anselm_varga",
-      "name": "Dr. Anselm Varga",
-      "role": "Medic",
+      "id": "tobe_raske",
+      "name": "Tobe Raske",
+      "role": "Rigger",
       "tracks": [
         {
           "trait": "brawn",
           "values": [
-            1,
-            1,
-            1,
-            2,
             3,
             4,
             4,
-            5
+            5,
+            5,
+            6,
+            7,
+            7
           ],
           "step": 4
         },
@@ -661,13 +802,13 @@
         {
           "trait": "tech",
           "values": [
+            1,
+            1,
             2,
             3,
-            3,
-            4,
             4,
             5,
-            6,
+            5,
             6
           ],
           "step": 4
@@ -675,14 +816,14 @@
         {
           "trait": "nerve",
           "values": [
+            1,
+            1,
             2,
             3,
             4,
+            4,
             5,
-            6,
-            6,
-            7,
-            8
+            6
           ],
           "step": 4
         }
@@ -690,41 +831,64 @@
       "taken": false,
       "mine": true
     },
-    "attacks": [],
+    "attacks": [
+      {
+        "id": "p1",
+        "name": "Player1"
+      }
+    ],
     "actions": [],
     "monsters": [
       {
         "id": "brood-1",
         "kind": "brood",
-        "at": "c32",
+        "at": "c40",
         "moves": [
-          "c20",
-          "c30",
-          "c31"
+          "c5",
+          "c27",
+          "c34",
+          "c36"
         ],
-        "targets": []
+        "targets": [
+          {
+            "id": "p1",
+            "name": "Player1"
+          }
+        ]
       },
       {
         "id": "brood-2",
         "kind": "brood",
-        "at": "c32",
+        "at": "c40",
         "moves": [
-          "c20",
-          "c30",
-          "c31"
+          "c5",
+          "c27",
+          "c34",
+          "c36"
         ],
-        "targets": []
+        "targets": [
+          {
+            "id": "p1",
+            "name": "Player1"
+          }
+        ]
       },
       {
         "id": "brood-3",
         "kind": "brood",
-        "at": "c32",
+        "at": "c40",
         "moves": [
-          "c20",
-          "c30",
-          "c31"
+          "c5",
+          "c27",
+          "c34",
+          "c36"
         ],
-        "targets": []
+        "targets": [
+          {
+            "id": "p1",
+            "name": "Player1"
+          }
+        ]
       }
     ],
     "briefing": {
@@ -737,6 +901,6 @@
     }
   },
   "viewId": "v1",
-  "deadlineUtc": "2026-01-01T00:04:35.5851842\u002B00:00",
+  "deadlineUtc": "2026-01-01T00:05:50.5370357\u002B00:00",
   "header": null
 }
