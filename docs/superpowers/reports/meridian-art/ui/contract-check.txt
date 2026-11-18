@@ -1,0 +1,10 @@
+tiles: 48 of 48 with art
+hatches: 4 of 4 with art
+crew: 8 of 8 with art
+portraits: 8 of 8 with art
+cards: 3 of 3 with art
+icons: 23 of 23 with art
+tokens: 0 of 8 with art (placeholders: brood, repair, sabotage, core, pods, engine, prize, item)
+ui: 13 of 13 with art
+fx: 0 of 16 with art
+audio: 0 of 22 with art

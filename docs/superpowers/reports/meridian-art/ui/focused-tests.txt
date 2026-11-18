@@ -1,0 +1,13 @@
+test_all_panel_stretch_regions_are_uniform (test_ui.UiTests.test_all_panel_stretch_regions_are_uniform) ... ok
+test_complete_contract_and_supplementary_coverage (test_ui.UiTests.test_complete_contract_and_supplementary_coverage) ... ok
+test_dice_settled_faces_and_tumble_are_distinct (test_ui.UiTests.test_dice_settled_faces_and_tumble_are_distinct) ... ok
+test_missing_piece_badge_or_die_and_corrupt_file_fail (test_ui.UiTests.test_missing_piece_badge_or_die_and_corrupt_file_fail) ... ok
+test_palette_has_no_visible_pure_black_or_white (test_ui.UiTests.test_palette_has_no_visible_pure_black_or_white) ... ok
+test_review_has_every_phase_all_crew_and_public_scenario_copy (test_ui.UiTests.test_review_has_every_phase_all_crew_and_public_scenario_copy) ... ok
+test_seat_badges_and_markers_are_distinct_without_colour (test_ui.UiTests.test_seat_badges_and_markers_are_distinct_without_colour) ... ok
+test_unknown_recipe_is_rejected_and_rebuild_is_identical (test_ui.UiTests.test_unknown_recipe_is_rejected_and_rebuild_is_identical) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.126s
+
+OK

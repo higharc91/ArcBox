@@ -1,0 +1,92 @@
+[
+  {
+    "width": 320,
+    "images": 76,
+    "phases": [
+      "boarding",
+      "explore",
+      "breach",
+      "endgame",
+      "debrief"
+    ],
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      1
+    ],
+    "clipped": [],
+    "leakedRole": false,
+    "roles": 6,
+    "awards": 3,
+    "prematureClock": false,
+    "autoPaths": [
+      "../../../../../content/meridian/base/ui/auto-neutral.98e505bc7ef0.png"
+    ],
+    "errors": [],
+    "motionFramesSeen": 4,
+    "pause": true,
+    "still": true,
+    "reduced": true,
+    "ready": true
+  },
+  {
+    "width": 390,
+    "images": 76,
+    "phases": [
+      "boarding",
+      "explore",
+      "breach",
+      "endgame",
+      "debrief"
+    ],
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      1
+    ],
+    "clipped": [],
+    "leakedRole": false,
+    "roles": 6,
+    "awards": 3,
+    "prematureClock": false,
+    "autoPaths": [
+      "../../../../../content/meridian/base/ui/auto-neutral.98e505bc7ef0.png"
+    ],
+    "errors": [],
+    "motionFramesSeen": 4,
+    "pause": true,
+    "still": true,
+    "reduced": true,
+    "ready": true
+  },
+  {
+    "width": 1920,
+    "images": 76,
+    "phases": [
+      "boarding",
+      "explore",
+      "breach",
+      "endgame",
+      "debrief"
+    ],
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      1
+    ],
+    "clipped": [],
+    "leakedRole": false,
+    "roles": 6,
+    "awards": 3,
+    "prematureClock": false,
+    "autoPaths": [
+      "../../../../../content/meridian/base/ui/auto-neutral.98e505bc7ef0.png"
+    ],
+    "errors": [],
+    "motionFramesSeen": 4,
+    "pause": true,
+    "still": true,
+    "reduced": true,
+    "ready": true
+  }
+]

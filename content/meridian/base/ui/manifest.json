@@ -1,0 +1,416 @@
+{
+  "version": 1,
+  "issue": 335,
+  "rulesHead": "3b272cb6c0f3b7cb3a53efa35a0d34e9f4dd330d",
+  "displayScale": 2,
+  "ui": {
+    "panel": {
+      "file": "panel.42c8aaee4e56.png",
+      "sha256": "42c8aaee4e56abeca25310131c9924946d8e67786ac0b341ee5aac78c542f091",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "seatSlot": {
+      "file": "seatSlot.3550de41f3a4.png",
+      "sha256": "3550de41f3a46f6b3bfe0b7536ee93f17a460bc5988e040402de8c76be552c2d",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "anomalyCounter": {
+      "file": "anomalyCounter.74120e1d7fc1.png",
+      "sha256": "74120e1d7fc100f1392aba4254fef9e396d36403bbd40da046cd26a7a0900a60",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "roundClock": {
+      "file": "roundClock.082d42d2c81a.png",
+      "sha256": "082d42d2c81a5387915eb517de161fd2686f795d6bf6326b37e70ff057caf30c",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "logPanel": {
+      "file": "logPanel.3550de41f3a4.png",
+      "sha256": "3550de41f3a46f6b3bfe0b7536ee93f17a460bc5988e040402de8c76be552c2d",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "cardPanel": {
+      "file": "cardPanel.95eb6896a008.png",
+      "sha256": "95eb6896a0087027102b6dcdcea231353db7d97e960379769b5f01045511c999",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "diceTray": {
+      "file": "diceTray.5caacbc4231d.png",
+      "sha256": "5caacbc4231dc62063e1bbcb006b721e3cb782b572e2d582ab0c5f8038d8dae2",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "miniMap": {
+      "file": "miniMap.603f570193ce.png",
+      "sha256": "603f570193ce34637e71989e5562956dcb2d22ef35054de53d11b3a9987a7be1",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "breachPlate": {
+      "file": "breachPlate.163b65f57def.png",
+      "sha256": "163b65f57deff4efc3867d26428d64029329a7497924b15e51e15859338ecd99",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "debriefPlate": {
+      "file": "debriefPlate.5caacbc4231d.png",
+      "sha256": "5caacbc4231dc62063e1bbcb006b721e3cb782b572e2d582ab0c5f8038d8dae2",
+      "frameSize": [
+        64,
+        64
+      ],
+      "insets": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "contentInset": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    "logo": {
+      "file": "logo.f73a628aa904.png",
+      "sha256": "f73a628aa90412ebb2fb4f8bd9a4d29ba189e7690b071a4fdc2cda81c1f92094",
+      "frameSize": [
+        128,
+        48
+      ]
+    },
+    "title": {
+      "file": "title.77cd4e4ab747.png",
+      "sha256": "77cd4e4ab7473c6060987cdf832751da34277ec7bf2645ca699c33790242abf9",
+      "frameSize": [
+        640,
+        128
+      ]
+    },
+    "die": {
+      "values": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        2
+      ],
+      "faces": [
+        "face0",
+        "face0",
+        "face1",
+        "face1",
+        "face1",
+        "face2"
+      ],
+      "roll": {
+        "file": "die-roll.ca5e46dff8bc.png",
+        "sha256": "ca5e46dff8bcd15e328756e6556f2c0d81478fb0daae55767501d444b3571b7d",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 4,
+        "fps": 12,
+        "loop": true,
+        "reducedMotion": "show face0 without animation"
+      },
+      "face0": {
+        "file": "die-face0.cfcac25c7345.png",
+        "sha256": "cfcac25c73450b4adca9cc2ddf5bd00c590cb63381ccaa2ebfd7a63a73a464ee",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "face1": {
+        "file": "die-face1.a174f60e91b1.png",
+        "sha256": "a174f60e91b13b748e3b8a7ccf4e575751b52e18d7d340e155beb91205fd268b",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "face2": {
+        "file": "die-face2.cc8711153f1e.png",
+        "sha256": "cc8711153f1e53b38e8ad28d5647b6a9f15f5df557e73ab7303c41efcf449797",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    }
+  },
+  "lobby": {
+    "backdrop": {
+      "file": "lobby-backdrop.124df1224688.png",
+      "sha256": "124df12246887a7f1d56868b1da8808206dae4fbfe235ec7609fa7b4f0ad1bce",
+      "frameSize": [
+        128,
+        128
+      ]
+    },
+    "banner": {
+      "file": "logo.f73a628aa904.png",
+      "sha256": "f73a628aa90412ebb2fb4f8bd9a4d29ba189e7690b071a4fdc2cda81c1f92094",
+      "frameSize": [
+        128,
+        48
+      ]
+    },
+    "badges": {
+      "seat1": {
+        "file": "seat-1.d15acbd92c2b.png",
+        "sha256": "d15acbd92c2b2869a67685fbf38bf6b51bbf38b3c26615f288c1f983d123e955",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "seat2": {
+        "file": "seat-2.5974a385960c.png",
+        "sha256": "5974a385960c6b5656b43a90d6fc099e469fcf7f02b98d5c8bff4720d1666e56",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "seat3": {
+        "file": "seat-3.300b3e4d3931.png",
+        "sha256": "300b3e4d39310713433c4c30937ed5d2dd0d1322e449077e1da86a91acbead2b",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "seat4": {
+        "file": "seat-4.2df2d077fb16.png",
+        "sha256": "2df2d077fb1606be73c4412e5cca87f0f4622b609efa68041dfa7b070f11fd00",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "seat5": {
+        "file": "seat-5.1ed4c0879698.png",
+        "sha256": "1ed4c0879698c3d3f700f2879da4a910d379df9a42d47cdcd5a8b0af20c64c49",
+        "frameSize": [
+          24,
+          24
+        ]
+      },
+      "seat6": {
+        "file": "seat-6.1e03dddf8f07.png",
+        "sha256": "1e03dddf8f075ff67a05e53dc042e66efbacf2576288088532ed1d6b4b401345",
+        "frameSize": [
+          24,
+          24
+        ]
+      }
+    }
+  },
+  "extras": {
+    "auto": {
+      "file": "auto-neutral.98e505bc7ef0.png",
+      "sha256": "98e505bc7ef0dc6cf0bee03d8969813fa7a64f85deaaae00dcbe7189d32fddb9",
+      "frameSize": [
+        16,
+        12
+      ],
+      "roleNeutral": true
+    },
+    "miniMarkers": {
+      "seat1": {
+        "file": "mini-marker-1.e624c663a61b.png",
+        "sha256": "e624c663a61b4bfd0cb9d1c1d449878ca5715ff8380891c48f98445c60a600ae",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "seat2": {
+        "file": "mini-marker-2.477af115fe74.png",
+        "sha256": "477af115fe74fa600068df8b0bf1b3d04dc344566479a99bec4af87ab92a29f0",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "seat3": {
+        "file": "mini-marker-3.a2c006b7428c.png",
+        "sha256": "a2c006b7428cf570b254adc53f70058a124ae22c3b68cd984cdaa3c9aec37b50",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "seat4": {
+        "file": "mini-marker-4.504ae2c03219.png",
+        "sha256": "504ae2c03219989773fcdda124e6e4f685bdc6ee802c8bf0394206d9d98b714b",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "seat5": {
+        "file": "mini-marker-5.bc4556e028db.png",
+        "sha256": "bc4556e028db366cc6775d9a4caff9ba62b700450b1ee153d550acfcc4b6bc6e",
+        "frameSize": [
+          16,
+          16
+        ]
+      },
+      "seat6": {
+        "file": "mini-marker-6.b4fe06825116.png",
+        "sha256": "b4fe06825116cf5736c50284473b6ab109396569d815fc7533f41f312b936312",
+        "frameSize": [
+          16,
+          16
+        ]
+      }
+    },
+    "breachBackdrop": {
+      "file": "breach-backdrop.8d6c6c416701.png",
+      "sha256": "8d6c6c4167011c0c567b5e3cf3bad2af7c6b0609f56f9b29ba88608009c8e626",
+      "frameSize": [
+        960,
+        540
+      ],
+      "reducedMotion": "same static image; no flash or shake"
+    }
+  }
+}

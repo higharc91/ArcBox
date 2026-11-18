@@ -1,0 +1,945 @@
+[
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        369
+      ],
+      "tr": [
+        460,
+        369
+      ],
+      "bl": [
+        32,
+        649
+      ],
+      "br": [
+        460,
+        649
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        500,
+        369
+      ],
+      "tr": [
+        928,
+        369
+      ],
+      "bl": [
+        500,
+        649
+      ],
+      "br": [
+        928,
+        649
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        968,
+        369
+      ],
+      "tr": [
+        1396,
+        369
+      ],
+      "bl": [
+        968,
+        649
+      ],
+      "br": [
+        1396,
+        649
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1436,
+        369
+      ],
+      "tr": [
+        1864,
+        369
+      ],
+      "bl": [
+        1436,
+        649
+      ],
+      "br": [
+        1864,
+        649
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        689
+      ],
+      "tr": [
+        460,
+        689
+      ],
+      "bl": [
+        32,
+        969
+      ],
+      "br": [
+        460,
+        969
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        500,
+        689
+      ],
+      "tr": [
+        928,
+        689
+      ],
+      "bl": [
+        500,
+        969
+      ],
+      "br": [
+        928,
+        969
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        968,
+        689
+      ],
+      "tr": [
+        1396,
+        689
+      ],
+      "bl": [
+        968,
+        969
+      ],
+      "br": [
+        1396,
+        969
+      ]
+    }
+  },
+  {
+    "phase": "boarding",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1436,
+        689
+      ],
+      "tr": [
+        1864,
+        689
+      ],
+      "bl": [
+        1436,
+        969
+      ],
+      "br": [
+        1864,
+        969
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        32
+      ],
+      "tr": [
+        274,
+        32
+      ],
+      "bl": [
+        32,
+        188
+      ],
+      "br": [
+        274,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        308,
+        32
+      ],
+      "tr": [
+        550,
+        32
+      ],
+      "bl": [
+        308,
+        188
+      ],
+      "br": [
+        550,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        584,
+        32
+      ],
+      "tr": [
+        826,
+        32
+      ],
+      "bl": [
+        584,
+        188
+      ],
+      "br": [
+        826,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        860,
+        32
+      ],
+      "tr": [
+        1102,
+        32
+      ],
+      "bl": [
+        860,
+        188
+      ],
+      "br": [
+        1102,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1136,
+        32
+      ],
+      "tr": [
+        1378,
+        32
+      ],
+      "bl": [
+        1136,
+        188
+      ],
+      "br": [
+        1378,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1412,
+        32
+      ],
+      "tr": [
+        1654,
+        32
+      ],
+      "bl": [
+        1412,
+        188
+      ],
+      "br": [
+        1654,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "anomalyCounter",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1688,
+        32
+      ],
+      "tr": [
+        1864,
+        32
+      ],
+      "bl": [
+        1688,
+        188
+      ],
+      "br": [
+        1864,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        884,
+        289
+      ],
+      "tr": [
+        1180,
+        289
+      ],
+      "bl": [
+        884,
+        469
+      ],
+      "br": [
+        1180,
+        469
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        884,
+        513
+      ],
+      "tr": [
+        1180,
+        513
+      ],
+      "bl": [
+        884,
+        693
+      ],
+      "br": [
+        1180,
+        693
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "logPanel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        817
+      ],
+      "tr": [
+        1240,
+        817
+      ],
+      "bl": [
+        32,
+        991
+      ],
+      "br": [
+        1240,
+        991
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "cardPanel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1288,
+        232
+      ],
+      "tr": [
+        1864,
+        232
+      ],
+      "bl": [
+        1288,
+        784
+      ],
+      "br": [
+        1864,
+        784
+      ]
+    }
+  },
+  {
+    "phase": "explore",
+    "piece": "diceTray",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1288,
+        824
+      ],
+      "tr": [
+        1864,
+        824
+      ],
+      "bl": [
+        1288,
+        1024
+      ],
+      "br": [
+        1864,
+        1024
+      ]
+    }
+  },
+  {
+    "phase": "breach",
+    "piece": "breachPlate",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        192,
+        254
+      ],
+      "tr": [
+        1704,
+        254
+      ],
+      "bl": [
+        192,
+        950
+      ],
+      "br": [
+        1704,
+        950
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        32
+      ],
+      "tr": [
+        239,
+        32
+      ],
+      "bl": [
+        32,
+        188
+      ],
+      "br": [
+        239,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        273,
+        32
+      ],
+      "tr": [
+        480,
+        32
+      ],
+      "bl": [
+        273,
+        188
+      ],
+      "br": [
+        480,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        514,
+        32
+      ],
+      "tr": [
+        721,
+        32
+      ],
+      "bl": [
+        514,
+        188
+      ],
+      "br": [
+        721,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        755,
+        32
+      ],
+      "tr": [
+        962,
+        32
+      ],
+      "bl": [
+        755,
+        188
+      ],
+      "br": [
+        962,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        996,
+        32
+      ],
+      "tr": [
+        1203,
+        32
+      ],
+      "bl": [
+        996,
+        188
+      ],
+      "br": [
+        1203,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "seatSlot",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1237,
+        32
+      ],
+      "tr": [
+        1444,
+        32
+      ],
+      "bl": [
+        1237,
+        188
+      ],
+      "br": [
+        1444,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "anomalyCounter",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1478,
+        32
+      ],
+      "tr": [
+        1654,
+        32
+      ],
+      "bl": [
+        1478,
+        188
+      ],
+      "br": [
+        1654,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "roundClock",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1688,
+        32
+      ],
+      "tr": [
+        1864,
+        32
+      ],
+      "bl": [
+        1688,
+        188
+      ],
+      "br": [
+        1864,
+        188
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        884,
+        289
+      ],
+      "tr": [
+        1180,
+        289
+      ],
+      "bl": [
+        884,
+        469
+      ],
+      "br": [
+        1180,
+        469
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        884,
+        513
+      ],
+      "tr": [
+        1180,
+        513
+      ],
+      "bl": [
+        884,
+        693
+      ],
+      "br": [
+        1180,
+        693
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "logPanel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        817
+      ],
+      "tr": [
+        1240,
+        817
+      ],
+      "bl": [
+        32,
+        991
+      ],
+      "br": [
+        1240,
+        991
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "cardPanel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1288,
+        232
+      ],
+      "tr": [
+        1864,
+        232
+      ],
+      "bl": [
+        1288,
+        784
+      ],
+      "br": [
+        1864,
+        784
+      ]
+    }
+  },
+  {
+    "phase": "endgame",
+    "piece": "diceTray",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1288,
+        824
+      ],
+      "tr": [
+        1864,
+        824
+      ],
+      "bl": [
+        1288,
+        1024
+      ],
+      "br": [
+        1864,
+        1024
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "debriefPlate",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        32
+      ],
+      "tr": [
+        1440,
+        32
+      ],
+      "bl": [
+        32,
+        790
+      ],
+      "br": [
+        1440,
+        790
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1528,
+        84
+      ],
+      "tr": [
+        1824,
+        84
+      ],
+      "bl": [
+        1528,
+        264
+      ],
+      "br": [
+        1824,
+        264
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1528,
+        304
+      ],
+      "tr": [
+        1824,
+        304
+      ],
+      "bl": [
+        1528,
+        484
+      ],
+      "br": [
+        1824,
+        484
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "miniMap",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1528,
+        524
+      ],
+      "tr": [
+        1824,
+        524
+      ],
+      "bl": [
+        1528,
+        704
+      ],
+      "br": [
+        1824,
+        704
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "panel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        32,
+        838
+      ],
+      "tr": [
+        612,
+        838
+      ],
+      "bl": [
+        32,
+        1024
+      ],
+      "br": [
+        612,
+        1024
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "panel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        658,
+        838
+      ],
+      "tr": [
+        1238,
+        838
+      ],
+      "bl": [
+        658,
+        1024
+      ],
+      "br": [
+        1238,
+        1024
+      ]
+    }
+  },
+  {
+    "phase": "debrief",
+    "piece": "panel",
+    "exactNearestScale": 2,
+    "corners": {
+      "tl": [
+        1284,
+        838
+      ],
+      "tr": [
+        1864,
+        838
+      ],
+      "bl": [
+        1284,
+        1024
+      ],
+      "br": [
+        1864,
+        1024
+      ]
+    }
+  }
+]
