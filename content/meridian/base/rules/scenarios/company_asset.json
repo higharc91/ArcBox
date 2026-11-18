@@ -1,0 +1,47 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "company_asset",
+  "title": "Company Asset",
+  "announcement": "Security override accepted. Corporate asset protocol is now in effect. One of you was placed aboard by the company, and the company would prefer that the ship's logs stay aboard with it. I have opened the Bridge and Comms Array to anyone who asks. I recommend you ask quickly.",
+  "roundLimit": 12,
+  "roles": [
+    {
+      "id": "synthetic",
+      "side": "synthetic",
+      "name": "The Synthetic",
+      "briefing": "You were never one of them. The company built you, placed you, and woke you when the Anomaly surfaced. The ship's logs say what the company did here, and they must not leave the Meridian. The security drones answer to you. Keep the crew away from the Bridge and the Comms Array, and leave no witnesses. Every failed transmission draws your drones to the sender. If time runs out with the logs unsent, the company wins.",
+      "objectives": [
+        "Kill every crew member, or keep the logs from being sent until the round limit."
+      ]
+    },
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "One of you is a company synthetic, and the ship's security drones follow it now. The logs prove what the company did aboard. Send them from the Bridge or the Comms Array and the truth is out. A transmission needs a steady hand, and a failed one calls every drone toward you. Cover whoever is sending. The synthetic can be fought, but its drones keep coming.",
+      "objectives": [
+        "Transmit the logs from the Bridge or the Comms Array (Tech 5+): twice, or three times with five or more aboard."
+      ]
+    }
+  ],
+  "numbers": {
+    "transmit": 5,
+    "transmissions": 2,
+    "extraAtFive": 1,
+    "droneBrawn": 3,
+    "droneAgility": 4,
+    "droneNerve": 3,
+    "dronesFewer": 2
+  },
+  "tokens": {
+    "drone": {
+      "label": "D",
+      "colour": "#7ad1ff",
+      "name": "Security drone",
+      "monster": true
+    }
+  },
+  "counters": {
+    "transmitted": "Logs transmitted"
+  }
+}
