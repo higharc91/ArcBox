@@ -93,11 +93,12 @@ public static class EndgameReport
     private static string WinRate(string scenario, List<EndgameGame> g)
     {
         var inv = CultureInfo.InvariantCulture;
-        switch (scenario)
+        // By the scenario's archetype, never its id, so a new scenario reports right without touching the Sim (criterion 8).
+        switch (ScenarioRegistry.Default.Find(scenario)?.Info.Archetype)
         {
-            case DecayingOrbit.Id:
+            case "timed-escape":
                 return "survive " + (100.0 * g.Sum(x => x.Winners) / g.Sum(x => x.Players)).ToString("0", inv) + "%";
-            case SalvageRights.Id:
+            case "free-for-all":
                 var won = g.Where(x => x.FirstWinnerSeat >= 0).ToList();
                 if (won.Count == 0)
                 {
