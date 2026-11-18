@@ -8,7 +8,8 @@
     "salvage_rights",
     "company_asset",
     "captain_on_deck",
-    "cold_sleep"
+    "cold_sleep",
+    "scuttle_charge"
   ],
   "table": [
     {

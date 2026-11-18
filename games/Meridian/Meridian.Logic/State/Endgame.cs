@@ -105,6 +105,10 @@ public sealed record ScenarioBoard(
         return at < 0 ? this : this with { Counters = Counters.SetItem(at, Counters[at] with { Value = value }) };
     }
 
+    /// <summary>Sets a counter, adding it with <paramref name="audience"/> if the board doesn't have it yet.</summary>
+    public ScenarioBoard WithCounter(string id, int value, Audience audience)
+        => CounterOf(id) is null ? this with { Counters = Counters.Add(new Counter(id, value, audience)) } : WithCounter(id, value);
+
     public ScenarioBoard WithToken(Token token)
     {
         var at = Tokens.Items.FindIndex(t => t.Id == token.Id);
