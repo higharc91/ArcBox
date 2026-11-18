@@ -1,0 +1,43 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "hull_rot",
+  "title": "Hull Rot",
+  "announcement": "Biological growth detected in the hull. It is spreading compartment to compartment, and it is heading for the Airlock. Burn it back where you can. Its source must be cut free and thrown out of the ship. I would rather you did that before it reaches me.",
+  "roundLimit": 12,
+  "roles": [
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "Something is growing through the Meridian's hull, from a single source, one compartment at a time. If it reaches the Airlock, the ship is lost. Burn the rot where you stand (Tech 4+). Breathing it at a turn's end costs a Nerve save (3+). Once no rot is within two compartments of the source, cut it free (Brawn 5+), carry it to the Airlock, and jettison it. Hold the line near the Airlock while you work.",
+      "objectives": [
+        "Cut the source free (Brawn 5+) once nothing near it is rotted, and jettison it from the Airlock."
+      ]
+    }
+  ],
+  "numbers": {
+    "sourceDistance": 3,
+    "maxSpread": 2,
+    "sporeSave": 3,
+    "burn": 4,
+    "cut": 5,
+    "slow": 1
+  },
+  "tokens": {
+    "rot": {
+      "label": "~",
+      "colour": "#7cbf3a",
+      "name": "Rot"
+    },
+    "rot_source": {
+      "label": "@",
+      "colour": "#4f9a1a",
+      "name": "Rot source"
+    }
+  },
+  "counters": {
+    "rotted": "Compartments rotted",
+    "lost": null,
+    "jettisoned": null
+  }
+}

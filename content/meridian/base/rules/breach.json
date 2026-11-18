@@ -9,7 +9,8 @@
     "company_asset",
     "captain_on_deck",
     "cold_sleep",
-    "scuttle_charge"
+    "scuttle_charge",
+    "hull_rot"
   ],
   "table": [
     {

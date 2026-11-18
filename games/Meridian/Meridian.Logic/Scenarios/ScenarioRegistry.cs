@@ -19,7 +19,7 @@ public static class ScenarioRegistry
 
     /// <summary>Every scenario that ships. Stage M3 adds the five S1 scenarios here, one task at a time.</summary>
     public static ScenarioSet Default { get; } = new([new ThePassenger(), new OneOfUsIsnt(), new TillerSaysNo(), new DecayingOrbit(),
-                                                      new SalvageRights(), new CompanyAsset(), new CaptainOnDeck(), new ColdSleep(), new ScuttleCharge()]);
+                                                      new SalvageRights(), new CompanyAsset(), new CaptainOnDeck(), new ColdSleep(), new ScuttleCharge(), new HullRot()]);
 
     /// <summary>
     /// What's wrong between the code and the content: a listed scenario with no class, a class with no content, or a role
