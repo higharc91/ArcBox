@@ -68,7 +68,7 @@ public sealed record HudModel(
     {
         "roll" or "fight" => new HudPanel(now.Kind, now.Title, now.Text, "#ffd447", now.Faces),
         "card" => new HudPanel("card", now.Title, now.Text, now.Deck is { } deck ? BoardStyle.Symbol(deck).Colour : "#9a9aa8", [], now.Deck),
-        "notice" or "vote" or "death" or "round" or "over" or "sealed" => new HudPanel(now.Kind, now.Title, now.Text, KindAccent(now.Kind), []),
+        "notice" or "vote" or "death" or "round" or "over" or "sealed" or "unsealed" => new HudPanel(now.Kind, now.Title, now.Text, KindAccent(now.Kind), []),
         _ => null,   // a reveal has its callout; the Breach has its own sequence
     };
 

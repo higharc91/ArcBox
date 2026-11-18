@@ -72,6 +72,8 @@ public static class SoundPlan
         {
             "reveal" => [new("sfx.reveal", At("drop")), new("sfx.hatchOpen", At("hatches"))],
             "sealed" => [new("sfx.hatchSeal", 0)],
+            "unsealed" => [new("sfx.hatchOpen", 0)],
+            "notice" when now.Fx is "vent" or "pressure" => [new("sfx.vent", 0)],
             "card" => Card(now, At("hold")),
             "roll" => [new("sfx.diceRoll", 0), new("sfx.diceSettle", At("land"))],
             "fight" => [new("sfx.diceRoll", At("dice")), .. Outcome(now.Outcome) is { } hit ? [new SoundCue(hit, At("tick"))] : Array.Empty<SoundCue>()],

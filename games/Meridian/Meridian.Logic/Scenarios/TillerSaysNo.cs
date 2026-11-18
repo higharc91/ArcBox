@@ -44,18 +44,8 @@ public sealed class TillerSaysNo : IScenario
             return state;
         }
         var save = pack.ScenarioDef(Id).Number("ventSave");
-        events.Add(new ScenarioNotice($"Tiller vents the {pack.Tile(state.Ship.Get(crowded.Key).Tile).Name}.", crowded.Key));
-        foreach (var crew in crowded.ToList())
-        {
-            (state, var total) = Primitives.Check(pack, state, crew.Seat, Trait.Agility, events);
-            if (total < save)
-            {
-                var me = state.CrewOf(crew.Seat);
-                var trait = me.Steps.Brawn >= me.Steps.Agility ? Trait.Brawn : Trait.Agility;
-                events.Add(new TraitChanged(crew.Seat, trait, me.Steps[trait], me.Steps[trait] - 1));
-                state = state.WithCrew(me with { Steps = me.Steps.With(trait, me.Steps[trait] - 1) });
-            }
-        }
+        events.Add(new ScenarioNotice($"Tiller vents the {pack.Tile(state.Ship.Get(crowded.Key).Tile).Name}.", crowded.Key, Fx: "vent"));
+        state = Primitives.Vent(pack, state, crowded.Key, save, events);
         return state;
     }
 

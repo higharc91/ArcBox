@@ -60,6 +60,9 @@ public sealed class SoundPlanTests
         Assert.Equal("sfx.cardSalvage", Ids(Now("card", 4, CardKind.Salvage, "x", text: "A thing.")));
         Assert.Equal("sfx.cardAnomaly", Ids(Now("card", 4, CardKind.Anomaly, "x", text: "A thing.")));
         Assert.Empty(SoundPlan.For(Beat.For(Now("roll"), Rules, brief: true)));
+        Assert.Equal("sfx.hatchOpen", Ids(Now("unsealed", 0.8)));
+        Assert.Equal("sfx.vent", Ids(Now("notice", 2, text: "Tiller vents the Galley.") with { Fx = "vent" }));
+        Assert.Empty(SoundPlan.For(Beat.For(Now("notice", 2, text: "The rot spreads.") with { Fx = "rot" }, Rules)));
     }
 
     [Fact]

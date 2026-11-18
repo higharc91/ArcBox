@@ -12,6 +12,7 @@ namespace Meridian.Logic;
 [JsonDerivedType(typeof(TurnEnded), "turnEnded")]
 [JsonDerivedType(typeof(Moved), "moved")]
 [JsonDerivedType(typeof(HatchSealed), "hatchSealed")]
+[JsonDerivedType(typeof(HatchUnsealed), "hatchUnsealed")]
 [JsonDerivedType(typeof(OrientRequested), "orientRequested")]
 [JsonDerivedType(typeof(CompartmentRevealed), "compartmentRevealed")]
 [JsonDerivedType(typeof(CardDrawn), "cardDrawn")]
@@ -50,7 +51,11 @@ public sealed record Rejected(Command Command, string Reason) : GameEvent;
 public sealed record TurnStarted(SeatId Seat, int Round, int Moves) : GameEvent;
 public sealed record TurnEnded(SeatId Seat) : GameEvent;
 public sealed record Moved(SeatId Seat, CompartmentId From, CompartmentId To, int Cost) : GameEvent;
-public sealed record HatchSealed(CompartmentId Compartment, Side Side) : GameEvent;
+public sealed record HatchSealed(CompartmentId Compartment, Side Side,
+                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)] bool Locked = false) : GameEvent;
+
+/// <summary>A hatch a scenario had sealed is open again (M7 plan, Task 2).</summary>
+public sealed record HatchUnsealed(CompartmentId Compartment, Side Side) : GameEvent;
 public sealed record OrientRequested(SeatId Seat, TileId Tile, EqArray<int> Rotations) : GameEvent;
 public sealed record CompartmentRevealed(SeatId Seat, Compartment Compartment) : GameEvent;
 public sealed record CardDrawn(SeatId Seat, CardId Card, CardKind Deck) : GameEvent;
@@ -97,4 +102,10 @@ public sealed record VoteResolved(string Purpose, string? Result, EqArray<VoteCo
 public sealed record VoteCount(string Choice, int Votes);
 
 /// <summary>Something everyone learns, with nobody's name on it (an anonymous sabotage, a hazard).</summary>
-public sealed record ScenarioNotice(string Text, CompartmentId? At = null) : GameEvent;
+/// <param name="Fx">A board effect for the TV to play on <paramref name="At"/>: one of <see cref="NoticeEffects"/>.</param>
+public sealed record ScenarioNotice(string Text, CompartmentId? At = null,
+                                    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Fx = null) : GameEvent
+{
+    /// <summary>The hazards a notice can show on the board (the art contract's effects of the same names).</summary>
+    public static readonly IReadOnlyList<string> NoticeEffects = ["vent", "rot", "pressure", "sparks"];
+}

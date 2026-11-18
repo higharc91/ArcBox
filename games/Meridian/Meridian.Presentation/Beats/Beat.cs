@@ -73,6 +73,7 @@ public sealed record Beat(int Seq, string Kind, Presented Now, EqArray<BeatStep>
             "roll" => [new("tumble", 0.8), new("land", 0.3), new("total", 0.3)],
             "fight" => [new("flash", 0.4), new("dice", 0.6), new("tick", 0.4)],
             "sealed" => [new("weld", 0.4), new("hold", 0.2)],
+            "unsealed" => [new("cut", 0.4), new("hold", 0.2)],
             _ => [new("show", 0.6)],
         };
         return new Beat(now.Seq, now.Kind, now, Fit(steps, now.Seconds * SilentShare), false, 0, false);

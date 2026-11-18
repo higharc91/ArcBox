@@ -108,10 +108,12 @@ public sealed record MeridianSession(
 /// <param name="Attacker">For a fight, who attacked: a stagger lands on them.</param>
 /// <param name="Outcome">For a fight, how it went: <c>hit</c>, <c>stunned</c>, <c>staggered</c> or <c>tie</c> (the TV's effect).</param>
 /// <param name="Card">For a card, its id: an Incident's board effect is chosen by it. The card is on screen anyway.</param>
+/// <param name="Fx">For a scenario's notice, the hazard to show on its compartment (vent, rot, pressure or sparks).</param>
 public sealed record Presented(int Seq, string Kind, SeatId Seat, string Title, string Text, double Seconds,
                                EqArray<int> Faces = default, string? Compartment = null,
                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] CardKind? Deck = null,
                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Target = null,
                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Attacker = null,
                                [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Outcome = null,
-                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Card = null);
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Card = null,
+                               [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Fx = null);

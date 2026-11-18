@@ -36,8 +36,10 @@ public sealed class ThePassenger : IScenario
     }
 
     private static Token Brood(ScenarioDef def, int n, CompartmentId at, SeatId host)
-        => new($"brood-{n}", "brood", at, Audience.Everyone, Controller: host,
-               Stats: new MonsterStats(def.Number("broodBrawn"), def.Number("broodAgility"), def.Number("broodNerve")));
+        => new($"brood-{n}", "brood", at, Audience.Everyone, Controller: host, Stats: Stats(def));
+
+    private static MonsterStats Stats(ScenarioDef def)
+        => new(def.Number("broodBrawn"), def.Number("broodAgility"), def.Number("broodNerve"));
 
     private static SeatId HostOf(GameState state) => state.Board!.Roles.First(r => r.Role == Host).Seat;
 
@@ -55,9 +57,8 @@ public sealed class ThePassenger : IScenario
             return state;
         }
         var host = HostOf(state);
-        var next = board.Tokens.Where(t => t.Kind == "brood").Select(t => int.Parse(t.Id[6..])).DefaultIfEmpty(0).Max() + 1;
         events.Add(new ScenarioActed(host, "spawn", null, "Another of the brood crawls free."));
-        return state.WithBoard(board.WithToken(Brood(pack.ScenarioDef(Id), next, state.CrewOf(host).At, host)));
+        return Primitives.Spawn(state, "brood", state.CrewOf(host).At, host, Stats(pack.ScenarioDef(Id)));
     }
 
     public IEnumerable<ScenarioAction> ActionsFor(RulesPack pack, GameState state, SeatId seat)

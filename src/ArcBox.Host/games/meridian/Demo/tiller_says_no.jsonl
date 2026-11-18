@@ -107,8 +107,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"now":{"seq":44,"kind":"roll","seat":"p3","title":"Tech check","text":"3 dice: 4","seconds":1.5,"faces":[1,2,1],"compartment":null},"$delete":["turnEndsIn"]}
 {"now":null,"turnEndsIn":60}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":5,"now":{"seq":45,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Gymnasium.","seconds":3.9814814814814814,"faces":[],"compartment":"c24"},"scenario":{"roundsLeft":7},"$delete":["turnEndsIn"]}
-{"now":{"seq":46,"kind":"roll","title":"Agility check","text":"3 dice: 2","seconds":1.5,"faces":[1,0,1],"compartment":null}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":5,"now":{"seq":45,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Gymnasium.","seconds":3.9814814814814814,"faces":[],"compartment":"c24","fx":"vent"},"scenario":{"roundsLeft":7},"$delete":["turnEndsIn"]}
+{"now":{"seq":46,"kind":"roll","title":"Agility check","text":"3 dice: 2","seconds":1.5,"faces":[1,0,1],"compartment":null,"$delete":["fx"]}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c18"}}}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
@@ -136,8 +136,8 @@
 {"compartments":{"$keyed":"id","$set":{"c28":{"id":"c28","tile":"chart_room","at":["command",1,0],"rotation":1,"hatches":["s","w"],"symbol":"salvage"}},"$order":["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14","c15","c16","c17","c18","c19","c20","c21","c22","c23","c24","c25","c26","c27","c28"]},"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}},"now":{"seq":53,"kind":"reveal","seat":"p3","title":"Chart Room","text":"","seconds":1.2,"faces":[],"compartment":"c28"},"log":["Player2 drew Stopped Watch.","The Breach.","Player1 found the Escape Pod Bay.","Player2 used Stopped Watch.","Player2 found the Comms Array.","Player2 drew Humming Shard.","Player3 found the Chart Room.","Player3 drew Mag Boots."],"$delete":["turnEndsIn"]}
 {"now":{"seq":54,"kind":"card","title":"Mag Boots","text":"They hold you to the deck when the deck stops holding you.","seconds":7.685185185185185,"compartment":null,"deck":"salvage","card":"mag_boots"}}
 {"now":null,"turnEndsIn":60}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":6,"now":{"seq":55,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Recreation Deck.","seconds":4.351851851851851,"faces":[],"compartment":"c18"},"scenario":{"roundsLeft":6},"$delete":["turnEndsIn"]}
-{"now":{"seq":56,"kind":"roll","title":"Agility check","text":"3 dice: 3","seconds":1.5,"faces":[1,1,1],"compartment":null}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":6,"now":{"seq":55,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Recreation Deck.","seconds":4.351851851851851,"faces":[],"compartment":"c18","fx":"vent"},"scenario":{"roundsLeft":6},"$delete":["turnEndsIn"]}
+{"now":{"seq":56,"kind":"roll","title":"Agility check","text":"3 dice: 3","seconds":1.5,"faces":[1,1,1],"compartment":null,"$delete":["fx"]}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c6"}}}}
 {"banner":"Player1\u0027s turn","seats":{"$keyed":"id","$set":{"p1":{"active":true},"p4":{"active":false}}}}
@@ -162,8 +162,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":7,"now":{"seq":63,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Command Lift Landing.","seconds":4.722222222222221,"faces":[],"compartment":"c4"},"scenario":{"roundsLeft":5},"$delete":["turnEndsIn"]}
-{"now":{"seq":64,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 2","seconds":1.5,"faces":[1,0,1],"compartment":null}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":7,"now":{"seq":63,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Command Lift Landing.","seconds":4.722222222222221,"faces":[],"compartment":"c4","fx":"vent"},"scenario":{"roundsLeft":5},"$delete":["turnEndsIn"]}
+{"now":{"seq":64,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 2","seconds":1.5,"faces":[1,0,1],"compartment":null,"$delete":["fx"]}}
 {"now":{"seq":65,"seat":"p3","text":"6 dice: 3","faces":[0,0,1,0,1,1]}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c3"}}}}
@@ -188,8 +188,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":8,"now":{"seq":69,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"faces":[],"compartment":"c28"},"scenario":{"roundsLeft":4},"$delete":["turnEndsIn"]}
-{"now":{"seq":70,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 1","seconds":1.5,"faces":[0,0,1],"compartment":null}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":8,"now":{"seq":69,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"faces":[],"compartment":"c28","fx":"vent"},"scenario":{"roundsLeft":4},"$delete":["turnEndsIn"]}
+{"now":{"seq":70,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 1","seconds":1.5,"faces":[0,0,1],"compartment":null,"$delete":["fx"]}}
 {"now":{"seq":71,"seat":"p3","text":"6 dice: 4","faces":[1,0,0,1,0,2]}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c4"}}}}
@@ -217,8 +217,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":9,"now":{"seq":76,"kind":"round","seat":"p4","title":"Round 9","text":"Three rounds remain.","seconds":4.351851851851851,"faces":[],"compartment":null},"scenario":{"roundsLeft":3},"$delete":["turnEndsIn"]}
-{"now":{"seq":77,"kind":"notice","title":"","text":"Tiller vents the Chart Room.","compartment":"c28"}}
-{"now":{"seq":78,"kind":"roll","seat":"p1","title":"Agility check","text":"4 dice: 4","seconds":1.5,"faces":[1,1,1,1],"compartment":null}}
+{"now":{"seq":77,"kind":"notice","title":"","text":"Tiller vents the Chart Room.","compartment":"c28","fx":"vent"}}
+{"now":{"seq":78,"kind":"roll","seat":"p1","title":"Agility check","text":"4 dice: 4","seconds":1.5,"faces":[1,1,1,1],"compartment":null,"$delete":["fx"]}}
 {"now":{"seq":79,"seat":"p4","text":"2 dice: 2","faces":[1,1]}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c4"}}}}
@@ -245,8 +245,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":10,"now":{"seq":84,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"faces":[],"compartment":"c28"},"scenario":{"roundsLeft":2},"$delete":["turnEndsIn"]}
-{"now":{"seq":85,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 4","seconds":1.5,"faces":[1,2,1],"compartment":null}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":10,"now":{"seq":84,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"faces":[],"compartment":"c28","fx":"vent"},"scenario":{"roundsLeft":2},"$delete":["turnEndsIn"]}
+{"now":{"seq":85,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 4","seconds":1.5,"faces":[1,2,1],"compartment":null,"$delete":["fx"]}}
 {"now":{"seq":86,"seat":"p3","text":"6 dice: 6","faces":[1,1,1,2,1,0]}}
 {"now":{"seq":87,"seat":"p4","text":"2 dice: 0","faces":[0,0]}}
 {"now":null,"turnEndsIn":60}
@@ -275,8 +275,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":11,"now":{"seq":92,"kind":"round","seat":"p4","title":"Round 11","text":"Final round.","seconds":3.9814814814814814,"faces":[],"compartment":null},"scenario":{"roundsLeft":1},"$delete":["turnEndsIn"]}
-{"now":{"seq":93,"kind":"notice","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"compartment":"c28"}}
-{"now":{"seq":94,"kind":"roll","seat":"p1","title":"Agility check","text":"4 dice: 0","seconds":1.5,"faces":[0,0,0,0],"compartment":null}}
+{"now":{"seq":93,"kind":"notice","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"compartment":"c28","fx":"vent"}}
+{"now":{"seq":94,"kind":"roll","seat":"p1","title":"Agility check","text":"4 dice: 0","seconds":1.5,"faces":[0,0,0,0],"compartment":null,"$delete":["fx"]}}
 {"now":{"seq":95,"seat":"p4","text":"1 die: 1","faces":[1]}}
 {"now":null,"turnEndsIn":60}
 {"crew":{"$keyed":"id","$set":{"p4":{"at":"c4"}}}}
@@ -302,8 +302,8 @@
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c4"}}}}
 {"crew":{"$keyed":"id","$set":{"p3":{"at":"c28"}}}}
-{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":12,"now":{"seq":100,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"faces":[],"compartment":"c28"},"scenario":{"roundsLeft":0,"reveal":[{"id":"p1","role":"Crew","won":false},{"id":"p2","role":"Crew","won":false},{"id":"p3","role":"Crew","won":false},{"id":"p4","role":"Crew","won":false}],"outcome":"Tiller says no. It will always say no.","awards":[{"id":"award-1","title":"Pathfinder: most compartments found","seat":"p4"}],"crewWon":false},"$delete":["turnEndsIn"]}
-{"now":{"seq":101,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 4","seconds":1.5,"faces":[2,0,2],"compartment":null}}
+{"banner":"Player4\u0027s turn","seats":{"$keyed":"id","$set":{"p3":{"active":false},"p4":{"active":true}}},"round":12,"now":{"seq":100,"kind":"notice","seat":"p4","title":"","text":"Tiller vents the Chart Room.","seconds":4.351851851851851,"faces":[],"compartment":"c28","fx":"vent"},"scenario":{"roundsLeft":0,"reveal":[{"id":"p1","role":"Crew","won":false},{"id":"p2","role":"Crew","won":false},{"id":"p3","role":"Crew","won":false},{"id":"p4","role":"Crew","won":false}],"outcome":"Tiller says no. It will always say no.","awards":[{"id":"award-1","title":"Pathfinder: most compartments found","seat":"p4"}],"crewWon":false},"$delete":["turnEndsIn"]}
+{"now":{"seq":101,"kind":"roll","seat":"p2","title":"Agility check","text":"3 dice: 4","seconds":1.5,"faces":[2,0,2],"compartment":null,"$delete":["fx"]}}
 {"now":{"seq":102,"seat":"p3","text":"6 dice: 3","faces":[1,0,1,0,1,0]}}
 {"now":{"seq":103,"kind":"over","seat":"p4","title":"It\u0027s over","text":"Tiller says no. It will always say no.","seconds":6.203703703703703,"faces":[]}}
 {"phase":"debrief","banner":"Debrief","seats":{"$keyed":"id","$set":{"p4":{"active":false}}},"now":null}

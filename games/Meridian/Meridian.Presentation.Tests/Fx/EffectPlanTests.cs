@@ -164,4 +164,18 @@ public sealed class EffectPlanTests : IDisposable
         Assert.Equal(3, EffectPlan.Frame(strip, once, 1.9));    // held on the last frame
         Assert.Equal(1, EffectPlan.Frame(strip, loop, 1.5));    // 5 frames in: round again
     }
+
+    [Fact]
+    public void An_unsealed_hatch_opens_and_a_scenario_notice_plays_its_hazard_where_it_says()
+    {
+        Assert.Equal(("hatchOpen", FxPlace.Hatches, "c3"), Cues(Now("unsealed", 0.8, room: "c3")).Select(c => (c.Fx, c.Place, c.Where)).Single());
+        var vent = new Presented(1, "notice", new SeatId("s1"), "", "Tiller vents the Galley.", 2, Compartment: "c4", Fx: "vent");
+        Assert.Equal(("vent", FxPlace.Compartment, "c4"), EffectPlan.For(Beat.For(vent, Rules)).Select(c => (c.Fx, c.Place, c.Where)).Single());
+        Assert.Empty(EffectPlan.For(Beat.For(vent with { Compartment = null }, Rules)));   // nowhere to show it
+        Assert.Empty(EffectPlan.For(Beat.For(vent with { Fx = null }, Rules)));
+    }
+
+    [Fact]
+    public void Every_hazard_a_notice_can_name_is_a_contract_effect()
+        => Assert.All(ScenarioNotice.NoticeEffects, fx => Assert.Contains(fx, ArtContract.Effects));
 }

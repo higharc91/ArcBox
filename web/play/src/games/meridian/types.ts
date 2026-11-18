@@ -48,7 +48,7 @@ export interface DebriefData {
 }
 export interface Presented {
   seq: number; kind: string; seat: string; title: string; text: string; seconds: number; faces: number[]; compartment: string | null;
-  deck?: string; target?: string; attacker?: string; outcome?: string; card?: string;
+  deck?: string; target?: string; attacker?: string; outcome?: string; card?: string; fx?: string;
 }
 export interface WatchData { now: Presented }
 export interface OverData { message: string }

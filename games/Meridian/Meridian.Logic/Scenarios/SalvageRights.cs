@@ -51,30 +51,16 @@ public sealed class SalvageRights : IScenario
 
     public GameState On(RulesPack pack, GameState state, GameEvent e, List<GameEvent> events)
     {
+        // The carrier is slowed (never below 1), a hit takes the Prize, and a dead carrier drops it where they fell.
+        state = Primitives.Carried(state, "prize", pack.ScenarioDef(Id).Number("slow"), "The Prize changes hands.", e, events);
+        // Ending a turn in the Airlock with the Prize wins.
         var prize = Prize(state);
-        switch (e)
+        if (e is TurnEnded t && prize.Carrier == t.Seat && state.CrewOf(t.Seat).Aboard && state.CrewOf(t.Seat).At == Airlock(state))
         {
-            // The carrier is slowed (never below 1 movement point).
-            case TurnStarted t when prize.Carrier == t.Seat && state.CrewOf(t.Seat).Aboard:
-                return state with { MovesLeft = Math.Max(1, state.MovesLeft - pack.ScenarioDef(Id).Number("slow")) };
-
-            // A hit on the carrier takes the Prize.
-            case Attacked { Result: "hit" } a when prize.Carrier?.Value == a.Defender && state.IndexOf(new SeatId(a.Attacker)) >= 0:
-                events.Add(new ScenarioActed(new SeatId(a.Attacker), "steal", null, "The Prize changes hands."));
-                return state.WithBoard(state.Board!.WithToken(prize with { Carrier = new SeatId(a.Attacker) }));
-
-            // A dead carrier drops it where they fell.
-            case Died d when prize.Carrier == d.Seat:
-                return state.WithBoard(state.Board!.WithToken(prize with { Carrier = null, At = state.CrewOf(d.Seat).At }));
-
-            // Ending a turn in the Airlock with the Prize wins.
-            case TurnEnded t when prize.Carrier == t.Seat && state.CrewOf(t.Seat).Aboard && state.CrewOf(t.Seat).At == Airlock(state):
-                events.Add(new ScenarioActed(t.Seat, "escape", null, "The Airlock cycles. The Prize is gone, and so are they."));
-                return state.WithBoard(state.Board!.WithCounter("escaped", 1));
-
-            default:
-                return state;
+            events.Add(new ScenarioActed(t.Seat, "escape", null, "The Airlock cycles. The Prize is gone, and so are they."));
+            return state.WithBoard(state.Board!.WithCounter("escaped", 1));
         }
+        return state;
     }
 
     public IEnumerable<ScenarioAction> ActionsFor(RulesPack pack, GameState state, SeatId seat)

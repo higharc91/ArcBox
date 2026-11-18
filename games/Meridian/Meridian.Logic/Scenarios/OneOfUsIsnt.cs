@@ -104,7 +104,7 @@ public sealed class OneOfUsIsnt : IScenario
         {
             yield return new ScenarioAction("repair", "Repair the point");
         }
-        var alone = !state.Crew.Any(c => c.Seat != seat && c.Aboard && c.At == me.At);
+        var alone = Primitives.Alone(state, seat);
         var sabotaged = state.Board!.Tokens.Where(t => t.Kind == "sabotage").Select(t => t.State).ToHashSet();
         if (state.RoleOf(seat)?.Role == Mimic && alone && here.Any(p => p.State == "fixed" && !sabotaged.Contains(p.Id)))
         {

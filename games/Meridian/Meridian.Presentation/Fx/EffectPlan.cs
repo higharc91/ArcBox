@@ -77,6 +77,9 @@ public static class EffectPlan
             "reveal" when now.Compartment is { } room =>
                 [At("reveal", FxPlace.Compartment, room, Step("drop")), At("hatchOpen", FxPlace.Hatches, room, Step("hatches", rest: true))],
             "sealed" when now.Compartment is { } room => [At("hatchSeal", FxPlace.Hatches, room, Step("weld", rest: true))],
+            "unsealed" when now.Compartment is { } room => [At("hatchOpen", FxPlace.Hatches, room, Step("cut", rest: true))],
+            // A scenario's hazard (venting, rot, pressure, sparks) on the compartment its notice names.
+            "notice" when now.Fx is { } hazard && now.Compartment is { } room => [At(hazard, FxPlace.Compartment, room, whole)],
             "fight" => Fight(now, Step("tick", rest: true), At),
             "breach" => [At("breachAlarm", FxPlace.Screen, null, whole, loop: true), At("breachDistortion", FxPlace.Screen, null, Step("in"))],
             "death" => [At("echo", FxPlace.Actor, now.Seat.Value, whole)],
