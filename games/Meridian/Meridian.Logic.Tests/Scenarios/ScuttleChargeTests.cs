@@ -14,10 +14,10 @@ public sealed class ScuttleChargeTests
         var state = ScenarioRun.Begun(Id, players: 5);
         var saboteur = Saboteur(state);
         Assert.All(state.Board!.Roles, r => Assert.Equal(Audience.OfSeat(r.Seat), r.Audience));
-        Assert.Equal(Audience.OfSeat(saboteur), state.Board.CounterOf("charges")!.Audience);
-        Assert.Equal(6, state.Board.Value("charges"));
+        Assert.Equal(Audience.OfSeat(saboteur), state.Board.CounterOf("kit")!.Audience);
         Assert.Equal(4, ScuttleCharge.Needed(Pack, state));
-        Assert.DoesNotContain(Visibility.For(state, null).Board!.Counters, c => c.Id == "charges");
+        Assert.Equal(5, state.Board.Value("kit"));   // one spare
+        Assert.DoesNotContain(Visibility.For(state, null).Board!.Counters, c => c.Id == "kit");
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class ScuttleChargeTests
         var crew = game.State.Crew.First(c => c.Seat != saboteur && c.Aboard).Seat;
         game.Put(crew, at);
         game.State = game.State with { Active = game.State.IndexOf(crew), Turn = game.State.Turn with { Acted = false } };
-        game.Rig(Rules.Value(Pack, game.Crew(crew), Trait.Nerve), t => t >= 4).Do(new ScenarioAct(crew, "search"));
+        game.Rig(Rules.Value(Pack, game.Crew(crew), Trait.Nerve), t => t >= 3).Do(new ScenarioAct(crew, "search"));
         Assert.Contains(Visibility.For(game.State, null).Board!.Tokens, t => t.Kind == ScuttleCharge.Charge);
         Assert.Contains(game.Events, e => e is ScenarioNotice { Fx: "sparks" });
 
@@ -120,5 +120,20 @@ public sealed class ScuttleChargeTests
         game.Put(saboteur, empty);
         game.State = game.State with { Active = game.State.IndexOf(saboteur), Waiting = null, Turn = game.State.Turn with { Acted = false } };
         return game;
+    }
+
+    [Fact]
+    public void A_search_sweeps_the_neighbouring_compartments_too()
+    {
+        var game = AloneSaboteur();
+        var saboteur = Saboteur(game.State);
+        game.Do(new ScenarioAct(saboteur, "plant"));
+        var planted = game.Crew(saboteur).At;
+        var next = game.State.Ship.Adjacent(game.State.Ship.Get(planted)).First().Id;
+        var crew = game.State.Crew.First(c => c.Seat != saboteur && c.Aboard).Seat;
+        game.Put(crew, next);
+        game.State = game.State with { Active = game.State.IndexOf(crew), Turn = game.State.Turn with { Acted = false } };
+        game.Rig(Rules.Value(Pack, game.Crew(crew), Trait.Nerve), t => t >= 3).Do(new ScenarioAct(crew, "search"));
+        Assert.Contains(Visibility.For(game.State, null).Board!.Tokens, t => t.Kind == ScuttleCharge.Charge && t.At == planted);
     }
 }

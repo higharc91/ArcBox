@@ -30,7 +30,7 @@ public sealed class ScuttleCharge : IScenario
         var objectives = state.Crew.Select(c => new Objective($"goal-{c.Seat}",
             def.Role(c.Seat == saboteur ? Saboteur : Crew).Objectives[0], ObjectiveState.Open, Audience.OfSeat(c.Seat))).ToEqArray();
         return state.WithBoard(new ScenarioBoard(Id, roles, [],
-            [new Counter("charges", state.Crew.Count + def.Number("extraCharges"), Audience.OfSeat(saboteur)),
+            [new Counter("kit", Needed(pack, state) + def.Number("extraCharges"), Audience.OfSeat(saboteur)),
              new Counter("armed", 0, Audience.Everyone), new Counter("disarmed", 0, Audience.Everyone),
              new Counter("scuttled", 0, Audience.Everyone)],
             objectives, def.RoundLimit, state.Round));
@@ -39,11 +39,11 @@ public sealed class ScuttleCharge : IScenario
     private static SeatId SaboteurOf(GameState state) => state.Board!.Roles.First(r => r.Role == Saboteur).Seat;
     private static IEnumerable<Token> Charges(GameState state) => state.Board!.Tokens.Where(t => t.Kind == Charge);
 
-    /// <summary>Armed charges it takes to scuttle the ship: three, four with five or more aboard.</summary>
+    /// <summary>Armed charges it takes to scuttle the ship, and more with five or more aboard (content numbers).</summary>
     public static int Needed(RulesPack pack, GameState state)
-        => pack.ScenarioDef(Id).Number("needed") + (state.Crew.Count >= 5 ? 1 : 0);
+        => pack.ScenarioDef(Id).Number("needed") + (state.Crew.Count >= 5 ? pack.ScenarioDef(Id).Number("extraAtFive") : 0);
 
-    /// <summary>At each round's end the armed count goes public, and enough charges scuttle the ship.</summary>
+    /// <summary>At each round's end the armed count goes public, enough charges scuttle the ship, and old search marks go.</summary>
     public GameState On(RulesPack pack, GameState state, GameEvent e, List<GameEvent> events)
     {
         if (e is not RoundClosed)
@@ -51,7 +51,11 @@ public sealed class ScuttleCharge : IScenario
             return state;
         }
         var armed = Charges(state).Count();
-        var board = state.Board!;
+        // Search marks only matter for three rounds; older ones go, which keeps the TV's view inside its budget.
+        var board = state.Board! with
+        {
+            Counters = state.Board!.Counters.Where(c => !c.Id.StartsWith("searched-", StringComparison.Ordinal) || state.Round - c.Value < 3).ToEqArray(),
+        };
         if (armed != board.Value("armed"))
         {
             events.Add(new ScenarioNotice(armed == 1 ? "One charge is armed somewhere aboard." : $"{armed} charges are armed somewhere aboard."));
@@ -74,7 +78,7 @@ public sealed class ScuttleCharge : IScenario
         {
             yield return new ScenarioAction("disarm", "Disarm the charge");
         }
-        if (state.RoleOf(seat)?.Role == Saboteur && here.Count == 0 && state.Board!.Value("charges") > 0 && Primitives.Alone(state, seat))
+        if (state.RoleOf(seat)?.Role == Saboteur && here.Count == 0 && state.Board!.Value("kit") > 0 && Primitives.Alone(state, seat))
         {
             yield return new ScenarioAction("plant", "Plant a charge, quietly");
         }
@@ -89,19 +93,25 @@ public sealed class ScuttleCharge : IScenario
         {
             case "plant":
                 // No event at all: nothing public may change on the turn a charge is planted.
-                return state.WithBoard(board.WithCounter("charges", board.Value("charges") - 1)
+                return state.WithBoard(board.WithCounter("kit", board.Value("kit") - 1)
                     .WithToken(new Token(Primitives.NextId(board, Charge), Charge, at, Audience.OfSeat(act.From))));
             case "search":
             {
                 var (next, total) = Primitives.Check(pack, state, act.From, Trait.Nerve, events);
                 next = next.WithBoard(next.Board!.WithCounter($"searched-{at}", next.Round, Audience.Everyone));
-                var hidden = Charges(next).Where(c => c.At == at && c.Audience != Audience.Everyone).ToList();
+                // A search sweeps the compartment and, with reach, its neighbours.
+                var swept = Primitives.Steps(next, at).Where(x => x.Value <= def.Number("searchReach")).Select(x => x.Key).ToHashSet();
+                var hidden = Charges(next).Where(c => swept.Contains(c.At!.Value) && c.Audience != Audience.Everyone).ToList();
                 if (total < def.Number("search") || hidden.Count == 0)
                 {
                     events.Add(new ScenarioActed(act.From, act.Action, null, "Nothing under the plates. Nothing you could see, anyway."));
                     return next;
                 }
-                events.Add(new ScenarioNotice($"A charge, wired under the deck plates of the {pack.Tile(next.Ship.Get(at).Tile).Name}.", at, Fx: "sparks"));
+                foreach (var found in hidden)
+                {
+                    events.Add(new ScenarioNotice($"A charge, wired under the deck plates of the {pack.Tile(next.Ship.Get(found.At!.Value).Tile).Name}.",
+                                                  found.At, Fx: "sparks"));
+                }
                 return hidden.Aggregate(next, (s, c) => Primitives.Reveal(s, c.Id));
             }
             case "disarm":
@@ -153,14 +163,17 @@ public sealed class ScuttleCharge : IScenario
 
     public IBotPolicy Bot(string role) => role switch
     {
-        // Disarm what's found, search where nobody has looked lately.
+        // Disarm what's found and search where nobody has looked lately, but never wander alone: whoever is alone is who
+        // can plant, so a crew member on their own rejoins the nearest of the others, as people at a table would.
         Crew => new PolicyBot(ctx =>
         {
             var found = Charges(ctx.State).Where(c => c.Audience == Audience.Everyone).Select(c => c.At!.Value).ToList();
             var here = ctx.Board.CounterOf($"searched-{ctx.Me.At}") is not { } s || ctx.State.Round - s.Value >= 3;
+            var others = ctx.State.Crew.Where(c => c.Aboard && c.Seat != ctx.Seat).Select(c => c.At).ToList();
             return BotMoves.Act(ctx, "disarm")
                    ?? (found.Count > 0 ? BotMoves.Toward(ctx, BotMoves.Nearest(ctx, found)) : null)
                    ?? (here ? BotMoves.Act(ctx, "search") : null)
+                   ?? (Primitives.Alone(ctx.State, ctx.Seat) && others.Count > 0 ? BotMoves.Toward(ctx, BotMoves.Nearest(ctx, others)) : null)
                    ?? BotMoves.Toward(ctx, Unsearched(ctx));
         }),
         // Plays the crew, planting only when the rules say nobody saw it (spec §6), and never searching its own charges.

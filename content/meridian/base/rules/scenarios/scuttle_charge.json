@@ -11,23 +11,25 @@
       "name": "The Saboteur",
       "briefing": "You were paid to make the Meridian a total loss, and nobody knows. When you're alone in a compartment, plant a charge. Nobody sees it but you, and nothing on the screen changes. At each round's end, the ship announces how many charges are armed, never where. Enough armed at a round's end and the ship breaks apart. The crew will search and disarm. Search with them, and steer them away from your work.",
       "objectives": [
-        "Have enough charges armed at a round's end: three, or four with five or more aboard."
+        "Have four charges armed at a round's end."
       ]
     },
     {
       "id": "crew",
       "side": "crew",
       "name": "Crew",
-      "briefing": "Somebody aboard was paid to destroy the Meridian, and you can't tell who. They plant charges where nobody is watching, and the ship counts the armed charges at each round's end, never saying where. Search compartments (Nerve 4+) to find them, and disarm what you find (Tech 4+). Hold the ship together until the round limit, and keep an eye on whoever keeps wandering off alone.",
+      "briefing": "Somebody aboard was paid to destroy the Meridian, and you can't tell who. They plant charges where nobody is watching, and the ship counts the armed charges at each round's end, never saying where. Search (Nerve 3+) to find them in your compartment and the ones beside it, and disarm what you find (Tech 4+). Hold the ship together until the round limit, and keep an eye on whoever keeps wandering off alone.",
       "objectives": [
-        "Search (Nerve 4+) and disarm (Tech 4+) the charges, and keep the ship whole until the round limit."
+        "Search (Nerve 3+) and disarm (Tech 4+) the charges, and keep the ship whole until the round limit."
       ]
     }
   ],
   "numbers": {
-    "needed": 3,
+    "needed": 4,
+    "extraAtFive": 0,
     "extraCharges": 1,
-    "search": 4,
+    "search": 3,
+    "searchReach": 1,
     "disarm": 4
   },
   "tokens": {
@@ -38,7 +40,7 @@
     }
   },
   "counters": {
-    "charges": null,
+    "kit": null,
     "armed": "Charges armed",
     "disarmed": "Charges disarmed",
     "scuttled": null,
