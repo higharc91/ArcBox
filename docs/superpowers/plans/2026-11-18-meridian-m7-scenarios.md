@@ -1,4 +1,4 @@
-> Status: draft for review (2026-11-18). Not started. When approved, its tasks become GitHub issues under the [live tracker index](../README.md).
+> Status: approved 2026-11-18; in progress on branch `ccr-de425e76-4vxzw2` (tasks #408–#419). Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M7 Scenarios 6–12 Implementation Plan
 
