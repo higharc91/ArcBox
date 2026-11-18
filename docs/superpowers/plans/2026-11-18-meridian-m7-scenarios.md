@@ -191,6 +191,26 @@ Spec §1's eight criteria, one row each. For each: the test or run that shows it
 - [ ] **Step 1: The audit and the full gate.**
 - [ ] **Step 2: Commit** `docs(meridian): v1 success criteria audited`.
 
+## Addendum: the owner's decisions on the balance report (2026-11-18)
+
+After Task 10's report, the owner decided three things. They become Task 10b, which comes before Tasks 11 and 12:
+
+1. **A second loss path, not an exemption.** Where a side wins only by holding out to the limit, it gets an active way
+   to win too:
+   - **One of Us Isn't:** the mimic strikes. Its bot attacks a crew member it's alone with, and the mimic wins when at
+     most one other crew member is left aboard.
+   - **Tiller Says No:** lethal vents. A failed save by someone already hurt (a physical trait below its starting step)
+     kills.
+   - **Captain on Deck:** lethal vents, as for Tiller, and the captain wins when at most one crew member is left aboard.
+   - **Scuttle Charge:** the crew win as soon as the saboteur can no longer reach the target, counting both the armed
+     charges and those still in the kit.
+   - **Cold Sleep and Hull Rot** already have one: the Airlock overrun, and the rot reaching the Airlock. Their
+     limit-decided share is tuned, not given a new rule.
+2. **Vent Cycle's suits are scattered:** each lies on a random placed compartment at least three steps from the Airlock
+   (else the farthest there is), so fetching one costs turns while the decks vent.
+3. **The Breach threshold is 7** (was 6), so the Explore phase runs about a round longer in every scenario, within the
+   Breach-timing target. The balance report is rerun afterwards.
+
 ## Order and parallelism
 
 - Tasks 1 and 2 come first, in that order, because every scenario relies on both.
