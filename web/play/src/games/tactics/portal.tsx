@@ -1,3 +1,4 @@
+import { ClassGuidance, classGuideId } from "./onboarding";
 import type { JSX } from "preact";
 import { useEffect, useMemo, useRef, useState } from "preact/hooks";
 import type { PortalProps } from "../module";
@@ -179,11 +180,11 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
       <div class="tx-classes" role="group" aria-label="Class">
         {options.classes.map((k) => (
           <div class="tx-class-cell" key={k.id}>
-            <button type="button" class={`tx-class${k.id === cls ? " on" : ""}`} aria-pressed={k.id === cls} disabled={readOnly}
+            <button type="button" class={`tx-class${k.id === cls ? " on" : ""}`} aria-label={`${k.name} ${k.role}`} aria-describedby={classGuideId(k.id)} aria-pressed={k.id === cls} disabled={readOnly}
               onClick={() => setCls(k.id)}>
               <Crest cls={k.id} scale={2} />
               <b>{k.name}</b>
-              <span class="tx-role">{k.role}</span>
+              <span class="tx-role">{k.role}</span><ClassGuidance id={k.id} />
             </button>
             {explain ? <InfoButton label={`About ${k.name}`} onClick={() => explain({ kind: "class", id: k.id })} /> : null}
           </div>

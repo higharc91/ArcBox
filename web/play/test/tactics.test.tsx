@@ -213,8 +213,8 @@ describe("tactics phone module", () => {
       targets: [], tiles: [[x + 1, y], [x - 1, y]], aim: "direction",
     }];
     render(<ControllerScreen view={v} send={() => {}} me="ALEX" game="tactics" />);
-    expect(screen.getByTitle("Your action").textContent).toBe("Action");
-    expect(screen.getByTitle("Tiles of movement left").textContent).toBe(`Move ${data.choices.economy.moveLeft}`);
+    expect(screen.getByRole("button", { name: /^Explain Action:/ }).textContent).toBe("Action");
+    expect(screen.getByRole("button", { name: /^Explain Move:/ }).textContent).toBe(`Move ${data.choices.economy.moveLeft}`);
     fireEvent.click(screen.getByRole("button", { name: /^Burning Hands/ }));
     expect(screen.getByRole("button", { name: "Pick a direction" })).toBeTruthy();
   });

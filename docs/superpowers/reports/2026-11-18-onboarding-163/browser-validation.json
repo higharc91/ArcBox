@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "widths": [
+    {
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "width": 360,
+      "scroll": 360
+    },
+    {
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "width": 430,
+      "scroll": 430
+    }
+  ],
+  "helpSheet": {
+    "x": 0,
+    "y": 662.8125,
+    "width": 320,
+    "height": 181.1875
+  },
+  "downedStyle": {
+    "align": "left",
+    "size": 16
+  },
+  "downedBounds": {
+    "x": 0,
+    "y": 626,
+    "width": 390,
+    "height": 218
+  },
+  "profilePersistence": true,
+  "separateProfileGetsPrimer": true,
+  "keyboardFocusAndEscape": true,
+  "commands": [
+    {
+      "action": "move",
+      "data": {
+        "path": [
+          [
+            1,
+            10
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "action": "use",
+      "data": {
+        "ability": "common.dash"
+      }
+    },
+    {
+      "action": "endTurn"
+    }
+  ],
+  "classes": 12,
+  "pageErrors": [],
+  "mode": "Real production phone components and server-recorded fixtures in headless touch Chromium; no human usability or live server claim"
+}

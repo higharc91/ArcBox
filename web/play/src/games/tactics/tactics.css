@@ -185,7 +185,7 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 @keyframes tx-pulse { 50% { transform: scale(1.02); } }
 
 .tx-econ { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.tx-econ span { text-align: center; padding: 6px 0; border-radius: 5px; font: 800 13px var(--wf-sans); letter-spacing: 0.1em; text-transform: uppercase;
+.tx-econ button { text-align: center; padding: 6px 0; border-radius: 5px; font: 800 13px var(--wf-sans); letter-spacing: 0.1em; text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.18); color: var(--wf-muted); }
 .tx-econ .on { color: var(--wf-gold-hi); border-color: var(--wf-edge); background: rgba(230, 189, 92, 0.12); }
 .tx-econ .done { opacity: 1; text-decoration: line-through; }
@@ -1119,3 +1119,23 @@ body:has(.screen[data-game="tactics"]), body:has(.tx-portal) {
 
 .tx-target-preview { display:block; font-size:1rem; line-height:1.35; white-space:normal; overflow-wrap:anywhere; margin-top:0.3rem; }
 .tx-chips .tx-chip { white-space:normal; overflow-wrap:anywhere; }
+
+/* Tap-first reading aids retain the turn's separate, fixed action row. */
+.tx .tx-rule-link { font: inherit; color: var(--wf-gold-hi); text-decoration: underline; text-underline-offset: 3px; padding: 6px 10px; min-height: 44px; }
+.tx-econ button { min-height: 44px; min-width: 0; letter-spacing: .02em; padding: 6px 2px; }
+.tx-class-guide { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; font: 500 14px/1.4 var(--wf-sans); text-transform: none; letter-spacing: normal; }
+.tx-class-guide small { color: var(--wf-muted); font-size: 12px; }
+.tx-class-guide strong { color: var(--wf-gold-hi); font-size: 12px; }
+.tx-battle-guide { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.tx-primer { width: 100%; box-sizing: border-box; background: rgba(230,189,92,.07); border: 1px solid var(--wf-edge); border-radius: 8px; padding: 12px; }
+.tx-primer h3 { margin: 8px 0; font-size: 18px; }
+.tx-primer p { margin: 0 0 12px; line-height: 1.5; }
+.tx-primer > div { display: flex; gap: 8px; }
+.tx-primer > div button { flex: 1; }
+.tx .tx-downed.tx-rule-link { padding: 2px 4px; min-height: 44px; font-weight: 800; color: var(--wf-danger, #ffb4a5); }
+.tx-ability-rules { margin: 4px 0 12px; }
+.tx-ability-rules summary, .tx-battle-guide summary { min-height: 44px; cursor: pointer; }
+@media (max-width: 600px) {
+  .tx-muster .tx-classes, .tx-portal .tx-classes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.tx-hp-text .tx-sheet { text-align: left; font: 400 16px/1.5 var(--wf-sans); color: var(--wf-ink); }

@@ -1,3 +1,5 @@
+import { BattleGuide } from "./onboarding";
+import { ABILITY_GUIDANCE } from "./guidance";
 import { SurfaceScene } from "./surfaces";
 import { useEffect, useMemo, useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
@@ -172,6 +174,7 @@ export function Turn({ data, send }: CustomScreenProps) {
           icon={<span class="tx-me-icon"><AbilityIcon ability={ability.ability} item={ability.item} /></span>} />
       ) : <MeCard me={me} cls={cls} />}
       <TurnBanner summon={summoned ? me.name : undefined} />
+      <BattleGuide unit={me.id} firstTurn={!summoned} />
       {ability ? null : <FallBack fallBack={fallBack} send={send} />}
       {ability ? null : <ReactionsSheet reactions={(data as TurnData).reactions} send={send} />}
 
@@ -251,7 +254,7 @@ function AbilityList({ abilities, cls, onPick }: { abilities: AbilityChoice[]; c
                     <span class="tx-ic"><AbilityIcon ability={a.ability} item={a.item} /></span>
                     <span class="tx-ab-text">
                       <b>{a.name}</b>
-                      <span class="tx-tip">{a.tooltip}</span>
+                      <span class="tx-tip">{ABILITY_GUIDANCE[a.ability] ?? a.tooltip}</span>
                     </span>
                     <Tags a={a} cls={cls} />
                   </button>
@@ -302,11 +305,12 @@ function Aim({ ability, target, unit, byId, unitLabel, onPick, strikes }: {
           <div class="tx-target-body">
             <b>{unitLabel(unit)}</b>
             <HpBar unit={unit} enemy={unit.side === "Enemy"} />
-            <small class="tx-target-hp"><HpText unit={unit} /> HP</small>
+            <div class="tx-target-hp"><HpText unit={unit} explain /> HP</div>
           </div>
         </div>
       ) : null}
-      <p class="tx-aim-what"><span class="tx-cost">{costText(ability.cost)}</span> {ability.tooltip}</p>
+      <p class="tx-aim-what"><span class="tx-cost">{costText(ability.cost)}</span> {ABILITY_GUIDANCE[ability.ability] ?? ability.tooltip}</p>
+      {ABILITY_GUIDANCE[ability.ability] ? <details class="tx-ability-rules"><summary>Full rules for {ability.name}</summary><p>{ability.tooltip}</p></details> : null}
       {strikes ? (
         <div class="tx-strikes">
           <p>Previews show the opening attack. Later attacks can change as effects are spent.</p>

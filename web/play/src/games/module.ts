@@ -110,3 +110,6 @@ export interface GameModule {
 export const SkinContext = createContext<Skin | undefined>(undefined);
 
 export const useSkin = () => useContext(SkinContext);
+
+/** Public profile id for local per-player preferences; never a profile credential. */
+export const PlayerProfileContext = createContext<string | undefined>(undefined);
