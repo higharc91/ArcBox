@@ -24,7 +24,7 @@
     "slow": 1
   },
   "tokens": {
-    "rot": {
+    "growth": {
       "label": "~",
       "colour": "#7cbf3a",
       "name": "Rot"
@@ -37,7 +37,7 @@
   },
   "counters": {
     "rotted": "Compartments rotted",
-    "lost": null,
+    "overgrown": null,
     "jettisoned": null
   }
 }

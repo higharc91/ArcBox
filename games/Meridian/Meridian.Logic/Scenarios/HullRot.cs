@@ -9,7 +9,7 @@ public sealed class HullRot : IScenario
 {
     public const string Id = "hull_rot";
     public const string Crew = "crew";
-    public const string Rot = "rot";
+    public const string Rot = "growth";
     public const string Source = "rot_source";
 
     public ScenarioInfo Info { get; } = new(Id, "co-op", 3, 6);
@@ -35,7 +35,7 @@ public sealed class HullRot : IScenario
         return state.WithBoard(new ScenarioBoard(Id,
             state.Crew.Select(c => new RoleCard(c.Seat, Crew, Crew, Audience.Everyone)).ToEqArray(),
             [new Token(Source, Source, at, Audience.Everyone), new Token($"{Rot}-1", Rot, at, Audience.Everyone)],
-            [new Counter("rotted", 1, Audience.Everyone), new Counter("lost", 0, Audience.Everyone), new Counter("jettisoned", 0, Audience.Everyone)],
+            [new Counter("rotted", 1, Audience.Everyone), new Counter("overgrown", 0, Audience.Everyone), new Counter("jettisoned", 0, Audience.Everyone)],
             [new Objective(Crew, def.Role(Crew).Objectives[0], ObjectiveState.Open, Audience.Everyone)],
             def.RoundLimit, state.Round));
     }
@@ -95,7 +95,7 @@ public sealed class HullRot : IScenario
             events.Add(new ScenarioNotice($"The rot spreads into the {pack.Tile(state.Ship.Get(front).Tile).Name}.", front, Fx: "rot"));
         }
         var board = state.Board!.WithCounter("rotted", Rotted(state).Count);
-        return state.WithBoard(Rotted(state).Contains(Airlock(state)) ? board.WithCounter("lost", 1) : board);
+        return state.WithBoard(Rotted(state).Contains(Airlock(state)) ? board.WithCounter("overgrown", 1) : board);
     }
 
     public IEnumerable<ScenarioAction> ActionsFor(RulesPack pack, GameState state, SeatId seat)
@@ -165,7 +165,7 @@ public sealed class HullRot : IScenario
         {
             return new Outcome(crew, "The source is gone. What's left of the rot withers by morning.");
         }
-        if (board.Value("lost") > 0)
+        if (board.Value("overgrown") > 0)
         {
             return new Outcome([], "The rot reaches the Airlock. The Meridian belongs to it now.");
         }
