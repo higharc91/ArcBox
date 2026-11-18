@@ -18,7 +18,7 @@
   "numbers": {
     "bankTarget": 5,
     "banksNeeded": 3,
-    "ventSave": 4
+    "ventSave": 3
   },
   "tokens": {
     "core": {
