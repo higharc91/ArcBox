@@ -1,5 +1,7 @@
 # Meridian card art / #334
 
+Latest visual revision: [November 18 card styling](RESTYLE.md). Earlier frozen-source validation below is historical.
+
 Three original nine-slice frame kinds, six matching kind glyphs (16px/24px), and all twenty first-wave item icons (8 Salvage / 12 Anomaly). Deterministic arcpix/Pillow source; 0 CU generation spend. Gameplay, balance, recordings and existing art are unchanged.
 
 [Review every real card](index.html), [TV examples](cards-tv.png), [long choice at the same font size](choice-tv.png), [all twenty objects at TV 3×](icons-tv.png). Card PNGs contain no titles/rules; the review renders actual current #316 content as live text. Thirty-two exact content IDs map to three frame kinds. Source snapshots are byte-identical to #316 head `00d4a52bb9c7e73a5ee72b117b91891e6c0cdd11`.

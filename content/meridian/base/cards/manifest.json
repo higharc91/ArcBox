@@ -13,8 +13,8 @@
   },
   "frames": {
     "incident": {
-      "file": "frame-incident.ac31d0709e1d.png",
-      "sha256": "ac31d0709e1d3b853ff4567d29257ce1f6ddce4f333aa53dbd0d3672098eff52",
+      "file": "frame-incident.db0c57999e6a.png",
+      "sha256": "db0c57999e6ae0281116277e6d8b8b31074b8e0230784403e1e23a8f0d221606",
       "frameSize": [
         64,
         64
@@ -36,8 +36,8 @@
       "cornerScale": "whole integer nearest"
     },
     "salvage": {
-      "file": "frame-salvage.35be66ca6326.png",
-      "sha256": "35be66ca6326cb3ab73017d622e0774f6ea5b1400e89b9cee842b982c97e735a",
+      "file": "frame-salvage.027fe1f5df14.png",
+      "sha256": "027fe1f5df141d1d14d93293e78761bbd016ef6021ecb3b06789a5cad79249ec",
       "frameSize": [
         64,
         64
@@ -59,8 +59,8 @@
       "cornerScale": "whole integer nearest"
     },
     "anomaly": {
-      "file": "frame-anomaly.ba2fdd1e52df.png",
-      "sha256": "ba2fdd1e52df1f6af77ae209df3db27d4c7eebee0a73f785c30e253fe0b13de1",
+      "file": "frame-anomaly.c926dbe9d169.png",
+      "sha256": "c926dbe9d1695ebe2533eddc841a58bce1d012663cce250040589739e75c88d4",
       "frameSize": [
         64,
         64

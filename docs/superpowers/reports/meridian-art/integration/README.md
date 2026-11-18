@@ -1,5 +1,7 @@
 # Meridian art integration / #331–#334
 
+Later card styling is tracked in [the card refinement report](../cards/RESTYLE.md); the full-stack evidence below applies to its stated frozen source.
+
 This integrates the owner-approved style, TV-refined compartments, complete crew and first-wave cards. Per-set review records: #357, #384, #391; integration PR #402. All art is original deterministic arcpix/Pillow work, 0 CU. Existing Tactics art, recordings, gameplay and balance are preserved.
 
 **Final gate: PASS.** Frozen source `6e8a518e10a3282ff9452e3dbb76a0e34663ffbd`, based on merged #403 / main `8863818a`: .NET **7,743/7,743**, phone **601** plus production build, Node **24**, Python **142** (including all **46 Meridian** checks), lore and docs all pass. **Zero build warnings/errors and zero skipped tests.** [Result/provenance](validation.json) · [Complete log](full-check.txt.gz). Final evidence changes docs only. Earlier per-set and disk-exhausted runs are retained as historical evidence, not counted as passing gates.
