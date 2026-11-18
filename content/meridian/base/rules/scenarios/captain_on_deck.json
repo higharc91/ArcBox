@@ -1,0 +1,48 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "captain_on_deck",
+  "title": "Captain on Deck",
+  "announcement": "Command authority transferred. The captain is dead, but the captain's orders are not, and someone aboard is speaking with the captain's voice. Three command cores still carry those orders. Pull them, and the voice stops. Until then, I am required to obey it.",
+  "roundLimit": 10,
+  "roles": [
+    {
+      "id": "captain",
+      "side": "captain",
+      "name": "The Captain",
+      "briefing": "The captain died at the helm, and now the captain speaks through you. The ship obeys. Each round you gain Authority. Spend it: one to seal a hatch out of your compartment, two to vent your compartment or a neighbour's. Three command cores hold your orders. If the crew pull all three, your voice is gone. Seal their way, vent them where they gather, and hold the ship until time runs out.",
+      "objectives": [
+        "Keep the crew from pulling all three command cores until the round limit, or leave none alive."
+      ]
+    },
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "The captain is dead, but someone is speaking with the captain's voice, and the ship obeys them. They can seal hatches in your face and vent compartments with you in them. Three command cores hold the captain's orders. Find them and pull them (Brawn 4+) and the voice stops. A sealed hatch can be cut through (Brawn 5+). Don't bunch up: a vent hits everyone in the room.",
+      "objectives": [
+        "Pull all three command cores (Brawn 4+). Cut through sealed hatches (Brawn 5+)."
+      ]
+    }
+  ],
+  "numbers": {
+    "cores": 3,
+    "authority": 2,
+    "maxAuthority": 4,
+    "sealCost": 1,
+    "ventCost": 2,
+    "ventSave": 3,
+    "pull": 4,
+    "cut": 5
+  },
+  "tokens": {
+    "command_core": {
+      "label": "C",
+      "colour": "#3ec7ff",
+      "name": "Command core"
+    }
+  },
+  "counters": {
+    "authority": "Authority",
+    "pulled": "Cores pulled"
+  }
+}
