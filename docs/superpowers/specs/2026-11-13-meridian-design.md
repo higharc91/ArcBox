@@ -99,7 +99,7 @@ Players take turns in a fixed order, starting with a random player.
 - Items are public: everyone can see who carries what. A scenario may hide specific tokens (§4.4).
 
 ### 2.6 The Breach
-- After each Anomaly is drawn, the drawer makes a **Breach roll**: as many dice as **Anomalies drawn so far this game**. On a total of **6 or more**, the Breach fires (5 until the M1 simulation; see [the Breach timing report](../reports/2026-11-meridian-breach-timing.md)).
+- After each Anomaly is drawn, the drawer makes a **Breach roll**: as many dice as **Anomalies drawn so far this game**. On a total of **7 or more**, the Breach fires (5 until the M1 simulation, 6 until the M7 balance report; see [the Breach timing report](../reports/2026-11-meridian-breach-timing.md) and [the endgame balance report](../reports/2026-11-meridian-endgame-balance.md)).
 - The ninth Anomaly fires the Breach without a roll.
 - **A ship with nowhere left to grow fires the Breach** (added 2026-11-13, during M1). If no open hatch faces empty space on a deck that still has a tile in the pile, no more Anomalies can be drawn and Explore could never end. The Breach then fires with no Anomaly and no compartment recorded, so the scenario is chosen from every runnable one.
 - With the shipped dice and tiles, bots fire the Breach at a median of the sixth Anomaly, with about 53% of the tiles placed. The simulator's target is a Breach between 35% and 55% of the way through a game's turns.

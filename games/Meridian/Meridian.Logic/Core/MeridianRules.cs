@@ -14,9 +14,10 @@ public sealed record MeridianRules
 
     /// <summary>
     /// A Breach roll at or above this fires the Breach (spec §2.6). 6 from the M1 simulation
-    /// (docs/superpowers/reports/2026-11-meridian-breach-timing.md); retune after the first playtest.
+    /// (docs/superpowers/reports/2026-11-meridian-breach-timing.md); 7 by the owner's decision on the M7 balance report,
+    /// for longer games. Retune after the first playtest.
     /// </summary>
-    public int BreachThreshold { get; init; } = 6;
+    public int BreachThreshold { get; init; } = 7;
 
     /// <summary>Drawing this Anomaly fires the Breach without a roll (spec §2.6).</summary>
     public int ForcedBreachAnomaly { get; init; } = 9;

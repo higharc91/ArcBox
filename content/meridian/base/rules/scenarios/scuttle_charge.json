@@ -9,7 +9,7 @@
       "id": "saboteur",
       "side": "saboteur",
       "name": "The Saboteur",
-      "briefing": "You were paid to make the Meridian a total loss, and nobody knows. When you're alone in a compartment, plant a charge. Nobody sees it but you, and nothing on the screen changes. At each round's end, the ship announces how many charges are armed, never where. Enough armed at a round's end and the ship breaks apart. The crew will search and disarm. Search with them, and steer them away from your work.",
+      "briefing": "You were paid to make the Meridian a total loss, and nobody knows. When you're alone in a compartment, plant a charge. Nobody sees it but you, and nothing on the screen changes. At each round's end, the ship announces how many charges are armed, never where. Enough armed at a round's end and the ship breaks apart. The crew will search and disarm. Search with them, and steer them away from your work. Every charge they disarm is one you can't replace.",
       "objectives": [
         "Have four charges armed at a round's end."
       ]
@@ -18,9 +18,9 @@
       "id": "crew",
       "side": "crew",
       "name": "Crew",
-      "briefing": "Somebody aboard was paid to destroy the Meridian, and you can't tell who. They plant charges where nobody is watching, and the ship counts the armed charges at each round's end, never saying where. Search (Nerve 3+) to find them in your compartment and the ones beside it, and disarm what you find (Tech 4+). Hold the ship together until the round limit, and keep an eye on whoever keeps wandering off alone.",
+      "briefing": "Somebody aboard was paid to destroy the Meridian, and you can't tell who. They plant charges where nobody is watching, and the ship counts the armed charges at each round's end, never saying where. Search (Nerve 3+) to find them in your compartment and the ones beside it, and disarm what you find (Tech 4+). Disarm enough and the saboteur runs out of charges; otherwise hold the ship together until the round limit, and keep an eye on whoever keeps wandering off alone.",
       "objectives": [
-        "Search (Nerve 3+) and disarm (Tech 4+) the charges, and keep the ship whole until the round limit."
+        "Search (Nerve 3+) and disarm (Tech 4+) until the saboteur can't reach the target, or keep the ship whole until the round limit."
       ]
     }
   ],

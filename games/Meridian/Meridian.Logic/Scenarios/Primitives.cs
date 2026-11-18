@@ -68,17 +68,36 @@ public static class Primitives
     /// against <paramref name="save"/> or loses a step from their higher physical trait. A death is dealt by the rules after.
     /// The caller says why, with a notice.
     /// </summary>
-    public static GameState Vent(RulesPack pack, GameState state, CompartmentId at, int save, List<GameEvent> events)
+    /// <param name="lethal">A failed save by someone already hurt kills (Tiller's and the captain's vents, from the owner's
+    /// decision on the M7 balance report).</param>
+    public static GameState Vent(RulesPack pack, GameState state, CompartmentId at, int save, List<GameEvent> events, bool lethal = false)
     {
         foreach (var crew in Aboard(state).Where(c => c.At == at).ToList())
         {
             (state, var total) = Check(pack, state, crew.Seat, Trait.Agility, events);
-            if (total < save)
+            if (total >= save)
+            {
+                continue;
+            }
+            if (lethal && Hurt(pack, state.CrewOf(crew.Seat)))
+            {
+                var me = state.CrewOf(crew.Seat);
+                events.Add(new TraitChanged(crew.Seat, Trait.Brawn, me.Steps.Brawn, 0));
+                state = state.WithCrew(me with { Steps = me.Steps.With(Trait.Brawn, 0) });   // the rules deal the death
+            }
+            else
             {
                 state = LoseStep(state, crew.Seat, physical: true, events);
             }
         }
         return state;
+    }
+
+    /// <summary>Whether a crew member is hurt: a physical trait below where it started.</summary>
+    public static bool Hurt(RulesPack pack, CrewState crew)
+    {
+        var start = TraitSteps.Starting(pack.CrewMember(crew.Crew).Tracks);
+        return crew.Steps.Brawn < start.Brawn || crew.Steps.Agility < start.Agility;
     }
 
     /// <summary>A seat loses a step from its higher physical (or mental) trait, as a hazard deals damage.</summary>

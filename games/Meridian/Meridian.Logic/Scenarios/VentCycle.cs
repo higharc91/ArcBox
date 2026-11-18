@@ -3,7 +3,7 @@ namespace Meridian.Logic;
 /// <summary>
 /// Vent Cycle (timed escape; M7 plan's scenario table). The decks lose pressure one at a time, Engineering, then Habitat,
 /// then Command, every few rounds. There are suits for all but one. Suit up and cycle out through the Airlock to escape;
-/// every seat wins or loses for itself. A hit in combat takes the loser's suit. When Command vents, whoever is left
+/// every seat wins or loses for itself. The suits lie scattered, far from the Airlock. A hit in combat takes the loser's suit. When Command vents, whoever is left
 /// aboard is lost.
 /// </summary>
 public sealed class VentCycle : IScenario
@@ -20,8 +20,15 @@ public sealed class VentCycle : IScenario
     public GameState Setup(RulesPack pack, GameState state, BreachInfo breach)
     {
         var def = pack.ScenarioDef(Id);
-        var lockers = Primitives.FirstOf(state, "suit_lockers", "docking_ring")!.Value;
-        var suits = Enumerable.Range(1, state.Crew.Count - 1).Select(i => new Token($"{Suit}-{i}", Suit, lockers, Audience.Everyone)).ToEqArray();
+        // Scattered, each at least a few steps from the Airlock (owner's decision on the M7 balance report): fetching a suit
+        // costs turns while the decks vent. On a small ship, the farthest compartments, in turn.
+        var count = state.Crew.Count - 1;
+        var away = Primitives.Steps(state, Airlock(state));
+        var far = away.Where(x => x.Value >= def.Number("suitDistance")).Select(x => x.Key).Order().ToList();
+        (var picked, state) = Primitives.Pick(state, far, count);
+        var farthest = away.OrderByDescending(x => x.Value).ThenBy(x => x.Key).Select(x => x.Key).ToList();
+        var places = picked.Concat(Enumerable.Range(0, Math.Max(0, count - picked.Count)).Select(i => farthest[i % farthest.Count])).ToList();
+        var suits = places.Select((at, i) => new Token($"{Suit}-{i + 1}", Suit, at, Audience.Everyone)).ToEqArray();
         return state.WithBoard(new ScenarioBoard(Id,
             state.Crew.Select(c => new RoleCard(c.Seat, Survivor, c.Seat.Value, Audience.Everyone)).ToEqArray(), suits,
             [new Counter("vented", 0, Audience.Everyone), new Counter("nextVent", def.Number("cycle"), Audience.Everyone),

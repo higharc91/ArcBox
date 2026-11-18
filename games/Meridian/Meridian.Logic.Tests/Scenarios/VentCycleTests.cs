@@ -9,13 +9,15 @@ public sealed class VentCycleTests
     private static CompartmentId Airlock(GameState s) => Primitives.FirstOf(s, "airlock")!.Value;
 
     [Fact]
-    public void There_are_suits_for_all_but_one_where_the_lockers_are()
+    public void There_are_suits_for_all_but_one_scattered_far_from_the_airlock()
     {
         foreach (var players in new[] { 3, 6 })
         {
             var state = ScenarioRun.Begun(Id, players);
             Assert.Equal(players - 1, Suits(state).Count());
-            Assert.All(Suits(state), s => Assert.Equal(Primitives.FirstOf(state, "suit_lockers", "docking_ring"), s.At));
+            var away = Primitives.Steps(state, Airlock(state));
+            var farEnough = away.Count(x => x.Value >= 3) >= players - 1;
+            Assert.All(Suits(state), s => Assert.True(!farEnough || away[s.At!.Value] >= 3, $"a suit {away[s.At!.Value]} steps from the Airlock"));
         }
     }
 

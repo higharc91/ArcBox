@@ -9,16 +9,16 @@
       "id": "captain",
       "side": "captain",
       "name": "The Captain",
-      "briefing": "The captain died at the helm, and now the captain speaks through you. The ship obeys. Each round you gain Authority. Spend it: one to seal a hatch out of your compartment, two to vent your compartment or a neighbour's. Three command cores hold your orders. If the crew pull all three, your voice is gone. Seal their way, vent them where they gather, and hold the ship until time runs out.",
+      "briefing": "The captain died at the helm, and now the captain speaks through you. The ship obeys. Each round you gain Authority. Spend it: one to seal a hatch out of your compartment, two to vent your compartment or a neighbour's. Three command cores hold your orders. If the crew pull all three, your voice is gone. Seal their way, vent them where they gather, and hold the ship until time runs out. A vent kills anyone already hurt who fails to get clear, and with one survivor left the ship is yours.",
       "objectives": [
-        "Keep the crew from pulling all three command cores until the round limit, or leave none alive."
+        "Keep the crew from pulling every command core until the round limit, or leave at most one of them standing."
       ]
     },
     {
       "id": "crew",
       "side": "crew",
       "name": "Crew",
-      "briefing": "The captain is dead, but someone is speaking with the captain's voice, and the ship obeys them. They can seal hatches in your face and vent compartments with you in them. Three command cores hold the captain's orders. Find them and pull them (Brawn 4+) and the voice stops. A sealed hatch can be cut through (Brawn 5+). Don't bunch up: a vent hits everyone in the room.",
+      "briefing": "The captain is dead, but someone is speaking with the captain's voice, and the ship obeys them. They can seal hatches in your face and vent compartments with you in them. Three command cores hold the captain's orders. Find them and pull them (Brawn 4+) and the voice stops. A sealed hatch can be cut through (Brawn 5+). Don't bunch up: a vent hits everyone in the room, and can kill whoever is already hurt. If only one of you is left, the captain wins.",
       "objectives": [
         "Pull all three command cores (Brawn 4+). Cut through sealed hatches (Brawn 5+)."
       ]

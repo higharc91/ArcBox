@@ -9,14 +9,15 @@
       "id": "survivor",
       "side": "survivor",
       "name": "Survivor",
-      "briefing": "The Meridian is venting its decks one at a time: Engineering, then Habitat, then Command, every three rounds. Anyone still aboard when Command goes is lost. There are suits for all but one of you, waiting in the Suit Lockers or the Docking Ring. Suit up and cycle out through the Airlock. On a vented deck, ending a turn without a suit hurts. A suit can be taken in a fight.",
+      "briefing": "The Meridian is venting its decks one at a time: Engineering, then Habitat, then Command, every three rounds. Anyone still aboard when Command goes is lost. There are suits for all but one of you, scattered across the ship, none of them close to the Airlock. Suit up and cycle out through the Airlock. On a vented deck, ending a turn without a suit hurts. A suit can be taken in a fight.",
       "objectives": [
         "Get a suit and cycle out through the Airlock before the last deck vents."
       ]
     }
   ],
   "numbers": {
-    "cycle": 3
+    "cycle": 3,
+    "suitDistance": 3
   },
   "tokens": {
     "suit": {

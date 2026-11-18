@@ -146,7 +146,7 @@ public sealed class CaptainOnDeck : IScenario
                 var room = new CompartmentId(act.Data!);
                 state = state.WithBoard(board.WithCounter("authority", board.Value("authority") - def.Number("ventCost")));
                 events.Add(new ScenarioNotice($"By the captain's order, the {pack.Tile(state.Ship.Get(room).Tile).Name} is vented.", room, Fx: "vent"));
-                return Primitives.Vent(pack, state, room, def.Number("ventSave"), events);
+                return Primitives.Vent(pack, state, room, def.Number("ventSave"), events, lethal: true);
             }
             case "pull":
             {
@@ -184,8 +184,9 @@ public sealed class CaptainOnDeck : IScenario
         {
             return new Outcome(crew, "The last core comes free. The captain's voice stops mid-order.");
         }
-        return crew.All(s => !state.CrewOf(s).Aboard)
-            ? new Outcome([CaptainOf(state)], "The captain stands alone on deck. The Meridian obeys.")
+        // The captain's second way to win (owner's decision on the M7 balance report): the crew down to one.
+        return crew.Count(s => state.CrewOf(s).Aboard) <= 1
+            ? new Outcome([CaptainOf(state)], "The captain stands on deck with one survivor left. The Meridian obeys.")
             : null;
     }
 

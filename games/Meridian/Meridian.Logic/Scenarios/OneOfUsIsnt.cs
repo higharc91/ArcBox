@@ -163,8 +163,9 @@ public sealed class OneOfUsIsnt : IScenario
         {
             return new Outcome(crew, "Every point repaired at once. The Meridian answers to the crew again.");
         }
-        return crew.All(s => !state.CrewOf(s).Aboard)
-            ? new Outcome([mimic], "Nobody is left who could tell the difference.")
+        // The mimic's second way to win (owner's decision on the M7 balance report): strike until one is left.
+        return crew.Count(s => state.CrewOf(s).Aboard) <= 1
+            ? new Outcome([mimic], "One of them is left, and they can't tell the difference any more.")
             : null;
     }
 
@@ -188,6 +189,12 @@ public sealed class OneOfUsIsnt : IScenario
         }, Suspect),
         Mimic => new PolicyBot(ctx =>
         {
+            // Alone with one of them, strike: a fight is public and may unmask it, but it can end the game.
+            var company = ctx.State.Crew.Where(c => c.Aboard && c.Seat != ctx.Seat && c.At == ctx.Me.At).ToList();
+            if (company.Count == 1 && BotMoves.Attack(ctx, t => t == company[0].Seat.Value) is { } strike)
+            {
+                return strike;
+            }
             var fixedPoints = Points(ctx.State).Where(p => p.State == "fixed").Select(p => p.At!.Value).ToList();
             return BotMoves.Act(ctx, "sabotage")
                    ?? BotMoves.Toward(ctx, BotMoves.Nearest(ctx, fixedPoints.Count > 0

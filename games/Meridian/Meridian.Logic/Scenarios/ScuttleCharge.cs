@@ -141,6 +141,12 @@ public sealed class ScuttleCharge : IScenario
         {
             return new Outcome([saboteur], "The charges go off together. The Meridian breaks in half, as someone was paid to see.");
         }
+        // The crew's second way to win (owner's decision on the M7 balance report): enough charges found and disarmed
+        // that the saboteur can't reach the target, counting the armed ones and those still in the kit.
+        if (Charges(state).Count() + board.Value("kit") < Needed(pack, state))
+        {
+            return new Outcome(crew, "Too many charges found. Whatever the saboteur has left, it isn't enough.");
+        }
         if (!state.CrewOf(saboteur).Alive)
         {
             return new Outcome(crew, "The saboteur is dead. Whatever they planted, nobody is left to wire it.");

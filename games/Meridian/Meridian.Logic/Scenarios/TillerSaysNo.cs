@@ -29,7 +29,8 @@ public sealed class TillerSaysNo : IScenario
 
     /// <summary>
     /// Tiller vents the compartment with the most crew in it (ties: the lowest id). Each crew member there makes an
-    /// Agility check or loses a step from their higher physical trait; a death is dealt by the rules after.
+    /// Agility check or loses a step from their higher physical trait, and someone already hurt who fails dies: Tiller can
+    /// win before the limit (owner's decision on the M7 balance report). A death is dealt by the rules after.
     /// </summary>
     public GameState On(RulesPack pack, GameState state, GameEvent e, List<GameEvent> events)
     {
@@ -45,7 +46,7 @@ public sealed class TillerSaysNo : IScenario
         }
         var save = pack.ScenarioDef(Id).Number("ventSave");
         events.Add(new ScenarioNotice($"Tiller vents the {pack.Tile(state.Ship.Get(crowded.Key).Tile).Name}.", crowded.Key, Fx: "vent"));
-        state = Primitives.Vent(pack, state, crowded.Key, save, events);
+        state = Primitives.Vent(pack, state, crowded.Key, save, events, lethal: true);
         return state;
     }
 
