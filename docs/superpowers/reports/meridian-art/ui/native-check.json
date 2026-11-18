@@ -1,0 +1,67 @@
+[
+  {
+    "scene": "boarding",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  },
+  {
+    "scene": "explore",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  },
+  {
+    "scene": "breach",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  },
+  {
+    "scene": "endgame",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  },
+  {
+    "scene": "debrief",
+    "size": [
+      1920,
+      1080
+    ],
+    "nativePixelsMatch": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "streamProxy": "JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test"
+  }
+]

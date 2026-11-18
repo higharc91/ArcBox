@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ArcBox.Sdk -> /tmp/meridian-contract-current/src/ArcBox.Sdk/bin/Release/net10.0/ArcBox.Sdk.dll
+  Meridian.Logic -> /tmp/meridian-contract-current/games/Meridian/Meridian.Logic/bin/Release/net10.0/Meridian.Logic.dll
+  Meridian.Game -> /tmp/meridian-contract-current/games/Meridian/Meridian.Game/bin/Release/net10.0/Meridian.Game.dll
+  Meridian.Presentation -> /tmp/meridian-contract-current/games/Meridian/Meridian.Presentation/bin/Release/net10.0/Meridian.Presentation.dll
+  Meridian.Sim -> /tmp/meridian-contract-current/games/Meridian/Meridian.Sim/bin/Release/net10.0/Meridian.Sim.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:11.71

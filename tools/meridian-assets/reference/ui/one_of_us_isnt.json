@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "one_of_us_isnt",
+  "title": "One of Us Isn't",
+  "announcement": "Crew manifest error. I count one more heartbeat than the manifest allows, and one of you is not who you say you are. Ship systems are failing at several points. Repair them. If you believe you know who is lying, call a vote from the scanner. I would trust nobody. I don't.",
+  "roundLimit": 10,
+  "roles": [
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "The Anomaly woke something that wears a familiar face. One of you isn't who they were an hour ago, and you can't tell which. A repair point for each of you is dead somewhere aboard. Fix them all and the Meridian locks out whatever is wearing your friend. If a repair fails, someone undid it while nobody was looking. Twice, the scanner in the Sensor Suite or Command Landing can test one of you. Choose carefully.",
+      "objectives": [
+        "Repair every point (Tech 4+), or name the mimic in a vote at the scanner."
+      ]
+    },
+    {
+      "id": "mimic",
+      "side": "mimic",
+      "name": "The Mimic",
+      "briefing": "You are not one of them, but you look it. The repair points would lock you out of the ship; keep them broken. Repair nothing. When you're alone with a repaired point, undo it quietly; nobody will know until the round ends, and by then you can be elsewhere. Twice they can drag everyone to the scanner and vote. Blend in, point at someone else, and outlast them.",
+      "objectives": [
+        "Keep the points from all being repaired until the round limit, and avoid being named."
+      ]
+    }
+  ],
+  "numbers": {
+    "repair": 4,
+    "votes": 2,
+    "extraPoints": 0
+  },
+  "tokens": {
+    "repair": {
+      "label": "R",
+      "colour": "#ffd447",
+      "name": "Repair point",
+      "states": {
+        "fixed": {
+          "label": "✓",
+          "colour": "#5fe08a"
+        }
+      }
+    },
+    "sabotage": {
+      "label": "S",
+      "colour": "#c08cff",
+      "name": "Sabotage"
+    }
+  },
+  "counters": {
+    "votes": "Votes called",
+    "voteRound": null,
+    "exposed": "Exposed",
+    "suspect-": "Suspicion: {seat}"
+  },
+  "votes": {
+    "mimic": "Who is the mimic?"
+  }
+}

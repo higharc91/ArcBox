@@ -1,0 +1,299 @@
+{
+  "boarding": [
+    {
+      "piece": "seatSlot",
+      "x": 32,
+      "y": 369.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 500,
+      "y": 369.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 968,
+      "y": 369.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 1436,
+      "y": 369.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 32,
+      "y": 689.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 500,
+      "y": 689.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 968,
+      "y": 689.40625,
+      "width": 452,
+      "height": 304
+    },
+    {
+      "piece": "seatSlot",
+      "x": 1436,
+      "y": 689.40625,
+      "width": 452,
+      "height": 304
+    }
+  ],
+  "explore": [
+    {
+      "piece": "seatSlot",
+      "x": 32,
+      "y": 32,
+      "width": 266,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 308,
+      "y": 32,
+      "width": 266,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 584,
+      "y": 32,
+      "width": 266,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 860,
+      "y": 32,
+      "width": 266,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 1136,
+      "y": 32,
+      "width": 266,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 1412,
+      "y": 32,
+      "width": 266,
+      "height": 180
+    },
+    {
+      "piece": "anomalyCounter",
+      "x": 1688,
+      "y": 32,
+      "width": 200,
+      "height": 180
+    },
+    {
+      "piece": "miniMap",
+      "x": 884,
+      "y": 289.390625,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "miniMap",
+      "x": 884,
+      "y": 513.390625,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "logPanel",
+      "x": 32,
+      "y": 817.390625,
+      "width": 1232,
+      "height": 197.6875
+    },
+    {
+      "piece": "cardPanel",
+      "x": 1288,
+      "y": 232,
+      "width": 600,
+      "height": 576
+    },
+    {
+      "piece": "diceTray",
+      "x": 1288,
+      "y": 824,
+      "width": 600,
+      "height": 224
+    }
+  ],
+  "breach": [
+    {
+      "piece": "breachPlate",
+      "x": 192,
+      "y": 254,
+      "width": 1536,
+      "height": 720
+    }
+  ],
+  "endgame": [
+    {
+      "piece": "seatSlot",
+      "x": 32,
+      "y": 32,
+      "width": 231,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 273,
+      "y": 32,
+      "width": 231,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 514,
+      "y": 32,
+      "width": 231,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 755,
+      "y": 32,
+      "width": 231,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 996,
+      "y": 32,
+      "width": 231,
+      "height": 180
+    },
+    {
+      "piece": "seatSlot",
+      "x": 1237,
+      "y": 32,
+      "width": 231,
+      "height": 180
+    },
+    {
+      "piece": "anomalyCounter",
+      "x": 1478,
+      "y": 32,
+      "width": 200,
+      "height": 180
+    },
+    {
+      "piece": "roundClock",
+      "x": 1688,
+      "y": 32,
+      "width": 200,
+      "height": 180
+    },
+    {
+      "piece": "miniMap",
+      "x": 884,
+      "y": 289.390625,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "miniMap",
+      "x": 884,
+      "y": 513.390625,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "logPanel",
+      "x": 32,
+      "y": 817.390625,
+      "width": 1232,
+      "height": 197.6875
+    },
+    {
+      "piece": "cardPanel",
+      "x": 1288,
+      "y": 232,
+      "width": 600,
+      "height": 576
+    },
+    {
+      "piece": "diceTray",
+      "x": 1288,
+      "y": 824,
+      "width": 600,
+      "height": 224
+    }
+  ],
+  "debrief": [
+    {
+      "piece": "debriefPlate",
+      "x": 32,
+      "y": 32,
+      "width": 1432,
+      "height": 782
+    },
+    {
+      "piece": "miniMap",
+      "x": 1528,
+      "y": 84,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "miniMap",
+      "x": 1528,
+      "y": 304,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "miniMap",
+      "x": 1528,
+      "y": 524,
+      "width": 320,
+      "height": 204
+    },
+    {
+      "piece": "panel",
+      "x": 32,
+      "y": 838,
+      "width": 604,
+      "height": 210
+    },
+    {
+      "piece": "panel",
+      "x": 658,
+      "y": 838,
+      "width": 604,
+      "height": 210
+    },
+    {
+      "piece": "panel",
+      "x": 1284,
+      "y": 838,
+      "width": 604,
+      "height": 210
+    }
+  ]
+}
