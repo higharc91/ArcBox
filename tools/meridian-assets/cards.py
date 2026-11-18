@@ -20,22 +20,35 @@ def catalogue(reference=REFERENCE):
 
 
 def frame(kind):
+    # Three material treatments, with solid stretch bands and detailed fixed corners.
+    treatments={
+        'incident': [('hull',0),('warning',2),('warning',4),('red',1),('hull',1),('floor',0)],
+        'salvage': [('hull',0),('engineering',1),('linen',4),('hull',3),('engineering',0),('floor',0)],
+        'anomaly': [('floor',0),('anomaly',1),('anomaly',4),('command',1),('anomaly',0),('floor',0)],
+    }
+    if kind not in treatments:raise ValueError(kind)
     c=style.canvas(64,64)
-    for i,slot,shade in [(0,'hull',0),(1,'hull',1),(2,'hull',4),(4,'hull',2),(6,'hull',0),(8,'floor',0)]:
-        c.rect(i,i,63-i,63-i,slot,shade)
-    # Only corners carry motifs. Every stretchable edge is uniform along its length.
+    for inset,(slot,shade) in zip([0,1,2,4,6,8],treatments[kind]):
+        c.rect(inset,inset,63-inset,63-inset,slot,shade)
     corner=style.canvas(12,12)
     if kind=='incident':
-        corner.polygon([(2,2),(10,2),(2,10)],'warning',4)
-        corner.thick_line(3,8,8,3,2,'hull',0)
+        corner.polygon([(0,0),(11,0),(11,3),(3,11),(0,11)],'warning',3)
+        for offset in [-4,2,8]:
+            corner.polygon([(offset,0),(offset+3,0),(offset+11,8),(offset+8,8)],'hull',0)
+        corner.rect(7,7,11,11,'red',1)
+        corner.rect(8,8,10,10,'warning',5)
     elif kind=='salvage':
-        corner.rect(3,3,10,5,'linen',3);corner.rect(3,3,5,10,'linen',3)
-        corner.rect(7,7,10,10,'engineering',1);corner.rect(8,8,9,9,'warning',4)
-    elif kind=='anomaly':
-        corner.polygon([(6,1),(11,6),(6,11),(1,6)],'anomaly',3)
-        corner.polygon([(6,4),(8,6),(6,8),(4,6)],'hull',0)
-        corner.rect(8,2,10,3,'anomaly',5)
-    else:raise ValueError(kind)
+        corner.polygon([(0,0),(11,0),(11,4),(5,4),(5,11),(0,11)],'hull',2)
+        corner.line(1,1,10,1,'linen',5);corner.line(1,1,1,10,'linen',5)
+        corner.rect(3,3,8,8,'engineering',0)
+        corner.rect(4,4,7,7,'linen',3);corner.line(4,5,7,5,'hull',0)
+        corner.rect(9,9,11,11,'engineering',3)
+    else:
+        corner.polygon([(0,0),(10,0),(11,3),(3,11),(0,10)],'anomaly',1)
+        corner.polygon([(6,0),(11,5),(6,11),(0,6)],'anomaly',4)
+        corner.polygon([(6,2),(9,5),(6,9),(2,6)],'floor',0)
+        corner.polygon([(6,4),(7,5),(6,7),(4,6)],'command',4)
+        corner.line(0,0,3,0,'anomaly',5)
     image=c.render(style.PALETTE);patch=corner.render(style.PALETTE)
     for turn,xy in enumerate([(0,0),(0,52),(52,52),(52,0)]):image.alpha_composite(patch.rotate(turn*90),xy)
     return image
@@ -228,9 +241,13 @@ def review_page(review,data,plates,symbols,icons):
     prefix='../../../../../content/meridian/base/'
     def card_html(kind,c,scale):
         glyph_url=prefix+'icons/'+symbols[kind]['24' if scale=='tv' else '16']['file']
-        item=icons.get(c['id']);image=f'<img class="item" alt="{html.escape(c["title"])} icon" src="{prefix}icons/{item["file"]}" width="{72 if scale=="tv" else 48}" height="{72 if scale=="tv" else 48}">' if item else ''
-        rules=''.join(f'<div class="rule"><strong>{html.escape(label)}</strong><p>{html.escape(text)}</p></div>' for label,text in details(c))
-        return f'<section class="card {scale} {kind}" data-card="{c["id"]}" data-kind="{kind}" style="border-image-source:url({prefix}cards/{plates[kind]["file"]})"><header>{image}<div><h3>{html.escape(c["title"])}</h3><div class="kind"><img alt="" src="{glyph_url}" width="{48 if scale=="tv" else 32}" height="{48 if scale=="tv" else 32}"><span>{kind.title()}</span></div></div></header><p class="flavour">{html.escape(c["text"])}</p>{rules}</section>'
+        item=icons.get(c['id'])
+        identity_url=prefix+'icons/'+(item['file'] if item else symbols[kind]['24']['file'])
+        identity_size=72 if scale=='tv' else 48
+        image=f'<div class="item-well"><img class="item" alt="{html.escape(c["title"])} icon" src="{identity_url}" width="{identity_size}" height="{identity_size}"></div>'
+        rules=''.join(f'<div class="rule{ " band" if label[:1].isdigit() else ""}"><strong>{html.escape(label)}</strong><p>{html.escape(text)}</p></div>' for label,text in details(c))
+        return f'<section class="card {scale} {kind}" data-card="{c["id"]}" data-kind="{kind}" style="border-image-source:url({prefix}cards/{plates[kind]["file"]})"><div class="kind"><img alt="" src="{glyph_url}" width="{48 if scale=="tv" else 32}" height="{48 if scale=="tv" else 32}"><span>{kind.title()}</span><i aria-hidden="true"></i></div><header>{image}<div><h3>{html.escape(c["title"])}</h3></div></header><p class="flavour">{html.escape(c["text"])}</p><div class="rules">{rules}</div></section>'
+
     articles=[]
     for kind,records in data.items():
         for c in records:
@@ -242,7 +259,41 @@ def review_page(review,data,plates,symbols,icons):
     glyphs=''.join('<figure><figcaption>'+kind.title()+'</figcaption>'+''.join(f'<img alt="{kind}, {size}px source" src="{prefix}icons/{symbols[kind][str(size)]["file"]}" width="{size*2}" height="{size*2}">' for size in [16,24])+'</figure>' for kind in KINDS)
     page='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Meridian cards</title><style>
 @font-face{font-family:Ship;src:url('../../../../../src/ArcBox.Host/fonts/TitilliumWeb-SemiBold.ttf')}*{box-sizing:border-box}:root{color-scheme:dark;background:#111b2a;color:#d8e1da;font:18px/1.5 Ship,system-ui}body{max-width:1320px;margin:auto;padding:16px}h1{line-height:1.15}a{color:#9ee0ed}img,.card{image-rendering:pixelated}h2{margin-bottom:12px}.card{border:24px solid transparent;border-image-slice:12 fill;border-image-width:24px;border-image-repeat:stretch;padding:16px;color:#d8e1da;flex:none}.card header{display:flex;gap:16px;align-items:start}.card header>div{min-width:0}.card h3{margin:0;line-height:1.15;overflow-wrap:anywhere}.card p{margin:0 0 .55em}.card .flavour{margin-top:16px}.kind{display:flex;align-items:center;gap:8px}.kind img,.item{flex:none}.kind span{font-size:.8em}.card.phone{width:280px;max-width:100%;font-size:18px;line-height:1.45;padding:12px}.phone h3{font-size:25px}.card.tv{width:560px;font-size:30px;line-height:1.25}.tv h3{font-size:38px}.rule{margin-top:12px}.rule strong{font-weight:bold}.rule p{margin:2px 0 0}.comparisons{display:flex;gap:24px;align-items:start;flex-wrap:wrap}.phone-preview{width:280px;max-width:100%}.tv-preview{flex:1;min-width:0;width:560px;max-width:100%}.pan{overflow:auto;max-height:80vh;border:1px solid #657482}article{padding:12px;border:1px solid #657482;margin:20px 0}.tv-stage{width:1920px;height:1080px;padding:32px 60px;background:#111b2a;display:flex;flex-wrap:wrap;gap:24px 60px;align-content:start;align-items:start}.tv-stage>h2{width:100%;font-size:32px;margin:0 0 10px}.tv-stage .card{width:560px;max-height:960px}.tv-long-stage{width:1920px;height:1080px;padding:28px 60px;background:#111b2a}.tv-long-stage>h2{font-size:32px;margin:0 0 16px}.tv-long-stage .card{width:960px;max-height:960px}.icon-stage{width:1920px;height:1080px;background:#111b2a;padding:28px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:52px repeat(4,1fr);gap:20px}.icon-stage h2{grid-column:1/-1;margin:0;font-size:32px}.icon-stage figure{margin:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;font-size:28px;line-height:1.2}.icon-stage span{font-size:24px;color:#a2b8c0}.icon-stage img{margin-bottom:12px}.glyphs{display:flex;gap:24px;flex-wrap:wrap}.glyphs img{margin-right:16px}select{font:inherit;min-height:44px;padding:8px;background:#26384b;color:#d8e1da;border:1px solid #657482}[hidden]{display:none!important}
-</style><body><h1>Meridian / card frames and item icons</h1><p>Three original nine-slice plates, matching Incident / Salvage / Anomaly symbols at 16px and 24px, and all 20 first-wave item icons at 24px. Text below comes from actual content data; the PNGs contain no titles or rules text.</p><p>Frame corners remain exact 2×; stretchable edge bands and centres are uniform colours. Larger object silhouettes carry item identity; kind names and shapes supplement colour. This is an asset review, not implemented controller/game UI or a physical-TV test.</p><h2>Kind symbols · exact 2×</h2><div class="glyphs">'''+glyphs+'''</div><h2>TV review · native 1920×1080</h2><p>Pan inside each panel on phones. TV cards use a 30px body font with 38px titles; content is live HTML text.</p><div class="pan" tabindex="0" aria-label="Full TV card review"><div class="tv-stage"><h2>DERELICT: ISV MERIDIAN / CARD REVIEW</h2>'''+tv+'''</div></div><h2>Long choice card · full live text</h2><div class="pan" tabindex="0" aria-label="Long choice card at TV size"><div class="tv-long-stage"><h2>LONG CHOICE CARD / SAME 30px FONT</h2>'''+long_card+'''</div></div><h2>All item icons · 3× at 1080p</h2><div class="pan" tabindex="0" aria-label="All item icons at TV size"><div class="icon-stage"><h2>SALVAGE / ANOMALY / TWENTY AUTHORED OBJECTS</h2>'''+icon_tiles+'''</div></div><h2>Every real card at phone and TV sizes</h2><label>Kind <select id="kind"><option value="all">All kinds</option><option>incident</option><option>salvage</option><option>anomaly</option></select></label>'''+''.join(articles)+'''<script>document.querySelector('#kind').onchange=e=>document.querySelectorAll('article').forEach(a=>a.hidden=e.target.value!=='all'&&a.dataset.kind!==e.target.value);</script></body></html>'''
+
+.card{--accent:#e0bd64;--dim:#823a1e;position:relative;padding:16px 16px 24px}
+.card.salvage{--accent:#ced7ca;--dim:#7a3e29}
+.card.anomaly{--accent:#b1bf7a;--dim:#32497d}
+.card::after{content:"";display:block;height:6px;margin-top:22px;background:repeating-linear-gradient(90deg,var(--accent) 0 8px,transparent 8px 16px);width:80px;opacity:.75}
+.card .kind{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:18px;line-height:1.1}
+.card .kind span{font-size:.8em;font-weight:bold}
+.kind i{height:8px;width:32px;background:var(--accent);margin-left:auto;flex:none}
+.salvage .kind i{height:12px;background:transparent;border:3px solid var(--accent)}
+.anomaly .kind i{height:12px;clip-path:polygon(0 4px,4px 4px,4px 0,28px 0,28px 4px,32px 4px,32px 8px,28px 8px,28px 12px,4px 12px,4px 8px,0 8px)}
+.card header{align-items:center;gap:16px;margin-bottom:20px}
+.item-well{flex:none;display:flex;align-items:center;justify-content:center;width:96px;height:96px;border:2px solid var(--accent);background:#111b2a;box-shadow:inset 0 0 0 6px #343e52,4px 4px 0 var(--dim)}
+.anomaly .item-well{box-shadow:inset 0 0 0 6px #2a3046,4px 4px 0 var(--dim)}
+.card h3{color:#e3eadf}
+.card .flavour{margin:0 0 18px;padding:4px 0 4px 14px;border-left:4px solid var(--accent);font-style:italic;color:#ced7ca}
+.rules{display:grid;gap:12px}
+.card .rule{margin:0;padding:12px 14px;background:#111b2a;border-left:2px solid #525e6f}
+.rule>strong{display:block;color:var(--accent);font-size:.85em;line-height:1.2;margin-bottom:6px}
+.card .rule p{margin:0}
+.card .band{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:start}
+.band>strong{font-size:1em;text-align:center;border:2px solid var(--accent);padding:4px 0;background:#21243c;margin:0}
+.tv-long-stage .rules{gap:10px}
+.tv-long-stage .rule{padding:10px 14px}
+.card.phone{padding:12px 12px 18px}
+.phone .item-well{width:64px;height:64px;box-shadow:inset 0 0 0 4px #343e52,3px 3px 0 var(--dim)}
+.phone header{gap:12px;margin-bottom:16px}
+.phone .kind{letter-spacing:.08em;margin-bottom:14px;padding-bottom:8px;gap:6px}
+.phone .kind i{width:16px}
+.phone.anomaly .kind i{clip-path:none;height:8px}
+.phone .flavour{padding-left:10px;margin-bottom:14px}
+.phone .rule{padding:10px}
+.phone .band{grid-template-columns:1fr;gap:8px}
+.phone .band>strong{width:52px}
+.phone::after{margin-top:16px;height:4px;width:64px}
+</style><body><h1>Meridian / card frames and item icons</h1><p>Three stylized industrial nine-slice plates, matching Incident / Salvage / Anomaly symbols at 16px and 24px, and all 20 first-wave item icons at 24px. Text below comes from actual content data; the PNGs contain no titles or rules text.</p><p>Frame corners remain exact 2×; stretchable edge bands and centres are uniform colours. Larger object silhouettes carry item identity; kind names and shapes supplement colour. This is an asset review, not implemented controller/game UI or a physical-TV test.</p><h2>Kind symbols · exact 2×</h2><div class="glyphs">'''+glyphs+'''</div><h2>TV review · native 1920×1080</h2><p>Pan inside each panel on phones. TV cards use a 30px body font with 38px titles; content is live HTML text.</p><div class="pan" tabindex="0" aria-label="Full TV card review"><div class="tv-stage"><h2>DERELICT: ISV MERIDIAN / CARD REVIEW</h2>'''+tv+'''</div></div><h2>Long choice card · full live text</h2><div class="pan" tabindex="0" aria-label="Long choice card at TV size"><div class="tv-long-stage"><h2>LONG CHOICE CARD / SAME 30px FONT</h2>'''+long_card+'''</div></div><h2>All item icons · 3× at 1080p</h2><div class="pan" tabindex="0" aria-label="All item icons at TV size"><div class="icon-stage"><h2>SALVAGE / ANOMALY / TWENTY AUTHORED OBJECTS</h2>'''+icon_tiles+'''</div></div><h2>Every real card at phone and TV sizes</h2><label>Kind <select id="kind"><option value="all">All kinds</option><option>incident</option><option>salvage</option><option>anomaly</option></select></label>'''+''.join(articles)+'''<script>document.querySelector('#kind').onchange=e=>document.querySelectorAll('article').forEach(a=>a.hidden=e.target.value!=='all'&&a.dataset.kind!==e.target.value);</script></body></html>'''
     (review/'index.html').write_text(page)
     # Pixel-only icon and symbol contact sheets; report text is separate from the runtime PNGs.
     sheet=Image.new('RGBA',(800,620),style.INK);draw=ImageDraw.Draw(sheet);draw.fontmode='1';font=ImageFont.load_default()

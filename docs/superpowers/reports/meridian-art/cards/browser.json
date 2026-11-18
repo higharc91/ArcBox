@@ -1,7 +1,7 @@
 [
   {
     "width": 320,
-    "images": 136,
+    "images": 162,
     "cards": 32,
     "pageOverflow": false,
     "imageScales": [
@@ -17,7 +17,7 @@
   },
   {
     "width": 390,
-    "images": 136,
+    "images": 162,
     "cards": 32,
     "pageOverflow": false,
     "imageScales": [
@@ -33,7 +33,7 @@
   },
   {
     "width": 1920,
-    "images": 136,
+    "images": 162,
     "cards": 32,
     "pageOverflow": false,
     "imageScales": [

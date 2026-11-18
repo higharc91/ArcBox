@@ -71,5 +71,6 @@
     "log": "game-contract-check.txt.gz",
     "latestRecheckHead": "93d5b3353d6f4f4c1cb23eda5fda0bd06003efd3",
     "latestCheckerErrors": 0
-  }
+  },
+  "latestStyleReport": "RESTYLE.md"
 }
