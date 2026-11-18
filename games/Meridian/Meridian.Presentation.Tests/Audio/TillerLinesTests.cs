@@ -49,18 +49,7 @@ public sealed class TillerLinesTests
 
     // ---- Review focus 3: nothing secret is spoken
 
-    public static TheoryData<string, int> Games()
-    {
-        var data = new TheoryData<string, int>();
-        foreach (var scenario in new[] { ThePassenger.Id, OneOfUsIsnt.Id, TillerSaysNo.Id, DecayingOrbit.Id, SalvageRights.Id })
-        {
-            for (var players = 3; players <= 6; players++)
-            {
-                data.Add(scenario, players);
-            }
-        }
-        return data;
-    }
+    public static TheoryData<string, int> Games() => AllScenarios.WithPlayers;
 
     [Theory]
     [MemberData(nameof(Games))]

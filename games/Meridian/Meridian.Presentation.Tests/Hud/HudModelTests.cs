@@ -1,3 +1,4 @@
+using Meridian.Presentation.Board;
 using Meridian.Presentation.Beats;
 using Meridian.Presentation.Hud;
 
@@ -58,18 +59,15 @@ public sealed class HudModelTests
     public void Counters_get_room_labels_and_bookkeeping_is_hidden()
     {
         string Names(string seat) => seat == "p2" ? "Bo" : seat;
-        Assert.Null(HudModel.CounterLabel("voteRound", Names));
-        Assert.Equal("Suspicion: Bo", HudModel.CounterLabel("suspect-p2", Names));
-        Assert.Equal("Memory banks pulled", HudModel.CounterLabel("banks", Names));
-        Assert.Equal("Hazard", HudModel.CounterLabel("hazard", Names));
+        var looks = ScenarioLooks.Of(BasePack.Pack);   // the labels are the scenarios' content (M7 plan, Task 1)
+        Assert.Null(looks.Counter("voteRound", Names));
+        Assert.Equal("Suspicion: Bo", looks.Counter("suspect-p2", Names));
+        Assert.Equal("Memory banks pulled", looks.Counter("banks", Names));
+        Assert.Equal("Hazard", looks.Counter("hazard", Names));   // undeclared: its id, capitalised
     }
 
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void Every_phase_of_a_real_game_has_a_hud(string scenario)
     {
         var game = new Harness(players: 4, seed: 2, scenario).Board();

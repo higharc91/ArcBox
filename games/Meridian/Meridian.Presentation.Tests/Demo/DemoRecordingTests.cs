@@ -30,11 +30,7 @@ public sealed class DemoRecordingTests
     }
 
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void The_recording_matches_what_the_game_sends(string scenario)
     {
         var views = Record(scenario);

@@ -28,5 +28,32 @@
     "repair": 4,
     "votes": 2,
     "extraPoints": 0
+  },
+  "tokens": {
+    "repair": {
+      "label": "R",
+      "colour": "#ffd447",
+      "name": "Repair point",
+      "states": {
+        "fixed": {
+          "label": "✓",
+          "colour": "#5fe08a"
+        }
+      }
+    },
+    "sabotage": {
+      "label": "S",
+      "colour": "#c08cff",
+      "name": "Sabotage"
+    }
+  },
+  "counters": {
+    "votes": "Votes called",
+    "voteRound": null,
+    "exposed": "Exposed",
+    "suspect-": "Suspicion: {seat}"
+  },
+  "votes": {
+    "mimic": "Who is the mimic?"
   }
 }

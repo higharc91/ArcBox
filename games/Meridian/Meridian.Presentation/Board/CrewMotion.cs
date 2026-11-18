@@ -50,8 +50,8 @@ public sealed class CrewMotion
         public bool Stunned;
     }
 
-    /// <summary>The token kinds that walk like crew: the scenarios' monsters.</summary>
-    public static readonly IReadOnlySet<string> MonsterKinds = new HashSet<string>(StringComparer.Ordinal) { "brood" };
+    /// <summary>Which token kinds walk like crew: the scenarios' monsters, as their content says (<see cref="ScenarioLooks.Monster"/>).</summary>
+    public Func<string, bool> IsMonster { get; set; } = _ => false;
 
     private readonly Dictionary<string, Walker> _walkers = new(StringComparer.Ordinal);
     private Beat? _beat;
@@ -64,7 +64,7 @@ public sealed class CrewMotion
         var rooms = view.Compartments.ToDictionary(c => c.Id);
         // Crew, and the monsters on the board: everything that walks.
         var figures = view.Crew.Select(m => (m.Id, m.At, m.Echo, Stunned: false))
-            .Concat((view.Scenario?.Tokens ?? []).Where(t => MonsterKinds.Contains(t.Kind) && t.At is not null)
+            .Concat((view.Scenario?.Tokens ?? []).Where(t => IsMonster(t.Kind) && t.At is not null)
                                                   .Select(t => (t.Id, At: t.At!, Echo: false, t.Stunned)))
             .ToList();
         foreach (var gone in _walkers.Keys.Except(figures.Select(f => f.Id)).ToList())

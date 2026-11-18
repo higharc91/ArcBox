@@ -33,11 +33,12 @@ public sealed record HudModel(
     public const int LogLines = 3;
 
     /// <param name="waited">Seconds since the view carrying <see cref="MeridianHostView.Wait"/> arrived: the TV counts down.</param>
-    public static HudModel Of(MeridianHostView view, Beat? beat, double waited = 0)
+    /// <param name="looks">The scenarios' counter labels and token names, from the pack; without them, ids capitalised.</param>
+    public static HudModel Of(MeridianHostView view, Beat? beat, double waited = 0, ScenarioLooks? looks = null)
     {
         var marks = BoardStyle.Marks([.. view.Seats.Select(s => s.Name)]);
         var seats = view.Seats.Select((s, i) => new HudSeat(s.Id, s.Name, s.Crew, marks[i], s.Colour, s.Active, s.Auto, !s.Connected)).ToEqArray();
-        var stats = view.Scenario is { } panel ? ScenarioStats(view, panel) : ExploreStats(view);
+        var stats = view.Scenario is { } panel ? ScenarioStats(view, panel, looks ?? ScenarioLooks.None) : ExploreStats(view);
         var log = view.Log.Skip(Math.Max(0, view.Log.Count - LogLines)).ToEqArray();
         return new HudModel(seats, view.Banner, stats, view.Scenario?.Title,
                             view.Scenario?.Objectives.Where(o => o.State == ObjectiveState.Open).Select(o => o.Text).ToEqArray() ?? [],
@@ -47,38 +48,21 @@ public sealed record HudModel(
     private static EqArray<HudStat> ExploreStats(MeridianHostView view)
         => [new("Round", $"{view.Round}"), new("Anomalies", $"{view.AnomaliesDrawn}"), new("Tiles left", $"{view.TilesLeft}")];
 
-    private static EqArray<HudStat> ScenarioStats(MeridianHostView view, ScenarioPanel panel)
+    private static EqArray<HudStat> ScenarioStats(MeridianHostView view, ScenarioPanel panel, ScenarioLooks looks)
     {
         string Name(string seat) => view.Seats.FirstOrDefault(s => s.Id == seat)?.Name ?? seat;
         var stats = new List<HudStat> { new(panel.RoundsLeft == 1 ? "Final round" : "Rounds left", $"{panel.RoundsLeft}") };
         foreach (var counter in panel.Counters)
         {
-            if (CounterLabel(counter.Id, Name) is { } label)
+            if (looks.Counter(counter.Id, Name) is { } label)
             {
                 stats.Add(new HudStat(label, $"{counter.Value}"));
             }
         }
         stats.AddRange(panel.Tokens.Where(t => t.Carrier is not null)
-                                   .Select(t => new HudStat(Capital(t.Kind), $"carried by {Name(t.Carrier!)}")));
+                                   .Select(t => new HudStat(looks.TokenName(t.Kind), $"carried by {Name(t.Carrier!)}")));
         return [.. stats];
     }
-
-    /// <summary>A counter's label on the TV, or null for the scenario's own bookkeeping, which means nothing to the room.</summary>
-    public static string? CounterLabel(string id, Func<string, string> seatName) => id switch
-    {
-        "voteRound" => null,
-        "banks" => "Memory banks pulled",
-        "doses" => "Doses",
-        "injected" => "Injected",
-        "engines" => "Engine restarts",
-        "escaped" => "Escaped",
-        "exposed" => "Exposed",
-        "orbit" => "Orbit",
-        "pods" => "Pods left",
-        "votes" => "Votes called",
-        _ when id.StartsWith("suspect-", StringComparison.Ordinal) => $"Suspicion: {seatName(id["suspect-".Length..])}",
-        _ => Capital(id),
-    };
 
     private static HudPanel? PanelFor(Presented now) => now.Kind switch
     {
@@ -114,5 +98,4 @@ public sealed record HudModel(
         return wait.Name is { } name ? $"Waiting for {name}… {left} s" : $"Waiting for the vote… {left} s";
     }
 
-    private static string Capital(string s) => s.Length == 0 ? s : char.ToUpperInvariant(s[0]) + s[1..];
 }

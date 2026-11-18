@@ -19,5 +19,22 @@
     "orbit": 7,
     "restartTarget": 6,
     "enginesNeeded": 3
+  },
+  "tokens": {
+    "pods": {
+      "label": "P",
+      "colour": "#5fe08a",
+      "name": "Escape pods"
+    },
+    "engine": {
+      "label": "E",
+      "colour": "#ff7a3d",
+      "name": "Engines"
+    }
+  },
+  "counters": {
+    "orbit": "Orbit",
+    "pods": "Pods left",
+    "engines": "Engine restarts"
   }
 }

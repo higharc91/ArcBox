@@ -61,11 +61,7 @@ public sealed class DebriefTests
     }
 
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void The_debrief_says_whether_the_crew_won_for_its_music(string scenario)
     {
         var game = AtDebrief(scenario);

@@ -15,7 +15,7 @@ public sealed class BeatTimingTests
     public void Every_beat_of_real_games_finishes_inside_its_fallback()
     {
         var kinds = new HashSet<string>();
-        foreach (var scenario in new[] { ThePassenger.Id, OneOfUsIsnt.Id, TillerSaysNo.Id, DecayingOrbit.Id, SalvageRights.Id })
+        foreach (var scenario in AllScenarios.List)
         {
             var game = new Harness(players: 4, seed: 3, scenario).Board();
             var rules = game.Pack.Rules;

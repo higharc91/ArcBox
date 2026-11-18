@@ -40,13 +40,23 @@ public sealed class BoardStyleTests
         => Assert.Equal(3, new[] { DeckId.Command, DeckId.Habitat, DeckId.Engineering }.Select(BoardStyle.DeckAccent).Distinct().Count());
 
     [Fact]
-    public void Every_token_kind_the_scenarios_use_has_a_glyph_and_an_unknown_one_still_draws()
+    public void Every_token_kind_the_scenarios_declare_has_a_glyph_and_an_unknown_one_still_draws()
     {
-        foreach (var kind in new[] { "brood", "repair", "core", "engine", "pods", "prize", "item" })
+        var looks = ScenarioLooks.Of(BasePack.Pack);
+        Assert.Superset(new HashSet<string> { "brood", "repair", "core", "engine", "pods", "prize" }, looks.Kinds.ToHashSet());
+        foreach (var kind in looks.Kinds.Concat(BoardStyle.CoreTokens))
         {
-            Assert.False(string.IsNullOrEmpty(BoardStyle.Token(kind).Label));
+            Assert.False(string.IsNullOrEmpty(looks.Token(kind).Label));
         }
-        Assert.Equal("H", BoardStyle.Token("hazard").Label);
-        Assert.NotEqual(BoardStyle.Token("repair", "broken"), BoardStyle.Token("repair", "fixed"));
+        Assert.Equal("H", looks.Token("hazard").Label);
+        Assert.NotEqual(looks.Token("repair", "broken"), looks.Token("repair", "fixed"));
+        // The S1 five look exactly as they did when their glyphs were code (M4).
+        Assert.Equal(new Glyph("B", "#ff3b3b"), looks.Token("brood"));
+        Assert.Equal(new Glyph("✓", "#5fe08a"), looks.Token("repair", "fixed"));
+        Assert.Equal(new Glyph("★", "#ffd447"), looks.Token("prize"));
+        Assert.Equal(new Glyph("+", "#5fe08a"), looks.Token("item"));
+        Assert.True(looks.Monster("brood"));
+        Assert.False(looks.Monster("prize"));
+        Assert.Equal("Prize", looks.TokenName("prize"));
     }
 }

@@ -13,6 +13,9 @@ namespace ArcBox.Server.Tests.Meridian;
 /// </summary>
 public sealed class MeridianRestartTests
 {
+    /// <summary>Every registered scenario (M7 plan, Task 1): a new one gets this test without editing it.</summary>
+    public static TheoryData<string> Scenarios => [.. global::Meridian.Logic.ScenarioRegistry.Default.All.Select(s => s.Info.Id).Order(StringComparer.Ordinal)];
+
     private sealed class TempDb : IDisposable
     {
         private readonly DirectoryInfo _dir = Directory.CreateTempSubdirectory("arcbox-meridian-restart-");
@@ -93,11 +96,7 @@ public sealed class MeridianRestartTests
 
     [Theory]
     [Trait("Category", "Integration")]
-    [InlineData("the_passenger")]
-    [InlineData("one_of_us_isnt")]
-    [InlineData("tiller_says_no")]
-    [InlineData("decaying_orbit")]
-    [InlineData("salvage_rights")]
+    [MemberData(nameof(Scenarios))]
     public async Task A_game_survives_a_server_restart_in_the_endgame(string scenario)
     {
         using var db = new TempDb();

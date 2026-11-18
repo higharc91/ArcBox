@@ -19,5 +19,15 @@
     "bankTarget": 5,
     "banksNeeded": 3,
     "ventSave": 4
+  },
+  "tokens": {
+    "core": {
+      "label": "◆",
+      "colour": "#3ec7ff",
+      "name": "Tiller's core"
+    }
+  },
+  "counters": {
+    "banks": "Memory banks pulled"
   }
 }

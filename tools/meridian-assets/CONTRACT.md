@@ -30,7 +30,7 @@ Run `tools/meridian-assets/check --art <your content/meridian/base>` before open
 | `portraits` | `portraits` | every crew id | any size |
 | `cards` | `frames` | `incident`, `salvage`, `anomaly` | any size, with `insets` |
 | `icons` | `icons` | every Salvage and Anomaly card id, and the three kinds' symbols | 16×16 or 24×24 |
-| `tokens` | `tokens` | `brood`, `repair`, `core`, `engine`, `pods`, `prize`, `item`, with states such as a repair point's `broken` and `fixed` as named entries | 24×24 or 64×64 |
+| `tokens` | `tokens` | every token kind a scenario declares (`tokens` in `rules/scenarios/<id>.json`), and `item` (a dropped item), with states such as a repair point's `broken` and `fixed` as named entries. `tools/meridian-assets/check` lists the kinds still drawn as placeholders | 24×24 or 64×64 |
 | `ui` | `ui` | `logo`, `title`, `panel`, `seatSlot`, `anomalyCounter`, `roundClock`, `logPanel`, `cardPanel`, `diceTray`, `die`, `miniMap`, `breachPlate`, `debriefPlate` | any size; panels with `insets` |
 | `fx` | `fx` | `reveal`, `hatchOpen`, `hatchSeal`, `hit`, `miss`, `stagger`, `stun`, `traitLoss`, `traitGain`, `breachAlarm`, `breachDistortion`, `vent`, `sparks`, `rot`, `pressure`, `echo`, each with a `reduced` entry beside its own (no flash, no shake) | 32×32 or 64×64 strips |
 | `audio` | `audio` | `music.explore`, `music.breach`, `music.endgame`, `music.debriefWon`, `music.debriefLost`, and `sfx.*`: `footstep`, `hatchOpen`, `hatchSeal`, `reveal`, `cardIncident`, `cardSalvage`, `cardAnomaly`, `diceRoll`, `diceSettle`, `hit`, `miss`, `stagger`, `death`, `echo`, `vent`, `alarm`, `tick` | Ogg Vorbis at −16 LUFS (Tactics' level) |

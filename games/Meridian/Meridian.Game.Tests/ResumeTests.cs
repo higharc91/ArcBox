@@ -141,7 +141,7 @@ public sealed class ResumeTests
     public static TheoryData<string, int> Games()
     {
         var data = new TheoryData<string, int>();
-        foreach (var scenario in new[] { ThePassenger.Id, OneOfUsIsnt.Id, TillerSaysNo.Id, DecayingOrbit.Id, SalvageRights.Id })
+        foreach (var scenario in AllScenarios.List)
         {
             for (var players = 3; players <= 6; players++)
             {

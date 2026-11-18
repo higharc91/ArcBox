@@ -33,18 +33,18 @@ public static class BoardStyle
         _ => new Glyph("?", "#9a9aa8"),
     };
 
-    /// <summary>A token's glyph. A kind no scenario of M4 knows still gets a labelled square: its first letter.</summary>
+    /// <summary>
+    /// A core-rules token's glyph: a dropped item. Scenario tokens look as their content says (<see cref="ScenarioLooks"/>);
+    /// a kind nobody declares still gets a labelled square, its first letter.
+    /// </summary>
     public static Glyph Token(string kind, string? state = null) => kind switch
     {
-        "brood" => new Glyph("B", "#ff3b3b"),
-        "repair" => state == "fixed" ? new Glyph("✓", "#5fe08a") : new Glyph("R", "#ffd447"),
-        "core" => new Glyph("◆", "#3ec7ff"),
-        "engine" => new Glyph("E", "#ff7a3d"),
-        "pods" => new Glyph("P", "#5fe08a"),
-        "prize" => new Glyph("★", "#ffd447"),
-        "item" => new Glyph("+", "#5fe08a"),   // gear a dead crew member dropped, for anyone to pick up
+        global::Meridian.Logic.Token.DroppedItem => new Glyph("+", "#5fe08a"),   // gear a dead crew member dropped, for anyone to pick up
         _ => new Glyph(kind.Length > 0 ? kind[..1].ToUpperInvariant() : "?", "#9a9aa8"),
     };
+
+    /// <summary>The token kinds the core rules place, whatever the scenario.</summary>
+    public static readonly IReadOnlyList<string> CoreTokens = [global::Meridian.Logic.Token.DroppedItem];
 
     /// <summary>A seat's initial, drawn on its colour so nobody relies on colour alone (M4 plan, Global constraints).</summary>
     public static string Initial(string name) => name.Trim() is { Length: > 0 } n ? n[..1].ToUpperInvariant() : "?";

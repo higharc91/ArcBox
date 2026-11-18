@@ -13,6 +13,7 @@
     <Using Include="Meridian.Logic.Tests" />
     <!-- One copy of the shipped-pack loader and the JSON helper, shared with the rules tests. -->
     <Compile Include="..\Meridian.Logic.Tests\Support\BasePack.cs" Link="Support\BasePack.cs" />
+    <Compile Include="..\Meridian.Logic.Tests\Support\AllScenarios.cs" Link="Support\AllScenarios.cs" />
     <Compile Include="..\Meridian.Logic.Tests\Support\Json.cs" Link="Support\Json.cs" />
   </ItemGroup>
 

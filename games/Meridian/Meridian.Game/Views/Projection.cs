@@ -231,7 +231,7 @@ internal static class Projection
     }
 
     private static VoteScreen Vote(MeridianGame game, GameState state, VotePending v, SeatId me)
-        => new(v.Purpose == "mimic" ? "Who is the mimic?" : "Vote",
+        => new(state.Board is { } board && game.Pack.ScenarioDef(board.Scenario).Votes?.GetValueOrDefault(v.Purpose) is { } question ? question : "Vote",
                v.Options.Select(o => new VoteOption(o, state.IndexOf(new SeatId(o)) >= 0 ? game.Session.SeatOf(new SeatId(o)).Name : o)).ToEqArray(),
                !v.Owed.Contains(me), v.Owed.Count);
 

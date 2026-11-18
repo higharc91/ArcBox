@@ -63,7 +63,11 @@ public sealed record Token(
     MonsterStats? Stats = null,
     bool Stunned = false,
     string? State = null,
-    CardId? Card = null);
+    CardId? Card = null)
+{
+    /// <summary>The token the core rules place: gear a dead crew member dropped. Every other kind is a scenario's.</summary>
+    public const string DroppedItem = "item";
+}
 
 public sealed record Counter(string Id, int Value, Audience Audience);
 

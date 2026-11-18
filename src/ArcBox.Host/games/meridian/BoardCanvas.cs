@@ -23,6 +23,7 @@ public partial class BoardCanvas : Node2D
     private Func<string, string> _tileName = id => id;
     private Func<string, string?> _crewId = _ => null;
     private MeridianArt _art = MeridianArt.None;
+    private ScenarioLooks _looks = ScenarioLooks.None;
     private TvSize _size = new(1920, 1080);
 
     // The camera eases from where it was to where framing wants it (DeckLayout.EaseSeconds).
@@ -39,9 +40,9 @@ public partial class BoardCanvas : Node2D
     private double _clock;
 
     /// <summary>The content pack's names and the art it has; until the pack arrives, ids and placeholders.</summary>
-    public void Use(Func<string, string> tileName, Func<string, string?> crewIdByName, MeridianArt art)
+    public void Use(Func<string, string> tileName, Func<string, string?> crewIdByName, MeridianArt art, ScenarioLooks looks)
     {
-        (_tileName, _crewId, _art) = (tileName, crewIdByName, art);
+        (_tileName, _crewId, _art, _looks) = (tileName, crewIdByName, art, looks);
         _textures.Clear();
     }
 
@@ -186,7 +187,7 @@ public partial class BoardCanvas : Node2D
                     var size = names ? Math.Max(18f, cell * 0.22f) : Math.Max(4f, cell * 0.2f);
                     var at = c + new Vector2(-cell * 0.36f + i++ * (size + 3), cell * 0.18f);
                     // A monster walks like crew (M5 plan, Task 4): drawn where it is, mid-walk.
-                    var pose = CrewMotion.MonsterKinds.Contains(token.Kind) ? figures.GetValueOrDefault(token.Id) : null;
+                    var pose = _looks.Monster(token.Kind) ? figures.GetValueOrDefault(token.Id) : null;
                     if (pose is { Walking: true })
                     {
                         at = V(DeckLayout.ToScreen(pose.X, pose.Y, cam, area)) - new Vector2(size / 2, size / 2);
@@ -204,7 +205,7 @@ public partial class BoardCanvas : Node2D
                                               new Color(1, 1, 1, token.Stunned && pose is null ? 0.4f : 1f));
                         continue;
                     }
-                    var glyph = BoardStyle.Token(token.Kind, token.State);
+                    var glyph = _looks.Token(token.Kind, token.State);
                     var colour = new Color(glyph.Colour, token.Stunned ? 0.4f : 1f);
                     DrawRect(new Rect2(at, new Vector2(size, size)), colour);
                     if (pose is { State: CrewLook.Hurt })

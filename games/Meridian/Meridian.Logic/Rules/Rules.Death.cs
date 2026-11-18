@@ -18,7 +18,7 @@ internal sealed partial class Resolver
         var board = State.Board;
         foreach (var card in crew.Items)
         {
-            board = board?.WithToken(new Token($"drop-{card.Value}", "item", crew.At, Audience.Everyone, Card: card));
+            board = board?.WithToken(new Token($"drop-{card.Value}", Token.DroppedItem, crew.At, Audience.Everyone, Card: card));
             Events.Add(new ItemDropped(seat, card, crew.At));
         }
         State = State.WithCrew(crew with { Alive = false, Items = [] });

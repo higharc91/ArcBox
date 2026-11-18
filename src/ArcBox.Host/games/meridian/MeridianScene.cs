@@ -124,8 +124,10 @@ public partial class MeridianScene : Control, IGameScene, ISignalingScene, ICont
             {
                 GD.PushWarning($"Meridian art: {problem}; drawing a placeholder");
             }
-            _board.Use(id => tiles.GetValueOrDefault(id, id), name => crew.GetValueOrDefault(name), art);
-            _textures.Use(art, name => crew.GetValueOrDefault(name));
+            var looks = ScenarioLooks.Of(pack);
+            _board.Use(id => tiles.GetValueOrDefault(id, id), name => crew.GetValueOrDefault(name), art, looks);
+            _textures.Use(art, name => crew.GetValueOrDefault(name), looks);
+            _motion.IsMonster = looks.Monster;
             _audio.Use(art);
         }
         catch (ContentException e)

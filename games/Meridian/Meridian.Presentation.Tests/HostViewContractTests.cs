@@ -14,11 +14,7 @@ public sealed class HostViewContractTests
     private static JsonElement Write(object view) => JsonSerializer.SerializeToElement(view, ArcJson.Options);
 
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void Every_phase_of_a_real_game_becomes_a_screen(string scenario)
     {
         var game = new Harness(players: 4, seed: 2, scenario);

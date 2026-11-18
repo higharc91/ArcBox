@@ -143,7 +143,7 @@ public sealed class ArtContractDocTests
         {
             Assert.Contains($"| `{set.Name}` | `{set.MapKey}` |", page);
         }
-        foreach (var piece in ArtContract.UiPieces.Concat(ArtContract.Effects).Concat(ArtContract.TokenKinds).Concat(ArtContract.HatchStates))
+        foreach (var piece in ArtContract.UiPieces.Concat(ArtContract.Effects).Concat(BoardStyle.CoreTokens).Concat(ArtContract.HatchStates))
         {
             Assert.Contains($"`{piece}`", page);
         }

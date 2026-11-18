@@ -15,6 +15,7 @@
     <Using Include="Meridian.Game.Tests" />
     <!-- The game tests' harness and the shipped-pack loader: real sessions, played by bots, for the TV to read. -->
     <Compile Include="..\Meridian.Logic.Tests\Support\BasePack.cs" Link="Support\BasePack.cs" />
+    <Compile Include="..\Meridian.Logic.Tests\Support\AllScenarios.cs" Link="Support\AllScenarios.cs" />
     <Compile Include="..\Meridian.Logic.Tests\Support\Json.cs" Link="Support\Json.cs" />
     <Compile Include="..\Meridian.Game.Tests\Support\Harness.cs" Link="Support\Harness.cs" />
   </ItemGroup>

@@ -17,5 +17,15 @@
   ],
   "numbers": {
     "slow": 2
+  },
+  "tokens": {
+    "prize": {
+      "label": "★",
+      "colour": "#ffd447",
+      "name": "Prize"
+    }
+  },
+  "counters": {
+    "escaped": "Escaped"
   }
 }

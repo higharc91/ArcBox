@@ -5,6 +5,12 @@ namespace Meridian.Logic;
 /// <summary>Checks a pack's meaning once its JSON has parsed. Returns every error; an empty list means valid.</summary>
 public static partial class Validation
 {
+    [GeneratedRegex(@"^#[0-9a-fA-F]{6}\z", RegexOptions.CultureInvariant)]
+    private static partial Regex HexColour();
+
+    /// <summary>A look as JSON, to compare two scenarios' declarations of one kind.</summary>
+    private static string Json(TokenLook look) => System.Text.Json.JsonSerializer.Serialize(look);
+
     [GeneratedRegex(@"^[a-z][a-z0-9_]*\z", RegexOptions.CultureInvariant)]
     private static partial Regex IdPattern();
 
@@ -256,6 +262,19 @@ public static partial class Validation
     private static void CheckScenarios(RulesPack pack, List<ContentError> errors)
     {
         var breach = pack.Breach;
+        // A token kind or counter means one thing everywhere: the TV looks it up without knowing the scenario.
+        foreach (var kind in pack.ScenarioDefs.SelectMany(d => (d.Tokens ?? new Dictionary<string, TokenLook>()).Select(t => (d.Id, t.Key, t.Value)))
+                                 .GroupBy(t => t.Key).Where(g => g.Select(t => Json(t.Value)).Distinct().Count() > 1))
+        {
+            errors.Add(new(PackLoader.ScenarioFile(kind.First().Id), $"tokens/{kind.Key}",
+                           $"looks different in {string.Join(", ", kind.Select(t => t.Id))}; a token kind must look the same everywhere"));
+        }
+        foreach (var counter in pack.ScenarioDefs.SelectMany(d => (d.Counters ?? new Dictionary<string, string?>()).Select(c => (d.Id, c.Key, c.Value)))
+                                    .GroupBy(c => c.Key).Where(g => g.Select(c => c.Value).Distinct().Count() > 1))
+        {
+            errors.Add(new(PackLoader.ScenarioFile(counter.First().Id), $"counters/{counter.Key}",
+                           $"is labelled differently in {string.Join(", ", counter.Select(c => c.Id))}; a counter must read the same everywhere"));
+        }
         foreach (var def in pack.ScenarioDefs)
         {
             var file = PackLoader.ScenarioFile(def.Id);
@@ -263,6 +282,17 @@ public static partial class Validation
             if (def.RoundLimit < 1)
             {
                 errors.Add(new(file, "roundLimit", "must be at least 1: every scenario has a round limit"));
+            }
+            foreach (var (kind, look) in def.Tokens ?? new Dictionary<string, TokenLook>())
+            {
+                foreach (var (where, each) in (look.States ?? new Dictionary<string, TokenLook>()).Select(x => ($"{kind}/{x.Key}", x.Value))
+                                                  .Prepend((kind, look)))
+                {
+                    if (each.Label.Length is < 1 or > 2 || !HexColour().IsMatch(each.Colour))
+                    {
+                        errors.Add(new(file, $"tokens/{where}", "needs a label of one or two characters and a colour like #ff3b3b"));
+                    }
+                }
             }
             if (def.Roles.IsEmpty || def.Roles.Select(r => r.Id).Distinct().Count() != def.Roles.Count)
             {

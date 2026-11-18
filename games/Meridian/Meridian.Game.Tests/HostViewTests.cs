@@ -69,11 +69,7 @@ public sealed class HostViewTests
 
     /// <summary>The endgame adds the scenario panel; the view and its patches keep their budgets in every scenario.</summary>
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void The_endgame_view_keeps_its_budgets(string scenario)
     {
         var game = new Harness(players: 6, seed: 2, scenario).Board();

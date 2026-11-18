@@ -22,6 +22,30 @@
         }
       }
     },
-    "numbers": { "type": "object", "additionalProperties": { "type": "integer" } }
+    "numbers": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "tokens": {
+      "type": "object", "description": "Each token kind the scenario places: its placeholder look on the TV. A kind must look the same in every scenario.",
+      "additionalProperties": { "$ref": "#/$defs/look" }
+    },
+    "counters": {
+      "type": "object", "description": "Each counter's TV label, or null to keep it off the TV. A key ending in '-' is a prefix for per-seat counters; '{seat}' in its label is the seat's name.",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "votes": {
+      "type": "object", "description": "The question each of the scenario's votes asks on the phones, by the vote's purpose.",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "look": {
+      "type": "object", "required": ["label", "colour"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 2 },
+        "colour": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "name": { "type": "string", "description": "Shown on the TV's HUD ('Prize carried by Sam'). Default: the kind, capitalised." },
+        "monster": { "type": "boolean", "description": "Walks like crew on the TV." },
+        "states": { "type": "object", "additionalProperties": { "$ref": "#/$defs/look" } }
+      }
+    }
   }
 }

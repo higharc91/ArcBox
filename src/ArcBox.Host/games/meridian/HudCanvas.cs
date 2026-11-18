@@ -39,7 +39,7 @@ public partial class HudCanvas : Node2D
         // or dice tumble.
         if (_director?.Shown is { } view)
         {
-            var hud = HudModel.Of(view, _director.Current, _waited);
+            var hud = HudModel.Of(view, _director.Current, _waited, _textures?.Looks);
             if (!hud.Equals(_drawn) || _director.Current is { Short: false } || !ReferenceEquals(view, _drawnView))
             {
                 (_drawn, _drawnView) = (hud, view);
@@ -59,7 +59,7 @@ public partial class HudCanvas : Node2D
         }
         var size = GetViewportRect().Size;
         var areas = DeckLayout.Areas(new TvSize((int)size.X, (int)size.Y));
-        var hud = HudModel.Of(view, _director.Current, _waited);
+        var hud = HudModel.Of(view, _director.Current, _waited, _textures?.Looks);
         DrawTop(hud, areas, size);
         if (DebriefModel.Of(view) is not null)
         {

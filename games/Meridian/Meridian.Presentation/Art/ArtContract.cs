@@ -49,8 +49,8 @@ public static class ArtContract
         "sfx.diceRoll", "sfx.diceSettle", "sfx.hit", "sfx.miss", "sfx.stagger", "sfx.death", "sfx.echo", "sfx.vent", "sfx.alarm", "sfx.tick",
     ];
 
-    /// <summary>The token kinds the scenarios place, as the board draws them.</summary>
-    public static readonly IReadOnlyList<string> TokenKinds = ["brood", "repair", "core", "engine", "pods", "prize", "item"];
+    /// <summary>The token kinds a pack's scenarios declare, and the core rules' own (a dropped item).</summary>
+    public static IReadOnlyList<string> TokenKinds(RulesPack pack) => [.. ScenarioLooks.Of(pack).Kinds, .. BoardStyle.CoreTokens];
 
     public static readonly IReadOnlyList<ArtSet> Sets =
     [
@@ -61,7 +61,7 @@ public static class ArtContract
         new("cards", "frames", _ => CardFrames, [], Strict: true, NeedsInsets: true),
         new("icons", "icons", p => [.. p.Cards.Where(c => c.Kind != CardKind.Incident).Select(c => c.Id.Value), .. CardFrames],
             [new(16, 16), Sprite], Strict: true),
-        new("tokens", "tokens", _ => TokenKinds, [Sprite, Tile], Strict: false),
+        new("tokens", "tokens", TokenKinds, [Sprite, Tile], Strict: false),
         new("ui", "ui", _ => UiPieces, [], Strict: false),
         new("fx", "fx", _ => Effects, [new(32, 32), Tile], Strict: false),
         new("audio", "audio", _ => Sounds, [], Strict: false),

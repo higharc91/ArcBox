@@ -70,11 +70,7 @@ public sealed class BreachAndDebriefTests
     }
 
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void The_debrief_reveals_every_seat_and_names_the_award_winners(string scenario)
     {
         var game = new Harness(players: 4, seed: 1, scenario).Board();

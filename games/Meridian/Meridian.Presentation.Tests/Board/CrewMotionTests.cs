@@ -120,7 +120,7 @@ public sealed class MonsterMotionTests
     [Fact]
     public void A_monster_walks_like_crew_and_a_stunned_one_shows_it()
     {
-        var motion = new CrewMotion();
+        var motion = new CrewMotion { IsMonster = ScenarioLooks.Of(BasePack.Pack).Monster };
         motion.Receive(View("a"), null);
         motion.Receive(View("b"), null);
         motion.Tick(0.1);
@@ -134,7 +134,7 @@ public sealed class MonsterMotionTests
     [Fact]
     public void A_monster_that_leaves_the_board_is_forgotten()
     {
-        var motion = new CrewMotion();
+        var motion = new CrewMotion { IsMonster = ScenarioLooks.Of(BasePack.Pack).Monster };
         motion.Receive(View("a"), null);
         motion.Receive(View("a", brood: false), null);
         Assert.DoesNotContain(motion.Poses, p => p.Seat == "brood-1");

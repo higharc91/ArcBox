@@ -30,5 +30,16 @@
     "broodAgility": 3,
     "broodNerve": 2,
     "broodFewer": 2
+  },
+  "tokens": {
+    "brood": {
+      "label": "B",
+      "colour": "#ff3b3b",
+      "monster": true
+    }
+  },
+  "counters": {
+    "doses": "Doses",
+    "injected": "Injected"
   }
 }

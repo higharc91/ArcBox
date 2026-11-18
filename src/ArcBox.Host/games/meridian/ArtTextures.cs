@@ -1,5 +1,6 @@
 using Godot;
 using Meridian.Presentation.Art;
+using Meridian.Presentation.Board;
 using Meridian.Presentation.Hud;
 
 namespace ArcBox.Host.Games.Meridian;
@@ -12,12 +13,15 @@ public sealed class ArtTextures
 
     public MeridianArt Art { get; private set; } = MeridianArt.None;
 
+    /// <summary>The scenarios' token and counter looks, from the pack (M7 plan, Task 1).</summary>
+    public ScenarioLooks Looks { get; private set; } = ScenarioLooks.None;
+
     /// <summary>A crew member's id by their name, as the host view names them.</summary>
     public Func<string, string?> CrewId { get; private set; } = _ => null;
 
-    public void Use(MeridianArt art, Func<string, string?> crewId)
+    public void Use(MeridianArt art, Func<string, string?> crewId, ScenarioLooks looks)
     {
-        (Art, CrewId) = (art, crewId);
+        (Art, CrewId, Looks) = (art, crewId, looks);
         _cache.Clear();
         _boxes.Clear();
     }

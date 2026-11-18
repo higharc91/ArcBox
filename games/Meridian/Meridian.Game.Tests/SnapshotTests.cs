@@ -30,11 +30,7 @@ public sealed class SnapshotTests
     }
 
     [Theory]
-    [InlineData(ThePassenger.Id)]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(TillerSaysNo.Id)]
-    [InlineData(DecayingOrbit.Id)]
-    [InlineData(SalvageRights.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void A_restored_game_plays_on_exactly_as_the_original(string scenario)
     {
         var original = new Harness(players: 4, seed: 3, scenario).Board();

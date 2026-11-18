@@ -12,13 +12,12 @@ namespace ArcBox.Server.Tests.Meridian;
 /// </summary>
 public sealed class MeridianHubTests
 {
+    /// <summary>Every registered scenario (M7 plan, Task 1): a new one gets this test without editing it.</summary>
+    public static TheoryData<string> Scenarios => [.. global::Meridian.Logic.ScenarioRegistry.Default.All.Select(s => s.Info.Id).Order(StringComparer.Ordinal)];
+
     [Theory]
     [Trait("Category", "Integration")]
-    [InlineData("the_passenger")]
-    [InlineData("one_of_us_isnt")]
-    [InlineData("tiller_says_no")]
-    [InlineData("decaying_orbit")]
-    [InlineData("salvage_rights")]
+    [MemberData(nameof(Scenarios))]
     public async Task Three_phones_play_through_the_breach_and_the_room_returns_to_the_lobby(string scenario)
     {
         using var f = new ArcServerFactory(withTactics: false, withMeridian: true) { MeridianScenario = scenario };

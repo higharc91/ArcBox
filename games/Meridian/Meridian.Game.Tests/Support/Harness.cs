@@ -17,9 +17,18 @@ internal sealed class Harness
     {
     }
 
-    private Harness(int players, int seed, string? scenario, bool start)
+    /// <summary>A game on another pack: one with a scenario added in a test (M7 plan, Task 1).</summary>
+    public Harness(RulesPack pack, int players = 3, int seed = 1) : this(players, seed, pack, start: true)
     {
-        var pack = scenario is null ? BasePack.Pack : BasePack.Pack.WithForcedScenario(scenario);
+    }
+
+    private Harness(int players, int seed, string? scenario, bool start)
+        : this(players, seed, scenario is null ? BasePack.Pack : BasePack.Pack.WithForcedScenario(scenario), start)
+    {
+    }
+
+    private Harness(int players, int seed, RulesPack pack, bool start)
+    {
         H = new GameHarness<MeridianGame>(new MeridianGame(new Lazy<RulesPack>(() => pack)), players, seed);
         if (start)
         {

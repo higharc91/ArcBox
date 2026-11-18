@@ -67,8 +67,7 @@ public sealed class TvFeedTests
     }
 
     [Theory]
-    [InlineData(OneOfUsIsnt.Id)]
-    [InlineData(ThePassenger.Id)]
+    [MemberData(nameof(AllScenarios.Ids), MemberType = typeof(AllScenarios))]
     public void The_endgame_pause_looks_the_same_whoever_drops(string scenario)
     {
         // Each living seat in turn drops on its own endgame turn; the TV's banner differs only in the name.
