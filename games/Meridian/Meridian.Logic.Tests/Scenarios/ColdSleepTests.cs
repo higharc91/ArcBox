@@ -20,7 +20,7 @@ public sealed class ColdSleepTests
         Assert.All(relays, r => Assert.Equal(DeckId.Engineering, state.Ship.Get(r.At!.Value).At.Deck));
         Assert.All(relays, r => Assert.Equal("powered", r.State));
         Assert.All(Sleepers(state), s => Assert.Equal(Waker(state), s.Controller));
-        Assert.Single(Sleepers(state));
+        Assert.Equal(Pack.ScenarioDef(Id).Number("startSleepers"), Sleepers(state).Count());
     }
 
     [Fact]

@@ -85,7 +85,9 @@ public sealed class CompanyAsset : IScenario
     public GameState Act(RulesPack pack, GameState state, ScenarioAct act, List<GameEvent> events)
     {
         var (next, total) = Primitives.Check(pack, state, act.From, Trait.Tech, events);
-        if (total >= pack.ScenarioDef(Id).Number("transmit"))
+        // A thin crew of three gets an easier line out (tuned in the M7 balance report).
+        var target = pack.ScenarioDef(Id).Number("transmit") - (state.Crew.Count == 3 ? pack.ScenarioDef(Id).Number("easierAtThree") : 0);
+        if (total >= target)
         {
             events.Add(new ScenarioActed(act.From, act.Action, null, "The logs go out. Somebody, somewhere, is listening."));
             return next.WithBoard(next.Board!.WithCounter("transmitted", next.Board.Value("transmitted") + 1));

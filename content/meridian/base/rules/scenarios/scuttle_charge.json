@@ -25,8 +25,8 @@
     }
   ],
   "numbers": {
-    "needed": 4,
-    "extraAtFive": 0,
+    "needed": 5,
+    "extraAtFive": -1,
     "extraCharges": 1,
     "search": 3,
     "searchReach": 1,

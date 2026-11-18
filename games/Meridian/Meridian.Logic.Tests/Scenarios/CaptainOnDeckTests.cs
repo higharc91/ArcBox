@@ -17,7 +17,8 @@ public sealed class CaptainOnDeckTests
             var lowest = state.Crew.Min(c => Rules.Value(Pack, c, Trait.Nerve));
             Assert.Equal(lowest, Rules.Value(Pack, state.CrewOf(Captain(state)), Trait.Nerve));
             var cores = Cores(state).ToList();
-            Assert.Equal(3, cores.Count);
+            Assert.Equal(players >= 5 ? 4 : 3, cores.Count);   // more to pull with more hands (balance report)
+            Assert.Equal(cores.Count, CaptainOnDeck.Cores(Pack, state));
             Assert.All(cores, c => Assert.DoesNotContain(c.At!.Value, state.Ship.Compartments.Take(Pack.Start.Place.Count).Select(x => x.Id)));
             foreach (var core in cores)
             {
@@ -89,7 +90,7 @@ public sealed class CaptainOnDeckTests
     }
 
     [Fact]
-    public void Pulling_three_cores_wins_for_the_crew()
+    public void Pulling_every_core_wins_for_the_crew()
     {
         var game = Begin();
         var crew = game.State.Crew.First(c => c.Seat != Captain(game.State) && c.Aboard).Seat;

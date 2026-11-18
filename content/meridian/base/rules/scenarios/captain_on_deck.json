@@ -32,7 +32,8 @@
     "ventCost": 2,
     "ventSave": 3,
     "pull": 4,
-    "cut": 5
+    "cut": 5,
+    "extraCoresAtFive": 1
   },
   "tokens": {
     "command_core": {

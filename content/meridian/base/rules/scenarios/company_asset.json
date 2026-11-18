@@ -31,7 +31,8 @@
     "droneBrawn": 3,
     "droneAgility": 4,
     "droneNerve": 3,
-    "dronesFewer": 2
+    "dronesFewer": 2,
+    "easierAtThree": 1
   },
   "tokens": {
     "drone": {

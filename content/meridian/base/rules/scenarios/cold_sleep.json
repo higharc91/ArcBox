@@ -25,12 +25,12 @@
     }
   ],
   "numbers": {
-    "relays": 3,
-    "reroute": 4,
-    "startSleepers": 1,
-    "maxAwake": 6,
+    "relays": 2,
+    "reroute": 3,
+    "startSleepers": 0,
+    "maxAwake": 3,
     "sleeperBrawn": 3,
-    "sleeperAgility": 2,
+    "sleeperAgility": 1,
     "sleeperNerve": 1
   },
   "tokens": {

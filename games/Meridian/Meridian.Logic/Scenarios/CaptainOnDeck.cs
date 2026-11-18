@@ -14,8 +14,13 @@ public sealed class CaptainOnDeck : IScenario
 
     public ScenarioInfo Info { get; } = new(Id, "revealed-traitor", 3, 6);
 
-    /// <summary>The cores need three compartments off the start layout, at least two steps apart.</summary>
-    public bool CanRun(RulesPack pack, GameState state, BreachInfo breach) => Places(pack, state, state.Rng, 3).Places.Count == 3;
+    /// <summary>The cores need compartments off the start layout, at least two steps apart.</summary>
+    public bool CanRun(RulesPack pack, GameState state, BreachInfo breach)
+        => Places(pack, state, state.Rng, Cores(pack, state)).Places.Count == Cores(pack, state);
+
+    /// <summary>The cores to pull: more with five or more aboard (tuned in the M7 balance report).</summary>
+    public static int Cores(RulesPack pack, GameState state)
+        => pack.ScenarioDef(Id).Number("cores") + (state.Crew.Count >= 5 ? pack.ScenarioDef(Id).Number("extraCoresAtFive") : 0);
 
     /// <summary>
     /// <paramref name="count"/> compartments off the start layout, each at least two steps from the others, picked in a
@@ -52,7 +57,7 @@ public sealed class CaptainOnDeck : IScenario
     {
         var def = pack.ScenarioDef(Id);
         var captain = Chosen(pack, state, breach.Seat);
-        var (places, rng) = Places(pack, state, state.Rng, def.Number("cores"));
+        var (places, rng) = Places(pack, state, state.Rng, Cores(pack, state));
         state = state with { Rng = rng };
         var roles = state.Crew.Select(c => c.Seat == captain
             ? new RoleCard(c.Seat, Captain, Captain, Audience.Everyone)
@@ -175,7 +180,7 @@ public sealed class CaptainOnDeck : IScenario
     {
         var board = state.Board!;
         var crew = board.Roles.Where(r => r.Role == Crew).Select(r => r.Seat).ToEqArray();
-        if (board.Value("pulled") >= pack.ScenarioDef(Id).Number("cores"))
+        if (board.Value("pulled") >= Cores(pack, state))
         {
             return new Outcome(crew, "The last core comes free. The captain's voice stops mid-order.");
         }
