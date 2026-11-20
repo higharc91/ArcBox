@@ -1,0 +1,34 @@
+{
+  "ines_okafor": {
+    "peakDb": -17.105,
+    "rmsDb": -30.406
+  },
+  "tobe_raske": {
+    "peakDb": -16.51,
+    "rmsDb": -28.62
+  },
+  "sable_quist": {
+    "peakDb": -16.684,
+    "rmsDb": -28.638
+  },
+  "anselm_varga": {
+    "peakDb": -16.614,
+    "rmsDb": -28.641
+  },
+  "pell_ostrander": {
+    "peakDb": -17.157,
+    "rmsDb": -30.407
+  },
+  "juno_achterberg": {
+    "peakDb": -17.618,
+    "rmsDb": -30.418
+  },
+  "kit_sato": {
+    "peakDb": -16.563,
+    "rmsDb": -28.641
+  },
+  "rhee_callender": {
+    "peakDb": -16.813,
+    "rmsDb": -30.385
+  }
+}

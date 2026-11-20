@@ -1,3 +1,5 @@
+import { playCrewSignature, crewSound, type CrewId, type CrewSound } from "./crew-tones";
+
 /**
  * Tiny WebAudio-synthesised sounds (audio spec §3.4): no asset files, each a short oscillator or noise envelope.
  * iOS only lets a page start audio from a user gesture, so the AudioContext is created and resumed in `unlock()`,
@@ -5,7 +7,7 @@
  * browser without WebAudio, `play` does nothing. Nothing here throws.
  */
 
-export type SoundName = "tap" | "tick" | "correct" | "wrong" | "spin" | "fizz" | "pop";
+export type SoundName = CrewSound | "tap" | "tick" | "correct" | "wrong" | "spin" | "fizz" | "pop";
 
 /** The loudest any envelope goes: quiet by default, the phone's volume does the rest. */
 export const MAX_GAIN = 0.25;
@@ -78,7 +80,7 @@ function filteredNoise(ctx: AudioContext, at: number, buffer: AudioBuffer, filte
   src.stop(at + length);
 }
 
-const RECIPES: Record<SoundName, (ctx: AudioContext, at: number, level: number) => void> = {
+const RECIPES: Record<Exclude<SoundName, CrewSound>, (ctx: AudioContext, at: number, level: number) => void> = {
   /** A soft "tok": a sine dropping an octave in 45 ms. */
   tap: (ctx, at) => tone(ctx, at, { type: "sine", from: 880, to: 440, peak: 0.18, length: 0.045 }),
 
@@ -182,7 +184,11 @@ export class Sounds {
     // when it resumes: skip them instead, unless a resume from this very gesture is on its way.
     if (!ctx || (ctx.state !== "running" && !this.resuming)) return;
     try {
-      RECIPES[name](ctx, ctx.currentTime + 0.005, level);
+      if (name.startsWith("crew.") && crewSound(name.slice(5))) {
+        playCrewSignature(ctx, name.slice(5) as CrewId, ctx.currentTime + 0.005);
+      } else {
+        RECIPES[name as Exclude<SoundName, CrewSound>](ctx, ctx.currentTime + 0.005, level);
+      }
     } catch {
       // Audio is decoration: never let it break a tap.
     }

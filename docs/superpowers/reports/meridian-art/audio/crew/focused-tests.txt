@@ -1,0 +1,13 @@
+
+> arcbox-play@0.0.0 test
+> vitest run --maxWorkers=1 test/feedback.test.ts test/crew-selection.test.ts
+
+
+ RUN  v4.1.12 /workspace/ArcBox-art/web/play
+
+
+ Test Files  2 passed (2)
+      Tests  26 passed (26)
+   Start at  17:57:58
+   Duration  1.85s (transform 508ms, setup 0ms, import 815ms, tests 112ms, environment 601ms)
+

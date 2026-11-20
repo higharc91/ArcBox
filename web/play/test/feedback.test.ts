@@ -379,7 +379,9 @@ describe("feedback", () => {
   });
 
   it("sounds are short and quiet", () => {
-    const limits: Record<SoundName, number> = { tap: 0.3, tick: 0.3, wrong: 0.3, spin: 0.3, correct: 0.6, fizz: 0.3, pop: 1 };
+    const limits: Record<SoundName, number> = { tap: 0.3, tick: 0.3, wrong: 0.3, spin: 0.3, correct: 0.6, fizz: 0.3, pop: 1,
+      "crew.ines_okafor": 0.45, "crew.tobe_raske": 0.45, "crew.sable_quist": 0.45, "crew.anselm_varga": 0.45,
+      "crew.pell_ostrander": 0.45, "crew.juno_achterberg": 0.45, "crew.kit_sato": 0.45, "crew.rhee_callender": 0.45 };
     for (const [name, limit] of Object.entries(limits) as [SoundName, number][]) {
       const sounds = new Sounds();
       sounds.unlock();

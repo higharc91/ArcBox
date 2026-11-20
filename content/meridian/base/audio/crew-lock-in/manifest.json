@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "about": "Original gentle, wordless crew lock-in signatures; supplemental UI cues, not the core #338 audio set.",
+  "source": "WebAudio OfflineAudioContext, same recipe as phone feedback",
+  "paidGenerationCu": 0,
+  "loop": false,
+  "sounds": {
+    "ines_okafor": {
+      "file": "ines_okafor.85a8bc2d0338.ogg",
+      "sha256": "85a8bc2d0338a5450141cc6587417a116a70c2f715dd744e3dab3e6ffe48aa63",
+      "name": "Ines Okafor",
+      "character": "a warm, reassuring toolbox chime",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -17.105,
+      "rmsDb": -30.406,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "tobe_raske": {
+      "file": "tobe_raske.ac6ad6a1978f.ogg",
+      "sha256": "ac6ad6a1978f8e3bc08901f48b630d2063238a3152f54ca0080ba892c875b8c9",
+      "name": "Tobe Raske",
+      "character": "a round little two-part rigging plonk",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -16.51,
+      "rmsDb": -28.62,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "sable_quist": {
+      "file": "sable_quist.d612260423ad.ogg",
+      "sha256": "d612260423add9ab275a27d5336d265e23439f1f48d14775c2571d53a765c12b",
+      "name": "Sable Quist",
+      "character": "a light upward pilot whistle",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -16.684,
+      "rmsDb": -28.638,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "anselm_varga": {
+      "file": "anselm_varga.6d727d2fd4e6.ogg",
+      "sha256": "6d727d2fd4e69f23fe9228637a69e63240807ee0678a36c5188cbea76e0819a4",
+      "name": "Dr. Anselm Varga",
+      "character": "a gentle, rounded medical scanner reply",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -16.614,
+      "rmsDb": -28.641,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "pell_ostrander": {
+      "file": "pell_ostrander.4d231de94f5c.ogg",
+      "sha256": "4d231de94f5ce630e06540b8d13a63cd4bb7d7499d75896cab6b189d28ac19ac",
+      "name": "Pell Ostrander",
+      "character": "a playful three-note terminal greeting",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -17.157,
+      "rmsDb": -30.407,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "juno_achterberg": {
+      "file": "juno_achterberg.9fd6cbfbfc7c.ogg",
+      "sha256": "9fd6cbfbfc7c7d4939d12f958971ea9a637957ae47743b0487b5c67439f42772",
+      "name": "Juno Achterberg",
+      "character": "a sturdy little cargo-latch boop",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -17.618,
+      "rmsDb": -30.418,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "kit_sato": {
+      "file": "kit_sato.0f07835f36f7.ogg",
+      "sha256": "0f07835f36f752c9ba26dc11de08cfcc8160234b6550cdc5ab3cc2a112b84162",
+      "name": "Kit Sato",
+      "character": "a curious quick scout chirrup",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -16.563,
+      "rmsDb": -28.641,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    },
+    "rhee_callender": {
+      "file": "rhee_callender.d0091579aa44.ogg",
+      "sha256": "d0091579aa44c069f0c5cc7e63c641654691aeadda42a7af5eac199555c3125e",
+      "name": "Rhee Callender",
+      "character": "a soft, sparkling radio hello",
+      "duration": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "peakDb": -16.813,
+      "rmsDb": -30.385,
+      "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
+    }
+  }
+}
