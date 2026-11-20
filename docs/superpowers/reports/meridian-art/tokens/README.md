@@ -22,3 +22,7 @@ Repair has broken/fixed geometry; relay has powered/rerouted cable geometry. Ini
 Current #316 `MonsterFrames` paths resolve the delivered directional idle/walk/hurt/stun groups. Attack strips are delivered but the current consumer has no Attack mapping. The static monster `default` also needs a consumer fallback for the rare pose-less `Token(kind)` route, which currently ignores that entry. These integration checks belong to #399; this asset PR does not import or modify unmerged gameplay. Static token `.idle` and explicit state entries follow the existing consumer contract. Review names are live HTML/poster labels; complete in-game labelling remains a consumer responsibility.
 
 Issue #336 remains open for the owner's visual approval. No gameplay/balance rules, existing voices or separate Tactics VFX workflows are changed.
+
+## Full gate
+
+`bash tools/check-all.sh --full` passed all five groups at `fce79253cb0aa503577a3ba29d14d2ab991b2abb` using the existing serial module wrapper: 7,743 .NET + 620 phone + 24 Node + 162 Python = **8,549 tests**, zero skips and zero build warnings/errors. Phone production build passed. See `full-gate.log.gz` and `validation.json` for the exact tested source and hashes. Latest game head `567c8d6dcf90e7a89c3e2d8c39e79466c958d477` only incorporates main; scenario, checker, renderer and contract sources match the pinned reference exactly. Subsequent commit only adds review evidence.
