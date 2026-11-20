@@ -14,3 +14,5 @@ Actual deuteranopia/protanopia transforms are retained for both widths and both 
 This updates the illustrated lobby from the user's screenshot in the art review. It does not wire the mock Ready state to a server or import the game implementation from open #316. #335 remains open for visual review; adoption by the game consumers and the separate #405 platform hook are still tracked. No human or physical-device usability test is claimed.
 
 The eight focused UI tests pass. Complete pre-merge validation is recorded separately in `lobby-clarity-validation.json` and `lobby-clarity-full.txt.gz` after the full gate finishes; the November 18 `validation.json` is historical evidence for #420.
+
+Full gate passed on frozen source `980e99e23b23254702441590fce17f4eaf52fc1b`: **7,743 .NET + 601 phone + 24 Node + 150 Python = 8,518 tests**, zero skips/build warnings/build errors. The serial MTP-module launcher runs the unchanged full gate with unchanged assertions and timing budgets. The final follow-up commit contains evidence/documentation only; `lobby-clarity-validation.json` records tested source hashes for comparison.
