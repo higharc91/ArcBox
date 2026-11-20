@@ -24,10 +24,15 @@ const fs=require('fs'),path=require('path');
   if(seen.size<2)throw Error('Roll does not advance');
   await page.locator('#pause').click();const held=await page.locator('.rolling').first().getAttribute('data-frame');await page.waitForTimeout(200);if(held!==await page.locator('.rolling').first().getAttribute('data-frame'))throw Error('Pause moved');
   await page.locator('#still').check();if(!await page.locator('#pause').isDisabled())throw Error('Still leaves motion enabled');
-  await page.locator('#ready').click();if(await page.locator('#ready').getAttribute('aria-pressed')!=='true')throw Error('Ready failed');
-  await page.locator('#ready').click();await page.evaluate(()=>scrollTo(0,0));
+  const lobby=await page.locator('.phone-device').evaluate(e=>({seats:[...e.querySelectorAll('.seat-meta>span:first-child')].map(n=>n.textContent),portraits:e.querySelectorAll('.lobby-portrait img').length,you:e.querySelectorAll('.you-tag').length,bots:[...e.querySelectorAll('.bot-tag')].map(n=>n.textContent),abstractBadges:e.querySelectorAll('.auto,img[src*="ui/seat-"]').length}));
+  if(lobby.seats.join()!=='Seat 1,Seat 2,Seat 3,Seat 4,Seat 5,Seat 6'||lobby.portraits!==6||lobby.you!==1||lobby.bots.join()!=='Bot'||lobby.abstractBadges)throw Error('Lobby identity unclear: '+JSON.stringify(lobby));
+  await page.locator('#ready').click();
+  if(await page.locator('#ready').getAttribute('aria-pressed')!=='true'||await page.locator('#your-status').textContent()!=='Ready'||await page.locator('#ready-count').textContent()!=='4 of 6 ready'||!(await page.locator('#ready-status').textContent()).includes('Waiting for 2 others'))throw Error('Ready state disagrees');
+  await page.locator('#ready').focus();await page.keyboard.press('Space');
+  if(await page.locator('#ready').getAttribute('aria-pressed')!=='false'||await page.locator('#your-status').textContent()!=='Not ready'||await page.locator('#ready-count').textContent()!=='3 of 6 ready')throw Error('Keyboard undo failed');
+  await page.evaluate(()=>scrollTo(0,0));
   await page.screenshot({path:report+'/browser-'+width+'.png'});
-  if(errors.length)throw Error(errors.join('\n'));results.push({width,...state,errors,motionFramesSeen:seen.size,pause:true,still:true,reduced:true,ready:true});await page.close();
+  if(errors.length)throw Error(errors.join('\n'));results.push({width,...state,errors,motionFramesSeen:seen.size,pause:true,still:true,reduced:true,ready:true,keyboardUndo:true,lobby});await page.close();
  }
  const geometry={};
  for(const phase of phases){
@@ -40,7 +45,11 @@ const fs=require('fs'),path=require('path');
  for(const width of [320,390]){
   const page=await browser.newPage({viewport:{width,height:844},reducedMotion:'reduce'});await load(page);
   await page.evaluate(()=>{const phone=document.querySelector('.phone-device');document.body.replaceChildren(phone);Object.assign(document.body.style,{padding:'0',margin:'0',maxWidth:'none'});});
-  await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:report+'/phone-'+width+'.png'});await page.close();
+  await page.evaluate(()=>document.fonts.ready);
+  const fit=await page.locator('.phone-device').evaluate(e=>({width:e.scrollWidth<=e.clientWidth,height:e.scrollHeight<=e.clientHeight+1,buttonHeight:e.querySelector('#ready').getBoundingClientRect().height,clippedNames:[...e.querySelectorAll('.lobby-person strong')].filter(n=>n.scrollWidth>n.clientWidth+1).length}));
+  if(!fit.width||!fit.height||fit.buttonHeight<44||fit.clippedNames)throw Error('Phone does not fit: '+JSON.stringify({width,...fit}));
+  await page.screenshot({path:report+'/phone-'+width+'.png'});
+  await page.locator('#ready').click();if(!await page.locator('#ready-status').textContent().then(t=>t.includes('Tap again to cancel.')))throw Error('Missing undo explanation');if(await page.locator('.phone-device').evaluate(e=>e.scrollHeight>e.clientHeight+1))throw Error('Ready state no longer fits');await page.screenshot({path:report+'/phone-'+width+'-ready.png'});await page.close();
  }
  fs.writeFileSync(report+'/browser.json',JSON.stringify(results,null,2)+'\n');fs.writeFileSync(report+'/geometry.json',JSON.stringify(geometry,null,2)+'\n');await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

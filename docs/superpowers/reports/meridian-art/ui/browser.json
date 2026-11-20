@@ -1,7 +1,7 @@
 [
   {
     "width": 320,
-    "images": 76,
+    "images": 75,
     "phases": [
       "boarding",
       "explore",
@@ -27,11 +27,28 @@
     "pause": true,
     "still": true,
     "reduced": true,
-    "ready": true
+    "ready": true,
+    "keyboardUndo": true,
+    "lobby": {
+      "seats": [
+        "Seat 1",
+        "Seat 2",
+        "Seat 3",
+        "Seat 4",
+        "Seat 5",
+        "Seat 6"
+      ],
+      "portraits": 6,
+      "you": 1,
+      "bots": [
+        "Bot"
+      ],
+      "abstractBadges": 0
+    }
   },
   {
     "width": 390,
-    "images": 76,
+    "images": 75,
     "phases": [
       "boarding",
       "explore",
@@ -57,11 +74,28 @@
     "pause": true,
     "still": true,
     "reduced": true,
-    "ready": true
+    "ready": true,
+    "keyboardUndo": true,
+    "lobby": {
+      "seats": [
+        "Seat 1",
+        "Seat 2",
+        "Seat 3",
+        "Seat 4",
+        "Seat 5",
+        "Seat 6"
+      ],
+      "portraits": 6,
+      "you": 1,
+      "bots": [
+        "Bot"
+      ],
+      "abstractBadges": 0
+    }
   },
   {
     "width": 1920,
-    "images": 76,
+    "images": 75,
     "phases": [
       "boarding",
       "explore",
@@ -87,6 +121,23 @@
     "pause": true,
     "still": true,
     "reduced": true,
-    "ready": true
+    "ready": true,
+    "keyboardUndo": true,
+    "lobby": {
+      "seats": [
+        "Seat 1",
+        "Seat 2",
+        "Seat 3",
+        "Seat 4",
+        "Seat 5",
+        "Seat 6"
+      ],
+      "portraits": 6,
+      "you": 1,
+      "bots": [
+        "Bot"
+      ],
+      "abstractBadges": 0
+    }
   }
 ]

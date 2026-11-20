@@ -1,0 +1,54 @@
+{
+  "checkedSource": "980e99e23b23254702441590fce17f4eaf52fc1b",
+  "base": "522bd55060e28b4535f6c182b0ef8505f6cef2d5",
+  "sourceHashes": {
+    "tools/meridian-assets": "2699f5b046a758250f27636e9c56a41035b654b7",
+    "content": "80fd54052f562baadb7124457e38a409263e070b",
+    "src": "908ba9779af2bc0762688d531c7ad56bfb2dc288",
+    "games": "b7e310520927d7d92f3c8be58da4c7641b271ee5",
+    "web/play": "bdfe43cb4adaa9e62d7270afcb6d6a21b65cb737",
+    "tools/check-all.sh": "d25bc8e82d2dff347aaf7f013d3098aef74a8e69",
+    "docs/superpowers/reports/meridian-art/ui/index.html": "02f04c0f7edeac153d4bb7582429b3250649941d"
+  },
+  "command": "bash tools/check-all.sh --full",
+  "launcher": "docs/superpowers/reports/art-merge-validation/run-full-serial.sh",
+  "testModulesRunSerially": true,
+  "assertionsAndTimingBudgetsUnchanged": true,
+  "groupsPassed": 5,
+  "dotnet": 7743,
+  "phone": 601,
+  "node": 24,
+  "python": 150,
+  "pythonGroups": [
+    61,
+    9,
+    54,
+    26
+  ],
+  "total": 8518,
+  "skipped": 0,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "browserWidths": [
+    320,
+    390,
+    1920
+  ],
+  "phoneStates": [
+    "not ready",
+    "ready"
+  ],
+  "phoneScrollOrNameClipping": false,
+  "keyboardUndo": true,
+  "actualCvd": [
+    "deuteranopia",
+    "protanopia"
+  ],
+  "existingNativeTvCapturesStillMatch": 5,
+  "newNativeCapturesRequired": false,
+  "tvLayoutAndRuntimeArtUnchanged": true,
+  "actualRenderedCornersVerified": 164,
+  "physicalDeviceOrHumanTest": false,
+  "fullLogSha256": "dc93829589b004068e9f967d003b984cf1731635f5a96349ce17f8785ee1cb02",
+  "scope": "Art-review lobby design; local Ready demonstration; game-consumer integration remains in #316. #335 stays open for visual OK."
+}

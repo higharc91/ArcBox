@@ -25,3 +25,19 @@ for scene in ['boarding','explore','breach','endgame','debrief']:
     rows.append({'scene':scene,'size':[1920,1080],'nativePixelsMatch':True,'actualCvd':list(MATRICES),
                  'streamProxy':'JPEG quality 55 / 4:2:0; not an actual Discord or physical-TV/human test'})
 (REPORT/'native-check.json').write_text(json.dumps(rows,indent=2)+'\n')
+
+# Phone-only revisions also retain actual CVD transforms in both ready states.
+phone_rows=[]
+for width in [320,390]:
+    for state in ['', '-ready']:
+        name=f'phone-{width}{state}'
+        path=REPORT/f'{name}.png'
+        if not path.exists():continue
+        rgb=np.asarray(Image.open(path).convert('RGB'),dtype=float)/255
+        linear=np.where(rgb<=.04045,rgb/12.92,((rgb+.055)/1.055)**2.4)
+        for kind,matrix in MATRICES.items():
+            transformed=np.clip(linear@np.asarray(matrix).T,0,1)
+            encoded=np.where(transformed<=.0031308,transformed*12.92,1.055*transformed**(1/2.4)-.055)
+            Image.fromarray(np.round(encoded*255).astype('uint8')).save(REPORT/f'{kind}-{name}.png')
+        phone_rows.append({'width':width,'height':844,'ready':bool(state),'actualChromiumScreenshot':True,'actualCvd':list(MATRICES),'physicalDeviceOrHumanTest':False})
+(REPORT/'phone-colour-check.json').write_text(json.dumps(phone_rows,indent=2)+'\n')

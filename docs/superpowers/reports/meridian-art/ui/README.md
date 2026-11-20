@@ -1,5 +1,7 @@
 # Meridian UI art / #335
 
+Latest phone revision: [November 20 lobby clarity](LOBBY-CLARITY.md). The November 18 frozen-source validation below is historical; current phone captures show explicit seats, portraits and ready states.
+
 Original ship-interface kit continuing the approved #406 card style: metal housings, brass corners, linen signal dice, cool display details and hazard rails for the Breach. Deterministic arcpix/Pillow source; no generated purchases or generation spend.
 
 [Live review](index.html): five native 1920×1080 phases, a responsive 390px phone lobby and all panel recipes. Static native captures: [Boarding](native-boarding.png), [Explore](native-explore.png), [Breach](native-breach.png), [Endgame](native-endgame.png), [Debrief](native-debrief.png). Phone: [320px](phone-320.png), [390px](phone-390.png).
