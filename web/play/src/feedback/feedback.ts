@@ -1,3 +1,4 @@
+import { CrewSelection } from "../games/meridian/crew-selection";
 import { createContext } from "preact";
 import { useContext } from "preact/hooks";
 import type { ControllerView } from "../protocol";
@@ -20,6 +21,7 @@ const TICK_FROM = 3;
  */
 export class Feedback {
   private mutedValue: boolean;
+  private readonly crewSelection = new CrewSelection();
   private listeners = new Set<(muted: boolean) => void>();
   private viewId: string | null = null;
   private input = false;
@@ -86,6 +88,8 @@ export class Feedback {
 
   /** A view arrived. Repeats of the current view (a rejoin re-sends it) are ignored. */
   onView(view: ControllerView, game?: string | null): void {
+    const selection = this.crewSelection.observe(view, game);
+    if (selection && !this.mutedValue) this.sounds.play(selection);
     if (view.viewId === this.viewId) return;
     this.viewId = view.viewId;
     this.input = view.kind !== "wait";
@@ -98,6 +102,9 @@ export class Feedback {
     this.lastResult = message;
     if (result && !repeat) this.cue(result);
   }
+
+  /** Leaving the controller drops selection history so rejoining never replays a lock-in. */
+  leaveController(): void { this.crewSelection.reset(); }
 
   /** The countdown's whole seconds left; ticks once per second for the last 3 s of an input view not yet answered. */
   onCountdown(secondsLeft: number): void {
