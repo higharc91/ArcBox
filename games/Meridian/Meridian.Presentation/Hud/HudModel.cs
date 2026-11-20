@@ -4,7 +4,9 @@ using Meridian.Presentation.Board;
 namespace Meridian.Presentation.Hud;
 
 /// <summary>A seat on the TV's strip. It shows who is active, who a bot plays and who is offline; never a side or a role.</summary>
-public sealed record HudSeat(string Id, string Name, string? Crew, string Mark, int Colour, bool Active, bool Auto, bool Offline);
+/// <param name="Badges">The scenario's per-seat counters for this seat ("Infection 4"), drawn on its chip, not in the figures.</param>
+public sealed record HudSeat(string Id, string Name, string? Crew, string Mark, int Colour, bool Active, bool Auto, bool Offline,
+                             EqArray<HudStat> Badges = default);
 
 /// <summary>One figure on the HUD: a label and its value.</summary>
 public sealed record HudStat(string Label, string Value);
@@ -37,8 +39,13 @@ public sealed record HudModel(
     public static HudModel Of(MeridianHostView view, Beat? beat, double waited = 0, ScenarioLooks? looks = null)
     {
         var marks = BoardStyle.Marks([.. view.Seats.Select(s => s.Name)]);
-        var seats = view.Seats.Select((s, i) => new HudSeat(s.Id, s.Name, s.Crew, marks[i], s.Colour, s.Active, s.Auto, !s.Connected)).ToEqArray();
-        var stats = view.Scenario is { } panel ? ScenarioStats(view, panel, looks ?? ScenarioLooks.None) : ExploreStats(view);
+        var shown = looks ?? ScenarioLooks.None;
+        // Per-seat counters go on their seat's chip: in the figures, six of them would crowd out everything else.
+        var badges = (view.Scenario?.Counters ?? []).Select(c => (Counter: c, Seat: shown.PerSeat(c.Id))).Where(x => x.Seat is not null)
+            .ToLookup(x => x.Seat!.Value.Seat, x => new HudStat(x.Seat!.Value.Label, $"{x.Counter.Value}"));
+        var seats = view.Seats.Select((s, i) => new HudSeat(s.Id, s.Name, s.Crew, marks[i], s.Colour, s.Active, s.Auto, !s.Connected,
+                                                            badges[s.Id].ToEqArray())).ToEqArray();
+        var stats = view.Scenario is { } panel ? ScenarioStats(view, panel, shown) : ExploreStats(view);
         var log = view.Log.Skip(Math.Max(0, view.Log.Count - LogLines)).ToEqArray();
         return new HudModel(seats, view.Banner, stats, view.Scenario?.Title,
                             view.Scenario?.Objectives.Where(o => o.State == ObjectiveState.Open).Select(o => o.Text).ToEqArray() ?? [],
@@ -52,7 +59,7 @@ public sealed record HudModel(
     {
         string Name(string seat) => view.Seats.FirstOrDefault(s => s.Id == seat)?.Name ?? seat;
         var stats = new List<HudStat> { new(panel.RoundsLeft == 1 ? "Final round" : "Rounds left", $"{panel.RoundsLeft}") };
-        foreach (var counter in panel.Counters)
+        foreach (var counter in panel.Counters.Where(c => looks.PerSeat(c.Id) is null))   // per-seat ones are on the chips
         {
             if (looks.Counter(counter.Id, Name) is { } label)
             {

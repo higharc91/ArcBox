@@ -85,24 +85,31 @@ public partial class HudCanvas : Node2D
         }
         DrawLine(new Vector2(0, (float)top.H), new Vector2(size.X, (float)top.H), new Color(1, 1, 1, 0.08f), 2);
 
-        // The banner, the scenario's title and its open objectives.
-        DrawString(ArcTheme.Bold, new Vector2(28, 44), hud.Banner, HorizontalAlignment.Left, size.X * 0.45f, 34, Colors.White);
+        // The figures first, right-aligned, so the text beside them knows where to stop.
+        var statsLeft = DrawStats(hud, size);
+
+        // The banner, the scenario's title and its open objectives, never running into the figures.
+        var room = Math.Max(200f, statsLeft - 28 - 24);
+        DrawString(ArcTheme.Bold, new Vector2(28, 44), hud.Banner, HorizontalAlignment.Left, Math.Min(size.X * 0.45f, room), 34, Colors.White);
         if (hud.Scenario is { } title)
         {
             var line = hud.Objectives.Count > 0 ? $"{title.ToUpperInvariant()} · {hud.Objectives[0]}" : title.ToUpperInvariant();
-            DrawString(ArcTheme.SemiBold, new Vector2(28, 76), line, HorizontalAlignment.Left, size.X * 0.55f, 22, new Color("c08cff"));
+            DrawString(ArcTheme.SemiBold, new Vector2(28, 76), line, HorizontalAlignment.Left, room, 22, new Color("c08cff"));
         }
 
-        // The seat strip.
+        // The seat strip. It fits the screen: with six seats, crew names go first (the name, mark and colour still say who),
+        // then per-seat counters shrink to their numbers.
         var x = 28f;
         var y = (float)top.H - 32;
+        var fit = 0;
+        while (fit < 2 && hud.Seats.Sum(s => Chip(s, fit).Width + 12) > size.X - 56)
+        {
+            fit++;
+        }
         foreach (var seat in hud.Seats)
         {
             var colour = ArcTheme.PlayerColour(seat.Colour);
-            var name = seat.Crew is { } crew ? $"{seat.Name} · {crew}" : seat.Name;
-            var tags = (seat.Auto ? " auto" : "") + (seat.Offline ? " offline" : "");
-            var width = 44 + ArcTheme.SemiBold.GetStringSize(name, HorizontalAlignment.Left, -1, 24).X
-                        + (tags.Length > 0 ? ArcTheme.Bold.GetStringSize(tags, HorizontalAlignment.Left, -1, 22).X + 8 : 0) + 18;
+            var (name, tags, badges, width) = Chip(seat, fit);
             var chip = new Rect2(x - 6, y - 22, width, 44);
             if (_textures?.DrawBox(this, UiKit.For(_textures.Art, UiElement.SeatSlot), chip) != true)
             {
@@ -128,15 +135,39 @@ public partial class HudCanvas : Node2D
                 DrawString(ArcTheme.Black, new Vector2(x - 1, y + 7), seat.Mark, HorizontalAlignment.Center, 30, seat.Mark.Length > 1 ? 16 : 20, new Color("101018"));
             }
             DrawString(ArcTheme.SemiBold, new Vector2(x + 36, y + 8), name, HorizontalAlignment.Left, -1, 24, seat.Offline ? ArcTheme.Dim : Colors.White);
+            var tx = x + 36 + ArcTheme.SemiBold.GetStringSize(name, HorizontalAlignment.Left, -1, 24).X + 8;
             if (tags.Length > 0)
             {
-                var tx = x + 36 + ArcTheme.SemiBold.GetStringSize(name, HorizontalAlignment.Left, -1, 24).X + 8;
                 DrawString(ArcTheme.Bold, new Vector2(tx, y + 8), tags, HorizontalAlignment.Left, -1, 22, new Color("ffd447"));
+                tx += ArcTheme.Bold.GetStringSize(tags, HorizontalAlignment.Left, -1, 22).X + 8;
+            }
+            if (badges.Length > 0)
+            {
+                DrawString(ArcTheme.Bold, new Vector2(tx + 6, y + 8), badges, HorizontalAlignment.Left, -1, 22, new Color("c08cff"));
             }
             x += width + 12;
         }
+    }
 
-        // The figures, right-aligned.
+    /// <summary>
+    /// A seat chip's text and width at a level of fit: 0 in full, 1 without the crew name, 2 with counters as bare numbers.
+    /// </summary>
+    private static (string Name, string Tags, string Badges, float Width) Chip(HudSeat seat, int fit)
+    {
+        var name = seat.Crew is { } crew && fit == 0 ? $"{seat.Name} · {crew}" : seat.Name;
+        var tags = (seat.Auto ? " auto" : "") + (seat.Offline ? " offline" : "");
+        // The scenario's per-seat counters ("Infection 4"), on the chip they belong to.
+        var badges = string.Join("  ", (seat.Badges.Items.IsDefaultOrEmpty ? [] : seat.Badges.Items)
+            .Select(b => fit < 2 ? $"{b.Label} {b.Value}" : b.Value));
+        var width = 44 + ArcTheme.SemiBold.GetStringSize(name, HorizontalAlignment.Left, -1, 24).X
+                    + (tags.Length > 0 ? ArcTheme.Bold.GetStringSize(tags, HorizontalAlignment.Left, -1, 22).X + 8 : 0)
+                    + (badges.Length > 0 ? ArcTheme.Bold.GetStringSize(badges, HorizontalAlignment.Left, -1, 22).X + 14 : 0) + 18;
+        return (name, tags, badges, width);
+    }
+
+    /// <summary>The figures, right-aligned, as many as fit beside the banner. Returns the left edge of the leftmost drawn.</summary>
+    private float DrawStats(HudModel hud, Vector2 size)
+    {
         var right = size.X - 28;
         foreach (var stat in hud.Stats.Reverse())
         {
@@ -150,6 +181,7 @@ public partial class HudCanvas : Node2D
             DrawString(ArcTheme.Bold, new Vector2(right - w, 72), stat.Value, HorizontalAlignment.Left, -1, 34, Colors.White);
             right -= w + 10;
         }
+        return right;
     }
 
     /// <summary>The card panel or dice tray, sliding in and out with the beat's steps.</summary>

@@ -108,7 +108,13 @@ Every run had no errors. Frame times were 25–29 ms median at 1080p (p95 29–3
 - each seat shows its colour and mark;
 - the TV view holds nothing secret.
 
-New since M4: per-seat counters such as "Infection: Player2" and "Suspicion: Player3" follow the same label size.
+**Fixed during this review:**
+- **Per-seat counters crowded the figures.** In The Last Clean Sample, four "Infection: PlayerN" figures pushed "Rounds left" off the screen, and the objective line ran into a number. A per-seat counter is now a badge on its seat's chip ("Infection 4"). One of Us Isn't's suspicion moves there too. The objective line also stops short of the figures.
+- **Six seats overflowed the strip,** with or without badges: M4 reviewed four. The strip now fits the screen by dropping crew names first, then shortening badges to their numbers. The seat's name, mark and colour always stay.
+
+Below, a six-phone game on the real TV at 720p, after the fix:
+
+![Six seats with their badges](m7-six-seats.png)
 
 ## For the first game night
 

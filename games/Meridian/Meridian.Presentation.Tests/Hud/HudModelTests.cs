@@ -84,4 +84,24 @@ public sealed class HudModelTests
         }, steps: 6000);
         Assert.True(sawRoundsLeft);
     }
+
+    /// <summary>
+    /// Per-seat counters ride on their seat's chip, never in the figures: six of them (The Last Clean Sample at six
+    /// players) crowded the figures off the screen (M7 TV review).
+    /// </summary>
+    [Fact]
+    public void Per_seat_counters_go_on_their_seats_chip_not_in_the_figures()
+    {
+        var looks = ScenarioLooks.Of(BasePack.Pack);
+        var view = new MeridianHostView("endgame", "", [new SeatCard("p1", "Ann", null, 0, true, false, true), new SeatCard("p2", "Bo", null, 1, true, false, false)],
+            [], [], 0, 0, 3, null, [],
+            new ScenarioPanel("The Last Clean Sample", 6, [], [new CounterCard("infection-p1", 4), new CounterCard("infection-p2", 5)], []));
+        var hud = HudModel.Of(view, null, 0, looks);
+        Assert.Equal([new HudStat("Infection", "4")], hud.Seats[0].Badges);
+        Assert.Equal([new HudStat("Infection", "5")], hud.Seats[1].Badges);
+        Assert.DoesNotContain(hud.Stats, s => s.Label.StartsWith("Infection", StringComparison.Ordinal));
+        Assert.Contains(hud.Stats, s => s.Label == "Rounds left");
+        Assert.Equal(("Suspicion", "p3"), looks.PerSeat("suspect-p3"));
+        Assert.Null(looks.PerSeat("orbit"));
+    }
 }

@@ -52,6 +52,24 @@ public sealed class ScenarioLooks
         => _tokens.TryGetValue(kind, out var look) && look.Name is { } name ? name : Capital(kind);
 
     /// <summary>
+    /// A per-seat counter (declared as a prefix, such as <c>infection-</c>): its seat and a short label for the seat's chip
+    /// ("Infection: {seat}" becomes "Infection"). Null for any other counter, or one kept off the TV.
+    /// </summary>
+    public (string Label, string Seat)? PerSeat(string id)
+    {
+        foreach (var (prefix, label) in _counters.Where(c => c.Key.EndsWith('-') && id.StartsWith(c.Key, StringComparison.Ordinal)))
+        {
+            if (label is null)
+            {
+                return null;
+            }
+            var shortLabel = label.Replace("{seat}", "", StringComparison.Ordinal).Trim().TrimEnd(':').Trim();
+            return (shortLabel, id[prefix.Length..]);
+        }
+        return null;
+    }
+
+    /// <summary>
     /// A counter's label on the TV, or null for one a scenario keeps off it. A per-seat counter (declared as a prefix)
     /// names its seat. An undeclared counter shows its id, capitalised.
     /// </summary>
