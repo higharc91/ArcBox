@@ -82,6 +82,34 @@ The UI kit hadn't landed, so this run uses a stand-in kit made only to test the 
 
 ![The stand-in UI kit](art-02-ui-kit.png)
 
+## The seven M7 scenarios (M7, Task 11)
+
+Each sheet is one demo-mode game, rendered from its recording at 1080p. Its four panels are the scenario's announcement, two endgame moments, and the Debrief.
+
+Every token and counter here is drawn from its scenario's content file (M7, Task 1): the label, the colour and the HUD's wording. No TV code names a scenario. The art sets for these tokens are tracked on #336; until they land, each draws its labelled placeholder.
+
+Every run had no errors. Frame times were 25–29 ms median at 1080p (p95 29–35 ms) and 14 ms median at 720p.
+
+| | |
+|---|---|
+| ![Company Asset](m7-company_asset.png) *Company Asset: security drones, logs transmitted* | ![Captain on Deck](m7-captain_on_deck.png) *Captain on Deck: a scenario's seal ("It won't open from this side"), Authority and cores pulled* |
+| ![Cold Sleep](m7-cold_sleep.png) *Cold Sleep: sleepers marching on the Airlock, and a round warning* | ![Scuttle Charge](m7-scuttle_charge.png) *Scuttle Charge: a charge found, with the sparks notice. The planter is never shown* |
+| ![Hull Rot](m7-hull_rot.png) *Hull Rot: the rot (~) and its source (@), with the spread notice and the rot effect* | ![Vent Cycle](m7-vent_cycle.png) *Vent Cycle: a deck decompresses, and the suits lie scattered* |
+| ![The Last Clean Sample](m7-last_clean_sample.png) *The Last Clean Sample: infection per seat, and the scramble for the dose* | |
+
+**At 720p** (the same layout, scaled by the engine):
+
+| | |
+|---|---|
+| ![Hull Rot at 720p](m7-720-hull_rot.png) | ![Captain on Deck at 720p](m7-720-captain_on_deck.png) |
+
+**Readability.** The M4 rules hold:
+- labels are at least 22 px at 1080p, except the long compartment names M4 already noted;
+- each seat shows its colour and mark;
+- the TV view holds nothing secret.
+
+New since M4: per-seat counters such as "Infection: Player2" and "Suspicion: Player3" follow the same label size.
+
 ## For the first game night
 
 These are things a person must judge that a screenshot can't:
