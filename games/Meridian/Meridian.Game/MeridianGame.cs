@@ -15,9 +15,15 @@ public sealed partial class MeridianGame(Lazy<RulesPack> pack) : IGame, IHostAwa
     private IGameContext _ctx = null!;
     private RulesPack _pack = null!;
 
-    public GameManifest Manifest { get; } = new(Id, "Derelict: ISV Meridian",
+    public GameManifest Manifest => new(Id, "Derelict: ISV Meridian",
         "Explore a silent starship, one compartment at a time. Something aboard is waiting.", MinPlayers: 3, MaxPlayers: 6,
-        ResumesAfterRestart: true);
+        ResumesAfterRestart: true, CardArt: CardArt);
+
+    /// <summary>
+    /// The TV lobby card's title image (#405): a path in the base pack, the UI kit's logo. The server's registration sets it
+    /// from the pack; without it, the lobby shows the text card.
+    /// </summary>
+    public string? CardArt { get; init; }
 
     /// <summary>The adapter's whole state. Internal so tests can read it; nothing outside the class assigns it.</summary>
     internal MeridianSession Session { get; private set; } = null!;

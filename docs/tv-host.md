@@ -79,6 +79,36 @@ roster: each member's card title and subtitle, a colour bar (the card's colour, 
 SEATED or AWAY. Start says "Pick a campaign first" until one is selected. Games without campaigns (REDLINE, Counter) get
 the lobby exactly as before.
 
+## Card art in the lobby (#405)
+
+A game can put a title image on its lobby card by naming a PNG in its **base content pack**, which is the pack with id
+`base`:
+
+```csharp
+public GameManifest Manifest => new(..., CardArt: "ui/logo.f73a628aa904.png");   // a path inside the base pack
+```
+
+The server swaps that path for the file's immutable content URL (`GameRegistry.WithCardArtUrl`, giving
+`/content/<game>/base/<hash>/<path>`) before any lobby state goes out. If the path is missing, or the game has no base
+pack, the server sends null, so a TV never asks for a file that isn't there. A game with no `CardArt` (Counter, REDLINE,
+Wardenflame) gets the lobby exactly as before. Meridian names its UI kit's logo, which it reads from `ui/manifest.json`
+when it registers (`MeridianServiceCollectionExtensions.LogoPath`). Without the kit, it sends no art.
+
+On the TV, `LobbyArt` (Host.Core) fetches each URL once per server and caches the result, failures included. It gives
+up after 3 seconds, and it accepts only a successful response that starts with the PNG signature. Anything else counts
+as no art: a 404, a timeout, a dropped connection or a file that isn't a PNG.
+
+The text card is always drawn first, and the art never replaces it. When the bytes arrive, the art is added as a faded
+emblem behind the card's text:
+- it's right-aligned and centred vertically, at 30% opacity;
+- it's scaled up by a whole number with nearest filtering, to at most 96 px tall and 256 px wide;
+- it sits on a layer with no layout, clipped to the card, so cards keep their size and every line stays where it was.
+
+The art must therefore carry no words, because the game's name stays in the text. A card that left the screen before
+its art arrived is skipped. The TV logs `LOBBY card art <url> at <n>x`.
+Screenshots with and without art are in
+[`docs/superpowers/reports/2026-11-20-lobby-card-art/`](superpowers/reports/2026-11-20-lobby-card-art/).
+
 ## Content packs
 
 The server sends `ContentRequired(gameId, packs)` when a game is selected, when it starts and on resume (spec §3.6). The TV
