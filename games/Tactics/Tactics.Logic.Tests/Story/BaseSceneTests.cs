@@ -23,7 +23,7 @@ public sealed class BaseSceneTests
         Assert.Equal(13, arc.Beats.Sum(b => Book.ScenesOf(b.Id).Length));
         Assert.Equal(["ch1_ford", "ch1_parley"], Book.ScenesOf("ch1_the_ford_choice").Select(s => s.Id));
         Assert.Equal([1, 2, 3, 4, 5], Book.Scenes.Where(s => s.Beat is not null).Select(ChapterOf).Distinct());
-        Assert.Equal(75, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
+        Assert.Equal(78, Book.Scenes.Count(s => !s.Camp && s.Beat is not null));
         Assert.Equal(5, Book.Scenes.Count(s => s.Camp));
     }
 
@@ -32,7 +32,7 @@ public sealed class BaseSceneTests
     {
         var lines = Book.Scenes.SelectMany(s => s.Lines.Select(l => (Scene: s, Line: l))).ToList();
 
-        Assert.Equal(945, lines.Count);
+        Assert.Equal(988, lines.Count);
         foreach (var (scene, line) in lines)
         {
             Assert.Contains(line.Speaker, scene.Cast);
@@ -159,14 +159,30 @@ public sealed class BaseSceneTests
     }
 
     /// <summary>
-    /// Dialogue can't invent story state (lore §7): every flag a node or option sets is one a beat or choice of <c>arcs.json</c> sets.
+    /// Dialogue can't invent story state (lore §7): flags come from beat/choice sets or the arc's explicit sceneFlags declarations.
     /// </summary>
     [Fact]
     public void Scenes_set_only_flags_the_arcs_set()
     {
-        var arcs = Book.Arcs.SelectMany(a => a.Beats).SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))).ToHashSet();
-        var invented = Book.Scenes.Where(s => !s.Camp && s.Beat is not null).SelectMany(s => s.Nodes.SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets)))).Where(f => !arcs.Contains(f)).Distinct();
-        Assert.Empty(invented);
+        Assert.Empty(UndeclaredSceneFlags(Book.Arcs, Book.Scenes));
+    }
+
+    private static IEnumerable<string> UndeclaredSceneFlags(IEnumerable<Arc> arcs, IEnumerable<SceneDef> scenes)
+    {
+        var declared = arcs.SelectMany(a => a.SceneFlags.Concat(a.Beats.SelectMany(b => b.Sets.Concat(b.Choices.SelectMany(c => c.Sets))))).ToHashSet();
+        return scenes.Where(s => !s.Camp && s.Beat is not null)
+            .SelectMany(s => s.Nodes.SelectMany(n => n.Sets.Concat(n.Options.SelectMany(o => o.Sets)))).Where(f => !declared.Contains(f)).Distinct();
+    }
+
+    [Fact]
+    public void Explicit_scene_flags_load_but_an_undeclared_scene_flag_is_still_refused()
+    {
+        var arc = Book.Arcs.Single(a => a.Chapter == 1 && !a.SideAdventure);
+        Assert.Equal(7, arc.SceneFlags.Length);
+        Assert.Contains("ch1_halden_suspected", arc.SceneFlags);
+        var scene = Book.Scenes.First(s => !s.Camp && s.Beat is not null);
+        var forged = scene with { Nodes = scene.Nodes.SetItem(0, scene.Nodes[0] with { Sets = scene.Nodes[0].Sets.Add("undeclared_scene_probe") }) };
+        Assert.Equal(["undeclared_scene_probe"], UndeclaredSceneFlags(Book.Arcs, [forged]));
     }
 
     /// <summary>

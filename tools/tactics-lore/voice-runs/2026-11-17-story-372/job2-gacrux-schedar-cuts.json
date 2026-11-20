@@ -1,0 +1,101 @@
+{
+  "batch": "story372_2026_11_17_job2-gacrux-schedar",
+  "source": "job2.wav",
+  "sourceSha256": "1822b4d4bacc695c5d30c9ec716121d414db16313904584cf28456a036d50573",
+  "durationSeconds": 123.2,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Gacrux.eef0a02e",
+      "line": "ashmaw_done",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "The pens are quiet, and the boy is home with his father. That is enough good news for one day.",
+      "start": 0.0,
+      "end": 8.603,
+      "matchedWords": "17/20",
+      "wavSha256": "b5fe18cc38ac9697a91899603fc16a8691047a576cfbe0f0bafa9b0c67fdf63b"
+    },
+    {
+      "raw": "Gacrux.2ddee8ac",
+      "line": "ashmaw_maud_after",
+      "speaker": "old_maud",
+      "preset": "Gacrux",
+      "text": "The boy reached my fire, and I sent him home to his father. Poor old bear. A hundred winters, and the last was the coldest. Keep the claw; there is nothing else down there to carry home.",
+      "start": 8.603,
+      "end": 30.724,
+      "matchedWords": "26/37",
+      "wavSha256": "dc333355b79e73487c60530732e0b0ada2de721c776fcee6277ede0d5f08d595"
+    },
+    {
+      "raw": "Gacrux.75318dc5",
+      "line": "ashmaw_maud_waiting",
+      "speaker": "old_maud",
+      "preset": "Gacrux",
+      "text": "I heard a fisher's boy is missing. I'll keep my fire ready if he finds his way here. As for that old bear... hunger wakes before a creature does. Go gently, if you can.",
+      "start": 33.024,
+      "end": 51.124,
+      "matchedWords": "13/34",
+      "wavSha256": "e2fe826b168e8bd787e475a1f5564cf8b81d08adbeb5234737b00782f5586bb8",
+      "trimmed": "a <long pause> tag spoken aloud, and a stage direction read aloud, cut off at the nearest silence"
+    },
+    {
+      "raw": "Gacrux.3eb07239",
+      "line": "ashmaw_offer",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "A grey bear is taking goats from the pens, and a fisher's boy is missing. The cave mouth is below Maud's hut on the burned bank. Will you search for him and put an end to the bear?",
+      "start": 77.295,
+      "end": 90.642,
+      "matchedWords": "18/38",
+      "wavSha256": "2707b100160c7b3d5bb5772223cf7e1efe244a826000e279874a9db2d902e2c8"
+    },
+    {
+      "raw": "Gacrux.9b6f6e93",
+      "line": "ch1_camp_ashmaw_pity_1",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "Aye. When the Hearth fails, the strong eat the weak, and everyone starves in the end. We have to find out what's happening to it.",
+      "start": 90.642,
+      "end": 100.859,
+      "matchedWords": "19/25",
+      "wavSha256": "a748056847898f2520666b95c0882b7c0c132f8005438dd882d3fd3e237b5e4f"
+    },
+    {
+      "raw": "Gacrux.82ae7242",
+      "line": "ch1_camp_maud_seek_1",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "The Stranger knows. I see how they watch the road east. When the time comes, we make them talk.",
+      "start": 102.309,
+      "end": 110.558,
+      "matchedWords": "10/19",
+      "wavSha256": "1038a57a4a3907973aad86b4b22ccac4350c7a499905a2660406143e533f96a4",
+      "trimmed": "a <long pause> tag spoken aloud cut off at the nearest silence"
+    },
+    {
+      "raw": "Gacrux.eb3cb437",
+      "line": "ch1_ford_pay_fail_2",
+      "speaker": "dagna_holt",
+      "preset": "Gacrux",
+      "text": "Twenty gold. My own. Now choose.",
+      "start": 110.558,
+      "end": 115.709,
+      "matchedWords": "5/6",
+      "wavSha256": "9e6189151f01e54ea4c2eb8ec3ceb43893df2c755d170850563f23b6136edee6"
+    },
+    {
+      "raw": "Schedar.66ac02b3",
+      "line": "say_keep_gate_1",
+      "speaker": "halvard",
+      "preset": "Schedar",
+      "text": "I had hoped you would turn back. I cannot yield the gate.",
+      "start": 117.709,
+      "end": 123.2,
+      "matchedWords": "10/12",
+      "wavSha256": "b1093bdb610c08c08913e37d84f2a1455d7ce03ffd4bb15cf167ed80491baa5c",
+      "trimmed": "a <long pause> tag spoken aloud cut off at the nearest silence"
+    }
+  ]
+}

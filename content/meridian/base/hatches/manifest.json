@@ -1,0 +1,154 @@
+{
+  "version": 2,
+  "status": "awaiting-set-review",
+  "issue": 332,
+  "rulesReference": {
+    "pr": 316,
+    "head": "ff3175af859733bf8b02c0ff2afa43d0113e1c66",
+    "sha256": "e68456723e2d4f1d409e9deb638f97f83233e25acd40ae86db525e440873f1eb"
+  },
+  "styleApproval": "Owner approved refined #331 samples in conversation on 2026-11-17; continued quality refinement and appropriate animation requested.",
+  "states": {
+    "open": {
+      "file": "open.e7c1970b0975.png",
+      "sha256": "e7c1970b0975ef9d2288f7c3d7f82d0017befa29d20c82c880c65110598d8299",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    },
+    "closed": {
+      "file": "closed.f20fc87c6603.png",
+      "sha256": "f20fc87c66030df686bf08c520feb1d2ff3f0dfe9d8f51f040fd1b122990e083",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    },
+    "sealed": {
+      "file": "sealed.78098a4b9f0e.png",
+      "sha256": "78098a4b9f0e3e13f544b75411033b54840b64f80fd1550b43ff3c73d67ec52a",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    },
+    "none": {
+      "file": "none.5eeef845f8ae.png",
+      "sha256": "5eeef845f8ae12b1ff72b28f610c5d91d2eb1d15b9346a4b49efd810ab2ad345",
+      "frameSize": [
+        64,
+        64
+      ],
+      "edge": "north",
+      "edgeBounds": [
+        23,
+        0,
+        41,
+        8
+      ]
+    }
+  },
+  "oneWay": {
+    "file": "one-way.f570d2cc0a27.png",
+    "sha256": "f570d2cc0a279d02e43df4be70e43f3c2c1bd84f5d6353f114b907c2d9bf7042",
+    "frameSize": [
+      64,
+      64
+    ],
+    "edge": "north",
+    "edgeBounds": [
+      23,
+      0,
+      41,
+      8
+    ]
+  },
+  "animations": {
+    "opening": {
+      "full": {
+        "file": "opening-full.1c2782386f51.png",
+        "sha256": "1c2782386f514e1fecc4285dcd0666311020de04f92dab87a98f19633caa5ea5",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 6,
+        "fps": 10,
+        "seconds": 0.6,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "open",
+        "reducedMotion": "show restState without animation"
+      },
+      "reduced": {
+        "file": "opening-reduced.1c2782386f51.png",
+        "sha256": "1c2782386f514e1fecc4285dcd0666311020de04f92dab87a98f19633caa5ea5",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 6,
+        "fps": 10,
+        "seconds": 0.6,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "open",
+        "reducedMotion": "show restState without animation"
+      }
+    },
+    "sealing": {
+      "full": {
+        "file": "sealing-full.1656d47a2aa6.png",
+        "sha256": "1656d47a2aa6b9cd6003eba2dd54fadfb2d104162e59cb4f114dbd9c4aa4de62",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 8,
+        "fps": 10,
+        "seconds": 0.8,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "sealed",
+        "reducedMotion": "show restState without animation"
+      },
+      "reduced": {
+        "file": "sealing-reduced.3301e92b430b.png",
+        "sha256": "3301e92b430bc42417930916665242a21a3fd8b0b425ffa1cb523ae454c76b36",
+        "frameSize": [
+          64,
+          64
+        ],
+        "frames": 8,
+        "fps": 10,
+        "seconds": 0.8,
+        "loop": false,
+        "blend": "alpha",
+        "restState": "sealed",
+        "reducedMotion": "show restState without animation"
+      }
+    }
+  }
+}

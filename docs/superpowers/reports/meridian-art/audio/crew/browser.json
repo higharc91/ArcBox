@@ -1,0 +1,90 @@
+{
+  "views": [
+    {
+      "width": 320,
+      "autoplay": false,
+      "confirmedCues": 8,
+      "mute": true,
+      "unmuteDoesNotReplay": true,
+      "keyboard": true,
+      "pageOverflow": false,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "autoplay": false,
+      "confirmedCues": 8,
+      "mute": true,
+      "unmuteDoesNotReplay": true,
+      "keyboard": true,
+      "pageOverflow": false,
+      "errors": []
+    }
+  ],
+  "decodedAssets": [
+    {
+      "id": "ines_okafor",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.1426367461681366,
+      "rms": 0.030509909190177886
+    },
+    {
+      "id": "tobe_raske",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.14967986941337585,
+      "rms": 0.03744989895575661
+    },
+    {
+      "id": "sable_quist",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.14512035250663757,
+      "rms": 0.03719493026794824
+    },
+    {
+      "id": "anselm_varga",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.14698702096939087,
+      "rms": 0.03726589726819109
+    },
+    {
+      "id": "pell_ostrander",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.13842540979385376,
+      "rms": 0.03039831165304656
+    },
+    {
+      "id": "juno_achterberg",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.13049045205116272,
+      "rms": 0.03033872566204674
+    },
+    {
+      "id": "kit_sato",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.14721710979938507,
+      "rms": 0.03726756342422566
+    },
+    {
+      "id": "rhee_callender",
+      "duration": 0.49732426303854876,
+      "sampleRate": 44100,
+      "channels": 1,
+      "peak": 0.1426323801279068,
+      "rms": 0.030432469290768698
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "request": {
+    "id": "story_2026_11_13_job16-laomedeia-umbriel",
+    "issues": [
+      "#207",
+      "#210",
+      "#211",
+      "#218"
+    ],
+    "multiSpeakerConfig": [
+      {
+        "speaker": "A",
+        "speakerVoice": "Laomedeia"
+      },
+      {
+        "speaker": "B",
+        "speakerVoice": "Umbriel"
+      }
+    ],
+    "text": "A: <bright, pitched up, innocent without baby talk Mood: sad.> Dad says the goblins aren't coming back. He didn't look happy about it.\n<long pause>\nA: <bright, pitched up, innocent without baby talk Mood: happy.> There's a goblin girl who can spit further than me. I'm going to beat her.\n<long pause>\nA: <bright, pitched up, innocent without baby talk Mood: surprised.> Pip says the river had a heart and somebody took it out. Is that true?\n<long pause>\nB: So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.\n<long pause>\nB: Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.\n<long pause>\nB: Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+    "segments": [
+      {
+        "raw": "Laomedeia.ec11b084",
+        "line": "town_child_force",
+        "speaker": "townsfolk_child",
+        "preset": "Laomedeia",
+        "text": "Dad says the goblins aren't coming back. He didn't look happy about it.",
+        "renderText": "<bright, pitched up, innocent without baby talk Mood: sad.> Dad says the goblins aren't coming back. He didn't look happy about it.",
+        "delivery": {
+          "direction": "bright, pitched up, innocent without baby talk",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Laomedeia.6ab094e4",
+        "line": "town_child_parley",
+        "speaker": "townsfolk_child",
+        "preset": "Laomedeia",
+        "text": "There's a goblin girl who can spit further than me. I'm going to beat her.",
+        "renderText": "<bright, pitched up, innocent without baby talk Mood: happy.> There's a goblin girl who can spit further than me. I'm going to beat her.",
+        "delivery": {
+          "direction": "bright, pitched up, innocent without baby talk",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Laomedeia.248d3dca",
+        "line": "town_child_ember",
+        "speaker": "townsfolk_child",
+        "preset": "Laomedeia",
+        "text": "Pip says the river had a heart and somebody took it out. Is that true?",
+        "renderText": "<bright, pitched up, innocent without baby talk Mood: surprised.> Pip says the river had a heart and somebody took it out. Is that true?",
+        "delivery": {
+          "direction": "bright, pitched up, innocent without baby talk",
+          "mood": "surprised"
+        }
+      },
+      {
+        "raw": "Umbriel.e5333759",
+        "line": "ch1_four_more_choose_2",
+        "speaker": "rook",
+        "preset": "Umbriel",
+        "text": "So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.",
+        "renderText": "So. Do you carry her off and let Emberwick freeze, or leave her to the town and the Market? I've an offer, if you're asking.",
+        "delivery": null
+      },
+      {
+        "raw": "Umbriel.6ea44dfa",
+        "line": "ch1_four_more_guard_1",
+        "speaker": "rook",
+        "preset": "Umbriel",
+        "text": "Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.",
+        "renderText": "Guards on my pier. Lovely. They'll be colder than I am by morning, and twice as bored.",
+        "delivery": null
+      },
+      {
+        "raw": "Umbriel.eab2ecb2",
+        "line": "ch1_four_more_bargain_1",
+        "speaker": "rook",
+        "preset": "Umbriel",
+        "text": "Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+        "renderText": "Sensible. I'll chip her slow and sell her cheap. The town stays warm, the Market stays fed, and nobody asks what it costs.",
+        "delivery": null
+      }
+    ]
+  }
+}

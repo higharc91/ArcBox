@@ -1,0 +1,55 @@
+{
+  "checkedSource": "ccc0c462b08f2ffe66d6a3fa0141a60ad1072105",
+  "runStartCommit": "a007bb03dc988ba939ec48d5ee08b7ae72297fd1",
+  "sourceHashes": {
+    "src": "908ba9779af2bc0762688d531c7ad56bfb2dc288",
+    "games": "b7e310520927d7d92f3c8be58da4c7641b271ee5",
+    "web/play": "414ef73ad4395133d98b445daefdff2cfe221629",
+    "tools": "64cae40de7ebbc1d74e89c3e04277948bfb621ba",
+    "content": "21271672cb4e5f194949db97a801895cc66e0bbf",
+    "ArcBox.slnx": "c0631452e3d56135448c14d973672f76e18c5cf7",
+    "Directory.Build.props": "cd4b34f20bf9f40b3059c908cdd2bb5ee1db31bb",
+    "docs/superpowers/reports/meridian-art/audio/crew/crew-audio.js": "edbf6cde41003945c55c39abbaa00f67c4c14cc3"
+  },
+  "artifactCommitNote": {
+    "runStartCommit": "a007bb03dc988ba939ec48d5ee08b7ae72297fd1",
+    "assetRefreshAlreadyPresentAtRunStart": true,
+    "files": [
+      "content/meridian/base/audio/crew-lock-in/manifest.json",
+      "content/meridian/base/audio/crew-lock-in/rhee_callender.d0091579aa44.ogg"
+    ],
+    "note": "The previously generated Ogg/manifest refresh is committed without changing any tested working-tree files. The only new text edit clarifies browser-DSP reproducibility."
+  },
+  "command": "bash tools/check-all.sh --full",
+  "launcher": "docs/superpowers/reports/art-merge-validation/run-full-serial.sh",
+  "testModulesRunSerially": true,
+  "assertionsAndTimingBudgetsUnchanged": true,
+  "groupsPassed": 5,
+  "dotnet": 7743,
+  "phone": 620,
+  "node": 24,
+  "python": 150,
+  "pythonGroups": [
+    61,
+    9,
+    54,
+    26
+  ],
+  "total": 8537,
+  "skipped": 0,
+  "buildWarnings": 0,
+  "buildErrors": 0,
+  "newPhoneTests": 19,
+  "focusedPhoneTests": 26,
+  "browserWidths": [
+    320,
+    390
+  ],
+  "auditionedCrewCuesPerViewport": 8,
+  "decodedHashedOggs": 8,
+  "paidGenerationCu": 0,
+  "physicalDeviceOrHumanListeningTest": false,
+  "gameBranchPayloadReference": "b1c8ea985a7e8aaafe0fb97229ae58520ab82caa",
+  "integration": "Common phone hook is implemented; playable Meridian module remains in open #316. #338 core audio remains open. #335 is closed after owner visual approval.",
+  "fullLogSha256": "f01b83db401c9fb8e0262aca5c490cfdaaa7d30d9eda7eac7d30afdc544b97c8"
+}

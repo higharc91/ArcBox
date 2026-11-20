@@ -1,0 +1,21 @@
+{
+  "batch": "story372_2026_11_17_job6-leda",
+  "source": "job6.wav",
+  "sourceSha256": "a0e8f1083bbabeaa4e2191c19489fc2b4fc4f2c17ec3d1d9f9343556f5718076",
+  "durationSeconds": 4.4,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Leda.de64089c",
+      "line": "bark_pip_ashdown_town_1",
+      "speaker": "pip_ashdown",
+      "preset": "Leda",
+      "text": "I can run that for you! One gold if you're nice. Two if you're not.",
+      "start": 0.0,
+      "end": 4.4,
+      "matchedWords": "10/15",
+      "wavSha256": "737298c889be0444f6e3b7899d8aa4c533f94e70dea92baec666edad1e916a30"
+    }
+  ]
+}

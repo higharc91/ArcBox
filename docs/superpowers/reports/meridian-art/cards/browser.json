@@ -1,0 +1,50 @@
+[
+  {
+    "width": 320,
+    "images": 162,
+    "cards": 32,
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      3
+    ],
+    "clippedText": [],
+    "tvFonts": [
+      "30px"
+    ],
+    "choiceTitle": "Drifting Body",
+    "errors": []
+  },
+  {
+    "width": 390,
+    "images": 162,
+    "cards": 32,
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      3
+    ],
+    "clippedText": [],
+    "tvFonts": [
+      "30px"
+    ],
+    "choiceTitle": "Drifting Body",
+    "errors": []
+  },
+  {
+    "width": 1920,
+    "images": 162,
+    "cards": 32,
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      3
+    ],
+    "clippedText": [],
+    "tvFonts": [
+      "30px"
+    ],
+    "choiceTitle": "Drifting Body",
+    "errors": []
+  }
+]

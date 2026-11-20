@@ -51,7 +51,7 @@ export function ControllerScreen({ view, send, me, game }: { view: ControllerVie
   useEffect(() => {
     void syncWakeLock(input);
   }, [input]);
-  useEffect(() => () => void syncWakeLock(false), []);
+  useEffect(() => () => { void syncWakeLock(false);feedback?.leaveController(); }, [feedback]);
   // A layout effect, so the view is known before the Countdown's first tick (a child's passive effect).
   useLayoutEffect(() => feedback?.onView(view, game), [feedback, view.viewId]);
   // The shake widget streams charge updates and cues its own fizz and pop: no tap click on each of them.

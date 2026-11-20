@@ -1,0 +1,663 @@
+{
+  "$schema": "schema/tiles.schema.json",
+  "start": {
+    "entry": "airlock",
+    "place": [
+      {
+        "tile": "airlock",
+        "deck": "habitat",
+        "x": 0,
+        "y": 2
+      },
+      {
+        "tile": "docking_ring",
+        "deck": "habitat",
+        "x": 0,
+        "y": 1
+      },
+      {
+        "tile": "central_lift",
+        "deck": "habitat",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "tile": "command_landing",
+        "deck": "command",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "tile": "engineering_landing",
+        "deck": "engineering",
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "links": [
+      {
+        "from": 2,
+        "to": 3
+      },
+      {
+        "from": 2,
+        "to": 4
+      }
+    ]
+  },
+  "startTiles": [
+    {
+      "id": "airlock",
+      "name": "Airlock",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n"
+      ]
+    },
+    {
+      "id": "docking_ring",
+      "name": "Docking Ring",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "central_lift",
+      "name": "Central Lift",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "command_landing",
+      "name": "Command Lift Landing",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "engineering_landing",
+      "name": "Engineering Lift Landing",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    }
+  ],
+  "tiles": [
+    {
+      "id": "bridge",
+      "name": "Bridge",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "captains_quarters",
+      "name": "Captain's Quarters",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "comms_array",
+      "name": "Comms Array",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "observation_dome",
+      "name": "Observation Dome",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "officers_mess",
+      "name": "Officers' Mess",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "chart_room",
+      "name": "Chart Room",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "armory",
+      "name": "Armory",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "briefing_room",
+      "name": "Briefing Room",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "sensor_suite",
+      "name": "Sensor Suite",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "escape_pod_bay",
+      "name": "Escape Pod Bay",
+      "decks": [
+        "command"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ]
+    },
+    {
+      "id": "galley",
+      "name": "Galley",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "mess_hall",
+      "name": "Mess Hall",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "crew_bunks",
+      "name": "Crew Bunks",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "med_bay",
+      "name": "Med Bay",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "rule": {
+        "kind": "heal",
+        "traits": "physical",
+        "steps": 1
+      }
+    },
+    {
+      "id": "quiet_room",
+      "name": "Quiet Room",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "rule": {
+        "kind": "heal",
+        "traits": "mental",
+        "steps": 1
+      }
+    },
+    {
+      "id": "hydroponics",
+      "name": "Hydroponics",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "laundry",
+      "name": "Laundry",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "gymnasium",
+      "name": "Gymnasium",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "chapel",
+      "name": "Chapel",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "cryo_bay",
+      "name": "Cryo Bay",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "suit_lockers",
+      "name": "Suit Lockers",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "e",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "recreation_deck",
+      "name": "Recreation Deck",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "isolation_ward",
+      "name": "Isolation Ward",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly",
+      "exitCost": 1
+    },
+    {
+      "id": "archive",
+      "name": "Archive",
+      "decks": [
+        "habitat"
+      ],
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "reactor_core",
+      "name": "Reactor Core",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly",
+      "exitCost": 1
+    },
+    {
+      "id": "engine_room",
+      "name": "Engine Room",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "coolant_pumps",
+      "name": "Coolant Pumps",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "machine_shop",
+      "name": "Machine Shop",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "cargo_hold",
+      "name": "Cargo Hold",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "waste_reclamation",
+      "name": "Waste Reclamation",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "incident",
+      "exitCost": 1
+    },
+    {
+      "id": "power_relay",
+      "name": "Power Relay",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "drone_bay",
+      "name": "Drone Bay",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "crawlspace",
+      "name": "Crawlspace",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "exitCost": 1
+    },
+    {
+      "id": "fuel_tanks",
+      "name": "Fuel Tanks",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "chiefs_office",
+      "name": "Chief Engineer's Office",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "containment_lab",
+      "name": "Containment Lab",
+      "decks": [
+        "engineering"
+      ],
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "service_corridor",
+      "name": "Service Corridor",
+      "decks": [
+        "command",
+        "habitat",
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "copies": 2
+    },
+    {
+      "id": "junction",
+      "name": "Junction",
+      "decks": [
+        "command",
+        "habitat",
+        "engineering"
+      ],
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "copies": 2
+    },
+    {
+      "id": "maintenance_shaft",
+      "name": "Maintenance Shaft",
+      "decks": [
+        "command",
+        "habitat"
+      ],
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "rule": {
+        "kind": "dropTo",
+        "deck": "engineering"
+      }
+    },
+    {
+      "id": "storage_closet",
+      "name": "Storage Closet",
+      "decks": [
+        "habitat",
+        "engineering"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "vent_hub",
+      "name": "Vent Hub",
+      "decks": [
+        "command",
+        "engineering"
+      ],
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "sealed_alcove",
+      "name": "Sealed Alcove",
+      "decks": [
+        "command",
+        "habitat",
+        "engineering"
+      ],
+      "hatches": [
+        "s"
+      ],
+      "symbol": "anomaly"
+    }
+  ]
+}

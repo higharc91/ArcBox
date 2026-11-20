@@ -1,0 +1,143 @@
+[
+  {
+    "width": 320,
+    "images": 75,
+    "phases": [
+      "boarding",
+      "explore",
+      "breach",
+      "endgame",
+      "debrief"
+    ],
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      1
+    ],
+    "clipped": [],
+    "leakedRole": false,
+    "roles": 6,
+    "awards": 3,
+    "prematureClock": false,
+    "autoPaths": [
+      "../../../../../content/meridian/base/ui/auto-neutral.98e505bc7ef0.png"
+    ],
+    "errors": [],
+    "motionFramesSeen": 4,
+    "pause": true,
+    "still": true,
+    "reduced": true,
+    "ready": true,
+    "keyboardUndo": true,
+    "lobby": {
+      "seats": [
+        "Seat 1",
+        "Seat 2",
+        "Seat 3",
+        "Seat 4",
+        "Seat 5",
+        "Seat 6"
+      ],
+      "portraits": 6,
+      "you": 1,
+      "bots": [
+        "Bot"
+      ],
+      "abstractBadges": 0
+    }
+  },
+  {
+    "width": 390,
+    "images": 75,
+    "phases": [
+      "boarding",
+      "explore",
+      "breach",
+      "endgame",
+      "debrief"
+    ],
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      1
+    ],
+    "clipped": [],
+    "leakedRole": false,
+    "roles": 6,
+    "awards": 3,
+    "prematureClock": false,
+    "autoPaths": [
+      "../../../../../content/meridian/base/ui/auto-neutral.98e505bc7ef0.png"
+    ],
+    "errors": [],
+    "motionFramesSeen": 4,
+    "pause": true,
+    "still": true,
+    "reduced": true,
+    "ready": true,
+    "keyboardUndo": true,
+    "lobby": {
+      "seats": [
+        "Seat 1",
+        "Seat 2",
+        "Seat 3",
+        "Seat 4",
+        "Seat 5",
+        "Seat 6"
+      ],
+      "portraits": 6,
+      "you": 1,
+      "bots": [
+        "Bot"
+      ],
+      "abstractBadges": 0
+    }
+  },
+  {
+    "width": 1920,
+    "images": 75,
+    "phases": [
+      "boarding",
+      "explore",
+      "breach",
+      "endgame",
+      "debrief"
+    ],
+    "pageOverflow": false,
+    "imageScales": [
+      2,
+      1
+    ],
+    "clipped": [],
+    "leakedRole": false,
+    "roles": 6,
+    "awards": 3,
+    "prematureClock": false,
+    "autoPaths": [
+      "../../../../../content/meridian/base/ui/auto-neutral.98e505bc7ef0.png"
+    ],
+    "errors": [],
+    "motionFramesSeen": 4,
+    "pause": true,
+    "still": true,
+    "reduced": true,
+    "ready": true,
+    "keyboardUndo": true,
+    "lobby": {
+      "seats": [
+        "Seat 1",
+        "Seat 2",
+        "Seat 3",
+        "Seat 4",
+        "Seat 5",
+        "Seat 6"
+      ],
+      "portraits": 6,
+      "you": 1,
+      "bots": [
+        "Bot"
+      ],
+      "abstractBadges": 0
+    }
+  }
+]

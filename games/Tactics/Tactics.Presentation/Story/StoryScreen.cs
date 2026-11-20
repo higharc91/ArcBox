@@ -21,6 +21,7 @@ public sealed record StoryCaption(string Line, string? Speaker, HudPortrait? Por
     /// <summary>The narrator's words: no name, no face, no quotes.</summary>
     public bool Narrator => Speaker is null;
 
+
     /// <summary>By its words, row by row: the same line drawn again is equal, so the TV doesn't rebuild it (<see cref="Contents"/>).</summary>
     public bool Equals(StoryCaption? other)
         => other is not null && Line == other.Line && Speaker == other.Speaker && Equals(Portrait, other.Portrait)
@@ -162,6 +163,12 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
     /// </summary>
     public const int CaptionColumns = 64;
 
+    /// <summary>Conservative extra width when the narrator has no portrait; font size and row count stay unchanged.</summary>
+    public const int NarratorCaptionColumns = 72;
+
+    /// <summary>The row budget for the existing speaker/narrator layout; it adds no fields to the caption record.</summary>
+    public static int CaptionColumnsFor(bool narrator) => narrator ? NarratorCaptionColumns : CaptionColumns;
+
     /// <summary>How many rows a caption has room for (mockup 02: three).</summary>
     public const int CaptionRows = 3;
 
@@ -214,7 +221,7 @@ public sealed record StoryScreen(int Seq, string Scene, string Title, string Sta
             words[0] = words[0] with { Text = $"“{words[0].Text}" };
             words[^1] = words[^1] with { Text = $"{words[^1].Text}”" };
         }
-        return new StoryCaption(line.Id, name, narrator ? null : art?.Speaker(line.Portrait, line.Mood, line.Role), Wrap(words, CaptionColumns));
+        return new StoryCaption(line.Id, name, narrator ? null : art?.Speaker(line.Portrait, line.Mood, line.Role), Wrap(words, CaptionColumnsFor(narrator)));
     }
 
     /// <summary>

@@ -1,0 +1,44 @@
+{
+  "frozenSource": "d505dd067a598138fbd62883d69be9d217adfbcc",
+  "command": "bash tools/check-all.sh --full via run-full-serial.sh",
+  "testModuleParallelism": 1,
+  "exitCode": 0,
+  "allGroupsPassed": true,
+  "dotnet": {
+    "passed": 7743,
+    "failed": 0,
+    "skipped": 0,
+    "buildWarnings": 0,
+    "buildErrors": 0
+  },
+  "phone": {
+    "passed": 601,
+    "productionBuild": true,
+    "buildWarnings": 0,
+    "byteIdenticalProductionFiles": 108
+  },
+  "node": {
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0
+  },
+  "python": {
+    "passed": 96,
+    "groups": {
+      "assets": 61,
+      "audio": 9,
+      "lore": 26
+    }
+  },
+  "loreAndDocs": true,
+  "testsSkippedOrWeakened": false,
+  "ciRemainsManuallyDisabled": true,
+  "fullLogSha256": "851b4825fb4835bcf9dfad638473f38152b02e2c478067631441f00aa5eb455d",
+  "sourceTrees": {
+    "games": "b7e310520927d7d92f3c8be58da4c7641b271ee5",
+    "src": "908ba9779af2bc0762688d531c7ad56bfb2dc288",
+    "web": "7527b6300582c04bacdebe39a6553f5c49c8500f",
+    "tools": "10a51ecacdadeff7fd0cc2108e5f5e186292f71b"
+  },
+  "finalEvidenceCommitChangesDocsOnly": true
+}

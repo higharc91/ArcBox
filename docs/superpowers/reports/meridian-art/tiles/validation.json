@@ -1,0 +1,126 @@
+{
+  "command": "bash tools/check-all.sh --full",
+  "commandStartHead": "fa1be5958dfe9b08249d6c8b0c805a94e477aba5",
+  "assetCodeHead": "3a1a3c136bf7c189130efbef400018de9f4397d3",
+  "sourceChangesDuringRun": "Greyscale review alpha and exact name-drift audit landed during the .NET phase, before the Python group ran. No C# or phone production source changes. Later changes only record evidence.",
+  "mainBase": "cf156c468557266db94ede7ee388f2f5cff41469",
+  "exitCode": 1,
+  "dotnet": {
+    "total": 7739,
+    "passed": 7727,
+    "failed": 12,
+    "skipped": 0,
+    "buildWarnings": 0
+  },
+  "phoneTests": 601,
+  "phoneProductionBuild": "pass",
+  "phoneUpstreamAnnotationWarnings": 2,
+  "nodeTests": 24,
+  "pythonTests": 117,
+  "pythonGroups": [
+    61,
+    9,
+    21,
+    26
+  ],
+  "focusedMeridianTests": 21,
+  "loreAndDocumentationDrift": "pass",
+  "failures": [
+    "Tactics.Game.Tests.GriskBarkTests.Authored_events_add_one_cosmetic_line_without_changing_the_input(moment: \"battle_start\", text: \"Bear\u2019s awake! Dig or die!\")",
+    "Tactics.Game.Tests.GriskBarkTests.Authored_events_add_one_cosmetic_line_without_changing_the_input(moment: \"low_hp\", text: \"The market pays! I\u2019ll split it!\")",
+    "Tactics.Game.Tests.PhoneFixtureTests.The_bounty_presents_only_the_receiving_phones_class_trinket",
+    "Tactics.Logic.Tests.BaseSceneTests.Every_line_has_a_clip_length",
+    "Tactics.Logic.Tests.BaseSceneTests.Scenes_set_only_flags_the_arcs_set",
+    "Tactics.Logic.Tests.Content.VoiceTests.Every_conversation_quest_and_town_bark_has_a_rendered_clip",
+    "Tactics.Presentation.Tests.Audio.VoiceClipsTests.Every_say_line_in_the_pack_has_a_clip_on_disk",
+    "Tactics.Presentation.Tests.Story.StoryDemoTests.The_demo_says_each_line_once_from_the_walk_up",
+    "Tactics.Presentation.Tests.Story.StoryScreenTests.Every_line_in_the_lore_fits_the_caption",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Camp_reflections_use_existing_portraits_and_the_completed_voice_batch",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Every_chapter_1_line_finds_its_clip",
+    "Tactics.Presentation.Tests.Story.StoryTrackTests.Every_line_of_every_chapter_finds_its_clip"
+  ],
+  "newFailures": [],
+  "coverage": {
+    "tileIds": 48,
+    "physicalTiles": 50,
+    "variants": 57,
+    "referencedAssets": 70
+  },
+  "rulesPinnedHead": "ff3175af859733bf8b02c0ff2afa43d0113e1c66",
+  "rulesRecheckedHead": "16dc31eced20a4331393e2991304c596f6a946a0",
+  "latestRulesByteIdentical": true,
+  "chromiumWidths": [
+    320,
+    390,
+    1920
+  ],
+  "loadedReviewImages": 464,
+  "roomViewsAtIntegerScale": 456,
+  "reducedMotionRestState": "pass",
+  "normalMotionPauseStill": "pass",
+  "nativeDeckChecks": [
+    {
+      "deck": "command",
+      "nativePixelsMatch": true,
+      "size": [
+        1920,
+        1080
+      ],
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG quality 55, 4:2:0; not a Discord/human playtest"
+    },
+    {
+      "deck": "habitat",
+      "nativePixelsMatch": true,
+      "size": [
+        1920,
+        1080
+      ],
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG quality 55, 4:2:0; not a Discord/human playtest"
+    },
+    {
+      "deck": "engineering",
+      "nativePixelsMatch": true,
+      "size": [
+        1920,
+        1080
+      ],
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG quality 55, 4:2:0; not a Discord/human playtest"
+    }
+  ],
+  "nativeDriverWarning": "unsupported V-Sync; no script/runtime errors",
+  "visualReview": [
+    "all 48 room IDs at exact 128px in colour and greyscale with crew occlusion",
+    "three native deck mocks",
+    "six actual CVD transformations",
+    "three JPEG stream proxies",
+    "hatch opening/sealing frame sequences"
+  ],
+  "humanPhysicalTvOrDiscordPlaytest": false,
+  "runtimeTvIntegration": "pending M4/M5; native image-display checks only",
+  "roomNames": "live content text; existing #316 phone map renders room.name; final TV HUD labels pending M4",
+  "generationCreditsSpent": 0,
+  "ownerStyleApproval": "approved in conversation on 2026-11-17; larger TV features requested afterward",
+  "issue332": "open; set review and passing merge gate remain; no merge claimed",
+  "sourceSha256": {
+    "tools/meridian-assets/audit_compartments.py": "97b57ac72e23c7e36106ecb0a07e33c00856fd3b09c1ec8bf89f001172f9f40b",
+    "tools/meridian-assets/build.py": "a658c93b5f3d8498fb39d7fbaacdf76426bf8cb5ee29fb116593a4d0ddd2e56b",
+    "tools/meridian-assets/check-native.py": "b5e3c00a228eb8675d79eca8a24c6189fd6166adbf8ecd5d0e6455a8169d502c",
+    "tools/meridian-assets/compartments.py": "adddc3b3eaa521767408c111a8662f3562f8b05243f4faceb605e69b422c3faa",
+    "tools/meridian-assets/review-sheet.py": "ebaf1b56dbc58e6643fc4fa828707b3a69582fc0de3ae178cf8e28a33f6d952a",
+    "tools/meridian-assets/test_build.py": "161a3edec2bb7212cb73ad43ac8f1fea228a8164bd938bdd380c2823c6586b3f",
+    "tools/meridian-assets/test_compartments.py": "1896262062e6c859c16c9adcd0ca28a526c0d6dbfeb8a1999206440a26c2ebdf"
+  },
+  "integrationReport": "../integration/README.md"
+}

@@ -1,0 +1,179 @@
+{
+  "id": "talk_lark",
+  "character": "lark",
+  "title": "The Songkeeper",
+  "cast": [
+    "narrator",
+    "lark"
+  ],
+  "start": "greet",
+  "entries": [
+    {
+      "node": "greet"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "greet",
+      "lines": [
+        {
+          "id": "talk_lark_greet_1",
+          "speaker": "lark",
+          "text": "Ah, an audience! Stand there and look grave, and I'll sing you something the Wardens wrote before your grandmothers were born.",
+          "mood": "happy",
+          "direction": "bright and theatrical, mid-strum"
+        }
+      ],
+      "options": [
+        {
+          "id": "reunion",
+          "label": "Lark? You taught me every song I know, then vanished. No note, nothing.",
+          "to": "reunion",
+          "tags": {
+            "background": [
+              "entertainer"
+            ]
+          }
+        },
+        {
+          "id": "song",
+          "label": "What are you singing?",
+          "to": "song"
+        },
+        {
+          "id": "why",
+          "label": "What brings a songkeeper to Emberwick?",
+          "to": "why"
+        },
+        {
+          "id": "bye",
+          "label": "Another time.",
+          "to": "bye"
+        }
+      ]
+    },
+    {
+      "id": "reunion",
+      "lines": [
+        {
+          "id": "talk_lark_reunion_1",
+          "speaker": "lark",
+          "text": "Look at you. Still holding a lute like it owes you money.",
+          "mood": "surprised",
+          "direction": "caught off guard, then delighted"
+        },
+        {
+          "id": "talk_lark_reunion_2",
+          "speaker": "lark",
+          "text": "I left because the songs were moving, and a songkeeper has to move with them. I should have said goodbye. We're terrible at endings. We always think there's another verse.",
+          "mood": "sad",
+          "direction": "rueful, warm"
+        },
+        {
+          "id": "talk_lark_reunion_3",
+          "speaker": "lark",
+          "text": "Stay close this time. If the songs are right, the Vale is about to need someone who can tell the whole of it.",
+          "mood": "idle",
+          "direction": "sincere, a little protective"
+        }
+      ],
+      "next": "more"
+    },
+    {
+      "id": "song",
+      "lines": [
+        {
+          "id": "talk_lark_song_1",
+          "speaker": "narrator",
+          "text": "Lark sets one foot on the rim of the well and sings, low and clear, until the square goes quiet.",
+          "mood": "idle",
+          "direction": "calm storyteller narration"
+        },
+        {
+          "id": "talk_lark_song_2",
+          "speaker": "lark",
+          "text": "Seven went over the Greywall high, and seven came home with a fire in the sky. The Wardens kept it and the Wardens sang, and the whole Vale warmed where the hearth-bells rang.",
+          "mood": "happy",
+          "direction": "sung softly, a simple folk melody"
+        },
+        {
+          "id": "talk_lark_song_3",
+          "speaker": "lark",
+          "text": "That's the Wardens' Song of the Seven. Seven went, seven came home, a gift and a hearth and everyone happy.",
+          "mood": "idle",
+          "direction": "conversational, a wry smile"
+        },
+        {
+          "id": "talk_lark_song_4",
+          "speaker": "lark",
+          "text": "There's a last verse, too. Nobody has sung it in two hundred years. When a song loses its last verse on purpose, it's usually because the last verse was true.",
+          "mood": "idle",
+          "direction": "lightly, but meaning it"
+        }
+      ],
+      "next": "more"
+    },
+    {
+      "id": "why",
+      "lines": [
+        {
+          "id": "talk_lark_why_1",
+          "speaker": "lark",
+          "text": "Songs gather where things are about to happen. A starving town, a goblin on a bridge, an ember going cold under the river. This is the best stage in the Vale.",
+          "mood": "happy",
+          "direction": "playful showman, warm"
+        },
+        {
+          "id": "talk_lark_why_2",
+          "speaker": "lark",
+          "text": "And someone I've been following came this way. Never mind who. That's a song for later, somewhere colder.",
+          "mood": "idle",
+          "direction": "quieter, glancing past you"
+        }
+      ],
+      "next": "more"
+    },
+    {
+      "id": "more",
+      "lines": [
+        {
+          "id": "talk_lark_more_1",
+          "speaker": "lark",
+          "text": "Anything else? I take requests. I don't take criticism.",
+          "mood": "happy",
+          "direction": "teasing, quick"
+        }
+      ],
+      "options": [
+        {
+          "id": "song",
+          "label": "Sing the Song of the Seven again.",
+          "to": "song"
+        },
+        {
+          "id": "why",
+          "label": "Why are you really in Emberwick?",
+          "to": "why"
+        },
+        {
+          "id": "bye",
+          "label": "That's all for now.",
+          "to": "bye"
+        }
+      ]
+    },
+    {
+      "id": "bye",
+      "lines": [
+        {
+          "id": "talk_lark_bye_1",
+          "speaker": "lark",
+          "text": "Go on, then. Do something worth a verse.",
+          "mood": "happy",
+          "direction": "cheerful send-off"
+        }
+      ],
+      "end": true
+    }
+  ]
+}

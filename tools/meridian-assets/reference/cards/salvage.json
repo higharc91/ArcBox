@@ -1,0 +1,130 @@
+{
+  "$schema": "../schema/cards.schema.json",
+  "cards": [
+    {
+      "id": "crowbar",
+      "title": "Crowbar",
+      "text": "Heavy, honest and older than the ship.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "brawn",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "med_kit",
+      "title": "Med Kit",
+      "text": "Gauze, sealant, and one good painkiller.",
+      "item": {
+        "use": {
+          "label": "Patch up",
+          "effects": [
+            {
+              "kind": "gain",
+              "traits": "physical",
+              "steps": 2
+            }
+          ],
+          "single": true
+        }
+      }
+    },
+    {
+      "id": "calm_tabs",
+      "title": "Calm Tabs",
+      "text": "Prescription. Not yours.",
+      "item": {
+        "use": {
+          "label": "Take one",
+          "effects": [
+            {
+              "kind": "gain",
+              "traits": "mental",
+              "steps": 2
+            }
+          ],
+          "single": true
+        }
+      }
+    },
+    {
+      "id": "mag_boots",
+      "title": "Mag Boots",
+      "text": "They hold you to the deck when the deck stops holding you.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "agility",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "diagnostic_slate",
+      "title": "Diagnostic Slate",
+      "text": "Talks to any system that will still talk.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "tech",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "flare_gun",
+      "title": "Flare Gun",
+      "text": "Six flares. The dark is smaller with one in your hand.",
+      "item": {
+        "passive": [
+          {
+            "kind": "extraDice",
+            "trait": "nerve",
+            "dice": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "adrenal_stim",
+      "title": "Adrenal Stim",
+      "text": "A single autoinjector. Tastes like copper.",
+      "item": {
+        "use": {
+          "label": "Inject",
+          "effects": [
+            {
+              "kind": "moves",
+              "delta": 3
+            }
+          ],
+          "single": true
+        }
+      }
+    },
+    {
+      "id": "hand_lamp",
+      "title": "Hand Lamp",
+      "text": "A good beam. It shows you the way before you need it.",
+      "item": {
+        "use": {
+          "label": "Light the way",
+          "effects": [
+            {
+              "kind": "moves",
+              "delta": 1
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

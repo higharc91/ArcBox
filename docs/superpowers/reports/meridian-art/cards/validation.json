@@ -1,0 +1,77 @@
+{
+  "issue": 334,
+  "focusedCardTests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "cards": 32,
+    "salvageIcons": 8,
+    "anomalyIcons": 12,
+    "frames": 3,
+    "symbols": 6,
+    "referencedAssets": 29
+  },
+  "browser": "browser.json",
+  "nineSliceCorners": "nine-slice-browser.json",
+  "native": "native-check.json",
+  "rulesHead": "00d4a52bb9c7e73a5ee72b117b91891e6c0cdd11",
+  "fullGate": {
+    "report": "../integration/validation.json",
+    "frozenSource": "6e8a518e10a3282ff9452e3dbb76a0e34663ffbd",
+    "exitCode": 0,
+    "allGroupsPassed": true
+  },
+  "runtimeIntegration": false,
+  "physicalTvOrHumanRecognitionTest": false,
+  "paidGenerationCU": 0,
+  "meridianTests": {
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0
+  },
+  "gameContract": {
+    "head": "00d4a52bb9c7e73a5ee72b117b91891e6c0cdd11",
+    "errors": 0,
+    "warnings": 0,
+    "buildWarnings": 0,
+    "coverage": {
+      "tiles": [
+        48,
+        48
+      ],
+      "hatches": [
+        4,
+        4
+      ],
+      "crew": [
+        8,
+        8
+      ],
+      "portraits": [
+        8,
+        8
+      ],
+      "cards": [
+        3,
+        3
+      ],
+      "icons": [
+        23,
+        23
+      ]
+    },
+    "futureSets": [
+      "tokens",
+      "ui",
+      "fx",
+      "audio"
+    ],
+    "log": "game-contract-check.txt.gz",
+    "latestRecheckHead": "93d5b3353d6f4f4c1cb23eda5fda0bd06003efd3",
+    "latestCheckerErrors": 0
+  },
+  "latestStyleReport": "RESTYLE.md",
+  "latestStyleValidation": "restyle-validation.json"
+}

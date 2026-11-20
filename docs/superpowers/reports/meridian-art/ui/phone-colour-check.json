@@ -1,0 +1,46 @@
+[
+  {
+    "width": 320,
+    "height": 844,
+    "ready": false,
+    "actualChromiumScreenshot": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "physicalDeviceOrHumanTest": false
+  },
+  {
+    "width": 320,
+    "height": 844,
+    "ready": true,
+    "actualChromiumScreenshot": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "physicalDeviceOrHumanTest": false
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "ready": false,
+    "actualChromiumScreenshot": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "physicalDeviceOrHumanTest": false
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "ready": true,
+    "actualChromiumScreenshot": true,
+    "actualCvd": [
+      "deuteranopia",
+      "protanopia"
+    ],
+    "physicalDeviceOrHumanTest": false
+  }
+]

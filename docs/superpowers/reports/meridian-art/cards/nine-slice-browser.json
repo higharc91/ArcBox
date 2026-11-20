@@ -1,0 +1,209 @@
+[
+  {
+    "viewport": 320,
+    "kind": "incident",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        0
+      ],
+      "tr": [
+        0,
+        0
+      ],
+      "bl": [
+        0,
+        -1
+      ],
+      "br": [
+        0,
+        -1
+      ]
+    }
+  },
+  {
+    "viewport": 320,
+    "kind": "salvage",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        1
+      ],
+      "tr": [
+        0,
+        1
+      ],
+      "bl": [
+        0,
+        -1
+      ],
+      "br": [
+        0,
+        -1
+      ]
+    }
+  },
+  {
+    "viewport": 320,
+    "kind": "anomaly",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        1
+      ],
+      "tr": [
+        0,
+        1
+      ],
+      "bl": [
+        0,
+        0
+      ],
+      "br": [
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "viewport": 390,
+    "kind": "incident",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        0
+      ],
+      "tr": [
+        0,
+        0
+      ],
+      "bl": [
+        0,
+        -1
+      ],
+      "br": [
+        0,
+        -1
+      ]
+    }
+  },
+  {
+    "viewport": 390,
+    "kind": "salvage",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        1
+      ],
+      "tr": [
+        0,
+        1
+      ],
+      "bl": [
+        0,
+        -1
+      ],
+      "br": [
+        0,
+        -1
+      ]
+    }
+  },
+  {
+    "viewport": 390,
+    "kind": "anomaly",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        0
+      ],
+      "tr": [
+        0,
+        0
+      ],
+      "bl": [
+        0,
+        0
+      ],
+      "br": [
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "viewport": 1920,
+    "kind": "incident",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        1
+      ],
+      "tr": [
+        0,
+        1
+      ],
+      "bl": [
+        0,
+        0
+      ],
+      "br": [
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "viewport": 1920,
+    "kind": "salvage",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        1
+      ],
+      "tr": [
+        0,
+        1
+      ],
+      "bl": [
+        0,
+        -1
+      ],
+      "br": [
+        0,
+        -1
+      ]
+    }
+  },
+  {
+    "viewport": 1920,
+    "kind": "anomaly",
+    "exactNearestScale": 2,
+    "cornerOffsets": {
+      "tl": [
+        0,
+        0
+      ],
+      "tr": [
+        0,
+        0
+      ],
+      "bl": [
+        0,
+        0
+      ],
+      "br": [
+        0,
+        0
+      ]
+    }
+  }
+]
