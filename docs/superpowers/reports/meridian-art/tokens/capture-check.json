@@ -1,0 +1,46 @@
+{
+  "nativeReviews": [
+    {
+      "scene": "monsters",
+      "nativePixelsMatch": true,
+      "size": [
+        1920,
+        1080
+      ],
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG 55 / 4:2:0, not a physical-TV or Discord test"
+    },
+    {
+      "scene": "tokens",
+      "nativePixelsMatch": true,
+      "size": [
+        1920,
+        1080
+      ],
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG 55 / 4:2:0, not a physical-TV or Discord test"
+    },
+    {
+      "scene": "states",
+      "nativePixelsMatch": true,
+      "size": [
+        1920,
+        1080
+      ],
+      "actualCvd": [
+        "deuteranopia",
+        "protanopia"
+      ],
+      "streamProxy": "JPEG 55 / 4:2:0, not a physical-TV or Discord test"
+    }
+  ],
+  "exactNearestBrowserCases": 12,
+  "newNativeGameSession": false,
+  "physicalTvOrHumanRecognitionTest": false
+}

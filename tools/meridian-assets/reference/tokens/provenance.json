@@ -1,0 +1,23 @@
+{
+  "head": "6defbead1d71ae7abf8ad8b2a09fc9be97b0b4f0",
+  "files": {
+    "content/meridian/base/rules/scenarios/captain_on_deck.json": "2d7ccb290fd03a13cbd4456fd55def17a52cc50abc0f4086ec8e98beada73b22",
+    "content/meridian/base/rules/scenarios/cold_sleep.json": "58d47e4b5956813d248d2e029e01d3477d36bd2cc189ffe64ceacf17adbb65a8",
+    "content/meridian/base/rules/scenarios/company_asset.json": "a30da0627310610ecb19b92f13fbd481c67f8003d91a7be6e7481cfdfb866424",
+    "content/meridian/base/rules/scenarios/decaying_orbit.json": "b6a652a5741d1e107361eb6aa747979a67de3c050e9f524fc7b77a7319bf8db7",
+    "content/meridian/base/rules/scenarios/hull_rot.json": "cfe30bde46d17a9c3f4e2f5874d14098bf935f23ff685883d4980b7a56e59b68",
+    "content/meridian/base/rules/scenarios/last_clean_sample.json": "1cb6573afd224e293692a9cfd018960ad6c67e7f556ae997ed8699fe4742fe4b",
+    "content/meridian/base/rules/scenarios/one_of_us_isnt.json": "12d20f1ef56fa14836b51fcffca45538f78e67d62ab136cdd74317c4c8362d25",
+    "content/meridian/base/rules/scenarios/salvage_rights.json": "4dd8fd4ec10d9a849a0092e1e5538fa983a00b535780dc52797c0a5f4893f96d",
+    "content/meridian/base/rules/scenarios/scuttle_charge.json": "ad9cebb829ff336063135ac6c79e345f82e5f34d0cfec978b50905e6af3e807c",
+    "content/meridian/base/rules/scenarios/the_passenger.json": "6ef3550dea5cf7322b957bcc267237358a3c0bffd4f0a26a5e9940cf765fc8a5",
+    "content/meridian/base/rules/scenarios/tiller_says_no.json": "dc37134cdaecfd7a6fbdf14475decfb108ea766802e1df125f015df428be7cb1",
+    "content/meridian/base/rules/scenarios/vent_cycle.json": "4c59d29ac922b5c98eac63632fd0717aec9c84112501baeaefadcd83b4190762",
+    "games/Meridian/Meridian.Logic/Scenarios/ColdSleep.cs": "a38586015ec296588ef48b09ca28bb0e9bda92ddf26e746f0fa6c6d0a5163f29",
+    "games/Meridian/Meridian.Logic/Scenarios/OneOfUsIsnt.cs": "3135497dae504236eedf660a4e452c34f79fb5a3217db4093a31638e882279d6"
+  },
+  "baseStates": {
+    "relay": "powered",
+    "repair": "broken"
+  }
+}
