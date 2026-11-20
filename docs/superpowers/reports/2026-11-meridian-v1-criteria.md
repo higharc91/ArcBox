@@ -17,7 +17,7 @@
 | 7 | A server restart resumes the same game at the turn's start | **Passes** for every scenario, on the real TV too |
 | 8 | A thirteenth scenario touches only its own files and one registration line | **Passes**, shown by a test that adds one |
 
-**Full gate** (`bash tools/check-all.sh --full`): not yet run on this build; it follows the TV screenshots, and this line will carry its result.
+**Full gate** (`bash tools/check-all.sh --full`, 2026-11-20): .NET build, phone tests and build, Node tool tests and Python checks pass. .NET tests: **8,608 of 8,620 passed**; the 12 failures are the Tactics tests that also fail on a clean `main` at `cf156c46`, and nothing in M7 touches Tactics.
 
 ## The criteria
 

@@ -1,4 +1,4 @@
-> Status: approved 2026-11-18; in progress on branch `ccr-de425e76-4vxzw2` (tasks #408–#419). Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
+> Status: complete (2026-11-20). Tasks 1–12 and the addendum are implemented on branch `ccr-de425e76-4vxzw2` and closed by its commits (#408–#419); see [Implementation notes](#implementation-notes) for where the code differs from this plan, and the [v1 criteria audit](../reports/2026-11-meridian-v1-criteria.md). Live task state belongs on GitHub issues (see the [live tracker index](../README.md)).
 
 # Derelict: ISV Meridian — M7 Scenarios 6–12 Implementation Plan
 
@@ -18,6 +18,39 @@ Steps use checkbox (`- [ ]`) syntax for tracking. Each task is test-first and en
 - **The art for the new tokens.** One `art` issue extends #336 with the new kinds. Until it lands they draw as labelled glyphs from their content (Task 1).
 - **The TV lobby's title card** (#405), a platform change.
 - **New phone screens.** Scenario actions, targets, votes, briefings and objectives already render generically. A scenario that needs a new kind of screen would be a design change, not M7.
+
+## Implementation notes
+
+Where the built code differs from the tasks below. The code and its tests are the authority.
+
+- **Looks are looked up across all scenarios,** not by the scenario running, so the TV view needs no scenario id. The
+  loader rejects a token kind or counter that reads differently in two scenarios. Tiller's `core` and the captain's
+  `command_core` are separate kinds for that reason.
+- **Two more things moved into content than planned:**
+  - each vote's question (`votes`), after the boundary test found One of Us Isn't's in the adapter;
+  - `Token.DroppedItem`, the one core-rules token kind, now owned by Logic.
+- **The host view carries less:**
+  - counters labelled null (bookkeeping) aren't sent to the TV at all;
+  - only objectives meant for everyone are sent. M7's game-over reveal had sent six private objectives in one 1.9 KB
+    patch.
+- **The TV puts per-seat counters on the seat chips,** and the seat strip fits six seats by dropping crew names first.
+  Found in the TV review: four infection figures crowded "Rounds left" off the screen.
+- **Hazard deaths now reach the scenario.** The deaths dealt after a step's events used to come too late for the
+  scenario to hear, so a carried token stayed with a corpse. Found by The Last Clean Sample's tests; the first five
+  scenarios' simulator output is byte-identical.
+- **The simulator reports by archetype,** not scenario id (criterion 8 beyond the boundary test's reach).
+- **Rules added in building, each recorded in its commit and the balance report:**
+  - Cold Sleep's stunned sleepers fall back asleep once the power is cut, and its crew win is judged at a round's end;
+  - Hull Rot caps its spread (`maxSpread`) and removes a jettisoned source from the board;
+  - Scuttle Charge's search sweeps the neighbouring compartments, and its crew bots stay in company;
+  - The Last Clean Sample's cure doesn't take for a seat the infection has just finished.
+- **The owner's decisions on the balance report** are in the addendum. They were implemented, and their effects are in
+  the report: a second way to win, scattered suits, and a Breach threshold of 7.
+- **`tools/tv-e2e.sh`'s restart run checks what a restart must keep:** the restart comes 3 s into the endgame; three
+  signals show the TV playing on; the results line counts as the end; and abandonments count from the TV's first
+  signal after it's back. Every scenario passes the plain and the restart run.
+- **The art issue is #336, extended** with the final token ids, rather than a new issue: #336 already covered all
+  twelve under working names.
 
 ## Global constraints
 
@@ -107,9 +140,9 @@ Situations a main-path test would not reach. Each gets a pinned test in the task
 - **The boundary test** scans `Meridian.Game`, `Meridian.Presentation`, `src/ArcBox.Host/games/meridian` and the phone module for any registered scenario's id, role ids, token kinds and counter ids, and fails on a hit. The registration line is allowed.
 - **The thirteenth scenario** is a test-only class with its own JSON in a temp pack. It goes through the Breach, the briefings and the TV's HUD model, and is bot-played to an ending (review focus 1).
 
-- [ ] **Step 1: Write the failing tests.**
-- [ ] **Steps 2–4:** fail, implement, pass. The S1 five look exactly as before; the fixtures and recordings don't change.
-- [ ] **Step 5: Commit** `refactor(meridian): scenarios own their look; every list from the registry`.
+- [x] **Step 1: Write the failing tests.**
+- [x] **Steps 2–4:** fail, implement, pass. The S1 five look exactly as before; the fixtures and recordings don't change.
+- [x] **Step 5: Commit** `refactor(meridian): scenarios own their look; every list from the registry`.
 
 ### Task 2: Primitives the seven need
 
@@ -127,9 +160,9 @@ Situations a main-path test would not reach. Each gets a pinned test in the task
   - `Distance(state, a, b)` over open hatches.
 - **`ScenarioNotice` gains an optional effect kind** from the art contract's `fx` list (`vent`, `rot`, `pressure`, `sparks`). The TV's `EffectPlan` and `SoundPlan` play it on the notice's compartment. This is how `vent` and `rot`, unused since M5, get cued.
 
-- [ ] **Step 1: Write the failing tests.** One for each primitive. Sealing blocks movement and monsters both ways, and unsealing restores it. Spread never crosses a sealed hatch, and dropped carried tokens are never lost (review focus 5).
-- [ ] **Steps 2–4:** fail, implement, pass. The S1 balance numbers are unchanged: Sim output is identical for a fixed seed.
-- [ ] **Step 5: Commit** `refactor(meridian): shared primitives for the remaining scenarios`.
+- [x] **Step 1: Write the failing tests.** One for each primitive. Sealing blocks movement and monsters both ways, and unsealing restores it. Spread never crosses a sealed hatch, and dropped carried tokens are never lost (review focus 5).
+- [x] **Steps 2–4:** fail, implement, pass. The S1 balance numbers are unchanged: Sim output is identical for a fixed seed.
+- [x] **Step 5: Commit** `refactor(meridian): shared primitives for the remaining scenarios`.
 
 ### Tasks 3–9: one scenario each
 
@@ -145,7 +178,7 @@ The rules are as in the table above. **Bots** follow the S1 pattern: score the o
 - **Task 8: Vent Cycle.** A bot suits up while suits remain and cycles out. A bot with no suit hunts a suited seat while the decks allow.
 - **Task 9: The Last Clean Sample.** Bots race to the sample. The dose carrier injects at once if nobody shares its compartment, else runs. Everyone else hunts the carrier.
 
-- [ ] **Step 1, per scenario: write the failing tests.**
+- [x] **Step 1, per scenario: write the failing tests.**
   - setup and `CanRun`, at every player count, on a start-only ship and a full one;
   - each action, rule, win and loss, and the round limit;
   - the review-focus items in brackets above;
@@ -162,9 +195,9 @@ The rules are as in the table above. **Bots** follow the S1 pattern: score the o
   - The M3 report's open findings get a second look, with the owner's decision on round-limit scenarios kept: crew win rates outside 40–60%, and most games estimating 24–44 minutes against a 45–60-minute target.
   - The length target applies to the whole game, so if every scenario is short, the fix may be the Explore phase's length (the Breach threshold, or tiles per deck). That would be proposed in the report, not changed silently.
 
-- [ ] **Step 1: The table and its content test.**
-- [ ] **Step 2: Run, tune, and write the report from the real output.**
-- [ ] **Step 3: Commit** `feat(meridian): the Breach table for twelve scenarios, and the balance report`.
+- [x] **Step 1: The table and its content test.**
+- [x] **Step 2: Run, tune, and write the report from the real output.**
+- [x] **Step 3: Commit** `feat(meridian): the Breach table for twelve scenarios, and the balance report`.
 
 ### Task 11: End to end, on the TV and the phones
 
@@ -178,9 +211,9 @@ The rules are as in the table above. **Bots** follow the S1 pattern: score the o
 - **One `art` issue** for the new token kinds (drones, sleepers, cores, relays, charges, rot, the source, suits, the sample and the dose), extending #336 to the contract.
 - **The playtest checklist** gains a line per new scenario, the things only people can judge: whether the saboteur can be read from the table's talk, and whether the captain's seals feel fair.
 
-- [ ] **Step 1: Run each end to end; fix what breaks.**
-- [ ] **Step 2: Recordings, screenshots, the art issue and the checklist.**
-- [ ] **Step 3: Commit** `test(meridian): every scenario end to end`.
+- [x] **Step 1: Run each end to end; fix what breaks.**
+- [x] **Step 2: Recordings, screenshots, the art issue and the checklist.**
+- [x] **Step 3: Commit** `test(meridian): every scenario end to end`.
 
 ### Task 12: The success criteria, audited
 
@@ -188,8 +221,8 @@ The rules are as in the table above. **Bots** follow the S1 pattern: score the o
 
 Spec §1's eight criteria, one row each. For each: the test or run that shows it, its result on the final commit, and anything a person must still check (the game nights). Criterion 4's row cites Task 10's report. The full gate runs last: `bash tools/check-all.sh --full` passes, apart from any Tactics failures already on `main`.
 
-- [ ] **Step 1: The audit and the full gate.**
-- [ ] **Step 2: Commit** `docs(meridian): v1 success criteria audited`.
+- [x] **Step 1: The audit and the full gate.**
+- [x] **Step 2: Commit** `docs(meridian): v1 success criteria audited`.
 
 ## Addendum: the owner's decisions on the balance report (2026-11-18)
 
