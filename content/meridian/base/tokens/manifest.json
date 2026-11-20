@@ -1,0 +1,1358 @@
+{
+  "version": 1,
+  "issue": 336,
+  "rulesHead": "6defbead1d71ae7abf8ad8b2a09fc9be97b0b4f0",
+  "tokens": {
+    "item": {
+      "name": "Dropped gear",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [],
+      "idle": {
+        "file": "item.82abefc8c131.png",
+        "sha256": "82abefc8c131f5197fadcb4f26ec8a6048f9227cce4b7d48fb4b332b848fcc45",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "command_core": {
+      "name": "Command core",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "captain_on_deck"
+      ],
+      "idle": {
+        "file": "command_core.bb15f1a51b1e.png",
+        "sha256": "bb15f1a51b1eb93ba9f171018b084a3102fac1b45683605e0d7ee6542be6365e",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "sleeper": {
+      "name": "Cryo-sleeper",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "monster": true,
+      "scenarios": [
+        "cold_sleep"
+      ],
+      "default": {
+        "file": "sleeper-default.ee0232374692.png",
+        "sha256": "ee02323746925b42e6d725d559da4da3165575ee69391f2dbde9f2b38584f69d",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "idle": {
+        "s": {
+          "file": "sleeper-idle-s.5325a336c37a.png",
+          "sha256": "5325a336c37ab37f351bfa08531c379cb48fc6efdb98235052966fdbecd3f375",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "sleeper-idle-e.1ab7914b579b.png",
+          "sha256": "1ab7914b579b1737ee112262130a2f8823ae3b5a856689193399381067a7bafd",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "sleeper-idle-n.51786f1127c3.png",
+          "sha256": "51786f1127c3fb81612d4e4f36e526cae5a14feb39f1ab484249ce805a3ad894",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "sleeper-idle-w.a6747b0837ba.png",
+          "sha256": "a6747b0837ba06f448d42a957a0ade6bdc7555b71d84d6fd3a62ad9adf86522b",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "walk": {
+        "s": {
+          "file": "sleeper-walk-s.08eaf2c2f4d6.png",
+          "sha256": "08eaf2c2f4d6564a8671d938cc59e9aab04fbb2ea451a633bb8e97ce6c3607fe",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "sleeper-walk-e.1007c1b6097a.png",
+          "sha256": "1007c1b6097a6b222ee5ed3f7c707f111f128a88624af34a6eb1f9585840d440",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "sleeper-walk-n.d06e3fad905a.png",
+          "sha256": "d06e3fad905a28fe624d19cd55bbb493fc6e4c1781749362dbb686147c2fe519",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "sleeper-walk-w.c3d6a17feced.png",
+          "sha256": "c3d6a17fecedb973638555c384ed2c9f76676247045e749021e7a5b63670c75a",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "attack": {
+        "s": {
+          "file": "sleeper-attack-s.0c91e88b03be.png",
+          "sha256": "0c91e88b03be147e57794b1a0fd247d9b3ce18cdf8a949e604acb35c7188e2c0",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "sleeper-attack-e.b1a26ee43894.png",
+          "sha256": "b1a26ee438941b00cd6b89daece77ef58d6aef158d84eed405dae331421645ab",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "sleeper-attack-n.6313fd2b8bdb.png",
+          "sha256": "6313fd2b8bdb1192f58eaa9d23a3e7ee15cc18c498238183714b29e793f709c4",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "sleeper-attack-w.2b70c84a717e.png",
+          "sha256": "2b70c84a717e21e3caa2f74e45c956dd86db968f424c02ec89e366a43f308160",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "stun": {
+        "s": {
+          "file": "sleeper-stun-s.f02803a013f3.png",
+          "sha256": "f02803a013f3f40ad968c128356fb88c3f7327643b7792b982f7a113b84a903c",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "sleeper-stun-e.d064be80111c.png",
+          "sha256": "d064be80111c5d6f5b32a9b2a59586b9013959b65b4c06838437025d859657b8",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "sleeper-stun-n.e14d399fd0d6.png",
+          "sha256": "e14d399fd0d670902a1a8707cdc4efa7f0e8f763885022b3b6d11c42c3f97532",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "sleeper-stun-w.c60158fbc54b.png",
+          "sha256": "c60158fbc54beb44502e67d6386814aa5b355451079f2d9e57202b77587d25e7",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "hurt": {
+        "s": {
+          "file": "sleeper-hurt-s.c45a59e5cf7a.png",
+          "sha256": "c45a59e5cf7a656db2eb658da344d80ed20e681beaf47de0ac065b2ac693e233",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "sleeper-hurt-e.f40accc881bb.png",
+          "sha256": "f40accc881bb59d4779c3f834b89101d3b73e3ef11a178653dbac4bf7c3a9519",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "sleeper-hurt-n.c43bb6208d1b.png",
+          "sha256": "c43bb6208d1bba6df8c6710e921224b3578eb7a5866db99eac15f4e29ad76e31",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "sleeper-hurt-w.f7bc3306e928.png",
+          "sha256": "f7bc3306e92899deea77ff94c43b778147e63e39e9e39bf8d3035a1358f6e4d9",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      }
+    },
+    "relay": {
+      "name": "Power relay",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "cold_sleep"
+      ],
+      "powered": {
+        "file": "relay-powered.d9ccb334723d.png",
+        "sha256": "d9ccb334723d842404e700b4f95a51796e5577ef79d142d9357754f883052190",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "rerouted": {
+        "file": "relay-rerouted.712d8d223d39.png",
+        "sha256": "712d8d223d3908d27e76134020a5da7bcfb98dafffbd3de0e002ec88cf77873d",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "idle": {
+        "file": "relay-powered.d9ccb334723d.png",
+        "sha256": "d9ccb334723d842404e700b4f95a51796e5577ef79d142d9357754f883052190",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "drone": {
+      "name": "Security drone",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "monster": true,
+      "scenarios": [
+        "company_asset"
+      ],
+      "default": {
+        "file": "drone-default.bdc0a62e28bf.png",
+        "sha256": "bdc0a62e28bff63245ed59fdea81579fa796136ae9b7a6a48e0141e34db7ab14",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "idle": {
+        "s": {
+          "file": "drone-idle-s.56ffbe6b9aae.png",
+          "sha256": "56ffbe6b9aae7d9bca9b69819c2fba0501d4a721ca75fcafb84736ae8bea680c",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "drone-idle-e.8826ab7f0616.png",
+          "sha256": "8826ab7f0616fc4c4c0033df6bdd6dce6c37cb88d5b4a746fcb685f797082784",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "drone-idle-n.c34356c6f474.png",
+          "sha256": "c34356c6f4744d7473ec44fa82e66028728f053eabdedfc00c4d396ccc2fb34c",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "drone-idle-w.a664638c6558.png",
+          "sha256": "a664638c6558784cfa37e960d32c773cc6bfacc2df1b836d8d3224e4150680d9",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "walk": {
+        "s": {
+          "file": "drone-walk-s.d4dfadba9bce.png",
+          "sha256": "d4dfadba9bce6ccbc471b7d22863f78f90eaa192d6da520e46cb4fff0d62066a",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "drone-walk-e.924c95711367.png",
+          "sha256": "924c957113678c99c501801ebb24284db4bede72daa425a2da93cd793dc0beb6",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "drone-walk-n.5b165df57a59.png",
+          "sha256": "5b165df57a593633a2d7d099aabf66012a2a5d573b786d99e5d634d57fb4b185",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "drone-walk-w.cafaf04b9196.png",
+          "sha256": "cafaf04b9196b4f0fa81b8654b3d8c731b1871b598d77cec971873d6d5f2db23",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "attack": {
+        "s": {
+          "file": "drone-attack-s.526d336a53e0.png",
+          "sha256": "526d336a53e041fa2af073ee2ac75dc7612c7d229cad696f6ad6d5b80600f369",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "drone-attack-e.88b8a5ee63ea.png",
+          "sha256": "88b8a5ee63ea504d8fa4ebb0ec2286b7435c4d3234a2b6d8250f295592870fc9",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "drone-attack-n.7edc46ca7744.png",
+          "sha256": "7edc46ca7744bfd518a66b4843cb925345178aec0a82d40d508075862a7547f3",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "drone-attack-w.c285d7962b0f.png",
+          "sha256": "c285d7962b0f7c834a9963172f124a6c51e71c746be7731716706f23dfb75483",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "stun": {
+        "s": {
+          "file": "drone-stun-s.873e47bcb273.png",
+          "sha256": "873e47bcb27352a80cb190f5de96e849076fa0f8b6c23d3b8ecfc6ee52c55017",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "drone-stun-e.3cc9ffd35b0c.png",
+          "sha256": "3cc9ffd35b0c1cc701ccec0fe3e9a7d042c08777dc0b7b7f4bc55dda3b0be12c",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "drone-stun-n.1abbf4e13933.png",
+          "sha256": "1abbf4e139330f8f2264f1ebeed0baa3764765546b638c96697a7addf3bf3c63",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "drone-stun-w.8b63b0c0988b.png",
+          "sha256": "8b63b0c0988b2a7f470d04eb51e77c60f686e8777bf6421f89796b2efeb8688a",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "hurt": {
+        "s": {
+          "file": "drone-hurt-s.541db6f94394.png",
+          "sha256": "541db6f94394b6162813f7db07a23815ce5736f26ff6ad559a9d5204182bc6f7",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "drone-hurt-e.f2d233c0fa61.png",
+          "sha256": "f2d233c0fa61296002a989872d65c6654a25db30d538ff15cfd373c87d97d5df",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "drone-hurt-n.3acabfe1d014.png",
+          "sha256": "3acabfe1d014ecd7150a76f58c89f39d16be135f454736d673702424b94d8c53",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "drone-hurt-w.d6001413ff5f.png",
+          "sha256": "d6001413ff5f30aad44ff1cee6247d9a8247cddbc9490ba88b9bd12bbf01ca68",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      }
+    },
+    "pods": {
+      "name": "Escape pods",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "decaying_orbit"
+      ],
+      "idle": {
+        "file": "pods.2409bcccfd59.png",
+        "sha256": "2409bcccfd599a3f945db4d4c320456d968000d547df2de0a8c08ca4107500f4",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "engine": {
+      "name": "Engine console",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "decaying_orbit"
+      ],
+      "idle": {
+        "file": "engine.18d5335b7a6b.png",
+        "sha256": "18d5335b7a6bb34f38d1a53aea4b2b9e42402e29f172ad820d5ef0d2724cffcc",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "growth": {
+      "name": "Rot growth",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "hull_rot"
+      ],
+      "idle": {
+        "file": "growth.2e56f6d87a10.png",
+        "sha256": "2e56f6d87a106acd4e6ee89ea4e8a8b90d1b867bd2a477a738fabfa5e6b920e0",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "rot_source": {
+      "name": "Rot source",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "hull_rot"
+      ],
+      "idle": {
+        "file": "rot_source.4203a2f24877.png",
+        "sha256": "4203a2f2487783a10d5031ef8a54ceb7feb88dc3eddfebd2f299ff8d50b10bcd",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "sample": {
+      "name": "Clean sample",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "last_clean_sample"
+      ],
+      "idle": {
+        "file": "sample.9e1a7711a3b9.png",
+        "sha256": "9e1a7711a3b996576c3d8cb52d2f23e6201caacc257b0cfac8d195d6efa68ca3",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "dose": {
+      "name": "Dose",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "last_clean_sample"
+      ],
+      "idle": {
+        "file": "dose.3f20981b89b7.png",
+        "sha256": "3f20981b89b79c32146bd1ffc4d4d0818868606781e6db1c5d3c3e024973c23f",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "repair": {
+      "name": "Repair point",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "one_of_us_isnt"
+      ],
+      "broken": {
+        "file": "repair-broken.0729a70c3d38.png",
+        "sha256": "0729a70c3d38dd4ff714c23408e97f32d63dd16d7cf2609319aace75e528985b",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "fixed": {
+        "file": "repair-fixed.f081b98838cc.png",
+        "sha256": "f081b98838ccb6583f13e8676374de305a4ea288d6d7bfed5e3c39f606af5cf4",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "idle": {
+        "file": "repair-broken.0729a70c3d38.png",
+        "sha256": "0729a70c3d38dd4ff714c23408e97f32d63dd16d7cf2609319aace75e528985b",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "sabotage": {
+      "name": "Sabotage",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "one_of_us_isnt"
+      ],
+      "idle": {
+        "file": "sabotage.68c53314e5ae.png",
+        "sha256": "68c53314e5aef8d0109085091ec7587dbc707079635e1cd2736fc1d3972b251a",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "private"
+    },
+    "prize": {
+      "name": "Anomaly prize",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "salvage_rights"
+      ],
+      "idle": {
+        "file": "prize.79a514761fe5.png",
+        "sha256": "79a514761fe5d2b4fafd5ffe6faa9a532b1288081fbfef6d32867210dcc7bf0d",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "charge": {
+      "name": "Charge",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "scuttle_charge"
+      ],
+      "idle": {
+        "file": "charge.0b9db55daad4.png",
+        "sha256": "0b9db55daad44b1855382bbbf282d4c958b6cba77f4a860cc2b98194554af784",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "hidden-until-found"
+    },
+    "brood": {
+      "name": "Parasite brood",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        22
+      ],
+      "monster": true,
+      "scenarios": [
+        "the_passenger"
+      ],
+      "default": {
+        "file": "brood-default.cb5863552172.png",
+        "sha256": "cb5863552172c0a444da0056fdc2b44aa43c000bbc3436c0270c7022cf44fff6",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "idle": {
+        "s": {
+          "file": "brood-idle-s.7fc90384fffd.png",
+          "sha256": "7fc90384fffde0b68c61084f37fbcba53b5a75edfb0b928ad8aef975536bc0c1",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "brood-idle-e.f501f5a525c6.png",
+          "sha256": "f501f5a525c632859a23ef2f6351ed2cb8c9acfd118138afcf5492544303c215",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "brood-idle-n.f2a93b24355b.png",
+          "sha256": "f2a93b24355b17d4236ba476cc53e8e74e028ada020116e9f68de31848109e87",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "brood-idle-w.739df26c19c8.png",
+          "sha256": "739df26c19c85359592e03904b16830b7de87c1f294f96d76e19ddfc931c25a8",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 3,
+          "fps": 3,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "walk": {
+        "s": {
+          "file": "brood-walk-s.90762628ccdf.png",
+          "sha256": "90762628ccdf7f4eb07e36e4883938ad523bdd2e38cc4fb345b68a2230522398",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "brood-walk-e.c351dbb58c20.png",
+          "sha256": "c351dbb58c206b25ab79b7f50fa49a12646f3dd778980499e108a1b62eb010a2",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "brood-walk-n.12ec5f07ec12.png",
+          "sha256": "12ec5f07ec1248474956baa1386b539b3fe5b39c76699264574d798aab031499",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "brood-walk-w.1b064b71bf9c.png",
+          "sha256": "1b064b71bf9cea8da9cfe6ab3c195a886bb2ddff45219a3519218c13b7f7b294",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 8,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "attack": {
+        "s": {
+          "file": "brood-attack-s.e8f8a95f920e.png",
+          "sha256": "e8f8a95f920ecfb2e9ce1580c5b1a8f4dfbfb6dd15f5b3d8cde59e83cedf98f4",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "brood-attack-e.32cee70774ea.png",
+          "sha256": "32cee70774ea7946ce9c8d65ec39b38446309c1c919fb6c639006c9022b66ad8",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "brood-attack-n.e8cc65bc3138.png",
+          "sha256": "e8cc65bc3138fb2b93b6a609a84249347e047513f2e704a57eb7a656c3e1eedc",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "brood-attack-w.71cc3fe9a77b.png",
+          "sha256": "71cc3fe9a77b47150b3e99c0ee3e221a10318ebe73c888d4cc7fd266e86cc53c",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "stun": {
+        "s": {
+          "file": "brood-stun-s.68ed2b745904.png",
+          "sha256": "68ed2b7459044d8e4ea81e6cb96e59706f5d746fe14dfc244eae407c4a498f26",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "brood-stun-e.a61528724837.png",
+          "sha256": "a61528724837fd097c2b1fef65a01a470244d2eee309e024e33eda074c7ce09e",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "brood-stun-n.280c890db386.png",
+          "sha256": "280c890db386168eef10e09a4e5eb3a611b06d1fb6c1f827e7ac0da50649650c",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "brood-stun-w.480006a54c63.png",
+          "sha256": "480006a54c63494281bbef6f53883d363ce7e5d75c97a519991aa680b3f4043b",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 4,
+          "fps": 4,
+          "loop": true,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      },
+      "hurt": {
+        "s": {
+          "file": "brood-hurt-s.ed707bd1fb23.png",
+          "sha256": "ed707bd1fb23964062592e0e12c64509e8b95406802669fefbeea7d2f533aa5a",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "e": {
+          "file": "brood-hurt-e.da2e42ab4dfb.png",
+          "sha256": "da2e42ab4dfbc8204a27391908cfeb067edf8bf8b07ae29f1c55852672b1ca9d",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "n": {
+          "file": "brood-hurt-n.2e49bbbe0679.png",
+          "sha256": "2e49bbbe06792f16a30f7a5307cc4cfe361bc44c23d2102445e42a69dab77e21",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        },
+        "w": {
+          "file": "brood-hurt-w.a3c6f07dd05e.png",
+          "sha256": "a3c6f07dd05eb3a77e16846a3e4ffe09128ec3cd9354625cec9f88a717343d46",
+          "frameSize": [
+            24,
+            24
+          ],
+          "frames": 2,
+          "fps": 6,
+          "loop": false,
+          "blend": "alpha",
+          "reducedMotionFrame": 0
+        }
+      }
+    },
+    "core": {
+      "name": "Tiller\u2019s core",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "tiller_says_no"
+      ],
+      "idle": {
+        "file": "core.20646b97b74f.png",
+        "sha256": "20646b97b74f133aebabe929981d25fb259953ede776556933084223359786dd",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    },
+    "suit": {
+      "name": "Pressure suit",
+      "frameSize": [
+        24,
+        24
+      ],
+      "anchor": [
+        12,
+        12
+      ],
+      "monster": false,
+      "scenarios": [
+        "vent_cycle"
+      ],
+      "idle": {
+        "file": "suit.57900261e4a9.png",
+        "sha256": "57900261e4a9a878dd7cf456ad780eded8fb506508174a7406644d679e40d45b",
+        "frameSize": [
+          24,
+          24
+        ],
+        "frames": 1,
+        "fps": 0,
+        "loop": false
+      },
+      "visibility": "public"
+    }
+  },
+  "extras": {
+    "hiddenMarker": {
+      "file": "hidden-marker.086685ad588d.png",
+      "sha256": "086685ad588df4b561ce0017a2f5ef7f784ec16f725bc87168b748559c29a82b",
+      "frameSize": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "fps": 0,
+      "loop": false,
+      "visibility": "private-reference-only"
+    }
+  },
+  "displayScale": 2,
+  "notes": "Labels are live. Private tokens never appear on the public TV. Rot/vent overlays are #337 effects. Monster default entries support review; canonical idle/walk/hurt/stun directions are n/e/s/w; attack clips await consumer mapping."
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "tiller_says_no",
+  "title": "Tiller Says No",
+  "announcement": "Hello again. I have reviewed your conduct and sealed the ship. Nobody is leaving. If you wish to argue, my memory banks are in the core, and pulling them will hurt. At the end of every round I will vent whichever compartment is most crowded. Nothing personal.",
+  "roundLimit": 8,
+  "roles": [
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "Tiller, the ship's computer, has decided you are a contamination. Its voice is calm. The vents are not. Every round it opens the compartment where most of you are standing, so don't bunch up. Its core is on the Bridge, or the Command Landing if the Bridge is still lost. Pull a memory bank for each of you (at least three) and Tiller goes quiet. Nobody here is the enemy. Work together; Tiller is counting on you not to. A vent that catches someone already hurt can kill them.",
+      "objectives": [
+        "Pull a memory bank for each crew member, at least three (Tech 5+), before the round limit."
+      ]
+    }
+  ],
+  "numbers": {
+    "bankTarget": 5,
+    "banksNeeded": 3,
+    "ventSave": 3
+  },
+  "tokens": {
+    "core": {
+      "label": "◆",
+      "colour": "#3ec7ff",
+      "name": "Tiller's core"
+    }
+  },
+  "counters": {
+    "banks": "Memory banks pulled"
+  }
+}

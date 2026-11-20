@@ -1,0 +1,45 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "the_passenger",
+  "title": "The Passenger",
+  "announcement": "Biological contamination confirmed. One of you is carrying something that is not yours, and it has started to hatch. Synthesize a counter-agent in a medical or laboratory compartment, then inject the carrier before the brood takes the ship. Carrier, I am told you can hear me. Please stop.",
+  "roundLimit": 12,
+  "roles": [
+    {
+      "id": "host",
+      "side": "passenger",
+      "name": "The Host",
+      "briefing": "Something came aboard with the Anomaly, and it chose you. You can feel it behind your eyes, patient and hungry. Its brood answers you now. Keep the crew from the labs, and keep their needles away from you. Every round you survive, another of the brood crawls free. Hunt them down, or simply outlast them: the Meridian is yours if they fail in time.",
+      "objectives": [
+        "Kill every crew member, or hold out until the round limit."
+      ]
+    },
+    {
+      "id": "crew",
+      "side": "crew",
+      "name": "Crew",
+      "briefing": "One of you is carrying something. You saw it in their face when the Anomaly woke, and now the brood moves when they move. There's still a chance: a counter-agent can be synthesized in the Med Bay, Hydroponics or the Containment Lab. Make a dose, get close enough, and inject the host. Stay together. The brood is strong, but it can only stun, and only the host can be stopped.",
+      "objectives": [
+        "Synthesize a dose in a lab (Tech 5+), then inject the host."
+      ]
+    }
+  ],
+  "numbers": {
+    "synthesize": 5,
+    "broodBrawn": 4,
+    "broodAgility": 3,
+    "broodNerve": 2,
+    "broodFewer": 2
+  },
+  "tokens": {
+    "brood": {
+      "label": "B",
+      "colour": "#ff3b3b",
+      "monster": true
+    }
+  },
+  "counters": {
+    "doses": "Doses",
+    "injected": "Injected"
+  }
+}

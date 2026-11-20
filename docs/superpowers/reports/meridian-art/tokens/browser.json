@@ -1,0 +1,147 @@
+{
+  "viewports": [
+    {
+      "width": 320,
+      "images": 21,
+      "clips": 15,
+      "facings": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "normalFramesSeen": 3,
+      "reduce": true,
+      "pause": true,
+      "oneShotHold": true,
+      "replay": true,
+      "still": true,
+      "pageOverflow": false,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "images": 21,
+      "clips": 15,
+      "facings": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "normalFramesSeen": 3,
+      "reduce": true,
+      "pause": true,
+      "oneShotHold": true,
+      "replay": true,
+      "still": true,
+      "pageOverflow": false,
+      "errors": []
+    },
+    {
+      "width": 1920,
+      "images": 21,
+      "clips": 15,
+      "facings": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "normalFramesSeen": 3,
+      "reduce": true,
+      "pause": true,
+      "oneShotHold": true,
+      "replay": true,
+      "still": true,
+      "pageOverflow": false,
+      "errors": []
+    }
+  ],
+  "pixelSamples": [
+    {
+      "key": "brood",
+      "side": "n",
+      "source": "brood-idle-n.f2a93b24355b.png",
+      "capture": "pixel-brood-n.png",
+      "scale": 2
+    },
+    {
+      "key": "brood",
+      "side": "e",
+      "source": "brood-idle-e.f501f5a525c6.png",
+      "capture": "pixel-brood-e.png",
+      "scale": 2
+    },
+    {
+      "key": "brood",
+      "side": "s",
+      "source": "brood-idle-s.7fc90384fffd.png",
+      "capture": "pixel-brood-s.png",
+      "scale": 2
+    },
+    {
+      "key": "brood",
+      "side": "w",
+      "source": "brood-idle-w.739df26c19c8.png",
+      "capture": "pixel-brood-w.png",
+      "scale": 2
+    },
+    {
+      "key": "drone",
+      "side": "n",
+      "source": "drone-idle-n.c34356c6f474.png",
+      "capture": "pixel-drone-n.png",
+      "scale": 2
+    },
+    {
+      "key": "drone",
+      "side": "e",
+      "source": "drone-idle-e.8826ab7f0616.png",
+      "capture": "pixel-drone-e.png",
+      "scale": 2
+    },
+    {
+      "key": "drone",
+      "side": "s",
+      "source": "drone-idle-s.56ffbe6b9aae.png",
+      "capture": "pixel-drone-s.png",
+      "scale": 2
+    },
+    {
+      "key": "drone",
+      "side": "w",
+      "source": "drone-idle-w.a664638c6558.png",
+      "capture": "pixel-drone-w.png",
+      "scale": 2
+    },
+    {
+      "key": "sleeper",
+      "side": "n",
+      "source": "sleeper-idle-n.51786f1127c3.png",
+      "capture": "pixel-sleeper-n.png",
+      "scale": 2
+    },
+    {
+      "key": "sleeper",
+      "side": "e",
+      "source": "sleeper-idle-e.1ab7914b579b.png",
+      "capture": "pixel-sleeper-e.png",
+      "scale": 2
+    },
+    {
+      "key": "sleeper",
+      "side": "s",
+      "source": "sleeper-idle-s.5325a336c37a.png",
+      "capture": "pixel-sleeper-s.png",
+      "scale": 2
+    },
+    {
+      "key": "sleeper",
+      "side": "w",
+      "source": "sleeper-idle-w.a6747b0837ba.png",
+      "capture": "pixel-sleeper-w.png",
+      "scale": 2
+    }
+  ]
+}
