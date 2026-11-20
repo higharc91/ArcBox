@@ -27,9 +27,9 @@ The hook and observer are implemented on main against open game PR #316's curren
 
 ## Sound and artifacts
 
-The phone synthesizes the cue with WebAudio, requiring no asset download. Three softly attacked and decaying sine/triangle notes last 0.42s. Equivalent exports include an 80ms tail for a total of 0.5s, at 48kHz mono. Source peaks are approximately −16.5 to −17.7 dBFS and RMS −28.6 to −30.5 dBFS. These are quiet phone UI cues, not a claim to complete #338's core −16 LUFS music/SFX delivery.
+The phone synthesizes the cue with WebAudio, requiring no asset download. Three softly attacked and decaying sine/triangle notes last 0.42s. Equivalent exports include 80ms of padding for a total of 0.5s, at 48kHz mono. Source peaks are approximately −16.5 to −17.7 dBFS and RMS −28.6 to −30.5 dBFS. These are quiet phone UI cues, not a claim to complete #338's core −16 LUFS music/SFX delivery.
 
-`content/meridian/base/audio/crew-lock-in/manifest.json` hashes eight immutable Ogg Vorbis files. This supplemental child set leaves the future core `audio/manifest.json` and canonical IDs untouched. OfflineAudioContext renders the exact live recipe. The encoder uses bit-exact container settings; stable signal measurements are rounded to 0.001dB rather than retaining insignificant browser floating-point noise. A same-engine rebuild produces identical manifest bytes and cue hashes. The review bundle is generated from actual runtime source.
+`content/meridian/base/audio/crew-lock-in/manifest.json` hashes eight immutable Ogg Vorbis files. This supplemental child set leaves the future core `audio/manifest.json` and canonical IDs untouched. OfflineAudioContext renders the exact live recipe. The encoder uses bit-exact container settings for fixed PCM masters; stable signal measurements are rounded to 0.001dB rather than retaining insignificant browser floating-point noise. Browser resynthesis can still change a least-significant PCM bit, so rerendered file hashes are not guaranteed identical. The retained WAV masters and hashed Ogg files pin the reviewed takes. The review bundle is generated from actual runtime source.
 
 ## Checks and reproduction
 

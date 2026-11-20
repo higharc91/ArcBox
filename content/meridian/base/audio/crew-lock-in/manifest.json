@@ -97,8 +97,8 @@
       "trigger": "own server-confirmed crew selection; never rejoin, hover or rejected tap"
     },
     "rhee_callender": {
-      "file": "rhee_callender.0279639b0fd0.ogg",
-      "sha256": "0279639b0fd0f848d842377f660e00875cd3bb13850801566edebc001165662a",
+      "file": "rhee_callender.d0091579aa44.ogg",
+      "sha256": "d0091579aa44c069f0c5cc7e63c641654691aeadda42a7af5eac199555c3125e",
       "name": "Rhee Callender",
       "character": "a soft, sparkling radio hello",
       "duration": 0.5,
