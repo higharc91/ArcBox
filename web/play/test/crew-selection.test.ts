@@ -96,4 +96,19 @@ describe("confirmed crew lock-in feedback", () => {
     }
   });
 
+  it("plays every accepted reselection, including changing back, without repeating a refresh", () => {
+    const t=new CrewSelection();t.observe(pick(),"meridian");
+    expect(t.observe(pick("ines_okafor"),"meridian")).toBe("crew.ines_okafor");
+    expect(t.observe(pick("sable_quist"),"meridian")).toBe("crew.sable_quist");
+    expect(t.observe(pick("sable_quist"),"meridian")).toBeUndefined();
+    expect(t.observe(pick("ines_okafor"),"meridian")).toBe("crew.ines_okafor");
+    expect(t.observe(view("sheet",{me:{id:"ines_okafor"}}),"meridian")).toBeUndefined();
+  });
+  it("a reconnected chosen baseline can make a fresh accepted change or skip directly to Explore", () => {
+    const t=new CrewSelection();expect(t.observe(pick("ines_okafor"),"meridian")).toBeUndefined();
+    expect(t.observe(pick("kit_sato"),"meridian")).toBe("crew.kit_sato");
+    t.reset();t.observe(pick("ines_okafor"),"meridian");
+    expect(t.observe(view("turn",{me:{id:"kit_sato"}}),"meridian")).toBe("crew.kit_sato");
+  });
+
 });

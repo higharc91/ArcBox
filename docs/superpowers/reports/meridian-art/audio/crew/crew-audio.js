@@ -232,10 +232,12 @@ var CrewAudio = (() => {
     viewId = null;
     boarding = false;
     armed = false;
+    selected = null;
     reset() {
       this.viewId = null;
       this.boarding = false;
       this.armed = false;
+      this.selected = null;
     }
     observe(view, game) {
       if (game !== "meridian" || view.kind !== "custom" || view.module !== "meridian") {
@@ -248,14 +250,16 @@ var CrewAudio = (() => {
       if (view.screen === "crewPick") {
         if (!Array.isArray(view.data.crew) || !view.data.crew.some((c) => record(c) && crewSound(c.id))) return;
         const mine = view.data.crew.filter((c) => record(c) && c.mine === true);
+        const selected = mine.length === 1 && typeof mine[0].id === "string" ? mine[0].id : null;
         if (!this.boarding) {
           this.boarding = true;
-          this.armed = mine.length === 0;
+          this.selected = selected;
+          this.armed = true;
           return;
         }
-        if (this.armed && mine.length === 1) {
-          this.armed = false;
-          return crewSound(mine[0].id);
+        if (selected !== null && selected !== this.selected) {
+          this.selected = selected;
+          return crewSound(selected);
         }
         return;
       }
@@ -264,9 +268,11 @@ var CrewAudio = (() => {
         this.reset();
         return;
       }
-      if (this.armed && (view.screen === "sheet" || view.screen === "turn") && record(view.data.me)) {
+      if (this.armed && (view.screen === "sheet" || view.screen === "turn") && record(view.data.me) && typeof view.data.me.id === "string") {
         this.armed = false;
-        return crewSound(view.data.me.id);
+        const changed = view.data.me.id !== this.selected;
+        this.selected = view.data.me.id;
+        return changed ? crewSound(this.selected) : void 0;
       }
     }
   };
