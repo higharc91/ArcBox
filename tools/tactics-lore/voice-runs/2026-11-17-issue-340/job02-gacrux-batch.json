@@ -1,0 +1,37 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job02-gacrux",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Gacrux",
+    "text": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.\n<long pause>\n<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.",
+    "segments": [
+      {
+        "raw": "Gacrux.6ac229d3",
+        "line": "talk_dagna_holt_ford_force",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Gacrux.327e8e33",
+        "line": "talk_dagna_holt_ford_parley",
+        "speaker": "dagna_holt",
+        "preset": "Gacrux",
+        "text": "Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.",
+        "renderText": "<Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue. Mood: idle.> Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.",
+        "delivery": {
+          "direction": "Mature female guard captain, late forties to fifties. Low, flat Northern English delivery. Grounded chest resonance, lightly weathered texture, restrained grief and calm clipped authority. No youthful brightness, frailty or theatrical growling. Speak only the dialogue.",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

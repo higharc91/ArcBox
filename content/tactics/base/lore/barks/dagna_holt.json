@@ -163,6 +163,26 @@
         "speaker": "dagna_holt",
         "mood": "idle",
         "direction": "low, flat, few words"
+      },
+      {
+        "id": "bark_dagna_holt_town_force",
+        "text": "We held the bridge. I keep counting the ones who didn't come back across it.",
+        "mood": "sad",
+        "direction": "low, flat",
+        "requires": [
+          "ch1_skarrow_slain",
+          "ch1_ford_settled"
+        ]
+      },
+      {
+        "id": "bark_dagna_holt_town_parley",
+        "text": "Peace with the clan. I'll hold to it. Doesn't mean I have to like it.",
+        "mood": "idle",
+        "direction": "low, flat, grudging",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_ford_settled"
+        ]
       }
     ]
   }

@@ -1,0 +1,61 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job05-fenrir",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Fenrir",
+    "text": "<restrained, ashamed but loyal military voice Mood: sad.> We took the bridge back. The captain hasn't said a word since. Neither have I.\n<long pause>\n<restrained, ashamed but loyal military voice Mood: idle.> Captain made peace with them. Some of the lads don't like it. I like breathing.\n<long pause>\n<restrained, ashamed but loyal military voice Mood: idle.> Orders are to watch the docks now. Watch them for what, nobody says.\n<long pause>\n<restrained, ashamed but loyal military voice Mood: idle.> Long shift, cold boots. Same as every week.",
+    "segments": [
+      {
+        "raw": "Fenrir.1c12c38c",
+        "line": "town_guard_force",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "We took the bridge back. The captain hasn't said a word since. Neither have I.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: sad.> We took the bridge back. The captain hasn't said a word since. Neither have I.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Fenrir.aca85793",
+        "line": "town_guard_parley",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Captain made peace with them. Some of the lads don't like it. I like breathing.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Captain made peace with them. Some of the lads don't like it. I like breathing.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Fenrir.59aa03b1",
+        "line": "town_guard_ember",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Orders are to watch the docks now. Watch them for what, nobody says.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Orders are to watch the docks now. Watch them for what, nobody says.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Fenrir.459d9811",
+        "line": "town_guard_4",
+        "speaker": "townsfolk_guard",
+        "preset": "Fenrir",
+        "text": "Long shift, cold boots. Same as every week.",
+        "renderText": "<restrained, ashamed but loyal military voice Mood: idle.> Long shift, cold boots. Same as every week.",
+        "delivery": {
+          "direction": "restrained, ashamed but loyal military voice",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

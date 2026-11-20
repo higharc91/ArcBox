@@ -96,7 +96,10 @@
         "text": "Valley people. Walking. Not running at me with spears. This is new.",
         "speaker": "mother_skarrow",
         "mood": "idle",
-        "direction": "cracked and rasping; slow, deliberate valley tongue, as a courtesy"
+        "direction": "cracked and rasping; slow, deliberate valley tongue, as a courtesy",
+        "unless": [
+          "ch1_ford_settled"
+        ]
       },
       {
         "id": "bark_mother_skarrow_town_2",

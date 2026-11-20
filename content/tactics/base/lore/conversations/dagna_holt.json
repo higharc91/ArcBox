@@ -33,7 +33,24 @@
       ]
     },
     {
-      "node": "busy"
+      "node": "ford_force",
+      "requires": [
+        "ch1_skarrow_slain",
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "node": "ford_parley",
+      "requires": [
+        "ch1_skarrow_spared",
+        "ch1_ford_settled"
+      ]
+    },
+    {
+      "node": "busy",
+      "unless": [
+        "ch1_ford_settled"
+      ]
     }
   ],
   "nodes": [
@@ -181,6 +198,32 @@
           "text": "The pens are quiet, and the boy is home with his father. That is enough good news for one day.",
           "mood": "idle",
           "direction": "Low, flat Northern soldier; restrained gratitude, no ceremony."
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "ford_force",
+      "lines": [
+        {
+          "id": "talk_dagna_holt_ford_force",
+          "speaker": "dagna_holt",
+          "text": "The bridge is ours. I keep seeing the old woman fall. There's work on the notice board. I'd rather you were busy.",
+          "mood": "sad",
+          "direction": "low, flat, restrained grief"
+        }
+      ],
+      "end": true
+    },
+    {
+      "id": "ford_parley",
+      "lines": [
+        {
+          "id": "talk_dagna_holt_ford_parley",
+          "speaker": "dagna_holt",
+          "text": "Peace with the clan. Half my guards think I've gone soft. The notice board has work, if you want something to hit.",
+          "mood": "idle",
+          "direction": "low, flat, grudging"
         }
       ],
       "end": true

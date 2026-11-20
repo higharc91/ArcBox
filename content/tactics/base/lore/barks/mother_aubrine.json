@@ -41,6 +41,26 @@
         "id": "bark_mother_aubrine_town_7",
         "text": "Mind how you speak in the square. Fear spreads faster than fever.",
         "mood": "angry"
+      },
+      {
+        "id": "bark_mother_aubrine_town_force",
+        "text": "I said the rites for everyone who died at the ford. All of them. The gods can sort out whose they were.",
+        "mood": "sad",
+        "direction": "measured, grieving",
+        "requires": [
+          "ch1_skarrow_slain",
+          "ch1_ford_settled"
+        ]
+      },
+      {
+        "id": "bark_mother_aubrine_town_parley",
+        "text": "Goblin children came to my door asking what the bell is for. I had no idea what to tell them.",
+        "mood": "happy",
+        "direction": "gentle wonder",
+        "requires": [
+          "ch1_skarrow_spared",
+          "ch1_ford_settled"
+        ]
       }
     ]
   }

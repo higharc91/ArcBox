@@ -1,0 +1,43 @@
+{
+  "batch": "issue340_2026_11_17_job07-algenib",
+  "source": "job07-algenib.wav",
+  "sourceSha256": "81aa8693f413daee40608f78cea853824079fbab95a95d25bb38caa4a676d0fa",
+  "durationSeconds": 25.92,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Algenib.865241df",
+      "line": "town_fisher_force",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Things went downstream after the fight. The river's carried worse. Not much worse.",
+      "start": 0.0,
+      "end": 8.646,
+      "matchedWords": "7/13",
+      "wavSha256": "944fd2e5ca87054f801c880187f3bc8a54e1823fbcbabf41446d162f2d2f9a27"
+    },
+    {
+      "raw": "Algenib.f83e308c",
+      "line": "town_fisher_parley",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.",
+      "start": 8.646,
+      "end": 17.075,
+      "matchedWords": "9/17",
+      "wavSha256": "2fe47d8969c2f73c49b496de6c8b2215adacc9292c62d9f742fe26fd6d3406bb"
+    },
+    {
+      "raw": "Algenib.6052e244",
+      "line": "town_fisher_ember",
+      "speaker": "townsfolk_fisher",
+      "preset": "Algenib",
+      "text": "River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+      "start": 17.075,
+      "end": 25.92,
+      "matchedWords": "11/18",
+      "wavSha256": "405bd5a6339cccd6cb77db7717fffae7acc55f6e0c9ad1a08e28deb82fd94574"
+    }
+  ]
+}

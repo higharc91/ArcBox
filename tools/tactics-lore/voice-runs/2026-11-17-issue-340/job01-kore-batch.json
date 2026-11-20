@@ -1,0 +1,85 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job01-kore",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Kore",
+    "text": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Valley people. Say what you came to say, or go back down the hill.\n<long pause>\n<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You came back up the hill. Not many valley people do that twice.\n<long pause>\n<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.\n<long pause>\n<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.\n<long pause>\n<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Anything else, valley people? The fire is small, and I am old.\n<long pause>\n<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Go well. Walk loud on the path, so the archers know it is you.",
+    "segments": [
+      {
+        "raw": "Kore.bf445bec",
+        "line": "talk_mother_skarrow_wary",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Valley people. Say what you came to say, or go back down the hill.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Valley people. Say what you came to say, or go back down the hill.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.9e4f6b37",
+        "line": "talk_mother_skarrow_truce",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "You came back up the hill. Not many valley people do that twice.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> You came back up the hill. Not many valley people do that twice.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.08905b95",
+        "line": "talk_mother_skarrow_clan",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Fed. For now. The little ones have stopped crying in the night. That is a sound I had forgotten.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.f3c6f947",
+        "line": "talk_mother_skarrow_vorga",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> With my grandson. Vorga thinks a bargain is a defeat. He took the angriest of our young and went east. He will be someone's problem.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.e99800f7",
+        "line": "talk_mother_skarrow_more",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Anything else, valley people? The fire is small, and I am old.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Anything else, valley people? The fire is small, and I am old.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Kore.61bbb24b",
+        "line": "talk_mother_skarrow_bye",
+        "speaker": "mother_skarrow",
+        "preset": "Kore",
+        "text": "Go well. Walk loud on the path, so the archers know it is you.",
+        "renderText": "<Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth. Mood: idle.> Go well. Walk loud on the path, so the archers know it is you.",
+        "delivery": {
+          "direction": "Elderly goblin matriarch: low female contralto, husky dry rasp and age-creak; measured, wary, quietly commanding, with tired warmth.",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

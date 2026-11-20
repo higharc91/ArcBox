@@ -1,0 +1,49 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job07-algenib",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Algenib",
+    "text": "<low, unhurried, superstitious river voice Mood: sad.> Things went downstream after the fight. The river's carried worse. Not much worse.\n<long pause>\n<low, unhurried, superstitious river voice Mood: happy.> Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.\n<long pause>\n<low, unhurried, superstitious river voice Mood: idle.> River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+    "segments": [
+      {
+        "raw": "Algenib.865241df",
+        "line": "town_fisher_force",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "Things went downstream after the fight. The river's carried worse. Not much worse.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: sad.> Things went downstream after the fight. The river's carried worse. Not much worse.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Algenib.f83e308c",
+        "line": "town_fisher_parley",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: happy.> Goblin children fish the far bank now. Taught one to tie a net. Don't tell the captain.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Algenib.6052e244",
+        "line": "town_fisher_ember",
+        "speaker": "townsfolk_fisher",
+        "preset": "Algenib",
+        "text": "River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+        "renderText": "<low, unhurried, superstitious river voice Mood: idle.> River's stopped steaming at the docks. First time since I was a boy. Feels like a held breath.",
+        "delivery": {
+          "direction": "low, unhurried, superstitious river voice",
+          "mood": "idle"
+        }
+      }
+    ]
+  }
+}

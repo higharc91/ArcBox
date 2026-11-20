@@ -1,0 +1,54 @@
+{
+  "batch": "issue340_2026_11_17_job06-achird",
+  "source": "job06-achird.wav",
+  "sourceSha256": "aafd9387e56d5cc1735aac1a2234156be86adf8b108b707a3d407423dcaf945f",
+  "durationSeconds": 27.52,
+  "method": "pocketsphinx 5 recognition (bundled en-us model) matched to the request's script with difflib; each clip is cut in the silence between the last heard word of one line and the first heard word of the next",
+  "note": "Derived cuts from one paid parent render; segment hashes do not represent independent generations. Recognition is a timing aid only; listen before final approval.",
+  "segments": [
+    {
+      "raw": "Achird.7237fe1b",
+      "line": "town_farmhand_force",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "The watch says the goblins scattered when their old woman fell. Scattered where, in this cold?",
+      "start": 0.0,
+      "end": 8.141,
+      "matchedWords": "11/16",
+      "wavSha256": "7d4c2feb0887a87e220a1dee34b9f3fa6f549b1764828d2705de7081127db08f"
+    },
+    {
+      "raw": "Achird.d51bb439",
+      "line": "town_farmhand_parley",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "Carried my first sack up the goblin path today. The little ones watched me the whole way.",
+      "start": 8.141,
+      "end": 15.233,
+      "matchedWords": "13/17",
+      "wavSha256": "1b12e0368536b18a00db0c5b8e9ded9609eafe12bcf5c9f0ddc4b516924dc335"
+    },
+    {
+      "raw": "Achird.fa8ce5a0",
+      "line": "town_farmhand_ember",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "Ground under the docks went cold as a grave. Nobody's saying why.",
+      "start": 15.233,
+      "end": 21.488,
+      "matchedWords": "4/12",
+      "wavSha256": "4901eb393d768a568a041437f664e2ad957586a916a67e3e84c7c6f1d6ff9b98"
+    },
+    {
+      "raw": "Achird.629eeeb2",
+      "line": "town_farmhand_4",
+      "speaker": "townsfolk_farmhand",
+      "preset": "Achird",
+      "text": "Hands are cold, but they still work. That's something.",
+      "start": 21.488,
+      "end": 27.52,
+      "matchedWords": "4/9",
+      "wavSha256": "6d2f5ed4871e09b42fdc0485c60d2d1a1c3a4b76093fd31318b627c29e1e02de"
+    }
+  ]
+}

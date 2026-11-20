@@ -1,0 +1,85 @@
+{
+  "request": {
+    "id": "issue340_2026_11_17_job03-zephyr",
+    "issues": [
+      "#340",
+      "#207"
+    ],
+    "voice": "Zephyr",
+    "text": "I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.\n<long pause>\nStew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.\n<long pause>\n<practical, warm, quick but clear Mood: sad.> Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.\n<long pause>\n<practical, warm, quick but clear Mood: happy.> We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.\n<long pause>\n<practical, warm, quick but clear Mood: idle.> Folk keep coming in to shout about the mayor. Then they stay for the soup.\n<long pause>\nYou'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.\n<long pause>\nHalf the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+    "segments": [
+      {
+        "raw": "Zephyr.3688e97b",
+        "line": "bark_bree_tallow_town_force",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.",
+        "renderText": "I set a bowl out for the old goblin woman. Silly. Habit. Somebody ought to mourn her.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.479dcff3",
+        "line": "bark_bree_tallow_town_parley",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Stew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.",
+        "renderText": "Stew's going up the hill by the potful. Don't look at me like that. Hungry's hungry.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.b645232a",
+        "line": "town_barmaid_force",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.",
+        "renderText": "<practical, warm, quick but clear Mood: sad.> Bree poured one for the goblin grandmother tonight. Nobody asked why. Nobody drank it.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "sad"
+        }
+      },
+      {
+        "raw": "Zephyr.8c356670",
+        "line": "town_barmaid_parley",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.",
+        "renderText": "<practical, warm, quick but clear Mood: happy.> We send stew up the hill now. Bree says hungry is hungry, whatever its ears look like.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "happy"
+        }
+      },
+      {
+        "raw": "Zephyr.adc77ee6",
+        "line": "town_barmaid_confessed",
+        "speaker": "townsfolk_barmaid",
+        "preset": "Zephyr",
+        "text": "Folk keep coming in to shout about the mayor. Then they stay for the soup.",
+        "renderText": "<practical, warm, quick but clear Mood: idle.> Folk keep coming in to shout about the mayor. Then they stay for the soup.",
+        "delivery": {
+          "direction": "practical, warm, quick but clear",
+          "mood": "idle"
+        }
+      },
+      {
+        "raw": "Zephyr.9dfc1381",
+        "line": "talk_bree_tallow_ford_force",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.",
+        "renderText": "You'll want feeding. Sit. I heard what happened on the bridge. I'm not asking, and you're not telling. Not tonight.",
+        "delivery": null
+      },
+      {
+        "raw": "Zephyr.a4b72498",
+        "line": "talk_bree_tallow_ford_parley",
+        "speaker": "bree_tallow",
+        "preset": "Zephyr",
+        "text": "Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+        "renderText": "Half the town says you've gone soft, and the other half is eating better for it. I know which half I'm in.",
+        "delivery": null
+      }
+    ]
+  }
+}
