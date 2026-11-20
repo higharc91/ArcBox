@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect } from "preact/hooks";
 import { useFeedback } from "../feedback/feedback";
 import { MuteToggle } from "../feedback/MuteToggle";
 import type { ControllerView } from "../protocol";
-import { SkinContext, type Skin } from "../games/module";
+import { SkinContext, PlayerProfileContext, type Skin } from "../games/module";
 import { useGameModule } from "../games/registry";
 import { Buttons } from "./Buttons";
 import { Choice } from "./Choice";
@@ -44,7 +44,7 @@ function Header({ header, skin }: { header: string; skin?: Skin }) {
  * `game` is the lobby's selected game id; once that game's module has loaded (e.g. "redline"), its skin applies.
  * With a Feedback in context, sends tap, results cue, and the last seconds of an input view tick.
  */
-export function ControllerScreen({ view, send, me, game }: { view: ControllerView; send: Send; me: string; game?: string | null }) {
+export function ControllerScreen({ view, send, me, game, profileId }: { view: ControllerView; send: Send; me: string; game?: string | null; profileId?: string }) {
   const input = view.kind !== "wait";
   const skin = useGameModule(game).module?.skin; // generic look until the game's module has loaded
   const feedback = useFeedback();
@@ -61,7 +61,7 @@ export function ControllerScreen({ view, send, me, game }: { view: ControllerVie
   };
 
   return (
-    <SkinContext.Provider value={skin}>
+    <SkinContext.Provider value={skin}><PlayerProfileContext.Provider value={profileId}>
       <div class={`screen controller k-${view.kind}`} data-game={game ?? undefined}>
         <header class="pstatus">
           <div class="me"><i /><span class="me-name">{me}</span></div>
@@ -73,6 +73,6 @@ export function ControllerScreen({ view, send, me, game }: { view: ControllerVie
         </main>
         {view.deadlineUtc ? <Countdown deadlineUtc={view.deadlineUtc} showUrgency={game === "tactics"} onSecond={feedback ? (s) => feedback.onCountdown(s) : undefined} /> : null}
       </div>
-    </SkinContext.Provider>
+    </PlayerProfileContext.Provider></SkinContext.Provider>
   );
 }

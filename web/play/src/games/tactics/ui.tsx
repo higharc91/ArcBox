@@ -1,5 +1,6 @@
 import type { ComponentChildren, JSX } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
+import { RuleExplanation } from "./onboarding";
 import { ConditionChip, Portrait } from "./art";
 import type { ControlNoticeData, Economy, UnitView } from "./types";
 
@@ -25,12 +26,14 @@ export function HpBar({ unit, enemy = false }: { unit: Pick<UnitView, "hp" | "ma
 }
 
 /** HP in numbers, with temporary HP and the downed countdown. */
-export function HpText({ unit }: { unit: UnitView }) {
+export function HpText({ unit, explain = false }: { unit: UnitView; explain?: boolean }) {
+  // Explanations contain a dialog. Keep them in a block container; plain labels stay safe inside selection buttons.
+  const Tag = explain ? "div" : "span";
   return (
-    <span class="tx-hp-text">
+    <Tag class="tx-hp-text">
       {unit.hp}/{unit.maxHp}{unit.tempHp > 0 ? <em> +{unit.tempHp}</em> : null}
-      {unit.life === "Downed" ? <b class="tx-downed">Downed · {unit.countdown}</b> : null}
-    </span>
+      {unit.life === "Downed" ? explain ? <RuleExplanation topic="Downed" class="tx-downed tx-rule-link">Downed · {unit.countdown}</RuleExplanation> : <b class="tx-downed">Downed · {unit.countdown}</b> : null}
+    </Tag>
   );
 }
 
@@ -48,7 +51,7 @@ export function MeCard({ me, cls, title, subtitle, icon }: {
       {title ? null : (
         <div class="tx-me-hp">
           <HpBar unit={me} />
-          <HpText unit={me} />
+          <HpText unit={me} explain />
         </div>
       )}
     </div>
@@ -101,10 +104,10 @@ export function EconomyChips({ e }: { e: Economy }) {
   const action = e.action || e.extraActions > 0;
   return (
     <div class="tx-econ" aria-label="What you have left this turn">
-      <span class={e.moveLeft > 0 ? "on" : "done"} title="Tiles of movement left">Move {e.moveLeft}</span>
-      <span class={action ? "on" : "done"} title="Your action">Action</span>
-      <span class={e.bonus ? "on" : "done"} title="Your bonus action">Bonus</span>
-      <span class={e.reaction ? "on" : "done"} title="Your reaction">Reaction</span>
+      <RuleExplanation topic="Move" class={e.moveLeft > 0 ? "on" : "done"} label={`Explain Move: ${e.moveLeft} tiles left`}>Move {e.moveLeft}</RuleExplanation>
+      <RuleExplanation topic="Action" class={action ? "on" : "done"} label={`Explain Action: ${action ? "available" : "spent"}`}>Action</RuleExplanation>
+      <RuleExplanation topic="Bonus" class={e.bonus ? "on" : "done"} label={`Explain Bonus: ${e.bonus ? "available" : "spent"}`}>Bonus</RuleExplanation>
+      <RuleExplanation topic="Reaction" class={e.reaction ? "on" : "done"} label={`Explain Reaction: ${e.reaction ? "available" : "spent"}`}>Reaction</RuleExplanation>
     </div>
   );
 }

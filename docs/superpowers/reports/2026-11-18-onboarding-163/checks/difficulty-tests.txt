@@ -1,0 +1,37 @@
+
+> arcbox-play@0.0.0 test
+> vitest run test/tacticsOnboarding.test.tsx
+
+
+ RUN  v4.1.12 /workspace/ArcBox/web/play
+
+AggregateError:
+    at internalConnectMultiple (node:net:1492:18)
+    at afterConnectMultiple (node:net:2161:7) {
+  code: 'ECONNREFUSED',
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:3000
+        at createConnectionError (node:net:2124:14)
+        at afterConnectMultiple (node:net:2154:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:3000
+        at createConnectionError (node:net:2124:14)
+        at afterConnectMultiple (node:net:2154:16) {
+      errno: -111,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+
+ Test Files  1 passed (1)
+      Tests  9 passed (9)
+   Start at  15:55:27
+   Duration  1.86s (transform 498ms, setup 0ms, import 724ms, tests 485ms, environment 447ms)

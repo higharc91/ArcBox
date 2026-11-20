@@ -101,6 +101,7 @@ function Screen({ state, session }: { state: SessionState; session: Session }) {
           send={(payload) => void session.send(state.view.viewId, payload)}
           me={state.lobby.players.find((p) => p.id === state.me)?.name ?? ""}
           game={state.lobby.selectedGameId}
+          profileId={state.lobby.players.find((p) => p.id === state.me)?.profile}
         />
       );
     case "results":

@@ -1,3 +1,4 @@
+import { ClassGuidance, classGuideId, BattleGuide } from "./onboarding";
 import { SurfaceScene } from "./surfaces";
 import { useState } from "preact/hooks";
 import type { CustomScreenProps } from "../module";
@@ -48,10 +49,10 @@ export function PickClass({ data, send }: CustomScreenProps) {
       ) : null}
       <div class="tx-classes">
         {classes.map((c) => (
-          <button type="button" key={c.id} class="tx-class" onClick={() => { sfx("confirm"); send("pickClass", { class: c.id }); }}>
+          <button type="button" key={c.id} class="tx-class" aria-label={`${c.name} ${c.role}`} aria-describedby={classGuideId(c.id)} onClick={() => { sfx("confirm"); send("pickClass", { class: c.id }); }}>
             <Crest cls={c.id} scale={2} />
             <b>{c.name}</b>
-            <span class="tx-role">{c.role}</span>
+            <span class="tx-role">{c.role}</span><ClassGuidance id={c.id} />
           </button>
         ))}
       </div>
@@ -195,6 +196,7 @@ export function Status({ data, send }: CustomScreenProps) {
     <div class="tx tx-status">
       <SurfaceScene kinds={s.surfaces} />
       <MeCard me={s.me} cls={cls} />
+      <BattleGuide unit={s.me.id} />
       <ControlNotice notice={s.controlNotice} />
       <div class={`tx-now${active?.side === "Enemy" ? " enemy" : ""}`}>
         {active ? <Portrait unit={active} size={60} /> : s.active ? <NamedPortrait name={s.active} size={60} /> : null}

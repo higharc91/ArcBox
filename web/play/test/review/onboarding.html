@@ -1,0 +1,11 @@
+<!-- Review harness: real phone components with recorded server fixtures; only the clock is rebased. Not a live-server or human usability test. -->
+<!doctype html><html><meta name="viewport" content="width=device-width,initial-scale=1"><body><div id="app"></div><script type="module">
+import {h,render} from 'preact';
+import { ControllerScreen } from '/src/widgets/ControllerScreen.tsx';
+import { loadModule } from '/src/games/registry.ts';
+import '/src/theme.css';
+await loadModule('tactics');
+window.commands=[];
+window.show=async(name='turn',profile='browser-first',downed=false)=>{const view=await(await fetch('/test/fixtures/tactics/'+name+'.json')).json();if(view.deadlineUtc)view.deadlineUtc=new Date(Date.now()+60000).toISOString();if(downed){view.data.me.life='Downed';view.data.me.hp=0;view.data.me.countdown=2;}render(h(ControllerScreen,{view,profileId:profile,me:'ALEX',game:'tactics',send:p=>window.commands.push(p)}),document.querySelector('#app'));};
+await window.show();window.ready=true;
+</script></body></html>
