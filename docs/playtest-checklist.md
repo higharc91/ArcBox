@@ -183,6 +183,18 @@ Development server with `--Meridian:Scenario=<id>` (ids in `content/meridian/bas
 - [ ] Restart it during the briefings: everyone gets their briefing back, and the endgame begins as before.
 - [ ] Restart it and leave one phone off: after a minute the game plays on, and that seat gets the usual pause, then a bot. Turning the phone back on takes the seat back.
 
+**All twelve scenarios (M7).** To play one, start a Development server with `--Meridian:Scenario=<id>`. The ids are in `content/meridian/base/rules/breach.json`; the balance report says what the bots made of each.
+- [ ] **Company Asset:** the crew can tell who the synthetic is and why (the highest Tech), and a failed transmission feels like a risk worth taking.
+- [ ] **Captain on Deck:** the captain's seals and vents feel fair, never a wall the crew can't answer. Cutting through a seal is worth the turn.
+- [ ] **Cold Sleep:** the crew understand they must cut the power *and* put the awake sleepers down before a round ends. The sleepers' march on the Airlock reads on the board.
+- [ ] **Scuttle Charge:** nobody can tell from the table, the TV or the sounds who planted a charge. Does the talk at the table unmask the saboteur too easily, or never?
+- [ ] **Hull Rot:** the rot's spread reads on the board, and the crew can see where it will go next. Cutting the source free feels earned.
+- [ ] **Vent Cycle:** fetching a suit feels like a race, not a formality (the bots say it isn't). The one who goes without should feel it coming.
+- [ ] **The Last Clean Sample:** the turn between injecting and the cure taking feels tense. Everyone knows who has the dose.
+- [ ] **The round limit:** in One of Us Isn't, Tiller, Captain on Deck and Cold Sleep, the bots let most games run to the limit. Does that happen with people too? Do the new ways to win (the mimic striking, lethal vents, the crew down to one) come into play?
+- [ ] **Game length** with real players: the bots estimate 30–45 minutes, against a 45–60 target. Time a whole game.
+- [ ] **Three players:** several scenarios are hard on a crew of two, by the bots' numbers. Play one at three.
+
 **Art and sound (M5).** Use whatever art sets have landed; anything missing draws its placeholder, side by side with the art.
 - [ ] Crew walk between compartments, face where they're going, and stand still when they arrive. A dying crew member falls and stays as a faded echo.
 - [ ] Panels, card frames and dice look crisp from the sofa, with no blurry edges, and every word on them is still live text.
