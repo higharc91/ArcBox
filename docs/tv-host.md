@@ -57,6 +57,7 @@ Everything after `--` on the Godot command line; all optional.
 | `--res=<w>x<h>` | Window size. The UI is laid out at 1920×1080 and scales (`canvas_items`, `expand`). |
 | `--redline-demo[=<step>]` | Dev only: play a scripted REDLINE race into the TV without a server (see below). |
 | `--drop-signals` | Dev only: the TV never sends a host signal, so a game runs on its fallback timers. Proves a game doesn't need them. |
+| `--meridian-demo[=<scenario>]` | Dev only: play a recorded Meridian game into the TV without a server (default `the_passenger`; see [Meridian scene](#meridian-scene)). |
 | `--beat-log` | Dev only: print a `BEAT` line for each Tactics beat played: when it ran, how long it took and what was in it. |
 | `--tactics-demo[=<map>[:changed\|:fight]]` | Dev only: show a Tactics board without a server, with the art from the repository's `content/` (default `river_crossing`). `:changed` adds zones, raised tiles and the bridge's tiles sunk; `:fight` adds one of every kind of unit. With `--shots` it saves `…-tactics-battle-<map>.png`. |
 | `--world-demo[=<region>\|hilly\|wood\|tavern\|town[:<block tiles>]]` | Dev only: open a whole region the way the TV will, without a server, with the art and region from the repository's `content/` (default `ashen_ford`; `hilly` and `wood` are `DemoRegion`'s stress cases, `tavern` its one building, `town` a small square at the ford's dusk, and `swatches` a band of each ground material in the ford's light, for choosing them), walk a stand-in (four distinct heroes with `--perf`) the length of it at twice walking pace, print what it cost in `WORLD` lines and quit. Use `--res=1920x1080`. With `--shots` it saves `world-<spec>.png`, then one `world-<spot>.png` for each place `WorldSpots` finds: behind a cliff, behind a crate, water at a block edge, a block corner, the region's edge and both sides of the void. See [the world](#the-world). |
@@ -77,6 +78,36 @@ When the selected game uses campaigns (`LobbyState.Campaigns` is set), the lobby
 roster: each member's card title and subtitle, a colour bar (the card's colour, else the seated player's colour) and
 SEATED or AWAY. Start says "Pick a campaign first" until one is selected. Games without campaigns (REDLINE, Counter) get
 the lobby exactly as before.
+
+## Card art in the lobby (#405)
+
+A game can put a title image on its lobby card by naming a PNG in its **base content pack**, which is the pack with id
+`base`:
+
+```csharp
+public GameManifest Manifest => new(..., CardArt: "ui/logo.f73a628aa904.png");   // a path inside the base pack
+```
+
+The server swaps that path for the file's immutable content URL (`GameRegistry.WithCardArtUrl`, giving
+`/content/<game>/base/<hash>/<path>`) before any lobby state goes out. If the path is missing, or the game has no base
+pack, the server sends null, so a TV never asks for a file that isn't there. A game with no `CardArt` (Counter, REDLINE,
+Wardenflame) gets the lobby exactly as before. Meridian names its UI kit's logo, which it reads from `ui/manifest.json`
+when it registers (`MeridianServiceCollectionExtensions.LogoPath`). Without the kit, it sends no art.
+
+On the TV, `LobbyArt` (Host.Core) fetches each URL once per server and caches the result, failures included. It gives
+up after 3 seconds, and it accepts only a successful response that starts with the PNG signature. Anything else counts
+as no art: a 404, a timeout, a dropped connection or a file that isn't a PNG.
+
+The text card is always drawn first, and the art never replaces it. When the bytes arrive, the art is added as a faded
+emblem behind the card's text:
+- it's right-aligned and centred vertically, at 30% opacity;
+- it's scaled up by a whole number with nearest filtering, to at most 96 px tall and 256 px wide;
+- it sits on a layer with no layout, clipped to the card, so cards keep their size and every line stays where it was.
+
+The art must therefore carry no words, because the game's name stays in the text. A card that left the screen before
+its art arrived is skipped. The TV logs `LOBBY card art <url> at <n>x`.
+Screenshots with and without art are in
+[`docs/superpowers/reports/2026-11-20-lobby-card-art/`](superpowers/reports/2026-11-20-lobby-card-art/).
 
 ## Content packs
 
@@ -184,6 +215,37 @@ over the whole frame. AgX runs with white 8 and contrast 1.45 (Godot's defaults,
 
 **Performance** must be measured on the target machine (RTX 5080, 2560×1440) with F3: this repository's sandbox renders
 with Mesa's CPU rasteriser (llvmpipe), where a 1080p frame takes several seconds, so frame rates from it mean nothing.
+
+## Meridian scene
+
+*Derelict: ISV Meridian* (stage M4; [plan](superpowers/plans/2026-11-17-meridian-m4-tv-scene.md)). The scene only draws. `Meridian.Presentation` decides everything about what to show, without Godot, so all of it has unit tests:
+
+- **What's on screen.** `TvScreen` picks the screen. `DeckLayout` and `TileDraw` place the ship. `HudModel`, `BreachSequence` and `DebriefModel` word everything else.
+- **Pacing.** The `Director` turns host views into beats. It signals `presented { seq }` once the TV has shown an event, never for one it skipped. Each beat fits inside the server's fallback, even when the voice is silent (`BeatTimingTests`).
+- **What's spoken.** `TillerLines` decides what Tiller (the `meridian.tiller` voice) says, from the host view alone. Nothing secret can be spoken (`TillerLinesTests` sweeps whole games).
+
+Layers, back to front: a starfield, the active deck with the other two in a side strip, the HUD, the Breach sequence and the Debrief. Placeholders use the art contract's metrics (#331): 64 px tiles at whole steps, 128 px at 1080p. `MeridianArt` swaps in any tile, hatch or crew art whose manifest and hash check out. Every layer redraws only when something changes.
+
+**Demo without a server.** `--meridian-demo=<scenario>` plays a recording from `games/meridian/Demo/` (written by `DemoRecordingTests` from seeded bot games) and waits for the scene's own signals. With `--shots` the scene captures:
+- each screen;
+- each Breach stage;
+- the Debrief;
+- part-way through the first beat of each kind, and every eighth event.
+
+The screenshots and readability review are in [the report](superpowers/reports/meridian-tv/README.md). For example:
+
+```
+godot --path src/ArcBox.Host -- --meridian-demo=one_of_us_isnt --shots=/tmp/meridian --res=1920x1080 --preset=low --audio-log
+```
+
+**Log lines.** The TV prints these with or without `--shots`; `ARCBOX_GAME=meridian tools/tv-e2e.sh` reads them.
+- `MERIDIAN screen <Boarding|Board|Breach|Debrief>` when the screen changes.
+- `MERIDIAN breach <Breach|Announcement|Phones>` for each Breach stage.
+- `MERIDIAN presented <seq> <kind>` for each signal.
+- `MERIDIAN abandoned <seq> <kind>` when the server moved on before the TV finished an event.
+- `MERIDIAN resuming <back> of <seats>` when the TV first sees a game resuming after a server restart (M6).
+
+After a server restart the game resumes from the start of the turn that was under way, and numbers its events from there again. A dropped connection makes the director's next view a fresh look, so it accepts those numbers even though they're below what it signalled before. `ARCBOX_GAME=meridian ARCBOX_RESTART=1 tools/tv-e2e.sh` checks this.
 
 ## Tactics scene
 

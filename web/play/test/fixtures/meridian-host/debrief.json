@@ -1,0 +1,819 @@
+{
+  "phase": "debrief",
+  "banner": "Debrief",
+  "seats": [
+    {
+      "id": "p1",
+      "name": "Player1",
+      "crew": "Ines Okafor",
+      "colour": 0,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p2",
+      "name": "Player2",
+      "crew": "Tobe Raske",
+      "colour": 1,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p3",
+      "name": "Player3",
+      "crew": "Sable Quist",
+      "colour": 2,
+      "connected": true,
+      "auto": false,
+      "active": false
+    },
+    {
+      "id": "p4",
+      "name": "Player4",
+      "crew": "Dr. Anselm Varga",
+      "colour": 3,
+      "connected": true,
+      "auto": false,
+      "active": false
+    }
+  ],
+  "compartments": [
+    {
+      "id": "c1",
+      "tile": "airlock",
+      "at": [
+        "habitat",
+        0,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n"
+      ]
+    },
+    {
+      "id": "c2",
+      "tile": "docking_ring",
+      "at": [
+        "habitat",
+        0,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c3",
+      "tile": "central_lift",
+      "at": [
+        "habitat",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c4",
+      "tile": "command_landing",
+      "at": [
+        "command",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c5",
+      "tile": "engineering_landing",
+      "at": [
+        "engineering",
+        0,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c6",
+      "tile": "mess_hall",
+      "at": [
+        "habitat",
+        1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "sealed": [
+        "n"
+      ]
+    },
+    {
+      "id": "c7",
+      "tile": "hydroponics",
+      "at": [
+        "habitat",
+        1,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c8",
+      "tile": "med_bay",
+      "at": [
+        "habitat",
+        -1,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c9",
+      "tile": "maintenance_shaft",
+      "at": [
+        "habitat",
+        -2,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c10",
+      "tile": "galley",
+      "at": [
+        "habitat",
+        2,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c11",
+      "tile": "storage_closet",
+      "at": [
+        "habitat",
+        1,
+        0
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c12",
+      "tile": "junction",
+      "at": [
+        "habitat",
+        2,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c13",
+      "tile": "chapel",
+      "at": [
+        "habitat",
+        3,
+        2
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c14",
+      "tile": "gymnasium",
+      "at": [
+        "habitat",
+        -3,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c15",
+      "tile": "sealed_alcove",
+      "at": [
+        "habitat",
+        3,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c16",
+      "tile": "isolation_ward",
+      "at": [
+        "habitat",
+        -1,
+        0
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c17",
+      "tile": "recreation_deck",
+      "at": [
+        "habitat",
+        2,
+        3
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c18",
+      "tile": "junction",
+      "at": [
+        "habitat",
+        2,
+        4
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ]
+    },
+    {
+      "id": "c19",
+      "tile": "suit_lockers",
+      "at": [
+        "habitat",
+        -4,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c20",
+      "tile": "waste_reclamation",
+      "at": [
+        "engineering",
+        0,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "n",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c21",
+      "tile": "laundry",
+      "at": [
+        "habitat",
+        1,
+        4
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c22",
+      "tile": "quiet_room",
+      "at": [
+        "habitat",
+        -5,
+        1
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n",
+        "e"
+      ]
+    },
+    {
+      "id": "c23",
+      "tile": "crew_bunks",
+      "at": [
+        "habitat",
+        -5,
+        0
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c24",
+      "tile": "archive",
+      "at": [
+        "habitat",
+        1,
+        3
+      ],
+      "rotation": 3,
+      "hatches": [
+        "n",
+        "e"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c25",
+      "tile": "containment_lab",
+      "at": [
+        "engineering",
+        -1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c26",
+      "tile": "service_corridor",
+      "at": [
+        "habitat",
+        2,
+        5
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "c27",
+      "tile": "cryo_bay",
+      "at": [
+        "habitat",
+        2,
+        6
+      ],
+      "rotation": 3,
+      "hatches": [
+        "n",
+        "e",
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c28",
+      "tile": "service_corridor",
+      "at": [
+        "habitat",
+        -4,
+        0
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "w"
+      ]
+    },
+    {
+      "id": "c29",
+      "tile": "cargo_hold",
+      "at": [
+        "engineering",
+        -1,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c30",
+      "tile": "comms_array",
+      "at": [
+        "command",
+        0,
+        1
+      ],
+      "rotation": 1,
+      "hatches": [
+        "n",
+        "w"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c31",
+      "tile": "drone_bay",
+      "at": [
+        "engineering",
+        -2,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c32",
+      "tile": "machine_shop",
+      "at": [
+        "engineering",
+        1,
+        0
+      ],
+      "rotation": 1,
+      "hatches": [
+        "s",
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c33",
+      "tile": "crawlspace",
+      "at": [
+        "engineering",
+        1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "s"
+      ]
+    },
+    {
+      "id": "c34",
+      "tile": "vent_hub",
+      "at": [
+        "engineering",
+        1,
+        2
+      ],
+      "rotation": 1,
+      "hatches": [
+        "n",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c35",
+      "tile": "navigation",
+      "at": [
+        "command",
+        -1,
+        1
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s"
+      ],
+      "sealed": [
+        "n"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c36",
+      "tile": "engine_room",
+      "at": [
+        "engineering",
+        -2,
+        3
+      ],
+      "rotation": 1,
+      "hatches": [
+        "n",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c37",
+      "tile": "captains_quarters",
+      "at": [
+        "command",
+        1,
+        0
+      ],
+      "rotation": 1,
+      "hatches": [
+        "w"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c38",
+      "tile": "coolant_pumps",
+      "at": [
+        "engineering",
+        0,
+        2
+      ],
+      "rotation": 1,
+      "hatches": [
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c39",
+      "tile": "sensor_suite",
+      "at": [
+        "command",
+        -1,
+        2
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "s"
+      ],
+      "symbol": "anomaly"
+    },
+    {
+      "id": "c40",
+      "tile": "armory",
+      "at": [
+        "command",
+        -1,
+        3
+      ],
+      "rotation": 2,
+      "hatches": [
+        "n"
+      ],
+      "symbol": "salvage"
+    },
+    {
+      "id": "c41",
+      "tile": "chiefs_office",
+      "at": [
+        "engineering",
+        -3,
+        3
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c42",
+      "tile": "observation_dome",
+      "at": [
+        "command",
+        -1,
+        0
+      ],
+      "rotation": 3,
+      "hatches": [
+        "e"
+      ],
+      "symbol": "incident"
+    },
+    {
+      "id": "c43",
+      "tile": "reactor_core",
+      "at": [
+        "engineering",
+        0,
+        3
+      ],
+      "rotation": 0,
+      "hatches": [
+        "n",
+        "e",
+        "s",
+        "w"
+      ],
+      "symbol": "anomaly"
+    }
+  ],
+  "crew": [
+    {
+      "id": "p1",
+      "name": "Player1",
+      "at": "c4",
+      "colour": 0
+    },
+    {
+      "id": "p2",
+      "name": "Player2",
+      "at": "c5",
+      "colour": 1
+    },
+    {
+      "id": "p3",
+      "name": "Player3",
+      "at": "c8",
+      "colour": 2
+    },
+    {
+      "id": "p4",
+      "name": "Player4",
+      "at": "c14",
+      "colour": 3
+    }
+  ],
+  "tilesLeft": 7,
+  "anomaliesDrawn": 9,
+  "round": 14,
+  "now": null,
+  "log": [
+    "Player1 found the Reactor Core.",
+    "Player1 drew Unknown Star Chart.",
+    "The Breach.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp.",
+    "Player4 used Hand Lamp."
+  ],
+  "scenario": {
+    "title": "One of Us Isn\u0027t",
+    "roundsLeft": 5,
+    "tokens": [
+      {
+        "id": "point-1",
+        "kind": "repair",
+        "at": "c19",
+        "state": "broken"
+      },
+      {
+        "id": "point-2",
+        "kind": "repair",
+        "at": "c28",
+        "state": "broken"
+      },
+      {
+        "id": "point-3",
+        "kind": "repair",
+        "at": "c14",
+        "state": "broken"
+      },
+      {
+        "id": "point-4",
+        "kind": "repair",
+        "at": "c11",
+        "state": "fixed"
+      }
+    ],
+    "counters": [
+      {
+        "id": "votes",
+        "value": 1
+      },
+      {
+        "id": "exposed",
+        "value": 1
+      },
+      {
+        "id": "suspect-p2",
+        "value": 2
+      },
+      {
+        "id": "suspect-p4",
+        "value": 1
+      }
+    ],
+    "objectives": [],
+    "reveal": [
+      {
+        "id": "p1",
+        "role": "Crew",
+        "won": true
+      },
+      {
+        "id": "p2",
+        "role": "The Mimic",
+        "won": false
+      },
+      {
+        "id": "p3",
+        "role": "Crew",
+        "won": true
+      },
+      {
+        "id": "p4",
+        "role": "Crew",
+        "won": true
+      }
+    ],
+    "outcome": "The crew named the mimic, and the scanner agreed.",
+    "awards": [
+      {
+        "id": "award-1",
+        "title": "Pathfinder: most compartments found",
+        "seat": "p1"
+      }
+    ],
+    "crewWon": true
+  }
+}

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ArcBox.Sdk;
 using ArcBox.Server.Campaigns;
 
@@ -131,6 +132,26 @@ public sealed partial class Room
             return interrupted;
         }
 
+        // A snapshot game needs its snapshot: none (the restart came before the first) or one it can't read is the same as
+        // a game that doesn't resume (Meridian spec §5.6).
+        if (game is ISnapshotGame snapshots)
+        {
+            if (_services.GameStates?.Load(Code, manifest.Id) is not { } snapshot)
+            {
+                return interrupted;
+            }
+            try
+            {
+                snapshots.Restore(snapshot);
+            }
+            catch (Exception error)
+            {
+                _logger.LogWarning(error, "Room {Code}: the {GameId} snapshot couldn't be restored", Code, manifest.Id);
+                _services.GameStates?.Delete(Code);
+                return interrupted;
+            }
+        }
+
         CampaignLease? lease = null;
         if (manifest.UsesCampaigns)
         {
@@ -155,7 +176,7 @@ public sealed partial class Room
             slot.AbsentAtStart = true;
         }
 
-        _session = new GameSession(game, Players(), _time, Random.Shared.Next(), Enqueue, _logger, lease);
+        _session = new GameSession(game, Players(), _time, Random.Shared.Next(), Enqueue, _logger, lease, SnapshotSink(game));
         _session.TimerFired += Publish;
         _status = RoomStatus.InGame;
         _session.Resume();
@@ -164,6 +185,10 @@ public sealed partial class Room
         Publish();
         return null;
     }
+
+    /// <summary>Where a snapshot game's snapshots go: this room's row in the game state store.</summary>
+    private Action<JsonElement>? SnapshotSink(IGame game)
+        => game is ISnapshotGame && _services.GameStates is { } store ? snapshot => store.Save(Code, game.Manifest.Id, snapshot) : null;
 
     /// <summary>The note owed to the host, once.</summary>
     private GameResults? TakeHostNotice()

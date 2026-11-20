@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tiles.schema.json",
+  "title": "Meridian tiles and start layout (rules/tiles.json)",
+  "type": "object",
+  "required": ["start", "startTiles", "tiles"],
+  "$defs": {
+    "tile": {
+      "type": "object",
+      "required": ["id", "name", "decks", "hatches"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/id" },
+        "name": { "type": "string" },
+        "decks": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/deck" } },
+        "hatches": { "type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/side" } },
+        "symbol": { "oneOf": [ { "$ref": "common.schema.json#/$defs/cardKind" }, { "type": "null" } ] },
+        "exitCost": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "copies": { "type": "integer", "minimum": 1 },
+        "rule": {
+          "type": "object",
+          "required": ["kind"],
+          "oneOf": [
+            { "properties": { "kind": { "const": "heal" }, "traits": { "$ref": "common.schema.json#/$defs/traitGroup" }, "steps": { "type": "integer", "minimum": 1 }, "oncePerCrew": { "type": "boolean" } }, "required": ["traits", "steps"] },
+            { "properties": { "kind": { "const": "dropTo" }, "deck": { "$ref": "common.schema.json#/$defs/deck" } }, "required": ["deck"] }
+          ]
+        }
+      }
+    }
+  },
+  "properties": {
+    "start": {
+      "type": "object",
+      "required": ["entry", "place", "links"],
+      "properties": {
+        "entry": { "$ref": "common.schema.json#/$defs/id" },
+        "place": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["tile", "deck", "x", "y"],
+            "properties": {
+              "tile": { "$ref": "common.schema.json#/$defs/id" },
+              "deck": { "$ref": "common.schema.json#/$defs/deck" },
+              "x": { "type": "integer" }, "y": { "type": "integer" },
+              "rotation": { "type": "integer", "minimum": 0, "maximum": 3 }
+            }
+          }
+        },
+        "links": {
+          "type": "array",
+          "items": { "type": "object", "required": ["from", "to"], "properties": { "from": { "type": "integer" }, "to": { "type": "integer" }, "oneWay": { "type": "boolean" } } }
+        }
+      }
+    },
+    "startTiles": { "type": "array", "items": { "$ref": "#/$defs/tile" } },
+    "tiles": { "type": "array", "items": { "$ref": "#/$defs/tile" } }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "schema/breach.schema.json",
+  "scenarios": [
+    "the_passenger",
+    "one_of_us_isnt",
+    "tiller_says_no",
+    "decaying_orbit",
+    "salvage_rights",
+    "company_asset",
+    "captain_on_deck",
+    "cold_sleep",
+    "scuttle_charge",
+    "hull_rot",
+    "vent_cycle",
+    "last_clean_sample"
+  ],
+  "table": [
+    {
+      "anomaly": "humming_shard",
+      "scenarios": [
+        "tiller_says_no",
+        "hull_rot",
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "black_mirror",
+      "scenarios": [
+        "scuttle_charge",
+        "one_of_us_isnt",
+        "salvage_rights"
+      ]
+    },
+    {
+      "anomaly": "warm_egg",
+      "scenarios": [
+        "decaying_orbit",
+        "the_passenger",
+        "cold_sleep"
+      ]
+    },
+    {
+      "anomaly": "stopped_watch",
+      "scenarios": [
+        "vent_cycle",
+        "captain_on_deck",
+        "one_of_us_isnt"
+      ]
+    },
+    {
+      "anomaly": "unknown_chart",
+      "scenarios": [
+        "decaying_orbit",
+        "salvage_rights",
+        "company_asset"
+      ]
+    },
+    {
+      "anomaly": "singing_wire",
+      "scenarios": [
+        "scuttle_charge",
+        "company_asset",
+        "hull_rot"
+      ]
+    },
+    {
+      "anomaly": "bone_key",
+      "scenarios": [
+        "tiller_says_no",
+        "captain_on_deck",
+        "salvage_rights"
+      ]
+    },
+    {
+      "anomaly": "sealed_vial",
+      "scenarios": [
+        "vent_cycle",
+        "last_clean_sample",
+        "the_passenger"
+      ]
+    },
+    {
+      "anomaly": "drowned_logbook",
+      "scenarios": [
+        "tiller_says_no",
+        "company_asset",
+        "one_of_us_isnt"
+      ]
+    },
+    {
+      "anomaly": "childs_drawing",
+      "scenarios": [
+        "scuttle_charge",
+        "cold_sleep",
+        "last_clean_sample"
+      ]
+    },
+    {
+      "anomaly": "cold_coin",
+      "scenarios": [
+        "decaying_orbit",
+        "last_clean_sample",
+        "captain_on_deck"
+      ]
+    },
+    {
+      "anomaly": "pocket_of_quiet",
+      "scenarios": [
+        "vent_cycle",
+        "hull_rot",
+        "cold_sleep"
+      ]
+    }
+  ]
+}

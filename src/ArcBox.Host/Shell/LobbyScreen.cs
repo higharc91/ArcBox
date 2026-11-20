@@ -528,7 +528,67 @@ public partial class LobbyScreen : Control
             }
         };
         _gameRow.AddChild(card);
+        if (game.CardArt is { } art)
+        {
+            ShowArt(card, art);
+        }
         return (card, name, players, bar);
+    }
+
+    /// <summary>The largest a card's title image is drawn: pixel art, scaled in whole steps up to this.</summary>
+    private const int MaxArtHeight = 96;
+    private const int MaxArtWidth = 256;
+
+    /// <summary>How strongly the emblem shows behind the card's text: enough to recognise, never enough to fight the words.</summary>
+    private const float ArtAlpha = 0.3f;
+
+    /// <summary>One loader per server, shared by every lobby screen: an image fetched once is kept (#405).</summary>
+    private static readonly Dictionary<string, LobbyArt> ArtByServer = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// The game's title image, once it arrives (#405): an emblem behind the card's text, on its right. It's drawn on a
+    /// layer of its own that layout ignores, so the card keeps its size and every line of text stays where it was (an
+    /// image in the text column made the whole row taller and pushed the player counts off a 720p screen). The art
+    /// carries no words (the art contract), so the name stays. A missing, slow or broken image leaves the card as it was.
+    /// </summary>
+    private async void ShowArt(PanelContainer card, string url)
+    {
+        if (!ArtByServer.TryGetValue(_serverUrl, out var loader))
+        {
+            loader = new LobbyArt(new System.Net.Http.HttpClient { BaseAddress = new Uri(_serverUrl + "/") });
+            ArtByServer[_serverUrl] = loader;
+        }
+        var bytes = await loader.Get(url);   // resumes on the main thread (Godot's synchronization context)
+        if (bytes is null || !IsInstanceValid(card))
+        {
+            return;   // no image, or the card was rebuilt meanwhile: the text card stands
+        }
+        var image = new Image();
+        if (image.LoadPngFromBuffer(bytes) != Error.Ok || image.GetWidth() == 0 || image.GetHeight() == 0)
+        {
+            return;
+        }
+        var scale = Math.Max(1, Math.Min(MaxArtHeight / image.GetHeight(), MaxArtWidth / image.GetWidth()));
+        var size = new Vector2(image.GetWidth() * scale, image.GetHeight() * scale);
+        // A plain Control fills the card (the PanelContainer sizes it) but doesn't lay out its child, so the emblem can sit
+        // anchored to the card's right edge, centred, without the card measuring it.
+        var layer = new Control { Name = "CardArtLayer", MouseFilter = MouseFilterEnum.Ignore, ClipContents = true };   // never past the card
+        var art = new TextureRect
+        {
+            Name = "CardArt",
+            Texture = ImageTexture.CreateFromImage(image),
+            TextureFilter = TextureFilterEnum.Nearest,   // whole-step pixel art, never smoothed
+            ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+            StretchMode = TextureRect.StretchModeEnum.Scale,
+            Modulate = new Color(1, 1, 1, ArtAlpha),
+            MouseFilter = MouseFilterEnum.Ignore,
+            AnchorLeft = 1, AnchorRight = 1, AnchorTop = 0.5f, AnchorBottom = 0.5f,
+            OffsetLeft = -size.X - 12, OffsetRight = -12, OffsetTop = -size.Y / 2, OffsetBottom = size.Y / 2,
+        };
+        layer.AddChild(art);
+        card.AddChild(layer);
+        card.MoveChild(layer, 0);   // behind the card's text
+        GD.Print($"LOBBY card art {url} at {scale}x");   // for the end-to-end run and screenshots
     }
 
     private static string PlayersText(GameManifest g) =>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(ArcSdkTargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Logic\Meridian.Logic.csproj" />
+    <ProjectReference Include="..\..\..\src\ArcBox.Sdk\ArcBox.Sdk.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Meridian.Game.Tests" />
+    <InternalsVisibleTo Include="Meridian.Presentation.Tests" />
+    <Using Include="Meridian.Logic" />
+  </ItemGroup>
+</Project>

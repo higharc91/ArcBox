@@ -149,3 +149,15 @@ body.dev-body { background: #0a0a0f; }
 .tx-board-order .active { color: #ffd60a; font-weight: 700; }
 .tx-board-log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; color: #ccd; }
 .tx-board-log .new { color: #fff; }
+
+/* Meridian's dev board (src/dev/MeridianBoard.tsx). Rooms reuse the phone module's .mer-room look. */
+.mer-board { display: grid; gap: 8px; color: #e6eef2; }
+.mer-board header { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.mer-seats { display: flex; gap: 6px; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; }
+.mer-seats li { border: 2px solid; border-radius: 6px; padding: 2px 6px; }
+.mer-seats li.active { font-weight: bold; }
+.mer-auto { color: #ffd447; }
+.mer-now { background: #141c22; border-left: 4px solid #3ec7ff; padding: 6px; }
+.mer-board-decks { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+.mer-board-deck h3 { margin: 0 0 4px; }
+.mer-log { margin: 0; padding-left: 18px; color: #8fa3ad; }

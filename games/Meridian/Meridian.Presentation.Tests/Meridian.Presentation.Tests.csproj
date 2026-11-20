@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="Meridian.Logic" />
+    <Using Include="Meridian.Game" />
+    <Using Include="Meridian.Presentation" />
+    <Using Include="ArcBox.Sdk" />
+    <Using Include="Meridian.Logic.Tests" />
+    <Using Include="Meridian.Game.Tests" />
+    <!-- The game tests' harness and the shipped-pack loader: real sessions, played by bots, for the TV to read. -->
+    <Compile Include="..\Meridian.Logic.Tests\Support\BasePack.cs" Link="Support\BasePack.cs" />
+    <Compile Include="..\Meridian.Logic.Tests\Support\AllScenarios.cs" Link="Support\AllScenarios.cs" />
+    <Compile Include="..\Meridian.Logic.Tests\Support\Json.cs" Link="Support\Json.cs" />
+    <Compile Include="..\Meridian.Game.Tests\Support\Harness.cs" Link="Support\Harness.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meridian.Presentation\Meridian.Presentation.csproj" />
+    <ProjectReference Include="..\..\..\src\ArcBox.Sdk.Testing\ArcBox.Sdk.Testing.csproj" />
+  </ItemGroup>
+</Project>

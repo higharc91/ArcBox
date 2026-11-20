@@ -1,0 +1,165 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "orient",
+  "data": {
+    "name": "Hydroponics",
+    "at": [
+      "habitat",
+      2,
+      1
+    ],
+    "toward": "w",
+    "options": [
+      {
+        "rotation": 1,
+        "hatches": [
+          "e",
+          "s",
+          "w"
+        ]
+      },
+      {
+        "rotation": 2,
+        "hatches": [
+          "n",
+          "s",
+          "w"
+        ]
+      },
+      {
+        "rotation": 3,
+        "hatches": [
+          "n",
+          "e",
+          "w"
+        ]
+      }
+    ],
+    "map": {
+      "compartments": [
+        {
+          "id": "c1",
+          "tile": "airlock",
+          "name": "Airlock",
+          "at": [
+            "habitat",
+            0,
+            2
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n"
+          ]
+        },
+        {
+          "id": "c2",
+          "tile": "docking_ring",
+          "name": "Docking Ring",
+          "at": [
+            "habitat",
+            0,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c3",
+          "tile": "central_lift",
+          "name": "Central Lift",
+          "at": [
+            "habitat",
+            0,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c4",
+          "tile": "command_landing",
+          "name": "Command Lift Landing",
+          "at": [
+            "command",
+            0,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c5",
+          "tile": "engineering_landing",
+          "name": "Engineering Lift Landing",
+          "at": [
+            "engineering",
+            0,
+            0
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        },
+        {
+          "id": "c6",
+          "tile": "mess_hall",
+          "name": "Mess Hall",
+          "at": [
+            "habitat",
+            1,
+            1
+          ],
+          "rotation": 0,
+          "hatches": [
+            "n",
+            "e",
+            "s",
+            "w"
+          ]
+        }
+      ],
+      "crew": [
+        {
+          "id": "p1",
+          "name": "Player1",
+          "at": "c1",
+          "colour": 0
+        },
+        {
+          "id": "p2",
+          "name": "Player2",
+          "at": "c1",
+          "colour": 1
+        },
+        {
+          "id": "p3",
+          "name": "Player3",
+          "at": "c6",
+          "colour": 2
+        }
+      ]
+    }
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:08\u002B00:00",
+  "header": null
+}

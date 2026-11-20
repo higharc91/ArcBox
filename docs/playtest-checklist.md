@@ -164,6 +164,60 @@ so tick those on the night. To play alongside the bots, see "With your own phone
 - [ ] **(person)** Join on a real phone over the LAN (`--people=1`): the QR opens the join page and the turn screen matches
       the TV. Checked here only in a browser on the PC, not on a phone.
 
+## Derelict: ISV Meridian (stages M2–M3: Explore, the Breach and five scenarios)
+
+The TV app shows the board (stage M4). Without a TV, use the dev page's board: open `/dev.html?phones=0` on a laptop.
+`node tools/meridian-playtest/bots.cjs --room=<CODE>` fills seats with bot phones. To play one scenario, start a
+Development server with `--Meridian:Scenario=<id>` (ids in `content/meridian/base/rules/breach.json`).
+
+**The first game night (M4):**
+- [ ] Three to six real phones and the TV play a whole game, from crew pick to the Debrief, and the room returns to the lobby.
+- [ ] Tiller reads each Incident card and the Breach's announcement aloud, and the panel stays up until he finishes. Nobody on the sofa misses a word.
+- [ ] From the sofa (about 3 m), the room names, the seat marks, the figures across the top and the card text all read without squinting. Check the side decks too.
+- [ ] Kill the TV app during the Breach sequence and start it again: the phones finish their briefings, and the TV comes back to the endgame without replaying the Breach.
+- [ ] Slow TV: on a slow machine or a busy Wi-Fi, the game still moves on (each event has a fallback), and the TV catches up without showing an old event again.
+- [ ] One remote player watches over a Discord stream: the board and the panel read through the compression.
+
+**Surviving a restart (M6):**
+- [ ] Restart the server mid-game (stop it and start it again). The TV shows "Reconnecting… N of M phones back"; each phone comes back to its screen without rejoining by hand; the game resumes at the start of the turn that was under way, not "Game interrupted".
+- [ ] Restart it during the briefings: everyone gets their briefing back, and the endgame begins as before.
+- [ ] Restart it and leave one phone off: after a minute the game plays on, and that seat gets the usual pause, then a bot. Turning the phone back on takes the seat back.
+
+**All twelve scenarios (M7).** To play one, start a Development server with `--Meridian:Scenario=<id>`. The ids are in `content/meridian/base/rules/breach.json`; the balance report says what the bots made of each.
+- [ ] **Company Asset:** the crew can tell who the synthetic is and why (the highest Tech), and a failed transmission feels like a risk worth taking.
+- [ ] **Captain on Deck:** the captain's seals and vents feel fair, never a wall the crew can't answer. Cutting through a seal is worth the turn.
+- [ ] **Cold Sleep:** the crew understand they must cut the power *and* put the awake sleepers down before a round ends. The sleepers' march on the Airlock reads on the board.
+- [ ] **Scuttle Charge:** nobody can tell from the table, the TV or the sounds who planted a charge. Does the talk at the table unmask the saboteur too easily, or never?
+- [ ] **Hull Rot:** the rot's spread reads on the board, and the crew can see where it will go next. Cutting the source free feels earned.
+- [ ] **Vent Cycle:** fetching a suit feels like a race, not a formality (the bots say it isn't). The one who goes without should feel it coming.
+- [ ] **The Last Clean Sample:** the turn between injecting and the cure taking feels tense. Everyone knows who has the dose.
+- [ ] **The round limit:** in One of Us Isn't, Tiller, Captain on Deck and Cold Sleep, the bots let most games run to the limit. Does that happen with people too? Do the new ways to win (the mimic striking, lethal vents, the crew down to one) come into play?
+- [ ] **Game length** with real players: the bots estimate 30–45 minutes, against a 45–60 target. Time a whole game.
+- [ ] **Three players:** several scenarios are hard on a crew of two, by the bots' numbers. Play one at three.
+
+**Art and sound (M5).** Use whatever art sets have landed; anything missing draws its placeholder, side by side with the art.
+- [ ] Crew walk between compartments, face where they're going, and stand still when they arrive. A dying crew member falls and stays as a faded echo.
+- [ ] Panels, card frames and dice look crisp from the sofa, with no blurry edges, and every word on them is still live text.
+- [ ] Effects (a reveal's lights, a hit, a weld, the Breach's alarm) read, but never hide a room name for long. With **Reduced effects** on in the TV's battle settings, nothing flashes or shakes.
+- [ ] The music sits under everything else: an ambience while exploring; a sting at the Breach that runs into the endgame's loop, never back to the ambience; a win or loss cue at the Debrief.
+- [ ] Tiller's voice is clear over the music and the effects; both dip while he speaks and come back after.
+- [ ] A soft tick counts down the last ten seconds of a turn, and stops when someone acts. Nobody can tell from the sounds what a hidden player did.
+
+- [ ] Three real phones on the LAN join, select **Derelict: ISV Meridian** and start. Each picks a different crew member; a taken one is greyed out.
+- [ ] On your turn, the deck tabs show a count where you can go; tapping a compartment moves you, tapping **Open** reveals a new one.
+- [ ] A new compartment appears on the board, and every phone shows "On the main screen" until it has been shown.
+- [ ] A card's check rolls on your phone and the result is in the board's log.
+- [ ] Lock a phone during its own turn for 30 s: the board marks it **auto** and a bot plays it; unlocking takes the next decision back.
+- [ ] Reload a phone while it is choosing which way a new compartment goes: it comes back on the same choice.
+- [ ] Leave a turn untouched: it ends after 60 s.
+- [ ] Reach the Breach: the board shows the scenario's title and rounds left; every phone shows a briefing.
+- [ ] Read a briefing: it fits the phone without scrolling past the Ready button, and the traitor's looks the same at a glance as everyone else's.
+- [ ] Play **One of Us Isn't** with people: the mimic's phone is the only one that knows; nothing on the board or the log gives them away before the Debrief.
+- [ ] Call a vote at the scanner: each phone picks in private, the board shows only that the vote happened, and nobody's choice is shown.
+- [ ] Drop a living player's phone in the endgame (lock it, or leave Wi-Fi): the game pauses for up to 60 s, the same whoever it is, then a bot plays them.
+- [ ] Die in **The Passenger**: your phone becomes an echo and can lend a die.
+- [ ] Read the Debrief: every role is revealed on the board and the phones, with the awards; the VIP's **Continue** returns the room to the lobby with the results.
+
 ## After
 
 - [ ] Save the server console log and the Godot log (`%APPDATA%\Godot\app_userdata\ArcBox\logs`) if anything failed.

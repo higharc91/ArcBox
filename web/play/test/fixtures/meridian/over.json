@@ -1,0 +1,11 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "over",
+  "data": {
+    "message": "The last deck goes. Only those who cycled out are breathing."
+  },
+  "viewId": "v1",
+  "deadlineUtc": null,
+  "header": null
+}

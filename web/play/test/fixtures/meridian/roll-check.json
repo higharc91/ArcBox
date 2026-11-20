@@ -1,0 +1,28 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "roll",
+  "data": {
+    "reason": "check",
+    "trait": "agility",
+    "dice": 3,
+    "title": "Sparking Conduit",
+    "text": "Exposed wiring arcs across the passage at chest height.",
+    "bands": [
+      {
+        "min": 0,
+        "max": 1,
+        "text": "It finds you."
+      },
+      {
+        "min": 2,
+        "max": null,
+        "text": "You time it and slip under."
+      }
+    ],
+    "needed": null
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:20\u002B00:00",
+  "header": null
+}

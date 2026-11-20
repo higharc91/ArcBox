@@ -58,6 +58,7 @@ public sealed class RoomManager : IAsyncDisposable
         {
             RemoveRoom(entry);
             _services.Store.Delete(code);
+            _services.GameStates?.Delete(code);
             throw;
         }
 
@@ -193,7 +194,9 @@ public sealed class RoomManager : IAsyncDisposable
             }
         }
 
-        return _services.Store.DeleteOlderThan(now - _services.Options.RetainFor);
+        var deleted = _services.Store.DeleteOlderThan(now - _services.Options.RetainFor);
+        _services.GameStates?.DeleteOrphans();
+        return deleted;
     }
 
     public async ValueTask DisposeAsync()

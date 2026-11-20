@@ -1,0 +1,454 @@
+{
+  "$schema": "../schema/cards.schema.json",
+  "cards": [
+    {
+      "id": "cold_spot",
+      "title": "Cold Spot",
+      "text": "A patch of air so cold your breath freezes on your visor.",
+      "check": {
+        "trait": "nerve",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "You back away, shaking.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "nerve",
+                "steps": 1
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": 3,
+            "text": "You push through it."
+          },
+          {
+            "min": 4,
+            "max": null,
+            "text": "You stand in it until it's gone.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "nerve",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "loose_grating",
+      "title": "Loose Grating",
+      "text": "A floor grate tips under your boot.",
+      "check": {
+        "trait": "agility",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "You go down hard on one knee.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "physical",
+                "steps": 1
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": null,
+            "text": "You catch the edge and step clear."
+          }
+        ]
+      }
+    },
+    {
+      "id": "jammed_bulkhead",
+      "title": "Jammed Bulkhead",
+      "text": "A pressure door has stopped halfway down, grinding.",
+      "check": {
+        "trait": "brawn",
+        "bands": [
+          {
+            "min": 0,
+            "max": 2,
+            "text": "It drops the last inch onto your arm.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "physical",
+                "steps": 1
+              },
+              {
+                "kind": "endTurn"
+              }
+            ]
+          },
+          {
+            "min": 3,
+            "max": null,
+            "text": "You heave it up and wedge it.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "brawn",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "garbled_log",
+      "title": "Garbled Log",
+      "text": "A wall panel plays a voice log. The words run backwards.",
+      "check": {
+        "trait": "tech",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "You can't stop hearing it.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "mental",
+                "steps": 1
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": 3,
+            "text": "You shut it off."
+          },
+          {
+            "min": 4,
+            "max": null,
+            "text": "Reversed, it gives a locker code.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "tech",
+                "steps": 1
+              },
+              {
+                "kind": "draw",
+                "card": "salvage"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "sparking_conduit",
+      "title": "Sparking Conduit",
+      "text": "Exposed wiring arcs across the passage at chest height.",
+      "check": {
+        "trait": "agility",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "It finds you.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "physical",
+                "steps": 2
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": null,
+            "text": "You time it and slip under."
+          }
+        ]
+      }
+    },
+    {
+      "id": "tool_cache",
+      "title": "Tool Cache",
+      "text": "A maintenance locker with a keypad, still powered.",
+      "check": {
+        "trait": "tech",
+        "bands": [
+          {
+            "min": 0,
+            "max": 2,
+            "text": "Three wrong tries and it locks for good."
+          },
+          {
+            "min": 3,
+            "max": null,
+            "text": "It clicks open.",
+            "effects": [
+              {
+                "kind": "draw",
+                "card": "salvage"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "someone_was_here",
+      "title": "Someone Was Here",
+      "text": "A half-eaten ration bar on a console. It's still soft.",
+      "check": {
+        "trait": "nerve",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "You freeze, listening, for far too long.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "nerve",
+                "steps": 1
+              },
+              {
+                "kind": "endTurn"
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": 3,
+            "text": "You keep moving."
+          },
+          {
+            "min": 4,
+            "max": null,
+            "text": "Whoever it was, you're ready.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "mental",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "hull_groan",
+      "title": "Hull Groan",
+      "text": "The whole ship lurches and throws you into a bulkhead.",
+      "check": {
+        "trait": "brawn",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "Something cracks. Hopefully the suit.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "physical",
+                "steps": 1
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": null,
+            "text": "You brace and ride it out."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gravity_flicker",
+      "title": "Gravity Flicker",
+      "text": "Gravity cuts out for three long seconds, then slams back.",
+      "check": {
+        "trait": "agility",
+        "bands": [
+          {
+            "min": 0,
+            "max": 1,
+            "text": "You hit the deck from head height.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "physical",
+                "steps": 1
+              }
+            ]
+          },
+          {
+            "min": 2,
+            "max": 3,
+            "text": "You land in a crouch."
+          },
+          {
+            "min": 4,
+            "max": null,
+            "text": "You ride it like a pro.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "agility",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "old_photo",
+      "title": "Old Photo",
+      "text": "Taped inside a locker: a photo of this crew. Your crew.",
+      "check": {
+        "trait": "nerve",
+        "bands": [
+          {
+            "min": 0,
+            "max": 2,
+            "text": "You can't remember it being taken.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "nerve",
+                "steps": 2
+              }
+            ]
+          },
+          {
+            "min": 3,
+            "max": null,
+            "text": "Someone is playing games. Fine.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "mental",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "drifting_body",
+      "title": "Drifting Body",
+      "text": "A crew member floats in the corridor, face hidden by a cracked visor.",
+      "choice": {
+        "options": [
+          {
+            "id": "search",
+            "label": "Search it",
+            "text": "You turn it towards you.",
+            "check": {
+              "trait": "nerve",
+              "bands": [
+                {
+                  "min": 0,
+                  "max": 2,
+                  "text": "Under the visor is your own face. Then it isn't.",
+                  "effects": [
+                    {
+                      "kind": "lose",
+                      "traits": "mental",
+                      "steps": 1
+                    }
+                  ]
+                },
+                {
+                  "min": 3,
+                  "max": null,
+                  "text": "A keycard in its glove, still warm.",
+                  "effects": [
+                    {
+                      "kind": "draw",
+                      "card": "salvage"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "move_on",
+            "label": "Move on",
+            "text": "You give it a wide berth. It turns to watch you go.",
+            "effects": [
+              {
+                "kind": "lose",
+                "traits": "nerve",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "open_channel",
+      "title": "Open Channel",
+      "text": "Your radio crackles. Someone is asking for help from the deck below.",
+      "choice": {
+        "options": [
+          {
+            "id": "answer",
+            "label": "Answer",
+            "text": "You key the mic.",
+            "check": {
+              "trait": "tech",
+              "bands": [
+                {
+                  "min": 0,
+                  "max": 2,
+                  "text": "Static, then slow breathing.",
+                  "effects": [
+                    {
+                      "kind": "lose",
+                      "traits": "mental",
+                      "steps": 1
+                    }
+                  ]
+                },
+                {
+                  "min": 3,
+                  "max": null,
+                  "text": "Directions, clear and calm. You follow them to the lift.",
+                  "effects": [
+                    {
+                      "kind": "moveTo",
+                      "tile": "central_lift"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "switch_off",
+            "label": "Switch it off",
+            "text": "You turn it off. Your hands are steady.",
+            "effects": [
+              {
+                "kind": "gain",
+                "traits": "nerve",
+                "steps": 1
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

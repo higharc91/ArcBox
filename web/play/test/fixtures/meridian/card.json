@@ -1,0 +1,28 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "card",
+  "data": {
+    "id": "drifting_body",
+    "kind": "incident",
+    "title": "Drifting Body",
+    "text": "A crew member floats in the corridor, face hidden by a cracked visor.",
+    "options": [
+      {
+        "id": "search",
+        "label": "Search it",
+        "text": "You turn it towards you.",
+        "check": "nerve"
+      },
+      {
+        "id": "move_on",
+        "label": "Move on",
+        "text": "You give it a wide berth. It turns to watch you go.",
+        "check": null
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:30\u002B00:00",
+  "header": null
+}

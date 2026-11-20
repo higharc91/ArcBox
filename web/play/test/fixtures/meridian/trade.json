@@ -1,0 +1,31 @@
+{
+  "kind": "custom",
+  "module": "meridian",
+  "screen": "trade",
+  "data": {
+    "from": "Player3",
+    "give": [
+      {
+        "id": "crowbar",
+        "kind": "salvage",
+        "title": "Crowbar",
+        "text": "Heavy, honest and older than the ship.",
+        "use": null,
+        "usable": false
+      }
+    ],
+    "take": [
+      {
+        "id": "hand_lamp",
+        "kind": "salvage",
+        "title": "Hand Lamp",
+        "text": "A good beam. It shows you the way before you need it.",
+        "use": "Light the way",
+        "usable": false
+      }
+    ]
+  },
+  "viewId": "v1",
+  "deadlineUtc": "2026-01-01T00:00:20\u002B00:00",
+  "header": null
+}

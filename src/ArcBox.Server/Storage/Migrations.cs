@@ -63,6 +63,17 @@ public static class Migrations
         );
         CREATE INDEX ix_campaign_snapshots_campaign ON campaign_snapshots (campaign_id, version);
         """,
+
+        // 2: a running game's snapshot, for games that resume after a restart without a campaign (ISnapshotGame; Meridian
+        // spec §5.6). One row per room, the newest; deleted when the game ends. Server-side only: never sent to a client.
+        """
+        CREATE TABLE room_game_state (
+            code      TEXT PRIMARY KEY NOT NULL,
+            game_id   TEXT NOT NULL,
+            snapshot  TEXT NOT NULL,
+            saved_utc TEXT NOT NULL
+        );
+        """,
     ];
 
     /// <summary>Runs every script the database hasn't had yet, each in its own transaction. Safe to call repeatedly.</summary>

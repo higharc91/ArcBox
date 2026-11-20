@@ -46,6 +46,9 @@ public sealed record AppArgs
     /// <summary>Dev only: the board to show instead of connecting (<c>Tactics.Presentation.Board.DemoBattle</c>), or null.</summary>
     public string? TacticsDemo { get; init; }
 
+    /// <summary>Dev only: <c>--meridian-demo[=&lt;scenario&gt;]</c> plays a recorded Meridian game with no server.</summary>
+    public string? MeridianDemo { get; init; }
+
     public string? FxDemo { get; init; }
 
     /// <summary>Dev only: the region to draw and measure instead of connecting (<c>Tactics.Presentation.World.DemoRegion</c>), or null.</summary>
@@ -123,6 +126,9 @@ public sealed record AppArgs
                     break;
                 case "--fx-demo" when !string.IsNullOrWhiteSpace(value):
                     args = args with { FxDemo = value };
+                    break;
+                case "--meridian-demo":
+                    args = args with { MeridianDemo = string.IsNullOrWhiteSpace(value) ? "the_passenger" : value };
                     break;
                 case "--tactics-demo":
                     args = args with { TacticsDemo = string.IsNullOrWhiteSpace(value) ? "river_crossing" : value };

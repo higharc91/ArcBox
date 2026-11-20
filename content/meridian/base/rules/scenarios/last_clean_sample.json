@@ -1,0 +1,39 @@
+{
+  "$schema": "../schema/scenario.schema.json",
+  "id": "last_clean_sample",
+  "title": "The Last Clean Sample",
+  "announcement": "Infection confirmed in every crew member aboard. There is one clean sample left, in a laboratory, enough for one dose. I am not permitted to choose who receives it. I have been told that you will choose among yourselves. I have been told that before.",
+  "roundLimit": 10,
+  "roles": [
+    {
+      "id": "infected",
+      "side": "infected",
+      "name": "Infected",
+      "briefing": "Everyone aboard is infected, and it gets worse every round. At its peak it kills. There is one clean sample in a lab, enough for one dose. Synthesize it (Tech 5+) and the dose is yours, but you carry it slowly and everyone knows you have it. Inject yourself, and it takes at the start of your next turn, if it's still yours. Anyone who hits you in a fight takes it. Only one of you walks away clean.",
+      "objectives": [
+        "Synthesize the dose, inject yourself, and keep it until your next turn starts."
+      ]
+    }
+  ],
+  "numbers": {
+    "synthesize": 5,
+    "infectionDeath": 6,
+    "slow": 1
+  },
+  "tokens": {
+    "sample": {
+      "label": "V",
+      "colour": "#c08cff",
+      "name": "Clean sample"
+    },
+    "dose": {
+      "label": "*",
+      "colour": "#5fe08a",
+      "name": "Dose"
+    }
+  },
+  "counters": {
+    "infection-": "Infection: {seat}",
+    "cured": null
+  }
+}

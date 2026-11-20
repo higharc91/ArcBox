@@ -18,6 +18,7 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
 {
     private readonly string? _databaseFile;
     private readonly bool _withTactics;
+    private readonly bool _withMeridian;
     private readonly DirectoryInfo _contentRoot = Directory.CreateTempSubdirectory("arcbox-content-");
 
     /// <summary>A server on a private in-memory database that lives as long as the factory.</summary>
@@ -32,7 +33,14 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
     /// With <paramref name="withTactics"/>, the content root also links the repository's <c>content/tactics</c>, so the
     /// real ArcBox Tactics can be played. Off by default: hashing its art at startup would slow every other test.
     /// </summary>
-    public ArcServerFactory(bool withTactics) => _withTactics = withTactics;
+    /// <param name="withMeridian">Also links the repository's <c>content/meridian</c>, so the real Meridian can be played.</param>
+    public ArcServerFactory(bool withTactics, bool withMeridian = false) => (_withTactics, _withMeridian) = (withTactics, withMeridian);
+
+    /// <summary>The real Meridian on <paramref name="databaseFile"/>, so a second factory on the same file is a restart.</summary>
+    public ArcServerFactory(string databaseFile, bool withMeridian) => (_databaseFile, _withMeridian) = (databaseFile, withMeridian);
+
+    /// <summary>The scenario every Meridian Breach picks (the Development-only <c>Meridian:Scenario</c> setting), or null.</summary>
+    public string? MeridianScenario { get; init; }
 
     /// <summary>The server's <c>Content:Root</c>: a private directory holding one pack, <c>ledger/base</c>.</summary>
     public string ContentRoot => _contentRoot.FullName;
@@ -47,6 +55,8 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         builder.UseSetting("Web:Root", "");
         // The tactics tests reach their fight through the battle list, which only this Development switch offers from the world.
         builder.UseSetting("Tactics:BattleList", "true");
+        if (MeridianScenario is { } scenario)
+            builder.UseSetting(ArcBox.Server.Games.Meridian.MeridianServiceCollectionExtensions.ScenarioSetting, scenario);
         // Like the settings above, read while Program registers services.
         SeedContent();
         builder.UseSetting("Content:Root", _contentRoot.FullName);
@@ -61,6 +71,7 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
             services.RemoveAllKeyed<TimeProvider>(RoomManager.ClockKey);
             services.AddKeyedSingleton<TimeProvider>(RoomManager.ClockKey, Time);
             services.AddArcGame<ThrowerGame>();
+            services.AddArcGame<TallyGame>();
             services.AddArcGame<LedgerGame>();
             services.AddArcGame(_ => new LedgerGame(LedgerGame.Plain));
             services.AddCampaignRules<LedgerRules>();
@@ -99,20 +110,30 @@ public sealed class ArcServerFactory : WebApplicationFactory<Program>
         File.WriteAllText(Path.Combine(pack, "blob.xyzunknown"), "blob");
         if (_withTactics)
         {
-            var repo = new DirectoryInfo(AppContext.BaseDirectory);
-            while (!File.Exists(Path.Combine(repo.FullName, "ArcBox.slnx")))
-                repo = repo.Parent ?? throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
-            var source = Path.Combine(repo.FullName, "content", "tactics");
-            var target = Path.Combine(_contentRoot.FullName, "tactics");
-            try
-            {
-                Directory.CreateSymbolicLink(target, source);
-            }
-            catch (IOException)
-            {
-                // Windows refuses symlinks without Developer Mode or admin rights.
-                CopyDirectory(source, target);
-            }
+            LinkGame("tactics");
+        }
+        if (_withMeridian)
+        {
+            LinkGame("meridian");
+        }
+    }
+
+    /// <summary>Links (or, without symlink rights, copies) the repository's <c>content/&lt;gameId&gt;</c> into the content root.</summary>
+    private void LinkGame(string gameId)
+    {
+        var repo = new DirectoryInfo(AppContext.BaseDirectory);
+        while (!File.Exists(Path.Combine(repo.FullName, "ArcBox.slnx")))
+            repo = repo.Parent ?? throw new DirectoryNotFoundException("No ArcBox.slnx above the test binaries.");
+        var source = Path.Combine(repo.FullName, "content", gameId);
+        var target = Path.Combine(_contentRoot.FullName, gameId);
+        try
+        {
+            Directory.CreateSymbolicLink(target, source);
+        }
+        catch (IOException)
+        {
+            // Windows refuses symlinks without Developer Mode or admin rights.
+            CopyDirectory(source, target);
         }
     }
 

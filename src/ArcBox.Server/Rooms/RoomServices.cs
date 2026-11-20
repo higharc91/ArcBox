@@ -17,4 +17,5 @@ public sealed record RoomServices(
     CampaignService Campaigns,
     CampaignRulesRegistry Rules,
     RoomStore Store,
-    ContentPackRegistry Content);
+    ContentPackRegistry Content,
+    GameStateStore? GameStates = null);

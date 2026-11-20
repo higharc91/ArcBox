@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "common.schema.json",
+  "title": "Meridian shared definitions. Editor support only: Meridian.Logic's Validation is the authority.",
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "deck": { "enum": ["command", "habitat", "engineering"] },
+    "side": { "enum": ["n", "e", "s", "w"] },
+    "trait": { "enum": ["brawn", "agility", "tech", "nerve"] },
+    "traitGroup": { "enum": ["brawn", "agility", "tech", "nerve", "physical", "mental"] },
+    "cardKind": { "enum": ["incident", "salvage", "anomaly"] },
+    "effect": {
+      "type": "object",
+      "required": ["kind"],
+      "oneOf": [
+        { "properties": { "kind": { "const": "gain" }, "traits": { "$ref": "#/$defs/traitGroup" }, "steps": { "type": "integer", "minimum": 1 } }, "required": ["traits", "steps"] },
+        { "properties": { "kind": { "const": "lose" }, "traits": { "$ref": "#/$defs/traitGroup" }, "steps": { "type": "integer", "minimum": 1 } }, "required": ["traits", "steps"] },
+        { "properties": { "kind": { "const": "draw" }, "card": { "$ref": "#/$defs/cardKind" } }, "required": ["card"] },
+        { "properties": { "kind": { "const": "moveTo" }, "tile": { "$ref": "#/$defs/id" } }, "required": ["tile"] },
+        { "properties": { "kind": { "const": "extraDice" }, "trait": { "$ref": "#/$defs/trait" }, "dice": { "type": "integer", "minimum": 1 } }, "required": ["trait", "dice"] },
+        { "properties": { "kind": { "const": "moves" }, "delta": { "type": "integer" } }, "required": ["delta"] },
+        { "properties": { "kind": { "const": "endTurn" } } }
+      ]
+    },
+    "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+    "check": {
+      "type": "object",
+      "required": ["trait", "bands"],
+      "properties": {
+        "trait": { "$ref": "#/$defs/trait" },
+        "bands": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "required": ["min", "text"],
+            "properties": {
+              "min": { "type": "integer", "minimum": 0 },
+              "max": { "type": ["integer", "null"] },
+              "text": { "type": "string" },
+              "effects": { "$ref": "#/$defs/effects" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

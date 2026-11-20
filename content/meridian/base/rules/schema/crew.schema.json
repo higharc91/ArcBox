@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "crew.schema.json",
+  "title": "Meridian crew (rules/crew.json)",
+  "type": "object",
+  "required": ["crew"],
+  "$defs": {
+    "track": {
+      "type": "object", "required": ["values", "start"],
+      "properties": {
+        "values": { "type": "array", "minItems": 8, "maxItems": 8, "items": { "type": "integer", "minimum": 0 } },
+        "start": { "type": "integer", "minimum": 1, "maximum": 8 }
+      }
+    }
+  },
+  "properties": {
+    "crew": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "role", "tracks"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/id" },
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "tracks": {
+            "type": "object",
+            "required": ["brawn", "agility", "tech", "nerve"],
+            "properties": {
+              "brawn": { "$ref": "#/$defs/track" }, "agility": { "$ref": "#/$defs/track" },
+              "tech": { "$ref": "#/$defs/track" }, "nerve": { "$ref": "#/$defs/track" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
