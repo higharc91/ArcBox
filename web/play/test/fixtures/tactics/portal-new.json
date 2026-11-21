@@ -289,6 +289,80 @@
       ]
     }
   },
+  "voices": [
+    {
+      "id": "steady.low",
+      "set": "steady",
+      "register": "low",
+      "name": "Steady, lower"
+    },
+    {
+      "id": "steady.high",
+      "set": "steady",
+      "register": "high",
+      "name": "Steady, higher"
+    },
+    {
+      "id": "fierce.low",
+      "set": "fierce",
+      "register": "low",
+      "name": "Fierce, lower"
+    },
+    {
+      "id": "fierce.high",
+      "set": "fierce",
+      "register": "high",
+      "name": "Fierce, higher"
+    },
+    {
+      "id": "wry.low",
+      "set": "wry",
+      "register": "low",
+      "name": "Wry, lower"
+    },
+    {
+      "id": "wry.high",
+      "set": "wry",
+      "register": "high",
+      "name": "Wry, higher"
+    },
+    {
+      "id": "earnest.low",
+      "set": "earnest",
+      "register": "low",
+      "name": "Earnest, lower"
+    },
+    {
+      "id": "earnest.high",
+      "set": "earnest",
+      "register": "high",
+      "name": "Earnest, higher"
+    },
+    {
+      "id": "scholarly.low",
+      "set": "scholarly",
+      "register": "low",
+      "name": "Scholarly, lower"
+    },
+    {
+      "id": "scholarly.high",
+      "set": "scholarly",
+      "register": "high",
+      "name": "Scholarly, higher"
+    },
+    {
+      "id": "grim.low",
+      "set": "grim",
+      "register": "low",
+      "name": "Grim, lower"
+    },
+    {
+      "id": "grim.high",
+      "set": "grim",
+      "register": "high",
+      "name": "Grim, higher"
+    }
+  ],
   "details": {
     "level": 4,
     "races": {

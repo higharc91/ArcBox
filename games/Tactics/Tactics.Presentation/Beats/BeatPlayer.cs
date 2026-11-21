@@ -410,9 +410,11 @@ public sealed class BeatPlayer(FxArt fx, UnitArt art, SoundBank? sounds = null, 
     private SpokenLine Say(LineCue line)
     {
         var narrator = line.Speaker == TacticsVoices.NarratorSpeaker;
-        var clip = Shown is { } battle ? voices?.For(battle.Encounter, line.Speaker, line.Line) : null;
+        // A player character speaks in the voice they picked: its recording and theme, not their unit id's.
+        var player = PlayerVoices.TryParse(line.Voice, out var set, out var register);
+        var clip = player ? voices?.ForVoice(line.Voice!, line.Line) : Shown is { } battle ? voices?.For(battle.Encounter, line.Speaker, line.Line) : null;
         var said = new SpokenLine(narrator ? null : Shown?.Units.FirstOrDefault(u => u.Id.Value == line.Speaker)?.Name ?? Words.Title(line.Speaker), line.Line,
-            TacticsVoices.ForSpeaker(line.Speaker), clip?.Path);
+            player ? TacticsVoices.PlayerVoice(set, register) : TacticsVoices.ForSpeaker(line.Speaker), clip?.Path);
         if (Caption is null || _now >= _captionRead)
             Caption = Captioned(said);
         else

@@ -78,6 +78,14 @@ describe("tactics portal", () => {
     expect(data.scores).toEqual({ str: 15, dex: 8, con: 8, int: 8, wis: 8, cha: 8 });
     expect(data.race).toBe(FRESH.options!.races[0]!.id);
     expect(data.color).toBe(FRESH.options!.colors!.current);
+    expect(data.voice).toBe("steady.low");     // the first voice, until one is picked
+  });
+
+  it("the creator sends the voice picked (#206)", () => {
+    const send = show(fresh);
+    fireEvent.click(within(screen.getByRole("group", { name: "Voice" })).getByRole("button", { name: "Wry, higher" }));
+    fireEvent.click(screen.getByRole("button", { name: "Create" }));
+    expect(lastCall(send)[1].voice).toBe("wry.high");
   });
 
   it("a level-4 cleric chooses a subclass and spends an increase", () => {
@@ -232,6 +240,17 @@ describe("colours", () => {
     fireEvent.click(within(d).getByRole("radio", { name: "Mint" }));
     fireEvent.click(within(d).getByRole("button", { name: "Save colour" }));
     expect(send).toHaveBeenLastCalledWith("setColor", { color: "#8ff0c4" });
+  });
+
+  it("the sheet changes the voice behind a Save (#206)", () => {
+    const send = show(cleric);
+    expect(screen.getByText("Grim, lower")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Change voice" }));
+    const d = dialog();
+    expect((within(d).getByRole("button", { name: "Save voice" }) as HTMLButtonElement).disabled).toBe(true);
+    fireEvent.click(within(d).getByRole("button", { name: "Earnest, higher" }));
+    fireEvent.click(within(d).getByRole("button", { name: "Save voice" }));
+    expect(send).toHaveBeenLastCalledWith("setVoice", { voice: "earnest.high" });
   });
 });
 

@@ -648,6 +648,8 @@ public sealed partial class TacticsGame(Lazy<RulesPack> pack, TacticsTiming? tim
         KeepWorld();
         _lease.Checkpoint(_doc.ToJson(), $"After {name}");
         _resultLeveledUp = leveledUp;
+        if (leveledUp)
+            LevelUpBark();
         _resultGold = goldWon;
         _resultLoot = rewards;
         (_result, _resultEncounter, _resultMembers, _phase) = (result, name, save.Members, TacticsPhase.Results);

@@ -215,8 +215,12 @@ public sealed record Countered(UnitId Caster, AbilityId Ability, UnitId By) : Ba
 /// <summary>The encounter trigger <see cref="Id"/> fired; its actions follow.</summary>
 public sealed record TriggerFired(string Id) : BattleEvent;
 
-/// <summary>A dialogue line for the TV: <see cref="Speaker"/> (a unit tag, a name, or <c>"narrator"</c>) says <see cref="Line"/>.</summary>
-public sealed record Said(string Speaker, string Line) : BattleEvent;
+/// <summary>
+/// A dialogue line for the TV: <see cref="Speaker"/> (a unit tag, a name, or <c>"narrator"</c>) says <see cref="Line"/>. A player
+/// character's bark also names its <see cref="Voice"/> (<c>"wry.high"</c>, see <see cref="PlayerVoices"/>), so the TV plays that voice's clip.
+/// </summary>
+public sealed record Said(string Speaker, string Line,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Voice = null) : BattleEvent;
 
 /// <summary>The objectives in force changed (a trigger's <c>setObjective</c>).</summary>
 public sealed record ObjectiveChanged(ObjectivesDef Objectives) : BattleEvent;

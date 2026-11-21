@@ -91,6 +91,12 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             level = doc.PartyLevel, completed = doc.Completed, party,
             me = mine is null ? null : Mine(mine, rules),
             options,
+            // Every voice set in a lower and a higher register (lore spec §7), for the creator and the sheet: "wry.high" and the like.
+            voices = PlayerVoices.Sets.SelectMany(set => PlayerVoices.Registers.Select(register => new
+            {
+                id = $"{set}.{register}", set, register,
+                name = $"{char.ToUpperInvariant(set[0])}{set[1..]}, {(register == "low" ? "lower" : "higher")}",
+            })),
             details,
         }, ArcJson.Options)!.AsObject();
         // The party's key ring (USER DECISION 8, decided 2026-11-03), beside the party: only once it holds a key, so a portal with none is as it was.
@@ -147,6 +153,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                 picked = placed[i],
             }).ToArray(),
             color = record.Color,
+            voice = PlayerVoices.Of(c),
             skills = sheet?.Skills.ToImmutableArray() ?? [],
             saves = sheet?.SaveProficiencies ?? [],
             // Each skill's bonus in a story check, as SkillCheck rolls it.
@@ -198,6 +205,7 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             var mine = doc.For(member);
             (CharacterRecord? Character, string? Problem) result;
             string? color = null;
+            string? voice = null;
             switch (type)
             {
                 case "createCharacter":
@@ -217,6 +225,17 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
                             return new(null, "Pick a colour.");
                         color = picked;
                     }
+                    if (data.TryGetProperty("voice", out _))
+                    {
+                        if (!PlayerVoices.TryParse(Str(data, "voice"), out _, out _))
+                            return new(null, "Pick a voice.");
+                        voice = Str(data, "voice");
+                    }
+                    break;
+                case "setVoice" when mine is not null:
+                    if (!PlayerVoices.TryParse(Str(data, "voice"), out _, out _))
+                        return new(null, "Pick a voice.");
+                    result = (mine.Character with { Voice = Str(data, "voice") }, null);
                     break;
                 case "setColor" when mine is not null:
                     if (PlayerColors.Readable(Str(data, "color")) is not { } chosen)
@@ -245,6 +264,9 @@ public sealed class TacticsCampaignRules(Lazy<RulesPack> pack) : ICampaignRules
             }
             if (result.Character is not { } character)
                 return new(null, result.Problem);
+            // A new character speaks in the voice picked; a remake without a new pick keeps the old one.
+            if (type == "createCharacter")
+                character = character with { Voice = voice ?? mine?.Character.Voice };
             var record = mine is null ? new MemberRecord(character, doc.StartingXpForNewMember(rules.Xp), Color: color)
                 : type == "createCharacter"
                     // Every remake keeps the existing inventory, injuries and purse. Starting kits are granted only

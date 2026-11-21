@@ -30,7 +30,11 @@ interface Me {
   subclasses: { id: string; name: string }[] | null; choices: Choice[];
   color?: string; skills?: string[]; saves?: string[]; bonuses?: Record<string, number> | null;
   trinket?: Trinket;
+  /** The voice the character barks in, picked or defaulted: "wry.high". */
+  voice?: string;
 }
+/** A player voice: a set in a lower or higher register (lore spec §7). */
+interface VoiceOption { id: string; set: string; register: "low" | "high"; name: string }
 interface Options {
   races: { id: string; name: string }[]; classes: { id: string; name: string; role: string }[];
   backgrounds: { id: string; name: string; boosts: Partial<Record<StatKey, number>> }[]; pointBuy: number;
@@ -39,6 +43,8 @@ interface Options {
 export interface TacticsPortalView {
   level: number; completed: string[]; party: { name: string; character: string; xp: number; you: boolean; color?: string | null }[];
   me: Me | null; options: Options | null; details?: PortalDetails;
+  /** The voices a character can bark in. */
+  voices?: VoiceOption[];
   /** The party's key ring, once it holds a key (the owner's decision 8). */
   keys?: KeyEntry[];
 }
@@ -82,10 +88,10 @@ export function TacticsPortal({ campaign, readOnly, send }: PortalProps) {
       <KeyRing keys={view.keys} />
       {making && view.options ? (
         <Create options={view.options} readOnly={readOnly} send={send} onCancel={view.me ? () => setMaking(false) : undefined}
-          freeRemake={view.me?.freeRemake ?? false} start={view.me} explainWith={explainWith} details={details} />
+          freeRemake={view.me?.freeRemake ?? false} start={view.me} explainWith={explainWith} details={details} voices={view.voices ?? []} />
       ) : view.me ? (
         <CharacterSheet me={view.me} readOnly={readOnly} send={send} onRemake={view.options ? () => setMaking(true) : undefined}
-          explainWith={explainWith} details={details} colors={view.options?.colors ?? null} />
+          explainWith={explainWith} details={details} colors={view.options?.colors ?? null} voices={view.voices ?? []} />
       ) : null}
       {topic && details ? <DetailsSheet details={details} topic={topic.topic} context={topic.context} onClose={() => setTopic(null)} /> : null}
     </div>
@@ -113,6 +119,45 @@ function Options<T extends { id: string; name: string }>({ label, items, value, 
   );
 }
 
+/** The voice a character barks in during battle and at camp: six sets, each lower or higher. */
+function VoicePicker({ voices, value, onPick, readOnly }: { voices: VoiceOption[]; value: string; onPick(id: string): void; readOnly: boolean }) {
+  return (
+    <div class="tx-opts" role="group" aria-label="Voice">
+      {voices.map((v) => (
+        <div class={`tx-opt${v.id === value ? " on" : ""}`} key={v.id}>
+          <button type="button" class="tx-opt-pick" aria-pressed={v.id === value} disabled={readOnly} onClick={() => onPick(v.id)}>{v.name}</button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** The voice on the sheet, and Change for the picker, which saves on its own. */
+function SheetVoice({ me, voices, readOnly, send }: { me: Me; voices: VoiceOption[]; readOnly: boolean; send: PortalProps["send"] }) {
+  const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState(me.voice ?? "");
+  useEffect(() => setDraft(me.voice ?? ""), [me.voice]);
+  return (
+    <div class="tx-block">
+      <h3 class="tx-sect">Your voice</h3>
+      <div class="tx-color-row">
+        <span>{voices.find((v) => v.id === me.voice)?.name ?? "None yet"}</span>
+        <button type="button" class="tx-btn ghost tx-more" aria-label="Change voice" disabled={readOnly} onClick={() => setOpen(true)}>Change</button>
+      </div>
+      {open ? (
+        <Panel title="Your voice" onClose={() => setOpen(false)}
+          foot={<>
+            <button type="button" class="tx-btn ghost" onClick={() => setOpen(false)}>Cancel</button>
+            <button type="button" class="tx-btn gold" disabled={readOnly || !draft || draft === me.voice}
+              onClick={() => { void send("setVoice", { voice: draft }); setOpen(false); }}>Save voice</button>
+          </>}>
+          <VoicePicker voices={voices} value={draft} onPick={setDraft} readOnly={readOnly} />
+        </Panel>
+      ) : null}
+    </div>
+  );
+}
+
 /** The chosen option's headline facts, with a button to its full sheet. */
 function Summary({ title, lines, onMore }: { title: string; lines: string[]; onMore: (() => void) | null }) {
   return (
@@ -126,10 +171,11 @@ function Summary({ title, lines, onMore }: { title: string; lines: string[]; onM
   );
 }
 
-function Create({ options, readOnly, send, onCancel, freeRemake, start, explainWith, details }: {
+function Create({ options, readOnly, send, onCancel, freeRemake, start, explainWith, details, voices }: {
   options: Options; readOnly: boolean; send: PortalProps["send"]; onCancel?: () => void; freeRemake: boolean; start: Me | null;
-  explainWith(c: Context): Explain; details: PortalDetails | null;
+  explainWith(c: Context): Explain; details: PortalDetails | null; voices: VoiceOption[];
 }) {
+  const [voice, setVoice] = useState(start?.voice ?? voices[0]?.id ?? "");
   const [race, setRace] = useState(start?.race ?? options.races[0]?.id ?? "");
   const [cls, setCls] = useState(start?.class ?? options.classes[0]?.id ?? "");
   const [background, setBackground] = useState(start?.background ?? options.backgrounds[0]?.id ?? "");
@@ -196,6 +242,11 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
       {b ? <Summary title={b.name} lines={b.facts.slice(0, 2)} onMore={explain && (() => explain({ kind: "background", id: background }))} />
         : <p class="tx-note">{Object.entries(boosts).map(([s, n]) => `${s.toUpperCase()} +${n}`).join(", ") || "No score boosts"}</p>}
 
+      {voices.length ? <>
+        <Section>Voice</Section>
+        <VoicePicker voices={voices} value={voice} onPick={setVoice} readOnly={readOnly} />
+      </> : null}
+
       <p class="tx-sect tx-points">Ability scores: {left} of {options.pointBuy} points left</p>
       <div class="tx-scores">
         {STATS.map((s) => (
@@ -215,7 +266,7 @@ function Create({ options, readOnly, send, onCancel, freeRemake, start, explainW
       <div class="tx-foot">
         {onCancel ? <button type="button" class="tx-btn ghost" onClick={onCancel}>Cancel</button> : null}
         <button type="button" class="tx-btn gold" disabled={readOnly}
-          onClick={() => void send("createCharacter", color ? { race, class: cls, background, scores, color } : { race, class: cls, background, scores })}>Create</button>
+          onClick={() => void send("createCharacter", { race, class: cls, background, scores, ...(color ? { color } : {}), ...(voice ? { voice } : {}) })}>Create</button>
       </div>
     </section>
   );
@@ -360,9 +411,9 @@ export function ColorPicker({ colors, value, onChange, readOnly, heading = true 
 
 // ---- The character sheet ----------------------------------------------------------------------------------------------
 
-function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, colors }: {
+function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, colors, voices }: {
   me: Me; readOnly: boolean; send: PortalProps["send"]; onRemake?: () => void; explainWith(c: Context): Explain;
-  details: PortalDetails | null; colors: ColorOptions | null;
+  details: PortalDetails | null; colors: ColorOptions | null; voices: VoiceOption[];
 }) {
   const choose = (t: Topic) => (t.kind === "subclass" && me.subclasses?.some((s) => s.id === t.id) && !readOnly
     ? { label: `Choose ${me.subclasses.find((s) => s.id === t.id)!.name}`, run: () => void send("chooseSubclass", { subclass: t.id }) }
@@ -409,6 +460,7 @@ function CharacterSheet({ me, readOnly, send, onRemake, explainWith, details, co
         </div>
       ) : null}
       {colors || me.color ? <SheetColor me={me} colors={colors} readOnly={readOnly} send={send} /> : null}
+      {voices.length ? <SheetVoice me={me} voices={voices} readOnly={readOnly} send={send} /> : null}
       {me.subclasses ? (
         <div class="tx-block">
           <h3 class="tx-sect">Choose your subclass</h3>

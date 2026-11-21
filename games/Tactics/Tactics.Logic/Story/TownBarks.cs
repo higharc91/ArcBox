@@ -38,14 +38,31 @@ public sealed record BarkSet(string Speaker, ImmutableArray<BarkLine> Lines)
     }
 }
 
-/// <summary>Town barks keyed by named character, or by townsfolk preset.</summary>
-public sealed class BarkBook(ImmutableDictionary<string, BarkSet> sets, ImmutableDictionary<string, BarkSet>? battle = null)
+/// <summary>A player voice set from <c>lore/voices</c>, for the creator's Voice pick.</summary>
+public sealed record VoiceSetInfo(string Id, string Name, string Description);
+
+/// <summary>
+/// Town barks keyed by named character, or by townsfolk preset; battle and camp barks keyed by speaker and moment, with the
+/// player voice sets of <c>lore/voices</c> under the speaker <c>"voice:&lt;set&gt;"</c>.
+/// </summary>
+public sealed class BarkBook(ImmutableDictionary<string, BarkSet> sets, ImmutableDictionary<string, BarkSet>? battle = null,
+    ImmutableArray<VoiceSetInfo> voices = default)
 {
     public static BarkBook Empty { get; } = new(ImmutableDictionary<string, BarkSet>.Empty);
     internal bool Has(string key) => sets.ContainsKey(key);
     public BarkSet? For(RegionPerson person) => sets.GetValueOrDefault(person.Bark ?? person.Character ?? person.Preset);
     /// <summary>Authored battle barks, separate from town rotations.</summary>
     public BarkSet? ForBattle(string speaker, string moment) => battle?.GetValueOrDefault(speaker + ":" + moment);
+    /// <summary>A player voice set's lines for <paramref name="moment"/>.</summary>
+    public BarkSet? ForVoice(string set, string moment) => ForBattle(VoiceSpeaker(set), moment);
+    /// <summary>The speaker key a player voice set's lines are filed under.</summary>
+    public static string VoiceSpeaker(string set) => "voice:" + set;
+    /// <summary>The player voice sets, in pack order.</summary>
+    public ImmutableArray<VoiceSetInfo> Voices => voices.IsDefault ? [] : voices;
+    /// <summary>Every (speaker, moment) with non-town lines: named speakers, <c>"narrator"</c>, and <c>"voice:&lt;set&gt;"</c>.</summary>
+    public IEnumerable<(string Speaker, string Moment)> BattleMoments
+        => (battle ?? ImmutableDictionary<string, BarkSet>.Empty).Keys.Select(k => k.LastIndexOf(':') is var i ? (k[..i], k[(i + 1)..]) : (k, ""))
+            .Order();
     public IEnumerable<string> LineIds => sets.Values.SelectMany(s => s.Lines).Select(l => l.Id);
 
     internal static BarkBook Load(string lore, ImmutableArray<string> files, IFileSource source)
@@ -82,6 +99,24 @@ public sealed class BarkBook(ImmutableDictionary<string, BarkSet> sets, Immutabl
                 throw new InvalidDataException($"{path}: invalid town bark data: {ex.Message}", ex);
             }
         }
-        return new BarkBook(result.ToImmutable(), battle.ToImmutable());
+        var voices = ImmutableArray.CreateBuilder<VoiceSetInfo>();
+        foreach (var file in files.Where(f => f.StartsWith("voices/", StringComparison.Ordinal)))
+        {
+            var path = Path.Combine(lore, file);
+            try
+            {
+                using var doc = JsonDocument.Parse(source.ReadAllText(path));
+                var root = doc.RootElement;
+                var id = root.GetProperty("id").GetString()!;
+                voices.Add(new VoiceSetInfo(id, root.GetProperty("name").GetString()!, root.GetProperty("description").GetString()!));
+                foreach (var moment in root.GetProperty("events").EnumerateObject())
+                    battle.Add(VoiceSpeaker(id) + ":" + moment.Name, new BarkSet(VoiceSpeaker(id), moment.Value.Deserialize<ImmutableArray<BarkLine>>(options)));
+            }
+            catch (Exception ex) when (ex is JsonException or KeyNotFoundException or InvalidOperationException or ArgumentException)
+            {
+                throw new InvalidDataException($"{path}: invalid voice set: {ex.Message}", ex);
+            }
+        }
+        return new BarkBook(result.ToImmutable(), battle.ToImmutable(), voices.ToImmutable());
     }
 }

@@ -9,13 +9,15 @@ namespace Tactics.Logic;
 /// levels 4 and 8; <see cref="Picks"/> are the abilities and passives chosen from the class's <c>choose</c> features (spells
 /// known and the like; empty means the class's default loadout); <see cref="Injuries"/> are those not yet healed.
 /// <see cref="Weapon"/> and <see cref="Armor"/> are ids from <c>weapons.json</c> and <c>armor.json</c> (an empty
-/// <see cref="Armor"/> is no armour), and <see cref="Shield"/> adds +2 AC.
+/// <see cref="Armor"/> is no armour), and <see cref="Shield"/> adds +2 AC. <see cref="Voice"/> is the player's pick of
+/// <see cref="PlayerVoices"/> (<c>"wry.high"</c>); without one, the character speaks in <see cref="PlayerVoices.Default"/>.
 /// </summary>
 public sealed record CharacterRecord(string Name, string Race, string Class, string? Subclass, string Background,
     int Level, ImmutableSortedDictionary<Stat, int> BaseScores, ImmutableSortedDictionary<Stat, int> Increases,
     ImmutableArray<AbilityId> Picks, ImmutableArray<InjuryId> Injuries, string Weapon, string Armor, bool Shield,
     ImmutableArray<ItemStack> Bag,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Trinket = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? Voice = null);
 
 /// <summary>
 /// Builds the <see cref="UnitSheet"/>s a battle starts from: a character from its <see cref="CharacterRecord"/> (spec §3.1)

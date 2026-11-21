@@ -45,6 +45,15 @@ public sealed partial class TacticsGame
     /// <summary>Party members are <c>hero1</c>, <c>hero2</c>, … in the order of <see cref="BattleSave.Members"/>.</summary>
     internal static UnitId UnitFor(int index) => new($"hero{index + 1}");
 
+    /// <summary>The voice a player character barks in (<see cref="PlayerVoices"/>); null for a unit no player owns.</summary>
+    private string? VoiceOf(UnitId unit)
+    {
+        for (var i = 0; i < Save_.Members.Length; i++)
+            if (UnitFor(i) == unit)
+                return _doc.For(Save_.Members[i])?.Character is { } character ? PlayerVoices.Of(character) : null;
+        return null;
+    }
+
     private UnitId? UnitOf(ProfileId profile)
         => _doc.Battle is { } save && save.Members.IndexOf(profile) is var i and >= 0 ? UnitFor(i) : null;
 
@@ -670,9 +679,11 @@ public sealed partial class TacticsGame
             Save();
             return null;
         }
-        events = GriskBarks.Enrich(State, events, Lore.Barks, _seq + 1);
-        var beat = new Beat(++_seq, actor, events, activeBefore);
         var log = Save_.Log.IsDefault ? [] : Save_.Log;
+        events = GriskBarks.Enrich(State, events, Lore.Barks, _seq + 1);
+        var sinceSaid = log.Length - 1 - log.Select((b, i) => (b, i)).LastOrDefault(x => x.b.Events.Any(e => e is Said), (null!, -BattleBarks.QuietBeats - 1)).Item2;
+        events = BattleBarks.Enrich(State, events, Lore.Barks, _seq + 1, actor, VoiceOf, sinceSaid);
+        var beat = new Beat(++_seq, actor, events, activeBefore);
         log = log.Add(beat);
         if (log.Length > TacticsDocument.LogBeats)
             log = log.RemoveRange(0, log.Length - TacticsDocument.LogBeats);

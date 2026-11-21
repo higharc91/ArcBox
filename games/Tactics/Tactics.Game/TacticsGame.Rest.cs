@@ -207,6 +207,7 @@ public sealed partial class TacticsGame
     {
         EndTelling();
         _doc = _doc with { World = _doc.World! with { Story = null, Camp = Camp! with { Stage = "sleep", Due = null } } };
+        CampBark();
         ArmCamp(Tell.CampSleep);
     }
 
