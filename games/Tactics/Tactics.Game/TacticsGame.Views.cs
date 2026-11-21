@@ -581,6 +581,7 @@ public sealed partial class TacticsGame
         var vip = IsVip(player);
         var leads = _lead == profile.Value;
         var targets = leads ? TradeTargets() : [];
+        var pointable = leads ? [] : TradeTargets();
         var data = JsonSerializer.SerializeToNode(new
         {
             leader = leads,
@@ -623,6 +624,14 @@ public sealed partial class TacticsGame
             if (QuestTracker() is { } tracker) data["pinned"] = JsonSerializer.SerializeToNode(new { tracker.Id, tracker.Name, tracker.Objective }, ArcJson.Options);
         }
         if (HasCampfires && _doc.World?.RestReady == true) data["restReady"] = true;
+        // #154: the leader can hand the lead on; a follower can point out what's in reach. The heirs are the members here (not
+        // whether they're silent, which a walk input changes), so a step never changes a phone; PassLead checks the rest.
+        if (leads && _doc.Members.Keys.Where(m => m != profile.Value && _players.Any(p => p.Profile?.Value == m && _online.Contains(p.Id)))
+                .ToArray() is { Length: > 0 } heirs)
+            data["passTo"] = JsonSerializer.SerializeToNode(heirs.Select(m => new
+                { id = m, name = _players.FirstOrDefault(p => p.Profile?.Value == m)?.Name ?? _doc.Members[m].Character.Name }), ArcJson.Options);
+        if (!pointable.IsDefaultOrEmpty)
+            data["pointAt"] = JsonSerializer.SerializeToNode(pointable.Select(t => new { id = t.Def.Id, label = t.Label }), ArcJson.Options);
         if (VisibleGold(profile) is { } gold) data["gold"] = gold;
         if (!AllThings.IsEmpty || !RegionShops.IsEmpty || !PersonTargets().IsEmpty)
         {

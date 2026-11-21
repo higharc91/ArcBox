@@ -51,6 +51,20 @@
     "canGive": true,
     "ambush": "Wolves in the Pines",
     "danger": "Wolves in the Pines",
+    "passTo": [
+      {
+        "id": "pr_member2",
+        "name": "Player2"
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3"
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4"
+      }
+    ],
     "gold": 0,
     "targets": [],
     "beat": false,

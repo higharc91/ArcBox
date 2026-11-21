@@ -49,6 +49,16 @@
     "portal": "/c/ABCD",
     "interact": null,
     "canGive": true,
+    "pointAt": [
+      {
+        "id": "key",
+        "label": "Pick up the iron key"
+      },
+      {
+        "id": "chest",
+        "label": "Open the chest"
+      }
+    ],
     "targets": [],
     "beat": false,
     "search": false

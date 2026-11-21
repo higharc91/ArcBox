@@ -104,9 +104,21 @@ describe("things to interact with, on the walk screen", () => {
     expect(screen.queryByRole("button", { name: /choose one/ })).toBeNull();
   });
 
-  it("nothing for a follower, whose list is empty", () => {
-    show("walk-things-follower");
-    expect(screen.queryByRole("button", { name: /Pick up|Open|choose one/ })).toBeNull();
+  it("a follower can't interact, only suggest to the leader (#154)", () => {
+    const { send } = show("walk-things-follower");
+    const suggest = screen.getByRole("group", { name: "Suggest to the leader" });
+    const named = screen.queryAllByRole("button", { name: /Pick up|Open|choose one/ });
+    expect(named.length).toBeGreaterThan(0);
+    expect(named.every((b) => suggest.contains(b))).toBe(true);
+    fireEvent.click(within(suggest).getByRole("button", { name: "Open the chest" }));
+    expect(send.mock.calls.map((c) => c[0]).at(-1)).toEqual({ action: "point", data: { target: "chest" } });
+  });
+
+  it("the leader passes the lead to someone who can take it (#154)", () => {
+    const { send } = show("walk-things");
+    fireEvent.click(screen.getByText("Pass the lead"));
+    fireEvent.click(within(screen.getByRole("group", { name: "Pass the lead to" })).getByRole("button", { name: "Player2" }));
+    expect(send.mock.calls.map((c) => c[0]).at(-1)).toEqual({ action: "passLead", data: { to: "pr_member2" } });
   });
 
   it("the leader can Search where there are things, and it sends once for a double tap", () => {

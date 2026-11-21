@@ -49,6 +49,20 @@
     "portal": "/c/ABCD",
     "interact": "Trade with Wenna\u0027s Remedies",
     "canGive": true,
+    "passTo": [
+      {
+        "id": "pr_member2",
+        "name": "Player2"
+      },
+      {
+        "id": "pr_member3",
+        "name": "Player3"
+      },
+      {
+        "id": "pr_member4",
+        "name": "Player4"
+      }
+    ],
     "gold": 200,
     "targets": [
       {
